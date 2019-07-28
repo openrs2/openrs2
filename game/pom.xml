@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>dev.openrs2</groupId>
+    <artifactId>openrs2</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>openrs2-game</artifactId>
+  <packaging>jar</packaging>
+
+  <name>OpenRS2 Game Server</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>co.paralleluniverse</groupId>
+      <artifactId>quasar-core</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>instrument-classes</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <property name="classpath" refid="maven.dependency.classpath" />
+                <taskdef name="instrumentation" classname="co.paralleluniverse.fibers.instrument.InstrumentationTask" classpath="${classpath}" />
+                <instrumentation>
+                  <fileset dir="${project.build.directory}/classes" erroronmissingdir="false" includes="**/*.class" />
+                </instrumentation>
+              </target>
+            </configuration>
+          </execution>
+          <execution>
+            <id>instrument-test-classes</id>
+            <phase>test-compile</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <property name="classpath" refid="maven.dependency.classpath" />
+                <taskdef name="instrumentation" classname="co.paralleluniverse.fibers.instrument.InstrumentationTask" classpath="${classpath}" />
+                <instrumentation>
+                  <fileset dir="${project.build.directory}/test-classes" erroronmissingdir="false" includes="**/*.class" />
+                </instrumentation>
+              </target>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
