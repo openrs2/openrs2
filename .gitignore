@@ -1,0 +1,7 @@
+.*
+!.git*
+!.mailmap
+*/target
+*~
+/nonfree
+/target
