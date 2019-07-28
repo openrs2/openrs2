@@ -10,6 +10,9 @@
   <name>OpenRS2</name>
 
   <modules>
+    <module>asm</module>
+    <module>deob</module>
+    <module>deob-annotations</module>
     <module>game</module>
     <module>util</module>
   </modules>
@@ -34,6 +37,31 @@
         <groupId>com.google.dagger</groupId>
         <artifactId>dagger</artifactId>
         <version>2.24</version>
+      </dependency>
+      <dependency>
+        <groupId>org.benf</groupId>
+        <artifactId>cfr</artifactId>
+        <version>0.145</version>
+      </dependency>
+      <dependency>
+        <groupId>org.ow2.asm</groupId>
+        <artifactId>asm</artifactId>
+        <version>7.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.ow2.asm</groupId>
+        <artifactId>asm-commons</artifactId>
+        <version>7.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.ow2.asm</groupId>
+        <artifactId>asm-tree</artifactId>
+        <version>7.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.ow2.asm</groupId>
+        <artifactId>asm-util</artifactId>
+        <version>7.1</version>
       </dependency>
       <dependency>
         <groupId>org.slf4j</groupId>
