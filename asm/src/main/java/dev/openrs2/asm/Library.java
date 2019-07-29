@@ -70,6 +70,14 @@ public final class Library implements Iterable<ClassNode> {
 		/* empty */
 	}
 
+	public Library(Library library) {
+		for (var clazz : library.classes.values()) {
+			var copy = new ClassNode();
+			clazz.accept(copy);
+			add(copy);
+		}
+	}
+
 	public boolean contains(String name) {
 		return classes.containsKey(name);
 	}
