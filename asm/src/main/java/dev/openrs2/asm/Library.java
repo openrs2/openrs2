@@ -93,8 +93,7 @@ public final class Library implements Iterable<ClassNode> {
 
 	public void writeJar(Path path) throws IOException {
 		try (var out = new DeterministicJarOutputStream(Files.newOutputStream(path))) {
-			for (var entry : classes.entrySet()) {
-				var clazz = entry.getValue();
+			for (var clazz : classes.values()) {
 				var writer = new ClassWriter(0);
 				clazz.accept(new CheckClassAdapter(writer, true));
 
