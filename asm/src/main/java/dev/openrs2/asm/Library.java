@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.SequenceInputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.jar.JarEntry;
@@ -21,7 +22,7 @@ import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.util.CheckClassAdapter;
 
-public final class Library {
+public final class Library implements Iterable<ClassNode> {
 	private static final String CLASS_SUFFIX = ".class";
 	private static final String TEMP_PREFIX = "tmp";
 	private static final String JAR_SUFFIX = ".jar";
@@ -41,7 +42,7 @@ public final class Library {
 				var reader = new ClassReader(in);
 				reader.accept(clazz, ClassReader.SKIP_DEBUG);
 
-				library.classes.put(clazz.name, clazz);
+				library.add(clazz);
 			}
 		}
 
@@ -67,6 +68,27 @@ public final class Library {
 
 	private Library() {
 		/* empty */
+	}
+
+	public boolean contains(String name) {
+		return classes.containsKey(name);
+	}
+
+	public ClassNode get(String name) {
+		return classes.get(name);
+	}
+
+	public ClassNode add(ClassNode clazz) {
+		return classes.put(clazz.name, clazz);
+	}
+
+	public ClassNode remove(String name) {
+		return classes.remove(name);
+	}
+
+	@Override
+	public Iterator<ClassNode> iterator() {
+		return classes.values().iterator();
 	}
 
 	public void writeJar(Path path) throws IOException {
