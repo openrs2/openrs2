@@ -2,6 +2,7 @@ package dev.openrs2.asm;
 
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
+import org.objectweb.asm.tree.FieldNode;
 import org.objectweb.asm.tree.MethodNode;
 
 public abstract class Transformer {
@@ -11,9 +12,15 @@ public abstract class Transformer {
 		for (var clazz : library) {
 			transformClass(clazz);
 
+			for (var field : clazz.fields) {
+				transformField(clazz, field);
+			}
+
 			for (var method : clazz.methods) {
+				transformMethod(clazz, method);
+
 				if ((method.access & (Opcodes.ACC_NATIVE | Opcodes.ACC_ABSTRACT)) == 0) {
-					transformMethod(clazz, method);
+					transformCode(clazz, method);
 				}
 			}
 		}
@@ -29,7 +36,15 @@ public abstract class Transformer {
 		/* empty */
 	}
 
+	public void transformField(ClassNode clazz, FieldNode field) {
+		/* empty */
+	}
+
 	public void transformMethod(ClassNode clazz, MethodNode method) {
+		/* empty */
+	}
+
+	public void transformCode(ClassNode clazz, MethodNode method) {
 		/* empty */
 	}
 

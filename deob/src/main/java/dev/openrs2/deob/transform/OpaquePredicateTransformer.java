@@ -88,7 +88,7 @@ public final class OpaquePredicateTransformer extends Transformer {
 	}
 
 	@Override
-	public void transformMethod(ClassNode clazz, MethodNode method) {
+	public void transformCode(ClassNode clazz, MethodNode method) {
 		/* find and fix opaque predicates */
 		OPAQUE_PREDICATE_MATCHER.match(method).filter(match -> isOpaquePredicate(method, match)).forEach(match -> {
 			var branch = (JumpInsnNode) match.get(1);

@@ -15,6 +15,7 @@ import dev.openrs2.deob.path.ClassPath;
 import dev.openrs2.deob.path.TypedRemapper;
 import dev.openrs2.deob.transform.ClassForNameTransformer;
 import dev.openrs2.deob.transform.OpaquePredicateTransformer;
+import dev.openrs2.deob.transform.OriginalNameTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -118,18 +119,33 @@ public final class Deobfuscator {
 
 		/* transform Class.forName() calls */
 		logger.info("Transforming Class.forName() calls");
-		var transformer = new ClassForNameTransformer(remapper);
+		Transformer transformer = new ClassForNameTransformer(remapper);
 		for (var library : libraries) {
 			transformer.transform(library);
 		}
 
-		var glTransformer = new ClassForNameTransformer(glRemapper);
+		transformer = new ClassForNameTransformer(glRemapper);
 		for (var library : glLibraries) {
-			glTransformer.transform(library);
+			transformer.transform(library);
 		}
 
-		var unsignedTransformer = new ClassForNameTransformer(unsignedRemapper);
-		unsignedTransformer.transform(unsignedClient);
+		transformer = new ClassForNameTransformer(unsignedRemapper);
+		transformer.transform(unsignedClient);
+
+		/* add @OriginalName annotations */
+		logger.info("Annotating classes and members with original names");
+		transformer = new OriginalNameTransformer(remapper);
+		for (var library : libraries) {
+			transformer.transform(library);
+		}
+
+		transformer = new OriginalNameTransformer(glRemapper);
+		for (var library : glLibraries) {
+			transformer.transform(library);
+		}
+
+		transformer = new OriginalNameTransformer(unsignedRemapper);
+		transformer.transform(unsignedClient);
 
 		/* write output jars */
 		logger.info("Writing output jars");

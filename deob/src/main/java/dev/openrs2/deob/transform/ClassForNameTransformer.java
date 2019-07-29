@@ -33,7 +33,7 @@ public final class ClassForNameTransformer extends Transformer {
 	}
 
 	@Override
-	public void transformMethod(ClassNode clazz, MethodNode method) {
+	public void transformCode(ClassNode clazz, MethodNode method) {
 		INVOKE_MATCHER.match(method).filter(ClassForNameTransformer::isClassForName).forEach(match -> {
 			var ldc = (LdcInsnNode) match.get(0);
 			ldc.cst = remapper.map((String) ldc.cst);
