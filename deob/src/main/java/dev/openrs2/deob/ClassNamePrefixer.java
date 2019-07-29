@@ -3,7 +3,7 @@ package dev.openrs2.deob;
 import java.util.HashMap;
 
 import dev.openrs2.asm.Library;
-import dev.openrs2.deob.path.TypedRemapper;
+import dev.openrs2.deob.classpath.TypedRemapper;
 import org.objectweb.asm.commons.ClassRemapper;
 import org.objectweb.asm.commons.SimpleRemapper;
 import org.objectweb.asm.tree.ClassNode;

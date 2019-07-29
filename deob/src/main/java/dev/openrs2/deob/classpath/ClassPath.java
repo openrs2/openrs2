@@ -1,4 +1,4 @@
-package dev.openrs2.deob.path;
+package dev.openrs2.deob.classpath;
 
 import java.util.ArrayList;
 import java.util.Collections;

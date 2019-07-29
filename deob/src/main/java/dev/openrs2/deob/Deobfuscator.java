@@ -11,8 +11,8 @@ import java.util.Map;
 
 import dev.openrs2.asm.Library;
 import dev.openrs2.asm.Transformer;
-import dev.openrs2.deob.path.ClassPath;
-import dev.openrs2.deob.path.TypedRemapper;
+import dev.openrs2.deob.classpath.ClassPath;
+import dev.openrs2.deob.classpath.TypedRemapper;
 import dev.openrs2.deob.transform.ClassForNameTransformer;
 import dev.openrs2.deob.transform.ExceptionTracingTransformer;
 import dev.openrs2.deob.transform.OpaquePredicateTransformer;
