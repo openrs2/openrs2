@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dev.openrs2.asm.Transformer;
-import dev.openrs2.deob.annotations.OriginalName;
+import dev.openrs2.deob.annotation.OriginalName;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.commons.Remapper;
 import org.objectweb.asm.tree.AnnotationNode;
