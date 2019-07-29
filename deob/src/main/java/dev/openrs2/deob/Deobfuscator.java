@@ -14,6 +14,7 @@ import dev.openrs2.asm.Transformer;
 import dev.openrs2.deob.path.ClassPath;
 import dev.openrs2.deob.path.TypedRemapper;
 import dev.openrs2.deob.transform.ClassForNameTransformer;
+import dev.openrs2.deob.transform.ExceptionTracingTransformer;
 import dev.openrs2.deob.transform.OpaquePredicateTransformer;
 import dev.openrs2.deob.transform.OriginalNameTransformer;
 import org.slf4j.Logger;
@@ -23,7 +24,8 @@ public final class Deobfuscator {
 	private static final Logger logger = LoggerFactory.getLogger(Deobfuscator.class);
 
 	private static final List<Transformer> TRANSFORMERS = List.of(
-		new OpaquePredicateTransformer()
+		new OpaquePredicateTransformer(),
+		new ExceptionTracingTransformer()
 	);
 
 	public static void main(String[] args) throws IOException {
