@@ -26,9 +26,9 @@ public final class MemberDesc {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		MemberDesc fieldRef = (MemberDesc) o;
-		return name.equals(fieldRef.name) &&
-			desc.equals(fieldRef.desc);
+		var memberDesc = (MemberDesc) o;
+		return name.equals(memberDesc.name) &&
+			desc.equals(memberDesc.desc);
 	}
 
 	@Override

@@ -35,10 +35,10 @@ public final class MemberRef {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		MemberRef fieldRef = (MemberRef) o;
-		return owner.equals(fieldRef.owner) &&
-			name.equals(fieldRef.name) &&
-			desc.equals(fieldRef.desc);
+		var memberRef = (MemberRef) o;
+		return owner.equals(memberRef.owner) &&
+			name.equals(memberRef.name) &&
+			desc.equals(memberRef.desc);
 	}
 
 	@Override
