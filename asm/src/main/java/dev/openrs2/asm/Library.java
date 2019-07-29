@@ -18,7 +18,10 @@ import java.util.zip.GZIPOutputStream;
 import dev.openrs2.util.io.DeterministicJarOutputStream;
 import dev.openrs2.util.io.SkipOutputStream;
 import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.commons.ClassRemapper;
+import org.objectweb.asm.commons.Remapper;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.util.CheckClassAdapter;
 import org.slf4j.Logger;
@@ -107,26 +110,33 @@ public final class Library implements Iterable<ClassNode> {
 		return classes.values().iterator();
 	}
 
-	public void writeJar(Path path) throws IOException {
+	public void writeJar(Path path, Remapper remapper) throws IOException {
 		logger.info("Writing jar {}", path);
 
 		try (var out = new DeterministicJarOutputStream(Files.newOutputStream(path))) {
 			for (var clazz : classes.values()) {
+				var name = clazz.name;
 				var writer = new ClassWriter(0);
-				clazz.accept(new CheckClassAdapter(writer, true));
 
-				out.putNextEntry(new JarEntry(clazz.name + CLASS_SUFFIX));
+				ClassVisitor visitor = new CheckClassAdapter(writer, true);
+				if (remapper != null) {
+					visitor = new ClassRemapper(visitor, remapper);
+					name = remapper.map(name);
+				}
+				clazz.accept(visitor);
+
+				out.putNextEntry(new JarEntry(name + CLASS_SUFFIX));
 				out.write(writer.toByteArray());
 			}
 		}
 	}
 
-	public void writePack(Path path) throws IOException {
+	public void writePack(Path path, Remapper remapper) throws IOException {
 		logger.info("Writing pack {}", path);
 
 		var temp = Files.createTempFile(TEMP_PREFIX, JAR_SUFFIX);
 		try {
-			writeJar(temp);
+			writeJar(temp, remapper);
 
 			try (var in = new JarInputStream(Files.newInputStream(temp));
 					var out = new GZIPOutputStream(new SkipOutputStream(Files.newOutputStream(path), 2))) {

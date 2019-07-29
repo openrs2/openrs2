@@ -1,0 +1,43 @@
+package dev.openrs2.asm;
+
+import java.util.Objects;
+
+public final class MemberDesc {
+	private final String name, desc;
+
+	public MemberDesc(String name, String desc) {
+		this.name = name;
+		this.desc = desc;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		MemberDesc fieldRef = (MemberDesc) o;
+		return name.equals(fieldRef.name) &&
+			desc.equals(fieldRef.desc);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(name, desc);
+	}
+
+	@Override
+	public String toString() {
+		return String.format("%s %s", desc, name);
+	}
+}

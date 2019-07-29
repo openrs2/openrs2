@@ -5,6 +5,10 @@ import java.util.Objects;
 public final class MemberRef {
 	private final String owner, name, desc;
 
+	public MemberRef(String owner, MemberDesc desc) {
+		this(owner, desc.getName(), desc.getDesc());
+	}
+
 	public MemberRef(String owner, String name, String desc) {
 		this.owner = owner;
 		this.name = name;
