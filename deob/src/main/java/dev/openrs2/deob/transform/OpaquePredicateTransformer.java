@@ -4,9 +4,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import dev.openrs2.asm.FieldRef;
 import dev.openrs2.asm.InsnMatcher;
 import dev.openrs2.asm.Library;
+import dev.openrs2.asm.MemberRef;
 import dev.openrs2.asm.Transformer;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.AbstractInsnNode;
@@ -25,7 +25,7 @@ public final class OpaquePredicateTransformer extends Transformer {
 	private static final InsnMatcher OPAQUE_PREDICATE_MATCHER = InsnMatcher.compile("(GETSTATIC | ILOAD) (IFEQ | IFNE)");
 	private static final InsnMatcher STORE_MATCHER = InsnMatcher.compile("GETSTATIC ISTORE");
 
-	private final Set<FieldRef> flowObstructors = new HashSet<>();
+	private final Set<MemberRef> flowObstructors = new HashSet<>();
 	private int opaquePredicates, stores;
 
 	@Override
@@ -49,7 +49,7 @@ public final class OpaquePredicateTransformer extends Transformer {
 		FLOW_OBSTRUCTOR_INITIALIZER_MATCHER.match(method).forEach(match -> {
 			/* add flow obstructor to set */
 			var putstatic = (FieldInsnNode) match.get(match.size() - 1);
-			flowObstructors.add(new FieldRef(putstatic.owner, putstatic.name, putstatic.desc));
+			flowObstructors.add(new MemberRef(putstatic.owner, putstatic.name, putstatic.desc));
 
 			/* remove initializer */
 			match.forEach(method.instructions::remove);
@@ -61,7 +61,7 @@ public final class OpaquePredicateTransformer extends Transformer {
 	}
 
 	private boolean isFlowObstructor(FieldInsnNode insn) {
-		return flowObstructors.contains(new FieldRef(insn.owner, insn.name, insn.desc));
+		return flowObstructors.contains(new MemberRef(insn.owner, insn.name, insn.desc));
 	}
 
 	private boolean isOpaquePredicate(MethodNode method, List<AbstractInsnNode> match) {

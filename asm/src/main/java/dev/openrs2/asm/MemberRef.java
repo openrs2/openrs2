@@ -2,10 +2,10 @@ package dev.openrs2.asm;
 
 import java.util.Objects;
 
-public final class FieldRef {
+public final class MemberRef {
 	private final String owner, name, desc;
 
-	public FieldRef(String owner, String name, String desc) {
+	public MemberRef(String owner, String name, String desc) {
 		this.owner = owner;
 		this.name = name;
 		this.desc = desc;
@@ -31,7 +31,7 @@ public final class FieldRef {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		FieldRef fieldRef = (FieldRef) o;
+		MemberRef fieldRef = (MemberRef) o;
 		return owner.equals(fieldRef.owner) &&
 			name.equals(fieldRef.name) &&
 			desc.equals(fieldRef.desc);
