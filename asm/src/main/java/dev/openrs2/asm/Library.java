@@ -74,7 +74,7 @@ public final class Library implements Iterable<ClassNode> {
 
 	private final Map<String, ClassNode> classes = new TreeMap<>();
 
-	private Library() {
+	public Library() {
 		/* empty */
 	}
 
