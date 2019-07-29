@@ -21,14 +21,20 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.util.CheckClassAdapter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class Library implements Iterable<ClassNode> {
+	private static final Logger logger = LoggerFactory.getLogger(Library.class);
+
 	private static final String CLASS_SUFFIX = ".class";
 	private static final String TEMP_PREFIX = "tmp";
 	private static final String JAR_SUFFIX = ".jar";
 	private static final byte[] GZIP_HEADER = { 0x1f, (byte) 0x8b };
 
 	public static Library readJar(Path path) throws IOException {
+		logger.info("Reading jar {}", path);
+
 		var library = new Library();
 
 		try (var in = new JarInputStream(Files.newInputStream(path))) {
@@ -50,6 +56,8 @@ public final class Library implements Iterable<ClassNode> {
 	}
 
 	public static Library readPack(Path path) throws IOException {
+		logger.info("Reading pack {}", path);
+
 		var temp = Files.createTempFile(TEMP_PREFIX, JAR_SUFFIX);
 		try {
 			try (var header = new ByteArrayInputStream(GZIP_HEADER);
@@ -100,6 +108,8 @@ public final class Library implements Iterable<ClassNode> {
 	}
 
 	public void writeJar(Path path) throws IOException {
+		logger.info("Writing jar {}", path);
+
 		try (var out = new DeterministicJarOutputStream(Files.newOutputStream(path))) {
 			for (var clazz : classes.values()) {
 				var writer = new ClassWriter(0);
@@ -112,6 +122,8 @@ public final class Library implements Iterable<ClassNode> {
 	}
 
 	public void writePack(Path path) throws IOException {
+		logger.info("Writing pack {}", path);
+
 		var temp = Files.createTempFile(TEMP_PREFIX, JAR_SUFFIX);
 		try {
 			writeJar(temp);
