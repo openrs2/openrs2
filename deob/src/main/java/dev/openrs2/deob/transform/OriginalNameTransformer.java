@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dev.openrs2.asm.Transformer;
-import dev.openrs2.deob.annotation.OriginalName;
+import dev.openrs2.deob.annotation.OriginalClass;
+import dev.openrs2.deob.annotation.OriginalMember;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.commons.Remapper;
 import org.objectweb.asm.tree.AnnotationNode;
@@ -13,9 +14,19 @@ import org.objectweb.asm.tree.FieldNode;
 import org.objectweb.asm.tree.MethodNode;
 
 public final class OriginalNameTransformer extends Transformer {
-	private static AnnotationNode createOriginalNameAnnotation(String name) {
-		var annotation = new AnnotationNode(Type.getDescriptor(OriginalName.class));
+	private static AnnotationNode createOriginalClassAnnotation(String name) {
+		var annotation = new AnnotationNode(Type.getDescriptor(OriginalClass.class));
 		annotation.values = List.of("value", name);
+		return annotation;
+	}
+
+	private static AnnotationNode createOriginalMemberAnnotation(String owner, String name, String desc) {
+		var annotation = new AnnotationNode(Type.getDescriptor(OriginalMember.class));
+		annotation.values = List.of(
+			"owner", owner,
+			"name", name,
+			"descriptor", desc
+		);
 		return annotation;
 	}
 
@@ -34,7 +45,7 @@ public final class OriginalNameTransformer extends Transformer {
 		if (clazz.invisibleAnnotations == null) {
 			clazz.invisibleAnnotations = new ArrayList<>();
 		}
-		clazz.invisibleAnnotations.add(createOriginalNameAnnotation(clazz.name));
+		clazz.invisibleAnnotations.add(createOriginalClassAnnotation(clazz.name));
 	}
 
 	@Override
@@ -46,7 +57,7 @@ public final class OriginalNameTransformer extends Transformer {
 		if (field.invisibleAnnotations == null) {
 			field.invisibleAnnotations = new ArrayList<>();
 		}
-		field.invisibleAnnotations.add(createOriginalNameAnnotation(field.name));
+		field.invisibleAnnotations.add(createOriginalMemberAnnotation(clazz.name, field.name, field.desc));
 	}
 
 	@Override
@@ -58,6 +69,6 @@ public final class OriginalNameTransformer extends Transformer {
 		if (method.invisibleAnnotations == null) {
 			method.invisibleAnnotations = new ArrayList<>();
 		}
-		method.invisibleAnnotations.add(createOriginalNameAnnotation(method.name));
+		method.invisibleAnnotations.add(createOriginalMemberAnnotation(clazz.name, method.name, method.desc));
 	}
 }
