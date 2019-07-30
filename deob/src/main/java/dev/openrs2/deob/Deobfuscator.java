@@ -15,6 +15,7 @@ import dev.openrs2.deob.classpath.ClassPath;
 import dev.openrs2.deob.classpath.TypedRemapper;
 import dev.openrs2.deob.transform.CanvasTransformer;
 import dev.openrs2.deob.transform.ClassForNameTransformer;
+import dev.openrs2.deob.transform.CounterTransformer;
 import dev.openrs2.deob.transform.ExceptionTracingTransformer;
 import dev.openrs2.deob.transform.OpaquePredicateTransformer;
 import dev.openrs2.deob.transform.OriginalNameTransformer;
@@ -27,6 +28,7 @@ public final class Deobfuscator {
 	private static final List<Transformer> TRANSFORMERS = List.of(
 		new OpaquePredicateTransformer(),
 		new ExceptionTracingTransformer(),
+		new CounterTransformer(),
 		new CanvasTransformer()
 	);
 
