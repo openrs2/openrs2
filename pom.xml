@@ -11,6 +11,7 @@
 
   <modules>
     <module>asm</module>
+    <module>decompiler</module>
     <module>deob</module>
     <module>deob-annotations</module>
     <module>fernflower</module>
