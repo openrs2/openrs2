@@ -7,7 +7,6 @@ import dev.openrs2.asm.Transformer;
 import dev.openrs2.deob.annotation.OriginalClass;
 import dev.openrs2.deob.annotation.OriginalMember;
 import org.objectweb.asm.Type;
-import org.objectweb.asm.commons.Remapper;
 import org.objectweb.asm.tree.AnnotationNode;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldNode;
@@ -30,18 +29,8 @@ public final class OriginalNameTransformer extends Transformer {
 		return annotation;
 	}
 
-	private final Remapper remapper;
-
-	public OriginalNameTransformer(Remapper remapper) {
-		this.remapper = remapper;
-	}
-
 	@Override
 	public void transformClass(ClassNode clazz) {
-		if (clazz.name.equals(remapper.map(clazz.name))) {
-			return;
-		}
-
 		if (clazz.invisibleAnnotations == null) {
 			clazz.invisibleAnnotations = new ArrayList<>();
 		}
@@ -50,10 +39,6 @@ public final class OriginalNameTransformer extends Transformer {
 
 	@Override
 	public void transformField(ClassNode clazz, FieldNode field) {
-		if (field.name.equals(remapper.mapFieldName(clazz.name, field.name, field.desc))) {
-			return;
-		}
-
 		if (field.invisibleAnnotations == null) {
 			field.invisibleAnnotations = new ArrayList<>();
 		}
@@ -62,7 +47,7 @@ public final class OriginalNameTransformer extends Transformer {
 
 	@Override
 	public void transformMethod(ClassNode clazz, MethodNode method) {
-		if (method.name.equals(remapper.mapMethodName(clazz.name, method.name, method.desc))) {
+		if (method.name.equals("<init>") || method.name.equals("<clinit>")) {
 			return;
 		}
 

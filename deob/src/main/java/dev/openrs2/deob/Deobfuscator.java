@@ -140,17 +140,15 @@ public final class Deobfuscator {
 
 		/* add @OriginalName annotations */
 		logger.info("Annotating classes and members with original names");
-		transformer = new OriginalNameTransformer(remapper);
+		transformer = new OriginalNameTransformer();
 		for (var library : libraries) {
 			transformer.transform(library);
 		}
 
-		transformer = new OriginalNameTransformer(glRemapper);
 		for (var library : glLibraries) {
 			transformer.transform(library);
 		}
 
-		transformer = new OriginalNameTransformer(unsignedRemapper);
 		transformer.transform(unsignedClient);
 
 		/* write output jars */
