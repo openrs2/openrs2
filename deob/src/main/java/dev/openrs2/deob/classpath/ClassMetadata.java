@@ -7,7 +7,7 @@ import dev.openrs2.asm.MemberDesc;
 
 public abstract class ClassMetadata {
 	public abstract String getName();
-	public abstract boolean isMutable();
+	public abstract boolean isDependency();
 	public abstract boolean isInterface();
 	public abstract ClassMetadata getSuperClass();
 	public abstract List<ClassMetadata> getSuperInterfaces();

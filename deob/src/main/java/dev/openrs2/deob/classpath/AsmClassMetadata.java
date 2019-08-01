@@ -22,8 +22,8 @@ public final class AsmClassMetadata extends ClassMetadata {
 	}
 
 	@Override
-	public boolean isMutable() {
-		return true;
+	public boolean isDependency() {
+		return false;
 	}
 
 	@Override

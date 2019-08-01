@@ -207,7 +207,7 @@ public final class TypedRemapper extends Remapper {
 
 	private static String populateClassMapping(Map<String, String> mapping, Map<String, Integer> prefixes, ClassMetadata clazz) {
 		var name = clazz.getName();
-		if (mapping.containsKey(name) || EXCLUDED_CLASSES.contains(name) || !clazz.isMutable()) {
+		if (mapping.containsKey(name) || EXCLUDED_CLASSES.contains(name) || clazz.isDependency()) {
 			return mapping.getOrDefault(name, name);
 		}
 
@@ -239,7 +239,7 @@ public final class TypedRemapper extends Remapper {
 			for (var field : partition) {
 				var clazz = classPath.get(field.getOwner());
 
-				if (!clazz.isMutable()) {
+				if (clazz.isDependency()) {
 					skip = true;
 					break;
 				}
@@ -298,7 +298,7 @@ public final class TypedRemapper extends Remapper {
 			for (var method : partition) {
 				var clazz = classPath.get(method.getOwner());
 
-				if (!clazz.isMutable()) {
+				if (clazz.isDependency()) {
 					skip = true;
 					break;
 				}

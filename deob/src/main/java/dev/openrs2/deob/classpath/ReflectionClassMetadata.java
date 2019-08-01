@@ -23,8 +23,8 @@ public final class ReflectionClassMetadata extends ClassMetadata {
 	}
 
 	@Override
-	public boolean isMutable() {
-		return false;
+	public boolean isDependency() {
+		return true;
 	}
 
 	@Override
