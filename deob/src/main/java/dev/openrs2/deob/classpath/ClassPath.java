@@ -9,13 +9,14 @@ import java.util.Map;
 import dev.openrs2.asm.Library;
 
 public final class ClassPath {
-	private final ClassLoader dependencyLoader;
-	private final List<Library> libraries;
+	private final ClassLoader runtime;
+	private final List<Library> dependencies, libraries;
 	private final Map<String, ClassMetadata> cache = new HashMap<>();
 
-	public ClassPath(ClassLoader dependencyLoader, Library... libraries) {
-		this.dependencyLoader = dependencyLoader;
-		this.libraries = List.of(libraries);
+	public ClassPath(ClassLoader runtime, List<Library> dependencies, List<Library> libraries) {
+		this.runtime = runtime;
+		this.dependencies = dependencies;
+		this.libraries = libraries;
 	}
 
 	public List<ClassMetadata> getLibraryClasses() {
@@ -39,7 +40,16 @@ public final class ClassPath {
 		for (var library : libraries) {
 			var clazz = library.get(name);
 			if (clazz != null) {
-				metadata = new AsmClassMetadata(this, clazz);
+				metadata = new AsmClassMetadata(this, clazz, false);
+				cache.put(name, metadata);
+				return metadata;
+			}
+		}
+
+		for (var library : dependencies) {
+			var clazz = library.get(name);
+			if (clazz != null) {
+				metadata = new AsmClassMetadata(this, clazz, true);
 				cache.put(name, metadata);
 				return metadata;
 			}
@@ -49,7 +59,7 @@ public final class ClassPath {
 
 		Class<?> clazz;
 		try {
-			clazz = dependencyLoader.loadClass(reflectionName);
+			clazz = runtime.loadClass(reflectionName);
 		} catch (ClassNotFoundException ex) {
 			throw new IllegalArgumentException("Unknown class " + name);
 		}

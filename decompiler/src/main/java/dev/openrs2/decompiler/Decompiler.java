@@ -19,46 +19,42 @@ public final class Decompiler implements Closeable {
 	);
 
 	private static Path getDestination(String archive) {
-		archive = archive.replaceAll("_gl[.]jar$", "");
+		archive = archive.replaceAll("(?:_gl)?[.]jar$", "");
 		if (archive.equals("runescape")) {
 			archive = "client";
+		} else if (archive.equals("jaggl")) {
+			archive = "gl";
 		}
 		return Paths.get("nonfree").resolve(archive).resolve("src/main/java");
 	}
 
 	public static void main(String[] args) throws IOException {
-		var libraries = List.of(Paths.get("nonfree/code/jogl.jar"));
-
 		var deobOutput = Paths.get("nonfree/code/deob");
 		var sources = List.of(
 			deobOutput.resolve("runescape_gl.jar"),
+			deobOutput.resolve("jaggl.jar"),
 			deobOutput.resolve("loader_gl.jar"),
 			deobOutput.resolve("signlink_gl.jar"),
 			deobOutput.resolve("unpack_gl.jar"),
 			deobOutput.resolve("unpacker_gl.jar")
 		);
 
-		try (var decompiler = new Decompiler(libraries, sources, Decompiler::getDestination)) {
+		try (var decompiler = new Decompiler(sources, Decompiler::getDestination)) {
 			decompiler.run();
 		}
 	}
 
 	private final DecompilerIo io;
 	private final Fernflower fernflower;
-	private final List<Path> libraries, sources;
+	private final List<Path> sources;
 
-	public Decompiler(List<Path> libraries, List<Path> sources, Function<String, Path> destination) {
+	public Decompiler(List<Path> sources, Function<String, Path> destination) {
 		this.io = new DecompilerIo(destination);
 		this.fernflower = new Fernflower(io, io, OPTIONS, Slf4jFernflowerLogger.INSTANCE);
-		this.libraries = libraries;
 		this.sources = sources;
 	}
 
 	public void run() {
-		for (var library : libraries) {
-			fernflower.addLibrary(library.toFile());
-		}
-
 		for (var source : sources) {
 			fernflower.addSource(source.toFile());
 		}

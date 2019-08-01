@@ -10,10 +10,12 @@ import org.objectweb.asm.tree.ClassNode;
 public final class AsmClassMetadata extends ClassMetadata {
 	private final ClassPath classPath;
 	private final ClassNode clazz;
+	private final boolean dependency;
 
-	public AsmClassMetadata(ClassPath classPath, ClassNode clazz) {
+	public AsmClassMetadata(ClassPath classPath, ClassNode clazz, boolean dependency) {
 		this.classPath = classPath;
 		this.clazz = clazz;
+		this.dependency = dependency;
 	}
 
 	@Override
@@ -23,7 +25,7 @@ public final class AsmClassMetadata extends ClassMetadata {
 
 	@Override
 	public boolean isDependency() {
-		return false;
+		return dependency;
 	}
 
 	@Override

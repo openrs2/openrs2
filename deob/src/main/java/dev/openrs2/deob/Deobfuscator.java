@@ -1,8 +1,6 @@
 package dev.openrs2.deob;
 
 import java.io.IOException;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -51,15 +49,10 @@ public final class Deobfuscator {
 		var glUnpacker = new Library(unpacker);
 		var loader = Library.readJar(input.resolve("loader.jar"));
 		var glLoader = Library.readJar(input.resolve("loader_gl.jar"));
+		var gl = Library.readPack(input.resolve("jaggl.pack200"));
 		var client = Library.readJar(input.resolve("runescape.jar"));
 		var glClient = Library.readPack(input.resolve("runescape_gl.pack200"));
 		var unsignedClient = new Library(client);
-
-		/* read dependencies */
-		var runtime = ClassLoader.getPlatformClassLoader();
-		var jogl = new URLClassLoader(new URL[] {
-			input.resolve("jogl.jar").toUri().toURL()
-		}, runtime);
 
 		/* overwrite client's classes with signed classes from the loader */
 		logger.info("Moving signed classes from loader to runescape");
@@ -74,6 +67,7 @@ public final class Deobfuscator {
 			"unpacker_gl", glUnpacker,
 			"loader", loader,
 			"loader_gl", glLoader,
+			"jaggl", gl,
 			"runescape", client,
 			"runescape_gl", glClient,
 			"runescape_unsigned", unsignedClient
@@ -115,13 +109,15 @@ public final class Deobfuscator {
 
 		/* remap all class, method and field names */
 		logger.info("Creating remappers");
-		var libraries = new Library[] { client, loader, signLink, unpack, unpacker };
-		var remapper = TypedRemapper.create(new ClassPath(runtime, libraries));
+		var runtime = ClassLoader.getPlatformClassLoader();
 
-		var glLibraries = new Library[] { glClient, glLoader, glSignLink, glUnpack, glUnpacker };
-		var glRemapper = TypedRemapper.create(new ClassPath(jogl, glLibraries));
+		var libraries = List.of(client, loader, signLink, unpack, unpacker);
+		var remapper = TypedRemapper.create(new ClassPath(runtime, List.of(), libraries));
 
-		var unsignedRemapper = TypedRemapper.create(new ClassPath(runtime, unsignedClient));
+		var glLibraries = List.of(glClient, glLoader, glSignLink, glUnpack, glUnpacker);
+		var glRemapper = TypedRemapper.create(new ClassPath(runtime, List.of(gl), glLibraries));
+
+		var unsignedRemapper = TypedRemapper.create(new ClassPath(runtime, List.of(), List.of(unsignedClient)));
 
 		/* transform Class.forName() calls */
 		logger.info("Transforming Class.forName() calls");
@@ -162,6 +158,7 @@ public final class Deobfuscator {
 		unpack.writeJar(output.resolve("unpack.jar"), remapper);
 		unpacker.writeJar(output.resolve("unpacker.jar"), remapper);
 
+		gl.writeJar(output.resolve("jaggl.jar"), glRemapper);
 		glClient.writeJar(output.resolve("runescape_gl.jar"), glRemapper);
 		glLoader.writeJar(output.resolve("loader_gl.jar"), glRemapper);
 		glSignLink.writeJar(output.resolve("signlink_gl.jar"), glRemapper);
