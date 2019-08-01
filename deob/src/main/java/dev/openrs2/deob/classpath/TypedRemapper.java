@@ -15,8 +15,12 @@ import dev.openrs2.util.collect.DisjointSet;
 import dev.openrs2.util.collect.ForestDisjointSet;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.commons.Remapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class TypedRemapper extends Remapper {
+	private static final Logger logger = LoggerFactory.getLogger(TypedRemapper.class);
+
 	public static final Set<String> EXCLUDED_CLASSES = Set.of(
 		"client",
 		"jagex3/jagmisc/jagmisc",
@@ -34,6 +38,7 @@ public final class TypedRemapper extends Remapper {
 	public static final Set<String> EXCLUDED_FIELDS = Set.of(
 		"cache"
 	);
+	private static final int MAX_OBFUSCATED_NAME_LEN = 2;
 
 	public static TypedRemapper create(ClassPath classPath) {
 		var libraryClasses = classPath.getLibraryClasses();
@@ -45,7 +50,30 @@ public final class TypedRemapper extends Remapper {
 		var fields = createFieldMapping(classPath, inheritedFieldSets, classes);
 		var methods = createMethodMapping(classPath, inheritedMethodSets);
 
+		verifyMapping(classes);
+		verifyMemberMapping(fields);
+		verifyMemberMapping(methods);
+
 		return new TypedRemapper(classes, fields, methods);
+	}
+
+	private static void verifyMapping(Map<String, String> mapping) {
+		for (var entry : mapping.entrySet()) {
+			verifyMapping(entry.getKey(), entry.getValue());
+		}
+	}
+
+	private static void verifyMemberMapping(Map<MemberRef, String> mapping) {
+		for (var entry : mapping.entrySet()) {
+			verifyMapping(entry.getKey().getName(), entry.getValue());
+		}
+	}
+
+	private static void verifyMapping(String name, String mappedName) {
+		name = name.replaceAll("^(?:loader|unpacker)_", "");
+		if (name.length() > MAX_OBFUSCATED_NAME_LEN && !name.equals(mappedName)) {
+			logger.warn("Remapping probably unobfuscated name {} to {}", name, mappedName);
+		}
 	}
 
 	private static DisjointSet<MemberRef> createInheritedFieldSets(List<ClassMetadata> classes) {
