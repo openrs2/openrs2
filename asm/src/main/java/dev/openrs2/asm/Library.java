@@ -63,10 +63,12 @@ public final class Library implements Iterable<ClassNode> {
 
 		var temp = Files.createTempFile(TEMP_PREFIX, JAR_SUFFIX);
 		try {
-			try (var header = new ByteArrayInputStream(GZIP_HEADER);
-					var data = Files.newInputStream(path);
-					var in = new GZIPInputStream(new SequenceInputStream(header, data));
-					var out = new JarOutputStream(Files.newOutputStream(temp))) {
+			try (
+				var header = new ByteArrayInputStream(GZIP_HEADER);
+				var data = Files.newInputStream(path);
+				var in = new GZIPInputStream(new SequenceInputStream(header, data));
+				var out = new JarOutputStream(Files.newOutputStream(temp))
+			) {
 				Pack200.newUnpacker().unpack(in, out);
 				return readJar(temp);
 			}
@@ -138,8 +140,10 @@ public final class Library implements Iterable<ClassNode> {
 		try {
 			writeJar(temp, remapper);
 
-			try (var in = new JarInputStream(Files.newInputStream(temp));
-					var out = new GZIPOutputStream(new SkipOutputStream(Files.newOutputStream(path), 2))) {
+			try (
+				var in = new JarInputStream(Files.newInputStream(temp));
+				var out = new GZIPOutputStream(new SkipOutputStream(Files.newOutputStream(path), 2))
+			) {
 				Pack200.newPacker().pack(in, out);
 			}
 		} finally {

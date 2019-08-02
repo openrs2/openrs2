@@ -258,23 +258,23 @@ public final class TypedRemapper extends Remapper {
 			}
 
 			switch (type.getSort()) {
-				case Type.BOOLEAN:
-				case Type.BYTE:
-				case Type.CHAR:
-				case Type.SHORT:
-				case Type.INT:
-				case Type.LONG:
-				case Type.FLOAT:
-				case Type.DOUBLE:
-					prefix = type.getClassName() + prefix;
-					break;
-				case Type.OBJECT:
-					var className = classMapping.getOrDefault(type.getInternalName(), type.getInternalName());
-					className = className.substring(className.lastIndexOf('/') + 1);
-					prefix = className + prefix;
-					break;
-				default:
-					throw new IllegalArgumentException("Unknown field type " + type);
+			case Type.BOOLEAN:
+			case Type.BYTE:
+			case Type.CHAR:
+			case Type.SHORT:
+			case Type.INT:
+			case Type.LONG:
+			case Type.FLOAT:
+			case Type.DOUBLE:
+				prefix = type.getClassName() + prefix;
+				break;
+			case Type.OBJECT:
+				var className = classMapping.getOrDefault(type.getInternalName(), type.getInternalName());
+				className = className.substring(className.lastIndexOf('/') + 1);
+				prefix = className + prefix;
+				break;
+			default:
+				throw new IllegalArgumentException("Unknown field type " + type);
 			}
 
 			prefix = StringUtils.indefiniteArticle(prefix) + StringUtils.capitalize(prefix);

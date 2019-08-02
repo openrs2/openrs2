@@ -105,7 +105,7 @@ public final class CounterTransformer extends Transformer {
 			var putstatic = (FieldInsnNode) match.get(3);
 
 			if (getstatic.owner.equals(putstatic.owner) && getstatic.name.equals(putstatic.name) && getstatic.desc.equals(putstatic.desc) &&
-					counters.contains(new MemberRef(putstatic.owner, putstatic.name, putstatic.desc))) {
+				counters.contains(new MemberRef(putstatic.owner, putstatic.name, putstatic.desc))) {
 				match.forEach(method.instructions::remove);
 			}
 		});

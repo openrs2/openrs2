@@ -21,32 +21,32 @@ public final class Slf4jFernflowerLogger extends IFernflowerLogger {
 	@Override
 	public void writeMessage(String message, Severity severity) {
 		switch (severity) {
-			case TRACE:
-				logger.trace(message);
-			case INFO:
-				logger.info(message);
-			case WARN:
-				logger.warn(message);
-			case ERROR:
-				logger.error(message);
-			default:
-				throw new IllegalArgumentException();
+		case TRACE:
+			logger.trace(message);
+		case INFO:
+			logger.info(message);
+		case WARN:
+			logger.warn(message);
+		case ERROR:
+			logger.error(message);
+		default:
+			throw new IllegalArgumentException();
 		}
 	}
 
 	@Override
 	public void writeMessage(String message, Severity severity, Throwable t) {
 		switch (severity) {
-			case TRACE:
-				logger.trace(message, t);
-			case INFO:
-				logger.info(message, t);
-			case WARN:
-				logger.warn(message, t);
-			case ERROR:
-				logger.error(message, t);
-			default:
-				throw new IllegalArgumentException();
+		case TRACE:
+			logger.trace(message, t);
+		case INFO:
+			logger.info(message, t);
+		case WARN:
+			logger.warn(message, t);
+		case ERROR:
+			logger.error(message, t);
+		default:
+			throw new IllegalArgumentException();
 		}
 	}
 }
