@@ -35,6 +35,26 @@ public final class InsnNodeUtils {
 		return insn;
 	}
 
+	public static boolean isIntConstant(AbstractInsnNode insn) {
+		switch (insn.getOpcode()) {
+		case Opcodes.ICONST_M1:
+		case Opcodes.ICONST_0:
+		case Opcodes.ICONST_1:
+		case Opcodes.ICONST_2:
+		case Opcodes.ICONST_3:
+		case Opcodes.ICONST_4:
+		case Opcodes.ICONST_5:
+		case Opcodes.BIPUSH:
+		case Opcodes.SIPUSH:
+			return true;
+		case Opcodes.LDC:
+			var ldc = (LdcInsnNode) insn;
+			return ldc.cst instanceof Integer;
+		}
+
+		return false;
+	}
+
 	public static int getIntConstant(AbstractInsnNode insn) {
 		switch (insn.getOpcode()) {
 		case Opcodes.ICONST_M1:
