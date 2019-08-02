@@ -240,7 +240,7 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>versions-maven-plugin</artifactId>
         <configuration>
-          <rulesUri>file://${session.executionRootDirectory}/version-rules.xml</rulesUri>
+          <rulesUri>file://${maven.multiModuleProjectDirectory}/version-rules.xml</rulesUri>
         </configuration>
       </plugin>
     </plugins>
