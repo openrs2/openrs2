@@ -1,4 +1,5 @@
 .*
+!.editorconfig
 !.git*
 !.idea
 !.mailmap
