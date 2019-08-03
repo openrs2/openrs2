@@ -17,7 +17,6 @@
     <module>fernflower</module>
     <module>game</module>
     <module>gl-natives</module>
-    <module>misc-natives</module>
     <module>util</module>
   </modules>
 
@@ -309,6 +308,17 @@
           </plugin>
         </plugins>
       </build>
+    </profile>
+    <profile>
+      <id>windows</id>
+      <activation>
+        <os>
+          <family>windows</family>
+        </os>
+      </activation>
+      <modules>
+        <module>misc-natives</module>
+      </modules>
     </profile>
   </profiles>
 </project>
