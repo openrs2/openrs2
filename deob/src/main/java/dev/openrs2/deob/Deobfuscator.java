@@ -57,6 +57,11 @@ public final class Deobfuscator {
 		var gl = Library.readPack(input.resolve("jaggl.pack200"));
 		var client = Library.readJar(input.resolve("runescape.jar"));
 		var glClient = Library.readPack(input.resolve("runescape_gl.pack200"));
+
+		// TODO(gpe): it'd be nice to have separate signlink.jar and
+		// signlink-unsigned.jar files so we don't (effectively) deobfuscate
+		// runescape.jar twice with different sets of names, but thinking about
+		// how this would work is tricky (as the naming must match)
 		var unsignedClient = new Library(client);
 
 		/* overwrite client's classes with signed classes from the loader */
