@@ -1,9 +1,8 @@
-package dev.openrs2.deob;
+package dev.openrs2.deob.remap;
 
 import java.util.HashMap;
 
 import dev.openrs2.asm.Library;
-import dev.openrs2.deob.classpath.TypedRemapper;
 import dev.openrs2.deob.transform.ClassForNameTransformer;
 import org.objectweb.asm.commons.ClassRemapper;
 import org.objectweb.asm.commons.SimpleRemapper;

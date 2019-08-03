@@ -1,4 +1,4 @@
-package dev.openrs2.deob.classpath;
+package dev.openrs2.deob.remap;
 
 import java.util.HashMap;
 import java.util.List;
