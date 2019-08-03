@@ -24,6 +24,8 @@ public final class Decompiler implements Closeable {
 			archive = "client";
 		} else if (archive.equals("jaggl")) {
 			archive = "gl";
+		} else if (archive.equals("jaggl_dri")) {
+			archive = "gl-dri";
 		}
 		return Paths.get("nonfree").resolve(archive).resolve("src/main/java");
 	}
@@ -33,6 +35,7 @@ public final class Decompiler implements Closeable {
 		var sources = List.of(
 			deobOutput.resolve("runescape_gl.jar"),
 			deobOutput.resolve("jaggl.jar"),
+			deobOutput.resolve("jaggl_dri.jar"),
 			deobOutput.resolve("loader_gl.jar"),
 			deobOutput.resolve("signlink_gl.jar"),
 			deobOutput.resolve("unpack_gl.jar"),

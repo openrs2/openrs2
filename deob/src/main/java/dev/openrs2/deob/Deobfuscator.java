@@ -82,6 +82,13 @@ public final class Deobfuscator {
 		var glUnpack = new Library();
 		glUnpack.add(glLoader.remove("unpack"));
 
+		/* move DRI classes out of jaggl (so we can place javah-generated headers in a separate directory) */
+		logger.info("Moving DRI classes from jaggl to jaggl_dri");
+		var glDri = new Library();
+		glDri.add(gl.remove("com/sun/opengl/impl/x11/DRIHack"));
+		glDri.add(gl.remove("com/sun/opengl/impl/x11/DRIHack$1"));
+		glDri.add(gl.remove("jaggl/X11/dri"));
+
 		/* prefix remaining loader/unpacker classes (to avoid conflicts when we rename in the same classpath as the client) */
 		logger.info("Prefixing loader and unpacker class names");
 		ClassNamePrefixer.addPrefix(loader, "loader_");
@@ -92,7 +99,7 @@ public final class Deobfuscator {
 		/* bundle libraries together into a common classpath */
 		var runtime = ClassLoader.getPlatformClassLoader();
 		var classPath = new ClassPath(runtime, List.of(), List.of(client, loader, signLink, unpack, unpacker));
-		var glClassPath = new ClassPath(runtime, List.of(gl), List.of(glClient, glLoader, glSignLink, glUnpack, glUnpacker));
+		var glClassPath = new ClassPath(runtime, List.of(gl, glDri), List.of(glClient, glLoader, glSignLink, glUnpack, glUnpacker));
 		var unsignedClassPath = new ClassPath(runtime, List.of(), List.of(unsignedClient));
 
 		/* deobfuscate */
@@ -150,6 +157,7 @@ public final class Deobfuscator {
 		unpacker.writeJar(output.resolve("unpacker.jar"), remapper);
 
 		gl.writeJar(output.resolve("jaggl.jar"), glRemapper);
+		glDri.writeJar(output.resolve("jaggl_dri.jar"), glRemapper);
 		glClient.writeJar(output.resolve("runescape_gl.jar"), glRemapper);
 		glLoader.writeJar(output.resolve("loader_gl.jar"), glRemapper);
 		glSignLink.writeJar(output.resolve("signlink_gl.jar"), glRemapper);
