@@ -60,11 +60,13 @@ public final class Deobfuscator {
 		var unsignedClient = new Library(client);
 
 		/* overwrite client's classes with signed classes from the loader */
-		logger.info("Moving signed classes from loader to runescape");
-		var signedClasses = SignedClassSet.create(loader, client);
+		logger.info("Moving signed classes from loader");
+		var signLink = new Library();
+		SignedClassUtils.move(loader, client, signLink);
 
-		logger.info("Moving signed classes from loader_gl to runescape_gl");
-		var glSignedClasses = SignedClassSet.create(glLoader, glClient);
+		logger.info("Moving signed classes from loader_gl");
+		var glSignLink = new Library();
+		SignedClassUtils.move(glLoader, glClient, glSignLink);
 
 		/* move unpack class out of the loader (so the unpacker and loader can both depend on it) */
 		logger.info("Moving unpack from loader to unpack");
@@ -74,15 +76,6 @@ public final class Deobfuscator {
 		logger.info("Moving unpack from loader_gl to unpack_gl");
 		var glUnpack = new Library();
 		glUnpack.add(glLoader.remove("unpack"));
-
-		/* move signed classes out of the client (so the client and loader can both depend on them) */
-		logger.info("Moving signed classes from runescape to signlink");
-		var signLink = new Library();
-		signedClasses.move(client, signLink);
-
-		logger.info("Moving signed classes from runescape_gl to signlink_gl");
-		var glSignLink = new Library();
-		glSignedClasses.move(glClient, glSignLink);
 
 		/* prefix remaining loader/unpacker classes (to avoid conflicts when we rename in the same classpath as the client) */
 		logger.info("Prefixing loader and unpacker class names");

@@ -16,12 +16,12 @@ import org.objectweb.asm.tree.MethodNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class SignedClassSet {
-	private static final Logger logger = LoggerFactory.getLogger(SignedClassSet.class);
+public final class SignedClassUtils {
+	private static final Logger logger = LoggerFactory.getLogger(SignedClassUtils.class);
 
 	private static final InsnMatcher LOAD_SIGNED_CLASS_MATCHER = InsnMatcher.compile("LDC INVOKESTATIC ASTORE ALOAD GETFIELD ALOAD INVOKEVIRTUAL ALOAD INVOKEVIRTUAL POP");
 
-	public static SignedClassSet create(Library loader, Library client) {
+	public static void move(Library loader, Library client, Library signLink) {
 		/* find signed classes */
 		var signedClasses = findSignedClasses(loader);
 		logger.info("Identified signed classes {}", signedClasses);
@@ -36,18 +36,20 @@ public final class SignedClassSet {
 		}
 		var remapper = new SimpleRemapper(mapping);
 
-		/* move signed classes to the client */
-		var remappedSignedClasses = new HashSet<String>();
+		/* delete original signed classes (these have no dependencies) */
+		for (var name : signedClasses) {
+			client.remove(name);
+		}
+
+		/* move loader signed classes to signlink */
 		for (var name : Sets.union(signedClasses, dependencies)) {
 			var in = loader.remove(name);
 
 			var out = new ClassNode();
 			in.accept(new ClassRemapper(out, remapper));
 
-			remappedSignedClasses.add(out.name);
-			client.add(out);
+			signLink.add(out);
 		}
-		return new SignedClassSet(remappedSignedClasses);
 	}
 
 	private static Set<String> findSignedClasses(Library loader) {
@@ -100,15 +102,7 @@ public final class SignedClassSet {
 		return dependencies;
 	}
 
-	private final Set<String> signedClasses;
-
-	private SignedClassSet(Set<String> signedClasses) {
-		this.signedClasses = signedClasses;
-	}
-
-	public void move(Library client, Library signLink) {
-		for (var name : signedClasses) {
-			signLink.add(client.remove(name));
-		}
+	private SignedClassUtils() {
+		/* empty */
 	}
 }
