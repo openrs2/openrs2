@@ -9,7 +9,7 @@
   </parent>
 
   <artifactId>openrs2-misc-natives</artifactId>
-  <packaging>jar</packaging>
+  <packaging>nar</packaging>
 
   <name>OpenRS2 Misc Natives</name>
 </project>
