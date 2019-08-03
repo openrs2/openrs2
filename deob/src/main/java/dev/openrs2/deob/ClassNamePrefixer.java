@@ -8,9 +8,10 @@ import dev.openrs2.deob.transform.ClassForNameTransformer;
 import org.objectweb.asm.commons.ClassRemapper;
 import org.objectweb.asm.commons.SimpleRemapper;
 import org.objectweb.asm.tree.ClassNode;
+import org.objectweb.asm.tree.analysis.AnalyzerException;
 
 public final class ClassNamePrefixer {
-	public static void addPrefix(Library library, String prefix) {
+	public static void addPrefix(Library library, String prefix) throws AnalyzerException {
 		var mapping = new HashMap<String, String>();
 		for (var clazz : library) {
 			if (TypedRemapper.EXCLUDED_CLASSES.contains(clazz.name)) {

@@ -4,9 +4,10 @@ import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldNode;
 import org.objectweb.asm.tree.MethodNode;
+import org.objectweb.asm.tree.analysis.AnalyzerException;
 
 public abstract class Transformer {
-	public final void transform(Library library) {
+	public void transform(Library library) throws AnalyzerException {
 		preTransform(library);
 
 		for (var clazz : library) {
@@ -28,27 +29,27 @@ public abstract class Transformer {
 		postTransform(library);
 	}
 
-	public void preTransform(Library library) {
+	public void preTransform(Library library) throws AnalyzerException {
 		/* empty */
 	}
 
-	public void transformClass(ClassNode clazz) {
+	public void transformClass(ClassNode clazz) throws AnalyzerException {
 		/* empty */
 	}
 
-	public void transformField(ClassNode clazz, FieldNode field) {
+	public void transformField(ClassNode clazz, FieldNode field) throws AnalyzerException {
 		/* empty */
 	}
 
-	public void transformMethod(ClassNode clazz, MethodNode method) {
+	public void transformMethod(ClassNode clazz, MethodNode method) throws AnalyzerException {
 		/* empty */
 	}
 
-	public void transformCode(ClassNode clazz, MethodNode method) {
+	public void transformCode(ClassNode clazz, MethodNode method) throws AnalyzerException {
 		/* empty */
 	}
 
-	public void postTransform(Library library) {
+	public void postTransform(Library library) throws AnalyzerException {
 		/* empty */
 	}
 }

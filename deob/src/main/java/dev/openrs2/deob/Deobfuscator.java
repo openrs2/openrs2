@@ -19,6 +19,7 @@ import dev.openrs2.deob.transform.ExceptionTracingTransformer;
 import dev.openrs2.deob.transform.FieldOrderTransformer;
 import dev.openrs2.deob.transform.OpaquePredicateTransformer;
 import dev.openrs2.deob.transform.OriginalNameTransformer;
+import org.objectweb.asm.tree.analysis.AnalyzerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,7 +35,7 @@ public final class Deobfuscator {
 		new FieldOrderTransformer()
 	);
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, AnalyzerException {
 		var deobfuscator = new Deobfuscator(Paths.get("nonfree/code"), Paths.get("nonfree/code/deob"));
 		deobfuscator.run();
 	}
@@ -46,7 +47,7 @@ public final class Deobfuscator {
 		this.output = output;
 	}
 
-	public void run() throws IOException {
+	public void run() throws IOException, AnalyzerException {
 		/* read input jars/packs */
 		logger.info("Reading input jars");
 		var unpacker = Library.readJar(input.resolve("game_unpacker.dat"));
