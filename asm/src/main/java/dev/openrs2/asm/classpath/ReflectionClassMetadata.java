@@ -1,4 +1,4 @@
-package dev.openrs2.deob.classpath;
+package dev.openrs2.asm.classpath;
 
 import java.lang.reflect.Modifier;
 import java.util.Arrays;

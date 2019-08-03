@@ -8,6 +8,8 @@ import java.util.Set;
 import com.google.common.base.Strings;
 import dev.openrs2.asm.MemberDesc;
 import dev.openrs2.asm.MemberRef;
+import dev.openrs2.asm.classpath.ClassMetadata;
+import dev.openrs2.asm.classpath.ClassPath;
 import dev.openrs2.util.StringUtils;
 import dev.openrs2.util.collect.DisjointSet;
 import org.objectweb.asm.Type;

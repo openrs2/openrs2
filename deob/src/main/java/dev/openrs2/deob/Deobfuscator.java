@@ -9,7 +9,7 @@ import java.util.Map;
 
 import dev.openrs2.asm.Library;
 import dev.openrs2.asm.Transformer;
-import dev.openrs2.deob.classpath.ClassPath;
+import dev.openrs2.asm.classpath.ClassPath;
 import dev.openrs2.deob.classpath.TypedRemapper;
 import dev.openrs2.deob.transform.BitShiftTransformer;
 import dev.openrs2.deob.transform.CanvasTransformer;
