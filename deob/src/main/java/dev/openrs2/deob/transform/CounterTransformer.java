@@ -6,9 +6,9 @@ import java.util.Map;
 import java.util.Set;
 
 import dev.openrs2.asm.InsnMatcher;
-import dev.openrs2.asm.Library;
 import dev.openrs2.asm.MemberRef;
 import dev.openrs2.asm.Transformer;
+import dev.openrs2.asm.classpath.ClassPath;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
@@ -26,22 +26,24 @@ public final class CounterTransformer extends Transformer {
 	private final Set<MemberRef> counters = new HashSet<>();
 
 	@Override
-	public void preTransform(Library library) {
+	public void preTransform(ClassPath classPath) {
 		counters.clear();
 
 		var references = new HashMap<MemberRef, Integer>();
 		var resets = new HashMap<MemberRef, Integer>();
 		var increments = new HashMap<MemberRef, Integer>();
 
-		for (var clazz : library) {
-			for (var method : clazz.methods) {
-				if ((method.access & (Opcodes.ACC_NATIVE | Opcodes.ACC_ABSTRACT)) == 0) {
-					findCounters(method, references, resets, increments);
+		for (var library : classPath.getLibraries()) {
+			for (var clazz : library) {
+				for (var method : clazz.methods) {
+					if ((method.access & (Opcodes.ACC_NATIVE | Opcodes.ACC_ABSTRACT)) == 0) {
+						findCounters(method, references, resets, increments);
+					}
 				}
 			}
 		}
 
-		deleteCounters(library, references, resets, increments);
+		deleteCounters(classPath, references, resets, increments);
 	}
 
 	private void findCounters(MethodNode method, Map<MemberRef, Integer> references, Map<MemberRef, Integer> resets, Map<MemberRef, Integer> increments) {
@@ -68,7 +70,7 @@ public final class CounterTransformer extends Transformer {
 		});
 	}
 
-	private void deleteCounters(Library library, Map<MemberRef, Integer> references, Map<MemberRef, Integer> resets, Map<MemberRef, Integer> increments) {
+	private void deleteCounters(ClassPath classPath, Map<MemberRef, Integer> references, Map<MemberRef, Integer> resets, Map<MemberRef, Integer> increments) {
 		for (Map.Entry<MemberRef, Integer> entry : references.entrySet()) {
 			var counter = entry.getKey();
 
@@ -84,7 +86,7 @@ public final class CounterTransformer extends Transformer {
 				continue;
 			}
 
-			ClassNode owner = library.get(counter.getOwner());
+			ClassNode owner = classPath.getNode(counter.getOwner());
 			owner.fields.removeIf(f -> f.name.equals(counter.getName()) && f.desc.equals(counter.getDesc()));
 
 			counters.add(counter);
@@ -112,7 +114,7 @@ public final class CounterTransformer extends Transformer {
 	}
 
 	@Override
-	public void postTransform(Library library) {
+	public void postTransform(ClassPath classPath) {
 		logger.info("Removed {} counters", counters.size());
 	}
 }

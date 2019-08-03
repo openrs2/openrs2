@@ -1,5 +1,6 @@
 package dev.openrs2.asm;
 
+import dev.openrs2.asm.classpath.ClassPath;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldNode;
@@ -7,29 +8,31 @@ import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.analysis.AnalyzerException;
 
 public abstract class Transformer {
-	public void transform(Library library) throws AnalyzerException {
-		preTransform(library);
+	public void transform(ClassPath classPath) throws AnalyzerException {
+		preTransform(classPath);
 
-		for (var clazz : library) {
-			transformClass(clazz);
+		for (var library : classPath.getLibraries()) {
+			for (var clazz : library) {
+				transformClass(clazz);
 
-			for (var field : clazz.fields) {
-				transformField(clazz, field);
-			}
+				for (var field : clazz.fields) {
+					transformField(clazz, field);
+				}
 
-			for (var method : clazz.methods) {
-				transformMethod(clazz, method);
+				for (var method : clazz.methods) {
+					transformMethod(clazz, method);
 
-				if ((method.access & (Opcodes.ACC_NATIVE | Opcodes.ACC_ABSTRACT)) == 0) {
-					transformCode(clazz, method);
+					if ((method.access & (Opcodes.ACC_NATIVE | Opcodes.ACC_ABSTRACT)) == 0) {
+						transformCode(clazz, method);
+					}
 				}
 			}
 		}
 
-		postTransform(library);
+		postTransform(classPath);
 	}
 
-	public void preTransform(Library library) throws AnalyzerException {
+	public void preTransform(ClassPath classPath) throws AnalyzerException {
 		/* empty */
 	}
 
@@ -49,7 +52,7 @@ public abstract class Transformer {
 		/* empty */
 	}
 
-	public void postTransform(Library library) throws AnalyzerException {
+	public void postTransform(ClassPath classPath) throws AnalyzerException {
 		/* empty */
 	}
 }

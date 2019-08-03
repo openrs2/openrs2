@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import dev.openrs2.asm.Library;
 import dev.openrs2.deob.transform.ClassForNameTransformer;
+import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.commons.ClassRemapper;
 import org.objectweb.asm.commons.SimpleRemapper;
 import org.objectweb.asm.tree.ClassNode;
@@ -22,7 +23,13 @@ public final class ClassNamePrefixer {
 		var remapper = new SimpleRemapper(mapping);
 
 		var transformer = new ClassForNameTransformer(remapper);
-		transformer.transform(library);
+		for (var clazz : library) {
+			for (var method : clazz.methods) {
+				if ((method.access & (Opcodes.ACC_NATIVE | Opcodes.ACC_ABSTRACT)) == 0) {
+					transformer.transformCode(clazz, method);
+				}
+			}
+		}
 
 		for (var name : mapping.keySet()) {
 			var in = library.remove(name);

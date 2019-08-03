@@ -2,8 +2,8 @@ package dev.openrs2.deob.transform;
 
 import dev.openrs2.asm.InsnMatcher;
 import dev.openrs2.asm.InsnNodeUtils;
-import dev.openrs2.asm.Library;
 import dev.openrs2.asm.Transformer;
+import dev.openrs2.asm.classpath.ClassPath;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.MethodNode;
 import org.slf4j.Logger;
@@ -17,7 +17,7 @@ public final class ExceptionTracingTransformer extends Transformer {
 	private int tracingTryCatches;
 
 	@Override
-	public void preTransform(Library library) {
+	public void preTransform(ClassPath classPath) {
 		tracingTryCatches = 0;
 	}
 
@@ -39,7 +39,7 @@ public final class ExceptionTracingTransformer extends Transformer {
 	}
 
 	@Override
-	public void postTransform(Library library) {
+	public void postTransform(ClassPath classPath) {
 		logger.info("Removed {} tracing try/catch blocks", tracingTryCatches);
 	}
 }

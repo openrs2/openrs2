@@ -4,8 +4,8 @@ import java.util.Set;
 
 import dev.openrs2.asm.InsnMatcher;
 import dev.openrs2.asm.InsnNodeUtils;
-import dev.openrs2.asm.Library;
 import dev.openrs2.asm.Transformer;
+import dev.openrs2.asm.classpath.ClassPath;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.MethodNode;
@@ -21,7 +21,7 @@ public final class BitShiftTransformer extends Transformer {
 	private int simplified;
 
 	@Override
-	public void preTransform(Library library) {
+	public void preTransform(ClassPath classPath) {
 		simplified = 0;
 	}
 
@@ -42,7 +42,7 @@ public final class BitShiftTransformer extends Transformer {
 	}
 
 	@Override
-	public void postTransform(Library library) {
+	public void postTransform(ClassPath classPath) {
 		logger.info("Simplified {} bit shifts", simplified);
 	}
 }

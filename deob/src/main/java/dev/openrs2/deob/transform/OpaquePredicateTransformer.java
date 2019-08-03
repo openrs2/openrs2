@@ -8,6 +8,7 @@ import dev.openrs2.asm.InsnMatcher;
 import dev.openrs2.asm.Library;
 import dev.openrs2.asm.MemberRef;
 import dev.openrs2.asm.Transformer;
+import dev.openrs2.asm.classpath.ClassPath;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
@@ -29,15 +30,17 @@ public final class OpaquePredicateTransformer extends Transformer {
 	private int opaquePredicates, stores;
 
 	@Override
-	public void preTransform(Library library) {
+	public void preTransform(ClassPath classPath) {
 		flowObstructors.clear();
 		opaquePredicates = 0;
 		stores = 0;
 
-		for (var clazz : library) {
-			for (var method : clazz.methods) {
-				if ((method.access & (Opcodes.ACC_NATIVE | Opcodes.ACC_ABSTRACT)) == 0) {
-					findFlowObstructors(library, method);
+		for (var library : classPath.getLibraries()) {
+			for (var clazz : library) {
+				for (var method : clazz.methods) {
+					if ((method.access & (Opcodes.ACC_NATIVE | Opcodes.ACC_ABSTRACT)) == 0) {
+						findFlowObstructors(library, method);
+					}
 				}
 			}
 		}
@@ -113,7 +116,7 @@ public final class OpaquePredicateTransformer extends Transformer {
 	}
 
 	@Override
-	public void postTransform(Library library) {
+	public void postTransform(ClassPath classPath) {
 		logger.info("Removed {} opaque predicates and {} redundant stores", opaquePredicates, stores);
 	}
 }

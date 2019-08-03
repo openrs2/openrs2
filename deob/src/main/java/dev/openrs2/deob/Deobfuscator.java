@@ -5,7 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Map;
 
 import dev.openrs2.asm.Library;
 import dev.openrs2.asm.Transformer;
@@ -67,27 +66,6 @@ public final class Deobfuscator {
 		logger.info("Moving signed classes from loader_gl to runescape_gl");
 		var glSignedClasses = SignedClassSet.create(glLoader, glClient);
 
-		/* deobfuscate */
-		var allLibraries = Map.of(
-			"unpacker", unpacker,
-			"unpacker_gl", glUnpacker,
-			"loader", loader,
-			"loader_gl", glLoader,
-			"jaggl", gl,
-			"runescape", client,
-			"runescape_gl", glClient,
-			"runescape_unsigned", unsignedClient
-		);
-
-		for (var entry : allLibraries.entrySet()) {
-			logger.info("Transforming library {}", entry.getKey());
-
-			for (var transformer : TRANSFORMERS) {
-				logger.info("Running transformer {}", transformer.getClass().getSimpleName());
-				transformer.transform(entry.getValue());
-			}
-		}
-
 		/* move unpack class out of the loader (so the unpacker and loader can both depend on it) */
 		logger.info("Moving unpack from loader to unpack");
 		var unpack = new Library();
@@ -113,45 +91,54 @@ public final class Deobfuscator {
 		ClassNamePrefixer.addPrefix(unpacker, "unpacker_");
 		ClassNamePrefixer.addPrefix(glUnpacker, "unpacker_");
 
+		/* bundle libraries together into a common classpath */
+		var runtime = ClassLoader.getPlatformClassLoader();
+		var classPath = new ClassPath(runtime, List.of(), List.of(client, loader, signLink, unpack, unpacker));
+		var glClassPath = new ClassPath(runtime, List.of(gl), List.of(glClient, glLoader, glSignLink, glUnpack, glUnpacker));
+		var unsignedClassPath = new ClassPath(runtime, List.of(), List.of(unsignedClient));
+
+		/* deobfuscate */
+		logger.info("Transforming client");
+		for (var transformer : TRANSFORMERS) {
+			logger.info("Running transformer {}", transformer.getClass().getSimpleName());
+			transformer.transform(classPath);
+		}
+
+		logger.info("Transforming client_gl");
+		for (var transformer : TRANSFORMERS) {
+			logger.info("Running transformer {}", transformer.getClass().getSimpleName());
+			transformer.transform(glClassPath);
+		}
+
+		logger.info("Transforming client_unsigned");
+		for (var transformer : TRANSFORMERS) {
+			logger.info("Running transformer {}", transformer.getClass().getSimpleName());
+			transformer.transform(unsignedClassPath);
+		}
+
 		/* remap all class, method and field names */
 		logger.info("Creating remappers");
-		var runtime = ClassLoader.getPlatformClassLoader();
-
-		var libraries = List.of(client, loader, signLink, unpack, unpacker);
-		var remapper = TypedRemapper.create(new ClassPath(runtime, List.of(), libraries));
-
-		var glLibraries = List.of(glClient, glLoader, glSignLink, glUnpack, glUnpacker);
-		var glRemapper = TypedRemapper.create(new ClassPath(runtime, List.of(gl), glLibraries));
-
-		var unsignedRemapper = TypedRemapper.create(new ClassPath(runtime, List.of(), List.of(unsignedClient)));
+		var remapper = TypedRemapper.create(classPath);
+		var glRemapper = TypedRemapper.create(glClassPath);
+		var unsignedRemapper = TypedRemapper.create(unsignedClassPath);
 
 		/* transform Class.forName() calls */
 		logger.info("Transforming Class.forName() calls");
 		Transformer transformer = new ClassForNameTransformer(remapper);
-		for (var library : libraries) {
-			transformer.transform(library);
-		}
+		transformer.transform(classPath);
 
 		transformer = new ClassForNameTransformer(glRemapper);
-		for (var library : glLibraries) {
-			transformer.transform(library);
-		}
+		transformer.transform(glClassPath);
 
 		transformer = new ClassForNameTransformer(unsignedRemapper);
-		transformer.transform(unsignedClient);
+		transformer.transform(unsignedClassPath);
 
 		/* add @OriginalName annotations */
 		logger.info("Annotating classes and members with original names");
 		transformer = new OriginalNameTransformer();
-		for (var library : libraries) {
-			transformer.transform(library);
-		}
-
-		for (var library : glLibraries) {
-			transformer.transform(library);
-		}
-
-		transformer.transform(unsignedClient);
+		transformer.transform(classPath);
+		transformer.transform(glClassPath);
+		transformer.transform(unsignedClassPath);
 
 		/* write output jars */
 		logger.info("Writing output jars");

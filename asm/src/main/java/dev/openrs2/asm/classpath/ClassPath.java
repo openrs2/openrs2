@@ -13,6 +13,7 @@ import dev.openrs2.asm.MemberDesc;
 import dev.openrs2.asm.MemberRef;
 import dev.openrs2.util.collect.DisjointSet;
 import dev.openrs2.util.collect.ForestDisjointSet;
+import org.objectweb.asm.tree.ClassNode;
 
 public final class ClassPath {
 	private final ClassLoader runtime;
@@ -23,6 +24,10 @@ public final class ClassPath {
 		this.runtime = runtime;
 		this.dependencies = dependencies;
 		this.libraries = libraries;
+	}
+
+	public List<Library> getLibraries() {
+		return libraries;
 	}
 
 	public List<ClassMetadata> getLibraryClasses() {
@@ -73,6 +78,16 @@ public final class ClassPath {
 		metadata = new ReflectionClassMetadata(this, clazz);
 		cache.put(name, metadata);
 		return metadata;
+	}
+
+	public ClassNode getNode(String name) {
+		for (var library : libraries) {
+			var clazz = library.get(name);
+			if (clazz != null) {
+				return clazz;
+			}
+		}
+		return null;
 	}
 
 	public DisjointSet<MemberRef> createInheritedFieldSets() {
