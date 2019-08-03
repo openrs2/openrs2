@@ -9,7 +9,26 @@
   </parent>
 
   <artifactId>openrs2-gl-dri-natives</artifactId>
-  <packaging>jar</packaging>
+  <packaging>nar</packaging>
 
   <name>OpenRS2 GL DRI Natives</name>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.github.maven-nar</groupId>
+        <artifactId>nar-maven-plugin</artifactId>
+        <configuration>
+          <linker>
+            <sysLibs>
+              <sysLib>
+                <type>shared</type>
+                <name>dl</name>
+              </sysLib>
+            </sysLibs>
+          </linker>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
