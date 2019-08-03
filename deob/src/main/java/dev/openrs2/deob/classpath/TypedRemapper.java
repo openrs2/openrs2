@@ -25,14 +25,14 @@ public final class TypedRemapper extends Remapper {
 		"unpack",
 		"unpackclass"
 	);
-	public static final Set<String> EXCLUDED_METHODS = Set.of(
+	private static final Set<String> EXCLUDED_METHODS = Set.of(
 		"<clinit>",
 		"<init>",
 		"main",
 		"providesignlink",
 		"quit"
 	);
-	public static final Set<String> EXCLUDED_FIELDS = Set.of(
+	private static final Set<String> EXCLUDED_FIELDS = Set.of(
 		"cache"
 	);
 	private static final int MAX_OBFUSCATED_NAME_LEN = 2;
@@ -120,6 +120,11 @@ public final class TypedRemapper extends Remapper {
 			for (var field : partition) {
 				var clazz = classPath.get(field.getOwner());
 
+				if (EXCLUDED_FIELDS.contains(field.getName())) {
+					skip = true;
+					break;
+				}
+
 				if (clazz.isDependency()) {
 					skip = true;
 					break;
@@ -178,6 +183,11 @@ public final class TypedRemapper extends Remapper {
 
 			for (var method : partition) {
 				var clazz = classPath.get(method.getOwner());
+
+				if (EXCLUDED_METHODS.contains(method.getName())) {
+					skip = true;
+					break;
+				}
 
 				if (clazz.isDependency()) {
 					skip = true;

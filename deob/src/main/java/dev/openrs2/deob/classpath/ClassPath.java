@@ -121,10 +121,6 @@ public final class ClassPath {
 		}
 
 		for (var field : clazz.getFields()) {
-			if (TypedRemapper.EXCLUDED_FIELDS.contains(field.getName())) {
-				continue;
-			}
-
 			disjointSet.add(new MemberRef(clazz.getName(), field));
 			ancestors.add(field);
 		}
@@ -180,10 +176,6 @@ public final class ClassPath {
 		}
 
 		for (var method : clazz.getMethods()) {
-			if (TypedRemapper.EXCLUDED_METHODS.contains(method.getName())) {
-				continue;
-			}
-
 			disjointSet.add(new MemberRef(clazz.getName(), method));
 			ancestors.add(method);
 		}
