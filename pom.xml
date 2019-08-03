@@ -16,6 +16,9 @@
     <module>deob-annotations</module>
     <module>fernflower</module>
     <module>game</module>
+    <module>gl-dri-natives</module>
+    <module>gl-natives</module>
+    <module>misc-natives</module>
     <module>util</module>
   </modules>
 
