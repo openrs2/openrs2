@@ -1,6 +1,6 @@
 package dev.openrs2.deob.transform;
 
-import dev.openrs2.asm.Transformer;
+import dev.openrs2.asm.transform.Transformer;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
 

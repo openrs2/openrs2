@@ -1,4 +1,4 @@
-package dev.openrs2.asm;
+package dev.openrs2.asm.classpath;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

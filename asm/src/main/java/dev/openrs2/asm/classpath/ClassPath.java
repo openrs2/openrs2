@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import dev.openrs2.asm.Library;
 import dev.openrs2.asm.MemberDesc;
 import dev.openrs2.asm.MemberRef;
 import dev.openrs2.util.collect.DisjointSet;

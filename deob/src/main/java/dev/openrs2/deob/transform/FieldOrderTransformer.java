@@ -3,7 +3,7 @@ package dev.openrs2.deob.transform;
 import java.util.HashMap;
 
 import dev.openrs2.asm.MemberDesc;
-import dev.openrs2.asm.Transformer;
+import dev.openrs2.asm.transform.Transformer;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldInsnNode;

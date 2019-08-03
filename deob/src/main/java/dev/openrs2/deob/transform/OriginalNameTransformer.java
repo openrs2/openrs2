@@ -3,7 +3,7 @@ package dev.openrs2.deob.transform;
 import java.util.ArrayList;
 import java.util.List;
 
-import dev.openrs2.asm.Transformer;
+import dev.openrs2.asm.transform.Transformer;
 import dev.openrs2.deob.annotation.OriginalArg;
 import dev.openrs2.deob.annotation.OriginalClass;
 import dev.openrs2.deob.annotation.OriginalMember;

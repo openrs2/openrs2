@@ -4,8 +4,8 @@ import java.util.Set;
 
 import dev.openrs2.asm.InsnMatcher;
 import dev.openrs2.asm.InsnNodeUtils;
-import dev.openrs2.asm.Transformer;
 import dev.openrs2.asm.classpath.ClassPath;
+import dev.openrs2.asm.transform.Transformer;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.MethodNode;

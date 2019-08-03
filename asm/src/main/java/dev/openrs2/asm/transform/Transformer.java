@@ -1,4 +1,4 @@
-package dev.openrs2.asm;
+package dev.openrs2.asm.transform;
 
 import dev.openrs2.asm.classpath.ClassPath;
 import org.objectweb.asm.Opcodes;

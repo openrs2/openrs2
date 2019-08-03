@@ -6,9 +6,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import dev.openrs2.asm.Library;
-import dev.openrs2.asm.Transformer;
 import dev.openrs2.asm.classpath.ClassPath;
+import dev.openrs2.asm.classpath.Library;
+import dev.openrs2.asm.transform.Transformer;
 import dev.openrs2.deob.remap.ClassNamePrefixer;
 import dev.openrs2.deob.remap.TypedRemapper;
 import dev.openrs2.deob.transform.BitShiftTransformer;

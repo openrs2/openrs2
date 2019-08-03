@@ -6,7 +6,7 @@ import java.util.Set;
 
 import com.google.common.collect.Sets;
 import dev.openrs2.asm.InsnMatcher;
-import dev.openrs2.asm.Library;
+import dev.openrs2.asm.classpath.Library;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.commons.ClassRemapper;
 import org.objectweb.asm.commons.SimpleRemapper;

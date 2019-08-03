@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Set;
 
 import dev.openrs2.asm.InsnMatcher;
-import dev.openrs2.asm.Library;
 import dev.openrs2.asm.MemberRef;
-import dev.openrs2.asm.Transformer;
 import dev.openrs2.asm.classpath.ClassPath;
+import dev.openrs2.asm.classpath.Library;
+import dev.openrs2.asm.transform.Transformer;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
