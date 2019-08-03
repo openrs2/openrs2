@@ -205,14 +205,6 @@
           <staticAfter>true</staticAfter>
           <removeUnused>true</removeUnused>
         </configuration>
-        <executions>
-          <execution>
-            <id>sort-imports</id>
-            <goals>
-              <goal>sort</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
