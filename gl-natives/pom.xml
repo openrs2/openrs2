@@ -12,4 +12,31 @@
   <packaging>nar</packaging>
 
   <name>OpenRS2 GL Natives</name>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.github.maven-nar</groupId>
+        <artifactId>nar-maven-plugin</artifactId>
+        <configuration>
+          <linker>
+            <sysLibs>
+              <sysLib>
+                <type>shared</type>
+                <name>GL</name>
+              </sysLib>
+              <sysLib>
+                <type>shared</type>
+                <name>GLX</name>
+              </sysLib>
+              <sysLib>
+                <type>shared</type>
+                <name>jawt</name>
+              </sysLib>
+            </sysLibs>
+          </linker>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>

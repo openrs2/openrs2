@@ -190,6 +190,11 @@
           <java>
             <include>true</include>
           </java>
+          <linker>
+            <options>
+              <option>-L${java.home}/lib</option>
+            </options>
+          </linker>
         </configuration>
       </plugin>
       <plugin>
@@ -293,6 +298,7 @@
             <configuration>
               <linker>
                 <options>
+                  <option>-L${java.home}/lib</option>
                   <option>-fPIC</option>
                 </options>
               </linker>
