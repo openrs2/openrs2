@@ -186,6 +186,12 @@
           </libraries>
           <c>
             <optimize>full</optimize>
+            <options>
+              <option>-Wall</option>
+              <option>-Wextra</option>
+              <option>-pedantic</option>
+              <option>-Wno-unused-parameter</option>
+            </options>
           </c>
           <java>
             <include>true</include>
