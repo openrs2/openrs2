@@ -301,7 +301,6 @@
               </c>
               <linker>
                 <options>
-                  <option>-L${java.home}/lib</option>
                   <option>-fPIC</option>
                 </options>
               </linker>

@@ -28,6 +28,13 @@
             <artifactId>nar-maven-plugin</artifactId>
             <configuration>
               <linker>
+                <libs>
+                  <lib>
+                    <type>shared</type>
+                    <name>jawt</name>
+                    <directory>${java.home}/lib</directory>
+                  </lib>
+                </libs>
                 <sysLibs>
                   <sysLib>
                     <type>shared</type>
@@ -36,10 +43,6 @@
                   <sysLib>
                     <type>shared</type>
                     <name>GLX</name>
-                  </sysLib>
-                  <sysLib>
-                    <type>shared</type>
-                    <name>jawt</name>
                   </sysLib>
                 </sysLibs>
               </linker>
