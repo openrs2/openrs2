@@ -181,6 +181,7 @@
           <libraries>
             <library>
               <type>shared</type>
+              <subSystem>gui</subSystem>
               <linkCPP>false</linkCPP>
             </library>
           </libraries>

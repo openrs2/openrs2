@@ -51,5 +51,42 @@
         </plugins>
       </build>
     </profile>
+    <profile>
+      <id>windows</id>
+      <activation>
+        <os>
+          <family>windows</family>
+        </os>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.github.maven-nar</groupId>
+            <artifactId>nar-maven-plugin</artifactId>
+            <configuration>
+              <linker>
+                <libs>
+                  <lib>
+                    <type>shared</type>
+                    <name>jawt</name>
+                    <directory>${java.home}/lib</directory>
+                  </lib>
+                </libs>
+                <sysLibs>
+                  <sysLib>
+                    <type>shared</type>
+                    <name>Gdi32</name>
+                  </sysLib>
+                  <sysLib>
+                    <type>shared</type>
+                    <name>OpenGL32</name>
+                  </sysLib>
+                </sysLibs>
+              </linker>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
   </profiles>
 </project>
