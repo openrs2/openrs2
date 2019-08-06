@@ -13,6 +13,26 @@
 
   <name>OpenRS2 GL Natives</name>
 
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.github.maven-nar</groupId>
+        <artifactId>nar-maven-plugin</artifactId>
+        <configuration>
+          <linker>
+            <libs>
+              <lib>
+                <type>shared</type>
+                <name>jawt</name>
+                <directory>${java.home}/lib</directory>
+              </lib>
+            </libs>
+          </linker>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
   <profiles>
     <profile>
       <id>unix</id>
@@ -28,13 +48,6 @@
             <artifactId>nar-maven-plugin</artifactId>
             <configuration>
               <linker>
-                <libs>
-                  <lib>
-                    <type>shared</type>
-                    <name>jawt</name>
-                    <directory>${java.home}/lib</directory>
-                  </lib>
-                </libs>
                 <sysLibs>
                   <sysLib>
                     <type>shared</type>
@@ -65,13 +78,6 @@
             <artifactId>nar-maven-plugin</artifactId>
             <configuration>
               <linker>
-                <libs>
-                  <lib>
-                    <type>shared</type>
-                    <name>jawt</name>
-                    <directory>${java.home}/lib</directory>
-                  </lib>
-                </libs>
                 <sysLibs>
                   <sysLib>
                     <type>shared</type>
