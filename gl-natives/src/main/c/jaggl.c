@@ -602,7 +602,7 @@ JNIEXPORT void JNICALL Java_jaggl_opengl_glColor4fv1(JNIEnv *env, jobject obj, j
 	JAGGL_LOCK(env);
 
 	JAGGL_GET_ARRAY(env, v, v_off);
-	glColor4fv((GLfloat *) JAGGL_PTR(v));
+	glColor4fv((const GLfloat *) JAGGL_PTR(v));
 	JAGGL_RELEASE_ARRAY(env, v);
 
 	JAGGL_UNLOCK(env);
@@ -635,7 +635,7 @@ JNIEXPORT void JNICALL Java_jaggl_opengl_glColorMaterial(JNIEnv *env, jobject ob
 JNIEXPORT void JNICALL Java_jaggl_opengl_glColorPointer(JNIEnv *env, jobject obj, jint size, jint type, jint stride, jlong ptr) {
 	JAGGL_LOCK(env);
 
-	glColorPointer((GLint) size, (GLenum) type, (GLsizei) stride, (GLvoid *) ptr);
+	glColorPointer((GLint) size, (GLenum) type, (GLsizei) stride, (const GLvoid *) ptr);
 
 	JAGGL_UNLOCK(env);
 }
@@ -644,7 +644,7 @@ JNIEXPORT void JNICALL Java_jaggl_opengl_glColorPointer0(JNIEnv *env, jobject ob
 	JAGGL_LOCK(env);
 
 	JAGGL_GET_BUFFER(env, ptr, ptr_off);
-	glColorPointer((GLint) size, (GLenum) type, (GLsizei) stride, (GLvoid *) JAGGL_PTR(ptr));
+	glColorPointer((GLint) size, (GLenum) type, (GLsizei) stride, (const GLvoid *) JAGGL_PTR(ptr));
 
 	JAGGL_UNLOCK(env);
 }
@@ -653,7 +653,7 @@ JNIEXPORT void JNICALL Java_jaggl_opengl_glColorPointer1(JNIEnv *env, jobject ob
 	JAGGL_LOCK(env);
 
 	JAGGL_GET_ARRAY(env, ptr, ptr_off);
-	glColorPointer((GLint) size, (GLenum) type, (GLsizei) stride, (GLvoid *) JAGGL_PTR(ptr));
+	glColorPointer((GLint) size, (GLenum) type, (GLsizei) stride, (const GLvoid *) JAGGL_PTR(ptr));
 	JAGGL_RELEASE_ARRAY(env, ptr);
 
 	JAGGL_UNLOCK(env);
@@ -726,7 +726,7 @@ JNIEXPORT void JNICALL Java_jaggl_opengl_glDeleteBuffersARB1(JNIEnv *env, jobjec
 
 	if (jaggl_glDeleteBuffersARB) {
 		JAGGL_GET_ARRAY(env, buffers, buffers_off);
-		jaggl_glDeleteBuffersARB((GLsizei) n, (GLuint *) JAGGL_PTR(buffers));
+		jaggl_glDeleteBuffersARB((GLsizei) n, (const GLuint *) JAGGL_PTR(buffers));
 		JAGGL_RELEASE_ARRAY(env, buffers);
 	}
 
@@ -738,7 +738,7 @@ JNIEXPORT void JNICALL Java_jaggl_opengl_glDeleteFramebuffersEXT1(JNIEnv *env, j
 
 	if (jaggl_glDeleteFramebuffersEXT) {
 		JAGGL_GET_ARRAY(env, framebuffers, framebuffers_off);
-		jaggl_glDeleteFramebuffersEXT((GLsizei) n, (GLuint *) JAGGL_PTR(framebuffers));
+		jaggl_glDeleteFramebuffersEXT((GLsizei) n, (const GLuint *) JAGGL_PTR(framebuffers));
 		JAGGL_RELEASE_ARRAY(env, framebuffers);
 	}
 
@@ -768,7 +768,7 @@ JNIEXPORT void JNICALL Java_jaggl_opengl_glDeleteRenderbuffersEXT1(JNIEnv *env, 
 
 	if (jaggl_glDeleteRenderbuffersEXT) {
 		JAGGL_GET_ARRAY(env, renderbuffers, renderbuffers_off);
-		jaggl_glDeleteRenderbuffersEXT((GLsizei) n, (GLuint *) JAGGL_PTR(renderbuffers));
+		jaggl_glDeleteRenderbuffersEXT((GLsizei) n, (const GLuint *) JAGGL_PTR(renderbuffers));
 		JAGGL_RELEASE_ARRAY(env, renderbuffers);
 	}
 
@@ -779,7 +779,7 @@ JNIEXPORT void JNICALL Java_jaggl_opengl_glDeleteTextures1(JNIEnv *env, jobject 
 	JAGGL_LOCK(env);
 
 	JAGGL_GET_ARRAY(env, textures, textures_off);
-	glDeleteTextures((GLsizei) n, (GLuint *) JAGGL_PTR(textures));
+	glDeleteTextures((GLsizei) n, (const GLuint *) JAGGL_PTR(textures));
 	JAGGL_RELEASE_ARRAY(env, textures);
 
 	JAGGL_UNLOCK(env);
@@ -846,7 +846,7 @@ JNIEXPORT void JNICALL Java_jaggl_opengl_glDrawBuffer(JNIEnv *env, jobject obj, 
 JNIEXPORT void JNICALL Java_jaggl_opengl_glDrawElements(JNIEnv *env, jobject obj, jint mode, jint count, jint type, jlong indices) {
 	JAGGL_LOCK(env);
 
-	glDrawElements((GLenum) mode, (GLsizei) count, (GLenum) type, (GLvoid *) indices);
+	glDrawElements((GLenum) mode, (GLsizei) count, (GLenum) type, (const GLvoid *) indices);
 
 	JAGGL_UNLOCK(env);
 }
@@ -855,7 +855,7 @@ JNIEXPORT void JNICALL Java_jaggl_opengl_glDrawElements0(JNIEnv *env, jobject ob
 	JAGGL_LOCK(env);
 
 	JAGGL_GET_BUFFER(env, indices, indices_off);
-	glDrawElements((GLenum) mode, (GLsizei) count, (GLenum) type, (GLvoid *) JAGGL_PTR(indices));
+	glDrawElements((GLenum) mode, (GLsizei) count, (GLenum) type, (const GLvoid *) JAGGL_PTR(indices));
 
 	JAGGL_UNLOCK(env);
 }
@@ -864,7 +864,7 @@ JNIEXPORT void JNICALL Java_jaggl_opengl_glDrawElements1(JNIEnv *env, jobject ob
 	JAGGL_LOCK(env);
 
 	JAGGL_GET_ARRAY(env, indices, indices_off);
-	glDrawElements((GLenum) mode, (GLsizei) count, (GLenum) type, (GLvoid *) JAGGL_PTR(indices));
+	glDrawElements((GLenum) mode, (GLsizei) count, (GLenum) type, (const GLvoid *) JAGGL_PTR(indices));
 	JAGGL_RELEASE_ARRAY(env, indices);
 
 	JAGGL_UNLOCK(env);
@@ -874,7 +874,7 @@ JNIEXPORT void JNICALL Java_jaggl_opengl_glDrawPixels0(JNIEnv *env, jobject obj,
 	JAGGL_LOCK(env);
 
 	JAGGL_GET_BUFFER(env, pixels, pixels_off);
-	glDrawPixels((GLsizei) width, (GLsizei) height, (GLenum) format, (GLenum) type, (GLvoid *) JAGGL_PTR(pixels));
+	glDrawPixels((GLsizei) width, (GLsizei) height, (GLenum) format, (GLenum) type, (const GLvoid *) JAGGL_PTR(pixels));
 
 	JAGGL_UNLOCK(env);
 }
@@ -883,7 +883,7 @@ JNIEXPORT void JNICALL Java_jaggl_opengl_glDrawPixels1(JNIEnv *env, jobject obj,
 	JAGGL_LOCK(env);
 
 	JAGGL_GET_ARRAY(env, pixels, pixels_off);
-	glDrawPixels((GLsizei) width, (GLsizei) height, (GLenum) format, (GLenum) type, (GLvoid *) JAGGL_PTR(pixels));
+	glDrawPixels((GLsizei) width, (GLsizei) height, (GLenum) format, (GLenum) type, (const GLvoid *) JAGGL_PTR(pixels));
 	JAGGL_RELEASE_ARRAY(env, pixels);
 
 	JAGGL_UNLOCK(env);
@@ -933,7 +933,7 @@ JNIEXPORT void JNICALL Java_jaggl_opengl_glFogfv1(JNIEnv *env, jobject obj, jint
 	JAGGL_LOCK(env);
 
 	JAGGL_GET_ARRAY(env, params, params_off);
-	glFogfv((GLenum) pname, (GLfloat *) JAGGL_PTR(params));
+	glFogfv((GLenum) pname, (const GLfloat *) JAGGL_PTR(params));
 	JAGGL_RELEASE_ARRAY(env, params);
 
 	JAGGL_UNLOCK(env);
