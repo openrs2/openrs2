@@ -186,21 +186,10 @@
           </libraries>
           <c>
             <optimize>full</optimize>
-            <options>
-              <option>-Wall</option>
-              <option>-Wextra</option>
-              <option>-pedantic</option>
-              <option>-Wno-unused-parameter</option>
-            </options>
           </c>
           <java>
             <include>true</include>
           </java>
-          <linker>
-            <options>
-              <option>-L${java.home}/lib</option>
-            </options>
-          </linker>
         </configuration>
       </plugin>
       <plugin>
@@ -302,6 +291,14 @@
             <groupId>com.github.maven-nar</groupId>
             <artifactId>nar-maven-plugin</artifactId>
             <configuration>
+              <c>
+                <options>
+                  <option>-Wall</option>
+                  <option>-Wextra</option>
+                  <option>-pedantic</option>
+                  <option>-Wno-unused-parameter</option>
+                </options>
+              </c>
               <linker>
                 <options>
                   <option>-L${java.home}/lib</option>
