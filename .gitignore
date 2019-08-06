@@ -3,6 +3,7 @@
 !.git*
 !.idea
 !.mailmap
+*.iml
 */target
 *~
 /nonfree
