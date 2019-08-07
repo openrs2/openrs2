@@ -78,6 +78,8 @@
 #define JAGGL_UNLOCK(env)
 
 #define JAGGL_PROC_ADDR(name) wglGetProcAddress(name)
+#else
+#error Unsupported platform
 #endif
 
 #if defined(__unix__)
@@ -91,6 +93,8 @@ static bool jaggl_double_buffered;
 static HWND jaggl_window;
 static HDC jaggl_device;
 static HGLRC jaggl_context;
+#else
+#error Unsupported platform
 #endif
 static int jaggl_alpha_bits;
 
@@ -144,6 +148,8 @@ static PFNGLXSWAPINTERVALSGIPROC jaggl_glXSwapIntervalSGI;
 #elif defined(_WIN32)
 static PFNWGLGETEXTENSIONSSTRINGEXTPROC jaggl_wglGetExtensionsStringEXT;
 static PFNWGLSWAPINTERVALEXTPROC jaggl_wglSwapIntervalEXT;
+#else
+#error Unsupported platform
 #endif
 
 static void jaggl_init_proc_table(void) {
@@ -197,6 +203,8 @@ static void jaggl_init_proc_table(void) {
 #elif defined(_WIN32)
 	jaggl_wglGetExtensionsStringEXT = (PFNWGLGETEXTENSIONSSTRINGEXTPROC) JAGGL_PROC_ADDR("wglGetExtensionsStringEXT");
 	jaggl_wglSwapIntervalEXT = (PFNWGLSWAPINTERVALEXTPROC) JAGGL_PROC_ADDR("wglSwapIntervalEXT");
+#else
+#error Unsupported platform
 #endif
 }
 
@@ -227,6 +235,8 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_createContext(JNIEnv *env, jclass 
 	}
 
 	jaggl_context = wglCreateContext(jaggl_device);
+#else
+#error Unsupported platform
 #endif
 
 	JAGGL_UNLOCK(env);
@@ -248,6 +258,8 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_releaseContext(JNIEnv *env, jclass
 	if (current) {
 		result = (jboolean) wglMakeCurrent(jaggl_device, NULL);
 	}
+#else
+#error Unsupported platform
 #endif
 
 	JAGGL_UNLOCK(env);
@@ -291,6 +303,8 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_destroy(JNIEnv *env, jclass cls) {
 	}
 
 	jaggl_window = NULL;
+#else
+#error Unsupported platform
 #endif
 
 	JAGGL_UNLOCK(env);
@@ -310,6 +324,8 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_swapBuffers(JNIEnv *env, jclass cl
 	}
 #elif defined(_WIN32)
 	result = (jboolean) SwapBuffers(jaggl_device);
+#else
+#error Unsupported platform
 #endif
 
 	JAGGL_UNLOCK(env);
@@ -317,10 +333,12 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_swapBuffers(JNIEnv *env, jclass cl
 }
 
 JNIEXPORT jint JNICALL Java_jaggl_context_getLastError(JNIEnv *env, jclass cls) {
-#if defined(_WIN32)
+#if defined(__unix__)
+	return 0;
+#elif defined(_WIN32)
 	return (jint) GetLastError();
 #else
-	return 0;
+#error Unsupported platform
 #endif
 }
 
@@ -335,6 +353,8 @@ JNIEXPORT void JNICALL Java_jaggl_context_setSwapInterval(JNIEnv *env, jclass cl
 	if (jaggl_wglSwapIntervalEXT) {
 		jaggl_wglSwapIntervalEXT((int) interval);
 	}
+#else
+#error Unsupported platform
 #endif
 
 	JAGGL_UNLOCK(env);
@@ -355,6 +375,8 @@ JNIEXPORT jstring JNICALL Java_jaggl_context_getExtensionsString(JNIEnv *env, jc
 	} else {
 		extensions = NULL;
 	}
+#else
+#error Unsupported platform
 #endif
 
 	JAGGL_UNLOCK(env);
@@ -499,6 +521,8 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_choosePixelFormat1(JNIEnv *env, jc
 			goto dsi_free;
 		}
 	}
+#else
+#error Unsupported platform
 #endif
 
 dsi_free:
@@ -545,6 +569,8 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_makeCurrent1(JNIEnv *env, jclass c
 	if (!wglMakeCurrent(jaggl_device, jaggl_context)) {
 		goto done;
 	}
+#else
+#error Unsupported platform
 #endif
 
 	jaggl_init_proc_table();
