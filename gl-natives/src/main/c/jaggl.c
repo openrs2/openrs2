@@ -107,6 +107,7 @@ static PFNGLPROGRAMLOCALPARAMETER4FVARBPROC jaggl_glProgramLocalParameter4fvARB;
 static PFNGLPROGRAMSTRINGARBPROC jaggl_glProgramStringARB;
 static PFNGLRENDERBUFFERSTORAGEEXTPROC jaggl_glRenderbufferStorageEXT;
 static PFNGLSHADERSOURCEARBPROC jaggl_glShaderSourceARB;
+static PFNGLTEXIMAGE3DPROC jaggl_glTexImage3D;
 static PFNGLUNIFORM1IARBPROC jaggl_glUniform1iARB;
 static PFNGLUNIFORM3FARBPROC jaggl_glUniform3fARB;
 static PFNGLUSEPROGRAMOBJECTARBPROC jaggl_glUseProgramObjectARB;
@@ -154,6 +155,7 @@ static void jaggl_init_proc_table(void) {
 	jaggl_glProgramStringARB = (PFNGLPROGRAMSTRINGARBPROC) glXGetProcAddressARB((const GLubyte *) "glProgramStringARB");
 	jaggl_glRenderbufferStorageEXT = (PFNGLRENDERBUFFERSTORAGEEXTPROC) glXGetProcAddressARB((const GLubyte *) "glRenderbufferStorageEXT");
 	jaggl_glShaderSourceARB = (PFNGLSHADERSOURCEARBPROC) glXGetProcAddressARB((const GLubyte *) "glShaderSourceARB");
+	jaggl_glTexImage3D = (PFNGLTEXIMAGE3DPROC) glXGetProcAddressARB((const GLubyte *) "glTexImage3D");
 	jaggl_glUniform1iARB = (PFNGLUNIFORM1IARBPROC) glXGetProcAddressARB((const GLubyte *) "glUniform1iARB");
 	jaggl_glUniform3fARB = (PFNGLUNIFORM3FARBPROC) glXGetProcAddressARB((const GLubyte *) "glUniform3fARB");
 	jaggl_glUseProgramObjectARB = (PFNGLUSEPROGRAMOBJECTARBPROC) glXGetProcAddressARB((const GLubyte *) "glUseProgramObjectARB");
@@ -1634,8 +1636,10 @@ JNIEXPORT void JNICALL Java_jaggl_opengl_glTexImage2D1(JNIEnv *env, jobject obj,
 JNIEXPORT void JNICALL Java_jaggl_opengl_glTexImage3D0(JNIEnv *env, jobject obj, jint target, jint level, jint internalformat, jint width, jint height, jint depth, jint border, jint format, jint type, jobject pixels, jint pixels_off) {
 	JAGGL_LOCK(env);
 
-	JAGGL_GET_BUFFER(env, pixels, pixels_off);
-	glTexImage3D((GLenum) target, (GLint) level, (GLint) internalformat, (GLsizei) width, (GLsizei) height, (GLsizei) depth, (GLint) border, (GLenum) format, (GLenum) type, (const void *) JAGGL_PTR(pixels));
+	if (jaggl_glTexImage3D) {
+		JAGGL_GET_BUFFER(env, pixels, pixels_off);
+		jaggl_glTexImage3D((GLenum) target, (GLint) level, (GLint) internalformat, (GLsizei) width, (GLsizei) height, (GLsizei) depth, (GLint) border, (GLenum) format, (GLenum) type, (const void *) JAGGL_PTR(pixels));
+	}
 
 	JAGGL_UNLOCK(env);
 }
@@ -1643,9 +1647,11 @@ JNIEXPORT void JNICALL Java_jaggl_opengl_glTexImage3D0(JNIEnv *env, jobject obj,
 JNIEXPORT void JNICALL Java_jaggl_opengl_glTexImage3D1(JNIEnv *env, jobject obj, jint target, jint level, jint internalformat, jint width, jint height, jint depth, jint border, jint format, jint type, jobject pixels, jint pixels_off) {
 	JAGGL_LOCK(env);
 
-	JAGGL_GET_ARRAY(env, pixels, pixels_off);
-	glTexImage3D((GLenum) target, (GLint) level, (GLint) internalformat, (GLsizei) width, (GLsizei) height, (GLsizei) depth, (GLint) border, (GLenum) format, (GLenum) type, (const void *) JAGGL_PTR(pixels));
-	JAGGL_RELEASE_ARRAY(env, pixels);
+	if (jaggl_glTexImage3D) {
+		JAGGL_GET_ARRAY(env, pixels, pixels_off);
+		jaggl_glTexImage3D((GLenum) target, (GLint) level, (GLint) internalformat, (GLsizei) width, (GLsizei) height, (GLsizei) depth, (GLint) border, (GLenum) format, (GLenum) type, (const void *) JAGGL_PTR(pixels));
+		JAGGL_RELEASE_ARRAY(env, pixels);
+	}
 
 	JAGGL_UNLOCK(env);
 }
