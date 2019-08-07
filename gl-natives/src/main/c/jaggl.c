@@ -1,7 +1,17 @@
 #include "jaggl_context.h"
 #include "jaggl_opengl.h"
 
+#if defined(__unix__)
 #include <GL/glx.h>
+#elif defined(_WIN32)
+#include <windows.h>
+#include <GL/gl.h>
+#include <GL/glext.h>
+#include <GL/wglext.h>
+#else
+#error Unsupported platform
+#endif
+
 #include <jawt.h>
 #include <jawt_md.h>
 #include <stdbool.h>
@@ -9,18 +19,14 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-#define PFNGLCLIENTACTIVETEXTUREPROC PFNGLCLIENTACTIVETEXTUREARBPROC
-#define PFNGLMULTITEXCOORD2FPROC PFNGLMULTITEXCOORD2FARBPROC
-#define PFNGLMULTITEXCOORD2IPROC PFNGLMULTITEXCOORD2IARBPROC
-
-#define JAGGL_LOCK(env) \
+#define JAGGL_FORCE_LOCK(env) \
 	JAWT awt = { .version = JAWT_VERSION_1_4 }; \
 	bool awt_valid = JAWT_GetAWT(env, &awt); \
 	if (awt_valid) { \
 		awt.Lock(env); \
 	}
 
-#define JAGGL_UNLOCK(env) \
+#define JAGGL_FORCE_UNLOCK(env) \
 	if (awt_valid) { \
 		awt.Unlock(env); \
 	}
@@ -58,13 +64,35 @@
 #define JAGGL_RELEASE_STRING(env, str) \
 	(*env)->ReleaseStringUTFChars(env, str, str ## _str)
 
+#if defined(__unix__)
+#define PFNGLCLIENTACTIVETEXTUREPROC PFNGLCLIENTACTIVETEXTUREARBPROC
+#define PFNGLMULTITEXCOORD2FPROC PFNGLMULTITEXCOORD2FARBPROC
+#define PFNGLMULTITEXCOORD2IPROC PFNGLMULTITEXCOORD2IARBPROC
+
+#define JAGGL_LOCK(env) JAGGL_FORCE_LOCK(env)
+#define JAGGL_UNLOCK(env) JAGGL_FORCE_UNLOCK(env)
+
+#define JAGGL_PROC_ADDR(name) glXGetProcAddressARB((const GLubyte *) name)
+#elif defined(_WIN32)
+#define JAGGL_LOCK(env)
+#define JAGGL_UNLOCK(env)
+
+#define JAGGL_PROC_ADDR(name) wglGetProcAddress(name)
+#endif
+
+#if defined(__unix__)
 static Display *jaggl_display;
 static XVisualInfo *jaggl_visual_info;
 static VisualID jaggl_visual_id;
 static GLXContext jaggl_context;
 static GLXDrawable jaggl_drawable;
-static int jaggl_alpha_bits;
 static bool jaggl_double_buffered;
+#elif defined(_WIN32)
+static HWND jaggl_window;
+static HDC jaggl_device;
+static HGLRC jaggl_context;
+#endif
+static int jaggl_alpha_bits;
 
 static PFNGLACTIVETEXTUREPROC jaggl_glActiveTexture;
 static PFNGLACTIVETEXTUREARBPROC jaggl_glActiveTextureARB;
@@ -111,60 +139,71 @@ static PFNGLTEXIMAGE3DPROC jaggl_glTexImage3D;
 static PFNGLUNIFORM1IARBPROC jaggl_glUniform1iARB;
 static PFNGLUNIFORM3FARBPROC jaggl_glUniform3fARB;
 static PFNGLUSEPROGRAMOBJECTARBPROC jaggl_glUseProgramObjectARB;
+#if defined(__unix__)
 static PFNGLXSWAPINTERVALSGIPROC jaggl_glXSwapIntervalSGI;
+#elif defined(_WIN32)
+static PFNWGLGETEXTENSIONSSTRINGEXTPROC jaggl_wglGetExtensionsStringEXT;
+static PFNWGLSWAPINTERVALEXTPROC jaggl_wglSwapIntervalEXT;
+#endif
 
 static void jaggl_init_proc_table(void) {
-	jaggl_glActiveTexture = (PFNGLACTIVETEXTUREPROC) glXGetProcAddressARB((const GLubyte *) "glActiveTexture");
-	jaggl_glActiveTextureARB = (PFNGLACTIVETEXTUREARBPROC) glXGetProcAddressARB((const GLubyte *) "glActiveTextureARB");
-	jaggl_glAttachObjectARB = (PFNGLATTACHOBJECTARBPROC) glXGetProcAddressARB((const GLubyte *) "glAttachObjectARB");
-	jaggl_glBindBufferARB = (PFNGLBINDBUFFERARBPROC) glXGetProcAddressARB((const GLubyte *) "glBindBufferARB");
-	jaggl_glBindFramebufferEXT = (PFNGLBINDFRAMEBUFFEREXTPROC) glXGetProcAddressARB((const GLubyte *) "glBindFramebufferEXT");
-	jaggl_glBindProgramARB = (PFNGLBINDPROGRAMARBPROC) glXGetProcAddressARB((const GLubyte *) "glBindProgramARB");
-	jaggl_glBindRenderbufferEXT = (PFNGLBINDRENDERBUFFEREXTPROC) glXGetProcAddressARB((const GLubyte *) "glBindRenderbufferEXT");
-	jaggl_glBufferDataARB = (PFNGLBUFFERDATAARBPROC) glXGetProcAddressARB((const GLubyte *) "glBufferDataARB");
-	jaggl_glBufferSubDataARB = (PFNGLBUFFERSUBDATAARBPROC) glXGetProcAddressARB((const GLubyte *) "glBufferSubDataARB");
-	jaggl_glCheckFramebufferStatusEXT = (PFNGLCHECKFRAMEBUFFERSTATUSEXTPROC) glXGetProcAddressARB((const GLubyte *) "glCheckFramebufferStatusEXT");
-	jaggl_glClientActiveTexture = (PFNGLCLIENTACTIVETEXTUREPROC) glXGetProcAddressARB((const GLubyte *) "glClientActiveTexture");
-	jaggl_glClientActiveTextureARB = (PFNGLCLIENTACTIVETEXTUREARBPROC) glXGetProcAddressARB((const GLubyte *) "glClientActiveTextureARB");
-	jaggl_glCompileShaderARB = (PFNGLCOMPILESHADERARBPROC) glXGetProcAddressARB((const GLubyte *) "glCompileShaderARB");
-	jaggl_glCreateProgramObjectARB = (PFNGLCREATEPROGRAMOBJECTARBPROC) glXGetProcAddressARB((const GLubyte *) "glCreateProgramObjectARB");
-	jaggl_glCreateShaderObjectARB = (PFNGLCREATESHADEROBJECTARBPROC) glXGetProcAddressARB((const GLubyte *) "glCreateShaderObjectARB");
-	jaggl_glDeleteBuffersARB = (PFNGLDELETEBUFFERSARBPROC) glXGetProcAddressARB((const GLubyte *) "glDeleteBuffersARB");
-	jaggl_glDeleteFramebuffersEXT = (PFNGLDELETEFRAMEBUFFERSEXTPROC) glXGetProcAddressARB((const GLubyte *) "glDeleteFramebuffersEXT");
-	jaggl_glDeleteObjectARB = (PFNGLDELETEOBJECTARBPROC) glXGetProcAddressARB((const GLubyte *) "glDeleteObjectARB");
-	jaggl_glDeleteRenderbuffersEXT = (PFNGLDELETERENDERBUFFERSEXTPROC) glXGetProcAddressARB((const GLubyte *) "glDeleteRenderbuffersEXT");
-	jaggl_glDetachObjectARB = (PFNGLDETACHOBJECTARBPROC) glXGetProcAddressARB((const GLubyte *) "glDetachObjectARB");
-	jaggl_glFramebufferRenderbufferEXT = (PFNGLFRAMEBUFFERRENDERBUFFEREXTPROC) glXGetProcAddressARB((const GLubyte *) "glFramebufferRenderbufferEXT");
-	jaggl_glFramebufferTexture2DEXT = (PFNGLFRAMEBUFFERTEXTURE2DEXTPROC) glXGetProcAddressARB((const GLubyte *) "glFramebufferTexture2DEXT");
-	jaggl_glGenBuffersARB = (PFNGLGENBUFFERSARBPROC) glXGetProcAddressARB((const GLubyte *) "glGenBuffersARB");
-	jaggl_glGenFramebuffersEXT = (PFNGLGENFRAMEBUFFERSEXTPROC) glXGetProcAddressARB((const GLubyte *) "glGenFramebuffersEXT");
-	jaggl_glGenProgramsARB = (PFNGLGENPROGRAMSARBPROC) glXGetProcAddressARB((const GLubyte *) "glGenProgramsARB");
-	jaggl_glGenRenderbuffersEXT = (PFNGLGENRENDERBUFFERSEXTPROC) glXGetProcAddressARB((const GLubyte *) "glGenRenderbuffersEXT");
-	jaggl_glGetInfoLogARB = (PFNGLGETINFOLOGARBPROC) glXGetProcAddressARB((const GLubyte *) "glGetInfoLogARB");
-	jaggl_glGetObjectParameterivARB = (PFNGLGETOBJECTPARAMETERIVARBPROC) glXGetProcAddressARB((const GLubyte *) "glGetObjectParameterivARB");
-	jaggl_glGetUniformLocation = (PFNGLGETUNIFORMLOCATIONPROC) glXGetProcAddressARB((const GLubyte *) "glGetUniformLocation");
-	jaggl_glLinkProgramARB = (PFNGLLINKPROGRAMARBPROC) glXGetProcAddressARB((const GLubyte *) "glLinkProgramARB");
-	jaggl_glMultiTexCoord2f = (PFNGLMULTITEXCOORD2FPROC) glXGetProcAddressARB((const GLubyte *) "glMultiTexCoord2f");
-	jaggl_glMultiTexCoord2fARB = (PFNGLMULTITEXCOORD2FARBPROC) glXGetProcAddressARB((const GLubyte *) "glMultiTexCoord2fARB");
-	jaggl_glMultiTexCoord2i = (PFNGLMULTITEXCOORD2IPROC) glXGetProcAddressARB((const GLubyte *) "glMultiTexCoord2i");
-	jaggl_glMultiTexCoord2iARB = (PFNGLMULTITEXCOORD2IARBPROC) glXGetProcAddressARB((const GLubyte *) "glMultiTexCoord2iARB");
-	jaggl_glPointParameterfARB = (PFNGLPOINTPARAMETERFARBPROC) glXGetProcAddressARB((const GLubyte *) "glPointParameterfARB");
-	jaggl_glPointParameterfvARB = (PFNGLPOINTPARAMETERFVARBPROC) glXGetProcAddressARB((const GLubyte *) "glPointParameterfvARB");
-	jaggl_glProgramLocalParameter4fARB = (PFNGLPROGRAMLOCALPARAMETER4FARBPROC) glXGetProcAddressARB((const GLubyte *) "glProgramLocalParameter4fARB");
-	jaggl_glProgramLocalParameter4fvARB = (PFNGLPROGRAMLOCALPARAMETER4FVARBPROC) glXGetProcAddressARB((const GLubyte *) "glProgramLocalParameter4fvARB");
-	jaggl_glProgramStringARB = (PFNGLPROGRAMSTRINGARBPROC) glXGetProcAddressARB((const GLubyte *) "glProgramStringARB");
-	jaggl_glRenderbufferStorageEXT = (PFNGLRENDERBUFFERSTORAGEEXTPROC) glXGetProcAddressARB((const GLubyte *) "glRenderbufferStorageEXT");
-	jaggl_glShaderSourceARB = (PFNGLSHADERSOURCEARBPROC) glXGetProcAddressARB((const GLubyte *) "glShaderSourceARB");
-	jaggl_glTexImage3D = (PFNGLTEXIMAGE3DPROC) glXGetProcAddressARB((const GLubyte *) "glTexImage3D");
-	jaggl_glUniform1iARB = (PFNGLUNIFORM1IARBPROC) glXGetProcAddressARB((const GLubyte *) "glUniform1iARB");
-	jaggl_glUniform3fARB = (PFNGLUNIFORM3FARBPROC) glXGetProcAddressARB((const GLubyte *) "glUniform3fARB");
-	jaggl_glUseProgramObjectARB = (PFNGLUSEPROGRAMOBJECTARBPROC) glXGetProcAddressARB((const GLubyte *) "glUseProgramObjectARB");
-	jaggl_glXSwapIntervalSGI = (PFNGLXSWAPINTERVALSGIPROC) glXGetProcAddressARB((const GLubyte *) "glXSwapIntervalSGI");
+	jaggl_glActiveTexture = (PFNGLACTIVETEXTUREPROC) JAGGL_PROC_ADDR("glActiveTexture");
+	jaggl_glActiveTextureARB = (PFNGLACTIVETEXTUREARBPROC) JAGGL_PROC_ADDR("glActiveTextureARB");
+	jaggl_glAttachObjectARB = (PFNGLATTACHOBJECTARBPROC) JAGGL_PROC_ADDR("glAttachObjectARB");
+	jaggl_glBindBufferARB = (PFNGLBINDBUFFERARBPROC) JAGGL_PROC_ADDR("glBindBufferARB");
+	jaggl_glBindFramebufferEXT = (PFNGLBINDFRAMEBUFFEREXTPROC) JAGGL_PROC_ADDR("glBindFramebufferEXT");
+	jaggl_glBindProgramARB = (PFNGLBINDPROGRAMARBPROC) JAGGL_PROC_ADDR("glBindProgramARB");
+	jaggl_glBindRenderbufferEXT = (PFNGLBINDRENDERBUFFEREXTPROC) JAGGL_PROC_ADDR("glBindRenderbufferEXT");
+	jaggl_glBufferDataARB = (PFNGLBUFFERDATAARBPROC) JAGGL_PROC_ADDR("glBufferDataARB");
+	jaggl_glBufferSubDataARB = (PFNGLBUFFERSUBDATAARBPROC) JAGGL_PROC_ADDR("glBufferSubDataARB");
+	jaggl_glCheckFramebufferStatusEXT = (PFNGLCHECKFRAMEBUFFERSTATUSEXTPROC) JAGGL_PROC_ADDR("glCheckFramebufferStatusEXT");
+	jaggl_glClientActiveTexture = (PFNGLCLIENTACTIVETEXTUREPROC) JAGGL_PROC_ADDR("glClientActiveTexture");
+	jaggl_glClientActiveTextureARB = (PFNGLCLIENTACTIVETEXTUREARBPROC) JAGGL_PROC_ADDR("glClientActiveTextureARB");
+	jaggl_glCompileShaderARB = (PFNGLCOMPILESHADERARBPROC) JAGGL_PROC_ADDR("glCompileShaderARB");
+	jaggl_glCreateProgramObjectARB = (PFNGLCREATEPROGRAMOBJECTARBPROC) JAGGL_PROC_ADDR("glCreateProgramObjectARB");
+	jaggl_glCreateShaderObjectARB = (PFNGLCREATESHADEROBJECTARBPROC) JAGGL_PROC_ADDR("glCreateShaderObjectARB");
+	jaggl_glDeleteBuffersARB = (PFNGLDELETEBUFFERSARBPROC) JAGGL_PROC_ADDR("glDeleteBuffersARB");
+	jaggl_glDeleteFramebuffersEXT = (PFNGLDELETEFRAMEBUFFERSEXTPROC) JAGGL_PROC_ADDR("glDeleteFramebuffersEXT");
+	jaggl_glDeleteObjectARB = (PFNGLDELETEOBJECTARBPROC) JAGGL_PROC_ADDR("glDeleteObjectARB");
+	jaggl_glDeleteRenderbuffersEXT = (PFNGLDELETERENDERBUFFERSEXTPROC) JAGGL_PROC_ADDR("glDeleteRenderbuffersEXT");
+	jaggl_glDetachObjectARB = (PFNGLDETACHOBJECTARBPROC) JAGGL_PROC_ADDR("glDetachObjectARB");
+	jaggl_glFramebufferRenderbufferEXT = (PFNGLFRAMEBUFFERRENDERBUFFEREXTPROC) JAGGL_PROC_ADDR("glFramebufferRenderbufferEXT");
+	jaggl_glFramebufferTexture2DEXT = (PFNGLFRAMEBUFFERTEXTURE2DEXTPROC) JAGGL_PROC_ADDR("glFramebufferTexture2DEXT");
+	jaggl_glGenBuffersARB = (PFNGLGENBUFFERSARBPROC) JAGGL_PROC_ADDR("glGenBuffersARB");
+	jaggl_glGenFramebuffersEXT = (PFNGLGENFRAMEBUFFERSEXTPROC) JAGGL_PROC_ADDR("glGenFramebuffersEXT");
+	jaggl_glGenProgramsARB = (PFNGLGENPROGRAMSARBPROC) JAGGL_PROC_ADDR("glGenProgramsARB");
+	jaggl_glGenRenderbuffersEXT = (PFNGLGENRENDERBUFFERSEXTPROC) JAGGL_PROC_ADDR("glGenRenderbuffersEXT");
+	jaggl_glGetInfoLogARB = (PFNGLGETINFOLOGARBPROC) JAGGL_PROC_ADDR("glGetInfoLogARB");
+	jaggl_glGetObjectParameterivARB = (PFNGLGETOBJECTPARAMETERIVARBPROC) JAGGL_PROC_ADDR("glGetObjectParameterivARB");
+	jaggl_glGetUniformLocation = (PFNGLGETUNIFORMLOCATIONPROC) JAGGL_PROC_ADDR("glGetUniformLocation");
+	jaggl_glLinkProgramARB = (PFNGLLINKPROGRAMARBPROC) JAGGL_PROC_ADDR("glLinkProgramARB");
+	jaggl_glMultiTexCoord2f = (PFNGLMULTITEXCOORD2FPROC) JAGGL_PROC_ADDR("glMultiTexCoord2f");
+	jaggl_glMultiTexCoord2fARB = (PFNGLMULTITEXCOORD2FARBPROC) JAGGL_PROC_ADDR("glMultiTexCoord2fARB");
+	jaggl_glMultiTexCoord2i = (PFNGLMULTITEXCOORD2IPROC) JAGGL_PROC_ADDR("glMultiTexCoord2i");
+	jaggl_glMultiTexCoord2iARB = (PFNGLMULTITEXCOORD2IARBPROC) JAGGL_PROC_ADDR("glMultiTexCoord2iARB");
+	jaggl_glPointParameterfARB = (PFNGLPOINTPARAMETERFARBPROC) JAGGL_PROC_ADDR("glPointParameterfARB");
+	jaggl_glPointParameterfvARB = (PFNGLPOINTPARAMETERFVARBPROC) JAGGL_PROC_ADDR("glPointParameterfvARB");
+	jaggl_glProgramLocalParameter4fARB = (PFNGLPROGRAMLOCALPARAMETER4FARBPROC) JAGGL_PROC_ADDR("glProgramLocalParameter4fARB");
+	jaggl_glProgramLocalParameter4fvARB = (PFNGLPROGRAMLOCALPARAMETER4FVARBPROC) JAGGL_PROC_ADDR("glProgramLocalParameter4fvARB");
+	jaggl_glProgramStringARB = (PFNGLPROGRAMSTRINGARBPROC) JAGGL_PROC_ADDR("glProgramStringARB");
+	jaggl_glRenderbufferStorageEXT = (PFNGLRENDERBUFFERSTORAGEEXTPROC) JAGGL_PROC_ADDR("glRenderbufferStorageEXT");
+	jaggl_glShaderSourceARB = (PFNGLSHADERSOURCEARBPROC) JAGGL_PROC_ADDR("glShaderSourceARB");
+	jaggl_glTexImage3D = (PFNGLTEXIMAGE3DPROC) JAGGL_PROC_ADDR("glTexImage3D");
+	jaggl_glUniform1iARB = (PFNGLUNIFORM1IARBPROC) JAGGL_PROC_ADDR("glUniform1iARB");
+	jaggl_glUniform3fARB = (PFNGLUNIFORM3FARBPROC) JAGGL_PROC_ADDR("glUniform3fARB");
+	jaggl_glUseProgramObjectARB = (PFNGLUSEPROGRAMOBJECTARBPROC) JAGGL_PROC_ADDR("glUseProgramObjectARB");
+#if defined(__unix__)
+	jaggl_glXSwapIntervalSGI = (PFNGLXSWAPINTERVALSGIPROC) JAGGL_PROC_ADDR("glXSwapIntervalSGI");
+#elif defined(_WIN32)
+	jaggl_wglGetExtensionsStringEXT = (PFNWGLGETEXTENSIONSSTRINGEXTPROC) JAGGL_PROC_ADDR("wglGetExtensionsStringEXT");
+	jaggl_wglSwapIntervalEXT = (PFNWGLSWAPINTERVALEXTPROC) JAGGL_PROC_ADDR("wglSwapIntervalEXT");
+#endif
 }
 
 JNIEXPORT jboolean JNICALL Java_jaggl_context_createContext(JNIEnv *env, jclass cls) {
 	JAGGL_LOCK(env);
 
+#if defined(__unix__)
 	GLXContext current = glXGetCurrentContext();
 	if (current) {
 		glXMakeCurrent(jaggl_display, None, NULL);
@@ -176,6 +215,19 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_createContext(JNIEnv *env, jclass 
 	}
 
 	jaggl_context = glXCreateContext(jaggl_display, jaggl_visual_info, NULL, True);
+#elif defined(_WIN32)
+	HGLRC current = wglGetCurrentContext();
+	if (current) {
+		wglMakeCurrent(jaggl_device, NULL);
+	}
+
+	if (jaggl_context) {
+		wglDeleteContext(jaggl_context);
+		jaggl_context = NULL;
+	}
+
+	jaggl_context = wglCreateContext(jaggl_device);
+#endif
 
 	JAGGL_UNLOCK(env);
 	return jaggl_context != NULL;
@@ -186,10 +238,17 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_releaseContext(JNIEnv *env, jclass
 
 	jboolean result = JNI_TRUE;
 
+#if defined(__unix__)
 	GLXContext current = glXGetCurrentContext();
 	if (current) {
 		result = (jboolean) glXMakeCurrent(jaggl_display, None, NULL);
 	}
+#elif defined(_WIN32)
+	HGLRC current = wglGetCurrentContext();
+	if (current) {
+		result = (jboolean) wglMakeCurrent(jaggl_device, NULL);
+	}
+#endif
 
 	JAGGL_UNLOCK(env);
 	return result;
@@ -198,6 +257,7 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_releaseContext(JNIEnv *env, jclass
 JNIEXPORT jboolean JNICALL Java_jaggl_context_destroy(JNIEnv *env, jclass cls) {
 	JAGGL_LOCK(env);
 
+#if defined(__unix__)
 	GLXContext current = glXGetCurrentContext();
 	if (current) {
 		glXMakeCurrent(jaggl_display, None, NULL);
@@ -214,6 +274,24 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_destroy(JNIEnv *env, jclass cls) {
 	}
 
 	jaggl_display = None;
+#elif defined(_WIN32)
+	HGLRC current = wglGetCurrentContext();
+	if (current) {
+		wglMakeCurrent(jaggl_device, NULL);
+	}
+
+	if (jaggl_context) {
+		wglDeleteContext(jaggl_context);
+		jaggl_context = NULL;
+	}
+
+	if (jaggl_device) {
+		ReleaseDC(jaggl_window, jaggl_device);
+		jaggl_device = NULL;
+	}
+
+	jaggl_window = NULL;
+#endif
 
 	JAGGL_UNLOCK(env);
 	return JNI_TRUE;
@@ -222,26 +300,42 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_destroy(JNIEnv *env, jclass cls) {
 JNIEXPORT jboolean JNICALL Java_jaggl_context_swapBuffers(JNIEnv *env, jclass cls) {
 	JAGGL_LOCK(env);
 
+	jboolean result = JNI_TRUE;
+
+#if defined(__unix__)
 	if (jaggl_double_buffered) {
 		glXSwapBuffers(jaggl_display, jaggl_drawable);
 	} else {
 		glFlush();
 	}
+#elif defined(_WIN32)
+	result = (jboolean) SwapBuffers(jaggl_device);
+#endif
 
 	JAGGL_UNLOCK(env);
-	return JNI_TRUE;
+	return result;
 }
 
 JNIEXPORT jint JNICALL Java_jaggl_context_getLastError(JNIEnv *env, jclass cls) {
+#if defined(_WIN32)
+	return (jint) GetLastError();
+#else
 	return 0;
+#endif
 }
 
 JNIEXPORT void JNICALL Java_jaggl_context_setSwapInterval(JNIEnv *env, jclass cls, jint interval) {
 	JAGGL_LOCK(env);
 
+#if defined(__unix__)
 	if (jaggl_glXSwapIntervalSGI) {
 		jaggl_glXSwapIntervalSGI((int) interval);
 	}
+#elif defined(_WIN32)
+	if (jaggl_wglSwapIntervalEXT) {
+		jaggl_wglSwapIntervalEXT((int) interval);
+	}
+#endif
 
 	JAGGL_UNLOCK(env);
 }
@@ -249,8 +343,19 @@ JNIEXPORT void JNICALL Java_jaggl_context_setSwapInterval(JNIEnv *env, jclass cl
 JNIEXPORT jstring JNICALL Java_jaggl_context_getExtensionsString(JNIEnv *env, jclass cls) {
 	JAGGL_LOCK(env);
 
+	jstring extensions;
+
+#if defined(__unix__)
 	const char *extensions_str = glXQueryExtensionsString(jaggl_display, jaggl_visual_info->screen);
-	jstring extensions = (*env)->NewStringUTF(env, extensions_str);
+	extensions = (*env)->NewStringUTF(env, extensions_str);
+#elif defined(_WIN32)
+	if (jaggl_wglGetExtensionsStringEXT) {
+		const char *extensions_str = jaggl_wglGetExtensionsStringEXT();
+		extensions = (*env)->NewStringUTF(env, extensions_str);
+	} else {
+		extensions = NULL;
+	}
+#endif
 
 	JAGGL_UNLOCK(env);
 	return extensions;
@@ -261,7 +366,7 @@ JNIEXPORT jint JNICALL Java_jaggl_context_getAlphaBits(JNIEnv *env, jclass cls) 
 }
 
 JNIEXPORT jboolean JNICALL Java_jaggl_context_choosePixelFormat1(JNIEnv *env, jclass cls, jobject component, jint num_samples, jint alpha_bits) {
-	JAGGL_LOCK(env);
+	JAGGL_FORCE_LOCK(env);
 
 	jboolean result = JNI_FALSE;
 
@@ -284,6 +389,7 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_choosePixelFormat1(JNIEnv *env, jc
 		goto ds_unlock;
 	}
 
+#if defined(__unix__)
 	JAWT_X11DrawingSurfaceInfo *platformInfo = (JAWT_X11DrawingSurfaceInfo *) dsi->platformInfo;
 	if (!platformInfo) {
 		goto dsi_free;
@@ -345,6 +451,55 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_choosePixelFormat1(JNIEnv *env, jc
 			goto dsi_free;
 		}
 	}
+#elif defined(_WIN32)
+	JAWT_Win32DrawingSurfaceInfo *platformInfo = (JAWT_Win32DrawingSurfaceInfo *) dsi->platformInfo;
+	if (!platformInfo) {
+		goto dsi_free;
+	}
+
+	jaggl_window = platformInfo->hwnd;
+
+	jaggl_device = GetDC(jaggl_window);
+	if (!jaggl_device) {
+		goto dsi_free;
+	}
+
+	int format = GetPixelFormat(jaggl_device);
+	if (format) {
+		PIXELFORMATDESCRIPTOR pfd;
+		if (DescribePixelFormat(jaggl_device, format, sizeof(pfd), &pfd)) {
+			jaggl_alpha_bits = pfd.cAlphaBits;
+
+			result = JNI_TRUE;
+			goto dsi_free;
+		}
+	}
+
+	// TODO(gpe): numSamples handling
+
+	PIXELFORMATDESCRIPTOR pfd = {
+		.nSize = sizeof(pfd),
+		.nVersion = 1,
+		.dwFlags = PFD_GENERIC_ACCELERATED | PFD_SUPPORT_OPENGL | PFD_DRAW_TO_WINDOW | PFD_DOUBLEBUFFER,
+		.iPixelType = PFD_TYPE_RGBA,
+		.cColorBits = 24,
+		.cRedBits = 8,
+		.cGreenBits = 8,
+		.cBlueBits = 8,
+		.cAlphaBits = alpha_bits,
+		.cDepthBits = 24,
+		.iLayerType = PFD_MAIN_PLANE
+	};
+	format = ChoosePixelFormat(jaggl_device, &pfd);
+	if (format) {
+		if (SetPixelFormat(jaggl_device, format, &pfd)) {
+			// TODO(gpe): get actual number of alpha bits
+
+			result = JNI_TRUE;
+			goto dsi_free;
+		}
+	}
+#endif
 
 dsi_free:
 	ds->FreeDrawingSurfaceInfo(dsi);
@@ -353,7 +508,7 @@ ds_unlock:
 ds_free:
 	awt.FreeDrawingSurface(ds);
 awt_unlock:
-	JAGGL_UNLOCK(env);
+	JAGGL_FORCE_UNLOCK(env);
 	return result;
 }
 
@@ -366,6 +521,7 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_makeCurrent1(JNIEnv *env, jclass c
 		goto done;
 	}
 
+#if defined(__unix__)
 	GLXContext current = glXGetCurrentContext();
 	if (jaggl_context == current) {
 		result = JNI_TRUE;
@@ -377,6 +533,19 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_makeCurrent1(JNIEnv *env, jclass c
 	if (!glXMakeCurrent(jaggl_display, jaggl_drawable, jaggl_context)) {
 		goto done;
 	}
+#elif defined(_WIN32)
+	HGLRC current = wglGetCurrentContext();
+	if (jaggl_context == current) {
+		result = JNI_TRUE;
+		goto done;
+	}
+
+	wglMakeCurrent(jaggl_device, NULL);
+
+	if (!wglMakeCurrent(jaggl_device, jaggl_context)) {
+		goto done;
+	}
+#endif
 
 	jaggl_init_proc_table();
 	result = JNI_TRUE;
@@ -1502,7 +1671,7 @@ JNIEXPORT void JNICALL Java_jaggl_opengl_glShaderSourceARB0(JNIEnv *env, jobject
 			(*env)->ReleaseStringUTFChars(env, s, (const char *) strings[i]);
 		}
 
-		free(strings);
+		free((void *) strings);
 	}
 
 	JAGGL_UNLOCK(env);

@@ -87,6 +87,10 @@
                     <type>shared</type>
                     <name>OpenGL32</name>
                   </sysLib>
+                  <sysLib>
+                    <type>shared</type>
+                    <name>User32</name>
+                  </sysLib>
                 </sysLibs>
               </linker>
             </configuration>
