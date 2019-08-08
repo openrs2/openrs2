@@ -19,14 +19,17 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-#define JAGGL_FORCE_LOCK(env) \
+#define _JAGGL_GET(env) \
 	JAWT awt = { .version = JAWT_VERSION_1_4 }; \
-	bool awt_valid = JAWT_GetAWT(env, &awt); \
+	bool awt_valid = JAWT_GetAWT(env, &awt);
+
+#define _JAGGL_GET_AND_LOCK(env) \
+	_JAGGL_GET(env); \
 	if (awt_valid) { \
 		awt.Lock(env); \
 	}
 
-#define JAGGL_FORCE_UNLOCK(env) \
+#define _JAGGL_UNLOCK(env) \
 	if (awt_valid) { \
 		awt.Unlock(env); \
 	}
@@ -69,11 +72,17 @@
 #define PFNGLMULTITEXCOORD2FPROC PFNGLMULTITEXCOORD2FARBPROC
 #define PFNGLMULTITEXCOORD2IPROC PFNGLMULTITEXCOORD2IARBPROC
 
-#define JAGGL_LOCK(env) JAGGL_FORCE_LOCK(env)
-#define JAGGL_UNLOCK(env) JAGGL_FORCE_UNLOCK(env)
+#define JAGGL_FORCE_LOCK(env) _JAGGL_GET_AND_LOCK(env)
+#define JAGGL_FORCE_UNLOCK(env) _JAGGL_UNLOCK(env)
+
+#define JAGGL_LOCK(env) _JAGGL_GET_AND_LOCK(env)
+#define JAGGL_UNLOCK(env) _JAGGL_UNLOCK(env)
 
 #define JAGGL_PROC_ADDR(name) glXGetProcAddressARB((const GLubyte *) name)
 #elif defined(_WIN32)
+#define JAGGL_FORCE_LOCK(env) _JAGGL_GET(env)
+#define JAGGL_FORCE_UNLOCK(env)
+
 #define JAGGL_LOCK(env)
 #define JAGGL_UNLOCK(env)
 
