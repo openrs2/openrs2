@@ -320,6 +320,35 @@
       <modules>
         <module>misc-natives</module>
       </modules>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.github.maven-nar</groupId>
+            <artifactId>nar-maven-plugin</artifactId>
+            <configuration>
+              <c>
+                <options>
+                  <option>/Wall</option>
+                  <!-- unused parameter -->
+                  <option>/wd4100</option>
+                  <!-- non-standard extension: nameless struct/union (in jawt_md.h) -->
+                  <option>/wd4201</option>
+                  <!-- non-standard extension: non-constant aggregate initializer -->
+                  <option>/wd4204</option>
+                  <!-- no function prototype given (in winuser.h) -->
+                  <option>/wd4255</option>
+                  <!-- undefined processor macro (in vcruntime.h and winioctl.h) -->
+                  <option>/wd4668</option>
+                  <!-- padding after data member (in jawt.h and jni.h) -->
+                  <option>/wd4820</option>
+                  <!-- compiler will insert Spectre mitigation -->
+                  <option>/wd5045</option>
+                </options>
+              </c>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
   </profiles>
 </project>

@@ -49,6 +49,7 @@
 		obj ## _carray = (*env)->GetPrimitiveArrayCritical(env, obj, NULL); \
 		obj ## _ptr = (void *) ((uintptr_t) obj ## _carray + (size_t) obj_off); \
 	} else { \
+		obj ## _carray = NULL; \
 		obj ## _ptr = NULL; \
 	}
 
@@ -655,7 +656,6 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_choosePixelFormat1(JNIEnv *env, jc
 				attribs[j++] = num_samples;
 			}
 
-			int format;
 			UINT num_formats;
 			if (!jaggl_wglChoosePixelFormatARB(jaggl_device, attribs, NULL, 1, &format, &num_formats)) {
 				continue;
@@ -686,7 +686,7 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_choosePixelFormat1(JNIEnv *env, jc
 		.cRedBits = 8,
 		.cGreenBits = 8,
 		.cBlueBits = 8,
-		.cAlphaBits = alpha_bits,
+		.cAlphaBits = (BYTE) alpha_bits,
 		.cDepthBits = 24,
 		.iLayerType = PFD_MAIN_PLANE
 	};
