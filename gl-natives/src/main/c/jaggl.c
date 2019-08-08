@@ -574,13 +574,15 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_choosePixelFormat1(JNIEnv *env, jc
 		}
 
 		jaggl_visual_info = glXChooseVisual(jaggl_display, DefaultScreen(jaggl_display), attribs);
-		if (jaggl_visual_info) {
-			jaggl_double_buffered = double_buffered;
-			jaggl_alpha_bits = alpha_bits;
-
-			result = JNI_TRUE;
-			goto dsi_free;
+		if (!jaggl_visual_info) {
+			continue;
 		}
+
+		jaggl_double_buffered = double_buffered;
+		jaggl_alpha_bits = alpha_bits;
+
+		result = JNI_TRUE;
+		goto dsi_free;
 	}
 #elif defined(_WIN32)
 	JAWT_Win32DrawingSurfaceInfo *platformInfo = (JAWT_Win32DrawingSurfaceInfo *) dsi->platformInfo;
@@ -664,12 +666,14 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_choosePixelFormat1(JNIEnv *env, jc
 				continue;
 			}
 
-			if (SetPixelFormat(jaggl_device, format, &pfd)) {
-				jaggl_alpha_bits = alpha_bits;
-
-				result = JNI_TRUE;
-				goto dsi_free;
+			if (!SetPixelFormat(jaggl_device, format, &pfd)) {
+				continue;
 			}
+
+			jaggl_alpha_bits = alpha_bits;
+
+			result = JNI_TRUE;
+			goto dsi_free;
 		}
 	}
 
