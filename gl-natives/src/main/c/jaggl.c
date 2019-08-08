@@ -91,7 +91,6 @@ static GLXDrawable jaggl_drawable;
 static bool jaggl_double_buffered;
 #elif defined(_WIN32)
 static HINSTANCE jaggl_instance;
-static ATOM jaggl_class;
 static HWND jaggl_window;
 static HDC jaggl_device;
 static HGLRC jaggl_context;
@@ -219,21 +218,18 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved) {
 }
 
 static void jaggl_bootstrap_proc_table(void) {
-	if (!jaggl_class) {
-		WNDCLASS c = {
-			.lpfnWndProc = DefWindowProc,
-			.hInstance = jaggl_instance,
-			.lpszClassName = "OpenRS2"
-		};
-
-		jaggl_class = RegisterClass(&c);
-		if (!jaggl_class) {
-			return;
-		}
+	WNDCLASS c = {
+		.lpfnWndProc = DefWindowProc,
+		.hInstance = jaggl_instance,
+		.lpszClassName = "OpenRS2"
+	};
+	ATOM class_atom = RegisterClass(&c);
+	if (!class_atom) {
+		return;
 	}
 
 	HWND hwnd = CreateWindow(
-		MAKEINTATOM(jaggl_class),
+		MAKEINTATOM(class_atom),
 		"OpenRS2",
 		0,
 		0,
@@ -246,7 +242,7 @@ static void jaggl_bootstrap_proc_table(void) {
 		NULL
 	);
 	if (!hwnd) {
-		return;
+		goto destroy_class;
 	}
 
 	HDC hdc = GetDC(hwnd);
@@ -293,6 +289,8 @@ destroy_device:
 	ReleaseDC(hwnd, hdc);
 destroy_window:
 	DestroyWindow(hwnd);
+destroy_class:
+	UnregisterClass(MAKEINTATOM(class_atom), jaggl_instance);
 }
 #endif
 
