@@ -90,6 +90,8 @@ static GLXContext jaggl_context;
 static GLXDrawable jaggl_drawable;
 static bool jaggl_double_buffered;
 #elif defined(_WIN32)
+static HINSTANCE jaggl_instance;
+static ATOM jaggl_class;
 static HWND jaggl_window;
 static HDC jaggl_device;
 static HGLRC jaggl_context;
@@ -146,10 +148,9 @@ static PFNGLUSEPROGRAMOBJECTARBPROC jaggl_glUseProgramObjectARB;
 #if defined(__unix__)
 static PFNGLXSWAPINTERVALSGIPROC jaggl_glXSwapIntervalSGI;
 #elif defined(_WIN32)
+static PFNWGLCHOOSEPIXELFORMATARBPROC jaggl_wglChoosePixelFormatARB;
 static PFNWGLGETEXTENSIONSSTRINGEXTPROC jaggl_wglGetExtensionsStringEXT;
 static PFNWGLSWAPINTERVALEXTPROC jaggl_wglSwapIntervalEXT;
-#else
-#error Unsupported platform
 #endif
 
 static void jaggl_init_proc_table(void) {
@@ -201,12 +202,99 @@ static void jaggl_init_proc_table(void) {
 #if defined(__unix__)
 	jaggl_glXSwapIntervalSGI = (PFNGLXSWAPINTERVALSGIPROC) JAGGL_PROC_ADDR("glXSwapIntervalSGI");
 #elif defined(_WIN32)
+	jaggl_wglChoosePixelFormatARB = (PFNWGLCHOOSEPIXELFORMATARBPROC) JAGGL_PROC_ADDR("wglChoosePixelFormatARB");
 	jaggl_wglGetExtensionsStringEXT = (PFNWGLGETEXTENSIONSSTRINGEXTPROC) JAGGL_PROC_ADDR("wglGetExtensionsStringEXT");
 	jaggl_wglSwapIntervalEXT = (PFNWGLSWAPINTERVALEXTPROC) JAGGL_PROC_ADDR("wglSwapIntervalEXT");
 #else
 #error Unsupported platform
 #endif
 }
+
+#if defined(_WIN32)
+BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved) {
+	if (fdwReason == DLL_PROCESS_ATTACH) {
+		jaggl_instance = hinstDLL;
+	}
+	return TRUE;
+}
+
+static void jaggl_bootstrap_proc_table(void) {
+	if (!jaggl_class) {
+		WNDCLASS c = {
+			.lpfnWndProc = DefWindowProc,
+			.hInstance = jaggl_instance,
+			.lpszClassName = "OpenRS2"
+		};
+
+		jaggl_class = RegisterClass(&c);
+		if (!jaggl_class) {
+			return;
+		}
+	}
+
+	HWND hwnd = CreateWindow(
+		MAKEINTATOM(jaggl_class),
+		"OpenRS2",
+		0,
+		0,
+		0,
+		1,
+		1,
+		NULL,
+		NULL,
+		jaggl_instance,
+		NULL
+	);
+	if (!hwnd) {
+		return;
+	}
+
+	HDC hdc = GetDC(hwnd);
+	if (!hdc) {
+		goto destroy_window;
+	}
+
+	PIXELFORMATDESCRIPTOR pfd = {
+		.nSize = sizeof(pfd),
+		.nVersion = 1,
+		.dwFlags = PFD_GENERIC_ACCELERATED | PFD_SUPPORT_OPENGL | PFD_DRAW_TO_WINDOW,
+		.iPixelType = PFD_TYPE_RGBA,
+		.cColorBits = 24,
+		.cRedBits = 8,
+		.cGreenBits = 8,
+		.cBlueBits = 8,
+		.cDepthBits = 24,
+		.iLayerType = PFD_MAIN_PLANE
+	};
+	int format = ChoosePixelFormat(hdc, &pfd);
+	if (!format) {
+		goto destroy_device;
+	}
+
+	if (!SetPixelFormat(hdc, format, &pfd)) {
+		goto destroy_device;
+	}
+
+	HGLRC context = wglCreateContext(hdc);
+	if (!context) {
+		goto destroy_device;
+	}
+
+	if (!wglMakeCurrent(hdc, context)) {
+		goto destroy_context;
+	}
+
+	jaggl_init_proc_table();
+
+destroy_context:
+	wglMakeCurrent(hdc, NULL);
+	wglDeleteContext(context);
+destroy_device:
+	ReleaseDC(hwnd, hdc);
+destroy_window:
+	DestroyWindow(hwnd);
+}
+#endif
 
 JNIEXPORT jboolean JNICALL Java_jaggl_context_createContext(JNIEnv *env, jclass cls) {
 	JAGGL_LOCK(env);
@@ -497,12 +585,77 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_choosePixelFormat1(JNIEnv *env, jc
 		}
 	}
 
-	// TODO(gpe): numSamples handling
+	jaggl_bootstrap_proc_table();
+
+	if (jaggl_wglChoosePixelFormatARB) {
+		for (int i = 0; i < 2; i++) {
+			bool double_buffered = i == 0;
+
+			int attribs[] = {
+				WGL_SUPPORT_OPENGL_ARB,
+				GL_TRUE,
+				WGL_DRAW_TO_WINDOW_ARB,
+				GL_TRUE,
+				WGL_PIXEL_TYPE_ARB,
+				WGL_TYPE_RGBA_ARB,
+				WGL_COLOR_BITS_ARB,
+				24,
+				WGL_RED_BITS_ARB,
+				8,
+				WGL_GREEN_BITS_ARB,
+				8,
+				WGL_BLUE_BITS_ARB,
+				8,
+				WGL_ALPHA_BITS_ARB,
+				alpha_bits,
+				WGL_DEPTH_BITS_ARB,
+				24,
+				0, /* for WGL_DOUBLE_BUFFER_ARB */
+				0, /* for GL_TRUE */
+				0, /* for WGL_SAMPLE_BUFFERS_ARB */
+				0, /* for GL_TRUE */
+				0, /* for WGL_SAMPLES_ARB */
+				0, /* for num_samples */
+				0
+			};
+
+			int j = 18;
+			if (double_buffered) {
+				attribs[j++] = WGL_DOUBLE_BUFFER_ARB;
+				attribs[j++] = GL_TRUE;
+			}
+
+			if (num_samples) {
+				attribs[j++] = WGL_SAMPLE_BUFFERS_ARB;
+				attribs[j++] = GL_TRUE;
+				attribs[j++] = WGL_SAMPLES_ARB;
+				attribs[j++] = num_samples;
+			}
+
+			int format;
+			UINT num_formats;
+			if (!jaggl_wglChoosePixelFormatARB(jaggl_device, attribs, NULL, 1, &format, &num_formats)) {
+				continue;
+			}
+
+			PIXELFORMATDESCRIPTOR pfd;
+			if (!DescribePixelFormat(jaggl_device, format, sizeof(pfd), &pfd)) {
+				continue;
+			}
+
+			if (SetPixelFormat(jaggl_device, format, &pfd)) {
+				jaggl_alpha_bits = pfd.cAlphaBits;
+
+				result = JNI_TRUE;
+				goto dsi_free;
+			}
+		}
+	}
 
 	PIXELFORMATDESCRIPTOR pfd = {
 		.nSize = sizeof(pfd),
 		.nVersion = 1,
-		.dwFlags = PFD_GENERIC_ACCELERATED | PFD_SUPPORT_OPENGL | PFD_DRAW_TO_WINDOW | PFD_DOUBLEBUFFER,
+		.dwFlags = PFD_SUPPORT_OPENGL | PFD_DRAW_TO_WINDOW | PFD_DOUBLEBUFFER,
 		.iPixelType = PFD_TYPE_RGBA,
 		.cColorBits = 24,
 		.cRedBits = 8,
