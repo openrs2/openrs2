@@ -533,6 +533,7 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_choosePixelFormat1(JNIEnv *env, jc
 
 	for (int i = 0; i < 2; i++) {
 		bool double_buffered = i == 0;
+
 		int attribs[] = {
 			GLX_RGBA,
 			GLX_RED_SIZE,
@@ -545,13 +546,26 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_choosePixelFormat1(JNIEnv *env, jc
 			alpha_bits,
 			GLX_DEPTH_SIZE,
 			24,
-			GLX_SAMPLE_BUFFERS,
-			num_samples ? True : False,
-			GLX_SAMPLES,
-			num_samples,
-			double_buffered ? GLX_DOUBLEBUFFER : None,
+			None, /* for GLX_DOUBLEBUFFER */
+			None, /* for GLX_SAMPLE_BUFFERS */
+			None, /* for True */
+			None, /* for GLX_SAMPLES */
+			None, /* for num_samples */
 			None
 		};
+
+		int j = 11;
+		if (double_buffered) {
+			attribs[j++] = GLX_DOUBLEBUFFER;
+		}
+
+		if (num_samples) {
+			attribs[j++] = GLX_SAMPLE_BUFFERS;
+			attribs[j++] = True;
+			attribs[j++] = GLX_SAMPLES;
+			attribs[j++] = num_samples;
+		}
+
 		jaggl_visual_info = glXChooseVisual(jaggl_display, DefaultScreen(jaggl_display), attribs);
 		if (jaggl_visual_info) {
 			jaggl_double_buffered = double_buffered;
