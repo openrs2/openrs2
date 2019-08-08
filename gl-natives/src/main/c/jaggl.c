@@ -665,7 +665,7 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_choosePixelFormat1(JNIEnv *env, jc
 			}
 
 			if (SetPixelFormat(jaggl_device, format, &pfd)) {
-				jaggl_alpha_bits = pfd.cAlphaBits;
+				jaggl_alpha_bits = alpha_bits;
 
 				result = JNI_TRUE;
 				goto dsi_free;
