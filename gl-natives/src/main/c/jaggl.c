@@ -513,14 +513,17 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_choosePixelFormat1(JNIEnv *env, jc
 		.iLayerType = PFD_MAIN_PLANE
 	};
 	format = ChoosePixelFormat(jaggl_device, &pfd);
-	if (format) {
-		if (SetPixelFormat(jaggl_device, format, &pfd)) {
-			// TODO(gpe): get actual number of alpha bits
-
-			result = JNI_TRUE;
-			goto dsi_free;
-		}
+	if (!format) {
+		goto dsi_free;
 	}
+
+	if (!SetPixelFormat(jaggl_device, format, &pfd)) {
+		goto dsi_free;
+	}
+
+	// TODO(gpe): get actual number of alpha bits
+
+	result = JNI_TRUE;
 #else
 #error Unsupported platform
 #endif
