@@ -53,6 +53,11 @@ public final class ForestDisjointSet<T> implements DisjointSet<T> {
 		public int hashCode() {
 			return find().value.hashCode();
 		}
+
+		@Override
+		public String toString() {
+			return find().value.toString();
+		}
 	}
 
 	private static class NodeIterator<T> implements Iterator<T> {
