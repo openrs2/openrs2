@@ -228,17 +228,17 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved) {
 }
 
 static void jaggl_bootstrap_proc_table(void) {
-	WNDCLASS c = {
+	WNDCLASS class = {
 		.lpfnWndProc = DefWindowProc,
 		.hInstance = jaggl_instance,
 		.lpszClassName = "OpenRS2"
 	};
-	ATOM class_atom = RegisterClass(&c);
+	ATOM class_atom = RegisterClass(&class);
 	if (!class_atom) {
 		return;
 	}
 
-	HWND hwnd = CreateWindow(
+	HWND window = CreateWindow(
 		MAKEINTATOM(class_atom),
 		"OpenRS2",
 		0,
@@ -251,12 +251,12 @@ static void jaggl_bootstrap_proc_table(void) {
 		jaggl_instance,
 		NULL
 	);
-	if (!hwnd) {
+	if (!window) {
 		goto destroy_class;
 	}
 
-	HDC hdc = GetDC(hwnd);
-	if (!hdc) {
+	HDC device = GetDC(window);
+	if (!device) {
 		goto destroy_window;
 	}
 
@@ -272,33 +272,33 @@ static void jaggl_bootstrap_proc_table(void) {
 		.cDepthBits = 24,
 		.iLayerType = PFD_MAIN_PLANE
 	};
-	int format = ChoosePixelFormat(hdc, &pfd);
+	int format = ChoosePixelFormat(device, &pfd);
 	if (!format) {
 		goto destroy_device;
 	}
 
-	if (!SetPixelFormat(hdc, format, &pfd)) {
+	if (!SetPixelFormat(device, format, &pfd)) {
 		goto destroy_device;
 	}
 
-	HGLRC context = wglCreateContext(hdc);
+	HGLRC context = wglCreateContext(device);
 	if (!context) {
 		goto destroy_device;
 	}
 
-	if (!wglMakeCurrent(hdc, context)) {
+	if (!wglMakeCurrent(device, context)) {
 		goto destroy_context;
 	}
 
 	jaggl_init_proc_table();
 
 destroy_context:
-	wglMakeCurrent(hdc, NULL);
+	wglMakeCurrent(device, NULL);
 	wglDeleteContext(context);
 destroy_device:
-	ReleaseDC(hwnd, hdc);
+	ReleaseDC(window, device);
 destroy_window:
-	DestroyWindow(hwnd);
+	DestroyWindow(window);
 destroy_class:
 	UnregisterClass(MAKEINTATOM(class_atom), jaggl_instance);
 }
