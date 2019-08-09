@@ -865,7 +865,7 @@ JNIEXPORT void JNICALL Java_jaggl_opengl_glBufferDataARB0(JNIEnv *env, jobject o
 
 	if (jaggl_glBufferDataARB) {
 		JAGGL_GET_BUFFER(env, data, data_off);
-		jaggl_glBufferDataARB((GLenum) target, (GLsizeiptrARB) size, JAGGL_PTR(data), (GLenum) usage);
+		jaggl_glBufferDataARB((GLenum) target, (GLsizeiptrARB) size, (const void *) JAGGL_PTR(data), (GLenum) usage);
 	}
 
 	JAGGL_UNLOCK(env);
@@ -876,7 +876,7 @@ JNIEXPORT void JNICALL Java_jaggl_opengl_glBufferDataARB1(JNIEnv *env, jobject o
 
 	if (jaggl_glBufferDataARB) {
 		JAGGL_GET_ARRAY(env, data, data_off);
-		jaggl_glBufferDataARB((GLenum) target, (GLsizeiptrARB) size, JAGGL_PTR(data), (GLenum) usage);
+		jaggl_glBufferDataARB((GLenum) target, (GLsizeiptrARB) size, (const void *) JAGGL_PTR(data), (GLenum) usage);
 		JAGGL_RELEASE_ARRAY(env, data);
 	}
 
@@ -888,7 +888,7 @@ JNIEXPORT void JNICALL Java_jaggl_opengl_glBufferSubDataARB0(JNIEnv *env, jobjec
 
 	if (jaggl_glBufferSubDataARB) {
 		JAGGL_GET_BUFFER(env, data, data_off);
-		jaggl_glBufferSubDataARB((GLenum) target, (GLintptrARB) offset, (GLsizeiptrARB) size, JAGGL_PTR(data));
+		jaggl_glBufferSubDataARB((GLenum) target, (GLintptrARB) offset, (GLsizeiptrARB) size, (const void *) JAGGL_PTR(data));
 	}
 
 	JAGGL_UNLOCK(env);
@@ -899,7 +899,7 @@ JNIEXPORT void JNICALL Java_jaggl_opengl_glBufferSubDataARB1(JNIEnv *env, jobjec
 
 	if (jaggl_glBufferSubDataARB) {
 		JAGGL_GET_ARRAY(env, data, data_off);
-		jaggl_glBufferSubDataARB((GLenum) target, (GLintptrARB) offset, (GLsizeiptrARB) size, JAGGL_PTR(data));
+		jaggl_glBufferSubDataARB((GLenum) target, (GLintptrARB) offset, (GLsizeiptrARB) size, (const void *) JAGGL_PTR(data));
 		JAGGL_RELEASE_ARRAY(env, data);
 	}
 
