@@ -15,6 +15,7 @@ public abstract class Transformer {
 		do {
 			changed = false;
 
+			prePass(classPath);
 			for (var library : classPath.getLibraries()) {
 				for (var clazz : library) {
 					changed |= transformClass(clazz);
@@ -32,32 +33,41 @@ public abstract class Transformer {
 					}
 				}
 			}
+			postPass(classPath);
 		} while (changed);
 
 		postTransform(classPath);
 	}
 
-	public void preTransform(ClassPath classPath) throws AnalyzerException {
+	protected void preTransform(ClassPath classPath) throws AnalyzerException {
 		/* empty */
 	}
 
-	public boolean transformClass(ClassNode clazz) throws AnalyzerException {
+	protected void prePass(ClassPath classPath) throws AnalyzerException {
+		/* empty */
+	}
+
+	protected boolean transformClass(ClassNode clazz) throws AnalyzerException {
 		return false;
 	}
 
-	public boolean transformField(ClassNode clazz, FieldNode field) throws AnalyzerException {
+	protected boolean transformField(ClassNode clazz, FieldNode field) throws AnalyzerException {
 		return false;
 	}
 
-	public boolean transformMethod(ClassNode clazz, MethodNode method) throws AnalyzerException {
+	protected boolean transformMethod(ClassNode clazz, MethodNode method) throws AnalyzerException {
 		return false;
 	}
 
-	public boolean transformCode(ClassNode clazz, MethodNode method) throws AnalyzerException {
+	protected boolean transformCode(ClassNode clazz, MethodNode method) throws AnalyzerException {
 		return false;
 	}
 
-	public void postTransform(ClassPath classPath) throws AnalyzerException {
+	protected void postPass(ClassPath classPath) throws AnalyzerException {
+		/* empty */
+	}
+
+	protected void postTransform(ClassPath classPath) throws AnalyzerException {
 		/* empty */
 	}
 }
