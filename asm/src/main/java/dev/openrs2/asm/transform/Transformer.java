@@ -8,7 +8,7 @@ import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.analysis.AnalyzerException;
 
 public abstract class Transformer {
-	public void transform(ClassPath classPath) throws AnalyzerException {
+	public final void transform(ClassPath classPath) throws AnalyzerException {
 		preTransform(classPath);
 
 		boolean changed;
