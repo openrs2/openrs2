@@ -15,9 +15,6 @@
     <module>deob</module>
     <module>deob-annotations</module>
     <module>game</module>
-    <module>gl-natives</module>
-    <module>gl-dri-natives</module>
-    <module>misc-natives</module>
     <module>util</module>
   </modules>
 
@@ -296,6 +293,20 @@
       </activation>
       <modules>
         <module>nonfree</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>natives</id>
+      <activation>
+        <!-- <activeByDefault> would be nicer, but it deactivates itself if any other profile is active -->
+        <file>
+          <exists>.</exists>
+        </file>
+      </activation>
+      <modules>
+        <module>gl-natives</module>
+        <module>gl-dri-natives</module>
+        <module>misc-natives</module>
       </modules>
     </profile>
     <profile>
