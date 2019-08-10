@@ -12,4 +12,8 @@
   <packaging>jar</packaging>
 
   <name>OpenRS2 Deobfuscator Annotations</name>
+
+  <properties>
+    <openrs2.root>${project.parent.basedir}</openrs2.root>
+  </properties>
 </project>

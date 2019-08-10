@@ -13,6 +13,10 @@
 
   <name>OpenRS2 GL DRI Natives</name>
 
+  <properties>
+    <openrs2.root>${project.parent.basedir}</openrs2.root>
+  </properties>
+
   <profiles>
     <profile>
       <id>unix</id>

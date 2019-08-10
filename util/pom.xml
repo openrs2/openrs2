@@ -13,6 +13,10 @@
 
   <name>OpenRS2 Utilities</name>
 
+  <properties>
+    <openrs2.root>${project.parent.basedir}</openrs2.root>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>com.google.guava</groupId>

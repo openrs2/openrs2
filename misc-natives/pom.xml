@@ -12,4 +12,8 @@
   <packaging>nar</packaging>
 
   <name>OpenRS2 Misc Natives</name>
+
+  <properties>
+    <openrs2.root>${project.parent.basedir}</openrs2.root>
+  </properties>
 </project>

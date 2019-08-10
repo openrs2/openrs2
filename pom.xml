@@ -19,6 +19,7 @@
   </modules>
 
   <properties>
+    <openrs2.root>${project.basedir}</openrs2.root>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -264,7 +265,7 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>versions-maven-plugin</artifactId>
         <configuration>
-          <rulesUri>file://${maven.multiModuleProjectDirectory}/version-rules.xml</rulesUri>
+          <rulesUri>file://${openrs2.root}/version-rules.xml</rulesUri>
         </configuration>
       </plugin>
     </plugins>
