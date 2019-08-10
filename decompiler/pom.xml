@@ -16,17 +16,16 @@
   <dependencies>
     <dependency>
       <groupId>dev.openrs2</groupId>
-      <artifactId>openrs2-fernflower</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>dev.openrs2</groupId>
       <artifactId>openrs2-util</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>dev.openrs2</groupId>
+      <artifactId>fernflower</artifactId>
     </dependency>
   </dependencies>
 </project>
