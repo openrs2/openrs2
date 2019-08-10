@@ -9,7 +9,6 @@
     <option name="FORMATTER_TAGS_ENABLED" value="true" />
     <option name="DO_NOT_FORMAT">
       <list>
-        <fileSet type="namedScope" name="fernflower" pattern="file[openrs2-fernflower]:*/&amp;&amp;!file[openrs2-fernflower]:pom.xml" />
         <fileSet type="namedScope" name="jni" pattern="file[openrs2-gl-dri-natives]:src/main/c/jaggl_X11_dri.h||file[openrs2-gl-natives]:src/main/c/jaggl_context.h||file[openrs2-gl-natives]:src/main/c/jaggl_opengl.h||file[openrs2-misc-natives]:src/main/c/jagex3_jagmisc_jagmisc.h" />
         <fileSet type="namedScope" name="gl" pattern="file[openrs2-gl-natives]:src/main/include/*" />
       </list>
