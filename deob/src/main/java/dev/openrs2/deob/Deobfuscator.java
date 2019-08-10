@@ -15,6 +15,7 @@ import dev.openrs2.deob.transform.BitShiftTransformer;
 import dev.openrs2.deob.transform.CanvasTransformer;
 import dev.openrs2.deob.transform.ClassForNameTransformer;
 import dev.openrs2.deob.transform.CounterTransformer;
+import dev.openrs2.deob.transform.DummyTransformer;
 import dev.openrs2.deob.transform.ExceptionTracingTransformer;
 import dev.openrs2.deob.transform.FieldOrderTransformer;
 import dev.openrs2.deob.transform.OpaquePredicateTransformer;
@@ -32,7 +33,8 @@ public final class Deobfuscator {
 		new BitShiftTransformer(),
 		new CounterTransformer(),
 		new CanvasTransformer(),
-		new FieldOrderTransformer()
+		new FieldOrderTransformer(),
+		new DummyTransformer()
 	);
 
 	public static void main(String[] args) throws IOException, AnalyzerException {
