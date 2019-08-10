@@ -160,6 +160,8 @@ static PFNGLXSWAPINTERVALSGIPROC jaggl_glXSwapIntervalSGI;
 static PFNWGLCHOOSEPIXELFORMATARBPROC jaggl_wglChoosePixelFormatARB;
 static PFNWGLGETEXTENSIONSSTRINGEXTPROC jaggl_wglGetExtensionsStringEXT;
 static PFNWGLSWAPINTERVALEXTPROC jaggl_wglSwapIntervalEXT;
+#else
+#error Unsupported platform
 #endif
 
 static void jaggl_init_proc_table(void) {
