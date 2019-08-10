@@ -16,6 +16,8 @@
     <module>deob-annotations</module>
     <module>game</module>
     <module>gl-natives</module>
+    <module>gl-dri-natives</module>
+    <module>misc-natives</module>
     <module>util</module>
   </modules>
 
@@ -303,9 +305,6 @@
           <family>unix</family>
         </os>
       </activation>
-      <modules>
-        <module>gl-dri-natives</module>
-      </modules>
       <build>
         <plugins>
           <plugin>
@@ -337,9 +336,6 @@
           <family>windows</family>
         </os>
       </activation>
-      <modules>
-        <module>misc-natives</module>
-      </modules>
       <build>
         <plugins>
           <plugin>
