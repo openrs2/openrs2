@@ -16,8 +16,11 @@ import org.objectweb.asm.tree.analysis.Interpreter;
 public final class IntInterpreter extends Interpreter<IntValue> {
 	private final Interpreter<BasicValue> basicInterpreter = new BasicInterpreter();
 
-	public IntInterpreter() {
+	private final Integer[] parameters;
+
+	public IntInterpreter(Integer[] parameters) {
 		super(Opcodes.ASM7);
+		this.parameters = parameters;
 	}
 
 	@Override
@@ -25,6 +28,33 @@ public final class IntInterpreter extends Interpreter<IntValue> {
 		var basicValue = basicInterpreter.newValue(type);
 		if (basicValue == null) {
 			return null;
+		}
+
+		return IntValue.newUnknown(basicValue);
+	}
+
+	@Override
+	public IntValue newParameterValue(boolean isInstanceMethod, int local, Type type) {
+		var basicValue = basicInterpreter.newParameterValue(isInstanceMethod, local, type);
+		if (basicValue == null) {
+			return null;
+		}
+
+		if (parameters != null) {
+			int parameterIndex;
+			if (isInstanceMethod) {
+				if (local == 0) {
+					return IntValue.newUnknown(basicValue);
+				}
+				parameterIndex = local - 1;
+			} else {
+				parameterIndex = local;
+			}
+
+			var parameter = parameters[parameterIndex];
+			if (parameter != null) {
+				return IntValue.newConstant(basicValue, parameter);
+			}
 		}
 
 		return IntValue.newUnknown(basicValue);
