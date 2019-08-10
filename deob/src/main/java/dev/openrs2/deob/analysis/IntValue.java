@@ -2,6 +2,7 @@ package dev.openrs2.deob.analysis;
 
 import java.util.Objects;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 import org.objectweb.asm.tree.analysis.BasicValue;
 import org.objectweb.asm.tree.analysis.Value;
@@ -59,5 +60,13 @@ public final class IntValue implements Value {
 	@Override
 	public int hashCode() {
 		return Objects.hash(basicValue, intValue);
+	}
+
+	@Override
+	public String toString() {
+		return MoreObjects.toStringHelper(this)
+			.add("basicValue", basicValue)
+			.add("intValue", intValue)
+			.toString();
 	}
 }
