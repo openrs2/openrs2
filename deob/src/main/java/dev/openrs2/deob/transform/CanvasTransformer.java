@@ -6,15 +6,17 @@ import org.objectweb.asm.tree.ClassNode;
 
 public final class CanvasTransformer extends Transformer {
 	@Override
-	public void transformClass(ClassNode clazz) {
+	public boolean transformClass(ClassNode clazz) {
 		if (!"java/awt/Canvas".equals(clazz.superName)) {
-			return;
+			return false;
 		}
 
 		if ((clazz.access & Opcodes.ACC_FINAL) == 0) {
-			return;
+			return false;
 		}
 
 		clazz.interfaces.remove("java/awt/event/FocusListener");
+
+		return false;
 	}
 }

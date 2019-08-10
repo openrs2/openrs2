@@ -45,8 +45,9 @@ public final class FieldOrderTransformer extends Transformer {
 	}
 
 	@Override
-	public void transformClass(ClassNode clazz) {
+	public boolean transformClass(ClassNode clazz) {
 		sortFields(clazz, CONSTRUCTOR, Opcodes.PUTFIELD);
 		sortFields(clazz, STATIC_CONSTRUCTOR, Opcodes.PUTSTATIC);
+		return false;
 	}
 }

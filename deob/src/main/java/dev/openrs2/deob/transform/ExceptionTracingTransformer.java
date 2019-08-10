@@ -22,7 +22,7 @@ public final class ExceptionTracingTransformer extends Transformer {
 	}
 
 	@Override
-	public void transformCode(ClassNode clazz, MethodNode method) {
+	public boolean transformCode(ClassNode clazz, MethodNode method) {
 		CATCH_MATCHER.match(method).forEach(match -> {
 			var foundTryCatch = method.tryCatchBlocks.removeIf(tryCatch -> {
 				if (!"java/lang/RuntimeException".equals(tryCatch.type)) {
@@ -36,6 +36,8 @@ public final class ExceptionTracingTransformer extends Transformer {
 				tracingTryCatches++;
 			}
 		});
+
+		return false;
 	}
 
 	@Override

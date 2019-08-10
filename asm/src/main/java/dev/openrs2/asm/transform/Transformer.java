@@ -11,23 +11,28 @@ public abstract class Transformer {
 	public void transform(ClassPath classPath) throws AnalyzerException {
 		preTransform(classPath);
 
-		for (var library : classPath.getLibraries()) {
-			for (var clazz : library) {
-				transformClass(clazz);
+		boolean changed;
+		do {
+			changed = false;
 
-				for (var field : clazz.fields) {
-					transformField(clazz, field);
-				}
+			for (var library : classPath.getLibraries()) {
+				for (var clazz : library) {
+					changed |= transformClass(clazz);
 
-				for (var method : clazz.methods) {
-					transformMethod(clazz, method);
+					for (var field : clazz.fields) {
+						changed |= transformField(clazz, field);
+					}
 
-					if ((method.access & (Opcodes.ACC_NATIVE | Opcodes.ACC_ABSTRACT)) == 0) {
-						transformCode(clazz, method);
+					for (var method : clazz.methods) {
+						changed |= transformMethod(clazz, method);
+
+						if ((method.access & (Opcodes.ACC_NATIVE | Opcodes.ACC_ABSTRACT)) == 0) {
+							changed |= transformCode(clazz, method);
+						}
 					}
 				}
 			}
-		}
+		} while (changed);
 
 		postTransform(classPath);
 	}
@@ -36,20 +41,20 @@ public abstract class Transformer {
 		/* empty */
 	}
 
-	public void transformClass(ClassNode clazz) throws AnalyzerException {
-		/* empty */
+	public boolean transformClass(ClassNode clazz) throws AnalyzerException {
+		return false;
 	}
 
-	public void transformField(ClassNode clazz, FieldNode field) throws AnalyzerException {
-		/* empty */
+	public boolean transformField(ClassNode clazz, FieldNode field) throws AnalyzerException {
+		return false;
 	}
 
-	public void transformMethod(ClassNode clazz, MethodNode method) throws AnalyzerException {
-		/* empty */
+	public boolean transformMethod(ClassNode clazz, MethodNode method) throws AnalyzerException {
+		return false;
 	}
 
-	public void transformCode(ClassNode clazz, MethodNode method) throws AnalyzerException {
-		/* empty */
+	public boolean transformCode(ClassNode clazz, MethodNode method) throws AnalyzerException {
+		return false;
 	}
 
 	public void postTransform(ClassPath classPath) throws AnalyzerException {

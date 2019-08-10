@@ -26,7 +26,7 @@ public final class BitShiftTransformer extends Transformer {
 	}
 
 	@Override
-	public void transformCode(ClassNode clazz, MethodNode method) {
+	public boolean transformCode(ClassNode clazz, MethodNode method) {
 		CONST_SHIFT_MATCHER.match(method).forEach(match -> {
 			var push = match.get(0);
 			var bits = InsnNodeUtils.getIntConstant(push);
@@ -39,6 +39,8 @@ public final class BitShiftTransformer extends Transformer {
 				simplified++;
 			}
 		});
+
+		return false;
 	}
 
 	@Override

@@ -94,7 +94,7 @@ public final class CounterTransformer extends Transformer {
 	}
 
 	@Override
-	public void transformCode(ClassNode clazz, MethodNode method) {
+	public boolean transformCode(ClassNode clazz, MethodNode method) {
 		RESET_PATTERN.match(method).forEach(match -> {
 			var putstatic = (FieldInsnNode) match.get(1);
 			if (counters.contains(new MemberRef(putstatic.owner, putstatic.name, putstatic.desc))) {
@@ -111,6 +111,8 @@ public final class CounterTransformer extends Transformer {
 				match.forEach(method.instructions::remove);
 			}
 		});
+
+		return false;
 	}
 
 	@Override

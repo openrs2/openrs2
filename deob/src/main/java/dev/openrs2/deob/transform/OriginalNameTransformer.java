@@ -37,26 +37,30 @@ public final class OriginalNameTransformer extends Transformer {
 	}
 
 	@Override
-	public void transformClass(ClassNode clazz) {
+	public boolean transformClass(ClassNode clazz) {
 		if (clazz.invisibleAnnotations == null) {
 			clazz.invisibleAnnotations = new ArrayList<>();
 		}
 		clazz.invisibleAnnotations.add(createOriginalClassAnnotation(clazz.name));
+
+		return false;
 	}
 
 	@Override
-	public void transformField(ClassNode clazz, FieldNode field) {
+	public boolean transformField(ClassNode clazz, FieldNode field) {
 		if (field.invisibleAnnotations == null) {
 			field.invisibleAnnotations = new ArrayList<>();
 		}
 		field.invisibleAnnotations.add(createOriginalMemberAnnotation(clazz.name, field.name, field.desc));
+
+		return false;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void transformMethod(ClassNode clazz, MethodNode method) {
+	public boolean transformMethod(ClassNode clazz, MethodNode method) {
 		if (method.name.equals("<init>") || method.name.equals("<clinit>")) {
-			return;
+			return false;
 		}
 
 		if (method.invisibleAnnotations == null) {
@@ -75,5 +79,7 @@ public final class OriginalNameTransformer extends Transformer {
 			}
 			annotations.add(createOriginalArgAnnotation(i));
 		}
+
+		return false;
 	}
 }
