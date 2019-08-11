@@ -3,12 +3,15 @@ package dev.openrs2.deob.ast.transform;
 import java.util.Optional;
 
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.expr.BinaryExpr;
+import com.github.javaparser.resolution.types.ResolvedType;
+import dev.openrs2.deob.ast.util.NodeUtils;
 
 public final class BinaryExprOrderTransformer extends Transformer {
 	private static Optional<BinaryExpr.Operator> flip(BinaryExpr.Operator op) {
-		// TODO(gpe): handle the PLUS operator (we can't flip it if the type of the expression is String)
 		switch (op) {
+		case PLUS:
 		case MULTIPLY:
 		case EQUALS:
 		case NOT_EQUALS:
@@ -31,16 +34,25 @@ public final class BinaryExprOrderTransformer extends Transformer {
 		}
 	}
 
+	private static boolean isString(ResolvedType type) {
+		return type.isReferenceType() && type.asReferenceType().getQualifiedName().equals("java.lang.String");
+	}
+
 	@Override
 	public void transform(CompilationUnit unit) {
-		unit.findAll(BinaryExpr.class).forEach(expr -> {
+		NodeUtils.walk(unit, Node.TreeTraversal.POSTORDER, BinaryExpr.class, expr -> {
 			flip(expr.getOperator()).ifPresent(op -> {
+				var type = expr.calculateResolvedType();
+				if (op == BinaryExpr.Operator.PLUS && isString(type)) {
+					return;
+				}
+
 				var left = expr.getLeft();
 				var right = expr.getRight();
 				if (left.isLiteralExpr() && !right.isLiteralExpr()) {
 					expr.setOperator(op);
-					expr.setLeft(right);
-					expr.setRight(left);
+					expr.setLeft(right.clone());
+					expr.setRight(left.clone());
 				}
 			});
 		});
