@@ -11,7 +11,6 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Multimap;
-import dev.openrs2.asm.InsnNodeUtils;
 import dev.openrs2.asm.MemberRef;
 import dev.openrs2.asm.classpath.ClassPath;
 import dev.openrs2.asm.transform.Transformer;
@@ -25,7 +24,6 @@ import org.objectweb.asm.tree.InsnNode;
 import org.objectweb.asm.tree.JumpInsnNode;
 import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
-import org.objectweb.asm.tree.VarInsnNode;
 import org.objectweb.asm.tree.analysis.Analyzer;
 import org.objectweb.asm.tree.analysis.AnalyzerException;
 import org.slf4j.Logger;
@@ -164,12 +162,11 @@ public final class DummyTransformer extends Transformer {
 	private final Multimap<ArgRef, IntValue> argValues = HashMultimap.create();
 	private final Map<DisjointSet.Partition<MemberRef>, ImmutableSet<Integer>[]> constArgs = new HashMap<>();
 	private DisjointSet<MemberRef> inheritedMethodSets;
-	private int loadsInlined, branchesSimplified;
+	private int branchesSimplified;
 
 	@Override
 	protected void preTransform(ClassPath classPath) {
 		inheritedMethodSets = classPath.createInheritedMethodSets();
-		loadsInlined = 0;
 		branchesSimplified = 0;
 	}
 
@@ -223,18 +220,9 @@ public final class DummyTransformer extends Transformer {
 					k += arg.getSize();
 				}
 				break;
-			case Opcodes.ILOAD:
-				var iload = (VarInsnNode) insn;
-				var value = frame.getLocal(iload.var);
-				if (value.isSingleConstant()) {
-					method.instructions.set(insn, InsnNodeUtils.createIntConstant(value.getIntValue()));
-					loadsInlined++;
-					changed = true;
-				}
-				break;
 			case Opcodes.IFEQ:
 			case Opcodes.IFNE:
-				value = frame.getStack(stackSize - 1);
+				var value = frame.getStack(stackSize - 1);
 				if (value.isUnknown()) {
 					continue;
 				}
@@ -321,6 +309,6 @@ public final class DummyTransformer extends Transformer {
 
 	@Override
 	protected void postTransform(ClassPath classPath) {
-		logger.info("Inlined {} dummy loads and simplified {} dummy branches", loadsInlined, branchesSimplified);
+		logger.info("Simplified {} dummy branches", branchesSimplified);
 	}
 }
