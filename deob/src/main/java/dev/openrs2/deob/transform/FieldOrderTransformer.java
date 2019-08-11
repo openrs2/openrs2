@@ -20,7 +20,8 @@ public final class FieldOrderTransformer extends Transformer {
 				var fields = new HashMap<MemberDesc, Integer>();
 				var index = 0;
 
-				for (var insn = ctor.instructions.getFirst(); insn != null; insn = insn.getNext()) {
+				for (var it = ctor.instructions.iterator(); it.hasNext(); ) {
+					var insn = it.next();
 					if (insn.getOpcode() != opcode) {
 						continue;
 					}

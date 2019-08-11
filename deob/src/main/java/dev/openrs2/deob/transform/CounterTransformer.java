@@ -47,7 +47,8 @@ public final class CounterTransformer extends Transformer {
 	}
 
 	private void findCounters(MethodNode method, Map<MemberRef, Integer> references, Map<MemberRef, Integer> resets, Map<MemberRef, Integer> increments) {
-		for (var insn = method.instructions.getFirst(); insn != null; insn = insn.getNext()) {
+		for (var it = method.instructions.iterator(); it.hasNext(); ) {
+			var insn = it.next();
 			if (insn.getType() != AbstractInsnNode.FIELD_INSN) {
 				continue;
 			}

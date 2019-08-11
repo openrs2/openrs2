@@ -216,7 +216,8 @@ public final class InsnMatcher {
 
 	private static List<AbstractInsnNode> createRealInsnList(InsnList list) {
 		List<AbstractInsnNode> realInsns = new ArrayList<>();
-		for (var insn = list.getFirst(); insn != null; insn = insn.getNext()) {
+		for (var it = list.iterator(); it.hasNext(); ) {
+			var insn = it.next();
 			if (insn.getOpcode() != -1) {
 				realInsns.add(insn);
 			}
