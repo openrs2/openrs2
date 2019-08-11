@@ -3,6 +3,8 @@ package dev.openrs2.deob.analysis;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Sets;
 import dev.openrs2.asm.InsnNodeUtils;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
@@ -14,11 +16,13 @@ import org.objectweb.asm.tree.analysis.BasicValue;
 import org.objectweb.asm.tree.analysis.Interpreter;
 
 public final class IntInterpreter extends Interpreter<IntValue> {
+	// TODO(gpe): this is fairly arbitrary and will need tweaking
+	private static final int MAX_TRACKED_VALUES = 8;
+
 	private final Interpreter<BasicValue> basicInterpreter = new BasicInterpreter();
+	private final ImmutableSet<Integer>[] parameters;
 
-	private final Integer[] parameters;
-
-	public IntInterpreter(Integer[] parameters) {
+	public IntInterpreter(ImmutableSet<Integer>[] parameters) {
 		super(Opcodes.ASM7);
 		this.parameters = parameters;
 	}
@@ -86,25 +90,36 @@ public final class IntInterpreter extends Interpreter<IntValue> {
 			return null;
 		}
 
-		if (value.isConstant()) {
-			var v = value.getIntValue();
+		if (value.isUnknown()) {
+			return IntValue.newUnknown(basicValue);
+		}
 
+		var set = ImmutableSet.<Integer>builder();
+
+		for (var v : value.getIntValues()) {
 			switch (insn.getOpcode()) {
 			case Opcodes.INEG:
-				return IntValue.newConstant(basicValue, -v);
+				set.add(-v);
+				break;
 			case Opcodes.IINC:
 				var iinc = (IincInsnNode) insn;
-				return IntValue.newConstant(basicValue, v + iinc.incr);
+				set.add(v + iinc.incr);
+				break;
 			case Opcodes.I2B:
-				return IntValue.newConstant(basicValue, (byte) v);
+				set.add((int) (byte) (int) v);
+				break;
 			case Opcodes.I2C:
-				return IntValue.newConstant(basicValue, (char) v);
+				set.add((int) (char) (int) v);
+				break;
 			case Opcodes.I2S:
-				return IntValue.newConstant(basicValue, (short) v);
+				set.add((int) (short) (int) v);
+				break;
+			default:
+				return IntValue.newUnknown(basicValue);
 			}
 		}
 
-		return IntValue.newUnknown(basicValue);
+		return IntValue.newConstant(basicValue, set.build());
 	}
 
 	@Override
@@ -114,43 +129,61 @@ public final class IntInterpreter extends Interpreter<IntValue> {
 			return null;
 		}
 
-		if (value1.isConstant() && value2.isConstant()) {
-			var v1 = value1.getIntValue();
-			var v2 = value2.getIntValue();
+		if (value1.isUnknown() || value2.isUnknown()) {
+			return IntValue.newUnknown(basicValue);
+		}
 
-			switch (insn.getOpcode()) {
-			case Opcodes.IADD:
-				return IntValue.newConstant(basicValue, v1 + v2);
-			case Opcodes.ISUB:
-				return IntValue.newConstant(basicValue, v1 - v2);
-			case Opcodes.IMUL:
-				return IntValue.newConstant(basicValue, v1 * v2);
-			case Opcodes.IDIV:
-				if (v2 == 0) {
+		var set = ImmutableSet.<Integer>builder();
+
+		for (var v1 : value1.getIntValues()) {
+			for (var v2 : value2.getIntValues()) {
+				switch (insn.getOpcode()) {
+				case Opcodes.IADD:
+					set.add(v1 + v2);
+					break;
+				case Opcodes.ISUB:
+					set.add(v1 - v2);
+					break;
+				case Opcodes.IMUL:
+					set.add(v1 * v2);
+					break;
+				case Opcodes.IDIV:
+					if (v2 == 0) {
+						return IntValue.newUnknown(basicValue);
+					}
+					set.add(v1 / v2);
+					break;
+				case Opcodes.IREM:
+					if (v2 == 0) {
+						return IntValue.newUnknown(basicValue);
+					}
+					set.add(v1 % v2);
+					break;
+				case Opcodes.ISHL:
+					set.add(v1 << v2);
+					break;
+				case Opcodes.ISHR:
+					set.add(v1 >> v2);
+					break;
+				case Opcodes.IUSHR:
+					set.add(v1 >>> v2);
+					break;
+				case Opcodes.IAND:
+					set.add(v1 & v2);
+					break;
+				case Opcodes.IOR:
+					set.add(v1 | v2);
+					break;
+				case Opcodes.IXOR:
+					set.add(v1 ^ v2);
+					break;
+				default:
 					return IntValue.newUnknown(basicValue);
 				}
-				return IntValue.newConstant(basicValue, v1 / v2);
-			case Opcodes.IREM:
-				if (v2 == 0) {
-					return IntValue.newUnknown(basicValue);
-				}
-				return IntValue.newConstant(basicValue, v1 % v2);
-			case Opcodes.ISHL:
-				return IntValue.newConstant(basicValue, v1 << v2);
-			case Opcodes.ISHR:
-				return IntValue.newConstant(basicValue, v1 >> v2);
-			case Opcodes.IUSHR:
-				return IntValue.newConstant(basicValue, v1 >>> v2);
-			case Opcodes.IAND:
-				return IntValue.newConstant(basicValue, v1 & v2);
-			case Opcodes.IOR:
-				return IntValue.newConstant(basicValue, v1 | v2);
-			case Opcodes.IXOR:
-				return IntValue.newConstant(basicValue, v1 ^ v2);
 			}
 		}
 
-		return IntValue.newUnknown(basicValue);
+		return IntValue.newConstant(basicValue, set.build());
 	}
 
 	@Override
@@ -188,10 +221,15 @@ public final class IntInterpreter extends Interpreter<IntValue> {
 			return null;
 		}
 
-		if (value1.isConstant() && value2.isConstant() && value1.getIntValue() == value2.getIntValue()) {
-			return IntValue.newConstant(basicValue, value1.getIntValue());
+		if (value1.isUnknown() || value2.isUnknown()) {
+			return IntValue.newUnknown(basicValue);
 		}
 
-		return IntValue.newUnknown(basicValue);
+		var set = ImmutableSet.copyOf(Sets.union(value1.getIntValues(), value2.getIntValues()));
+		if (set.size() > MAX_TRACKED_VALUES) {
+			return IntValue.newUnknown(basicValue);
+		}
+
+		return IntValue.newConstant(basicValue, set);
 	}
 }

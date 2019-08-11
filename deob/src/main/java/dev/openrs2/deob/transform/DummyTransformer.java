@@ -1,11 +1,15 @@
 package dev.openrs2.deob.transform;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Multimap;
 import dev.openrs2.asm.InsnNodeUtils;
 import dev.openrs2.asm.MemberRef;
@@ -58,6 +62,39 @@ public final class DummyTransformer extends Transformer {
 		}
 	}
 
+	private enum BranchResult {
+		ALWAYS_TAKEN,
+		NEVER_TAKEN,
+		UNKNOWN;
+
+		public static BranchResult fromTakenNotTaken(int taken, int notTaken) {
+			Preconditions.checkArgument(taken != 0 || notTaken != 0);
+
+			if (taken == 0) {
+				return NEVER_TAKEN;
+			} else if (notTaken == 0) {
+				return ALWAYS_TAKEN;
+			} else {
+				return UNKNOWN;
+			}
+		}
+	}
+
+	private static BranchResult evaluateUnaryBranch(int opcode, Set<Integer> values) {
+		Preconditions.checkArgument(!values.isEmpty());
+
+		int taken = 0, notTaken = 0;
+		for (var v : values) {
+			if (evaluateUnaryBranch(opcode, v)) {
+				taken++;
+			} else {
+				notTaken++;
+			}
+		}
+
+		return BranchResult.fromTakenNotTaken(taken, notTaken);
+	}
+
 	private static boolean evaluateUnaryBranch(int opcode, int value) {
 		switch (opcode) {
 		case Opcodes.IFEQ:
@@ -67,6 +104,23 @@ public final class DummyTransformer extends Transformer {
 		default:
 			throw new IllegalArgumentException();
 		}
+	}
+
+	private static BranchResult evaluateBinaryBranch(int opcode, Set<Integer> values1, Set<Integer> values2) {
+		Preconditions.checkArgument(!values1.isEmpty() && !values2.isEmpty());
+
+		int taken = 0, notTaken = 0;
+		for (var v1 : values1) {
+			for (var v2 : values2) {
+				if (evaluateBinaryBranch(opcode, v1, v2)) {
+					taken++;
+				} else {
+					notTaken++;
+				}
+			}
+		}
+
+		return BranchResult.fromTakenNotTaken(taken, notTaken);
 	}
 
 	private static boolean evaluateBinaryBranch(int opcode, int value1, int value2) {
@@ -88,8 +142,27 @@ public final class DummyTransformer extends Transformer {
 		}
 	}
 
+	private static ImmutableSet<Integer> union(Collection<IntValue> intValues) {
+		var builder = ImmutableSet.<Integer>builder();
+
+		for (var value : intValues) {
+			if (value.isUnknown()) {
+				return null;
+			}
+
+			builder.addAll(value.getIntValues());
+		}
+
+		var set = builder.build();
+		if (set.isEmpty()) {
+			return null;
+		}
+
+		return set;
+	}
+
 	private final Multimap<ArgRef, IntValue> argValues = HashMultimap.create();
-	private final Map<DisjointSet.Partition<MemberRef>, Integer[]> constArgs = new HashMap<>();
+	private final Map<DisjointSet.Partition<MemberRef>, ImmutableSet<Integer>[]> constArgs = new HashMap<>();
 	private DisjointSet<MemberRef> inheritedMethodSets;
 	private int loadsInlined, branchesSimplified;
 
@@ -153,7 +226,7 @@ public final class DummyTransformer extends Transformer {
 			case Opcodes.ILOAD:
 				var iload = (VarInsnNode) insn;
 				var value = frame.getLocal(iload.var);
-				if (value.isConstant()) {
+				if (value.isSingleConstant()) {
 					method.instructions.set(insn, InsnNodeUtils.createIntConstant(value.getIntValue()));
 					loadsInlined++;
 					changed = true;
@@ -162,15 +235,18 @@ public final class DummyTransformer extends Transformer {
 			case Opcodes.IFEQ:
 			case Opcodes.IFNE:
 				value = frame.getStack(stackSize - 1);
-				if (!value.isConstant()) {
+				if (value.isUnknown()) {
 					continue;
 				}
 
-				var taken = evaluateUnaryBranch(insn.getOpcode(), value.getIntValue());
-				if (taken) {
+				var result = evaluateUnaryBranch(insn.getOpcode(), value.getIntValues());
+				switch (result) {
+				case ALWAYS_TAKEN:
 					alwaysTakenUnaryBranches.add((JumpInsnNode) insn);
-				} else {
+					break;
+				case NEVER_TAKEN:
 					neverTakenUnaryBranches.add((JumpInsnNode) insn);
+					break;
 				}
 				break;
 			case Opcodes.IF_ICMPEQ:
@@ -180,20 +256,19 @@ public final class DummyTransformer extends Transformer {
 			case Opcodes.IF_ICMPGT:
 			case Opcodes.IF_ICMPLE:
 				var value1 = frame.getStack(stackSize - 2);
-				if (!value1.isConstant()) {
-					continue;
-				}
-
 				var value2 = frame.getStack(stackSize - 1);
-				if (!value2.isConstant()) {
+				if (value1.isUnknown() || value2.isUnknown()) {
 					continue;
 				}
 
-				taken = evaluateBinaryBranch(insn.getOpcode(), value1.getIntValue(), value2.getIntValue());
-				if (taken) {
+				result = evaluateBinaryBranch(insn.getOpcode(), value1.getIntValues(), value2.getIntValues());
+				switch (result) {
+				case ALWAYS_TAKEN:
 					alwaysTakenBinaryBranches.add((JumpInsnNode) insn);
-				} else {
+					break;
+				case NEVER_TAKEN:
 					neverTakenBinaryBranches.add((JumpInsnNode) insn);
+					break;
 				}
 				break;
 			}
@@ -235,17 +310,10 @@ public final class DummyTransformer extends Transformer {
 		for (var method : inheritedMethodSets) {
 			var args = (Type.getArgumentsAndReturnSizes(method.iterator().next().getDesc()) >> 2) - 1;
 
-			var parameters = new Integer[args];
+			@SuppressWarnings("unchecked")
+			var parameters = (ImmutableSet<Integer>[]) new ImmutableSet<?>[args];
 			for (int i = 0; i < args; i++) {
-				var values = argValues.get(new ArgRef(method, i));
-				if (values.size() != 1) {
-					continue;
-				}
-
-				var value = values.iterator().next();
-				if (value.isConstant()) {
-					parameters[i] = value.getIntValue();
-				}
+				parameters[i] = union(argValues.get(new ArgRef(method, i)));
 			}
 			constArgs.put(method, parameters);
 		}
