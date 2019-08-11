@@ -21,6 +21,7 @@
     <module>decompiler</module>
     <module>deob</module>
     <module>deob-annotations</module>
+    <module>deob-ast</module>
     <module>game</module>
     <module>util</module>
   </modules>
@@ -51,6 +52,11 @@
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
         <version>28.0-jre</version>
+      </dependency>
+      <dependency>
+        <groupId>com.github.javaparser</groupId>
+        <artifactId>javaparser-symbol-solver-core</artifactId>
+        <version>3.14.9</version>
       </dependency>
       <dependency>
         <groupId>dev.openrs2</groupId>
