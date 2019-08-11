@@ -2,6 +2,8 @@ package dev.openrs2.deob.ast.transform;
 
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.NodeList;
+import com.github.javaparser.ast.expr.Expression;
+import com.github.javaparser.ast.expr.UnaryExpr;
 import com.github.javaparser.ast.stmt.IfStmt;
 import com.github.javaparser.ast.stmt.Statement;
 import dev.openrs2.deob.ast.visitor.NegateExprVisitor;
@@ -34,13 +36,35 @@ public final class IfElseTransformer extends Transformer {
 		throw new IllegalArgumentException();
 	}
 
+	private static boolean isNot(Expression expr) {
+		return expr.isUnaryExpr() && expr.asUnaryExpr().getOperator() == UnaryExpr.Operator.LOGICAL_COMPLEMENT;
+	}
+
 	@Override
 	public void transform(CompilationUnit unit) {
 		unit.findAll(IfStmt.class).forEach(stmt -> {
 			stmt.getElseStmt().ifPresent(elseStmt -> {
+				var condition = stmt.getCondition();
 				var thenStmt = stmt.getThenStmt();
 				if (isIf(thenStmt) && !isIf(elseStmt)) {
-					stmt.setCondition(stmt.getCondition().accept(new NegateExprVisitor(), null));
+					stmt.setCondition(condition.accept(new NegateExprVisitor(), null));
+					stmt.setThenStmt(elseStmt);
+					stmt.setElseStmt(thenStmt);
+				} else if (!isIf(thenStmt) && isIf(elseStmt)) {
+					/*
+					 * Don't consider any more conditions for swapping the
+					 * if/else branches, as it'll introduce another level of
+					 * indentation.
+					 */
+					return;
+				}
+
+				/*
+				 * Prefer if (a) over if (!a). We don't swap != as it makes
+				 * checking bitwise flags look worse.
+				 */
+				if (isNot(condition)) {
+					stmt.setCondition(condition.accept(new NegateExprVisitor(), null));
 					stmt.setThenStmt(elseStmt);
 					stmt.setElseStmt(thenStmt);
 				}
