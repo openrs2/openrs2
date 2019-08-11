@@ -301,7 +301,7 @@ public final class DummyTransformer extends Transformer {
 			var allUnknown = true;
 			@SuppressWarnings("unchecked")
 			var parameters = (ImmutableSet<Integer>[]) new ImmutableSet<?>[args];
-			for (int i = 0; i < args; i++) {
+			for (var i = 0; i < args; i++) {
 				var parameter = union(argValues.get(new ArgRef(method, i)));
 				if (parameter != null) {
 					allUnknown = false;

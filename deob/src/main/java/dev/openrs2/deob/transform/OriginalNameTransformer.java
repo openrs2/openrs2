@@ -72,7 +72,7 @@ public final class OriginalNameTransformer extends Transformer {
 		if (method.invisibleParameterAnnotations == null) {
 			method.invisibleParameterAnnotations = (List<AnnotationNode>[]) new List<?>[args];
 		}
-		for (int i = 0; i < method.invisibleParameterAnnotations.length; i++) {
+		for (var i = 0; i < method.invisibleParameterAnnotations.length; i++) {
 			var annotations = method.invisibleParameterAnnotations[i];
 			if (annotations == null) {
 				annotations = method.invisibleParameterAnnotations[i] = new ArrayList<>();
