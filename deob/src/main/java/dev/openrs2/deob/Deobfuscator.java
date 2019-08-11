@@ -12,6 +12,7 @@ import dev.openrs2.asm.transform.Transformer;
 import dev.openrs2.deob.remap.ClassNamePrefixer;
 import dev.openrs2.deob.remap.TypedRemapper;
 import dev.openrs2.deob.transform.BitShiftTransformer;
+import dev.openrs2.deob.transform.BitwiseOpTransformer;
 import dev.openrs2.deob.transform.CanvasTransformer;
 import dev.openrs2.deob.transform.ClassForNameTransformer;
 import dev.openrs2.deob.transform.CounterTransformer;
@@ -34,6 +35,7 @@ public final class Deobfuscator {
 		new CounterTransformer(),
 		new CanvasTransformer(),
 		new FieldOrderTransformer(),
+		new BitwiseOpTransformer(),
 		new DummyTransformer()
 	);
 
