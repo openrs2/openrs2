@@ -298,12 +298,22 @@ public final class DummyTransformer extends Transformer {
 		for (var method : inheritedMethodSets) {
 			var args = (Type.getArgumentsAndReturnSizes(method.iterator().next().getDesc()) >> 2) - 1;
 
+			var allUnknown = true;
 			@SuppressWarnings("unchecked")
 			var parameters = (ImmutableSet<Integer>[]) new ImmutableSet<?>[args];
 			for (int i = 0; i < args; i++) {
-				parameters[i] = union(argValues.get(new ArgRef(method, i)));
+				var parameter = union(argValues.get(new ArgRef(method, i)));
+				if (parameter != null) {
+					allUnknown = false;
+				}
+				parameters[i] = parameter;
 			}
-			constArgs.put(method, parameters);
+
+			if (allUnknown) {
+				constArgs.remove(method);
+			} else {
+				constArgs.put(method, parameters);
+			}
 		}
 	}
 
