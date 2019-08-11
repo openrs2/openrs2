@@ -8,14 +8,13 @@ import com.github.javaparser.ast.expr.EnclosedExpr;
 import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.UnaryExpr;
 import com.github.javaparser.ast.visitor.GenericVisitorWithDefaults;
+import com.google.common.base.Preconditions;
 
 // TODO(gpe): need to be careful about operator precedence/EnclosedExpr
 public final class NegateExprVisitor extends GenericVisitorWithDefaults<Expression, Void> {
 	@Override
 	public Expression defaultAction(Node n, Void arg) {
-		if (!(n instanceof Expression)) {
-			throw new IllegalArgumentException();
-		}
+		Preconditions.checkArgument(n instanceof Expression);
 		return new UnaryExpr((Expression) n, UnaryExpr.Operator.LOGICAL_COMPLEMENT);
 	}
 
