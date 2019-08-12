@@ -2,10 +2,9 @@ package dev.openrs2.deob.ast.transform;
 
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.NodeList;
-import com.github.javaparser.ast.expr.Expression;
-import com.github.javaparser.ast.expr.UnaryExpr;
 import com.github.javaparser.ast.stmt.IfStmt;
 import com.github.javaparser.ast.stmt.Statement;
+import dev.openrs2.deob.ast.util.ExprUtils;
 import dev.openrs2.deob.ast.visitor.NegateExprVisitor;
 
 public final class IfElseTransformer extends Transformer {
@@ -36,10 +35,6 @@ public final class IfElseTransformer extends Transformer {
 		throw new IllegalArgumentException();
 	}
 
-	private static boolean isNot(Expression expr) {
-		return expr.isUnaryExpr() && expr.asUnaryExpr().getOperator() == UnaryExpr.Operator.LOGICAL_COMPLEMENT;
-	}
-
 	@Override
 	public void transform(CompilationUnit unit) {
 		unit.findAll(IfStmt.class).forEach(stmt -> {
@@ -63,7 +58,7 @@ public final class IfElseTransformer extends Transformer {
 				 * Prefer if (a) over if (!a). We don't swap != as it makes
 				 * checking bitwise flags look worse.
 				 */
-				if (isNot(condition)) {
+				if (ExprUtils.isNot(condition)) {
 					stmt.setCondition(condition.accept(new NegateExprVisitor(), null));
 					stmt.setThenStmt(elseStmt);
 					stmt.setElseStmt(thenStmt);

@@ -17,6 +17,7 @@ import dev.openrs2.deob.ast.transform.BinaryExprOrderTransformer;
 import dev.openrs2.deob.ast.transform.ComplementTransformer;
 import dev.openrs2.deob.ast.transform.IfElseTransformer;
 import dev.openrs2.deob.ast.transform.NegativeLiteralTransformer;
+import dev.openrs2.deob.ast.transform.TernaryTransformer;
 import dev.openrs2.deob.ast.transform.Transformer;
 
 public final class AstDeobfuscator {
@@ -24,6 +25,7 @@ public final class AstDeobfuscator {
 		new NegativeLiteralTransformer(),
 		new ComplementTransformer(),
 		new IfElseTransformer(),
+		new TernaryTransformer(),
 		new BinaryExprOrderTransformer(),
 		new AddSubTransformer()
 	);
