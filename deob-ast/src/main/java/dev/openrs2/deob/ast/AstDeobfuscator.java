@@ -12,6 +12,7 @@ import com.github.javaparser.symbolsolver.resolution.typesolvers.JavaParserTypeS
 import com.github.javaparser.symbolsolver.resolution.typesolvers.ReflectionTypeSolver;
 import com.github.javaparser.utils.SourceRoot;
 import com.google.common.collect.ImmutableList;
+import dev.openrs2.deob.ast.transform.AddSubTransformer;
 import dev.openrs2.deob.ast.transform.BinaryExprOrderTransformer;
 import dev.openrs2.deob.ast.transform.ComplementTransformer;
 import dev.openrs2.deob.ast.transform.IfElseTransformer;
@@ -23,7 +24,8 @@ public final class AstDeobfuscator {
 		new NegativeLiteralTransformer(),
 		new ComplementTransformer(),
 		new IfElseTransformer(),
-		new BinaryExprOrderTransformer()
+		new BinaryExprOrderTransformer(),
+		new AddSubTransformer()
 	);
 
 	public static void main(String[] args) {

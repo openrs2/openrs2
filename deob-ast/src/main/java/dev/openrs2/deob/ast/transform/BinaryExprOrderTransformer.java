@@ -5,8 +5,8 @@ import java.util.Optional;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.expr.BinaryExpr;
-import com.github.javaparser.resolution.types.ResolvedType;
 import dev.openrs2.deob.ast.util.NodeUtils;
+import dev.openrs2.deob.ast.util.TypeUtils;
 
 public final class BinaryExprOrderTransformer extends Transformer {
 	private static Optional<BinaryExpr.Operator> flip(BinaryExpr.Operator op) {
@@ -34,16 +34,12 @@ public final class BinaryExprOrderTransformer extends Transformer {
 		}
 	}
 
-	private static boolean isString(ResolvedType type) {
-		return type.isReferenceType() && type.asReferenceType().getQualifiedName().equals("java.lang.String");
-	}
-
 	@Override
 	public void transform(CompilationUnit unit) {
 		NodeUtils.walk(unit, Node.TreeTraversal.POSTORDER, BinaryExpr.class, expr -> {
 			flip(expr.getOperator()).ifPresent(op -> {
 				var type = expr.calculateResolvedType();
-				if (op == BinaryExpr.Operator.PLUS && isString(type)) {
+				if (op == BinaryExpr.Operator.PLUS && TypeUtils.isString(type)) {
 					return;
 				}
 
