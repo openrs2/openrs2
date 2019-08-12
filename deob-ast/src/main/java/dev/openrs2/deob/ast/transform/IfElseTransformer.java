@@ -5,7 +5,6 @@ import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.stmt.IfStmt;
 import com.github.javaparser.ast.stmt.Statement;
 import dev.openrs2.deob.ast.util.ExprUtils;
-import dev.openrs2.deob.ast.visitor.NegateExprVisitor;
 
 public final class IfElseTransformer extends Transformer {
 	private static boolean isIf(Statement stmt) {
@@ -42,7 +41,7 @@ public final class IfElseTransformer extends Transformer {
 				var condition = stmt.getCondition();
 				var thenStmt = stmt.getThenStmt();
 				if (isIf(thenStmt) && !isIf(elseStmt)) {
-					stmt.setCondition(condition.accept(new NegateExprVisitor(), null));
+					stmt.setCondition(ExprUtils.not(condition));
 					stmt.setThenStmt(elseStmt);
 					stmt.setElseStmt(thenStmt);
 				} else if (!isIf(thenStmt) && isIf(elseStmt)) {
@@ -59,7 +58,7 @@ public final class IfElseTransformer extends Transformer {
 				 * checking bitwise flags look worse.
 				 */
 				if (ExprUtils.isNot(condition)) {
-					stmt.setCondition(condition.accept(new NegateExprVisitor(), null));
+					stmt.setCondition(ExprUtils.not(condition));
 					stmt.setThenStmt(elseStmt);
 					stmt.setElseStmt(thenStmt);
 				}

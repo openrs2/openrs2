@@ -1,5 +1,7 @@
 package dev.openrs2.deob.ast.util;
 
+import com.github.javaparser.ast.expr.BinaryExpr;
+import com.github.javaparser.ast.expr.BooleanLiteralExpr;
 import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.IntegerLiteralExpr;
 import com.github.javaparser.ast.expr.LongLiteralExpr;
@@ -28,6 +30,45 @@ public final class ExprUtils {
 		} else {
 			throw new IllegalArgumentException();
 		}
+	}
+
+	// TODO(gpe): need to be careful about operator precedence/EnclosedExpr
+	public static Expression not(Expression expr) {
+		if (expr.isUnaryExpr()) {
+			var unary = expr.asUnaryExpr();
+			if (unary.getOperator() == UnaryExpr.Operator.LOGICAL_COMPLEMENT) {
+				return unary.getExpression().clone();
+			}
+		} else if (expr.isBinaryExpr()) {
+			var binary = expr.asBinaryExpr();
+
+			var left = binary.getLeft();
+			var right = binary.getRight();
+
+			switch (binary.getOperator()) {
+			case EQUALS:
+				return new BinaryExpr(left, right, BinaryExpr.Operator.NOT_EQUALS);
+			case NOT_EQUALS:
+				return new BinaryExpr(left, right, BinaryExpr.Operator.EQUALS);
+			case GREATER:
+				return new BinaryExpr(left, right, BinaryExpr.Operator.LESS_EQUALS);
+			case GREATER_EQUALS:
+				return new BinaryExpr(left, right, BinaryExpr.Operator.LESS);
+			case LESS:
+				return new BinaryExpr(left, right, BinaryExpr.Operator.GREATER_EQUALS);
+			case LESS_EQUALS:
+				return new BinaryExpr(left, right, BinaryExpr.Operator.GREATER);
+			case AND:
+				return new BinaryExpr(not(left), not(right), BinaryExpr.Operator.OR);
+			case OR:
+				return new BinaryExpr(not(left), not(right), BinaryExpr.Operator.AND);
+			}
+		} else if (expr.isBooleanLiteralExpr()) {
+			return new BooleanLiteralExpr(!expr.asBooleanLiteralExpr().getValue());
+		} else if (expr.isEnclosedExpr()) {
+			return not(expr.asEnclosedExpr().getInner());
+		}
+		return new UnaryExpr(expr.clone(), UnaryExpr.Operator.LOGICAL_COMPLEMENT);
 	}
 
 	private ExprUtils() {
