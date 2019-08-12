@@ -38,9 +38,11 @@ public final class AddSubTransformer extends Transformer {
 				/* x + -y => x - y */
 				expr.setOperator(BinaryExpr.Operator.MINUS);
 				expr.setRight(ExprUtils.negate(right));
-			} else if (op == BinaryExpr.Operator.PLUS && isNegative(left)) {
+			} else if (op == BinaryExpr.Operator.PLUS && isNegative(left) && !(ExprUtils.hasSideEffects(left) && ExprUtils.hasSideEffects(right))) {
 				/* -x + y => y - x */
-				// TODO(gpe): check for side effects before applying this transform
+				expr.setOperator(BinaryExpr.Operator.MINUS);
+				expr.setLeft(right.clone());
+				expr.setRight(ExprUtils.negate(left));
 			} else if (op == BinaryExpr.Operator.MINUS && isNegative(right)) {
 				/* x - -y => x + y */
 				expr.setOperator(BinaryExpr.Operator.PLUS);

@@ -71,6 +71,24 @@ public final class ExprUtils {
 		return new UnaryExpr(expr.clone(), UnaryExpr.Operator.LOGICAL_COMPLEMENT);
 	}
 
+	public static boolean hasSideEffects(Expression expr) {
+		if (expr.isLiteralExpr() || expr.isNameExpr() | expr.isFieldAccessExpr()) {
+			return false;
+		} else if (expr.isEnclosedExpr()) {
+			return hasSideEffects(expr.asEnclosedExpr().getInner());
+		} else if (expr.isUnaryExpr()) {
+			return hasSideEffects(expr.asUnaryExpr().getExpression());
+		} else if (expr.isBinaryExpr()) {
+			var binary = expr.asBinaryExpr();
+			return hasSideEffects(binary.getLeft()) || hasSideEffects(binary.getRight());
+		} else if (expr.isArrayAccessExpr()) {
+			var access = expr.asArrayAccessExpr();
+			return hasSideEffects(access.getName()) || hasSideEffects(access.getIndex());
+		}
+		// TODO(gpe): more cases
+		return true;
+	}
+
 	private ExprUtils() {
 		/* empty */
 	}
