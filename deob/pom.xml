@@ -11,7 +11,7 @@
   <artifactId>openrs2-deob</artifactId>
   <packaging>jar</packaging>
 
-  <name>OpenRS2 Deobfuscator</name>
+  <name>OpenRS2 Bytecode Deobfuscator</name>
 
   <properties>
     <openrs2.root>${project.parent.basedir}</openrs2.root>
