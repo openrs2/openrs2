@@ -6,7 +6,7 @@ import com.github.javaparser.ast.expr.IntegerLiteralExpr;
 import com.github.javaparser.ast.expr.UnaryExpr;
 import dev.openrs2.deob.ast.util.ExprUtils;
 
-public final class AddSubTransformer extends Transformer {
+public final class NegativeLiteralTransformer extends Transformer {
 	private static Expression negate(Expression expr) {
 		if (expr.isIntegerLiteralExpr()) {
 			return new IntegerLiteralExpr(-expr.asIntegerLiteralExpr().asInt());

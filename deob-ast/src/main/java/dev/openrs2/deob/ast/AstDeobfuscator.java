@@ -12,15 +12,15 @@ import com.github.javaparser.symbolsolver.resolution.typesolvers.JavaParserTypeS
 import com.github.javaparser.symbolsolver.resolution.typesolvers.ReflectionTypeSolver;
 import com.github.javaparser.utils.SourceRoot;
 import com.google.common.collect.ImmutableList;
-import dev.openrs2.deob.ast.transform.AddSubTransformer;
 import dev.openrs2.deob.ast.transform.BinaryExprOrderTransformer;
 import dev.openrs2.deob.ast.transform.ComplementTransformer;
 import dev.openrs2.deob.ast.transform.IfElseTransformer;
+import dev.openrs2.deob.ast.transform.NegativeLiteralTransformer;
 import dev.openrs2.deob.ast.transform.Transformer;
 
 public final class AstDeobfuscator {
 	private static final ImmutableList<Transformer> TRANSFORMERS = ImmutableList.of(
-		new AddSubTransformer(),
+		new NegativeLiteralTransformer(),
 		new ComplementTransformer(),
 		new IfElseTransformer(),
 		new BinaryExprOrderTransformer()
