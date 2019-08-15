@@ -324,6 +324,34 @@
       </modules>
     </profile>
     <profile>
+      <id>mac</id>
+      <activation>
+        <os>
+          <family>mac</family>
+        </os>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.github.maven-nar</groupId>
+            <artifactId>nar-maven-plugin</artifactId>
+            <configuration>
+              <c>
+                <options>
+                  <option>-x</option>
+                  <option>objective-c</option>
+                  <option>-Wall</option>
+                  <option>-Wextra</option>
+                  <option>-pedantic</option>
+                  <option>-Wno-unused-parameter</option>
+                </options>
+              </c>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
       <id>unix</id>
       <activation>
         <os>
