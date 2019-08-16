@@ -3,9 +3,9 @@ package dev.openrs2.deob.remap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableSet;
 import dev.openrs2.asm.MemberDesc;
 import dev.openrs2.asm.MemberRef;
 import dev.openrs2.asm.classpath.ClassMetadata;
@@ -20,21 +20,21 @@ import org.slf4j.LoggerFactory;
 public final class TypedRemapper extends Remapper {
 	private static final Logger logger = LoggerFactory.getLogger(TypedRemapper.class);
 
-	public static final Set<String> EXCLUDED_CLASSES = Set.of(
+	public static final ImmutableSet<String> EXCLUDED_CLASSES = ImmutableSet.of(
 		"client",
 		"jagex3/jagmisc/jagmisc",
 		"loader",
 		"unpack",
 		"unpackclass"
 	);
-	private static final Set<String> EXCLUDED_METHODS = Set.of(
+	private static final ImmutableSet<String> EXCLUDED_METHODS = ImmutableSet.of(
 		"<clinit>",
 		"<init>",
 		"main",
 		"providesignlink",
 		"quit"
 	);
-	private static final Set<String> EXCLUDED_FIELDS = Set.of(
+	private static final ImmutableSet<String> EXCLUDED_FIELDS = ImmutableSet.of(
 		"cache"
 	);
 	private static final int MAX_OBFUSCATED_NAME_LEN = 2;

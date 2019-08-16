@@ -1,8 +1,8 @@
 package dev.openrs2.deob.analysis;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import dev.openrs2.asm.InsnNodeUtils;
@@ -200,7 +200,7 @@ public final class IntInterpreter extends Interpreter<IntValue> {
 	public IntValue naryOperation(AbstractInsnNode insn, List<? extends IntValue> values) throws AnalyzerException {
 		var args = values.stream()
 			.map(IntValue::getBasicValue)
-			.collect(Collectors.toUnmodifiableList());
+			.collect(ImmutableList.toImmutableList());
 		var basicValue = basicInterpreter.naryOperation(insn, args);
 		if (basicValue == null) {
 			return null;

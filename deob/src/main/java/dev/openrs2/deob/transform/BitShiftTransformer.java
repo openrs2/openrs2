@@ -1,7 +1,6 @@
 package dev.openrs2.deob.transform;
 
-import java.util.Set;
-
+import com.google.common.collect.ImmutableSet;
 import dev.openrs2.asm.InsnMatcher;
 import dev.openrs2.asm.InsnNodeUtils;
 import dev.openrs2.asm.classpath.ClassPath;
@@ -16,7 +15,7 @@ public final class BitShiftTransformer extends Transformer {
 	private static final Logger logger = LoggerFactory.getLogger(BitShiftTransformer.class);
 
 	private static final InsnMatcher CONST_SHIFT_MATCHER = InsnMatcher.compile("(ICONST | BIPUSH | SIPUSH | LDC) (ISHL | ISHR | IUSHR | LSHL | LSHR | LUSHR)");
-	private static final Set<Integer> LONG_SHIFTS = Set.of(Opcodes.LSHL, Opcodes.LSHR, Opcodes.LUSHR);
+	private static final ImmutableSet<Integer> LONG_SHIFTS = ImmutableSet.of(Opcodes.LSHL, Opcodes.LSHR, Opcodes.LUSHR);
 
 	private int simplified;
 

@@ -1,12 +1,12 @@
 package dev.openrs2.asm;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.InsnList;
@@ -15,8 +15,8 @@ import org.objectweb.asm.util.Printer;
 
 public final class InsnMatcher {
 	private static final int PRIVATE_USE_AREA = 0xE000;
-	private static final Map<String, int[]> OPCODE_GROUPS = Map.ofEntries(
-		Map.entry("InsnNode", new int[] {
+	private static final ImmutableMap<String, int[]> OPCODE_GROUPS = ImmutableMap.<String, int[]>builder()
+		.put("InsnNode", new int[] {
 			Opcodes.NOP,
 			Opcodes.ACONST_NULL,
 			Opcodes.ICONST_M1,
@@ -124,13 +124,13 @@ public final class InsnMatcher {
 			Opcodes.ATHROW,
 			Opcodes.MONITORENTER,
 			Opcodes.MONITOREXIT
-		}),
-		Map.entry("IntInsnNode", new int[] {
+		})
+		.put("IntInsnNode", new int[] {
 			Opcodes.BIPUSH,
 			Opcodes.SIPUSH,
 			Opcodes.NEWARRAY
-		}),
-		Map.entry("VarInsnNode", new int[] {
+		})
+		.put("VarInsnNode", new int[] {
 			Opcodes.ILOAD,
 			Opcodes.LLOAD,
 			Opcodes.FLOAD,
@@ -142,29 +142,29 @@ public final class InsnMatcher {
 			Opcodes.DSTORE,
 			Opcodes.ASTORE,
 			Opcodes.RET
-		}),
-		Map.entry("TypeInsnNode", new int[] {
+		})
+		.put("TypeInsnNode", new int[] {
 			Opcodes.NEW,
 			Opcodes.ANEWARRAY,
 			Opcodes.CHECKCAST,
 			Opcodes.INSTANCEOF
-		}),
-		Map.entry("FieldInsnNode", new int[] {
+		})
+		.put("FieldInsnNode", new int[] {
 			Opcodes.GETSTATIC,
 			Opcodes.PUTSTATIC,
 			Opcodes.GETFIELD,
 			Opcodes.PUTFIELD
-		}),
-		Map.entry("MethodInsnNode", new int[] {
+		})
+		.put("MethodInsnNode", new int[] {
 			Opcodes.INVOKEVIRTUAL,
 			Opcodes.INVOKESPECIAL,
 			Opcodes.INVOKESTATIC,
 			Opcodes.INVOKEINTERFACE
-		}),
-		Map.entry("InvokeDynamicInsnNode", new int[] {
+		})
+		.put("InvokeDynamicInsnNode", new int[] {
 			Opcodes.INVOKEDYNAMIC
-		}),
-		Map.entry("JumpInsnNode", new int[] {
+		})
+		.put("JumpInsnNode", new int[] {
 			Opcodes.IFEQ,
 			Opcodes.IFNE,
 			Opcodes.IFLT,
@@ -183,23 +183,23 @@ public final class InsnMatcher {
 			Opcodes.JSR,
 			Opcodes.IFNULL,
 			Opcodes.IFNONNULL
-		}),
-		Map.entry("LdcInsnNode", new int[] {
+		})
+		.put("LdcInsnNode", new int[] {
 			Opcodes.LDC
-		}),
-		Map.entry("IincInsnNode", new int[] {
+		})
+		.put("IincInsnNode", new int[] {
 			Opcodes.IINC
-		}),
-		Map.entry("TableSwitchInsnNode", new int[] {
+		})
+		.put("TableSwitchInsnNode", new int[] {
 			Opcodes.TABLESWITCH
-		}),
-		Map.entry("LookupSwitchInsnNode", new int[] {
+		})
+		.put("LookupSwitchInsnNode", new int[] {
 			Opcodes.LOOKUPSWITCH
-		}),
-		Map.entry("MultiANewArrayInsnNode", new int[] {
+		})
+		.put("MultiANewArrayInsnNode", new int[] {
 			Opcodes.MULTIANEWARRAY
-		}),
-		Map.entry("ICONST", new int[] {
+		})
+		.put("ICONST", new int[] {
 			Opcodes.ICONST_M1,
 			Opcodes.ICONST_0,
 			Opcodes.ICONST_1,
@@ -208,7 +208,7 @@ public final class InsnMatcher {
 			Opcodes.ICONST_4,
 			Opcodes.ICONST_5
 		})
-	);
+		.build();
 
 	private static char opcodeToCodepoint(int opcode) {
 		return (char) (PRIVATE_USE_AREA + opcode);
@@ -295,19 +295,19 @@ public final class InsnMatcher {
 		this.pattern = pattern;
 	}
 
-	public Stream<List<AbstractInsnNode>> match(MethodNode method) {
+	public Stream<ImmutableList<AbstractInsnNode>> match(MethodNode method) {
 		return match(method.instructions);
 	}
 
-	public Stream<List<AbstractInsnNode>> match(InsnList list) {
-		Stream.Builder<List<AbstractInsnNode>> matches = Stream.builder();
+	public Stream<ImmutableList<AbstractInsnNode>> match(InsnList list) {
+		Stream.Builder<ImmutableList<AbstractInsnNode>> matches = Stream.builder();
 
 		var insns = createRealInsnList(list);
 		var matcher = pattern.matcher(createCodepointSeq(insns));
 		while (matcher.find()) {
 			var start = matcher.start();
 			var end = matcher.end();
-			matches.add(Collections.unmodifiableList(insns.subList(start, end)));
+			matches.add(ImmutableList.copyOf(insns.subList(start, end)));
 		}
 
 		return matches.build();

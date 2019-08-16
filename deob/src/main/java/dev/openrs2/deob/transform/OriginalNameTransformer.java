@@ -3,6 +3,7 @@ package dev.openrs2.deob.transform;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.collect.ImmutableList;
 import dev.openrs2.asm.transform.Transformer;
 import dev.openrs2.deob.annotation.OriginalArg;
 import dev.openrs2.deob.annotation.OriginalClass;
@@ -16,13 +17,13 @@ import org.objectweb.asm.tree.MethodNode;
 public final class OriginalNameTransformer extends Transformer {
 	private static AnnotationNode createOriginalClassAnnotation(String name) {
 		var annotation = new AnnotationNode(Type.getDescriptor(OriginalClass.class));
-		annotation.values = List.of("value", name);
+		annotation.values = ImmutableList.of("value", name);
 		return annotation;
 	}
 
 	private static AnnotationNode createOriginalMemberAnnotation(String owner, String name, String desc) {
 		var annotation = new AnnotationNode(Type.getDescriptor(OriginalMember.class));
-		annotation.values = List.of(
+		annotation.values = ImmutableList.of(
 			"owner", owner,
 			"name", name,
 			"descriptor", desc
@@ -32,7 +33,7 @@ public final class OriginalNameTransformer extends Transformer {
 
 	private static AnnotationNode createOriginalArgAnnotation(int index) {
 		var annotation = new AnnotationNode(Type.getDescriptor(OriginalArg.class));
-		annotation.values = List.of("value", index);
+		annotation.values = ImmutableList.of("value", index);
 		return annotation;
 	}
 

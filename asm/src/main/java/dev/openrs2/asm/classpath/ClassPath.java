@@ -1,13 +1,10 @@
 package dev.openrs2.asm.classpath;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import dev.openrs2.asm.MemberDesc;
 import dev.openrs2.asm.MemberRef;
 import dev.openrs2.util.collect.DisjointSet;
@@ -16,21 +13,21 @@ import org.objectweb.asm.tree.ClassNode;
 
 public final class ClassPath {
 	private final ClassLoader runtime;
-	private final List<Library> dependencies, libraries;
+	private final ImmutableList<Library> dependencies, libraries;
 	private final Map<String, ClassMetadata> cache = new HashMap<>();
 
-	public ClassPath(ClassLoader runtime, List<Library> dependencies, List<Library> libraries) {
+	public ClassPath(ClassLoader runtime, ImmutableList<Library> dependencies, ImmutableList<Library> libraries) {
 		this.runtime = runtime;
 		this.dependencies = dependencies;
 		this.libraries = libraries;
 	}
 
-	public List<Library> getLibraries() {
+	public ImmutableList<Library> getLibraries() {
 		return libraries;
 	}
 
-	public List<ClassMetadata> getLibraryClasses() {
-		var classes = new ArrayList<ClassMetadata>();
+	public ImmutableList<ClassMetadata> getLibraryClasses() {
+		var classes = ImmutableList.<ClassMetadata>builder();
 
 		for (var library : libraries) {
 			for (var clazz : library) {
@@ -38,7 +35,7 @@ public final class ClassPath {
 			}
 		}
 
-		return Collections.unmodifiableList(classes);
+		return classes.build();
 	}
 
 	public ClassMetadata get(String name) {
@@ -91,7 +88,7 @@ public final class ClassPath {
 
 	public DisjointSet<MemberRef> createInheritedFieldSets() {
 		var disjointSet = new ForestDisjointSet<MemberRef>();
-		var ancestorCache = new HashMap<ClassMetadata, Set<MemberDesc>>();
+		var ancestorCache = new HashMap<ClassMetadata, ImmutableSet<MemberDesc>>();
 
 		for (var library : libraries) {
 			for (var clazz : library) {
@@ -102,12 +99,12 @@ public final class ClassPath {
 		return disjointSet;
 	}
 
-	private Set<MemberDesc> populateInheritedFieldSets(Map<ClassMetadata, Set<MemberDesc>> ancestorCache, DisjointSet<MemberRef> disjointSet, ClassMetadata clazz) {
+	private ImmutableSet<MemberDesc> populateInheritedFieldSets(Map<ClassMetadata, ImmutableSet<MemberDesc>> ancestorCache, DisjointSet<MemberRef> disjointSet, ClassMetadata clazz) {
 		var ancestors = ancestorCache.get(clazz);
 		if (ancestors != null) {
 			return ancestors;
 		}
-		ancestors = new HashSet<>();
+		var ancestorsBuilder = ImmutableSet.<MemberDesc>builder();
 
 		var superClass = clazz.getSuperClass();
 		if (superClass != null) {
@@ -119,7 +116,7 @@ public final class ClassPath {
 				disjointSet.union(partition1, partition2);
 			}
 
-			ancestors.addAll(fields);
+			ancestorsBuilder.addAll(fields);
 		}
 
 		for (var superInterface : clazz.getSuperInterfaces()) {
@@ -131,22 +128,22 @@ public final class ClassPath {
 				disjointSet.union(partition1, partition2);
 			}
 
-			ancestors.addAll(fields);
+			ancestorsBuilder.addAll(fields);
 		}
 
 		for (var field : clazz.getFields()) {
 			disjointSet.add(new MemberRef(clazz.getName(), field));
-			ancestors.add(field);
+			ancestorsBuilder.add(field);
 		}
 
-		ancestors = Collections.unmodifiableSet(ancestors);
+		ancestors = ancestorsBuilder.build();
 		ancestorCache.put(clazz, ancestors);
 		return ancestors;
 	}
 
 	public DisjointSet<MemberRef> createInheritedMethodSets() {
 		var disjointSet = new ForestDisjointSet<MemberRef>();
-		var ancestorCache = new HashMap<ClassMetadata, Set<MemberDesc>>();
+		var ancestorCache = new HashMap<ClassMetadata, ImmutableSet<MemberDesc>>();
 
 		for (var library : libraries) {
 			for (var clazz : library) {
@@ -157,12 +154,12 @@ public final class ClassPath {
 		return disjointSet;
 	}
 
-	private Set<MemberDesc> populateInheritedMethodSets(Map<ClassMetadata, Set<MemberDesc>> ancestorCache, DisjointSet<MemberRef> disjointSet, ClassMetadata clazz) {
+	private ImmutableSet<MemberDesc> populateInheritedMethodSets(Map<ClassMetadata, ImmutableSet<MemberDesc>> ancestorCache, DisjointSet<MemberRef> disjointSet, ClassMetadata clazz) {
 		var ancestors = ancestorCache.get(clazz);
 		if (ancestors != null) {
 			return ancestors;
 		}
-		ancestors = new HashSet<>();
+		var ancestorsBuilder = ImmutableSet.<MemberDesc>builder();
 
 		var superClass = clazz.getSuperClass();
 		if (superClass != null) {
@@ -174,7 +171,7 @@ public final class ClassPath {
 				disjointSet.union(partition1, partition2);
 			}
 
-			ancestors.addAll(methods);
+			ancestorsBuilder.addAll(methods);
 		}
 
 		for (var superInterface : clazz.getSuperInterfaces()) {
@@ -186,15 +183,15 @@ public final class ClassPath {
 				disjointSet.union(partition1, partition2);
 			}
 
-			ancestors.addAll(methods);
+			ancestorsBuilder.addAll(methods);
 		}
 
 		for (var method : clazz.getMethods()) {
 			disjointSet.add(new MemberRef(clazz.getName(), method));
-			ancestors.add(method);
+			ancestorsBuilder.add(method);
 		}
 
-		ancestors = Collections.unmodifiableSet(ancestors);
+		ancestors = ancestorsBuilder.build();
 		ancestorCache.put(clazz, ancestors);
 		return ancestors;
 	}

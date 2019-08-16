@@ -1,8 +1,6 @@
 package dev.openrs2.asm.classpath;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
+import com.google.common.collect.ImmutableList;
 import dev.openrs2.asm.MemberDesc;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
@@ -42,24 +40,24 @@ public final class AsmClassMetadata extends ClassMetadata {
 	}
 
 	@Override
-	public List<ClassMetadata> getSuperInterfaces() {
+	public ImmutableList<ClassMetadata> getSuperInterfaces() {
 		return clazz.interfaces.stream()
 			.map(classPath::get)
-			.collect(Collectors.toUnmodifiableList());
+			.collect(ImmutableList.toImmutableList());
 	}
 
 	@Override
-	public List<MemberDesc> getFields() {
+	public ImmutableList<MemberDesc> getFields() {
 		return clazz.fields.stream()
 			.map(f -> new MemberDesc(f.name, f.desc))
-			.collect(Collectors.toUnmodifiableList());
+			.collect(ImmutableList.toImmutableList());
 	}
 
 	@Override
-	public List<MemberDesc> getMethods() {
+	public ImmutableList<MemberDesc> getMethods() {
 		return clazz.methods.stream()
 			.map(m -> new MemberDesc(m.name, m.desc))
-			.collect(Collectors.toUnmodifiableList());
+			.collect(ImmutableList.toImmutableList());
 	}
 
 	@Override

@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import com.google.common.collect.ImmutableList;
 import dev.openrs2.asm.classpath.ClassPath;
 import dev.openrs2.asm.classpath.Library;
 import dev.openrs2.asm.transform.Transformer;
@@ -102,9 +103,9 @@ public final class Deobfuscator {
 
 		/* bundle libraries together into a common classpath */
 		var runtime = ClassLoader.getPlatformClassLoader();
-		var classPath = new ClassPath(runtime, List.of(), List.of(client, loader, signLink, unpack, unpacker));
-		var glClassPath = new ClassPath(runtime, List.of(gl, glDri), List.of(glClient, glLoader, glSignLink, glUnpack, glUnpacker));
-		var unsignedClassPath = new ClassPath(runtime, List.of(), List.of(unsignedClient));
+		var classPath = new ClassPath(runtime, ImmutableList.of(), ImmutableList.of(client, loader, signLink, unpack, unpacker));
+		var glClassPath = new ClassPath(runtime, ImmutableList.of(gl, glDri), ImmutableList.of(glClient, glLoader, glSignLink, glUnpack, glUnpacker));
+		var unsignedClassPath = new ClassPath(runtime, ImmutableList.of(), ImmutableList.of(unsignedClient));
 
 		/* deobfuscate */
 		logger.info("Transforming client");

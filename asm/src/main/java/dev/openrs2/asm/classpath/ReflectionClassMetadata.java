@@ -2,9 +2,8 @@ package dev.openrs2.asm.classpath;
 
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
+import com.google.common.collect.ImmutableList;
 import dev.openrs2.asm.MemberDesc;
 import org.objectweb.asm.Type;
 
@@ -42,24 +41,24 @@ public final class ReflectionClassMetadata extends ClassMetadata {
 	}
 
 	@Override
-	public List<ClassMetadata> getSuperInterfaces() {
+	public ImmutableList<ClassMetadata> getSuperInterfaces() {
 		return Arrays.stream(clazz.getInterfaces())
 			.map(i -> classPath.get(i.getName().replace('.', '/')))
-			.collect(Collectors.toUnmodifiableList());
+			.collect(ImmutableList.toImmutableList());
 	}
 
 	@Override
-	public List<MemberDesc> getFields() {
+	public ImmutableList<MemberDesc> getFields() {
 		return Arrays.stream(clazz.getDeclaredFields())
 			.map(f -> new MemberDesc(f.getName(), Type.getDescriptor(f.getType())))
-			.collect(Collectors.toUnmodifiableList());
+			.collect(ImmutableList.toImmutableList());
 	}
 
 	@Override
-	public List<MemberDesc> getMethods() {
+	public ImmutableList<MemberDesc> getMethods() {
 		return Arrays.stream(clazz.getDeclaredMethods())
 			.map(m -> new MemberDesc(m.getName(), Type.getMethodDescriptor(m)))
-			.collect(Collectors.toUnmodifiableList());
+			.collect(ImmutableList.toImmutableList());
 	}
 
 	@Override
