@@ -15,19 +15,23 @@ import com.google.common.collect.ImmutableList;
 import dev.openrs2.deob.ast.transform.AddSubTransformer;
 import dev.openrs2.deob.ast.transform.BinaryExprOrderTransformer;
 import dev.openrs2.deob.ast.transform.ComplementTransformer;
+import dev.openrs2.deob.ast.transform.EncloseTransformer;
 import dev.openrs2.deob.ast.transform.IfElseTransformer;
 import dev.openrs2.deob.ast.transform.NegativeLiteralTransformer;
 import dev.openrs2.deob.ast.transform.TernaryTransformer;
 import dev.openrs2.deob.ast.transform.Transformer;
+import dev.openrs2.deob.ast.transform.UnencloseTransformer;
 
 public final class AstDeobfuscator {
 	private static final ImmutableList<Transformer> TRANSFORMERS = ImmutableList.of(
+		new UnencloseTransformer(),
 		new NegativeLiteralTransformer(),
 		new ComplementTransformer(),
 		new IfElseTransformer(),
 		new TernaryTransformer(),
 		new BinaryExprOrderTransformer(),
-		new AddSubTransformer()
+		new AddSubTransformer(),
+		new EncloseTransformer()
 	);
 
 	public static void main(String[] args) {
