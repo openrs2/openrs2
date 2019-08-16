@@ -14,6 +14,7 @@ import com.github.javaparser.utils.SourceRoot;
 import com.google.common.collect.ImmutableList;
 import dev.openrs2.deob.ast.transform.AddSubTransformer;
 import dev.openrs2.deob.ast.transform.BinaryExprOrderTransformer;
+import dev.openrs2.deob.ast.transform.BitMaskTransformer;
 import dev.openrs2.deob.ast.transform.ComplementTransformer;
 import dev.openrs2.deob.ast.transform.EncloseTransformer;
 import dev.openrs2.deob.ast.transform.IfElseTransformer;
@@ -31,6 +32,7 @@ public final class AstDeobfuscator {
 		new TernaryTransformer(),
 		new BinaryExprOrderTransformer(),
 		new AddSubTransformer(),
+		new BitMaskTransformer(),
 		new EncloseTransformer()
 	);
 
