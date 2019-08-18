@@ -12,6 +12,9 @@
   <packaging>jar</packaging>
 
   <name>OpenRS2 Bundler</name>
+  <description>A tool for patching the RuneScape client to allow it to connect
+    to an OpenRS2 server and improve compatibility with modern
+    JVMs.</description>
 
   <properties>
     <openrs2.root>${project.parent.basedir}</openrs2.root>

@@ -12,6 +12,7 @@
   <packaging>jar</packaging>
 
   <name>OpenRS2 Utilities</name>
+  <description>Common utility code used by all modules.</description>
 
   <properties>
     <openrs2.root>${project.parent.basedir}</openrs2.root>

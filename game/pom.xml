@@ -12,6 +12,8 @@
   <packaging>jar</packaging>
 
   <name>OpenRS2 Game Server</name>
+  <description>Reimplementation of the RuneScape game server
+    software.</description>
 
   <properties>
     <openrs2.root>${project.parent.basedir}</openrs2.root>

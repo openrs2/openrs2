@@ -12,6 +12,10 @@
   <packaging>jar</packaging>
 
   <name>OpenRS2 Bytecode Deobfuscator</name>
+  <description>A tool for performing bytecode-level deobfuscation of the
+    RuneScape client. It must be run before decompiling the client - some of the
+    transformations it performs are required for the decompiler to produce valid
+    output.</description>
 
   <properties>
     <openrs2.root>${project.parent.basedir}</openrs2.root>

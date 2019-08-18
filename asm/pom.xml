@@ -12,6 +12,8 @@
   <packaging>jar</packaging>
 
   <name>OpenRS2 ASM Utilities</name>
+  <description>Common utility code used for manipulating Java
+    bytecode with the ASM library.</description>
 
   <properties>
     <openrs2.root>${project.parent.basedir}</openrs2.root>
