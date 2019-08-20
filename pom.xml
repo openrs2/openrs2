@@ -343,6 +343,7 @@
                   <option>-Wall</option>
                   <option>-Wextra</option>
                   <option>-pedantic</option>
+                  <option>-Wno-int-to-void-pointer-cast</option>
                   <option>-Wno-unused-parameter</option>
                 </options>
               </c>
