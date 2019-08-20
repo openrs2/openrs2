@@ -748,26 +748,24 @@ JNIEXPORT void JNICALL Java_jaggl_context_setSwapInterval(JNIEnv *env, jclass cl
 JNIEXPORT jstring JNICALL Java_jaggl_context_getExtensionsString(JNIEnv *env, jclass cls) {
 	JAGGL_LOCK(env);
 
-	jstring extensions;
+	const char *extensions_str;
 
 #if defined(__unix__)
-	const char *extensions_str = glXQueryExtensionsString(jaggl_display, jaggl_visual_info->screen);
-	extensions = (*env)->NewStringUTF(env, extensions_str);
+	extensions_str = glXQueryExtensionsString(jaggl_display, jaggl_visual_info->screen);
 #elif defined(_WIN32)
 	if (jaggl_wglGetExtensionsStringEXT) {
-		const char *extensions_str = jaggl_wglGetExtensionsStringEXT();
-		extensions = (*env)->NewStringUTF(env, extensions_str);
+		extensions_str = jaggl_wglGetExtensionsStringEXT();
 	} else {
-		extensions = NULL;
+		extensions_str = "";
 	}
 #elif defined(__APPLE__) && defined(__MACH__)
-	extensions = (*env)->NewStringUTF(env, "");
+	extensions_str = "";
 #else
 #error Unsupported platform
 #endif
 
 	JAGGL_UNLOCK(env);
-	return extensions;
+	return (*env)->NewStringUTF(env, extensions_str);
 }
 
 JNIEXPORT jint JNICALL Java_jaggl_context_getAlphaBits(JNIEnv *env, jclass cls) {
