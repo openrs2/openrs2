@@ -43,6 +43,40 @@
 
   <profiles>
     <profile>
+      <id>mac</id>
+      <activation>
+        <os>
+          <family>mac</family>
+        </os>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.github.maven-nar</groupId>
+            <artifactId>nar-maven-plugin</artifactId>
+            <configuration>
+              <linker>
+                <sysLibs>
+                  <sysLib>
+                    <type>framework</type>
+                    <name>Cocoa</name>
+                  </sysLib>
+                  <sysLib>
+                    <type>framework</type>
+                    <name>OpenGL</name>
+                  </sysLib>
+                  <sysLib>
+                    <type>framework</type>
+                    <name>QuartzCore</name>
+                  </sysLib>
+                </sysLibs>
+              </linker>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
       <id>unix</id>
       <activation>
         <os>

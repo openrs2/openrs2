@@ -8,6 +8,12 @@
 #include <GL/gl.h>
 #include <GL/glext.h>
 #include <GL/wglext.h>
+#elif defined(__APPLE__) && defined(__MACH__)
+#include <Cocoa/Cocoa.h>
+#include <OpenGL/OpenGL.h>
+#include <OpenGL/gl.h>
+#include <QuartzCore/QuartzCore.h>
+#include <dlfcn.h>
 #else
 #error Unsupported platform
 #endif
@@ -19,8 +25,14 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+#if defined(__APPLE__) && defined(__MACH__)
+#define _JAGGL_JAWT_VERSION (JAWT_VERSION_1_4 | JAWT_MACOSX_USE_CALAYER)
+#else
+#define _JAGGL_JAWT_VERSION JAWT_VERSION_1_4
+#endif
+
 #define _JAGGL_GET(env) \
-	JAWT awt = { .version = JAWT_VERSION_1_4 }; \
+	JAWT awt = { .version = (jint) _JAGGL_JAWT_VERSION }; \
 	bool awt_valid = JAWT_GetAWT(env, &awt);
 
 #define _JAGGL_GET_AND_LOCK(env) \
@@ -88,6 +100,14 @@
 #define JAGGL_UNLOCK(env)
 
 #define JAGGL_PROC_ADDR(name) wglGetProcAddress(name)
+#elif defined(__APPLE__) && defined(__MACH__)
+#define JAGGL_FORCE_LOCK(env) _JAGGL_GET(env)
+#define JAGGL_FORCE_UNLOCK(env)
+
+#define JAGGL_LOCK(env)
+#define JAGGL_UNLOCK(env)
+
+#define JAGGL_PROC_ADDR(name) jaggl_proc_addr(name)
 #else
 #error Unsupported platform
 #endif
@@ -104,10 +124,191 @@ static HINSTANCE jaggl_instance;
 static HWND jaggl_window;
 static HDC jaggl_device;
 static HGLRC jaggl_context;
+#elif defined(__APPLE__) && defined(__MACH__)
+@interface JagGLLayer : CAOpenGLLayer
+{
+	@private
+	GLuint framebuffer;
+	GLuint renderbuffer_color, renderbuffer_depth;
+	GLint framebuffer_width, framebuffer_height;
+}
+@end
+
+static CGLContextObj jaggl_onscreen_context;
+static CGLContextObj jaggl_context;
+static CGLPixelFormatObj jaggl_pix;
+static NSWindow *jaggl_window;
+static NSView *jaggl_view;
+static NSOpenGLContext *jaggl_context_appkit;
+static JagGLLayer *jaggl_layer;
+static bool jaggl_double_buffered;
 #else
 #error Unsupported platform
 #endif
 static int jaggl_alpha_bits;
+
+#if defined(__APPLE__) && defined(__MACH__)
+typedef void (*PFNGLACTIVETEXTUREPROC)(GLenum texture);
+typedef void (*PFNGLACTIVETEXTUREARBPROC)(GLenum texture);
+typedef void (*PFNGLATTACHOBJECTARBPROC)(GLhandleARB containerObj, GLhandleARB obj);
+typedef void (*PFNGLBINDBUFFERARBPROC)(GLenum target, GLuint buffer);
+typedef void (*PFNGLBINDFRAMEBUFFEREXTPROC)(GLenum target, GLuint framebuffer);
+typedef void (*PFNGLBINDPROGRAMARBPROC)(GLenum target, GLuint program);
+typedef void (*PFNGLBINDRENDERBUFFEREXTPROC)(GLenum target, GLuint renderbuffer);
+typedef void (*PFNGLBUFFERDATAARBPROC)(GLenum target, GLsizeiptrARB size, const void *data, GLenum usage);
+typedef void (*PFNGLBUFFERSUBDATAARBPROC)(GLenum target, GLintptrARB offset, GLsizeiptrARB size, const void *data);
+typedef GLenum (*PFNGLCHECKFRAMEBUFFERSTATUSEXTPROC)(GLenum target);
+typedef void (*PFNGLCLIENTACTIVETEXTUREPROC)(GLenum texture);
+typedef void (*PFNGLCLIENTACTIVETEXTUREARBPROC)(GLenum texture);
+typedef void (*PFNGLCOMPILESHADERARBPROC)(GLhandleARB shaderObj);
+typedef GLhandleARB (*PFNGLCREATEPROGRAMOBJECTARBPROC)(void);
+typedef GLhandleARB (*PFNGLCREATESHADEROBJECTARBPROC)(GLenum shaderType);
+typedef void (*PFNGLDELETEBUFFERSARBPROC)(GLsizei n, const GLuint *buffers);
+typedef void (*PFNGLDELETEFRAMEBUFFERSEXTPROC)(GLsizei n, const GLuint *framebuffers);
+typedef void (*PFNGLDELETEOBJECTARBPROC)(GLhandleARB obj);
+typedef void (*PFNGLDELETERENDERBUFFERSEXTPROC)(GLsizei n, const GLuint *renderbuffers);
+typedef void (*PFNGLDETACHOBJECTARBPROC)(GLhandleARB containerObj, GLhandleARB attachedObj);
+typedef void (*PFNGLFRAMEBUFFERRENDERBUFFEREXTPROC)(GLenum target, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer);
+typedef void (*PFNGLFRAMEBUFFERTEXTURE2DEXTPROC)(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level);
+typedef void (*PFNGLGENBUFFERSARBPROC)(GLsizei n, GLuint *buffers);
+typedef void (*PFNGLGENFRAMEBUFFERSEXTPROC)(GLsizei n, GLuint *framebuffers);
+typedef void (*PFNGLGENPROGRAMSARBPROC)(GLsizei n, GLuint *programs);
+typedef void (*PFNGLGENRENDERBUFFERSEXTPROC)(GLsizei n, GLuint *renderbuffers);
+typedef void (*PFNGLGETINFOLOGARBPROC)(GLhandleARB obj, GLsizei maxLength, GLsizei *length, GLcharARB *infoLog);
+typedef void (*PFNGLGETOBJECTPARAMETERIVARBPROC)(GLhandleARB obj, GLenum pname, GLint *params);
+typedef GLint (*PFNGLGETUNIFORMLOCATIONPROC)(GLuint program, const GLchar *name);
+typedef void (*PFNGLLINKPROGRAMARBPROC)(GLhandleARB programObj);
+typedef void (*PFNGLMULTITEXCOORD2FPROC)(GLenum target, GLfloat s, GLfloat t);
+typedef void (*PFNGLMULTITEXCOORD2FARBPROC)(GLenum target, GLfloat s, GLfloat t);
+typedef void (*PFNGLMULTITEXCOORD2IPROC)(GLenum target, GLint s, GLint t);
+typedef void (*PFNGLMULTITEXCOORD2IARBPROC)(GLenum target, GLint s, GLint t);
+typedef void (*PFNGLPOINTPARAMETERFARBPROC)(GLenum pname, GLfloat param);
+typedef void (*PFNGLPOINTPARAMETERFVARBPROC)(GLenum pname, const GLfloat *params);
+typedef void (*PFNGLPROGRAMLOCALPARAMETER4FARBPROC)(GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+typedef void (*PFNGLPROGRAMLOCALPARAMETER4FVARBPROC)(GLenum target, GLuint index, const GLfloat *params);
+typedef void (*PFNGLPROGRAMSTRINGARBPROC)(GLenum target, GLenum format, GLsizei len, const void *string);
+typedef void (*PFNGLRENDERBUFFERSTORAGEEXTPROC)(GLenum target, GLenum internalformat, GLsizei width, GLsizei height);
+typedef void (*PFNGLSHADERSOURCEARBPROC)(GLhandleARB shaderObj, GLsizei count, const GLcharARB **string, const GLint *length);
+typedef void (*PFNGLTEXIMAGE3DPROC)(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
+typedef void (*PFNGLUNIFORM1IARBPROC)(GLint location, GLint v0);
+typedef void (*PFNGLUNIFORM3FARBPROC)(GLint location, GLfloat v0, GLfloat v1, GLfloat v2);
+typedef void (*PFNGLUSEPROGRAMOBJECTARBPROC)(GLhandleARB programObj);
+
+static void *jaggl_proc_addr(const char *name) {
+	static void *handle;
+
+	if (!handle) {
+		handle = dlopen("/System/Library/Frameworks/OpenGL.framework/Versions/Current/OpenGL", RTLD_LAZY);
+		if (!handle) {
+			return NULL;
+		}
+	}
+
+	return dlsym(handle, name);
+}
+
+@implementation JagGLLayer
+- (id)init {
+	self = [super init];
+	if (self) {
+		self.asynchronous = YES;
+		self.opaque = YES;
+		self.needsDisplayOnBoundsChange = YES;
+		self.autoresizingMask = kCALayerWidthSizable | kCALayerHeightSizable;
+	}
+	return self;
+}
+
+- (void)genFramebuffer {
+	framebuffer_width = (GLint) self.bounds.size.width;
+	framebuffer_height = (GLint) self.bounds.size.height;
+
+	glGenFramebuffersEXT(1, &framebuffer);
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, framebuffer);
+
+	glGenRenderbuffersEXT(1, &renderbuffer_color);
+	glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, renderbuffer_color);
+	glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL_RGB, framebuffer_width, framebuffer_height);
+	glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_RENDERBUFFER_EXT, renderbuffer_color);
+
+	glGenRenderbuffersEXT(1, &renderbuffer_depth);
+	glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, renderbuffer_depth);
+	glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL_DEPTH_COMPONENT24, framebuffer_width, framebuffer_height);
+	glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, GL_RENDERBUFFER_EXT, renderbuffer_depth);
+
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+}
+
+- (void)deleteFramebuffer {
+	glDeleteRenderbuffersEXT(1, &renderbuffer_depth);
+	glDeleteRenderbuffersEXT(1, &renderbuffer_color);
+	glDeleteFramebuffersEXT(1, &framebuffer);
+}
+
+- (void)blit {
+	/* TODO(gpe): I think we need locking here and in drawInCGLContext */
+	if (!framebuffer) {
+		return;
+	}
+
+	glBindFramebufferEXT(GL_READ_FRAMEBUFFER_EXT, 0);
+	glBindFramebufferEXT(GL_DRAW_FRAMEBUFFER_EXT, framebuffer);
+
+	glBlitFramebufferEXT(0, 0, framebuffer_width, framebuffer_height, 0, 0, framebuffer_width, framebuffer_height, GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+}
+
+- (BOOL)canDrawInCGLContext:(CGLContextObj)context
+                pixelFormat:(CGLPixelFormatObj)pixelFormat
+               forLayerTime:(CFTimeInterval)layerTime
+                displayTime:(const CVTimeStamp *)displayTime {
+	return YES;
+}
+
+- (void)drawInCGLContext:(CGLContextObj)context
+             pixelFormat:(CGLPixelFormatObj)pixelFormat
+            forLayerTime:(CFTimeInterval)layerTime
+             displayTime:(const CVTimeStamp *)displayTime {
+	CGLSetCurrentContext(context);
+
+	GLint width = (GLint) self.bounds.size.width;
+	GLint height = (GLint) self.bounds.size.height;
+
+	/* TODO(gpe): improve resize support (fix corruption, do we need to resize the NSView/NSWindow?) */
+	if (width != framebuffer_width || height != framebuffer_height) {
+		[self deleteFramebuffer];
+		[self genFramebuffer];
+	}
+
+	glBindFramebufferEXT(GL_READ_FRAMEBUFFER_EXT, framebuffer);
+	glBlitFramebufferEXT(0, 0, framebuffer_width, framebuffer_height, 0, 0, framebuffer_width, framebuffer_height, GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+	glBindFramebufferEXT(GL_READ_FRAMEBUFFER_EXT, 0);
+
+	[super drawInCGLContext:context pixelFormat:pixelFormat forLayerTime:layerTime displayTime:displayTime];
+}
+
+- (CGLPixelFormatObj)copyCGLPixelFormatForDisplayMask:(uint32_t)mask {
+	return jaggl_pix;
+}
+
+- (void)releaseCGLPixelFormat:(CGLPixelFormatObj)pix {
+	/* empty */
+}
+
+- (CGLContextObj)copyCGLContextForPixelFormat:(CGLPixelFormatObj)pix {
+	CGLSetCurrentContext(jaggl_onscreen_context);
+	[self genFramebuffer];
+	return jaggl_onscreen_context;
+}
+
+- (void)releaseCGLContext:(CGLContextObj)context {
+	CGLSetCurrentContext(context);
+	[self deleteFramebuffer];
+	CGLClearDrawable(context);
+}
+@end
+#endif
 
 static PFNGLACTIVETEXTUREPROC jaggl_glActiveTexture;
 static PFNGLACTIVETEXTUREARBPROC jaggl_glActiveTextureARB;
@@ -160,6 +361,8 @@ static PFNGLXSWAPINTERVALSGIPROC jaggl_glXSwapIntervalSGI;
 static PFNWGLCHOOSEPIXELFORMATARBPROC jaggl_wglChoosePixelFormatARB;
 static PFNWGLGETEXTENSIONSSTRINGEXTPROC jaggl_wglGetExtensionsStringEXT;
 static PFNWGLSWAPINTERVALEXTPROC jaggl_wglSwapIntervalEXT;
+#elif defined(__APPLE__) && defined(__MACH__)
+/* CGL doesn't have extensions */
 #else
 #error Unsupported platform
 #endif
@@ -216,6 +419,8 @@ static void jaggl_init_proc_table(void) {
 	jaggl_wglChoosePixelFormatARB = (PFNWGLCHOOSEPIXELFORMATARBPROC) JAGGL_PROC_ADDR("wglChoosePixelFormatARB");
 	jaggl_wglGetExtensionsStringEXT = (PFNWGLGETEXTENSIONSSTRINGEXTPROC) JAGGL_PROC_ADDR("wglGetExtensionsStringEXT");
 	jaggl_wglSwapIntervalEXT = (PFNWGLSWAPINTERVALEXTPROC) JAGGL_PROC_ADDR("wglSwapIntervalEXT");
+#elif defined(__APPLE__) && defined(__MACH__)
+	/* CGL doesn't have extensions */
 #else
 #error Unsupported platform
 #endif
@@ -333,6 +538,24 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_createContext(JNIEnv *env, jclass 
 	}
 
 	jaggl_context = wglCreateContext(jaggl_device);
+#elif defined(__APPLE__) && defined(__MACH__)
+	CGLContextObj current = CGLGetCurrentContext();
+	if (current) {
+		CGLSetCurrentContext(NULL);
+	}
+
+	if (jaggl_context) {
+		CGLDestroyContext(jaggl_context);
+		jaggl_context = NULL;
+	}
+
+	CGLCreateContext(jaggl_pix, jaggl_onscreen_context, &jaggl_context);
+	if (jaggl_context) {
+		dispatch_async(dispatch_get_main_queue(), ^{
+			jaggl_context_appkit = [[NSOpenGLContext alloc] initWithCGLContextObj:jaggl_context];
+			jaggl_context_appkit.view = jaggl_view;
+		});
+	}
 #else
 #error Unsupported platform
 #endif
@@ -355,6 +578,11 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_releaseContext(JNIEnv *env, jclass
 	HGLRC current = wglGetCurrentContext();
 	if (current) {
 		result = (jboolean) wglMakeCurrent(jaggl_device, NULL);
+	}
+#elif defined(__APPLE__) && defined(__MACH__)
+	CGLContextObj current = CGLGetCurrentContext();
+	if (current) {
+		result = (jboolean) (CGLSetCurrentContext(NULL) == kCGLNoError);
 	}
 #else
 #error Unsupported platform
@@ -401,6 +629,50 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_destroy(JNIEnv *env, jclass cls) {
 	}
 
 	jaggl_window = NULL;
+#elif defined(__APPLE__) && defined(__MACH__)
+	CGLContextObj current = CGLGetCurrentContext();
+	if (current) {
+		CGLSetCurrentContext(NULL);
+	}
+
+	dispatch_sync(dispatch_get_main_queue(), ^{
+		if (jaggl_context_appkit) {
+			[jaggl_context_appkit clearDrawable];
+			[jaggl_context_appkit release];
+			jaggl_context_appkit = NULL;
+		}
+
+		if (jaggl_view) {
+			[jaggl_view release];
+			jaggl_view = NULL;
+		}
+
+		if (jaggl_window) {
+			[jaggl_window release];
+			jaggl_window = NULL;
+		}
+
+		if (jaggl_layer) {
+			[jaggl_layer removeFromSuperlayer];
+			[jaggl_layer release];
+			jaggl_layer = NULL;
+		}
+	});
+
+	if (jaggl_onscreen_context) {
+		CGLDestroyContext(jaggl_onscreen_context);
+		jaggl_onscreen_context = NULL;
+	}
+
+	if (jaggl_context) {
+		CGLDestroyContext(jaggl_context);
+		jaggl_context = NULL;
+	}
+
+	if (jaggl_pix) {
+		CGLDestroyPixelFormat(jaggl_pix);
+		jaggl_pix = NULL;
+	}
 #else
 #error Unsupported platform
 #endif
@@ -422,6 +694,14 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_swapBuffers(JNIEnv *env, jclass cl
 	}
 #elif defined(_WIN32)
 	result = (jboolean) SwapBuffers(jaggl_device);
+#elif defined(__APPLE__) && defined(__MACH__)
+	if (jaggl_double_buffered) {
+		[jaggl_context_appkit flushBuffer];
+	} else {
+		glFlush();
+	}
+
+	[jaggl_layer blit];
 #else
 #error Unsupported platform
 #endif
@@ -435,6 +715,8 @@ JNIEXPORT jint JNICALL Java_jaggl_context_getLastError(JNIEnv *env, jclass cls) 
 	return 0;
 #elif defined(_WIN32)
 	return (jint) GetLastError();
+#elif defined(__APPLE__) && defined(__MACH__)
+	return 0;
 #else
 #error Unsupported platform
 #endif
@@ -451,6 +733,11 @@ JNIEXPORT void JNICALL Java_jaggl_context_setSwapInterval(JNIEnv *env, jclass cl
 	if (jaggl_wglSwapIntervalEXT) {
 		jaggl_wglSwapIntervalEXT((int) interval);
 	}
+#elif defined(__APPLE__) && defined(__MACH__)
+	GLint param = (GLint) interval;
+	CGLSetParameter(jaggl_context, kCGLCPSwapInterval, &param);
+
+	/* TODO(gpe): what about jaggl_onscreen_context? */
 #else
 #error Unsupported platform
 #endif
@@ -473,6 +760,8 @@ JNIEXPORT jstring JNICALL Java_jaggl_context_getExtensionsString(JNIEnv *env, jc
 	} else {
 		extensions = NULL;
 	}
+#elif defined(__APPLE__) && defined(__MACH__)
+	extensions = (*env)->NewStringUTF(env, "");
 #else
 #error Unsupported platform
 #endif
@@ -708,6 +997,78 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_choosePixelFormat1(JNIEnv *env, jc
 	jaggl_alpha_bits = pfd.cAlphaBits;
 
 	result = JNI_TRUE;
+#elif defined(__APPLE__) && defined(__MACH__)
+	id<JAWT_SurfaceLayers> platformInfo = (id<JAWT_SurfaceLayers>) dsi->platformInfo;
+	if (!platformInfo) {
+		goto dsi_free;
+	}
+
+	for (int i = 0; i < 2; i++) {
+		bool double_buffered = i == 0;
+
+		CGLPixelFormatAttribute attribs[] = {
+			kCGLPFAColorSize,
+			24,
+			kCGLPFAAlphaSize,
+			(CGLPixelFormatAttribute) alpha_bits,
+			kCGLPFADepthSize,
+			24,
+			kCGLPFAMinimumPolicy,
+			(CGLPixelFormatAttribute) NULL, /* for kCGLPFADoubleBuffer */
+			(CGLPixelFormatAttribute) NULL, /* for kCGLPFAMultisample */
+			(CGLPixelFormatAttribute) NULL, /* for kCGLPFASamples */
+			(CGLPixelFormatAttribute) NULL, /* for num_samples */
+			(CGLPixelFormatAttribute) NULL
+		};
+
+		int j = 7;
+		if (double_buffered) {
+			attribs[j++] = kCGLPFADoubleBuffer;
+		}
+
+		if (num_samples) {
+			attribs[j++] = kCGLPFAMultisample;
+			attribs[j++] = kCGLPFASamples;
+			attribs[j++] = (CGLPixelFormatAttribute) num_samples;
+		}
+
+		GLint npix;
+		CGLChoosePixelFormat(attribs, &jaggl_pix, &npix);
+		if (!jaggl_pix) {
+			continue;
+		}
+
+		jaggl_double_buffered = double_buffered;
+		jaggl_alpha_bits = alpha_bits;
+
+		CGLCreateContext(jaggl_pix, NULL, &jaggl_onscreen_context);
+		if (!jaggl_onscreen_context) {
+			CGLDestroyPixelFormat(jaggl_pix);
+			goto dsi_free;
+		}
+
+		dispatch_sync(dispatch_get_main_queue(), ^{
+			NSRect frame = NSMakeRect(0, 0, dsi->bounds.width, dsi->bounds.height);
+			jaggl_view = [[NSView alloc] initWithFrame:frame];
+
+			jaggl_window = [[NSWindow alloc] initWithContentRect:frame styleMask:NSWindowStyleMaskBorderless backing:NSBackingStoreBuffered defer:NO];
+			jaggl_window.contentView = jaggl_view;
+
+			jaggl_layer = [[JagGLLayer alloc] init];
+			platformInfo.layer = jaggl_layer;
+
+			/*
+			 * XXX(gpe): Not sure, but this might only work if the Canvas fills the
+			 * entire Frame. I'm not investigating further as this is good enough
+			 * for the client.
+			 */
+			jaggl_layer.frame = frame;
+			[jaggl_layer setNeedsDisplay];
+		});
+
+		result = JNI_TRUE;
+		goto dsi_free;
+	}
 #else
 #error Unsupported platform
 #endif
@@ -754,6 +1115,18 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_makeCurrent1(JNIEnv *env, jclass c
 	wglMakeCurrent(jaggl_device, NULL);
 
 	if (!wglMakeCurrent(jaggl_device, jaggl_context)) {
+		goto done;
+	}
+#elif defined(__APPLE__) && defined(__MACH__)
+	CGLContextObj current = CGLGetCurrentContext();
+	if (jaggl_context == current) {
+		result = JNI_TRUE;
+		goto done;
+	}
+
+	CGLSetCurrentContext(NULL);
+
+	if (CGLSetCurrentContext(jaggl_context) != kCGLNoError) {
 		goto done;
 	}
 #else
