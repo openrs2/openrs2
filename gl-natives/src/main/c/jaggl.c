@@ -759,6 +759,7 @@ JNIEXPORT jstring JNICALL Java_jaggl_context_getExtensionsString(JNIEnv *env, jc
 		extensions_str = "";
 	}
 #elif defined(__APPLE__) && defined(__MACH__)
+	/* CGL doesn't have extensions */
 	extensions_str = "";
 #else
 #error Unsupported platform
