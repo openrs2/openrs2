@@ -20,12 +20,16 @@ public final class Decompiler implements Closeable {
 
 	private static Path getDestination(String archive) {
 		archive = archive.replaceAll("(?:_gl)?[.]jar$", "");
-		if (archive.equals("runescape")) {
+		switch (archive) {
+		case "runescape":
 			archive = "client";
-		} else if (archive.equals("jaggl")) {
+			break;
+		case "jaggl":
 			archive = "gl";
-		} else if (archive.equals("jaggl_dri")) {
+			break;
+		case "jaggl_dri":
 			archive = "gl-dri";
+			break;
 		}
 		return Paths.get("nonfree").resolve(archive).resolve("src/main/java");
 	}
