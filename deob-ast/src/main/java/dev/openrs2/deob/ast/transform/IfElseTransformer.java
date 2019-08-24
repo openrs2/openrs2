@@ -20,13 +20,13 @@ public final class IfElseTransformer extends Transformer {
 
 	private static Statement getIf(Statement stmt) {
 		if (stmt.isIfStmt()) {
-			return stmt;
+			return stmt.clone();
 		} else if (stmt.isBlockStmt()) {
 			NodeList<Statement> stmts = stmt.asBlockStmt().getStatements();
 			if (stmts.size() == 1) {
 				Statement head = stmts.get(0);
 				if (head.isIfStmt()) {
-					return head;
+					return head.clone();
 				}
 			}
 		}
@@ -42,8 +42,8 @@ public final class IfElseTransformer extends Transformer {
 				var thenStmt = stmt.getThenStmt();
 				if (isIf(thenStmt) && !isIf(elseStmt)) {
 					stmt.setCondition(ExprUtils.not(condition));
-					stmt.setThenStmt(elseStmt);
-					stmt.setElseStmt(thenStmt);
+					stmt.setThenStmt(elseStmt.clone());
+					stmt.setElseStmt(thenStmt.clone());
 				} else if (!isIf(thenStmt) && isIf(elseStmt)) {
 					/*
 					 * Don't consider any more conditions for swapping the
@@ -59,8 +59,8 @@ public final class IfElseTransformer extends Transformer {
 				 */
 				if (ExprUtils.isNot(condition)) {
 					stmt.setCondition(ExprUtils.not(condition));
-					stmt.setThenStmt(elseStmt);
-					stmt.setElseStmt(thenStmt);
+					stmt.setThenStmt(elseStmt.clone());
+					stmt.setElseStmt(thenStmt.clone());
 				}
 			});
 		});
