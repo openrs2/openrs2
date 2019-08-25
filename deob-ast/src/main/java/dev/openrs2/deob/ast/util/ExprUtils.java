@@ -32,7 +32,6 @@ public final class ExprUtils {
 		}
 	}
 
-	// TODO(gpe): need to be careful about operator precedence/EnclosedExpr
 	public static Expression not(Expression expr) {
 		if (expr.isUnaryExpr()) {
 			var unary = expr.asUnaryExpr();
@@ -65,8 +64,6 @@ public final class ExprUtils {
 			}
 		} else if (expr.isBooleanLiteralExpr()) {
 			return new BooleanLiteralExpr(!expr.asBooleanLiteralExpr().getValue());
-		} else if (expr.isEnclosedExpr()) {
-			return not(expr.asEnclosedExpr().getInner());
 		}
 		return new UnaryExpr(expr.clone(), UnaryExpr.Operator.LOGICAL_COMPLEMENT);
 	}
@@ -92,8 +89,6 @@ public final class ExprUtils {
 	public static boolean hasSideEffects(Expression expr) {
 		if (expr.isLiteralExpr() || expr.isNameExpr() | expr.isFieldAccessExpr()) {
 			return false;
-		} else if (expr.isEnclosedExpr()) {
-			return hasSideEffects(expr.asEnclosedExpr().getInner());
 		} else if (expr.isUnaryExpr()) {
 			return hasSideEffects(expr.asUnaryExpr().getExpression());
 		} else if (expr.isBinaryExpr()) {
