@@ -54,9 +54,7 @@ public final class IfElseTransformer extends Transformer {
 					return;
 				}
 
-				/*
-				 * Prefer fewer NOTs in the if condition.
-				 */
+				/* Prefer fewer NOTs in the if condition. */
 				var notCondition = ExprUtils.not(condition);
 				if (ExprUtils.countNots(notCondition) < ExprUtils.countNots(condition)) {
 					stmt.setCondition(notCondition);
