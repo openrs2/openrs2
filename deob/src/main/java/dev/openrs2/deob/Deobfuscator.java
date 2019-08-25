@@ -10,6 +10,7 @@ import com.google.common.collect.ImmutableList;
 import dev.openrs2.asm.classpath.ClassPath;
 import dev.openrs2.asm.classpath.Library;
 import dev.openrs2.asm.transform.Transformer;
+import dev.openrs2.bundler.transform.RightClickTransformer;
 import dev.openrs2.deob.remap.ClassNamePrefixer;
 import dev.openrs2.deob.remap.TypedRemapper;
 import dev.openrs2.deob.transform.BitShiftTransformer;
@@ -30,6 +31,7 @@ public final class Deobfuscator {
 	private static final Logger logger = LoggerFactory.getLogger(Deobfuscator.class);
 
 	private static final List<Transformer> TRANSFORMERS = List.of(
+		new RightClickTransformer(),
 		new OpaquePredicateTransformer(),
 		new ExceptionTracingTransformer(),
 		new BitShiftTransformer(),
