@@ -1,9 +1,11 @@
 package dev.openrs2.deob.ast.transform;
 
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.stmt.IfStmt;
 import com.github.javaparser.ast.stmt.Statement;
 import dev.openrs2.deob.ast.util.ExprUtils;
+import dev.openrs2.deob.ast.util.NodeUtils;
 
 public final class IfElseTransformer extends Transformer {
 	private static boolean isIf(Statement stmt) {
@@ -64,7 +66,7 @@ public final class IfElseTransformer extends Transformer {
 			});
 		});
 
-		unit.findAll(IfStmt.class).forEach(stmt -> {
+		NodeUtils.walk(unit, Node.TreeTraversal.POSTORDER, IfStmt.class, stmt -> {
 			stmt.getElseStmt().ifPresent(elseStmt -> {
 				if (isIf(elseStmt)) {
 					stmt.setElseStmt(getIf(elseStmt));
