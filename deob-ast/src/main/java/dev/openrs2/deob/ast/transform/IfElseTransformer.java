@@ -2,6 +2,7 @@ package dev.openrs2.deob.ast.transform;
 
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
+import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.stmt.IfStmt;
 import com.github.javaparser.ast.stmt.Statement;
 import dev.openrs2.deob.ast.util.ExprUtils;
@@ -58,7 +59,13 @@ public final class IfElseTransformer extends Transformer {
 				var notCondition = ExprUtils.not(condition);
 				if (ExprUtils.countNots(notCondition) < ExprUtils.countNots(condition)) {
 					stmt.setCondition(notCondition);
-					stmt.setThenStmt(elseStmt.clone());
+					if (elseStmt.isIfStmt()) {
+						var block = new BlockStmt();
+						block.getStatements().add(elseStmt.clone());
+						stmt.setThenStmt(block);
+					} else {
+						stmt.setThenStmt(elseStmt.clone());
+					}
 					stmt.setElseStmt(thenStmt.clone());
 				}
 			});
