@@ -3,8 +3,10 @@ package dev.openrs2.deob.ast.transform;
 import java.util.Optional;
 
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.expr.EnclosedExpr;
 import com.github.javaparser.ast.expr.Expression;
+import dev.openrs2.deob.ast.util.NodeUtils;
 
 public final class EncloseTransformer extends Transformer {
 	private enum Associativity {
@@ -143,7 +145,7 @@ public final class EncloseTransformer extends Transformer {
 
 	@Override
 	public void transform(CompilationUnit unit) {
-		unit.findAll(Expression.class).forEach(expr -> {
+		NodeUtils.walk(unit, Node.TreeTraversal.POSTORDER, Expression.class, expr -> {
 			if (expr.isArrayAccessExpr()) {
 				var accessExpr = expr.asArrayAccessExpr();
 				encloseLeft(expr, accessExpr.getName());

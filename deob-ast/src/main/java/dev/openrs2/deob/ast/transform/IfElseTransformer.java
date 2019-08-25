@@ -37,7 +37,7 @@ public final class IfElseTransformer extends Transformer {
 
 	@Override
 	public void transform(CompilationUnit unit) {
-		unit.findAll(IfStmt.class).forEach(stmt -> {
+		NodeUtils.walk(unit, Node.TreeTraversal.POSTORDER, IfStmt.class, stmt -> {
 			stmt.getElseStmt().ifPresent(elseStmt -> {
 				var condition = stmt.getCondition();
 				var thenStmt = stmt.getThenStmt();

@@ -3,11 +3,13 @@ package dev.openrs2.deob.ast.transform;
 import java.util.Optional;
 
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.expr.BinaryExpr;
 import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.IntegerLiteralExpr;
 import com.github.javaparser.ast.expr.UnaryExpr;
 import dev.openrs2.deob.ast.util.ExprUtils;
+import dev.openrs2.deob.ast.util.NodeUtils;
 
 public final class ComplementTransformer extends Transformer {
 	private static boolean isComplement(Expression expr) {
@@ -50,7 +52,7 @@ public final class ComplementTransformer extends Transformer {
 
 	@Override
 	public void transform(CompilationUnit unit) {
-		unit.findAll(BinaryExpr.class).forEach(expr -> {
+		NodeUtils.walk(unit, Node.TreeTraversal.POSTORDER, BinaryExpr.class, expr -> {
 			complement(expr.getOperator()).ifPresent(op -> {
 				var left = expr.getLeft();
 				var right = expr.getRight();

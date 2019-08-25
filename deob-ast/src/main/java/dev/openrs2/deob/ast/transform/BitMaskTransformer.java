@@ -1,10 +1,12 @@
 package dev.openrs2.deob.ast.transform;
 
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.expr.BinaryExpr;
 import com.github.javaparser.ast.expr.IntegerLiteralExpr;
 import com.google.common.collect.ImmutableSet;
 import dev.openrs2.deob.ast.util.ExprUtils;
+import dev.openrs2.deob.ast.util.NodeUtils;
 
 public final class BitMaskTransformer extends Transformer {
 	private static final ImmutableSet<BinaryExpr.Operator> SHIFT_OPS = ImmutableSet.of(
@@ -20,7 +22,7 @@ public final class BitMaskTransformer extends Transformer {
 
 	@Override
 	public void transform(CompilationUnit unit) {
-		unit.findAll(BinaryExpr.class).forEach(expr -> {
+		NodeUtils.walk(unit, Node.TreeTraversal.POSTORDER, BinaryExpr.class, expr -> {
 			var shiftOp = expr.getOperator();
 			var left = expr.getLeft();
 			var shamtExpr = expr.getRight();
