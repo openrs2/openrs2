@@ -80,8 +80,10 @@ public final class ExprUtils {
 			count++;
 		}
 
-		for (Expression child : expr.getChildNodesByType(Expression.class)) {
-			count += countNots(child);
+		for (Expression child : expr.findAll(Expression.class)) {
+			if (child != expr) {
+				count += countNots(child);
+			}
 		}
 
 		return count;
