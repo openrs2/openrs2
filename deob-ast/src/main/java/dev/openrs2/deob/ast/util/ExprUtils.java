@@ -46,17 +46,17 @@ public final class ExprUtils {
 
 			switch (binary.getOperator()) {
 			case EQUALS:
-				return new BinaryExpr(left, right, BinaryExpr.Operator.NOT_EQUALS);
+				return new BinaryExpr(left.clone(), right.clone(), BinaryExpr.Operator.NOT_EQUALS);
 			case NOT_EQUALS:
-				return new BinaryExpr(left, right, BinaryExpr.Operator.EQUALS);
+				return new BinaryExpr(left.clone(), right.clone(), BinaryExpr.Operator.EQUALS);
 			case GREATER:
-				return new BinaryExpr(left, right, BinaryExpr.Operator.LESS_EQUALS);
+				return new BinaryExpr(left.clone(), right.clone(), BinaryExpr.Operator.LESS_EQUALS);
 			case GREATER_EQUALS:
-				return new BinaryExpr(left, right, BinaryExpr.Operator.LESS);
+				return new BinaryExpr(left.clone(), right.clone(), BinaryExpr.Operator.LESS);
 			case LESS:
-				return new BinaryExpr(left, right, BinaryExpr.Operator.GREATER_EQUALS);
+				return new BinaryExpr(left.clone(), right.clone(), BinaryExpr.Operator.GREATER_EQUALS);
 			case LESS_EQUALS:
-				return new BinaryExpr(left, right, BinaryExpr.Operator.GREATER);
+				return new BinaryExpr(left.clone(), right.clone(), BinaryExpr.Operator.GREATER);
 			case AND:
 				return new BinaryExpr(not(left), not(right), BinaryExpr.Operator.OR);
 			case OR:
