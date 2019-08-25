@@ -14,7 +14,8 @@
   <name>OpenRS2 Decompiler</name>
   <description>A thin wrapper around OpenRS2's fork of Fernflower that sets the
     standard options required to decompile the RuneScape client and its
-    dependencies.</description>
+    dependencies.
+  </description>
 
   <properties>
     <openrs2.root>${project.parent.basedir}</openrs2.root>

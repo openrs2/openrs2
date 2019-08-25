@@ -13,7 +13,8 @@
 
   <name>OpenRS2 AST Deobfuscator</name>
   <description>A tool for performing AST-level deobfuscation of the RuneScape
-    client. It may be run after decompiling the client.</description>
+    client. It may be run after decompiling the client.
+  </description>
 
   <properties>
     <openrs2.root>${project.parent.basedir}</openrs2.root>

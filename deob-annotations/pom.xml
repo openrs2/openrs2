@@ -13,7 +13,8 @@
 
   <name>OpenRS2 Deobfuscator Annotations</name>
   <description>Annotations inserted by the deobfuscator to track the original
-    names and descriptors of classes, methods and fields.</description>
+    names and descriptors of classes, methods and fields.
+  </description>
 
   <properties>
     <openrs2.root>${project.parent.basedir}</openrs2.root>

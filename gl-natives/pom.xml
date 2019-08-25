@@ -15,7 +15,8 @@
   <description>Reimplementation of the jaggl native library, which implements
     OpenGL bindings for Windows (WGL), macOS (CGL) and UNIX (GLX) systems. This
     implementation supports modern versions of Java on macOS, as it is backed
-    by a CALayer instead of an NSView.</description>
+    by a CALayer instead of an NSView.
+  </description>
 
   <properties>
     <openrs2.root>${project.parent.basedir}</openrs2.root>

@@ -15,7 +15,8 @@
   <description>Reimplementation of the jagmisc native library, which implements
     a high-precision timer for Windows systems. It is queried from a thread
     pinned to a single processor core to work around hardware
-    bugs.</description>
+    bugs.
+  </description>
 
   <properties>
     <openrs2.root>${project.parent.basedir}</openrs2.root>
