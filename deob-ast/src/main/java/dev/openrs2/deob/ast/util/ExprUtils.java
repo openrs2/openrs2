@@ -71,6 +71,22 @@ public final class ExprUtils {
 		return new UnaryExpr(expr.clone(), UnaryExpr.Operator.LOGICAL_COMPLEMENT);
 	}
 
+	public static int countNots(Expression expr) {
+		int count = 0;
+
+		if (expr.isUnaryExpr() && expr.asUnaryExpr().getOperator() == UnaryExpr.Operator.LOGICAL_COMPLEMENT) {
+			count++;
+		} else if (expr.isBinaryExpr() && expr.asBinaryExpr().getOperator() == BinaryExpr.Operator.NOT_EQUALS) {
+			count++;
+		}
+
+		for (Expression child : expr.getChildNodesByType(Expression.class)) {
+			count += countNots(child);
+		}
+
+		return count;
+	}
+
 	public static boolean hasSideEffects(Expression expr) {
 		if (expr.isLiteralExpr() || expr.isNameExpr() | expr.isFieldAccessExpr()) {
 			return false;

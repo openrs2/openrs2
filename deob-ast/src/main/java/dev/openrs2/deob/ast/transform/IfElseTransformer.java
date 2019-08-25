@@ -54,11 +54,11 @@ public final class IfElseTransformer extends Transformer {
 				}
 
 				/*
-				 * Prefer if (a) over if (!a). We don't swap != as it makes
-				 * checking bitwise flags look worse.
+				 * Prefer fewer NOTs in the if condition.
 				 */
-				if (ExprUtils.isNot(condition)) {
-					stmt.setCondition(ExprUtils.not(condition));
+				var notCondition = ExprUtils.not(condition);
+				if (ExprUtils.countNots(notCondition) < ExprUtils.countNots(condition)) {
+					stmt.setCondition(notCondition);
 					stmt.setThenStmt(elseStmt.clone());
 					stmt.setElseStmt(thenStmt.clone());
 				}
