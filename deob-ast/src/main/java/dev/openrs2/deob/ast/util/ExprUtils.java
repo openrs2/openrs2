@@ -16,10 +16,6 @@ public final class ExprUtils {
 		return new LongLiteralExpr(Long.toString(value).concat("L"));
 	}
 
-	public static boolean isNot(Expression expr) {
-		return expr.isUnaryExpr() && expr.asUnaryExpr().getOperator() == UnaryExpr.Operator.LOGICAL_COMPLEMENT;
-	}
-
 	public static Expression negate(Expression expr) {
 		if (expr.isUnaryExpr() && expr.asUnaryExpr().getOperator() == UnaryExpr.Operator.MINUS) {
 			return expr.asUnaryExpr().getExpression().clone();
