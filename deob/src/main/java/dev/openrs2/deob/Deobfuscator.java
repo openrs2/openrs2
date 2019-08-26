@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 
 import com.google.common.collect.ImmutableList;
 import dev.openrs2.asm.classpath.ClassPath;
@@ -31,7 +30,7 @@ import org.slf4j.LoggerFactory;
 public final class Deobfuscator {
 	private static final Logger logger = LoggerFactory.getLogger(Deobfuscator.class);
 
-	private static final List<Transformer> TRANSFORMERS = List.of(
+	private static final ImmutableList<Transformer> TRANSFORMERS = ImmutableList.of(
 		new HostCheckTransformer(),
 		new RightClickTransformer(),
 		new OpaquePredicateTransformer(),
