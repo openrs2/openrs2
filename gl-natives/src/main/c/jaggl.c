@@ -1057,9 +1057,8 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_choosePixelFormat1(JNIEnv *env, jc
 			platformInfo.layer = jaggl_layer;
 
 			/*
-			 * XXX(gpe): Not sure, but this might only work if the Canvas fills the
-			 * entire Frame. I'm not investigating further as this is good enough
-			 * for the client.
+			 * TODO(gpe): this doesn't work in resizable mode, where the Canvas
+			 * only fills part of the Frame.
 			 */
 			jaggl_layer.frame = frame;
 			[jaggl_layer setNeedsDisplay];
