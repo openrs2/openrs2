@@ -21,33 +21,22 @@
     <openrs2.root>${project.parent.basedir}</openrs2.root>
   </properties>
 
-  <profiles>
-    <profile>
-      <id>unix</id>
-      <activation>
-        <os>
-          <family>unix</family>
-          <name>!mac os x</name>
-        </os>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>com.github.maven-nar</groupId>
-            <artifactId>nar-maven-plugin</artifactId>
-            <configuration>
-              <linker>
-                <sysLibs>
-                  <sysLib>
-                    <type>shared</type>
-                    <name>dl</name>
-                  </sysLib>
-                </sysLibs>
-              </linker>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.github.maven-nar</groupId>
+        <artifactId>nar-maven-plugin</artifactId>
+        <configuration>
+          <linker>
+            <sysLibs>
+              <sysLib>
+                <type>shared</type>
+                <name>dl</name>
+              </sysLib>
+            </sysLibs>
+          </linker>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
