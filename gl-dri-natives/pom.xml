@@ -16,6 +16,12 @@
     implements the DRI hack to support the open-source Mesa drivers on UNIX
     systems.
   </description>
+  <licenses>
+    <license>
+      <name>GNU Lesser General Public License v3</name>
+      <url>https://www.gnu.org/licenses/lgpl-3.0.txt</url>
+    </license>
+  </licenses>
 
   <properties>
     <openrs2.root>${project.parent.basedir}</openrs2.root>

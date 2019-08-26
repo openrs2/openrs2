@@ -17,6 +17,12 @@
     implementation supports modern versions of Java on macOS, as it is backed
     by a CALayer instead of an NSView.
   </description>
+  <licenses>
+    <license>
+      <name>GNU Lesser General Public License v3</name>
+      <url>https://www.gnu.org/licenses/lgpl-3.0.txt</url>
+    </license>
+  </licenses>
 
   <properties>
     <openrs2.root>${project.parent.basedir}</openrs2.root>

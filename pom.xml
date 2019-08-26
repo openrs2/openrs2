@@ -14,6 +14,12 @@
   </description>
   <url>https://www.openrs2.dev/</url>
   <inceptionYear>2019</inceptionYear>
+  <licenses>
+    <license>
+      <name>GNU General Public License v3</name>
+      <url>https://www.gnu.org/licenses/gpl-3.0.txt</url>
+    </license>
+  </licenses>
 
   <modules>
     <module>asm</module>
