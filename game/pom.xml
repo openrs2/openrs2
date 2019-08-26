@@ -12,8 +12,8 @@
   <packaging>jar</packaging>
 
   <name>OpenRS2 Game Server</name>
-  <description>Reimplementation of the RuneScape game server
-    software.
+  <description>
+    Reimplementation of the RuneScape game server software.
   </description>
 
   <properties>

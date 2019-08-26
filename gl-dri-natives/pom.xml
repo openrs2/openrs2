@@ -12,9 +12,9 @@
   <packaging>nar</packaging>
 
   <name>OpenRS2 GL DRI Natives</name>
-  <description>Reimplementation of the jaggl_dri native library, which
-    implements the DRI hack to support the open-source Mesa drivers on UNIX
-    systems.
+  <description>
+    Reimplementation of the jaggl_dri native library, which implements the DRI
+    hack to support the open-source Mesa drivers on UNIX systems.
   </description>
   <licenses>
     <license>

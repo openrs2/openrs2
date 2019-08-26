@@ -8,9 +8,10 @@
   <packaging>pom</packaging>
 
   <name>OpenRS2</name>
-  <description>OpenRS2 is an open-source multiplayer game server and suite of
-    associated tools. It is compatible with build 550 of the RuneScape client,
-    which was released in mid-2009.
+  <description>
+    OpenRS2 is an open-source multiplayer game server and suite of associated
+    tools. It is compatible with build 550 of the RuneScape client, which was
+    released in mid-2009.
   </description>
   <url>https://www.openrs2.dev/</url>
   <inceptionYear>2019</inceptionYear>

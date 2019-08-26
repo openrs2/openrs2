@@ -12,8 +12,9 @@
   <packaging>jar</packaging>
 
   <name>OpenRS2 Deobfuscator Annotations</name>
-  <description>Annotations inserted by the deobfuscator to track the original
-    names and descriptors of classes, methods and fields.
+  <description>
+    Annotations inserted by the deobfuscator to track the original names and
+    descriptors of classes, methods and fields.
   </description>
 
   <properties>

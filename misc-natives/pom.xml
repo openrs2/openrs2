@@ -12,10 +12,10 @@
   <packaging>nar</packaging>
 
   <name>OpenRS2 Misc Natives</name>
-  <description>Reimplementation of the jagmisc native library, which implements
-    a high-precision timer for Windows systems. It is queried from a thread
-    pinned to a single processor core to work around hardware
-    bugs.
+  <description>
+    Reimplementation of the jagmisc native library, which implements a
+    high-precision timer for Windows systems. It is queried from a thread
+    pinned to a single processor core to work around hardware bugs.
   </description>
   <licenses>
     <license>
