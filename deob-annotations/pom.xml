@@ -16,6 +16,12 @@
     Annotations inserted by the deobfuscator to track the original names and
     descriptors of classes, methods and fields.
   </description>
+  <licenses>
+    <license>
+      <name>GNU Lesser General Public License v3.0</name>
+      <url>https://www.gnu.org/licenses/lgpl-3.0.txt</url>
+    </license>
+  </licenses>
 
   <properties>
     <openrs2.root>${project.parent.basedir}</openrs2.root>

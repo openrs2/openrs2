@@ -128,10 +128,10 @@ Unless otherwise stated, all code and data is licensed under version 3.0 (and
 only version 3.0) of the [GNU General Public License][gpl]. The full terms are
 available in the `COPYING` file.
 
-The `gl-natives`, `gl-dri-natives` and `misc-natives` modules are instead
-licensed under version 3.0 (and only version 3.0) of the [GNU Lesser General
-Public License][lgpl]. The full terms are available in the `COPYING.LESSER`
-file in each module's directory.
+The `deob-annotations`, `gl-natives`, `gl-dri-natives` and `misc-natives`
+modules are instead licensed under version 3.0 (and only version 3.0) of the
+[GNU Lesser General Public License][lgpl]. The full terms are available in the
+`COPYING.LESSER` file in each module's directory.
 
 ## Copyright
 
