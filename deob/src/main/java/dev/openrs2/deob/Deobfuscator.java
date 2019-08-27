@@ -12,7 +12,6 @@ import dev.openrs2.asm.transform.Transformer;
 import dev.openrs2.bundler.transform.HostCheckTransformer;
 import dev.openrs2.bundler.transform.RightClickTransformer;
 import dev.openrs2.deob.remap.PrefixRemapper;
-import dev.openrs2.deob.remap.TypedRemapper;
 import dev.openrs2.deob.transform.BitShiftTransformer;
 import dev.openrs2.deob.transform.BitwiseOpTransformer;
 import dev.openrs2.deob.transform.CanvasTransformer;
@@ -23,6 +22,7 @@ import dev.openrs2.deob.transform.ExceptionTracingTransformer;
 import dev.openrs2.deob.transform.FieldOrderTransformer;
 import dev.openrs2.deob.transform.OpaquePredicateTransformer;
 import dev.openrs2.deob.transform.OriginalNameTransformer;
+import dev.openrs2.deob.transform.RemapTransformer;
 import org.objectweb.asm.tree.analysis.AnalyzerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +41,7 @@ public final class Deobfuscator {
 		new CanvasTransformer(),
 		new FieldOrderTransformer(),
 		new BitwiseOpTransformer(),
+		new RemapTransformer(),
 		new DummyArgTransformer(),
 		new DummyLocalTransformer()
 	);
@@ -130,12 +131,6 @@ public final class Deobfuscator {
 			logger.info("Running transformer {}", transformer.getClass().getSimpleName());
 			transformer.transform(unsignedClassPath);
 		}
-
-		/* remap all class, method and field names */
-		logger.info("Remapping");
-		classPath.remap(TypedRemapper.create(classPath));
-		glClassPath.remap(TypedRemapper.create(glClassPath));
-		unsignedClassPath.remap(TypedRemapper.create(unsignedClassPath));
 
 		/* write output jars */
 		logger.info("Writing output jars");
