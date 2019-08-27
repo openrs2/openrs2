@@ -13,6 +13,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Multimap;
 import dev.openrs2.asm.InsnNodeUtils;
 import dev.openrs2.asm.MemberRef;
+import dev.openrs2.asm.StackMetadata;
 import dev.openrs2.asm.classpath.ClassPath;
 import dev.openrs2.asm.transform.Transformer;
 import dev.openrs2.deob.analysis.IntInterpreter;
@@ -20,6 +21,7 @@ import dev.openrs2.deob.analysis.IntValue;
 import dev.openrs2.util.collect.DisjointSet;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
+import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.JumpInsnNode;
 import org.objectweb.asm.tree.MethodInsnNode;
@@ -162,12 +164,13 @@ public final class DummyArgTransformer extends Transformer {
 	private final Multimap<ArgRef, IntValue> argValues = HashMultimap.create();
 	private final Map<DisjointSet.Partition<MemberRef>, ImmutableSet<Integer>[]> constArgs = new HashMap<>();
 	private DisjointSet<MemberRef> inheritedMethodSets;
-	private int branchesSimplified;
+	private int branchesSimplified, constantsInlined;
 
 	@Override
 	protected void preTransform(ClassPath classPath) {
 		inheritedMethodSets = classPath.createInheritedMethodSets();
 		branchesSimplified = 0;
+		constantsInlined = 0;
 	}
 
 	@Override
@@ -189,6 +192,7 @@ public final class DummyArgTransformer extends Transformer {
 
 		var alwaysTakenBranches = new ArrayList<JumpInsnNode>();
 		var neverTakenBranches = new ArrayList<JumpInsnNode>();
+		var constInsns = new HashMap<AbstractInsnNode, Integer>();
 
 		for (var i = 0; i < frames.length; i++) {
 			var frame = frames[i];
@@ -256,6 +260,30 @@ public final class DummyArgTransformer extends Transformer {
 					break;
 				}
 				break;
+			default:
+				if (InsnNodeUtils.hasSideEffects(insn) || InsnNodeUtils.isIntConstant(insn)) {
+					continue;
+				}
+
+				if (StackMetadata.get(insn).getPushes() != 1) {
+					continue;
+				}
+
+				var nextInsn = InsnNodeUtils.nextReal(insn);
+				if (nextInsn == null) {
+					continue;
+				}
+
+				var nextInsnIndex = method.instructions.indexOf(nextInsn);
+				var nextFrame = frames[nextInsnIndex];
+
+				value = nextFrame.getStack(nextFrame.getStackSize() - 1);
+				if (!value.isSingleConstant()) {
+					continue;
+				}
+
+				constInsns.put(insn, value.getIntValue());
+				break;
 			}
 		}
 
@@ -269,6 +297,19 @@ public final class DummyArgTransformer extends Transformer {
 		for (var insn : neverTakenBranches) {
 			if (InsnNodeUtils.deleteSimpleExpression(method.instructions, insn)) {
 				branchesSimplified++;
+				changed = true;
+			}
+		}
+
+		for (var entry : constInsns.entrySet()) {
+			var insn = entry.getKey();
+			if (!method.instructions.contains(insn)) {
+				continue;
+			}
+
+			var replacement = InsnNodeUtils.createIntConstant(entry.getValue());
+			if (InsnNodeUtils.replaceSimpleExpression(method.instructions, insn, replacement)) {
+				constantsInlined++;
 				changed = true;
 			}
 		}
@@ -302,6 +343,6 @@ public final class DummyArgTransformer extends Transformer {
 
 	@Override
 	protected void postTransform(ClassPath classPath) {
-		logger.info("Simplified {} dummy branches", branchesSimplified);
+		logger.info("Simplified {} dummy branches and inlined {} constants", branchesSimplified, constantsInlined);
 	}
 }
