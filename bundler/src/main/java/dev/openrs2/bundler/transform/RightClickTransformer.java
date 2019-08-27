@@ -9,7 +9,6 @@ import org.objectweb.asm.tree.InsnList;
 import org.objectweb.asm.tree.InsnNode;
 import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
-import org.objectweb.asm.tree.analysis.AnalyzerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,12 +18,12 @@ public final class RightClickTransformer extends Transformer {
 	private int metaDownCalls;
 
 	@Override
-	protected void preTransform(ClassPath classPath) throws AnalyzerException {
+	protected void preTransform(ClassPath classPath) {
 		metaDownCalls = 0;
 	}
 
 	@Override
-	protected boolean transformCode(ClassNode clazz, MethodNode method) throws AnalyzerException {
+	protected boolean transformCode(ClassNode clazz, MethodNode method) {
 		for (var it = method.instructions.iterator(); it.hasNext(); ) {
 			var insn = it.next();
 			if (insn.getOpcode() != Opcodes.INVOKEVIRTUAL) {
@@ -59,7 +58,7 @@ public final class RightClickTransformer extends Transformer {
 	}
 
 	@Override
-	protected void postTransform(ClassPath classPath) throws AnalyzerException {
+	protected void postTransform(ClassPath classPath) {
 		logger.info("Replaced {} isMetaDown calls with getModifiersEx", metaDownCalls);
 	}
 }

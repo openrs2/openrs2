@@ -9,7 +9,6 @@ import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.InsnNode;
 import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
-import org.objectweb.asm.tree.analysis.AnalyzerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,12 +20,12 @@ public final class HostCheckTransformer extends Transformer {
 	private int hostChecks;
 
 	@Override
-	protected void preTransform(ClassPath classPath) throws AnalyzerException {
+	protected void preTransform(ClassPath classPath) {
 		hostChecks = 0;
 	}
 
 	@Override
-	protected boolean transformCode(ClassNode clazz, MethodNode method) throws AnalyzerException {
+	protected boolean transformCode(ClassNode clazz, MethodNode method) {
 		if (Type.getReturnType(method.desc).getSort() != Type.BOOLEAN) {
 			return false;
 		}
@@ -84,7 +83,7 @@ public final class HostCheckTransformer extends Transformer {
 	}
 
 	@Override
-	protected void postTransform(ClassPath classPath) throws AnalyzerException {
+	protected void postTransform(ClassPath classPath) {
 		logger.info("Removed {} host checks", hostChecks);
 	}
 }

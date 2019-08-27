@@ -8,7 +8,6 @@ import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.VarInsnNode;
-import org.objectweb.asm.tree.analysis.AnalyzerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,12 +33,12 @@ public final class DummyLocalTransformer extends Transformer {
 	private int localsRemoved;
 
 	@Override
-	protected void preTransform(ClassPath classPath) throws AnalyzerException {
+	protected void preTransform(ClassPath classPath) {
 		localsRemoved = 0;
 	}
 
 	@Override
-	protected boolean transformCode(ClassNode clazz, MethodNode method) throws AnalyzerException {
+	protected boolean transformCode(ClassNode clazz, MethodNode method) {
 		/*
 		 * XXX(gpe): this is primitive (ideally we'd do a proper data flow
 		 * analysis, but we'd need to do it in reverse and ASM only supports
@@ -77,7 +76,7 @@ public final class DummyLocalTransformer extends Transformer {
 	}
 
 	@Override
-	protected void postTransform(ClassPath classPath) throws AnalyzerException {
+	protected void postTransform(ClassPath classPath) {
 		logger.info("Removed {} dummy local variables", localsRemoved);
 	}
 }

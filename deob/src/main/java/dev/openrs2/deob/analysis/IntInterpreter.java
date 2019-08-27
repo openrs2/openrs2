@@ -79,7 +79,7 @@ public final class IntInterpreter extends Interpreter<IntValue> {
 	}
 
 	@Override
-	public IntValue copyOperation(AbstractInsnNode insn, IntValue value) throws AnalyzerException {
+	public IntValue copyOperation(AbstractInsnNode insn, IntValue value) {
 		return value;
 	}
 
