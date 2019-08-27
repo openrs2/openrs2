@@ -19,7 +19,7 @@ import dev.openrs2.deob.transform.CanvasTransformer;
 import dev.openrs2.deob.transform.ClassForNameTransformer;
 import dev.openrs2.deob.transform.CounterTransformer;
 import dev.openrs2.deob.transform.DummyLocalTransformer;
-import dev.openrs2.deob.transform.DummyTransformer;
+import dev.openrs2.deob.transform.DummyArgTransformer;
 import dev.openrs2.deob.transform.ExceptionTracingTransformer;
 import dev.openrs2.deob.transform.FieldOrderTransformer;
 import dev.openrs2.deob.transform.OpaquePredicateTransformer;
@@ -41,7 +41,7 @@ public final class Deobfuscator {
 		new CanvasTransformer(),
 		new FieldOrderTransformer(),
 		new BitwiseOpTransformer(),
-		new DummyTransformer(),
+		new DummyArgTransformer(),
 		new DummyLocalTransformer()
 	);
 

@@ -29,8 +29,8 @@ import org.objectweb.asm.tree.analysis.AnalyzerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class DummyTransformer extends Transformer {
-	private static final Logger logger = LoggerFactory.getLogger(DummyTransformer.class);
+public final class DummyArgTransformer extends Transformer {
+	private static final Logger logger = LoggerFactory.getLogger(DummyArgTransformer.class);
 
 	private static final class ArgRef {
 		private final DisjointSet.Partition<MemberRef> method;
