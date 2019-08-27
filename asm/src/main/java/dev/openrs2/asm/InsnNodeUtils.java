@@ -115,6 +115,7 @@ public final class InsnNodeUtils {
 	public static boolean hasSideEffects(AbstractInsnNode insn) {
 		var opcode = insn.getOpcode();
 		switch (opcode) {
+		case -1:
 		case Opcodes.NOP:
 		case Opcodes.ACONST_NULL:
 		case Opcodes.ICONST_M1:

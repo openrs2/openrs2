@@ -32,6 +32,7 @@ public final class StackMetadata {
 	public static StackMetadata get(AbstractInsnNode insn) {
 		var opcode = insn.getOpcode();
 		switch (opcode) {
+		case -1:
 		case Opcodes.NOP:
 			return NONE;
 		case Opcodes.ACONST_NULL:
