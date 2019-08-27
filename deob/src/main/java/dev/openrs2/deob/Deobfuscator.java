@@ -11,7 +11,7 @@ import dev.openrs2.asm.classpath.Library;
 import dev.openrs2.asm.transform.Transformer;
 import dev.openrs2.bundler.transform.HostCheckTransformer;
 import dev.openrs2.bundler.transform.RightClickTransformer;
-import dev.openrs2.deob.remap.ClassNamePrefixer;
+import dev.openrs2.deob.remap.PrefixRemapper;
 import dev.openrs2.deob.remap.TypedRemapper;
 import dev.openrs2.deob.transform.BitShiftTransformer;
 import dev.openrs2.deob.transform.BitwiseOpTransformer;
@@ -101,10 +101,10 @@ public final class Deobfuscator {
 
 		/* prefix remaining loader/unpacker classes (to avoid conflicts when we rename in the same classpath as the client) */
 		logger.info("Prefixing loader and unpacker class names");
-		ClassNamePrefixer.addPrefix(loader, "loader_");
-		ClassNamePrefixer.addPrefix(glLoader, "loader_");
-		ClassNamePrefixer.addPrefix(unpacker, "unpacker_");
-		ClassNamePrefixer.addPrefix(glUnpacker, "unpacker_");
+		loader.remap(PrefixRemapper.create(loader, "loader_"));
+		glLoader.remap(PrefixRemapper.create(glLoader, "loader_"));
+		unpacker.remap(PrefixRemapper.create(unpacker, "unpacker_"));
+		glUnpacker.remap(PrefixRemapper.create(glUnpacker, "unpacker_"));
 
 		/* bundle libraries together into a common classpath */
 		var runtime = ClassLoader.getPlatformClassLoader();
