@@ -15,7 +15,7 @@ import java.util.jar.JarOutputStream;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
-import dev.openrs2.asm.transform.ClassForNameTransformer;
+import dev.openrs2.asm.remap.ClassForNameRemapper;
 import dev.openrs2.util.io.DeterministicJarOutputStream;
 import dev.openrs2.util.io.SkipOutputStream;
 import org.apache.harmony.pack200.Pack200;
@@ -115,13 +115,12 @@ public final class Library implements Iterable<ClassNode> {
 	}
 
 	public void remap(Remapper remapper) {
-		var transformer = new ClassForNameTransformer(remapper);
 		var classNames = new HashSet<String>();
 
 		for (var clazz : classes.values()) {
 			for (var method : clazz.methods) {
 				if ((method.access & (Opcodes.ACC_NATIVE | Opcodes.ACC_ABSTRACT)) == 0) {
-					transformer.transformCode(clazz, method);
+					ClassForNameRemapper.remap(remapper, method);
 				}
 			}
 
