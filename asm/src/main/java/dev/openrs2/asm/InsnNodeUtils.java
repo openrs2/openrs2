@@ -1,5 +1,9 @@
 package dev.openrs2.asm;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.UncheckedIOException;
 import java.util.ArrayList;
 
 import org.objectweb.asm.Opcodes;
@@ -8,6 +12,8 @@ import org.objectweb.asm.tree.InsnList;
 import org.objectweb.asm.tree.InsnNode;
 import org.objectweb.asm.tree.IntInsnNode;
 import org.objectweb.asm.tree.LdcInsnNode;
+import org.objectweb.asm.util.Textifier;
+import org.objectweb.asm.util.TraceMethodVisitor;
 
 public final class InsnNodeUtils {
 	public static AbstractInsnNode nextReal(AbstractInsnNode insn) {
@@ -341,6 +347,23 @@ public final class InsnNodeUtils {
 
 	public static boolean deleteSimpleExpression(InsnList list, AbstractInsnNode last) {
 		return replaceSimpleExpression(list, last, null);
+	}
+
+	public static String toString(AbstractInsnNode insn) {
+		var printer = new Textifier();
+
+		var visitor = new TraceMethodVisitor(printer);
+		insn.accept(visitor);
+
+		try (
+			var stringWriter = new StringWriter();
+			var printWriter = new PrintWriter(stringWriter)
+		) {
+			printer.print(printWriter);
+			return stringWriter.toString().trim();
+		} catch (IOException ex) {
+			throw new UncheckedIOException(ex);
+		}
 	}
 
 	private InsnNodeUtils() {
