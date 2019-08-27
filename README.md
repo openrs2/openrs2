@@ -124,21 +124,21 @@ patches).
 
 ## License
 
-Unless otherwise stated, all code and data is licensed under version 3 (and
-only version 3) of the [GNU General Public License][gpl]. The full terms are
+Unless otherwise stated, all code and data is licensed under version 3.0 (and
+only version 3.0) of the [GNU General Public License][gpl]. The full terms are
 available in the `COPYING` file.
 
 The `gl-natives`, `gl-dri-natives` and `misc-natives` modules are instead
-licensed under version 3 (and only version 3) of the [GNU Lesser General Public
-License][lgpl]. The full terms are available in the `COPYING.LESSER` file in
-each module's directory.
+licensed under version 3.0 (and only version 3.0) of the [GNU Lesser General
+Public License][lgpl]. The full terms are available in the `COPYING.LESSER`
+file in each module's directory.
 
 ## Copyright
 
 Copyright (c) 2019 OpenRS2 Authors
 
 OpenRS2 is free software: you can redistribute it and/or modify it under the
-terms of the version 3 of the GNU General Public License as published by the
+terms of the version 3.0 of the GNU General Public License as published by the
 Free Software Foundation.
 
 OpenRS2 is distributed in the hope that it will be useful, but WITHOUT ANY
