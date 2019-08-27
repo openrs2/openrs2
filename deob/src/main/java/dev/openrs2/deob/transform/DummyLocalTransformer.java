@@ -14,6 +14,8 @@ import org.slf4j.LoggerFactory;
 public final class DummyLocalTransformer extends Transformer {
 	private static final Logger logger = LoggerFactory.getLogger(DummyLocalTransformer.class);
 
+	private static final int TYPES = 5;
+
 	private static final ImmutableSet<Integer> LOAD_OPCODES = ImmutableSet.of(
 		Opcodes.ILOAD,
 		Opcodes.LLOAD,
@@ -43,15 +45,17 @@ public final class DummyLocalTransformer extends Transformer {
 		 * XXX(gpe): this is primitive (ideally we'd do a proper data flow
 		 * analysis, but we'd need to do it in reverse and ASM only supports
 		 * forward data flow), however, it seems to be good enough to catch
-		 * everything.
+		 * most dummy locals.
 		 */
-		var loads = new boolean[method.maxLocals];
+		var loads = new boolean[TYPES][method.maxLocals];
 
 		for (var it = method.instructions.iterator(); it.hasNext(); ) {
 			var insn = it.next();
-			if (LOAD_OPCODES.contains(insn.getOpcode())) {
+			var opcode = insn.getOpcode();
+			if (LOAD_OPCODES.contains(opcode)) {
+				var type = opcode - Opcodes.ILOAD;
 				var load = (VarInsnNode) insn;
-				loads[load.var] = true;
+				loads[type][load.var] = true;
 			}
 		}
 
@@ -62,8 +66,9 @@ public final class DummyLocalTransformer extends Transformer {
 				continue;
 			}
 
+			var type = opcode - Opcodes.ISTORE;
 			var store = (VarInsnNode) insn;
-			if (loads[store.var]) {
+			if (loads[type][store.var]) {
 				continue;
 			}
 
