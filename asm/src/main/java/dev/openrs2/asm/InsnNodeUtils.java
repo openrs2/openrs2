@@ -1,7 +1,10 @@
 package dev.openrs2.asm;
 
+import java.util.ArrayList;
+
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.AbstractInsnNode;
+import org.objectweb.asm.tree.InsnList;
 import org.objectweb.asm.tree.InsnNode;
 import org.objectweb.asm.tree.IntInsnNode;
 import org.objectweb.asm.tree.LdcInsnNode;
@@ -303,6 +306,31 @@ public final class InsnNodeUtils {
 		}
 
 		throw new IllegalArgumentException();
+	}
+
+	public static boolean deleteSimpleExpression(InsnList list, AbstractInsnNode last) {
+		var deadInsns = new ArrayList<AbstractInsnNode>();
+
+		var height = 0;
+		var insn = last;
+		do {
+			deadInsns.add(insn);
+
+			var metadata = StackMetadata.get(insn);
+			if (insn != last) {
+				height -= metadata.getPushes();
+			}
+			height += metadata.getPops();
+
+			if (height == 0) {
+				deadInsns.forEach(list::remove);
+				return true;
+			}
+
+			insn = insn.getPrevious();
+		} while (insn != null && insn.getType() != AbstractInsnNode.LABEL && !hasSideEffects(insn));
+
+		return false;
 	}
 
 	private InsnNodeUtils() {
