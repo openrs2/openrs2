@@ -32,6 +32,7 @@ public final class Deobfuscator {
 	private static final Logger logger = LoggerFactory.getLogger(Deobfuscator.class);
 
 	private static final ImmutableList<Transformer> TRANSFORMERS = ImmutableList.of(
+		new OriginalNameTransformer(),
 		new HostCheckTransformer(),
 		new RightClickTransformer(),
 		new OpaquePredicateTransformer(),
@@ -146,13 +147,6 @@ public final class Deobfuscator {
 		transformer.transform(glClassPath);
 
 		transformer = new ClassForNameTransformer(unsignedRemapper);
-		transformer.transform(unsignedClassPath);
-
-		/* add @OriginalName annotations */
-		logger.info("Annotating classes and members with original names");
-		transformer = new OriginalNameTransformer();
-		transformer.transform(classPath);
-		transformer.transform(glClassPath);
 		transformer.transform(unsignedClassPath);
 
 		/* write output jars */
