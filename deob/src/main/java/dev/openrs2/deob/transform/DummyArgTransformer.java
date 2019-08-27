@@ -11,6 +11,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Multimap;
+import dev.openrs2.asm.InsnNodeUtils;
 import dev.openrs2.asm.MemberRef;
 import dev.openrs2.asm.classpath.ClassPath;
 import dev.openrs2.asm.transform.Transformer;
@@ -20,7 +21,6 @@ import dev.openrs2.util.collect.DisjointSet;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.ClassNode;
-import org.objectweb.asm.tree.InsnNode;
 import org.objectweb.asm.tree.JumpInsnNode;
 import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
@@ -187,11 +187,8 @@ public final class DummyArgTransformer extends Transformer {
 
 		var changed = false;
 
-		var alwaysTakenUnaryBranches = new ArrayList<JumpInsnNode>();
-		var neverTakenUnaryBranches = new ArrayList<JumpInsnNode>();
-
-		var alwaysTakenBinaryBranches = new ArrayList<JumpInsnNode>();
-		var neverTakenBinaryBranches = new ArrayList<JumpInsnNode>();
+		var alwaysTakenBranches = new ArrayList<JumpInsnNode>();
+		var neverTakenBranches = new ArrayList<JumpInsnNode>();
 
 		for (var i = 0; i < frames.length; i++) {
 			var frame = frames[i];
@@ -230,10 +227,10 @@ public final class DummyArgTransformer extends Transformer {
 				var result = evaluateUnaryBranch(insn.getOpcode(), value.getIntValues());
 				switch (result) {
 				case ALWAYS_TAKEN:
-					alwaysTakenUnaryBranches.add((JumpInsnNode) insn);
+					alwaysTakenBranches.add((JumpInsnNode) insn);
 					break;
 				case NEVER_TAKEN:
-					neverTakenUnaryBranches.add((JumpInsnNode) insn);
+					neverTakenBranches.add((JumpInsnNode) insn);
 					break;
 				}
 				break;
@@ -252,42 +249,28 @@ public final class DummyArgTransformer extends Transformer {
 				result = evaluateBinaryBranch(insn.getOpcode(), value1.getIntValues(), value2.getIntValues());
 				switch (result) {
 				case ALWAYS_TAKEN:
-					alwaysTakenBinaryBranches.add((JumpInsnNode) insn);
+					alwaysTakenBranches.add((JumpInsnNode) insn);
 					break;
 				case NEVER_TAKEN:
-					neverTakenBinaryBranches.add((JumpInsnNode) insn);
+					neverTakenBranches.add((JumpInsnNode) insn);
 					break;
 				}
 				break;
 			}
 		}
 
-		for (var insn : alwaysTakenUnaryBranches) {
-			method.instructions.insertBefore(insn, new InsnNode(Opcodes.POP));
-			method.instructions.set(insn, new JumpInsnNode(Opcodes.GOTO, insn.label));
-			branchesSimplified++;
-			changed = true;
+		for (var insn : alwaysTakenBranches) {
+			if (InsnNodeUtils.replaceSimpleExpression(method.instructions, insn, new JumpInsnNode(Opcodes.GOTO, insn.label))) {
+				branchesSimplified++;
+				changed = true;
+			}
 		}
 
-		for (var insn : neverTakenUnaryBranches) {
-			method.instructions.set(insn, new InsnNode(Opcodes.POP));
-			branchesSimplified++;
-			changed = true;
-		}
-
-		for (var insn : alwaysTakenBinaryBranches) {
-			method.instructions.insertBefore(insn, new InsnNode(Opcodes.POP));
-			method.instructions.insertBefore(insn, new InsnNode(Opcodes.POP));
-			method.instructions.set(insn, new JumpInsnNode(Opcodes.GOTO, insn.label));
-			branchesSimplified++;
-			changed = true;
-		}
-
-		for (var insn : neverTakenBinaryBranches) {
-			method.instructions.insertBefore(insn, new InsnNode(Opcodes.POP));
-			method.instructions.set(insn, new InsnNode(Opcodes.POP));
-			branchesSimplified++;
-			changed = true;
+		for (var insn : neverTakenBranches) {
+			if (InsnNodeUtils.deleteSimpleExpression(method.instructions, insn)) {
+				branchesSimplified++;
+				changed = true;
+			}
 		}
 
 		return changed;
