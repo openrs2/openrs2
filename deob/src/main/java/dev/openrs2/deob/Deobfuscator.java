@@ -16,10 +16,9 @@ import dev.openrs2.deob.remap.TypedRemapper;
 import dev.openrs2.deob.transform.BitShiftTransformer;
 import dev.openrs2.deob.transform.BitwiseOpTransformer;
 import dev.openrs2.deob.transform.CanvasTransformer;
-import dev.openrs2.deob.transform.ClassForNameTransformer;
 import dev.openrs2.deob.transform.CounterTransformer;
-import dev.openrs2.deob.transform.DummyLocalTransformer;
 import dev.openrs2.deob.transform.DummyArgTransformer;
+import dev.openrs2.deob.transform.DummyLocalTransformer;
 import dev.openrs2.deob.transform.ExceptionTracingTransformer;
 import dev.openrs2.deob.transform.FieldOrderTransformer;
 import dev.openrs2.deob.transform.OpaquePredicateTransformer;
@@ -133,41 +132,30 @@ public final class Deobfuscator {
 		}
 
 		/* remap all class, method and field names */
-		logger.info("Creating remappers");
-		var remapper = TypedRemapper.create(classPath);
-		var glRemapper = TypedRemapper.create(glClassPath);
-		var unsignedRemapper = TypedRemapper.create(unsignedClassPath);
-
-		/* transform Class.forName() calls */
-		logger.info("Transforming Class.forName() calls");
-		Transformer transformer = new ClassForNameTransformer(remapper);
-		transformer.transform(classPath);
-
-		transformer = new ClassForNameTransformer(glRemapper);
-		transformer.transform(glClassPath);
-
-		transformer = new ClassForNameTransformer(unsignedRemapper);
-		transformer.transform(unsignedClassPath);
+		logger.info("Remapping");
+		classPath.remap(TypedRemapper.create(classPath));
+		glClassPath.remap(TypedRemapper.create(glClassPath));
+		unsignedClassPath.remap(TypedRemapper.create(unsignedClassPath));
 
 		/* write output jars */
 		logger.info("Writing output jars");
 
 		Files.createDirectories(output);
 
-		client.writeJar(output.resolve("runescape.jar"), remapper);
-		loader.writeJar(output.resolve("loader.jar"), remapper);
-		signLink.writeJar(output.resolve("signlink.jar"), remapper);
-		unpack.writeJar(output.resolve("unpack.jar"), remapper);
-		unpacker.writeJar(output.resolve("unpacker.jar"), remapper);
+		client.writeJar(output.resolve("runescape.jar"));
+		loader.writeJar(output.resolve("loader.jar"));
+		signLink.writeJar(output.resolve("signlink.jar"));
+		unpack.writeJar(output.resolve("unpack.jar"));
+		unpacker.writeJar(output.resolve("unpacker.jar"));
 
-		gl.writeJar(output.resolve("jaggl.jar"), glRemapper);
-		glDri.writeJar(output.resolve("jaggl_dri.jar"), glRemapper);
-		glClient.writeJar(output.resolve("runescape_gl.jar"), glRemapper);
-		glLoader.writeJar(output.resolve("loader_gl.jar"), glRemapper);
-		glSignLink.writeJar(output.resolve("signlink_gl.jar"), glRemapper);
-		glUnpack.writeJar(output.resolve("unpack_gl.jar"), glRemapper);
-		glUnpacker.writeJar(output.resolve("unpacker_gl.jar"), glRemapper);
+		gl.writeJar(output.resolve("jaggl.jar"));
+		glDri.writeJar(output.resolve("jaggl_dri.jar"));
+		glClient.writeJar(output.resolve("runescape_gl.jar"));
+		glLoader.writeJar(output.resolve("loader_gl.jar"));
+		glSignLink.writeJar(output.resolve("signlink_gl.jar"));
+		glUnpack.writeJar(output.resolve("unpack_gl.jar"));
+		glUnpacker.writeJar(output.resolve("unpacker_gl.jar"));
 
-		unsignedClient.writeJar(output.resolve("runescape_unsigned.jar"), unsignedRemapper);
+		unsignedClient.writeJar(output.resolve("runescape_unsigned.jar"));
 	}
 }

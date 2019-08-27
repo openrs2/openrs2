@@ -1,9 +1,8 @@
-package dev.openrs2.deob.transform;
+package dev.openrs2.asm.transform;
 
 import java.util.List;
 
 import dev.openrs2.asm.InsnMatcher;
-import dev.openrs2.asm.transform.Transformer;
 import org.objectweb.asm.commons.Remapper;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;

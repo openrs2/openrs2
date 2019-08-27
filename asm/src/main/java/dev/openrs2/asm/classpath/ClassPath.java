@@ -9,6 +9,7 @@ import dev.openrs2.asm.MemberDesc;
 import dev.openrs2.asm.MemberRef;
 import dev.openrs2.util.collect.DisjointSet;
 import dev.openrs2.util.collect.ForestDisjointSet;
+import org.objectweb.asm.commons.Remapper;
 import org.objectweb.asm.tree.ClassNode;
 
 public final class ClassPath {
@@ -84,6 +85,12 @@ public final class ClassPath {
 			}
 		}
 		return null;
+	}
+
+	public void remap(Remapper remapper) {
+		for (var library : libraries) {
+			library.remap(remapper);
+		}
 	}
 
 	public DisjointSet<MemberRef> createInheritedFieldSets() {

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.SequenceInputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
@@ -14,12 +15,13 @@ import java.util.jar.JarOutputStream;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
+import dev.openrs2.asm.transform.ClassForNameTransformer;
 import dev.openrs2.util.io.DeterministicJarOutputStream;
 import dev.openrs2.util.io.SkipOutputStream;
 import org.apache.harmony.pack200.Pack200;
 import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.commons.ClassRemapper;
 import org.objectweb.asm.commons.Remapper;
 import org.objectweb.asm.tree.ClassNode;
@@ -112,33 +114,51 @@ public final class Library implements Iterable<ClassNode> {
 		return classes.values().iterator();
 	}
 
-	public void writeJar(Path path, Remapper remapper) throws IOException {
+	public void remap(Remapper remapper) {
+		var transformer = new ClassForNameTransformer(remapper);
+		var classNames = new HashSet<String>();
+
+		for (var clazz : classes.values()) {
+			for (var method : clazz.methods) {
+				if ((method.access & (Opcodes.ACC_NATIVE | Opcodes.ACC_ABSTRACT)) == 0) {
+					transformer.transformCode(clazz, method);
+				}
+			}
+
+			classNames.add(clazz.name);
+		}
+
+		for (var name : classNames) {
+			var in = classes.remove(name);
+
+			var out = new ClassNode();
+			in.accept(new ClassRemapper(out, remapper));
+
+			classes.put(out.name, out);
+		}
+	}
+
+	public void writeJar(Path path) throws IOException {
 		logger.info("Writing jar {}", path);
 
 		try (var out = new DeterministicJarOutputStream(Files.newOutputStream(path))) {
 			for (var clazz : classes.values()) {
-				var name = clazz.name;
 				var writer = new ClassWriter(0);
 
-				ClassVisitor visitor = new CheckClassAdapter(writer, true);
-				if (remapper != null) {
-					visitor = new ClassRemapper(visitor, remapper);
-					name = remapper.map(name);
-				}
-				clazz.accept(visitor);
+				clazz.accept(new CheckClassAdapter(writer, true));
 
-				out.putNextEntry(new JarEntry(name + CLASS_SUFFIX));
+				out.putNextEntry(new JarEntry(clazz.name + CLASS_SUFFIX));
 				out.write(writer.toByteArray());
 			}
 		}
 	}
 
-	public void writePack(Path path, Remapper remapper) throws IOException {
+	public void writePack(Path path) throws IOException {
 		logger.info("Writing pack {}", path);
 
 		var temp = Files.createTempFile(TEMP_PREFIX, JAR_SUFFIX);
 		try {
-			writeJar(temp, remapper);
+			writeJar(temp);
 
 			try (
 				var in = new JarInputStream(Files.newInputStream(temp));
