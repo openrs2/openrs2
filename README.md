@@ -138,8 +138,8 @@ file in each module's directory.
 Copyright (c) 2019 OpenRS2 Authors
 
 OpenRS2 is free software: you can redistribute it and/or modify it under the
-terms of the version 3.0 of the GNU General Public License as published by the
-Free Software Foundation.
+terms of version 3.0 of the GNU General Public License as published by the Free
+Software Foundation.
 
 OpenRS2 is distributed in the hope that it will be useful, but WITHOUT ANY
 WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
