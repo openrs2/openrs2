@@ -91,6 +91,8 @@ public final class ClassPath {
 		for (var library : libraries) {
 			library.remap(remapper);
 		}
+
+		cache.clear();
 	}
 
 	public DisjointSet<MemberRef> createInheritedFieldSets() {
