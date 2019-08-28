@@ -161,7 +161,7 @@ public final class Library implements Iterable<ClassNode> {
 
 			try (
 				var in = new JarInputStream(Files.newInputStream(temp));
-				var out = new GZIPOutputStream(new SkipOutputStream(Files.newOutputStream(path), 2))
+				var out = new GZIPOutputStream(new SkipOutputStream(Files.newOutputStream(path), GZIP_HEADER.length))
 			) {
 				Pack200.newPacker().pack(in, out);
 			}
