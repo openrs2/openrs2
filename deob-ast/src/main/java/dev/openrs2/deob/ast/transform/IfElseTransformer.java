@@ -36,6 +36,22 @@ public final class IfElseTransformer extends Transformer {
 		throw new IllegalArgumentException();
 	}
 
+	private static boolean isTailThrowOrReturn(Statement stmt) {
+		if (stmt.isThrowStmt() || stmt.isReturnStmt()) {
+			return true;
+		} else if (stmt.isBlockStmt()) {
+			var stmts = stmt.asBlockStmt().getStatements();
+			if (stmts.isEmpty()) {
+				return false;
+			}
+
+			var tail = stmts.get(stmts.size() - 1);
+			return tail.isThrowStmt() || tail.isReturnStmt();
+		} else {
+			return false;
+		}
+	}
+
 	@Override
 	public void transform(CompilationUnit unit) {
 		NodeUtils.walk(unit, Node.TreeTraversal.POSTORDER, IfStmt.class, stmt -> {
@@ -76,6 +92,66 @@ public final class IfElseTransformer extends Transformer {
 				if (isIf(elseStmt)) {
 					stmt.setElseStmt(getIf(elseStmt));
 				}
+			});
+		});
+
+		/*
+		 * Rewrite:
+		 *
+		 * ...
+		 * } else {
+		 *     if (x != 123) {
+		 *         ...
+		 *         throw ...;
+		 *     }
+		 *     ...
+		 * }
+		 *
+		 * to:
+		 *
+		 * ...
+		 * } else if (x == 123) {
+		 *     ...
+		 * } else {
+		 *     ...
+		 *     throw ...;
+		 * }
+		 */
+		NodeUtils.walk(unit, Node.TreeTraversal.POSTORDER, IfStmt.class, stmt -> {
+			stmt.getElseStmt().ifPresent(elseStmt -> {
+				/* match */
+				if (!elseStmt.isBlockStmt()) {
+					return;
+				}
+
+				var blockStmt = elseStmt.asBlockStmt();
+				var statements = blockStmt.getStatements();
+				if (statements.isEmpty()) {
+					return;
+				}
+
+				var head = statements.get(0);
+				if (!head.isIfStmt()) {
+					return;
+				}
+
+				var ifStmt = head.asIfStmt();
+				if (ifStmt.getElseStmt().isPresent()) {
+					return;
+				}
+
+				var thenStmt = ifStmt.getThenStmt();
+				if (!isTailThrowOrReturn(thenStmt)) {
+					return;
+				}
+
+				/* rewrite */
+				var condition = ExprUtils.not(ifStmt.getCondition());
+
+				var tail = blockStmt.clone();
+				tail.getStatements().remove(0);
+
+				elseStmt.replace(new IfStmt(condition, tail, thenStmt.clone()));
 			});
 		});
 	}
