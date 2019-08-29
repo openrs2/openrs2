@@ -9,6 +9,7 @@ import com.google.common.collect.ImmutableList;
 import dev.openrs2.asm.classpath.ClassPath;
 import dev.openrs2.asm.classpath.Library;
 import dev.openrs2.asm.transform.Transformer;
+import dev.openrs2.bundler.transform.CachePathTransformer;
 import dev.openrs2.bundler.transform.HostCheckTransformer;
 import dev.openrs2.bundler.transform.RightClickTransformer;
 import dev.openrs2.deob.remap.PrefixRemapper;
@@ -32,6 +33,7 @@ public final class Deobfuscator {
 
 	private static final ImmutableList<Transformer> TRANSFORMERS = ImmutableList.of(
 		new OriginalNameTransformer(),
+		new CachePathTransformer(),
 		new HostCheckTransformer(),
 		new RightClickTransformer(),
 		new OpaquePredicateTransformer(),
