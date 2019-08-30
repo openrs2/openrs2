@@ -61,7 +61,7 @@ public final class OriginalNameTransformer extends Transformer {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public boolean transformMethod(ClassPath classPath, Library library, ClassNode clazz, MethodNode method) {
+	public boolean preTransformMethod(ClassPath classPath, Library library, ClassNode clazz, MethodNode method) {
 		if (method.name.equals("<init>") || method.name.equals("<clinit>")) {
 			return false;
 		}

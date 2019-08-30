@@ -26,11 +26,13 @@ public abstract class Transformer {
 					}
 
 					for (var method : clazz.methods) {
-						changed |= transformMethod(classPath, library, clazz, method);
+						changed |= preTransformMethod(classPath, library, clazz, method);
 
 						if ((method.access & (Opcodes.ACC_NATIVE | Opcodes.ACC_ABSTRACT)) == 0) {
 							changed |= transformCode(classPath, library, clazz, method);
 						}
+
+						changed |= postTransformMethod(classPath, library, clazz, method);
 					}
 				}
 			}
@@ -56,11 +58,15 @@ public abstract class Transformer {
 		return false;
 	}
 
-	protected boolean transformMethod(ClassPath classPath, Library library, ClassNode clazz, MethodNode method) throws AnalyzerException {
+	protected boolean preTransformMethod(ClassPath classPath, Library library, ClassNode clazz, MethodNode method) throws AnalyzerException {
 		return false;
 	}
 
 	protected boolean transformCode(ClassPath classPath, Library library, ClassNode clazz, MethodNode method) throws AnalyzerException {
+		return false;
+	}
+
+	protected boolean postTransformMethod(ClassPath classPath, Library library, ClassNode clazz, MethodNode method) throws AnalyzerException {
 		return false;
 	}
 
