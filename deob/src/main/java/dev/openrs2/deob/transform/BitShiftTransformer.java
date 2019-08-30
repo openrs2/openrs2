@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableSet;
 import dev.openrs2.asm.InsnMatcher;
 import dev.openrs2.asm.InsnNodeUtils;
 import dev.openrs2.asm.classpath.ClassPath;
+import dev.openrs2.asm.classpath.Library;
 import dev.openrs2.asm.transform.Transformer;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
@@ -25,7 +26,7 @@ public final class BitShiftTransformer extends Transformer {
 	}
 
 	@Override
-	public boolean transformCode(ClassNode clazz, MethodNode method) {
+	public boolean transformCode(ClassPath classPath, Library library, ClassNode clazz, MethodNode method) {
 		CONST_SHIFT_MATCHER.match(method).forEach(match -> {
 			var push = match.get(0);
 			var bits = InsnNodeUtils.getIntConstant(push);

@@ -1,6 +1,7 @@
 package dev.openrs2.bundler.transform;
 
 import dev.openrs2.asm.classpath.ClassPath;
+import dev.openrs2.asm.classpath.Library;
 import dev.openrs2.asm.transform.Transformer;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
@@ -20,7 +21,7 @@ public final class CachePathTransformer extends Transformer {
 	}
 
 	@Override
-	protected boolean transformCode(ClassNode clazz, MethodNode method) {
+	protected boolean transformCode(ClassPath classPath, Library library, ClassNode clazz, MethodNode method) {
 		for (var it = method.instructions.iterator(); it.hasNext(); ) {
 			var insn = it.next();
 			if (insn.getOpcode() != Opcodes.LDC) {

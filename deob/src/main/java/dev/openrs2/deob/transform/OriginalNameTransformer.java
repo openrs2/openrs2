@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.collect.ImmutableList;
+import dev.openrs2.asm.classpath.ClassPath;
+import dev.openrs2.asm.classpath.Library;
 import dev.openrs2.asm.transform.Transformer;
 import dev.openrs2.deob.annotation.OriginalArg;
 import dev.openrs2.deob.annotation.OriginalClass;
@@ -38,7 +40,7 @@ public final class OriginalNameTransformer extends Transformer {
 	}
 
 	@Override
-	public boolean transformClass(ClassNode clazz) {
+	public boolean transformClass(ClassPath classPath, Library library, ClassNode clazz) {
 		if (clazz.invisibleAnnotations == null) {
 			clazz.invisibleAnnotations = new ArrayList<>();
 		}
@@ -48,7 +50,7 @@ public final class OriginalNameTransformer extends Transformer {
 	}
 
 	@Override
-	public boolean transformField(ClassNode clazz, FieldNode field) {
+	public boolean transformField(ClassPath classPath, Library library, ClassNode clazz, FieldNode field) {
 		if (field.invisibleAnnotations == null) {
 			field.invisibleAnnotations = new ArrayList<>();
 		}
@@ -59,7 +61,7 @@ public final class OriginalNameTransformer extends Transformer {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public boolean transformMethod(ClassNode clazz, MethodNode method) {
+	public boolean transformMethod(ClassPath classPath, Library library, ClassNode clazz, MethodNode method) {
 		if (method.name.equals("<init>") || method.name.equals("<clinit>")) {
 			return false;
 		}

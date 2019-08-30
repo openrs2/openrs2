@@ -3,6 +3,7 @@ package dev.openrs2.deob.transform;
 import dev.openrs2.asm.InsnMatcher;
 import dev.openrs2.asm.InsnNodeUtils;
 import dev.openrs2.asm.classpath.ClassPath;
+import dev.openrs2.asm.classpath.Library;
 import dev.openrs2.asm.transform.Transformer;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.MethodNode;
@@ -22,7 +23,7 @@ public final class ExceptionTracingTransformer extends Transformer {
 	}
 
 	@Override
-	public boolean transformCode(ClassNode clazz, MethodNode method) {
+	public boolean transformCode(ClassPath classPath, Library library, ClassNode clazz, MethodNode method) {
 		CATCH_MATCHER.match(method).forEach(match -> {
 			var foundTryCatch = method.tryCatchBlocks.removeIf(tryCatch -> {
 				if (!"java/lang/RuntimeException".equals(tryCatch.type)) {

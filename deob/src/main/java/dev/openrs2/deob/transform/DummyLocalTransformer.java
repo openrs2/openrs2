@@ -2,6 +2,7 @@ package dev.openrs2.deob.transform;
 
 import dev.openrs2.asm.InsnNodeUtils;
 import dev.openrs2.asm.classpath.ClassPath;
+import dev.openrs2.asm.classpath.Library;
 import dev.openrs2.asm.transform.Transformer;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
@@ -21,7 +22,7 @@ public final class DummyLocalTransformer extends Transformer {
 	}
 
 	@Override
-	protected boolean transformCode(ClassNode clazz, MethodNode method) {
+	protected boolean transformCode(ClassPath classPath, Library library, ClassNode clazz, MethodNode method) {
 		/*
 		 * XXX(gpe): this is primitive (ideally we'd do a proper data flow
 		 * analysis, but we'd need to do it in reverse and ASM only supports

@@ -3,6 +3,8 @@ package dev.openrs2.deob.transform;
 import java.util.HashMap;
 
 import dev.openrs2.asm.MemberDesc;
+import dev.openrs2.asm.classpath.ClassPath;
+import dev.openrs2.asm.classpath.Library;
 import dev.openrs2.asm.transform.Transformer;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
@@ -46,7 +48,7 @@ public final class FieldOrderTransformer extends Transformer {
 	}
 
 	@Override
-	public boolean transformClass(ClassNode clazz) {
+	public boolean transformClass(ClassPath classPath, Library library, ClassNode clazz) {
 		sortFields(clazz, CONSTRUCTOR, Opcodes.PUTFIELD);
 		sortFields(clazz, STATIC_CONSTRUCTOR, Opcodes.PUTSTATIC);
 		return false;

@@ -6,6 +6,7 @@ import java.util.Map;
 import dev.openrs2.asm.InsnMatcher;
 import dev.openrs2.asm.MemberRef;
 import dev.openrs2.asm.classpath.ClassPath;
+import dev.openrs2.asm.classpath.Library;
 import dev.openrs2.asm.transform.Transformer;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
@@ -65,13 +66,13 @@ public final class BitwiseOpTransformer extends Transformer {
 	}
 
 	@Override
-	protected boolean transformClass(ClassNode clazz) {
+	protected boolean transformClass(ClassPath classPath, Library library, ClassNode clazz) {
 		clazz.methods.removeIf(m -> methodOps.containsKey(new MemberRef(clazz.name, m.name, m.desc)));
 		return false;
 	}
 
 	@Override
-	protected boolean transformCode(ClassNode clazz, MethodNode method) {
+	protected boolean transformCode(ClassPath classPath, Library library, ClassNode clazz, MethodNode method) {
 		for (var it = method.instructions.iterator(); it.hasNext(); ) {
 			var insn = it.next();
 			if (insn.getOpcode() != Opcodes.INVOKESTATIC) {

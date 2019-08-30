@@ -8,6 +8,7 @@ import java.util.Set;
 import dev.openrs2.asm.InsnMatcher;
 import dev.openrs2.asm.MemberRef;
 import dev.openrs2.asm.classpath.ClassPath;
+import dev.openrs2.asm.classpath.Library;
 import dev.openrs2.asm.transform.Transformer;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.AbstractInsnNode;
@@ -95,7 +96,7 @@ public final class CounterTransformer extends Transformer {
 	}
 
 	@Override
-	public boolean transformCode(ClassNode clazz, MethodNode method) {
+	public boolean transformCode(ClassPath classPath, Library library, ClassNode clazz, MethodNode method) {
 		RESET_PATTERN.match(method).forEach(match -> {
 			var putstatic = (FieldInsnNode) match.get(1);
 			if (counters.contains(new MemberRef(putstatic.owner, putstatic.name, putstatic.desc))) {

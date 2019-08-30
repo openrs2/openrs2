@@ -2,6 +2,7 @@ package dev.openrs2.bundler.transform;
 
 import dev.openrs2.asm.InsnMatcher;
 import dev.openrs2.asm.classpath.ClassPath;
+import dev.openrs2.asm.classpath.Library;
 import dev.openrs2.asm.transform.Transformer;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
@@ -25,7 +26,7 @@ public final class HostCheckTransformer extends Transformer {
 	}
 
 	@Override
-	protected boolean transformCode(ClassNode clazz, MethodNode method) {
+	protected boolean transformCode(ClassPath classPath, Library library, ClassNode clazz, MethodNode method) {
 		if (Type.getReturnType(method.desc).getSort() != Type.BOOLEAN) {
 			return false;
 		}

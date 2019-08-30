@@ -14,6 +14,7 @@ import dev.openrs2.asm.InsnNodeUtils;
 import dev.openrs2.asm.MemberRef;
 import dev.openrs2.asm.StackMetadata;
 import dev.openrs2.asm.classpath.ClassPath;
+import dev.openrs2.asm.classpath.Library;
 import dev.openrs2.asm.transform.Transformer;
 import dev.openrs2.deob.ArgRef;
 import dev.openrs2.deob.analysis.IntInterpreter;
@@ -151,7 +152,7 @@ public final class DummyArgTransformer extends Transformer {
 	}
 
 	@Override
-	protected boolean transformCode(ClassNode clazz, MethodNode method) throws AnalyzerException {
+	protected boolean transformCode(ClassPath classPath, Library library, ClassNode clazz, MethodNode method) throws AnalyzerException {
 		var parentMethod = inheritedMethodSets.get(new MemberRef(clazz.name, method.name, method.desc));
 		var parameters = constArgs.get(parentMethod);
 
