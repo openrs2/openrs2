@@ -176,33 +176,32 @@ public final class TypedRemapper extends Remapper {
 		return mapping;
 	}
 
+	public static boolean isMethodImmutable(ClassPath classPath, DisjointSet.Partition<MemberRef> partition) {
+		for (var method : partition) {
+			var clazz = classPath.get(method.getOwner());
+
+			if (EXCLUDED_METHODS.contains(method.getName())) {
+				return true;
+			}
+
+			if (clazz.isDependency()) {
+				return true;
+			}
+
+			if (clazz.isNative(new MemberDesc(method.getName(), method.getDesc()))) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	private static Map<MemberRef, String> createMethodMapping(ClassPath classPath, DisjointSet<MemberRef> disjointSet) {
 		var mapping = new HashMap<MemberRef, String>();
 		var id = 0;
 
 		for (var partition : disjointSet) {
-			boolean skip = false;
-
-			for (var method : partition) {
-				var clazz = classPath.get(method.getOwner());
-
-				if (EXCLUDED_METHODS.contains(method.getName())) {
-					skip = true;
-					break;
-				}
-
-				if (clazz.isDependency()) {
-					skip = true;
-					break;
-				}
-
-				if (clazz.isNative(new MemberDesc(method.getName(), method.getDesc()))) {
-					skip = true;
-					break;
-				}
-			}
-
-			if (skip) {
+			if (isMethodImmutable(classPath, partition)) {
 				continue;
 			}
 
