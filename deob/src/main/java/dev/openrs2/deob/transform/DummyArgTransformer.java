@@ -157,9 +157,7 @@ public final class DummyArgTransformer extends Transformer {
 		var parameters = constArgs.get(parentMethod);
 
 		var analyzer = new Analyzer<>(new IntInterpreter(parameters));
-		analyzer.analyze(clazz.name, method);
-
-		var frames = analyzer.getFrames();
+		var frames = analyzer.analyze(clazz.name, method);
 
 		var changed = false;
 

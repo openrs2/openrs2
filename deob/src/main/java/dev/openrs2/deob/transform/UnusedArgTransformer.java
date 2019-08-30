@@ -125,9 +125,7 @@ public final class UnusedArgTransformer extends Transformer {
 		/* delete unused int args from call sites */
 		if ((method.access & (Opcodes.ACC_ABSTRACT | Opcodes.ACC_NATIVE)) == 0) {
 			var analyzer = new Analyzer<>(new ConstSourceInterpreter());
-			analyzer.analyze(clazz.name, method);
-
-			var frames = analyzer.getFrames();
+			var frames = analyzer.analyze(clazz.name, method);
 			var deadInsns = new ArrayList<AbstractInsnNode>();
 
 			for (var i = 0; i < frames.length; i++) {
