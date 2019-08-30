@@ -967,6 +967,16 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_choosePixelFormat1(JNIEnv *env, jc
 		}
 	}
 
+	/*
+	 * The Windows documentation doesn't make it immediately clear whether
+	 * ChoosePixelFormat() will fall back to a single-buffered context if
+	 * double-buffering is not available when PFD_DOUBLEBUFFER is set.
+	 *
+	 * The Wine project determined that it does fall back to a single-buffered
+	 * context:
+	 *
+	 * https://github.com/wine-mirror/wine/blob/ba9f3dc198dfc81bb40159077b73b797006bb73c/dlls/opengl32/wgl.c#L480
+	 */
 	PIXELFORMATDESCRIPTOR pfd = {
 		.nSize = sizeof(pfd),
 		.nVersion = 1,
