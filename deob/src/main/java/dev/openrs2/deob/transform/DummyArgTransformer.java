@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
 import com.google.common.base.Preconditions;
@@ -16,6 +15,7 @@ import dev.openrs2.asm.MemberRef;
 import dev.openrs2.asm.StackMetadata;
 import dev.openrs2.asm.classpath.ClassPath;
 import dev.openrs2.asm.transform.Transformer;
+import dev.openrs2.deob.ArgRef;
 import dev.openrs2.deob.analysis.IntInterpreter;
 import dev.openrs2.deob.analysis.IntValue;
 import dev.openrs2.util.collect.DisjointSet;
@@ -33,34 +33,6 @@ import org.slf4j.LoggerFactory;
 
 public final class DummyArgTransformer extends Transformer {
 	private static final Logger logger = LoggerFactory.getLogger(DummyArgTransformer.class);
-
-	private static final class ArgRef {
-		private final DisjointSet.Partition<MemberRef> method;
-		private final int arg;
-
-		public ArgRef(DisjointSet.Partition<MemberRef> method, int arg) {
-			this.method = method;
-			this.arg = arg;
-		}
-
-		@Override
-		public boolean equals(Object o) {
-			if (this == o) {
-				return true;
-			}
-			if (o == null || getClass() != o.getClass()) {
-				return false;
-			}
-			ArgRef argRef = (ArgRef) o;
-			return arg == argRef.arg &&
-				method.equals(argRef.method);
-		}
-
-		@Override
-		public int hashCode() {
-			return Objects.hash(method, arg);
-		}
-	}
 
 	private enum BranchResult {
 		ALWAYS_TAKEN,
