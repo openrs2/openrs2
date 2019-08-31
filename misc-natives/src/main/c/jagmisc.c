@@ -2,6 +2,7 @@
 
 #include <stdbool.h>
 #include <stdint.h>
+#include <stdlib.h>
 #include <windows.h>
 #include <VersionHelpers.h>
 
@@ -35,12 +36,12 @@ static DWORD WINAPI jagmisc_run(LPVOID parameter) {
 	CloseHandle(thread);
 
 	if (!success) {
-		return 1;
+		return EXIT_FAILURE;
 	}
 
 	/* notify Java_jagex3_jagmisc_jagmisc_init() that the thread has started successfully */
 	if (!SetEvent(jagmisc_start_event)) {
-		return 1;
+		return EXIT_FAILURE;
 	}
 
 	/* serve time request and stop events */
@@ -56,13 +57,13 @@ static DWORD WINAPI jagmisc_run(LPVOID parameter) {
 			}
 
 			if (!SetEvent(jagmisc_time_ready_event)) {
-				return 1;
+				return EXIT_FAILURE;
 			}
 			break;
 		case WAIT_OBJECT_1:
-			return 0;
+			return EXIT_SUCCESS;
 		default:
-			return 1;
+			return EXIT_FAILURE;
 		}
 	}
 }
