@@ -430,6 +430,9 @@
             <artifactId>nar-maven-plugin</artifactId>
             <configuration>
               <c>
+                <defines>
+                  <define>WIN32_LEAN_AND_MEAN</define>
+                </defines>
                 <options>
                   <option>/Wall</option>
                   <!-- unused parameter -->
