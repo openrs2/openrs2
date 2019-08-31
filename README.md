@@ -110,7 +110,7 @@ tests and package it.
 All source code must be formatted with [IntelliJ IDEA][idea]'s built-in
 formatter before each commit. The 'Optimize imports' option should also be
 selected. Do not select 'Rearrange entries'.
- 
+
 OpenRS2's code style settings are held in `.idea/codeStyles/Project.xml` in the
 repository, and IDEA should use them automatically after importing the Maven
 project.
