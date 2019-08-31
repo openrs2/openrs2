@@ -1067,10 +1067,15 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_choosePixelFormat1(JNIEnv *env, jc
 			platformInfo.layer = jaggl_layer;
 
 			/*
-			 * TODO(gpe): this doesn't work in resizable mode, where the Canvas
-			 * only fills part of the Frame.
+			 * XXX(gpe): the DSI bounds include the top/left insets, which we
+			 * need to subtract here. Unfortunately, we can't access them here
+			 * easily. Ignoring the left inset and hard-coding y to zero work,
+			 * but only because windows don't have left borders and there is
+			 * nothing above the Canvas in the Frame.
 			 */
-			jaggl_layer.frame = frame;
+			jint x = dsi->bounds.x; /* should be dsi->bounds.x - insets.left */
+			jint y = 0; /* should be dsi->bounds.y - insets.top */
+			jaggl_layer.frame = NSMakeRect(x, platformInfo.windowLayer.bounds.size.height - y - dsi->bounds.height, dsi->bounds.width, dsi->bounds.height);
 			[jaggl_layer setNeedsDisplay];
 		});
 
