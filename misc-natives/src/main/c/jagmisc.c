@@ -26,7 +26,7 @@ static inline int64_t jagmisc_to_nanos(LARGE_INTEGER count) {
 	return count.QuadPart * JAGMISC_NANOS_PER_SEC / jagmisc_freq.QuadPart;
 }
 
-static DWORD WINAPI jagmisc_run(LPVOID parameter) {
+static DWORD WINAPI jagmisc_run(LPVOID lpParameter) {
 	/* pin this thread to the system's first processor */
 	HANDLE thread = GetCurrentThread();
 
