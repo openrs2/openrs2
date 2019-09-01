@@ -551,7 +551,7 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_createContext(JNIEnv *env, jclass 
 
 	CGLCreateContext(jaggl_pix, jaggl_onscreen_context, &jaggl_context);
 	if (jaggl_context) {
-		dispatch_async(dispatch_get_main_queue(), ^{
+		dispatch_sync(dispatch_get_main_queue(), ^{
 			jaggl_context_appkit = [[NSOpenGLContext alloc] initWithCGLContextObj:jaggl_context];
 			jaggl_context_appkit.view = jaggl_view;
 		});
