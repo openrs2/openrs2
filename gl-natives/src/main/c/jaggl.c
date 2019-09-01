@@ -699,6 +699,11 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_swapBuffers(JNIEnv *env, jclass cl
 #elif defined(_WIN32)
 	result = (jboolean) SwapBuffers(jaggl_device);
 #elif defined(__APPLE__) && defined(__MACH__)
+	/*
+	 * This buffer swap isn't strictly necessary (in fact, I'm not sure if we
+	 * need to double buffer at all on macOS), but it is useful when the
+	 * offscreen window is displayed for debugging purposes.
+	 */
 	if (jaggl_double_buffered) {
 		[jaggl_context_appkit flushBuffer];
 	} else {
