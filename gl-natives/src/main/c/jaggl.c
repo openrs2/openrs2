@@ -740,8 +740,7 @@ JNIEXPORT void JNICALL Java_jaggl_context_setSwapInterval(JNIEnv *env, jclass cl
 #elif defined(__APPLE__) && defined(__MACH__)
 	GLint param = (GLint) interval;
 	CGLSetParameter(jaggl_context, kCGLCPSwapInterval, &param);
-
-	/* TODO(gpe): what about jaggl_onscreen_context? */
+	CGLSetParameter(jaggl_onscreen_context, kCGLCPSwapInterval, &param);
 #else
 #error Unsupported platform
 #endif
