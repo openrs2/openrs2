@@ -131,6 +131,7 @@ static HGLRC jaggl_context;
 	GLuint framebuffer;
 	GLuint renderbuffer_color, renderbuffer_depth;
 	GLint framebuffer_width, framebuffer_height;
+	NSLock *lock;
 }
 @end
 
@@ -216,7 +217,13 @@ static void *jaggl_proc_addr(const char *name) {
 		self.needsDisplayOnBoundsChange = YES;
 		self.autoresizingMask = kCALayerWidthSizable | kCALayerHeightSizable;
 	}
+	lock = [[NSLock alloc] init];
 	return self;
+}
+
+- (void)dealloc {
+	[lock release];
+	[super dealloc];
 }
 
 - (void)genFramebuffer {
@@ -246,7 +253,8 @@ static void *jaggl_proc_addr(const char *name) {
 }
 
 - (void)blit {
-	/* TODO(gpe): I think we need locking here and in drawInCGLContext */
+	[lock lock];
+
 	if (!framebuffer) {
 		return;
 	}
@@ -257,6 +265,8 @@ static void *jaggl_proc_addr(const char *name) {
 	glBlitFramebufferEXT(0, 0, framebuffer_width, framebuffer_height, 0, 0, framebuffer_width, framebuffer_height, GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT, GL_NEAREST);
 
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+
+	[lock unlock];
 
 	dispatch_sync(dispatch_get_main_queue(), ^{
 		[self setNeedsDisplay];
@@ -279,6 +289,8 @@ static void *jaggl_proc_addr(const char *name) {
 	GLint width = (GLint) self.bounds.size.width;
 	GLint height = (GLint) self.bounds.size.height;
 
+	[lock lock];
+
 	/* TODO(gpe): improve resize support (fix corruption, do we need to resize the NSView/NSWindow?) */
 	if (width != framebuffer_width || height != framebuffer_height) {
 		[self deleteFramebuffer];
@@ -288,6 +300,8 @@ static void *jaggl_proc_addr(const char *name) {
 	glBindFramebufferEXT(GL_READ_FRAMEBUFFER_EXT, framebuffer);
 	glBlitFramebufferEXT(0, 0, framebuffer_width, framebuffer_height, 0, 0, framebuffer_width, framebuffer_height, GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT, GL_NEAREST);
 	glBindFramebufferEXT(GL_READ_FRAMEBUFFER_EXT, 0);
+
+	[lock unlock];
 
 	[super drawInCGLContext:context pixelFormat:pixelFormat forLayerTime:layerTime displayTime:displayTime];
 }
@@ -302,13 +316,17 @@ static void *jaggl_proc_addr(const char *name) {
 
 - (CGLContextObj)copyCGLContextForPixelFormat:(CGLPixelFormatObj)pix {
 	CGLSetCurrentContext(jaggl_onscreen_context);
+	[lock lock];
 	[self genFramebuffer];
+	[lock unlock];
 	return jaggl_onscreen_context;
 }
 
 - (void)releaseCGLContext:(CGLContextObj)context {
 	CGLSetCurrentContext(context);
+	[lock lock];
 	[self deleteFramebuffer];
+	[lock unlock];
 	CGLClearDrawable(context);
 }
 @end
