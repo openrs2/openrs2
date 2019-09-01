@@ -211,7 +211,7 @@ static void *jaggl_proc_addr(const char *name) {
 - (id)init {
 	self = [super init];
 	if (self) {
-		self.asynchronous = YES;
+		self.asynchronous = NO;
 		self.opaque = YES;
 		self.needsDisplayOnBoundsChange = YES;
 		self.autoresizingMask = kCALayerWidthSizable | kCALayerHeightSizable;
@@ -257,6 +257,10 @@ static void *jaggl_proc_addr(const char *name) {
 	glBlitFramebufferEXT(0, 0, framebuffer_width, framebuffer_height, 0, 0, framebuffer_width, framebuffer_height, GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT, GL_NEAREST);
 
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+
+	dispatch_sync(dispatch_get_main_queue(), ^{
+		[self setNeedsDisplay];
+	});
 }
 
 - (BOOL)canDrawInCGLContext:(CGLContextObj)context
