@@ -226,42 +226,72 @@ static void *jaggl_proc_addr(const char *name) {
 	[super dealloc];
 }
 
-- (void)genFramebuffer {
-	framebuffer_width = (GLint) self.bounds.size.width;
-	framebuffer_height = (GLint) self.bounds.size.height;
-
-	glGenFramebuffersEXT(1, &framebuffer);
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, framebuffer);
-
-	glGenRenderbuffersEXT(1, &renderbuffer_color);
-	glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, renderbuffer_color);
-	glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL_RGB, framebuffer_width, framebuffer_height);
-	glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_RENDERBUFFER_EXT, renderbuffer_color);
-
-	glGenRenderbuffersEXT(1, &renderbuffer_depth);
-	glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, renderbuffer_depth);
-	glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL_DEPTH_COMPONENT24, framebuffer_width, framebuffer_height);
-	glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, GL_RENDERBUFFER_EXT, renderbuffer_depth);
-
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
-}
-
-- (void)deleteFramebuffer {
-	glDeleteRenderbuffersEXT(1, &renderbuffer_depth);
-	glDeleteRenderbuffersEXT(1, &renderbuffer_color);
-	glDeleteFramebuffersEXT(1, &framebuffer);
-}
-
 - (void)blit {
 	[lock lock];
 
-	if (!framebuffer) {
-		return;
+	/* get current size */
+	NSSize size = self.bounds.size;
+	GLint width = (GLint) size.width;
+	GLint height = (GLint) size.height;
+
+	/* check if we need to resize the framebuffer/off-screen window */
+	bool resized = width != framebuffer_width || height != framebuffer_height;
+
+	if (!framebuffer || resized) {
+		/* create new framebuffer */
+		GLuint new_framebuffer, new_renderbuffer_color, new_renderbuffer_depth;
+
+		glGenFramebuffersEXT(1, &new_framebuffer);
+		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, new_framebuffer);
+
+		glGenRenderbuffersEXT(1, &new_renderbuffer_color);
+		glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, new_renderbuffer_color);
+		glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL_RGB, width, height);
+		glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_RENDERBUFFER_EXT, new_renderbuffer_color);
+
+		glGenRenderbuffersEXT(1, &new_renderbuffer_depth);
+		glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, new_renderbuffer_depth);
+		glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL_DEPTH_COMPONENT24, width, height);
+		glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, GL_RENDERBUFFER_EXT, new_renderbuffer_depth);
+
+		/* clear the framebuffer */
+		glClearColor(0, 0, 0, 1);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		/* copy the old framebuffer to the new framebuffer */
+		if (framebuffer) {
+			glBindFramebufferEXT(GL_READ_FRAMEBUFFER_EXT, framebuffer);
+			glBindFramebufferEXT(GL_DRAW_FRAMEBUFFER_EXT, new_framebuffer);
+
+			glBlitFramebufferEXT(0, 0, framebuffer_width, framebuffer_height, 0, 0, framebuffer_width, framebuffer_height, GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+		}
+
+		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+
+		/* delete the old framebuffer */
+		if (framebuffer) {
+			glDeleteRenderbuffersEXT(1, &renderbuffer_depth);
+			glDeleteRenderbuffersEXT(1, &renderbuffer_color);
+			glDeleteFramebuffersEXT(1, &framebuffer);
+		}
+
+		/* update framebuffer_* vars */
+		framebuffer = new_framebuffer;
+		renderbuffer_color = new_renderbuffer_color;
+		renderbuffer_depth = new_renderbuffer_depth;
+		framebuffer_width = width;
+		framebuffer_height = height;
 	}
 
+	/* bind the existing framebuffer */
 	glBindFramebufferEXT(GL_READ_FRAMEBUFFER_EXT, 0);
 	glBindFramebufferEXT(GL_DRAW_FRAMEBUFFER_EXT, framebuffer);
 
+	/* clear the framebuffer */
+	glClearColor(0, 0, 0, 1);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	/* copy current off-screen contents to the framebuffer */
 	glBlitFramebufferEXT(0, 0, framebuffer_width, framebuffer_height, 0, 0, framebuffer_width, framebuffer_height, GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT, GL_NEAREST);
 
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
@@ -270,6 +300,12 @@ static void *jaggl_proc_addr(const char *name) {
 
 	dispatch_sync(dispatch_get_main_queue(), ^{
 		[self setNeedsDisplay];
+
+		if (resized) {
+			jaggl_view.frame = NSMakeRect(0, 0, width, height);
+			[jaggl_window setFrame:[jaggl_window frameRectForContentRect:jaggl_view.frame] display:YES];
+			[jaggl_context_appkit update];
+		}
 	});
 }
 
@@ -286,24 +322,16 @@ static void *jaggl_proc_addr(const char *name) {
              displayTime:(const CVTimeStamp *)displayTime {
 	CGLSetCurrentContext(context);
 
-	GLint width = (GLint) self.bounds.size.width;
-	GLint height = (GLint) self.bounds.size.height;
-
 	[lock lock];
 
-	/* TODO(gpe): improve resize support (fix corruption, do we need to resize the NSView/NSWindow?) */
-	if (width != framebuffer_width || height != framebuffer_height) {
-		[self deleteFramebuffer];
-		[self genFramebuffer];
+	glClearColor(0, 0, 0, 1);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		jaggl_view.frame = NSMakeRect(0, 0, width, height);
-		[jaggl_window setFrame:[jaggl_window frameRectForContentRect:jaggl_view.frame] display:YES];
-		[jaggl_context_appkit update];
+	if (framebuffer) {
+		glBindFramebufferEXT(GL_READ_FRAMEBUFFER_EXT, framebuffer);
+		glBlitFramebufferEXT(0, 0, framebuffer_width, framebuffer_height, 0, 0, framebuffer_width, framebuffer_height, GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+		glBindFramebufferEXT(GL_READ_FRAMEBUFFER_EXT, 0);
 	}
-
-	glBindFramebufferEXT(GL_READ_FRAMEBUFFER_EXT, framebuffer);
-	glBlitFramebufferEXT(0, 0, framebuffer_width, framebuffer_height, 0, 0, framebuffer_width, framebuffer_height, GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT, GL_NEAREST);
-	glBindFramebufferEXT(GL_READ_FRAMEBUFFER_EXT, 0);
 
 	[lock unlock];
 
@@ -319,10 +347,6 @@ static void *jaggl_proc_addr(const char *name) {
 }
 
 - (CGLContextObj)copyCGLContextForPixelFormat:(CGLPixelFormatObj)pix {
-	CGLSetCurrentContext(jaggl_onscreen_context);
-	[lock lock];
-	[self genFramebuffer];
-	[lock unlock];
 	return jaggl_onscreen_context;
 }
 
