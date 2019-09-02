@@ -295,6 +295,10 @@ static void *jaggl_proc_addr(const char *name) {
 	if (width != framebuffer_width || height != framebuffer_height) {
 		[self deleteFramebuffer];
 		[self genFramebuffer];
+
+		jaggl_view.frame = NSMakeRect(0, 0, width, height);
+		[jaggl_window setFrame:[jaggl_window frameRectForContentRect:jaggl_view.frame] display:YES];
+		[jaggl_context_appkit update];
 	}
 
 	glBindFramebufferEXT(GL_READ_FRAMEBUFFER_EXT, framebuffer);
