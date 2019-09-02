@@ -725,6 +725,8 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_swapBuffers(JNIEnv *env, jclass cl
 #elif defined(_WIN32)
 	result = (jboolean) SwapBuffers(jaggl_device);
 #elif defined(__APPLE__) && defined(__MACH__)
+	[jaggl_layer blit];
+
 	/*
 	 * This buffer swap isn't strictly necessary (in fact, I'm not sure if we
 	 * need to double buffer at all on macOS), but it is useful when the
@@ -735,8 +737,6 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_swapBuffers(JNIEnv *env, jclass cl
 	} else {
 		glFlush();
 	}
-
-	[jaggl_layer blit];
 #else
 #error Unsupported platform
 #endif
