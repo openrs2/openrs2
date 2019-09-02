@@ -327,11 +327,15 @@ static void *jaggl_proc_addr(const char *name) {
 }
 
 - (void)releaseCGLContext:(CGLContextObj)context {
-	CGLSetCurrentContext(context);
-	[lock lock];
-	[self deleteFramebuffer];
-	[lock unlock];
-	CGLClearDrawable(context);
+	/*
+	 * Ideally we'd delete the framebuffer/renderbuffers here, if they exist.
+	 * However, releaseCGLContext sometimes ends up being called after we
+	 * destroy the jaggl_onscreen_context, so attempting to call any gl*
+	 * functions here causes a segfault.
+	 *
+	 * Hopefully deleting the context will free up the
+	 * framebuffer/renderbuffers implicitly.
+	 */
 }
 @end
 #endif
