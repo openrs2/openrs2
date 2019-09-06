@@ -250,8 +250,7 @@
               <version>2.24</version>
             </path>
           </annotationProcessorPaths>
-          <source>12</source>
-          <target>12</target>
+          <release>12</release>
         </configuration>
       </plugin>
       <plugin>
