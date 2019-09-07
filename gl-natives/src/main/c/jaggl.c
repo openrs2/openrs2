@@ -242,7 +242,7 @@ static void *jaggl_proc_addr(const char *name) {
 	[lock lock];
 
 	/* get current size */
-	NSSize size = self.bounds.size;
+	CGSize size = self.bounds.size;
 	GLint width = (GLint) size.width;
 	GLint height = (GLint) size.height;
 
@@ -1162,7 +1162,7 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_choosePixelFormat1(JNIEnv *env, jc
 				 */
 				jint x = dsi->bounds.x; /* should be dsi->bounds.x - insets.left */
 				jint y = 0; /* should be dsi->bounds.y - insets.top */
-				jaggl_layer.frame = NSMakeRect(x, platformInfo.windowLayer.bounds.size.height - y - dsi->bounds.height, dsi->bounds.width, dsi->bounds.height);
+				jaggl_layer.frame = CGRectMake(x, platformInfo.windowLayer.bounds.size.height - y - dsi->bounds.height, dsi->bounds.width, dsi->bounds.height);
 				[jaggl_layer setNeedsDisplay];
 			});
 		} else {
