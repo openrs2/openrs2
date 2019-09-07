@@ -85,6 +85,28 @@
       </build>
     </profile>
     <profile>
+      <id>mac-legacy</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.github.maven-nar</groupId>
+            <artifactId>nar-maven-plugin</artifactId>
+            <configuration>
+              <linker>
+                <libs>
+                  <lib>
+                    <type>shared</type>
+                    <name>jawt</name>
+                    <directory>${nar.javaHome}/../Libraries</directory>
+                  </lib>
+                </libs>
+              </linker>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
       <id>unix</id>
       <activation>
         <os>
