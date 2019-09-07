@@ -369,6 +369,11 @@
                   <option>-Wno-unused-parameter</option>
                 </options>
               </c>
+              <linker>
+                <options>
+                  <option>-arch ${nar.arch}</option>
+                </options>
+              </linker>
             </configuration>
           </plugin>
         </plugins>
