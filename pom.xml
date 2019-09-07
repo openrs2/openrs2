@@ -34,6 +34,7 @@
   </modules>
 
   <properties>
+    <nar.javaHome>${java.home}</nar.javaHome>
     <openrs2.root>${project.basedir}</openrs2.root>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
