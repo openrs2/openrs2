@@ -9,10 +9,11 @@
 #include <GL/glext.h>
 #include <GL/wglext.h>
 #elif defined(__APPLE__) && defined(__MACH__)
-#include <Cocoa/Cocoa.h>
-#include <OpenGL/OpenGL.h>
+#include <AppKit/NSOpenGL.h>
+#include <AppKit/NSView.h>
+#include <AppKit/NSWindow.h>
 #include <OpenGL/gl.h>
-#include <QuartzCore/QuartzCore.h>
+#include <QuartzCore/CAOpenGLLayer.h>
 #include <dlfcn.h>
 #else
 #error Unsupported platform
