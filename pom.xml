@@ -372,7 +372,8 @@
               </c>
               <linker>
                 <options>
-                  <option>-arch ${nar.arch}</option>
+                  <option>-arch</option>
+                  <option>${nar.arch}</option>
                 </options>
               </linker>
             </configuration>
