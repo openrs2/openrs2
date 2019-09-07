@@ -11,6 +11,7 @@ import dev.openrs2.asm.classpath.Library;
 import dev.openrs2.asm.transform.Transformer;
 import dev.openrs2.bundler.transform.CachePathTransformer;
 import dev.openrs2.bundler.transform.HostCheckTransformer;
+import dev.openrs2.bundler.transform.MacResizeTransformer;
 import dev.openrs2.bundler.transform.RightClickTransformer;
 import dev.openrs2.deob.remap.PrefixRemapper;
 import dev.openrs2.deob.transform.BitShiftTransformer;
@@ -36,6 +37,7 @@ public final class Deobfuscator {
 		new OriginalNameTransformer(),
 		new CachePathTransformer(),
 		new HostCheckTransformer(),
+		new MacResizeTransformer(),
 		new RightClickTransformer(),
 		new OpaquePredicateTransformer(),
 		new ExceptionTracingTransformer(),
