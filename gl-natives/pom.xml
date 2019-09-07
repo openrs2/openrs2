@@ -86,6 +86,11 @@
     </profile>
     <profile>
       <id>mac-legacy</id>
+      <activation>
+        <file>
+          <exists>${nar.javaHome}/../Libraries</exists>
+        </file>
+      </activation>
       <build>
         <plugins>
           <plugin>
