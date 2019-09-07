@@ -40,7 +40,7 @@
               <lib>
                 <type>shared</type>
                 <name>jawt</name>
-                <directory>${java.home}/lib</directory>
+                <directory>${nar.javaHome}/lib</directory>
               </lib>
             </libs>
           </linker>
