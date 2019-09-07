@@ -1170,7 +1170,9 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_choosePixelFormat1(JNIEnv *env, jc
 			jaggl_view = platformInfo->view;
 
 			jaggl_view_observer = [[NSNotificationCenter defaultCenter] addObserverForName:NSViewFrameDidChangeNotification object:jaggl_view queue:nil usingBlock:^(NSNotification *note) {
-				[jaggl_context_appkit update];
+				if (jaggl_context_appkit) {
+					[jaggl_context_appkit update];
+				}
 			}];
 		}
 
