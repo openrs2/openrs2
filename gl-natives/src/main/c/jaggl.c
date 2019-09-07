@@ -27,14 +27,18 @@
 #include <stdlib.h>
 
 #if defined(__APPLE__) && defined(__MACH__)
-#define _JAGGL_JAWT_VERSION (JAWT_VERSION_1_4 | JAWT_MACOSX_USE_CALAYER)
-#else
-#define _JAGGL_JAWT_VERSION JAWT_VERSION_1_4
-#endif
-
 #define _JAGGL_GET(env) \
-	JAWT awt = { .version = (jint) _JAGGL_JAWT_VERSION }; \
+	JAWT awt = { .version = JAWT_VERSION_1_4 }; \
+	bool awt_valid = JAWT_GetAWT(env, &awt); \
+	if (!awt_valid) { \
+		awt.version |= JAWT_MACOSX_USE_CALAYER; \
+		awt_valid = JAWT_GetAWT(env, &awt); \
+	}
+#else
+#define _JAGGL_GET(env) \
+	JAWT awt = { .version = JAWT_VERSION_1_4 }; \
 	bool awt_valid = JAWT_GetAWT(env, &awt);
+#endif
 
 #define _JAGGL_GET_AND_LOCK(env) \
 	_JAGGL_GET(env); \
@@ -126,6 +130,11 @@ static HWND jaggl_window;
 static HDC jaggl_device;
 static HGLRC jaggl_context;
 #elif defined(__APPLE__) && defined(__MACH__)
+/* copy of JAWT_MacOSXDrawingSurfaceInfo from Java 6's jawt_md.h */
+struct jaggl_legacy_dsi {
+	NSView *view;
+};
+
 @interface JagGLLayer : CAOpenGLLayer
 {
 	@private
@@ -136,6 +145,7 @@ static HGLRC jaggl_context;
 }
 @end
 
+static bool jaggl_calayer;
 static CGLContextObj jaggl_onscreen_context;
 static CGLContextObj jaggl_context;
 static CGLPixelFormatObj jaggl_pix;
@@ -697,24 +707,26 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_destroy(JNIEnv *env, jclass cls) {
 			jaggl_context_appkit = NULL;
 		}
 
-		if (jaggl_view) {
-			[jaggl_view release];
-			jaggl_view = NULL;
-		}
+		if (jaggl_calayer) {
+			if (jaggl_view) {
+				[jaggl_view release];
+				jaggl_view = NULL;
+			}
 
-		if (jaggl_window) {
-			[jaggl_window release];
-			jaggl_window = NULL;
-		}
+			if (jaggl_window) {
+				[jaggl_window release];
+				jaggl_window = NULL;
+			}
 
-		if (jaggl_layer) {
-			[jaggl_layer removeFromSuperlayer];
-			[jaggl_layer release];
-			jaggl_layer = NULL;
+			if (jaggl_layer) {
+				[jaggl_layer removeFromSuperlayer];
+				[jaggl_layer release];
+				jaggl_layer = NULL;
+			}
 		}
 	});
 
-	if (jaggl_onscreen_context) {
+	if (jaggl_calayer && jaggl_onscreen_context) {
 		CGLDestroyContext(jaggl_onscreen_context);
 		jaggl_onscreen_context = NULL;
 	}
@@ -750,7 +762,9 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_swapBuffers(JNIEnv *env, jclass cl
 #elif defined(_WIN32)
 	result = (jboolean) SwapBuffers(jaggl_device);
 #elif defined(__APPLE__) && defined(__MACH__)
-	[jaggl_layer blit];
+	if (jaggl_calayer) {
+		[jaggl_layer blit];
+	}
 
 	/*
 	 * This buffer swap isn't strictly necessary (in fact, I'm not sure if we
@@ -796,7 +810,9 @@ JNIEXPORT void JNICALL Java_jaggl_context_setSwapInterval(JNIEnv *env, jclass cl
 #elif defined(__APPLE__) && defined(__MACH__)
 	GLint param = (GLint) interval;
 	CGLSetParameter(jaggl_context, kCGLCPSwapInterval, &param);
-	CGLSetParameter(jaggl_onscreen_context, kCGLCPSwapInterval, &param);
+	if (jaggl_calayer) {
+		CGLSetParameter(jaggl_onscreen_context, kCGLCPSwapInterval, &param);
+	}
 #else
 #error Unsupported platform
 #endif
@@ -1066,10 +1082,11 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_choosePixelFormat1(JNIEnv *env, jc
 
 	result = JNI_TRUE;
 #elif defined(__APPLE__) && defined(__MACH__)
-	id<JAWT_SurfaceLayers> platformInfo = (id<JAWT_SurfaceLayers>) dsi->platformInfo;
-	if (!platformInfo) {
+	if (!dsi->platformInfo) {
 		goto dsi_free;
 	}
+
+	jaggl_calayer = awt.version & (jint) JAWT_MACOSX_USE_CALAYER;
 
 	for (int i = 0; i < 2; i++) {
 		bool double_buffered = i == 0;
@@ -1109,34 +1126,41 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_choosePixelFormat1(JNIEnv *env, jc
 		jaggl_double_buffered = double_buffered;
 		jaggl_alpha_bits = alpha_bits;
 
-		CGLCreateContext(jaggl_pix, NULL, &jaggl_onscreen_context);
-		if (!jaggl_onscreen_context) {
-			CGLDestroyPixelFormat(jaggl_pix);
-			goto dsi_free;
+		if (jaggl_calayer) {
+			id<JAWT_SurfaceLayers> platformInfo = (id<JAWT_SurfaceLayers>) dsi->platformInfo;
+
+			CGLCreateContext(jaggl_pix, NULL, &jaggl_onscreen_context);
+			if (!jaggl_onscreen_context) {
+				CGLDestroyPixelFormat(jaggl_pix);
+				goto dsi_free;
+			}
+
+			dispatch_sync(dispatch_get_main_queue(), ^{
+				NSRect frame = NSMakeRect(0, 0, dsi->bounds.width, dsi->bounds.height);
+				jaggl_view = [[NSView alloc] initWithFrame:frame];
+
+				jaggl_window = [[NSWindow alloc] initWithContentRect:frame styleMask:NSWindowStyleMaskBorderless backing:NSBackingStoreBuffered defer:NO];
+				jaggl_window.contentView = jaggl_view;
+
+				jaggl_layer = [[JagGLLayer alloc] init];
+				platformInfo.layer = jaggl_layer;
+
+				/*
+				 * XXX(gpe): the DSI bounds include the top/left insets, which we
+				 * need to subtract here. Unfortunately, we can't access them here
+				 * easily. Ignoring the left inset and hard-coding y to zero work,
+				 * but only because windows don't have left borders and there is
+				 * nothing above the Canvas in the Frame.
+				 */
+				jint x = dsi->bounds.x; /* should be dsi->bounds.x - insets.left */
+				jint y = 0; /* should be dsi->bounds.y - insets.top */
+				jaggl_layer.frame = NSMakeRect(x, platformInfo.windowLayer.bounds.size.height - y - dsi->bounds.height, dsi->bounds.width, dsi->bounds.height);
+				[jaggl_layer setNeedsDisplay];
+			});
+		} else {
+			struct jaggl_legacy_dsi *platformInfo = (struct jaggl_legacy_dsi *) dsi->platformInfo;
+			jaggl_view = platformInfo->view;
 		}
-
-		dispatch_sync(dispatch_get_main_queue(), ^{
-			NSRect frame = NSMakeRect(0, 0, dsi->bounds.width, dsi->bounds.height);
-			jaggl_view = [[NSView alloc] initWithFrame:frame];
-
-			jaggl_window = [[NSWindow alloc] initWithContentRect:frame styleMask:NSWindowStyleMaskBorderless backing:NSBackingStoreBuffered defer:NO];
-			jaggl_window.contentView = jaggl_view;
-
-			jaggl_layer = [[JagGLLayer alloc] init];
-			platformInfo.layer = jaggl_layer;
-
-			/*
-			 * XXX(gpe): the DSI bounds include the top/left insets, which we
-			 * need to subtract here. Unfortunately, we can't access them here
-			 * easily. Ignoring the left inset and hard-coding y to zero work,
-			 * but only because windows don't have left borders and there is
-			 * nothing above the Canvas in the Frame.
-			 */
-			jint x = dsi->bounds.x; /* should be dsi->bounds.x - insets.left */
-			jint y = 0; /* should be dsi->bounds.y - insets.top */
-			jaggl_layer.frame = NSMakeRect(x, platformInfo.windowLayer.bounds.size.height - y - dsi->bounds.height, dsi->bounds.width, dsi->bounds.height);
-			[jaggl_layer setNeedsDisplay];
-		});
 
 		result = JNI_TRUE;
 		goto dsi_free;
