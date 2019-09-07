@@ -151,6 +151,7 @@ static CGLContextObj jaggl_context;
 static CGLPixelFormatObj jaggl_pix;
 static NSWindow *jaggl_window;
 static NSView *jaggl_view;
+static id<NSObject> jaggl_view_observer;
 static NSOpenGLContext *jaggl_context_appkit;
 static JagGLLayer *jaggl_layer;
 static bool jaggl_double_buffered;
@@ -723,6 +724,13 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_destroy(JNIEnv *env, jclass cls) {
 				[jaggl_layer release];
 				jaggl_layer = NULL;
 			}
+		} else {
+			if (jaggl_view_observer) {
+				[[NSNotificationCenter defaultCenter] removeObserver:jaggl_view_observer];
+				jaggl_view_observer = nil;
+			}
+
+			jaggl_view = NULL;
 		}
 	});
 
@@ -1160,6 +1168,10 @@ JNIEXPORT jboolean JNICALL Java_jaggl_context_choosePixelFormat1(JNIEnv *env, jc
 		} else {
 			struct jaggl_legacy_dsi *platformInfo = (struct jaggl_legacy_dsi *) dsi->platformInfo;
 			jaggl_view = platformInfo->view;
+
+			jaggl_view_observer = [[NSNotificationCenter defaultCenter] addObserverForName:NSViewFrameDidChangeNotification object:jaggl_view queue:nil usingBlock:^(NSNotification *note) {
+				[jaggl_context_appkit update];
+			}];
 		}
 
 		result = JNI_TRUE;
