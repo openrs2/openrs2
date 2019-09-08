@@ -37,6 +37,16 @@ The easiest way to achieve this is to open the command prompt with the
 The Java Development Kit and Apache Maven `bin` directories must be manually
 [added to your `%PATH%` variable][path].
 
+##### Cross-compiling
+
+To compile a 32-bit DLL on a 64-bit Windows system, open the 'x64_x86 Cross
+Tools Command Prompt for VS 2019' instead.
+
+Maven's `nar.javaHome` variable must point to a 32-bit JDK and `nar.arch` must
+be set to `x86`:
+
+    -Dnar.javaHome="C:\Program Files (x86)\path\to\jdk" -Dnar.arch=x86
+
 #### macOS
 
 Run `xcode-select --install` from the terminal to install the [Xcode][xcode]
@@ -45,6 +55,16 @@ command-line tools.
 The easiest way to install the Java Development Kit and Apache Maven is with the
 [Homebrew][homebrew] package manager. After installing Homebrew, run
 `brew cask install java` and `brew install maven`.
+
+##### Cross-compiling
+
+The last version of Java to support the 32-bit version of Mac OS X is the
+[legacy Java 6 runtime][mac-legacy-java].
+
+Pass the following flags to Maven to compile against the 32-bit version of the
+legacy runtime on a 64-bit macOS system:
+
+    -Dnar.javaHome=/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home -Dnar.arch=i386
 
 #### UNIX
 
@@ -64,6 +84,14 @@ or enable its backports repository.
 
 `-headless` packages are not sufficient as the `gl-natives` module is linked
 with `libjawt`.
+
+##### Cross-compiling
+
+To compile a 32-bit shared object on a 64-bit UNIX system, Maven's
+`nar.javaHome` variable must point to a 32-bit JDK and `nar.arch` must be set
+to `i386`:
+
+    -Dnar.javaHome=/path/to/jdk -Dnar.arch=i386
 
 ### Non-free components
 
@@ -155,6 +183,7 @@ OpenRS2. If not, see <https://www.gnu.org/licenses/>.
 [idea]: https://www.jetbrains.com/idea/
 [jdk]: https://jdk.java.net/
 [lgpl]: https://www.gnu.org/licenses/lgpl-3.0.html
+[mac-legacy-java]: https://support.apple.com/kb/DL1572
 [maven]: https://maven.apache.org/
 [mesa]: https://www.mesa3d.org/
 [opengl]: https://www.opengl.org/
