@@ -353,33 +353,6 @@
       <modules>
         <module>gl-natives</module>
       </modules>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>com.github.maven-nar</groupId>
-            <artifactId>nar-maven-plugin</artifactId>
-            <configuration>
-              <c>
-                <options>
-                  <option>-x</option>
-                  <option>objective-c</option>
-                  <option>-Wall</option>
-                  <option>-Wextra</option>
-                  <option>-pedantic</option>
-                  <option>-Wno-int-to-void-pointer-cast</option>
-                  <option>-Wno-unused-parameter</option>
-                </options>
-              </c>
-              <linker>
-                <options>
-                  <option>-arch</option>
-                  <option>${nar.arch}</option>
-                </options>
-              </linker>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
     </profile>
     <profile>
       <id>unix</id>
@@ -393,30 +366,6 @@
         <module>gl-natives</module>
         <module>gl-dri-natives</module>
       </modules>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>com.github.maven-nar</groupId>
-            <artifactId>nar-maven-plugin</artifactId>
-            <configuration>
-              <c>
-                <options>
-                  <option>-Wall</option>
-                  <option>-Wextra</option>
-                  <option>-pedantic</option>
-                  <option>-Wno-int-to-void-pointer-cast</option>
-                  <option>-Wno-unused-parameter</option>
-                </options>
-              </c>
-              <linker>
-                <options>
-                  <option>-fPIC</option>
-                </options>
-              </linker>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
     </profile>
     <profile>
       <id>windows</id>
@@ -429,40 +378,6 @@
         <module>gl-natives</module>
         <module>misc-natives</module>
       </modules>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>com.github.maven-nar</groupId>
-            <artifactId>nar-maven-plugin</artifactId>
-            <configuration>
-              <c>
-                <defines>
-                  <define>WIN32_LEAN_AND_MEAN</define>
-                </defines>
-                <options>
-                  <option>/Wall</option>
-                  <!-- unused parameter -->
-                  <option>/wd4100</option>
-                  <!-- non-standard extension: nameless struct/union (in jawt_md.h) -->
-                  <option>/wd4201</option>
-                  <!-- non-standard extension: non-constant aggregate initializer -->
-                  <option>/wd4204</option>
-                  <!-- no function prototype given (in winuser.h) -->
-                  <option>/wd4255</option>
-                  <!-- type cast: truncation from <type> to <type> (only on 32-bit machines) -->
-                  <option>/wd4305</option>
-                  <!-- undefined processor macro (in vcruntime.h and winioctl.h) -->
-                  <option>/wd4668</option>
-                  <!-- padding after data member (in jawt.h and jni.h) -->
-                  <option>/wd4820</option>
-                  <!-- compiler will insert Spectre mitigation -->
-                  <option>/wd5045</option>
-                </options>
-              </c>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
     </profile>
   </profiles>
 </project>
