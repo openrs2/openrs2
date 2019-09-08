@@ -32,6 +32,9 @@ public final class CachePathTransformer extends Transformer {
 			if (ldc.cst.equals(".jagex_cache_") || ldc.cst.equals(".file_store_")) {
 				ldc.cst = ".openrs2_cache_";
 				paths++;
+			} else if (ldc.cst.equals("jagex_")) {
+				ldc.cst = ".openrs2_";
+				paths++;
 			}
 		}
 
