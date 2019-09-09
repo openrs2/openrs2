@@ -85,6 +85,14 @@ or enable its backports repository.
 `-headless` packages are not sufficient as the `gl-natives` module is linked
 with `libjawt`.
 
+##### Compatibility
+
+The `aol.properties` file uses the normalized `os.name` property as part of the
+architecture/operating system/linker key. It currently only contains properties
+for Linux. While the default settings will probably work for other UNIX-like
+systems, the defaults are not ideal. For example, `g++` will be used as the
+linker instead of `gcc`, introducing a redundant dependency on `libstdc++`.
+
 ##### Cross-compiling
 
 To compile a 32-bit shared object on a 64-bit UNIX system, Maven's
