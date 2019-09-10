@@ -321,6 +321,7 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <configuration>
           <detectJavaApiLink>true</detectJavaApiLink>
+          <detectLinks>true</detectLinks>
           <show>private</show>
         </configuration>
         <reportSets>
