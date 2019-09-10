@@ -319,6 +319,10 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
+        <configuration>
+          <detectJavaApiLink>true</detectJavaApiLink>
+          <show>private</show>
+        </configuration>
         <reportSets>
           <reportSet>
             <id>aggregate</id>
