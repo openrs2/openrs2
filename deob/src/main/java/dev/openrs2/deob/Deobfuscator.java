@@ -14,6 +14,7 @@ import dev.openrs2.bundler.transform.HostCheckTransformer;
 import dev.openrs2.bundler.transform.MacResizeTransformer;
 import dev.openrs2.bundler.transform.RightClickTransformer;
 import dev.openrs2.deob.remap.PrefixRemapper;
+import dev.openrs2.deob.transform.AccessTransformer;
 import dev.openrs2.deob.transform.BitShiftTransformer;
 import dev.openrs2.deob.transform.BitwiseOpTransformer;
 import dev.openrs2.deob.transform.CanvasTransformer;
@@ -49,7 +50,8 @@ public final class Deobfuscator {
 		new RemapTransformer(),
 		new DummyArgTransformer(),
 		new DummyLocalTransformer(),
-		new UnusedArgTransformer()
+		new UnusedArgTransformer(),
+		new AccessTransformer()
 	);
 
 	public static void main(String[] args) throws IOException, AnalyzerException {
