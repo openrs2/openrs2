@@ -208,6 +208,15 @@ public final class InsnMatcher {
 			Opcodes.ICONST_4,
 			Opcodes.ICONST_5
 		})
+		.put("FCONST", new int[] {
+			Opcodes.FCONST_0,
+			Opcodes.FCONST_1,
+			Opcodes.FCONST_2
+		})
+		.put("DCONST", new int[] {
+			Opcodes.DCONST_0,
+			Opcodes.DCONST_1
+		})
 		.build();
 
 	private static char opcodeToCodepoint(int opcode) {
