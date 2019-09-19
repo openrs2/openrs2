@@ -33,6 +33,16 @@
     <module>util</module>
   </modules>
 
+  <scm>
+    <connection>scm:git:https://git.openrs2.dev/openrs2/openrs2.git</connection>
+    <developerConnection>scm:git:git@git.openrs2.dev:openrs2/openrs2.git</developerConnection>
+    <url>https://git.openrs2.dev/openrs2/openrs2</url>
+  </scm>
+  <issueManagement>
+    <system>Gitea</system>
+    <url>https://git.openrs2.dev/openrs2/openrs2/issues</url>
+  </issueManagement>
+
   <properties>
     <nar.javaHome>${java.home}</nar.javaHome>
     <openrs2.root>${project.basedir}</openrs2.root>
