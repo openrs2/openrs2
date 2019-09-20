@@ -42,6 +42,10 @@
     <system>Gitea</system>
     <url>https://git.openrs2.dev/openrs2/openrs2/issues</url>
   </issueManagement>
+  <ciManagement>
+    <system>Jenkins</system>
+    <url>https://build.openrs2.dev/job/openrs2/</url>
+  </ciManagement>
 
   <properties>
     <nar.javaHome>${java.home}</nar.javaHome>
