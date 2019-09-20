@@ -115,6 +115,31 @@
     </dependencies>
   </dependencyManagement>
 
+  <repositories>
+    <repository>
+      <id>openrs2</id>
+      <name>OpenRS2</name>
+      <url>https://repo.openrs2.dev/repository/openrs2/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>openrs2-snapshots</id>
+      <name>OpenRS2 Snapshots</name>
+      <url>https://repo.openrs2.dev/repository/openrs2-snapshots/</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+
   <build>
     <pluginManagement>
       <plugins>
