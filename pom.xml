@@ -15,6 +15,10 @@
   </description>
   <url>https://www.openrs2.dev/</url>
   <inceptionYear>2019</inceptionYear>
+  <organization>
+    <name>OpenRS2 Authors</name>
+    <url>https://www.openrs2.dev/</url>
+  </organization>
   <licenses>
     <license>
       <name>GNU General Public License v3.0</name>
