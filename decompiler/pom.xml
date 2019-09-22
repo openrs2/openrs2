@@ -17,10 +17,6 @@
     options required to decompile the RuneScape client and its dependencies.
   </description>
 
-  <properties>
-    <openrs2.root>${project.parent.basedir}</openrs2.root>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>dev.openrs2</groupId>

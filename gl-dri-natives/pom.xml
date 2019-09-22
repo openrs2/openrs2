@@ -23,10 +23,6 @@
     </license>
   </licenses>
 
-  <properties>
-    <openrs2.root>${project.parent.basedir}</openrs2.root>
-  </properties>
-
   <build>
     <plugins>
       <plugin>

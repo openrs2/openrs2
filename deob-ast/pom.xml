@@ -17,10 +17,6 @@
     may be run after decompiling the client.
   </description>
 
-  <properties>
-    <openrs2.root>${project.parent.basedir}</openrs2.root>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>ch.qos.logback</groupId>

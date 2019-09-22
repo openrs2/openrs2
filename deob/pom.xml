@@ -18,10 +18,6 @@
     it performs are required for the decompiler to produce valid output.
   </description>
 
-  <properties>
-    <openrs2.root>${project.parent.basedir}</openrs2.root>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>dev.openrs2</groupId>

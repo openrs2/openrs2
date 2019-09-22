@@ -46,7 +46,6 @@
 
   <properties>
     <nar.javaHome>${java.home}</nar.javaHome>
-    <openrs2.root>${project.basedir}</openrs2.root>
   </properties>
 
   <dependencyManagement>

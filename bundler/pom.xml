@@ -17,10 +17,6 @@
     OpenRS2 server and improve compatibility with modern JVMs.
   </description>
 
-  <properties>
-    <openrs2.root>${project.parent.basedir}</openrs2.root>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>dev.openrs2</groupId>

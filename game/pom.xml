@@ -16,10 +16,6 @@
     Reimplementation of the RuneScape game server software.
   </description>
 
-  <properties>
-    <openrs2.root>${project.parent.basedir}</openrs2.root>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>co.paralleluniverse</groupId>
