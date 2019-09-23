@@ -44,10 +44,6 @@
     <url>https://build.openrs2.dev/job/openrs2/</url>
   </ciManagement>
 
-  <properties>
-    <nar.javaHome>${java.home}</nar.javaHome>
-  </properties>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -141,26 +137,6 @@
 
   <build>
     <plugins>
-      <plugin>
-        <groupId>com.github.maven-nar</groupId>
-        <artifactId>nar-maven-plugin</artifactId>
-        <extensions>true</extensions>
-        <configuration>
-          <libraries>
-            <library>
-              <type>shared</type>
-              <subSystem>gui</subSystem>
-              <linkCPP>false</linkCPP>
-            </library>
-          </libraries>
-          <c>
-            <optimize>full</optimize>
-          </c>
-          <java>
-            <include>true</include>
-          </java>
-        </configuration>
-      </plugin>
       <plugin>
         <groupId>net.revelc.code</groupId>
         <artifactId>impsort-maven-plugin</artifactId>
@@ -281,42 +257,6 @@
       </activation>
       <modules>
         <module>nonfree</module>
-      </modules>
-    </profile>
-    <profile>
-      <id>mac</id>
-      <activation>
-        <os>
-          <family>mac</family>
-        </os>
-      </activation>
-      <modules>
-        <module>gl-natives</module>
-      </modules>
-    </profile>
-    <profile>
-      <id>unix</id>
-      <activation>
-        <os>
-          <family>unix</family>
-          <name>!mac os x</name>
-        </os>
-      </activation>
-      <modules>
-        <module>gl-natives</module>
-        <module>gl-dri-natives</module>
-      </modules>
-    </profile>
-    <profile>
-      <id>windows</id>
-      <activation>
-        <os>
-          <family>windows</family>
-        </os>
-      </activation>
-      <modules>
-        <module>gl-natives</module>
-        <module>misc-natives</module>
       </modules>
     </profile>
   </profiles>
