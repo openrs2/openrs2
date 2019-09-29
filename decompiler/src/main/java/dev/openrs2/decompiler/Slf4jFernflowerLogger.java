@@ -23,12 +23,16 @@ public final class Slf4jFernflowerLogger extends IFernflowerLogger {
 		switch (severity) {
 		case TRACE:
 			logger.trace(message);
+			break;
 		case INFO:
 			logger.info(message);
+			break;
 		case WARN:
 			logger.warn(message);
+			break;
 		case ERROR:
 			logger.error(message);
+			break;
 		default:
 			throw new IllegalArgumentException();
 		}
@@ -39,12 +43,16 @@ public final class Slf4jFernflowerLogger extends IFernflowerLogger {
 		switch (severity) {
 		case TRACE:
 			logger.trace(message, t);
+			break;
 		case INFO:
 			logger.info(message, t);
+			break;
 		case WARN:
 			logger.warn(message, t);
+			break;
 		case ERROR:
 			logger.error(message, t);
+			break;
 		default:
 			throw new IllegalArgumentException();
 		}
