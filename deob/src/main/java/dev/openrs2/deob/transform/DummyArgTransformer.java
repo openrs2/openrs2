@@ -18,7 +18,7 @@ import dev.openrs2.asm.classpath.Library;
 import dev.openrs2.asm.transform.Transformer;
 import dev.openrs2.deob.ArgRef;
 import dev.openrs2.deob.analysis.IntInterpreter;
-import dev.openrs2.deob.analysis.IntValue;
+import dev.openrs2.deob.analysis.SourcedIntValue;
 import dev.openrs2.util.collect.DisjointSet;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
@@ -115,15 +115,21 @@ public final class DummyArgTransformer extends Transformer {
 		}
 	}
 
-	private static ImmutableSet<Integer> union(Collection<IntValue> intValues) {
+	private static ImmutableSet<Integer> union(DisjointSet.Partition<MemberRef> method, Collection<SourcedIntValue> intValues) {
 		var builder = ImmutableSet.<Integer>builder();
 
 		for (var value : intValues) {
-			if (value.isUnknown()) {
+			var intValue = value.getIntValue();
+			if (intValue.isUnknown()) {
 				return null;
 			}
 
-			builder.addAll(value.getIntValues());
+			var source = value.getSource();
+			if (source.equals(method)) {
+				continue;
+			}
+
+			builder.addAll(intValue.getIntValues());
 		}
 
 		var set = builder.build();
@@ -134,7 +140,7 @@ public final class DummyArgTransformer extends Transformer {
 		return set;
 	}
 
-	private final Multimap<ArgRef, IntValue> argValues = HashMultimap.create();
+	private final Multimap<ArgRef, SourcedIntValue> argValues = HashMultimap.create();
 	private final Map<DisjointSet.Partition<MemberRef>, ImmutableSet<Integer>[]> constArgs = new HashMap<>();
 	private DisjointSet<MemberRef> inheritedMethodSets;
 	private int branchesSimplified, constantsInlined;
@@ -188,7 +194,7 @@ public final class DummyArgTransformer extends Transformer {
 				var args = Type.getArgumentTypes(invoke.desc).length;
 				for (int j = 0, k = 0; j < args; j++) {
 					var arg = frame.getStack(stackSize - args + j);
-					argValues.put(new ArgRef(invokedMethod, k), arg);
+					argValues.put(new ArgRef(invokedMethod, k), new SourcedIntValue(parentMethod, arg));
 					k += arg.getSize();
 				}
 				break;
@@ -297,7 +303,7 @@ public final class DummyArgTransformer extends Transformer {
 			@SuppressWarnings("unchecked")
 			var parameters = (ImmutableSet<Integer>[]) new ImmutableSet<?>[args];
 			for (var i = 0; i < args; i++) {
-				var parameter = union(argValues.get(new ArgRef(method, i)));
+				var parameter = union(method, argValues.get(new ArgRef(method, i)));
 				if (parameter != null) {
 					allUnknown = false;
 				}
