@@ -22,8 +22,7 @@ public final class CachePathTransformer extends Transformer {
 
 	@Override
 	protected boolean transformCode(ClassPath classPath, Library library, ClassNode clazz, MethodNode method) {
-		for (var it = method.instructions.iterator(); it.hasNext(); ) {
-			var insn = it.next();
+		for (var insn : method.instructions) {
 			if (insn.getOpcode() != Opcodes.LDC) {
 				continue;
 			}

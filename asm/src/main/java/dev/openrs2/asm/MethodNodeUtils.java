@@ -109,8 +109,7 @@ public final class MethodNodeUtils {
 			method.invisibleLocalVariableAnnotations.forEach(v -> v.index = remapAll(v.index, argType, localIndex));
 		}
 
-		for (var it = method.instructions.iterator(); it.hasNext(); ) {
-			var insn = it.next();
+		for (var insn : method.instructions) {
 			switch (insn.getType()) {
 			case AbstractInsnNode.VAR_INSN:
 				var varInsn = (VarInsnNode) insn;
