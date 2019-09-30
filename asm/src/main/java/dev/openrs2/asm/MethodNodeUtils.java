@@ -2,6 +2,7 @@ package dev.openrs2.asm;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,8 +12,12 @@ import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.AnnotationNode;
 import org.objectweb.asm.tree.FrameNode;
 import org.objectweb.asm.tree.IincInsnNode;
+import org.objectweb.asm.tree.LabelNode;
 import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.VarInsnNode;
+import org.objectweb.asm.tree.analysis.Analyzer;
+import org.objectweb.asm.tree.analysis.AnalyzerException;
+import org.objectweb.asm.tree.analysis.BasicInterpreter;
 
 public final class MethodNodeUtils {
 	private static int localIndex(int access, List<Type> argTypes, int argIndex) {
@@ -127,6 +132,36 @@ public final class MethodNodeUtils {
 				break;
 			}
 		}
+	}
+
+	public static void removeDeadCode(String owner, MethodNode method) throws AnalyzerException {
+		boolean changed;
+		do {
+			changed = false;
+
+			var analyzer = new Analyzer<>(new BasicInterpreter());
+			var frames = analyzer.analyze(owner, method);
+
+			var deadLabels = new HashSet<LabelNode>();
+			var i = 0;
+			for (var it = method.instructions.iterator(); it.hasNext(); ) {
+				var insn = it.next();
+				if (frames[i++] != null) {
+					continue;
+				}
+
+				if (insn.getType() == AbstractInsnNode.LABEL) {
+					deadLabels.add((LabelNode) insn);
+				} else {
+					it.remove();
+					changed = true;
+				}
+			}
+
+			if (method.tryCatchBlocks.removeIf(tryCatch -> deadLabels.contains(tryCatch.start) && deadLabels.contains(tryCatch.end))) {
+				changed = true;
+			}
+		} while (changed);
 	}
 
 	private MethodNodeUtils() {
