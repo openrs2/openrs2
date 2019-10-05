@@ -20,6 +20,7 @@
   </description>
 
   <modules>
+    <module>all</module>
     <module>asm</module>
     <module>bundler</module>
     <module>decompiler</module>
