@@ -30,7 +30,6 @@
     <dependency>
       <groupId>dev.openrs2</groupId>
       <artifactId>openrs2-natives-all</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
     </dependency>
   </dependencies>
 </project>
