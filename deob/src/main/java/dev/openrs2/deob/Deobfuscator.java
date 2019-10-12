@@ -9,10 +9,7 @@ import com.google.common.collect.ImmutableList;
 import dev.openrs2.asm.classpath.ClassPath;
 import dev.openrs2.asm.classpath.Library;
 import dev.openrs2.asm.transform.Transformer;
-import dev.openrs2.bundler.transform.CachePathTransformer;
-import dev.openrs2.bundler.transform.HostCheckTransformer;
-import dev.openrs2.bundler.transform.MacResizeTransformer;
-import dev.openrs2.bundler.transform.RightClickTransformer;
+import dev.openrs2.bundler.Bundler;
 import dev.openrs2.deob.remap.PrefixRemapper;
 import dev.openrs2.deob.transform.AccessTransformer;
 import dev.openrs2.deob.transform.BitShiftTransformer;
@@ -34,25 +31,22 @@ import org.slf4j.LoggerFactory;
 public final class Deobfuscator {
 	private static final Logger logger = LoggerFactory.getLogger(Deobfuscator.class);
 
-	private static final ImmutableList<Transformer> TRANSFORMERS = ImmutableList.of(
-		new OriginalNameTransformer(),
-		new CachePathTransformer(),
-		new HostCheckTransformer(),
-		new MacResizeTransformer(),
-		new RightClickTransformer(),
-		new OpaquePredicateTransformer(),
-		new ExceptionTracingTransformer(),
-		new BitShiftTransformer(),
-		new CounterTransformer(),
-		new CanvasTransformer(),
-		new FieldOrderTransformer(),
-		new BitwiseOpTransformer(),
-		new RemapTransformer(),
-		new DummyArgTransformer(),
-		new DummyLocalTransformer(),
-		new UnusedArgTransformer(),
-		new AccessTransformer()
-	);
+	private static final ImmutableList<Transformer> TRANSFORMERS = ImmutableList.<Transformer>builder()
+		.add(new OriginalNameTransformer())
+		.addAll(Bundler.TRANSFORMERS)
+		.add(new OpaquePredicateTransformer())
+		.add(new ExceptionTracingTransformer())
+		.add(new BitShiftTransformer())
+		.add(new CounterTransformer())
+		.add(new CanvasTransformer())
+		.add(new FieldOrderTransformer())
+		.add(new BitwiseOpTransformer())
+		.add(new RemapTransformer())
+		.add(new DummyArgTransformer())
+		.add(new DummyLocalTransformer())
+		.add(new UnusedArgTransformer())
+		.add(new AccessTransformer())
+		.build();
 
 	public static void main(String[] args) throws IOException, AnalyzerException {
 		var deobfuscator = new Deobfuscator(Paths.get("nonfree/code"), Paths.get("nonfree/code/deob"));
