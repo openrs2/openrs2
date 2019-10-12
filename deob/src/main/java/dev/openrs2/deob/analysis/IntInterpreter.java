@@ -221,6 +221,10 @@ public final class IntInterpreter extends Interpreter<IntValue> {
 			return null;
 		}
 
+		if (value1.equals(value2)) {
+			return value1;
+		}
+
 		if (value1.isUnknown() || value2.isUnknown()) {
 			return IntValue.newUnknown(basicValue);
 		}
