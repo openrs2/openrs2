@@ -16,8 +16,7 @@ import org.objectweb.asm.tree.analysis.BasicValue;
 import org.objectweb.asm.tree.analysis.Interpreter;
 
 public final class IntInterpreter extends Interpreter<IntValue> {
-	// TODO(gpe): this is fairly arbitrary and will need tweaking
-	private static final int MAX_TRACKED_VALUES = 8;
+	private static final int MAX_TRACKED_VALUES = 1;
 
 	private final Interpreter<BasicValue> basicInterpreter = new BasicInterpreter();
 	private final ImmutableSet<Integer>[] parameters;
