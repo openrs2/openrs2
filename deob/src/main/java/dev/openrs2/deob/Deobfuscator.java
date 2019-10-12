@@ -23,6 +23,7 @@ import dev.openrs2.deob.transform.FieldOrderTransformer;
 import dev.openrs2.deob.transform.OpaquePredicateTransformer;
 import dev.openrs2.deob.transform.OriginalNameTransformer;
 import dev.openrs2.deob.transform.RemapTransformer;
+import dev.openrs2.deob.transform.ResetTransformer;
 import dev.openrs2.deob.transform.UnusedArgTransformer;
 import org.objectweb.asm.tree.analysis.AnalyzerException;
 import org.slf4j.Logger;
@@ -45,6 +46,7 @@ public final class Deobfuscator {
 		.add(new DummyArgTransformer())
 		.add(new DummyLocalTransformer())
 		.add(new UnusedArgTransformer())
+		.add(new ResetTransformer())
 		.add(new AccessTransformer())
 		.build();
 
