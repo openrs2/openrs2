@@ -1,5 +1,7 @@
 # OpenRS2
 
+[![Build status badge](https://build.openrs2.dev/buildStatus/icon?job=openrs2&build=lastCompleted)](https://build.openrs2.dev/job/openrs2/)
+
 ## Introduction
 
 OpenRS2 is an open-source multiplayer game server and suite of associated
