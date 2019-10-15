@@ -5,7 +5,7 @@
   <parent>
     <groupId>dev.openrs2</groupId>
     <artifactId>openrs2-parent</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
   </parent>
 
   <artifactId>openrs2</artifactId>
@@ -75,7 +75,7 @@
       <dependency>
         <groupId>dev.openrs2</groupId>
         <artifactId>fernflower</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
       </dependency>
       <dependency>
         <groupId>dev.openrs2</groupId>
@@ -85,7 +85,7 @@
       <dependency>
         <groupId>dev.openrs2</groupId>
         <artifactId>pack200</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
       </dependency>
       <dependency>
         <groupId>org.ow2.asm</groupId>
