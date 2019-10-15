@@ -12,7 +12,7 @@ released in late 2009.
 
 Building OpenRS2 requires the following pieces of software:
 
-* [Java Development Kit][jdk] (version 12)
+* [Java Development Kit][jdk] (version 11)
 * [Apache Maven][maven] (version 3.3.9 or later)
 
 ### Non-free components
