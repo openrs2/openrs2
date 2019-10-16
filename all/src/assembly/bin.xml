@@ -9,12 +9,22 @@
       <directory>${project.basedir}/src/bin</directory>
       <outputDirectory>bin</outputDirectory>
     </fileSet>
+    <fileSet>
+      <directory>${project.parent.basedir}/docs</directory>
+      <outputDirectory>docs</outputDirectory>
+    </fileSet>
   </fileSets>
   <files>
     <file>
       <source>${project.build.directory}/${project.artifactId}-${project.version}-jar-with-dependencies.jar</source>
       <outputDirectory>lib</outputDirectory>
       <destName>openrs2.jar</destName>
+    </file>
+    <file>
+      <source>${project.parent.basedir}/COPYING</source>
+    </file>
+    <file>
+      <source>${project.parent.basedir}/README.md</source>
     </file>
   </files>
 </assembly>
