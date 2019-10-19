@@ -188,7 +188,7 @@ public final class TypedRemapper extends Remapper {
 				return true;
 			}
 
-			if (clazz.isNative(new MemberDesc(method.getName(), method.getDesc()))) {
+			if (clazz.isNative(new MemberDesc(method))) {
 				return true;
 			}
 		}

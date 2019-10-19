@@ -49,14 +49,14 @@ public final class AsmClassMetadata extends ClassMetadata {
 	@Override
 	public ImmutableList<MemberDesc> getFields() {
 		return clazz.fields.stream()
-			.map(f -> new MemberDesc(f.name, f.desc))
+			.map(MemberDesc::new)
 			.collect(ImmutableList.toImmutableList());
 	}
 
 	@Override
 	public ImmutableList<MemberDesc> getMethods() {
 		return clazz.methods.stream()
-			.map(m -> new MemberDesc(m.name, m.desc))
+			.map(MemberDesc::new)
 			.collect(ImmutableList.toImmutableList());
 	}
 

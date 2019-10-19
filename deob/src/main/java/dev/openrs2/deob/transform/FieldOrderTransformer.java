@@ -33,15 +33,15 @@ public final class FieldOrderTransformer extends Transformer {
 						continue;
 					}
 
-					var desc = new MemberDesc(putfield.name, putfield.desc);
+					var desc = new MemberDesc(putfield);
 					if (!fields.containsKey(desc)) {
 						fields.put(desc, index++);
 					}
 				}
 
 				clazz.fields.sort((a, b) -> {
-					var indexA = fields.getOrDefault(new MemberDesc(a.name, a.desc), -1);
-					var indexB = fields.getOrDefault(new MemberDesc(b.name, b.desc), -1);
+					var indexA = fields.getOrDefault(new MemberDesc(a), -1);
+					var indexB = fields.getOrDefault(new MemberDesc(b), -1);
 					return Integer.compare(indexA, indexB);
 				});
 			});
