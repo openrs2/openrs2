@@ -19,6 +19,7 @@ import dev.openrs2.deob.ast.transform.ComplementTransformer;
 import dev.openrs2.deob.ast.transform.EncloseTransformer;
 import dev.openrs2.deob.ast.transform.IfElseTransformer;
 import dev.openrs2.deob.ast.transform.NegativeLiteralTransformer;
+import dev.openrs2.deob.ast.transform.NewInstanceTransformer;
 import dev.openrs2.deob.ast.transform.TernaryTransformer;
 import dev.openrs2.deob.ast.transform.Transformer;
 import dev.openrs2.deob.ast.transform.UnencloseTransformer;
@@ -35,6 +36,7 @@ public final class AstDeobfuscator {
 		new AddSubTransformer(),
 		new BitMaskTransformer(),
 		new ValueOfTransformer(),
+		new NewInstanceTransformer(),
 		new EncloseTransformer()
 	);
 
