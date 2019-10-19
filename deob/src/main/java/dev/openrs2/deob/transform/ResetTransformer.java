@@ -59,7 +59,7 @@ public final class ResetTransformer extends Transformer {
 				continue;
 			}
 
-			return new MemberRef(invoke.owner, invoke.name, invoke.desc);
+			return new MemberRef(invoke);
 		}
 
 		return null;
@@ -74,7 +74,7 @@ public final class ResetTransformer extends Transformer {
 			}
 
 			var invoke = (MethodInsnNode) insn;
-			resetMethods.add(new MemberRef(invoke.owner, invoke.name, invoke.desc));
+			resetMethods.add(new MemberRef(invoke));
 		}
 	}
 
@@ -117,7 +117,7 @@ public final class ResetTransformer extends Transformer {
 
 	@Override
 	protected boolean transformClass(ClassPath classPath, Library library, ClassNode clazz) {
-		clazz.methods.removeIf(m -> resetMethods.contains(new MemberRef(clazz.name, m.name, m.desc)));
+		clazz.methods.removeIf(m -> resetMethods.contains(new MemberRef(clazz, m)));
 		return false;
 	}
 

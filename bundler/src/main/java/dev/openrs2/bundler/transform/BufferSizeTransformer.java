@@ -30,7 +30,7 @@ public final class BufferSizeTransformer extends Transformer {
 			})
 			.map(match -> {
 				var getstatic = (FieldInsnNode) match.get(2);
-				return new MemberRef(getstatic.owner, getstatic.name, getstatic.desc);
+				return new MemberRef(getstatic);
 			})
 			.findAny();
 	}

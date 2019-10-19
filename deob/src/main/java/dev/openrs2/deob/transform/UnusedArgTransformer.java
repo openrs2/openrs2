@@ -75,7 +75,7 @@ public final class UnusedArgTransformer extends Transformer {
 	}
 
 	private void populateRetainedArgs(ClassPath classPath, ClassNode clazz, MethodNode method) throws AnalyzerException {
-		var partition = inheritedMethodSets.get(new MemberRef(clazz.name, method.name, method.desc));
+		var partition = inheritedMethodSets.get(new MemberRef(clazz, method));
 		var localToArgMap = createLocalToArgMap(method);
 
 		var analyzer = new Analyzer<>(new ConstSourceInterpreter());
@@ -103,7 +103,7 @@ public final class UnusedArgTransformer extends Transformer {
 			case Opcodes.INVOKESTATIC:
 			case Opcodes.INVOKEINTERFACE:
 				var invoke = (MethodInsnNode) insn;
-				var invokePartition = inheritedMethodSets.get(new MemberRef(invoke.owner, invoke.name, invoke.desc));
+				var invokePartition = inheritedMethodSets.get(new MemberRef(invoke));
 				if (invokePartition == null || TypedRemapper.isMethodImmutable(classPath, invokePartition)) {
 					continue;
 				}
@@ -142,7 +142,7 @@ public final class UnusedArgTransformer extends Transformer {
 				}
 
 				var methodInsn = (MethodInsnNode) insn;
-				var partition = inheritedMethodSets.get(new MemberRef(methodInsn.owner, methodInsn.name, methodInsn.desc));
+				var partition = inheritedMethodSets.get(new MemberRef(methodInsn));
 				if (partition == null || TypedRemapper.isMethodImmutable(classPath, partition)) {
 					continue;
 				}
@@ -174,7 +174,7 @@ public final class UnusedArgTransformer extends Transformer {
 	@Override
 	protected boolean postTransformMethod(ClassPath classPath, Library library, ClassNode clazz, MethodNode method) {
 		/* delete unused int args from the method itself */
-		var partition = inheritedMethodSets.get(new MemberRef(clazz.name, method.name, method.desc));
+		var partition = inheritedMethodSets.get(new MemberRef(clazz, method));
 		if (TypedRemapper.isMethodImmutable(classPath, partition)) {
 			return false;
 		}

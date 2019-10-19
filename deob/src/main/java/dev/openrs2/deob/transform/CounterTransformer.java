@@ -55,19 +55,19 @@ public final class CounterTransformer extends Transformer {
 			}
 
 			var fieldInsn = (FieldInsnNode) insn;
-			references.merge(new MemberRef(fieldInsn.owner, fieldInsn.name, fieldInsn.desc), 1, Integer::sum);
+			references.merge(new MemberRef(fieldInsn), 1, Integer::sum);
 		}
 
 		RESET_PATTERN.match(method).forEach(match -> {
 			var putstatic = (FieldInsnNode) match.get(1);
-			resets.merge(new MemberRef(putstatic.owner, putstatic.name, putstatic.desc), 1, Integer::sum);
+			resets.merge(new MemberRef(putstatic), 1, Integer::sum);
 		});
 
 		INCREMENT_PATTERN.match(method).forEach(match -> {
 			var getstatic = (FieldInsnNode) match.get(0);
 			var putstatic = (FieldInsnNode) match.get(3);
 			if (getstatic.owner.equals(putstatic.owner) && getstatic.name.equals(putstatic.name) && getstatic.desc.equals(putstatic.desc)) {
-				increments.merge(new MemberRef(putstatic.owner, putstatic.name, putstatic.desc), 1, Integer::sum);
+				increments.merge(new MemberRef(putstatic), 1, Integer::sum);
 			}
 		});
 	}
@@ -99,7 +99,7 @@ public final class CounterTransformer extends Transformer {
 	public boolean transformCode(ClassPath classPath, Library library, ClassNode clazz, MethodNode method) {
 		RESET_PATTERN.match(method).forEach(match -> {
 			var putstatic = (FieldInsnNode) match.get(1);
-			if (counters.contains(new MemberRef(putstatic.owner, putstatic.name, putstatic.desc))) {
+			if (counters.contains(new MemberRef(putstatic))) {
 				match.forEach(method.instructions::remove);
 			}
 		});
@@ -109,7 +109,7 @@ public final class CounterTransformer extends Transformer {
 			var putstatic = (FieldInsnNode) match.get(3);
 
 			if (getstatic.owner.equals(putstatic.owner) && getstatic.name.equals(putstatic.name) && getstatic.desc.equals(putstatic.desc) &&
-				counters.contains(new MemberRef(putstatic.owner, putstatic.name, putstatic.desc))) {
+				counters.contains(new MemberRef(putstatic))) {
 				match.forEach(method.instructions::remove);
 			}
 		});

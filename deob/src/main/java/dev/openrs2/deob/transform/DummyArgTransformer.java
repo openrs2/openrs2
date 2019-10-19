@@ -241,7 +241,7 @@ public final class DummyArgTransformer extends Transformer {
 
 	@Override
 	protected boolean transformCode(ClassPath classPath, Library library, ClassNode clazz, MethodNode method) throws AnalyzerException {
-		var parentMethod = inheritedMethodSets.get(new MemberRef(clazz.name, method.name, method.desc));
+		var parentMethod = inheritedMethodSets.get(new MemberRef(clazz, method));
 
 		var stores = new boolean[method.maxLocals];
 
@@ -301,7 +301,7 @@ public final class DummyArgTransformer extends Transformer {
 				}
 			}
 
-			var callee = inheritedMethodSets.get(new MemberRef(invoke.owner, invoke.name, invoke.desc));
+			var callee = inheritedMethodSets.get(new MemberRef(invoke));
 			if (callee == null) {
 				return;
 			}
@@ -334,7 +334,7 @@ public final class DummyArgTransformer extends Transformer {
 			case Opcodes.INVOKESTATIC:
 			case Opcodes.INVOKEINTERFACE:
 				var invoke = (MethodInsnNode) insn;
-				var invokedMethod = inheritedMethodSets.get(new MemberRef(invoke.owner, invoke.name, invoke.desc));
+				var invokedMethod = inheritedMethodSets.get(new MemberRef(invoke));
 				if (invokedMethod == null) {
 					continue;
 				}

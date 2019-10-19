@@ -57,7 +57,7 @@ public final class BitwiseOpTransformer extends Transformer {
 							return;
 						}
 
-						var methodRef = new MemberRef(clazz.name, method.name, method.desc);
+						var methodRef = new MemberRef(clazz, method);
 						methodOps.put(methodRef, match.get(2).getOpcode());
 					});
 				}
@@ -67,7 +67,7 @@ public final class BitwiseOpTransformer extends Transformer {
 
 	@Override
 	protected boolean transformClass(ClassPath classPath, Library library, ClassNode clazz) {
-		clazz.methods.removeIf(m -> methodOps.containsKey(new MemberRef(clazz.name, m.name, m.desc)));
+		clazz.methods.removeIf(m -> methodOps.containsKey(new MemberRef(clazz, m)));
 		return false;
 	}
 
@@ -80,7 +80,7 @@ public final class BitwiseOpTransformer extends Transformer {
 			}
 
 			var invokestatic = (MethodInsnNode) insn;
-			var methodRef = new MemberRef(invokestatic.owner, invokestatic.name, invokestatic.desc);
+			var methodRef = new MemberRef(invokestatic);
 			var opcode = methodOps.get(methodRef);
 			if (opcode != null) {
 				it.set(new InsnNode(opcode));
