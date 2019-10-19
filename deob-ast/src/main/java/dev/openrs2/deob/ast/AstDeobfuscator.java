@@ -22,6 +22,7 @@ import dev.openrs2.deob.ast.transform.NegativeLiteralTransformer;
 import dev.openrs2.deob.ast.transform.TernaryTransformer;
 import dev.openrs2.deob.ast.transform.Transformer;
 import dev.openrs2.deob.ast.transform.UnencloseTransformer;
+import dev.openrs2.deob.ast.transform.ValueOfTransformer;
 
 public final class AstDeobfuscator {
 	private static final ImmutableList<Transformer> TRANSFORMERS = ImmutableList.of(
@@ -33,6 +34,7 @@ public final class AstDeobfuscator {
 		new BinaryExprOrderTransformer(),
 		new AddSubTransformer(),
 		new BitMaskTransformer(),
+		new ValueOfTransformer(),
 		new EncloseTransformer()
 	);
 
