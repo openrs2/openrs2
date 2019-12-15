@@ -154,12 +154,12 @@ public final class ForestDisjointSet<T> implements DisjointSet<T> {
 	}
 
 	@Override
-	public int elements() {
+	public int getElements() {
 		return elements;
 	}
 
 	@Override
-	public int partitions() {
+	public int getPartitions() {
 		return partitions;
 	}
 
