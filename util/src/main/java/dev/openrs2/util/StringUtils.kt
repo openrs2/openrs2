@@ -9,10 +9,3 @@ fun CharSequence.indefiniteArticle(): String {
         else -> "a"
     }
 }
-
-object StringUtils {
-    @JvmStatic
-    fun capitalize(str: String): String {
-        return str.capitalize()
-    }
-}

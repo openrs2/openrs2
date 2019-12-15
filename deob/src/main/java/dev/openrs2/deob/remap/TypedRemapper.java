@@ -10,9 +10,9 @@ import dev.openrs2.asm.MemberDesc;
 import dev.openrs2.asm.MemberRef;
 import dev.openrs2.asm.classpath.ClassMetadata;
 import dev.openrs2.asm.classpath.ClassPath;
-import dev.openrs2.util.StringUtils;
 import dev.openrs2.util.StringUtilsKt;
 import dev.openrs2.util.collect.DisjointSet;
+import kotlin.text.StringsKt;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.commons.Remapper;
 import org.slf4j.Logger;
@@ -166,7 +166,7 @@ public final class TypedRemapper extends Remapper {
 				throw new IllegalArgumentException("Unknown field type " + type);
 			}
 
-			prefix = StringUtilsKt.indefiniteArticle(prefix) + StringUtils.capitalize(prefix);
+			prefix = StringUtilsKt.indefiniteArticle(prefix) + StringsKt.capitalize(prefix);
 
 			var mappedName = generateName(prefixes, prefix);
 			for (var field : partition) {
