@@ -163,6 +163,10 @@ public final class MethodNodeUtils {
 		} while (changed);
 	}
 
+	public static boolean hasCode(MethodNode method) {
+		return (method.access & (Opcodes.ACC_NATIVE | Opcodes.ACC_ABSTRACT)) == 0;
+	}
+
 	private MethodNodeUtils() {
 		/* empty */
 	}

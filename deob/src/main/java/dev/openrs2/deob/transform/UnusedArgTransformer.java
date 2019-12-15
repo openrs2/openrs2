@@ -66,7 +66,7 @@ public final class UnusedArgTransformer extends Transformer {
 		for (var library : classPath.getLibraries()) {
 			for (var clazz : library) {
 				for (var method : clazz.methods) {
-					if ((method.access & (Opcodes.ACC_NATIVE | Opcodes.ACC_ABSTRACT)) == 0) {
+					if (MethodNodeUtils.hasCode(method)) {
 						populateRetainedArgs(classPath, clazz, method);
 					}
 				}
@@ -123,7 +123,7 @@ public final class UnusedArgTransformer extends Transformer {
 	@Override
 	protected boolean preTransformMethod(ClassPath classPath, Library library, ClassNode clazz, MethodNode method) throws AnalyzerException {
 		/* delete unused int args from call sites */
-		if ((method.access & (Opcodes.ACC_ABSTRACT | Opcodes.ACC_NATIVE)) == 0) {
+		if (MethodNodeUtils.hasCode(method)) {
 			var analyzer = new Analyzer<>(new ConstSourceInterpreter());
 			var frames = analyzer.analyze(clazz.name, method);
 			var deadInsns = new ArrayList<AbstractInsnNode>();

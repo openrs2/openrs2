@@ -15,13 +15,13 @@ import java.util.jar.JarOutputStream;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
+import dev.openrs2.asm.MethodNodeUtils;
 import dev.openrs2.asm.remap.ClassForNameRemapper;
 import dev.openrs2.util.io.DeterministicJarOutputStream;
 import dev.openrs2.util.io.SkipOutputStream;
 import org.apache.harmony.pack200.Pack200;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.commons.ClassRemapper;
 import org.objectweb.asm.commons.Remapper;
 import org.objectweb.asm.tree.ClassNode;
@@ -119,7 +119,7 @@ public final class Library implements Iterable<ClassNode> {
 
 		for (var clazz : classes.values()) {
 			for (var method : clazz.methods) {
-				if ((method.access & (Opcodes.ACC_NATIVE | Opcodes.ACC_ABSTRACT)) == 0) {
+				if (MethodNodeUtils.hasCode(method)) {
 					ClassForNameRemapper.remap(remapper, method);
 				}
 			}

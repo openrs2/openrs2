@@ -7,10 +7,10 @@ import java.util.Set;
 
 import dev.openrs2.asm.InsnMatcher;
 import dev.openrs2.asm.MemberRef;
+import dev.openrs2.asm.MethodNodeUtils;
 import dev.openrs2.asm.classpath.ClassPath;
 import dev.openrs2.asm.classpath.Library;
 import dev.openrs2.asm.transform.Transformer;
-import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldInsnNode;
@@ -37,7 +37,7 @@ public final class CounterTransformer extends Transformer {
 		for (var library : classPath.getLibraries()) {
 			for (var clazz : library) {
 				for (var method : clazz.methods) {
-					if ((method.access & (Opcodes.ACC_NATIVE | Opcodes.ACC_ABSTRACT)) == 0) {
+					if (MethodNodeUtils.hasCode(method)) {
 						findCounters(method, references, resets, increments);
 					}
 				}

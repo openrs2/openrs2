@@ -1,8 +1,8 @@
 package dev.openrs2.asm.transform
 
+import dev.openrs2.asm.MethodNodeUtils.hasCode
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
-import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.FieldNode
 import org.objectweb.asm.tree.MethodNode
@@ -29,7 +29,7 @@ abstract class Transformer {
                     for (method in clazz.methods) {
                         changed = changed or preTransformMethod(classPath, library, clazz, method)
 
-                        if (method.access and (Opcodes.ACC_NATIVE or Opcodes.ACC_ABSTRACT) == 0) {
+                        if (hasCode(method)) {
                             changed = changed or transformCode(classPath, library, clazz, method)
                         }
 

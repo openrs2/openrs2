@@ -87,7 +87,7 @@ public final class ResetTransformer extends Transformer {
 		for (var library : classPath.getLibraries()) {
 			for (var clazz : library) {
 				for (var method : clazz.methods) {
-					if ((method.access & (Opcodes.ACC_NATIVE | Opcodes.ACC_ABSTRACT)) != 0) {
+					if (!MethodNodeUtils.hasCode(method)) {
 						continue;
 					}
 

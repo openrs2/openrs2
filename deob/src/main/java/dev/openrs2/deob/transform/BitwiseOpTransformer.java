@@ -5,6 +5,7 @@ import java.util.Map;
 
 import dev.openrs2.asm.InsnMatcher;
 import dev.openrs2.asm.MemberRef;
+import dev.openrs2.asm.MethodNodeUtils;
 import dev.openrs2.asm.classpath.ClassPath;
 import dev.openrs2.asm.classpath.Library;
 import dev.openrs2.asm.transform.Transformer;
@@ -34,7 +35,7 @@ public final class BitwiseOpTransformer extends Transformer {
 		for (var library : classPath.getLibraries()) {
 			for (var clazz : library) {
 				for (var method : clazz.methods) {
-					if ((method.access & (Opcodes.ACC_NATIVE | Opcodes.ACC_ABSTRACT)) != 0) {
+					if (!MethodNodeUtils.hasCode(method)) {
 						continue;
 					}
 
