@@ -1,7 +1,6 @@
 package dev.openrs2.util
 
 import dev.openrs2.util.StringUtils.capitalize
-import dev.openrs2.util.StringUtils.indefiniteArticle
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -9,10 +8,10 @@ import kotlin.test.assertFailsWith
 object StringUtilsTest {
     @Test
     fun testIndefiniteArticle() {
-        assertEquals("a", indefiniteArticle("book"))
-        assertEquals("an", indefiniteArticle("aeroplane"))
+        assertEquals("a", "book".indefiniteArticle())
+        assertEquals("an", "aeroplane".indefiniteArticle())
         assertFailsWith(IllegalArgumentException::class) {
-            indefiniteArticle("")
+            "".indefiniteArticle()
         }
     }
 

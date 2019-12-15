@@ -1,18 +1,16 @@
 package dev.openrs2.util
 
-object StringUtils {
-    // TODO(gpe): convert to an extension function
-    @JvmStatic
-    fun indefiniteArticle(str: String): String {
-        require(str.isNotEmpty())
+fun CharSequence.indefiniteArticle(): String {
+    require(isNotEmpty())
 
-        val first = str.first().toLowerCase()
-        return when (first) {
-            'a', 'e', 'i', 'o', 'u' -> "an"
-            else -> "a"
-        }
+    val first = first().toLowerCase()
+    return when (first) {
+        'a', 'e', 'i', 'o', 'u' -> "an"
+        else -> "a"
     }
+}
 
+object StringUtils {
     @JvmStatic
     fun capitalize(str: String): String {
         return str.capitalize()
