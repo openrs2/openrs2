@@ -44,7 +44,7 @@ public final class MethodNodeUtils {
 			.collect(Collectors.toList());
 	}
 
-	public static void deleteArgument(MethodNode method, int argIndex) {
+	public static void removeArgument(MethodNode method, int argIndex) {
 		/* remove argument from the signature */
 		var type = Type.getType(method.desc);
 

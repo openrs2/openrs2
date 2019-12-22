@@ -185,7 +185,7 @@ public final class UnusedArgTransformer extends Transformer {
 		for (var i = argTypes.length - 1; i >= 0; i--) {
 			var argType = argTypes[i];
 			if (INT_SORTS.contains(argType.getSort()) && !retainedArgs.contains(new ArgRef(partition, i))) {
-				MethodNodeUtils.deleteArgument(method, i);
+				MethodNodeUtils.removeArgument(method, i);
 				deletedArgs++;
 			}
 		}
