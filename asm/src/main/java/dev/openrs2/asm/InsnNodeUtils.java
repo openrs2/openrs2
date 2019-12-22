@@ -320,7 +320,7 @@ public final class InsnNodeUtils {
 		var height = 0;
 		var insn = last;
 		do {
-			var metadata = StackMetadata.get(insn);
+			var metadata = StackMetadataKt.stackMetadata(insn);
 			if (insn != last) {
 				deadInsns.add(insn);
 				height -= metadata.getPushes();

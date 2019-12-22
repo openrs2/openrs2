@@ -14,7 +14,7 @@ import com.google.common.collect.Multimap;
 import dev.openrs2.asm.InsnMatcher;
 import dev.openrs2.asm.InsnNodeUtils;
 import dev.openrs2.asm.MemberRef;
-import dev.openrs2.asm.StackMetadata;
+import dev.openrs2.asm.StackMetadataKt;
 import dev.openrs2.asm.classpath.ClassPath;
 import dev.openrs2.asm.classpath.Library;
 import dev.openrs2.asm.transform.Transformer;
@@ -390,7 +390,7 @@ public final class DummyArgTransformer extends Transformer {
 					continue;
 				}
 
-				if (StackMetadata.get(insn).getPushes() != 1) {
+				if (StackMetadataKt.stackMetadata(insn).getPushes() != 1) {
 					continue;
 				}
 
