@@ -4,11 +4,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.UncheckedIOException;
-import java.util.ArrayList;
 
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.AbstractInsnNode;
-import org.objectweb.asm.tree.InsnList;
 import org.objectweb.asm.tree.InsnNode;
 import org.objectweb.asm.tree.IntInsnNode;
 import org.objectweb.asm.tree.LdcInsnNode;
@@ -312,41 +310,6 @@ public final class InsnNodeUtils {
 		}
 
 		throw new IllegalArgumentException();
-	}
-
-	public static boolean replaceSimpleExpression(InsnList list, AbstractInsnNode last, AbstractInsnNode replacement) {
-		var deadInsns = new ArrayList<AbstractInsnNode>();
-
-		var height = 0;
-		var insn = last;
-		do {
-			var metadata = StackMetadataKt.stackMetadata(insn);
-			if (insn != last) {
-				deadInsns.add(insn);
-				height -= metadata.getPushes();
-			}
-			height += metadata.getPops();
-
-			if (height == 0) {
-				deadInsns.forEach(list::remove);
-
-				if (replacement != null) {
-					list.set(last, replacement);
-				} else {
-					list.remove(last);
-				}
-
-				return true;
-			}
-
-			insn = insn.getPrevious();
-		} while (insn != null && insn.getType() != AbstractInsnNode.LABEL && !hasSideEffects(insn));
-
-		return false;
-	}
-
-	public static boolean deleteSimpleExpression(InsnList list, AbstractInsnNode last) {
-		return replaceSimpleExpression(list, last, null);
 	}
 
 	public static String toString(AbstractInsnNode insn) {

@@ -11,6 +11,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Multimap;
+import dev.openrs2.asm.InsnListUtils;
 import dev.openrs2.asm.InsnMatcher;
 import dev.openrs2.asm.InsnNodeUtils;
 import dev.openrs2.asm.MemberRef;
@@ -413,14 +414,14 @@ public final class DummyArgTransformer extends Transformer {
 		}
 
 		for (var insn : alwaysTakenBranches) {
-			if (InsnNodeUtils.replaceSimpleExpression(method.instructions, insn, new JumpInsnNode(Opcodes.GOTO, insn.label))) {
+			if (InsnListUtils.replaceSimpleExpression(method.instructions, insn, new JumpInsnNode(Opcodes.GOTO, insn.label))) {
 				branchesSimplified++;
 				changed = true;
 			}
 		}
 
 		for (var insn : neverTakenBranches) {
-			if (InsnNodeUtils.deleteSimpleExpression(method.instructions, insn)) {
+			if (InsnListUtils.deleteSimpleExpression(method.instructions, insn)) {
 				branchesSimplified++;
 				changed = true;
 			}
@@ -433,7 +434,7 @@ public final class DummyArgTransformer extends Transformer {
 			}
 
 			var replacement = InsnNodeUtils.createIntConstant(entry.getValue());
-			if (InsnNodeUtils.replaceSimpleExpression(method.instructions, insn, replacement)) {
+			if (InsnListUtils.replaceSimpleExpression(method.instructions, insn, replacement)) {
 				constantsInlined++;
 				changed = true;
 			}
