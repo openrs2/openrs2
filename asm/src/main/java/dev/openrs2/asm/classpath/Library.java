@@ -15,7 +15,7 @@ import java.util.jar.JarOutputStream;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
-import dev.openrs2.asm.MethodNodeUtils;
+import dev.openrs2.asm.MethodNodeUtilsKt;
 import dev.openrs2.asm.remap.ClassForNameRemapper;
 import dev.openrs2.util.io.DeterministicJarOutputStream;
 import dev.openrs2.util.io.SkipOutputStream;
@@ -119,7 +119,7 @@ public final class Library implements Iterable<ClassNode> {
 
 		for (var clazz : classes.values()) {
 			for (var method : clazz.methods) {
-				if (MethodNodeUtils.hasCode(method)) {
+				if (MethodNodeUtilsKt.hasCode(method)) {
 					ClassForNameRemapper.remap(remapper, method);
 				}
 			}

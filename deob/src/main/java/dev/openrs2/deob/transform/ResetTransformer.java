@@ -5,7 +5,7 @@ import java.util.Set;
 
 import dev.openrs2.asm.InsnNodeUtils;
 import dev.openrs2.asm.MemberRef;
-import dev.openrs2.asm.MethodNodeUtils;
+import dev.openrs2.asm.MethodNodeUtilsKt;
 import dev.openrs2.asm.classpath.ClassPath;
 import dev.openrs2.asm.classpath.Library;
 import dev.openrs2.asm.transform.Transformer;
@@ -66,7 +66,7 @@ public final class ResetTransformer extends Transformer {
 	}
 
 	private static void findResetMethods(Set<MemberRef> resetMethods, ClassNode clazz, MethodNode method) throws AnalyzerException {
-		MethodNodeUtils.removeDeadCode(clazz.name, method);
+		MethodNodeUtilsKt.removeDeadCode(method, clazz.name);
 
 		for (var insn : method.instructions) {
 			if (insn.getOpcode() == -1 || insn.getOpcode() != Opcodes.INVOKESTATIC) {
@@ -87,7 +87,7 @@ public final class ResetTransformer extends Transformer {
 		for (var library : classPath.getLibraries()) {
 			for (var clazz : library) {
 				for (var method : clazz.methods) {
-					if (!MethodNodeUtils.hasCode(method)) {
+					if (!MethodNodeUtilsKt.hasCode(method)) {
 						continue;
 					}
 

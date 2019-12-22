@@ -8,7 +8,7 @@ import java.util.Set;
 
 import com.google.common.collect.ImmutableSet;
 import dev.openrs2.asm.MemberRef;
-import dev.openrs2.asm.MethodNodeUtils;
+import dev.openrs2.asm.MethodNodeUtilsKt;
 import dev.openrs2.asm.classpath.ClassPath;
 import dev.openrs2.asm.classpath.Library;
 import dev.openrs2.asm.transform.Transformer;
@@ -66,7 +66,7 @@ public final class UnusedArgTransformer extends Transformer {
 		for (var library : classPath.getLibraries()) {
 			for (var clazz : library) {
 				for (var method : clazz.methods) {
-					if (MethodNodeUtils.hasCode(method)) {
+					if (MethodNodeUtilsKt.hasCode(method)) {
 						populateRetainedArgs(classPath, clazz, method);
 					}
 				}
@@ -123,7 +123,7 @@ public final class UnusedArgTransformer extends Transformer {
 	@Override
 	protected boolean preTransformMethod(ClassPath classPath, Library library, ClassNode clazz, MethodNode method) throws AnalyzerException {
 		/* delete unused int args from call sites */
-		if (MethodNodeUtils.hasCode(method)) {
+		if (MethodNodeUtilsKt.hasCode(method)) {
 			var analyzer = new Analyzer<>(new ConstSourceInterpreter());
 			var frames = analyzer.analyze(clazz.name, method);
 			var deadInsns = new ArrayList<AbstractInsnNode>();
@@ -185,7 +185,7 @@ public final class UnusedArgTransformer extends Transformer {
 		for (var i = argTypes.length - 1; i >= 0; i--) {
 			var argType = argTypes[i];
 			if (INT_SORTS.contains(argType.getSort()) && !retainedArgs.contains(new ArgRef(partition, i))) {
-				MethodNodeUtils.removeArgument(method, i);
+				MethodNodeUtilsKt.removeArgument(method, i);
 				deletedArgs++;
 			}
 		}
