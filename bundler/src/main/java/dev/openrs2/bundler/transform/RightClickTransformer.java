@@ -32,7 +32,7 @@ public final class RightClickTransformer extends Transformer {
 			}
 
 			var invokevirtual = (MethodInsnNode) insn;
-			if (!invokevirtual.owner.equals("java/awt/event/MouseEvent")) {
+			if (!invokevirtual.owner.equals("java/awt/event/MouseEvent") && !invokevirtual.owner.equals("java/awt/event/InputEvent")) {
 				continue;
 			}
 
