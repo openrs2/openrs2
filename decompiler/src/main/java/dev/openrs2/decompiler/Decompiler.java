@@ -4,10 +4,10 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.function.Function;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import kotlin.jvm.functions.Function1;
 import org.jetbrains.java.decompiler.main.Fernflower;
 import org.jetbrains.java.decompiler.main.extern.IFernflowerPreferences;
 
@@ -55,7 +55,7 @@ public final class Decompiler implements Closeable {
 	private final Fernflower fernflower;
 	private final ImmutableList<Path> sources;
 
-	public Decompiler(ImmutableList<Path> sources, Function<String, Path> destination) {
+	public Decompiler(ImmutableList<Path> sources, Function1<String, Path> destination) {
 		this.io = new DecompilerIo(destination);
 		this.fernflower = new Fernflower(io, io, OPTIONS, Slf4jFernflowerLogger.INSTANCE);
 		this.sources = sources;
