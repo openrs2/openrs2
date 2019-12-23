@@ -3,7 +3,7 @@ package dev.openrs2.bundler.transform;
 import java.util.Optional;
 
 import dev.openrs2.asm.InsnMatcher;
-import dev.openrs2.asm.InsnNodeUtils;
+import dev.openrs2.asm.InsnNodeUtilsKt;
 import dev.openrs2.asm.MemberRef;
 import dev.openrs2.asm.MethodNodeUtilsKt;
 import dev.openrs2.asm.classpath.ClassPath;
@@ -79,7 +79,7 @@ public final class BufferSizeTransformer extends Transformer {
 				return;
 			}
 
-			method.instructions.set(match.get(2), InsnNodeUtils.createIntConstant(65535));
+			method.instructions.set(match.get(2), InsnNodeUtilsKt.createIntConstant(65535));
 			buffersResized++;
 		});
 

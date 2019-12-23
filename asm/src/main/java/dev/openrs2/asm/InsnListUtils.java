@@ -32,7 +32,7 @@ public final class InsnListUtils {
 			}
 
 			insn = insn.getPrevious();
-		} while (insn != null && insn.getType() != AbstractInsnNode.LABEL && InsnNodeUtils.isPure(insn));
+		} while (insn != null && insn.getType() != AbstractInsnNode.LABEL && InsnNodeUtilsKt.getPure(insn));
 
 		return false;
 	}

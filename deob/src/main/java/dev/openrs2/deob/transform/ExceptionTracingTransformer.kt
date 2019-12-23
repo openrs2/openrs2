@@ -2,9 +2,9 @@ package dev.openrs2.deob.transform
 
 import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.InsnMatcher
-import dev.openrs2.asm.InsnNodeUtils
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
+import dev.openrs2.asm.nextReal
 import dev.openrs2.asm.transform.Transformer
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.MethodNode
@@ -24,7 +24,7 @@ class ExceptionTracingTransformer : Transformer() {
     ): Boolean {
         CATCH_MATCHER.match(method).forEach { match ->
             val foundTryCatch = method.tryCatchBlocks.removeIf { tryCatch ->
-                tryCatch.type == "java/lang/RuntimeException" && InsnNodeUtils.nextReal(tryCatch.handler) === match[0]
+                tryCatch.type == "java/lang/RuntimeException" && tryCatch.handler.nextReal === match[0]
             }
 
             if (foundTryCatch) {

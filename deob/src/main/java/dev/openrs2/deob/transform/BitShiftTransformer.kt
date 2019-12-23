@@ -2,9 +2,10 @@ package dev.openrs2.deob.transform
 
 import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.InsnMatcher
-import dev.openrs2.asm.InsnNodeUtils
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
+import dev.openrs2.asm.createIntConstant
+import dev.openrs2.asm.intConstant
 import dev.openrs2.asm.transform.Transformer
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
@@ -25,7 +26,7 @@ class BitShiftTransformer : Transformer() {
     ): Boolean {
         CONST_SHIFT_MATCHER.match(method).forEach {
             val push = it[0]
-            val bits = InsnNodeUtils.getIntConstant(push)
+            val bits = push.intConstant!!
 
             val opcode = it[1].opcode
             val mask = if (LONG_SHIFTS.contains(opcode)) 63 else 31
@@ -33,7 +34,7 @@ class BitShiftTransformer : Transformer() {
             val simplifiedBits = bits and mask
 
             if (bits != simplifiedBits) {
-                method.instructions[push] = InsnNodeUtils.createIntConstant(simplifiedBits)
+                method.instructions[push] = createIntConstant(simplifiedBits)
                 simplified++
             }
         }

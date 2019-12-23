@@ -13,7 +13,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Multimap;
 import dev.openrs2.asm.InsnListUtils;
 import dev.openrs2.asm.InsnMatcher;
-import dev.openrs2.asm.InsnNodeUtils;
+import dev.openrs2.asm.InsnNodeUtilsKt;
 import dev.openrs2.asm.MemberRef;
 import dev.openrs2.asm.StackMetadataKt;
 import dev.openrs2.asm.classpath.ClassPath;
@@ -280,7 +280,7 @@ public final class DummyArgTransformer extends Transformer {
 				conditionValue = null;
 				matchIndex++;
 			} else {
-				conditionValue = InsnNodeUtils.getIntConstant(match.get(matchIndex++));
+				conditionValue = InsnNodeUtilsKt.getIntConstant(match.get(matchIndex++));
 				conditionOpcode = match.get(matchIndex++).getOpcode();
 			}
 
@@ -297,8 +297,8 @@ public final class DummyArgTransformer extends Transformer {
 				var insn = match.get(matchIndex++);
 				if (insn.getOpcode() == Opcodes.ACONST_NULL) {
 					matchIndex++;
-				} else if (InsnNodeUtils.isIntConstant(insn)) {
-					constArgs[i] = InsnNodeUtils.getIntConstant(insn);
+				} else {
+					constArgs[i] = InsnNodeUtilsKt.getIntConstant(insn);
 				}
 			}
 
@@ -387,7 +387,7 @@ public final class DummyArgTransformer extends Transformer {
 				}
 				break;
 			default:
-				if (!InsnNodeUtils.isPure(insn) || InsnNodeUtils.isIntConstant(insn)) {
+				if (!InsnNodeUtilsKt.getPure(insn) || InsnNodeUtilsKt.getIntConstant(insn) != null) {
 					continue;
 				}
 
@@ -395,7 +395,7 @@ public final class DummyArgTransformer extends Transformer {
 					continue;
 				}
 
-				var nextInsn = InsnNodeUtils.nextReal(insn);
+				var nextInsn = InsnNodeUtilsKt.getNextReal(insn);
 				if (nextInsn == null) {
 					continue;
 				}
@@ -433,7 +433,7 @@ public final class DummyArgTransformer extends Transformer {
 				continue;
 			}
 
-			var replacement = InsnNodeUtils.createIntConstant(entry.getValue());
+			var replacement = InsnNodeUtilsKt.createIntConstant(entry.getValue());
 			if (InsnListUtils.replaceSimpleExpression(method.instructions, insn, replacement)) {
 				constantsInlined++;
 				changed = true;

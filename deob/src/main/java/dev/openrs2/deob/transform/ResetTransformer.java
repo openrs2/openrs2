@@ -3,7 +3,7 @@ package dev.openrs2.deob.transform;
 import java.util.HashSet;
 import java.util.Set;
 
-import dev.openrs2.asm.InsnNodeUtils;
+import dev.openrs2.asm.InsnNodeUtilsKt;
 import dev.openrs2.asm.MemberRef;
 import dev.openrs2.asm.MethodNodeUtilsKt;
 import dev.openrs2.asm.classpath.ClassPath;
@@ -49,7 +49,7 @@ public final class ResetTransformer extends Transformer {
 				continue;
 			}
 
-			var nextInsn = InsnNodeUtils.nextReal(insn);
+			var nextInsn = InsnNodeUtilsKt.getNextReal(insn);
 			if (nextInsn.getOpcode() != Opcodes.INVOKEVIRTUAL) {
 				continue;
 			}

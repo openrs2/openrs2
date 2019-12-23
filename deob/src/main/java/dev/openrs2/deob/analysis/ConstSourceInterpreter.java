@@ -3,7 +3,7 @@ package dev.openrs2.deob.analysis;
 import java.util.List;
 
 import com.google.common.collect.ImmutableList;
-import dev.openrs2.asm.InsnNodeUtils;
+import dev.openrs2.asm.InsnNodeUtilsKt;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.AbstractInsnNode;
@@ -36,7 +36,7 @@ public final class ConstSourceInterpreter extends Interpreter<ConstSourceValue> 
 			return null;
 		}
 
-		if (InsnNodeUtils.isIntConstant(insn)) {
+		if (InsnNodeUtilsKt.getIntConstant(insn) != null) {
 			return ConstSourceValue.createSingleSourceConstant(basicValue, insn);
 		}
 
