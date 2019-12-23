@@ -1,0 +1,47 @@
+package dev.openrs2.deob.transform
+
+import com.github.michaelbull.logging.InlineLogger
+import dev.openrs2.asm.InsnMatcher
+import dev.openrs2.asm.InsnNodeUtils
+import dev.openrs2.asm.classpath.ClassPath
+import dev.openrs2.asm.classpath.Library
+import dev.openrs2.asm.transform.Transformer
+import org.objectweb.asm.tree.ClassNode
+import org.objectweb.asm.tree.MethodNode
+
+class ExceptionTracingTransformer : Transformer() {
+    private var tracingTryCatches = 0
+
+    public override fun preTransform(classPath: ClassPath) {
+        tracingTryCatches = 0
+    }
+
+    public override fun transformCode(
+        classPath: ClassPath,
+        library: Library,
+        clazz: ClassNode,
+        method: MethodNode
+    ): Boolean {
+        CATCH_MATCHER.match(method).forEach { match ->
+            val foundTryCatch = method.tryCatchBlocks.removeIf { tryCatch ->
+                tryCatch.type == "java/lang/RuntimeException" && InsnNodeUtils.nextReal(tryCatch.handler) === match[0]
+            }
+
+            if (foundTryCatch) {
+                match.forEach(method.instructions::remove)
+                tracingTryCatches++
+            }
+        }
+        return false
+    }
+
+    public override fun postTransform(classPath: ClassPath) {
+        logger.info { "Removed $tracingTryCatches tracing try/catch blocks" }
+    }
+
+    companion object {
+        private val logger = InlineLogger()
+        private val CATCH_MATCHER =
+            InsnMatcher.compile("ASTORE ALOAD (| LDC INVOKESTATIC | NEW DUP (LDC INVOKESPECIAL | INVOKESPECIAL LDC INVOKEVIRTUAL) ((ILOAD | LLOAD | FLOAD | DLOAD | (ALOAD IFNULL LDC GOTO LDC) | BIPUSH) INVOKEVIRTUAL)* INVOKEVIRTUAL INVOKESTATIC) ATHROW")
+    }
+}
