@@ -22,12 +22,12 @@ public final class AsmClassMetadata extends ClassMetadata {
 	}
 
 	@Override
-	public boolean isDependency() {
+	public boolean getDependency() {
 		return dependency;
 	}
 
 	@Override
-	public boolean isInterface() {
+	public boolean getInterface() {
 		return (clazz.access & Opcodes.ACC_INTERFACE) != 0;
 	}
 

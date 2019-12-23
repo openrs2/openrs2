@@ -91,7 +91,7 @@ public final class TypedRemapper extends Remapper {
 
 	private static String populateClassMapping(Map<String, String> mapping, Map<String, Integer> prefixes, ClassMetadata clazz) {
 		var name = clazz.getName();
-		if (mapping.containsKey(name) || EXCLUDED_CLASSES.contains(name) || clazz.isDependency()) {
+		if (mapping.containsKey(name) || EXCLUDED_CLASSES.contains(name) || clazz.getDependency()) {
 			return mapping.getOrDefault(name, name);
 		}
 
@@ -103,7 +103,7 @@ public final class TypedRemapper extends Remapper {
 			superName = superName.substring(superName.lastIndexOf('/') + 1);
 
 			mappedName += generateName(prefixes, superName + "_Sub");
-		} else if (clazz.isInterface()) {
+		} else if (clazz.getInterface()) {
 			mappedName += generateName(prefixes, "Interface");
 		} else {
 			mappedName += generateName(prefixes, "Class");
@@ -128,7 +128,7 @@ public final class TypedRemapper extends Remapper {
 					break;
 				}
 
-				if (clazz.isDependency()) {
+				if (clazz.getDependency()) {
 					skip = true;
 					break;
 				}
@@ -185,7 +185,7 @@ public final class TypedRemapper extends Remapper {
 				return true;
 			}
 
-			if (clazz.isDependency()) {
+			if (clazz.getDependency()) {
 				return true;
 			}
 

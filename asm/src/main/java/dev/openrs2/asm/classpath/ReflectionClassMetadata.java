@@ -22,12 +22,12 @@ public final class ReflectionClassMetadata extends ClassMetadata {
 	}
 
 	@Override
-	public boolean isDependency() {
+	public boolean getDependency() {
 		return true;
 	}
 
 	@Override
-	public boolean isInterface() {
+	public boolean getInterface() {
 		return clazz.isInterface();
 	}
 
