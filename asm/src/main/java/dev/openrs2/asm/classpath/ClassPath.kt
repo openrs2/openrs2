@@ -26,27 +26,18 @@ class ClassPath(
             return classes
         }
 
-    operator fun get(name: String): ClassMetadata {
-        var metadata = cache[name]
-        if (metadata != null) {
-            return metadata
-        }
-
+    operator fun get(name: String): ClassMetadata = cache.computeIfAbsent(name) {
         for (library in libraries) {
             val clazz = library[name]
             if (clazz != null) {
-                metadata = AsmClassMetadata(this, clazz, false)
-                cache[name] = metadata
-                return metadata
+                return@computeIfAbsent AsmClassMetadata(this, clazz, false)
             }
         }
 
         for (library in dependencies) {
             val clazz = library[name]
             if (clazz != null) {
-                metadata = AsmClassMetadata(this, clazz, true)
-                cache[name] = metadata
-                return metadata
+                return@computeIfAbsent AsmClassMetadata(this, clazz, true)
             }
         }
 
@@ -58,9 +49,7 @@ class ClassPath(
             throw IllegalArgumentException("Unknown class $name")
         }
 
-        metadata = ReflectionClassMetadata(this, clazz)
-        cache[name] = metadata
-        return metadata
+        return@computeIfAbsent ReflectionClassMetadata(this, clazz)
     }
 
     fun getNode(name: String): ClassNode? {
