@@ -387,7 +387,7 @@ public final class DummyArgTransformer extends Transformer {
 				}
 				break;
 			default:
-				if (InsnNodeUtils.hasSideEffects(insn) || InsnNodeUtils.isIntConstant(insn)) {
+				if (!InsnNodeUtils.isPure(insn) || InsnNodeUtils.isIntConstant(insn)) {
 					continue;
 				}
 

@@ -119,7 +119,7 @@ public final class InsnNodeUtils {
 		}
 	}
 
-	public static boolean hasSideEffects(AbstractInsnNode insn) {
+	public static boolean isPure(AbstractInsnNode insn) {
 		var opcode = insn.getOpcode();
 		switch (opcode) {
 		case -1:
@@ -147,7 +147,7 @@ public final class InsnNodeUtils {
 		case Opcodes.FLOAD:
 		case Opcodes.DLOAD:
 		case Opcodes.ALOAD:
-			return false;
+			return true;
 		case Opcodes.IALOAD:
 		case Opcodes.LALOAD:
 		case Opcodes.FALOAD:
@@ -170,7 +170,7 @@ public final class InsnNodeUtils {
 		case Opcodes.BASTORE:
 		case Opcodes.CASTORE:
 		case Opcodes.SASTORE:
-			return true;
+			return false;
 		case Opcodes.POP:
 		case Opcodes.POP2:
 		case Opcodes.DUP:
@@ -226,9 +226,9 @@ public final class InsnNodeUtils {
 		case Opcodes.LOR:
 		case Opcodes.IXOR:
 		case Opcodes.LXOR:
-			return false;
-		case Opcodes.IINC:
 			return true;
+		case Opcodes.IINC:
+			return false;
 		case Opcodes.I2L:
 		case Opcodes.I2F:
 		case Opcodes.I2D:
@@ -249,7 +249,7 @@ public final class InsnNodeUtils {
 		case Opcodes.FCMPG:
 		case Opcodes.DCMPL:
 		case Opcodes.DCMPG:
-			return false;
+			return true;
 		case Opcodes.IFEQ:
 		case Opcodes.IFNE:
 		case Opcodes.IFLT:
@@ -275,22 +275,22 @@ public final class InsnNodeUtils {
 		case Opcodes.DRETURN:
 		case Opcodes.ARETURN:
 		case Opcodes.RETURN:
-			return true;
-		case Opcodes.GETSTATIC:
 			return false;
+		case Opcodes.GETSTATIC:
+			return true;
 		case Opcodes.PUTSTATIC:
 		case Opcodes.GETFIELD:
 			/* might throw NPE */
 		case Opcodes.PUTFIELD:
-			return true;
+			return false;
 		case Opcodes.INVOKEVIRTUAL:
 		case Opcodes.INVOKESPECIAL:
 		case Opcodes.INVOKESTATIC:
 		case Opcodes.INVOKEINTERFACE:
 		case Opcodes.INVOKEDYNAMIC:
-			return true;
-		case Opcodes.NEW:
 			return false;
+		case Opcodes.NEW:
+			return true;
 		case Opcodes.NEWARRAY:
 		case Opcodes.ANEWARRAY:
 			/* arrays might be created with negative size */
@@ -298,15 +298,15 @@ public final class InsnNodeUtils {
 			/* might throw NPE */
 		case Opcodes.ATHROW:
 		case Opcodes.CHECKCAST:
-			return true;
-		case Opcodes.INSTANCEOF:
 			return false;
+		case Opcodes.INSTANCEOF:
+			return true;
 		case Opcodes.MONITORENTER:
 		case Opcodes.MONITOREXIT:
 		case Opcodes.MULTIANEWARRAY:
 		case Opcodes.IFNULL:
 		case Opcodes.IFNONNULL:
-			return true;
+			return false;
 		}
 
 		throw new IllegalArgumentException();
