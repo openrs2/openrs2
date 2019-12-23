@@ -38,7 +38,7 @@ object SignedClassUtils {
 
         // move loader signed classes to signlink
         for (name in signedClasses.union(dependencies)) {
-            val `in` = loader.remove(name)
+            val `in` = loader.remove(name)!!
 
             val out = ClassNode()
             `in`.accept(ClassRemapper(out, remapper))
@@ -74,7 +74,7 @@ object SignedClassUtils {
         val dependencies = mutableSetOf<String>()
 
         for (signedClass in signedClasses) {
-            val clazz = loader[signedClass]
+            val clazz = loader[signedClass]!!
 
             for (field in clazz.fields) {
                 val type = Type.getType(field.desc)
