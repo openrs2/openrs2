@@ -20,6 +20,10 @@
       <artifactId>guava</artifactId>
     </dependency>
     <dependency>
+      <groupId>com.michael-bull.kotlin-inline-logger</groupId>
+      <artifactId>kotlin-inline-logger-jvm</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
     </dependency>

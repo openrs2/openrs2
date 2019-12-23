@@ -5,7 +5,7 @@
   <parent>
     <groupId>dev.openrs2</groupId>
     <artifactId>openrs2-parent</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.6</version>
   </parent>
 
   <artifactId>openrs2</artifactId>
@@ -66,6 +66,11 @@
         <groupId>com.github.javaparser</groupId>
         <artifactId>javaparser-symbol-solver-core</artifactId>
         <version>3.15.7</version>
+      </dependency>
+      <dependency>
+        <groupId>com.michael-bull.kotlin-inline-logger</groupId>
+        <artifactId>kotlin-inline-logger-jvm</artifactId>
+        <version>1.0.1</version>
       </dependency>
       <dependency>
         <groupId>dev.openrs2</groupId>
