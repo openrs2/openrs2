@@ -45,12 +45,12 @@ abstract class Transformer {
 
     @Throws(AnalyzerException::class)
     protected open fun preTransform(classPath: ClassPath) {
-        /* empty */
+        // empty
     }
 
     @Throws(AnalyzerException::class)
     protected open fun prePass(classPath: ClassPath) {
-        /* empty */
+        // empty
     }
 
     @Throws(AnalyzerException::class)
@@ -100,11 +100,11 @@ abstract class Transformer {
 
     @Throws(AnalyzerException::class)
     protected open fun postPass(classPath: ClassPath) {
-        /* empty */
+        // empty
     }
 
     @Throws(AnalyzerException::class)
     protected open fun postTransform(classPath: ClassPath) {
-        /* empty */
+        // empty
     }
 }
