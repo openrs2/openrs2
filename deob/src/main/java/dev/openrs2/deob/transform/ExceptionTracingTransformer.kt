@@ -12,11 +12,11 @@ import org.objectweb.asm.tree.MethodNode
 class ExceptionTracingTransformer : Transformer() {
     private var tracingTryCatches = 0
 
-    public override fun preTransform(classPath: ClassPath) {
+    override fun preTransform(classPath: ClassPath) {
         tracingTryCatches = 0
     }
 
-    public override fun transformCode(
+    override fun transformCode(
         classPath: ClassPath,
         library: Library,
         clazz: ClassNode,
@@ -35,7 +35,7 @@ class ExceptionTracingTransformer : Transformer() {
         return false
     }
 
-    public override fun postTransform(classPath: ClassPath) {
+    override fun postTransform(classPath: ClassPath) {
         logger.info { "Removed $tracingTryCatches tracing try/catch blocks" }
     }
 

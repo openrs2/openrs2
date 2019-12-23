@@ -7,7 +7,7 @@ import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
 
 class CanvasTransformer : Transformer() {
-    public override fun transformClass(
+    override fun transformClass(
         classPath: ClassPath,
         library: Library,
         clazz: ClassNode

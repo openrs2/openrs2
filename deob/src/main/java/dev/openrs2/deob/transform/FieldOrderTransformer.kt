@@ -9,7 +9,7 @@ import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.FieldInsnNode
 
 class FieldOrderTransformer : Transformer() {
-    public override fun transformClass(classPath: ClassPath, library: Library, clazz: ClassNode): Boolean {
+    override fun transformClass(classPath: ClassPath, library: Library, clazz: ClassNode): Boolean {
         sortFields(clazz, CONSTRUCTOR, Opcodes.PUTFIELD)
         sortFields(clazz, STATIC_CONSTRUCTOR, Opcodes.PUTSTATIC)
         return false

@@ -13,11 +13,11 @@ import org.objectweb.asm.tree.MethodNode
 class BitShiftTransformer : Transformer() {
     private var simplified = 0
 
-    public override fun preTransform(classPath: ClassPath) {
+    override fun preTransform(classPath: ClassPath) {
         simplified = 0
     }
 
-    public override fun transformCode(
+    override fun transformCode(
         classPath: ClassPath,
         library: Library,
         clazz: ClassNode,
@@ -40,7 +40,7 @@ class BitShiftTransformer : Transformer() {
         return false
     }
 
-    public override fun postTransform(classPath: ClassPath) {
+    override fun postTransform(classPath: ClassPath) {
         logger.info { "Simplified $simplified bit shifts" }
     }
 

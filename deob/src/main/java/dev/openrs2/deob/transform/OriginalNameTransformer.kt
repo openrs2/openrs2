@@ -13,7 +13,7 @@ import org.objectweb.asm.tree.FieldNode
 import org.objectweb.asm.tree.MethodNode
 
 class OriginalNameTransformer : Transformer() {
-    public override fun transformClass(classPath: ClassPath, library: Library, clazz: ClassNode): Boolean {
+    override fun transformClass(classPath: ClassPath, library: Library, clazz: ClassNode): Boolean {
         if (clazz.invisibleAnnotations == null) {
             clazz.invisibleAnnotations = mutableListOf()
         }
@@ -21,7 +21,7 @@ class OriginalNameTransformer : Transformer() {
         return false
     }
 
-    public override fun transformField(
+    override fun transformField(
         classPath: ClassPath,
         library: Library,
         clazz: ClassNode,
@@ -34,7 +34,7 @@ class OriginalNameTransformer : Transformer() {
         return false
     }
 
-    public override fun preTransformMethod(
+    override fun preTransformMethod(
         classPath: ClassPath,
         library: Library,
         clazz: ClassNode,
