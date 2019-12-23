@@ -1,6 +1,6 @@
 package dev.openrs2.deob.transform;
 
-import dev.openrs2.asm.InsnListUtils;
+import dev.openrs2.asm.InsnListUtilsKt;
 import dev.openrs2.asm.classpath.ClassPath;
 import dev.openrs2.asm.classpath.Library;
 import dev.openrs2.asm.transform.Transformer;
@@ -56,7 +56,7 @@ public final class DummyLocalTransformer extends Transformer {
 				continue;
 			}
 
-			if (InsnListUtils.deleteSimpleExpression(method.instructions, insn)) {
+			if (InsnListUtilsKt.deleteSimpleExpression(method.instructions, insn)) {
 				localsRemoved++;
 			}
 		}
