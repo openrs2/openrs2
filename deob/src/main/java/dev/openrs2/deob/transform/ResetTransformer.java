@@ -69,7 +69,7 @@ public final class ResetTransformer extends Transformer {
 		MethodNodeUtilsKt.removeDeadCode(method, clazz.name);
 
 		for (var insn : method.instructions) {
-			if (insn.getOpcode() == -1 || insn.getOpcode() != Opcodes.INVOKESTATIC) {
+			if (insn.getOpcode() != Opcodes.INVOKESTATIC) {
 				continue;
 			}
 
