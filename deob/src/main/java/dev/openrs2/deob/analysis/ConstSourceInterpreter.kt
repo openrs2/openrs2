@@ -44,9 +44,8 @@ class ConstSourceInterpreter : Interpreter<ConstSourceValue>(Opcodes.ASM7) {
         value1: ConstSourceValue,
         value2: ConstSourceValue
     ): ConstSourceValue? {
-        val basicValue =
-            basicInterpreter.binaryOperation(insn, value1.basicValue, value2.basicValue)
-                ?: return null
+        val basicValue = basicInterpreter.binaryOperation(insn, value1.basicValue, value2.basicValue)
+            ?: return null
         return ConstSourceValue.createUnknown(basicValue)
     }
 
