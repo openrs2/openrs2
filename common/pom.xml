@@ -8,11 +8,11 @@
     <version>1.0.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>openrs2-util</artifactId>
+  <artifactId>openrs2-common</artifactId>
   <packaging>jar</packaging>
 
-  <name>OpenRS2 Utilities</name>
-  <description>Common utility code used by all modules.</description>
+  <name>OpenRS2 Common</name>
+  <description>Common code used by all modules.</description>
 
   <dependencies>
     <dependency>

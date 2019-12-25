@@ -23,12 +23,12 @@
     <module>all</module>
     <module>asm</module>
     <module>bundler</module>
+    <module>common</module>
     <module>decompiler</module>
-    <module>deob</module>
     <module>deob-annotations</module>
     <module>deob-ast</module>
+    <module>deob</module>
     <module>game</module>
-    <module>util</module>
   </modules>
 
   <scm>

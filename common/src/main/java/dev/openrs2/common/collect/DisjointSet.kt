@@ -1,4 +1,4 @@
-package dev.openrs2.util.collect
+package dev.openrs2.common.collect
 
 interface DisjointSet<T> : Iterable<DisjointSet.Partition<T>> {
     interface Partition<T> : Iterable<T>

@@ -3,8 +3,8 @@ package dev.openrs2.asm.classpath
 import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.hasCode
 import dev.openrs2.asm.remap.ClassForNameRemapper
-import dev.openrs2.util.io.DeterministicJarOutputStream
-import dev.openrs2.util.io.SkipOutputStream
+import dev.openrs2.common.io.DeterministicJarOutputStream
+import dev.openrs2.common.io.SkipOutputStream
 import org.apache.harmony.pack200.Pack200
 import org.objectweb.asm.ClassReader
 import org.objectweb.asm.ClassWriter

@@ -1,4 +1,4 @@
-package dev.openrs2.util.io
+package dev.openrs2.common.io
 
 import java.io.FilterOutputStream
 import java.io.OutputStream

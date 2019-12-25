@@ -1,4 +1,4 @@
-package dev.openrs2.util
+package dev.openrs2.common
 
 fun CharSequence.indefiniteArticle(): String {
     require(isNotEmpty())

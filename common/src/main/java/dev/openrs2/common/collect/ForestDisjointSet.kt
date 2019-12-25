@@ -1,4 +1,4 @@
-package dev.openrs2.util.collect
+package dev.openrs2.common.collect
 
 import java.util.*
 import kotlin.NoSuchElementException

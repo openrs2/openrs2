@@ -20,7 +20,7 @@
   <dependencies>
     <dependency>
       <groupId>dev.openrs2</groupId>
-      <artifactId>openrs2-util</artifactId>
+      <artifactId>openrs2-common</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
