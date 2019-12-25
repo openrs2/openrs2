@@ -22,4 +22,5 @@
       <url>https://www.gnu.org/licenses/lgpl-3.0.txt</url>
     </license>
   </licenses>
+  <!-- XXX(gpe): this module MUST NOT depend on any of the GPLed modules. -->
 </project>
