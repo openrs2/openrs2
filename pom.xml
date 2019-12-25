@@ -156,16 +156,6 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>net.revelc.code</groupId>
-        <artifactId>impsort-maven-plugin</artifactId>
-        <configuration>
-          <groups>java.,javax.,*</groups>
-          <staticGroups>*</staticGroups>
-          <staticAfter>true</staticAfter>
-          <removeUnused>true</removeUnused>
-        </configuration>
-      </plugin>
-      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
