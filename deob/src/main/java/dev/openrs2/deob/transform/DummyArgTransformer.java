@@ -246,9 +246,7 @@ public final class DummyArgTransformer extends Transformer {
 
 		var stores = new boolean[method.maxLocals];
 
-		for (var it = method.instructions.iterator(); it.hasNext(); ) {
-			var insn = it.next();
-
+		for (AbstractInsnNode insn : method.instructions) {
 			var opcode = insn.getOpcode();
 			if (opcode != Opcodes.ISTORE) {
 				continue;
