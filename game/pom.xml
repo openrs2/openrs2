@@ -15,4 +15,12 @@
   <description>
     Reimplementation of the RuneScape game server software.
   </description>
+
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>openrs2-common</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
 </project>
