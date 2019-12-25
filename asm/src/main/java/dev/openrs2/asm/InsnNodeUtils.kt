@@ -7,10 +7,8 @@ import org.objectweb.asm.tree.IntInsnNode
 import org.objectweb.asm.tree.LdcInsnNode
 import org.objectweb.asm.util.Textifier
 import org.objectweb.asm.util.TraceMethodVisitor
-import java.io.IOException
 import java.io.PrintWriter
 import java.io.StringWriter
-import java.io.UncheckedIOException
 
 private val PURE_OPCODES = setOf(
     -1,
@@ -273,16 +271,14 @@ fun createIntConstant(value: Int): AbstractInsnNode = when (value) {
 
 fun AbstractInsnNode.toPrettyString(): String {
     val printer = Textifier()
+
     val visitor = TraceMethodVisitor(printer)
     accept(visitor)
-    try {
-        StringWriter().use { stringWriter ->
-            PrintWriter(stringWriter).use { printWriter ->
-                printer.print(printWriter)
-                return stringWriter.toString().trim { it <= ' ' }
-            }
+
+    StringWriter().use { stringWriter ->
+        PrintWriter(stringWriter).use { printWriter ->
+            printer.print(printWriter)
+            return stringWriter.toString().trim()
         }
-    } catch (ex: IOException) {
-        throw UncheckedIOException(ex)
     }
 }
