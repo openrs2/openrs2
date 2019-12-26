@@ -10,6 +10,7 @@ import dev.openrs2.asm.transform.Transformer
 import dev.openrs2.common.collect.DisjointSet
 import dev.openrs2.deob.ArgRef
 import dev.openrs2.deob.analysis.IntInterpreter
+import dev.openrs2.deob.analysis.IntValue
 import dev.openrs2.deob.analysis.SourcedIntValue
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.Type
@@ -106,7 +107,7 @@ class DummyArgTransformer : Transformer() {
         val set = mutableSetOf<Int>()
 
         for ((source, intValue) in intValues) {
-            if (intValue.isUnknown) {
+            if (intValue !is IntValue.Constant) {
                 return null
             }
 
@@ -114,13 +115,13 @@ class DummyArgTransformer : Transformer() {
                 continue
             }
 
-            if (intValue.isSingleConstant) {
-                if (isMutuallyRecursiveDummy(method, arg, source, intValue.intValue)) {
+            if (intValue.singleton != null) {
+                if (isMutuallyRecursiveDummy(method, arg, source, intValue.singleton)) {
                     continue
                 }
             }
 
-            set.addAll(intValue.intValues)
+            set.addAll(intValue.values)
         }
 
         return if (set.isEmpty()) {
@@ -237,11 +238,11 @@ class DummyArgTransformer : Transformer() {
                 }
                 Opcodes.IFEQ, Opcodes.IFNE -> {
                     val value = frame.getStack(stackSize - 1)
-                    if (value.isUnknown) {
+                    if (value !is IntValue.Constant) {
                         continue@frame
                     }
 
-                    val result = evaluateUnaryBranch(insn.opcode, value.intValues)
+                    val result = evaluateUnaryBranch(insn.opcode, value.values)
                     @Suppress("NON_EXHAUSTIVE_WHEN")
                     when (result) {
                         BranchResult.ALWAYS_TAKEN -> alwaysTakenBranches.add(insn as JumpInsnNode)
@@ -251,11 +252,11 @@ class DummyArgTransformer : Transformer() {
                 Opcodes.IF_ICMPEQ, Opcodes.IF_ICMPNE, Opcodes.IF_ICMPLT, Opcodes.IF_ICMPGE, Opcodes.IF_ICMPGT, Opcodes.IF_ICMPLE -> {
                     val value1 = frame.getStack(stackSize - 2)
                     val value2 = frame.getStack(stackSize - 1)
-                    if (value1.isUnknown || value2.isUnknown) {
+                    if (value1 !is IntValue.Constant || value2 !is IntValue.Constant) {
                         continue@frame
                     }
 
-                    val result = evaluateBinaryBranch(insn.opcode, value1.intValues, value2.intValues)
+                    val result = evaluateBinaryBranch(insn.opcode, value1.values, value2.values)
                     @Suppress("NON_EXHAUSTIVE_WHEN")
                     when (result) {
                         BranchResult.ALWAYS_TAKEN -> alwaysTakenBranches.add(insn as JumpInsnNode)
@@ -276,8 +277,8 @@ class DummyArgTransformer : Transformer() {
                     val nextFrame = frames[nextInsnIndex]
 
                     val value = nextFrame.getStack(nextFrame.stackSize - 1)
-                    if (value.isSingleConstant) {
-                        constInsns[insn] = value.intValue
+                    if (value is IntValue.Constant && value.singleton != null) {
+                        constInsns[insn] = value.singleton
                     }
                 }
             }

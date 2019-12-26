@@ -1,7 +1,5 @@
 package dev.openrs2.deob.analysis
 
-import com.google.common.collect.ImmutableSet
-import com.google.common.collect.Sets
 import dev.openrs2.asm.intConstant
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.Type
@@ -16,7 +14,7 @@ class IntInterpreter(private val parameters: Array<Set<Int>?>?) : Interpreter<In
 
     override fun newValue(type: Type?): IntValue? {
         val basicValue = basicInterpreter.newValue(type) ?: return null
-        return IntValue.newUnknown(basicValue)
+        return IntValue.Unknown(basicValue)
     }
 
     override fun newParameterValue(isInstanceMethod: Boolean, local: Int, type: Type): IntValue {
@@ -24,18 +22,18 @@ class IntInterpreter(private val parameters: Array<Set<Int>?>?) : Interpreter<In
 
         if (parameters != null) {
             val parameterIndex = when {
-                isInstanceMethod && local == 0 -> return IntValue.newUnknown(basicValue)
+                isInstanceMethod && local == 0 -> return IntValue.Unknown(basicValue)
                 isInstanceMethod -> local - 1
                 else -> local
             }
 
             val parameter = parameters[parameterIndex]
             if (parameter != null) {
-                return IntValue.newConstant(basicValue, parameter)
+                return IntValue.Constant(basicValue, parameter)
             }
         }
 
-        return IntValue.newUnknown(basicValue)
+        return IntValue.Unknown(basicValue)
     }
 
     @Throws(AnalyzerException::class)
@@ -43,9 +41,9 @@ class IntInterpreter(private val parameters: Array<Set<Int>?>?) : Interpreter<In
         val basicValue = basicInterpreter.newOperation(insn)
         val v = insn.intConstant
         return if (v != null) {
-            IntValue.newConstant(basicValue, v)
+            IntValue.Constant(basicValue, v)
         } else {
-            IntValue.newUnknown(basicValue)
+            IntValue.Unknown(basicValue)
         }
     }
 
@@ -57,49 +55,49 @@ class IntInterpreter(private val parameters: Array<Set<Int>?>?) : Interpreter<In
     override fun unaryOperation(insn: AbstractInsnNode, value: IntValue): IntValue? {
         val basicValue = basicInterpreter.unaryOperation(insn, value.basicValue) ?: return null
 
-        if (value.isUnknown) {
-            return IntValue.newUnknown(basicValue)
+        if (value !is IntValue.Constant) {
+            return IntValue.Unknown(basicValue)
         }
 
-        val set = ImmutableSet.builder<Int>()
-        for (v in value.intValues) {
+        val set = mutableSetOf<Int>()
+        for (v in value.values) {
             val result = when {
                 insn.opcode == Opcodes.INEG -> -v
                 insn is IincInsnNode -> v + insn.incr
                 insn.opcode == Opcodes.I2B -> v.toByte().toInt()
                 insn.opcode == Opcodes.I2C -> v.toChar().toInt()
                 insn.opcode == Opcodes.I2S -> v.toShort().toInt()
-                else -> return IntValue.newUnknown(basicValue)
+                else -> return IntValue.Unknown(basicValue)
             }
             set.add(result)
         }
-        return IntValue.newConstant(basicValue, set.build())
+        return IntValue.Constant(basicValue, set)
     }
 
     @Throws(AnalyzerException::class)
     override fun binaryOperation(insn: AbstractInsnNode, value1: IntValue, value2: IntValue): IntValue? {
         val basicValue = basicInterpreter.binaryOperation(insn, value1.basicValue, value2.basicValue) ?: return null
 
-        if (value1.isUnknown || value2.isUnknown) {
-            return IntValue.newUnknown(basicValue)
+        if (value1 !is IntValue.Constant || value2 !is IntValue.Constant) {
+            return IntValue.Unknown(basicValue)
         }
 
-        val set = ImmutableSet.builder<Int>()
-        for (v1 in value1.intValues) {
-            for (v2 in value2.intValues) {
+        val set = mutableSetOf<Int>()
+        for (v1 in value1.values) {
+            for (v2 in value2.values) {
                 val result = when (insn.opcode) {
                     Opcodes.IADD -> v1 + v2
                     Opcodes.ISUB -> v1 - v2
                     Opcodes.IMUL -> v1 * v2
                     Opcodes.IDIV -> {
                         if (v2 == 0) {
-                            return IntValue.newUnknown(basicValue)
+                            return IntValue.Unknown(basicValue)
                         }
                         v1 / v2
                     }
                     Opcodes.IREM -> {
                         if (v2 == 0) {
-                            return IntValue.newUnknown(basicValue)
+                            return IntValue.Unknown(basicValue)
                         }
                         v1 % v2
                     }
@@ -109,12 +107,12 @@ class IntInterpreter(private val parameters: Array<Set<Int>?>?) : Interpreter<In
                     Opcodes.IAND -> v1 and v2
                     Opcodes.IOR -> v1 or v2
                     Opcodes.IXOR -> v1 xor v2
-                    else -> return IntValue.newUnknown(basicValue)
+                    else -> return IntValue.Unknown(basicValue)
                 }
                 set.add(result)
             }
         }
-        return IntValue.newConstant(basicValue, set.build())
+        return IntValue.Constant(basicValue, set)
     }
 
     @Throws(AnalyzerException::class)
@@ -127,14 +125,14 @@ class IntInterpreter(private val parameters: Array<Set<Int>?>?) : Interpreter<In
         val basicValue =
             basicInterpreter.ternaryOperation(insn, value1.basicValue, value2.basicValue, value3.basicValue)
                 ?: return null
-        return IntValue.newUnknown(basicValue)
+        return IntValue.Unknown(basicValue)
     }
 
     @Throws(AnalyzerException::class)
     override fun naryOperation(insn: AbstractInsnNode, values: List<IntValue>): IntValue? {
         val args = values.map { it.basicValue }.toList()
         val basicValue = basicInterpreter.naryOperation(insn, args) ?: return null
-        return IntValue.newUnknown(basicValue)
+        return IntValue.Unknown(basicValue)
     }
 
     @Throws(AnalyzerException::class)
@@ -149,15 +147,15 @@ class IntInterpreter(private val parameters: Array<Set<Int>?>?) : Interpreter<In
             return value1
         }
 
-        if (value1.isUnknown || value2.isUnknown) {
-            return IntValue.newUnknown(basicValue)
+        if (value1 !is IntValue.Constant || value2 !is IntValue.Constant) {
+            return IntValue.Unknown(basicValue)
         }
 
-        val set = ImmutableSet.copyOf(Sets.union(value1.intValues, value2.intValues))
+        val set = value1.values.union(value2.values)
         return if (set.size > MAX_TRACKED_VALUES) {
-            IntValue.newUnknown(basicValue)
+            IntValue.Unknown(basicValue)
         } else {
-            IntValue.newConstant(basicValue, set)
+            IntValue.Constant(basicValue, set)
         }
     }
 
