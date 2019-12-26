@@ -7,11 +7,11 @@ import com.github.javaparser.ast.expr.Expression
 import com.github.javaparser.ast.expr.IntegerLiteralExpr
 import com.github.javaparser.ast.expr.UnaryExpr
 import dev.openrs2.deob.ast.util.ExprUtils
-import dev.openrs2.deob.ast.util.NodeUtils
+import dev.openrs2.deob.ast.util.walk
 
 class ComplementTransformer : Transformer() {
     override fun transform(unit: CompilationUnit) {
-        NodeUtils.walk(unit, Node.TreeTraversal.POSTORDER, BinaryExpr::class.java) { expr ->
+        unit.walk(Node.TreeTraversal.POSTORDER) { expr: BinaryExpr ->
             val op = complement(expr.operator) ?: return@walk
 
             val left = expr.left

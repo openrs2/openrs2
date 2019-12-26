@@ -5,7 +5,7 @@ import com.github.javaparser.ast.Node
 import com.github.javaparser.ast.expr.BinaryExpr
 import com.github.javaparser.ast.expr.EnclosedExpr
 import com.github.javaparser.ast.expr.Expression
-import dev.openrs2.deob.ast.util.NodeUtils
+import dev.openrs2.deob.ast.util.walk
 
 class EncloseTransformer : Transformer() {
     private enum class Associativity {
@@ -73,7 +73,7 @@ class EncloseTransformer : Transformer() {
     }
 
     override fun transform(unit: CompilationUnit) {
-        NodeUtils.walk(unit, Node.TreeTraversal.POSTORDER, Expression::class.java) { expr ->
+        unit.walk(Node.TreeTraversal.POSTORDER) { expr: Expression ->
             when {
                 expr.isArrayAccessExpr -> {
                     val accessExpr = expr.asArrayAccessExpr()

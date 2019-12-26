@@ -5,11 +5,11 @@ import com.github.javaparser.ast.Node
 import com.github.javaparser.ast.expr.BinaryExpr
 import com.github.javaparser.ast.expr.IntegerLiteralExpr
 import dev.openrs2.deob.ast.util.ExprUtils
-import dev.openrs2.deob.ast.util.NodeUtils
+import dev.openrs2.deob.ast.util.walk
 
 class BitMaskTransformer : Transformer() {
     override fun transform(unit: CompilationUnit) {
-        NodeUtils.walk(unit, Node.TreeTraversal.POSTORDER, BinaryExpr::class.java) { expr ->
+        unit.walk(Node.TreeTraversal.POSTORDER) { expr: BinaryExpr ->
             val shiftOp = expr.operator
             val left = expr.left
             val shamtExpr = expr.right

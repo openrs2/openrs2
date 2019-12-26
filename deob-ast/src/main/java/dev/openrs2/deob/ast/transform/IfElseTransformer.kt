@@ -6,11 +6,11 @@ import com.github.javaparser.ast.stmt.BlockStmt
 import com.github.javaparser.ast.stmt.IfStmt
 import com.github.javaparser.ast.stmt.Statement
 import dev.openrs2.deob.ast.util.ExprUtils
-import dev.openrs2.deob.ast.util.NodeUtils
+import dev.openrs2.deob.ast.util.walk
 
 class IfElseTransformer : Transformer() {
     override fun transform(unit: CompilationUnit) {
-        NodeUtils.walk(unit, Node.TreeTraversal.POSTORDER, IfStmt::class.java) { stmt ->
+        unit.walk(Node.TreeTraversal.POSTORDER) { stmt: IfStmt ->
             stmt.elseStmt.ifPresent { elseStmt: Statement ->
                 val condition = stmt.condition
                 val thenStmt = stmt.thenStmt
@@ -43,7 +43,7 @@ class IfElseTransformer : Transformer() {
             }
         }
 
-        NodeUtils.walk(unit, Node.TreeTraversal.POSTORDER, IfStmt::class.java) { stmt ->
+        unit.walk(Node.TreeTraversal.POSTORDER) { stmt: IfStmt ->
             stmt.elseStmt.ifPresent { elseStmt ->
                 if (isIf(elseStmt)) {
                     stmt.setElseStmt(getIf(elseStmt))
@@ -73,7 +73,7 @@ class IfElseTransformer : Transformer() {
          *     throw ...;
          * }
          */
-        NodeUtils.walk(unit, Node.TreeTraversal.POSTORDER, IfStmt::class.java) { stmt ->
+        unit.walk(Node.TreeTraversal.POSTORDER) { stmt: IfStmt ->
             stmt.elseStmt.ifPresent { elseStmt ->
                 // match
                 if (!elseStmt.isBlockStmt) {

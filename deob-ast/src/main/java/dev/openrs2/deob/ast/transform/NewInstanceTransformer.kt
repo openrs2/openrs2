@@ -3,11 +3,11 @@ package dev.openrs2.deob.ast.transform
 import com.github.javaparser.ast.CompilationUnit
 import com.github.javaparser.ast.Node
 import com.github.javaparser.ast.expr.MethodCallExpr
-import dev.openrs2.deob.ast.util.NodeUtils
+import dev.openrs2.deob.ast.util.walk
 
 class NewInstanceTransformer : Transformer() {
     override fun transform(unit: CompilationUnit) {
-        NodeUtils.walk(unit, Node.TreeTraversal.POSTORDER, MethodCallExpr::class.java) { expr ->
+        unit.walk(Node.TreeTraversal.POSTORDER) { expr: MethodCallExpr ->
             if (expr.nameAsString != "newInstance") {
                 return@walk
             }

@@ -3,12 +3,12 @@ package dev.openrs2.deob.ast.transform
 import com.github.javaparser.ast.CompilationUnit
 import com.github.javaparser.ast.Node
 import com.github.javaparser.ast.expr.BinaryExpr
-import dev.openrs2.deob.ast.util.NodeUtils
 import dev.openrs2.deob.ast.util.TypeUtils
+import dev.openrs2.deob.ast.util.walk
 
 class BinaryExprOrderTransformer : Transformer() {
     override fun transform(unit: CompilationUnit) {
-        NodeUtils.walk(unit, Node.TreeTraversal.POSTORDER, BinaryExpr::class.java) { expr ->
+        unit.walk(Node.TreeTraversal.POSTORDER) { expr: BinaryExpr ->
             val op = flip(expr.operator) ?: return@walk
 
             val type = expr.calculateResolvedType()

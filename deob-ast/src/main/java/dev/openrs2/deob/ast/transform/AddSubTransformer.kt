@@ -6,12 +6,12 @@ import com.github.javaparser.ast.expr.BinaryExpr
 import com.github.javaparser.ast.expr.Expression
 import com.github.javaparser.ast.expr.UnaryExpr
 import dev.openrs2.deob.ast.util.ExprUtils
-import dev.openrs2.deob.ast.util.NodeUtils
 import dev.openrs2.deob.ast.util.TypeUtils
+import dev.openrs2.deob.ast.util.walk
 
 class AddSubTransformer : Transformer() {
     override fun transform(unit: CompilationUnit) {
-        NodeUtils.walk(unit, Node.TreeTraversal.POSTORDER, BinaryExpr::class.java) { expr ->
+        unit.walk(Node.TreeTraversal.POSTORDER) { expr: BinaryExpr ->
             val op = expr.operator
             val left = expr.left
             val right = expr.right
