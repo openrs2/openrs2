@@ -13,10 +13,14 @@ class NewInstanceTransformer : Transformer() {
             }
 
             expr.scope.ifPresent { scope ->
-                if (!scope.isMethodCallExpr || scope.asMethodCallExpr().nameAsString != "getConstructor") {
+                if (!scope.isMethodCallExpr || scope.asMethodCallExpr().nameAsString !in CONSTRUCTOR_METHODS) {
                     expr.setScope(MethodCallExpr(scope.clone(), "getDeclaredConstructor"))
                 }
             }
         }
+    }
+
+    companion object {
+        val CONSTRUCTOR_METHODS = setOf("getConstructor", "getDeclaredConstructor")
     }
 }
