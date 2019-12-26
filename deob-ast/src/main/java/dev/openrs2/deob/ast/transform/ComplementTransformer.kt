@@ -6,7 +6,8 @@ import com.github.javaparser.ast.expr.BinaryExpr
 import com.github.javaparser.ast.expr.Expression
 import com.github.javaparser.ast.expr.IntegerLiteralExpr
 import com.github.javaparser.ast.expr.UnaryExpr
-import dev.openrs2.deob.ast.util.ExprUtils
+import dev.openrs2.deob.ast.util.createLong
+import dev.openrs2.deob.ast.util.isIntegerOrLongLiteral
 import dev.openrs2.deob.ast.util.walk
 
 class ComplementTransformer : Transformer() {
@@ -16,7 +17,7 @@ class ComplementTransformer : Transformer() {
 
             val left = expr.left
             val right = expr.right
-            val bothLiteral = ExprUtils.isIntegerOrLongLiteral(left) && ExprUtils.isIntegerOrLongLiteral(right)
+            val bothLiteral = left.isIntegerOrLongLiteral() && right.isIntegerOrLongLiteral()
 
             if (isComplementOrLiteral(left) && isComplementOrLiteral(right) && !bothLiteral) {
                 expr.operator = op
@@ -32,7 +33,7 @@ class ComplementTransformer : Transformer() {
         }
 
         private fun isComplementOrLiteral(expr: Expression): Boolean {
-            return isComplement(expr) || ExprUtils.isIntegerOrLongLiteral(expr)
+            return isComplement(expr) || expr.isIntegerOrLongLiteral()
         }
 
         private fun complement(op: BinaryExpr.Operator): BinaryExpr.Operator? {
@@ -50,7 +51,7 @@ class ComplementTransformer : Transformer() {
             return when {
                 expr.isUnaryExpr -> expr.asUnaryExpr().expression
                 expr.isIntegerLiteralExpr -> IntegerLiteralExpr(expr.asIntegerLiteralExpr().asInt().inv())
-                expr.isLongLiteralExpr -> ExprUtils.createLong(expr.asLongLiteralExpr().asLong().inv())
+                expr.isLongLiteralExpr -> createLong(expr.asLongLiteralExpr().asLong().inv())
                 else -> throw IllegalArgumentException()
             }
         }

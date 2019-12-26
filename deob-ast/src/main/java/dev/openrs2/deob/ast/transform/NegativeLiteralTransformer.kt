@@ -3,14 +3,15 @@ package dev.openrs2.deob.ast.transform
 import com.github.javaparser.ast.CompilationUnit
 import com.github.javaparser.ast.Node
 import com.github.javaparser.ast.expr.UnaryExpr
-import dev.openrs2.deob.ast.util.ExprUtils
+import dev.openrs2.deob.ast.util.isIntegerOrLongLiteral
+import dev.openrs2.deob.ast.util.negate
 import dev.openrs2.deob.ast.util.walk
 
 class NegativeLiteralTransformer : Transformer() {
     override fun transform(unit: CompilationUnit) {
         unit.walk(Node.TreeTraversal.POSTORDER) { expr: UnaryExpr ->
             val operand = expr.expression
-            if (!ExprUtils.isIntegerOrLongLiteral(operand)) {
+            if (!operand.isIntegerOrLongLiteral()) {
                 return@walk
             }
 
@@ -20,7 +21,7 @@ class NegativeLiteralTransformer : Transformer() {
                     expr.replace(operand)
                 }
                 UnaryExpr.Operator.MINUS -> {
-                    expr.replace(ExprUtils.negate(operand))
+                    expr.replace(operand.negate())
                 }
             }
         }

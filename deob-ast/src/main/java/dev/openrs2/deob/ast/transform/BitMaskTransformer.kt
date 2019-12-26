@@ -4,7 +4,8 @@ import com.github.javaparser.ast.CompilationUnit
 import com.github.javaparser.ast.Node
 import com.github.javaparser.ast.expr.BinaryExpr
 import com.github.javaparser.ast.expr.IntegerLiteralExpr
-import dev.openrs2.deob.ast.util.ExprUtils
+import dev.openrs2.deob.ast.util.createLong
+import dev.openrs2.deob.ast.util.isIntegerOrLongLiteral
 import dev.openrs2.deob.ast.util.walk
 
 class BitMaskTransformer : Transformer() {
@@ -23,7 +24,7 @@ class BitMaskTransformer : Transformer() {
             val argExpr = bitwiseExpr.left
             var maskExpr = bitwiseExpr.right
 
-            if (!BITWISE_OPS.contains(bitwiseOp) || !ExprUtils.isIntegerOrLongLiteral(maskExpr)) {
+            if (!BITWISE_OPS.contains(bitwiseOp) || !maskExpr.isIntegerOrLongLiteral()) {
                 return@walk
             }
 
@@ -47,7 +48,7 @@ class BitMaskTransformer : Transformer() {
                     else -> throw IllegalStateException()
                 }
 
-                maskExpr = ExprUtils.createLong(mask)
+                maskExpr = createLong(mask)
             }
 
             expr.replace(BinaryExpr(BinaryExpr(argExpr.clone(), shamtExpr.clone(), shiftOp), maskExpr, bitwiseOp))

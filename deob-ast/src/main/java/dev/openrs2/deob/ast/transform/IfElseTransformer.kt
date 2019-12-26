@@ -5,7 +5,8 @@ import com.github.javaparser.ast.Node
 import com.github.javaparser.ast.stmt.BlockStmt
 import com.github.javaparser.ast.stmt.IfStmt
 import com.github.javaparser.ast.stmt.Statement
-import dev.openrs2.deob.ast.util.ExprUtils
+import dev.openrs2.deob.ast.util.countNots
+import dev.openrs2.deob.ast.util.not
 import dev.openrs2.deob.ast.util.walk
 
 class IfElseTransformer : Transformer() {
@@ -15,7 +16,7 @@ class IfElseTransformer : Transformer() {
                 val condition = stmt.condition
                 val thenStmt = stmt.thenStmt
                 if (isIf(thenStmt) && !isIf(elseStmt)) {
-                    stmt.condition = ExprUtils.not(condition)
+                    stmt.condition = condition.not()
                     stmt.thenStmt = elseStmt.clone()
                     stmt.setElseStmt(thenStmt.clone())
                 } else if (!isIf(thenStmt) && isIf(elseStmt)) {
@@ -28,8 +29,8 @@ class IfElseTransformer : Transformer() {
                 }
 
                 // Prefer fewer NOTs in the if condition
-                val notCondition = ExprUtils.not(condition)
-                if (ExprUtils.countNots(notCondition) < ExprUtils.countNots(condition)) {
+                val notCondition = condition.not()
+                if (notCondition.countNots() < condition.countNots()) {
                     stmt.condition = notCondition
                     if (elseStmt.isIfStmt) {
                         val block = BlockStmt()
@@ -102,7 +103,7 @@ class IfElseTransformer : Transformer() {
                 }
 
                 // rewrite
-                val condition = ExprUtils.not(ifStmt.condition)
+                val condition = ifStmt.condition.not()
 
                 val tail = blockStmt.clone()
                 tail.statements.removeAt(0)

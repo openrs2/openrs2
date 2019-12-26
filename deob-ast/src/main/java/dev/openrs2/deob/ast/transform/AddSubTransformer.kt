@@ -5,8 +5,9 @@ import com.github.javaparser.ast.Node
 import com.github.javaparser.ast.expr.BinaryExpr
 import com.github.javaparser.ast.expr.Expression
 import com.github.javaparser.ast.expr.UnaryExpr
-import dev.openrs2.deob.ast.util.ExprUtils
+import dev.openrs2.deob.ast.util.hasSideEffects
 import dev.openrs2.deob.ast.util.isString
+import dev.openrs2.deob.ast.util.negate
 import dev.openrs2.deob.ast.util.walk
 
 class AddSubTransformer : Transformer() {
@@ -24,20 +25,20 @@ class AddSubTransformer : Transformer() {
             if (op == BinaryExpr.Operator.PLUS && isNegative(right)) {
                 // x + -y => x - y
                 expr.operator = BinaryExpr.Operator.MINUS
-                expr.right = ExprUtils.negate(right)
+                expr.right = right.negate()
             } else if (op == BinaryExpr.Operator.PLUS && isNegative(left)) {
-                if (ExprUtils.hasSideEffects(left) || ExprUtils.hasSideEffects(right)) {
+                if (left.hasSideEffects() || right.hasSideEffects()) {
                     return@walk
                 }
 
                 // -x + y => y - x
                 expr.operator = BinaryExpr.Operator.MINUS
                 expr.left = right.clone()
-                expr.right = ExprUtils.negate(left)
+                expr.right = left.negate()
             } else if (op == BinaryExpr.Operator.MINUS && isNegative(right)) {
                 // x - -y => x + y
                 expr.operator = BinaryExpr.Operator.PLUS
-                expr.right = ExprUtils.negate(right)
+                expr.right = right.negate()
             }
         }
     }
