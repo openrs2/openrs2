@@ -1,7 +1,6 @@
 package dev.openrs2.deob.remap
 
 import com.github.michaelbull.logging.InlineLogger
-import com.google.common.base.Strings
 import dev.openrs2.asm.MemberDesc
 import dev.openrs2.asm.MemberRef
 import dev.openrs2.asm.classpath.ClassMetadata
@@ -158,7 +157,7 @@ class TypedRemapper private constructor(
 
                 var type = Type.getType(partition.iterator().next().desc)
                 if (type.sort == Type.ARRAY) {
-                    prefix = Strings.repeat("Array", type.dimensions)
+                    prefix = "Array".repeat(type.dimensions)
                     type = type.elementType
                 }
 
