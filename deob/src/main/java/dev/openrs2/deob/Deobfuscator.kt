@@ -1,7 +1,6 @@
 package dev.openrs2.deob
 
 import com.github.michaelbull.logging.InlineLogger
-import com.google.common.collect.ImmutableList
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
 import dev.openrs2.asm.classpath.Library.Companion.readJar
@@ -68,18 +67,18 @@ class Deobfuscator(private val input: Path, private val output: Path) {
         val runtime = ClassLoader.getPlatformClassLoader()
         val classPath = ClassPath(
             runtime,
-            ImmutableList.of(),
-            ImmutableList.of(client, loader, signLink, unpack, unpacker)
+            listOf(),
+            listOf(client, loader, signLink, unpack, unpacker)
         )
         val glClassPath = ClassPath(
             runtime,
-            ImmutableList.of(gl, glDri),
-            ImmutableList.of(glClient, glLoader, glSignLink, glUnpack, glUnpacker)
+            listOf(gl, glDri),
+            listOf(glClient, glLoader, glSignLink, glUnpack, glUnpacker)
         )
         val unsignedClassPath = ClassPath(
             runtime,
-            ImmutableList.of(),
-            ImmutableList.of(unsignedClient)
+            listOf(),
+            listOf(unsignedClient)
         )
 
         // deobfuscate

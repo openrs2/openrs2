@@ -1,6 +1,5 @@
 package dev.openrs2.asm.classpath
 
-import com.google.common.collect.ImmutableList
 import dev.openrs2.asm.MemberDesc
 import dev.openrs2.asm.MemberRef
 import dev.openrs2.common.collect.DisjointSet
@@ -10,7 +9,7 @@ import org.objectweb.asm.tree.ClassNode
 
 class ClassPath(
     private val runtime: ClassLoader,
-    private val dependencies: ImmutableList<Library>,
+    private val dependencies: List<Library>,
     val libraries: List<Library>
 ) {
     private val cache = mutableMapOf<String, ClassMetadata>()
