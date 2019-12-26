@@ -67,18 +67,18 @@ class Deobfuscator(private val input: Path, private val output: Path) {
         val runtime = ClassLoader.getPlatformClassLoader()
         val classPath = ClassPath(
             runtime,
-            listOf(),
-            listOf(client, loader, signLink, unpack, unpacker)
+            dependencies = listOf(),
+            libraries = listOf(client, loader, signLink, unpack, unpacker)
         )
         val glClassPath = ClassPath(
             runtime,
-            listOf(gl, glDri),
-            listOf(glClient, glLoader, glSignLink, glUnpack, glUnpacker)
+            dependencies = listOf(gl, glDri),
+            libraries = listOf(glClient, glLoader, glSignLink, glUnpack, glUnpacker)
         )
         val unsignedClassPath = ClassPath(
             runtime,
-            listOf(),
-            listOf(unsignedClient)
+            dependencies = listOf(),
+            libraries = listOf(unsignedClient)
         )
 
         // deobfuscate
