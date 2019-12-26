@@ -255,7 +255,6 @@ class InsnMatcher private constructor(private val regex: Regex) {
             throw IllegalArgumentException("$opcode is not a valid opcode or opcode group")
         }
 
-        @JvmStatic
         fun compile(regex: String): InsnMatcher {
             val pattern = StringBuilder()
             val opcode = StringBuilder()

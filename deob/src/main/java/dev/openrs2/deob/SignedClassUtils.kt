@@ -15,7 +15,6 @@ object SignedClassUtils {
     private val LOAD_SIGNED_CLASS_MATCHER =
         InsnMatcher.compile("LDC INVOKESTATIC ASTORE ALOAD GETFIELD ALOAD INVOKEVIRTUAL ALOAD INVOKEVIRTUAL POP")
 
-    @JvmStatic
     fun move(loader: Library, client: Library, signLink: Library) {
         // find signed classes
         val signedClasses = findSignedClasses(loader)

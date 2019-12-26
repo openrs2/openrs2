@@ -5,7 +5,6 @@ import org.objectweb.asm.commons.Remapper
 import org.objectweb.asm.commons.SimpleRemapper
 
 object PrefixRemapper {
-    @JvmStatic
     fun create(library: Library, prefix: String): Remapper {
         val mapping = mutableMapOf<String, String>()
 

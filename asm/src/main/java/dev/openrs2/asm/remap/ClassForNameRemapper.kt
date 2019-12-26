@@ -22,7 +22,6 @@ object ClassForNameRemapper {
             && invokestatic.desc == "(Ljava/lang/String;)Ljava/lang/Class;"
     }
 
-    @JvmStatic
     fun remap(remapper: Remapper, method: MethodNode) {
         INVOKE_MATCHER.match(method).filter(ClassForNameRemapper::isClassForName).forEach {
             val ldc = it[0] as LdcInsnNode

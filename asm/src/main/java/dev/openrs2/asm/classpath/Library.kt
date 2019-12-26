@@ -119,7 +119,6 @@ class Library constructor() : Iterable<ClassNode> {
         private const val JAR_SUFFIX = ".jar"
         private val GZIP_HEADER = byteArrayOf(0x1F, 0x8B.toByte())
 
-        @JvmStatic
         fun readJar(path: Path): Library {
             logger.info { "Reading jar $path" }
 
@@ -145,7 +144,6 @@ class Library constructor() : Iterable<ClassNode> {
             return library
         }
 
-        @JvmStatic
         fun readPack(path: Path): Library {
             logger.info { "Reading pack $path" }
 
