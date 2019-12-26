@@ -6,10 +6,8 @@ import dev.openrs2.asm.hasCode
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.FieldNode
 import org.objectweb.asm.tree.MethodNode
-import org.objectweb.asm.tree.analysis.AnalyzerException
 
 abstract class Transformer {
-    @Throws(AnalyzerException::class)
     fun transform(classPath: ClassPath) {
         preTransform(classPath)
 
@@ -43,22 +41,18 @@ abstract class Transformer {
         postTransform(classPath)
     }
 
-    @Throws(AnalyzerException::class)
     protected open fun preTransform(classPath: ClassPath) {
         // empty
     }
 
-    @Throws(AnalyzerException::class)
     protected open fun prePass(classPath: ClassPath) {
         // empty
     }
 
-    @Throws(AnalyzerException::class)
     protected open fun transformClass(classPath: ClassPath, library: Library, clazz: ClassNode): Boolean {
         return false
     }
 
-    @Throws(AnalyzerException::class)
     protected open fun transformField(
         classPath: ClassPath,
         library: Library,
@@ -68,7 +62,6 @@ abstract class Transformer {
         return false
     }
 
-    @Throws(AnalyzerException::class)
     protected open fun preTransformMethod(
         classPath: ClassPath,
         library: Library,
@@ -78,7 +71,6 @@ abstract class Transformer {
         return false
     }
 
-    @Throws(AnalyzerException::class)
     protected open fun transformCode(
         classPath: ClassPath,
         library: Library,
@@ -88,7 +80,6 @@ abstract class Transformer {
         return false
     }
 
-    @Throws(AnalyzerException::class)
     protected open fun postTransformMethod(
         classPath: ClassPath,
         library: Library,
@@ -98,12 +89,10 @@ abstract class Transformer {
         return false
     }
 
-    @Throws(AnalyzerException::class)
     protected open fun postPass(classPath: ClassPath) {
         // empty
     }
 
-    @Throws(AnalyzerException::class)
     protected open fun postTransform(classPath: ClassPath) {
         // empty
     }

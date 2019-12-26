@@ -16,14 +16,12 @@ import org.objectweb.asm.Opcodes
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree.*
 import org.objectweb.asm.tree.analysis.Analyzer
-import org.objectweb.asm.tree.analysis.AnalyzerException
 
 class UnusedArgTransformer : Transformer() {
     private val retainedArgs = mutableSetOf<ArgRef>()
     private lateinit var inheritedMethodSets: DisjointSet<MemberRef>
     private var deletedArgs = 0
 
-    @Throws(AnalyzerException::class)
     override fun preTransform(classPath: ClassPath) {
         retainedArgs.clear()
         inheritedMethodSets = classPath.createInheritedMethodSets()
@@ -40,7 +38,6 @@ class UnusedArgTransformer : Transformer() {
         }
     }
 
-    @Throws(AnalyzerException::class)
     private fun populateRetainedArgs(classPath: ClassPath, clazz: ClassNode, method: MethodNode) {
         val partition = inheritedMethodSets[MemberRef(clazz, method)]!!
         val localToArgMap = createLocalToArgMap(method)
@@ -85,7 +82,6 @@ class UnusedArgTransformer : Transformer() {
         }
     }
 
-    @Throws(AnalyzerException::class)
     override fun preTransformMethod(
         classPath: ClassPath,
         library: Library,

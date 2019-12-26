@@ -4,7 +4,6 @@ import dev.openrs2.asm.intConstant
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree.AbstractInsnNode
-import org.objectweb.asm.tree.analysis.AnalyzerException
 import org.objectweb.asm.tree.analysis.BasicInterpreter
 import org.objectweb.asm.tree.analysis.Interpreter
 
@@ -16,7 +15,6 @@ class ConstSourceInterpreter : Interpreter<ConstSourceValue>(Opcodes.ASM7) {
         return ConstSourceValue.Unknown(basicValue)
     }
 
-    @Throws(AnalyzerException::class)
     override fun newOperation(insn: AbstractInsnNode): ConstSourceValue {
         val basicValue = basicInterpreter.newOperation(insn)
         return if (insn.intConstant != null) {
@@ -26,19 +24,16 @@ class ConstSourceInterpreter : Interpreter<ConstSourceValue>(Opcodes.ASM7) {
         }
     }
 
-    @Throws(AnalyzerException::class)
     override fun copyOperation(insn: AbstractInsnNode, value: ConstSourceValue): ConstSourceValue {
         val basicValue = basicInterpreter.copyOperation(insn, value.basicValue)
         return ConstSourceValue.Unknown(basicValue)
     }
 
-    @Throws(AnalyzerException::class)
     override fun unaryOperation(insn: AbstractInsnNode, value: ConstSourceValue): ConstSourceValue? {
         val basicValue = basicInterpreter.unaryOperation(insn, value.basicValue) ?: return null
         return ConstSourceValue.Unknown(basicValue)
     }
 
-    @Throws(AnalyzerException::class)
     override fun binaryOperation(
         insn: AbstractInsnNode,
         value1: ConstSourceValue,
@@ -49,7 +44,6 @@ class ConstSourceInterpreter : Interpreter<ConstSourceValue>(Opcodes.ASM7) {
         return ConstSourceValue.Unknown(basicValue)
     }
 
-    @Throws(AnalyzerException::class)
     override fun ternaryOperation(
         insn: AbstractInsnNode,
         value1: ConstSourceValue,
@@ -65,7 +59,6 @@ class ConstSourceInterpreter : Interpreter<ConstSourceValue>(Opcodes.ASM7) {
         return ConstSourceValue.Unknown(basicValue)
     }
 
-    @Throws(AnalyzerException::class)
     override fun naryOperation(
         insn: AbstractInsnNode,
         values: List<ConstSourceValue>
@@ -75,7 +68,6 @@ class ConstSourceInterpreter : Interpreter<ConstSourceValue>(Opcodes.ASM7) {
         return ConstSourceValue.Unknown(basicValue)
     }
 
-    @Throws(AnalyzerException::class)
     override fun returnOperation(insn: AbstractInsnNode, value: ConstSourceValue, expected: ConstSourceValue) {
         basicInterpreter.returnOperation(insn, value.basicValue, expected.basicValue)
     }

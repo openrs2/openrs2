@@ -4,7 +4,6 @@ import com.google.common.io.ByteStreams
 import org.jetbrains.java.decompiler.main.extern.IBytecodeProvider
 import org.jetbrains.java.decompiler.main.extern.IResultSaver
 import java.io.Closeable
-import java.io.IOException
 import java.nio.file.Files
 import java.nio.file.Path
 import java.util.jar.JarFile
@@ -13,7 +12,6 @@ import java.util.jar.Manifest
 class DecompilerIo(private val destination: (String) -> Path) : IBytecodeProvider, IResultSaver, Closeable {
     private val inputJars = mutableMapOf<String, JarFile>()
 
-    @Throws(IOException::class)
     override fun getBytecode(externalPath: String, internalPath: String?): ByteArray {
         if (internalPath == null) {
             throw UnsupportedOperationException()
@@ -76,7 +74,6 @@ class DecompilerIo(private val destination: (String) -> Path) : IBytecodeProvide
         // ignore
     }
 
-    @Throws(IOException::class)
     override fun close() {
         for (jar in inputJars.values) {
             jar.close()

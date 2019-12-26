@@ -5,7 +5,6 @@ import org.objectweb.asm.Opcodes
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.IincInsnNode
-import org.objectweb.asm.tree.analysis.AnalyzerException
 import org.objectweb.asm.tree.analysis.BasicInterpreter
 import org.objectweb.asm.tree.analysis.Interpreter
 
@@ -36,7 +35,6 @@ class IntInterpreter(private val parameters: Array<Set<Int>?>?) : Interpreter<In
         return IntValue.Unknown(basicValue)
     }
 
-    @Throws(AnalyzerException::class)
     override fun newOperation(insn: AbstractInsnNode): IntValue {
         val basicValue = basicInterpreter.newOperation(insn)
         val v = insn.intConstant
@@ -51,7 +49,6 @@ class IntInterpreter(private val parameters: Array<Set<Int>?>?) : Interpreter<In
         return value
     }
 
-    @Throws(AnalyzerException::class)
     override fun unaryOperation(insn: AbstractInsnNode, value: IntValue): IntValue? {
         val basicValue = basicInterpreter.unaryOperation(insn, value.basicValue) ?: return null
 
@@ -74,7 +71,6 @@ class IntInterpreter(private val parameters: Array<Set<Int>?>?) : Interpreter<In
         return IntValue.Constant(basicValue, set)
     }
 
-    @Throws(AnalyzerException::class)
     override fun binaryOperation(insn: AbstractInsnNode, value1: IntValue, value2: IntValue): IntValue? {
         val basicValue = basicInterpreter.binaryOperation(insn, value1.basicValue, value2.basicValue) ?: return null
 
@@ -115,7 +111,6 @@ class IntInterpreter(private val parameters: Array<Set<Int>?>?) : Interpreter<In
         return IntValue.Constant(basicValue, set)
     }
 
-    @Throws(AnalyzerException::class)
     override fun ternaryOperation(
         insn: AbstractInsnNode,
         value1: IntValue,
@@ -128,14 +123,12 @@ class IntInterpreter(private val parameters: Array<Set<Int>?>?) : Interpreter<In
         return IntValue.Unknown(basicValue)
     }
 
-    @Throws(AnalyzerException::class)
     override fun naryOperation(insn: AbstractInsnNode, values: List<IntValue>): IntValue? {
         val args = values.map { it.basicValue }.toList()
         val basicValue = basicInterpreter.naryOperation(insn, args) ?: return null
         return IntValue.Unknown(basicValue)
     }
 
-    @Throws(AnalyzerException::class)
     override fun returnOperation(insn: AbstractInsnNode, value: IntValue, expected: IntValue) {
         basicInterpreter.returnOperation(insn, value.basicValue, expected.basicValue)
     }

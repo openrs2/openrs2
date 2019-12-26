@@ -13,7 +13,6 @@ import org.objectweb.asm.commons.Remapper
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.util.CheckClassAdapter
 import java.io.ByteArrayInputStream
-import java.io.IOException
 import java.io.SequenceInputStream
 import java.nio.file.Files
 import java.nio.file.Path
@@ -78,7 +77,6 @@ class Library constructor() : Iterable<ClassNode> {
         }
     }
 
-    @Throws(IOException::class)
     fun writeJar(path: Path) {
         logger.info { "Writing jar $path" }
 
@@ -94,7 +92,6 @@ class Library constructor() : Iterable<ClassNode> {
         }
     }
 
-    @Throws(IOException::class)
     fun writePack(path: Path) {
         logger.info { "Writing pack $path" }
 
@@ -123,7 +120,6 @@ class Library constructor() : Iterable<ClassNode> {
         private val GZIP_HEADER = byteArrayOf(0x1F, 0x8B.toByte())
 
         @JvmStatic
-        @Throws(IOException::class)
         fun readJar(path: Path): Library {
             logger.info { "Reading jar $path" }
 
@@ -150,7 +146,6 @@ class Library constructor() : Iterable<ClassNode> {
         }
 
         @JvmStatic
-        @Throws(IOException::class)
         fun readPack(path: Path): Library {
             logger.info { "Reading pack $path" }
 

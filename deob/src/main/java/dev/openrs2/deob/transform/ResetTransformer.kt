@@ -10,12 +10,10 @@ import dev.openrs2.asm.removeDeadCode
 import dev.openrs2.asm.transform.Transformer
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.*
-import org.objectweb.asm.tree.analysis.AnalyzerException
 
 class ResetTransformer : Transformer() {
     private val resetMethods = mutableSetOf<MemberRef>()
 
-    @Throws(AnalyzerException::class)
     override fun preTransform(classPath: ClassPath) {
         resetMethods.clear()
 
@@ -94,7 +92,6 @@ class ResetTransformer : Transformer() {
             return null
         }
 
-        @Throws(AnalyzerException::class)
         private fun findResetMethods(resetMethods: MutableSet<MemberRef>, clazz: ClassNode, method: MethodNode) {
             method.removeDeadCode(clazz.name)
 

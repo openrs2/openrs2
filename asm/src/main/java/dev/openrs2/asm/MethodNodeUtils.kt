@@ -4,7 +4,6 @@ import org.objectweb.asm.Opcodes
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree.*
 import org.objectweb.asm.tree.analysis.Analyzer
-import org.objectweb.asm.tree.analysis.AnalyzerException
 import org.objectweb.asm.tree.analysis.BasicInterpreter
 import org.objectweb.asm.tree.analysis.BasicValue
 
@@ -100,7 +99,6 @@ fun MethodNode.removeArgument(argIndex: Int) {
     }
 }
 
-@Throws(AnalyzerException::class)
 fun MethodNode.removeDeadCode(owner: String) {
     var changed: Boolean
     do {

@@ -16,7 +16,6 @@ import org.objectweb.asm.Opcodes
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree.*
 import org.objectweb.asm.tree.analysis.Analyzer
-import org.objectweb.asm.tree.analysis.AnalyzerException
 
 class DummyArgTransformer : Transformer() {
     private data class ConditionalCall(
@@ -142,7 +141,6 @@ class DummyArgTransformer : Transformer() {
         conditionalCalls.clear()
     }
 
-    @Throws(AnalyzerException::class)
     override fun transformCode(
         classPath: ClassPath,
         library: Library,

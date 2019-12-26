@@ -10,14 +10,11 @@ import dev.openrs2.bundler.Bundler
 import dev.openrs2.deob.SignedClassUtils.move
 import dev.openrs2.deob.remap.PrefixRemapper.create
 import dev.openrs2.deob.transform.*
-import org.objectweb.asm.tree.analysis.AnalyzerException
-import java.io.IOException
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 
 class Deobfuscator(private val input: Path, private val output: Path) {
-    @Throws(IOException::class, AnalyzerException::class)
     fun run() {
         // read input jars/packs
         logger.info { "Reading input jars" }
@@ -146,7 +143,6 @@ class Deobfuscator(private val input: Path, private val output: Path) {
             AccessTransformer()
         )
 
-        @Throws(IOException::class, AnalyzerException::class)
         @JvmStatic
         fun main(args: Array<String>) {
             val deobfuscator = Deobfuscator(Paths.get("nonfree/code"), Paths.get("nonfree/code/deob"))
