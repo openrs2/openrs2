@@ -13,6 +13,11 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 
+fun main() {
+    val deobfuscator = Deobfuscator(Paths.get("nonfree/code"), Paths.get("nonfree/code/deob"))
+    deobfuscator.run()
+}
+
 class Deobfuscator(private val input: Path, private val output: Path) {
     fun run() {
         // read input jars/packs
@@ -141,11 +146,5 @@ class Deobfuscator(private val input: Path, private val output: Path) {
             ResetTransformer(),
             AccessTransformer()
         )
-
-        @JvmStatic
-        fun main(args: Array<String>) {
-            val deobfuscator = Deobfuscator(Paths.get("nonfree/code"), Paths.get("nonfree/code/deob"))
-            deobfuscator.run()
-        }
     }
 }

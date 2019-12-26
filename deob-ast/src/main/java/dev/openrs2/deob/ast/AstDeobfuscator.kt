@@ -13,6 +13,21 @@ import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.function.Function
 
+fun main() {
+    val deobfuscator = AstDeobfuscator(
+        listOf(
+            Paths.get("nonfree/client/src/main/java"),
+            Paths.get("nonfree/gl/src/main/java"),
+            Paths.get("nonfree/gl-dri/src/main/java"),
+            Paths.get("nonfree/loader/src/main/java"),
+            Paths.get("nonfree/signlink/src/main/java"),
+            Paths.get("nonfree/unpack/src/main/java"),
+            Paths.get("nonfree/unpacker/src/main/java")
+        )
+    )
+    deobfuscator.run()
+}
+
 class AstDeobfuscator(private val modules: List<Path>) {
     fun run() {
         val solver = CombinedTypeSolver(ReflectionTypeSolver(true))
@@ -63,21 +78,5 @@ class AstDeobfuscator(private val modules: List<Path>) {
             NewInstanceTransformer(),
             EncloseTransformer()
         )
-
-        @JvmStatic
-        fun main(args: Array<String>) {
-            val deobfuscator = AstDeobfuscator(
-                listOf(
-                    Paths.get("nonfree/client/src/main/java"),
-                    Paths.get("nonfree/gl/src/main/java"),
-                    Paths.get("nonfree/gl-dri/src/main/java"),
-                    Paths.get("nonfree/loader/src/main/java"),
-                    Paths.get("nonfree/signlink/src/main/java"),
-                    Paths.get("nonfree/unpack/src/main/java"),
-                    Paths.get("nonfree/unpacker/src/main/java")
-                )
-            )
-            deobfuscator.run()
-        }
     }
 }
