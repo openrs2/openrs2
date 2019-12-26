@@ -1,6 +1,7 @@
 package dev.openrs2.deob.analysis;
 
 import java.util.Objects;
+import java.util.Set;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
@@ -13,7 +14,7 @@ public final class IntValue implements Value {
 		return newConstant(basicValue, ImmutableSet.of(intValue));
 	}
 
-	public static IntValue newConstant(BasicValue basicValue, ImmutableSet<Integer> intValues) {
+	public static IntValue newConstant(BasicValue basicValue, Set<Integer> intValues) {
 		Preconditions.checkArgument(basicValue == BasicValue.INT_VALUE);
 		Preconditions.checkArgument(!intValues.isEmpty());
 		return new IntValue(basicValue, intValues);
@@ -25,9 +26,9 @@ public final class IntValue implements Value {
 	}
 
 	private final BasicValue basicValue;
-	private final ImmutableSet<Integer> intValues;
+	private final Set<Integer> intValues;
 
-	private IntValue(BasicValue basicValue, ImmutableSet<Integer> intValues) {
+	private IntValue(BasicValue basicValue, Set<Integer> intValues) {
 		this.basicValue = basicValue;
 		this.intValues = intValues;
 	}
@@ -49,7 +50,7 @@ public final class IntValue implements Value {
 		return intValues.iterator().next();
 	}
 
-	public ImmutableSet<Integer> getIntValues() {
+	public Set<Integer> getIntValues() {
 		Preconditions.checkArgument(!isUnknown());
 		return intValues;
 	}

@@ -11,7 +11,7 @@ import org.objectweb.asm.tree.analysis.AnalyzerException
 import org.objectweb.asm.tree.analysis.BasicInterpreter
 import org.objectweb.asm.tree.analysis.Interpreter
 
-class IntInterpreter(private val parameters: Array<ImmutableSet<Int>?>?) : Interpreter<IntValue>(Opcodes.ASM7) {
+class IntInterpreter(private val parameters: Array<Set<Int>?>?) : Interpreter<IntValue>(Opcodes.ASM7) {
     private val basicInterpreter = BasicInterpreter()
 
     override fun newValue(type: Type?): IntValue? {

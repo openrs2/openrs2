@@ -2,7 +2,6 @@ package dev.openrs2.deob.transform
 
 import com.github.michaelbull.logging.InlineLogger
 import com.google.common.collect.HashMultimap
-import com.google.common.collect.ImmutableSet
 import com.google.common.collect.Multimap
 import dev.openrs2.asm.*
 import dev.openrs2.asm.classpath.ClassPath
@@ -45,7 +44,7 @@ class DummyArgTransformer : Transformer() {
 
     private val argValues: Multimap<ArgRef, SourcedIntValue> = HashMultimap.create()
     private val conditionalCalls: Multimap<DisjointSet.Partition<MemberRef>?, ConditionalCall> = HashMultimap.create()
-    private val constArgs = mutableMapOf<DisjointSet.Partition<MemberRef>, Array<ImmutableSet<Int>?>>()
+    private val constArgs = mutableMapOf<DisjointSet.Partition<MemberRef>, Array<Set<Int>?>>()
     private lateinit var inheritedMethodSets: DisjointSet<MemberRef>
     private var branchesSimplified = 0
     private var constantsInlined = 0
@@ -103,8 +102,8 @@ class DummyArgTransformer : Transformer() {
         method: DisjointSet.Partition<MemberRef>,
         arg: Int,
         intValues: Collection<SourcedIntValue>
-    ): ImmutableSet<Int>? {
-        val builder = ImmutableSet.builder<Int>()
+    ): Set<Int>? {
+        val set = mutableSetOf<Int>()
 
         for ((source, intValue) in intValues) {
             if (intValue.isUnknown) {
@@ -121,10 +120,9 @@ class DummyArgTransformer : Transformer() {
                 }
             }
 
-            builder.addAll(intValue.intValues)
+            set.addAll(intValue.intValues)
         }
 
-        val set = builder.build()
         return if (set.isEmpty()) {
             null
         } else {
@@ -319,7 +317,7 @@ class DummyArgTransformer : Transformer() {
             val args = (Type.getArgumentsAndReturnSizes(method.first().desc) shr 2) - 1
 
             var allUnknown = true
-            val parameters = arrayOfNulls<ImmutableSet<Int>?>(args)
+            val parameters = arrayOfNulls<Set<Int>?>(args)
 
             for (i in 0 until args) {
                 val parameter = union(method, i, argValues[ArgRef(method, i)])
