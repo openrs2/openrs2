@@ -13,29 +13,29 @@ class ConstSourceInterpreter : Interpreter<ConstSourceValue>(Opcodes.ASM7) {
 
     override fun newValue(type: Type?): ConstSourceValue? {
         val basicValue = basicInterpreter.newValue(type) ?: return null
-        return ConstSourceValue.createUnknown(basicValue)
+        return ConstSourceValue.Unknown(basicValue)
     }
 
     @Throws(AnalyzerException::class)
     override fun newOperation(insn: AbstractInsnNode): ConstSourceValue {
         val basicValue = basicInterpreter.newOperation(insn)
         return if (insn.intConstant != null) {
-            ConstSourceValue.createSingleSourceConstant(basicValue, insn)
+            ConstSourceValue.Single(basicValue, insn)
         } else {
-            ConstSourceValue.createUnknown(basicValue)
+            ConstSourceValue.Unknown(basicValue)
         }
     }
 
     @Throws(AnalyzerException::class)
     override fun copyOperation(insn: AbstractInsnNode, value: ConstSourceValue): ConstSourceValue {
         val basicValue = basicInterpreter.copyOperation(insn, value.basicValue)
-        return ConstSourceValue.createUnknown(basicValue)
+        return ConstSourceValue.Unknown(basicValue)
     }
 
     @Throws(AnalyzerException::class)
     override fun unaryOperation(insn: AbstractInsnNode, value: ConstSourceValue): ConstSourceValue? {
         val basicValue = basicInterpreter.unaryOperation(insn, value.basicValue) ?: return null
-        return ConstSourceValue.createUnknown(basicValue)
+        return ConstSourceValue.Unknown(basicValue)
     }
 
     @Throws(AnalyzerException::class)
@@ -46,7 +46,7 @@ class ConstSourceInterpreter : Interpreter<ConstSourceValue>(Opcodes.ASM7) {
     ): ConstSourceValue? {
         val basicValue = basicInterpreter.binaryOperation(insn, value1.basicValue, value2.basicValue)
             ?: return null
-        return ConstSourceValue.createUnknown(basicValue)
+        return ConstSourceValue.Unknown(basicValue)
     }
 
     @Throws(AnalyzerException::class)
@@ -62,7 +62,7 @@ class ConstSourceInterpreter : Interpreter<ConstSourceValue>(Opcodes.ASM7) {
             value2.basicValue,
             value3.basicValue
         ) ?: return null
-        return ConstSourceValue.createUnknown(basicValue)
+        return ConstSourceValue.Unknown(basicValue)
     }
 
     @Throws(AnalyzerException::class)
@@ -72,7 +72,7 @@ class ConstSourceInterpreter : Interpreter<ConstSourceValue>(Opcodes.ASM7) {
     ): ConstSourceValue? {
         val args = values.map { it.basicValue }.toList()
         val basicValue = basicInterpreter.naryOperation(insn, args) ?: return null
-        return ConstSourceValue.createUnknown(basicValue)
+        return ConstSourceValue.Unknown(basicValue)
     }
 
     @Throws(AnalyzerException::class)
@@ -82,10 +82,10 @@ class ConstSourceInterpreter : Interpreter<ConstSourceValue>(Opcodes.ASM7) {
 
     override fun merge(value1: ConstSourceValue, value2: ConstSourceValue): ConstSourceValue {
         val basicValue = basicInterpreter.merge(value1.basicValue, value2.basicValue)
-        return if (value1.isSingleSourceConstant && value1 == value2) {
+        return if (value1 is ConstSourceValue.Single && value1 == value2) {
             value1
         } else {
-            ConstSourceValue.createUnknown(basicValue)
+            ConstSourceValue.Unknown(basicValue)
         }
     }
 }

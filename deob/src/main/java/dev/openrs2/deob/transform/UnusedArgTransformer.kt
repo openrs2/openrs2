@@ -10,6 +10,7 @@ import dev.openrs2.asm.transform.Transformer
 import dev.openrs2.common.collect.DisjointSet
 import dev.openrs2.deob.ArgRef
 import dev.openrs2.deob.analysis.ConstSourceInterpreter
+import dev.openrs2.deob.analysis.ConstSourceValue
 import dev.openrs2.deob.remap.TypedRemapper
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.Type
@@ -75,7 +76,7 @@ class UnusedArgTransformer : Transformer() {
                     val args = Type.getArgumentTypes(insn.desc).size
                     for (j in 0 until args) {
                         val source = frame.getStack(stackSize - args + j)
-                        if (!source.isSingleSourceConstant) {
+                        if (source !is ConstSourceValue.Single) {
                             retainedArgs.add(ArgRef(invokePartition, j))
                         }
                     }
@@ -123,8 +124,8 @@ class UnusedArgTransformer : Transformer() {
 
             for ((j, argType) in argTypes.withIndex()) {
                 if (INT_SORTS.contains(argType.sort) && !retainedArgs.contains(ArgRef(partition, j))) {
-                    val source = frame.getStack(stackSize - argTypes.size + j).source
-                    deadInsns.add(source)
+                    val value = frame.getStack(stackSize - argTypes.size + j) as ConstSourceValue.Single
+                    deadInsns.add(value.source)
                 } else {
                     newArgTypes.add(argType)
                 }
