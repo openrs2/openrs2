@@ -6,7 +6,7 @@ import com.github.javaparser.ast.expr.BinaryExpr
 import com.github.javaparser.ast.expr.Expression
 import com.github.javaparser.ast.expr.UnaryExpr
 import dev.openrs2.deob.ast.util.ExprUtils
-import dev.openrs2.deob.ast.util.TypeUtils
+import dev.openrs2.deob.ast.util.isString
 import dev.openrs2.deob.ast.util.walk
 
 class AddSubTransformer : Transformer() {
@@ -17,7 +17,7 @@ class AddSubTransformer : Transformer() {
             val right = expr.right
             val type = expr.calculateResolvedType()
 
-            if (op == BinaryExpr.Operator.PLUS && TypeUtils.isString(type)) {
+            if (op == BinaryExpr.Operator.PLUS && type.isString()) {
                 return@walk
             }
 

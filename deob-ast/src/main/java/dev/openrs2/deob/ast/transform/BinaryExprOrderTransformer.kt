@@ -3,7 +3,7 @@ package dev.openrs2.deob.ast.transform
 import com.github.javaparser.ast.CompilationUnit
 import com.github.javaparser.ast.Node
 import com.github.javaparser.ast.expr.BinaryExpr
-import dev.openrs2.deob.ast.util.TypeUtils
+import dev.openrs2.deob.ast.util.isString
 import dev.openrs2.deob.ast.util.walk
 
 class BinaryExprOrderTransformer : Transformer() {
@@ -12,7 +12,7 @@ class BinaryExprOrderTransformer : Transformer() {
             val op = flip(expr.operator) ?: return@walk
 
             val type = expr.calculateResolvedType()
-            if (op == BinaryExpr.Operator.PLUS && TypeUtils.isString(type)) {
+            if (op == BinaryExpr.Operator.PLUS && type.isString()) {
                 return@walk
             }
 
