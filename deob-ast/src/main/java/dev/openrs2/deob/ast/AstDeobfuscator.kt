@@ -1,6 +1,7 @@
 package dev.openrs2.deob.ast
 
 import com.github.javaparser.ParserConfiguration
+import com.github.javaparser.ast.CompilationUnit
 import com.github.javaparser.printer.PrettyPrinter
 import com.github.javaparser.printer.PrettyPrinterConfiguration
 import com.github.javaparser.symbolsolver.JavaSymbolSolver
@@ -59,7 +60,7 @@ class AstDeobfuscator(private val modules: List<Path>) {
                 }
             }
 
-            root.printer = Function(printer::print)
+            root.printer = Function<CompilationUnit, String>(printer::print)
             root.saveAll()
         }
     }
