@@ -8,7 +8,12 @@ import dev.openrs2.asm.classpath.Library
 import dev.openrs2.asm.hasCode
 import dev.openrs2.asm.transform.Transformer
 import org.objectweb.asm.Opcodes
-import org.objectweb.asm.tree.*
+import org.objectweb.asm.tree.AbstractInsnNode
+import org.objectweb.asm.tree.ClassNode
+import org.objectweb.asm.tree.FieldInsnNode
+import org.objectweb.asm.tree.JumpInsnNode
+import org.objectweb.asm.tree.MethodNode
+import org.objectweb.asm.tree.VarInsnNode
 
 class OpaquePredicateTransformer : Transformer() {
     private val flowObstructors = mutableSetOf<MemberRef>()
@@ -105,8 +110,14 @@ class OpaquePredicateTransformer : Transformer() {
 
     companion object {
         private val logger = InlineLogger()
-        private val FLOW_OBSTRUCTOR_INITIALIZER_MATCHER =
-            InsnMatcher.compile("(GETSTATIC | ILOAD) IFEQ (((GETSTATIC ISTORE)? IINC ILOAD) | ((GETSTATIC | ILOAD) IFEQ ICONST GOTO ICONST)) PUTSTATIC")
+        private val FLOW_OBSTRUCTOR_INITIALIZER_MATCHER = InsnMatcher.compile(
+            """
+            (GETSTATIC | ILOAD)
+            IFEQ
+            (((GETSTATIC ISTORE)? IINC ILOAD) | ((GETSTATIC | ILOAD) IFEQ ICONST GOTO ICONST))
+            PUTSTATIC
+        """
+        )
         private val OPAQUE_PREDICATE_MATCHER = InsnMatcher.compile("(GETSTATIC | ILOAD) (IFEQ | IFNE)")
         private val STORE_MATCHER = InsnMatcher.compile("GETSTATIC ISTORE")
     }

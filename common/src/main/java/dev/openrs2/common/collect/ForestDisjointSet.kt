@@ -1,7 +1,6 @@
 package dev.openrs2.common.collect
 
-import java.util.*
-import kotlin.NoSuchElementException
+import java.util.ArrayDeque
 
 class ForestDisjointSet<T> : DisjointSet<T> {
     private class Node<T>(val value: T) : DisjointSet.Partition<T> {

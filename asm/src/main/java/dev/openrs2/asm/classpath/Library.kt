@@ -16,7 +16,8 @@ import java.io.ByteArrayInputStream
 import java.io.SequenceInputStream
 import java.nio.file.Files
 import java.nio.file.Path
-import java.util.*
+import java.util.HashSet
+import java.util.TreeMap
 import java.util.jar.JarEntry
 import java.util.jar.JarInputStream
 import java.util.jar.JarOutputStream

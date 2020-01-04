@@ -6,7 +6,12 @@ import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
 import dev.openrs2.asm.transform.Transformer
 import org.objectweb.asm.Opcodes
-import org.objectweb.asm.tree.*
+import org.objectweb.asm.tree.ClassNode
+import org.objectweb.asm.tree.FieldInsnNode
+import org.objectweb.asm.tree.JumpInsnNode
+import org.objectweb.asm.tree.LdcInsnNode
+import org.objectweb.asm.tree.MethodInsnNode
+import org.objectweb.asm.tree.MethodNode
 
 class MacResizeTransformer : Transformer() {
     private var branchesRemoved = 0
@@ -18,7 +23,11 @@ class MacResizeTransformer : Transformer() {
     override fun transformCode(classPath: ClassPath, library: Library, clazz: ClassNode, method: MethodNode): Boolean {
         DETECT_MAC_MATCHER.match(method).forEach {
             val getstatic = it[0] as FieldInsnNode
-            if (getstatic.owner == "loader" || getstatic.owner == clazz.name || getstatic.desc != "Ljava/lang/String;") {
+            if (
+                getstatic.owner == "loader" ||
+                getstatic.owner == clazz.name ||
+                getstatic.desc != "Ljava/lang/String;"
+            ) {
                 return@forEach
             }
 
@@ -28,7 +37,11 @@ class MacResizeTransformer : Transformer() {
             }
 
             val invokevirtual = it[2] as MethodInsnNode
-            if (invokevirtual.owner != "java/lang/String" || invokevirtual.name != "startsWith" || invokevirtual.desc != "(Ljava/lang/String;)Z") {
+            if (
+                invokevirtual.owner != "java/lang/String" ||
+                invokevirtual.name != "startsWith" ||
+                invokevirtual.desc != "(Ljava/lang/String;)Z"
+            ) {
                 return@forEach
             }
 

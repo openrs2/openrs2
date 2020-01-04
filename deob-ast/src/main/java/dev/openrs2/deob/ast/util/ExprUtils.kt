@@ -1,6 +1,11 @@
 package dev.openrs2.deob.ast.util
 
-import com.github.javaparser.ast.expr.*
+import com.github.javaparser.ast.expr.BinaryExpr
+import com.github.javaparser.ast.expr.BooleanLiteralExpr
+import com.github.javaparser.ast.expr.Expression
+import com.github.javaparser.ast.expr.IntegerLiteralExpr
+import com.github.javaparser.ast.expr.LongLiteralExpr
+import com.github.javaparser.ast.expr.UnaryExpr
 
 fun Expression.isIntegerOrLongLiteral(): Boolean {
     return isIntegerLiteralExpr || isLongLiteralExpr

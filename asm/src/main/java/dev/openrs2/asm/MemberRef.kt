@@ -1,6 +1,10 @@
 package dev.openrs2.asm
 
-import org.objectweb.asm.tree.*
+import org.objectweb.asm.tree.ClassNode
+import org.objectweb.asm.tree.FieldInsnNode
+import org.objectweb.asm.tree.FieldNode
+import org.objectweb.asm.tree.MethodInsnNode
+import org.objectweb.asm.tree.MethodNode
 
 data class MemberRef(val owner: String, val name: String, val desc: String) {
     constructor(clazz: ClassNode, field: FieldNode) : this(clazz.name, field.name, field.desc)

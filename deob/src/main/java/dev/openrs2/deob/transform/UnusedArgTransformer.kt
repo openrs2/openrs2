@@ -14,7 +14,11 @@ import dev.openrs2.deob.analysis.ConstSourceValue
 import dev.openrs2.deob.remap.TypedRemapper
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.Type
-import org.objectweb.asm.tree.*
+import org.objectweb.asm.tree.AbstractInsnNode
+import org.objectweb.asm.tree.ClassNode
+import org.objectweb.asm.tree.MethodInsnNode
+import org.objectweb.asm.tree.MethodNode
+import org.objectweb.asm.tree.VarInsnNode
 import org.objectweb.asm.tree.analysis.Analyzer
 
 class UnusedArgTransformer : Transformer() {

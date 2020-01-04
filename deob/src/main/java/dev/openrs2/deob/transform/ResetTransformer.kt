@@ -9,7 +9,13 @@ import dev.openrs2.asm.nextReal
 import dev.openrs2.asm.removeDeadCode
 import dev.openrs2.asm.transform.Transformer
 import org.objectweb.asm.Opcodes
-import org.objectweb.asm.tree.*
+import org.objectweb.asm.tree.AbstractInsnNode
+import org.objectweb.asm.tree.ClassNode
+import org.objectweb.asm.tree.InsnNode
+import org.objectweb.asm.tree.LdcInsnNode
+import org.objectweb.asm.tree.MethodInsnNode
+import org.objectweb.asm.tree.MethodNode
+import org.objectweb.asm.tree.VarInsnNode
 
 class ResetTransformer : Transformer() {
     private val resetMethods = mutableSetOf<MemberRef>()

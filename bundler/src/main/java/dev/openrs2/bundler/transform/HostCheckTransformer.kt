@@ -36,7 +36,11 @@ class HostCheckTransformer : Transformer() {
             }
 
             val insn3 = it[2] as MethodInsnNode
-            if (insn3.owner != "java/lang/String" || insn3.name != "toLowerCase" || insn3.desc != "()Ljava/lang/String;") {
+            if (
+                insn3.owner != "java/lang/String" ||
+                insn3.name != "toLowerCase" ||
+                insn3.desc != "()Ljava/lang/String;"
+            ) {
                 return@forEach
             }
 

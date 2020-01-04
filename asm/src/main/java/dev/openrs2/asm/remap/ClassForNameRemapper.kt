@@ -17,9 +17,9 @@ object ClassForNameRemapper {
         }
 
         val invokestatic = match[1] as MethodInsnNode
-        return invokestatic.owner == "java/lang/Class"
-            && invokestatic.name == "forName"
-            && invokestatic.desc == "(Ljava/lang/String;)Ljava/lang/Class;"
+        return invokestatic.owner == "java/lang/Class" &&
+            invokestatic.name == "forName" &&
+            invokestatic.desc == "(Ljava/lang/String;)Ljava/lang/Class;"
     }
 
     fun remap(remapper: Remapper, method: MethodNode) {

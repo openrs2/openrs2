@@ -3,9 +3,17 @@ package dev.openrs2.deob.transform
 import com.github.michaelbull.logging.InlineLogger
 import com.google.common.collect.HashMultimap
 import com.google.common.collect.Multimap
-import dev.openrs2.asm.*
+import dev.openrs2.asm.InsnMatcher
+import dev.openrs2.asm.MemberRef
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
+import dev.openrs2.asm.createIntConstant
+import dev.openrs2.asm.deleteSimpleExpression
+import dev.openrs2.asm.intConstant
+import dev.openrs2.asm.nextReal
+import dev.openrs2.asm.pure
+import dev.openrs2.asm.replaceSimpleExpression
+import dev.openrs2.asm.stackMetadata
 import dev.openrs2.asm.transform.Transformer
 import dev.openrs2.common.collect.DisjointSet
 import dev.openrs2.deob.ArgRef
@@ -14,7 +22,12 @@ import dev.openrs2.deob.analysis.IntValue
 import dev.openrs2.deob.analysis.SourcedIntValue
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.Type
-import org.objectweb.asm.tree.*
+import org.objectweb.asm.tree.AbstractInsnNode
+import org.objectweb.asm.tree.ClassNode
+import org.objectweb.asm.tree.JumpInsnNode
+import org.objectweb.asm.tree.MethodInsnNode
+import org.objectweb.asm.tree.MethodNode
+import org.objectweb.asm.tree.VarInsnNode
 import org.objectweb.asm.tree.analysis.Analyzer
 
 class DummyArgTransformer : Transformer() {
@@ -247,7 +260,8 @@ class DummyArgTransformer : Transformer() {
                         BranchResult.NEVER_TAKEN -> neverTakenBranches.add(insn as JumpInsnNode)
                     }
                 }
-                Opcodes.IF_ICMPEQ, Opcodes.IF_ICMPNE, Opcodes.IF_ICMPLT, Opcodes.IF_ICMPGE, Opcodes.IF_ICMPGT, Opcodes.IF_ICMPLE -> {
+                Opcodes.IF_ICMPEQ, Opcodes.IF_ICMPNE, Opcodes.IF_ICMPLT, Opcodes.IF_ICMPGE, Opcodes.IF_ICMPGT,
+                Opcodes.IF_ICMPLE -> {
                     val value1 = frame.getStack(stackSize - 2)
                     val value2 = frame.getStack(stackSize - 1)
                     if (value1 !is IntValue.Constant || value2 !is IntValue.Constant) {
@@ -340,8 +354,18 @@ class DummyArgTransformer : Transformer() {
 
     companion object {
         private val logger = InlineLogger()
-        private val CONDITIONAL_CALL_MATCHER =
-            InsnMatcher.compile("ILOAD (IFEQ | IFNE | (ICONST | BIPUSH | SIPUSH | LDC) (IF_ICMPEQ | IF_ICMPNE | IF_ICMPLT | IF_ICMPGE | IF_ICMPGT | IF_ICMPLE)) ALOAD? (ICONST | FCONST | DCONST | BIPUSH | SIPUSH | LDC | ACONST_NULL CHECKCAST)+ (INVOKEVIRTUAL | INVOKESTATIC | INVOKEINTERFACE)")
+        private val CONDITIONAL_CALL_MATCHER = InsnMatcher.compile(
+            """
+            ILOAD
+            (IFEQ | IFNE |
+                (ICONST | BIPUSH | SIPUSH | LDC)
+                (IF_ICMPEQ | IF_ICMPNE | IF_ICMPLT | IF_ICMPGE | IF_ICMPGT | IF_ICMPLE)
+            )
+            ALOAD?
+            (ICONST | FCONST | DCONST | BIPUSH | SIPUSH | LDC | ACONST_NULL CHECKCAST)+
+            (INVOKEVIRTUAL | INVOKESTATIC | INVOKEINTERFACE)
+        """
+        )
 
         private fun evaluateUnaryBranch(opcode: Int, values: Set<Int>): BranchResult {
             require(values.isNotEmpty())
