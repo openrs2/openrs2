@@ -13,6 +13,31 @@ abstract class ClassMetadata {
 
     abstract fun isNative(method: MemberDesc): Boolean
 
+    fun isOverride(method: MemberDesc): Boolean {
+        val superClass = this.superClass
+        if (superClass != null) {
+            if (superClass.methods.contains(method)) {
+                return true
+            }
+
+            if (superClass.isOverride(method)) {
+                return true
+            }
+        }
+
+        for (superInterface in superInterfaces) {
+            if (superInterface.methods.contains(method)) {
+                return true
+            }
+
+            if (superInterface.isOverride(method)) {
+                return true
+            }
+        }
+
+        return false
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is ClassMetadata) return false

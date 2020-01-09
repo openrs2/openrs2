@@ -19,6 +19,7 @@ import dev.openrs2.deob.transform.ExceptionTracingTransformer
 import dev.openrs2.deob.transform.FieldOrderTransformer
 import dev.openrs2.deob.transform.OpaquePredicateTransformer
 import dev.openrs2.deob.transform.OriginalNameTransformer
+import dev.openrs2.deob.transform.OverrideTransformer
 import dev.openrs2.deob.transform.RemapTransformer
 import dev.openrs2.deob.transform.ResetTransformer
 import dev.openrs2.deob.transform.UnusedArgTransformer
@@ -157,7 +158,8 @@ class Deobfuscator(private val input: Path, private val output: Path) {
             DummyLocalTransformer(),
             UnusedArgTransformer(),
             ResetTransformer(),
-            AccessTransformer()
+            AccessTransformer(),
+            OverrideTransformer()
         )
     }
 }
