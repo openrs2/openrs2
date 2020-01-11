@@ -65,6 +65,8 @@ OpenRS2's code style settings are held in `.idea/codeStyles/Project.xml` in the
 repository, and IDEA should use them automatically after importing the Maven
 project.
 
+Kotlin code must pass all of [ktlint][ktlint]'s tests.
+
 ### Commit messages
 
 Commit messages should follow the ['seven rules'][commitmsg] described in
@@ -101,5 +103,6 @@ OpenRS2. If not, see <https://www.gnu.org/licenses/>.
 [gpl]: https://www.gnu.org/licenses/gpl-3.0.html
 [idea]: https://www.jetbrains.com/idea/
 [jdk]: https://jdk.java.net/
+[ktlint]: https://github.com/pinterest/ktlint#readme
 [lgpl]: https://www.gnu.org/licenses/lgpl-3.0.html
 [maven]: https://maven.apache.org/
