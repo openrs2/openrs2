@@ -12,7 +12,6 @@ import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.FieldInsnNode
 import org.objectweb.asm.tree.LdcInsnNode
 import org.objectweb.asm.tree.MethodNode
-import kotlin.streams.asSequence
 
 class BufferSizeTransformer : Transformer() {
     private var buffer: MemberRef? = null
@@ -63,7 +62,7 @@ class BufferSizeTransformer : Transformer() {
         private val NEW_BUFFER_MATCHER = InsnMatcher.compile("NEW DUP (SIPUSH | LDC) INVOKESPECIAL PUTSTATIC")
 
         private fun findBuffer(method: MethodNode): MemberRef? {
-            return GPP1_POS_MATCHER.match(method).asSequence().filter {
+            return GPP1_POS_MATCHER.match(method).filter {
                 val ldc = it[0] as LdcInsnNode
                 ldc.cst == "gpp1 pos:"
             }.map {

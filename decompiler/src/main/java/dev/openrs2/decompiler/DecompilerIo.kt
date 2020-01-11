@@ -1,6 +1,5 @@
 package dev.openrs2.decompiler
 
-import com.google.common.io.ByteStreams
 import org.jetbrains.java.decompiler.main.extern.IBytecodeProvider
 import org.jetbrains.java.decompiler.main.extern.IResultSaver
 import java.io.Closeable
@@ -22,7 +21,7 @@ class DecompilerIo(private val destination: (String) -> Path) : IBytecodeProvide
         }
 
         jar.getInputStream(jar.getJarEntry(internalPath)).use {
-            return ByteStreams.toByteArray(it)
+            return it.readBytes()
         }
     }
 

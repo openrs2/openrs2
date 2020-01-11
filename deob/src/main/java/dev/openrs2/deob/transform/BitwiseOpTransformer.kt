@@ -13,7 +13,6 @@ import org.objectweb.asm.tree.InsnNode
 import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.VarInsnNode
-import kotlin.streams.asSequence
 
 class BitwiseOpTransformer : Transformer() {
     private val methodOps = mutableMapOf<MemberRef, Int>()
@@ -38,7 +37,7 @@ class BitwiseOpTransformer : Transformer() {
                         continue
                     }
 
-                    val match = BITWISE_OP_MATCHER.match(method).asSequence().firstOrNull() ?: continue
+                    val match = BITWISE_OP_MATCHER.match(method).firstOrNull() ?: continue
 
                     val iload0 = match[0] as VarInsnNode
                     val iload1 = match[1] as VarInsnNode
