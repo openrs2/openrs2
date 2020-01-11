@@ -32,14 +32,14 @@ class OverrideTransformer : Transformer() {
             return false
         }
 
-        if (method.visibleAnnotations != null && method.visibleAnnotations.any { it.desc == OVERRIDE_DESC }) {
+        if (method.invisibleAnnotations != null && method.invisibleAnnotations.any { it.desc == OVERRIDE_DESC }) {
             return false
         }
 
-        if (method.visibleAnnotations == null) {
-            method.visibleAnnotations = mutableListOf()
+        if (method.invisibleAnnotations == null) {
+            method.invisibleAnnotations = mutableListOf()
         }
-        method.visibleAnnotations.add(AnnotationNode(OVERRIDE_DESC))
+        method.invisibleAnnotations.add(AnnotationNode(OVERRIDE_DESC))
         overrides++
 
         return false
