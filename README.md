@@ -87,7 +87,7 @@ version 3.0 (and only version 3.0) of the
 
 ## Copyright
 
-Copyright (c) 2019 OpenRS2 Authors
+Copyright (c) 2019-2020 OpenRS2 Authors
 
 OpenRS2 is free software: you can redistribute it and/or modify it under the
 terms of version 3.0 of the GNU General Public License as published by the Free
