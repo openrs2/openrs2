@@ -67,10 +67,10 @@ class OpaquePredicateTransformer : Transformer() {
 
         // flow obstructor loaded via local variable
         val iload = load as VarInsnNode
-        return STORE_MATCHER.match(method).anyMatch {
+        return STORE_MATCHER.match(method).any {
             val getstatic = it[0] as FieldInsnNode
             val istore = it[1] as VarInsnNode
-            return@anyMatch isFlowObstructor(getstatic) && iload.`var` == istore.`var`
+            return@any isFlowObstructor(getstatic) && iload.`var` == istore.`var`
         }
     }
 

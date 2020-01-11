@@ -5,21 +5,18 @@ import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.InsnList
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.util.Printer
-import java.util.stream.Stream
-import kotlin.streams.asStream
 
 class InsnMatcher private constructor(private val regex: Regex) {
-    // TODO(gpe): use Sequence<T> when the rest of the deobfuscator is ported to Kotlin
-    fun match(method: MethodNode): Stream<List<AbstractInsnNode>> {
+    fun match(method: MethodNode): Sequence<List<AbstractInsnNode>> {
         return match(method.instructions)
     }
 
-    fun match(list: InsnList): Stream<List<AbstractInsnNode>> {
+    fun match(list: InsnList): Sequence<List<AbstractInsnNode>> {
         val insns = list.filter { it.opcode != -1 }.toList()
         val codepoints = insns.map { opcodeToCodepoint(it.opcode) }.toCharArray()
         return regex.findAll(String(codepoints)).map {
             insns.subList(it.range.first, it.range.last + 1)
-        }.asStream()
+        }
     }
 
     companion object {
