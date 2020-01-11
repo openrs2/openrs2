@@ -45,7 +45,7 @@ class BufferSizeTransformer : Transformer() {
         NEW_BUFFER_MATCHER.match(method).forEach {
             val putstatic = it[4] as FieldInsnNode
             if (MemberRef(putstatic) == buffer!!) {
-                method.instructions[it[2]] = createIntConstant(65535)
+                method.instructions[it[2]] = createIntConstant(65536)
                 buffersResized++
             }
         }
@@ -54,7 +54,7 @@ class BufferSizeTransformer : Transformer() {
     }
 
     override fun postTransform(classPath: ClassPath) {
-        logger.info { "Resized $buffersResized buffers to 65535 bytes" }
+        logger.info { "Resized $buffersResized buffers to 65536 bytes" }
     }
 
     companion object {
