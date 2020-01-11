@@ -42,9 +42,9 @@ have been more appropriate. However, it would be far more difficult to enforce
 the AGPL than the GPL, disadvantaging honest users who would have otherwise
 obeyed the license.
 
-A small number of modules (`deob-annotations` and the native library
-replacements) are instead licensed under the LGPL, as it needs to be possible
-to legally link these modules with the proprietary client code.
+A small number of modules (`deob-annotations`, `jsobject` and the native
+library replacements) are instead licensed under the LGPL, as it needs to be
+possible to legally link these modules with the proprietary client code.
 
 ## Why rewrite the client's native libraries?
 

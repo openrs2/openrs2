@@ -29,6 +29,7 @@
     <module>deob-ast</module>
     <module>deob</module>
     <module>game</module>
+    <module>jsobject</module>
   </modules>
 
   <scm>
