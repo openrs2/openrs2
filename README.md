@@ -74,6 +74,10 @@ Commit messages should follow the ['seven rules'][commitmsg] described in
 can be up to 72 characters in length (as OpenRS2 does not use email-based
 patches).
 
+### Versioning
+
+OpenRS2 uses [Semantic Versioning][semver].
+
 ## License
 
 Unless otherwise stated, all code and data is licensed under version 3.0 (and
@@ -107,3 +111,4 @@ OpenRS2. If not, see <https://www.gnu.org/licenses/>.
 [ktlint]: https://github.com/pinterest/ktlint#readme
 [lgpl]: https://www.gnu.org/licenses/lgpl-3.0.html
 [maven]: https://maven.apache.org/
+[semver]: https://semver.org/
