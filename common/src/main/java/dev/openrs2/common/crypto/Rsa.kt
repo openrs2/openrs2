@@ -13,6 +13,7 @@ import org.bouncycastle.crypto.params.RSAKeyParameters
 import org.bouncycastle.crypto.params.RSAPrivateCrtKeyParameters
 import org.bouncycastle.crypto.util.PrivateKeyInfoFactory
 import org.bouncycastle.crypto.util.SubjectPublicKeyInfoFactory
+import org.bouncycastle.util.BigIntegers
 import org.bouncycastle.util.io.pem.PemObject
 import org.bouncycastle.util.io.pem.PemReader
 import org.bouncycastle.util.io.pem.PemWriter
@@ -49,6 +50,64 @@ object Rsa {
 
         val keyPair = generator.generateKeyPair()
         return Pair(keyPair.public as RSAKeyParameters, keyPair.private as RSAPrivateCrtKeyParameters)
+    }
+
+    fun encrypt(plaintext: BigInteger, key: RSAKeyParameters): BigInteger {
+        require(!key.isPrivate)
+        return plaintext.modPow(key.exponent, key.modulus)
+    }
+
+    private fun generateBlindingFactor(m: BigInteger): Pair<BigInteger, BigInteger> {
+        val max = m - BigInteger.ONE
+
+        while (true) {
+            val r = BigIntegers.createRandomInRange(BigInteger.ONE, max, secureRandom)
+            val rInv = try {
+                r.modInverse(m)
+            } catch (ex: ArithmeticException) {
+                continue
+            }
+            return Pair(r, rInv)
+        }
+    }
+
+    fun decrypt(ciphertext: BigInteger, key: RSAKeyParameters): BigInteger {
+        require(key.isPrivate)
+
+        if (key is RSAPrivateCrtKeyParameters) {
+            // blind the input
+            val e = key.publicExponent
+            val m = key.modulus
+            val (r, rInv) = generateBlindingFactor(m)
+
+            val blindCiphertext = (r.modPow(e, m) * ciphertext).mod(m)
+
+            // decrypt using the Chinese Remainder Theorem
+            val p = key.p
+            val q = key.q
+            val dP = key.dp
+            val dQ = key.dq
+            val qInv = key.qInv
+
+            val mP = (blindCiphertext.mod(p)).modPow(dP, p)
+            val mQ = (blindCiphertext.mod(q)).modPow(dQ, q)
+
+            val h = (qInv * (mP - mQ)).mod(p)
+
+            val blindPlaintext = (h * q) + mQ
+
+            // unblind output
+            val plaintext = (blindPlaintext * rInv).mod(m)
+
+            // defend against CRT faults (see https://people.redhat.com/~fweimer/rsa-crt-leaks.pdf)
+            if (plaintext.modPow(e, m) != ciphertext) {
+                throw IllegalStateException()
+            }
+
+            return plaintext
+        } else {
+            return ciphertext.modPow(key.exponent, key.modulus)
+        }
     }
 
     fun readPublicKey(path: Path): RSAKeyParameters {
