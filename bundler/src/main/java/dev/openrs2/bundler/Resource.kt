@@ -50,47 +50,48 @@ class Resource(
         }
 
         private fun compress(source: String, destination: String, resource: String): Resource {
-            val uncompressed = Resource::class.java.getResourceAsStream(resource).use { it.readBytes() }
+            val path = "/dev/openrs2/natives/$resource"
+            val uncompressed = Resource::class.java.getResourceAsStream(path).use { it.readBytes() }
             return compress(source, destination, uncompressed)
         }
 
         fun compressGlResources() = listOf(
             // Windows i386
             listOf(
-                compress("jaggl_0_0.lib", "jaggl.dll", "/natives/windows-i386/jaggl.dll")
+                compress("jaggl_0_0.lib", "jaggl.dll", "windows-i386/jaggl.dll")
             ),
 
             // Windows amd64
             listOf(
-                compress("jaggl_1_0.lib", "jaggl.dll", "/natives/windows-amd64/jaggl.dll")
+                compress("jaggl_1_0.lib", "jaggl.dll", "windows-amd64/jaggl.dll")
             ),
 
             // macOS i386
             listOf(
-                compress("jaggl_2_0.lib", "libjaggl.dylib", "/natives/mac-i386/libjaggl.dylib")
+                compress("jaggl_2_0.lib", "libjaggl.dylib", "mac-i386/libjaggl.dylib")
             ),
 
             // macOS amd64
             listOf(
-                compress("jaggl_3_0.lib", "libjaggl.dylib", "/natives/mac-amd64/libjaggl.dylib")
+                compress("jaggl_3_0.lib", "libjaggl.dylib", "mac-amd64/libjaggl.dylib")
             ),
 
             // Linux i386
             listOf(
-                compress("jaggl_4_0.lib", "libjaggl.so", "/natives/linux-i386/libjaggl.so"),
-                compress("jaggl_4_1.lib", "libjaggl_dri.so", "/natives/linux-i386/libjaggl_dri.so")
+                compress("jaggl_4_0.lib", "libjaggl.so", "linux-i386/libjaggl.so"),
+                compress("jaggl_4_1.lib", "libjaggl_dri.so", "linux-i386/libjaggl_dri.so")
             ),
 
             // Linux amd64
             listOf(
-                compress("jaggl_5_0.lib", "libjaggl.so", "/natives/linux-amd64/libjaggl.so"),
-                compress("jaggl_5_1.lib", "libjaggl_dri.so", "/natives/linux-amd64/libjaggl_dri.so")
+                compress("jaggl_5_0.lib", "libjaggl.so", "linux-amd64/libjaggl.so"),
+                compress("jaggl_5_1.lib", "libjaggl_dri.so", "linux-amd64/libjaggl_dri.so")
             )
         )
 
         fun compressMiscResources() = listOf(
-            compress("jagmisc_0.lib", "jagmisc.dll", "/natives/windows-i386/jagmisc.dll"),
-            compress("jagmisc_1.lib", "jagmisc.dll", "/natives/windows-amd64/jagmisc.dll")
+            compress("jagmisc_0.lib", "jagmisc.dll", "windows-i386/jagmisc.dll"),
+            compress("jagmisc_1.lib", "jagmisc.dll", "windows-amd64/jagmisc.dll")
         )
     }
 }
