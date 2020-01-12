@@ -1,5 +1,6 @@
 package dev.openrs2.common.crypto
 
+import io.netty.buffer.Unpooled
 import org.bouncycastle.crypto.params.RSAKeyParameters
 import org.bouncycastle.crypto.params.RSAPrivateCrtKeyParameters
 import org.bouncycastle.util.Properties
@@ -52,6 +53,52 @@ object RsaTest {
         ) }
         val ciphertext = Rsa.decrypt(BigInteger("2790"), private)
         assertEquals(BigInteger("65"), ciphertext)
+    }
+
+    @Test
+    fun testEncryptByteBuf() {
+        // from https://en.wikipedia.org/wiki/RSA_(cryptosystem)#Example
+        val public = allowUnsafeMod { RSAKeyParameters(false, BigInteger("3233"), BigInteger("17")) }
+
+        val plaintext = Unpooled.wrappedBuffer(byteArrayOf(65))
+        try {
+            val ciphertext = plaintext.rsaEncrypt(public)
+            try {
+                val expectedCiphertext = Unpooled.wrappedBuffer(byteArrayOf(10, 230.toByte()))
+                try {
+                    assertEquals(expectedCiphertext, ciphertext)
+                } finally {
+                    expectedCiphertext.release()
+                }
+            } finally {
+                ciphertext.release()
+            }
+        } finally {
+            plaintext.release()
+        }
+    }
+
+    @Test
+    fun testDecryptByteBuf() {
+        // from https://en.wikipedia.org/wiki/RSA_(cryptosystem)#Example
+        val private = allowUnsafeMod { RSAKeyParameters(true, BigInteger("3233"), BigInteger("413")) }
+
+        val ciphertext = Unpooled.wrappedBuffer(byteArrayOf(10, 230.toByte()))
+        try {
+            val plaintext = ciphertext.rsaDecrypt(private)
+            try {
+                val expectedPlaintext = Unpooled.wrappedBuffer(byteArrayOf(65))
+                try {
+                    assertEquals(expectedPlaintext, plaintext)
+                } finally {
+                    expectedPlaintext.release()
+                }
+            } finally {
+                plaintext.release()
+            }
+        } finally {
+            ciphertext.release()
+        }
     }
 
     private fun <T> allowUnsafeMod(f: () -> T): T {

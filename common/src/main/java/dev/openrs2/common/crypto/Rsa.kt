@@ -1,5 +1,7 @@
 package dev.openrs2.common.crypto
 
+import io.netty.buffer.ByteBuf
+import io.netty.buffer.Unpooled
 import org.bouncycastle.asn1.DERNull
 import org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers
 import org.bouncycastle.asn1.pkcs.PrivateKeyInfo
@@ -21,6 +23,30 @@ import java.io.IOException
 import java.math.BigInteger
 import java.nio.file.Files
 import java.nio.file.Path
+
+private fun ByteBuf.toBigInteger(): BigInteger {
+    val bytes: ByteArray
+    if (hasArray() && arrayOffset() == 0 && readerIndex() == 0 && readableBytes() == array().size) {
+        bytes = array()
+    } else {
+        bytes = ByteArray(readableBytes())
+        getBytes(readerIndex(), bytes)
+    }
+
+    return BigInteger(bytes)
+}
+
+private fun BigInteger.toByteBuf(): ByteBuf {
+    return Unpooled.wrappedBuffer(toByteArray())
+}
+
+fun ByteBuf.rsaEncrypt(key: RSAKeyParameters): ByteBuf {
+    return Rsa.encrypt(toBigInteger(), key).toByteBuf()
+}
+
+fun ByteBuf.rsaDecrypt(key: RSAKeyParameters): ByteBuf {
+    return Rsa.decrypt(toBigInteger(), key).toByteBuf()
+}
 
 object Rsa {
     private const val PUBLIC_KEY = "PUBLIC KEY"
