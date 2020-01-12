@@ -5,6 +5,7 @@ import dev.openrs2.bundler.transform.CachePathTransformer
 import dev.openrs2.bundler.transform.HostCheckTransformer
 import dev.openrs2.bundler.transform.LoadLibraryTransformer
 import dev.openrs2.bundler.transform.MacResizeTransformer
+import dev.openrs2.bundler.transform.PlatformDetectionTransformer
 import dev.openrs2.bundler.transform.RightClickTransformer
 
 class Bundler {
@@ -15,7 +16,8 @@ class Bundler {
             HostCheckTransformer(),
             MacResizeTransformer(),
             RightClickTransformer(),
-            LoadLibraryTransformer()
+            LoadLibraryTransformer(),
+            PlatformDetectionTransformer()
         )
     }
 }
