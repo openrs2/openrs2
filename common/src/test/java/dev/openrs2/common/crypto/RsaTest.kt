@@ -11,6 +11,17 @@ object RsaTest {
     private const val ALLOW_UNSAFE_MOD = "org.bouncycastle.rsa.allow_unsafe_mod"
 
     @Test
+    fun testGenerateKeyPair() {
+        val (public, private) = Rsa.generateKeyPair()
+
+        val expectedPlaintext = BigInteger("1337")
+        val ciphertext = Rsa.encrypt(expectedPlaintext, public)
+        val actualPlaintext = Rsa.decrypt(ciphertext, private)
+
+        assertEquals(expectedPlaintext, actualPlaintext)
+    }
+
+    @Test
     fun testEncrypt() {
         // from https://en.wikipedia.org/wiki/RSA_(cryptosystem)#Example
         val public = allowUnsafeMod { RSAKeyParameters(false, BigInteger("3233"), BigInteger("17")) }
