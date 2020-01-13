@@ -61,8 +61,7 @@ class PlatformDetectionTransformer : Transformer() {
                         Opcodes.INVOKEVIRTUAL,
                         STARTS_WITH.owner,
                         STARTS_WITH.name,
-                        STARTS_WITH.desc,
-                        false
+                        STARTS_WITH.desc
                     )
                 )
                 list.add(JumpInsnNode(Opcodes.IFEQ, next))
@@ -74,8 +73,7 @@ class PlatformDetectionTransformer : Transformer() {
                         Opcodes.INVOKEVIRTUAL,
                         STARTS_WITH.owner,
                         STARTS_WITH.name,
-                        STARTS_WITH.desc,
-                        false
+                        STARTS_WITH.desc
                     )
                 )
                 list.add(JumpInsnNode(Opcodes.IFNE, amd64))
@@ -87,8 +85,7 @@ class PlatformDetectionTransformer : Transformer() {
                         Opcodes.INVOKEVIRTUAL,
                         STARTS_WITH.owner,
                         STARTS_WITH.name,
-                        STARTS_WITH.desc,
-                        false
+                        STARTS_WITH.desc
                     )
                 )
                 list.add(JumpInsnNode(Opcodes.IFEQ, i386))
