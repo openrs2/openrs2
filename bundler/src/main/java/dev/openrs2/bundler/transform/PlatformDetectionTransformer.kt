@@ -163,7 +163,7 @@ class PlatformDetectionTransformer : Transformer() {
             """
         )
         private val MISC_PLATFORM_DETECT_MATCHER =
-            InsnMatcher.compile("ICONST ISTORE (ILOAD IFEQ | GOTO) ICONST ISTORE")
+            InsnMatcher.compile("ICONST ISTORE ((GETSTATIC | ILOAD) IFEQ | GOTO) ICONST ISTORE")
         private val OS_NAMES = listOf("win", "mac", "linux")
         private val STARTS_WITH = MemberRef("java/lang/String", "startsWith", "(Ljava/lang/String;)Z")
 
