@@ -178,6 +178,13 @@ object RsaTest {
         }
     }
 
+    @Test
+    fun testPrivateToPublicKey() {
+        val public = allowUnsafeMod { PRIVATE_KEY_CRT.publicKey }
+        assertEquals(PUBLIC_KEY.modulus, public.modulus)
+        assertEquals(PUBLIC_KEY.exponent, public.exponent)
+    }
+
     private fun <T> allowUnsafeMod(f: () -> T): T {
         Properties.setThreadOverride(ALLOW_UNSAFE_MOD, true)
         try {

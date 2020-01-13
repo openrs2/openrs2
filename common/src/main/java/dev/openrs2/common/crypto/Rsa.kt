@@ -24,6 +24,9 @@ import java.math.BigInteger
 import java.nio.file.Files
 import java.nio.file.Path
 
+val RSAPrivateCrtKeyParameters.publicKey
+    get() = RSAKeyParameters(false, modulus, publicExponent)
+
 private fun ByteBuf.toBigInteger(): BigInteger {
     val bytes: ByteArray
     if (hasArray() && arrayOffset() == 0 && readerIndex() == 0 && readableBytes() == array().size) {
@@ -66,9 +69,6 @@ object Rsa {
 
     // 1 in 2^80
     private const val CERTAINTY = 80
-
-    val RSAPrivateCrtKeyParameters.publicKey
-        get() = RSAKeyParameters(false, modulus, publicExponent)
 
     fun generateKeyPair(): Pair<RSAKeyParameters, RSAPrivateCrtKeyParameters> {
         val generator = RSAKeyPairGenerator()
