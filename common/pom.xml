@@ -20,6 +20,10 @@
       <artifactId>guava</artifactId>
     </dependency>
     <dependency>
+      <groupId>com.google.jimfs</groupId>
+      <artifactId>jimfs</artifactId>
+    </dependency>
+    <dependency>
       <groupId>com.michael-bull.kotlin-inline-logger</groupId>
       <artifactId>kotlin-inline-logger-jvm</artifactId>
     </dependency>
