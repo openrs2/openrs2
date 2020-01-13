@@ -30,7 +30,7 @@ class PlatformDetectionTransformer : Transformer() {
     }
 
     override fun transformCode(classPath: ClassPath, library: Library, clazz: ClassNode, method: MethodNode): Boolean {
-        val match = GL_PLATFORM_DETECT_MATCHER.match(method).singleOrNull()
+        val match = GL_PLATFORM_DETECTION_MATCHER.match(method).singleOrNull()
         if (match != null) {
             // find os.name, os.arch and platform ID variables
             val nameStore = match[3] as VarInsnNode
@@ -120,7 +120,7 @@ class PlatformDetectionTransformer : Transformer() {
         }
 
         // adjust jagmisc platform IDs to account for the removal of MSJVM support
-        val miscMatch = MISC_PLATFORM_DETECT_MATCHER.match(method).filter {
+        val miscMatch = MISC_PLATFORM_DETECTION_MATCHER.match(method).filter {
             val const1 = it[0].intConstant
             if (const1 != 0 && const1 != 2) {
                 return@filter false
@@ -154,7 +154,7 @@ class PlatformDetectionTransformer : Transformer() {
 
     companion object {
         private val logger = InlineLogger()
-        private val GL_PLATFORM_DETECT_MATCHER = InsnMatcher.compile(
+        private val GL_PLATFORM_DETECTION_MATCHER = InsnMatcher.compile(
             """
             LDC INVOKESTATIC INVOKEVIRTUAL ASTORE
             LDC INVOKESTATIC INVOKEVIRTUAL ASTORE
@@ -162,7 +162,7 @@ class PlatformDetectionTransformer : Transformer() {
             ICONST ISTORE ILOAD GETSTATIC ILOAD AALOAD ARRAYLENGTH
             """
         )
-        private val MISC_PLATFORM_DETECT_MATCHER =
+        private val MISC_PLATFORM_DETECTION_MATCHER =
             InsnMatcher.compile("ICONST ISTORE ((GETSTATIC | ILOAD) IFEQ | GOTO) ICONST ISTORE")
         private val OS_NAMES = listOf("win", "mac", "linux")
         private val STARTS_WITH = MemberRef("java/lang/String", "startsWith", "(Ljava/lang/String;)Z")
