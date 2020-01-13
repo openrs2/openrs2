@@ -1,6 +1,7 @@
 package dev.openrs2.common.crypto
 
 import io.netty.buffer.ByteBuf
+import io.netty.buffer.ByteBufUtil
 import io.netty.buffer.Unpooled
 import org.bouncycastle.asn1.DERNull
 import org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers
@@ -28,14 +29,7 @@ val RSAPrivateCrtKeyParameters.publicKey
     get() = RSAKeyParameters(false, modulus, publicExponent)
 
 private fun ByteBuf.toBigInteger(): BigInteger {
-    val bytes: ByteArray
-    if (hasArray() && arrayOffset() == 0 && readerIndex() == 0 && readableBytes() == array().size) {
-        bytes = array()
-    } else {
-        bytes = ByteArray(readableBytes())
-        getBytes(readerIndex(), bytes)
-    }
-
+    val bytes = ByteBufUtil.getBytes(this, readerIndex(), readableBytes(), false)
     return BigInteger(bytes)
 }
 
