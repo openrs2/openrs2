@@ -30,7 +30,7 @@ class PlatformDetectionTransformer : Transformer() {
     }
 
     override fun transformCode(classPath: ClassPath, library: Library, clazz: ClassNode, method: MethodNode): Boolean {
-        val match = PLATFORM_DETECT_MATCHER.match(method).singleOrNull()
+        val match = GL_PLATFORM_DETECT_MATCHER.match(method).singleOrNull()
         if (match != null) {
             // find os.name, os.arch and platform ID variables
             val nameStore = match[3] as VarInsnNode
@@ -154,7 +154,7 @@ class PlatformDetectionTransformer : Transformer() {
 
     companion object {
         private val logger = InlineLogger()
-        private val PLATFORM_DETECT_MATCHER = InsnMatcher.compile(
+        private val GL_PLATFORM_DETECT_MATCHER = InsnMatcher.compile(
             """
             LDC INVOKESTATIC INVOKEVIRTUAL ASTORE
             LDC INVOKESTATIC INVOKEVIRTUAL ASTORE
