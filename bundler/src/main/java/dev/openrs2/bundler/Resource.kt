@@ -12,10 +12,14 @@ import java.util.zip.Deflater
 class Resource(
     val source: String,
     val destination: String,
+    val crc: Int,
     val digest: ByteArray,
     val uncompressedSize: Int,
     val content: ByteArray
 ) {
+    val sourceWithCrc: String
+        get() = source.replace(".", "_$crc.")
+
     val compressedSize: Int
         get() = content.size
 
@@ -35,8 +39,6 @@ class Resource(
         private fun compress(source: String, destination: String, uncompressed: ByteArray): Resource {
             val crc = CRC32()
             crc.update(uncompressed)
-
-            val sourceWithCrc = source.replace(".", "_${crc.value.toInt()}.")
 
             val digest = MessageDigest.getInstance("SHA-1")
             digest.update(uncompressed)
@@ -59,7 +61,7 @@ class Resource(
                 uncompressed
             }
 
-            return Resource(sourceWithCrc, destination, digest.digest(), uncompressed.size, content)
+            return Resource(source, destination, crc.value.toInt(), digest.digest(), uncompressed.size, content)
         }
 
         fun compressJar(source: String, destination: String, library: Library): Resource {

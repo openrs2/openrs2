@@ -112,7 +112,7 @@ class ResourceTransformer(
             list.add(TypeInsnNode(Opcodes.NEW, type))
             list.add(InsnNode(Opcodes.DUP))
             list.add(LdcInsnNode(resource.destination))
-            list.add(LdcInsnNode(resource.source))
+            list.add(LdcInsnNode(resource.sourceWithCrc))
 
             list.add(createIntConstant(messages.size))
             list.add(TypeInsnNode(Opcodes.ANEWARRAY, "java/lang/String"))
