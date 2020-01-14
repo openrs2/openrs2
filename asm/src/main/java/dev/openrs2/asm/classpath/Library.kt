@@ -115,6 +115,10 @@ class Library constructor() : Iterable<ClassNode> {
         }
     }
 
+    fun writeJs5(out: OutputStream) {
+        // TODO(gpe): implement
+    }
+
     companion object {
         private val logger = InlineLogger()
         private const val CLASS_SUFFIX = ".class"
