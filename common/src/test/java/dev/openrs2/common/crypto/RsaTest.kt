@@ -18,16 +18,18 @@ object RsaTest {
     // example data from https://en.wikipedia.org/wiki/RSA_(cryptosystem)#Example
     private val PUBLIC_KEY = allowUnsafeMod { RSAKeyParameters(false, BigInteger("3233"), BigInteger("17")) }
     private val PRIVATE_KEY = allowUnsafeMod { RSAKeyParameters(true, BigInteger("3233"), BigInteger("413")) }
-    private val PRIVATE_KEY_CRT = allowUnsafeMod { RSAPrivateCrtKeyParameters(
-        BigInteger("3233"), // modulus
-        BigInteger("17"), // public exponent
-        BigInteger("413"), // private exponent
-        BigInteger("61"), // p
-        BigInteger("53"), // q
-        BigInteger("53"), // dP
-        BigInteger("49"), // dQ
-        BigInteger("38") // qInv
-    ) }
+    private val PRIVATE_KEY_CRT = allowUnsafeMod {
+        RSAPrivateCrtKeyParameters(
+            BigInteger("3233"), // modulus
+            BigInteger("17"), // public exponent
+            BigInteger("413"), // private exponent
+            BigInteger("61"), // p
+            BigInteger("53"), // q
+            BigInteger("53"), // dP
+            BigInteger("49"), // dQ
+            BigInteger("38") // qInv
+        )
+    }
 
     private val PUBLIC_KEY_PEM = listOf(
         "-----BEGIN PUBLIC KEY-----",
