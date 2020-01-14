@@ -150,7 +150,7 @@ object RsaTest {
             try {
                 Files.write(file, PRIVATE_KEY_PEM)
 
-                val key = allowUnsafeMod { Rsa.readPrivateKey(file) } as RSAPrivateCrtKeyParameters
+                val key = allowUnsafeMod { Rsa.readPrivateKey(file) }
                 assertTrue(key.isPrivate)
                 assertEquals(PRIVATE_KEY_CRT.modulus, key.modulus)
                 assertEquals(PRIVATE_KEY_CRT.exponent, key.exponent)

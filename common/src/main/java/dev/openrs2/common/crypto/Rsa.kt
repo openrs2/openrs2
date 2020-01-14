@@ -145,7 +145,7 @@ object Rsa {
         return writeSinglePemObject(path, PUBLIC_KEY, spki.encoded)
     }
 
-    fun readPrivateKey(path: Path): RSAKeyParameters {
+    fun readPrivateKey(path: Path): RSAPrivateCrtKeyParameters {
         val der = readSinglePemObject(path, PRIVATE_KEY)
 
         val pki = PrivateKeyInfo.getInstance(der)
