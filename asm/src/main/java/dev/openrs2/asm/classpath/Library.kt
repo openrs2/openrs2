@@ -13,6 +13,7 @@ import org.objectweb.asm.commons.Remapper
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.util.CheckClassAdapter
 import java.io.ByteArrayInputStream
+import java.io.OutputStream
 import java.io.SequenceInputStream
 import java.nio.file.Files
 import java.nio.file.Path
@@ -81,31 +82,32 @@ class Library constructor() : Iterable<ClassNode> {
     fun writeJar(path: Path) {
         logger.info { "Writing jar $path" }
 
-        DeterministicJarOutputStream(Files.newOutputStream(path)).use { out ->
+        Files.newOutputStream(path).use(::writeJar)
+    }
+
+    fun writeJar(out: OutputStream) {
+        DeterministicJarOutputStream(out).use { jar ->
             for (clazz in classes.values) {
                 val writer = ClassWriter(0)
 
                 clazz.accept(CheckClassAdapter(writer, true))
 
-                out.putNextEntry(JarEntry(clazz.name + CLASS_SUFFIX))
-                out.write(writer.toByteArray())
+                jar.putNextEntry(JarEntry(clazz.name + CLASS_SUFFIX))
+                jar.write(writer.toByteArray())
             }
         }
     }
 
-    fun writePack(path: Path) {
-        logger.info { "Writing pack $path" }
-
+    fun writePack(out: OutputStream) {
         val temp = Files.createTempFile(TEMP_PREFIX, JAR_SUFFIX)
         try {
             writeJar(temp)
 
             JarInputStream(Files.newInputStream(temp)).use { `in` ->
-                val data = Files.newOutputStream(path)
                 val headerSize = GZIP_HEADER.size.toLong()
 
-                GZIPOutputStream(SkipOutputStream(data, headerSize)).use { out ->
-                    Pack200.newPacker().pack(`in`, out)
+                GZIPOutputStream(SkipOutputStream(out, headerSize)).use { gzip ->
+                    Pack200.newPacker().pack(`in`, gzip)
                 }
             }
         } finally {
