@@ -1,6 +1,7 @@
 package dev.openrs2.bundler
 
 import com.github.michaelbull.logging.InlineLogger
+import com.google.inject.Guice
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
 import dev.openrs2.bundler.transform.BufferSizeTransformer
@@ -9,6 +10,7 @@ import dev.openrs2.bundler.transform.HostCheckTransformer
 import dev.openrs2.bundler.transform.LoadLibraryTransformer
 import dev.openrs2.bundler.transform.MacResizeTransformer
 import dev.openrs2.bundler.transform.PlatformDetectionTransformer
+import dev.openrs2.bundler.transform.PublicKeyTransformer
 import dev.openrs2.bundler.transform.ResourceTransformer
 import dev.openrs2.bundler.transform.RightClickTransformer
 import java.nio.file.Path
@@ -16,14 +18,20 @@ import java.nio.file.Paths
 import java.util.jar.Attributes
 import java.util.jar.Attributes.Name.MANIFEST_VERSION
 import java.util.jar.Manifest
+import javax.inject.Inject
+import javax.inject.Singleton
 
 fun main() {
-    val bundler = Bundler(Paths.get("nonfree/code"), Paths.get("nonfree/code/bundle"))
-    bundler.run()
+    val injector = Guice.createInjector(BundlerModule())
+    val bundler = injector.getInstance(Bundler::class.java)
+    bundler.run(Paths.get("nonfree/code"), Paths.get("nonfree/code/bundle"))
 }
 
-class Bundler(private val input: Path, private val output: Path) {
-    fun run() {
+@Singleton
+class Bundler @Inject constructor(publicKeyTransformer: PublicKeyTransformer) {
+    private val transformers = listOf(*TRANSFORMERS.toTypedArray(), publicKeyTransformer)
+
+    fun run(input: Path, output: Path) {
         // read input jars/packs
         logger.info { "Reading input jars" }
         val unpacker = Library.readJar(input.resolve("game_unpacker.dat"))
@@ -48,13 +56,13 @@ class Bundler(private val input: Path, private val output: Path) {
 
         // run simple transformers
         logger.info { "Transforming client" }
-        for (transformer in TRANSFORMERS) {
+        for (transformer in transformers) {
             logger.info { "Running transformer ${transformer.javaClass.simpleName} " }
             transformer.transform(classPath)
         }
 
         logger.info { "Transforming client_gl" }
-        for (transformer in TRANSFORMERS) {
+        for (transformer in transformers) {
             logger.info { "Running transformer ${transformer.javaClass.simpleName} " }
             transformer.transform(glClassPath)
         }
