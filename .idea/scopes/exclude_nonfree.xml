@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="exclude-nonfree" pattern="!file[openrs2-client]:*/&amp;&amp;!file[openrs2-gl]:*/&amp;&amp;!file[openrs2-gl-dri]:*/&amp;&amp;!file[openrs2-loader]:*/&amp;&amp;!file[openrs2-nonfree]:*/&amp;&amp;!file[openrs2-signlink]:*/&amp;&amp;!file[openrs2-unpack]:*/&amp;&amp;!file[openrs2-unpacker]:*/" />
+</component>
