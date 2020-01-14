@@ -32,7 +32,7 @@ class Resource(
     companion object {
         private val logger = InlineLogger()
 
-        fun compress(source: String, destination: String, uncompressed: ByteArray): Resource {
+        private fun compress(source: String, destination: String, uncompressed: ByteArray): Resource {
             val crc = CRC32()
             crc.update(uncompressed)
 
