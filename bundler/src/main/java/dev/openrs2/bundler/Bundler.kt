@@ -13,6 +13,9 @@ import dev.openrs2.bundler.transform.ResourceTransformer
 import dev.openrs2.bundler.transform.RightClickTransformer
 import java.nio.file.Path
 import java.nio.file.Paths
+import java.util.jar.Attributes
+import java.util.jar.Attributes.Name.MANIFEST_VERSION
+import java.util.jar.Manifest
 
 fun main() {
     val bundler = Bundler(Paths.get("nonfree/code"), Paths.get("nonfree/code/bundle"))
@@ -104,9 +107,9 @@ class Bundler(private val input: Path, private val output: Path) {
         resources.forEach { it.write(output) }
 
         // write unsigned client and loaders
-        client.writeJar(output.resolve("runescape.jar"))
-        loader.writeJar(output.resolve("loader.jar"))
-        glLoader.writeJar(output.resolve("loader_gl.jar"))
+        client.writeJar(output.resolve("runescape.jar"), unsignedManifest)
+        loader.writeJar(output.resolve("loader.jar"), signedManifest)
+        glLoader.writeJar(output.resolve("loader_gl.jar"), signedManifest)
 
         // sign loaders
         logger.info { "Signing loaders" }
@@ -124,5 +127,20 @@ class Bundler(private val input: Path, private val output: Path) {
             LoadLibraryTransformer(),
             PlatformDetectionTransformer()
         )
+
+        private val unsignedManifest = Manifest()
+        private val signedManifest = Manifest()
+        private val APPLICATION_NAME = Attributes.Name("Application-Name")
+        private val PERMISSIONS = Attributes.Name("Permissions")
+
+        init {
+            unsignedManifest.mainAttributes[MANIFEST_VERSION] = "1.0"
+            unsignedManifest.mainAttributes[APPLICATION_NAME] = "OpenRS2"
+            unsignedManifest.mainAttributes[PERMISSIONS] = "sandbox"
+
+            signedManifest.mainAttributes[MANIFEST_VERSION] = "1.0"
+            signedManifest.mainAttributes[APPLICATION_NAME] = "OpenRS2"
+            signedManifest.mainAttributes[PERMISSIONS] = "all-permissions"
+        }
     }
 }
