@@ -22,6 +22,7 @@ import java.util.TreeMap
 import java.util.jar.JarEntry
 import java.util.jar.JarInputStream
 import java.util.jar.JarOutputStream
+import java.util.jar.Manifest
 import java.util.zip.GZIPInputStream
 import java.util.zip.GZIPOutputStream
 
@@ -79,14 +80,16 @@ class Library constructor() : Iterable<ClassNode> {
         }
     }
 
-    fun writeJar(path: Path) {
+    fun writeJar(path: Path, manifest: Manifest? = null) {
         logger.info { "Writing jar $path" }
 
-        Files.newOutputStream(path).use(::writeJar)
+        Files.newOutputStream(path).use {
+            writeJar(it, manifest)
+        }
     }
 
-    fun writeJar(out: OutputStream) {
-        DeterministicJarOutputStream(out).use { jar ->
+    fun writeJar(out: OutputStream, manifest: Manifest? = null) {
+        DeterministicJarOutputStream.create(out, manifest).use { jar ->
             for (clazz in classes.values) {
                 val writer = ClassWriter(0)
 
