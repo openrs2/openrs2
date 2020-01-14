@@ -5,7 +5,6 @@ import dev.openrs2.asm.hasCode
 import dev.openrs2.asm.remap.ClassForNameRemapper
 import dev.openrs2.common.io.DeterministicJarOutputStream
 import dev.openrs2.common.io.SkipOutputStream
-import org.apache.harmony.pack200.Pack200
 import org.objectweb.asm.ClassReader
 import org.objectweb.asm.ClassWriter
 import org.objectweb.asm.commons.ClassRemapper
@@ -23,6 +22,7 @@ import java.util.jar.JarEntry
 import java.util.jar.JarInputStream
 import java.util.jar.JarOutputStream
 import java.util.jar.Manifest
+import java.util.jar.Pack200
 import java.util.zip.GZIPInputStream
 import java.util.zip.GZIPOutputStream
 
