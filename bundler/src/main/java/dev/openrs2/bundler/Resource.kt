@@ -1,7 +1,10 @@
 package dev.openrs2.bundler
 
+import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.classpath.Library
 import java.io.ByteArrayOutputStream
+import java.nio.file.Files
+import java.nio.file.Path
 import java.security.MessageDigest
 import java.util.zip.CRC32
 import java.util.zip.Deflater
@@ -20,7 +23,15 @@ class Resource(
         require(digest.size == 20)
     }
 
+    fun write(dir: Path) {
+        val path = dir.resolve(source)
+        logger.info { "Writing resource $path" }
+        Files.write(path, content)
+    }
+
     companion object {
+        private val logger = InlineLogger()
+
         fun compress(source: String, destination: String, uncompressed: ByteArray): Resource {
             val crc = CRC32()
             crc.update(uncompressed)
