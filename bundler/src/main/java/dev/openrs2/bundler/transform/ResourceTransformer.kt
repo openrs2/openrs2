@@ -31,6 +31,29 @@ class ResourceTransformer(
     }
 
     override fun transformCode(classPath: ClassPath, library: Library, clazz: ClassNode, method: MethodNode): Boolean {
+        if (resources != null) {
+            for ((i, match) in RESOURCE_MATCHER.match(method).withIndex()) {
+                val resource = resources[i]
+
+                // sanity check that the destination matches up
+                val destination = match[2] as LdcInsnNode
+                require(destination.cst == resource.destination)
+
+                // update the source (the CRC may have changed)
+                val source = match[3] as LdcInsnNode
+                source.cst = resource.sourceWithCrc
+
+                // update file sizes
+                method.instructions.set(match[22], createIntConstant(resource.uncompressedSize))
+                method.instructions.set(match[23], createIntConstant(resource.compressedSize))
+
+                // update digest
+                for ((j, byte) in resource.digest.withIndex()) {
+                    method.instructions.set(match[28 + 4 * j], createIntConstant(byte.toInt()))
+                }
+            }
+        }
+
         val match = GL_RESOURCES_MATCHER.match(method).singleOrNull()
         if (match != null) {
             // remove everything but the PUTSTATIC
@@ -176,6 +199,7 @@ class ResourceTransformer(
         """
         private const val RESOURCE_ARRAY_CONSTRUCTOR = "ICONST ANEWARRAY (DUP ICONST $RESOURCE_CONSTRUCTOR AASTORE)+"
 
+        private val RESOURCE_MATCHER = InsnMatcher.compile("$RESOURCE_CONSTRUCTOR PUTSTATIC")
         private val GL_RESOURCES_MATCHER = InsnMatcher.compile(
             """
             ICONST ANEWARRAY
