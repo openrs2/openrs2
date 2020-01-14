@@ -91,7 +91,7 @@ class Resource(
             return compress(source, destination, uncompressed)
         }
 
-        fun compressGlResources() = listOf(
+        fun compressGlNatives() = listOf(
             // Windows i386
             listOf(
                 compressNative("jaggl_0_0.lib", "jaggl.dll", "windows-i386/jaggl.dll")
@@ -125,7 +125,7 @@ class Resource(
             )
         )
 
-        fun compressMiscResources() = listOf(
+        fun compressMiscNatives() = listOf(
             compressNative("jagmisc_0.lib", "jagmisc.dll", "windows-i386/jagmisc.dll"),
             compressNative("jagmisc_1.lib", "jagmisc.dll", "windows-amd64/jagmisc.dll")
         )

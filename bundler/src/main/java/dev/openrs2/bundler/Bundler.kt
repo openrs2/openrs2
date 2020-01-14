@@ -78,8 +78,8 @@ class Bundler @Inject constructor(publicKeyTransformer: PublicKeyTransformer) {
         val glPack = Resource.compressPack("jaggl.pack200", "main_file_cache.dat5", gl)
         val glJs5 = Resource.compressJs5("jaggl.js5", "main_file_cache.dat6", gl)
 
-        val glNatives = Resource.compressGlResources()
-        val miscNatives = Resource.compressMiscResources()
+        val glNatives = Resource.compressGlNatives()
+        val miscNatives = Resource.compressMiscNatives()
 
         // update checksums in the loader
         logger.info { "Updating checksums" }

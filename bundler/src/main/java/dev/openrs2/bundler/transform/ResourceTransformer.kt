@@ -19,8 +19,8 @@ import org.objectweb.asm.tree.TypeInsnNode
 
 class ResourceTransformer(
     private val resources: List<Resource>? = null,
-    private val glResources: List<List<Resource>> = Resource.compressGlResources(),
-    private val miscResources: List<Resource> = Resource.compressMiscResources()
+    private val glResources: List<List<Resource>> = Resource.compressGlNatives(),
+    private val miscResources: List<Resource> = Resource.compressMiscNatives()
 ) : Transformer() {
     private var glBlocks = 0
     private var miscBlocks = 0
