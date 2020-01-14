@@ -6,6 +6,7 @@ import dev.openrs2.asm.classpath.Library
 import dev.openrs2.asm.classpath.Library.Companion.readJar
 import dev.openrs2.asm.classpath.Library.Companion.readPack
 import dev.openrs2.bundler.Bundler
+import dev.openrs2.bundler.transform.ResourceTransformer
 import dev.openrs2.deob.SignedClassUtils.move
 import dev.openrs2.deob.remap.PrefixRemapper.create
 import dev.openrs2.deob.transform.AccessTransformer
@@ -146,6 +147,7 @@ class Deobfuscator(private val input: Path, private val output: Path) {
         private val TRANSFORMERS = listOf(
             OriginalNameTransformer(),
             *Bundler.TRANSFORMERS.toTypedArray(),
+            ResourceTransformer(),
             OpaquePredicateTransformer(),
             ExceptionTracingTransformer(),
             BitShiftTransformer(),
