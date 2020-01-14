@@ -4,18 +4,17 @@ import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
 import dev.openrs2.asm.transform.Transformer
-import org.bouncycastle.crypto.params.RSAKeyParameters
+import org.bouncycastle.crypto.params.RSAPrivateCrtKeyParameters
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.LdcInsnNode
 import org.objectweb.asm.tree.MethodNode
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class PublicKeyTransformer(private val key: RSAKeyParameters) : Transformer() {
+@Singleton
+class PublicKeyTransformer @Inject constructor(private val key: RSAPrivateCrtKeyParameters) : Transformer() {
     private var exponents = 0
     private var moduli = 0
-
-    init {
-        require(!key.isPrivate)
-    }
 
     override fun preTransform(classPath: ClassPath) {
         exponents = 0
@@ -30,7 +29,7 @@ class PublicKeyTransformer(private val key: RSAKeyParameters) : Transformer() {
 
             when (insn.cst) {
                 JAGEX_EXPONENT -> {
-                    insn.cst = key.exponent.toString()
+                    insn.cst = key.publicExponent.toString()
                     exponents++
                 }
                 JAGEX_MODULUS -> {
