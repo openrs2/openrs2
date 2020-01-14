@@ -39,13 +39,13 @@ class OpaquePredicateTransformer : Transformer() {
     }
 
     private fun findFlowObstructors(library: Library, method: MethodNode) {
-        FLOW_OBSTRUCTOR_INITIALIZER_MATCHER.match(method).forEach {
+        FLOW_OBSTRUCTOR_INITIALIZER_MATCHER.match(method).forEach { match ->
             // add flow obstructor to set
-            val putstatic = it.last() as FieldInsnNode
+            val putstatic = match.last() as FieldInsnNode
             flowObstructors.add(MemberRef(putstatic))
 
             // remove initializer
-            it.forEach(method.instructions::remove)
+            match.forEach(method.instructions::remove)
 
             // remove field
             val owner = library[putstatic.owner]!!

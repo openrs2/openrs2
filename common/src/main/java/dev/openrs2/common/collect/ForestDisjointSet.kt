@@ -98,13 +98,17 @@ class ForestDisjointSet<T> : DisjointSet<T> {
             return
         }
 
-        if (xRoot.rank < yRoot.rank) {
-            xRoot.parent = yRoot
-        } else if (xRoot.rank > yRoot.rank) {
-            yRoot.parent = xRoot
-        } else {
-            yRoot.parent = xRoot
-            xRoot.rank++
+        when {
+            xRoot.rank < yRoot.rank -> {
+                xRoot.parent = yRoot
+            }
+            xRoot.rank > yRoot.rank -> {
+                yRoot.parent = xRoot
+            }
+            else -> {
+                yRoot.parent = xRoot
+                xRoot.rank++
+            }
         }
 
         partitions--

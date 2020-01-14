@@ -115,13 +115,13 @@ class IfElseTransformer : Transformer() {
 
     companion object {
         private fun isIf(stmt: Statement): Boolean {
-            return if (stmt.isIfStmt) {
-                true
-            } else if (stmt.isBlockStmt) {
-                val stmts = stmt.asBlockStmt().statements
-                stmts.size == 1 && stmts[0].isIfStmt
-            } else {
-                false
+            return when {
+                stmt.isIfStmt -> true
+                stmt.isBlockStmt -> {
+                    val stmts = stmt.asBlockStmt().statements
+                    stmts.size == 1 && stmts[0].isIfStmt
+                }
+                else -> false
             }
         }
 

@@ -56,8 +56,7 @@ class UnusedArgTransformer : Transformer() {
 
             val stackSize = frame.stackSize
 
-            val insn = method.instructions[i]
-            when (insn) {
+            when (val insn = method.instructions[i]) {
                 is VarInsnNode -> {
                     if (insn.opcode != Opcodes.ILOAD) {
                         continue@frame

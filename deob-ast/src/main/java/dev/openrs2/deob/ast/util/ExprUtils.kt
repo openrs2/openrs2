@@ -12,7 +12,7 @@ fun Expression.isIntegerOrLongLiteral(): Boolean {
 }
 
 fun createLong(value: Long): LongLiteralExpr {
-    return LongLiteralExpr(java.lang.Long.toString(value) + "L")
+    return LongLiteralExpr(value.toString() + "L")
 }
 
 fun Expression.negate(): Expression {
