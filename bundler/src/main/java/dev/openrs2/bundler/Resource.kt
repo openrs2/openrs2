@@ -1,5 +1,7 @@
 package dev.openrs2.bundler
 
+import dev.openrs2.asm.classpath.Library
+import java.io.ByteArrayOutputStream
 import java.security.MessageDigest
 import java.util.zip.CRC32
 import java.util.zip.Deflater
@@ -47,6 +49,27 @@ class Resource(
             }
 
             return Resource(sourceWithCrc, destination, digest.digest(), uncompressed.size, content)
+        }
+
+        fun compressJar(source: String, destination: String, library: Library): Resource {
+            ByteArrayOutputStream().use { out ->
+                library.writeJar(out)
+                return compress(source, destination, out.toByteArray())
+            }
+        }
+
+        fun compressPack(source: String, destination: String, library: Library): Resource {
+            ByteArrayOutputStream().use { out ->
+                library.writePack(out)
+                return compress(source, destination, out.toByteArray())
+            }
+        }
+
+        fun compressJs5(source: String, destination: String, library: Library): Resource {
+            ByteArrayOutputStream().use { out ->
+                library.writeJs5(out)
+                return compress(source, destination, out.toByteArray())
+            }
         }
 
         private fun compress(source: String, destination: String, resource: String): Resource {
