@@ -20,6 +20,10 @@
       <artifactId>guava</artifactId>
     </dependency>
     <dependency>
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+    </dependency>
+    <dependency>
       <groupId>com.google.jimfs</groupId>
       <artifactId>jimfs</artifactId>
     </dependency>
