@@ -125,7 +125,7 @@ class Bundler @Inject constructor(publicKeyTransformer: PublicKeyTransformer) {
     }
 
     companion object {
-        val logger = InlineLogger()
+        private val logger = InlineLogger()
         val TRANSFORMERS = listOf(
             BufferSizeTransformer(),
             CachePathTransformer(),

@@ -50,7 +50,7 @@ class OverrideTransformer : Transformer() {
     }
 
     companion object {
-        val logger = InlineLogger()
-        val OVERRIDE_DESC: String = Type.getDescriptor(Override::class.java)
+        private val logger = InlineLogger()
+        private val OVERRIDE_DESC: String = Type.getDescriptor(Override::class.java)
     }
 }

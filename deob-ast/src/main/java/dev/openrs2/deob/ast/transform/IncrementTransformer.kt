@@ -31,7 +31,7 @@ class IncrementTransformer : Transformer() {
     }
 
     companion object {
-        fun prefixToPostfix(operator: UnaryExpr.Operator) = when (operator) {
+        private fun prefixToPostfix(operator: UnaryExpr.Operator) = when (operator) {
             UnaryExpr.Operator.PREFIX_INCREMENT -> UnaryExpr.Operator.POSTFIX_INCREMENT
             UnaryExpr.Operator.PREFIX_DECREMENT -> UnaryExpr.Operator.POSTFIX_DECREMENT
             else -> operator
