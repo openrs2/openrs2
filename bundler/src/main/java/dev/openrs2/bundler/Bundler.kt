@@ -136,7 +136,7 @@ class Bundler @Inject constructor(publicKeyTransformer: PublicKeyTransformer) {
         )
 
         private val unsignedManifest = Manifest()
-        private val signedManifest = Manifest()
+        private val signedManifest: Manifest
         private val APPLICATION_NAME = Attributes.Name("Application-Name")
         private val PERMISSIONS = Attributes.Name("Permissions")
 
@@ -145,8 +145,7 @@ class Bundler @Inject constructor(publicKeyTransformer: PublicKeyTransformer) {
             unsignedManifest.mainAttributes[APPLICATION_NAME] = "OpenRS2"
             unsignedManifest.mainAttributes[PERMISSIONS] = "sandbox"
 
-            signedManifest.mainAttributes[MANIFEST_VERSION] = "1.0"
-            signedManifest.mainAttributes[APPLICATION_NAME] = "OpenRS2"
+            signedManifest = Manifest(unsignedManifest)
             signedManifest.mainAttributes[PERMISSIONS] = "all-permissions"
         }
     }
