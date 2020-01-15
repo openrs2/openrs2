@@ -3,6 +3,7 @@ package dev.openrs2.asm.classpath
 import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.hasCode
 import dev.openrs2.asm.remap.ClassForNameRemapper
+import dev.openrs2.common.crypto.Pkcs12KeyStore
 import dev.openrs2.common.io.DeterministicJarOutputStream
 import dev.openrs2.common.io.SkipOutputStream
 import org.objectweb.asm.ClassReader
@@ -98,6 +99,19 @@ class Library constructor() : Iterable<ClassNode> {
                 jar.putNextEntry(JarEntry(clazz.name + CLASS_SUFFIX))
                 jar.write(writer.toByteArray())
             }
+        }
+    }
+
+    public fun writeSignedJar(path: Path, keyStore: Pkcs12KeyStore, manifest: Manifest? = null) {
+        logger.info { "Writing signed jar $path" }
+
+        val unsignedPath = Files.createTempFile("tmp", ".jar")
+        try {
+            writeJar(unsignedPath, manifest)
+            keyStore.signJar(unsignedPath)
+            DeterministicJarOutputStream.repack(unsignedPath, path)
+        } finally {
+            Files.deleteIfExists(unsignedPath)
         }
     }
 

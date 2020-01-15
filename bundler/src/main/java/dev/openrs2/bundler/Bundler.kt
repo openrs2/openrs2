@@ -13,6 +13,7 @@ import dev.openrs2.bundler.transform.PlatformDetectionTransformer
 import dev.openrs2.bundler.transform.PublicKeyTransformer
 import dev.openrs2.bundler.transform.ResourceTransformer
 import dev.openrs2.bundler.transform.RightClickTransformer
+import dev.openrs2.common.crypto.Pkcs12KeyStore
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.jar.Attributes
@@ -24,14 +25,14 @@ import javax.inject.Singleton
 fun main() {
     val injector = Guice.createInjector(BundlerModule())
     val bundler = injector.getInstance(Bundler::class.java)
-    bundler.run(Paths.get("nonfree/code"), Paths.get("nonfree/code/bundle"))
+    bundler.run(Paths.get("nonfree/code"), Paths.get("nonfree/code/bundle"), Paths.get("conf/loader.p12"))
 }
 
 @Singleton
 class Bundler @Inject constructor(publicKeyTransformer: PublicKeyTransformer) {
     private val transformers = listOf(*TRANSFORMERS.toTypedArray(), publicKeyTransformer)
 
-    fun run(input: Path, output: Path) {
+    fun run(input: Path, output: Path, keyStorePath: Path) {
         // read input jars/packs
         logger.info { "Reading input jars" }
         val unpacker = Library.readJar(input.resolve("game_unpacker.dat"))
@@ -116,12 +117,10 @@ class Bundler @Inject constructor(publicKeyTransformer: PublicKeyTransformer) {
 
         // write unsigned client and loaders
         client.writeJar(output.resolve("runescape.jar"), unsignedManifest)
-        loader.writeJar(output.resolve("loader.jar"), signedManifest)
-        glLoader.writeJar(output.resolve("loader_gl.jar"), signedManifest)
 
-        // sign loaders
-        logger.info { "Signing loaders" }
-        // TODO(gpe): implement
+        val keyStore = Pkcs12KeyStore.open(keyStorePath)
+        loader.writeSignedJar(output.resolve("loader.jar"), keyStore, signedManifest)
+        glLoader.writeSignedJar(output.resolve("loader_gl.jar"), keyStore, signedManifest)
     }
 
     companion object {
