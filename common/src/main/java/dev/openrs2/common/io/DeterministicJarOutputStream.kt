@@ -1,7 +1,10 @@
 package dev.openrs2.common.io
 
 import java.io.OutputStream
+import java.nio.file.Files
+import java.nio.file.Path
 import java.nio.file.attribute.FileTime
+import java.util.jar.JarInputStream
 import java.util.jar.JarOutputStream
 import java.util.jar.Manifest
 import java.util.zip.ZipEntry
@@ -25,6 +28,18 @@ class DeterministicJarOutputStream : JarOutputStream {
                 DeterministicJarOutputStream(out, manifest)
             } else {
                 DeterministicJarOutputStream(out)
+            }
+        }
+
+        fun repack(src: Path, dest: Path) {
+            JarInputStream(Files.newInputStream(src)).use { `in` ->
+                create(Files.newOutputStream(dest), `in`.manifest).use { out ->
+                    while (true) {
+                        val entry = `in`.nextJarEntry ?: break
+                        out.putNextEntry(entry)
+                        `in`.copyTo(out)
+                    }
+                }
             }
         }
     }
