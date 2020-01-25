@@ -32,12 +32,12 @@ class DeterministicJarOutputStream : JarOutputStream {
         }
 
         fun repack(src: Path, dest: Path) {
-            JarInputStream(Files.newInputStream(src)).use { `in` ->
-                create(Files.newOutputStream(dest), `in`.manifest).use { out ->
+            JarInputStream(Files.newInputStream(src)).use { input ->
+                create(Files.newOutputStream(dest), input.manifest).use { output ->
                     while (true) {
-                        val entry = `in`.nextJarEntry ?: break
-                        out.putNextEntry(entry)
-                        `in`.copyTo(out)
+                        val entry = input.nextJarEntry ?: break
+                        output.putNextEntry(entry)
+                        input.copyTo(output)
                     }
                 }
             }
