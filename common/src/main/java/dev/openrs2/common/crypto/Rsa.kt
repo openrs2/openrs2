@@ -120,9 +120,7 @@ object Rsa {
             val plaintext = (blindPlaintext * rInv).mod(m)
 
             // defend against CRT faults (see https://people.redhat.com/~fweimer/rsa-crt-leaks.pdf)
-            if (plaintext.modPow(e, m) != ciphertext) {
-                throw IllegalStateException()
-            }
+            check(plaintext.modPow(e, m) == ciphertext)
 
             return plaintext
         } else {
