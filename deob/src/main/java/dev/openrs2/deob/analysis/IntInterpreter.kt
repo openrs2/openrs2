@@ -144,7 +144,7 @@ class IntInterpreter(private val parameters: Array<Set<Int>?>?) : Interpreter<In
             return IntValue.Unknown(basicValue)
         }
 
-        val set = value1.values.union(value2.values)
+        val set = value1.values union value2.values
         return if (set.size > MAX_TRACKED_VALUES) {
             IntValue.Unknown(basicValue)
         } else {

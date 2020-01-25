@@ -36,7 +36,7 @@ object SignedClassUtils {
         }
 
         // move loader signed classes to signlink
-        for (name in signedClasses.union(dependencies)) {
+        for (name in signedClasses union dependencies) {
             val `in` = loader.remove(name)!!
 
             val out = ClassNode()
