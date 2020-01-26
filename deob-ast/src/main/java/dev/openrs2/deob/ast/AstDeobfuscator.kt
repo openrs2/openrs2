@@ -14,6 +14,7 @@ import dev.openrs2.deob.ast.transform.BinaryExprOrderTransformer
 import dev.openrs2.deob.ast.transform.BitMaskTransformer
 import dev.openrs2.deob.ast.transform.ComplementTransformer
 import dev.openrs2.deob.ast.transform.EncloseTransformer
+import dev.openrs2.deob.ast.transform.ForLoopConditionTransformer
 import dev.openrs2.deob.ast.transform.IfElseTransformer
 import dev.openrs2.deob.ast.transform.IncrementTransformer
 import dev.openrs2.deob.ast.transform.NegativeLiteralTransformer
@@ -89,6 +90,7 @@ class AstDeobfuscator(private val modules: List<Path>) {
             ValueOfTransformer(),
             NewInstanceTransformer(),
             IncrementTransformer(),
+            ForLoopConditionTransformer(),
             EncloseTransformer()
         )
     }
