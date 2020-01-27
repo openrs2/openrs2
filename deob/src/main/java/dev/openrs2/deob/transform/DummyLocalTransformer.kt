@@ -5,7 +5,9 @@ import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
 import dev.openrs2.asm.deleteSimpleExpression
 import dev.openrs2.asm.transform.Transformer
+import dev.openrs2.deob.analysis.LiveVariableAnalyzer
 import org.objectweb.asm.Opcodes
+import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.VarInsnNode
@@ -18,29 +20,25 @@ class DummyLocalTransformer : Transformer() {
     }
 
     override fun transformCode(classPath: ClassPath, library: Library, clazz: ClassNode, method: MethodNode): Boolean {
-        /*
-         * XXX(gpe): this is primitive (ideally we'd do a proper data flow
-         * analysis, but we'd need to do it in reverse and ASM only supports
-         * forward data flow), however, it seems to be good enough to catch
-         * most dummy locals.
-         */
-        val loads = BooleanArray(method.maxLocals)
+        val analyzer = LiveVariableAnalyzer(clazz.name, method)
+        analyzer.analyze()
 
-        for (insn in method.instructions) {
-            if (insn is VarInsnNode && insn.opcode == Opcodes.ILOAD) {
-                loads[insn.`var`] = true
-            }
-        }
+        val deadStores = mutableListOf<AbstractInsnNode>()
 
         for (insn in method.instructions) {
             if (insn !is VarInsnNode || insn.opcode != Opcodes.ISTORE) {
                 continue
             }
 
-            if (loads[insn.`var`]) {
+            val live = analyzer.getInSet(insn)?.contains(insn.`var`) ?: false
+            if (live) {
                 continue
             }
 
+            deadStores += insn
+        }
+
+        for (insn in deadStores) {
             if (method.instructions.deleteSimpleExpression(insn)) {
                 localsRemoved++
             }
