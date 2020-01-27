@@ -159,7 +159,7 @@ class Library constructor() : Iterable<ClassNode> {
 
                     val clazz = ClassNode()
                     val reader = ClassReader(`in`)
-                    reader.accept(clazz, ClassReader.SKIP_DEBUG)
+                    reader.accept(JsrInliner(clazz), ClassReader.SKIP_DEBUG)
 
                     library.add(clazz)
                 }
