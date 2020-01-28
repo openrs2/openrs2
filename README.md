@@ -74,6 +74,56 @@ Commit messages should follow the ['seven rules'][commitmsg] described in
 can be up to 72 characters in length (as OpenRS2 does not use email-based
 patches).
 
+### Developer Certificate of Origin
+
+OpenRS2 uses version 1.1 of the [Developer Certificate of Origin][dco] (DCO) to
+certify that contributors agree to license their code under OpenRS2's license
+(see the Copyright section below). To confirm that a contribution meets the
+requirements of the DCO, a `Signed-off-by:` line must be added to the Git
+commit message by passing `--signoff` to the `git commit` invocation.
+
+The full text of the DCO is reproduced below:
+
+```
+Developer Certificate of Origin
+Version 1.1
+
+Copyright (C) 2004, 2006 The Linux Foundation and its contributors.
+1 Letterman Drive
+Suite D4700
+San Francisco, CA, 94129
+
+Everyone is permitted to copy and distribute verbatim copies of this
+license document, but changing it is not allowed.
+
+
+Developer's Certificate of Origin 1.1
+
+By making a contribution to this project, I certify that:
+
+(a) The contribution was created in whole or in part by me and I
+    have the right to submit it under the open source license
+    indicated in the file; or
+
+(b) The contribution is based upon previous work that, to the best
+    of my knowledge, is covered under an appropriate open source
+    license and I have the right under that license to submit that
+    work with modifications, whether created in whole or in part
+    by me, under the same open source license (unless I am
+    permitted to submit under a different license), as indicated
+    in the file; or
+
+(c) The contribution was provided directly to me by some other
+    person who certified (a), (b) or (c) and I have not modified
+    it.
+
+(d) I understand and agree that this project and the contribution
+    are public and that a record of the contribution (including all
+    personal information I submit with it, including my sign-off) is
+    maintained indefinitely and may be redistributed consistent with
+    this project or the open source license(s) involved.
+```
+
 ### Versioning
 
 OpenRS2 uses [Semantic Versioning][semver].
@@ -105,6 +155,7 @@ You should have received a copy of the GNU General Public License along with
 OpenRS2. If not, see <https://www.gnu.org/licenses/>.
 
 [commitmsg]: https://chris.beams.io/posts/git-commit/#seven-rules
+[dco]: https://developercertificate.org/
 [gpl]: https://www.gnu.org/licenses/gpl-3.0.html
 [idea]: https://www.jetbrains.com/idea/
 [jdk]: https://jdk.java.net/
