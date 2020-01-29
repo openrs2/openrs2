@@ -4,6 +4,7 @@ import com.github.javaparser.ast.CompilationUnit
 import com.github.javaparser.ast.Node
 import com.github.javaparser.ast.expr.BinaryExpr
 import com.github.javaparser.ast.stmt.ForStmt
+import dev.openrs2.deob.ast.util.hasSideEffects
 import dev.openrs2.deob.ast.util.walk
 
 class ForLoopConditionTransformer : Transformer() {
@@ -15,6 +16,10 @@ class ForLoopConditionTransformer : Transformer() {
                 }
 
                 val expr = compare.asBinaryExpr()
+                if (expr.left.hasSideEffects() && expr.right.hasSideEffects()) {
+                    return@ifPresent
+                }
+
                 val flipped = when (expr.operator) {
                     BinaryExpr.Operator.GREATER -> BinaryExpr.Operator.LESS
                     BinaryExpr.Operator.GREATER_EQUALS -> BinaryExpr.Operator.LESS_EQUALS
