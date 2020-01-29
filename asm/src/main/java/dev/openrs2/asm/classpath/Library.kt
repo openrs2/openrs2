@@ -150,10 +150,8 @@ class Library constructor() : Iterable<ClassNode> {
 
             JarInputStream(Files.newInputStream(path)).use { `in` ->
                 while (true) {
-                    val entry = `in`.nextJarEntry
-                    if (entry == null) {
-                        break
-                    } else if (!entry.name.endsWith(CLASS_SUFFIX)) {
+                    val entry = `in`.nextJarEntry ?: break
+                    if (!entry.name.endsWith(CLASS_SUFFIX)) {
                         continue
                     }
 
