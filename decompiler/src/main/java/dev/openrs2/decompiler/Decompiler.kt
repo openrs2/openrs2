@@ -52,7 +52,6 @@ class Decompiler(
 
     companion object {
         private val OPTIONS = mapOf(
-            IFernflowerPreferences.ASCII_STRING_CHARACTERS to "1",
             IFernflowerPreferences.INDENT_STRING to "\t",
             IFernflowerPreferences.SYNTHETIC_NOT_SET to "1"
         )
