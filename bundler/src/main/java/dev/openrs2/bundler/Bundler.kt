@@ -13,6 +13,7 @@ import dev.openrs2.bundler.transform.PlatformDetectionTransformer
 import dev.openrs2.bundler.transform.PublicKeyTransformer
 import dev.openrs2.bundler.transform.ResourceTransformer
 import dev.openrs2.bundler.transform.RightClickTransformer
+import dev.openrs2.bundler.transform.TypoTransformer
 import dev.openrs2.common.crypto.Pkcs12KeyStore
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -132,7 +133,8 @@ class Bundler @Inject constructor(publicKeyTransformer: PublicKeyTransformer) {
             MacResizeTransformer(),
             RightClickTransformer(),
             LoadLibraryTransformer(),
-            PlatformDetectionTransformer()
+            PlatformDetectionTransformer(),
+            TypoTransformer()
         )
 
         private val unsignedManifest = Manifest()
