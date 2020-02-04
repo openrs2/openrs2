@@ -27,7 +27,7 @@ class AddSubTransformer : Transformer() {
                 expr.operator = BinaryExpr.Operator.MINUS
                 expr.right = right.negate()
             } else if (op == BinaryExpr.Operator.PLUS && isNegative(left)) {
-                if (left.hasSideEffects() || right.hasSideEffects()) {
+                if (expr.hasSideEffects()) {
                     return@walk
                 }
 
