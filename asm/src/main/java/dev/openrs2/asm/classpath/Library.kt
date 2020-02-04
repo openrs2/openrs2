@@ -102,7 +102,7 @@ class Library constructor() : Iterable<ClassNode> {
         }
     }
 
-    public fun writeSignedJar(path: Path, keyStore: Pkcs12KeyStore, manifest: Manifest? = null) {
+    fun writeSignedJar(path: Path, keyStore: Pkcs12KeyStore, manifest: Manifest? = null) {
         logger.info { "Writing signed jar $path" }
 
         val unsignedPath = Files.createTempFile("tmp", ".jar")
