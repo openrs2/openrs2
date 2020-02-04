@@ -19,12 +19,12 @@ class IncrementTransformer : Transformer() {
         }
 
         unit.walk(Node.TreeTraversal.POSTORDER) { stmt: ForStmt ->
-            stmt.update.forEach {
-                if (!it.isUnaryExpr) {
-                    return@forEach
+            for (expr in stmt.update) {
+                if (!expr.isUnaryExpr) {
+                    continue
                 }
 
-                val unaryExpr = it.asUnaryExpr()
+                val unaryExpr = expr.asUnaryExpr()
                 unaryExpr.operator = prefixToPostfix(unaryExpr.operator)
             }
         }

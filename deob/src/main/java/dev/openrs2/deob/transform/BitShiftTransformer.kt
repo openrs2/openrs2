@@ -24,11 +24,11 @@ class BitShiftTransformer : Transformer() {
         clazz: ClassNode,
         method: MethodNode
     ): Boolean {
-        CONST_SHIFT_MATCHER.match(method).forEach {
-            val push = it[0]
+        for (match in CONST_SHIFT_MATCHER.match(method)) {
+            val push = match[0]
             val bits = push.intConstant!!
 
-            val opcode = it[1].opcode
+            val opcode = match[1].opcode
             val mask = if (LONG_SHIFTS.contains(opcode)) 63 else 31
 
             val simplifiedBits = bits and mask

@@ -24,24 +24,24 @@ class HostCheckTransformer : Transformer() {
             return false
         }
 
-        GET_HOST_MATCHER.match(method).forEach {
-            val insn1 = it[0] as MethodInsnNode
+        for (match in GET_HOST_MATCHER.match(method)) {
+            val insn1 = match[0] as MethodInsnNode
             if (insn1.owner != clazz.name || insn1.name != "getDocumentBase" || insn1.desc != "()Ljava/net/URL;") {
-                return@forEach
+                continue
             }
 
-            val insn2 = it[1] as MethodInsnNode
+            val insn2 = match[1] as MethodInsnNode
             if (insn2.owner != "java/net/URL" || insn2.name != "getHost" || insn2.desc != "()Ljava/lang/String;") {
-                return@forEach
+                continue
             }
 
-            val insn3 = it[2] as MethodInsnNode
+            val insn3 = match[2] as MethodInsnNode
             if (
                 insn3.owner != "java/lang/String" ||
                 insn3.name != "toLowerCase" ||
                 insn3.desc != "()Ljava/lang/String;"
             ) {
-                return@forEach
+                continue
             }
 
             method.instructions.clear()

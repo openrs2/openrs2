@@ -58,8 +58,8 @@ object SignedClassUtils {
     private fun findSignedClasses(method: MethodNode): Set<String> {
         val classes = mutableSetOf<String>()
 
-        LOAD_SIGNED_CLASS_MATCHER.match(method).forEach {
-            val ldc = it[0] as LdcInsnNode
+        for (match in LOAD_SIGNED_CLASS_MATCHER.match(method)) {
+            val ldc = match[0] as LdcInsnNode
             val cst = ldc.cst
             if (cst is String && cst != "unpack") {
                 classes.add(cst)

@@ -73,17 +73,23 @@ fun MethodNode.removeArgument(argIndex: Int) {
 
     if (localVariables != null) {
         localVariables.removeIf { it.index == localIndex }
-        localVariables.forEach { it.index = remap(it.index, argType, localIndex) }
+        for (v in localVariables) {
+            v.index = remap(v.index, argType, localIndex)
+        }
     }
 
     if (visibleLocalVariableAnnotations != null) {
         visibleLocalVariableAnnotations.removeIf { it.index.contains(localIndex) }
-        visibleLocalVariableAnnotations.forEach { it.index = remapAll(it.index, argType, localIndex) }
+        for (annotation in visibleLocalVariableAnnotations) {
+            annotation.index = remapAll(annotation.index, argType, localIndex)
+        }
     }
 
     if (invisibleLocalVariableAnnotations != null) {
         invisibleLocalVariableAnnotations.removeIf { it.index.contains(localIndex) }
-        invisibleLocalVariableAnnotations.forEach { it.index = remapAll(it.index, argType, localIndex) }
+        for (annotation in invisibleLocalVariableAnnotations) {
+            annotation.index = remapAll(annotation.index, argType, localIndex)
+        }
     }
 
     for (insn in instructions) {

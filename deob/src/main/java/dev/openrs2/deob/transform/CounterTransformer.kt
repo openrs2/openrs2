@@ -46,14 +46,14 @@ class CounterTransformer : Transformer() {
             }
         }
 
-        RESET_PATTERN.match(method).forEach {
-            val putstatic = MemberRef(it[1] as FieldInsnNode)
+        for (match in RESET_PATTERN.match(method)) {
+            val putstatic = MemberRef(match[1] as FieldInsnNode)
             resets.merge(putstatic, 1, Integer::sum)
         }
 
-        INCREMENT_PATTERN.match(method).forEach {
-            val getstatic = MemberRef(it[0] as FieldInsnNode)
-            val putstatic = MemberRef(it[3] as FieldInsnNode)
+        for (match in INCREMENT_PATTERN.match(method)) {
+            val getstatic = MemberRef(match[0] as FieldInsnNode)
+            val putstatic = MemberRef(match[3] as FieldInsnNode)
             if (getstatic == putstatic) {
                 increments.merge(putstatic, 1, Integer::sum)
             }
@@ -92,18 +92,18 @@ class CounterTransformer : Transformer() {
         clazz: ClassNode,
         method: MethodNode
     ): Boolean {
-        RESET_PATTERN.match(method).forEach {
-            val putstatic = it[1] as FieldInsnNode
+        for (match in RESET_PATTERN.match(method)) {
+            val putstatic = match[1] as FieldInsnNode
             if (counters.contains(MemberRef(putstatic))) {
-                it.forEach(method.instructions::remove)
+                match.forEach(method.instructions::remove)
             }
         }
 
-        INCREMENT_PATTERN.match(method).forEach {
-            val getstatic = MemberRef(it[0] as FieldInsnNode)
-            val putstatic = MemberRef(it[3] as FieldInsnNode)
+        for (match in INCREMENT_PATTERN.match(method)) {
+            val getstatic = MemberRef(match[0] as FieldInsnNode)
+            val putstatic = MemberRef(match[3] as FieldInsnNode)
             if (getstatic == putstatic && counters.contains(putstatic)) {
-                it.forEach(method.instructions::remove)
+                match.forEach(method.instructions::remove)
             }
         }
 

@@ -22,7 +22,7 @@ class ExceptionTracingTransformer : Transformer() {
         clazz: ClassNode,
         method: MethodNode
     ): Boolean {
-        CATCH_MATCHER.match(method).forEach { match ->
+        for (match in CATCH_MATCHER.match(method)) {
             val foundTryCatch = method.tryCatchBlocks.removeIf { tryCatch ->
                 tryCatch.type == "java/lang/RuntimeException" && tryCatch.handler.nextReal === match[0]
             }

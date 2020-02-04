@@ -23,8 +23,8 @@ object ClassForNameRemapper {
     }
 
     fun remap(remapper: Remapper, method: MethodNode) {
-        INVOKE_MATCHER.match(method).filter(ClassForNameRemapper::isClassForName).forEach {
-            val ldc = it[0] as LdcInsnNode
+        for (match in INVOKE_MATCHER.match(method).filter(ClassForNameRemapper::isClassForName)) {
+            val ldc = match[0] as LdcInsnNode
             val name = remapper.map(ldc.cst as String)
             if (name != null) {
                 ldc.cst = name

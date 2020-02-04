@@ -21,35 +21,35 @@ class MacResizeTransformer : Transformer() {
     }
 
     override fun transformCode(classPath: ClassPath, library: Library, clazz: ClassNode, method: MethodNode): Boolean {
-        DETECT_MAC_MATCHER.match(method).forEach {
-            val getstatic = it[0] as FieldInsnNode
+        for (match in DETECT_MAC_MATCHER.match(method)) {
+            val getstatic = match[0] as FieldInsnNode
             if (
                 getstatic.owner == "loader" ||
                 getstatic.owner == clazz.name ||
                 getstatic.desc != "Ljava/lang/String;"
             ) {
-                return@forEach
+                continue
             }
 
-            val ldc = it[1] as LdcInsnNode
+            val ldc = match[1] as LdcInsnNode
             if (ldc.cst != "mac") {
-                return@forEach
+                continue
             }
 
-            val invokevirtual = it[2] as MethodInsnNode
+            val invokevirtual = match[2] as MethodInsnNode
             if (
                 invokevirtual.owner != "java/lang/String" ||
                 invokevirtual.name != "startsWith" ||
                 invokevirtual.desc != "(Ljava/lang/String;)Z"
             ) {
-                return@forEach
+                continue
             }
 
             method.instructions.remove(getstatic)
             method.instructions.remove(ldc)
             method.instructions.remove(invokevirtual)
 
-            val branch = it[3] as JumpInsnNode
+            val branch = match[3] as JumpInsnNode
             if (branch.opcode == Opcodes.IFEQ) {
                 branch.opcode = Opcodes.GOTO
             } else {

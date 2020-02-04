@@ -67,8 +67,8 @@ class AstDeobfuscator(private val modules: List<Path>) {
                 require(result.isSuccessful) { result }
             }
 
-            root.compilationUnits.forEach { unit ->
-                TRANSFORMERS.forEach { transformer ->
+            for (unit in root.compilationUnits) {
+                for (transformer in TRANSFORMERS) {
                     transformer.transform(unit)
                 }
             }

@@ -41,10 +41,10 @@ class BufferSizeTransformer : Transformer() {
             return false
         }
 
-        NEW_BUFFER_MATCHER.match(method).forEach {
-            val putstatic = it[4] as FieldInsnNode
+        for (match in NEW_BUFFER_MATCHER.match(method)) {
+            val putstatic = match[4] as FieldInsnNode
             if (MemberRef(putstatic) == buffer!!) {
-                method.instructions[it[2]] = createIntConstant(65536)
+                method.instructions[match[2]] = createIntConstant(65536)
                 buffersResized++
             }
         }

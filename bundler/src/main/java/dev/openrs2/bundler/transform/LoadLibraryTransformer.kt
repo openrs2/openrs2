@@ -24,10 +24,10 @@ class LoadLibraryTransformer : Transformer() {
         jnilib.cst = "libjaggl.dylib"
         jnilibs++
 
-        AMD64_CHECK_MATCHER.match(method).forEach {
-            val ldc = it[1] as LdcInsnNode
+        for (match in AMD64_CHECK_MATCHER.match(method)) {
+            val ldc = match[1] as LdcInsnNode
             if (ldc.cst == "amd64") {
-                it.forEach(method.instructions::remove)
+                match.forEach(method.instructions::remove)
                 amd64Checks++
             }
         }

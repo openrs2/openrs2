@@ -39,7 +39,7 @@ class OpaquePredicateTransformer : Transformer() {
     }
 
     private fun findFlowObstructors(library: Library, method: MethodNode) {
-        FLOW_OBSTRUCTOR_INITIALIZER_MATCHER.match(method).forEach { match ->
+        for (match in FLOW_OBSTRUCTOR_INITIALIZER_MATCHER.match(method)) {
             // add flow obstructor to set
             val putstatic = match.last() as FieldInsnNode
             flowObstructors.add(MemberRef(putstatic))
@@ -81,23 +81,23 @@ class OpaquePredicateTransformer : Transformer() {
 
     override fun transformCode(classPath: ClassPath, library: Library, clazz: ClassNode, method: MethodNode): Boolean {
         // find and fix opaque predicates
-        OPAQUE_PREDICATE_MATCHER.match(method).filter { isOpaquePredicate(method, it) }.forEach {
-            val branch = it[1] as JumpInsnNode
+        for (match in OPAQUE_PREDICATE_MATCHER.match(method).filter { isOpaquePredicate(method, it) }) {
+            val branch = match[1] as JumpInsnNode
             if (branch.opcode == Opcodes.IFEQ) {
                 // branch is always taken
-                method.instructions.remove(it[0])
+                method.instructions.remove(match[0])
                 branch.opcode = Opcodes.GOTO
             } else { // IFNE
                 // branch is never taken
-                it.forEach(method.instructions::remove)
+                match.forEach(method.instructions::remove)
             }
 
             opaquePredicates++
         }
 
         // remove redundant stores
-        STORE_MATCHER.match(method).filter(this::isRedundantStore).forEach {
-            it.forEach(method.instructions::remove)
+        for (match in STORE_MATCHER.match(method).filter(this::isRedundantStore)) {
+            match.forEach(method.instructions::remove)
             stores++
         }
 

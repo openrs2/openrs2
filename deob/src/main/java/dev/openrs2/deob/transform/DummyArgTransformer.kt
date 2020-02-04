@@ -169,12 +169,12 @@ class DummyArgTransformer : Transformer() {
             }
         }
 
-        CONDITIONAL_CALL_MATCHER.match(method).forEach { match ->
+        for (match in CONDITIONAL_CALL_MATCHER.match(method)) {
             var matchIndex = 0
 
             val load = match[matchIndex++] as VarInsnNode
             if (stores[load.`var`]) {
-                return@forEach
+                continue
             }
 
             var callerSlots = Type.getArgumentsAndReturnSizes(method.desc) shr 2
@@ -182,7 +182,7 @@ class DummyArgTransformer : Transformer() {
                 callerSlots++
             }
             if (load.`var` >= callerSlots) {
-                return@forEach
+                continue
             }
 
             val conditionValue: Int?
@@ -210,7 +210,7 @@ class DummyArgTransformer : Transformer() {
                 }
             }
 
-            val callee = inheritedMethodSets[MemberRef(invoke)] ?: return@forEach
+            val callee = inheritedMethodSets[MemberRef(invoke)] ?: continue
             conditionalCalls.put(
                 parentMethod,
                 ConditionalCall(load.`var`, conditionOpcode, conditionValue, callee, constArgs.asList())

@@ -114,7 +114,9 @@ class Bundler @Inject constructor(publicKeyTransformer: PublicKeyTransformer) {
             *glNatives.flatten().toTypedArray(),
             *miscNatives.toTypedArray()
         )
-        resources.forEach { it.write(output) }
+        for (resource in resources) {
+            resource.write(output)
+        }
 
         // write unsigned client and loaders
         client.writeJar(output.resolve("runescape.jar"), unsignedManifest)
