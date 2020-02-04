@@ -44,8 +44,13 @@ class OpaquePredicateTransformer : Transformer() {
             val putstatic = match.last() as FieldInsnNode
             flowObstructors.add(MemberRef(putstatic))
 
-            // remove initializer
-            match.forEach(method.instructions::remove)
+            // remove initializer (except the opaque predicate at the start,
+            // which we treat like any other)
+            for ((i, insn) in match.withIndex()) {
+                if (i >= 2) {
+                    method.instructions.remove(insn)
+                }
+            }
 
             // remove field
             val owner = library[putstatic.owner]!!
