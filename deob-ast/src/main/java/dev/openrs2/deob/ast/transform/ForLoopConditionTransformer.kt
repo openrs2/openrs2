@@ -16,7 +16,7 @@ class ForLoopConditionTransformer : Transformer() {
                 }
 
                 val expr = compare.asBinaryExpr()
-                if (expr.left.hasSideEffects() && expr.right.hasSideEffects()) {
+                if (expr.hasSideEffects()) {
                     return@ifPresent
                 }
 
