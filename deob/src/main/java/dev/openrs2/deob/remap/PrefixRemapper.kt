@@ -9,7 +9,7 @@ object PrefixRemapper {
         val mapping = mutableMapOf<String, String>()
 
         for (clazz in library) {
-            if (TypedRemapper.EXCLUDED_CLASSES.contains(clazz.name)) {
+            if (clazz.name in TypedRemapper.EXCLUDED_CLASSES) {
                 mapping[clazz.name] = clazz.name
             } else {
                 mapping[clazz.name] = prefix + clazz.name

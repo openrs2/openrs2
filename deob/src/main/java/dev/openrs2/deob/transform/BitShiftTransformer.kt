@@ -29,7 +29,7 @@ class BitShiftTransformer : Transformer() {
             val bits = push.intConstant!!
 
             val opcode = match[1].opcode
-            val mask = if (LONG_SHIFTS.contains(opcode)) 63 else 31
+            val mask = if (opcode in LONG_SHIFTS) 63 else 31
 
             val simplifiedBits = bits and mask
 

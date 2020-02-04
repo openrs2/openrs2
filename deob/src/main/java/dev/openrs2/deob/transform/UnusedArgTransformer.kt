@@ -122,7 +122,7 @@ class UnusedArgTransformer : Transformer() {
             val newArgTypes = mutableListOf<Type>()
 
             for ((j, argType) in argTypes.withIndex()) {
-                if (INT_SORTS.contains(argType.sort) && !retainedArgs.contains(ArgRef(partition, j))) {
+                if (argType.sort in INT_SORTS && ArgRef(partition, j) !in retainedArgs) {
                     val value = frame.getStack(stackSize - argTypes.size + j) as ConstSourceValue.Single
                     deadInsns.add(value.source)
                 } else {
@@ -152,7 +152,7 @@ class UnusedArgTransformer : Transformer() {
 
         val argTypes = Type.getType(method.desc).argumentTypes
         for ((i, argType) in argTypes.withIndex().reversed()) {
-            if (INT_SORTS.contains(argType.sort) && !retainedArgs.contains(ArgRef(partition, i))) {
+            if (argType.sort in INT_SORTS && ArgRef(partition, i) !in retainedArgs) {
                 method.removeArgument(i)
                 deletedArgs++
             }

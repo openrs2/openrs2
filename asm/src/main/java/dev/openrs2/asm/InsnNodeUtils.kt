@@ -250,9 +250,9 @@ val AbstractInsnNode.intConstant: Int?
     }
 
 val AbstractInsnNode.pure: Boolean
-    get() = when {
-        PURE_OPCODES.contains(opcode) -> true
-        IMPURE_OPCODES.contains(opcode) -> false
+    get() = when (opcode) {
+        in PURE_OPCODES -> true
+        in IMPURE_OPCODES -> false
         else -> throw IllegalArgumentException()
     }
 

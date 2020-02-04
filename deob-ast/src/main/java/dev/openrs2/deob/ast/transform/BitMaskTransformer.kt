@@ -15,7 +15,7 @@ class BitMaskTransformer : Transformer() {
             val left = expr.left
             val shamtExpr = expr.right
 
-            if (!SHIFT_OPS.contains(shiftOp) || !left.isBinaryExpr || !shamtExpr.isIntegerLiteralExpr) {
+            if (shiftOp !in SHIFT_OPS || !left.isBinaryExpr || !shamtExpr.isIntegerLiteralExpr) {
                 return@walk
             }
 
@@ -24,7 +24,7 @@ class BitMaskTransformer : Transformer() {
             val argExpr = bitwiseExpr.left
             var maskExpr = bitwiseExpr.right
 
-            if (!BITWISE_OPS.contains(bitwiseOp) || !maskExpr.isIntegerOrLongLiteral()) {
+            if (bitwiseOp !in BITWISE_OPS || !maskExpr.isIntegerOrLongLiteral()) {
                 return@walk
             }
 

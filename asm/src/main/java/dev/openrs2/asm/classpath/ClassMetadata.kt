@@ -16,7 +16,7 @@ abstract class ClassMetadata {
     fun isOverride(method: MemberDesc): Boolean {
         val superClass = this.superClass
         if (superClass != null) {
-            if (superClass.methods.contains(method)) {
+            if (method in superClass.methods) {
                 return true
             }
 
@@ -26,7 +26,7 @@ abstract class ClassMetadata {
         }
 
         for (superInterface in superInterfaces) {
-            if (superInterface.methods.contains(method)) {
+            if (method in superInterface.methods) {
                 return true
             }
 

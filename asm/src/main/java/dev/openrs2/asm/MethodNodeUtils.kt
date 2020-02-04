@@ -79,14 +79,14 @@ fun MethodNode.removeArgument(argIndex: Int) {
     }
 
     if (visibleLocalVariableAnnotations != null) {
-        visibleLocalVariableAnnotations.removeIf { it.index.contains(localIndex) }
+        visibleLocalVariableAnnotations.removeIf { localIndex in it.index }
         for (annotation in visibleLocalVariableAnnotations) {
             annotation.index = remapAll(annotation.index, argType, localIndex)
         }
     }
 
     if (invisibleLocalVariableAnnotations != null) {
-        invisibleLocalVariableAnnotations.removeIf { it.index.contains(localIndex) }
+        invisibleLocalVariableAnnotations.removeIf { localIndex in it.index }
         for (annotation in invisibleLocalVariableAnnotations) {
             annotation.index = remapAll(annotation.index, argType, localIndex)
         }
@@ -133,7 +133,7 @@ fun MethodNode.removeDeadCode(owner: String) {
             }
         }
 
-        changed = changed or tryCatchBlocks.removeIf { deadLabels.contains(it.start) && deadLabels.contains(it.end) }
+        changed = changed or tryCatchBlocks.removeIf { it.start in deadLabels && it.end in deadLabels }
     } while (changed)
 }
 

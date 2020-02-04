@@ -311,7 +311,7 @@ class DummyArgTransformer : Transformer() {
         }
 
         for ((insn, value) in constInsns) {
-            if (!method.instructions.contains(insn)) {
+            if (insn !in method.instructions) {
                 continue
             }
 

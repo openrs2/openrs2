@@ -54,7 +54,7 @@ class OpaquePredicateTransformer : Transformer() {
     }
 
     private fun isFlowObstructor(insn: FieldInsnNode): Boolean {
-        return flowObstructors.contains(MemberRef(insn))
+        return MemberRef(insn) in flowObstructors
     }
 
     private fun isOpaquePredicate(method: MethodNode, match: List<AbstractInsnNode>): Boolean {

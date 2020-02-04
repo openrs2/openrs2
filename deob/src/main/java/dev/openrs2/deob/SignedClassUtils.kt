@@ -82,7 +82,7 @@ object SignedClassUtils {
                 }
 
                 val name = type.className
-                if (loader.contains(name) && !signedClasses.contains(name)) {
+                if (name in loader && name !in signedClasses) {
                     dependencies.add(name)
                 }
             }

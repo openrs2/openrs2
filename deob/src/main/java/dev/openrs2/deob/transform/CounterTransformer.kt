@@ -94,7 +94,7 @@ class CounterTransformer : Transformer() {
     ): Boolean {
         for (match in RESET_PATTERN.match(method)) {
             val putstatic = match[1] as FieldInsnNode
-            if (counters.contains(MemberRef(putstatic))) {
+            if (MemberRef(putstatic) in counters) {
                 match.forEach(method.instructions::remove)
             }
         }
@@ -102,7 +102,7 @@ class CounterTransformer : Transformer() {
         for (match in INCREMENT_PATTERN.match(method)) {
             val getstatic = MemberRef(match[0] as FieldInsnNode)
             val putstatic = MemberRef(match[3] as FieldInsnNode)
-            if (getstatic == putstatic && counters.contains(putstatic)) {
+            if (getstatic == putstatic && putstatic in counters) {
                 match.forEach(method.instructions::remove)
             }
         }

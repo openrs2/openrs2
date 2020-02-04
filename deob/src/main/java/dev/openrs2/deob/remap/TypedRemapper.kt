@@ -103,7 +103,7 @@ class TypedRemapper private constructor(
             clazz: ClassMetadata
         ): String {
             val name = clazz.name
-            if (mapping.containsKey(name) || EXCLUDED_CLASSES.contains(name) || clazz.dependency) {
+            if (mapping.containsKey(name) || name in EXCLUDED_CLASSES || clazz.dependency) {
                 return mapping.getOrDefault(name, name)
             }
 
@@ -138,7 +138,7 @@ class TypedRemapper private constructor(
                 for ((owner, name) in partition) {
                     val clazz = classPath[owner]
 
-                    if (EXCLUDED_FIELDS.contains(name)) {
+                    if (name in EXCLUDED_FIELDS) {
                         skip = true
                         break
                     }
@@ -188,7 +188,7 @@ class TypedRemapper private constructor(
             for (method in partition) {
                 val clazz = classPath[method.owner]
 
-                if (EXCLUDED_METHODS.contains(method.name)) {
+                if (method.name in EXCLUDED_METHODS) {
                     return true
                 }
 
