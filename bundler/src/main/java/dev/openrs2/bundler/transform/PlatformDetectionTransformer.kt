@@ -168,9 +168,7 @@ class PlatformDetectionTransformer : Transformer() {
             val aloadIndex = match.indexOfFirst {
                 it is VarInsnNode && it.opcode == Opcodes.ALOAD && it.`var` == 0
             }
-            if (aloadIndex == -1) {
-                throw IllegalArgumentException("Missing ALOAD_0")
-            }
+            require(aloadIndex != -1) { "Missing ALOAD_0" }
 
             val list = InsnList()
             for (i in aloadIndex until match.size) {
