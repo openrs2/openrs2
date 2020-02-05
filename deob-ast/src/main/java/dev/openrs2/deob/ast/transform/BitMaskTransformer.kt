@@ -35,7 +35,7 @@ class BitMaskTransformer : Transformer() {
                 mask = when (shiftOp) {
                     BinaryExpr.Operator.SIGNED_RIGHT_SHIFT -> mask shr shamt
                     BinaryExpr.Operator.UNSIGNED_RIGHT_SHIFT -> mask ushr shamt
-                    else -> throw IllegalStateException()
+                    else -> error("Invalid shiftOp")
                 }
 
                 maskExpr = IntegerLiteralExpr(mask)
@@ -45,7 +45,7 @@ class BitMaskTransformer : Transformer() {
                 mask = when (shiftOp) {
                     BinaryExpr.Operator.SIGNED_RIGHT_SHIFT -> mask shr shamt
                     BinaryExpr.Operator.UNSIGNED_RIGHT_SHIFT -> mask ushr shamt
-                    else -> throw IllegalStateException()
+                    else -> error("Invalid shiftOp")
                 }
 
                 maskExpr = createLong(mask)
