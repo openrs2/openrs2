@@ -88,13 +88,17 @@ class OpaquePredicateTransformer : Transformer() {
         // find and fix opaque predicates
         for (match in OPAQUE_PREDICATE_MATCHER.match(method).filter { isOpaquePredicate(method, it) }) {
             val branch = match[1] as JumpInsnNode
-            if (branch.opcode == Opcodes.IFEQ) {
-                // branch is always taken
-                method.instructions.remove(match[0])
-                branch.opcode = Opcodes.GOTO
-            } else { // IFNE
-                // branch is never taken
-                match.forEach(method.instructions::remove)
+            when (branch.opcode) {
+                Opcodes.IFEQ -> {
+                    // branch is always taken
+                    method.instructions.remove(match[0])
+                    branch.opcode = Opcodes.GOTO
+                }
+                Opcodes.IFNE -> {
+                    // branch is never taken
+                    match.forEach(method.instructions::remove)
+                }
+                else -> error("Invalid opcode")
             }
 
             opaquePredicates++
