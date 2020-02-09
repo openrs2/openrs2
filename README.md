@@ -10,10 +10,7 @@ released in late 2009.
 
 ## Prerequisites
 
-Building OpenRS2 requires the following pieces of software:
-
-* [Java Development Kit][jdk] (version 8 or later)
-* [Apache Maven][maven] (version 3.3.9 or later)
+Building OpenRS2 requires version 8 or later of the [Java Development Kit][jdk].
 
 ### Non-free components
 
@@ -50,8 +47,8 @@ non-free material from being accidentally included in the repository.
 
 ## Building
 
-Run `mvn verify` to download the dependencies, build the code, run the unit
-tests and package it.
+Run `./gradlew` to download the dependencies, build the code, run the unit tests
+and package it.
 
 ## Contributing
 
@@ -62,7 +59,7 @@ formatter before each commit. The 'Optimize imports' option should also be
 selected. Do not select 'Rearrange entries'.
 
 OpenRS2's code style settings are held in `.idea/codeStyles/Project.xml` in the
-repository, and IDEA should use them automatically after importing the Maven
+repository, and IDEA should use them automatically after importing the Gradle
 project.
 
 Kotlin code must pass all of [ktlint][ktlint]'s tests.

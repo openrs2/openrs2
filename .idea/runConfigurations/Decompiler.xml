@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Decompiler" type="JetRunConfigurationType" factoryName="Kotlin">
-    <module name="openrs2-decompiler" />
+    <module name="openrs2.decompiler.main" />
     <option name="VM_PARAMETERS" value="" />
     <option name="PROGRAM_PARAMETERS" value="" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />

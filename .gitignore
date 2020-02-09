@@ -4,10 +4,12 @@
 !.idea
 !.mailmap
 *.iml
+*/build
+*/out
 */target
 *~
 /nonfree
+/build
+/out
 /target
 hs_err_pid*.log
-pom.xml.releaseBackup
-release.properties

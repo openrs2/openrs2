@@ -1,3 +1,0 @@
-#!/bin/sh -e
-cd `dirname "$0"`/..
-exec java -cp lib/openrs2.jar dev.openrs2.decompiler.DecompilerKt "$@"

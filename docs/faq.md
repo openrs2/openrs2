@@ -12,23 +12,11 @@ A mixture of reasons:
 * Availability of the complete set of original client data files.
 * Availability of a large proportion of the location file encryption keys.
 
-## Why does OpenRS2 use Maven instead of Gradle?
+## Why do the OpenRS2 Natives use Maven instead of Gradle?
 
-Gradle's task-based model is significantly better than Maven's fixed lifecycle
-model.
-
-However, Gradle's flexibility and rate of development has come at a cost of
-worse IDE integration, to the point at which recent versions of IntelliJ IDEA
-now delegate build actions to Gradle by default rather than attempting to
-understand the project structure. This tends to be slower and consume more
-memory than IDEA's built-in build system. While this setting can be changed, I
-think it is a sign of the future of Gradle's IDE integration.
-
-Furthermore, [nar-maven-plugin][nar-maven-plugin] is, at the time of writing,
-significantly better than Gradle's support for building native code. Gradle's
-new C++ plugin simply doesn't provide enough features.
-
-This might be a decision we revisit in the future.
+[nar-maven-plugin][nar-maven-plugin] is, at the time of writing, significantly
+better than Gradle's support for building native code. Gradle's new C++ plugin
+simply doesn't provide enough features.
 
 ## Why is OpenRS2 licensed under the GNU GPL?
 
