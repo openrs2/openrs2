@@ -6,7 +6,7 @@ object Versions {
     const val guava = "28.2-jre"
     const val guice = "4.2.2"
     const val inlineLogger = "1.0.1"
-    const val javaParser = "3.15.11"
+    const val javaParser = "3.15.12"
     const val jimfs = "1.1"
     const val junit = "5.6.0"
     const val kotlin = "1.3.61"
