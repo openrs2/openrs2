@@ -12,7 +12,7 @@ class SkipOutputStream(private val out: OutputStream, private var skipBytes: Lon
     }
 
     override fun write(b: ByteArray, off: Int, len: Int) {
-        if (len >= skipBytes) {
+        if (len > skipBytes) {
             out.write(b, off + skipBytes.toInt(), len - skipBytes.toInt())
             skipBytes = 0
         } else {
