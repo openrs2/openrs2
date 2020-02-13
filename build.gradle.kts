@@ -19,7 +19,6 @@ allprojects {
     version = "1.0.0-SNAPSHOT"
 
     repositories {
-        mavenLocal()
         mavenCentral()
         if (hasProperty("repoUsername")) {
             maven(url = "https://repo.openrs2.dev/repository/openrs2") {
@@ -35,6 +34,7 @@ allprojects {
                 }
             }
         }
+        mavenLocal()
     }
 
     plugins.withType<BasePlugin> {
