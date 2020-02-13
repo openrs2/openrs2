@@ -35,7 +35,6 @@ allprojects {
                 }
             }
         }
-        maven(url = "https://dl.bintray.com/michaelbull/maven")
     }
 
     plugins.withType<BasePlugin> {
