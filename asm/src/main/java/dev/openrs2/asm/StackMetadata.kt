@@ -168,7 +168,7 @@ private val SIMPLE_OPCODES = mapOf(
     Opcodes.DRETURN to POP2,
     Opcodes.ARETURN to POP1,
     Opcodes.RETURN to NONE,
-    Opcodes.NEW to POP1,
+    Opcodes.NEW to PUSH1,
     Opcodes.NEWARRAY to POP1_PUSH1,
     Opcodes.ANEWARRAY to POP1_PUSH1,
     Opcodes.ARRAYLENGTH to POP1_PUSH1,
