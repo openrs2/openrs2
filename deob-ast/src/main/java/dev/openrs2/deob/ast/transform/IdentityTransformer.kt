@@ -1,7 +1,6 @@
 package dev.openrs2.deob.ast.transform
 
 import com.github.javaparser.ast.CompilationUnit
-import com.github.javaparser.ast.Node
 import com.github.javaparser.ast.expr.BinaryExpr
 import com.github.javaparser.ast.expr.Expression
 import com.github.javaparser.ast.expr.UnaryExpr
@@ -9,7 +8,7 @@ import dev.openrs2.deob.ast.util.walk
 
 class IdentityTransformer : Transformer() {
     override fun transform(unit: CompilationUnit) {
-        unit.walk(Node.TreeTraversal.POSTORDER) { expr: BinaryExpr ->
+        unit.walk { expr: BinaryExpr ->
             @Suppress("NON_EXHAUSTIVE_WHEN")
             when (expr.operator) {
                 BinaryExpr.Operator.PLUS -> {

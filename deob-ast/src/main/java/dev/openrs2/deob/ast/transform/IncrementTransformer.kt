@@ -1,7 +1,6 @@
 package dev.openrs2.deob.ast.transform
 
 import com.github.javaparser.ast.CompilationUnit
-import com.github.javaparser.ast.Node
 import com.github.javaparser.ast.expr.UnaryExpr
 import com.github.javaparser.ast.stmt.ExpressionStmt
 import com.github.javaparser.ast.stmt.ForStmt
@@ -9,7 +8,7 @@ import dev.openrs2.deob.ast.util.walk
 
 class IncrementTransformer : Transformer() {
     override fun transform(unit: CompilationUnit) {
-        unit.walk(Node.TreeTraversal.POSTORDER) { stmt: ExpressionStmt ->
+        unit.walk { stmt: ExpressionStmt ->
             if (!stmt.expression.isUnaryExpr) {
                 return@walk
             }
@@ -18,7 +17,7 @@ class IncrementTransformer : Transformer() {
             unaryExpr.operator = prefixToPostfix(unaryExpr.operator)
         }
 
-        unit.walk(Node.TreeTraversal.POSTORDER) { stmt: ForStmt ->
+        unit.walk { stmt: ForStmt ->
             for (expr in stmt.update) {
                 if (!expr.isUnaryExpr) {
                     continue

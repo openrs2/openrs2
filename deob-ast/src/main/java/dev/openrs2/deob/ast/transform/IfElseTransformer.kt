@@ -1,7 +1,6 @@
 package dev.openrs2.deob.ast.transform
 
 import com.github.javaparser.ast.CompilationUnit
-import com.github.javaparser.ast.Node
 import com.github.javaparser.ast.stmt.BlockStmt
 import com.github.javaparser.ast.stmt.IfStmt
 import com.github.javaparser.ast.stmt.Statement
@@ -11,7 +10,7 @@ import dev.openrs2.deob.ast.util.walk
 
 class IfElseTransformer : Transformer() {
     override fun transform(unit: CompilationUnit) {
-        unit.walk(Node.TreeTraversal.POSTORDER) { stmt: IfStmt ->
+        unit.walk { stmt: IfStmt ->
             stmt.elseStmt.ifPresent { elseStmt: Statement ->
                 val condition = stmt.condition
                 val thenStmt = stmt.thenStmt
@@ -44,7 +43,7 @@ class IfElseTransformer : Transformer() {
             }
         }
 
-        unit.walk(Node.TreeTraversal.POSTORDER) { stmt: IfStmt ->
+        unit.walk { stmt: IfStmt ->
             stmt.elseStmt.ifPresent { elseStmt ->
                 if (isIf(elseStmt)) {
                     stmt.setElseStmt(getIf(elseStmt))
@@ -74,7 +73,7 @@ class IfElseTransformer : Transformer() {
          *     throw ...;
          * }
          */
-        unit.walk(Node.TreeTraversal.POSTORDER) { stmt: IfStmt ->
+        unit.walk { stmt: IfStmt ->
             stmt.elseStmt.ifPresent { elseStmt ->
                 // match
                 if (!elseStmt.isBlockStmt) {

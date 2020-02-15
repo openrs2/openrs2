@@ -1,7 +1,6 @@
 package dev.openrs2.deob.ast.transform
 
 import com.github.javaparser.ast.CompilationUnit
-import com.github.javaparser.ast.Node
 import com.github.javaparser.ast.expr.BinaryExpr
 import com.github.javaparser.ast.stmt.ForStmt
 import dev.openrs2.deob.ast.util.hasSideEffects
@@ -9,7 +8,7 @@ import dev.openrs2.deob.ast.util.walk
 
 class ForLoopConditionTransformer : Transformer() {
     override fun transform(unit: CompilationUnit) {
-        unit.walk(Node.TreeTraversal.POSTORDER) { stmt: ForStmt ->
+        unit.walk { stmt: ForStmt ->
             stmt.compare.ifPresent { compare ->
                 if (!compare.isBinaryExpr) {
                     return@ifPresent

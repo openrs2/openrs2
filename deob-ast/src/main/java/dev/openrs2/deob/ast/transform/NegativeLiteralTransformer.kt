@@ -1,7 +1,6 @@
 package dev.openrs2.deob.ast.transform
 
 import com.github.javaparser.ast.CompilationUnit
-import com.github.javaparser.ast.Node
 import com.github.javaparser.ast.expr.UnaryExpr
 import dev.openrs2.deob.ast.util.isIntegerOrLongLiteral
 import dev.openrs2.deob.ast.util.negate
@@ -9,7 +8,7 @@ import dev.openrs2.deob.ast.util.walk
 
 class NegativeLiteralTransformer : Transformer() {
     override fun transform(unit: CompilationUnit) {
-        unit.walk(Node.TreeTraversal.POSTORDER) { expr: UnaryExpr ->
+        unit.walk { expr: UnaryExpr ->
             val operand = expr.expression
             if (!operand.isIntegerOrLongLiteral()) {
                 return@walk
