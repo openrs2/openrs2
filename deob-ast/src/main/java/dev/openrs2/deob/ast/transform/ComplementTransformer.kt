@@ -18,21 +18,21 @@ class ComplementTransformer : Transformer() {
             val right = expr.right
             val bothLiteral = left.isIntegerOrLongLiteral() && right.isIntegerOrLongLiteral()
 
-            if (isComplementOrLiteral(left) && isComplementOrLiteral(right) && !bothLiteral) {
+            if (left.isComplementOrLiteral() && right.isComplementOrLiteral() && !bothLiteral) {
                 expr.operator = op
-                expr.left = complement(left)
-                expr.right = complement(right)
+                expr.left = left.complement()
+                expr.right = right.complement()
             }
         }
     }
 
     companion object {
-        private fun isComplement(expr: Expression): Boolean {
-            return expr.isUnaryExpr && expr.asUnaryExpr().operator == UnaryExpr.Operator.BITWISE_COMPLEMENT
+        private fun Expression.isComplement(): Boolean {
+            return isUnaryExpr && asUnaryExpr().operator == UnaryExpr.Operator.BITWISE_COMPLEMENT
         }
 
-        private fun isComplementOrLiteral(expr: Expression): Boolean {
-            return isComplement(expr) || expr.isIntegerOrLongLiteral()
+        private fun Expression.isComplementOrLiteral(): Boolean {
+            return isComplement() || isIntegerOrLongLiteral()
         }
 
         private fun complement(op: BinaryExpr.Operator): BinaryExpr.Operator? {
@@ -46,11 +46,11 @@ class ComplementTransformer : Transformer() {
             }
         }
 
-        private fun complement(expr: Expression): Expression {
+        private fun Expression.complement(): Expression {
             return when {
-                expr.isUnaryExpr -> expr.asUnaryExpr().expression
-                expr.isIntegerLiteralExpr -> IntegerLiteralExpr(expr.asIntegerLiteralExpr().asInt().inv())
-                expr.isLongLiteralExpr -> createLong(expr.asLongLiteralExpr().asLong().inv())
+                isUnaryExpr -> asUnaryExpr().expression
+                isIntegerLiteralExpr -> IntegerLiteralExpr(asIntegerLiteralExpr().asInt().inv())
+                isLongLiteralExpr -> createLong(asLongLiteralExpr().asLong().inv())
                 else -> throw IllegalArgumentException()
             }
         }

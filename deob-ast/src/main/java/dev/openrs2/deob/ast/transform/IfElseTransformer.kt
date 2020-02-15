@@ -14,11 +14,11 @@ class IfElseTransformer : Transformer() {
             stmt.elseStmt.ifPresent { elseStmt: Statement ->
                 val condition = stmt.condition
                 val thenStmt = stmt.thenStmt
-                if (isIf(thenStmt) && !isIf(elseStmt)) {
+                if (thenStmt.isIf() && !elseStmt.isIf()) {
                     stmt.condition = condition.not()
                     stmt.thenStmt = elseStmt.clone()
                     stmt.setElseStmt(thenStmt.clone())
-                } else if (!isIf(thenStmt) && isIf(elseStmt)) {
+                } else if (!thenStmt.isIf() && elseStmt.isIf()) {
                     /*
                      * Don't consider any more conditions for swapping the
                      * if/else branches, as it'll introduce another level of
@@ -45,8 +45,8 @@ class IfElseTransformer : Transformer() {
 
         unit.walk { stmt: IfStmt ->
             stmt.elseStmt.ifPresent { elseStmt ->
-                if (isIf(elseStmt)) {
-                    stmt.setElseStmt(getIf(elseStmt))
+                if (elseStmt.isIf()) {
+                    stmt.setElseStmt(elseStmt.getIf())
                 }
             }
         }
@@ -97,7 +97,7 @@ class IfElseTransformer : Transformer() {
                 }
 
                 val thenStmt = ifStmt.thenStmt
-                if (!isTailThrowOrReturn(thenStmt)) {
+                if (!thenStmt.isTailThrowOrReturn()) {
                     return@ifPresent
                 }
 
@@ -112,47 +112,45 @@ class IfElseTransformer : Transformer() {
         }
     }
 
-    companion object {
-        private fun isIf(stmt: Statement): Boolean {
-            return when {
-                stmt.isIfStmt -> true
-                stmt.isBlockStmt -> {
-                    val stmts = stmt.asBlockStmt().statements
-                    stmts.size == 1 && stmts[0].isIfStmt
+    private fun Statement.isIf(): Boolean {
+        return when {
+            isIfStmt -> true
+            isBlockStmt -> {
+                val stmts = asBlockStmt().statements
+                stmts.size == 1 && stmts[0].isIfStmt
+            }
+            else -> false
+        }
+    }
+
+    private fun Statement.getIf(): Statement {
+        if (isIfStmt) {
+            return clone()
+        } else if (isBlockStmt) {
+            val stmts = asBlockStmt().statements
+            if (stmts.size == 1) {
+                val head = stmts[0]
+                if (head.isIfStmt) {
+                    return head.clone()
                 }
-                else -> false
             }
         }
+        throw IllegalArgumentException()
+    }
 
-        private fun getIf(stmt: Statement): Statement {
-            if (stmt.isIfStmt) {
-                return stmt.clone()
-            } else if (stmt.isBlockStmt) {
-                val stmts = stmt.asBlockStmt().statements
-                if (stmts.size == 1) {
-                    val head = stmts[0]
-                    if (head.isIfStmt) {
-                        return head.clone()
-                    }
-                }
+    private fun Statement.isTailThrowOrReturn(): Boolean {
+        return if (isThrowStmt || isReturnStmt) {
+            true
+        } else if (isBlockStmt) {
+            val stmts = asBlockStmt().statements
+            if (stmts.isEmpty()) {
+                return false
             }
-            throw IllegalArgumentException()
-        }
 
-        private fun isTailThrowOrReturn(stmt: Statement): Boolean {
-            return if (stmt.isThrowStmt || stmt.isReturnStmt) {
-                true
-            } else if (stmt.isBlockStmt) {
-                val stmts = stmt.asBlockStmt().statements
-                if (stmts.isEmpty()) {
-                    return false
-                }
-
-                val tail = stmts[stmts.size - 1]
-                tail.isThrowStmt || tail.isReturnStmt
-            } else {
-                false
-            }
+            val tail = stmts[stmts.size - 1]
+            tail.isThrowStmt || tail.isReturnStmt
+        } else {
+            false
         }
     }
 }

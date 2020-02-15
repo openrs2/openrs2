@@ -21,11 +21,11 @@ class AddSubTransformer : Transformer() {
                 return@walk
             }
 
-            if (op == BinaryExpr.Operator.PLUS && isNegative(right)) {
+            if (op == BinaryExpr.Operator.PLUS && right.isNegative()) {
                 // x + -y => x - y
                 expr.operator = BinaryExpr.Operator.MINUS
                 expr.right = right.negate()
-            } else if (op == BinaryExpr.Operator.PLUS && isNegative(left)) {
+            } else if (op == BinaryExpr.Operator.PLUS && left.isNegative()) {
                 if (expr.hasSideEffects()) {
                     return@walk
                 }
@@ -34,7 +34,7 @@ class AddSubTransformer : Transformer() {
                 expr.operator = BinaryExpr.Operator.MINUS
                 expr.left = right.clone()
                 expr.right = left.negate()
-            } else if (op == BinaryExpr.Operator.MINUS && isNegative(right)) {
+            } else if (op == BinaryExpr.Operator.MINUS && right.isNegative()) {
                 // x - -y => x + y
                 expr.operator = BinaryExpr.Operator.PLUS
                 expr.right = right.negate()
@@ -42,14 +42,12 @@ class AddSubTransformer : Transformer() {
         }
     }
 
-    companion object {
-        private fun isNegative(expr: Expression): Boolean {
-            return when {
-                expr.isUnaryExpr -> expr.asUnaryExpr().operator == UnaryExpr.Operator.MINUS
-                expr.isIntegerLiteralExpr -> expr.asIntegerLiteralExpr().asInt() < 0
-                expr.isLongLiteralExpr -> expr.asLongLiteralExpr().asLong() < 0
-                else -> false
-            }
+    private fun Expression.isNegative(): Boolean {
+        return when {
+            isUnaryExpr -> asUnaryExpr().operator == UnaryExpr.Operator.MINUS
+            isIntegerLiteralExpr -> asIntegerLiteralExpr().asInt() < 0
+            isLongLiteralExpr -> asLongLiteralExpr().asLong() < 0
+            else -> false
         }
     }
 }

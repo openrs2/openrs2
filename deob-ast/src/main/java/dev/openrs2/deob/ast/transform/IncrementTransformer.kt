@@ -14,7 +14,7 @@ class IncrementTransformer : Transformer() {
             }
 
             val unaryExpr = stmt.expression.asUnaryExpr()
-            unaryExpr.operator = prefixToPostfix(unaryExpr.operator)
+            unaryExpr.operator = unaryExpr.operator.toPostfix()
         }
 
         unit.walk { stmt: ForStmt ->
@@ -24,16 +24,14 @@ class IncrementTransformer : Transformer() {
                 }
 
                 val unaryExpr = expr.asUnaryExpr()
-                unaryExpr.operator = prefixToPostfix(unaryExpr.operator)
+                unaryExpr.operator = unaryExpr.operator.toPostfix()
             }
         }
     }
 
-    companion object {
-        private fun prefixToPostfix(operator: UnaryExpr.Operator) = when (operator) {
-            UnaryExpr.Operator.PREFIX_INCREMENT -> UnaryExpr.Operator.POSTFIX_INCREMENT
-            UnaryExpr.Operator.PREFIX_DECREMENT -> UnaryExpr.Operator.POSTFIX_DECREMENT
-            else -> operator
-        }
+    private fun UnaryExpr.Operator.toPostfix() = when (this) {
+        UnaryExpr.Operator.PREFIX_INCREMENT -> UnaryExpr.Operator.POSTFIX_INCREMENT
+        UnaryExpr.Operator.PREFIX_DECREMENT -> UnaryExpr.Operator.POSTFIX_DECREMENT
+        else -> this
     }
 }

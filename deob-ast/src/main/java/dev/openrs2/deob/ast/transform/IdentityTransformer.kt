@@ -12,28 +12,28 @@ class IdentityTransformer : Transformer() {
             @Suppress("NON_EXHAUSTIVE_WHEN")
             when (expr.operator) {
                 BinaryExpr.Operator.PLUS -> {
-                    if (isZero(expr.left)) {
+                    if (expr.left.isZero()) {
                         // 0 + x => x
                         expr.replace(expr.right)
-                    } else if (isZero(expr.right)) {
+                    } else if (expr.right.isZero()) {
                         // x + 0 => x
                         expr.replace(expr.left)
                     }
                 }
                 BinaryExpr.Operator.MINUS -> {
-                    if (isZero(expr.left)) {
+                    if (expr.left.isZero()) {
                         // 0 - x => -x
                         expr.replace(UnaryExpr(expr.right, UnaryExpr.Operator.MINUS))
-                    } else if (isZero(expr.right)) {
+                    } else if (expr.right.isZero()) {
                         // x - 0 => x
                         expr.replace(expr.left)
                     }
                 }
                 BinaryExpr.Operator.MULTIPLY -> {
-                    if (isOne(expr.left)) {
+                    if (expr.left.isOne()) {
                         // 1 * x => x
                         expr.replace(expr.right)
-                    } else if (isOne(expr.right)) {
+                    } else if (expr.right.isOne()) {
                         // x * 1 => x
                         expr.replace(expr.left)
                     }
@@ -42,21 +42,19 @@ class IdentityTransformer : Transformer() {
         }
     }
 
-    companion object {
-        private fun isZero(expr: Expression): Boolean {
-            return when {
-                expr.isIntegerLiteralExpr -> expr.asIntegerLiteralExpr().asNumber() == 0
-                expr.isLongLiteralExpr -> expr.asLongLiteralExpr().asNumber() == 0L
-                else -> false
-            }
+    private fun Expression.isZero(): Boolean {
+        return when {
+            isIntegerLiteralExpr -> asIntegerLiteralExpr().asNumber() == 0
+            isLongLiteralExpr -> asLongLiteralExpr().asNumber() == 0L
+            else -> false
         }
+    }
 
-        private fun isOne(expr: Expression): Boolean {
-            return when {
-                expr.isIntegerLiteralExpr -> expr.asIntegerLiteralExpr().asNumber() == 1
-                expr.isLongLiteralExpr -> expr.asLongLiteralExpr().asNumber() == 1L
-                else -> false
-            }
+    private fun Expression.isOne(): Boolean {
+        return when {
+            isIntegerLiteralExpr -> asIntegerLiteralExpr().asNumber() == 1
+            isLongLiteralExpr -> asLongLiteralExpr().asNumber() == 1L
+            else -> false
         }
     }
 }
