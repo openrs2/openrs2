@@ -20,11 +20,13 @@ publishing {
         pom {
             packaging = "jar"
             name.set("OpenRS2 Decompiler")
-            description.set("""
+            description.set(
+                """
                 A thin wrapper around OpenRS2's fork of Fernflower that sets
                 the standard options required to decompile the RuneScape client
                 and its dependencies.
-            """.trimIndent())
+            """.trimIndent()
+            )
         }
     }
 }

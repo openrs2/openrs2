@@ -18,9 +18,11 @@ publishing {
         pom {
             packaging = "jar"
             name.set("OpenRS2 Common")
-            description.set("""
+            description.set(
+                """
                 Common code used by all modules.
-            """.trimIndent())
+            """.trimIndent()
+            )
         }
     }
 }

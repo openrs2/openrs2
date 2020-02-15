@@ -19,9 +19,11 @@ publishing {
         pom {
             packaging = "jar"
             name.set("OpenRS2 Game Server")
-            description.set("""
+            description.set(
+                """
                 Reimplementation of the RuneScape game server software.
-            """.trimIndent())
+            """.trimIndent()
+            )
         }
     }
 }

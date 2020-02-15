@@ -18,10 +18,12 @@ publishing {
         pom {
             packaging = "jar"
             name.set("OpenRS2 ASM Utilities")
-            description.set("""
+            description.set(
+                """
                 Common utility code used for manipulating Java bytecode with
                 the ASM library.
-            """.trimIndent())
+            """.trimIndent()
+            )
         }
     }
 }

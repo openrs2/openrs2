@@ -21,12 +21,14 @@ publishing {
         pom {
             packaging = "jar"
             name.set("OpenRS2 Bytecode Deobfuscator")
-            description.set("""
+            description.set(
+                """
                 A tool for performing bytecode-level deobfuscation of the
                 RuneScape client. It must be run before decompiling the
                 client - some of the transformations it performs are required
                 for the decompiler to produce valid output.
-            """.trimIndent())
+            """.trimIndent()
+            )
         }
     }
 }

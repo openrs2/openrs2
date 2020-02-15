@@ -12,9 +12,11 @@ publishing {
         pom {
             packaging = "jar"
             name.set("OpenRS2 JavaScript Object")
-            description.set("""
+            description.set(
+                """
                 Stubs for the netscape.javascript package.
-            """.trimIndent())
+            """.trimIndent()
+            )
         }
     }
 }

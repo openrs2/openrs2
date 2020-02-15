@@ -12,10 +12,12 @@ publishing {
         pom {
             packaging = "jar"
             name.set("OpenRS2 Deobfuscator Annotations")
-            description.set("""
+            description.set(
+                """
                 Annotations inserted by the deobfuscator to track the original
                 names and descriptors of classes, methods and fields.
-            """.trimIndent())
+            """.trimIndent()
+            )
         }
     }
 }

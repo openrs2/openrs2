@@ -71,11 +71,13 @@ publishing {
         pom {
             packaging = "zip"
             name.set("OpenRS2")
-            description.set("""
+            description.set(
+                """
                 OpenRS2 is an open-source multiplayer game server and suite of
                 associated tools. It is compatible with build 550 of the
                 RuneScape client, which was released in mid-2009.
-            """.trimIndent())
+            """.trimIndent()
+            )
         }
     }
 }

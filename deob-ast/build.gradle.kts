@@ -20,10 +20,12 @@ publishing {
         pom {
             packaging = "jar"
             name.set("OpenRS2 AST Deobfuscator")
-            description.set("""
+            description.set(
+                """
                 A tool for performing AST-level deobfuscation of the RuneScape client. It
                 may be run after decompiling the client.
-            """.trimIndent())
+            """.trimIndent()
+            )
         }
     }
 }

@@ -21,10 +21,12 @@ publishing {
         pom {
             packaging = "jar"
             name.set("OpenRS2 Bundler")
-            description.set("""
+            description.set(
+                """
                 A tool for patching the RuneScape client to allow it to connect
                 to an OpenRS2 server and improve compatibility with modern JVMs.
-            """.trimIndent())
+            """.trimIndent()
+            )
         }
     }
 }
