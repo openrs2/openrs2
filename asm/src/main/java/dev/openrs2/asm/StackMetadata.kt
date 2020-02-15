@@ -195,9 +195,9 @@ fun AbstractInsnNode.stackMetadata(): StackMetadata = when (this) {
             pops++
         }
         if (opcode == Opcodes.PUTFIELD || opcode == Opcodes.PUTSTATIC) {
-            pushes += fieldSize
-        } else {
             pops += fieldSize
+        } else {
+            pushes += fieldSize
         }
         StackMetadata(pops, pushes)
     }
