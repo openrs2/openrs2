@@ -7,6 +7,22 @@ import com.github.javaparser.ast.expr.IntegerLiteralExpr
 import com.github.javaparser.ast.expr.LongLiteralExpr
 import com.github.javaparser.ast.expr.UnaryExpr
 
+fun IntegerLiteralExpr.checkedAsInt(): Int {
+    val n = asNumber()
+    if (n !is Int) {
+        error("Invalid IntegerLiteralExpr type")
+    }
+    return n
+}
+
+fun LongLiteralExpr.checkedAsLong(): Long {
+    val n = asNumber()
+    if (n !is Long) {
+        error("Invalid LongLiteralExpr type")
+    }
+    return n
+}
+
 fun Expression.isIntegerOrLongLiteral(): Boolean {
     return isIntegerLiteralExpr || isLongLiteralExpr
 }
@@ -19,9 +35,17 @@ fun Expression.negate(): Expression {
     return if (isUnaryExpr && asUnaryExpr().operator == UnaryExpr.Operator.MINUS) {
         asUnaryExpr().expression.clone()
     } else if (isIntegerLiteralExpr) {
-        IntegerLiteralExpr(-asIntegerLiteralExpr().asInt())
+        when (val n = asIntegerLiteralExpr().asNumber()) {
+            IntegerLiteralExpr.MAX_31_BIT_UNSIGNED_VALUE_AS_LONG -> IntegerLiteralExpr(Integer.MIN_VALUE.toString())
+            is Int -> IntegerLiteralExpr((-n.toInt()).toString())
+            else -> error("Invalid IntegerLiteralExpr type")
+        }
     } else if (isLongLiteralExpr) {
-        createLong(-asLongLiteralExpr().asLong())
+        when (val n = asLongLiteralExpr().asNumber()) {
+            LongLiteralExpr.MAX_63_BIT_UNSIGNED_VALUE_AS_BIG_INTEGER -> createLong(Long.MIN_VALUE)
+            is Long -> createLong(-n)
+            else -> error("Invalid LongLiteralExpr type")
+        }
     } else {
         throw IllegalArgumentException()
     }

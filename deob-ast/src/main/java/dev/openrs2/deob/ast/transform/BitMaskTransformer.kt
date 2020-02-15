@@ -3,6 +3,8 @@ package dev.openrs2.deob.ast.transform
 import com.github.javaparser.ast.CompilationUnit
 import com.github.javaparser.ast.expr.BinaryExpr
 import com.github.javaparser.ast.expr.IntegerLiteralExpr
+import dev.openrs2.deob.ast.util.checkedAsInt
+import dev.openrs2.deob.ast.util.checkedAsLong
 import dev.openrs2.deob.ast.util.createLong
 import dev.openrs2.deob.ast.util.isIntegerOrLongLiteral
 import dev.openrs2.deob.ast.util.walk
@@ -27,9 +29,9 @@ class BitMaskTransformer : Transformer() {
                 return@walk
             }
 
-            val shamt = shamtExpr.asIntegerLiteralExpr().asInt()
+            val shamt = shamtExpr.asIntegerLiteralExpr().checkedAsInt()
             if (maskExpr.isIntegerLiteralExpr) {
-                var mask = maskExpr.asIntegerLiteralExpr().asInt()
+                var mask = maskExpr.asIntegerLiteralExpr().checkedAsInt()
 
                 mask = when (shiftOp) {
                     BinaryExpr.Operator.SIGNED_RIGHT_SHIFT -> mask shr shamt
@@ -37,9 +39,9 @@ class BitMaskTransformer : Transformer() {
                     else -> error("Invalid shiftOp")
                 }
 
-                maskExpr = IntegerLiteralExpr(mask)
+                maskExpr = IntegerLiteralExpr(mask.toString())
             } else {
-                var mask = maskExpr.asLongLiteralExpr().asLong()
+                var mask = maskExpr.asLongLiteralExpr().checkedAsLong()
 
                 mask = when (shiftOp) {
                     BinaryExpr.Operator.SIGNED_RIGHT_SHIFT -> mask shr shamt

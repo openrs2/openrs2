@@ -3,6 +3,8 @@ package dev.openrs2.deob.ast.transform
 import com.github.javaparser.ast.CompilationUnit
 import com.github.javaparser.ast.expr.BinaryExpr
 import com.github.javaparser.ast.expr.Expression
+import com.github.javaparser.ast.expr.IntegerLiteralExpr
+import com.github.javaparser.ast.expr.LongLiteralExpr
 import com.github.javaparser.ast.expr.UnaryExpr
 import dev.openrs2.deob.ast.util.hasSideEffects
 import dev.openrs2.deob.ast.util.isString
@@ -45,8 +47,16 @@ class AddSubTransformer : Transformer() {
     private fun Expression.isNegative(): Boolean {
         return when {
             isUnaryExpr -> asUnaryExpr().operator == UnaryExpr.Operator.MINUS
-            isIntegerLiteralExpr -> asIntegerLiteralExpr().asInt() < 0
-            isLongLiteralExpr -> asLongLiteralExpr().asLong() < 0
+            isIntegerLiteralExpr -> when (val n = asIntegerLiteralExpr().asNumber()) {
+                IntegerLiteralExpr.MAX_31_BIT_UNSIGNED_VALUE_AS_LONG -> false
+                is Int -> n < 0
+                else -> error("Invalid IntegerLiteralExpr type")
+            }
+            isLongLiteralExpr -> when (val n = asLongLiteralExpr().asNumber()) {
+                LongLiteralExpr.MAX_63_BIT_UNSIGNED_VALUE_AS_BIG_INTEGER -> false
+                is Long -> n < 0
+                else -> error("Invalid LongLiteralExpr type")
+            }
             else -> false
         }
     }

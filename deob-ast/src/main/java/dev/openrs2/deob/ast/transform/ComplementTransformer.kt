@@ -5,6 +5,8 @@ import com.github.javaparser.ast.expr.BinaryExpr
 import com.github.javaparser.ast.expr.Expression
 import com.github.javaparser.ast.expr.IntegerLiteralExpr
 import com.github.javaparser.ast.expr.UnaryExpr
+import dev.openrs2.deob.ast.util.checkedAsInt
+import dev.openrs2.deob.ast.util.checkedAsLong
 import dev.openrs2.deob.ast.util.createLong
 import dev.openrs2.deob.ast.util.isIntegerOrLongLiteral
 import dev.openrs2.deob.ast.util.walk
@@ -49,8 +51,8 @@ class ComplementTransformer : Transformer() {
         private fun Expression.complement(): Expression {
             return when {
                 isUnaryExpr -> asUnaryExpr().expression
-                isIntegerLiteralExpr -> IntegerLiteralExpr(asIntegerLiteralExpr().asInt().inv())
-                isLongLiteralExpr -> createLong(asLongLiteralExpr().asLong().inv())
+                isIntegerLiteralExpr -> IntegerLiteralExpr(asIntegerLiteralExpr().checkedAsInt().inv().toString())
+                isLongLiteralExpr -> createLong(asLongLiteralExpr().checkedAsLong().inv())
                 else -> throw IllegalArgumentException()
             }
         }
