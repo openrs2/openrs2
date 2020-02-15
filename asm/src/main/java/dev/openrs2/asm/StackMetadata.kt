@@ -205,8 +205,8 @@ fun AbstractInsnNode.stackMetadata(): StackMetadata = when (this) {
         val argumentsAndReturnSizes = Type.getArgumentsAndReturnSizes(desc)
         val pushes = argumentsAndReturnSizes and 0x3
         var pops = argumentsAndReturnSizes shr 2
-        if (opcode != Opcodes.INVOKESTATIC) {
-            pops++
+        if (opcode == Opcodes.INVOKESTATIC) {
+            pops--
         }
         StackMetadata(pops, pushes)
     }

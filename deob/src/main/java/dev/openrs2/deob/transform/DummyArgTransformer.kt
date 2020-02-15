@@ -179,7 +179,7 @@ class DummyArgTransformer : Transformer() {
 
             var callerSlots = Type.getArgumentsAndReturnSizes(method.desc) shr 2
             if (method.access and Opcodes.ACC_STATIC != 0) {
-                callerSlots++
+                callerSlots--
             }
             if (load.`var` >= callerSlots) {
                 continue
