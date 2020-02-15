@@ -8,11 +8,11 @@ import dev.openrs2.asm.MemberRef
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
 import dev.openrs2.asm.createIntConstant
-import dev.openrs2.asm.deleteSimpleExpression
+import dev.openrs2.asm.deleteExpression
 import dev.openrs2.asm.intConstant
 import dev.openrs2.asm.nextReal
 import dev.openrs2.asm.pure
-import dev.openrs2.asm.replaceSimpleExpression
+import dev.openrs2.asm.replaceExpression
 import dev.openrs2.asm.stackMetadata
 import dev.openrs2.asm.transform.Transformer
 import dev.openrs2.common.collect.DisjointSet
@@ -297,14 +297,15 @@ class DummyArgTransformer : Transformer() {
         }
 
         for (insn in alwaysTakenBranches) {
-            if (method.instructions.replaceSimpleExpression(insn, JumpInsnNode(Opcodes.GOTO, insn.label))) {
+            val replacement = JumpInsnNode(Opcodes.GOTO, insn.label)
+            if (method.instructions.replaceExpression(insn, replacement, AbstractInsnNode::pure)) {
                 branchesSimplified++
                 changed = true
             }
         }
 
         for (insn in neverTakenBranches) {
-            if (method.instructions.deleteSimpleExpression(insn)) {
+            if (method.instructions.deleteExpression(insn, AbstractInsnNode::pure)) {
                 branchesSimplified++
                 changed = true
             }
@@ -316,7 +317,7 @@ class DummyArgTransformer : Transformer() {
             }
 
             val replacement = createIntConstant(value)
-            if (method.instructions.replaceSimpleExpression(insn, replacement)) {
+            if (method.instructions.replaceExpression(insn, replacement, AbstractInsnNode::pure)) {
                 constantsInlined++
                 changed = true
             }

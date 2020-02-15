@@ -3,7 +3,13 @@ package dev.openrs2.asm
 import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.InsnList
 
-fun getSimpleExpression(last: AbstractInsnNode): List<AbstractInsnNode>? {
+private val ANY_INSN = { _: AbstractInsnNode -> true }
+private val JUMP_OR_LABEL = listOf(AbstractInsnNode.LABEL, AbstractInsnNode.JUMP_INSN)
+
+fun getExpression(
+    last: AbstractInsnNode,
+    filter: (AbstractInsnNode) -> Boolean = ANY_INSN
+): List<AbstractInsnNode>? {
     val expr = mutableListOf<AbstractInsnNode>()
 
     var height = 0
@@ -21,20 +27,27 @@ fun getSimpleExpression(last: AbstractInsnNode): List<AbstractInsnNode>? {
         }
 
         insn = insn.previous
-    } while (insn != null && insn.type != AbstractInsnNode.LABEL && insn.pure)
+    } while (insn != null && insn.type !in JUMP_OR_LABEL && filter(insn))
 
     return null
 }
 
-fun InsnList.replaceSimpleExpression(last: AbstractInsnNode, replacement: AbstractInsnNode): Boolean {
-    val expr = getSimpleExpression(last) ?: return false
+fun InsnList.replaceExpression(
+    last: AbstractInsnNode,
+    replacement: AbstractInsnNode,
+    filter: (AbstractInsnNode) -> Boolean = ANY_INSN
+): Boolean {
+    val expr = getExpression(last, filter) ?: return false
     expr.forEach(this::remove)
     this[last] = replacement
     return true
 }
 
-fun InsnList.deleteSimpleExpression(last: AbstractInsnNode): Boolean {
-    val expr = getSimpleExpression(last) ?: return false
+fun InsnList.deleteExpression(
+    last: AbstractInsnNode,
+    filter: (AbstractInsnNode) -> Boolean = ANY_INSN
+): Boolean {
+    val expr = getExpression(last, filter) ?: return false
     expr.forEach(this::remove)
     remove(last)
     return true
