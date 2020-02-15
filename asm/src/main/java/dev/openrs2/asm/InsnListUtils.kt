@@ -3,37 +3,39 @@ package dev.openrs2.asm
 import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.InsnList
 
-fun InsnList.replaceSimpleExpression(last: AbstractInsnNode, replacement: AbstractInsnNode?): Boolean {
-    val deadInsns = mutableListOf<AbstractInsnNode>()
+fun getSimpleExpression(last: AbstractInsnNode): List<AbstractInsnNode>? {
+    val expr = mutableListOf<AbstractInsnNode>()
 
     var height = 0
     var insn: AbstractInsnNode? = last
     do {
         val (pops, pushes) = insn!!.stackMetadata()
         if (insn !== last) {
-            deadInsns.add(insn)
+            expr.add(insn)
             height -= pushes
         }
         height += pops
 
         if (height == 0) {
-            deadInsns.forEach(this::remove)
-
-            if (replacement != null) {
-                this[last] = replacement
-            } else {
-                remove(last)
-            }
-
-            return true
+            return expr.asReversed()
         }
 
         insn = insn.previous
     } while (insn != null && insn.type != AbstractInsnNode.LABEL && insn.pure)
 
-    return false
+    return null
+}
+
+fun InsnList.replaceSimpleExpression(last: AbstractInsnNode, replacement: AbstractInsnNode): Boolean {
+    val expr = getSimpleExpression(last) ?: return false
+    expr.forEach(this::remove)
+    this[last] = replacement
+    return true
 }
 
 fun InsnList.deleteSimpleExpression(last: AbstractInsnNode): Boolean {
-    return replaceSimpleExpression(last, null)
+    val expr = getSimpleExpression(last) ?: return false
+    expr.forEach(this::remove)
+    remove(last)
+    return true
 }
