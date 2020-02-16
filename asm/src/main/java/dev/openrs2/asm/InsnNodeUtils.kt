@@ -4,7 +4,11 @@ import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.InsnNode
 import org.objectweb.asm.tree.IntInsnNode
+import org.objectweb.asm.tree.JumpInsnNode
+import org.objectweb.asm.tree.LabelNode
 import org.objectweb.asm.tree.LdcInsnNode
+import org.objectweb.asm.tree.LookupSwitchInsnNode
+import org.objectweb.asm.tree.TableSwitchInsnNode
 import org.objectweb.asm.util.Textifier
 import org.objectweb.asm.util.TraceMethodVisitor
 import java.io.PrintWriter
@@ -184,6 +188,17 @@ private val IMPURE_OPCODES = setOf(
     Opcodes.IFNONNULL
 )
 
+private val THROW_RETURN_OPCODES = listOf(
+    Opcodes.IRETURN,
+    Opcodes.LRETURN,
+    Opcodes.FRETURN,
+    Opcodes.DRETURN,
+    Opcodes.ARETURN,
+    Opcodes.RETURN,
+    Opcodes.RET,
+    Opcodes.ATHROW
+)
+
 val AbstractInsnNode.nextReal: AbstractInsnNode?
     get() {
         var insn = next
@@ -247,6 +262,15 @@ val AbstractInsnNode.intConstant: Int?
             Opcodes.ICONST_5 -> 5
             else -> null
         }
+    }
+
+val AbstractInsnNode.sequential: Boolean
+    get() = when (this) {
+        is LabelNode -> false
+        is JumpInsnNode -> false
+        is TableSwitchInsnNode -> false
+        is LookupSwitchInsnNode -> false
+        else -> opcode !in THROW_RETURN_OPCODES
     }
 
 val AbstractInsnNode.pure: Boolean

@@ -4,7 +4,6 @@ import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.InsnList
 
 private val ANY_INSN = { _: AbstractInsnNode -> true }
-private val JUMP_OR_LABEL = listOf(AbstractInsnNode.LABEL, AbstractInsnNode.JUMP_INSN)
 
 fun getExpression(
     last: AbstractInsnNode,
@@ -27,7 +26,7 @@ fun getExpression(
         }
 
         insn = insn.previous
-    } while (insn != null && insn.type !in JUMP_OR_LABEL && filter(insn))
+    } while (insn != null && insn.sequential && filter(insn))
 
     return null
 }
