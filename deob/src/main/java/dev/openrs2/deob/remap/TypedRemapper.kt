@@ -37,14 +37,14 @@ class TypedRemapper private constructor(
             "unpack",
             "unpackclass"
         )
-        private val EXCLUDED_METHODS = setOf(
+        val EXCLUDED_METHODS = setOf(
             "<clinit>",
             "<init>",
             "main",
             "providesignlink",
             "quit"
         )
-        private val EXCLUDED_FIELDS = setOf(
+        val EXCLUDED_FIELDS = setOf(
             "cache"
         )
 
