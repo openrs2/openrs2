@@ -151,7 +151,6 @@ class Deobfuscator(private val input: Path, private val output: Path) {
             OpaquePredicateTransformer(),
             ExceptionTracingTransformer(),
             BitShiftTransformer(),
-            CounterTransformer(),
             CanvasTransformer(),
             FieldOrderTransformer(),
             BitwiseOpTransformer(),
@@ -159,6 +158,7 @@ class Deobfuscator(private val input: Path, private val output: Path) {
             DummyArgTransformer(),
             DummyLocalTransformer(),
             UnusedArgTransformer(),
+            CounterTransformer(),
             ResetTransformer(),
             AccessTransformer(),
             OverrideTransformer()
