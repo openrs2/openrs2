@@ -67,16 +67,13 @@ class CounterTransformer : Transformer() {
         increments: Map<MemberRef, Int>
     ) {
         for ((counter, value) in references) {
-            // one for the reset, two for the increment
-            if (value != 3) {
-                continue
-            }
-
             if (resets[counter] != 1) {
                 continue
             }
 
-            if (increments[counter] != 1) {
+            // one for the reset, two for each increment
+            val counterIncrements = increments[counter] ?: 0
+            if (value != counterIncrements * 2 + 1) {
                 continue
             }
 
