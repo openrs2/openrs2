@@ -10,10 +10,10 @@ object Versions {
     const val jimfs = "1.1"
     const val junit = "5.6.0"
     const val kotlin = "1.3.61"
-    const val kotlinter = "2.3.0"
+    const val kotlinter = "2.3.1"
     const val logback = "1.2.3"
     const val netty = "4.1.45.Final"
     const val openrs2Natives = "2.0.0"
     const val shadowPlugin = "5.2.0"
-    const val versionsPlugin = "0.27.0"
+    const val versionsPlugin = "0.28.0"
 }
