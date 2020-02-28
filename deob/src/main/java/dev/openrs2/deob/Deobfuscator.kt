@@ -9,7 +9,6 @@ import dev.openrs2.bundler.Bundler
 import dev.openrs2.bundler.transform.ResourceTransformer
 import dev.openrs2.deob.SignedClassUtils.move
 import dev.openrs2.deob.remap.PrefixRemapper.create
-import dev.openrs2.deob.transform.AccessTransformer
 import dev.openrs2.deob.transform.BitShiftTransformer
 import dev.openrs2.deob.transform.BitwiseOpTransformer
 import dev.openrs2.deob.transform.CanvasTransformer
@@ -18,12 +17,14 @@ import dev.openrs2.deob.transform.DummyArgTransformer
 import dev.openrs2.deob.transform.DummyLocalTransformer
 import dev.openrs2.deob.transform.ExceptionTracingTransformer
 import dev.openrs2.deob.transform.FieldOrderTransformer
+import dev.openrs2.deob.transform.FinalTransformer
 import dev.openrs2.deob.transform.OpaquePredicateTransformer
 import dev.openrs2.deob.transform.OriginalNameTransformer
 import dev.openrs2.deob.transform.OverrideTransformer
 import dev.openrs2.deob.transform.RemapTransformer
 import dev.openrs2.deob.transform.ResetTransformer
 import dev.openrs2.deob.transform.UnusedArgTransformer
+import dev.openrs2.deob.transform.VisibilityTransformer
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -160,7 +161,8 @@ class Deobfuscator(private val input: Path, private val output: Path) {
             UnusedArgTransformer(),
             CounterTransformer(),
             ResetTransformer(),
-            AccessTransformer(),
+            FinalTransformer(),
+            VisibilityTransformer(),
             OverrideTransformer()
         )
     }
