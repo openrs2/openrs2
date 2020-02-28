@@ -27,8 +27,7 @@ class AsmClassMetadata(
     override val methods
         get() = clazz.methods.map { MemberDesc(it) }.toList()
 
-    override fun isNative(method: MemberDesc): Boolean {
-        val m = clazz.methods.find { it.name == method.name && it.desc == method.desc } ?: return false
-        return m.access and Opcodes.ACC_NATIVE != 0
+    override fun getAccess(method: MemberDesc): Int? {
+        return clazz.methods.find { it.name == method.name && it.desc == method.desc }?.access
     }
 }

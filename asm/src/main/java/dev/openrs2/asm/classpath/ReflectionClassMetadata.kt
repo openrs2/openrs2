@@ -2,7 +2,6 @@ package dev.openrs2.asm.classpath
 
 import dev.openrs2.asm.MemberDesc
 import org.objectweb.asm.Type
-import java.lang.reflect.Modifier
 
 private val Class<*>.asmName: String
     get() = name.replace('.', '/')
@@ -29,9 +28,8 @@ class ReflectionClassMetadata(private val classPath: ClassPath, private val claz
     override val methods
         get() = clazz.declaredMethods.map { MemberDesc(it.name, Type.getMethodDescriptor(it)) }.toList()
 
-    override fun isNative(method: MemberDesc): Boolean {
-        val m = clazz.declaredMethods.find { it.name == method.name && Type.getMethodDescriptor(it) == method.desc }
-            ?: return false
-        return Modifier.isNative(m.modifiers)
+    override fun getAccess(method: MemberDesc): Int? {
+        return clazz.declaredMethods.find { it.name == method.name && Type.getMethodDescriptor(it) == method.desc }
+            ?.modifiers
     }
 }

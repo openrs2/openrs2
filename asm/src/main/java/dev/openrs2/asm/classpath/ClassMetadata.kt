@@ -11,7 +11,7 @@ abstract class ClassMetadata {
     abstract val fields: List<MemberDesc>
     abstract val methods: List<MemberDesc>
 
-    abstract fun isNative(method: MemberDesc): Boolean
+    abstract fun getAccess(method: MemberDesc): Int?
 
     fun isOverride(method: MemberDesc): Boolean {
         val superClass = this.superClass

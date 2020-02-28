@@ -7,6 +7,7 @@ import dev.openrs2.asm.classpath.ClassMetadata
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.common.collect.DisjointSet
 import dev.openrs2.common.indefiniteArticle
+import org.objectweb.asm.Opcodes
 import org.objectweb.asm.Type
 import org.objectweb.asm.commons.Remapper
 
@@ -196,7 +197,8 @@ class TypedRemapper private constructor(
                     return true
                 }
 
-                if (clazz.isNative(MemberDesc(method))) {
+                val access = clazz.getAccess(MemberDesc(method))
+                if (access != null && (access and Opcodes.ACC_NATIVE) != 0) {
                     return true
                 }
             }
