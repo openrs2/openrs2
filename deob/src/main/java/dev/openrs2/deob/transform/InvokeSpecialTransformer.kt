@@ -16,6 +16,11 @@ class InvokeSpecialTransformer : Transformer() {
         invokeSpecialsReplaced = 0
     }
 
+    override fun transformClass(classPath: ClassPath, library: Library, clazz: ClassNode): Boolean {
+        require(clazz.access and (Opcodes.ACC_SUPER or Opcodes.ACC_INTERFACE) != 0)
+        return false
+    }
+
     override fun transformCode(classPath: ClassPath, library: Library, clazz: ClassNode, method: MethodNode): Boolean {
         for (insn in method.instructions) {
             if (insn !is MethodInsnNode || insn.opcode != Opcodes.INVOKESPECIAL) {
