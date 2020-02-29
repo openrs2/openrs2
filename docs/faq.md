@@ -5,7 +5,7 @@
 A mixture of reasons:
 
 * The early HD era is my favourite. In particular, I like the 'clean'-looking
-  tabs in the user interface, and 550 was the last build with those. I also
+  tabs in the game frame, and 550 was the last build with those. I also
   considered 530, but 550 has a better built-in world map viewer (it supports
   dungeons in addition to the main surface).
 * Availability of the original loader, client, game unpacker and jaggl jars.
