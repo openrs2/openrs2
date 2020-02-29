@@ -12,6 +12,7 @@ import dev.openrs2.deob.remap.PrefixRemapper.create
 import dev.openrs2.deob.transform.BitShiftTransformer
 import dev.openrs2.deob.transform.BitwiseOpTransformer
 import dev.openrs2.deob.transform.CanvasTransformer
+import dev.openrs2.deob.transform.ClassLiteralTransformer
 import dev.openrs2.deob.transform.CounterTransformer
 import dev.openrs2.deob.transform.DummyArgTransformer
 import dev.openrs2.deob.transform.DummyLocalTransformer
@@ -162,6 +163,7 @@ class Deobfuscator(private val input: Path, private val output: Path) {
             CounterTransformer(),
             ResetTransformer(),
             FinalTransformer(),
+            ClassLiteralTransformer(),
             VisibilityTransformer(),
             OverrideTransformer()
         )
