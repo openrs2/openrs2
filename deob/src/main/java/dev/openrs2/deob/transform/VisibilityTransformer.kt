@@ -156,7 +156,7 @@ class VisibilityTransformer : Transformer() {
     companion object {
         private val logger = InlineLogger()
         private const val VISIBILITY_FLAGS = Opcodes.ACC_PUBLIC or Opcodes.ACC_PROTECTED or Opcodes.ACC_PRIVATE
-        private val DEFAULT_PUBLIC_CTOR_CLASSES = setOf("client", "loader")
+        private val DEFAULT_PUBLIC_CTOR_CLASSES = setOf("client", "loader", "unpackclass")
         private val PUBLIC_METHODS = setOf("main", "providesignlink")
 
         private fun addReference(
