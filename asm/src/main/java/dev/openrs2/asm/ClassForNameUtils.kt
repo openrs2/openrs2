@@ -21,11 +21,23 @@ object ClassForNameUtils {
             invokestatic.desc == "(Ljava/lang/String;)Ljava/lang/Class;"
     }
 
+    private fun findLdcInsns(method: MethodNode): Sequence<LdcInsnNode> {
+        return INVOKE_MATCHER.match(method)
+            .filter(::isClassForName)
+            .map { it[0] as LdcInsnNode }
+    }
+
+    private fun internalName(ldc: LdcInsnNode): String {
+        return (ldc.cst as String).toInternalClassName()
+    }
+
+    fun findClassNames(method: MethodNode): Sequence<String> {
+        return findLdcInsns(method).map(::internalName)
+    }
+
     fun remap(remapper: Remapper, method: MethodNode) {
-        for (match in INVOKE_MATCHER.match(method).filter(
-            ClassForNameUtils::isClassForName)) {
-            val ldc = match[0] as LdcInsnNode
-            val name = remapper.map((ldc.cst as String).toInternalClassName())
+        for (ldc in findLdcInsns(method)) {
+            val name = remapper.map(internalName(ldc))
             if (name != null) {
                 ldc.cst = name.toBinaryClassName()
             }
