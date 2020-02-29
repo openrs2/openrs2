@@ -2,6 +2,7 @@ package dev.openrs2.asm.classpath
 
 import dev.openrs2.asm.MemberDesc
 import dev.openrs2.asm.MemberRef
+import dev.openrs2.asm.toBinaryClassName
 import dev.openrs2.common.collect.DisjointSet
 import dev.openrs2.common.collect.ForestDisjointSet
 import org.objectweb.asm.commons.Remapper
@@ -40,10 +41,8 @@ class ClassPath(
             }
         }
 
-        val reflectionName = name.replace('/', '.')
-
         val clazz = try {
-            runtime.loadClass(reflectionName)
+            runtime.loadClass(name.toBinaryClassName())
         } catch (ex: ClassNotFoundException) {
             throw IllegalArgumentException("Unknown class $name")
         }

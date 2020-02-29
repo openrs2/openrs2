@@ -1,10 +1,11 @@
 package dev.openrs2.asm.classpath
 
 import dev.openrs2.asm.MemberDesc
+import dev.openrs2.asm.toInternalClassName
 import org.objectweb.asm.Type
 
 private val Class<*>.asmName: String
-    get() = name.replace('.', '/')
+    get() = name.toInternalClassName()
 
 class ReflectionClassMetadata(private val classPath: ClassPath, private val clazz: Class<*>) : ClassMetadata() {
     override val name: String
