@@ -6,6 +6,7 @@ plugins {
 
 application {
     mainClassName = "dev.openrs2.decompiler.DecompilerKt"
+    applicationDefaultJvmArgs = listOf("-Xmx3G")
 }
 
 dependencies {
