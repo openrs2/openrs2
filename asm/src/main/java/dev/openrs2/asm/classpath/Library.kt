@@ -2,7 +2,7 @@ package dev.openrs2.asm.classpath
 
 import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.hasCode
-import dev.openrs2.asm.remap.ClassForNameRemapper
+import dev.openrs2.asm.ClassForNameUtils
 import dev.openrs2.common.crypto.Pkcs12KeyStore
 import dev.openrs2.common.io.DeterministicJarOutputStream
 import dev.openrs2.common.io.SkipOutputStream
@@ -64,7 +64,7 @@ class Library constructor() : Iterable<ClassNode> {
         for (clazz in classes.values) {
             for (method in clazz.methods) {
                 if (method.hasCode()) {
-                    ClassForNameRemapper.remap(remapper, method)
+                    ClassForNameUtils.remap(remapper, method)
                 }
             }
 

@@ -1,15 +1,12 @@
-package dev.openrs2.asm.remap
+package dev.openrs2.asm
 
-import dev.openrs2.asm.InsnMatcher
-import dev.openrs2.asm.toBinaryClassName
-import dev.openrs2.asm.toInternalClassName
 import org.objectweb.asm.commons.Remapper
 import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.LdcInsnNode
 import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.MethodNode
 
-object ClassForNameRemapper {
+object ClassForNameUtils {
     private val INVOKE_MATCHER = InsnMatcher.compile("LDC INVOKESTATIC")
 
     private fun isClassForName(match: List<AbstractInsnNode>): Boolean {
@@ -25,7 +22,8 @@ object ClassForNameRemapper {
     }
 
     fun remap(remapper: Remapper, method: MethodNode) {
-        for (match in INVOKE_MATCHER.match(method).filter(ClassForNameRemapper::isClassForName)) {
+        for (match in INVOKE_MATCHER.match(method).filter(
+            ClassForNameUtils::isClassForName)) {
             val ldc = match[0] as LdcInsnNode
             val name = remapper.map((ldc.cst as String).toInternalClassName())
             if (name != null) {
