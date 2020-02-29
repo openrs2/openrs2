@@ -18,10 +18,10 @@ class ReflectionClassMetadata(private val classPath: ClassPath, private val claz
         get() = clazz.isInterface
 
     override val superClass: ClassMetadata?
-        get() = if (clazz.superclass != null) classPath[clazz.superclass.asmName] else null
+        get() = if (clazz.superclass != null) classPath[clazz.superclass.asmName]!! else null
 
     override val superInterfaces
-        get() = clazz.interfaces.map { classPath[it.asmName] }.toList()
+        get() = clazz.interfaces.map { classPath[it.asmName]!! }.toList()
 
     override val fields
         get() = clazz.declaredFields.map { MemberDesc(it.name, Type.getDescriptor(it.type)) }.toList()

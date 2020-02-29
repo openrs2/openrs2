@@ -13,20 +13,30 @@ class ClassPath(
     private val dependencies: List<Library>,
     val libraries: List<Library>
 ) {
-    private val cache = mutableMapOf<String, ClassMetadata>()
+    private val cache = mutableMapOf<String, ClassMetadata?>()
 
     val libraryClasses: List<ClassMetadata>
         get() {
             val classes = mutableListOf<ClassMetadata>()
             for (library in libraries) {
                 for (clazz in library) {
-                    classes.add(get(clazz.name))
+                    classes.add(get(clazz.name)!!)
                 }
             }
             return classes
         }
 
-    operator fun get(name: String): ClassMetadata = cache.computeIfAbsent(name) {
+    private inline fun computeIfAbsent(name: String, f: (String) -> ClassMetadata?): ClassMetadata? {
+        if (cache.containsKey(name)) {
+            return cache[name]
+        }
+
+        val clazz = f(name)
+        cache[name] = clazz
+        return clazz
+    }
+
+    operator fun get(name: String): ClassMetadata? = computeIfAbsent(name) {
         for (library in libraries) {
             val clazz = library[name]
             if (clazz != null) {
@@ -44,7 +54,7 @@ class ClassPath(
         val clazz = try {
             runtime.loadClass(name.toBinaryClassName())
         } catch (ex: ClassNotFoundException) {
-            throw IllegalArgumentException("Unknown class $name")
+            return@computeIfAbsent null
         }
 
         return@computeIfAbsent ReflectionClassMetadata(this, clazz)
@@ -75,7 +85,7 @@ class ClassPath(
 
         for (library in libraries) {
             for (clazz in library) {
-                populateInheritedFieldSets(ancestorCache, disjointSet, get(clazz.name))
+                populateInheritedFieldSets(ancestorCache, disjointSet, get(clazz.name)!!)
             }
         }
 
@@ -130,7 +140,7 @@ class ClassPath(
 
         for (library in libraries) {
             for (clazz in library) {
-                populateInheritedMethodSets(ancestorCache, disjointSet, get(clazz.name))
+                populateInheritedMethodSets(ancestorCache, disjointSet, get(clazz.name)!!)
             }
         }
 

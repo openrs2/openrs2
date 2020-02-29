@@ -28,7 +28,7 @@ class OverrideTransformer : Transformer() {
             return false
         }
 
-        if (!classPath[clazz.name].isOverride(MemberDesc(method))) {
+        if (!classPath[clazz.name]!!.isOverride(MemberDesc(method))) {
             return false
         }
 

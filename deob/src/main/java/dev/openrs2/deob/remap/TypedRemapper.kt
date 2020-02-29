@@ -137,7 +137,7 @@ class TypedRemapper private constructor(
                 var skip = false
 
                 for ((owner, name) in partition) {
-                    val clazz = classPath[owner]
+                    val clazz = classPath[owner]!!
 
                     if (name in EXCLUDED_FIELDS) {
                         skip = true
@@ -187,7 +187,7 @@ class TypedRemapper private constructor(
 
         fun isMethodImmutable(classPath: ClassPath, partition: DisjointSet.Partition<MemberRef>): Boolean {
             for (method in partition) {
-                val clazz = classPath[method.owner]
+                val clazz = classPath[method.owner]!!
 
                 if (method.name in EXCLUDED_METHODS) {
                     return true
