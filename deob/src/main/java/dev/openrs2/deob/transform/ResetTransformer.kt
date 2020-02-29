@@ -31,7 +31,7 @@ class ResetTransformer : Transformer() {
                     }
 
                     val masterReset = findMasterReset(method) ?: continue
-                    logger.info { "Identified master reset method: $masterReset" }
+                    logger.info { "Identified master reset method $masterReset" }
 
                     val resetClass = classPath.getNode("client")!!
                     val resetMethod = resetClass.methods.first {

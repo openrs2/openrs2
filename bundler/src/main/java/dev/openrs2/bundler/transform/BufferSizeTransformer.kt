@@ -29,7 +29,7 @@ class BufferSizeTransformer : Transformer() {
                     }
 
                     this.buffer = findBuffer(method) ?: continue
-                    logger.info { "Identified buffer: ${this.buffer}" }
+                    logger.info { "Identified buffer ${this.buffer}" }
                     break
                 }
             }
