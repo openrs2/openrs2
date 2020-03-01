@@ -37,7 +37,7 @@ class StaticScramblingTransformer : Transformer() {
 
     private fun nextClass(): Pair<ClassNode, MethodNode> {
         var clazz = nextStaticClass
-        if (clazz != null && (clazz.fields.size + clazz.methods.size) < MAX_FIELDS_AND_METHODS) {
+        if (clazz != null && clazz.fields.size < MAX_FIELDS && clazz.methods.size < MAX_METHODS) {
             return Pair(clazz, nextClinit!!)
         }
 
@@ -197,6 +197,7 @@ class StaticScramblingTransformer : Transformer() {
 
     companion object {
         private val logger = InlineLogger()
-        private const val MAX_FIELDS_AND_METHODS = 500
+        private const val MAX_FIELDS = 500
+        private const val MAX_METHODS = 50
     }
 }
