@@ -1,5 +1,6 @@
 package dev.openrs2.deob.transform
 
+import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.ClassVersionUtils
 import dev.openrs2.asm.MemberRef
 import dev.openrs2.asm.classpath.ClassPath
@@ -202,7 +203,12 @@ class StaticScramblingTransformer : Transformer() {
         return false
     }
 
+    override fun postTransform(classPath: ClassPath) {
+        logger.info { "Moved ${fieldClasses.size} fields and ${methodClasses.size} methods" }
+    }
+
     companion object {
+        private val logger = InlineLogger()
         private const val MAX_FIELDS_AND_METHODS = 500
     }
 }
