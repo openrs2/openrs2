@@ -92,20 +92,24 @@ class StaticScramblingTransformer : Transformer() {
         return entry.plus(exit)
     }
 
-    private fun MethodNode.extractInitializers(owner: String): Map<MemberDesc, InsnList> {
-        val initializers = mutableMapOf<MemberDesc, InsnList>()
+    private fun MethodNode.extractInitializers(owner: String): Pair<Map<MemberDesc, InsnList>, Set<MemberDesc>> {
+        val entryExitBlocks = extractEntryExitBlocks()
 
-        val putstatics = extractEntryExitBlocks()
+        val simpleInitializers = mutableMapOf<MemberDesc, InsnList>()
+        val complexInitializers = instructions.asSequence()
+            .filter { !entryExitBlocks.contains(it) }
             .filterIsInstance<FieldInsnNode>()
-            .filter { it.opcode == Opcodes.PUTSTATIC }
+            .filter { it.opcode == Opcodes.GETSTATIC && it.owner == owner && it.name !in TypedRemapper.EXCLUDED_FIELDS }
+            .map(::MemberDesc)
+            .toSet()
+
+        val putstatics = entryExitBlocks
+            .filterIsInstance<FieldInsnNode>()
+            .filter { it.opcode == Opcodes.PUTSTATIC && it.owner == owner && it.name !in TypedRemapper.EXCLUDED_FIELDS }
 
         for (putstatic in putstatics) {
-            if (putstatic.owner != owner || putstatic.name in TypedRemapper.EXCLUDED_FIELDS) {
-                continue
-            }
-
             val desc = MemberDesc(putstatic)
-            if (initializers.containsKey(desc)) {
+            if (simpleInitializers.containsKey(desc) || complexInitializers.contains(desc)) {
                 continue
             }
 
@@ -120,10 +124,10 @@ class StaticScramblingTransformer : Transformer() {
             instructions.remove(putstatic)
             initializer.add(putstatic)
 
-            initializers[desc] = initializer
+            simpleInitializers[desc] = initializer
         }
 
-        return initializers
+        return Pair(simpleInitializers, complexInitializers)
     }
 
     private fun spliceInitializers() {
@@ -139,7 +143,8 @@ class StaticScramblingTransformer : Transformer() {
         }
 
         for (dependency in field.dependencies) {
-            spliceInitializers(done, dependency, fields[dependency]!!)
+            val dependencyField = fields[dependency] ?: continue
+            spliceInitializers(done, dependency, dependencyField)
         }
 
         val (clazz, clinit) = nextClass()
@@ -171,7 +176,8 @@ class StaticScramblingTransformer : Transformer() {
                 }
 
                 val clinit = clazz.methods.find { it.name == "<clinit>" }
-                val initializers = clinit?.extractInitializers(clazz.name) ?: emptyMap()
+                val (simpleInitializers, complexInitializers) = clinit?.extractInitializers(clazz.name)
+                    ?: Pair(emptyMap(), emptySet())
 
                 clazz.fields.removeIf { field ->
                     if (field.access and Opcodes.ACC_STATIC == 0) {
@@ -181,7 +187,11 @@ class StaticScramblingTransformer : Transformer() {
                     }
 
                     val desc = MemberDesc(field)
-                    val initializer = initializers[desc] ?: InsnList()
+                    if (complexInitializers.contains(desc)) {
+                        return@removeIf false
+                    }
+
+                    val initializer = simpleInitializers[desc] ?: InsnList()
                     val maxStack = clinit?.maxStack ?: 0
 
                     val ref = MemberRef(clazz, field)
