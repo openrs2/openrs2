@@ -2,6 +2,7 @@ package dev.openrs2.deob.transform
 
 import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.ClassVersionUtils
+import dev.openrs2.asm.MemberDesc
 import dev.openrs2.asm.MemberRef
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
@@ -69,32 +70,60 @@ class StaticScramblingTransformer : Transformer() {
         return Pair(clazz, clinit)
     }
 
-    private fun extractInitializers(clazz: ClassNode, clinit: MethodNode, block: List<AbstractInsnNode>) {
-        val putstatics = block.filterIsInstance<FieldInsnNode>()
+    private fun MethodNode.extractEntryExitBlocks(): List<AbstractInsnNode> {
+        /*
+         * Most (or all?) of the <clinit> methods have "simple" initializers
+         * that we're capable of moving in the first and last basic blocks of
+         * the method. The last basic block is always at the end of the code
+         * and ends in a RETURN. This allows us to avoid worrying about making
+         * a full basic block control flow graph here.
+         */
+        val entry = instructions.takeWhile { it.sequential }
+
+        val last = instructions.lastOrNull()
+        if (last == null || last.opcode != Opcodes.RETURN) {
+            return entry
+        }
+
+        val exit = instructions.toList()
+            .dropLast(1)
+            .takeLastWhile { it.sequential }
+
+        return entry.plus(exit)
+    }
+
+    private fun MethodNode.extractInitializers(owner: String): Map<MemberDesc, InsnList> {
+        val initializers = mutableMapOf<MemberDesc, InsnList>()
+
+        val putstatics = extractEntryExitBlocks()
+            .filterIsInstance<FieldInsnNode>()
             .filter { it.opcode == Opcodes.PUTSTATIC }
 
         for (putstatic in putstatics) {
-            if (putstatic.owner != clazz.name || putstatic.name in TypedRemapper.EXCLUDED_FIELDS) {
+            if (putstatic.owner != owner || putstatic.name in TypedRemapper.EXCLUDED_FIELDS) {
                 continue
             }
 
-            val node = clazz.fields.find { it.name == putstatic.name && it.desc == putstatic.desc } ?: continue
+            val desc = MemberDesc(putstatic)
+            if (initializers.containsKey(desc)) {
+                continue
+            }
+
             // TODO(gpe): use a filter here (pure with no *LOADs?)
             val expr = getExpression(putstatic) ?: continue
 
             val initializer = InsnList()
             for (insn in expr) {
-                clinit.instructions.remove(insn)
+                instructions.remove(insn)
                 initializer.add(insn)
             }
-            clinit.instructions.remove(putstatic)
+            instructions.remove(putstatic)
             initializer.add(putstatic)
 
-            clazz.fields.remove(node)
-
-            val ref = MemberRef(putstatic)
-            fields[ref] = Field(node, initializer, clazz.version, clinit.maxStack)
+            initializers[desc] = initializer
         }
+
+        return initializers
     }
 
     private fun spliceInitializers() {
@@ -142,28 +171,23 @@ class StaticScramblingTransformer : Transformer() {
                 }
 
                 val clinit = clazz.methods.find { it.name == "<clinit>" }
-                if (clinit != null) {
-                    val insns = clinit.instructions.toMutableList()
+                val initializers = clinit?.extractInitializers(clazz.name) ?: emptyMap()
 
-                    /*
-                     * Most (or all?) of the <clinit> methods have "simple"
-                     * initializers that we're capable of moving in the first
-                     * and last basic blocks of the method. The last basic
-                     * block is always at the end of the code and ends in a
-                     * RETURN. This allows us to avoid worrying about making a
-                     * full basic block control flow graph here.
-                     */
-
-                    val entry = insns.takeWhile { it.sequential }
-                    extractInitializers(clazz, clinit, entry)
-
-                    val last = insns.lastOrNull()
-                    if (last != null && last.opcode == Opcodes.RETURN) {
-                        insns.removeAt(insns.size - 1)
-
-                        val exit = insns.takeLastWhile { it.sequential }
-                        extractInitializers(clazz, clinit, exit)
+                clazz.fields.removeIf { field ->
+                    if (field.access and Opcodes.ACC_STATIC == 0) {
+                        return@removeIf false
+                    } else if (field.name in TypedRemapper.EXCLUDED_METHODS) {
+                        return@removeIf false
                     }
+
+                    val desc = MemberDesc(field)
+                    val initializer = initializers[desc] ?: InsnList()
+                    val maxStack = clinit?.maxStack ?: 0
+
+                    val ref = MemberRef(clazz, field)
+                    fields[ref] = Field(field, initializer, clazz.version, maxStack)
+
+                    return@removeIf true
                 }
 
                 clazz.methods.removeIf { method ->
