@@ -6,8 +6,8 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(
                     credentialsId: 'archiva',
-                    usernameVariable: 'ORG_GRADLE_PROJECT_repoUsername',
-                    passwordVariable: 'ORG_GRADLE_PROJECT_repoPassword'
+                    usernameVariable: 'ORG_GRADLE_PROJECT_openrs2RepoUsername',
+                    passwordVariable: 'ORG_GRADLE_PROJECT_openrs2RepoPassword'
                 )]) {
                     withGradle {
                         sh './gradlew --no-daemon clean build publish'
