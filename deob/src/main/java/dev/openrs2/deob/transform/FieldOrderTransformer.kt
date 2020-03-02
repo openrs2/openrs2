@@ -7,6 +7,7 @@ import dev.openrs2.asm.transform.Transformer
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.FieldInsnNode
+import org.objectweb.asm.tree.FieldNode
 
 class FieldOrderTransformer : Transformer() {
     override fun transformClass(classPath: ClassPath, library: Library, clazz: ClassNode): Boolean {
@@ -18,6 +19,15 @@ class FieldOrderTransformer : Transformer() {
     companion object {
         private const val CONSTRUCTOR = "<init>"
         private const val STATIC_CONSTRUCTOR = "<clinit>"
+        private val STATIC_COMPARATOR = Comparator<FieldNode> { a, b ->
+            val aStatic = a.access and Opcodes.ACC_STATIC != 0
+            val bStatic = b.access and Opcodes.ACC_STATIC != 0
+            when {
+                aStatic && !bStatic -> -1
+                !aStatic && bStatic -> 1
+                else -> 0
+            }
+        }
 
         private fun sortFields(clazz: ClassNode, ctorName: String, opcode: Int) {
             val ctor = clazz.methods.find { it.name == ctorName } ?: return
@@ -40,7 +50,7 @@ class FieldOrderTransformer : Transformer() {
                 }
             }
 
-            clazz.fields.sortBy { fields.getOrDefault(MemberDesc(it), -1) }
+            clazz.fields.sortWith(STATIC_COMPARATOR.thenBy { fields.getOrDefault(MemberDesc(it), -1) })
         }
     }
 }
