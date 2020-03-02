@@ -46,11 +46,7 @@ class OpaquePredicateTransformer : Transformer() {
 
             // remove initializer (except the opaque predicate at the start,
             // which we treat like any other)
-            for ((i, insn) in match.withIndex()) {
-                if (i >= 2) {
-                    method.instructions.remove(insn)
-                }
-            }
+            match.drop(2).forEach(method.instructions::remove)
 
             // remove field
             val owner = library[putstatic.owner]!!
