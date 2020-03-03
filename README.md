@@ -128,6 +128,10 @@ By making a contribution to this project, I certify that:
 
 OpenRS2 uses [Semantic Versioning][semver].
 
+## Community
+
+* [Discord][discord]
+
 ## License
 
 Unless otherwise stated, all code and data is licensed under version 3.0 or
@@ -156,6 +160,7 @@ OpenRS2. If not, see <https://www.gnu.org/licenses/>.
 
 [commitmsg]: https://chris.beams.io/posts/git-commit/#seven-rules
 [dco]: https://developercertificate.org/
+[discord]: https://discord.gg/Mp9eDUQ
 [gpl]: https://www.gnu.org/licenses/gpl-3.0.html
 [idea]: https://www.jetbrains.com/idea/
 [jdk]: https://jdk.java.net/
