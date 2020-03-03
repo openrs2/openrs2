@@ -146,6 +146,7 @@ OpenRS2 uses [Semantic Versioning][semver].
 ## Community
 
 * [Discord][discord]
+* [Website][www]
 
 ## License
 
@@ -183,3 +184,4 @@ OpenRS2. If not, see <https://www.gnu.org/licenses/>.
 [lgpl]: https://www.gnu.org/licenses/lgpl-3.0.html
 [rewriting-history]: https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History
 [semver]: https://semver.org/
+[www]: https://www.openrs2.dev/
