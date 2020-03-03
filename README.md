@@ -158,5 +158,4 @@ OpenRS2. If not, see <https://www.gnu.org/licenses/>.
 [jdk]: https://jdk.java.net/
 [ktlint]: https://github.com/pinterest/ktlint#readme
 [lgpl]: https://www.gnu.org/licenses/lgpl-3.0.html
-[maven]: https://maven.apache.org/
 [semver]: https://semver.org/
