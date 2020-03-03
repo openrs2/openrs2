@@ -52,6 +52,18 @@ and package it.
 
 ## Contributing
 
+OpenRS2 is still in the early stages of development. The current focus is on
+building underlying infrastructure, such as the deobfuscator, rather than
+game content. This approach will make it much quicker to build game content in
+the long run, but it does mean OpenRS2 won't be particularly useful in the short
+term.
+
+If you're interested in contributing new features, you should discuss your
+plans in our [Discord][discord] server first. I have rough plans in my head for
+the future development direction. Communicating beforehand will avoid the need
+for significant changes to be made at the code review stage and make it less
+likely for your contribution to be dropped entirely.
+
 ### Code style
 
 All source code must be formatted with [IntelliJ IDEA][idea]'s built-in
