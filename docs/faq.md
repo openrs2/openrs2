@@ -61,4 +61,13 @@ Again, there are a mixture of reasons:
   libraries were compiled 10 years ago, and at some point one of their
   dependencies might drop backwards binary compatibility.
 
+## Why does OpenRS2 run its own development infrastructure?
+
+Even though OpenRS2 does not distribute Jagex's intellectual property, there is
+a risk that it could be taken down from a service like GitHub by mistake,
+causing disruption. Running our own infrastructure allows us to keep backups of
+data not held in the Git repository, such as issues. If necessary, we can
+switch to a different hosting provider at short notice while retaining such
+data.
+
 [nar-maven-plugin]: https://maven-nar.github.io/
