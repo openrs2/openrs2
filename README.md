@@ -71,6 +71,9 @@ Commit messages should follow the ['seven rules'][commitmsg] described in
 can be up to 72 characters in length (as OpenRS2 does not use email-based
 patches).
 
+You should use tools such as [interactive rebase][rewriting-history] to ensure
+the commit history is tidy.
+
 ### Developer Certificate of Origin
 
 OpenRS2 uses version 1.1 of the [Developer Certificate of Origin][dco] (DCO) to
@@ -158,4 +161,5 @@ OpenRS2. If not, see <https://www.gnu.org/licenses/>.
 [jdk]: https://jdk.java.net/
 [ktlint]: https://github.com/pinterest/ktlint#readme
 [lgpl]: https://www.gnu.org/licenses/lgpl-3.0.html
+[rewriting-history]: https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History
 [semver]: https://semver.org/
