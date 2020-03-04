@@ -164,13 +164,8 @@ configure(subprojects.filter { it.free }) {
 
                     licenses {
                         license {
-                            if (project.name in listOf("deob-annotations", "jsobject")) {
-                                name.set("GNU Lesser General Public License v3.0 or later")
-                                url.set("https://www.gnu.org/licenses/lgpl-3.0.txt")
-                            } else {
-                                name.set("GNU General Public License v3.0 or later")
-                                url.set("https://www.gnu.org/licenses/gpl-3.0.txt")
-                            }
+                            name.set("ISC License")
+                            url.set("https://opensource.org/licenses/ISC")
                         }
                     }
 

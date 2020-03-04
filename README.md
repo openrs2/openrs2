@@ -150,38 +150,17 @@ OpenRS2 uses [Semantic Versioning][semver].
 
 ## License
 
-Unless otherwise stated, all code and data is licensed under version 3.0 or
-later of the [GNU General Public License][gpl]. The full terms are available
-in the `COPYING` file.
-
-The `deob-annotations` and `jsobject` modules are instead licensed under
-version 3.0 or later of the [GNU Lesser General Public License][lgpl]. The full
-terms are available in the `COPYING.LESSER` file in each module's directory.
-
-## Copyright
-
-Copyright (c) 2019-2020 OpenRS2 Authors
-
-OpenRS2 is free software: you can redistribute it and/or modify it under the
-terms of the GNU General Public License as published by the Free Software
-Foundation, either version 3 of the License, or (at your option) any later
-version.
-
-OpenRS2 is distributed in the hope that it will be useful, but WITHOUT ANY
-WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
-PARTICULAR PURPOSE. See the GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License along with
-OpenRS2. If not, see <https://www.gnu.org/licenses/>.
+OpenRS2 is available under the terms of the [ISC license][isc], which is
+similar to the 2-clause BSD license. The full copyright notice and terms are
+available in the `LICENSE` file.
 
 [commitmsg]: https://chris.beams.io/posts/git-commit/#seven-rules
 [dco]: https://developercertificate.org/
 [discord]: https://discord.gg/Mp9eDUQ
-[gpl]: https://www.gnu.org/licenses/gpl-3.0.html
 [idea]: https://www.jetbrains.com/idea/
+[isc]: https://opensource.org/licenses/ISC
 [jdk]: https://jdk.java.net/
 [ktlint]: https://github.com/pinterest/ktlint#readme
-[lgpl]: https://www.gnu.org/licenses/lgpl-3.0.html
 [rewriting-history]: https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History
 [semver]: https://semver.org/
 [www]: https://www.openrs2.dev/

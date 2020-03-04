@@ -18,22 +18,6 @@ A mixture of reasons:
 better than Gradle's support for building native code. Gradle's new C++ plugin
 simply doesn't provide enough features.
 
-## Why is OpenRS2 licensed under the GNU GPL?
-
-As significant amount of work went into the development of OpenRS2. My aim is
-to encourage community contributions rather than effort being duplicated across
-multiple independent closed-source forks, making a copyleft license desirable.
-
-I also wanted to frustrate commercial use, given OpenRS2 is itself developed
-entirely non-commercially. While the GPL does this to an extent, the AGPL would
-have been more appropriate. However, it would be far more difficult to enforce
-the AGPL than the GPL, disadvantaging honest users who would have otherwise
-obeyed the license.
-
-A small number of modules (`deob-annotations`, `jsobject` and the native
-library replacements) are instead licensed under the LGPL, as it needs to be
-possible to legally link these modules with the proprietary client code.
-
 ## Why rewrite the client's native libraries?
 
 Again, there are a mixture of reasons:

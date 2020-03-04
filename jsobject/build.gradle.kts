@@ -3,8 +3,6 @@ plugins {
     `maven-publish`
 }
 
-// XXX(gpe): this module MUST NOT depend on any of the GPLed modules.
-
 publishing {
     publications.create<MavenPublication>("maven") {
         from(components["java"])
