@@ -139,6 +139,9 @@ By making a contribution to this project, I certify that:
     this project or the open source license(s) involved.
 ```
 
+OpenRS2 does not distribute any of Jagex's intellectual property, and care
+should be taken to avoid inadvertently including any in contributions.
+
 ### Versioning
 
 OpenRS2 uses [Semantic Versioning][semver].
