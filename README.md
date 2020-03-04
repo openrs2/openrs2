@@ -159,7 +159,7 @@ available in the `LICENSE` file.
 
 [commitmsg]: https://chris.beams.io/posts/git-commit/#seven-rules
 [dco]: https://developercertificate.org/
-[discord]: https://discord.gg/Mp9eDUQ
+[discord]: https://chat.openrs2.dev/
 [idea]: https://www.jetbrains.com/idea/
 [isc]: https://opensource.org/licenses/ISC
 [jdk]: https://jdk.java.net/
