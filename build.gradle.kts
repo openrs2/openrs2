@@ -20,20 +20,8 @@ allprojects {
 
     repositories {
         mavenCentral()
-        if (hasProperty("openrs2RepoUsername")) {
-            maven(url = "https://repo.openrs2.dev/repository/openrs2") {
-                credentials {
-                    username = findProperty("openrs2RepoUsername")?.toString()
-                    password = findProperty("openrs2RepoPassword")?.toString()
-                }
-            }
-            maven(url = "https://repo.openrs2.dev/repository/openrs2-snapshots") {
-                credentials {
-                    username = findProperty("openrs2RepoUsername")?.toString()
-                    password = findProperty("openrs2RepoPassword")?.toString()
-                }
-            }
-        }
+        maven(url = "https://repo.openrs2.dev/repository/openrs2")
+        maven(url = "https://repo.openrs2.dev/repository/openrs2-snapshots")
         mavenLocal()
     }
 
