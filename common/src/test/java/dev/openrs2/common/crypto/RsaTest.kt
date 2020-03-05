@@ -1,5 +1,6 @@
 package dev.openrs2.common.crypto
 
+import com.google.common.jimfs.Configuration
 import com.google.common.jimfs.Jimfs
 import io.netty.buffer.Unpooled
 import org.bouncycastle.crypto.params.RSAKeyParameters
@@ -114,7 +115,7 @@ object RsaTest {
 
     @Test
     fun testReadPublicKey() {
-        Jimfs.newFileSystem().use { fs ->
+        Jimfs.newFileSystem(Configuration.unix()).use { fs ->
             val file = Files.createTempFile(fs.getPath("/"), "public", ".key")
             try {
                 Files.write(file, PUBLIC_KEY_PEM)
@@ -131,7 +132,7 @@ object RsaTest {
 
     @Test
     fun testWritePublicKey() {
-        Jimfs.newFileSystem().use { fs ->
+        Jimfs.newFileSystem(Configuration.unix()).use { fs ->
             val file = Files.createTempFile(fs.getPath("/"), "public", ".key")
             try {
                 Rsa.writePublicKey(file, PUBLIC_KEY)
@@ -145,7 +146,7 @@ object RsaTest {
 
     @Test
     fun testReadPrivateKey() {
-        Jimfs.newFileSystem().use { fs ->
+        Jimfs.newFileSystem(Configuration.unix()).use { fs ->
             val file = Files.createTempFile(fs.getPath("/"), "private", ".key")
             try {
                 Files.write(file, PRIVATE_KEY_PEM)
@@ -168,7 +169,7 @@ object RsaTest {
 
     @Test
     fun testWritePrivateKey() {
-        Jimfs.newFileSystem().use { fs ->
+        Jimfs.newFileSystem(Configuration.unix()).use { fs ->
             val file = Files.createTempFile(fs.getPath("/"), "private", ".key")
             try {
                 Rsa.writePrivateKey(file, PRIVATE_KEY_CRT)
