@@ -5662,9 +5662,9 @@ typedef unsigned int GLhandleARB;
         <enum value="0x1101" name="GL_FASTEST" group="HintMode"/>
         <enum value="0x1102" name="GL_NICEST" group="HintMode"/>
             <unused start="0x1103" end="0x11FF" comment="Unused for HintMode"/>
-        <enum value="0x1200" name="GL_AMBIENT" group="MaterialParameter,FragmentLightParameterSGIX,ColorMaterialParameter"/>
-        <enum value="0x1201" name="GL_DIFFUSE" group="MaterialParameter,FragmentLightParameterSGIX,ColorMaterialParameter"/>
-        <enum value="0x1202" name="GL_SPECULAR" group="MaterialParameter,FragmentLightParameterSGIX,ColorMaterialParameter"/>
+        <enum value="0x1200" name="GL_AMBIENT" group="MaterialParameter,FragmentLightParameterSGIX,ColorMaterialParameter,LightParameter"/>
+        <enum value="0x1201" name="GL_DIFFUSE" group="MaterialParameter,FragmentLightParameterSGIX,ColorMaterialParameter,LightParameter"/>
+        <enum value="0x1202" name="GL_SPECULAR" group="MaterialParameter,FragmentLightParameterSGIX,ColorMaterialParameter,LightParameter"/>
         <enum value="0x1203" name="GL_POSITION" group="LightParameter,FragmentLightParameterSGIX"/>
         <enum value="0x1204" name="GL_SPOT_DIRECTION" group="LightParameter,FragmentLightParameterSGIX"/>
         <enum value="0x1205" name="GL_SPOT_EXPONENT" group="LightParameter,FragmentLightParameterSGIX"/>
@@ -5752,11 +5752,11 @@ typedef unsigned int GLhandleARB;
         <enum value="0x1904" name="GL_GREEN_NV"/>
         <enum value="0x1905" name="GL_BLUE" group="TextureSwizzle,CombinerComponentUsageNV,PixelFormat"/>
         <enum value="0x1905" name="GL_BLUE_NV"/>
-        <enum value="0x1906" name="GL_ALPHA" group="TextureSwizzle,CombinerPortionNV,PathColorFormat,CombinerComponentUsageNV,PixelFormat"/>
+        <enum value="0x1906" name="GL_ALPHA" group="TextureSwizzle,CombinerPortionNV,PathColorFormat,CombinerComponentUsageNV,PixelFormat,InternalFormat"/>
         <enum value="0x1907" name="GL_RGB" group="PixelTexGenMode,CombinerPortionNV,PathColorFormat,CombinerComponentUsageNV,PixelFormat,InternalFormat"/>
         <enum value="0x1908" name="GL_RGBA" group="PixelTexGenMode,PathColorFormat,PixelFormat,InternalFormat"/>
         <enum value="0x1909" name="GL_LUMINANCE" group="PixelTexGenMode,PathColorFormat,PixelFormat"/>
-        <enum value="0x190A" name="GL_LUMINANCE_ALPHA" group="PixelTexGenMode,PathColorFormat,PixelFormat"/>
+        <enum value="0x190A" name="GL_LUMINANCE_ALPHA" group="PixelTexGenMode,PathColorFormat,PixelFormat,InternalFormat"/>
             <unused start="0x1910" end="0x19FF" comment="Unused for PixelFormat"/>
         <enum value="0x1A00" name="GL_BITMAP" group="PixelType"/>
             <unused start="0x1A01" end="0x1AFF" comment="Unused for PixelType"/>
@@ -6411,8 +6411,8 @@ typedef unsigned int GLhandleARB;
         <enum value="0x8128" name="GL_POINT_FADE_THRESHOLD_SIZE_SGIS" group="PointParameterNameSGIS,GetPName"/>
         <enum value="0x8129" name="GL_DISTANCE_ATTENUATION_EXT" group="PointParameterNameSGIS"/>
         <enum value="0x8129" name="GL_DISTANCE_ATTENUATION_SGIS" group="PointParameterNameSGIS,GetPName"/>
-        <enum value="0x8129" name="GL_POINT_DISTANCE_ATTENUATION" group="PointParameterNameSGIS"/>
-        <enum value="0x8129" name="GL_POINT_DISTANCE_ATTENUATION_ARB" group="PointParameterNameSGIS"/>
+        <enum value="0x8129" name="GL_POINT_DISTANCE_ATTENUATION" group="PointParameterNameARB"/>
+        <enum value="0x8129" name="GL_POINT_DISTANCE_ATTENUATION_ARB" group="PointParameterNameARB"/>
         <enum value="0x812A" name="GL_FOG_FUNC_SGIS" group="FogMode"/>
         <enum value="0x812B" name="GL_FOG_FUNC_POINTS_SGIS" group="GetPName"/>
         <enum value="0x812C" name="GL_MAX_FOG_FUNC_POINTS_SGIS" group="GetPName"/>
@@ -7456,8 +7456,8 @@ typedef unsigned int GLhandleARB;
         <enum value="0x84E0" name="GL_ACTIVE_TEXTURE_ARB"/>
         <enum value="0x84E1" name="GL_CLIENT_ACTIVE_TEXTURE"/>
         <enum value="0x84E1" name="GL_CLIENT_ACTIVE_TEXTURE_ARB"/>
-        <enum value="0x84E2" name="GL_MAX_TEXTURE_UNITS"/>
-        <enum value="0x84E2" name="GL_MAX_TEXTURE_UNITS_ARB"/>
+        <enum value="0x84E2" name="GL_MAX_TEXTURE_UNITS" group="GetPName"/>
+        <enum value="0x84E2" name="GL_MAX_TEXTURE_UNITS_ARB" group="GetPName"/>
         <enum value="0x84E3" name="GL_TRANSPOSE_MODELVIEW_MATRIX"/>
         <enum value="0x84E3" name="GL_TRANSPOSE_MODELVIEW_MATRIX_ARB"/>
         <enum value="0x84E3" name="GL_PATH_TRANSPOSE_MODELVIEW_MATRIX_NV"/>
@@ -7495,8 +7495,8 @@ typedef unsigned int GLhandleARB;
         <enum value="0x84F2" name="GL_ALL_COMPLETED_NV" group="FenceConditionNV"/>
         <enum value="0x84F3" name="GL_FENCE_STATUS_NV" group="FenceParameterNameNV"/>
         <enum value="0x84F4" name="GL_FENCE_CONDITION_NV" group="FenceParameterNameNV"/>
-        <enum value="0x84F5" name="GL_TEXTURE_RECTANGLE" group="CopyImageSubDataTarget,TextureTarget"/>
-        <enum value="0x84F5" name="GL_TEXTURE_RECTANGLE_ARB"/>
+        <enum value="0x84F5" name="GL_TEXTURE_RECTANGLE" group="CopyImageSubDataTarget,TextureTarget,EnableCap"/>
+        <enum value="0x84F5" name="GL_TEXTURE_RECTANGLE_ARB" group="EnableCap"/>
         <enum value="0x84F5" name="GL_TEXTURE_RECTANGLE_NV"/>
         <enum value="0x84F6" name="GL_TEXTURE_BINDING_RECTANGLE" group="GetPName"/>
         <enum value="0x84F6" name="GL_TEXTURE_BINDING_RECTANGLE_ARB"/>
@@ -7556,8 +7556,8 @@ typedef unsigned int GLhandleARB;
         <enum value="0x8512" name="GL_REFLECTION_MAP_EXT"/>
         <enum value="0x8512" name="GL_REFLECTION_MAP_NV"/>
         <enum value="0x8512" name="GL_REFLECTION_MAP_OES"/>
-        <enum value="0x8513" name="GL_TEXTURE_CUBE_MAP" group="CopyImageSubDataTarget,TextureTarget"/>
-        <enum value="0x8513" name="GL_TEXTURE_CUBE_MAP_ARB"/>
+        <enum value="0x8513" name="GL_TEXTURE_CUBE_MAP" group="CopyImageSubDataTarget,TextureTarget,EnableCap"/>
+        <enum value="0x8513" name="GL_TEXTURE_CUBE_MAP_ARB" group="EnableCap"/>
         <enum value="0x8513" name="GL_TEXTURE_CUBE_MAP_EXT"/>
         <enum value="0x8513" name="GL_TEXTURE_CUBE_MAP_OES"/>
         <enum value="0x8514" name="GL_TEXTURE_BINDING_CUBE_MAP" group="GetPName"/>
@@ -7682,84 +7682,84 @@ typedef unsigned int GLhandleARB;
     </enums>
 
     <enums namespace="GL" start="0x8570" end="0x859F" group="RegisterCombinerPname" vendor="AMD/NV">
-        <enum value="0x8570" name="GL_COMBINE"/>
-        <enum value="0x8570" name="GL_COMBINE_ARB"/>
-        <enum value="0x8570" name="GL_COMBINE_EXT"/>
-        <enum value="0x8571" name="GL_COMBINE_RGB"/>
-        <enum value="0x8571" name="GL_COMBINE_RGB_ARB"/>
-        <enum value="0x8571" name="GL_COMBINE_RGB_EXT"/>
-        <enum value="0x8572" name="GL_COMBINE_ALPHA"/>
-        <enum value="0x8572" name="GL_COMBINE_ALPHA_ARB"/>
-        <enum value="0x8572" name="GL_COMBINE_ALPHA_EXT"/>
-        <enum value="0x8573" name="GL_RGB_SCALE"/>
-        <enum value="0x8573" name="GL_RGB_SCALE_ARB"/>
-        <enum value="0x8573" name="GL_RGB_SCALE_EXT"/>
-        <enum value="0x8574" name="GL_ADD_SIGNED"/>
-        <enum value="0x8574" name="GL_ADD_SIGNED_ARB"/>
-        <enum value="0x8574" name="GL_ADD_SIGNED_EXT"/>
-        <enum value="0x8575" name="GL_INTERPOLATE"/>
-        <enum value="0x8575" name="GL_INTERPOLATE_ARB"/>
-        <enum value="0x8575" name="GL_INTERPOLATE_EXT"/>
-        <enum value="0x8576" name="GL_CONSTANT" group="PathGenMode"/>
-        <enum value="0x8576" name="GL_CONSTANT_ARB"/>
-        <enum value="0x8576" name="GL_CONSTANT_EXT"/>
+        <enum value="0x8570" name="GL_COMBINE" group="TextureEnvParameter"/>
+        <enum value="0x8570" name="GL_COMBINE_ARB" group="TextureEnvParameter"/>
+        <enum value="0x8570" name="GL_COMBINE_EXT" group="TextureEnvParameter"/>
+        <enum value="0x8571" name="GL_COMBINE_RGB" group="TextureEnvParameter"/>
+        <enum value="0x8571" name="GL_COMBINE_RGB_ARB" group="TextureEnvParameter"/>
+        <enum value="0x8571" name="GL_COMBINE_RGB_EXT" group="TextureEnvParameter"/>
+        <enum value="0x8572" name="GL_COMBINE_ALPHA" group="TextureEnvParameter"/>
+        <enum value="0x8572" name="GL_COMBINE_ALPHA_ARB" group="TextureEnvParameter"/>
+        <enum value="0x8572" name="GL_COMBINE_ALPHA_EXT" group="TextureEnvParamter"/>
+        <enum value="0x8573" name="GL_RGB_SCALE" group="TextureEnvParameter"/>
+        <enum value="0x8573" name="GL_RGB_SCALE_ARB" group="TextureEnvParameter"/>
+        <enum value="0x8573" name="GL_RGB_SCALE_EXT" group="TextureEnvParameter"/>
+        <enum value="0x8574" name="GL_ADD_SIGNED" group="TextureEnvParameter"/>
+        <enum value="0x8574" name="GL_ADD_SIGNED_ARB" group="TextureEnvParameter"/>
+        <enum value="0x8574" name="GL_ADD_SIGNED_EXT" group="TextureEnvParameter"/>
+        <enum value="0x8575" name="GL_INTERPOLATE" group="TextureEnvParameter"/>
+        <enum value="0x8575" name="GL_INTERPOLATE_ARB" group="TextureEnvParameter"/>
+        <enum value="0x8575" name="GL_INTERPOLATE_EXT" group="TextureEnvParameter"/>
+        <enum value="0x8576" name="GL_CONSTANT" group="PathGenMode,TextureEnvParameter"/>
+        <enum value="0x8576" name="GL_CONSTANT_ARB" group="TextureEnvParameter"/>
+        <enum value="0x8576" name="GL_CONSTANT_EXT" group="TextureEnvParameter"/>
         <enum value="0x8576" name="GL_CONSTANT_NV"/>
-        <enum value="0x8577" name="GL_PRIMARY_COLOR" group="PathColor"/>
-        <enum value="0x8577" name="GL_PRIMARY_COLOR_ARB"/>
-        <enum value="0x8577" name="GL_PRIMARY_COLOR_EXT"/>
-        <enum value="0x8578" name="GL_PREVIOUS"/>
-        <enum value="0x8578" name="GL_PREVIOUS_ARB"/>
-        <enum value="0x8578" name="GL_PREVIOUS_EXT"/>
+        <enum value="0x8577" name="GL_PRIMARY_COLOR" group="PathColor,TextureEnvParameter"/>
+        <enum value="0x8577" name="GL_PRIMARY_COLOR_ARB" group="TextureEnvParameter"/>
+        <enum value="0x8577" name="GL_PRIMARY_COLOR_EXT" group="TextureEnvParameter"/>
+        <enum value="0x8578" name="GL_PREVIOUS" group="TextureEnvParameter"/>
+        <enum value="0x8578" name="GL_PREVIOUS_ARB" group="TextureEnvParameter"/>
+        <enum value="0x8578" name="GL_PREVIOUS_EXT" group="TextureEnvParameter"/>
             <unused start="0x8579" end="0x857F" comment="Additional combiner enums only"/>
-        <enum value="0x8580" name="GL_SOURCE0_RGB"/>
-        <enum value="0x8580" name="GL_SOURCE0_RGB_ARB"/>
-        <enum value="0x8580" name="GL_SOURCE0_RGB_EXT"/>
-        <enum value="0x8580" name="GL_SRC0_RGB" alias="GL_SOURCE0_RGB"/>
-        <enum value="0x8581" name="GL_SOURCE1_RGB"/>
-        <enum value="0x8581" name="GL_SOURCE1_RGB_ARB"/>
-        <enum value="0x8581" name="GL_SOURCE1_RGB_EXT"/>
-        <enum value="0x8581" name="GL_SRC1_RGB" alias="GL_SOURCE1_RGB"/>
-        <enum value="0x8582" name="GL_SOURCE2_RGB"/>
-        <enum value="0x8582" name="GL_SOURCE2_RGB_ARB"/>
-        <enum value="0x8582" name="GL_SOURCE2_RGB_EXT"/>
-        <enum value="0x8582" name="GL_SRC2_RGB" alias="GL_SOURCE2_RGB"/>
+        <enum value="0x8580" name="GL_SOURCE0_RGB" group="TextureEnvParameter"/>
+        <enum value="0x8580" name="GL_SOURCE0_RGB_ARB" group="TextureEnvParameter"/>
+        <enum value="0x8580" name="GL_SOURCE0_RGB_EXT" group="TextureEnvParameter"/>
+        <enum value="0x8580" name="GL_SRC0_RGB" alias="GL_SOURCE0_RGB" group="TextureEnvParameter"/>
+        <enum value="0x8581" name="GL_SOURCE1_RGB" group="TextureEnvParameter"/>
+        <enum value="0x8581" name="GL_SOURCE1_RGB_ARB" group="TextureEnvParameter"/>
+        <enum value="0x8581" name="GL_SOURCE1_RGB_EXT" group="TextureEnvParameter"/>
+        <enum value="0x8581" name="GL_SRC1_RGB" alias="GL_SOURCE1_RGB" group="TextureEnvParameter"/>
+        <enum value="0x8582" name="GL_SOURCE2_RGB" group="TextureEnvParameter"/>
+        <enum value="0x8582" name="GL_SOURCE2_RGB_ARB" group="TextureEnvParameter"/>
+        <enum value="0x8582" name="GL_SOURCE2_RGB_EXT" group="TextureEnvParameter"/>
+        <enum value="0x8582" name="GL_SRC2_RGB" alias="GL_SOURCE2_RGB" group="TextureEnvParameter"/>
         <enum value="0x8583" name="GL_SOURCE3_RGB_NV"/>
             <unused start="0x8584" end="0x8587" comment="Additional combiner enums only"/>
-        <enum value="0x8588" name="GL_SOURCE0_ALPHA"/>
-        <enum value="0x8588" name="GL_SOURCE0_ALPHA_ARB"/>
-        <enum value="0x8588" name="GL_SOURCE0_ALPHA_EXT"/>
-        <enum value="0x8588" name="GL_SRC0_ALPHA" alias="GL_SOURCE0_ALPHA"/>
-        <enum value="0x8589" name="GL_SOURCE1_ALPHA"/>
-        <enum value="0x8589" name="GL_SOURCE1_ALPHA_ARB"/>
-        <enum value="0x8589" name="GL_SOURCE1_ALPHA_EXT"/>
-        <enum value="0x8589" name="GL_SRC1_ALPHA" alias="GL_SOURCE1_ALPHA" group="BlendingFactor"/>
-        <enum value="0x8589" name="GL_SRC1_ALPHA_EXT"/>
-        <enum value="0x858A" name="GL_SOURCE2_ALPHA"/>
-        <enum value="0x858A" name="GL_SOURCE2_ALPHA_ARB"/>
-        <enum value="0x858A" name="GL_SOURCE2_ALPHA_EXT"/>
-        <enum value="0x858A" name="GL_SRC2_ALPHA" alias="GL_SOURCE2_ALPHA"/>
+        <enum value="0x8588" name="GL_SOURCE0_ALPHA" group="TextureEnvParameter"/>
+        <enum value="0x8588" name="GL_SOURCE0_ALPHA_ARB" group="TextureEnvParameter"/>
+        <enum value="0x8588" name="GL_SOURCE0_ALPHA_EXT" group="TextureEnvParameter"/>
+        <enum value="0x8588" name="GL_SRC0_ALPHA" alias="GL_SOURCE0_ALPHA" group="TextureEnvParameter"/>
+        <enum value="0x8589" name="GL_SOURCE1_ALPHA" group="TextureEnvParameter"/>
+        <enum value="0x8589" name="GL_SOURCE1_ALPHA_ARB" group="TextureEnvParameter"/>
+        <enum value="0x8589" name="GL_SOURCE1_ALPHA_EXT" group="TextureEnvParameter"/>
+        <enum value="0x8589" name="GL_SRC1_ALPHA" alias="GL_SOURCE1_ALPHA" group="BlendingFactor,TextureEnvParameter"/>
+        <enum value="0x8589" name="GL_SRC1_ALPHA_EXT" group="TextureEnvParameter"/>
+        <enum value="0x858A" name="GL_SOURCE2_ALPHA" group="TextureEnvParameter"/>
+        <enum value="0x858A" name="GL_SOURCE2_ALPHA_ARB" group="TextureEnvParameter"/>
+        <enum value="0x858A" name="GL_SOURCE2_ALPHA_EXT" group="TextureEnvParameter"/>
+        <enum value="0x858A" name="GL_SRC2_ALPHA" alias="GL_SOURCE2_ALPHA" group="TextureEnvParameter"/>
         <enum value="0x858B" name="GL_SOURCE3_ALPHA_NV"/>
             <unused start="0x858C" end="0x858F" comment="Additional combiner enums only"/>
-        <enum value="0x8590" name="GL_OPERAND0_RGB"/>
-        <enum value="0x8590" name="GL_OPERAND0_RGB_ARB"/>
-        <enum value="0x8590" name="GL_OPERAND0_RGB_EXT"/>
-        <enum value="0x8591" name="GL_OPERAND1_RGB"/>
-        <enum value="0x8591" name="GL_OPERAND1_RGB_ARB"/>
-        <enum value="0x8591" name="GL_OPERAND1_RGB_EXT"/>
-        <enum value="0x8592" name="GL_OPERAND2_RGB"/>
-        <enum value="0x8592" name="GL_OPERAND2_RGB_ARB"/>
-        <enum value="0x8592" name="GL_OPERAND2_RGB_EXT"/>
+        <enum value="0x8590" name="GL_OPERAND0_RGB" group="TextureEnvParameter"/>
+        <enum value="0x8590" name="GL_OPERAND0_RGB_ARB" group="TextureEnvParameter"/>
+        <enum value="0x8590" name="GL_OPERAND0_RGB_EXT" group="TextureEnvParameter"/>
+        <enum value="0x8591" name="GL_OPERAND1_RGB" group="TextureEnvParameter"/>
+        <enum value="0x8591" name="GL_OPERAND1_RGB_ARB" group="TextureEnvParameter"/>
+        <enum value="0x8591" name="GL_OPERAND1_RGB_EXT" group="TextureEnvParameter"/>
+        <enum value="0x8592" name="GL_OPERAND2_RGB" group="TextureEnvParameter"/>
+        <enum value="0x8592" name="GL_OPERAND2_RGB_ARB" group="TextureEnvParameter"/>
+        <enum value="0x8592" name="GL_OPERAND2_RGB_EXT" group="TextureEnvParameter"/>
         <enum value="0x8593" name="GL_OPERAND3_RGB_NV"/>
             <unused start="0x8594" end="0x8597" comment="Additional combiner enums only"/>
-        <enum value="0x8598" name="GL_OPERAND0_ALPHA"/>
-        <enum value="0x8598" name="GL_OPERAND0_ALPHA_ARB"/>
-        <enum value="0x8598" name="GL_OPERAND0_ALPHA_EXT"/>
-        <enum value="0x8599" name="GL_OPERAND1_ALPHA"/>
-        <enum value="0x8599" name="GL_OPERAND1_ALPHA_ARB"/>
-        <enum value="0x8599" name="GL_OPERAND1_ALPHA_EXT"/>
-        <enum value="0x859A" name="GL_OPERAND2_ALPHA"/>
-        <enum value="0x859A" name="GL_OPERAND2_ALPHA_ARB"/>
-        <enum value="0x859A" name="GL_OPERAND2_ALPHA_EXT"/>
+        <enum value="0x8598" name="GL_OPERAND0_ALPHA" group="TextureEnvParameter"/>
+        <enum value="0x8598" name="GL_OPERAND0_ALPHA_ARB" group="TextureEnvParameter"/>
+        <enum value="0x8598" name="GL_OPERAND0_ALPHA_EXT" group="TextureEnvParameter"/>
+        <enum value="0x8599" name="GL_OPERAND1_ALPHA" group="TextureEnvParameter"/>
+        <enum value="0x8599" name="GL_OPERAND1_ALPHA_ARB" group="TextureEnvParameter"/>
+        <enum value="0x8599" name="GL_OPERAND1_ALPHA_EXT" group="TextureEnvParameter"/>
+        <enum value="0x859A" name="GL_OPERAND2_ALPHA" group="TextureEnvParameter"/>
+        <enum value="0x859A" name="GL_OPERAND2_ALPHA_ARB" group="TextureEnvParameter"/>
+        <enum value="0x859A" name="GL_OPERAND2_ALPHA_EXT" group="TextureEnvParameter"/>
         <enum value="0x859B" name="GL_OPERAND3_ALPHA_NV"/>
             <unused start="0x859C" end="0x859F" comment="Additional combiner enums only"/>
     </enums>
@@ -7873,7 +7873,7 @@ typedef unsigned int GLhandleARB;
     </enums>
 
     <enums namespace="GL" start="0x8620" end="0x867F" vendor="NV">
-        <enum value="0x8620" name="GL_VERTEX_PROGRAM_ARB" group="ProgramTarget"/>
+        <enum value="0x8620" name="GL_VERTEX_PROGRAM_ARB" group="ProgramTarget,EnableCap"/>
         <enum value="0x8620" name="GL_VERTEX_PROGRAM_NV"/>
         <enum value="0x8621" name="GL_VERTEX_STATE_PROGRAM_NV"/>
         <enum value="0x8622" name="GL_VERTEX_ATTRIB_ARRAY_ENABLED" group="VertexAttribEnum,VertexAttribPropertyARB,VertexArrayPName"/>
@@ -7942,7 +7942,7 @@ typedef unsigned int GLhandleARB;
         <enum value="0x8648" name="GL_TRACK_MATRIX_NV"/>
         <enum value="0x8649" name="GL_TRACK_MATRIX_TRANSFORM_NV"/>
         <enum value="0x864A" name="GL_VERTEX_PROGRAM_BINDING_NV"/>
-        <enum value="0x864B" name="GL_PROGRAM_ERROR_POSITION_ARB"/>
+        <enum value="0x864B" name="GL_PROGRAM_ERROR_POSITION_ARB" group="GetPName"/>
         <enum value="0x864B" name="GL_PROGRAM_ERROR_POSITION_NV"/>
         <enum value="0x864C" name="GL_OFFSET_TEXTURE_RECTANGLE_NV"/>
         <enum value="0x864D" name="GL_OFFSET_TEXTURE_RECTANGLE_SCALE_NV"/>
@@ -8399,7 +8399,7 @@ typedef unsigned int GLhandleARB;
         <enum value="0x8802" name="GL_STENCIL_BACK_PASS_DEPTH_FAIL_ATI"/>
         <enum value="0x8803" name="GL_STENCIL_BACK_PASS_DEPTH_PASS" group="GetPName"/>
         <enum value="0x8803" name="GL_STENCIL_BACK_PASS_DEPTH_PASS_ATI"/>
-        <enum value="0x8804" name="GL_FRAGMENT_PROGRAM_ARB" group="ProgramTarget"/>
+        <enum value="0x8804" name="GL_FRAGMENT_PROGRAM_ARB" group="ProgramTarget,EnableCap"/>
         <enum value="0x8805" name="GL_PROGRAM_ALU_INSTRUCTIONS_ARB"/>
         <enum value="0x8806" name="GL_PROGRAM_TEX_INSTRUCTIONS_ARB"/>
         <enum value="0x8807" name="GL_PROGRAM_TEX_INDIRECTIONS_ARB"/>
@@ -8619,12 +8619,12 @@ typedef unsigned int GLhandleARB;
         <enum value="0x885E" name="GL_HILO8_NV"/>
         <enum value="0x885F" name="GL_SIGNED_HILO8_NV"/>
         <enum value="0x8860" name="GL_FORCE_BLUE_TO_ONE_NV"/>
-        <enum value="0x8861" name="GL_POINT_SPRITE"/>
-        <enum value="0x8861" name="GL_POINT_SPRITE_ARB"/>
+        <enum value="0x8861" name="GL_POINT_SPRITE" group="TextureEnvTarget,EnableCap"/>
+        <enum value="0x8861" name="GL_POINT_SPRITE_ARB" group="TextureEnvTarget,EnableCap"/>
         <enum value="0x8861" name="GL_POINT_SPRITE_NV"/>
         <enum value="0x8861" name="GL_POINT_SPRITE_OES"/>
-        <enum value="0x8862" name="GL_COORD_REPLACE"/>
-        <enum value="0x8862" name="GL_COORD_REPLACE_ARB"/>
+        <enum value="0x8862" name="GL_COORD_REPLACE" group="TextureEnvTarget"/>
+        <enum value="0x8862" name="GL_COORD_REPLACE_ARB" group="TextureEnvTarget"/>
         <enum value="0x8862" name="GL_COORD_REPLACE_NV"/>
         <enum value="0x8862" name="GL_COORD_REPLACE_OES"/>
         <enum value="0x8863" name="GL_POINT_SPRITE_R_MODE_NV"/>
@@ -8659,8 +8659,8 @@ typedef unsigned int GLhandleARB;
         <enum value="0x886E" name="GL_DEPTH_STENCIL_TO_RGBA_NV"/>
         <enum value="0x886F" name="GL_DEPTH_STENCIL_TO_BGRA_NV"/>
         <enum value="0x8870" name="GL_FRAGMENT_PROGRAM_NV"/>
-        <enum value="0x8871" name="GL_MAX_TEXTURE_COORDS"/>
-        <enum value="0x8871" name="GL_MAX_TEXTURE_COORDS_ARB"/>
+        <enum value="0x8871" name="GL_MAX_TEXTURE_COORDS" group="GetPName"/>
+        <enum value="0x8871" name="GL_MAX_TEXTURE_COORDS_ARB" group="GetPName"/>
         <enum value="0x8871" name="GL_MAX_TEXTURE_COORDS_NV"/>
         <enum value="0x8872" name="GL_MAX_TEXTURE_IMAGE_UNITS" group="GetPName"/>
         <enum value="0x8872" name="GL_MAX_TEXTURE_IMAGE_UNITS_ARB"/>
@@ -9627,8 +9627,8 @@ typedef unsigned int GLhandleARB;
         <enum value="0x8CDD" name="GL_FRAMEBUFFER_UNSUPPORTED_OES"/>
             <unused start="0x8CDE" vendor="ARB" comment="Removed 2005/05/31 in revision #113 of the FBO extension spec"/>
             <!-- <enum value="0x8CDE" name="GL_FRAMEBUFFER_STATUS_ERROR_EXT"/> -->
-        <enum value="0x8CDF" name="GL_MAX_COLOR_ATTACHMENTS"/>
-        <enum value="0x8CDF" name="GL_MAX_COLOR_ATTACHMENTS_EXT"/>
+        <enum value="0x8CDF" name="GL_MAX_COLOR_ATTACHMENTS" group="GetPName"/>
+        <enum value="0x8CDF" name="GL_MAX_COLOR_ATTACHMENTS_EXT" group="GetPName"/>
         <enum value="0x8CDF" name="GL_MAX_COLOR_ATTACHMENTS_NV"/>
         <enum value="0x8CE0" name="GL_COLOR_ATTACHMENT0" group="ColorBuffer,DrawBufferMode,ReadBufferMode,FramebufferAttachment,InvalidateFramebufferAttachment"/>
         <enum value="0x8CE0" name="GL_COLOR_ATTACHMENT0_EXT" group="InvalidateFramebufferAttachment"/>
@@ -9695,8 +9695,8 @@ typedef unsigned int GLhandleARB;
         <enum value="0x8CFD" name="GL_COLOR_ATTACHMENT29" group="ColorBuffer,DrawBufferMode,FramebufferAttachment,InvalidateFramebufferAttachment"/>
         <enum value="0x8CFE" name="GL_COLOR_ATTACHMENT30" group="ColorBuffer,DrawBufferMode,FramebufferAttachment,InvalidateFramebufferAttachment"/>
         <enum value="0x8CFF" name="GL_COLOR_ATTACHMENT31" group="ColorBuffer,DrawBufferMode,FramebufferAttachment,InvalidateFramebufferAttachment"/>
-        <enum value="0x8D00" name="GL_DEPTH_ATTACHMENT" group="InvalidateFramebufferAttachment"/>
-        <enum value="0x8D00" name="GL_DEPTH_ATTACHMENT_EXT" group="InvalidateFramebufferAttachment"/>
+        <enum value="0x8D00" name="GL_DEPTH_ATTACHMENT" group="InvalidateFramebufferAttachment,FramebufferAttachment"/>
+        <enum value="0x8D00" name="GL_DEPTH_ATTACHMENT_EXT" group="InvalidateFramebufferAttachment,FramebufferAttachment"/>
         <enum value="0x8D00" name="GL_DEPTH_ATTACHMENT_OES" group="InvalidateFramebufferAttachment"/>
             <unused start="0x8D01" end="0x8D1F" vendor="ARB" comment="For depth attachments 16-31"/>
         <enum value="0x8D20" name="GL_STENCIL_ATTACHMENT" group="FramebufferAttachment"/>
