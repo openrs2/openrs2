@@ -20,7 +20,7 @@ simply doesn't provide enough features.
 
 ## Why rewrite the client's native libraries?
 
-Again, there are a mixture of reasons:
+There are a mixture of reasons:
 
 * Availability of the original native libraries. I struggled to find the
   original native libraries for 550, except for 32-bit Windows. While Linux and
