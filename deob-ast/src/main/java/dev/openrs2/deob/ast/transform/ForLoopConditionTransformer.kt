@@ -7,7 +7,10 @@ import dev.openrs2.deob.ast.util.hasSideEffects
 import dev.openrs2.deob.ast.util.walk
 
 class ForLoopConditionTransformer : Transformer() {
-    override fun transform(unit: CompilationUnit) {
+    override fun transformUnit(
+        units: Map<String, CompilationUnit>,
+        unit: CompilationUnit
+    ) {
         unit.walk { stmt: ForStmt ->
             stmt.compare.ifPresent { compare ->
                 if (!compare.isBinaryExpr) {

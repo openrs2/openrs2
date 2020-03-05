@@ -12,7 +12,10 @@ import dev.openrs2.deob.ast.util.isIntegerOrLongLiteral
 import dev.openrs2.deob.ast.util.walk
 
 class ComplementTransformer : Transformer() {
-    override fun transform(unit: CompilationUnit) {
+    override fun transformUnit(
+        units: Map<String, CompilationUnit>,
+        unit: CompilationUnit
+    ) {
         unit.walk { expr: BinaryExpr ->
             val op = complement(expr.operator) ?: return@walk
 

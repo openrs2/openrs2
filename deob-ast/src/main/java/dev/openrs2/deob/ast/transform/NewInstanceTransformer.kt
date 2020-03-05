@@ -5,7 +5,10 @@ import com.github.javaparser.ast.expr.MethodCallExpr
 import dev.openrs2.deob.ast.util.walk
 
 class NewInstanceTransformer : Transformer() {
-    override fun transform(unit: CompilationUnit) {
+    override fun transformUnit(
+        units: Map<String, CompilationUnit>,
+        unit: CompilationUnit
+    ) {
         unit.walk { expr: MethodCallExpr ->
             if (expr.nameAsString != "newInstance") {
                 return@walk

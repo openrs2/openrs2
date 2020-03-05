@@ -7,7 +7,10 @@ import dev.openrs2.deob.ast.util.not
 import dev.openrs2.deob.ast.util.walk
 
 class TernaryTransformer : Transformer() {
-    override fun transform(unit: CompilationUnit) {
+    override fun transformUnit(
+        units: Map<String, CompilationUnit>,
+        unit: CompilationUnit
+    ) {
         unit.walk { expr: ConditionalExpr ->
             val condition = expr.condition
             val notCondition = condition.not()

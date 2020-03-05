@@ -59,20 +59,26 @@ class AstDeobfuscator(private val modules: List<Path>) {
 
         val printer = PrettyPrinter(printerConfig)
 
-        for (module in modules) {
-            val root = SourceRoot(module, config)
+        val roots = modules.map { SourceRoot(it, config) }
+        val units = mutableMapOf<String, CompilationUnit>()
 
+        for (root in roots) {
             val results = root.tryToParseParallelized()
             for (result in results) {
                 require(result.isSuccessful) { result }
             }
 
             for (unit in root.compilationUnits) {
-                for (transformer in TRANSFORMERS) {
-                    transformer.transform(unit)
-                }
+                val name = unit.primaryType.orElseThrow().fullyQualifiedName.orElseThrow()
+                units[name] = unit
             }
+        }
 
+        for (transformer in TRANSFORMERS) {
+            transformer.transform(units)
+        }
+
+        for (root in roots) {
             root.printer = Function<CompilationUnit, String>(printer::print)
             root.saveAll()
         }

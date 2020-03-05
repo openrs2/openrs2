@@ -7,7 +7,10 @@ import dev.openrs2.deob.ast.util.negate
 import dev.openrs2.deob.ast.util.walk
 
 class NegativeLiteralTransformer : Transformer() {
-    override fun transform(unit: CompilationUnit) {
+    override fun transformUnit(
+        units: Map<String, CompilationUnit>,
+        unit: CompilationUnit
+    ) {
         unit.walk { expr: UnaryExpr ->
             val operand = expr.expression
             if (!operand.isIntegerOrLongLiteral()) {

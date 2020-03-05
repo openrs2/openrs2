@@ -12,7 +12,10 @@ import dev.openrs2.deob.ast.util.negate
 import dev.openrs2.deob.ast.util.walk
 
 class AddSubTransformer : Transformer() {
-    override fun transform(unit: CompilationUnit) {
+    override fun transformUnit(
+        units: Map<String, CompilationUnit>,
+        unit: CompilationUnit
+    ) {
         unit.walk { expr: BinaryExpr ->
             val op = expr.operator
             val left = expr.left

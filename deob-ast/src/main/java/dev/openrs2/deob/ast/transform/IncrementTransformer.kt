@@ -7,7 +7,10 @@ import com.github.javaparser.ast.stmt.ForStmt
 import dev.openrs2.deob.ast.util.walk
 
 class IncrementTransformer : Transformer() {
-    override fun transform(unit: CompilationUnit) {
+    override fun transformUnit(
+        units: Map<String, CompilationUnit>,
+        unit: CompilationUnit
+    ) {
         unit.walk { stmt: ExpressionStmt ->
             if (!stmt.expression.isUnaryExpr) {
                 return@walk

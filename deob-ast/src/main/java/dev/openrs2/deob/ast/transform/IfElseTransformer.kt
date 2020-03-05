@@ -9,7 +9,10 @@ import dev.openrs2.deob.ast.util.not
 import dev.openrs2.deob.ast.util.walk
 
 class IfElseTransformer : Transformer() {
-    override fun transform(unit: CompilationUnit) {
+    override fun transformUnit(
+        units: Map<String, CompilationUnit>,
+        unit: CompilationUnit
+    ) {
         unit.walk { stmt: IfStmt ->
             stmt.elseStmt.ifPresent { elseStmt: Statement ->
                 val condition = stmt.condition

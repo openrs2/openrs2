@@ -71,7 +71,10 @@ class EncloseTransformer : Transformer() {
         }
     }
 
-    override fun transform(unit: CompilationUnit) {
+    override fun transformUnit(
+        units: Map<String, CompilationUnit>,
+        unit: CompilationUnit
+    ) {
         unit.walk { expr: Expression ->
             when {
                 expr.isArrayAccessExpr -> {

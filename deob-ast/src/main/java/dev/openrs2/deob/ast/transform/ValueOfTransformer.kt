@@ -7,7 +7,10 @@ import com.github.javaparser.ast.expr.TypeExpr
 import dev.openrs2.deob.ast.util.walk
 
 class ValueOfTransformer : Transformer() {
-    override fun transform(unit: CompilationUnit) {
+    override fun transformUnit(
+        units: Map<String, CompilationUnit>,
+        unit: CompilationUnit
+    ) {
         unit.walk { expr: ObjectCreationExpr ->
             if (expr.type.isBoxedType) {
                 expr.replace(MethodCallExpr(TypeExpr(expr.type), "valueOf", expr.arguments))

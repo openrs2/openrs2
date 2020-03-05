@@ -6,7 +6,10 @@ import dev.openrs2.deob.ast.util.isString
 import dev.openrs2.deob.ast.util.walk
 
 class BinaryExprOrderTransformer : Transformer() {
-    override fun transform(unit: CompilationUnit) {
+    override fun transformUnit(
+        units: Map<String, CompilationUnit>,
+        unit: CompilationUnit
+    ) {
         unit.walk { expr: BinaryExpr ->
             val op = expr.operator.flip() ?: return@walk
 

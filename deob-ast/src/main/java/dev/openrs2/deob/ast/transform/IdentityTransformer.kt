@@ -7,7 +7,10 @@ import com.github.javaparser.ast.expr.UnaryExpr
 import dev.openrs2.deob.ast.util.walk
 
 class IdentityTransformer : Transformer() {
-    override fun transform(unit: CompilationUnit) {
+    override fun transformUnit(
+        units: Map<String, CompilationUnit>,
+        unit: CompilationUnit
+    ) {
         unit.walk { expr: BinaryExpr ->
             @Suppress("NON_EXHAUSTIVE_WHEN")
             when (expr.operator) {
