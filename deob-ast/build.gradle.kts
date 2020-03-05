@@ -11,6 +11,7 @@ application {
 dependencies {
     implementation(project(":common"))
     implementation("com.github.javaparser:javaparser-symbol-solver-core:${Versions.javaParser}")
+    implementation("org.jdom:jdom2:${Versions.jdom}")
 }
 
 publishing {
