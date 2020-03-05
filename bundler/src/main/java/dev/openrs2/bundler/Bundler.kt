@@ -31,7 +31,7 @@ fun main() {
 
 @Singleton
 class Bundler @Inject constructor(publicKeyTransformer: PublicKeyTransformer) {
-    private val transformers = listOf(*TRANSFORMERS.toTypedArray(), publicKeyTransformer)
+    private val transformers = TRANSFORMERS + publicKeyTransformer
 
     fun run(input: Path, output: Path, keyStorePath: Path) {
         // read input jars/packs
@@ -110,10 +110,8 @@ class Bundler @Inject constructor(publicKeyTransformer: PublicKeyTransformer) {
             glClientPack,
             glClientJs5,
             glPack,
-            glJs5,
-            *glNatives.flatten().toTypedArray(),
-            *miscNatives.toTypedArray()
-        )
+            glJs5
+        ) + glNatives.flatten() + miscNatives
         for (resource in resources) {
             resource.write(output)
         }
