@@ -70,7 +70,7 @@ class AstDeobfuscator(private val modules: List<Path>) {
             }
 
             for (unit in root.compilationUnits) {
-                val name = unit.primaryType.orElseThrow().fullyQualifiedName.orElseThrow()
+                val name = unit.primaryType.get().fullyQualifiedName.get()
                 units[name] = unit
             }
         }
@@ -80,7 +80,7 @@ class AstDeobfuscator(private val modules: List<Path>) {
         }
 
         for (root in roots) {
-            root.printer = Function<CompilationUnit, String>(printer::print)
+            root.printer = Function(printer::print)
             root.saveAll()
         }
     }

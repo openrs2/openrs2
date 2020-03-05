@@ -58,7 +58,7 @@ class GlConstantTransformer : Transformer() {
 
     override fun postTransform(units: Map<String, CompilationUnit>) {
         val glUnit = units[GL_CLASS] ?: return
-        val glInterface = glUnit.primaryType.orElseThrow()
+        val glInterface = glUnit.primaryType.get()
 
         // remove existing declarations first to maintain sort order
         for (enum in enums) {
