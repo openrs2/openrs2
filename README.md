@@ -93,7 +93,7 @@ the commit history is tidy.
 
 OpenRS2 uses version 1.1 of the [Developer Certificate of Origin][dco] (DCO) to
 certify that contributors agree to license their code under OpenRS2's license
-(see the Copyright section below). To confirm that a contribution meets the
+(see the License section below). To confirm that a contribution meets the
 requirements of the DCO, a `Signed-off-by:` line must be added to the Git
 commit message by passing `--signoff` to the `git commit` invocation.
 
