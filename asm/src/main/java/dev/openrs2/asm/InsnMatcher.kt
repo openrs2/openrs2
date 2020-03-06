@@ -12,9 +12,17 @@ class InsnMatcher private constructor(private val regex: Regex) {
     }
 
     fun match(list: InsnList): Sequence<List<AbstractInsnNode>> {
-        val insns = list.filter { it.opcode != -1 }.toList()
-        val codepoints = insns.map { opcodeToCodepoint(it.opcode) }.toCharArray()
-        return regex.findAll(String(codepoints)).map {
+        val insns = ArrayList<AbstractInsnNode>(list.size())
+        val builder = StringBuilder(list.size())
+
+        for (instruction in list) {
+            if (instruction.opcode != -1) {
+                insns += instruction
+                builder.append(opcodeToCodepoint(instruction.opcode))
+            }
+        }
+
+        return regex.findAll(builder).map {
             insns.subList(it.range.first, it.range.last + 1)
         }
     }
