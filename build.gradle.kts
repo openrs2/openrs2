@@ -21,8 +21,8 @@ allprojects {
     repositories {
         mavenCentral()
         maven(url = "https://repo.openrs2.dev/repository/openrs2")
-        maven(url = "https://repo.openrs2.dev/repository/openrs2-snapshots")
         mavenLocal()
+        maven(url = "https://repo.openrs2.dev/repository/openrs2-snapshots")
     }
 
     plugins.withType<BasePlugin> {
