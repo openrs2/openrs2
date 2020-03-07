@@ -63,8 +63,8 @@ private fun Remapper.mapFrameType(type: Any): Any {
 private fun AbstractInsnNode.remap(remapper: Remapper) {
     when (this) {
         is FrameNode -> {
-            local = local.map(remapper::mapFrameType)
-            stack = stack.map(remapper::mapFrameType)
+            local = local?.map(remapper::mapFrameType)
+            stack = stack?.map(remapper::mapFrameType)
         }
         is FieldInsnNode -> {
             val originalOwner = owner
