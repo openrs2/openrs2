@@ -96,15 +96,7 @@ fun MethodNode.removeArgument(argIndex: Int) {
         when (insn) {
             is VarInsnNode -> insn.`var` = remap(insn.`var`, argType, localIndex)
             is IincInsnNode -> insn.`var` = remap(insn.`var`, argType, localIndex)
-            is FrameNode -> {
-                if (insn.type != Opcodes.F_NEW) {
-                    throw UnsupportedOperationException("Only F_NEW frames are supported")
-                }
-
-                for (i in 0 until argType.size) {
-                    insn.local.removeAt(localIndex)
-                }
-            }
+            is FrameNode -> throw UnsupportedOperationException("SKIP_FRAMES and COMPUTE_FRAMES must be used")
         }
     }
 }

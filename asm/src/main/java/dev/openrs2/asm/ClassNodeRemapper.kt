@@ -45,20 +45,9 @@ fun ClassNode.remap(remapper: Remapper) {
     }
 }
 
-private fun Remapper.mapFrameType(type: Any?): Any? {
-    return if (type is String) {
-        mapType(type)
-    } else {
-        type
-    }
-}
-
 private fun AbstractInsnNode.remap(remapper: Remapper) {
     when (this) {
-        is FrameNode -> {
-            local = local?.map(remapper::mapFrameType)
-            stack = stack?.map(remapper::mapFrameType)
-        }
+        is FrameNode -> throw UnsupportedOperationException("SKIP_FRAMES and COMPUTE_FRAMES must be used")
         is FieldInsnNode -> {
             val originalOwner = owner
             owner = remapper.mapType(originalOwner)
