@@ -9222,32 +9222,32 @@ typedef unsigned int GLhandleARB;
 
     <enums namespace="GL" start="0x8B80" end="0x8B8F" vendor="ARB">
         <enum value="0x8B80" name="GL_DELETE_STATUS" group="ProgramPropertyARB,ShaderParameterName"/>
-        <enum value="0x8B80" name="GL_OBJECT_DELETE_STATUS_ARB"/>
-        <enum value="0x8B81" name="GL_COMPILE_STATUS" group="ShaderParameterName"/>
-        <enum value="0x8B81" name="GL_OBJECT_COMPILE_STATUS_ARB"/>
+        <enum value="0x8B80" name="GL_OBJECT_DELETE_STATUS_ARB" group="ProgramPropertyARB"/>
+        <enum value="0x8B81" name="GL_COMPILE_STATUS" group="ProgramPropertyARB,ShaderParameterName"/>
+        <enum value="0x8B81" name="GL_OBJECT_COMPILE_STATUS_ARB" group="ProgramPropertyARB"/>
         <enum value="0x8B82" name="GL_LINK_STATUS" group="ProgramPropertyARB"/>
-        <enum value="0x8B82" name="GL_OBJECT_LINK_STATUS_ARB"/>
+        <enum value="0x8B82" name="GL_OBJECT_LINK_STATUS_ARB" group="ProgramPropertyARB"/>
         <enum value="0x8B83" name="GL_VALIDATE_STATUS" group="ProgramPropertyARB"/>
-        <enum value="0x8B83" name="GL_OBJECT_VALIDATE_STATUS_ARB"/>
+        <enum value="0x8B83" name="GL_OBJECT_VALIDATE_STATUS_ARB" group="ProgramPropertyARB"/>
         <enum value="0x8B84" name="GL_INFO_LOG_LENGTH" group="ProgramPropertyARB,ShaderParameterName,PipelineParameterName"/>
-        <enum value="0x8B84" name="GL_OBJECT_INFO_LOG_LENGTH_ARB"/>
+        <enum value="0x8B84" name="GL_OBJECT_INFO_LOG_LENGTH_ARB" group="ProgramPropertyARB"/>
         <enum value="0x8B85" name="GL_ATTACHED_SHADERS" group="ProgramPropertyARB"/>
-        <enum value="0x8B85" name="GL_OBJECT_ATTACHED_OBJECTS_ARB"/>
+        <enum value="0x8B85" name="GL_OBJECT_ATTACHED_OBJECTS_ARB" group="ProgramPropertyARB"/>
         <enum value="0x8B86" name="GL_ACTIVE_UNIFORMS" group="ProgramPropertyARB"/>
-        <enum value="0x8B86" name="GL_OBJECT_ACTIVE_UNIFORMS_ARB"/>
+        <enum value="0x8B86" name="GL_OBJECT_ACTIVE_UNIFORMS_ARB" group="ProgramPropertyARB"/>
         <enum value="0x8B87" name="GL_ACTIVE_UNIFORM_MAX_LENGTH" group="ProgramPropertyARB"/>
-        <enum value="0x8B87" name="GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH_ARB"/>
+        <enum value="0x8B87" name="GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH_ARB" group="ProgramPropertyARB"/>
         <enum value="0x8B88" name="GL_SHADER_SOURCE_LENGTH" group="ShaderParameterName"/>
-        <enum value="0x8B88" name="GL_OBJECT_SHADER_SOURCE_LENGTH_ARB"/>
+        <enum value="0x8B88" name="GL_OBJECT_SHADER_SOURCE_LENGTH_ARB" group="ProgramPropertyARB"/>
         <enum value="0x8B89" name="GL_ACTIVE_ATTRIBUTES" group="ProgramPropertyARB"/>
-        <enum value="0x8B89" name="GL_OBJECT_ACTIVE_ATTRIBUTES_ARB"/>
+        <enum value="0x8B89" name="GL_OBJECT_ACTIVE_ATTRIBUTES_ARB" group="ProgramPropertyARB"/>
         <enum value="0x8B8A" name="GL_ACTIVE_ATTRIBUTE_MAX_LENGTH" group="ProgramPropertyARB"/>
-        <enum value="0x8B8A" name="GL_OBJECT_ACTIVE_ATTRIBUTE_MAX_LENGTH_ARB"/>
+        <enum value="0x8B8A" name="GL_OBJECT_ACTIVE_ATTRIBUTE_MAX_LENGTH_ARB" group="ProgramPropertyARB"/>
         <enum value="0x8B8B" name="GL_FRAGMENT_SHADER_DERIVATIVE_HINT" group="HintTarget,GetPName"/>
         <enum value="0x8B8B" name="GL_FRAGMENT_SHADER_DERIVATIVE_HINT_ARB" group="HintTarget"/>
         <enum value="0x8B8B" name="GL_FRAGMENT_SHADER_DERIVATIVE_HINT_OES" group="HintTarget"/>
         <enum value="0x8B8C" name="GL_SHADING_LANGUAGE_VERSION" group="StringName"/>
-        <enum value="0x8B8C" name="GL_SHADING_LANGUAGE_VERSION_ARB"/>
+        <enum value="0x8B8C" name="GL_SHADING_LANGUAGE_VERSION_ARB" group="StringName"/>
         <enum value="0x8B8D" name="GL_CURRENT_PROGRAM" group="GetPName"/>
         <enum value="0x8B8D" api="gl" name="GL_ACTIVE_PROGRAM_EXT" alias="GL_CURRENT_PROGRAM" comment="For the OpenGL version of EXT_separate_shader_objects"/>
             <unused start="0x8B8E" end="0x8B8F" vendor="ARB"/>
