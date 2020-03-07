@@ -6,6 +6,7 @@ import dev.openrs2.asm.MemberRef
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
 import dev.openrs2.asm.transform.Transformer
+import dev.openrs2.common.collect.DisjointSet
 import dev.openrs2.deob.remap.TypedRemapper
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
@@ -27,9 +28,11 @@ class StaticScramblingTransformer : Transformer() {
             ?.mapTo(mutableSetOf(), ::MemberRef) ?: emptySet<MemberRef>()
     }
 
+    private lateinit var inheritedFieldSets: DisjointSet<MemberRef>
+    private lateinit var inheritedMethodSets: DisjointSet<MemberRef>
     private val fieldSets = mutableMapOf<MemberRef, FieldSet>()
-    private val fieldClasses = mutableMapOf<MemberRef, String>()
-    private val methodClasses = mutableMapOf<MemberRef, String>()
+    private val fieldClasses = mutableMapOf<DisjointSet.Partition<MemberRef>, String>()
+    private val methodClasses = mutableMapOf<DisjointSet.Partition<MemberRef>, String>()
     private var nextStaticClass: ClassNode? = null
     private var nextClinit: MethodNode? = null
     private val staticClasses = mutableListOf<ClassNode>()
@@ -115,12 +118,14 @@ class StaticScramblingTransformer : Transformer() {
         }
 
         for (field in fieldSet.fields) {
-            val ref = MemberRef(fieldSet.owner, field)
-            fieldClasses[ref] = staticClass.name
+            val partition = inheritedFieldSets[MemberRef(fieldSet.owner, field)]!!
+            fieldClasses[partition] = staticClass.name
         }
     }
 
     override fun preTransform(classPath: ClassPath) {
+        inheritedFieldSets = classPath.createInheritedFieldSets()
+        inheritedMethodSets = classPath.createInheritedMethodSets()
         fieldSets.clear()
         fieldClasses.clear()
         methodClasses.clear()
@@ -166,7 +171,8 @@ class StaticScramblingTransformer : Transformer() {
                     staticClass.methods.add(method)
                     staticClass.version = ClassVersionUtils.maxVersion(staticClass.version, clazz.version)
 
-                    methodClasses[MemberRef(clazz, method)] = staticClass.name
+                    val partition = inheritedMethodSets[MemberRef(clazz, method)]!!
+                    methodClasses[partition] = staticClass.name
                     return@removeIf true
                 }
             }
@@ -182,8 +188,18 @@ class StaticScramblingTransformer : Transformer() {
     override fun transformCode(classPath: ClassPath, library: Library, clazz: ClassNode, method: MethodNode): Boolean {
         for (insn in method.instructions) {
             when (insn) {
-                is FieldInsnNode -> insn.owner = fieldClasses.getOrDefault(MemberRef(insn), insn.owner)
-                is MethodInsnNode -> insn.owner = methodClasses.getOrDefault(MemberRef(insn), insn.owner)
+                is FieldInsnNode -> {
+                    val partition = inheritedFieldSets[MemberRef(insn)]
+                    if (partition != null) {
+                        insn.owner = fieldClasses.getOrDefault(partition, insn.owner)
+                    }
+                }
+                is MethodInsnNode -> {
+                    val partition = inheritedMethodSets[MemberRef(insn)]
+                    if (partition != null) {
+                        insn.owner = methodClasses.getOrDefault(partition, insn.owner)
+                    }
+                }
             }
         }
 
