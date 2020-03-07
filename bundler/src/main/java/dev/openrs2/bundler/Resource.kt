@@ -1,6 +1,7 @@
 package dev.openrs2.bundler
 
 import com.github.michaelbull.logging.InlineLogger
+import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
 import java.io.ByteArrayOutputStream
 import java.nio.file.Files
@@ -64,23 +65,23 @@ class Resource(
             return Resource(source, destination, crc.value.toInt(), digest.digest(), uncompressed.size, content)
         }
 
-        fun compressJar(source: String, destination: String, library: Library): Resource {
+        fun compressJar(source: String, destination: String, classPath: ClassPath, library: Library): Resource {
             ByteArrayOutputStream().use { out ->
-                library.writeJar(out)
+                library.writeJar(classPath, out)
                 return compress(source, destination, out.toByteArray())
             }
         }
 
-        fun compressPack(source: String, destination: String, library: Library): Resource {
+        fun compressPack(source: String, destination: String, classPath: ClassPath, library: Library): Resource {
             ByteArrayOutputStream().use { out ->
-                library.writePack(out)
+                library.writePack(classPath, out)
                 return compress(source, destination, out.toByteArray())
             }
         }
 
-        fun compressJs5(source: String, destination: String, library: Library): Resource {
+        fun compressJs5(source: String, destination: String, classPath: ClassPath, library: Library): Resource {
             ByteArrayOutputStream().use { out ->
-                library.writeJs5(out)
+                library.writeJs5(classPath, out)
                 return compress(source, destination, out.toByteArray())
             }
         }

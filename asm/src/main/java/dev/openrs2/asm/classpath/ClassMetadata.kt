@@ -38,6 +38,28 @@ abstract class ClassMetadata {
         return false
     }
 
+    fun isAssignableFrom(type: ClassMetadata): Boolean {
+        return type == this || isSuperClassOf(type) || isSuperInterfaceOf(type)
+    }
+
+    private tailrec fun isSuperClassOf(type: ClassMetadata): Boolean {
+        val superClass = type.superClass ?: return false
+        if (superClass == this) {
+            return true
+        }
+        return isSuperClassOf(superClass)
+    }
+
+    private fun isSuperInterfaceOf(type: ClassMetadata): Boolean {
+        for (superInterface in type.superInterfaces) {
+            if (superInterface == this || isSuperInterfaceOf(superInterface)) {
+                return true
+            }
+        }
+
+        return false
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is ClassMetadata) return false

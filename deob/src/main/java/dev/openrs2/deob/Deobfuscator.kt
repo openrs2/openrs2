@@ -133,21 +133,21 @@ class Deobfuscator(private val input: Path, private val output: Path) {
 
         Files.createDirectories(output)
 
-        client.writeJar(output.resolve("runescape.jar"))
-        loader.writeJar(output.resolve("loader.jar"))
-        signLink.writeJar(output.resolve("signlink.jar"))
-        unpack.writeJar(output.resolve("unpack.jar"))
-        unpacker.writeJar(output.resolve("unpacker.jar"))
+        client.writeJar(classPath, output.resolve("runescape.jar"))
+        loader.writeJar(classPath, output.resolve("loader.jar"))
+        signLink.writeJar(classPath, output.resolve("signlink.jar"))
+        unpack.writeJar(classPath, output.resolve("unpack.jar"))
+        unpacker.writeJar(classPath, output.resolve("unpacker.jar"))
 
-        gl.writeJar(output.resolve("jaggl.jar"))
-        glDri.writeJar(output.resolve("jaggl_dri.jar"))
-        glClient.writeJar(output.resolve("runescape_gl.jar"))
-        glLoader.writeJar(output.resolve("loader_gl.jar"))
-        glSignLink.writeJar(output.resolve("signlink_gl.jar"))
-        glUnpack.writeJar(output.resolve("unpack_gl.jar"))
-        glUnpacker.writeJar(output.resolve("unpacker_gl.jar"))
+        gl.writeJar(glClassPath, output.resolve("jaggl.jar"))
+        glDri.writeJar(glClassPath, output.resolve("jaggl_dri.jar"))
+        glClient.writeJar(glClassPath, output.resolve("runescape_gl.jar"))
+        glLoader.writeJar(glClassPath, output.resolve("loader_gl.jar"))
+        glSignLink.writeJar(glClassPath, output.resolve("signlink_gl.jar"))
+        glUnpack.writeJar(glClassPath, output.resolve("unpack_gl.jar"))
+        glUnpacker.writeJar(glClassPath, output.resolve("unpacker_gl.jar"))
 
-        unsignedClient.writeJar(output.resolve("runescape_unsigned.jar"))
+        unsignedClient.writeJar(unsignedClassPath, output.resolve("runescape_unsigned.jar"))
     }
 
     companion object {

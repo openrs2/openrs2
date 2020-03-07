@@ -7,7 +7,6 @@ import dev.openrs2.common.crypto.Pkcs12KeyStore
 import dev.openrs2.common.io.DeterministicJarOutputStream
 import dev.openrs2.common.io.SkipOutputStream
 import org.objectweb.asm.ClassReader
-import org.objectweb.asm.ClassWriter
 import org.objectweb.asm.commons.Remapper
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.util.CheckClassAdapter
@@ -64,18 +63,18 @@ class Library constructor() : Iterable<ClassNode> {
         classes = classes.mapKeysTo(TreeMap()) { (_, clazz) -> clazz.name }
     }
 
-    fun writeJar(path: Path, manifest: Manifest? = null) {
+    fun writeJar(classPath: ClassPath, path: Path, manifest: Manifest? = null) {
         logger.info { "Writing jar $path" }
 
         Files.newOutputStream(path).use {
-            writeJar(it, manifest)
+            writeJar(classPath, it, manifest)
         }
     }
 
-    fun writeJar(out: OutputStream, manifest: Manifest? = null) {
+    fun writeJar(classPath: ClassPath, out: OutputStream, manifest: Manifest? = null) {
         DeterministicJarOutputStream.create(out, manifest).use { jar ->
             for (clazz in classes.values) {
-                val writer = ClassWriter(0)
+                val writer = StackFrameClassWriter(classPath)
 
                 clazz.accept(writer)
 
@@ -96,12 +95,12 @@ class Library constructor() : Iterable<ClassNode> {
         }
     }
 
-    fun writeSignedJar(path: Path, keyStore: Pkcs12KeyStore, manifest: Manifest? = null) {
+    fun writeSignedJar(classPath: ClassPath, path: Path, keyStore: Pkcs12KeyStore, manifest: Manifest? = null) {
         logger.info { "Writing signed jar $path" }
 
         val unsignedPath = Files.createTempFile("tmp", ".jar")
         try {
-            writeJar(unsignedPath, manifest)
+            writeJar(classPath, unsignedPath, manifest)
             keyStore.signJar(unsignedPath)
             DeterministicJarOutputStream.repack(unsignedPath, path)
         } finally {
@@ -109,10 +108,10 @@ class Library constructor() : Iterable<ClassNode> {
         }
     }
 
-    fun writePack(out: OutputStream) {
+    fun writePack(classPath: ClassPath, out: OutputStream) {
         val temp = Files.createTempFile(TEMP_PREFIX, JAR_SUFFIX)
         try {
-            writeJar(temp)
+            writeJar(classPath, temp)
 
             JarInputStream(Files.newInputStream(temp)).use { `in` ->
                 val headerSize = GZIP_HEADER.size.toLong()
@@ -126,7 +125,7 @@ class Library constructor() : Iterable<ClassNode> {
         }
     }
 
-    fun writeJs5(out: OutputStream) {
+    fun writeJs5(classPath: ClassPath, out: OutputStream) {
         // TODO(gpe): implement
     }
 
@@ -151,7 +150,7 @@ class Library constructor() : Iterable<ClassNode> {
 
                     val clazz = ClassNode()
                     val reader = ClassReader(`in`)
-                    reader.accept(JsrInliner(clazz), ClassReader.SKIP_DEBUG)
+                    reader.accept(JsrInliner(clazz), ClassReader.SKIP_DEBUG or ClassReader.SKIP_FRAMES)
 
                     library.add(clazz)
                 }

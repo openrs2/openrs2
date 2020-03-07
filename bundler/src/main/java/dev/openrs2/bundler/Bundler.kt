@@ -72,13 +72,13 @@ class Bundler @Inject constructor(publicKeyTransformer: PublicKeyTransformer) {
         // compress resources
         logger.info { "Compressing resources" }
 
-        val unpackerJar = Resource.compressJar("unpackclass.pack", "game_unpacker.dat", unpacker)
-        val clientPack = Resource.compressPack("runescape.pack200", "main_file_cache.dat0", client)
-        val clientJs5 = Resource.compressJs5("runescape.js5", "main_file_cache.dat1", client)
-        val glClientPack = Resource.compressPack("runescape_gl.pack200", "main_file_cache.dat3", glClient)
-        val glClientJs5 = Resource.compressJs5("runescape_gl.js5", "main_file_cache.dat4", glClient)
-        val glPack = Resource.compressPack("jaggl.pack200", "main_file_cache.dat5", gl)
-        val glJs5 = Resource.compressJs5("jaggl.js5", "main_file_cache.dat6", gl)
+        val unpackerJar = Resource.compressJar("unpackclass.pack", "game_unpacker.dat", classPath, unpacker)
+        val clientPack = Resource.compressPack("runescape.pack200", "main_file_cache.dat0", classPath, client)
+        val clientJs5 = Resource.compressJs5("runescape.js5", "main_file_cache.dat1", classPath, client)
+        val glClientPack = Resource.compressPack("runescape_gl.pack200", "main_file_cache.dat3", glClassPath, glClient)
+        val glClientJs5 = Resource.compressJs5("runescape_gl.js5", "main_file_cache.dat4", glClassPath, glClient)
+        val glPack = Resource.compressPack("jaggl.pack200", "main_file_cache.dat5", glClassPath, gl)
+        val glJs5 = Resource.compressJs5("jaggl.js5", "main_file_cache.dat6", glClassPath, gl)
 
         val glNatives = Resource.compressGlNatives()
         val miscNatives = Resource.compressMiscNatives()
@@ -117,11 +117,11 @@ class Bundler @Inject constructor(publicKeyTransformer: PublicKeyTransformer) {
         }
 
         // write unsigned client and loaders
-        client.writeJar(output.resolve("runescape.jar"), unsignedManifest)
+        client.writeJar(classPath, output.resolve("runescape.jar"), unsignedManifest)
 
         val keyStore = Pkcs12KeyStore.open(keyStorePath)
-        loader.writeSignedJar(output.resolve("loader.jar"), keyStore, signedManifest)
-        glLoader.writeSignedJar(output.resolve("loader_gl.jar"), keyStore, signedManifest)
+        loader.writeSignedJar(classPath, output.resolve("loader.jar"), keyStore, signedManifest)
+        glLoader.writeSignedJar(glClassPath, output.resolve("loader_gl.jar"), keyStore, signedManifest)
     }
 
     companion object {
