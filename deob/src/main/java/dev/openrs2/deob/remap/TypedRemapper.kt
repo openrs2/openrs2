@@ -86,7 +86,11 @@ class TypedRemapper private constructor(
         }
 
         private fun generateName(prefixes: MutableMap<String, Int>, prefix: String): String {
-            val separator = if (prefix.last().isDigit()) { "_" } else { "" }
+            val separator = if (prefix.last().isDigit()) {
+                "_"
+            } else {
+                ""
+            }
             return prefix + separator + prefixes.merge(prefix, 1, Integer::sum)
         }
 
