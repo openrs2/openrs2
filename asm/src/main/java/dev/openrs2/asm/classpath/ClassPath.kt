@@ -5,6 +5,7 @@ import dev.openrs2.asm.MemberRef
 import dev.openrs2.asm.toBinaryClassName
 import dev.openrs2.common.collect.DisjointSet
 import dev.openrs2.common.collect.ForestDisjointSet
+import org.objectweb.asm.Opcodes
 import org.objectweb.asm.commons.Remapper
 import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.ClassNode
@@ -120,21 +121,33 @@ class ClassPath(
         if (superClass != null) {
             val fields = populateInheritedFieldSets(ancestorCache, disjointSet, superClass)
             for (field in fields) {
+                val access = clazz.getFieldAccess(field)
+                if (access != null && access and Opcodes.ACC_STATIC != 0) {
+                    continue
+                }
+
                 val partition1 = disjointSet.add(MemberRef(clazz.name, field))
                 val partition2 = disjointSet.add(MemberRef(superClass.name, field))
                 disjointSet.union(partition1, partition2)
+
+                ancestorsBuilder.add(field)
             }
-            ancestorsBuilder.addAll(fields)
         }
 
         for (superInterface in clazz.superInterfaces) {
             val fields = populateInheritedFieldSets(ancestorCache, disjointSet, superInterface)
             for (field in fields) {
+                val access = clazz.getFieldAccess(field)
+                if (access != null && access and Opcodes.ACC_STATIC != 0) {
+                    continue
+                }
+
                 val partition1 = disjointSet.add(MemberRef(clazz.name, field))
                 val partition2 = disjointSet.add(MemberRef(superInterface.name, field))
                 disjointSet.union(partition1, partition2)
+
+                ancestorsBuilder.add(field)
             }
-            ancestorsBuilder.addAll(fields)
         }
 
         for (field in clazz.fields) {
@@ -175,21 +188,33 @@ class ClassPath(
         if (superClass != null) {
             val methods = populateInheritedMethodSets(ancestorCache, disjointSet, superClass)
             for (method in methods) {
+                val access = clazz.getMethodAccess(method)
+                if (access != null && access and Opcodes.ACC_STATIC != 0) {
+                    continue
+                }
+
                 val partition1 = disjointSet.add(MemberRef(clazz.name, method))
                 val partition2 = disjointSet.add(MemberRef(superClass.name, method))
                 disjointSet.union(partition1, partition2)
+
+                ancestorsBuilder.add(method)
             }
-            ancestorsBuilder.addAll(methods)
         }
 
         for (superInterface in clazz.superInterfaces) {
             val methods = populateInheritedMethodSets(ancestorCache, disjointSet, superInterface)
             for (method in methods) {
+                val access = clazz.getMethodAccess(method)
+                if (access != null && access and Opcodes.ACC_STATIC != 0) {
+                    continue
+                }
+
                 val partition1 = disjointSet.add(MemberRef(clazz.name, method))
                 val partition2 = disjointSet.add(MemberRef(superInterface.name, method))
                 disjointSet.union(partition1, partition2)
+
+                ancestorsBuilder.add(method)
             }
-            ancestorsBuilder.addAll(methods)
         }
 
         for (method in clazz.methods) {
