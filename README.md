@@ -86,8 +86,8 @@ Commit messages should follow the ['seven rules'][commitmsg] described in
 can be up to 72 characters in length (as OpenRS2 does not use email-based
 patches).
 
-You should use tools such as [interactive rebase][rewriting-history] to ensure
-the commit history is tidy.
+You should use tools like [interactive rebase][rewriting-history] to ensure the
+commit history is tidy.
 
 ### Developer Certificate of Origin
 
