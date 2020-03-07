@@ -16,10 +16,7 @@ fun ClassNode.remap(remapper: Remapper) {
     name = remapper.mapType(originalName)
     signature = remapper.mapSignature(signature, false)
     superName = remapper.mapType(superName)
-
-    if (interfaces != null) {
-        interfaces = interfaces.map(remapper::mapType)
-    }
+    interfaces = interfaces?.map(remapper::mapType)
 
     for (field in fields) {
         field.name = remapper.mapFieldName(originalName, field.name, field.desc)
