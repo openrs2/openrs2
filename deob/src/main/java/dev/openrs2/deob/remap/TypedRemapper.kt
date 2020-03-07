@@ -109,7 +109,7 @@ class TypedRemapper private constructor(
             clazz: ClassMetadata
         ): String {
             val name = clazz.name
-            if (mapping.containsKey(name) || name in EXCLUDED_CLASSES || clazz.dependency) {
+            if (mapping.containsKey(name) || !isClassRenamable(clazz)) {
                 return mapping.getOrDefault(name, name)
             }
 
@@ -188,6 +188,20 @@ class TypedRemapper private constructor(
             }
 
             return mapping
+        }
+
+        private fun isClassRenamable(clazz: ClassMetadata): Boolean {
+            if (clazz.name in EXCLUDED_CLASSES || clazz.dependency) {
+                return false
+            }
+
+            for (method in clazz.methods) {
+                if (clazz.getAccess(method)!! and Opcodes.ACC_NATIVE != 0) {
+                    return false
+                }
+            }
+
+            return true
         }
 
         fun isMethodImmutable(classPath: ClassPath, partition: DisjointSet.Partition<MemberRef>): Boolean {
