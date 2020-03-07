@@ -22,10 +22,7 @@ fun ClassNode.remap(remapper: Remapper) {
         field.name = remapper.mapFieldName(originalName, field.name, field.desc)
         field.desc = remapper.mapDesc(field.desc)
         field.signature = remapper.mapSignature(field.signature, true)
-
-        if (field.value != null) {
-            field.value = remapper.mapValue(field.value)
-        }
+        field.value = remapper.mapValue(field.value)
     }
 
     for (method in methods) {
