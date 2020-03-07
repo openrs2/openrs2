@@ -29,7 +29,6 @@ fun ClassNode.remap(remapper: Remapper) {
         method.name = remapper.mapMethodName(originalName, method.name, method.desc)
         method.desc = remapper.mapMethodDesc(method.desc)
         method.signature = remapper.mapSignature(method.signature, false)
-
         method.exceptions = method.exceptions.map(remapper::mapType)
 
         if (method.hasCode()) {
