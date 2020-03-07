@@ -5262,7 +5262,7 @@ typedef unsigned int GLhandleARB;
         <enum value="8" name="GL_LUID_SIZE_EXT"/>
     </enums>
 
-    <enums namespace="GL" start="0x0000" end="0x7FFF" vendor="ARB" comment="Mostly OpenGL 1.0/1.1 enum assignments. Unused ranges should generally remain unused.">
+    <enums namespace="GL" group="CheckedInt32" start="0x0000" end="0x7FFF" vendor="ARB" comment="Mostly OpenGL 1.0/1.1 enum assignments. Unused ranges should generally remain unused.">
         <enum value="0x0000" name="GL_POINTS" group="PrimitiveType"/>
         <enum value="0x0001" name="GL_LINES" group="PrimitiveType"/>
         <enum value="0x0002" name="GL_LINE_LOOP" group="PrimitiveType"/>
@@ -6374,7 +6374,7 @@ typedef unsigned int GLhandleARB;
             <unused start="0x80F1" end="0x810F" vendor="MS"/>
     </enums>
 
-    <enums namespace="GL" start="0x8110" end="0x814F" vendor="SGI">
+    <enums namespace="GL" group="CheckedInt32" start="0x8110" end="0x814F" vendor="SGI">
         <enum value="0x8110" name="GL_DUAL_ALPHA4_SGIS" group="InternalFormat"/>
         <enum value="0x8111" name="GL_DUAL_ALPHA8_SGIS" group="InternalFormat"/>
         <enum value="0x8112" name="GL_DUAL_ALPHA12_SGIS" group="InternalFormat"/>
@@ -7387,7 +7387,7 @@ typedef unsigned int GLhandleARB;
             <unused start="0x84A0" end="0x84BF" vendor="AMD"/>
     </enums>
 
-    <enums namespace="GL" start="0x84C0" end="0x84EF" vendor="ARB">
+    <enums namespace="GL" group="CheckedInt32" start="0x84C0" end="0x84EF" vendor="ARB">
         <enum value="0x84C0" name="GL_TEXTURE0" group="TextureUnit"/>
         <enum value="0x84C0" name="GL_TEXTURE0_ARB" group="CombinerRegisterNV"/>
         <enum value="0x84C1" name="GL_TEXTURE1" group="TextureUnit"/>
@@ -7489,7 +7489,7 @@ typedef unsigned int GLhandleARB;
         <enum value="0x84EF" name="GL_TEXTURE_COMPRESSION_HINT_ARB" group="HintTarget"/>
     </enums>
 
-    <enums namespace="GL" start="0x84F0" end="0x855F" vendor="NV">
+    <enums namespace="GL" group="CheckedInt32" start="0x84F0" end="0x855F" vendor="NV">
         <enum value="0x84F0" name="GL_UNIFORM_BLOCK_REFERENCED_BY_TESS_CONTROL_SHADER" group="UniformBlockPName"/>
         <enum value="0x84F1" name="GL_UNIFORM_BLOCK_REFERENCED_BY_TESS_EVALUATION_SHADER" group="UniformBlockPName"/>
         <enum value="0x84F2" name="GL_ALL_COMPLETED_NV" group="FenceConditionNV"/>
@@ -7681,7 +7681,7 @@ typedef unsigned int GLhandleARB;
             <unused start="0x8569" end="0x856F" vendor="ZiiLabs"/>
     </enums>
 
-    <enums namespace="GL" start="0x8570" end="0x859F" group="RegisterCombinerPname" vendor="AMD/NV">
+    <enums namespace="GL" start="0x8570" end="0x859F" group="RegisterCombinerPname,CheckedInt32" vendor="AMD/NV">
         <enum value="0x8570" name="GL_COMBINE" group="TextureEnvParameter"/>
         <enum value="0x8570" name="GL_COMBINE_ARB" group="TextureEnvParameter"/>
         <enum value="0x8570" name="GL_COMBINE_EXT" group="TextureEnvParameter"/>
