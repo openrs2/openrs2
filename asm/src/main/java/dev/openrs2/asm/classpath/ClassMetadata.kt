@@ -11,6 +11,16 @@ abstract class ClassMetadata {
     abstract val fields: List<MemberDesc>
     abstract val methods: List<MemberDesc>
 
+    val superClassAndInterfaces: List<ClassMetadata>
+        get() {
+            val clazz = superClass
+            return if (clazz != null) {
+                listOf(clazz).plus(superInterfaces)
+            } else {
+                superInterfaces
+            }
+        }
+
     abstract fun getFieldAccess(field: MemberDesc): Int?
     abstract fun getMethodAccess(method: MemberDesc): Int?
 
