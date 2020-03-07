@@ -125,7 +125,9 @@ fun MethodNode.removeDeadCode(owner: String) {
             }
         }
 
-        changed = changed or tryCatchBlocks.removeIf { it.start in deadLabels && it.end in deadLabels }
+        changed = changed or tryCatchBlocks.removeIf {
+            it.start in deadLabels && it.end in deadLabels || it.isBodyEmpty()
+        }
     } while (changed)
 }
 
