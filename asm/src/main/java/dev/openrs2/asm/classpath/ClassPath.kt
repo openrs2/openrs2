@@ -93,23 +93,31 @@ class ClassPath(
     }
 
     fun createInheritedFieldSets(): DisjointSet<MemberRef> {
-        return createInheritedMemberSets(ClassMetadata::fields, ClassMetadata::getFieldAccess)
+        return createInheritedMemberSets(ClassMetadata::fields, ClassMetadata::getFieldAccess, fields = true)
     }
 
     fun createInheritedMethodSets(): DisjointSet<MemberRef> {
-        return createInheritedMemberSets(ClassMetadata::methods, ClassMetadata::getMethodAccess)
+        return createInheritedMemberSets(ClassMetadata::methods, ClassMetadata::getMethodAccess, fields = false)
     }
 
     private fun createInheritedMemberSets(
         getMembers: (ClassMetadata) -> List<MemberDesc>,
-        getMemberAccess: (ClassMetadata, MemberDesc) -> Int?
+        getMemberAccess: (ClassMetadata, MemberDesc) -> Int?,
+        fields: Boolean
     ): DisjointSet<MemberRef> {
         val disjointSet = ForestDisjointSet<MemberRef>()
         val ancestorCache = mutableMapOf<ClassMetadata, Set<MemberDesc>>()
 
         for (library in libraries) {
             for (clazz in library) {
-                populateInheritedMemberSets(getMembers, getMemberAccess, ancestorCache, disjointSet, get(clazz.name)!!)
+                populateInheritedMemberSets(
+                    getMembers,
+                    getMemberAccess,
+                    fields,
+                    ancestorCache,
+                    disjointSet,
+                    get(clazz.name)!!
+                )
             }
         }
 
@@ -119,6 +127,7 @@ class ClassPath(
     private fun populateInheritedMemberSets(
         getMembers: (ClassMetadata) -> List<MemberDesc>,
         getMemberAccess: (ClassMetadata, MemberDesc) -> Int?,
+        fields: Boolean,
         ancestorCache: MutableMap<ClassMetadata, Set<MemberDesc>>,
         disjointSet: DisjointSet<MemberRef>,
         clazz: ClassMetadata
@@ -132,11 +141,11 @@ class ClassPath(
 
         for (superClass in clazz.superClassAndInterfaces) {
             val members =
-                populateInheritedMemberSets(getMembers, getMemberAccess, ancestorCache, disjointSet, superClass)
+                populateInheritedMemberSets(getMembers, getMemberAccess, fields, ancestorCache, disjointSet, superClass)
 
             for (member in members) {
                 val access = getMemberAccess(clazz, member)
-                if (access != null && access and Opcodes.ACC_STATIC != 0) {
+                if (access != null && (access and Opcodes.ACC_STATIC != 0 || fields)) {
                     continue
                 }
 
