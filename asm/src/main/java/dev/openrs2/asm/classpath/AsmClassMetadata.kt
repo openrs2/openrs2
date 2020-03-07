@@ -16,10 +16,10 @@ class AsmClassMetadata(
         get() = clazz.access and Opcodes.ACC_INTERFACE != 0
 
     override val superClass
-        get() = if (clazz.superName != null) classPath[clazz.superName]!! else null
+        get() = clazz.superName?.let { classPath[it] ?: error("Failed to find $it on provided classpath.") }
 
     override val superInterfaces
-        get() = clazz.interfaces.map { classPath[it]!! }.toList()
+        get() = clazz.interfaces.map { classPath[it] ?: error("Failed to find $it on provided classpath.") }.toList()
 
     override val fields
         get() = clazz.fields.map { MemberDesc(it) }.toList()
