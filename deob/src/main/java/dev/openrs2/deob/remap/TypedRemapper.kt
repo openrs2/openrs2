@@ -204,25 +204,21 @@ class TypedRemapper private constructor(
             return true
         }
 
-        fun isMethodImmutable(classPath: ClassPath, partition: DisjointSet.Partition<MemberRef>): Boolean {
+        fun isMethodRenamable(classPath: ClassPath, partition: DisjointSet.Partition<MemberRef>): Boolean {
             for (method in partition) {
                 val clazz = classPath[method.owner]!!
 
-                if (method.name in EXCLUDED_METHODS) {
-                    return true
-                }
-
-                if (clazz.dependency) {
-                    return true
+                if (method.name in EXCLUDED_METHODS || clazz.dependency) {
+                    return false
                 }
 
                 val access = clazz.getAccess(MemberDesc(method))
-                if (access != null && (access and Opcodes.ACC_NATIVE) != 0) {
-                    return true
+                if (access != null && access and Opcodes.ACC_NATIVE != 0) {
+                    return false
                 }
             }
 
-            return false
+            return true
         }
 
         private fun createMethodMapping(
@@ -233,7 +229,7 @@ class TypedRemapper private constructor(
             var id = 0
 
             for (partition in disjointSet) {
-                if (isMethodImmutable(classPath, partition)) {
+                if (!isMethodRenamable(classPath, partition)) {
                     continue
                 }
 

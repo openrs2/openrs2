@@ -69,7 +69,7 @@ class UnusedArgTransformer : Transformer() {
                 }
                 is MethodInsnNode -> {
                     val invokePartition = inheritedMethodSets[MemberRef(insn)]
-                    if (invokePartition == null || TypedRemapper.isMethodImmutable(classPath, invokePartition)) {
+                    if (invokePartition == null || !TypedRemapper.isMethodRenamable(classPath, invokePartition)) {
                         continue@frame
                     }
 
@@ -113,7 +113,7 @@ class UnusedArgTransformer : Transformer() {
             }
 
             val partition = inheritedMethodSets[MemberRef(insn)]
-            if (partition == null || TypedRemapper.isMethodImmutable(classPath, partition)) {
+            if (partition == null || !TypedRemapper.isMethodRenamable(classPath, partition)) {
                 continue
             }
 
@@ -146,7 +146,7 @@ class UnusedArgTransformer : Transformer() {
     ): Boolean {
         // delete unused int args from the method itself
         val partition = inheritedMethodSets[MemberRef(clazz, method)]!!
-        if (TypedRemapper.isMethodImmutable(classPath, partition)) {
+        if (!TypedRemapper.isMethodRenamable(classPath, partition)) {
             return false
         }
 
