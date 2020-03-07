@@ -218,23 +218,6 @@ class TypedRemapper private constructor(
             return generateName(prefixes, prefix.indefiniteArticle() + prefix.capitalize())
         }
 
-        fun isMethodRenamable(classPath: ClassPath, partition: DisjointSet.Partition<MemberRef>): Boolean {
-            for (method in partition) {
-                val clazz = classPath[method.owner]!!
-
-                if (method.name in EXCLUDED_METHODS || clazz.dependency) {
-                    return false
-                }
-
-                val access = clazz.getAccess(MemberDesc(method))
-                if (access != null && access and Opcodes.ACC_NATIVE != 0) {
-                    return false
-                }
-            }
-
-            return true
-        }
-
         private fun createMethodMapping(
             classPath: ClassPath,
             disjointSet: DisjointSet<MemberRef>
@@ -254,6 +237,23 @@ class TypedRemapper private constructor(
             }
 
             return mapping
+        }
+
+        fun isMethodRenamable(classPath: ClassPath, partition: DisjointSet.Partition<MemberRef>): Boolean {
+            for (method in partition) {
+                val clazz = classPath[method.owner]!!
+
+                if (method.name in EXCLUDED_METHODS || clazz.dependency) {
+                    return false
+                }
+
+                val access = clazz.getAccess(MemberDesc(method))
+                if (access != null && access and Opcodes.ACC_NATIVE != 0) {
+                    return false
+                }
+            }
+
+            return true
         }
     }
 }
