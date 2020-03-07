@@ -93,69 +93,32 @@ class ClassPath(
     }
 
     fun createInheritedFieldSets(): DisjointSet<MemberRef> {
-        val disjointSet = ForestDisjointSet<MemberRef>()
-        val ancestorCache = mutableMapOf<ClassMetadata, Set<MemberDesc>>()
-
-        for (library in libraries) {
-            for (clazz in library) {
-                populateInheritedFieldSets(ancestorCache, disjointSet, get(clazz.name)!!)
-            }
-        }
-
-        return disjointSet
-    }
-
-    private fun populateInheritedFieldSets(
-        ancestorCache: MutableMap<ClassMetadata, Set<MemberDesc>>,
-        disjointSet: DisjointSet<MemberRef>,
-        clazz: ClassMetadata
-    ): Set<MemberDesc> {
-        val ancestors = ancestorCache[clazz]
-        if (ancestors != null) {
-            return ancestors
-        }
-
-        val ancestorsBuilder = mutableSetOf<MemberDesc>()
-
-        for (superClass in clazz.superClassAndInterfaces) {
-            val fields = populateInheritedFieldSets(ancestorCache, disjointSet, superClass)
-            for (field in fields) {
-                val access = clazz.getFieldAccess(field)
-                if (access != null && access and Opcodes.ACC_STATIC != 0) {
-                    continue
-                }
-
-                val partition1 = disjointSet.add(MemberRef(clazz.name, field))
-                val partition2 = disjointSet.add(MemberRef(superClass.name, field))
-                disjointSet.union(partition1, partition2)
-
-                ancestorsBuilder.add(field)
-            }
-        }
-
-        for (field in clazz.fields) {
-            disjointSet.add(MemberRef(clazz.name, field))
-            ancestorsBuilder.add(field)
-        }
-
-        ancestorCache[clazz] = ancestorsBuilder
-        return ancestorsBuilder
+        return createInheritedMemberSets(ClassMetadata::fields, ClassMetadata::getFieldAccess)
     }
 
     fun createInheritedMethodSets(): DisjointSet<MemberRef> {
+        return createInheritedMemberSets(ClassMetadata::methods, ClassMetadata::getMethodAccess)
+    }
+
+    private fun createInheritedMemberSets(
+        getMembers: (ClassMetadata) -> List<MemberDesc>,
+        getMemberAccess: (ClassMetadata, MemberDesc) -> Int?
+    ): DisjointSet<MemberRef> {
         val disjointSet = ForestDisjointSet<MemberRef>()
         val ancestorCache = mutableMapOf<ClassMetadata, Set<MemberDesc>>()
 
         for (library in libraries) {
             for (clazz in library) {
-                populateInheritedMethodSets(ancestorCache, disjointSet, get(clazz.name)!!)
+                populateInheritedMemberSets(getMembers, getMemberAccess, ancestorCache, disjointSet, get(clazz.name)!!)
             }
         }
 
         return disjointSet
     }
 
-    private fun populateInheritedMethodSets(
+    private fun populateInheritedMemberSets(
+        getMembers: (ClassMetadata) -> List<MemberDesc>,
+        getMemberAccess: (ClassMetadata, MemberDesc) -> Int?,
         ancestorCache: MutableMap<ClassMetadata, Set<MemberDesc>>,
         disjointSet: DisjointSet<MemberRef>,
         clazz: ClassMetadata
@@ -168,24 +131,26 @@ class ClassPath(
         val ancestorsBuilder = mutableSetOf<MemberDesc>()
 
         for (superClass in clazz.superClassAndInterfaces) {
-            val methods = populateInheritedMethodSets(ancestorCache, disjointSet, superClass)
-            for (method in methods) {
-                val access = clazz.getMethodAccess(method)
+            val members =
+                populateInheritedMemberSets(getMembers, getMemberAccess, ancestorCache, disjointSet, superClass)
+
+            for (member in members) {
+                val access = getMemberAccess(clazz, member)
                 if (access != null && access and Opcodes.ACC_STATIC != 0) {
                     continue
                 }
 
-                val partition1 = disjointSet.add(MemberRef(clazz.name, method))
-                val partition2 = disjointSet.add(MemberRef(superClass.name, method))
+                val partition1 = disjointSet.add(MemberRef(clazz.name, member))
+                val partition2 = disjointSet.add(MemberRef(superClass.name, member))
                 disjointSet.union(partition1, partition2)
 
-                ancestorsBuilder.add(method)
+                ancestorsBuilder.add(member)
             }
         }
 
-        for (method in clazz.methods) {
-            disjointSet.add(MemberRef(clazz.name, method))
-            ancestorsBuilder.add(method)
+        for (member in getMembers(clazz)) {
+            disjointSet.add(MemberRef(clazz.name, member))
+            ancestorsBuilder.add(member)
         }
 
         ancestorCache[clazz] = ancestorsBuilder
