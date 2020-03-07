@@ -97,6 +97,15 @@ certify that contributors agree to license their code under OpenRS2's license
 requirements of the DCO, a `Signed-off-by:` line must be added to the Git
 commit message by passing `--signoff` to the `git commit` invocation.
 
+If you intend to make a large number of contributions, run the following
+commands from the repository root to add `Signed-off-by:` to all your commit
+messages by default:
+
+```
+echo -e "\n\nSigned-off-by: $(git config user.name) <$(git config user.email)>" > .git/commit-template
+git config commit.template .git/commit-template
+```
+
 The full text of the DCO is reproduced below:
 
 ```
