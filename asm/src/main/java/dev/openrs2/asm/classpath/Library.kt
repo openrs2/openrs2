@@ -1,14 +1,12 @@
 package dev.openrs2.asm.classpath
 
 import com.github.michaelbull.logging.InlineLogger
-import dev.openrs2.asm.ClassForNameUtils
-import dev.openrs2.asm.hasCode
+import dev.openrs2.asm.remap
 import dev.openrs2.common.crypto.Pkcs12KeyStore
 import dev.openrs2.common.io.DeterministicJarOutputStream
 import dev.openrs2.common.io.SkipOutputStream
 import org.objectweb.asm.ClassReader
 import org.objectweb.asm.ClassWriter
-import org.objectweb.asm.commons.ClassRemapper
 import org.objectweb.asm.commons.Remapper
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.util.CheckClassAdapter
@@ -17,7 +15,6 @@ import java.io.OutputStream
 import java.io.SequenceInputStream
 import java.nio.file.Files
 import java.nio.file.Path
-import java.util.HashSet
 import java.util.TreeMap
 import java.util.jar.JarEntry
 import java.util.jar.JarInputStream
@@ -28,7 +25,7 @@ import java.util.zip.GZIPInputStream
 import java.util.zip.GZIPOutputStream
 
 class Library constructor() : Iterable<ClassNode> {
-    private val classes = TreeMap<String, ClassNode>()
+    private var classes = TreeMap<String, ClassNode>()
 
     constructor(library: Library) : this() {
         for (clazz in library.classes.values) {
@@ -59,26 +56,11 @@ class Library constructor() : Iterable<ClassNode> {
     }
 
     fun remap(remapper: Remapper) {
-        val classNames = HashSet<String>()
-
         for (clazz in classes.values) {
-            for (method in clazz.methods) {
-                if (method.hasCode()) {
-                    ClassForNameUtils.remap(remapper, method)
-                }
-            }
-
-            classNames.add(clazz.name)
+            clazz.remap(remapper)
         }
 
-        for (name in classNames) {
-            val `in` = classes.remove(name)
-
-            val out = ClassNode()
-            `in`!!.accept(ClassRemapper(out, remapper))
-
-            classes[out.name] = out
-        }
+        classes = classes.mapKeysTo(TreeMap()) { (_, clazz) -> clazz.name }
     }
 
     fun writeJar(path: Path, manifest: Manifest? = null) {
