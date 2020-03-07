@@ -6,6 +6,7 @@ import dev.openrs2.asm.toBinaryClassName
 import dev.openrs2.common.collect.DisjointSet
 import dev.openrs2.common.collect.ForestDisjointSet
 import org.objectweb.asm.commons.Remapper
+import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.ClassNode
 
 class ClassPath(
@@ -14,6 +15,17 @@ class ClassPath(
     val libraries: List<Library>
 ) {
     private val cache = mutableMapOf<String, ClassMetadata?>()
+
+    /*
+     * XXX(gpe): this is a bit of a hack, as it makes the asm module contain
+     * some details that are only relevant in the deobfuscator. However, I
+     * can't think of a better way of storing this state at the moment - ASM
+     * doesn't have support for attaching arbitrary state to an
+     * AbstractInsnNode. We need to persist the state across all of our
+     * Transformers to avoid adding extraneous labels until the last possible
+     * moment, which would confuse some of our analyses if added earlier.
+     */
+    val originalPcs = mutableMapOf<AbstractInsnNode, Int>()
 
     val libraryClasses: List<ClassMetadata>
         get() {

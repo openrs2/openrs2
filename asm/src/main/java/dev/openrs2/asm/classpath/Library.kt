@@ -1,6 +1,7 @@
 package dev.openrs2.asm.classpath
 
 import com.github.michaelbull.logging.InlineLogger
+import dev.openrs2.asm.NopClassVisitor
 import dev.openrs2.asm.remap
 import dev.openrs2.common.crypto.Pkcs12KeyStore
 import dev.openrs2.common.io.DeterministicJarOutputStream
@@ -76,10 +77,21 @@ class Library constructor() : Iterable<ClassNode> {
             for (clazz in classes.values) {
                 val writer = ClassWriter(0)
 
-                clazz.accept(CheckClassAdapter(writer, true))
+                clazz.accept(writer)
 
                 jar.putNextEntry(JarEntry(clazz.name + CLASS_SUFFIX))
                 jar.write(writer.toByteArray())
+
+                /*
+                 * XXX(gpe): CheckClassAdapter breaks the Label offset
+                 * calculation in the OriginalPcTable's write method, so we do
+                 * a second pass without any attributes to check the class,
+                 * feeding the callbacks into a no-op visitor.
+                 */
+                for (method in clazz.methods) {
+                    method.attrs?.clear()
+                }
+                clazz.accept(CheckClassAdapter(NopClassVisitor, true))
             }
         }
     }

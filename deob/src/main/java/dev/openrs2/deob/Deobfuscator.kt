@@ -24,6 +24,8 @@ import dev.openrs2.deob.transform.InvokeSpecialTransformer
 import dev.openrs2.deob.transform.MethodOrderTransformer
 import dev.openrs2.deob.transform.OpaquePredicateTransformer
 import dev.openrs2.deob.transform.OriginalNameTransformer
+import dev.openrs2.deob.transform.OriginalPcRestoreTransformer
+import dev.openrs2.deob.transform.OriginalPcSaveTransformer
 import dev.openrs2.deob.transform.OverrideTransformer
 import dev.openrs2.deob.transform.RemapTransformer
 import dev.openrs2.deob.transform.ResetTransformer
@@ -151,6 +153,7 @@ class Deobfuscator(private val input: Path, private val output: Path) {
     companion object {
         private val logger = InlineLogger()
         private val TRANSFORMERS = listOf(
+            OriginalPcSaveTransformer(),
             OriginalNameTransformer(),
             *Bundler.TRANSFORMERS.toTypedArray(),
             ResourceTransformer(),
@@ -173,7 +176,8 @@ class Deobfuscator(private val input: Path, private val output: Path) {
             EmptyClassTransformer(),
             MethodOrderTransformer(),
             VisibilityTransformer(),
-            OverrideTransformer()
+            OverrideTransformer(),
+            OriginalPcRestoreTransformer()
         )
     }
 }
