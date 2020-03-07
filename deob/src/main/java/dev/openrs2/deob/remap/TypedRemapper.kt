@@ -113,19 +113,7 @@ class TypedRemapper private constructor(
                 return mapping.getOrDefault(name, name)
             }
 
-            var mappedName = name.substring(0, name.lastIndexOf('/') + 1)
-
-            val superClass = clazz.superClass
-            if (superClass != null && superClass.name != "java/lang/Object") {
-                var superName = populateClassMapping(mapping, prefixes, superClass)
-                superName = superName.substring(superName.lastIndexOf('/') + 1)
-                mappedName += generateName(prefixes, superName + "_Sub")
-            } else if (clazz.`interface`) {
-                mappedName += generateName(prefixes, "Interface")
-            } else {
-                mappedName += generateName(prefixes, "Class")
-            }
-
+            val mappedName = generateClassName(mapping, prefixes, clazz)
             mapping[name] = mappedName
             return mappedName
         }
@@ -144,6 +132,28 @@ class TypedRemapper private constructor(
             return true
         }
 
+        private fun generateClassName(
+            mapping: MutableMap<String, String>,
+            prefixes: MutableMap<String, Int>,
+            clazz: ClassMetadata
+        ): String {
+            val name = clazz.name
+            var mappedName = name.substring(0, name.lastIndexOf('/') + 1)
+
+            val superClass = clazz.superClass
+            if (superClass != null && superClass.name != "java/lang/Object") {
+                var superName = populateClassMapping(mapping, prefixes, superClass)
+                superName = superName.substring(superName.lastIndexOf('/') + 1)
+                mappedName += generateName(prefixes, superName + "_Sub")
+            } else if (clazz.`interface`) {
+                mappedName += generateName(prefixes, "Interface")
+            } else {
+                mappedName += generateName(prefixes, "Class")
+            }
+
+            return mappedName
+        }
+
         private fun createFieldMapping(
             classPath: ClassPath,
             disjointSet: DisjointSet<MemberRef>,
@@ -157,29 +167,8 @@ class TypedRemapper private constructor(
                     continue
                 }
 
-                var prefix = ""
-
-                var type = Type.getType(partition.iterator().next().desc)
-                if (type.sort == Type.ARRAY) {
-                    prefix = "Array".repeat(type.dimensions)
-                    type = type.elementType
-                }
-
-                when (type.sort) {
-                    Type.BOOLEAN, Type.BYTE, Type.CHAR, Type.SHORT, Type.INT, Type.LONG, Type.FLOAT, Type.DOUBLE -> {
-                        prefix = type.className + prefix
-                    }
-                    Type.OBJECT -> {
-                        var className = classMapping.getOrDefault(type.internalName, type.internalName)
-                        className = className.substring(className.lastIndexOf('/') + 1)
-                        prefix = className + prefix
-                    }
-                    else -> throw IllegalArgumentException("Unknown field type $type")
-                }
-
-                prefix = prefix.indefiniteArticle() + prefix.capitalize()
-
-                val mappedName = generateName(prefixes, prefix)
+                val type = Type.getType(partition.first().desc)
+                val mappedName = generateFieldName(prefixes, classMapping, type)
                 for (field in partition) {
                     mapping[field] = mappedName
                 }
@@ -198,6 +187,35 @@ class TypedRemapper private constructor(
             }
 
             return true
+        }
+
+        private fun generateFieldName(
+            prefixes: MutableMap<String, Int>,
+            classMapping: Map<String, String>,
+            type: Type
+        ): String {
+            val dimensions: String
+            val elementType: Type
+            if (type.sort == Type.ARRAY) {
+                dimensions = "Array".repeat(type.dimensions)
+                elementType = type.elementType
+            } else {
+                dimensions = ""
+                elementType = type
+            }
+
+            val prefix = when (elementType.sort) {
+                Type.BOOLEAN, Type.BYTE, Type.CHAR, Type.SHORT, Type.INT, Type.LONG, Type.FLOAT, Type.DOUBLE -> {
+                    elementType.className + dimensions
+                }
+                Type.OBJECT -> {
+                    val className = classMapping.getOrDefault(elementType.internalName, elementType.internalName)
+                    className.substring(className.lastIndexOf('/') + 1) + dimensions
+                }
+                else -> throw IllegalArgumentException("Unknown field type $elementType")
+            }
+
+            return generateName(prefixes, prefix.indefiniteArticle() + prefix.capitalize())
         }
 
         fun isMethodRenamable(classPath: ClassPath, partition: DisjointSet.Partition<MemberRef>): Boolean {
