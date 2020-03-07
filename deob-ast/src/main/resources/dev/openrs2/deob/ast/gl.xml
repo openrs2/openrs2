@@ -18970,7 +18970,7 @@ typedef unsigned int GLhandleARB;
         <command>
             <proto>void <name>glGetObjectParameterivARB</name></proto>
             <param group="handleARB"><ptype>GLhandleARB</ptype> <name>obj</name></param>
-            <param><ptype>GLenum</ptype> <name>pname</name></param>
+            <param group="ProgramPropertyARB"><ptype>GLenum</ptype> <name>pname</name></param>
             <param len="COMPSIZE(pname)"><ptype>GLint</ptype> *<name>params</name></param>
         </command>
         <command>
