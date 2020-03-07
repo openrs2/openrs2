@@ -56,8 +56,13 @@ class VisibilityTransformer : Transformer() {
         references: Multimap<DisjointSet.Partition<MemberRef>, String>,
         disjointSet: DisjointSet<MemberRef>,
         member: MemberRef,
+        classAccess: Int,
         access: Int
     ): Int {
+        if (classAccess and Opcodes.ACC_INTERFACE != 0) {
+            return Opcodes.ACC_PUBLIC
+        }
+
         val method = Type.getType(member.desc).sort == Type.METHOD
         if (method) {
             if (member.name == "<clinit>") {
@@ -120,6 +125,7 @@ class VisibilityTransformer : Transformer() {
                         fieldReferences,
                         inheritedFieldSets,
                         MemberRef(clazz, field),
+                        clazz.access,
                         access
                     )
                     field.access = (access and VISIBILITY_FLAGS.inv()) or visibility
@@ -137,6 +143,7 @@ class VisibilityTransformer : Transformer() {
                         methodReferences,
                         inheritedMethodSets,
                         MemberRef(clazz, method),
+                        clazz.access,
                         access
                     )
                     method.access = (access and VISIBILITY_FLAGS.inv()) or visibility
