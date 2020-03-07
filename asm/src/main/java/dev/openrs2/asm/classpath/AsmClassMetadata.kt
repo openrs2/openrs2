@@ -27,6 +27,10 @@ class AsmClassMetadata(
     override val methods
         get() = clazz.methods.map(::MemberDesc)
 
+    override fun getFieldAccess(field: MemberDesc): Int? {
+        return clazz.fields.find { it.name == field.name && it.desc == field.desc }?.access
+    }
+
     override fun getMethodAccess(method: MemberDesc): Int? {
         return clazz.methods.find { it.name == method.name && it.desc == method.desc }?.access
     }
