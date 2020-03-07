@@ -130,6 +130,20 @@ class TypedRemapper private constructor(
             return mappedName
         }
 
+        private fun isClassRenamable(clazz: ClassMetadata): Boolean {
+            if (clazz.name in EXCLUDED_CLASSES || clazz.dependency) {
+                return false
+            }
+
+            for (method in clazz.methods) {
+                if (clazz.getAccess(method)!! and Opcodes.ACC_NATIVE != 0) {
+                    return false
+                }
+            }
+
+            return true
+        }
+
         private fun createFieldMapping(
             classPath: ClassPath,
             disjointSet: DisjointSet<MemberRef>,
@@ -179,20 +193,6 @@ class TypedRemapper private constructor(
                 val clazz = classPath[field.owner]!!
 
                 if (field.name in EXCLUDED_FIELDS || clazz.dependency) {
-                    return false
-                }
-            }
-
-            return true
-        }
-
-        private fun isClassRenamable(clazz: ClassMetadata): Boolean {
-            if (clazz.name in EXCLUDED_CLASSES || clazz.dependency) {
-                return false
-            }
-
-            for (method in clazz.methods) {
-                if (clazz.getAccess(method)!! and Opcodes.ACC_NATIVE != 0) {
                     return false
                 }
             }
