@@ -4,6 +4,7 @@ import com.github.javaparser.ast.CompilationUnit
 import com.github.javaparser.ast.NodeList
 import com.github.javaparser.ast.body.BodyDeclaration
 import com.github.javaparser.ast.body.FieldDeclaration
+import com.github.javaparser.ast.body.TypeDeclaration
 import com.github.javaparser.ast.body.VariableDeclarator
 import com.github.javaparser.ast.expr.BinaryExpr
 import com.github.javaparser.ast.expr.Expression
@@ -37,6 +38,10 @@ class GlConstantTransformer : Transformer() {
             return
         }
 
+        if (unit.primaryType.flatMap(TypeDeclaration<*>::getFullyQualifiedName).orElse(null) == JAGGL_CLASS) {
+            return
+        }
+
         unit.walk { expr: MethodCallExpr ->
             if (!expr.nameAsString.startsWith("gl")) {
                 return@walk
@@ -49,7 +54,7 @@ class GlConstantTransformer : Transformer() {
                 }
 
                 val name = type.asReferenceType().qualifiedName
-                if (name == GL_CLASS) {
+                if (name == GL_CLASS || name == JAGGL_CLASS) {
                     transformCall(unit, expr)
                 }
             }
@@ -200,6 +205,7 @@ class GlConstantTransformer : Transformer() {
         private val logger = InlineLogger()
         private const val GL_CLASS_UNQUALIFIED = "GL"
         private const val GL_CLASS = "javax.media.opengl.$GL_CLASS_UNQUALIFIED"
+        private const val JAGGL_CLASS = "jaggl.opengl"
         private val REGISTRY = GlRegistry.parse()
         private val VENDORS = setOf("ARB", "EXT")
 
