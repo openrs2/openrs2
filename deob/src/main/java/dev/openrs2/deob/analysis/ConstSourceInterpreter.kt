@@ -63,7 +63,7 @@ class ConstSourceInterpreter : Interpreter<ConstSourceValue>(Opcodes.ASM7) {
         insn: AbstractInsnNode,
         values: List<ConstSourceValue>
     ): ConstSourceValue? {
-        val args = values.map { it.basicValue }.toList()
+        val args = values.map(ConstSourceValue::basicValue)
         val basicValue = basicInterpreter.naryOperation(insn, args) ?: return null
         return ConstSourceValue.Unknown(basicValue)
     }

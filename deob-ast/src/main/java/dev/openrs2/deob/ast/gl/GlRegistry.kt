@@ -51,7 +51,7 @@ data class GlRegistry(val enums: ImmutableSetMultimap<Long, GlEnum>, val command
 
             val groups = groupsBuilder.asMap().mapValues { entry ->
                 // sort by name length ascending so names with vendor suffixes come last
-                GlGroup(entry.key, entry.value.sortedBy { enum -> enum.name.length }.toList())
+                GlGroup(entry.key, entry.value.sortedBy { enum -> enum.name.length })
             }
 
             // create parameters and commands

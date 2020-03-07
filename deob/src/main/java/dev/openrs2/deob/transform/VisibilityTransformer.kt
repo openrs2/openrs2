@@ -78,7 +78,7 @@ class VisibilityTransformer : Transformer() {
         val hasOverride = overridable && partition.count { classPath[it.owner]!!.methods.contains(MemberDesc(it)) } > 1
         val abstract = method && access and Opcodes.ACC_ABSTRACT != 0
         val partitionReferences = references[partition]
-        val partitionOwners = partition.map(MemberRef::owner).toSet()
+        val partitionOwners = partition.mapTo(mutableSetOf(), MemberRef::owner)
 
         // pick the weakest access level based on references in our own code
         val visibility = when {

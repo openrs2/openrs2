@@ -124,7 +124,7 @@ class IntInterpreter(private val parameters: Array<Set<Int>?>?) : Interpreter<In
     }
 
     override fun naryOperation(insn: AbstractInsnNode, values: List<IntValue>): IntValue? {
-        val args = values.map { it.basicValue }.toList()
+        val args = values.map(IntValue::basicValue)
         val basicValue = basicInterpreter.naryOperation(insn, args) ?: return null
         return IntValue.Unknown(basicValue)
     }

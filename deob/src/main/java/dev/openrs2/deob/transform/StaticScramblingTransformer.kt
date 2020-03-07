@@ -24,8 +24,7 @@ class StaticScramblingTransformer : Transformer() {
         val dependencies = clinit?.instructions
             ?.filterIsInstance<FieldInsnNode>()
             ?.filter { it.opcode == Opcodes.GETSTATIC && it.owner != owner.name }
-            ?.map(::MemberRef)
-            ?.toSet() ?: emptySet()
+            ?.mapTo(mutableSetOf(), ::MemberRef) ?: emptySet<MemberRef>()
     }
 
     private val fieldSets = mutableMapOf<MemberRef, FieldSet>()

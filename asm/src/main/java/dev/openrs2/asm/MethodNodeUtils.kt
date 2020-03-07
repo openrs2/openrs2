@@ -31,7 +31,7 @@ private fun remap(i: Int, argType: Type, localIndex: Int): Int {
 }
 
 private fun remapAll(indexes: List<Int>, argType: Type, localIndex: Int): MutableList<Int> {
-    return indexes.map { remap(it, argType, localIndex) }.toMutableList()
+    return indexes.mapTo(mutableListOf()) { remap(it, argType, localIndex) }
 }
 
 fun MethodNode.removeArgument(argIndex: Int) {

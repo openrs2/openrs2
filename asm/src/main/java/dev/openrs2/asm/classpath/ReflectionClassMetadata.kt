@@ -21,13 +21,13 @@ class ReflectionClassMetadata(private val classPath: ClassPath, private val claz
         get() = if (clazz.superclass != null) classPath[clazz.superclass.asmName]!! else null
 
     override val superInterfaces
-        get() = clazz.interfaces.map { classPath[it.asmName]!! }.toList()
+        get() = clazz.interfaces.map { classPath[it.asmName]!! }
 
     override val fields
-        get() = clazz.declaredFields.map { MemberDesc(it.name, Type.getDescriptor(it.type)) }.toList()
+        get() = clazz.declaredFields.map { MemberDesc(it.name, Type.getDescriptor(it.type)) }
 
     override val methods
-        get() = clazz.declaredMethods.map { MemberDesc(it.name, Type.getMethodDescriptor(it)) }.toList()
+        get() = clazz.declaredMethods.map { MemberDesc(it.name, Type.getMethodDescriptor(it)) }
 
     override fun getAccess(method: MemberDesc): Int? {
         return clazz.declaredMethods.find { it.name == method.name && Type.getMethodDescriptor(it) == method.desc }

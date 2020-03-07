@@ -19,13 +19,13 @@ class AsmClassMetadata(
         get() = clazz.superName?.let { classPath[it] ?: error("Failed to find $it on provided classpath.") }
 
     override val superInterfaces
-        get() = clazz.interfaces.map { classPath[it] ?: error("Failed to find $it on provided classpath.") }.toList()
+        get() = clazz.interfaces.map { classPath[it] ?: error("Failed to find $it on provided classpath.") }
 
     override val fields
-        get() = clazz.fields.map { MemberDesc(it) }.toList()
+        get() = clazz.fields.map(::MemberDesc)
 
     override val methods
-        get() = clazz.methods.map { MemberDesc(it) }.toList()
+        get() = clazz.methods.map(::MemberDesc)
 
     override fun getAccess(method: MemberDesc): Int? {
         return clazz.methods.find { it.name == method.name && it.desc == method.desc }?.access
