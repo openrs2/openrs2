@@ -29,7 +29,7 @@ class ReflectionClassMetadata(private val classPath: ClassPath, private val claz
     override val methods
         get() = clazz.declaredMethods.map { MemberDesc(it.name, Type.getMethodDescriptor(it)) }
 
-    override fun getAccess(method: MemberDesc): Int? {
+    override fun getMethodAccess(method: MemberDesc): Int? {
         return clazz.declaredMethods.find { it.name == method.name && Type.getMethodDescriptor(it) == method.desc }
             ?.modifiers
     }

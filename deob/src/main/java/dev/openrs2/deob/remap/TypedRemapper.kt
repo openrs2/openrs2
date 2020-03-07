@@ -124,7 +124,7 @@ class TypedRemapper private constructor(
             }
 
             for (method in clazz.methods) {
-                if (clazz.getAccess(method)!! and Opcodes.ACC_NATIVE != 0) {
+                if (clazz.getMethodAccess(method)!! and Opcodes.ACC_NATIVE != 0) {
                     return false
                 }
             }
@@ -247,7 +247,7 @@ class TypedRemapper private constructor(
                     return false
                 }
 
-                val access = clazz.getAccess(MemberDesc(method))
+                val access = clazz.getMethodAccess(MemberDesc(method))
                 if (access != null && access and Opcodes.ACC_NATIVE != 0) {
                     return false
                 }

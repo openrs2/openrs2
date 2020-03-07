@@ -95,7 +95,7 @@ class VisibilityTransformer : Transformer() {
         return if (overridable) {
             // reduce it to the weakest level required to override a dependency's method
             partition.filter { classPath[it.owner]!!.dependency }
-                .mapNotNull { classPath[it.owner]!!.getAccess(MemberDesc(it)) }
+                .mapNotNull { classPath[it.owner]!!.getMethodAccess(MemberDesc(it)) }
                 .fold(visibility, ::weakestVisibility)
         } else {
             visibility
