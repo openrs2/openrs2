@@ -45,7 +45,7 @@ fun ClassNode.remap(remapper: Remapper) {
     }
 }
 
-private fun Remapper.mapFrameType(type: Any): Any {
+private fun Remapper.mapFrameType(type: Any?): Any? {
     return if (type is String) {
         mapType(type)
     } else {
