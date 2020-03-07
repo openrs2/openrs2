@@ -34,16 +34,18 @@ data class GlRegistry(val enums: ImmutableSetMultimap<Long, GlEnum>, val command
             val enumsBuilder = ImmutableSetMultimap.builder<Long, GlEnum>()
             val groupsBuilder = HashMultimap.create<String, GlEnum>()
 
-            for (elements in root.getChildren("enums")) {
-                for (element in elements.getChildren("enum")) {
+            for (parent in root.getChildren("enums")) {
+                val parentGroups = (parent.getAttributeValue("group") ?: "").split(",")
+
+                for (element in parent.getChildren("enum")) {
                     val name = element.getAttributeValue("name")
                     val value = parseValue(element.getAttributeValue("value"))
 
                     val enum = GlEnum(name, value)
                     enumsBuilder.put(value, enum)
 
-                    val groups = element.getAttributeValue("group") ?: continue
-                    for (group in groups.split(",")) {
+                    val groups = (element.getAttributeValue("group") ?: "").split(",")
+                    for (group in parentGroups union groups) {
                         groupsBuilder.put(group, enum)
                     }
                 }
