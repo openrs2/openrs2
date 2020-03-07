@@ -139,23 +139,7 @@ class TypedRemapper private constructor(
             val prefixes = mutableMapOf<String, Int>()
 
             for (partition in disjointSet) {
-                var skip = false
-
-                for ((owner, name) in partition) {
-                    val clazz = classPath[owner]!!
-
-                    if (name in EXCLUDED_FIELDS) {
-                        skip = true
-                        break
-                    }
-
-                    if (clazz.dependency) {
-                        skip = true
-                        break
-                    }
-                }
-
-                if (skip) {
+                if (!isFieldRenamable(classPath, partition)) {
                     continue
                 }
 
@@ -188,6 +172,18 @@ class TypedRemapper private constructor(
             }
 
             return mapping
+        }
+
+        private fun isFieldRenamable(classPath: ClassPath, partition: DisjointSet.Partition<MemberRef>): Boolean {
+            for (field in partition) {
+                val clazz = classPath[field.owner]!!
+
+                if (field.name in EXCLUDED_FIELDS || clazz.dependency) {
+                    return false
+                }
+            }
+
+            return true
         }
 
         private fun isClassRenamable(clazz: ClassMetadata): Boolean {
