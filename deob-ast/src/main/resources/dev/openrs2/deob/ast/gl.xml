@@ -8623,8 +8623,8 @@ typedef unsigned int GLhandleARB;
         <enum value="0x8861" name="GL_POINT_SPRITE_ARB" group="TextureEnvTarget,EnableCap"/>
         <enum value="0x8861" name="GL_POINT_SPRITE_NV"/>
         <enum value="0x8861" name="GL_POINT_SPRITE_OES"/>
-        <enum value="0x8862" name="GL_COORD_REPLACE" group="TextureEnvTarget"/>
-        <enum value="0x8862" name="GL_COORD_REPLACE_ARB" group="TextureEnvTarget"/>
+        <enum value="0x8862" name="GL_COORD_REPLACE" group="TextureEnvParameter"/>
+        <enum value="0x8862" name="GL_COORD_REPLACE_ARB" group="TextureEnvParameter"/>
         <enum value="0x8862" name="GL_COORD_REPLACE_NV"/>
         <enum value="0x8862" name="GL_COORD_REPLACE_OES"/>
         <enum value="0x8863" name="GL_POINT_SPRITE_R_MODE_NV"/>
