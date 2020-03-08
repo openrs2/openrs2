@@ -60,6 +60,7 @@ class VisibilityTransformer : Transformer() {
         access: Int
     ): Int {
         if (classAccess and Opcodes.ACC_INTERFACE != 0) {
+            // interface members are always public
             return Opcodes.ACC_PUBLIC
         }
 
