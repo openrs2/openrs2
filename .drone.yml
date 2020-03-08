@@ -1,0 +1,22 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+  - name: build
+    image: registry.openrs2.dev/openrs2-dev
+    commands:
+      - ./gradlew --no-daemon clean build
+
+  - name: deploy
+    image: registry.openrs2.dev/openrs2-dev
+    commands:
+      - ./gradlew --no-daemon publish
+    environment:
+      ORG_GRADLE_PROJECT_openrs2RepoUsername:
+        from_secret: repo_username
+      ORG_GRADLE_PROJECT_openrs2RepoPassword:
+        from_secret: repo_password
+    when:
+      branch:
+        - master
