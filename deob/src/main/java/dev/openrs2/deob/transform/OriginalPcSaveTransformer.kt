@@ -9,10 +9,8 @@ import org.objectweb.asm.tree.MethodNode
 
 class OriginalPcSaveTransformer : Transformer() {
     override fun transformCode(classPath: ClassPath, library: Library, clazz: ClassNode, method: MethodNode): Boolean {
-        for ((pc, insn) in method.instructions.withIndex()) {
-            if (insn.opcode != -1) {
-                classPath.originalPcs[insn] = pc
-            }
+        for ((pc, insn) in method.instructions.filter { it.opcode != -1 }.withIndex()) {
+            classPath.originalPcs[insn] = pc
         }
 
         return false
