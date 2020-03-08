@@ -169,8 +169,8 @@ configure(subprojects.filter { it.free }) {
                     }
 
                     ciManagement {
-                        system.set("Jenkins")
-                        url.set("https://build.openrs2.dev/job/openrs2/")
+                        system.set("Drone")
+                        url.set("https://build.openrs2.dev/openrs2/openrs2/")
                     }
                 }
             }
