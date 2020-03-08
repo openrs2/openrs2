@@ -40,7 +40,7 @@ class OriginalNameTransformer : Transformer() {
         clazz: ClassNode,
         method: MethodNode
     ): Boolean {
-        if (method.name == "<init>" || method.name == "<clinit>") {
+        if (method.name == "<clinit>") {
             return false
         }
 
