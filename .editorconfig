@@ -17,7 +17,3 @@ disabled_rules = import-ordering
 [*.{xml,yaml,yml}]
 indent_style = space
 indent_size = 2
-
-[Jenkinsfile]
-indent_style = space
-indent_size = 4
