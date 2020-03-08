@@ -11,6 +11,7 @@ include(
     "deob",
     "deob-annotations",
     "deob-ast",
+    "deob-cli",
     "deob-ir",
     "game"
 )

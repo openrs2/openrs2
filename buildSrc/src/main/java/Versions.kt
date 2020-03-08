@@ -1,6 +1,7 @@
 object Versions {
     const val asm = "7.3.1"
     const val bouncyCastle = "1.64"
+    const val clikt = "2.5.0"
     const val dependencyLicenseReport = "1.13"
     const val fernflower = "1.0.4-SNAPSHOT"
     const val guava = "28.2-jre"
@@ -8,6 +9,7 @@ object Versions {
     const val inlineLogger = "1.0.2"
     const val javaParser = "3.15.14"
     const val jdom = "2.0.6"
+    const val jgrapht = "1.4.0"
     const val jimfs = "1.1"
     const val junit = "5.6.0"
     const val kotlin = "1.3.70"
