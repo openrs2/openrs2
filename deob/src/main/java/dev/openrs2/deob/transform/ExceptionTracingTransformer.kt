@@ -44,12 +44,12 @@ class ExceptionTracingTransformer : Transformer() {
         private val CATCH_MATCHER = InsnMatcher.compile(
             """
             (ASTORE ALOAD)?
-            (| LDC INVOKESTATIC |
+            (LDC INVOKESTATIC |
                 NEW DUP
                 (LDC INVOKESPECIAL | INVOKESPECIAL LDC INVOKEVIRTUAL)
                 ((ILOAD | LLOAD | FLOAD | DLOAD | (ALOAD IFNULL LDC GOTO LDC) | BIPUSH | SIPUSH | LDC) INVOKEVIRTUAL)*
                 INVOKEVIRTUAL INVOKESTATIC
-            )
+            )?
             ATHROW
         """
         )
