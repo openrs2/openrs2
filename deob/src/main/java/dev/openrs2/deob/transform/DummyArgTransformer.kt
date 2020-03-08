@@ -196,11 +196,12 @@ class DummyArgTransformer : Transformer() {
             }
 
             val invoke = match[match.size - 1] as MethodInsnNode
-            val invokeArgTypes = Type.getArgumentTypes(invoke.desc).size
-            val constArgs = arrayOfNulls<Int>(invokeArgTypes)
+            var invokeArgCount = Type.getArgumentTypes(invoke.desc).size
             if (invoke.opcode != Opcodes.INVOKESTATIC) {
-                matchIndex++
+                invokeArgCount++
             }
+
+            val constArgs = arrayOfNulls<Int>(invokeArgCount)
             for (i in constArgs.indices) {
                 val insn = match[matchIndex++]
                 if (insn.opcode == Opcodes.ACONST_NULL) {
