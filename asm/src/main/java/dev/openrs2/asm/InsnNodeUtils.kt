@@ -313,7 +313,7 @@ fun TryCatchBlockNode.isBodyEmpty(): Boolean {
 
     while (true) {
         when {
-            current == null -> return false
+            current == null -> error("Failed to reach end of try-catch block.")
             current === end -> return true
             current.opcode != -1 -> return false
             else -> current = current.next
