@@ -4,6 +4,8 @@ import com.github.javaparser.ast.CompilationUnit
 import com.github.javaparser.ast.NodeList
 import com.github.javaparser.ast.body.BodyDeclaration
 import com.github.javaparser.ast.body.FieldDeclaration
+import com.github.javaparser.ast.body.MethodDeclaration
+import com.github.javaparser.ast.body.Parameter
 import com.github.javaparser.ast.body.TypeDeclaration
 import com.github.javaparser.ast.body.VariableDeclarator
 import com.github.javaparser.ast.expr.BinaryExpr
@@ -12,8 +14,10 @@ import com.github.javaparser.ast.expr.FieldAccessExpr
 import com.github.javaparser.ast.expr.IntegerLiteralExpr
 import com.github.javaparser.ast.expr.MethodCallExpr
 import com.github.javaparser.ast.expr.NameExpr
+import com.github.javaparser.ast.expr.SimpleName
 import com.github.javaparser.ast.type.PrimitiveType
 import com.github.javaparser.resolution.types.ResolvedPrimitiveType
+import com.github.javaparser.resolution.types.ResolvedType
 import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.deob.ast.gl.GlCommand
 import dev.openrs2.deob.ast.gl.GlEnum
@@ -38,12 +42,93 @@ class GlConstantTransformer : Transformer() {
             return
         }
 
-        if (unit.primaryType.flatMap(TypeDeclaration<*>::getFullyQualifiedName).orElse(null) == JAGGL_CLASS) {
-            return
+        val primaryType = unit.primaryType.orElse(null)
+        if (primaryType.fullyQualifiedName.orElse(null) in GL_CLASSES) {
+            transformParameterNames(primaryType)
+        } else {
+            transformLiteralArguments(unit)
+        }
+    }
+
+    private fun transformParameterNames(type: TypeDeclaration<*>) {
+        for (method in type.methods) {
+            if (!method.nameAsString.startsWith(GL_METHOD_PREFIX)) {
+                continue
+            }
+
+            transformParameterNames(method)
+        }
+    }
+
+    private fun ResolvedType.isFollowedByOffset(): Boolean {
+        return when {
+            isArray && asArrayType().componentType.isPrimitive -> true
+            isReferenceType && asReferenceType().qualifiedName == "java.lang.Object" -> true
+            else -> false
+        }
+    }
+
+    private fun ResolvedType.isOffset(): Boolean {
+        return this == ResolvedPrimitiveType.INT
+    }
+
+    private fun transformParameterNames(method: MethodDeclaration) {
+        var name = method.nameAsString
+
+        val last = name.lastOrNull()
+        if (method.isNative && last != null && last.isDigit()) {
+            name = name.dropLast(1)
         }
 
+        val command = REGISTRY.commands[name] ?: error("Failed to find $name in the OpenGL registry")
+
+        var registryIndex = 0
+        var followedByOffset = false
+        for (parameter in method.parameters) {
+            val type = parameter.type.resolve()
+
+            if (followedByOffset && type.isOffset()) {
+                transformParameterName(method, command.parameters[registryIndex - 1], parameter, offset = true)
+            } else {
+                transformParameterName(method, command.parameters[registryIndex], parameter, offset = false)
+                registryIndex++
+            }
+
+            followedByOffset = type.isFollowedByOffset()
+        }
+
+        if (registryIndex != command.parameters.size) {
+            error("Command parameters inconsistent with registry")
+        }
+    }
+
+    private fun transformParameterName(
+        method: MethodDeclaration,
+        glParameter: GlParameter,
+        parameter: Parameter,
+        offset: Boolean
+    ) {
+        val oldName = parameter.nameAsString
+
+        var newName = glParameter.name
+        if (offset) {
+            newName += "Offset"
+        }
+
+        val newSimpleName = SimpleName(newName)
+
+        parameter.name = newSimpleName
+
+        method.walk { expr: NameExpr ->
+            if (expr.nameAsString == oldName) {
+                expr.name = newSimpleName
+            }
+        }
+    }
+
+    private fun transformLiteralArguments(unit: CompilationUnit) {
         unit.walk { expr: MethodCallExpr ->
-            if (!expr.nameAsString.startsWith("gl")) {
+            if (!expr.nameAsString.startsWith(GL_METHOD_PREFIX)) {
                 return@walk
             }
 
@@ -54,8 +139,8 @@ class GlConstantTransformer : Transformer() {
                 }
 
                 val name = type.asReferenceType().qualifiedName
-                if (name == GL_CLASS || name == JAGGL_CLASS) {
-                    transformCall(unit, expr)
+                if (name in GL_CLASSES) {
+                    transformLiteralArguments(unit, expr)
                 }
             }
         }
@@ -74,31 +159,25 @@ class GlConstantTransformer : Transformer() {
         glInterface.members.sortWith(FIELD_METHOD_COMPARATOR.thenComparing(GL_FIELD_VALUE_COMPARATOR))
     }
 
-    private fun transformCall(unit: CompilationUnit, expr: MethodCallExpr) {
+    private fun transformLiteralArguments(unit: CompilationUnit, expr: MethodCallExpr) {
         val name = expr.nameAsString
         val command = REGISTRY.commands[name] ?: error("Failed to find $name in the OpenGL registry")
 
-        var offset = false
         var registryIndex = 0
+        var followedByOffset = false
         for (argument in expr.arguments) {
             val type = argument.calculateResolvedType()
 
-            if (offset) {
-                if (type != ResolvedPrimitiveType.INT) {
-                    error("Expecting integer offset after primitive array")
-                }
-
-                offset = false
+            if (followedByOffset && type.isOffset()) {
                 continue
             }
 
-            when {
-                type.isArray -> offset = type.asArrayType().componentType.isPrimitive
-                type.isPrimitive -> transformArgument(unit, command, command.parameters[registryIndex], argument)
-                !type.isReferenceType -> error("Expecting array, reference or primitive type")
+            if (type.isPrimitive) {
+                transformLiteralArgument(unit, command, command.parameters[registryIndex], argument)
             }
 
             registryIndex++
+            followedByOffset = type.isFollowedByOffset()
         }
 
         if (registryIndex != command.parameters.size) {
@@ -135,7 +214,7 @@ class GlConstantTransformer : Transformer() {
         return IntegerLiteralExpr("0x${Integer.toUnsignedString(this, 16)}")
     }
 
-    private fun transformArgument(
+    private fun transformLiteralArgument(
         unit: CompilationUnit,
         command: GlCommand,
         parameter: GlParameter,
@@ -203,9 +282,11 @@ class GlConstantTransformer : Transformer() {
 
     companion object {
         private val logger = InlineLogger()
+        private const val GL_METHOD_PREFIX = "gl"
         private const val GL_CLASS_UNQUALIFIED = "GL"
         private const val GL_CLASS = "javax.media.opengl.$GL_CLASS_UNQUALIFIED"
         private const val JAGGL_CLASS = "jaggl.opengl"
+        private val GL_CLASSES = setOf(GL_CLASS, JAGGL_CLASS)
         private val REGISTRY = GlRegistry.parse()
         private val VENDORS = setOf("ARB", "EXT")
 
