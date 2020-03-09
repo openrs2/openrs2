@@ -28,6 +28,7 @@ import dev.openrs2.deob.transform.OriginalNameTransformer
 import dev.openrs2.deob.transform.OriginalPcRestoreTransformer
 import dev.openrs2.deob.transform.OriginalPcSaveTransformer
 import dev.openrs2.deob.transform.OverrideTransformer
+import dev.openrs2.deob.transform.RedundantGotoTransformer
 import dev.openrs2.deob.transform.RemapTransformer
 import dev.openrs2.deob.transform.ResetTransformer
 import dev.openrs2.deob.transform.StaticScramblingTransformer
@@ -180,6 +181,7 @@ class Deobfuscator(private val input: Path, private val output: Path) {
             VisibilityTransformer(),
             FinalTransformer(),
             OverrideTransformer(),
+            RedundantGotoTransformer(),
             OriginalPcRestoreTransformer(),
             FernflowerExceptionTransformer()
         )
