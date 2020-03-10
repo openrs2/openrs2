@@ -196,7 +196,7 @@ class GlConstantTransformer : Transformer() {
     }
 
     private fun Int.toHexLiteralExpr(): IntegerLiteralExpr {
-        return IntegerLiteralExpr("0x${Integer.toUnsignedString(this, 16)}")
+        return IntegerLiteralExpr("0x${Integer.toUnsignedString(this, 16).toUpperCase()}")
     }
 
     private fun transformExpr(
