@@ -6397,14 +6397,14 @@ typedef unsigned int GLhandleARB;
         <enum value="0x8123" name="GL_QUAD_INTENSITY8_SGIS" group="InternalFormat"/>
         <enum value="0x8124" name="GL_DUAL_TEXTURE_SELECT_SGIS" group="TextureParameterName,GetTextureParameter"/>
         <enum value="0x8125" name="GL_QUAD_TEXTURE_SELECT_SGIS" group="TextureParameterName,GetTextureParameter"/>
-        <enum value="0x8126" name="GL_POINT_SIZE_MIN" group="PointParameterNameSGIS"/>
-        <enum value="0x8126" name="GL_POINT_SIZE_MIN_ARB" group="PointParameterNameSGIS"/>
-        <enum value="0x8126" name="GL_POINT_SIZE_MIN_EXT" group="PointParameterNameSGIS,PointParameterNameARB"/>
-        <enum value="0x8126" name="GL_POINT_SIZE_MIN_SGIS" group="PointParameterNameSGIS,GetPName"/>
-        <enum value="0x8127" name="GL_POINT_SIZE_MAX" group="PointParameterNameSGIS"/>
-        <enum value="0x8127" name="GL_POINT_SIZE_MAX_ARB" group="PointParameterNameSGIS"/>
-        <enum value="0x8127" name="GL_POINT_SIZE_MAX_EXT" group="PointParameterNameSGIS,PointParameterNameARB"/>
-        <enum value="0x8127" name="GL_POINT_SIZE_MAX_SGIS" group="PointParameterNameSGIS,GetPName"/>
+        <enum value="0x8126" name="GL_POINT_SIZE_MIN" group="PointParameterNameSGIS,PointParameterNameARB,GetPName"/>
+        <enum value="0x8126" name="GL_POINT_SIZE_MIN_ARB" group="PointParameterNameSGIS,PointParameterNameARB,GetPName"/>
+        <enum value="0x8126" name="GL_POINT_SIZE_MIN_EXT" group="PointParameterNameSGIS,PointParameterNameARB,GetPName"/>
+        <enum value="0x8126" name="GL_POINT_SIZE_MIN_SGIS" group="PointParameterNameSGIS,PointParameterNameARB,GetPName"/>
+        <enum value="0x8127" name="GL_POINT_SIZE_MAX" group="PointParameterNameSGIS,PointParameterNameARB,GetPName"/>
+        <enum value="0x8127" name="GL_POINT_SIZE_MAX_ARB" group="PointParameterNameSGIS,PointParameterNameARB,GetPName"/>
+        <enum value="0x8127" name="GL_POINT_SIZE_MAX_EXT" group="PointParameterNameSGIS,PointParameterNameARB,GetPName"/>
+        <enum value="0x8127" name="GL_POINT_SIZE_MAX_SGIS" group="PointParameterNameSGIS,PointParameterNameARB,GetPName"/>
         <enum value="0x8128" name="GL_POINT_FADE_THRESHOLD_SIZE" group="PointParameterNameSGIS,PointParameterNameARB,GetPName"/>
         <enum value="0x8128" name="GL_POINT_FADE_THRESHOLD_SIZE_ARB" group="PointParameterNameSGIS"/>
         <enum value="0x8128" name="GL_POINT_FADE_THRESHOLD_SIZE_EXT" group="PointParameterNameSGIS,PointParameterNameARB"/>
