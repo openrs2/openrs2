@@ -21,7 +21,6 @@ import com.github.javaparser.resolution.types.ResolvedType
 import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.deob.ast.gl.GlCommand
 import dev.openrs2.deob.ast.gl.GlEnum
-import dev.openrs2.deob.ast.gl.GlGroup
 import dev.openrs2.deob.ast.gl.GlParameter
 import dev.openrs2.deob.ast.gl.GlRegistry
 import dev.openrs2.deob.ast.util.checkedAsInt
@@ -185,20 +184,6 @@ class GlConstantTransformer : Transformer() {
         }
     }
 
-    private val GlCommand.vendor: String?
-        get() = VENDORS.firstOrNull { name.endsWith(it) }
-
-    private fun GlGroup.firstEnumOrNull(value: Int, vendor: String?): GlEnum? {
-        if (vendor != null) {
-            val enum = enums.filter { it.name.endsWith("_$vendor") }.firstOrNull { it.value == value.toLong() }
-            if (enum != null) {
-                return enum
-            }
-        }
-
-        return enums.firstOrNull { it.value == value.toLong() }
-    }
-
     private fun GlEnum.toExpr(): Expression {
         return FieldAccessExpr(NameExpr(GL_CLASS_UNQUALIFIED), name)
     }
@@ -240,7 +225,6 @@ class GlConstantTransformer : Transformer() {
         expr: Expression
     ) {
         var value = expr.asIntegerLiteralExpr().checkedAsInt()
-        val vendor = command.vendor
         val group = parameter.group ?: return
 
         if (parameter.bitfield) {
@@ -256,7 +240,7 @@ class GlConstantTransformer : Transformer() {
                     continue
                 }
 
-                val enum = group.firstEnumOrNull(bit, vendor)
+                val enum = group.enums.firstOrNull { it.value == bit.toLong() }
                 if (enum != null) {
                     bitfieldEnums += enum
                     value = value and bit.inv()
@@ -283,7 +267,7 @@ class GlConstantTransformer : Transformer() {
                 expr.replace(orExpr)
             }
         } else {
-            val enum = group.firstEnumOrNull(value, vendor)
+            val enum = group.enums.firstOrNull { it.value == value.toLong() }
             if (enum != null) {
                 unit.addImport(GL_CLASS)
                 enums += enum
@@ -303,7 +287,6 @@ class GlConstantTransformer : Transformer() {
         private const val JAGGL_CLASS = "jaggl.opengl"
         private val GL_CLASSES = setOf(GL_CLASS, JAGGL_CLASS)
         private val REGISTRY = GlRegistry.parse()
-        private val VENDORS = setOf("ARB", "EXT")
 
         private val FIELD_METHOD_COMPARATOR = Comparator<BodyDeclaration<*>> { a, b ->
             when {
