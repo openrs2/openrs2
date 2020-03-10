@@ -46,7 +46,7 @@ class GlConstantTransformer : Transformer() {
         if (primaryType.fullyQualifiedName.orElse(null) in GL_CLASSES) {
             transformParameterNames(primaryType)
         } else {
-            transformLiteralArguments(unit)
+            transformArguments(unit)
         }
     }
 
@@ -126,7 +126,7 @@ class GlConstantTransformer : Transformer() {
         }
     }
 
-    private fun transformLiteralArguments(unit: CompilationUnit) {
+    private fun transformArguments(unit: CompilationUnit) {
         unit.walk { expr: MethodCallExpr ->
             if (!expr.nameAsString.startsWith(GL_METHOD_PREFIX)) {
                 return@walk
@@ -140,7 +140,7 @@ class GlConstantTransformer : Transformer() {
 
                 val name = type.asReferenceType().qualifiedName
                 if (name in GL_CLASSES) {
-                    transformLiteralArguments(unit, expr)
+                    transformArguments(unit, expr)
                 }
             }
         }
@@ -159,7 +159,7 @@ class GlConstantTransformer : Transformer() {
         glInterface.members.sortWith(FIELD_METHOD_COMPARATOR.thenComparing(GL_FIELD_VALUE_COMPARATOR))
     }
 
-    private fun transformLiteralArguments(unit: CompilationUnit, expr: MethodCallExpr) {
+    private fun transformArguments(unit: CompilationUnit, expr: MethodCallExpr) {
         val name = expr.nameAsString
         val command = REGISTRY.commands[name] ?: error("Failed to find $name in the OpenGL registry")
 
@@ -173,7 +173,7 @@ class GlConstantTransformer : Transformer() {
             }
 
             if (type.isPrimitive) {
-                transformLiteralArgument(unit, command, command.parameters[registryIndex], argument)
+                transformExpr(unit, command, command.parameters[registryIndex], argument)
             }
 
             registryIndex++
@@ -214,17 +214,32 @@ class GlConstantTransformer : Transformer() {
         return IntegerLiteralExpr("0x${Integer.toUnsignedString(this, 16)}")
     }
 
-    private fun transformLiteralArgument(
+    private fun transformExpr(
         unit: CompilationUnit,
         command: GlCommand,
         parameter: GlParameter,
-        argument: Expression
+        expr: Expression
     ) {
-        if (!argument.isIntegerLiteralExpr) {
-            return
+        if (expr.isBinaryExpr) {
+            val binaryExpr = expr.asBinaryExpr()
+            transformExpr(unit, command, parameter, binaryExpr.left)
+            transformExpr(unit, command, parameter, binaryExpr.right)
+        } else if (expr.isConditionalExpr) {
+            val conditionalExpr = expr.asConditionalExpr()
+            transformExpr(unit, command, parameter, conditionalExpr.thenExpr)
+            transformExpr(unit, command, parameter, conditionalExpr.elseExpr)
+        } else if (expr.isIntegerLiteralExpr) {
+            transformIntegerLiteralExpr(unit, command, parameter, expr)
         }
+    }
 
-        var value = argument.asIntegerLiteralExpr().checkedAsInt()
+    private fun transformIntegerLiteralExpr(
+        unit: CompilationUnit,
+        command: GlCommand,
+        parameter: GlParameter,
+        expr: Expression
+    ) {
+        var value = expr.asIntegerLiteralExpr().checkedAsInt()
         val vendor = command.vendor
         val group = parameter.group ?: return
 
@@ -256,16 +271,16 @@ class GlConstantTransformer : Transformer() {
             unit.addImport(GL_CLASS)
             enums += bitfieldEnums
 
-            val expr = bitfieldEnums.sortedBy(GlEnum::value)
+            val orExpr = bitfieldEnums.sortedBy(GlEnum::value)
                 .map { it.toExpr() }
                 .reduce { a, b -> BinaryExpr(a, b, BinaryExpr.Operator.BINARY_OR) }
 
             if (value != 0) {
                 logger.warn { "Missing some enums in ${command.name}'s ${parameter.name} bitfield: $value" }
 
-                argument.replace(BinaryExpr(expr, value.toHexLiteralExpr(), BinaryExpr.Operator.BINARY_OR))
+                expr.replace(BinaryExpr(orExpr, value.toHexLiteralExpr(), BinaryExpr.Operator.BINARY_OR))
             } else {
-                argument.replace(expr)
+                expr.replace(orExpr)
             }
         } else {
             val enum = group.firstEnumOrNull(value, vendor)
@@ -273,7 +288,7 @@ class GlConstantTransformer : Transformer() {
                 unit.addImport(GL_CLASS)
                 enums += enum
 
-                argument.replace(enum.toExpr())
+                expr.replace(enum.toExpr())
             } else {
                 logger.warn { "Missing enum for ${command.name}'s ${parameter.name} parameter: $value" }
             }
