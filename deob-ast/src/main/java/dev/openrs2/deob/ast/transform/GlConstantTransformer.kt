@@ -26,7 +26,7 @@ import dev.openrs2.deob.ast.gl.GlRegistry
 import dev.openrs2.deob.ast.util.checkedAsInt
 import dev.openrs2.deob.ast.util.walk
 
-class GlConstantTransformer : Transformer() {
+class GlConstantTransformer(private val registry: GlRegistry = GlRegistry.parse()) : Transformer() {
     private val enums = mutableSetOf<GlEnum>()
 
     override fun preTransform(units: Map<String, CompilationUnit>) {
@@ -106,7 +106,7 @@ class GlConstantTransformer : Transformer() {
             name = name.dropLast(1)
         }
 
-        val command = REGISTRY.commands[name] ?: error("Failed to find $name in the OpenGL registry")
+        val command = registry.commands[name] ?: error("Failed to find $name in the OpenGL registry")
 
         var registryIndex = 0
         var followedByOffset = false
@@ -187,7 +187,7 @@ class GlConstantTransformer : Transformer() {
 
     private fun transformArguments(unit: CompilationUnit, expr: MethodCallExpr) {
         val name = expr.nameAsString
-        val command = REGISTRY.commands[name] ?: error("Failed to find $name in the OpenGL registry")
+        val command = registry.commands[name] ?: error("Failed to find $name in the OpenGL registry")
 
         var registryIndex = 0
         var followedByOffset = false
@@ -313,7 +313,6 @@ class GlConstantTransformer : Transformer() {
         private const val GL_CLASS = "javax.media.opengl.$GL_CLASS_UNQUALIFIED"
         private const val JAGGL_CLASS = "jaggl.opengl"
         private val GL_CLASSES = setOf(GL_CLASS, JAGGL_CLASS)
-        private val REGISTRY = GlRegistry.parse()
         private val GL_FRAMEBUFFER_COMPLETE = GlEnum("GL_FRAMEBUFFER_COMPLETE", 0x8CD5)
 
         private val FIELD_METHOD_COMPARATOR = Comparator<BodyDeclaration<*>> { a, b ->
