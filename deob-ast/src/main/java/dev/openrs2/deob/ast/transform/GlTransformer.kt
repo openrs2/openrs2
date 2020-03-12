@@ -26,7 +26,7 @@ import dev.openrs2.deob.ast.gl.GlRegistry
 import dev.openrs2.deob.ast.util.checkedAsInt
 import dev.openrs2.deob.ast.util.walk
 
-class GlConstantTransformer(private val registry: GlRegistry = GlRegistry.parse()) : Transformer() {
+class GlTransformer(private val registry: GlRegistry = GlRegistry.parse()) : Transformer() {
     private val enums = mutableSetOf<GlEnum>()
 
     override fun preTransform(units: Map<String, CompilationUnit>) {
