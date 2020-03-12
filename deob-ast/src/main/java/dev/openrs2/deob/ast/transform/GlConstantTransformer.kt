@@ -47,6 +47,33 @@ class GlConstantTransformer : Transformer() {
         } else {
             transformArguments(unit)
         }
+
+        transformFramebufferStatus(unit)
+    }
+
+    private fun transformFramebufferStatus(unit: CompilationUnit) {
+        unit.walk { expr: BinaryExpr ->
+            if (expr.operator == BinaryExpr.Operator.EQUALS || expr.operator == BinaryExpr.Operator.NOT_EQUALS) {
+                transformFramebufferStatus(unit, expr.left)
+                transformFramebufferStatus(unit, expr.right)
+            }
+        }
+    }
+
+    private fun transformFramebufferStatus(unit: CompilationUnit, expr: Expression) {
+        if (!expr.isIntegerLiteralExpr) {
+            return
+        }
+
+        val value = expr.asIntegerLiteralExpr().checkedAsInt()
+        if (value.toLong() != GL_FRAMEBUFFER_COMPLETE.value) {
+            return
+        }
+
+        unit.addImport(GL_CLASS)
+        enums += GL_FRAMEBUFFER_COMPLETE
+
+        expr.replace(GL_FRAMEBUFFER_COMPLETE.toExpr())
     }
 
     private fun transformParameterNames(type: TypeDeclaration<*>) {
@@ -287,6 +314,7 @@ class GlConstantTransformer : Transformer() {
         private const val JAGGL_CLASS = "jaggl.opengl"
         private val GL_CLASSES = setOf(GL_CLASS, JAGGL_CLASS)
         private val REGISTRY = GlRegistry.parse()
+        private val GL_FRAMEBUFFER_COMPLETE = GlEnum("GL_FRAMEBUFFER_COMPLETE", 0x8CD5)
 
         private val FIELD_METHOD_COMPARATOR = Comparator<BodyDeclaration<*>> { a, b ->
             when {
