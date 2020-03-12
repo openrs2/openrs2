@@ -79,6 +79,8 @@ project.
 
 Kotlin code must pass all of [ktlint][ktlint]'s tests.
 
+Always use `//` for single-line comments and `/*` for multi-line comments.
+
 ### Commit messages
 
 Commit messages should follow the ['seven rules'][commitmsg] described in
