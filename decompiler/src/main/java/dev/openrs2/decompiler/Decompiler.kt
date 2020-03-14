@@ -11,7 +11,6 @@ private fun getDestination(archive: String): Path {
     when (dir) {
         "runescape" -> dir = "client"
         "jaggl" -> dir = "gl"
-        "jaggl_dri" -> dir = "gl-dri"
     }
     return Paths.get("nonfree").resolve(dir).resolve("src/main/java")
 }
@@ -21,7 +20,6 @@ fun main() {
     val sources = listOf(
         deobOutput.resolve("runescape_gl.jar"),
         deobOutput.resolve("jaggl.jar"),
-        deobOutput.resolve("jaggl_dri.jar"),
         deobOutput.resolve("loader_gl.jar"),
         deobOutput.resolve("signlink_gl.jar"),
         deobOutput.resolve("unpack_gl.jar"),

@@ -80,13 +80,6 @@ class Deobfuscator(private val input: Path, private val output: Path) {
         val glUnpack = Library()
         glUnpack.add(glLoader.remove("unpack")!!)
 
-        // move DRI classes out of jaggl (so we can place javah-generated headers in a separate directory)
-        logger.info { "Moving DRI classes from jaggl to jaggl_dri" }
-        val glDri = Library()
-        glDri.add(gl.remove("com/sun/opengl/impl/x11/DRIHack")!!)
-        glDri.add(gl.remove("com/sun/opengl/impl/x11/DRIHack$1")!!)
-        glDri.add(gl.remove("jaggl/X11/dri")!!)
-
         // prefix remaining loader/unpacker classes (to avoid conflicts when we rename in the same classpath as the client)
         logger.info { "Prefixing loader and unpacker class names" }
         loader.remap(create(loader, "loader_"))
@@ -103,7 +96,7 @@ class Deobfuscator(private val input: Path, private val output: Path) {
         )
         val glClassPath = ClassPath(
             runtime,
-            dependencies = listOf(gl, glDri),
+            dependencies = listOf(gl),
             libraries = listOf(glClient, glLoader, glSignLink, glUnpack, glUnpacker)
         )
         val unsignedClassPath = ClassPath(
@@ -143,7 +136,6 @@ class Deobfuscator(private val input: Path, private val output: Path) {
         unpacker.writeJar(classPath, output.resolve("unpacker.jar"))
 
         gl.writeJar(glClassPath, output.resolve("jaggl.jar"))
-        glDri.writeJar(glClassPath, output.resolve("jaggl_dri.jar"))
         glClient.writeJar(glClassPath, output.resolve("runescape_gl.jar"))
         glLoader.writeJar(glClassPath, output.resolve("loader_gl.jar"))
         glSignLink.writeJar(glClassPath, output.resolve("signlink_gl.jar"))
