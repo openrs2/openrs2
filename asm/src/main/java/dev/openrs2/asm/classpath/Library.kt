@@ -101,8 +101,14 @@ class Library constructor() : Iterable<ClassNode> {
         val unsignedPath = Files.createTempFile("tmp", ".jar")
         try {
             writeJar(classPath, unsignedPath, manifest)
-            keyStore.signJar(unsignedPath)
-            DeterministicJarOutputStream.repack(unsignedPath, path)
+
+            val signedPath = Files.createTempFile("tmp", ".jar")
+            try {
+                keyStore.signJar(unsignedPath, signedPath)
+                DeterministicJarOutputStream.repack(signedPath, path)
+            } finally {
+                Files.deleteIfExists(signedPath)
+            }
         } finally {
             Files.deleteIfExists(unsignedPath)
         }

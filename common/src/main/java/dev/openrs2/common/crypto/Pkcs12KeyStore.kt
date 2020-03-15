@@ -1,5 +1,6 @@
 package dev.openrs2.common.crypto
 
+import jdk.security.jarsigner.JarSigner
 import org.bouncycastle.asn1.nist.NISTObjectIdentifiers
 import org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers
 import org.bouncycastle.asn1.x500.X500NameBuilder
@@ -10,7 +11,6 @@ import org.bouncycastle.cert.jcajce.JcaX509CertificateConverter
 import org.bouncycastle.crypto.util.SubjectPublicKeyInfoFactory
 import org.bouncycastle.operator.bc.BcRSAContentSignerBuilder
 import org.bouncycastle.util.BigIntegers
-import java.io.IOException
 import java.nio.file.Files
 import java.nio.file.Path
 import java.security.KeyFactory
@@ -19,18 +19,21 @@ import java.time.OffsetDateTime
 import java.time.Period
 import java.time.ZoneOffset
 import java.util.Date
+import java.util.jar.JarFile
 
-class Pkcs12KeyStore private constructor(private val path: Path) {
-    fun signJar(jar: Path) {
-        exec(
-            "jarsigner",
-            "-keystore", path.toString(),
-            "-storetype", "pkcs12",
-            "-storepass", PASSWORD,
-            "-keypass", PASSWORD,
-            jar.toString(),
-            ALIAS
-        )
+class Pkcs12KeyStore private constructor(privateKeyEntry: KeyStore.PrivateKeyEntry) {
+    private val signer = JarSigner.Builder(privateKeyEntry)
+        .signatureAlgorithm("SHA256withRSA")
+        .digestAlgorithm("SHA-256")
+        .signerName(SIGNER_NAME)
+        .build()
+
+    fun signJar(input: Path, output: Path) {
+        JarFile(input.toFile()).use { file ->
+            Files.newOutputStream(output).use { os ->
+                signer.sign(file, os)
+            }
+        }
     }
 
     companion object {
@@ -43,8 +46,9 @@ class Pkcs12KeyStore private constructor(private val path: Path) {
         private const val SERIAL_LENGTH = 128
 
         // TODO(gpe): add support for overriding this
+        private const val SIGNER_NAME = "OpenRS2"
         private val DNAME = X500NameBuilder()
-            .addRDN(BCStyle.CN, "OpenRS2")
+            .addRDN(BCStyle.CN, SIGNER_NAME)
             .build()
 
         private val MAX_CLOCK_SKEW = Period.ofDays(1)
@@ -63,15 +67,20 @@ class Pkcs12KeyStore private constructor(private val path: Path) {
                 keyStore.load(null)
             }
 
-            if (!keyStore.containsAlias(ALIAS)) {
-                keyStore.setEntry(ALIAS, createPrivateKeyEntry(), PASSWORD_PARAMETER)
+            val privateKeyEntry = if (keyStore.containsAlias(ALIAS)) {
+                keyStore.getEntry(ALIAS, PASSWORD_PARAMETER) as KeyStore.PrivateKeyEntry
+            } else {
+                val entry = createPrivateKeyEntry()
+                keyStore.setEntry(ALIAS, entry, PASSWORD_PARAMETER)
 
                 Files.newOutputStream(path).use { output ->
                     keyStore.store(output, PASSWORD_CHARS)
                 }
+
+                entry
             }
 
-            return Pkcs12KeyStore(path)
+            return Pkcs12KeyStore(privateKeyEntry)
         }
 
         private fun createPrivateKeyEntry(): KeyStore.PrivateKeyEntry {
@@ -97,16 +106,6 @@ class Pkcs12KeyStore private constructor(private val path: Path) {
             val jcaPrivate = KeyFactory.getInstance("RSA").generatePrivate(private.toKeySpec())
             val jcaCertificate = JcaX509CertificateConverter().getCertificate(certificate)
             return KeyStore.PrivateKeyEntry(jcaPrivate, arrayOf(jcaCertificate))
-        }
-
-        private fun exec(command: String, vararg args: String) {
-            val commandWithArgs = listOf(command, *args)
-            val status = ProcessBuilder(commandWithArgs)
-                .start()
-                .waitFor()
-            if (status != 0) {
-                throw IOException("$command returned non-zero status code $status")
-            }
         }
     }
 }
