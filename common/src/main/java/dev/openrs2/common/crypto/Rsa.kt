@@ -24,6 +24,8 @@ import java.io.IOException
 import java.math.BigInteger
 import java.nio.file.Files
 import java.nio.file.Path
+import java.security.spec.KeySpec
+import java.security.spec.RSAPrivateCrtKeySpec
 
 val RSAPrivateCrtKeyParameters.publicKey
     get() = RSAKeyParameters(false, modulus, publicExponent)
@@ -45,6 +47,10 @@ fun ByteBuf.rsaDecrypt(key: RSAKeyParameters): ByteBuf {
     return Rsa.decrypt(toBigInteger(), key).toByteBuf()
 }
 
+fun RSAPrivateCrtKeyParameters.toKeySpec(): KeySpec {
+    return RSAPrivateCrtKeySpec(modulus, publicExponent, exponent, p, q, dp, dq, qInv)
+}
+
 object Rsa {
     private const val PUBLIC_KEY = "PUBLIC KEY"
     private const val PRIVATE_KEY = "PRIVATE KEY"
@@ -60,6 +66,8 @@ object Rsa {
      * the maximum key size supported by the client is 126 bytes - or 1008 bits.
      */
     const val CLIENT_KEY_LENGTH = 1008
+
+    const val JAR_KEY_LENGTH = 2048
 
     // 1 in 2^80
     private const val CERTAINTY = 80
