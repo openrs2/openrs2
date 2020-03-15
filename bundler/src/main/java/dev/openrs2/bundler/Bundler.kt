@@ -44,7 +44,7 @@ class Bundler @Inject constructor(publicKeyTransformer: PublicKeyTransformer) {
         val glClient = Library.readPack(input.resolve("runescape_gl.pack200"))
 
         // bundle libraries together into a common classpath
-        val runtime = ClassLoader.getSystemClassLoader()
+        val runtime = ClassLoader.getPlatformClassLoader()
         val classPath = ClassPath(
             runtime,
             dependencies = listOf(unpacker),

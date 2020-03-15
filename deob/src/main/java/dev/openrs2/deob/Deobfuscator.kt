@@ -88,7 +88,7 @@ class Deobfuscator(private val input: Path, private val output: Path) {
         glUnpacker.remap(create(glUnpacker, "unpacker_"))
 
         // bundle libraries together into a common classpath
-        val runtime = ClassLoader.getSystemClassLoader()
+        val runtime = ClassLoader.getPlatformClassLoader()
         val classPath = ClassPath(
             runtime,
             dependencies = emptyList(),
