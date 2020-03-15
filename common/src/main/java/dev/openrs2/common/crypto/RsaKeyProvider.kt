@@ -10,7 +10,7 @@ class RsaKeyProvider : Provider<RSAPrivateCrtKeyParameters> {
         return if (Files.exists(PRIVATE_PATH)) {
             Rsa.readPrivateKey(PRIVATE_PATH)
         } else {
-            val (public, private) = Rsa.generateKeyPair()
+            val (public, private) = Rsa.generateKeyPair(Rsa.KEY_LENGTH)
             Rsa.writePublicKey(PUBLIC_PATH, public)
             Rsa.writePrivateKey(PRIVATE_PATH, private)
             private

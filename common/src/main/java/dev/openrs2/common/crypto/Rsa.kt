@@ -59,14 +59,14 @@ object Rsa {
      * The maximum output length of RSA encryption is the key size plus one, so
      * the maximum key size supported by the client is 126 bytes - or 1008 bits.
      */
-    private const val KEY_LENGTH = 1008
+    const val KEY_LENGTH = 1008
 
     // 1 in 2^80
     private const val CERTAINTY = 80
 
-    fun generateKeyPair(): Pair<RSAKeyParameters, RSAPrivateCrtKeyParameters> {
+    fun generateKeyPair(length: Int): Pair<RSAKeyParameters, RSAPrivateCrtKeyParameters> {
         val generator = RSAKeyPairGenerator()
-        generator.init(RSAKeyGenerationParameters(F4, secureRandom, KEY_LENGTH, CERTAINTY))
+        generator.init(RSAKeyGenerationParameters(F4, secureRandom, length, CERTAINTY))
 
         val keyPair = generator.generateKeyPair()
         return Pair(keyPair.public as RSAKeyParameters, keyPair.private as RSAPrivateCrtKeyParameters)
