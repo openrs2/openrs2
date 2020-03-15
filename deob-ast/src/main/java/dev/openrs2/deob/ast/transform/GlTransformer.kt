@@ -177,7 +177,7 @@ class GlTransformer(private val registry: GlRegistry = GlRegistry.parse()) : Tra
         val glInterface = glUnit.primaryType.get()
 
         // add missing fields
-        val fields = enums.filter { !glInterface.getFieldByName(it.name).isPresent }
+        val fields = enums.filter { glInterface.getFieldByName(it.name).isEmpty }
             .map { it.toDeclaration() }
         glInterface.members.addAll(fields)
 
