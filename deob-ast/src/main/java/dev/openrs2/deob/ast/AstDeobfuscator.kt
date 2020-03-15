@@ -33,7 +33,6 @@ fun main() {
         listOf(
             Paths.get("nonfree/client/src/main/java"),
             Paths.get("nonfree/gl/src/main/java"),
-            Paths.get("nonfree/gl-dri/src/main/java"),
             Paths.get("nonfree/loader/src/main/java"),
             Paths.get("nonfree/signlink/src/main/java"),
             Paths.get("nonfree/unpack/src/main/java"),
