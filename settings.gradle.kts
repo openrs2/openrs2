@@ -11,8 +11,7 @@ include(
     "deob",
     "deob-annotations",
     "deob-ast",
-    "game",
-    "jsobject"
+    "game"
 )
 
 if (Files.exists(rootProject.projectDir.toPath().resolve("nonfree/build.gradle.kts"))) {

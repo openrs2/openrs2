@@ -10,7 +10,7 @@ released in late 2009.
 
 ## Prerequisites
 
-OpenRS2 requires version 8 or later of the [Java Development Kit][jdk].
+OpenRS2 requires version 11 or later of the [Java Development Kit][jdk].
 
 The JDK is required even if a pre-built copy of OpenRS2 is used, as it depends
 on JDK-only tools, such as `jarsigner`, at runtime.
