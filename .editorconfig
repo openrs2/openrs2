@@ -7,13 +7,18 @@ trim_trailing_whitespace = true
 max_line_length = 120
 indent_style = tab
 
-[*.{kt, kts}]
+# Prevent IDEA from translating *.{kt,kts} -> *.{kt, kts}. This confuses ktlint.
+# @formatter:off
+[*.{kt,kts}]
+# @formatter:on
 indent_style = space
 indent_size = 4
 # see https://github.com/pinterest/ktlint/issues/527
 # noinspection EditorConfigKeyCorrectness
 disabled_rules = import-ordering
 
-[*.{xml, yaml, yml}]
+# @formatter:off
+[*.{xml,yaml,yml}]
+# @formatter:on
 indent_style = space
 indent_size = 2
