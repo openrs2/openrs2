@@ -46,7 +46,7 @@ object RsaTest {
 
     @Test
     fun testGenerateKeyPair() {
-        val (public, private) = Rsa.generateKeyPair(Rsa.KEY_LENGTH)
+        val (public, private) = Rsa.generateKeyPair(Rsa.CLIENT_KEY_LENGTH)
 
         val expectedPlaintext = BigInteger("1337")
         val ciphertext = Rsa.encrypt(expectedPlaintext, public)

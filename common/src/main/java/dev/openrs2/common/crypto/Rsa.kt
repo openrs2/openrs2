@@ -59,7 +59,7 @@ object Rsa {
      * The maximum output length of RSA encryption is the key size plus one, so
      * the maximum key size supported by the client is 126 bytes - or 1008 bits.
      */
-    const val KEY_LENGTH = 1008
+    const val CLIENT_KEY_LENGTH = 1008
 
     // 1 in 2^80
     private const val CERTAINTY = 80
