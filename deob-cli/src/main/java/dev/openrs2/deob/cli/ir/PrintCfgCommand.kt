@@ -1,10 +1,9 @@
 package dev.openrs2.deob.cli.ir
 
 import com.google.common.graph.EndpointPair
+import dev.openrs2.deob.ir.BasicBlock
 import dev.openrs2.deob.ir.Method
-import dev.openrs2.deob.ir.flow.BasicBlock
 import org.jgrapht.Graph
-import org.jgrapht.graph.guava.MutableGraphAdapter
 import org.jgrapht.nio.DefaultAttribute
 import org.jgrapht.nio.GraphExporter
 import org.jgrapht.nio.dot.DOTExporter
@@ -28,9 +27,6 @@ fun dotExporter(): BlockGraphExporter {
 
 object PrintCfgCommand : MethodScopedCommand("ir-print-cfg") {
     override fun run(method: Method) {
-        val graph: BlockGraph = MutableGraphAdapter(method.cfg)
-        val exporter: BlockGraphExporter = dotExporter()
-
-        exporter.exportGraph(graph, System.out)
+        TODO("Make this output expressions")
     }
 }

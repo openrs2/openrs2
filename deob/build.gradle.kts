@@ -11,6 +11,7 @@ application {
 dependencies {
     implementation(project(":bundler"))
     implementation(project(":deob-annotations"))
+    implementation(project(":deob-ir"))
     implementation("com.google.guava:guava:${Versions.guava}")
 }
 

@@ -4,12 +4,14 @@ import dev.openrs2.deob.ir.translation.fixture.Fixture
 import dev.openrs2.deob.ir.translation.fixture.FixtureMethod
 import org.junit.jupiter.api.Test
 
-class IrDecompilerTests {
+class BytecodeToIrTranlatorTests {
 
     @Test
     fun `Creates entry basic block`() {
-        class CfgSample(val a: Boolean, val b: Boolean) :
-            Fixture {
+        class CfgSample() : Fixture {
+            val a = true
+            val b = false
+
             override fun test() {
                 if (a) {
                     println("a")
@@ -20,8 +22,10 @@ class IrDecompilerTests {
         }
 
         val fixture = FixtureMethod.from(CfgSample::class)
-        val decompiler = IrDecompiler(fixture.owner, fixture.method)
-        val irMethod = decompiler.decompile()
+        val decompiler = BytecodeToIrTranlator()
+        val irMethod = decompiler.decompile(fixture.owner, fixture.method)
+
+        // @TODO - some way of asserting on the output cfg?
     }
 }
 

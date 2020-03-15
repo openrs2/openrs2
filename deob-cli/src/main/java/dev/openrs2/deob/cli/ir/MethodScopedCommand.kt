@@ -5,7 +5,7 @@ import com.github.ajalt.clikt.core.requireObject
 import com.github.ajalt.clikt.parameters.arguments.argument
 import dev.openrs2.deob.cli.DeobfuscatorOptions
 import dev.openrs2.deob.ir.Method
-import dev.openrs2.deob.ir.translation.IrDecompiler
+import dev.openrs2.deob.ir.translation.BytecodeToIrTranlator
 
 abstract class MethodScopedCommand(command: String) : CliktCommand(name = command) {
     val className: String by argument(help = "Fully qualified name of the class name to disassemble")
@@ -16,8 +16,8 @@ abstract class MethodScopedCommand(command: String) : CliktCommand(name = comman
         val clazz = PrintCfgCommand.options.classLoader.load(PrintCfgCommand.className)
         val method = clazz.methods.find { it.name == PrintCfgCommand.methodName }!!
 
-        val decompiler = IrDecompiler(clazz, method)
-        val ir = decompiler.decompile()
+        val decompiler = BytecodeToIrTranlator()
+        val ir = decompiler.decompile(clazz, method)
 
         run(ir)
     }

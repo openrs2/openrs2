@@ -1,4 +1,4 @@
-package dev.openrs2.deob.analysis
+package dev.openrs2.deob.ir.flow.data
 
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.AbstractInsnNode

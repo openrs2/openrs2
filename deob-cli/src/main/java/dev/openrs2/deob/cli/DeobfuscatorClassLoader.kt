@@ -33,7 +33,7 @@ object SystemClassLoader : DeobfuscatorClassLoader {
 
 class ClasspathClassLoader(val classPath: List<Path>) : DeobfuscatorClassLoader {
     override fun load(name: String): ClassNode {
-        val relativePath = Paths.get("/${name.replace('.', File.separatorChar)}.class")
+        val relativePath = Paths.get("${name.replace('.', File.separatorChar)}.class")
 
         for (entry in classPath) {
             val classFilePath = entry.resolve(relativePath)

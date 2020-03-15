@@ -6,8 +6,6 @@ plugins {
 
 dependencies {
     implementation(project(":asm"))
-    implementation(project(":deob"))
-    implementation(project(":deob-annotations"))
     implementation("com.google.guava:guava:${Versions.guava}")
 }
 

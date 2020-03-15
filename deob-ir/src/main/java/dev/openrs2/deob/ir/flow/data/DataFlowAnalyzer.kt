@@ -1,7 +1,8 @@
-package dev.openrs2.deob.analysis
+package dev.openrs2.deob.ir.flow.data
 
 import com.google.common.graph.Graph
 import com.google.common.graph.Graphs
+import dev.openrs2.deob.ir.flow.ControlFlowAnalyzer
 import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.MethodNode
 

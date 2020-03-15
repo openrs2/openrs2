@@ -6,7 +6,7 @@ import dev.openrs2.asm.classpath.Library
 import dev.openrs2.asm.deleteExpression
 import dev.openrs2.asm.pure
 import dev.openrs2.asm.transform.Transformer
-import dev.openrs2.deob.analysis.LiveVariableAnalyzer
+import dev.openrs2.deob.ir.flow.data.LiveVariableAnalyzer
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.ClassNode
