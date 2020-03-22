@@ -52,7 +52,7 @@ class Pkcs12KeyStore private constructor(privateKeyEntry: KeyStore.PrivateKeyEnt
             .build()
 
         private val MAX_CLOCK_SKEW = Period.ofDays(1)
-        private val VALIDITY_PERIOD = Period.ofYears(1)
+        private val VALIDITY_PERIOD = Period.ofYears(10)
 
         private val SHA256_WITH_RSA = AlgorithmIdentifier(PKCSObjectIdentifiers.sha256WithRSAEncryption)
         private val SHA256 = AlgorithmIdentifier(NISTObjectIdentifiers.id_sha256)
