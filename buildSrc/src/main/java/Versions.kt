@@ -2,7 +2,7 @@ object Versions {
     const val asm = "7.3.1"
     const val bouncyCastle = "1.64"
     const val dependencyLicenseReport = "1.13"
-    const val fernflower = "1.0.4-SNAPSHOT"
+    const val fernflower = "1.0.3"
     const val guava = "28.2-jre"
     const val guice = "4.2.3"
     const val inlineLogger = "1.0.2"
