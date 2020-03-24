@@ -79,7 +79,7 @@ class AstDeobfuscator(private val modules: List<Path>) {
         }
 
         for (root in roots) {
-            root.printer = Function(printer::print)
+            root.printer = Function<CompilationUnit, String>(printer::print).andThen(::stripNewlineAfterPcAnnotation)
             root.saveAll()
         }
     }
@@ -102,5 +102,10 @@ class AstDeobfuscator(private val modules: List<Path>) {
             GlTransformer(),
             EncloseTransformer()
         )
+        private val PC_ANNOTATION_REGEX = Regex("@Pc\\(([0-9]+)\\)\\s+")
+
+        private fun stripNewlineAfterPcAnnotation(s: String): String {
+            return s.replace(PC_ANNOTATION_REGEX, "@Pc($1) ")
+        }
     }
 }
