@@ -56,6 +56,8 @@ class AstDeobfuscator(private val modules: List<Path>) {
         val printerConfig = PrettyPrinterConfiguration()
             .setIndentType(PrettyPrinterConfiguration.IndentType.TABS_WITH_SPACE_ALIGN)
             .setIndentSize(1)
+            .setIndentCaseInSwitch(false)
+            .setOrderImports(true)
 
         val printer = PrettyPrinter(printerConfig)
 
