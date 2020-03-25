@@ -48,7 +48,7 @@ class Deobfuscator(private val input: Path, private val output: Path) {
     fun run() {
         // read input jars/packs
         logger.info { "Reading input jars" }
-        val unpacker = readJar(input.resolve("game_unpacker.dat"))
+        val unpacker = readJar(input.resolve("unpackclass.pack"))
         val glUnpacker = Library(unpacker)
         val loader = readJar(input.resolve("loader.jar"))
         val glLoader = readJar(input.resolve("loader_gl.jar"))

@@ -36,7 +36,7 @@ class Bundler @Inject constructor(publicKeyTransformer: PublicKeyTransformer) {
     fun run(input: Path, output: Path, keyStorePath: Path) {
         // read input jars/packs
         logger.info { "Reading input jars" }
-        val unpacker = Library.readJar(input.resolve("game_unpacker.dat"))
+        val unpacker = Library.readJar(input.resolve("unpackclass.pack"))
         val loader = Library.readJar(input.resolve("loader.jar"))
         val glLoader = Library.readJar(input.resolve("loader_gl.jar"))
         val gl = Library.readPack(input.resolve("jaggl.pack200"))
