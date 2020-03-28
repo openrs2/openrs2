@@ -46,6 +46,7 @@ configure(tasks.filter { it.name in distTasks }) {
 distributions {
     all {
         contents {
+            from("${rootProject.projectDir}/DCO")
             from("${rootProject.projectDir}/LICENSE")
             from("${rootProject.projectDir}/README.md")
             from("${rootProject.projectDir}/docs") {
