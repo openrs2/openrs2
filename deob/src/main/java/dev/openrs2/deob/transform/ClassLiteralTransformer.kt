@@ -58,9 +58,18 @@ class ClassLiteralTransformer : Transformer() {
     override fun transformCode(classPath: ClassPath, library: Library, clazz: ClassNode, method: MethodNode): Boolean {
         for (match in CLASS_LITERAL_MATCHER.match(method)) {
             val getstatic1 = MemberRef(match[0] as FieldInsnNode)
-            val putstatic = MemberRef(match[5] as FieldInsnNode)
-            val getstatic2 = MemberRef(match[7] as FieldInsnNode)
-            val invokestatic = MemberRef(match[3] as MethodInsnNode)
+            val putstatic: MemberRef
+            val getstatic2: MemberRef
+            val invokestatic: MemberRef
+            if (match[1].opcode == Opcodes.IFNONNULL) {
+                putstatic = MemberRef(match[5] as FieldInsnNode)
+                getstatic2 = MemberRef(match[7] as FieldInsnNode)
+                invokestatic = MemberRef(match[3] as MethodInsnNode)
+            } else {
+                putstatic = MemberRef(match[7] as FieldInsnNode)
+                getstatic2 = MemberRef(match[2] as FieldInsnNode)
+                invokestatic = MemberRef(match[5] as MethodInsnNode)
+            }
 
             if (getstatic1 != putstatic || putstatic != getstatic2) {
                 continue
@@ -78,10 +87,9 @@ class ClassLiteralTransformer : Transformer() {
                 continue
             }
 
-            for ((i, insn) in match.withIndex()) {
-                if (i == 2) {
-                    val ldc = insn as LdcInsnNode
-                    ldc.cst = Type.getObjectType((ldc.cst as String).toInternalClassName())
+            for (insn in match) {
+                if (insn is LdcInsnNode) {
+                    insn.cst = Type.getObjectType((insn.cst as String).toInternalClassName())
                 } else {
                     method.instructions.remove(insn)
                 }
@@ -103,10 +111,15 @@ class ClassLiteralTransformer : Transformer() {
     companion object {
         private val logger = InlineLogger()
         private val CLASS_FOR_NAME_MATCHER = InsnMatcher.compile(
-            "^ALOAD INVOKESTATIC ARETURN ASTORE NEW DUP INVOKESPECIAL ALOAD INVOKEVIRTUAL ATHROW$"
+            """
+            ^ALOAD INVOKESTATIC ARETURN
+            ASTORE NEW DUP (ALOAD INVOKEVIRTUAL INVOKESPECIAL | INVOKESPECIAL ALOAD INVOKEVIRTUAL) ATHROW$
+        """
         )
+
+        private const val NULL_ARM = "LDC INVOKESTATIC DUP PUTSTATIC"
         private val CLASS_LITERAL_MATCHER = InsnMatcher.compile(
-            "GETSTATIC IFNONNULL LDC INVOKESTATIC DUP PUTSTATIC GOTO GETSTATIC"
+            "GETSTATIC (IFNONNULL $NULL_ARM GOTO GETSTATIC | IFNULL GETSTATIC GOTO $NULL_ARM)"
         )
     }
 }
