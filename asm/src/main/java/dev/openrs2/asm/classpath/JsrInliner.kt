@@ -5,7 +5,7 @@ import org.objectweb.asm.MethodVisitor
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.commons.JSRInlinerAdapter
 
-class JsrInliner(cv: ClassVisitor) : ClassVisitor(Opcodes.ASM7, cv) {
+class JsrInliner(cv: ClassVisitor) : ClassVisitor(Opcodes.ASM8, cv) {
     override fun visitMethod(
         access: Int,
         name: String,
