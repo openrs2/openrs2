@@ -5,10 +5,12 @@ plugins {
 }
 
 application {
-    mainClassName = "dev.openrs2.game.GameServerKt"
+    mainClassName = "dev.openrs2.game.GameCommandKt"
 }
 
 dependencies {
+    api("com.github.ajalt:clikt:${Versions.clikt}")
+
     implementation(project(":common"))
 }
 

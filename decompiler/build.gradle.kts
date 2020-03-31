@@ -5,11 +5,13 @@ plugins {
 }
 
 application {
-    mainClassName = "dev.openrs2.decompiler.DecompilerKt"
+    mainClassName = "dev.openrs2.decompiler.DecompileCommandKt"
     applicationDefaultJvmArgs = listOf("-Xmx3G")
 }
 
 dependencies {
+    api("com.github.ajalt:clikt:${Versions.clikt}")
+
     implementation(project(":common"))
     implementation("dev.openrs2:fernflower:${Versions.fernflower}")
 }

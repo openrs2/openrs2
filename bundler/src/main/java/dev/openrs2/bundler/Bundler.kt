@@ -1,7 +1,6 @@
 package dev.openrs2.bundler
 
 import com.github.michaelbull.logging.InlineLogger
-import com.google.inject.Guice
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
 import dev.openrs2.bundler.transform.BufferSizeTransformer
@@ -16,18 +15,11 @@ import dev.openrs2.bundler.transform.RightClickTransformer
 import dev.openrs2.bundler.transform.TypoTransformer
 import dev.openrs2.common.crypto.Pkcs12KeyStore
 import java.nio.file.Path
-import java.nio.file.Paths
 import java.util.jar.Attributes
 import java.util.jar.Attributes.Name.MANIFEST_VERSION
 import java.util.jar.Manifest
 import javax.inject.Inject
 import javax.inject.Singleton
-
-fun main() {
-    val injector = Guice.createInjector(BundlerModule())
-    val bundler = injector.getInstance(Bundler::class.java)
-    bundler.run(Paths.get("nonfree/code"), Paths.get("nonfree/code/bundle"), Paths.get("conf/loader.p12"))
-}
 
 @Singleton
 class Bundler @Inject constructor(publicKeyTransformer: PublicKeyTransformer) {

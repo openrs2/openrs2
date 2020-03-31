@@ -5,11 +5,12 @@ plugins {
 }
 
 application {
-    mainClassName = "dev.openrs2.bundler.BundlerKt"
+    mainClassName = "dev.openrs2.bundler.BundleCommandKt"
 }
 
 dependencies {
     api(project(":asm"))
+    api("com.github.ajalt:clikt:${Versions.clikt}")
 
     implementation("dev.openrs2:openrs2-natives-all:${Versions.openrs2Natives}")
 }

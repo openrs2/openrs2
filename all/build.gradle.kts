@@ -11,7 +11,7 @@ plugins {
 
 application {
     applicationName = "openrs2"
-    mainClassName = "dev.openrs2.LauncherKt"
+    mainClassName = "dev.openrs2.CommandKt"
 }
 
 dependencies {

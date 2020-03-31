@@ -5,10 +5,12 @@ plugins {
 }
 
 application {
-    mainClassName = "dev.openrs2.deob.DeobfuscatorKt"
+    mainClassName = "dev.openrs2.deob.DeobfuscateCommandKt"
 }
 
 dependencies {
+    api("com.github.ajalt:clikt:${Versions.clikt}")
+
     implementation(project(":bundler"))
     implementation(project(":deob-annotations"))
     implementation("com.google.guava:guava:${Versions.guava}")
