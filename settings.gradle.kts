@@ -7,6 +7,7 @@ include(
     "asm",
     "bundler",
     "common",
+    "compress",
     "decompiler",
     "deob",
     "deob-annotations",

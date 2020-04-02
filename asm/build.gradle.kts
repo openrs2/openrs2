@@ -9,6 +9,8 @@ dependencies {
     api("org.ow2.asm:asm-commons:${Versions.asm}")
     api("org.ow2.asm:asm-tree:${Versions.asm}")
     api("org.ow2.asm:asm-util:${Versions.asm}")
+
+    implementation(project(":compress"))
 }
 
 publishing {

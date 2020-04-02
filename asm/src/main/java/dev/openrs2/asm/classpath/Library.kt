@@ -5,14 +5,12 @@ import dev.openrs2.asm.NopClassVisitor
 import dev.openrs2.asm.remap
 import dev.openrs2.common.crypto.Pkcs12KeyStore
 import dev.openrs2.common.io.DeterministicJarOutputStream
-import dev.openrs2.common.io.SkipOutputStream
+import dev.openrs2.compress.gzip.Gzip
 import org.objectweb.asm.ClassReader
 import org.objectweb.asm.commons.Remapper
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.util.CheckClassAdapter
-import java.io.ByteArrayInputStream
 import java.io.OutputStream
-import java.io.SequenceInputStream
 import java.nio.file.Files
 import java.nio.file.Path
 import java.util.TreeMap
@@ -21,8 +19,6 @@ import java.util.jar.JarInputStream
 import java.util.jar.JarOutputStream
 import java.util.jar.Manifest
 import java.util.jar.Pack200
-import java.util.zip.GZIPInputStream
-import java.util.zip.GZIPOutputStream
 
 class Library constructor() : Iterable<ClassNode> {
     private var classes = TreeMap<String, ClassNode>()
@@ -120,9 +116,7 @@ class Library constructor() : Iterable<ClassNode> {
             writeJar(classPath, temp)
 
             JarInputStream(Files.newInputStream(temp)).use { `in` ->
-                val headerSize = GZIP_HEADER.size.toLong()
-
-                GZIPOutputStream(SkipOutputStream(out, headerSize)).use { gzip ->
+                Gzip.createHeaderlessOutputStream(out).use { gzip ->
                     Pack200.newPacker().pack(`in`, gzip)
                 }
             }
@@ -140,7 +134,6 @@ class Library constructor() : Iterable<ClassNode> {
         private const val CLASS_SUFFIX = ".class"
         private const val TEMP_PREFIX = "tmp"
         private const val JAR_SUFFIX = ".jar"
-        private val GZIP_HEADER = byteArrayOf(0x1F, 0x8B.toByte())
 
         fun readJar(path: Path): Library {
             logger.info { "Reading jar $path" }
@@ -170,10 +163,7 @@ class Library constructor() : Iterable<ClassNode> {
 
             val temp = Files.createTempFile(TEMP_PREFIX, JAR_SUFFIX)
             try {
-                val header = ByteArrayInputStream(GZIP_HEADER)
-                val data = Files.newInputStream(path)
-
-                GZIPInputStream(SequenceInputStream(header, data)).use { `in` ->
+                Gzip.createHeaderlessInputStream(Files.newInputStream(path)).use { `in` ->
                     JarOutputStream(Files.newOutputStream(temp)).use { out ->
                         Pack200.newUnpacker().unpack(`in`, out)
                     }
