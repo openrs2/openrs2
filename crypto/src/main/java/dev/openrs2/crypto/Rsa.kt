@@ -1,4 +1,4 @@
-package dev.openrs2.common.crypto
+package dev.openrs2.crypto
 
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufUtil

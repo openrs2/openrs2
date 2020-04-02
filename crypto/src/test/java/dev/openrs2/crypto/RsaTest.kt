@@ -1,4 +1,4 @@
-package dev.openrs2.common.crypto
+package dev.openrs2.crypto
 
 import com.google.common.jimfs.Configuration
 import com.google.common.jimfs.Jimfs

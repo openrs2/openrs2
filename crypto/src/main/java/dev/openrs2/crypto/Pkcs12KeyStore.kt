@@ -1,4 +1,4 @@
-package dev.openrs2.common.crypto
+package dev.openrs2.crypto
 
 import jdk.security.jarsigner.JarSigner
 import org.bouncycastle.asn1.nist.NISTObjectIdentifiers

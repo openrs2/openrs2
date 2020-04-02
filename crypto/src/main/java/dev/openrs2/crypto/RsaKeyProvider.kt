@@ -1,4 +1,4 @@
-package dev.openrs2.common.crypto
+package dev.openrs2.crypto
 
 import org.bouncycastle.crypto.params.RSAPrivateCrtKeyParameters
 import java.nio.file.Files

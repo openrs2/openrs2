@@ -13,7 +13,7 @@ import dev.openrs2.bundler.transform.PublicKeyTransformer
 import dev.openrs2.bundler.transform.ResourceTransformer
 import dev.openrs2.bundler.transform.RightClickTransformer
 import dev.openrs2.bundler.transform.TypoTransformer
-import dev.openrs2.common.crypto.Pkcs12KeyStore
+import dev.openrs2.crypto.Pkcs12KeyStore
 import java.nio.file.Path
 import java.util.jar.Attributes
 import java.util.jar.Attributes.Name.MANIFEST_VERSION

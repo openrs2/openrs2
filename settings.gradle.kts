@@ -11,6 +11,7 @@ include(
     "compress",
     "compress-cli",
     "crc32",
+    "crypto",
     "decompiler",
     "deob",
     "deob-annotations",

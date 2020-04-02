@@ -11,6 +11,7 @@ dependencies {
     api("org.ow2.asm:asm-util:${Versions.asm}")
 
     implementation(project(":compress"))
+    implementation(project(":crypto"))
 }
 
 publishing {

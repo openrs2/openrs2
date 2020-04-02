@@ -11,7 +11,7 @@ application {
 dependencies {
     api("com.github.ajalt:clikt:${Versions.clikt}")
 
-    implementation(project(":common"))
+    implementation("com.google.inject:guice:${Versions.guice}")
 }
 
 publishing {

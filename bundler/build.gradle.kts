@@ -12,6 +12,7 @@ dependencies {
     api(project(":asm"))
     api("com.github.ajalt:clikt:${Versions.clikt}")
 
+    implementation(project(":crypto"))
     implementation("dev.openrs2:openrs2-natives-all:${Versions.openrs2Natives}")
 }
 

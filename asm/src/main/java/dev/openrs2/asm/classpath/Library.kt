@@ -3,7 +3,7 @@ package dev.openrs2.asm.classpath
 import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.NopClassVisitor
 import dev.openrs2.asm.remap
-import dev.openrs2.common.crypto.Pkcs12KeyStore
+import dev.openrs2.crypto.Pkcs12KeyStore
 import dev.openrs2.common.io.DeterministicJarOutputStream
 import dev.openrs2.compress.gzip.Gzip
 import org.objectweb.asm.ClassReader
