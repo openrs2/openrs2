@@ -7,7 +7,7 @@ import dev.openrs2.compress.cli.CompressCommand
 import dev.openrs2.crc32.Crc32Command
 import dev.openrs2.decompiler.DecompileCommand
 import dev.openrs2.deob.DeobfuscateCommand
-import dev.openrs2.deob.ast.AstDeobfuscateCommand
+import dev.openrs2.deob.ast.DeobfuscateAstCommand
 import dev.openrs2.game.GameCommand
 
 fun main(args: Array<String>) = Command().subcommands(
@@ -16,7 +16,7 @@ fun main(args: Array<String>) = Command().subcommands(
     Crc32Command(),
     DecompileCommand(),
     DeobfuscateCommand(),
-    AstDeobfuscateCommand(),
+    DeobfuscateAstCommand(),
     GameCommand()
 ).main(args)
 
