@@ -1,6 +1,6 @@
 package dev.openrs2.compress.gzip
 
-import dev.openrs2.common.io.SkipOutputStream
+import dev.openrs2.util.io.SkipOutputStream
 import java.io.ByteArrayInputStream
 import java.io.InputStream
 import java.io.OutputStream

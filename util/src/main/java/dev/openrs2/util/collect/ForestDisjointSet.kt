@@ -1,4 +1,4 @@
-package dev.openrs2.common.collect
+package dev.openrs2.util.collect
 
 import java.util.ArrayDeque
 

@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-    api(project(":common"))
+    api(project(":util"))
     api("org.ow2.asm:asm:${Versions.asm}")
     api("org.ow2.asm:asm-commons:${Versions.asm}")
     api("org.ow2.asm:asm-tree:${Versions.asm}")

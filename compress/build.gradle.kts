@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":common"))
+    implementation(project(":util"))
     implementation("org.apache.commons:commons-compress:${Versions.commonsCompress}")
 }
 

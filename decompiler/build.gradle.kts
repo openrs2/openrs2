@@ -12,7 +12,7 @@ application {
 dependencies {
     api("com.github.ajalt:clikt:${Versions.clikt}")
 
-    implementation(project(":common"))
+    implementation(project(":util"))
     implementation("dev.openrs2:fernflower:${Versions.fernflower}")
 }
 

@@ -5,8 +5,8 @@ import dev.openrs2.asm.MemberDesc
 import dev.openrs2.asm.MemberRef
 import dev.openrs2.asm.classpath.ClassMetadata
 import dev.openrs2.asm.classpath.ClassPath
-import dev.openrs2.common.collect.DisjointSet
-import dev.openrs2.common.indefiniteArticle
+import dev.openrs2.util.collect.DisjointSet
+import dev.openrs2.util.indefiniteArticle
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.Type
 import org.objectweb.asm.commons.Remapper

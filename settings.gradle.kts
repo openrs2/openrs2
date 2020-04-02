@@ -7,7 +7,6 @@ include(
     "asm",
     "bundler",
     "cli",
-    "common",
     "compress",
     "compress-cli",
     "crc32",
@@ -16,7 +15,8 @@ include(
     "deob",
     "deob-annotations",
     "deob-ast",
-    "game"
+    "game",
+    "util"
 )
 
 if (Files.exists(rootProject.projectDir.toPath().resolve("nonfree/build.gradle.kts"))) {

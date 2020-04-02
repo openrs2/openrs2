@@ -3,8 +3,8 @@ package dev.openrs2.asm.classpath
 import dev.openrs2.asm.MemberDesc
 import dev.openrs2.asm.MemberRef
 import dev.openrs2.asm.toBinaryClassName
-import dev.openrs2.common.collect.DisjointSet
-import dev.openrs2.common.collect.ForestDisjointSet
+import dev.openrs2.util.collect.DisjointSet
+import dev.openrs2.util.collect.ForestDisjointSet
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.commons.Remapper
 import org.objectweb.asm.tree.AbstractInsnNode

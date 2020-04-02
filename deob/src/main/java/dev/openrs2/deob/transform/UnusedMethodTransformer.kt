@@ -7,9 +7,9 @@ import dev.openrs2.asm.MemberRef
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
 import dev.openrs2.asm.transform.Transformer
-import dev.openrs2.common.collect.DisjointSet
-import dev.openrs2.common.collect.removeFirst
 import dev.openrs2.deob.remap.TypedRemapper
+import dev.openrs2.util.collect.DisjointSet
+import dev.openrs2.util.collect.removeFirst
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.MethodInsnNode

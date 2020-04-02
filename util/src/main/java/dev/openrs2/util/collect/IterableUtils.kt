@@ -1,4 +1,4 @@
-package dev.openrs2.common.collect
+package dev.openrs2.util.collect
 
 inline fun <T> MutableIterable<T>.removeFirst(predicate: (T) -> Boolean): Boolean {
     val iterator = iterator()

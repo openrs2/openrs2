@@ -3,9 +3,9 @@ package dev.openrs2.asm.classpath
 import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.NopClassVisitor
 import dev.openrs2.asm.remap
-import dev.openrs2.crypto.Pkcs12KeyStore
-import dev.openrs2.common.io.DeterministicJarOutputStream
 import dev.openrs2.compress.gzip.Gzip
+import dev.openrs2.crypto.Pkcs12KeyStore
+import dev.openrs2.util.io.DeterministicJarOutputStream
 import org.objectweb.asm.ClassReader
 import org.objectweb.asm.commons.Remapper
 import org.objectweb.asm.tree.ClassNode

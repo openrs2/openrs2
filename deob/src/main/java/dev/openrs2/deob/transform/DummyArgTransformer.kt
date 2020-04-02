@@ -15,11 +15,11 @@ import dev.openrs2.asm.pure
 import dev.openrs2.asm.replaceExpression
 import dev.openrs2.asm.stackMetadata
 import dev.openrs2.asm.transform.Transformer
-import dev.openrs2.common.collect.DisjointSet
 import dev.openrs2.deob.ArgRef
 import dev.openrs2.deob.analysis.IntInterpreter
 import dev.openrs2.deob.analysis.IntValue
 import dev.openrs2.deob.analysis.SourcedIntValue
+import dev.openrs2.util.collect.DisjointSet
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree.AbstractInsnNode

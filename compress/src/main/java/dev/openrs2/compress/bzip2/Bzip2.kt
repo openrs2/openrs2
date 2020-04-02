@@ -1,6 +1,6 @@
 package dev.openrs2.compress.bzip2
 
-import dev.openrs2.common.io.SkipOutputStream
+import dev.openrs2.util.io.SkipOutputStream
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorOutputStream
 import java.io.ByteArrayInputStream

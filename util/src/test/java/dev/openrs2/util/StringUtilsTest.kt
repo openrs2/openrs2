@@ -1,4 +1,4 @@
-package dev.openrs2.common
+package dev.openrs2.util
 
 import kotlin.test.Test
 import kotlin.test.assertEquals

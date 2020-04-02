@@ -9,10 +9,10 @@ publishing {
 
         pom {
             packaging = "jar"
-            name.set("OpenRS2 Common")
+            name.set("OpenRS2 Utilities")
             description.set(
                 """
-                Common code used by all modules.
+                Common utility code used by all modules.
             """.trimIndent()
             )
         }

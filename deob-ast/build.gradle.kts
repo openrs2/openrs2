@@ -11,7 +11,7 @@ application {
 dependencies {
     api("com.github.ajalt:clikt:${Versions.clikt}")
 
-    implementation(project(":common"))
+    implementation(project(":util"))
     implementation("com.github.javaparser:javaparser-symbol-solver-core:${Versions.javaParser}")
     implementation("org.jdom:jdom2:${Versions.jdom}")
 }

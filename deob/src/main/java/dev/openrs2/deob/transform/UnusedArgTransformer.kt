@@ -7,11 +7,11 @@ import dev.openrs2.asm.classpath.Library
 import dev.openrs2.asm.hasCode
 import dev.openrs2.asm.removeArgument
 import dev.openrs2.asm.transform.Transformer
-import dev.openrs2.common.collect.DisjointSet
 import dev.openrs2.deob.ArgRef
 import dev.openrs2.deob.analysis.ConstSourceInterpreter
 import dev.openrs2.deob.analysis.ConstSourceValue
 import dev.openrs2.deob.remap.TypedRemapper
+import dev.openrs2.util.collect.DisjointSet
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree.AbstractInsnNode
