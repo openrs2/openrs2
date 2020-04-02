@@ -10,6 +10,7 @@ include(
     "common",
     "compress",
     "compress-cli",
+    "crc32",
     "decompiler",
     "deob",
     "deob-annotations",
