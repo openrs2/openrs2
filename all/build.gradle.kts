@@ -16,6 +16,7 @@ application {
 
 dependencies {
     implementation(project(":bundler"))
+    implementation(project(":compress-cli"))
     implementation(project(":decompiler"))
     implementation(project(":deob"))
     implementation(project(":deob-ast"))
