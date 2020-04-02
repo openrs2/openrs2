@@ -33,6 +33,7 @@ allprojects {
 
     plugins.withType<ApplicationPlugin> {
         tasks.named<JavaExec>("run") {
+            standardInput = System.`in`
             workingDir = rootProject.projectDir
         }
     }
