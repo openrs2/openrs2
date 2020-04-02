@@ -10,17 +10,21 @@ import dev.openrs2.deob.DeobfuscateCommand
 import dev.openrs2.deob.ast.DeobfuscateAstCommand
 import dev.openrs2.game.GameCommand
 
-fun main(args: Array<String>) = Command().subcommands(
-    BundleCommand(),
-    CompressCommand(),
-    Crc32Command(),
-    DecompileCommand(),
-    DeobfuscateCommand(),
-    DeobfuscateAstCommand(),
-    GameCommand()
-).main(args)
+fun main(args: Array<String>) = Command().main(args)
 
 class Command : CliktCommand(name = "openrs2") {
+    init {
+        subcommands(
+            BundleCommand(),
+            CompressCommand(),
+            Crc32Command(),
+            DecompileCommand(),
+            DeobfuscateCommand(),
+            DeobfuscateAstCommand(),
+            GameCommand()
+        )
+    }
+
     override fun run() {
         // empty
     }
