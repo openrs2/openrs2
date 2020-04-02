@@ -13,10 +13,9 @@ class Crc32Command : CliktCommand(name = "crc32") {
 
     override fun run() {
         val crc = CRC32()
+        val bytes = ByteArray(4096)
 
         input.use { input ->
-            val bytes = ByteArray(4096)
-
             while (true) {
                 val len = input.read(bytes)
                 if (len == -1) {
