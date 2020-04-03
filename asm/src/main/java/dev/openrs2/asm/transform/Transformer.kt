@@ -13,9 +13,8 @@ abstract class Transformer {
 
         var changed: Boolean
         do {
-            changed = false
+            changed = prePass(classPath)
 
-            prePass(classPath)
             for (library in classPath.libraries) {
                 for (clazz in library) {
                     changed = changed or transformClass(classPath, library, clazz)
@@ -35,7 +34,8 @@ abstract class Transformer {
                     }
                 }
             }
-            postPass(classPath)
+
+            changed = changed or postPass(classPath)
         } while (changed)
 
         postTransform(classPath)
@@ -45,8 +45,8 @@ abstract class Transformer {
         // empty
     }
 
-    protected open fun prePass(classPath: ClassPath) {
-        // empty
+    protected open fun prePass(classPath: ClassPath): Boolean {
+        return false
     }
 
     protected open fun transformClass(classPath: ClassPath, library: Library, clazz: ClassNode): Boolean {
@@ -89,8 +89,8 @@ abstract class Transformer {
         return false
     }
 
-    protected open fun postPass(classPath: ClassPath) {
-        // empty
+    protected open fun postPass(classPath: ClassPath): Boolean {
+        return false
     }
 
     protected open fun postTransform(classPath: ClassPath) {

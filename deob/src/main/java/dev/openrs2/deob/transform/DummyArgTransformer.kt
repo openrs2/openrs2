@@ -149,9 +149,10 @@ class DummyArgTransformer : Transformer() {
         constantsInlined = 0
     }
 
-    override fun prePass(classPath: ClassPath) {
+    override fun prePass(classPath: ClassPath): Boolean {
         argValues.clear()
         conditionalCalls.clear()
+        return false
     }
 
     override fun transformCode(
@@ -327,7 +328,7 @@ class DummyArgTransformer : Transformer() {
         return changed
     }
 
-    override fun postPass(classPath: ClassPath) {
+    override fun postPass(classPath: ClassPath): Boolean {
         for (method in inheritedMethodSets) {
             val args = (Type.getArgumentsAndReturnSizes(method.first().desc) shr 2) - 1
 
@@ -348,6 +349,8 @@ class DummyArgTransformer : Transformer() {
                 constArgs[method] = parameters
             }
         }
+
+        return false
     }
 
     override fun postTransform(classPath: ClassPath) {
