@@ -1,6 +1,6 @@
 package dev.openrs2.compress.cli
 
-import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.core.NoOpCliktCommand
 import com.github.ajalt.clikt.core.subcommands
 import dev.openrs2.compress.cli.bzip2.Bunzip2Command
 import dev.openrs2.compress.cli.bzip2.Bzip2Command
@@ -11,7 +11,7 @@ import dev.openrs2.compress.cli.gzip.GzipCommand
 
 fun main(args: Array<String>) = CompressCommand().main(args)
 
-class CompressCommand : CliktCommand(name = "compress") {
+class CompressCommand : NoOpCliktCommand(name = "compress") {
     init {
         subcommands(
             Bzip2Command(),
@@ -21,9 +21,5 @@ class CompressCommand : CliktCommand(name = "compress") {
             GzipCommand(),
             GunzipCommand()
         )
-    }
-
-    override fun run() {
-        // empty
     }
 }
