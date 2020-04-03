@@ -13,12 +13,18 @@ import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.TypeInsnNode
 
 class EmptyClassTransformer : Transformer() {
+    private var removedClasses = 0
     private val emptyClasses = mutableSetOf<String>()
     private val referencedClasses = mutableSetOf<String>()
 
     override fun preTransform(classPath: ClassPath) {
+        removedClasses = 0
         emptyClasses.clear()
+    }
+
+    override fun prePass(classPath: ClassPath): Boolean {
         referencedClasses.clear()
+        return false
     }
 
     override fun transformClass(classPath: ClassPath, library: Library, clazz: ClassNode): Boolean {
@@ -75,18 +81,23 @@ class EmptyClassTransformer : Transformer() {
         return false
     }
 
-    override fun postTransform(classPath: ClassPath) {
-        var removed = 0
+    override fun postPass(classPath: ClassPath): Boolean {
+        var changed = false
 
         for (name in emptyClasses.subtract(referencedClasses)) {
             for (library in classPath.libraries) {
                 if (library.remove(name) != null) {
-                    removed++
+                    removedClasses++
+                    changed = true
                 }
             }
         }
 
-        logger.info { "Removed $removed unused classes" }
+        return changed
+    }
+
+    override fun postTransform(classPath: ClassPath) {
+        logger.info { "Removed $removedClasses unused classes" }
     }
 
     companion object {
