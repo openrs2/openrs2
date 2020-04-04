@@ -22,17 +22,16 @@ class InvokeSpecialTransformer : Transformer() {
     }
 
     override fun transformCode(classPath: ClassPath, library: Library, clazz: ClassNode, method: MethodNode): Boolean {
+        if ((clazz.access and Opcodes.ACC_FINAL) == 0) {
+            return false
+        }
+
         for (insn in method.instructions) {
             if (insn !is MethodInsnNode || insn.opcode != Opcodes.INVOKESPECIAL) {
                 continue
             } else if (insn.name == "<init>") {
                 continue
             } else if (insn.owner != clazz.name) {
-                continue
-            }
-
-            val owner = classPath.getNode(insn.owner)!!
-            if ((owner.access and Opcodes.ACC_FINAL) == 0) {
                 continue
             }
 
