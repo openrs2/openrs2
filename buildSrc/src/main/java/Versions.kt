@@ -1,5 +1,5 @@
 object Versions {
-    const val asm = "8.0"
+    const val asm = "8.0.1"
     const val bouncyCastle = "1.64"
     const val clikt = "2.6.0"
     const val commonsCompress = "1.20"
