@@ -8,6 +8,7 @@ import org.objectweb.asm.tree.VarInsnNode
 
 class LiveVariableAnalyzer(owner: String, method: MethodNode) :
     DataFlowAnalyzer<Set<Int>>(owner, method, backwards = true) {
+
     override fun createInitialSet(): Set<Int> {
         return emptySet()
     }
