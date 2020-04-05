@@ -5,11 +5,11 @@
 The command-line interface takes four required parameters:
 
 * `worldid`
-* `modewhere` (`live`, `rc` or `wip`)
+* `modewhat` (`live`, `rc` or `wip`)
 * `lang` (`en`/`english`, `de`/`german`, `fr` or `pt`)
 * `game` (`game0` or `game1`)
 
-Each parameter is described in the applet parameter table below. `modewhat` is
+Each parameter is described in the applet parameter table below. `modewhere` is
 always set to `local`. All other parameters share their default value with the
 applet.
 
