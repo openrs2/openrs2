@@ -189,3 +189,7 @@ tasks.withType<DependencyUpdatesTask> {
         candidate.version.contains(rejectVersionRegex)
     }
 }
+
+tasks.wrapper {
+    distributionType = Wrapper.DistributionType.ALL
+}
