@@ -1,4 +1,3 @@
-import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -181,7 +180,7 @@ configure(subprojects.filter { it.free }) {
 
 val rejectVersionRegex = Regex("(?i)[._-](?:alpha|beta|rc|cr|m)")
 
-tasks.withType<DependencyUpdatesTask> {
+tasks.dependencyUpdates {
     gradleReleaseChannel = "current"
     revision = "release"
 
