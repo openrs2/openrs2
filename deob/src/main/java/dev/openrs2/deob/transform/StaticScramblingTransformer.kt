@@ -55,7 +55,7 @@ class StaticScramblingTransformer : Transformer() {
 
         clazz = ClassNode()
         clazz.version = Opcodes.V1_1
-        clazz.access = Opcodes.ACC_PUBLIC or Opcodes.ACC_SUPER
+        clazz.access = Opcodes.ACC_PUBLIC or Opcodes.ACC_SUPER or Opcodes.ACC_FINAL
         clazz.name = "Static${staticClasses.size + 1}"
         clazz.superName = "java/lang/Object"
         clazz.interfaces = mutableListOf()
