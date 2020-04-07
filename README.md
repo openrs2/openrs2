@@ -1,6 +1,6 @@
 # OpenRS2
 
-[![Drone](https://build.openrs2.dev/api/badges/openrs2/openrs2/status.svg)](https://build.openrs2.dev/openrs2/openrs2/) [![Discord](https://img.shields.io/discord/684495254145335298)][discord] [![ISC license](https://img.shields.io/badge/license-ISC-brightgreen)][isc]
+[![Drone][drone-badge]][drone] [![Discord][discord-badge]][discord] [![ISC license][isc-badge]][isc]
 
 ## Introduction
 
@@ -130,8 +130,12 @@ available in the `LICENSE` file.
 
 [commitmsg]: https://chris.beams.io/posts/git-commit/#seven-rules
 [dco]: https://developercertificate.org/
+[discord-badge]: https://img.shields.io/discord/684495254145335298
 [discord]: https://chat.openrs2.dev/
+[drone-badge]: https://build.openrs2.dev/api/badges/openrs2/openrs2/status.svg
+[drone]: https://build.openrs2.dev/openrs2/openrs2/
 [idea]: https://www.jetbrains.com/idea/
+[isc-badge]: https://img.shields.io/badge/license-ISC-brightgreen
 [isc]: https://opensource.org/licenses/ISC
 [jdk]: https://jdk.java.net/
 [ktlint]: https://github.com/pinterest/ktlint#readme
