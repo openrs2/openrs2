@@ -135,7 +135,7 @@ available in the `LICENSE` file.
 [drone-badge]: https://build.openrs2.dev/api/badges/openrs2/openrs2/status.svg
 [drone]: https://build.openrs2.dev/openrs2/openrs2/
 [idea]: https://www.jetbrains.com/idea/
-[isc-badge]: https://img.shields.io/badge/license-ISC-brightgreen
+[isc-badge]: https://img.shields.io/badge/license-ISC-informational
 [isc]: https://opensource.org/licenses/ISC
 [jdk]: https://jdk.java.net/
 [ktlint]: https://github.com/pinterest/ktlint#readme
