@@ -1,6 +1,6 @@
 # OpenRS2
 
-[![Build status badge](https://build.openrs2.dev/api/badges/openrs2/openrs2/status.svg)](https://build.openrs2.dev/openrs2/openrs2/) [![Discord](https://img.shields.io/discord/684495254145335298)][discord] [![ISC license](https://img.shields.io/badge/license-ISC-brightgreen)][isc]
+[![Drone](https://build.openrs2.dev/api/badges/openrs2/openrs2/status.svg)](https://build.openrs2.dev/openrs2/openrs2/) [![Discord](https://img.shields.io/discord/684495254145335298)][discord] [![ISC license](https://img.shields.io/badge/license-ISC-brightgreen)][isc]
 
 ## Introduction
 
