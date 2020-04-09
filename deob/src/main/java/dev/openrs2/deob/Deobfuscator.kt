@@ -13,8 +13,8 @@ import dev.openrs2.deob.transform.BitShiftTransformer
 import dev.openrs2.deob.transform.BitwiseOpTransformer
 import dev.openrs2.deob.transform.CanvasTransformer
 import dev.openrs2.deob.transform.ClassLiteralTransformer
+import dev.openrs2.deob.transform.ConstantArgTransformer
 import dev.openrs2.deob.transform.CounterTransformer
-import dev.openrs2.deob.transform.DummyArgTransformer
 import dev.openrs2.deob.transform.DummyLocalTransformer
 import dev.openrs2.deob.transform.EmptyClassTransformer
 import dev.openrs2.deob.transform.ExceptionTracingTransformer
@@ -155,7 +155,7 @@ class Deobfuscator(private val input: Path, private val output: Path) {
             FieldOrderTransformer(),
             BitwiseOpTransformer(),
             RemapTransformer(),
-            DummyArgTransformer(),
+            ConstantArgTransformer(),
             DummyLocalTransformer(),
             UnusedArgTransformer(),
             UnusedMethodTransformer(),
