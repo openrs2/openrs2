@@ -11,6 +11,7 @@ object Versions {
     const val inlineLogger = "1.0.2"
     const val javaParser = "3.15.18"
     const val jdom = "2.0.6"
+    const val jgrapht = "1.4.0"
     const val jimfs = "1.1"
     const val junit = "5.6.1"
     const val kotlin = "1.3.71"

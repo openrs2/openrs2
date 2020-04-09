@@ -1,19 +1,20 @@
 package dev.openrs2.deob.analysis
 
-import com.google.common.graph.Graph
-import com.google.common.graph.Graphs
+import org.jgrapht.Graph
+import org.jgrapht.graph.DefaultEdge
+import org.jgrapht.graph.EdgeReversedGraph
 import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.MethodNode
 
 abstract class DataFlowAnalyzer<T>(owner: String, private val method: MethodNode, backwards: Boolean = false) {
-    private val graph: Graph<Int>
+    private val graph: Graph<Int, DefaultEdge>
     private val inSets = mutableMapOf<Int, T>()
     private val outSets = mutableMapOf<Int, T>()
 
     init {
         val forwardsGraph = ControlFlowAnalyzer().createGraph(owner, method)
         graph = if (backwards) {
-            Graphs.transpose(forwardsGraph)
+            EdgeReversedGraph(forwardsGraph)
         } else {
             forwardsGraph
         }
@@ -40,7 +41,7 @@ abstract class DataFlowAnalyzer<T>(owner: String, private val method: MethodNode
     }
 
     fun analyze() {
-        for (node in graph.nodes()) {
+        for (node in graph.vertexSet()) {
             outSets[node] = createInitialSet()
         }
 
@@ -48,8 +49,8 @@ abstract class DataFlowAnalyzer<T>(owner: String, private val method: MethodNode
         do {
             changed = false
 
-            for (node in graph.nodes()) {
-                val predecessors = graph.predecessors(node).map { pred -> outSets[pred]!! }
+            for (node in graph.vertexSet()) {
+                val predecessors = graph.incomingEdgesOf(node).map { edge -> outSets[graph.getEdgeSource(edge)]!! }
 
                 val inSet = if (predecessors.isEmpty()) {
                     createInitialSet()

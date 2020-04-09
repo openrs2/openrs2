@@ -15,6 +15,7 @@ dependencies {
     implementation(project(":deob-annotations"))
     implementation("com.google.guava:guava:${Versions.guava}")
     implementation("it.unimi.dsi:fastutil:${Versions.fastutil}")
+    implementation("org.jgrapht:jgrapht-core:${Versions.jgrapht}")
 }
 
 publishing {

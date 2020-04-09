@@ -1,29 +1,30 @@
 package dev.openrs2.deob.analysis
 
-import com.google.common.graph.Graph
-import com.google.common.graph.GraphBuilder
+import org.jgrapht.Graph
+import org.jgrapht.graph.AsUnmodifiableGraph
+import org.jgrapht.graph.DefaultDirectedGraph
+import org.jgrapht.graph.DefaultEdge
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.analysis.Analyzer
 import org.objectweb.asm.tree.analysis.BasicInterpreter
 import org.objectweb.asm.tree.analysis.BasicValue
 
 class ControlFlowAnalyzer : Analyzer<BasicValue>(BasicInterpreter()) {
-    private val graph = GraphBuilder
-        .directed()
-        .allowsSelfLoops(true)
-        .immutable<Int>()
+    private val graph = DefaultDirectedGraph<Int, DefaultEdge>(DefaultEdge::class.java)
 
     override fun newControlFlowEdge(insnIndex: Int, successorIndex: Int) {
-        graph.putEdge(insnIndex, successorIndex)
+        graph.addVertex(insnIndex)
+        graph.addVertex(successorIndex)
+        graph.addEdge(insnIndex, successorIndex)
     }
 
     override fun newControlFlowExceptionEdge(insnIndex: Int, successorIndex: Int): Boolean {
-        graph.putEdge(insnIndex, successorIndex)
+        newControlFlowEdge(insnIndex, successorIndex)
         return true
     }
 
-    fun createGraph(owner: String, method: MethodNode): Graph<Int> {
+    fun createGraph(owner: String, method: MethodNode): Graph<Int, DefaultEdge> {
         analyze(owner, method)
-        return graph.build()
+        return AsUnmodifiableGraph(graph)
     }
 }
