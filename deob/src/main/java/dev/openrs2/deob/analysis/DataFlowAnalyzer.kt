@@ -1,5 +1,6 @@
 package dev.openrs2.deob.analysis
 
+import dev.openrs2.util.collect.removeFirstOrNull
 import org.jgrapht.Graph
 import org.jgrapht.graph.DefaultEdge
 import org.jgrapht.graph.EdgeReversedGraph
@@ -45,28 +46,30 @@ abstract class DataFlowAnalyzer<T>(owner: String, private val method: MethodNode
             outSets[node] = createInitialSet()
         }
 
-        var changed: Boolean
-        do {
-            changed = false
+        val workList = LinkedHashSet<Int>(graph.vertexSet())
+        while (true) {
+            val node = workList.removeFirstOrNull() ?: break
 
-            for (node in graph.vertexSet()) {
-                val predecessors = graph.incomingEdgesOf(node).map { edge -> outSets[graph.getEdgeSource(edge)]!! }
+            val predecessors = graph.incomingEdgesOf(node).map { edge -> outSets[graph.getEdgeSource(edge)]!! }
 
-                val inSet = if (predecessors.isEmpty()) {
-                    createInitialSet()
-                } else {
-                    predecessors.reduce(this::join)
-                }
+            val inSet = if (predecessors.isEmpty()) {
+                createInitialSet()
+            } else {
+                predecessors.reduce(this::join)
+            }
 
-                inSets[node] = inSet
+            inSets[node] = inSet
 
-                val outSet = transfer(inSet, method.instructions[node])
+            val outSet = transfer(inSet, method.instructions[node])
 
-                if (outSets[node] != outSet) {
-                    outSets[node] = outSet
-                    changed = true
+            if (outSets[node] != outSet) {
+                outSets[node] = outSet
+
+                for (edge in graph.outgoingEdgesOf(node)) {
+                    val successor = graph.getEdgeTarget(edge)
+                    workList += successor
                 }
             }
-        } while (changed)
+        }
     }
 }
