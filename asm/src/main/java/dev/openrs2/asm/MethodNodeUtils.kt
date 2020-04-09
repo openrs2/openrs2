@@ -9,7 +9,6 @@ import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.VarInsnNode
 import org.objectweb.asm.tree.analysis.Analyzer
 import org.objectweb.asm.tree.analysis.BasicInterpreter
-import org.objectweb.asm.tree.analysis.BasicValue
 
 private fun localIndex(access: Int, argTypes: Array<Type>, argIndex: Int): Int {
     var localIndex = 0
@@ -106,7 +105,7 @@ fun MethodNode.removeDeadCode(owner: String) {
     do {
         changed = false
 
-        val analyzer = Analyzer<BasicValue>(BasicInterpreter())
+        val analyzer = Analyzer(BasicInterpreter())
         val frames = analyzer.analyze(owner, this)
 
         val deadLabels = mutableSetOf<LabelNode>()
