@@ -15,7 +15,6 @@ import dev.openrs2.deob.transform.CanvasTransformer
 import dev.openrs2.deob.transform.ClassLiteralTransformer
 import dev.openrs2.deob.transform.ConstantArgTransformer
 import dev.openrs2.deob.transform.CounterTransformer
-import dev.openrs2.deob.transform.DummyLocalTransformer
 import dev.openrs2.deob.transform.EmptyClassTransformer
 import dev.openrs2.deob.transform.ExceptionTracingTransformer
 import dev.openrs2.deob.transform.FernflowerExceptionTransformer
@@ -34,6 +33,7 @@ import dev.openrs2.deob.transform.RemapTransformer
 import dev.openrs2.deob.transform.ResetTransformer
 import dev.openrs2.deob.transform.StaticScramblingTransformer
 import dev.openrs2.deob.transform.UnusedArgTransformer
+import dev.openrs2.deob.transform.UnusedLocalTransformer
 import dev.openrs2.deob.transform.UnusedMethodTransformer
 import dev.openrs2.deob.transform.VisibilityTransformer
 import java.nio.file.Files
@@ -156,7 +156,7 @@ class Deobfuscator(private val input: Path, private val output: Path) {
             BitwiseOpTransformer(),
             RemapTransformer(),
             ConstantArgTransformer(),
-            DummyLocalTransformer(),
+            UnusedLocalTransformer(),
             UnusedArgTransformer(),
             UnusedMethodTransformer(),
             CounterTransformer(),

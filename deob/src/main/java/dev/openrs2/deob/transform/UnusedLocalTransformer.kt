@@ -13,7 +13,7 @@ import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.VarInsnNode
 
-class DummyLocalTransformer : Transformer() {
+class UnusedLocalTransformer : Transformer() {
     private var localsRemoved = 0
 
     override fun preTransform(classPath: ClassPath) {
