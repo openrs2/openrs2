@@ -27,6 +27,6 @@ if (Files.exists(rootProject.projectDir.toPath().resolve("nonfree/build.gradle.k
         "nonfree:loader",
         "nonfree:signlink",
         "nonfree:unpack",
-        "nonfree:unpacker"
+        "nonfree:unpackclass"
     )
 }

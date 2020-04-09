@@ -14,7 +14,7 @@ class DeobfuscateAstCommand : CliktCommand(name = "deob-ast") {
                 Paths.get("nonfree/loader/src/main/java"),
                 Paths.get("nonfree/signlink/src/main/java"),
                 Paths.get("nonfree/unpack/src/main/java"),
-                Paths.get("nonfree/unpacker/src/main/java")
+                Paths.get("nonfree/unpackclass/src/main/java")
             )
         )
         deobfuscator.run()

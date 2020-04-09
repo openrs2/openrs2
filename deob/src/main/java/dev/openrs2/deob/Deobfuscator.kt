@@ -43,8 +43,8 @@ class Deobfuscator(private val input: Path, private val output: Path) {
     fun run() {
         // read input jars/packs
         logger.info { "Reading input jars" }
-        val unpacker = readJar(input.resolve("unpackclass.pack"))
-        val glUnpacker = Library(unpacker)
+        val unpackClass = readJar(input.resolve("unpackclass.pack"))
+        val glUnpackClass = Library(unpackClass)
         val loader = readJar(input.resolve("loader.jar"))
         val glLoader = readJar(input.resolve("loader_gl.jar"))
         val gl = readPack(input.resolve("jaggl.pack200"))
@@ -76,23 +76,23 @@ class Deobfuscator(private val input: Path, private val output: Path) {
         glUnpack.add(glLoader.remove("unpack")!!)
 
         // prefix remaining loader/unpacker classes (to avoid conflicts when we rename in the same classpath as the client)
-        logger.info { "Prefixing loader and unpacker class names" }
+        logger.info { "Prefixing loader and unpackclass class names" }
         loader.remap(create(loader, "loader_"))
         glLoader.remap(create(glLoader, "loader_"))
-        unpacker.remap(create(unpacker, "unpacker_"))
-        glUnpacker.remap(create(glUnpacker, "unpacker_"))
+        unpackClass.remap(create(unpackClass, "unpackclass_"))
+        glUnpackClass.remap(create(glUnpackClass, "unpackclass_"))
 
         // bundle libraries together into a common classpath
         val runtime = ClassLoader.getPlatformClassLoader()
         val classPath = ClassPath(
             runtime,
             dependencies = emptyList(),
-            libraries = listOf(client, loader, signLink, unpack, unpacker)
+            libraries = listOf(client, loader, signLink, unpack, unpackClass)
         )
         val glClassPath = ClassPath(
             runtime,
             dependencies = listOf(gl),
-            libraries = listOf(glClient, glLoader, glSignLink, glUnpack, glUnpacker)
+            libraries = listOf(glClient, glLoader, glSignLink, glUnpack, glUnpackClass)
         )
         val unsignedClassPath = ClassPath(
             runtime,
@@ -128,14 +128,14 @@ class Deobfuscator(private val input: Path, private val output: Path) {
         loader.writeJar(classPath, output.resolve("loader.jar"))
         signLink.writeJar(classPath, output.resolve("signlink.jar"))
         unpack.writeJar(classPath, output.resolve("unpack.jar"))
-        unpacker.writeJar(classPath, output.resolve("unpacker.jar"))
+        unpackClass.writeJar(classPath, output.resolve("unpackclass.jar"))
 
         gl.writeJar(glClassPath, output.resolve("jaggl.jar"))
         glClient.writeJar(glClassPath, output.resolve("runescape_gl.jar"))
         glLoader.writeJar(glClassPath, output.resolve("loader_gl.jar"))
         glSignLink.writeJar(glClassPath, output.resolve("signlink_gl.jar"))
         glUnpack.writeJar(glClassPath, output.resolve("unpack_gl.jar"))
-        glUnpacker.writeJar(glClassPath, output.resolve("unpacker_gl.jar"))
+        glUnpackClass.writeJar(glClassPath, output.resolve("unpackclass_gl.jar"))
 
         unsignedClient.writeJar(unsignedClassPath, output.resolve("runescape_unsigned.jar"))
     }

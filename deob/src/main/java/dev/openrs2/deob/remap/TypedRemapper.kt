@@ -79,7 +79,7 @@ class TypedRemapper private constructor(
         }
 
         private fun verifyMapping(name: String, mappedName: String) {
-            val originalName = name.replace("^(?:loader|unpacker)_".toRegex(), "")
+            val originalName = name.replace("^(?:loader|unpackclass)_".toRegex(), "")
             if (originalName.length > MAX_OBFUSCATED_NAME_LEN && originalName != mappedName) {
                 logger.warn { "Remapping probably unobfuscated name $originalName to $mappedName" }
             }

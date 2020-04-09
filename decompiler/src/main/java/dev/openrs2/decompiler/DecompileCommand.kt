@@ -15,7 +15,7 @@ class DecompileCommand : CliktCommand(name = "decompile") {
             deobOutput.resolve("loader_gl.jar"),
             deobOutput.resolve("signlink_gl.jar"),
             deobOutput.resolve("unpack_gl.jar"),
-            deobOutput.resolve("unpacker_gl.jar")
+            deobOutput.resolve("unpackclass_gl.jar")
         )
         Decompiler(sources, ::getDestination).use {
             it.run()
