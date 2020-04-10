@@ -49,7 +49,7 @@ class UnusedLocalTransformer : Transformer() {
     }
 
     override fun postTransform(classPath: ClassPath) {
-        logger.info { "Removed $localsRemoved dummy local variables" }
+        logger.info { "Removed $localsRemoved unused local variables" }
     }
 
     companion object {

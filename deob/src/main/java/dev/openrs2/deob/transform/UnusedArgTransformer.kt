@@ -162,7 +162,7 @@ class UnusedArgTransformer : Transformer() {
     }
 
     override fun postTransform(classPath: ClassPath) {
-        logger.info { "Removed $deletedArgs dummy arguments" }
+        logger.info { "Removed $deletedArgs unused arguments" }
     }
 
     companion object {
