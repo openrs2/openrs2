@@ -4,6 +4,7 @@ import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.MemberRef
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
+import dev.openrs2.asm.copy
 import dev.openrs2.asm.createIntConstant
 import dev.openrs2.asm.deleteExpression
 import dev.openrs2.asm.hasCode
@@ -105,14 +106,7 @@ class ConstantArgTransformer : Transformer() {
          * final pass, as we might discover more routes through the call graph
          * later which reduce the number of branches we can simplify.
          */
-        val method = MethodNode(
-            originalMethod.access,
-            originalMethod.name,
-            originalMethod.desc,
-            originalMethod.signature,
-            originalMethod.exceptions?.toTypedArray()
-        )
-        originalMethod.accept(method)
+        val method = originalMethod.copy()
 
         // find existing constant arguments
         val args = getArgs(ref)

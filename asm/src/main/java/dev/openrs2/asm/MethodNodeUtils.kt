@@ -133,3 +133,15 @@ fun MethodNode.removeDeadCode(owner: String) {
 fun MethodNode.hasCode(): Boolean {
     return access and (Opcodes.ACC_NATIVE or Opcodes.ACC_ABSTRACT) == 0
 }
+
+fun MethodNode.copy(): MethodNode {
+    val copy = MethodNode(
+        access,
+        name,
+        desc,
+        signature,
+        exceptions?.toTypedArray()
+    )
+    accept(copy)
+    return copy
+}
