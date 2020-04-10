@@ -80,8 +80,8 @@ class ConstantArgTransformer : Transformer() {
              * point, but strictly speaking we only need to count <init>
              * methods invoked with reflection as entry points (like
              * VisibilityTransformer). However, it makes no difference in this
-             * case, as the deobfuscator does not add dummy constant arguments
-             * to constructors.
+             * case, as the obfuscator does not add dummy constant arguments to
+             * constructors.
              *
              * It also counts native methods as an entry point. This isn't
              * problematic as they don't have an InsnList, so we skip them.
