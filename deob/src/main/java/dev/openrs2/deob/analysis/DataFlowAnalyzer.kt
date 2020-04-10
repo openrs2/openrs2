@@ -42,18 +42,20 @@ abstract class DataFlowAnalyzer<T>(owner: String, private val method: MethodNode
     }
 
     fun analyze() {
-        for (node in graph.vertexSet()) {
-            outSets[node] = createInitialSet()
-        }
+        val initialSet = createInitialSet()
 
-        val workList = LinkedHashSet<Int>(graph.vertexSet())
+        val workList = LinkedHashSet<Int>()
+        workList += graph.vertexSet().filter { vertex -> graph.inDegreeOf(vertex) == 0 }
+
         while (true) {
             val node = workList.removeFirstOrNull() ?: break
 
-            val predecessors = graph.incomingEdgesOf(node).map { edge -> outSets[graph.getEdgeSource(edge)]!! }
+            val predecessors = graph.incomingEdgesOf(node).map { edge ->
+                outSets[graph.getEdgeSource(edge)] ?: initialSet
+            }
 
             val inSet = if (predecessors.isEmpty()) {
-                createInitialSet()
+                initialSet
             } else {
                 predecessors.reduce(this::join)
             }
