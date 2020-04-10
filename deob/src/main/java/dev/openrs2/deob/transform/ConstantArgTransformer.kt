@@ -70,17 +70,23 @@ class ConstantArgTransformer : Transformer() {
     private fun queueEntryPoints(classPath: ClassPath) {
         for (partition in inheritedMethodSets) {
             /*
-             * The EXCLUDED_METHODS set roughly matches up with the methods we
-             * want to consider as entry points. It isn't perfect - it counts
-             * every <init> method as an entry point, but strictly speaking we
-             * only need to count <init> methods invoked with reflection as
-             * entry points (like VisibilityTransformer). However, it makes no
-             * difference in this case, as the deobfuscator does not add dummy
-             * constant arguments to constructors.
+             * The set of non-renamable methods roughly matches up with the
+             * methods we want to consider as entry points. It includes methods
+             * which we override, which may be called by the standard library),
+             * the main() method (called by the JVM), providesignlink() (called
+             * with reflection) and <clinit> (called by the JVM).
+             *
+             * It isn't perfect - it counts every <init> method as an entry
+             * point, but strictly speaking we only need to count <init>
+             * methods invoked with reflection as entry points (like
+             * VisibilityTransformer). However, it makes no difference in this
+             * case, as the deobfuscator does not add dummy constant arguments
+             * to constructors.
+             *
+             * It also counts native methods as an entry point. This isn't
+             * problematic as they don't have an InsnList, so we skip them.
              */
-            val excluded = partition.first().name in TypedRemapper.EXCLUDED_METHODS
-            val overridesDependency = partition.any { classPath[it.owner]!!.dependency }
-            if (excluded || overridesDependency) {
+            if (!TypedRemapper.isMethodRenamable(classPath, partition)) {
                 pendingMethods.addAll(partition)
             }
         }
