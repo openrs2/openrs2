@@ -68,6 +68,7 @@ distributions {
 
 publishing {
     publications.create<MavenPublication>("maven") {
+        artifactId = "openrs2"
         artifact(tasks.named("shadowDistZip").get())
 
         pom {
