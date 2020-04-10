@@ -108,25 +108,18 @@ fun MethodNode.removeDeadCode(owner: String) {
         val analyzer = Analyzer(BasicInterpreter())
         val frames = analyzer.analyze(owner, this)
 
-        val deadLabels = mutableSetOf<LabelNode>()
         val it = instructions.iterator()
         var i = 0
         for (insn in it) {
-            if (frames[i++] != null) {
+            if (frames[i++] != null || insn is LabelNode) {
                 continue
             }
 
-            if (insn is LabelNode) {
-                deadLabels.add(insn)
-            } else {
-                it.remove()
-                changed = true
-            }
+            it.remove()
+            changed = true
         }
 
-        changed = changed or tryCatchBlocks.removeIf {
-            it.start in deadLabels && it.end in deadLabels || it.isBodyEmpty()
-        }
+        changed = changed or tryCatchBlocks.removeIf { it.isBodyEmpty() }
     } while (changed)
 }
 
