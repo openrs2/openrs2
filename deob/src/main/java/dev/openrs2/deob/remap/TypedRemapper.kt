@@ -49,6 +49,7 @@ class TypedRemapper private constructor(
             "cache"
         )
 
+        private val LIBRARY_PREFIX_REGEX = Regex("^(?:loader|unpackclass)_")
         private const val MAX_OBFUSCATED_NAME_LEN = 2
 
         fun create(classPath: ClassPath): TypedRemapper {
@@ -79,7 +80,7 @@ class TypedRemapper private constructor(
         }
 
         private fun verifyMapping(name: String, mappedName: String) {
-            val originalName = name.replace("^(?:loader|unpackclass)_".toRegex(), "")
+            val originalName = name.replace(LIBRARY_PREFIX_REGEX, "")
             if (originalName.length > MAX_OBFUSCATED_NAME_LEN && originalName != mappedName) {
                 logger.warn { "Remapping probably unobfuscated name $originalName to $mappedName" }
             }
