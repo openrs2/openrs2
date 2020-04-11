@@ -23,11 +23,15 @@ class DecompileCommand : CliktCommand(name = "decompile") {
     }
 
     private fun getDestination(archive: String): Path {
-        var dir = archive.replace(Regex("(?:_gl)?[.]jar$"), "")
+        var dir = archive.replace(JAR_SUFFIX_REGEX, "")
         when (dir) {
             "runescape" -> dir = "client"
             "jaggl" -> dir = "gl"
         }
         return Paths.get("nonfree").resolve(dir).resolve("src/main/java")
+    }
+
+    companion object {
+        private val JAR_SUFFIX_REGEX = Regex("(?:_gl)?[.]jar$")
     }
 }
