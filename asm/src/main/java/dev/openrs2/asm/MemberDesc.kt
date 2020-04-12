@@ -13,6 +13,6 @@ data class MemberDesc(val name: String, val desc: String) {
     constructor(memberRef: MemberRef) : this(memberRef.name, memberRef.desc)
 
     override fun toString(): String {
-        return "$desc $name"
+        return "$name $desc"
     }
 }

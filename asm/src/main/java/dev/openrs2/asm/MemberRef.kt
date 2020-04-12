@@ -14,6 +14,6 @@ data class MemberRef(val owner: String, val name: String, val desc: String) {
     constructor(owner: String, desc: MemberDesc) : this(owner, desc.name, desc.desc)
 
     override fun toString(): String {
-        return "$desc $owner.$name"
+        return "$owner.$name $desc"
     }
 }
