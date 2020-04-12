@@ -14,7 +14,7 @@ object Versions {
     const val jdom = "2.0.6"
     const val jgrapht = "1.4.0"
     const val jimfs = "1.1"
-    const val junit = "5.6.1"
+    const val junit = "5.6.2"
     const val kotlin = "1.3.71"
     const val kotlinter = "2.3.2"
     const val logback = "1.2.3"
