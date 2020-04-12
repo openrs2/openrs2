@@ -1,12 +1,15 @@
 package dev.openrs2.asm.classpath
 
 import com.github.michaelbull.logging.InlineLogger
+import dev.openrs2.asm.ClassVersionUtils
 import dev.openrs2.asm.NopClassVisitor
 import dev.openrs2.asm.remap
 import dev.openrs2.compress.gzip.Gzip
 import dev.openrs2.crypto.Pkcs12KeyStore
 import dev.openrs2.util.io.DeterministicJarOutputStream
 import org.objectweb.asm.ClassReader
+import org.objectweb.asm.ClassWriter
+import org.objectweb.asm.Opcodes
 import org.objectweb.asm.commons.Remapper
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.util.CheckClassAdapter
@@ -70,7 +73,11 @@ class Library constructor() : Iterable<ClassNode> {
     fun writeJar(classPath: ClassPath, out: OutputStream, manifest: Manifest? = null) {
         DeterministicJarOutputStream.create(out, manifest).use { jar ->
             for (clazz in classes.values) {
-                val writer = StackFrameClassWriter(classPath)
+                val writer = if (ClassVersionUtils.gte(clazz.version, Opcodes.V1_7)) {
+                    StackFrameClassWriter(classPath)
+                } else {
+                    ClassWriter(ClassWriter.COMPUTE_MAXS)
+                }
 
                 clazz.accept(writer)
 
