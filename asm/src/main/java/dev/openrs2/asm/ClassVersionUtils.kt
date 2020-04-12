@@ -9,7 +9,7 @@ object ClassVersionUtils {
         return swapWords(v1) >= swapWords(v2)
     }
 
-    fun maxVersion(v1: Int, v2: Int): Int {
+    fun max(v1: Int, v2: Int): Int {
         return if (gte(v1, v2)) {
             v1
         } else {

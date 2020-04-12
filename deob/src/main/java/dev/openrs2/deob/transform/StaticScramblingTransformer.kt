@@ -89,7 +89,7 @@ class StaticScramblingTransformer : Transformer() {
 
         val (staticClass, staticClinit) = nextClass()
         staticClass.fields.addAll(fieldSet.fields)
-        staticClass.version = ClassVersionUtils.maxVersion(staticClass.version, fieldSet.owner.version)
+        staticClass.version = ClassVersionUtils.max(staticClass.version, fieldSet.owner.version)
 
         if (fieldSet.clinit != null) {
             // remove tail RETURN
@@ -169,7 +169,7 @@ class StaticScramblingTransformer : Transformer() {
 
                     val (staticClass, _) = nextClass()
                     staticClass.methods.add(method)
-                    staticClass.version = ClassVersionUtils.maxVersion(staticClass.version, clazz.version)
+                    staticClass.version = ClassVersionUtils.max(staticClass.version, clazz.version)
 
                     val partition = inheritedMethodSets[MemberRef(clazz, method)]!!
                     methodClasses[partition] = staticClass.name

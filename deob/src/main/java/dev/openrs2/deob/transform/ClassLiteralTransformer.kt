@@ -95,7 +95,7 @@ class ClassLiteralTransformer : Transformer() {
                 }
             }
 
-            clazz.version = ClassVersionUtils.maxVersion(clazz.version, Opcodes.V1_5)
+            clazz.version = ClassVersionUtils.max(clazz.version, Opcodes.V1_5)
             clazz.fields.removeIf { it.name == getstatic1.name && it.desc == getstatic1.desc }
 
             classLiterals++
