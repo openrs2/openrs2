@@ -15,6 +15,8 @@ include(
     "deob",
     "deob-annotations",
     "deob-ast",
+    "deob-map",
+    "deob-processor",
     "game",
     "util"
 )
