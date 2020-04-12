@@ -18,7 +18,7 @@ class RsaKeyProvider : Provider<RSAPrivateCrtKeyParameters> {
     }
 
     companion object {
-        private val PUBLIC_PATH = Paths.get("conf/public.key")
-        private val PRIVATE_PATH = Paths.get("conf/private.key")
+        private val PUBLIC_PATH = Paths.get("etc/public.key")
+        private val PRIVATE_PATH = Paths.get("etc/private.key")
     }
 }

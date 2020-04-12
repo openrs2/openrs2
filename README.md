@@ -25,7 +25,7 @@ beneath the root of the repository), in the following structure:
 
 ```
 nonfree
-└── code
+└── lib
     ├── jaggl.pack200
     ├── loader_gl.jar
     ├── loader.jar
@@ -37,12 +37,12 @@ nonfree
 The SHA-256 checksums of the correct files are:
 
 ```
-d39578f4a88a376bcb2571f05da1939a14a80d8c4ed89a4eb172d9e525795fe2  nonfree/code/jaggl.pack200
-31182683ba04dc0ad45859161c13f66424b10deb0b2df10aa58b48bba57402db  nonfree/code/loader_gl.jar
-ccdfaa86be07452ddd69f869ade86ea900dbb916fd853db16602edf2eb54211b  nonfree/code/loader.jar
-4a5032ea8079d2154617ae1f21dfcc46a10e023c8ba23a4827d5e25e75c73045  nonfree/code/runescape_gl.pack200
-0ab28a95e7c5993860ff439ebb331c0df02ad40aa1f544777ed91b46d30d3d24  nonfree/code/runescape.jar
-7c090e07f8d754d09804ff6e9733ef3ba227893b6b639436db90977b39122590  nonfree/code/unpackclass.pack
+d39578f4a88a376bcb2571f05da1939a14a80d8c4ed89a4eb172d9e525795fe2  nonfree/lib/jaggl.pack200
+31182683ba04dc0ad45859161c13f66424b10deb0b2df10aa58b48bba57402db  nonfree/lib/loader_gl.jar
+ccdfaa86be07452ddd69f869ade86ea900dbb916fd853db16602edf2eb54211b  nonfree/lib/loader.jar
+4a5032ea8079d2154617ae1f21dfcc46a10e023c8ba23a4827d5e25e75c73045  nonfree/lib/runescape_gl.pack200
+0ab28a95e7c5993860ff439ebb331c0df02ad40aa1f544777ed91b46d30d3d24  nonfree/lib/runescape.jar
+7c090e07f8d754d09804ff6e9733ef3ba227893b6b639436db90977b39122590  nonfree/lib/unpackclass.pack
 ```
 
 The `nonfree` directory is included in the `.gitignore` file to prevent any

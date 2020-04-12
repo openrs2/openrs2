@@ -8,7 +8,7 @@ fun main(args: Array<String>) = DecompileCommand().main(args)
 
 class DecompileCommand : CliktCommand(name = "decompile") {
     override fun run() {
-        val deobOutput = Paths.get("nonfree/code/deob")
+        val deobOutput = Paths.get("nonfree/var/cache/deob")
         val sources = listOf(
             deobOutput.resolve("runescape_gl.jar"),
             deobOutput.resolve("jaggl.jar"),

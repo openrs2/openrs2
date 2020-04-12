@@ -7,7 +7,7 @@ fun main(args: Array<String>) = DeobfuscateCommand().main(args)
 
 class DeobfuscateCommand : CliktCommand(name = "deob") {
     override fun run() {
-        val deobfuscator = Deobfuscator(Paths.get("nonfree/code"), Paths.get("nonfree/code/deob"))
+        val deobfuscator = Deobfuscator(Paths.get("nonfree/lib"), Paths.get("nonfree/var/cache/deob"))
         deobfuscator.run()
     }
 }
