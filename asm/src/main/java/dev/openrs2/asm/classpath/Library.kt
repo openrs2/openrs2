@@ -94,11 +94,11 @@ class Library constructor() : Iterable<ClassNode> {
     fun writeSignedJar(classPath: ClassPath, path: Path, keyStore: Pkcs12KeyStore, manifest: Manifest? = null) {
         logger.info { "Writing signed jar $path" }
 
-        val unsignedPath = Files.createTempFile("tmp", ".jar")
+        val unsignedPath = Files.createTempFile(TEMP_PREFIX, JAR_SUFFIX)
         try {
             writeJar(classPath, unsignedPath, manifest)
 
-            val signedPath = Files.createTempFile("tmp", ".jar")
+            val signedPath = Files.createTempFile(TEMP_PREFIX, JAR_SUFFIX)
             try {
                 keyStore.signJar(unsignedPath, signedPath)
                 DeterministicJarOutputStream.repack(signedPath, path)
