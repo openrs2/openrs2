@@ -50,9 +50,9 @@ distributions {
             from("${rootProject.projectDir}/DCO")
             from("${rootProject.projectDir}/LICENSE")
             from("${rootProject.projectDir}/README.md")
-            from("${rootProject.projectDir}/share/doc") {
-                include("*.md")
-                into("share/doc")
+            from("${rootProject.projectDir}/share") {
+                exclude(".*", "*~")
+                into("share")
             }
             from("$buildDir/reports/dependency-license/THIRD-PARTY-NOTICES.txt") {
                 rename { "third-party-licenses.txt" }
