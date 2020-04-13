@@ -98,6 +98,11 @@ configure(subprojects.filter { it.free }) {
 
             val testImplementation by configurations
             testImplementation(kotlin("test-junit5"))
+            testImplementation("org.junit.jupiter:junit-jupiter-api") {
+                version {
+                    strictly(Versions.junit)
+                }
+            }
         }
     }
 
