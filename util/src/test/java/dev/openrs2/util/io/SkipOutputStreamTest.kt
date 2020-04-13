@@ -2,7 +2,10 @@ package dev.openrs2.util.io
 
 import org.junit.jupiter.api.Assertions.assertArrayEquals
 import java.io.ByteArrayOutputStream
+import java.io.FilterOutputStream
+import java.io.OutputStream
 import kotlin.test.Test
+import kotlin.test.assertTrue
 
 object SkipOutputStreamTest {
     @Test
@@ -47,5 +50,22 @@ object SkipOutputStreamTest {
                 assertArrayEquals(expected, out.toByteArray())
             }
         }
+    }
+
+    @Test
+    fun testFlush() {
+        val out = object : FilterOutputStream(OutputStream.nullOutputStream()) {
+            var flushed = false
+
+            override fun flush() {
+                flushed = true
+            }
+        }
+
+        SkipOutputStream(out, 0).use { skip ->
+            skip.flush()
+        }
+
+        assertTrue(out.flushed)
     }
 }
