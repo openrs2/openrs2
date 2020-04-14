@@ -4,7 +4,9 @@ import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
 import dev.openrs2.asm.transform.Transformer
+import dev.openrs2.asm.io.JarLibraryReader
 import dev.openrs2.asm.io.JarLibraryWriter
+import dev.openrs2.asm.io.Pack200LibraryReader
 import dev.openrs2.asm.io.SignedJarLibraryWriter
 import dev.openrs2.bundler.transform.ResourceTransformer
 import dev.openrs2.conf.Config
@@ -14,6 +16,7 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.util.jar.Attributes
 import java.util.jar.Attributes.Name.MANIFEST_VERSION
+import java.util.jar.JarInputStream
 import java.util.jar.Manifest
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -38,12 +41,12 @@ class Bundler @Inject constructor(
     fun run(input: Path, output: Path, keyStorePath: Path) {
         // read input jars/packs
         logger.info { "Reading input jars" }
-        val unpacker = Library.readJar(input.resolve("unpackclass.pack"))
-        val loader = Library.readJar(input.resolve("loader.jar"))
-        val glLoader = Library.readJar(input.resolve("loader_gl.jar"))
-        val gl = Library.readPack(input.resolve("jaggl.pack200"))
-        val client = Library.readJar(input.resolve("runescape.jar"))
-        val glClient = Library.readPack(input.resolve("runescape_gl.pack200"))
+        val unpacker = readJar(input.resolve("unpackclass.pack"))
+        val loader = readJar(input.resolve("loader.jar"))
+        val glLoader = readJar(input.resolve("loader_gl.jar"))
+        val gl = readPack(input.resolve("jaggl.pack200"))
+        val client = readJar(input.resolve("runescape.jar"))
+        val glClient = readPack(input.resolve("runescape_gl.pack200"))
 
         // bundle libraries together into a common classpath
         val runtime = ClassLoader.getPlatformClassLoader()
@@ -124,6 +127,22 @@ class Bundler @Inject constructor(
         val keyStore = Pkcs12KeyStore.open(keyStorePath, config.game)
         writeSignedJar(classPath, loader, output.resolve("loader.jar"), keyStore)
         writeSignedJar(glClassPath, glLoader, output.resolve("loader_gl.jar"), keyStore)
+    }
+
+    private fun readJar(path: Path): Library {
+        logger.info { "Reading jar $path" }
+
+        return JarInputStream(Files.newInputStream(path)).use { input ->
+            JarLibraryReader(input).read()
+        }
+    }
+
+    private fun readPack(path: Path): Library {
+        logger.info { "Reading pack $path" }
+
+        return Files.newInputStream(path).use { input ->
+            Pack200LibraryReader(input).read()
+        }
     }
 
     private fun writeJar(classPath: ClassPath, library: Library, path: Path) {

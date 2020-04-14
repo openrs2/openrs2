@@ -3,12 +3,15 @@ package dev.openrs2.deob
 import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
+import dev.openrs2.asm.io.JarLibraryReader
 import dev.openrs2.asm.io.JarLibraryWriter
+import dev.openrs2.asm.io.Pack200LibraryReader
 import dev.openrs2.asm.transform.Transformer
 import dev.openrs2.deob.remap.PrefixRemapper
 import dev.openrs2.util.io.DeterministicJarOutputStream
 import java.nio.file.Files
 import java.nio.file.Path
+import java.util.jar.JarInputStream
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -19,13 +22,13 @@ class Deobfuscator @Inject constructor(
     fun run(input: Path, output: Path) {
         // read input jars/packs
         logger.info { "Reading input jars" }
-        val unpackClass = Library.readJar(input.resolve("unpackclass.pack"))
+        val unpackClass = readJar(input.resolve("unpackclass.pack"))
         val glUnpackClass = Library(unpackClass)
-        val loader = Library.readJar(input.resolve("loader.jar"))
-        val glLoader = Library.readJar(input.resolve("loader_gl.jar"))
-        val gl = Library.readPack(input.resolve("jaggl.pack200"))
-        val client = Library.readJar(input.resolve("runescape.jar"))
-        val glClient = Library.readPack(input.resolve("runescape_gl.pack200"))
+        val loader = readJar(input.resolve("loader.jar"))
+        val glLoader = readJar(input.resolve("loader_gl.jar"))
+        val gl = readPack(input.resolve("jaggl.pack200"))
+        val client = readJar(input.resolve("runescape.jar"))
+        val glClient = readPack(input.resolve("runescape_gl.pack200"))
 
         /*
          * TODO(gpe): it'd be nice to have separate signlink.jar and
@@ -116,6 +119,22 @@ class Deobfuscator @Inject constructor(
         writeJar(glClassPath, glUnpackClass, output.resolve("unpackclass_gl.jar"))
 
         writeJar(unsignedClassPath, unsignedClient, output.resolve("runescape_unsigned.jar"))
+    }
+
+    private fun readJar(path: Path): Library {
+        logger.info { "Reading jar $path" }
+
+        return JarInputStream(Files.newInputStream(path)).use { input ->
+            JarLibraryReader(input).read()
+        }
+    }
+
+    private fun readPack(path: Path): Library {
+        logger.info { "Reading pack $path" }
+
+        return Files.newInputStream(path).use { input ->
+            Pack200LibraryReader(input).read()
+        }
     }
 
     private fun writeJar(classPath: ClassPath, library: Library, path: Path) {
