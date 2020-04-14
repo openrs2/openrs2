@@ -10,8 +10,8 @@ import java.util.jar.Manifest
 import java.util.zip.ZipEntry
 
 class DeterministicJarOutputStream : JarOutputStream {
-    private constructor(out: OutputStream) : super(out)
-    private constructor(out: OutputStream, man: Manifest) : super(out, man)
+    constructor(out: OutputStream) : super(out)
+    constructor(out: OutputStream, man: Manifest) : super(out, man)
 
     override fun putNextEntry(ze: ZipEntry) {
         ze.creationTime = UNIX_EPOCH

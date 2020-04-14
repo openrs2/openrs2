@@ -3,6 +3,10 @@ package dev.openrs2.bundler
 import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
+import dev.openrs2.asm.io.JarLibraryWriter
+import dev.openrs2.asm.io.Js5LibraryWriter
+import dev.openrs2.asm.io.Pack200LibraryWriter
+import dev.openrs2.util.io.DeterministicJarOutputStream
 import java.io.ByteArrayOutputStream
 import java.nio.file.Files
 import java.nio.file.Path
@@ -66,23 +70,26 @@ class Resource(
         }
 
         fun compressJar(source: String, destination: String, classPath: ClassPath, library: Library): Resource {
-            ByteArrayOutputStream().use { out ->
-                library.writeJar(classPath, out)
-                return compress(source, destination, out.toByteArray())
+            ByteArrayOutputStream().use { output ->
+                DeterministicJarOutputStream(output).use { jarOutput ->
+                    JarLibraryWriter(jarOutput).write(classPath, library)
+                }
+
+                return compress(source, destination, output.toByteArray())
             }
         }
 
         fun compressPack(source: String, destination: String, classPath: ClassPath, library: Library): Resource {
-            ByteArrayOutputStream().use { out ->
-                library.writePack(classPath, out)
-                return compress(source, destination, out.toByteArray())
+            ByteArrayOutputStream().use { output ->
+                Pack200LibraryWriter(output).write(classPath, library)
+                return compress(source, destination, output.toByteArray())
             }
         }
 
         fun compressJs5(source: String, destination: String, classPath: ClassPath, library: Library): Resource {
-            ByteArrayOutputStream().use { out ->
-                library.writeJs5(classPath, out)
-                return compress(source, destination, out.toByteArray())
+            ByteArrayOutputStream().use { output ->
+                Js5LibraryWriter(output).write(classPath, library)
+                return compress(source, destination, output.toByteArray())
             }
         }
 

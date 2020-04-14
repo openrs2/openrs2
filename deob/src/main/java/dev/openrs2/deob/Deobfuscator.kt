@@ -3,8 +3,10 @@ package dev.openrs2.deob
 import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
+import dev.openrs2.asm.io.JarLibraryWriter
 import dev.openrs2.asm.transform.Transformer
 import dev.openrs2.deob.remap.PrefixRemapper
+import dev.openrs2.util.io.DeterministicJarOutputStream
 import java.nio.file.Files
 import java.nio.file.Path
 import javax.inject.Inject
@@ -100,20 +102,28 @@ class Deobfuscator @Inject constructor(
 
         Files.createDirectories(output)
 
-        client.writeJar(classPath, output.resolve("runescape.jar"))
-        loader.writeJar(classPath, output.resolve("loader.jar"))
-        signLink.writeJar(classPath, output.resolve("signlink.jar"))
-        unpack.writeJar(classPath, output.resolve("unpack.jar"))
-        unpackClass.writeJar(classPath, output.resolve("unpackclass.jar"))
+        writeJar(classPath, client, output.resolve("runescape.jar"))
+        writeJar(classPath, loader, output.resolve("loader.jar"))
+        writeJar(classPath, signLink, output.resolve("signlink.jar"))
+        writeJar(classPath, unpack, output.resolve("unpack.jar"))
+        writeJar(classPath, unpackClass, output.resolve("unpackclass.jar"))
 
-        gl.writeJar(glClassPath, output.resolve("jaggl.jar"))
-        glClient.writeJar(glClassPath, output.resolve("runescape_gl.jar"))
-        glLoader.writeJar(glClassPath, output.resolve("loader_gl.jar"))
-        glSignLink.writeJar(glClassPath, output.resolve("signlink_gl.jar"))
-        glUnpack.writeJar(glClassPath, output.resolve("unpack_gl.jar"))
-        glUnpackClass.writeJar(glClassPath, output.resolve("unpackclass_gl.jar"))
+        writeJar(glClassPath, gl, output.resolve("jaggl.jar"))
+        writeJar(glClassPath, glClient, output.resolve("runescape_gl.jar"))
+        writeJar(glClassPath, glLoader, output.resolve("loader_gl.jar"))
+        writeJar(glClassPath, glSignLink, output.resolve("signlink_gl.jar"))
+        writeJar(glClassPath, glUnpack, output.resolve("unpack_gl.jar"))
+        writeJar(glClassPath, glUnpackClass, output.resolve("unpackclass_gl.jar"))
 
-        unsignedClient.writeJar(unsignedClassPath, output.resolve("runescape_unsigned.jar"))
+        writeJar(unsignedClassPath, unsignedClient, output.resolve("runescape_unsigned.jar"))
+    }
+
+    private fun writeJar(classPath: ClassPath, library: Library, path: Path) {
+        logger.info { "Writing jar $path" }
+
+        DeterministicJarOutputStream(Files.newOutputStream(path)).use { output ->
+            JarLibraryWriter(output).write(classPath, library)
+        }
     }
 
     companion object {
