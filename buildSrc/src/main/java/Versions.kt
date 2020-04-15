@@ -5,7 +5,7 @@ object Versions {
     const val commonsCompress = "1.20"
     const val dependencyLicenseReport = "1.13"
     const val fastutil = "8.3.1"
-    const val fernflower = "1.0.3"
+    const val fernflower = "1.0.4-SNAPSHOT"
     const val guava = "29.0-jre"
     const val guice = "4.2.3"
     const val inlineLogger = "1.0.2"
