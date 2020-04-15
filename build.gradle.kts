@@ -1,16 +1,23 @@
 import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import java.io.ByteArrayOutputStream
+import java.nio.charset.StandardCharsets
 
 defaultTasks("build")
 
 plugins {
     base
     id("com.github.ben-manes.versions") version Versions.versionsPlugin
+    id("org.jetbrains.dokka") version Versions.dokka
+    kotlin("jvm") version Versions.kotlin
 
     id("com.github.jk1.dependency-license-report") version Versions.dependencyLicenseReport apply false
     id("com.github.johnrengelman.shadow") version Versions.shadowPlugin apply false
     id("org.jmailen.kotlinter") version Versions.kotlinter apply false
-    kotlin("jvm") version Versions.kotlin apply false
+}
+
+repositories {
+    jcenter()
 }
 
 allprojects {
@@ -191,6 +198,39 @@ tasks.dependencyUpdates {
 
     rejectVersionIf {
         candidate.version.contains(rejectVersionRegex)
+    }
+}
+
+fun commitHash(): String {
+    val out = ByteArrayOutputStream()
+    exec {
+        commandLine("git", "rev-parse", "HEAD")
+        standardOutput = out
+    }.assertNormalExitValue()
+    return String(out.toByteArray(), StandardCharsets.UTF_8).trim()
+}
+
+tasks.dokka {
+    outputDirectory = "${project.buildDir}/dokka"
+    outputFormat = "html"
+
+    subProjects = subprojects.filter { it.free && it.name != "deob-annotations" }.map { it.name }
+
+    configuration {
+        includeNonPublic = true
+
+        /*
+         * XXX(gpe): ideally we'd use 11 here, but we're blocked on
+         * https://github.com/Kotlin/dokka/issues/294. 9 is the most recent
+         * working version for now.
+         */
+        jdkVersion = 9
+
+        sourceLink {
+            path = "."
+            url = "https://git.openrs2.dev/openrs2/openrs2/src/commit/${commitHash()}"
+            lineSuffix = "#L"
+        }
     }
 }
 
