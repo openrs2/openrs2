@@ -23,7 +23,7 @@ import java.util.jar.JarOutputStream
 import java.util.jar.Manifest
 import java.util.jar.Pack200
 
-class Library constructor() : Iterable<ClassNode> {
+class Library() : Iterable<ClassNode> {
     private var classes = TreeMap<String, ClassNode>()
 
     constructor(library: Library) : this() {
