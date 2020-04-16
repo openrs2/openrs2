@@ -1,7 +1,6 @@
 import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.io.ByteArrayOutputStream
-import java.nio.charset.StandardCharsets
 
 defaultTasks("build")
 
@@ -207,7 +206,7 @@ fun commitHash(): String {
         commandLine("git", "rev-parse", "HEAD")
         standardOutput = out
     }.assertNormalExitValue()
-    return String(out.toByteArray(), StandardCharsets.UTF_8).trim()
+    return String(out.toByteArray(), Charsets.UTF_8).trim()
 }
 
 tasks.dokka {
