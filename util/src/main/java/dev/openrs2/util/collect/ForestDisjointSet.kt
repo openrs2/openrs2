@@ -2,6 +2,11 @@ package dev.openrs2.util.collect
 
 import java.util.ArrayDeque
 
+/**
+ * A [DisjointSet] implementation backed by a disjoint-set forest, as described
+ * in chapter 21.3 of the third edition of CLRS. It uses path compression and
+ * union by rank.
+ */
 class ForestDisjointSet<T> : DisjointSet<T> {
     private class Node<T>(val value: T) : DisjointSet.Partition<T> {
         val children = mutableListOf<Node<T>>()
