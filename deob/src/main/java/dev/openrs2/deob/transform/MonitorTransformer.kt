@@ -8,6 +8,7 @@ import dev.openrs2.asm.nextReal
 import dev.openrs2.asm.previousReal
 import dev.openrs2.asm.transform.Transformer
 import org.objectweb.asm.Opcodes
+import org.objectweb.asm.commons.JSRInlinerAdapter
 import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.InsnNode
@@ -15,6 +16,31 @@ import org.objectweb.asm.tree.JumpInsnNode
 import org.objectweb.asm.tree.LabelNode
 import org.objectweb.asm.tree.MethodNode
 
+/**
+ * A [Transformer] that rewrites `synchronized` blocks produced by older
+ * versions of the Java compiler (1.3 and older) into a more modern format.
+ * This is required for compatibility with Fernflower, which does not
+ * understand the older format.
+ *
+ * This transformer depends on [JSRInlinerAdapter].
+ *
+ * It makes three changes:
+ *
+ * - Inlines `MONITOREXIT` subroutines. [JSRInlinerAdapter] only replaces
+ *   `JSR`/`RET` calls with `GOTO`. Fernflower needs the actual body of the
+ *   subroutine to be inlined.
+ *
+ * - Extends exception handler ranges to cover the `MONITOREXIT` instruction.
+ *
+ * - Replaces `ASTORE ALOAD MONITORENTER` sequences with `DUP MONITORENTER`,
+ *   which prevents Fernflower from emitting a redundant variable declaration.
+ *
+ * There is one final difference that this transformer does not deal with:
+ * modern versions of the Java compiler add a second exception handler range to
+ * each synchronized block covering the `MONITOREXIT` sequence, with the
+ * handler pointing to the same `MONITOREXIT` sequence. Adding this isn't
+ * necessary for Fernflower compatibility.
+ */
 class MonitorTransformer : Transformer() {
     private var subroutinesInlined = 0
     private var tryRangesExtended = 0
