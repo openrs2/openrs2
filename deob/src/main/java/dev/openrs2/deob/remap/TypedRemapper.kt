@@ -56,7 +56,7 @@ class TypedRemapper private constructor(
             val inheritedFieldSets = classPath.createInheritedFieldSets()
             val inheritedMethodSets = classPath.createInheritedMethodSets()
 
-            val classes = createClassMapping(classPath.libraryClasses)
+            val classes = createClassMapping(classPath)
             val fields = createFieldMapping(classPath, inheritedFieldSets, classes)
             val methods = createMethodMapping(classPath, inheritedMethodSets)
 
@@ -95,10 +95,10 @@ class TypedRemapper private constructor(
             return prefix + separator + prefixes.merge(prefix, 1, Integer::sum)
         }
 
-        private fun createClassMapping(classes: List<ClassMetadata>): Map<String, String> {
+        private fun createClassMapping(classPath: ClassPath): Map<String, String> {
             val mapping = mutableMapOf<String, String>()
             val prefixes = mutableMapOf<String, Int>()
-            for (clazz in classes) {
+            for (clazz in classPath.libraryClasses) {
                 populateClassMapping(mapping, prefixes, clazz)
             }
             return mapping

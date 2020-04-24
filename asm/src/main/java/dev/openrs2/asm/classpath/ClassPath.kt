@@ -28,16 +28,8 @@ class ClassPath(
      */
     val originalPcs = mutableMapOf<AbstractInsnNode, Int>()
 
-    val libraryClasses: List<ClassMetadata>
-        get() {
-            val classes = mutableListOf<ClassMetadata>()
-            for (library in libraries) {
-                for (clazz in library) {
-                    classes.add(get(clazz.name)!!)
-                }
-            }
-            return classes
-        }
+    val libraryClasses: Sequence<ClassMetadata>
+        get() = libraries.asSequence().flatten().map { get(it.name)!! }
 
     private inline fun computeIfAbsent(name: String, f: (String) -> ClassMetadata?): ClassMetadata? {
         if (cache.containsKey(name)) {
