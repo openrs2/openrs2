@@ -211,7 +211,7 @@ fun commitHash(): String {
 }
 
 tasks.dokka {
-    outputDirectory = "${project.buildDir}/dokka"
+    outputDirectory = "${project.buildDir}/kdoc"
     outputFormat = "html"
 
     subProjects = subprojects.filter { it.free && it.name != "deob-annotations" }.map { it.name }
