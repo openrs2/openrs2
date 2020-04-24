@@ -77,7 +77,7 @@ class CounterTransformer : Transformer() {
                 continue
             }
 
-            val owner = classPath.getNode(counter.owner)!!
+            val owner = classPath.getClassNode(counter.owner)!!
             owner.fields.removeIf { it.name == counter.name && it.desc == counter.desc }
             counters.add(counter)
         }

@@ -73,7 +73,7 @@ class ClassPath(
         return@computeIfAbsent ReflectionClassMetadata(this, clazz)
     }
 
-    fun getNode(name: String): ClassNode? {
+    fun getClassNode(name: String): ClassNode? {
         for (library in libraries) {
             val clazz = library[name]
             if (clazz != null) {

@@ -95,7 +95,7 @@ class ConstantArgTransformer : Transformer() {
 
     private fun analyzeMethod(classPath: ClassPath, ref: MemberRef) {
         // find ClassNode/MethodNode
-        val owner = classPath.getNode(ref.owner) ?: return
+        val owner = classPath.getClassNode(ref.owner) ?: return
         val originalMethod = owner.methods.singleOrNull { it.name == ref.name && it.desc == ref.desc } ?: return
         if (!originalMethod.hasCode()) {
             return
