@@ -3,6 +3,10 @@ plugins {
     kotlin("jvm")
 }
 
+dependencies {
+    testImplementation("com.google.jimfs:jimfs:${Versions.jimfs}")
+}
+
 publishing {
     publications.create<MavenPublication>("maven") {
         from(components["java"])
