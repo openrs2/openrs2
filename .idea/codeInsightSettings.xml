@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaProjectCodeInsightSettings">
+    <excluded-names>
+      <name>com.google.inject.BindingAnnotation</name>
+      <name>com.google.inject.Inject</name>
+      <name>com.google.inject.Named</name>
+      <name>com.google.inject.Provider</name>
+      <name>com.google.inject.ScopeAnnotation</name>
+      <name>com.google.inject.Singleton</name>
+    </excluded-names>
+  </component>
+</project>

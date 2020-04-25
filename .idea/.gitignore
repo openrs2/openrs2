@@ -1,5 +1,6 @@
 /*
 !.gitignore
+!codeInsightSettings.xml
 !codeStyles
 !fileTemplates
 !inspectionProfiles
