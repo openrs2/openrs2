@@ -6,8 +6,7 @@ plugins {
 dependencies {
     implementation(project(":deob-annotations"))
     implementation(project(":deob-map"))
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${Versions.jackson}")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${Versions.jackson}")
+    implementation(project(":yaml"))
 }
 
 publishing {

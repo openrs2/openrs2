@@ -1,8 +1,7 @@
 package dev.openrs2.deob.processor
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
-import com.fasterxml.jackson.module.kotlin.registerKotlinModule
+import com.google.inject.Guice
 import com.sun.source.util.Trees
 import dev.openrs2.asm.MemberRef
 import dev.openrs2.asm.toInternalClassName
@@ -12,6 +11,7 @@ import dev.openrs2.deob.annotation.OriginalMember
 import dev.openrs2.deob.map.Field
 import dev.openrs2.deob.map.Method
 import dev.openrs2.deob.map.NameMap
+import dev.openrs2.yaml.YamlModule
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -41,8 +41,14 @@ class NameMapProcessor : AbstractProcessor() {
     private val classes = TreeMap<String, String>()
     private val fields = TreeMap<MemberRef, Field>()
     private val methods = TreeMap<MemberRef, Method>()
+    private val mapper: ObjectMapper
     private lateinit var trees: Trees
     private lateinit var localScanner: LocalVariableScanner
+
+    init {
+        val injector = Guice.createInjector(YamlModule())
+        mapper = injector.getInstance(ObjectMapper::class.java)
+    }
 
     override fun init(env: ProcessingEnvironment) {
         super.init(env)
@@ -92,7 +98,6 @@ class NameMapProcessor : AbstractProcessor() {
 
         if (env.processingOver()) {
             Files.newBufferedWriter(mapPath).use { writer ->
-                val mapper = ObjectMapper(YAMLFactory()).registerKotlinModule()
                 mapper.writeValue(writer, NameMap(classes, fields, methods))
             }
         }
