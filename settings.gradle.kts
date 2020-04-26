@@ -18,7 +18,8 @@ include(
     "deob-map",
     "deob-processor",
     "game",
-    "util"
+    "util",
+    "yaml"
 )
 
 if (Files.exists(rootProject.projectDir.toPath().resolve("nonfree/build.gradle.kts"))) {
