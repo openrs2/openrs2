@@ -50,6 +50,9 @@ distributions {
             from("${rootProject.projectDir}/DCO")
             from("${rootProject.projectDir}/LICENSE")
             from("${rootProject.projectDir}/README.md")
+            from("${rootProject.projectDir}/etc/config.example.yaml") {
+                into("etc")
+            }
             from("${rootProject.projectDir}/share") {
                 exclude(".*", "*~")
                 into("share")

@@ -9,6 +9,7 @@ include(
     "cli",
     "compress",
     "compress-cli",
+    "conf",
     "crc32",
     "crypto",
     "decompiler",
