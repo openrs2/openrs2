@@ -8,7 +8,7 @@ fun main(args: Array<String>) = BundleCommand().main(args)
 
 class BundleCommand : CliktCommand(name = "bundle") {
     override fun run() {
-        val injector = Guice.createInjector(BundlerModule())
+        val injector = Guice.createInjector(BundlerModule)
         val bundler = injector.getInstance(Bundler::class.java)
         bundler.run(Paths.get("nonfree/lib"), Paths.get("nonfree/var/cache/bundle"), Paths.get("etc/loader.p12"))
     }

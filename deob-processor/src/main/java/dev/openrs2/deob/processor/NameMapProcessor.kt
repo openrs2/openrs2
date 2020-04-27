@@ -46,7 +46,7 @@ class NameMapProcessor : AbstractProcessor() {
     private lateinit var localScanner: LocalVariableScanner
 
     init {
-        val injector = Guice.createInjector(YamlModule())
+        val injector = Guice.createInjector(YamlModule)
         mapper = injector.getInstance(ObjectMapper::class.java)
     }
 

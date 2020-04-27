@@ -7,7 +7,7 @@ fun main(args: Array<String>) = GameCommand().main(args)
 
 class GameCommand : CliktCommand(name = "game") {
     override fun run() {
-        val injector = Guice.createInjector(GameModule())
+        val injector = Guice.createInjector(GameModule)
         val server = injector.getInstance(GameServer::class.java)
         server.run()
     }

@@ -2,7 +2,7 @@ package dev.openrs2.game
 
 import com.google.inject.AbstractModule
 
-class GameModule : AbstractModule() {
+object GameModule : AbstractModule() {
     override fun configure() {
         // empty
     }

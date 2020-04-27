@@ -6,7 +6,7 @@ import com.google.inject.AbstractModule
 import com.google.inject.Scopes
 import com.google.inject.multibindings.Multibinder
 
-class YamlModule : AbstractModule() {
+object YamlModule : AbstractModule() {
     override fun configure() {
         Multibinder.newSetBinder(binder(), Module::class.java)
 
