@@ -5,6 +5,7 @@ import com.google.inject.multibindings.Multibinder
 import dev.openrs2.asm.transform.Transformer
 import dev.openrs2.bundler.transform.BufferSizeTransformer
 import dev.openrs2.bundler.transform.CachePathTransformer
+import dev.openrs2.bundler.transform.DomainTransformer
 import dev.openrs2.bundler.transform.HostCheckTransformer
 import dev.openrs2.bundler.transform.LoadLibraryTransformer
 import dev.openrs2.bundler.transform.MacResizeTransformer
@@ -24,6 +25,7 @@ object BundlerModule : AbstractModule() {
         binder.addBinding().to(BufferSizeTransformer::class.java)
         binder.addBinding().to(CachePathTransformer::class.java)
         binder.addBinding().to(HostCheckTransformer::class.java)
+        binder.addBinding().to(DomainTransformer::class.java)
         binder.addBinding().to(LoadLibraryTransformer::class.java)
         binder.addBinding().to(MacResizeTransformer::class.java)
         binder.addBinding().to(PlatformDetectionTransformer::class.java)
