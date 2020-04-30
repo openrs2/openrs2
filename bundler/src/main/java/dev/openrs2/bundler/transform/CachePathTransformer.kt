@@ -36,6 +36,10 @@ class CachePathTransformer @Inject constructor(
                     insn.cst = ".${config.internalOperator}_"
                     paths++
                 }
+                "runescape" -> {
+                    insn.cst = config.internalGame
+                    paths++
+                }
             }
         }
 
