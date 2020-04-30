@@ -43,13 +43,13 @@ class Bundler @Inject constructor(
         // run simple transformers
         logger.info { "Transforming client" }
         for (transformer in transformers) {
-            logger.info { "Running transformer ${transformer.javaClass.simpleName} " }
+            logger.info { "Running transformer ${transformer.javaClass.simpleName}" }
             transformer.transform(classPath)
         }
 
         logger.info { "Transforming client_gl" }
         for (transformer in transformers) {
-            logger.info { "Running transformer ${transformer.javaClass.simpleName} " }
+            logger.info { "Running transformer ${transformer.javaClass.simpleName}" }
             transformer.transform(glClassPath)
         }
 
