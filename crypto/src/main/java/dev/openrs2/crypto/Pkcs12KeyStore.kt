@@ -21,11 +21,11 @@ import java.time.ZoneOffset
 import java.util.Date
 import java.util.jar.JarFile
 
-class Pkcs12KeyStore private constructor(privateKeyEntry: KeyStore.PrivateKeyEntry) {
+class Pkcs12KeyStore private constructor(privateKeyEntry: KeyStore.PrivateKeyEntry, signerName: String) {
     private val signer = JarSigner.Builder(privateKeyEntry)
         .signatureAlgorithm("SHA256withRSA")
         .digestAlgorithm("SHA-256")
-        .signerName(SIGNER_NAME)
+        .signerName(signerName)
         .build()
 
     fun signJar(input: Path, output: Path) {
@@ -45,19 +45,13 @@ class Pkcs12KeyStore private constructor(privateKeyEntry: KeyStore.PrivateKeyEnt
 
         private const val SERIAL_LENGTH = 128
 
-        // TODO(gpe): add support for overriding this
-        private const val SIGNER_NAME = "OpenRS2"
-        private val DNAME = X500NameBuilder()
-            .addRDN(BCStyle.CN, SIGNER_NAME)
-            .build()
-
         private val MAX_CLOCK_SKEW = Period.ofDays(1)
         private val VALIDITY_PERIOD = Period.ofYears(10)
 
         private val SHA256_WITH_RSA = AlgorithmIdentifier(PKCSObjectIdentifiers.sha256WithRSAEncryption)
         private val SHA256 = AlgorithmIdentifier(NISTObjectIdentifiers.id_sha256)
 
-        fun open(path: Path): Pkcs12KeyStore {
+        fun open(path: Path, signerName: String): Pkcs12KeyStore {
             val keyStore = KeyStore.getInstance("PKCS12")
             if (Files.exists(path)) {
                 Files.newInputStream(path).use { input ->
@@ -70,7 +64,7 @@ class Pkcs12KeyStore private constructor(privateKeyEntry: KeyStore.PrivateKeyEnt
             val privateKeyEntry = if (keyStore.containsAlias(ALIAS)) {
                 keyStore.getEntry(ALIAS, PASSWORD_PARAMETER) as KeyStore.PrivateKeyEntry
             } else {
-                val entry = createPrivateKeyEntry()
+                val entry = createPrivateKeyEntry(signerName)
                 keyStore.setEntry(ALIAS, entry, PASSWORD_PARAMETER)
 
                 Files.newOutputStream(path).use { output ->
@@ -80,11 +74,15 @@ class Pkcs12KeyStore private constructor(privateKeyEntry: KeyStore.PrivateKeyEnt
                 entry
             }
 
-            return Pkcs12KeyStore(privateKeyEntry)
+            return Pkcs12KeyStore(privateKeyEntry, signerName)
         }
 
-        private fun createPrivateKeyEntry(): KeyStore.PrivateKeyEntry {
+        private fun createPrivateKeyEntry(signerName: String): KeyStore.PrivateKeyEntry {
             val (public, private) = Rsa.generateKeyPair(Rsa.JAR_KEY_LENGTH)
+
+            val dname = X500NameBuilder()
+                .addRDN(BCStyle.CN, signerName)
+                .build()
 
             val serial = BigIntegers.createRandomBigInteger(SERIAL_LENGTH, secureRandom)
 
@@ -95,11 +93,11 @@ class Pkcs12KeyStore private constructor(privateKeyEntry: KeyStore.PrivateKeyEnt
             val signer = BcRSAContentSignerBuilder(SHA256_WITH_RSA, SHA256).build(private)
 
             val certificate = X509v3CertificateBuilder(
-                DNAME,
+                dname,
                 serial,
                 Date.from(start.toInstant()),
                 Date.from(end.toInstant()),
-                DNAME,
+                dname,
                 spki
             ).build(signer)
 

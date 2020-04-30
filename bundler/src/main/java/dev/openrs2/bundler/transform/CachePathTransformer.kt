@@ -4,13 +4,17 @@ import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
 import dev.openrs2.asm.transform.Transformer
+import dev.openrs2.conf.Config
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.LdcInsnNode
 import org.objectweb.asm.tree.MethodNode
+import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class CachePathTransformer : Transformer() {
+class CachePathTransformer @Inject constructor(
+    private val config: Config
+) : Transformer() {
     private var paths = 0
 
     override fun preTransform(classPath: ClassPath) {
@@ -25,11 +29,11 @@ class CachePathTransformer : Transformer() {
 
             when (insn.cst) {
                 ".jagex_cache_", ".file_store_" -> {
-                    insn.cst = ".openrs2_cache_"
+                    insn.cst = ".${config.internalOperator}_cache_"
                     paths++
                 }
                 "jagex_" -> {
-                    insn.cst = ".openrs2_"
+                    insn.cst = ".${config.internalOperator}_"
                     paths++
                 }
             }

@@ -5,6 +5,7 @@ import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
 import dev.openrs2.asm.transform.Transformer
 import dev.openrs2.bundler.transform.ResourceTransformer
+import dev.openrs2.conf.Config
 import dev.openrs2.crypto.Pkcs12KeyStore
 import java.nio.file.Path
 import java.util.jar.Attributes
@@ -15,8 +16,21 @@ import javax.inject.Singleton
 
 @Singleton
 class Bundler @Inject constructor(
-    @BundlerQualifier private val transformers: Set<@JvmSuppressWildcards Transformer>
+    @BundlerQualifier private val transformers: Set<@JvmSuppressWildcards Transformer>,
+    private val config: Config
 ) {
+    private val unsignedManifest = Manifest().apply {
+        mainAttributes[MANIFEST_VERSION] = "1.0"
+        mainAttributes[APPLICATION_NAME] = config.game
+        mainAttributes[PERMISSIONS] = "sandbox"
+    }
+
+    private val signedManifest = Manifest().apply {
+        mainAttributes[MANIFEST_VERSION] = "1.0"
+        mainAttributes[APPLICATION_NAME] = config.game
+        mainAttributes[PERMISSIONS] = "all-permissions"
+    }
+
     fun run(input: Path, output: Path, keyStorePath: Path) {
         // read input jars/packs
         logger.info { "Reading input jars" }
@@ -103,7 +117,7 @@ class Bundler @Inject constructor(
         // write unsigned client and loaders
         client.writeJar(classPath, output.resolve("runescape.jar"), unsignedManifest)
 
-        val keyStore = Pkcs12KeyStore.open(keyStorePath)
+        val keyStore = Pkcs12KeyStore.open(keyStorePath, config.game)
         loader.writeSignedJar(classPath, output.resolve("loader.jar"), keyStore, signedManifest)
         glLoader.writeSignedJar(glClassPath, output.resolve("loader_gl.jar"), keyStore, signedManifest)
     }
@@ -111,18 +125,7 @@ class Bundler @Inject constructor(
     companion object {
         private val logger = InlineLogger()
 
-        private val unsignedManifest = Manifest()
-        private val signedManifest: Manifest
         private val APPLICATION_NAME = Attributes.Name("Application-Name")
         private val PERMISSIONS = Attributes.Name("Permissions")
-
-        init {
-            unsignedManifest.mainAttributes[MANIFEST_VERSION] = "1.0"
-            unsignedManifest.mainAttributes[APPLICATION_NAME] = "OpenRS2"
-            unsignedManifest.mainAttributes[PERMISSIONS] = "sandbox"
-
-            signedManifest = Manifest(unsignedManifest)
-            signedManifest.mainAttributes[PERMISSIONS] = "all-permissions"
-        }
     }
 }

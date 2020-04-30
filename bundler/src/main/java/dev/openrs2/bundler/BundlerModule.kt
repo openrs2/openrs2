@@ -12,10 +12,12 @@ import dev.openrs2.bundler.transform.PlatformDetectionTransformer
 import dev.openrs2.bundler.transform.PublicKeyTransformer
 import dev.openrs2.bundler.transform.RightClickTransformer
 import dev.openrs2.bundler.transform.TypoTransformer
+import dev.openrs2.conf.ConfigModule
 import dev.openrs2.crypto.CryptoModule
 
 object BundlerModule : AbstractModule() {
     override fun configure() {
+        install(ConfigModule)
         install(CryptoModule)
 
         val binder = Multibinder.newSetBinder(binder(), Transformer::class.java, BundlerQualifier::class.java)
