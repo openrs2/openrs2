@@ -20,7 +20,9 @@ import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.VarInsnNode
 import org.objectweb.asm.tree.analysis.Analyzer
+import javax.inject.Singleton
 
+@Singleton
 class UnusedArgTransformer : Transformer() {
     private val retainedArgs = mutableSetOf<ArgRef>()
     private lateinit var inheritedMethodSets: DisjointSet<MemberRef>

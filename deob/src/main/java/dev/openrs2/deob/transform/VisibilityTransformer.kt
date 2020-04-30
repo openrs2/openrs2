@@ -16,7 +16,9 @@ import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.FieldInsnNode
 import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.MethodNode
+import javax.inject.Singleton
 
+@Singleton
 class VisibilityTransformer : Transformer() {
     private lateinit var inheritedFieldSets: DisjointSet<MemberRef>
     private lateinit var inheritedMethodSets: DisjointSet<MemberRef>

@@ -10,7 +10,9 @@ import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.JumpInsnNode
 import org.objectweb.asm.tree.MethodNode
+import javax.inject.Singleton
 
+@Singleton
 class RedundantGotoTransformer : Transformer() {
     private var removed = 0
 

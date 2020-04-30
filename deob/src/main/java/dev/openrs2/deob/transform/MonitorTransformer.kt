@@ -15,6 +15,7 @@ import org.objectweb.asm.tree.InsnNode
 import org.objectweb.asm.tree.JumpInsnNode
 import org.objectweb.asm.tree.LabelNode
 import org.objectweb.asm.tree.MethodNode
+import javax.inject.Singleton
 
 /**
  * A [Transformer] that rewrites `synchronized` blocks produced by older
@@ -41,6 +42,7 @@ import org.objectweb.asm.tree.MethodNode
  * handler pointing to the same `MONITOREXIT` sequence. Adding this isn't
  * necessary for Fernflower compatibility.
  */
+@Singleton
 class MonitorTransformer : Transformer() {
     private var subroutinesInlined = 0
     private var tryRangesExtended = 0

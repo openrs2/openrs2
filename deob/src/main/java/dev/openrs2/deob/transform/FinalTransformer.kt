@@ -9,7 +9,9 @@ import dev.openrs2.util.collect.DisjointSet
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.MethodNode
+import javax.inject.Singleton
 
+@Singleton
 class FinalTransformer : Transformer() {
     private val superClasses = mutableListOf<String>()
     private lateinit var inheritedMethodSets: DisjointSet<MemberRef>

@@ -8,7 +8,7 @@ import org.objectweb.asm.tree.FieldNode
 import org.objectweb.asm.tree.MethodNode
 
 abstract class Transformer {
-    fun transform(classPath: ClassPath) {
+    open fun transform(classPath: ClassPath) {
         preTransform(classPath)
 
         var changed: Boolean

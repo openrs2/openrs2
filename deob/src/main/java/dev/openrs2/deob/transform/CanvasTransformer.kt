@@ -5,7 +5,9 @@ import dev.openrs2.asm.classpath.Library
 import dev.openrs2.asm.transform.Transformer
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
+import javax.inject.Singleton
 
+@Singleton
 class CanvasTransformer : Transformer() {
     override fun transformClass(
         classPath: ClassPath,

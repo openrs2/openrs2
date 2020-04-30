@@ -8,7 +8,9 @@ import dev.openrs2.asm.transform.Transformer
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.LdcInsnNode
 import org.objectweb.asm.tree.MethodNode
+import javax.inject.Singleton
 
+@Singleton
 class LoadLibraryTransformer : Transformer() {
     private var jnilibs = 0
     private var amd64Checks = 0

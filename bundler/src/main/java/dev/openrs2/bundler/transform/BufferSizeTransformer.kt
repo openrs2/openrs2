@@ -12,7 +12,9 @@ import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.FieldInsnNode
 import org.objectweb.asm.tree.LdcInsnNode
 import org.objectweb.asm.tree.MethodNode
+import javax.inject.Singleton
 
+@Singleton
 class BufferSizeTransformer : Transformer() {
     private var buffer: MemberRef? = null
     private var buffersResized = 0

@@ -43,7 +43,9 @@ import org.objectweb.asm.tree.JumpInsnNode
 import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.analysis.Analyzer
+import javax.inject.Singleton
 
+@Singleton
 class ConstantArgTransformer : Transformer() {
     private val pendingMethods = LinkedHashSet<MemberRef>()
     private val arglessMethods = mutableSetOf<DisjointSet.Partition<MemberRef>>()

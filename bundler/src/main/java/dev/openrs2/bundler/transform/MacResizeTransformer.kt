@@ -12,7 +12,9 @@ import org.objectweb.asm.tree.JumpInsnNode
 import org.objectweb.asm.tree.LdcInsnNode
 import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.MethodNode
+import javax.inject.Singleton
 
+@Singleton
 class MacResizeTransformer : Transformer() {
     private var branchesRemoved = 0
 

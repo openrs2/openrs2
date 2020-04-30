@@ -8,6 +8,7 @@ import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.MethodNode
+import javax.inject.Singleton
 
 /**
  * A [Transformer] that replaces `INVOKESPECIAL` instructions in static methods
@@ -47,6 +48,7 @@ import org.objectweb.asm.tree.MethodNode
  * instructions where possible, allowing the [StaticScramblingTransformer] to
  * produce verifiable output.
  */
+@Singleton
 class InvokeSpecialTransformer : Transformer() {
     private var invokeSpecialsReplaced = 0
 

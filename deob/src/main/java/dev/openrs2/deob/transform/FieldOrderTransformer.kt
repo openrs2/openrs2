@@ -8,7 +8,9 @@ import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.FieldInsnNode
 import org.objectweb.asm.tree.FieldNode
+import javax.inject.Singleton
 
+@Singleton
 class FieldOrderTransformer : Transformer() {
     override fun transformClass(classPath: ClassPath, library: Library, clazz: ClassNode): Boolean {
         sortFields(clazz, CONSTRUCTOR, Opcodes.PUTFIELD)

@@ -16,7 +16,9 @@ import org.objectweb.asm.tree.LdcInsnNode
 import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.VarInsnNode
+import javax.inject.Singleton
 
+@Singleton
 class ResetTransformer : Transformer() {
     private val resetMethods = mutableSetOf<MemberRef>()
 

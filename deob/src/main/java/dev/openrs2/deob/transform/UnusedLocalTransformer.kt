@@ -12,7 +12,9 @@ import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.VarInsnNode
+import javax.inject.Singleton
 
+@Singleton
 class UnusedLocalTransformer : Transformer() {
     private var localsRemoved = 0
 

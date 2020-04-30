@@ -6,7 +6,9 @@ import dev.openrs2.asm.classpath.Library
 import dev.openrs2.asm.transform.Transformer
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.MethodNode
+import javax.inject.Singleton
 
+@Singleton
 class OriginalPcSaveTransformer : Transformer() {
     override fun transformCode(classPath: ClassPath, library: Library, clazz: ClassNode, method: MethodNode): Boolean {
         for ((pc, insn) in method.instructions.filter { it.opcode != -1 }.withIndex()) {

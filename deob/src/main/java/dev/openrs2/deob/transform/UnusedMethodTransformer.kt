@@ -14,7 +14,9 @@ import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.MethodNode
+import javax.inject.Singleton
 
+@Singleton
 class UnusedMethodTransformer : Transformer() {
     private lateinit var inheritedMethodSets: DisjointSet<MemberRef>
     private val methodReferences = HashMultimap.create<DisjointSet.Partition<MemberRef>, MemberRef>()

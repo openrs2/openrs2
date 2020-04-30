@@ -5,42 +5,19 @@ import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
 import dev.openrs2.asm.classpath.Library.Companion.readJar
 import dev.openrs2.asm.classpath.Library.Companion.readPack
-import dev.openrs2.bundler.Bundler
-import dev.openrs2.bundler.transform.ResourceTransformer
+import dev.openrs2.asm.transform.Transformer
 import dev.openrs2.deob.SignedClassUtils.move
 import dev.openrs2.deob.remap.PrefixRemapper.create
-import dev.openrs2.deob.transform.BitShiftTransformer
-import dev.openrs2.deob.transform.BitwiseOpTransformer
-import dev.openrs2.deob.transform.CanvasTransformer
-import dev.openrs2.deob.transform.ClassLiteralTransformer
-import dev.openrs2.deob.transform.ConstantArgTransformer
-import dev.openrs2.deob.transform.CounterTransformer
-import dev.openrs2.deob.transform.EmptyClassTransformer
-import dev.openrs2.deob.transform.ExceptionTracingTransformer
-import dev.openrs2.deob.transform.FernflowerExceptionTransformer
-import dev.openrs2.deob.transform.FieldOrderTransformer
-import dev.openrs2.deob.transform.FinalTransformer
-import dev.openrs2.deob.transform.InvokeSpecialTransformer
-import dev.openrs2.deob.transform.MethodOrderTransformer
-import dev.openrs2.deob.transform.MonitorTransformer
-import dev.openrs2.deob.transform.OpaquePredicateTransformer
-import dev.openrs2.deob.transform.OriginalNameTransformer
-import dev.openrs2.deob.transform.OriginalPcRestoreTransformer
-import dev.openrs2.deob.transform.OriginalPcSaveTransformer
-import dev.openrs2.deob.transform.OverrideTransformer
-import dev.openrs2.deob.transform.RedundantGotoTransformer
-import dev.openrs2.deob.transform.RemapTransformer
-import dev.openrs2.deob.transform.ResetTransformer
-import dev.openrs2.deob.transform.StaticScramblingTransformer
-import dev.openrs2.deob.transform.UnusedArgTransformer
-import dev.openrs2.deob.transform.UnusedLocalTransformer
-import dev.openrs2.deob.transform.UnusedMethodTransformer
-import dev.openrs2.deob.transform.VisibilityTransformer
 import java.nio.file.Files
 import java.nio.file.Path
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class Deobfuscator(private val input: Path, private val output: Path) {
-    fun run() {
+@Singleton
+class Deobfuscator @Inject constructor(
+    @DeobfuscatorQualifier private val transformers: Set<@JvmSuppressWildcards Transformer>
+) {
+    fun run(input: Path, output: Path) {
         // read input jars/packs
         logger.info { "Reading input jars" }
         val unpackClass = readJar(input.resolve("unpackclass.pack"))
@@ -102,19 +79,19 @@ class Deobfuscator(private val input: Path, private val output: Path) {
 
         // deobfuscate
         logger.info { "Transforming client" }
-        for (transformer in TRANSFORMERS) {
+        for (transformer in transformers) {
             logger.info { "Running transformer ${transformer.javaClass.simpleName} " }
             transformer.transform(classPath)
         }
 
         logger.info { "Transforming client_gl" }
-        for (transformer in TRANSFORMERS) {
+        for (transformer in transformers) {
             logger.info { "Running transformer ${transformer.javaClass.simpleName} " }
             transformer.transform(glClassPath)
         }
 
         logger.info { "Transforming client_unsigned" }
-        for (transformer in TRANSFORMERS) {
+        for (transformer in transformers) {
             logger.info { "Running transformer ${transformer.javaClass.simpleName} " }
             transformer.transform(unsignedClassPath)
         }
@@ -142,36 +119,5 @@ class Deobfuscator(private val input: Path, private val output: Path) {
 
     companion object {
         private val logger = InlineLogger()
-        private val TRANSFORMERS = listOf(
-            OriginalPcSaveTransformer(),
-            OriginalNameTransformer(),
-            *Bundler.TRANSFORMERS.toTypedArray(),
-            ResourceTransformer(),
-            OpaquePredicateTransformer(),
-            ExceptionTracingTransformer(),
-            MonitorTransformer(),
-            BitShiftTransformer(),
-            CanvasTransformer(),
-            FieldOrderTransformer(),
-            BitwiseOpTransformer(),
-            RemapTransformer(),
-            ConstantArgTransformer(),
-            UnusedLocalTransformer(),
-            UnusedMethodTransformer(),
-            UnusedArgTransformer(),
-            CounterTransformer(),
-            ResetTransformer(),
-            ClassLiteralTransformer(),
-            InvokeSpecialTransformer(),
-            StaticScramblingTransformer(),
-            EmptyClassTransformer(),
-            MethodOrderTransformer(),
-            VisibilityTransformer(),
-            FinalTransformer(),
-            OverrideTransformer(),
-            RedundantGotoTransformer(),
-            OriginalPcRestoreTransformer(),
-            FernflowerExceptionTransformer()
-        )
     }
 }

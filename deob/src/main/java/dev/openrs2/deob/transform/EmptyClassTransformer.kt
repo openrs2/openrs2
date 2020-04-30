@@ -11,7 +11,9 @@ import org.objectweb.asm.tree.FieldNode
 import org.objectweb.asm.tree.LdcInsnNode
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.TypeInsnNode
+import javax.inject.Singleton
 
+@Singleton
 class EmptyClassTransformer : Transformer() {
     private var removedClasses = 0
     private val emptyClasses = mutableSetOf<String>()

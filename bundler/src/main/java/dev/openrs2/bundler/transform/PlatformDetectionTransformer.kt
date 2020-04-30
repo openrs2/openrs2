@@ -19,7 +19,9 @@ import org.objectweb.asm.tree.LdcInsnNode
 import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.VarInsnNode
+import javax.inject.Singleton
 
+@Singleton
 class PlatformDetectionTransformer : Transformer() {
     private var glBlocks = 0
     private var miscBlocks = 0

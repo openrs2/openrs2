@@ -7,7 +7,9 @@ import dev.openrs2.asm.transform.Transformer
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.LdcInsnNode
 import org.objectweb.asm.tree.MethodNode
+import javax.inject.Singleton
 
+@Singleton
 class TypoTransformer : Transformer() {
     private var errorsFixed = 0
 

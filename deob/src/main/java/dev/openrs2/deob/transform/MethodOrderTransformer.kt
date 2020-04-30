@@ -6,7 +6,9 @@ import dev.openrs2.asm.transform.Transformer
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.MethodNode
+import javax.inject.Singleton
 
+@Singleton
 class MethodOrderTransformer : Transformer() {
     override fun transformClass(classPath: ClassPath, library: Library, clazz: ClassNode): Boolean {
         clazz.methods.sortWith(STATIC_COMPARATOR.then(INIT_COMPARATOR))

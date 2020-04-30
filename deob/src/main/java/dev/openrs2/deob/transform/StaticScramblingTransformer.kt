@@ -18,8 +18,10 @@ import org.objectweb.asm.tree.JumpInsnNode
 import org.objectweb.asm.tree.LabelNode
 import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.MethodNode
+import javax.inject.Singleton
 import kotlin.math.max
 
+@Singleton
 class StaticScramblingTransformer : Transformer() {
     private class FieldSet(val owner: ClassNode, val fields: List<FieldNode>, val clinit: MethodNode?) {
         val dependencies = clinit?.instructions

@@ -8,6 +8,7 @@ import dev.openrs2.asm.nextReal
 import dev.openrs2.asm.transform.Transformer
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.MethodNode
+import javax.inject.Singleton
 
 /**
  * A [Transformer] responsible for removing two kinds of redundant exception
@@ -27,6 +28,7 @@ import org.objectweb.asm.tree.MethodNode
  *   and not obfuscation, it is clearly automatically-generated and thus we
  *   remove these exception handlers too.
  */
+@Singleton
 class ExceptionTracingTransformer : Transformer() {
     private var tracingTryCatches = 0
 

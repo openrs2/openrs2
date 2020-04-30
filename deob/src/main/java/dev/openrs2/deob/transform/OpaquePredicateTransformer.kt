@@ -14,7 +14,9 @@ import org.objectweb.asm.tree.FieldInsnNode
 import org.objectweb.asm.tree.JumpInsnNode
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.VarInsnNode
+import javax.inject.Singleton
 
+@Singleton
 class OpaquePredicateTransformer : Transformer() {
     private val flowObstructors = mutableSetOf<MemberRef>()
     private var opaquePredicates = 0

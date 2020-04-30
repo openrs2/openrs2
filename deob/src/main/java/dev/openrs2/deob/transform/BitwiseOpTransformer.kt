@@ -13,7 +13,9 @@ import org.objectweb.asm.tree.InsnNode
 import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.VarInsnNode
+import javax.inject.Singleton
 
+@Singleton
 class BitwiseOpTransformer : Transformer() {
     private val methodOps = mutableMapOf<MemberRef, Int>()
     private var inlinedOps = 0

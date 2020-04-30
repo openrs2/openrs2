@@ -11,6 +11,7 @@ application {
 dependencies {
     api(project(":asm"))
     api("com.github.ajalt:clikt:${Versions.clikt}")
+    api("com.google.inject:guice:${Versions.guice}")
 
     implementation(project(":crypto"))
     implementation("dev.openrs2:openrs2-natives-all:${Versions.openrs2Natives}")

@@ -11,7 +11,9 @@ import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.InsnNode
 import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.MethodNode
+import javax.inject.Singleton
 
+@Singleton
 class HostCheckTransformer : Transformer() {
     private var hostChecks = 0
 

@@ -9,7 +9,9 @@ import dev.openrs2.deob.OriginalPcTable
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.LabelNode
 import org.objectweb.asm.tree.MethodNode
+import javax.inject.Singleton
 
+@Singleton
 class OriginalPcRestoreTransformer : Transformer() {
     private var originalPcsRestored = 0
 

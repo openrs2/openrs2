@@ -3,16 +3,8 @@ package dev.openrs2.bundler
 import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
-import dev.openrs2.bundler.transform.BufferSizeTransformer
-import dev.openrs2.bundler.transform.CachePathTransformer
-import dev.openrs2.bundler.transform.HostCheckTransformer
-import dev.openrs2.bundler.transform.LoadLibraryTransformer
-import dev.openrs2.bundler.transform.MacResizeTransformer
-import dev.openrs2.bundler.transform.PlatformDetectionTransformer
-import dev.openrs2.bundler.transform.PublicKeyTransformer
+import dev.openrs2.asm.transform.Transformer
 import dev.openrs2.bundler.transform.ResourceTransformer
-import dev.openrs2.bundler.transform.RightClickTransformer
-import dev.openrs2.bundler.transform.TypoTransformer
 import dev.openrs2.crypto.Pkcs12KeyStore
 import java.nio.file.Path
 import java.util.jar.Attributes
@@ -22,9 +14,9 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class Bundler @Inject constructor(publicKeyTransformer: PublicKeyTransformer) {
-    private val transformers = TRANSFORMERS + publicKeyTransformer
-
+class Bundler @Inject constructor(
+    @BundlerQualifier private val transformers: Set<@JvmSuppressWildcards Transformer>
+) {
     fun run(input: Path, output: Path, keyStorePath: Path) {
         // read input jars/packs
         logger.info { "Reading input jars" }
@@ -118,16 +110,6 @@ class Bundler @Inject constructor(publicKeyTransformer: PublicKeyTransformer) {
 
     companion object {
         private val logger = InlineLogger()
-        val TRANSFORMERS = listOf(
-            BufferSizeTransformer(),
-            CachePathTransformer(),
-            HostCheckTransformer(),
-            MacResizeTransformer(),
-            RightClickTransformer(),
-            LoadLibraryTransformer(),
-            PlatformDetectionTransformer(),
-            TypoTransformer()
-        )
 
         private val unsignedManifest = Manifest()
         private val signedManifest: Manifest

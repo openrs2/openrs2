@@ -10,7 +10,9 @@ import dev.openrs2.asm.transform.Transformer
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.FieldInsnNode
 import org.objectweb.asm.tree.MethodNode
+import javax.inject.Singleton
 
+@Singleton
 class CounterTransformer : Transformer() {
     private val counters = mutableSetOf<MemberRef>()
 
