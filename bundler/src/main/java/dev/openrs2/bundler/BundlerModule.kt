@@ -9,6 +9,7 @@ import dev.openrs2.bundler.transform.DomainTransformer
 import dev.openrs2.bundler.transform.HostCheckTransformer
 import dev.openrs2.bundler.transform.LoadLibraryTransformer
 import dev.openrs2.bundler.transform.MacResizeTransformer
+import dev.openrs2.bundler.transform.MemoryAllocationTransformer
 import dev.openrs2.bundler.transform.NameTransformer
 import dev.openrs2.bundler.transform.PlatformDetectionTransformer
 import dev.openrs2.bundler.transform.PublicKeyTransformer
@@ -29,6 +30,7 @@ object BundlerModule : AbstractModule() {
         binder.addBinding().to(DomainTransformer::class.java)
         binder.addBinding().to(LoadLibraryTransformer::class.java)
         binder.addBinding().to(MacResizeTransformer::class.java)
+        binder.addBinding().to(MemoryAllocationTransformer::class.java)
         binder.addBinding().to(NameTransformer::class.java)
         binder.addBinding().to(PlatformDetectionTransformer::class.java)
         binder.addBinding().to(PublicKeyTransformer::class.java)
