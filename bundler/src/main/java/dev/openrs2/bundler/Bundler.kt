@@ -4,8 +4,11 @@ import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
 import dev.openrs2.asm.io.JarLibraryReader
+import dev.openrs2.asm.io.JarLibraryWriter
+import dev.openrs2.asm.io.Js5LibraryWriter
 import dev.openrs2.asm.io.ManifestJarLibraryWriter
 import dev.openrs2.asm.io.Pack200LibraryReader
+import dev.openrs2.asm.io.Pack200LibraryWriter
 import dev.openrs2.asm.io.SignedJarLibraryWriter
 import dev.openrs2.asm.transform.Transformer
 import dev.openrs2.bundler.transform.ResourceTransformer
@@ -75,13 +78,27 @@ class Bundler @Inject constructor(
         // compress resources
         logger.info { "Compressing resources" }
 
-        val unpackerJar = Resource.compressJar("unpackclass.pack", "game_unpacker.dat", classPath, unpacker)
-        val clientPack = Resource.compressPack("runescape.pack200", "main_file_cache.dat0", classPath, client)
-        val clientJs5 = Resource.compressJs5("runescape.js5", "main_file_cache.dat1", classPath, client)
-        val glClientPack = Resource.compressPack("runescape_gl.pack200", "main_file_cache.dat3", glClassPath, glClient)
-        val glClientJs5 = Resource.compressJs5("runescape_gl.js5", "main_file_cache.dat4", glClassPath, glClient)
-        val glPack = Resource.compressPack("jaggl.pack200", "main_file_cache.dat5", glClassPath, gl)
-        val glJs5 = Resource.compressJs5("jaggl.js5", "main_file_cache.dat6", glClassPath, gl)
+        val unpackerJar = Resource.compressLibrary(
+            "unpackclass.pack", "game_unpacker.dat", classPath, unpacker, JarLibraryWriter()
+        )
+        val clientPack = Resource.compressLibrary(
+            "runescape.pack200", "main_file_cache.dat0", classPath, client, Pack200LibraryWriter()
+        )
+        val clientJs5 = Resource.compressLibrary(
+            "runescape.js5", "main_file_cache.dat1", classPath, client, Js5LibraryWriter()
+        )
+        val glClientPack = Resource.compressLibrary(
+            "runescape_gl.pack200", "main_file_cache.dat3", glClassPath, glClient, Pack200LibraryWriter()
+        )
+        val glClientJs5 = Resource.compressLibrary(
+            "runescape_gl.js5", "main_file_cache.dat4", glClassPath, glClient, Js5LibraryWriter()
+        )
+        val glPack = Resource.compressLibrary(
+            "jaggl.pack200", "main_file_cache.dat5", glClassPath, gl, Pack200LibraryWriter()
+        )
+        val glJs5 = Resource.compressLibrary(
+            "jaggl.js5", "main_file_cache.dat6", glClassPath, gl, Js5LibraryWriter()
+        )
 
         val glNatives = Resource.compressGlNatives()
         val miscNatives = Resource.compressMiscNatives()

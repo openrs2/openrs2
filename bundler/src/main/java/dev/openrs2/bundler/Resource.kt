@@ -3,9 +3,7 @@ package dev.openrs2.bundler
 import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
-import dev.openrs2.asm.io.JarLibraryWriter
-import dev.openrs2.asm.io.Js5LibraryWriter
-import dev.openrs2.asm.io.Pack200LibraryWriter
+import dev.openrs2.asm.io.LibraryWriter
 import java.io.ByteArrayOutputStream
 import java.nio.file.Files
 import java.nio.file.Path
@@ -68,23 +66,15 @@ class Resource(
             return Resource(source, destination, crc.value.toInt(), digest.digest(), uncompressed.size, content)
         }
 
-        fun compressJar(source: String, destination: String, classPath: ClassPath, library: Library): Resource {
+        fun compressLibrary(
+            source: String,
+            destination: String,
+            classPath: ClassPath,
+            library: Library,
+            writer: LibraryWriter
+        ): Resource {
             ByteArrayOutputStream().use { output ->
-                JarLibraryWriter().write(output, classPath, library)
-                return compress(source, destination, output.toByteArray())
-            }
-        }
-
-        fun compressPack(source: String, destination: String, classPath: ClassPath, library: Library): Resource {
-            ByteArrayOutputStream().use { output ->
-                Pack200LibraryWriter().write(output, classPath, library)
-                return compress(source, destination, output.toByteArray())
-            }
-        }
-
-        fun compressJs5(source: String, destination: String, classPath: ClassPath, library: Library): Resource {
-            ByteArrayOutputStream().use { output ->
-                Js5LibraryWriter().write(output, classPath, library)
+                writer.write(output, classPath, library)
                 return compress(source, destination, output.toByteArray())
             }
         }
