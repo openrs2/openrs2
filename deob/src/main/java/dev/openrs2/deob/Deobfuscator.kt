@@ -123,7 +123,7 @@ class Deobfuscator @Inject constructor(
         logger.info { "Reading jar $path" }
 
         return Files.newInputStream(path).use { input ->
-            JarLibraryReader().read(input)
+            JarLibraryReader.read(input)
         }
     }
 
@@ -131,7 +131,7 @@ class Deobfuscator @Inject constructor(
         logger.info { "Reading pack $path" }
 
         return Files.newInputStream(path).use { input ->
-            Pack200LibraryReader().read(input)
+            Pack200LibraryReader.read(input)
         }
     }
 
@@ -139,7 +139,7 @@ class Deobfuscator @Inject constructor(
         logger.info { "Writing jar $path" }
 
         Files.newOutputStream(path).use { output ->
-            JarLibraryWriter().write(output, classPath, library)
+            JarLibraryWriter.write(output, classPath, library)
         }
     }
 

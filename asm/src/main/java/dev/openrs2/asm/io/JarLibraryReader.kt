@@ -8,7 +8,9 @@ import org.objectweb.asm.tree.ClassNode
 import java.io.InputStream
 import java.util.jar.JarInputStream
 
-class JarLibraryReader : LibraryReader {
+object JarLibraryReader : LibraryReader {
+    private const val CLASS_SUFFIX = ".class"
+
     override fun read(input: InputStream): Library {
         val library = Library()
 
@@ -27,9 +29,5 @@ class JarLibraryReader : LibraryReader {
         }
 
         return library
-    }
-
-    private companion object {
-        private const val CLASS_SUFFIX = ".class"
     }
 }

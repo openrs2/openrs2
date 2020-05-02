@@ -8,7 +8,7 @@ import java.io.InputStream
 import java.util.jar.JarOutputStream
 import java.util.jar.Pack200
 
-class Pack200LibraryReader : LibraryReader {
+object Pack200LibraryReader : LibraryReader {
     override fun read(input: InputStream): Library {
         ByteArrayOutputStream().use { tempOutput ->
             Gzip.createHeaderlessInputStream(input).use { gzipInput ->
@@ -18,7 +18,7 @@ class Pack200LibraryReader : LibraryReader {
             }
 
             return ByteArrayInputStream(tempOutput.toByteArray()).use { tempInput ->
-                JarLibraryReader().read(tempInput)
+                JarLibraryReader.read(tempInput)
             }
         }
     }

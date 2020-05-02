@@ -79,25 +79,25 @@ class Bundler @Inject constructor(
         logger.info { "Compressing resources" }
 
         val unpackerJar = Resource.compressLibrary(
-            "unpackclass.pack", "game_unpacker.dat", classPath, unpacker, JarLibraryWriter()
+            "unpackclass.pack", "game_unpacker.dat", classPath, unpacker, JarLibraryWriter
         )
         val clientPack = Resource.compressLibrary(
-            "runescape.pack200", "main_file_cache.dat0", classPath, client, Pack200LibraryWriter()
+            "runescape.pack200", "main_file_cache.dat0", classPath, client, Pack200LibraryWriter
         )
         val clientJs5 = Resource.compressLibrary(
-            "runescape.js5", "main_file_cache.dat1", classPath, client, Js5LibraryWriter()
+            "runescape.js5", "main_file_cache.dat1", classPath, client, Js5LibraryWriter
         )
         val glClientPack = Resource.compressLibrary(
-            "runescape_gl.pack200", "main_file_cache.dat3", glClassPath, glClient, Pack200LibraryWriter()
+            "runescape_gl.pack200", "main_file_cache.dat3", glClassPath, glClient, Pack200LibraryWriter
         )
         val glClientJs5 = Resource.compressLibrary(
-            "runescape_gl.js5", "main_file_cache.dat4", glClassPath, glClient, Js5LibraryWriter()
+            "runescape_gl.js5", "main_file_cache.dat4", glClassPath, glClient, Js5LibraryWriter
         )
         val glPack = Resource.compressLibrary(
-            "jaggl.pack200", "main_file_cache.dat5", glClassPath, gl, Pack200LibraryWriter()
+            "jaggl.pack200", "main_file_cache.dat5", glClassPath, gl, Pack200LibraryWriter
         )
         val glJs5 = Resource.compressLibrary(
-            "jaggl.js5", "main_file_cache.dat6", glClassPath, gl, Js5LibraryWriter()
+            "jaggl.js5", "main_file_cache.dat6", glClassPath, gl, Js5LibraryWriter
         )
 
         val glNatives = Resource.compressGlNatives()
@@ -150,7 +150,7 @@ class Bundler @Inject constructor(
         logger.info { "Reading jar $path" }
 
         return Files.newInputStream(path).use { input ->
-            JarLibraryReader().read(input)
+            JarLibraryReader.read(input)
         }
     }
 
@@ -158,7 +158,7 @@ class Bundler @Inject constructor(
         logger.info { "Reading pack $path" }
 
         return Files.newInputStream(path).use { input ->
-            Pack200LibraryReader().read(input)
+            Pack200LibraryReader.read(input)
         }
     }
 

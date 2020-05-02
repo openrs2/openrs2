@@ -9,10 +9,10 @@ import java.io.OutputStream
 import java.util.jar.JarInputStream
 import java.util.jar.Pack200
 
-class Pack200LibraryWriter : LibraryWriter {
+object Pack200LibraryWriter : LibraryWriter {
     override fun write(output: OutputStream, classPath: ClassPath, library: Library) {
         ByteArrayOutputStream().use { tempOutput ->
-            JarLibraryWriter().write(tempOutput, classPath, library)
+            JarLibraryWriter.write(tempOutput, classPath, library)
 
             return JarInputStream(ByteArrayInputStream(tempOutput.toByteArray())).use { jarInput ->
                 Gzip.createHeaderlessOutputStream(output).use { gzipOutput ->
