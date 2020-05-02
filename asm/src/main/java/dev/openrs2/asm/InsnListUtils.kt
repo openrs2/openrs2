@@ -26,7 +26,7 @@ fun getExpression(
         }
 
         insn = insn.previous
-    } while (insn != null && insn.sequential && filter(insn))
+    } while (insn != null && insn.isSequential && filter(insn))
 
     return null
 }

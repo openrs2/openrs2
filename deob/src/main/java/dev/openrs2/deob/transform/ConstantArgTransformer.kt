@@ -9,8 +9,8 @@ import dev.openrs2.asm.createIntConstant
 import dev.openrs2.asm.deleteExpression
 import dev.openrs2.asm.hasCode
 import dev.openrs2.asm.intConstant
+import dev.openrs2.asm.isPure
 import dev.openrs2.asm.nextReal
-import dev.openrs2.asm.pure
 import dev.openrs2.asm.replaceExpression
 import dev.openrs2.asm.stackMetadata
 import dev.openrs2.asm.transform.Transformer
@@ -230,13 +230,13 @@ class ConstantArgTransformer : Transformer() {
 
         for (insn in alwaysTakenBranches) {
             val replacement = JumpInsnNode(GOTO, insn.label)
-            if (method.instructions.replaceExpression(insn, replacement, AbstractInsnNode::pure)) {
+            if (method.instructions.replaceExpression(insn, replacement, AbstractInsnNode::isPure)) {
                 simplified++
             }
         }
 
         for (insn in neverTakenBranches) {
-            if (method.instructions.deleteExpression(insn, AbstractInsnNode::pure)) {
+            if (method.instructions.deleteExpression(insn, AbstractInsnNode::isPure)) {
                 simplified++
             }
         }
@@ -259,7 +259,7 @@ class ConstantArgTransformer : Transformer() {
             if (insn.intConstant != null) {
                 // already constant
                 continue
-            } else if (!insn.pure) {
+            } else if (!insn.isPure) {
                 // can't replace instructions with a side effect
                 continue
             } else if (insn.stackMetadata.pushes != 1) {
@@ -287,7 +287,7 @@ class ConstantArgTransformer : Transformer() {
             }
 
             val replacement = createIntConstant(value)
-            if (method.instructions.replaceExpression(insn, replacement, AbstractInsnNode::pure)) {
+            if (method.instructions.replaceExpression(insn, replacement, AbstractInsnNode::isPure)) {
                 inlined++
             }
         }

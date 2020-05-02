@@ -4,7 +4,7 @@ import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
 import dev.openrs2.asm.deleteExpression
-import dev.openrs2.asm.pure
+import dev.openrs2.asm.isPure
 import dev.openrs2.asm.transform.Transformer
 import dev.openrs2.deob.analysis.LiveVariableAnalyzer
 import org.objectweb.asm.Opcodes
@@ -42,7 +42,7 @@ class UnusedLocalTransformer : Transformer() {
         }
 
         for (insn in deadStores) {
-            if (method.instructions.deleteExpression(insn, AbstractInsnNode::pure)) {
+            if (method.instructions.deleteExpression(insn, AbstractInsnNode::isPure)) {
                 localsRemoved++
             }
         }

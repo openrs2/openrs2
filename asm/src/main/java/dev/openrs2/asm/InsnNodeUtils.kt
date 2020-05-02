@@ -265,7 +265,7 @@ val AbstractInsnNode.intConstant: Int?
         }
     }
 
-val AbstractInsnNode.sequential: Boolean
+val AbstractInsnNode.isSequential: Boolean
     get() = when (this) {
         is LabelNode -> false
         is JumpInsnNode -> false
@@ -274,7 +274,7 @@ val AbstractInsnNode.sequential: Boolean
         else -> opcode !in THROW_RETURN_OPCODES
     }
 
-val AbstractInsnNode.pure: Boolean
+val AbstractInsnNode.isPure: Boolean
     get() = when (opcode) {
         in PURE_OPCODES -> true
         in IMPURE_OPCODES -> false

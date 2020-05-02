@@ -87,10 +87,10 @@ allprojects {
     }
 }
 
-val Project.free: Boolean
+val Project.isFree: Boolean
     get() = name != "nonfree" && parent?.name != "nonfree"
 
-configure(subprojects.filter { it.free }) {
+configure(subprojects.filter { it.isFree }) {
     apply(plugin = "jacoco")
 
     plugins.withType<KotlinPluginWrapper> {
@@ -215,7 +215,7 @@ tasks.dokka {
     outputDirectory = "${project.buildDir}/kdoc"
     outputFormat = "html"
 
-    subProjects = subprojects.filter { it.free && it.name != "deob-annotations" }.map { it.name }
+    subProjects = subprojects.filter { it.isFree && it.name != "deob-annotations" }.map { it.name }
 
     configuration {
         includeNonPublic = true
