@@ -24,7 +24,9 @@ dependencies {
 }
 
 tasks.shadowJar {
-    minimize()
+    minimize {
+        exclude(dependency("org.jetbrains.kotlin:kotlin-reflect"))
+    }
 }
 
 licenseReport {

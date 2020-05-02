@@ -101,6 +101,7 @@ configure(subprojects.filter { it.free }) {
             api(kotlin("stdlib-jdk8"))
 
             val implementation by configurations
+            implementation(kotlin("reflect"))
             implementation("com.michael-bull.kotlin-inline-logger:kotlin-inline-logger:${Versions.inlineLogger}")
 
             val testImplementation by configurations
