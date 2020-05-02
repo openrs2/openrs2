@@ -5,8 +5,8 @@ import dev.openrs2.asm.InsnMatcher
 import dev.openrs2.asm.MemberRef
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
-import dev.openrs2.asm.createIntConstant
 import dev.openrs2.asm.intConstant
+import dev.openrs2.asm.toAbstractInsnNode
 import dev.openrs2.asm.transform.Transformer
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.AbstractInsnNode
@@ -93,12 +93,12 @@ class PlatformDetectionTransformer : Transformer() {
                 list.add(JumpInsnNode(Opcodes.IFEQ, i386))
 
                 list.add(amd64)
-                list.add(createIntConstant(index * 2 + 1))
+                list.add((index * 2 + 1).toAbstractInsnNode())
                 list.add(VarInsnNode(Opcodes.ISTORE, platformVar))
                 list.add(JumpInsnNode(Opcodes.GOTO, end))
 
                 list.add(i386)
-                list.add(createIntConstant(index * 2))
+                list.add((index * 2).toAbstractInsnNode())
                 list.add(VarInsnNode(Opcodes.ISTORE, platformVar))
                 list.add(JumpInsnNode(Opcodes.GOTO, end))
 

@@ -4,8 +4,8 @@ import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.InsnMatcher
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
-import dev.openrs2.asm.createIntConstant
 import dev.openrs2.asm.intConstant
+import dev.openrs2.asm.toAbstractInsnNode
 import dev.openrs2.asm.transform.Transformer
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
@@ -36,7 +36,7 @@ class BitShiftTransformer : Transformer() {
             val simplifiedBits = bits and mask
 
             if (bits != simplifiedBits) {
-                method.instructions[push] = createIntConstant(simplifiedBits)
+                method.instructions[push] = simplifiedBits.toAbstractInsnNode()
                 simplified++
             }
         }

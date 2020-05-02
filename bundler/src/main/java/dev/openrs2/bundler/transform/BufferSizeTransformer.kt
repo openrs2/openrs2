@@ -5,8 +5,8 @@ import dev.openrs2.asm.InsnMatcher
 import dev.openrs2.asm.MemberRef
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
-import dev.openrs2.asm.createIntConstant
 import dev.openrs2.asm.hasCode
+import dev.openrs2.asm.toAbstractInsnNode
 import dev.openrs2.asm.transform.Transformer
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.FieldInsnNode
@@ -46,7 +46,7 @@ class BufferSizeTransformer : Transformer() {
         for (match in NEW_BUFFER_MATCHER.match(method)) {
             val putstatic = match[4] as FieldInsnNode
             if (MemberRef(putstatic) == buffer!!) {
-                method.instructions[match[2]] = createIntConstant(65536)
+                method.instructions[match[2]] = 65536.toAbstractInsnNode()
                 buffersResized++
             }
         }

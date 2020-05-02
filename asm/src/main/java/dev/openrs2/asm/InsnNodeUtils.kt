@@ -281,7 +281,7 @@ val AbstractInsnNode.isPure: Boolean
         else -> throw IllegalArgumentException()
     }
 
-fun createIntConstant(value: Int): AbstractInsnNode = when (value) {
+fun Int.toAbstractInsnNode(): AbstractInsnNode = when (this) {
     -1 -> InsnNode(Opcodes.ICONST_M1)
     0 -> InsnNode(Opcodes.ICONST_0)
     1 -> InsnNode(Opcodes.ICONST_1)
@@ -289,9 +289,9 @@ fun createIntConstant(value: Int): AbstractInsnNode = when (value) {
     3 -> InsnNode(Opcodes.ICONST_3)
     4 -> InsnNode(Opcodes.ICONST_4)
     5 -> InsnNode(Opcodes.ICONST_5)
-    in Byte.MIN_VALUE..Byte.MAX_VALUE -> IntInsnNode(Opcodes.BIPUSH, value)
-    in Short.MIN_VALUE..Short.MAX_VALUE -> IntInsnNode(Opcodes.SIPUSH, value)
-    else -> LdcInsnNode(value)
+    in Byte.MIN_VALUE..Byte.MAX_VALUE -> IntInsnNode(Opcodes.BIPUSH, this)
+    in Short.MIN_VALUE..Short.MAX_VALUE -> IntInsnNode(Opcodes.SIPUSH, this)
+    else -> LdcInsnNode(this)
 }
 
 fun AbstractInsnNode.toPrettyString(): String {

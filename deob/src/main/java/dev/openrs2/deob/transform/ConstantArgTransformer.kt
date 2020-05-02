@@ -5,7 +5,6 @@ import dev.openrs2.asm.MemberRef
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
 import dev.openrs2.asm.copy
-import dev.openrs2.asm.createIntConstant
 import dev.openrs2.asm.deleteExpression
 import dev.openrs2.asm.hasCode
 import dev.openrs2.asm.intConstant
@@ -13,6 +12,7 @@ import dev.openrs2.asm.isPure
 import dev.openrs2.asm.nextReal
 import dev.openrs2.asm.replaceExpression
 import dev.openrs2.asm.stackMetadata
+import dev.openrs2.asm.toAbstractInsnNode
 import dev.openrs2.asm.transform.Transformer
 import dev.openrs2.deob.ArgRef
 import dev.openrs2.deob.analysis.IntBranch
@@ -286,7 +286,7 @@ class ConstantArgTransformer : Transformer() {
                 continue
             }
 
-            val replacement = createIntConstant(value)
+            val replacement = value.toAbstractInsnNode()
             if (method.instructions.replaceExpression(insn, replacement, AbstractInsnNode::isPure)) {
                 inlined++
             }

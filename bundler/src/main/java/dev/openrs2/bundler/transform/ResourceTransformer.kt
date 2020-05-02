@@ -4,7 +4,7 @@ import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.InsnMatcher
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
-import dev.openrs2.asm.createIntConstant
+import dev.openrs2.asm.toAbstractInsnNode
 import dev.openrs2.asm.transform.Transformer
 import dev.openrs2.bundler.Resource
 import org.objectweb.asm.Opcodes
@@ -44,12 +44,12 @@ class ResourceTransformer(
                 source.cst = resource.sourceWithCrc
 
                 // update file sizes
-                method.instructions.set(match[22], createIntConstant(resource.uncompressedSize))
-                method.instructions.set(match[23], createIntConstant(resource.compressedSize))
+                method.instructions.set(match[22], resource.uncompressedSize.toAbstractInsnNode())
+                method.instructions.set(match[23], resource.compressedSize.toAbstractInsnNode())
 
                 // update digest
                 for ((j, byte) in resource.digest.withIndex()) {
-                    method.instructions.set(match[28 + 4 * j], createIntConstant(byte.toInt()))
+                    method.instructions.set(match[28 + 4 * j], byte.toInt().toAbstractInsnNode())
                 }
             }
         }
@@ -105,12 +105,12 @@ class ResourceTransformer(
         resources: List<List<Resource>>,
         messages: List<String>
     ) {
-        list.add(createIntConstant(resources.size))
+        list.add(resources.size.toAbstractInsnNode())
         list.add(TypeInsnNode(Opcodes.ANEWARRAY, "[L$type;"))
 
         for ((i, innerResources) in resources.withIndex()) {
             list.add(InsnNode(Opcodes.DUP))
-            list.add(createIntConstant(i))
+            list.add(i.toAbstractInsnNode())
 
             createResourceArray(list, type, innerResources, messages, progressSufix = true)
 
@@ -125,19 +125,19 @@ class ResourceTransformer(
         messages: List<String>,
         progressSufix: Boolean = false
     ) {
-        list.add(createIntConstant(resources.size))
+        list.add(resources.size.toAbstractInsnNode())
         list.add(TypeInsnNode(Opcodes.ANEWARRAY, type))
 
         for ((i, resource) in resources.withIndex()) {
             list.add(InsnNode(Opcodes.DUP))
-            list.add(createIntConstant(i))
+            list.add(i.toAbstractInsnNode())
 
             list.add(TypeInsnNode(Opcodes.NEW, type))
             list.add(InsnNode(Opcodes.DUP))
             list.add(LdcInsnNode(resource.destination))
             list.add(LdcInsnNode(resource.sourceWithCrc))
 
-            list.add(createIntConstant(messages.size))
+            list.add(messages.size.toAbstractInsnNode())
             list.add(TypeInsnNode(Opcodes.ANEWARRAY, "java/lang/String"))
 
             for ((j, message) in messages.withIndex()) {
@@ -148,21 +148,21 @@ class ResourceTransformer(
                 }
 
                 list.add(InsnNode(Opcodes.DUP))
-                list.add(createIntConstant(j))
+                list.add(j.toAbstractInsnNode())
                 list.add(LdcInsnNode(messageWithSuffix))
                 list.add(InsnNode(Opcodes.AASTORE))
             }
 
-            list.add(createIntConstant(resource.uncompressedSize))
-            list.add(createIntConstant(resource.compressedSize))
+            list.add(resource.uncompressedSize.toAbstractInsnNode())
+            list.add(resource.compressedSize.toAbstractInsnNode())
 
-            list.add(createIntConstant(resource.digest.size))
+            list.add(resource.digest.size.toAbstractInsnNode())
             list.add(IntInsnNode(Opcodes.NEWARRAY, Opcodes.T_INT))
 
             for ((j, byte) in resource.digest.withIndex()) {
                 list.add(InsnNode(Opcodes.DUP))
-                list.add(createIntConstant(j))
-                list.add(createIntConstant(byte.toInt()))
+                list.add(j.toAbstractInsnNode())
+                list.add(byte.toInt().toAbstractInsnNode())
                 list.add(InsnNode(Opcodes.IASTORE))
             }
 
