@@ -8,10 +8,8 @@ import dev.openrs2.asm.io.JarLibraryWriter
 import dev.openrs2.asm.io.Pack200LibraryReader
 import dev.openrs2.asm.transform.Transformer
 import dev.openrs2.deob.remap.PrefixRemapper
-import dev.openrs2.util.io.DeterministicJarOutputStream
 import java.nio.file.Files
 import java.nio.file.Path
-import java.util.jar.JarInputStream
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -124,8 +122,8 @@ class Deobfuscator @Inject constructor(
     private fun readJar(path: Path): Library {
         logger.info { "Reading jar $path" }
 
-        return JarInputStream(Files.newInputStream(path)).use { input ->
-            JarLibraryReader(input).read()
+        return Files.newInputStream(path).use { input ->
+            JarLibraryReader().read(input)
         }
     }
 
@@ -133,15 +131,15 @@ class Deobfuscator @Inject constructor(
         logger.info { "Reading pack $path" }
 
         return Files.newInputStream(path).use { input ->
-            Pack200LibraryReader(input).read()
+            Pack200LibraryReader().read(input)
         }
     }
 
     private fun writeJar(classPath: ClassPath, library: Library, path: Path) {
         logger.info { "Writing jar $path" }
 
-        DeterministicJarOutputStream(Files.newOutputStream(path)).use { output ->
-            JarLibraryWriter(output).write(classPath, library)
+        Files.newOutputStream(path).use { output ->
+            JarLibraryWriter().write(output, classPath, library)
         }
     }
 

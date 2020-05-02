@@ -3,20 +3,18 @@ package dev.openrs2.bundler
 import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
-import dev.openrs2.asm.transform.Transformer
 import dev.openrs2.asm.io.JarLibraryReader
-import dev.openrs2.asm.io.JarLibraryWriter
+import dev.openrs2.asm.io.ManifestJarLibraryWriter
 import dev.openrs2.asm.io.Pack200LibraryReader
 import dev.openrs2.asm.io.SignedJarLibraryWriter
+import dev.openrs2.asm.transform.Transformer
 import dev.openrs2.bundler.transform.ResourceTransformer
 import dev.openrs2.conf.Config
 import dev.openrs2.crypto.Pkcs12KeyStore
-import dev.openrs2.util.io.DeterministicJarOutputStream
 import java.nio.file.Files
 import java.nio.file.Path
 import java.util.jar.Attributes
 import java.util.jar.Attributes.Name.MANIFEST_VERSION
-import java.util.jar.JarInputStream
 import java.util.jar.Manifest
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -134,8 +132,8 @@ class Bundler @Inject constructor(
     private fun readJar(path: Path): Library {
         logger.info { "Reading jar $path" }
 
-        return JarInputStream(Files.newInputStream(path)).use { input ->
-            JarLibraryReader(input).read()
+        return Files.newInputStream(path).use { input ->
+            JarLibraryReader().read(input)
         }
     }
 
@@ -143,23 +141,23 @@ class Bundler @Inject constructor(
         logger.info { "Reading pack $path" }
 
         return Files.newInputStream(path).use { input ->
-            Pack200LibraryReader(input).read()
+            Pack200LibraryReader().read(input)
         }
     }
 
     private fun writeJar(classPath: ClassPath, library: Library, path: Path) {
         logger.info { "Writing jar $path" }
 
-        DeterministicJarOutputStream(Files.newOutputStream(path), unsignedManifest).use { output ->
-            JarLibraryWriter(output).write(classPath, library)
+        Files.newOutputStream(path).use { output ->
+            ManifestJarLibraryWriter(unsignedManifest).write(output, classPath, library)
         }
     }
 
     private fun writeSignedJar(classPath: ClassPath, library: Library, path: Path, keyStore: Pkcs12KeyStore) {
         logger.info { "Writing signed jar $path" }
 
-        Files.newOutputStream(path).use {
-            SignedJarLibraryWriter(it, signedManifest, keyStore).write(classPath, library)
+        Files.newOutputStream(path).use { output ->
+            SignedJarLibraryWriter(signedManifest, keyStore).write(output, classPath, library)
         }
     }
 

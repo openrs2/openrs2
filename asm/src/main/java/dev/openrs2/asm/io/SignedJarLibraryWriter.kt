@@ -12,21 +12,20 @@ import java.util.jar.JarInputStream
 import java.util.jar.Manifest
 
 class SignedJarLibraryWriter(
-    private val output: OutputStream,
     private val manifest: Manifest,
     private val keyStore: Pkcs12KeyStore
 ) : LibraryWriter {
-    override fun write(classPath: ClassPath, library: Library) {
+    override fun write(output: OutputStream, classPath: ClassPath, library: Library) {
         val unsignedJar = Files.createTempFile(TEMP_PREFIX, JAR_SUFFIX)
         try {
-            DeterministicJarOutputStream(Files.newOutputStream(unsignedJar), manifest).use { unsignedOutput ->
-                JarLibraryWriter(unsignedOutput).write(classPath, library)
+            Files.newOutputStream(unsignedJar).use { unsignedOutput ->
+                ManifestJarLibraryWriter(manifest).write(unsignedOutput, classPath, library)
             }
 
             val signedJar = Files.createTempFile(TEMP_PREFIX, JAR_SUFFIX)
             try {
                 keyStore.signJar(unsignedJar, signedJar)
-                repack(signedJar)
+                repack(signedJar, output)
             } finally {
                 Files.deleteIfExists(signedJar)
             }
@@ -35,7 +34,7 @@ class SignedJarLibraryWriter(
         }
     }
 
-    private fun repack(signedJar: Path) {
+    private fun repack(signedJar: Path, output: OutputStream) {
         JarInputStream(Files.newInputStream(signedJar)).use { input ->
             DeterministicJarOutputStream(output, input.manifest).use { output ->
                 for (entry in input.entries) {

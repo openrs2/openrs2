@@ -6,7 +6,6 @@ import dev.openrs2.asm.classpath.Library
 import dev.openrs2.asm.io.JarLibraryWriter
 import dev.openrs2.asm.io.Js5LibraryWriter
 import dev.openrs2.asm.io.Pack200LibraryWriter
-import dev.openrs2.util.io.DeterministicJarOutputStream
 import java.io.ByteArrayOutputStream
 import java.nio.file.Files
 import java.nio.file.Path
@@ -71,24 +70,21 @@ class Resource(
 
         fun compressJar(source: String, destination: String, classPath: ClassPath, library: Library): Resource {
             ByteArrayOutputStream().use { output ->
-                DeterministicJarOutputStream(output).use { jarOutput ->
-                    JarLibraryWriter(jarOutput).write(classPath, library)
-                }
-
+                JarLibraryWriter().write(output, classPath, library)
                 return compress(source, destination, output.toByteArray())
             }
         }
 
         fun compressPack(source: String, destination: String, classPath: ClassPath, library: Library): Resource {
             ByteArrayOutputStream().use { output ->
-                Pack200LibraryWriter(output).write(classPath, library)
+                Pack200LibraryWriter().write(output, classPath, library)
                 return compress(source, destination, output.toByteArray())
             }
         }
 
         fun compressJs5(source: String, destination: String, classPath: ClassPath, library: Library): Resource {
             ByteArrayOutputStream().use { output ->
-                Js5LibraryWriter(output).write(classPath, library)
+                Js5LibraryWriter().write(output, classPath, library)
                 return compress(source, destination, output.toByteArray())
             }
         }
