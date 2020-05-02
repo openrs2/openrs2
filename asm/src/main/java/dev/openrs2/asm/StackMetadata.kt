@@ -181,36 +181,37 @@ private val SIMPLE_OPCODES = mapOf(
     Opcodes.IFNONNULL to POP1
 )
 
-fun AbstractInsnNode.stackMetadata(): StackMetadata = when (this) {
-    is LdcInsnNode -> if (cst is Double || cst is Long) {
-        PUSH2
-    } else {
-        PUSH1
-    }
-    is FieldInsnNode -> {
-        val fieldSize = Type.getType(desc).size
-        var pushes = 0
-        var pops = 0
-        if (opcode == Opcodes.GETFIELD || opcode == Opcodes.PUTFIELD) {
-            pops++
-        }
-        if (opcode == Opcodes.PUTFIELD || opcode == Opcodes.PUTSTATIC) {
-            pops += fieldSize
+val AbstractInsnNode.stackMetadata
+    get() = when (this) {
+        is LdcInsnNode -> if (cst is Double || cst is Long) {
+            PUSH2
         } else {
-            pushes += fieldSize
+            PUSH1
         }
-        StackMetadata(pops, pushes)
-    }
-    is MethodInsnNode -> {
-        val argumentsAndReturnSizes = Type.getArgumentsAndReturnSizes(desc)
-        val pushes = argumentsAndReturnSizes and 0x3
-        var pops = argumentsAndReturnSizes shr 2
-        if (opcode == Opcodes.INVOKESTATIC) {
-            pops--
+        is FieldInsnNode -> {
+            val fieldSize = Type.getType(desc).size
+            var pushes = 0
+            var pops = 0
+            if (opcode == Opcodes.GETFIELD || opcode == Opcodes.PUTFIELD) {
+                pops++
+            }
+            if (opcode == Opcodes.PUTFIELD || opcode == Opcodes.PUTSTATIC) {
+                pops += fieldSize
+            } else {
+                pushes += fieldSize
+            }
+            StackMetadata(pops, pushes)
         }
-        StackMetadata(pops, pushes)
+        is MethodInsnNode -> {
+            val argumentsAndReturnSizes = Type.getArgumentsAndReturnSizes(desc)
+            val pushes = argumentsAndReturnSizes and 0x3
+            var pops = argumentsAndReturnSizes shr 2
+            if (opcode == Opcodes.INVOKESTATIC) {
+                pops--
+            }
+            StackMetadata(pops, pushes)
+        }
+        is InvokeDynamicInsnNode -> throw UnsupportedOperationException()
+        is MultiANewArrayInsnNode -> StackMetadata(dims, 1)
+        else -> SIMPLE_OPCODES[opcode] ?: throw IllegalArgumentException()
     }
-    is InvokeDynamicInsnNode -> throw UnsupportedOperationException()
-    is MultiANewArrayInsnNode -> StackMetadata(dims, 1)
-    else -> SIMPLE_OPCODES[opcode] ?: throw IllegalArgumentException()
-}

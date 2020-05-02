@@ -14,7 +14,7 @@ fun getExpression(
     var height = 0
     var insn: AbstractInsnNode? = last
     do {
-        val (pops, pushes) = insn!!.stackMetadata()
+        val (pops, pushes) = insn!!.stackMetadata
         if (insn !== last) {
             expr.add(insn)
             height -= pushes

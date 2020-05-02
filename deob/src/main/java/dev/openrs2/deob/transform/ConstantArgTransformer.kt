@@ -262,7 +262,7 @@ class ConstantArgTransformer : Transformer() {
             } else if (!insn.pure) {
                 // can't replace instructions with a side effect
                 continue
-            } else if (insn.stackMetadata().pushes != 1) {
+            } else if (insn.stackMetadata.pushes != 1) {
                 // can't replace instructions pushing more than one result
                 continue
             }
