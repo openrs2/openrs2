@@ -27,8 +27,8 @@ fun Expression.isIntegerOrLongLiteral(): Boolean {
     return isIntegerLiteralExpr || isLongLiteralExpr
 }
 
-fun createLong(value: Long): LongLiteralExpr {
-    return LongLiteralExpr(value.toString() + "L")
+fun Long.toLongLiteralExpr(): LongLiteralExpr {
+    return LongLiteralExpr(this.toString() + "L")
 }
 
 fun Expression.negate(): Expression {
@@ -42,8 +42,8 @@ fun Expression.negate(): Expression {
         }
     } else if (isLongLiteralExpr) {
         when (val n = asLongLiteralExpr().asNumber()) {
-            LongLiteralExpr.MAX_63_BIT_UNSIGNED_VALUE_AS_BIG_INTEGER -> createLong(Long.MIN_VALUE)
-            is Long -> createLong(-n)
+            LongLiteralExpr.MAX_63_BIT_UNSIGNED_VALUE_AS_BIG_INTEGER -> Long.MIN_VALUE.toLongLiteralExpr()
+            is Long -> (-n).toLongLiteralExpr()
             else -> error("Invalid LongLiteralExpr type")
         }
     } else {

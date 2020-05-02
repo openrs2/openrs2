@@ -5,8 +5,8 @@ import com.github.javaparser.ast.expr.BinaryExpr
 import com.github.javaparser.ast.expr.IntegerLiteralExpr
 import dev.openrs2.deob.ast.util.checkedAsInt
 import dev.openrs2.deob.ast.util.checkedAsLong
-import dev.openrs2.deob.ast.util.createLong
 import dev.openrs2.deob.ast.util.isIntegerOrLongLiteral
+import dev.openrs2.deob.ast.util.toLongLiteralExpr
 import dev.openrs2.deob.ast.util.walk
 
 class BitMaskTransformer : Transformer() {
@@ -52,7 +52,7 @@ class BitMaskTransformer : Transformer() {
                     else -> error("Invalid shiftOp")
                 }
 
-                maskExpr = createLong(mask)
+                maskExpr = mask.toLongLiteralExpr()
             }
 
             expr.replace(BinaryExpr(BinaryExpr(argExpr.clone(), shamtExpr.clone(), shiftOp), maskExpr, bitwiseOp))

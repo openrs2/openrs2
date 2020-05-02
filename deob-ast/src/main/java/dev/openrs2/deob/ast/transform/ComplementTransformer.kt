@@ -7,8 +7,8 @@ import com.github.javaparser.ast.expr.IntegerLiteralExpr
 import com.github.javaparser.ast.expr.UnaryExpr
 import dev.openrs2.deob.ast.util.checkedAsInt
 import dev.openrs2.deob.ast.util.checkedAsLong
-import dev.openrs2.deob.ast.util.createLong
 import dev.openrs2.deob.ast.util.isIntegerOrLongLiteral
+import dev.openrs2.deob.ast.util.toLongLiteralExpr
 import dev.openrs2.deob.ast.util.walk
 
 class ComplementTransformer : Transformer() {
@@ -55,7 +55,7 @@ class ComplementTransformer : Transformer() {
             return when {
                 isUnaryExpr -> asUnaryExpr().expression
                 isIntegerLiteralExpr -> IntegerLiteralExpr(asIntegerLiteralExpr().checkedAsInt().inv().toString())
-                isLongLiteralExpr -> createLong(asLongLiteralExpr().checkedAsLong().inv())
+                isLongLiteralExpr -> asLongLiteralExpr().checkedAsLong().inv().toLongLiteralExpr()
                 else -> throw IllegalArgumentException()
             }
         }
