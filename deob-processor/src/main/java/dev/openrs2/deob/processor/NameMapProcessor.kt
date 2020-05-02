@@ -11,7 +11,6 @@ import dev.openrs2.deob.annotation.OriginalMember
 import dev.openrs2.deob.map.Field
 import dev.openrs2.deob.map.Method
 import dev.openrs2.deob.map.NameMap
-import dev.openrs2.yaml.YamlModule
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -46,7 +45,7 @@ class NameMapProcessor : AbstractProcessor() {
     private lateinit var localScanner: LocalVariableScanner
 
     init {
-        val injector = Guice.createInjector(YamlModule)
+        val injector = Guice.createInjector(DeobfuscatorProcessorModule)
         mapper = injector.getInstance(ObjectMapper::class.java)
     }
 
