@@ -108,6 +108,8 @@ class Bundler @Inject constructor(
         // write all resources to disk
         logger.info { "Writing resources" }
 
+        Files.createDirectories(output)
+
         val resources = listOf(
             unpackerJar,
             clientPack,
