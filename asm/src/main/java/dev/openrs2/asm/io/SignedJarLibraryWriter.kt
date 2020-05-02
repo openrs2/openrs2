@@ -4,6 +4,7 @@ import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
 import dev.openrs2.crypto.Pkcs12KeyStore
 import dev.openrs2.util.io.DeterministicJarOutputStream
+import dev.openrs2.util.io.entries
 import java.io.OutputStream
 import java.nio.file.Files
 import java.nio.file.Path
@@ -37,8 +38,8 @@ class SignedJarLibraryWriter(
     private fun repack(signedJar: Path) {
         JarInputStream(Files.newInputStream(signedJar)).use { input ->
             DeterministicJarOutputStream(output, input.manifest).use { output ->
-                generateSequence { input.nextJarEntry }.forEach {
-                    output.putNextEntry(it)
+                for (entry in input.entries) {
+                    output.putNextEntry(entry)
                     input.copyTo(output)
                 }
             }

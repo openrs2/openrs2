@@ -34,8 +34,7 @@ class DeterministicJarOutputStream : JarOutputStream {
         fun repack(src: Path, dest: Path) {
             JarInputStream(Files.newInputStream(src)).use { input ->
                 create(Files.newOutputStream(dest), input.manifest).use { output ->
-                    while (true) {
-                        val entry = input.nextJarEntry ?: break
+                    for (entry in input.entries) {
                         output.putNextEntry(entry)
                         input.copyTo(output)
                     }
