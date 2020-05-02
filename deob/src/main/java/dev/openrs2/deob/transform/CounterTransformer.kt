@@ -26,7 +26,7 @@ class CounterTransformer : Transformer() {
         for (library in classPath.libraries) {
             for (clazz in library) {
                 for (method in clazz.methods) {
-                    if (method.hasCode()) {
+                    if (method.hasCode) {
                         findCounters(method, references, resets, increments)
                     }
                 }

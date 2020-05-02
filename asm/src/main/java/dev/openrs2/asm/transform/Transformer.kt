@@ -26,7 +26,7 @@ abstract class Transformer {
                     for (method in clazz.methods) {
                         changed = changed or preTransformMethod(classPath, library, clazz, method)
 
-                        if (method.hasCode()) {
+                        if (method.hasCode) {
                             changed = changed or transformCode(classPath, library, clazz, method)
                         }
 

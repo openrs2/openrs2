@@ -26,7 +26,7 @@ class BufferSizeTransformer : Transformer() {
         for (library in classPath.libraries) {
             for (clazz in library) {
                 for (method in clazz.methods) {
-                    if (!method.hasCode()) {
+                    if (!method.hasCode) {
                         continue
                     }
 

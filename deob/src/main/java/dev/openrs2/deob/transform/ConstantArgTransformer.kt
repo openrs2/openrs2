@@ -99,7 +99,7 @@ class ConstantArgTransformer : Transformer() {
         // find ClassNode/MethodNode
         val owner = classPath.getClassNode(ref.owner) ?: return
         val originalMethod = owner.methods.singleOrNull { it.name == ref.name && it.desc == ref.desc } ?: return
-        if (!originalMethod.hasCode()) {
+        if (!originalMethod.hasCode) {
             return
         }
 

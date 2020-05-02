@@ -31,7 +31,7 @@ fun ClassNode.remap(remapper: Remapper) {
         method.signature = remapper.mapSignature(method.signature, false)
         method.exceptions = method.exceptions.map(remapper::mapType)
 
-        if (method.hasCode()) {
+        if (method.hasCode) {
             ClassForNameUtils.remap(remapper, method)
 
             for (insn in method.instructions) {

@@ -36,7 +36,7 @@ class UnusedArgTransformer : Transformer() {
         for (library in classPath.libraries) {
             for (clazz in library) {
                 for (method in clazz.methods) {
-                    if (method.hasCode()) {
+                    if (method.hasCode) {
                         populateRetainedArgs(classPath, clazz, method)
                     }
                 }
@@ -94,7 +94,7 @@ class UnusedArgTransformer : Transformer() {
         method: MethodNode
     ): Boolean {
         // delete unused int args from call sites
-        if (!method.hasCode()) {
+        if (!method.hasCode) {
             return false
         }
 
