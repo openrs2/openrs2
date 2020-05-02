@@ -20,13 +20,13 @@ class Deobfuscator @Inject constructor(
     fun run(input: Path, output: Path) {
         // read input jars/packs
         logger.info { "Reading input jars" }
-        val unpackClass = readJar(input.resolve("unpackclass.pack"))
+        val unpackClass = Library.read(input.resolve("unpackclass.pack"), JarLibraryReader)
         val glUnpackClass = Library(unpackClass)
-        val loader = readJar(input.resolve("loader.jar"))
-        val glLoader = readJar(input.resolve("loader_gl.jar"))
-        val gl = readPack(input.resolve("jaggl.pack200"))
-        val client = readJar(input.resolve("runescape.jar"))
-        val glClient = readPack(input.resolve("runescape_gl.pack200"))
+        val loader = Library.read(input.resolve("loader.jar"), JarLibraryReader)
+        val glLoader = Library.read(input.resolve("loader_gl.jar"), JarLibraryReader)
+        val gl = Library.read(input.resolve("jaggl.pack200"), Pack200LibraryReader)
+        val client = Library.read(input.resolve("runescape.jar"), JarLibraryReader)
+        val glClient = Library.read(input.resolve("runescape_gl.pack200"), Pack200LibraryReader)
 
         /*
          * TODO(gpe): it'd be nice to have separate signlink.jar and
@@ -103,44 +103,20 @@ class Deobfuscator @Inject constructor(
 
         Files.createDirectories(output)
 
-        writeJar(classPath, client, output.resolve("runescape.jar"))
-        writeJar(classPath, loader, output.resolve("loader.jar"))
-        writeJar(classPath, signLink, output.resolve("signlink.jar"))
-        writeJar(classPath, unpack, output.resolve("unpack.jar"))
-        writeJar(classPath, unpackClass, output.resolve("unpackclass.jar"))
+        client.write(output.resolve("runescape.jar"), JarLibraryWriter, classPath)
+        loader.write(output.resolve("loader.jar"), JarLibraryWriter, classPath)
+        signLink.write(output.resolve("signlink.jar"), JarLibraryWriter, classPath)
+        unpack.write(output.resolve("unpack.jar"), JarLibraryWriter, classPath)
+        unpackClass.write(output.resolve("unpackclass.jar"), JarLibraryWriter, classPath)
 
-        writeJar(glClassPath, gl, output.resolve("jaggl.jar"))
-        writeJar(glClassPath, glClient, output.resolve("runescape_gl.jar"))
-        writeJar(glClassPath, glLoader, output.resolve("loader_gl.jar"))
-        writeJar(glClassPath, glSignLink, output.resolve("signlink_gl.jar"))
-        writeJar(glClassPath, glUnpack, output.resolve("unpack_gl.jar"))
-        writeJar(glClassPath, glUnpackClass, output.resolve("unpackclass_gl.jar"))
+        gl.write(output.resolve("jaggl.jar"), JarLibraryWriter, glClassPath)
+        glClient.write(output.resolve("runescape_gl.jar"), JarLibraryWriter, glClassPath)
+        glLoader.write(output.resolve("loader_gl.jar"), JarLibraryWriter, glClassPath)
+        glSignLink.write(output.resolve("signlink_gl.jar"), JarLibraryWriter, glClassPath)
+        glUnpack.write(output.resolve("unpack_gl.jar"), JarLibraryWriter, glClassPath)
+        glUnpackClass.write(output.resolve("unpackclass_gl.jar"), JarLibraryWriter, glClassPath)
 
-        writeJar(unsignedClassPath, unsignedClient, output.resolve("runescape_unsigned.jar"))
-    }
-
-    private fun readJar(path: Path): Library {
-        logger.info { "Reading jar $path" }
-
-        return Files.newInputStream(path).use { input ->
-            JarLibraryReader.read(input)
-        }
-    }
-
-    private fun readPack(path: Path): Library {
-        logger.info { "Reading pack $path" }
-
-        return Files.newInputStream(path).use { input ->
-            Pack200LibraryReader.read(input)
-        }
-    }
-
-    private fun writeJar(classPath: ClassPath, library: Library, path: Path) {
-        logger.info { "Writing jar $path" }
-
-        Files.newOutputStream(path).use { output ->
-            JarLibraryWriter.write(output, classPath, library)
-        }
+        unsignedClient.write(output.resolve("runescape_unsigned.jar"), JarLibraryWriter, unsignedClassPath)
     }
 
     companion object {

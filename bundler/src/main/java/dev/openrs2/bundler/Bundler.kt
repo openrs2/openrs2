@@ -42,12 +42,12 @@ class Bundler @Inject constructor(
     fun run(input: Path, output: Path, keyStorePath: Path) {
         // read input jars/packs
         logger.info { "Reading input jars" }
-        val unpacker = readJar(input.resolve("unpackclass.pack"))
-        val loader = readJar(input.resolve("loader.jar"))
-        val glLoader = readJar(input.resolve("loader_gl.jar"))
-        val gl = readPack(input.resolve("jaggl.pack200"))
-        val client = readJar(input.resolve("runescape.jar"))
-        val glClient = readPack(input.resolve("runescape_gl.pack200"))
+        val unpacker = Library.read(input.resolve("unpackclass.pack"), JarLibraryReader)
+        val loader = Library.read(input.resolve("loader.jar"), JarLibraryReader)
+        val glLoader = Library.read(input.resolve("loader_gl.jar"), JarLibraryReader)
+        val gl = Library.read(input.resolve("jaggl.pack200"), Pack200LibraryReader)
+        val client = Library.read(input.resolve("runescape.jar"), JarLibraryReader)
+        val glClient = Library.read(input.resolve("runescape_gl.pack200"), Pack200LibraryReader)
 
         // bundle libraries together into a common classpath
         val runtime = ClassLoader.getPlatformClassLoader()
@@ -139,43 +139,11 @@ class Bundler @Inject constructor(
         }
 
         // write unsigned client and loaders
-        writeJar(classPath, client, output.resolve("runescape.jar"))
+        client.write(output.resolve("runescape.jar"), ManifestJarLibraryWriter(unsignedManifest), classPath)
 
         val keyStore = Pkcs12KeyStore.open(keyStorePath, config.game)
-        writeSignedJar(classPath, loader, output.resolve("loader.jar"), keyStore)
-        writeSignedJar(glClassPath, glLoader, output.resolve("loader_gl.jar"), keyStore)
-    }
-
-    private fun readJar(path: Path): Library {
-        logger.info { "Reading jar $path" }
-
-        return Files.newInputStream(path).use { input ->
-            JarLibraryReader.read(input)
-        }
-    }
-
-    private fun readPack(path: Path): Library {
-        logger.info { "Reading pack $path" }
-
-        return Files.newInputStream(path).use { input ->
-            Pack200LibraryReader.read(input)
-        }
-    }
-
-    private fun writeJar(classPath: ClassPath, library: Library, path: Path) {
-        logger.info { "Writing jar $path" }
-
-        Files.newOutputStream(path).use { output ->
-            ManifestJarLibraryWriter(unsignedManifest).write(output, classPath, library)
-        }
-    }
-
-    private fun writeSignedJar(classPath: ClassPath, library: Library, path: Path, keyStore: Pkcs12KeyStore) {
-        logger.info { "Writing signed jar $path" }
-
-        Files.newOutputStream(path).use { output ->
-            SignedJarLibraryWriter(signedManifest, keyStore).write(output, classPath, library)
-        }
+        loader.write(output.resolve("loader.jar"), SignedJarLibraryWriter(signedManifest, keyStore), classPath)
+        glLoader.write(output.resolve("loader_gl.jar"), SignedJarLibraryWriter(signedManifest, keyStore), glClassPath)
     }
 
     companion object {
