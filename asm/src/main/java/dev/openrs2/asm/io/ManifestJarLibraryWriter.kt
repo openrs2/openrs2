@@ -5,7 +5,7 @@ import java.io.OutputStream
 import java.util.jar.JarOutputStream
 import java.util.jar.Manifest
 
-class ManifestJarLibraryWriter(private val manifest: Manifest) : JarLibraryWriter() {
+class ManifestJarLibraryWriter(private val manifest: Manifest) : AbstractJarLibraryWriter() {
     override fun createJarOutputStream(output: OutputStream): JarOutputStream {
         return DeterministicJarOutputStream(output, manifest)
     }
