@@ -3,11 +3,8 @@ package dev.openrs2.deob
 import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
-import dev.openrs2.asm.classpath.Library.Companion.readJar
-import dev.openrs2.asm.classpath.Library.Companion.readPack
 import dev.openrs2.asm.transform.Transformer
-import dev.openrs2.deob.SignedClassUtils.move
-import dev.openrs2.deob.remap.PrefixRemapper.create
+import dev.openrs2.deob.remap.PrefixRemapper
 import java.nio.file.Files
 import java.nio.file.Path
 import javax.inject.Inject
@@ -20,13 +17,13 @@ class Deobfuscator @Inject constructor(
     fun run(input: Path, output: Path) {
         // read input jars/packs
         logger.info { "Reading input jars" }
-        val unpackClass = readJar(input.resolve("unpackclass.pack"))
+        val unpackClass = Library.readJar(input.resolve("unpackclass.pack"))
         val glUnpackClass = Library(unpackClass)
-        val loader = readJar(input.resolve("loader.jar"))
-        val glLoader = readJar(input.resolve("loader_gl.jar"))
-        val gl = readPack(input.resolve("jaggl.pack200"))
-        val client = readJar(input.resolve("runescape.jar"))
-        val glClient = readPack(input.resolve("runescape_gl.pack200"))
+        val loader = Library.readJar(input.resolve("loader.jar"))
+        val glLoader = Library.readJar(input.resolve("loader_gl.jar"))
+        val gl = Library.readPack(input.resolve("jaggl.pack200"))
+        val client = Library.readJar(input.resolve("runescape.jar"))
+        val glClient = Library.readPack(input.resolve("runescape_gl.pack200"))
 
         // TODO(gpe): it'd be nice to have separate signlink.jar and
         // signlink-unsigned.jar files so we don't (effectively) deobfuscate
@@ -37,11 +34,11 @@ class Deobfuscator @Inject constructor(
         // overwrite client's classes with signed classes from the loader
         logger.info { "Moving signed classes from loader" }
         val signLink = Library()
-        move(loader, client, signLink)
+        SignedClassUtils.move(loader, client, signLink)
 
         logger.info { "Moving signed classes from loader_gl" }
         val glSignLink = Library()
-        move(glLoader, glClient, glSignLink)
+        SignedClassUtils.move(glLoader, glClient, glSignLink)
 
         // move unpack class out of the loader (so the unpacker and loader can both depend on it)
         logger.info { "Moving unpack from loader to unpack" }
@@ -54,10 +51,10 @@ class Deobfuscator @Inject constructor(
 
         // prefix remaining loader/unpacker classes (to avoid conflicts when we rename in the same classpath as the client)
         logger.info { "Prefixing loader and unpackclass class names" }
-        loader.remap(create(loader, "loader_"))
-        glLoader.remap(create(glLoader, "loader_"))
-        unpackClass.remap(create(unpackClass, "unpackclass_"))
-        glUnpackClass.remap(create(glUnpackClass, "unpackclass_"))
+        loader.remap(PrefixRemapper.create(loader, "loader_"))
+        glLoader.remap(PrefixRemapper.create(glLoader, "loader_"))
+        unpackClass.remap(PrefixRemapper.create(unpackClass, "unpackclass_"))
+        glUnpackClass.remap(PrefixRemapper.create(glUnpackClass, "unpackclass_"))
 
         // bundle libraries together into a common classpath
         val runtime = ClassLoader.getPlatformClassLoader()

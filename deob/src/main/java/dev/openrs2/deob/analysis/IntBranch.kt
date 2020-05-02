@@ -1,6 +1,5 @@
 package dev.openrs2.deob.analysis
 
-import dev.openrs2.deob.analysis.IntBranchResult.Companion.fromTakenNotTaken
 import org.objectweb.asm.Opcodes.IFEQ
 import org.objectweb.asm.Opcodes.IFGE
 import org.objectweb.asm.Opcodes.IFGT
@@ -29,7 +28,7 @@ object IntBranch {
             }
         }
 
-        return fromTakenNotTaken(taken, notTaken)
+        return IntBranchResult.fromTakenNotTaken(taken, notTaken)
     }
 
     private fun evaluateUnary(opcode: Int, value: Int): Boolean {
@@ -61,7 +60,7 @@ object IntBranch {
             }
         }
 
-        return fromTakenNotTaken(taken, notTaken)
+        return IntBranchResult.fromTakenNotTaken(taken, notTaken)
     }
 
     private fun evaluateBinary(opcode: Int, value1: Int, value2: Int): Boolean {
