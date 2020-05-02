@@ -11,6 +11,7 @@ import org.bouncycastle.cert.jcajce.JcaX509CertificateConverter
 import org.bouncycastle.crypto.util.SubjectPublicKeyInfoFactory
 import org.bouncycastle.operator.bc.BcRSAContentSignerBuilder
 import org.bouncycastle.util.BigIntegers
+import java.io.OutputStream
 import java.nio.file.Files
 import java.nio.file.Path
 import java.security.KeyFactory
@@ -28,11 +29,9 @@ class Pkcs12KeyStore private constructor(privateKeyEntry: KeyStore.PrivateKeyEnt
         .signerName(signerName)
         .build()
 
-    fun signJar(input: Path, output: Path) {
+    fun signJar(input: Path, output: OutputStream) {
         JarFile(input.toFile()).use { file ->
-            Files.newOutputStream(output).use { os ->
-                signer.sign(file, os)
-            }
+            signer.sign(file, output)
         }
     }
 
