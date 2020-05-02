@@ -51,6 +51,7 @@ distributions {
             from("${rootProject.projectDir}/LICENSE")
             from("${rootProject.projectDir}/README.md")
             from("${rootProject.projectDir}/etc/config.example.yaml") {
+                rename { "config.yaml" }
                 into("etc")
             }
             from("${rootProject.projectDir}/share") {
