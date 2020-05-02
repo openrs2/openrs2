@@ -1,10 +1,7 @@
 package dev.openrs2.util.io
 
 import java.io.OutputStream
-import java.nio.file.Files
-import java.nio.file.Path
 import java.nio.file.attribute.FileTime
-import java.util.jar.JarInputStream
 import java.util.jar.JarOutputStream
 import java.util.jar.Manifest
 import java.util.zip.ZipEntry
@@ -22,24 +19,5 @@ class DeterministicJarOutputStream : JarOutputStream {
 
     companion object {
         private val UNIX_EPOCH = FileTime.fromMillis(0)
-
-        fun create(out: OutputStream, manifest: Manifest? = null): JarOutputStream {
-            return if (manifest != null) {
-                DeterministicJarOutputStream(out, manifest)
-            } else {
-                DeterministicJarOutputStream(out)
-            }
-        }
-
-        fun repack(src: Path, dest: Path) {
-            JarInputStream(Files.newInputStream(src)).use { input ->
-                create(Files.newOutputStream(dest), input.manifest).use { output ->
-                    for (entry in input.entries) {
-                        output.putNextEntry(entry)
-                        input.copyTo(output)
-                    }
-                }
-            }
-        }
     }
 }
