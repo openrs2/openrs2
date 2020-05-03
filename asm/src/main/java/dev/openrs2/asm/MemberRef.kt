@@ -30,4 +30,14 @@ data class MemberRef(val owner: String, val name: String, val desc: String) : Co
     override fun toString(): String {
         return "$owner.$name $desc"
     }
+
+    companion object {
+        private val STRING_REGEX = Regex("([^.]+)[.]([^ ]+) (.+)")
+
+        fun fromString(str: String): MemberRef {
+            val result = STRING_REGEX.matchEntire(str)
+            require(result != null)
+            return MemberRef(result.groupValues[1], result.groupValues[2], result.groupValues[3])
+        }
+    }
 }
