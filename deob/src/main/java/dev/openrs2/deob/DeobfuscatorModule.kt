@@ -5,6 +5,7 @@ import com.google.inject.multibindings.Multibinder
 import dev.openrs2.asm.transform.Transformer
 import dev.openrs2.bundler.BundlerModule
 import dev.openrs2.bundler.transform.ResourceTransformer
+import dev.openrs2.deob.map.DeobfuscatorMapModule
 import dev.openrs2.deob.transform.BitShiftTransformer
 import dev.openrs2.deob.transform.BitwiseOpTransformer
 import dev.openrs2.deob.transform.BundlerTransformer
@@ -37,6 +38,7 @@ import dev.openrs2.deob.transform.VisibilityTransformer
 object DeobfuscatorModule : AbstractModule() {
     override fun configure() {
         install(BundlerModule)
+        install(DeobfuscatorMapModule)
 
         val binder = Multibinder.newSetBinder(binder(), Transformer::class.java, DeobfuscatorQualifier::class.java)
         binder.addBinding().to(OriginalPcSaveTransformer::class.java)
