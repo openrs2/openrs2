@@ -5,6 +5,9 @@ import dev.openrs2.asm.MemberDesc
 import dev.openrs2.asm.MemberRef
 import dev.openrs2.asm.classpath.ClassMetadata
 import dev.openrs2.asm.classpath.ClassPath
+import dev.openrs2.asm.filter.ClassFilter
+import dev.openrs2.asm.filter.MemberFilter
+import dev.openrs2.deob.Profile
 import dev.openrs2.util.collect.DisjointSet
 import dev.openrs2.util.indefiniteArticle
 import org.objectweb.asm.Opcodes
@@ -31,57 +34,38 @@ class TypedRemapper private constructor(
     companion object {
         private val logger = InlineLogger()
 
-        val EXCLUDED_CLASSES = setOf(
-            "client",
-            "jagex3/jagmisc/jagmisc",
-            "loader",
-            "unpack",
-            "unpackclass"
-        )
-        val EXCLUDED_METHODS = setOf(
-            "<clinit>",
-            "<init>",
-            "main",
-            "providesignlink",
-            "quit"
-        )
-        val EXCLUDED_FIELDS = setOf(
-            "cache"
-        )
-
         private val LIBRARY_PREFIX_REGEX = Regex("^(?:loader|unpackclass)_")
-        private const val MAX_OBFUSCATED_NAME_LEN = 2
 
-        fun create(classPath: ClassPath): TypedRemapper {
+        fun create(classPath: ClassPath, profile: Profile): TypedRemapper {
             val inheritedFieldSets = classPath.createInheritedFieldSets()
             val inheritedMethodSets = classPath.createInheritedMethodSets()
 
-            val classes = createClassMapping(classPath)
-            val fields = createFieldMapping(classPath, inheritedFieldSets, classes)
-            val methods = createMethodMapping(classPath, inheritedMethodSets)
+            val classes = createClassMapping(classPath, profile.excludedClasses)
+            val fields = createFieldMapping(classPath, profile.excludedFields, inheritedFieldSets, classes)
+            val methods = createMethodMapping(classPath, profile.excludedMethods, inheritedMethodSets)
 
-            verifyMapping(classes)
-            verifyMemberMapping(fields)
-            verifyMemberMapping(methods)
+            verifyMapping(classes, profile.maxObfuscatedNameLen)
+            verifyMemberMapping(fields, profile.maxObfuscatedNameLen)
+            verifyMemberMapping(methods, profile.maxObfuscatedNameLen)
 
             return TypedRemapper(classes, fields, methods)
         }
 
-        private fun verifyMapping(mapping: Map<String, String>) {
+        private fun verifyMapping(mapping: Map<String, String>, maxObfuscatedNameLen: Int) {
             for ((key, value) in mapping) {
-                verifyMapping(key, value)
+                verifyMapping(key, value, maxObfuscatedNameLen)
             }
         }
 
-        private fun verifyMemberMapping(mapping: Map<MemberRef, String>) {
+        private fun verifyMemberMapping(mapping: Map<MemberRef, String>, maxObfuscatedNameLen: Int) {
             for ((key, value) in mapping) {
-                verifyMapping(key.name, value)
+                verifyMapping(key.name, value, maxObfuscatedNameLen)
             }
         }
 
-        private fun verifyMapping(name: String, mappedName: String) {
+        private fun verifyMapping(name: String, mappedName: String, maxObfuscatedNameLen: Int) {
             val originalName = name.replace(LIBRARY_PREFIX_REGEX, "")
-            if (originalName.length > MAX_OBFUSCATED_NAME_LEN && originalName != mappedName) {
+            if (originalName.length > maxObfuscatedNameLen && originalName != mappedName) {
                 logger.warn { "Remapping probably unobfuscated name $originalName to $mappedName" }
             }
         }
@@ -95,32 +79,33 @@ class TypedRemapper private constructor(
             return prefix + separator + prefixes.merge(prefix, 1, Integer::sum)
         }
 
-        private fun createClassMapping(classPath: ClassPath): Map<String, String> {
+        private fun createClassMapping(classPath: ClassPath, excludedClasses: ClassFilter): Map<String, String> {
             val mapping = mutableMapOf<String, String>()
             val prefixes = mutableMapOf<String, Int>()
             for (clazz in classPath.libraryClasses) {
-                populateClassMapping(mapping, prefixes, clazz)
+                populateClassMapping(excludedClasses, mapping, prefixes, clazz)
             }
             return mapping
         }
 
         private fun populateClassMapping(
+            excludedClasses: ClassFilter,
             mapping: MutableMap<String, String>,
             prefixes: MutableMap<String, Int>,
             clazz: ClassMetadata
         ): String {
             val name = clazz.name
-            if (mapping.containsKey(name) || !isClassRenamable(clazz)) {
+            if (mapping.containsKey(name) || !isClassRenamable(clazz, excludedClasses)) {
                 return mapping.getOrDefault(name, name)
             }
 
-            val mappedName = generateClassName(mapping, prefixes, clazz)
+            val mappedName = generateClassName(excludedClasses, mapping, prefixes, clazz)
             mapping[name] = mappedName
             return mappedName
         }
 
-        private fun isClassRenamable(clazz: ClassMetadata): Boolean {
-            if (clazz.name in EXCLUDED_CLASSES || clazz.dependency) {
+        private fun isClassRenamable(clazz: ClassMetadata, excludedClasses: ClassFilter): Boolean {
+            if (excludedClasses.matches(clazz.name) || clazz.dependency) {
                 return false
             }
 
@@ -134,6 +119,7 @@ class TypedRemapper private constructor(
         }
 
         private fun generateClassName(
+            excludedClasses: ClassFilter,
             mapping: MutableMap<String, String>,
             prefixes: MutableMap<String, Int>,
             clazz: ClassMetadata
@@ -143,7 +129,7 @@ class TypedRemapper private constructor(
 
             val superClass = clazz.superClass
             if (superClass != null && superClass.name != "java/lang/Object") {
-                var superName = populateClassMapping(mapping, prefixes, superClass)
+                var superName = populateClassMapping(excludedClasses, mapping, prefixes, superClass)
                 superName = superName.substring(superName.lastIndexOf('/') + 1)
                 mappedName += generateName(prefixes, superName + "_Sub")
             } else if (clazz.`interface`) {
@@ -157,6 +143,7 @@ class TypedRemapper private constructor(
 
         private fun createFieldMapping(
             classPath: ClassPath,
+            excludedFields: MemberFilter,
             disjointSet: DisjointSet<MemberRef>,
             classMapping: Map<String, String>
         ): Map<MemberRef, String> {
@@ -164,7 +151,7 @@ class TypedRemapper private constructor(
             val prefixes = mutableMapOf<String, Int>()
 
             for (partition in disjointSet) {
-                if (!isFieldRenamable(classPath, partition)) {
+                if (!isFieldRenamable(classPath, excludedFields, partition)) {
                     continue
                 }
 
@@ -178,11 +165,15 @@ class TypedRemapper private constructor(
             return mapping
         }
 
-        private fun isFieldRenamable(classPath: ClassPath, partition: DisjointSet.Partition<MemberRef>): Boolean {
+        private fun isFieldRenamable(
+            classPath: ClassPath,
+            excludedFields: MemberFilter,
+            partition: DisjointSet.Partition<MemberRef>
+        ): Boolean {
             for (field in partition) {
                 val clazz = classPath[field.owner]!!
 
-                if (field.name in EXCLUDED_FIELDS || clazz.dependency) {
+                if (excludedFields.matches(field) || clazz.dependency) {
                     return false
                 }
             }
@@ -221,13 +212,14 @@ class TypedRemapper private constructor(
 
         private fun createMethodMapping(
             classPath: ClassPath,
+            excludedMethods: MemberFilter,
             disjointSet: DisjointSet<MemberRef>
         ): Map<MemberRef, String> {
             val mapping = mutableMapOf<MemberRef, String>()
             var id = 0
 
             for (partition in disjointSet) {
-                if (!isMethodRenamable(classPath, partition)) {
+                if (!isMethodRenamable(classPath, excludedMethods, partition)) {
                     continue
                 }
 
@@ -240,11 +232,15 @@ class TypedRemapper private constructor(
             return mapping
         }
 
-        fun isMethodRenamable(classPath: ClassPath, partition: DisjointSet.Partition<MemberRef>): Boolean {
+        fun isMethodRenamable(
+            classPath: ClassPath,
+            excludedMethods: MemberFilter,
+            partition: DisjointSet.Partition<MemberRef>
+        ): Boolean {
             for (method in partition) {
                 val clazz = classPath[method.owner]!!
 
-                if (method.name in EXCLUDED_METHODS || clazz.dependency) {
+                if (excludedMethods.matches(method) || clazz.dependency) {
                     return false
                 }
 

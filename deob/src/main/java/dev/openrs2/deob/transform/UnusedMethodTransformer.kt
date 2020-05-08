@@ -6,23 +6,29 @@ import com.google.common.collect.Multimap
 import dev.openrs2.asm.MemberRef
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
+import dev.openrs2.asm.filter.MemberFilter
+import dev.openrs2.asm.filter.UnionMemberFilter
 import dev.openrs2.asm.transform.Transformer
-import dev.openrs2.deob.remap.TypedRemapper
+import dev.openrs2.deob.Profile
+import dev.openrs2.deob.filter.ReflectedConstructorFilter
 import dev.openrs2.util.collect.DisjointSet
 import dev.openrs2.util.collect.removeFirst
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.MethodNode
+import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class UnusedMethodTransformer : Transformer() {
+class UnusedMethodTransformer @Inject constructor(private val profile: Profile) : Transformer() {
     private lateinit var inheritedMethodSets: DisjointSet<MemberRef>
+    private lateinit var excludedMethods: MemberFilter
     private val methodReferences = HashMultimap.create<DisjointSet.Partition<MemberRef>, MemberRef>()
 
     override fun preTransform(classPath: ClassPath) {
         inheritedMethodSets = classPath.createInheritedMethodSets()
+        excludedMethods = UnionMemberFilter(profile.entryPoints, ReflectedConstructorFilter.create(classPath))
         methodReferences.clear()
     }
 
@@ -44,7 +50,9 @@ class UnusedMethodTransformer : Transformer() {
                 val methods = clazz.methods.iterator()
 
                 for (method in methods) {
-                    if (method.access and Opcodes.ACC_NATIVE != 0 || method.name in TypedRemapper.EXCLUDED_METHODS) {
+                    if (method.access and Opcodes.ACC_NATIVE != 0) {
+                        continue
+                    } else if (excludedMethods.matches(clazz.name, method.name, method.desc)) {
                         continue
                     }
 

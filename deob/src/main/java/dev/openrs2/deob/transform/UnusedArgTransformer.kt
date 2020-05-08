@@ -8,6 +8,7 @@ import dev.openrs2.asm.hasCode
 import dev.openrs2.asm.removeArgument
 import dev.openrs2.asm.transform.Transformer
 import dev.openrs2.deob.ArgRef
+import dev.openrs2.deob.Profile
 import dev.openrs2.deob.analysis.ConstSourceInterpreter
 import dev.openrs2.deob.analysis.ConstSourceValue
 import dev.openrs2.deob.remap.TypedRemapper
@@ -20,10 +21,11 @@ import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.VarInsnNode
 import org.objectweb.asm.tree.analysis.Analyzer
+import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class UnusedArgTransformer : Transformer() {
+class UnusedArgTransformer @Inject constructor(private val profile: Profile) : Transformer() {
     private val retainedArgs = mutableSetOf<ArgRef>()
     private lateinit var inheritedMethodSets: DisjointSet<MemberRef>
     private var deletedArgs = 0
@@ -71,7 +73,9 @@ class UnusedArgTransformer : Transformer() {
                 }
                 is MethodInsnNode -> {
                     val invokePartition = inheritedMethodSets[MemberRef(insn)]
-                    if (invokePartition == null || !TypedRemapper.isMethodRenamable(classPath, invokePartition)) {
+                    if (invokePartition == null) {
+                        continue@frame
+                    } else if (!TypedRemapper.isMethodRenamable(classPath, profile.excludedMethods, invokePartition)) {
                         continue@frame
                     }
 
@@ -115,7 +119,7 @@ class UnusedArgTransformer : Transformer() {
             }
 
             val partition = inheritedMethodSets[MemberRef(insn)]
-            if (partition == null || !TypedRemapper.isMethodRenamable(classPath, partition)) {
+            if (partition == null || !TypedRemapper.isMethodRenamable(classPath, profile.excludedMethods, partition)) {
                 continue
             }
 
@@ -148,7 +152,7 @@ class UnusedArgTransformer : Transformer() {
     ): Boolean {
         // delete unused int args from the method itself
         val partition = inheritedMethodSets[MemberRef(clazz, method)]!!
-        if (!TypedRemapper.isMethodRenamable(classPath, partition)) {
+        if (!TypedRemapper.isMethodRenamable(classPath, profile.excludedMethods, partition)) {
             return false
         }
 

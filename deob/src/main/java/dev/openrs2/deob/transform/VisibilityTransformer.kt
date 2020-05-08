@@ -3,12 +3,15 @@ package dev.openrs2.deob.transform
 import com.github.michaelbull.logging.InlineLogger
 import com.google.common.collect.HashMultimap
 import com.google.common.collect.Multimap
-import dev.openrs2.asm.ClassForNameUtils
 import dev.openrs2.asm.MemberDesc
 import dev.openrs2.asm.MemberRef
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
+import dev.openrs2.asm.filter.MemberFilter
+import dev.openrs2.asm.filter.UnionMemberFilter
 import dev.openrs2.asm.transform.Transformer
+import dev.openrs2.deob.Profile
+import dev.openrs2.deob.filter.ReflectedConstructorFilter
 import dev.openrs2.util.collect.DisjointSet
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.Type
@@ -16,33 +19,26 @@ import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.FieldInsnNode
 import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.MethodNode
+import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class VisibilityTransformer : Transformer() {
+class VisibilityTransformer @Inject constructor(private val profile: Profile) : Transformer() {
     private lateinit var inheritedFieldSets: DisjointSet<MemberRef>
     private lateinit var inheritedMethodSets: DisjointSet<MemberRef>
+    private lateinit var entryPoints: MemberFilter
     private val fieldReferences = HashMultimap.create<DisjointSet.Partition<MemberRef>, String>()
     private val methodReferences = HashMultimap.create<DisjointSet.Partition<MemberRef>, String>()
-    private val publicCtorClasses = mutableSetOf<String>()
 
     override fun preTransform(classPath: ClassPath) {
         inheritedFieldSets = classPath.createInheritedFieldSets()
         inheritedMethodSets = classPath.createInheritedMethodSets()
+        entryPoints = UnionMemberFilter(profile.entryPoints, ReflectedConstructorFilter.create(classPath))
         fieldReferences.clear()
         methodReferences.clear()
-        publicCtorClasses.clear()
-        publicCtorClasses.addAll(DEFAULT_PUBLIC_CTOR_CLASSES)
     }
 
     override fun transformCode(classPath: ClassPath, library: Library, clazz: ClassNode, method: MethodNode): Boolean {
-        for (name in ClassForNameUtils.findClassNames(method)) {
-            val loadedClass = classPath[name]
-            if (loadedClass != null && !loadedClass.dependency) {
-                publicCtorClasses.add(name)
-            }
-        }
-
         for (insn in method.instructions) {
             when (insn) {
                 is FieldInsnNode -> addReference(fieldReferences, inheritedFieldSets, MemberRef(insn), clazz.name)
@@ -71,11 +67,8 @@ class VisibilityTransformer : Transformer() {
             if (member.name == "<clinit>") {
                 // the visibility flags don't really matter - we use package-private to match javac
                 return 0
-            } else if (member.owner in publicCtorClasses && member.name == "<init>") {
-                // constructors invoked with reflection (including applets) must be public
-                return Opcodes.ACC_PUBLIC
-            } else if (member.name in PUBLIC_METHODS) {
-                // methods invoked with reflection must also be public
+            } else if (entryPoints.matches(member)) {
+                // entry points must be public
                 return Opcodes.ACC_PUBLIC
             }
         }
@@ -106,8 +99,6 @@ class VisibilityTransformer : Transformer() {
     }
 
     override fun postTransform(classPath: ClassPath) {
-        logger.info { "Identified constructors invoked with reflection $publicCtorClasses" }
-
         var classesChanged = 0
         var fieldsChanged = 0
         var methodsChanged = 0
@@ -166,8 +157,6 @@ class VisibilityTransformer : Transformer() {
     companion object {
         private val logger = InlineLogger()
         private const val VISIBILITY_FLAGS = Opcodes.ACC_PUBLIC or Opcodes.ACC_PROTECTED or Opcodes.ACC_PRIVATE
-        private val DEFAULT_PUBLIC_CTOR_CLASSES = setOf("client", "loader", "unpackclass")
-        private val PUBLIC_METHODS = setOf("main", "providesignlink")
 
         private fun addReference(
             references: Multimap<DisjointSet.Partition<MemberRef>, String>,

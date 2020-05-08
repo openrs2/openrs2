@@ -40,6 +40,9 @@ object DeobfuscatorModule : AbstractModule() {
         install(BundlerModule)
         install(DeobfuscatorMapModule)
 
+        bind(Profile::class.java)
+            .toInstance(Profile.BUILD_550)
+
         val binder = Multibinder.newSetBinder(binder(), Transformer::class.java, DeobfuscatorQualifier::class.java)
         binder.addBinding().to(OriginalPcSaveTransformer::class.java)
         binder.addBinding().to(OriginalNameTransformer::class.java)

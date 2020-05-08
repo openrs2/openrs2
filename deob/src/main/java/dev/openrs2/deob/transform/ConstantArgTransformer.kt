@@ -6,6 +6,8 @@ import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
 import dev.openrs2.asm.copy
 import dev.openrs2.asm.deleteExpression
+import dev.openrs2.asm.filter.MemberFilter
+import dev.openrs2.asm.filter.UnionMemberFilter
 import dev.openrs2.asm.hasCode
 import dev.openrs2.asm.intConstant
 import dev.openrs2.asm.isPure
@@ -15,12 +17,13 @@ import dev.openrs2.asm.stackMetadata
 import dev.openrs2.asm.toAbstractInsnNode
 import dev.openrs2.asm.transform.Transformer
 import dev.openrs2.deob.ArgRef
+import dev.openrs2.deob.Profile
 import dev.openrs2.deob.analysis.IntBranch
 import dev.openrs2.deob.analysis.IntBranchResult.ALWAYS_TAKEN
 import dev.openrs2.deob.analysis.IntBranchResult.NEVER_TAKEN
 import dev.openrs2.deob.analysis.IntInterpreter
 import dev.openrs2.deob.analysis.IntValueSet
-import dev.openrs2.deob.remap.TypedRemapper
+import dev.openrs2.deob.filter.ReflectedConstructorFilter
 import dev.openrs2.util.collect.DisjointSet
 import dev.openrs2.util.collect.removeFirstOrNull
 import org.objectweb.asm.Opcodes.GOTO
@@ -43,14 +46,16 @@ import org.objectweb.asm.tree.JumpInsnNode
 import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.analysis.Analyzer
+import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ConstantArgTransformer : Transformer() {
+class ConstantArgTransformer @Inject constructor(private val profile: Profile) : Transformer() {
     private val pendingMethods = LinkedHashSet<MemberRef>()
     private val arglessMethods = mutableSetOf<DisjointSet.Partition<MemberRef>>()
     private val argValues = mutableMapOf<ArgRef, IntValueSet>()
     private lateinit var inheritedMethodSets: DisjointSet<MemberRef>
+    private lateinit var entryPoints: MemberFilter
     private var branchesSimplified = 0
     private var constantsInlined = 0
 
@@ -59,6 +64,7 @@ class ConstantArgTransformer : Transformer() {
         arglessMethods.clear()
         argValues.clear()
         inheritedMethodSets = classPath.createInheritedMethodSets()
+        entryPoints = UnionMemberFilter(profile.entryPoints, ReflectedConstructorFilter.create(classPath))
         branchesSimplified = 0
         constantsInlined = 0
 
@@ -72,27 +78,22 @@ class ConstantArgTransformer : Transformer() {
 
     private fun queueEntryPoints(classPath: ClassPath) {
         for (partition in inheritedMethodSets) {
-            /*
-             * The set of non-renamable methods roughly matches up with the
-             * methods we want to consider as entry points. It includes methods
-             * which we override, which may be called by the standard library),
-             * the main() method (called by the JVM), providesignlink() (called
-             * with reflection) and <clinit> (called by the JVM).
-             *
-             * It isn't perfect - it counts every <init> method as an entry
-             * point, but strictly speaking we only need to count <init>
-             * methods invoked with reflection as entry points (like
-             * VisibilityTransformer). However, it makes no difference in this
-             * case, as the obfuscator does not add dummy constant arguments to
-             * constructors.
-             *
-             * It also counts native methods as an entry point. This isn't
-             * problematic as they don't have an InsnList, so we skip them.
-             */
-            if (!TypedRemapper.isMethodRenamable(classPath, partition)) {
+            if (isEntryPoint(classPath, partition)) {
                 pendingMethods.addAll(partition)
             }
         }
+    }
+
+    private fun isEntryPoint(classPath: ClassPath, partition: DisjointSet.Partition<MemberRef>): Boolean {
+        for (method in partition) {
+            val clazz = classPath[method.owner]!!
+
+            if (entryPoints.matches(method) || clazz.dependency) {
+                return true
+            }
+        }
+
+        return false
     }
 
     private fun analyzeMethod(classPath: ClassPath, ref: MemberRef) {

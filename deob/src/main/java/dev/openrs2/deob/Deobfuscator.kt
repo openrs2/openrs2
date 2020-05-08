@@ -15,6 +15,7 @@ import javax.inject.Singleton
 
 @Singleton
 class Deobfuscator @Inject constructor(
+    private val profile: Profile,
     @DeobfuscatorQualifier private val transformers: Set<@JvmSuppressWildcards Transformer>
 ) {
     fun run(input: Path, output: Path) {
@@ -56,10 +57,10 @@ class Deobfuscator @Inject constructor(
 
         // prefix remaining loader/unpacker classes (to avoid conflicts when we rename in the same classpath as the client)
         logger.info { "Prefixing loader and unpackclass class names" }
-        loader.remap(PrefixRemapper.create(loader, "loader_"))
-        glLoader.remap(PrefixRemapper.create(glLoader, "loader_"))
-        unpackClass.remap(PrefixRemapper.create(unpackClass, "unpackclass_"))
-        glUnpackClass.remap(PrefixRemapper.create(glUnpackClass, "unpackclass_"))
+        loader.remap(PrefixRemapper.create(loader, "loader_", profile.excludedClasses))
+        glLoader.remap(PrefixRemapper.create(glLoader, "loader_", profile.excludedClasses))
+        unpackClass.remap(PrefixRemapper.create(unpackClass, "unpackclass_", profile.excludedClasses))
+        glUnpackClass.remap(PrefixRemapper.create(glUnpackClass, "unpackclass_", profile.excludedClasses))
 
         // bundle libraries together into a common classpath
         val runtime = ClassLoader.getPlatformClassLoader()

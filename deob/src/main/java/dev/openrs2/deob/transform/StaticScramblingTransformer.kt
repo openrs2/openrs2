@@ -6,7 +6,7 @@ import dev.openrs2.asm.MemberRef
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
 import dev.openrs2.asm.transform.Transformer
-import dev.openrs2.deob.remap.TypedRemapper
+import dev.openrs2.deob.Profile
 import dev.openrs2.util.collect.DisjointSet
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
@@ -18,11 +18,12 @@ import org.objectweb.asm.tree.JumpInsnNode
 import org.objectweb.asm.tree.LabelNode
 import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.MethodNode
+import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.math.max
 
 @Singleton
-class StaticScramblingTransformer : Transformer() {
+class StaticScramblingTransformer @Inject constructor(private val profile: Profile) : Transformer() {
     private class FieldSet(val owner: ClassNode, val fields: List<FieldNode>, val clinit: MethodNode?) {
         val dependencies = clinit?.instructions
             ?.filterIsInstance<FieldInsnNode>()
@@ -165,7 +166,7 @@ class StaticScramblingTransformer : Transformer() {
                         return@removeIf false
                     } else if (method.access and Opcodes.ACC_NATIVE != 0) {
                         return@removeIf false
-                    } else if (method.name in TypedRemapper.EXCLUDED_METHODS) {
+                    } else if (profile.excludedMethods.matches(clazz.name, method.name, method.desc)) {
                         return@removeIf false
                     }
 
