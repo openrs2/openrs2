@@ -1,5 +1,3 @@
-import java.nio.file.Files
-
 rootProject.name = "openrs2"
 
 include(
@@ -19,18 +17,13 @@ include(
     "deob-map",
     "deob-processor",
     "game",
+    "nonfree",
+    "nonfree:client",
+    "nonfree:gl",
+    "nonfree:loader",
+    "nonfree:signlink",
+    "nonfree:unpack",
+    "nonfree:unpackclass",
     "util",
     "yaml"
 )
-
-if (Files.exists(rootProject.projectDir.toPath().resolve("nonfree/build.gradle.kts"))) {
-    include(
-        "nonfree",
-        "nonfree:client",
-        "nonfree:gl",
-        "nonfree:loader",
-        "nonfree:signlink",
-        "nonfree:unpack",
-        "nonfree:unpackclass"
-    )
-}

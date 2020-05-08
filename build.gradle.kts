@@ -306,3 +306,78 @@ tasks.dokka {
 tasks.wrapper {
     distributionType = Wrapper.DistributionType.ALL
 }
+
+configure(project(":nonfree").subprojects) {
+    plugins.withType<JavaPlugin> {
+        dependencies {
+            val annotationProcessor by configurations
+            annotationProcessor(project(":deob-processor"))
+
+            val compileOnly by configurations
+            compileOnly(project(":deob-annotations"))
+        }
+
+        tasks.named<JavaCompile>("compileJava") {
+            options.compilerArgs = listOf("-Amap=${project.rootDir}/share/deob-map/${project.name}.yaml")
+        }
+    }
+}
+
+project(":nonfree") {
+    apply(plugin = "base")
+}
+
+project(":nonfree:client") {
+    apply(plugin = "application")
+
+    configure<ApplicationPluginConvention> {
+        mainClassName = "client"
+    }
+
+    tasks.named<JavaExec>("run") {
+        args("1", "live", "en", "game0")
+    }
+
+    plugins.withType<JavaPlugin> {
+        dependencies {
+            val implementation by configurations
+            implementation(project(":nonfree:gl"))
+            implementation(project(":nonfree:signlink"))
+        }
+    }
+}
+
+project(":nonfree:gl") {
+    apply(plugin = "java-library")
+}
+
+project(":nonfree:loader") {
+    apply(plugin = "java")
+
+    plugins.withType<JavaPlugin> {
+        dependencies {
+            val implementation by configurations
+            implementation(project(":nonfree:signlink"))
+            implementation(project(":nonfree:unpack"))
+        }
+    }
+}
+
+project(":nonfree:signlink") {
+    apply(plugin = "java-library")
+}
+
+project(":nonfree:unpack") {
+    apply(plugin = "java-library")
+}
+
+project(":nonfree:unpackclass") {
+    apply(plugin = "java-library")
+
+    plugins.withType<JavaPlugin> {
+        dependencies {
+            val implementation by configurations
+            implementation(project(":nonfree:unpack"))
+        }
+    }
+}
