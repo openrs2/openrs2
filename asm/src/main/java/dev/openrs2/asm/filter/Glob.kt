@@ -12,11 +12,8 @@ object Glob {
     private fun compile(pattern: String, className: Boolean): Regex {
         val regex = StringBuilder()
         var star = false
-        var escape = false
 
         for (ch in pattern) {
-            check(!star || !escape)
-
             if (star) {
                 star = false
 
@@ -26,9 +23,6 @@ object Glob {
                 }
 
                 regex.append("[^/]*")
-            } else if (escape) {
-                regex.append(Regex.escape(ch.toString()))
-                continue
             }
 
             when (ch) {
@@ -37,17 +31,12 @@ object Glob {
                 } else {
                     regex.append(".*")
                 }
-                '\\' -> escape = true
                 else -> regex.append(Regex.escape(ch.toString()))
             }
         }
 
         if (star) {
             regex.append(".*")
-        }
-
-        require(!escape) {
-            "Unterminated escape sequence"
         }
 
         return Regex(regex.toString())
