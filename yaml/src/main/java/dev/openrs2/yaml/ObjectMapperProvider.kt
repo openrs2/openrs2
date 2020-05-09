@@ -2,6 +2,7 @@ package dev.openrs2.yaml
 
 import com.fasterxml.jackson.databind.Module
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.PropertyNamingStrategy
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import javax.inject.Inject
@@ -14,5 +15,6 @@ class ObjectMapperProvider @Inject constructor(
         return ObjectMapper(YAMLFactory())
             .registerKotlinModule()
             .registerModules(modules)
+            .setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE)
     }
 }
