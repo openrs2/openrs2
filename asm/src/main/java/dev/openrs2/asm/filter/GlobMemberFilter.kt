@@ -1,23 +1,24 @@
 package dev.openrs2.asm.filter
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import dev.openrs2.asm.MemberRef
 
-class GlobMemberFilter(vararg patterns: String) : MemberFilter {
+class GlobMemberFilter(@Suppress("CanBeParameter") private val patterns: List<MemberRef>) : MemberFilter {
     private data class CompiledPattern(val owner: Regex, val name: Regex, val desc: Regex)
 
-    private val patterns = patterns.map(::compile).toList()
+    @JsonIgnore
+    private val compiledPatterns = patterns.map(::compile).toList()
 
     override fun matches(owner: String, name: String, desc: String): Boolean {
-        return patterns.any { it.owner.matches(owner) && it.name.matches(name) && it.desc.matches(desc) }
+        return compiledPatterns.any { it.owner.matches(owner) && it.name.matches(name) && it.desc.matches(desc) }
     }
 
     companion object {
-        private fun compile(pattern: String): CompiledPattern {
-            val ref = MemberRef.fromString(pattern)
+        private fun compile(member: MemberRef): CompiledPattern {
             return CompiledPattern(
-                Glob.compileClass(ref.owner),
-                Glob.compile(ref.name),
-                Glob.compile(ref.desc)
+                Glob.compileClass(member.owner),
+                Glob.compile(member.name),
+                Glob.compile(member.desc)
             )
         }
     }

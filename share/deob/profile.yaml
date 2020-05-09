@@ -1,0 +1,34 @@
+---
+excluded_classes:
+  - "client"
+  - "com/sun/opengl/impl/x11/**"
+  - "jagex3/jagmisc/jagmisc"
+  - "jaggl/**"
+  - "javax/media/opengl/**"
+  - "loader"
+  - "unpack"
+  - "unpackclass"
+excluded_methods:
+  - "**.<clinit> *"
+  - "**.<init> *"
+  - "**.main *"
+  - "**.providesignlink *"
+  - "**.quit *"
+  - "com/sun/opengl/impl/x11/**.* *"
+  - "jaggl/**.* *"
+  - "javax/media/opengl/**.* *"
+excluded_fields:
+  - "**.cache *"
+  - "com/sun/opengl/impl/x11/**.* *"
+  - "jaggl/**.* *"
+  - "javax/media/opengl/**.* *"
+entry_points:
+  - "**.<clinit> *"
+  - "**.main *"
+  - "**.providesignlink *"
+  - "client.<init> *"
+  - "com/sun/opengl/impl/x11/DRIHack.begin *"
+  - "com/sun/opengl/impl/x11/DRIHack.end *"
+  - "loader.<init> *"
+  - "unpackclass.<init> *"
+max_obfuscated_name_len: 2

@@ -6,6 +6,7 @@ import javax.inject.Singleton
 @Singleton
 class AsmJacksonModule : SimpleModule() {
     init {
+        addDeserializer(MemberRef::class.java, MemberRefDeserializer)
         addKeyDeserializer(MemberRef::class.java, MemberRefKeyDeserializer)
     }
 }

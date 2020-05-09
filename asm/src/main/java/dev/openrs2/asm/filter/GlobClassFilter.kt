@@ -1,9 +1,12 @@
 package dev.openrs2.asm.filter
 
-class GlobClassFilter(vararg patterns: String) : ClassFilter {
-    private val patterns = patterns.map(Glob::compileClass).toList()
+import com.fasterxml.jackson.annotation.JsonIgnore
+
+class GlobClassFilter(@Suppress("CanBeParameter") private val patterns: List<String>) : ClassFilter {
+    @JsonIgnore
+    private val compiledPatterns = patterns.map(Glob::compileClass).toList()
 
     override fun matches(name: String): Boolean {
-        return patterns.any { it.matches(name) }
+        return compiledPatterns.any { it.matches(name) }
     }
 }

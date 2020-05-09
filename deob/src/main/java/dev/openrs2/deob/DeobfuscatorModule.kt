@@ -1,6 +1,7 @@
 package dev.openrs2.deob
 
 import com.google.inject.AbstractModule
+import com.google.inject.Scopes
 import com.google.inject.multibindings.Multibinder
 import dev.openrs2.asm.transform.Transformer
 import dev.openrs2.bundler.BundlerModule
@@ -41,7 +42,8 @@ object DeobfuscatorModule : AbstractModule() {
         install(DeobfuscatorMapModule)
 
         bind(Profile::class.java)
-            .toInstance(Profile.BUILD_550)
+            .toProvider(ProfileProvider::class.java)
+            .`in`(Scopes.SINGLETON)
 
         val binder = Multibinder.newSetBinder(binder(), Transformer::class.java, DeobfuscatorQualifier::class.java)
         binder.addBinding().to(OriginalPcSaveTransformer::class.java)
