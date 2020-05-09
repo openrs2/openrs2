@@ -137,7 +137,7 @@ class ClassPath(
 
             for (member in members) {
                 val access = getMemberAccess(clazz, member)
-                if (access != null && (access and Opcodes.ACC_STATIC != 0 || fields)) {
+                if (access != null && (access and Opcodes.ACC_STATIC != 0 || member.name == "<init>" || fields)) {
                     continue
                 }
 
