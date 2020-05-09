@@ -71,8 +71,8 @@ class Deobfuscator @Inject constructor(
         )
         val glClassPath = ClassPath(
             runtime,
-            dependencies = listOf(gl),
-            libraries = listOf(glClient, glLoader, glSignLink, glUnpack, glUnpackClass)
+            dependencies = emptyList(),
+            libraries = listOf(gl, glClient, glLoader, glSignLink, glUnpack, glUnpackClass)
         )
         val unsignedClassPath = ClassPath(
             runtime,

@@ -16,7 +16,10 @@ class Profile(
         val BUILD_550 = Profile(
             excludedClasses = GlobClassFilter(
                 "client",
+                "com/sun/opengl/impl/x11/**",
                 "jagex3/jagmisc/jagmisc",
+                "jaggl/**",
+                "javax/media/opengl/**",
                 "loader",
                 "unpack",
                 "unpackclass"
@@ -26,16 +29,24 @@ class Profile(
                 "**.<init> *",
                 "**.main *",
                 "**.providesignlink *",
-                "**.quit *"
+                "**.quit *",
+                "com/sun/opengl/impl/x11/**.* *",
+                "jaggl/**.* *",
+                "javax/media/opengl/**.* *"
             ),
             excludedFields = GlobMemberFilter(
-                "**.cache *"
+                "**.cache *",
+                "com/sun/opengl/impl/x11/**.* *",
+                "jaggl/**.* *",
+                "javax/media/opengl/**.* *"
             ),
             entryPoints = GlobMemberFilter(
                 "**.<clinit> *",
                 "**.main *",
                 "**.providesignlink *",
                 "client.<init> *",
+                "com/sun/opengl/impl/x11/DRIHack.begin *",
+                "com/sun/opengl/impl/x11/DRIHack.end *",
                 "loader.<init> *",
                 "unpackclass.<init> *"
             ),
