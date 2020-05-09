@@ -9,6 +9,7 @@ import com.github.javaparser.symbolsolver.resolution.typesolvers.CombinedTypeSol
 import com.github.javaparser.symbolsolver.resolution.typesolvers.JavaParserTypeSolver
 import com.github.javaparser.symbolsolver.resolution.typesolvers.ReflectionTypeSolver
 import com.github.javaparser.utils.SourceRoot
+import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.deob.ast.transform.AddSubTransformer
 import dev.openrs2.deob.ast.transform.BinaryExprOrderTransformer
 import dev.openrs2.deob.ast.transform.BitMaskTransformer
@@ -50,6 +51,7 @@ class AstDeobfuscator(private val modules: List<Path>) {
         val units = mutableMapOf<String, CompilationUnit>()
 
         for (root in roots) {
+            logger.info { "Parsing root ${root.root}" }
             val results = root.tryToParseParallelized()
             for (result in results) {
                 require(result.isSuccessful) { result }
@@ -62,16 +64,20 @@ class AstDeobfuscator(private val modules: List<Path>) {
         }
 
         for (transformer in TRANSFORMERS) {
+            logger.info { "Running transformer ${transformer.javaClass.simpleName}" }
             transformer.transform(units)
         }
 
         for (root in roots) {
+            logger.info { "Saving root ${root.root}" }
             root.printer = Function<CompilationUnit, String>(printer::print).andThen(::stripNewlineAfterPcAnnotation)
             root.saveAll()
         }
     }
 
     companion object {
+        private val logger = InlineLogger()
+
         private val TRANSFORMERS = listOf(
             UnencloseTransformer(),
             NegativeLiteralTransformer(),
