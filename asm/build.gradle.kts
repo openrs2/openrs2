@@ -5,6 +5,8 @@ plugins {
 
 dependencies {
     api(project(":util"))
+    api(project(":yaml"))
+    api("com.google.inject:guice:${Versions.guice}")
     api("org.ow2.asm:asm:${Versions.asm}")
     api("org.ow2.asm:asm-commons:${Versions.asm}")
     api("org.ow2.asm:asm-tree:${Versions.asm}")

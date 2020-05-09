@@ -5,7 +5,6 @@ plugins {
 
 dependencies {
     api(project(":asm"))
-    api(project(":yaml"))
 }
 
 publishing {
