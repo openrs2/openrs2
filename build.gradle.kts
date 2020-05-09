@@ -318,7 +318,7 @@ configure(project(":nonfree").subprojects) {
         }
 
         tasks.named<JavaCompile>("compileJava") {
-            options.compilerArgs = listOf("-Amap=${project.rootDir}/share/deob-map/${project.name}.yaml")
+            options.compilerArgs = listOf("-Amap=${project.rootDir}/share/deob/map/${project.name}.yaml")
         }
     }
 }

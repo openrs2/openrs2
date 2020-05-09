@@ -26,7 +26,7 @@ class NameMapProvider @Inject constructor(private val mapper: ObjectMapper) : Pr
     }
 
     companion object {
-        private val PATH = Paths.get("share/deob-map")
+        private val PATH = Paths.get("share/deob/map")
         private const val YAML_SUFFIX = ".yaml"
     }
 }
