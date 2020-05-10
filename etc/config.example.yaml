@@ -1,10 +1,10 @@
 ---
 # The name of the game. All references to "RuneScape" are replaced with this
 # string.
-game: OpenRS2
+game: "OpenRS2"
 # The name of the organisation running the game. All references to "Jagex" are
 # replaced with this string.
-operator: OpenRS2
+operator: "OpenRS2"
 # The game's domain name. All references to "runescape.com" are replaced with
 # this string. It should, at a minimum, have `www` and `www-wtqa` hostnames.
-domain: openrs2.dev
+domain: "openrs2.dev"
