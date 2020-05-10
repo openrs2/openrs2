@@ -72,7 +72,7 @@ configure(tasks.filter { it.name in shadowDistTasks }) {
 
 distributions {
     named("shadow") {
-        distributionBaseName.set("openrs2-shadow")
+        distributionBaseName.set("openrs2")
 
         contents {
             from("$buildDir/AUTHORS")
