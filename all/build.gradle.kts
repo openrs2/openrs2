@@ -25,6 +25,8 @@ dependencies {
 }
 
 tasks.shadowJar {
+    archiveFileName.set("openrs2.jar")
+
     minimize {
         exclude(dependency("org.jetbrains.kotlin:kotlin-reflect"))
     }
