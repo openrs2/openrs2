@@ -15,7 +15,7 @@ class MethodOrderTransformer : Transformer() {
         return false
     }
 
-    companion object {
+    private companion object {
         private val STATIC_COMPARATOR = Comparator<MethodNode> { a, b ->
             val aStatic = a.access and Opcodes.ACC_STATIC != 0
             val bStatic = b.access and Opcodes.ACC_STATIC != 0

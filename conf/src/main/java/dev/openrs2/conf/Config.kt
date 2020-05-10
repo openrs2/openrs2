@@ -13,7 +13,7 @@ data class Config(
         internalOperator = operator.toInternalName()
     }
 
-    companion object {
+    private companion object {
         private val INTERNAL_NAME_REGEX = Regex("(?i)[^a-z0-9]+")
 
         private fun String.toInternalName(): String {

@@ -131,7 +131,7 @@ class MonitorTransformer : Transformer() {
         logger.info { "Replaced $loadsReplaced ASTORE ALOAD sequences with DUP ASTORE" }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
 
         // these regexes rely on JSRInlinerAdapter running first

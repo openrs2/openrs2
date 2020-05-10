@@ -50,7 +50,7 @@ class CachePathTransformer @Inject constructor(
         logger.info { "Updated $paths cache paths" }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
     }
 }

@@ -151,7 +151,7 @@ class PlatformDetectionTransformer : Transformer() {
         logger.info { "Replaced $glBlocks jaggl and $miscBlocks jagmisc platform detection blocks" }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
         private val GL_PLATFORM_DETECTION_MATCHER = InsnMatcher.compile(
             """

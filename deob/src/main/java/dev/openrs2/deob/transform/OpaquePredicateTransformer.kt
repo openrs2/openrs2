@@ -115,7 +115,7 @@ class OpaquePredicateTransformer : Transformer() {
         logger.info { "Removed $opaquePredicates opaque predicates and $stores redundant stores" }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
         private val FLOW_OBSTRUCTOR_INITIALIZER_MATCHER = InsnMatcher.compile(
             """

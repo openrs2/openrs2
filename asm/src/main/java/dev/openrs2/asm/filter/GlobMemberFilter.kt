@@ -13,7 +13,7 @@ class GlobMemberFilter(@Suppress("CanBeParameter") private val patterns: List<Me
         return compiledPatterns.any { it.owner.matches(owner) && it.name.matches(name) && it.desc.matches(desc) }
     }
 
-    companion object {
+    private companion object {
         private fun compile(member: MemberRef): CompiledPattern {
             return CompiledPattern(
                 Glob.compileClass(member.owner),

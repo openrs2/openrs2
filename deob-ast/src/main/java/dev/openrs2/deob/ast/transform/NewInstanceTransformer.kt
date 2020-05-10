@@ -22,7 +22,7 @@ class NewInstanceTransformer : Transformer() {
         }
     }
 
-    companion object {
+    private companion object {
         private val CONSTRUCTOR_METHODS = setOf("getConstructor", "getDeclaredConstructor")
     }
 }

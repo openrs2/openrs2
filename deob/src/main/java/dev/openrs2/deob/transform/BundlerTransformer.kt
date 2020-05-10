@@ -18,7 +18,7 @@ class BundlerTransformer @Inject constructor(
         }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
     }
 }

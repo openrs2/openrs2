@@ -67,7 +67,7 @@ class OriginalNameTransformer : Transformer() {
         return false
     }
 
-    companion object {
+    private companion object {
         private fun createOriginalClassAnnotation(name: String): AnnotationNode {
             val annotation = AnnotationNode(Type.getDescriptor(OriginalClass::class.java))
             annotation.values = listOf("value", name)

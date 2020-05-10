@@ -36,7 +36,7 @@ class TypoTransformer : Transformer() {
         logger.info { "Fixed $errorsFixed typographical errors" }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
     }
 }

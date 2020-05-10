@@ -41,7 +41,7 @@ class LoadLibraryTransformer : Transformer() {
         logger.info { "Replaced $jnilibs jnilibs with dylibs and removed $amd64Checks amd64 jagmisc checks" }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
         private val AMD64_CHECK_MATCHER =
             InsnMatcher.compile("GETSTATIC LDC INVOKEVIRTUAL IFNE GETSTATIC LDC INVOKEVIRTUAL IFNE")

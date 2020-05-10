@@ -25,7 +25,7 @@ class NameMapProvider @Inject constructor(private val mapper: ObjectMapper) : Pr
         return Files.isRegularFile(path) && path.fileName.toString().endsWith(YAML_SUFFIX)
     }
 
-    companion object {
+    private companion object {
         private val PATH = Paths.get("share/deob/map")
         private const val YAML_SUFFIX = ".yaml"
     }

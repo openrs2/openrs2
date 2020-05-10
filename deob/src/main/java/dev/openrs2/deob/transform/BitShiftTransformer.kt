@@ -47,7 +47,7 @@ class BitShiftTransformer : Transformer() {
         logger.info { "Simplified $simplified bit shifts" }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
         private val CONST_SHIFT_MATCHER =
             InsnMatcher.compile("(ICONST | BIPUSH | SIPUSH | LDC) (ISHL | ISHR | IUSHR | LSHL | LSHR | LUSHR)")

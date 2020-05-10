@@ -54,7 +54,7 @@ class UnusedLocalTransformer : Transformer() {
         logger.info { "Removed $localsRemoved unused local variables" }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
     }
 }

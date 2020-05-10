@@ -59,7 +59,7 @@ class ExceptionTracingTransformer : Transformer() {
         logger.info { "Removed $tracingTryCatches tracing try/catch blocks" }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
         private val CATCH_MATCHER = InsnMatcher.compile(
             """

@@ -23,7 +23,7 @@ class Decompiler(
         io.close()
     }
 
-    companion object {
+    private companion object {
         private val OPTIONS = mapOf(
             IFernflowerPreferences.INDENT_STRING to "\t",
             IFernflowerPreferences.SYNTHETIC_NOT_SET to "1"

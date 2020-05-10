@@ -59,7 +59,7 @@ class ResetTransformer : Transformer() {
         logger.info { "Removed ${resetMethods.size} reset methods" }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
 
         private fun findMasterReset(method: MethodNode): MemberRef? {

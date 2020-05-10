@@ -120,7 +120,7 @@ class Deobfuscator @Inject constructor(
         unsignedClient.write(output.resolve("runescape_unsigned.jar"), JarLibraryWriter, unsignedClassPath)
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
     }
 }

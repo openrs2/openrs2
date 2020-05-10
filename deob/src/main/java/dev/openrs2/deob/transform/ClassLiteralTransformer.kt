@@ -110,7 +110,7 @@ class ClassLiteralTransformer : Transformer() {
         logger.info { "Updated $classLiterals class literals to Java 5 style" }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
         private val CLASS_FOR_NAME_MATCHER = InsnMatcher.compile(
             """

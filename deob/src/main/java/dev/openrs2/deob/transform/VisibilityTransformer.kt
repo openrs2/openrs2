@@ -154,7 +154,7 @@ class VisibilityTransformer @Inject constructor(private val profile: Profile) : 
         }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
         private const val VISIBILITY_FLAGS = Opcodes.ACC_PUBLIC or Opcodes.ACC_PROTECTED or Opcodes.ACC_PRIVATE
 

@@ -31,7 +31,7 @@ class ComplementTransformer : Transformer() {
         }
     }
 
-    companion object {
+    private companion object {
         private fun Expression.isComplement(): Boolean {
             return isUnaryExpr && asUnaryExpr().operator == UnaryExpr.Operator.BITWISE_COMPLEMENT
         }

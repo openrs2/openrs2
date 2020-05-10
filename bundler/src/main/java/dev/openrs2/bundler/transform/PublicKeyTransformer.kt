@@ -46,7 +46,7 @@ class PublicKeyTransformer @Inject constructor(private val key: RSAPrivateCrtKey
         logger.info { "Replaced $exponents exponents and $moduli moduli" }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
         private const val JAGEX_EXPONENT =
             "58778699976184461502525193738213253649000149147835990136706041084440742975821"

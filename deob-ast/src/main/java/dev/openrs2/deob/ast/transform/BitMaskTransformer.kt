@@ -59,7 +59,7 @@ class BitMaskTransformer : Transformer() {
         }
     }
 
-    companion object {
+    private companion object {
         private val SHIFT_OPS = setOf(
             BinaryExpr.Operator.SIGNED_RIGHT_SHIFT,
             BinaryExpr.Operator.UNSIGNED_RIGHT_SHIFT

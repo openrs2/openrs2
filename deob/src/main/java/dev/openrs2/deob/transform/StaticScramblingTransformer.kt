@@ -213,7 +213,7 @@ class StaticScramblingTransformer @Inject constructor(private val profile: Profi
         logger.info { "Moved ${fieldClasses.size} fields and ${methodClasses.size} methods" }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
         private const val MAX_FIELDS = 500
         private const val MAX_METHODS = 50

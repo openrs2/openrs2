@@ -51,7 +51,7 @@ class OriginalPcRestoreTransformer : Transformer() {
         logger.info { "Restored $originalPcsRestored original instruction indexes" }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
     }
 }

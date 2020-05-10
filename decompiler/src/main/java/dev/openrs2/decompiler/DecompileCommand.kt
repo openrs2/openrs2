@@ -31,7 +31,7 @@ class DecompileCommand : CliktCommand(name = "decompile") {
         return Paths.get("nonfree").resolve(dir).resolve("src/main/java")
     }
 
-    companion object {
+    private companion object {
         private val JAR_SUFFIX_REGEX = Regex("(?:_gl)?[.]jar$")
     }
 }

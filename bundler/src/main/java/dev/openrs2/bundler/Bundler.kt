@@ -146,7 +146,7 @@ class Bundler @Inject constructor(
         glLoader.write(output.resolve("loader_gl.jar"), SignedJarLibraryWriter(signedManifest, keyStore), glClassPath)
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
 
         private val APPLICATION_NAME = Attributes.Name("Application-Name")

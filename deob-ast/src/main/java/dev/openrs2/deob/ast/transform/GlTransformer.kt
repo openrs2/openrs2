@@ -306,7 +306,7 @@ class GlTransformer(private val registry: GlRegistry = GlRegistry.parse()) : Tra
         }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
         private const val GL_METHOD_PREFIX = "gl"
         private const val GL_CLASS_UNQUALIFIED = "GL"

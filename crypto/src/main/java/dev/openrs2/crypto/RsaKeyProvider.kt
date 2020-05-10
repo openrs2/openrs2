@@ -16,7 +16,7 @@ class RsaKeyProvider : Provider<RSAPrivateCrtKeyParameters> {
         }
     }
 
-    companion object {
+    private companion object {
         private val PATH = Paths.get("etc/game.key")
     }
 }

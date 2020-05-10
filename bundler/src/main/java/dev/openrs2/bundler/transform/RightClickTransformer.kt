@@ -53,7 +53,7 @@ class RightClickTransformer : Transformer() {
         logger.info { "Replaced $metaDownCalls isMetaDown calls with getModifiersEx" }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
     }
 }

@@ -113,7 +113,7 @@ class CounterTransformer : Transformer() {
         logger.info { "Removed ${counters.size} counters" }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
         private val RESET_PATTERN = InsnMatcher.compile("ICONST_0 PUTSTATIC")
         private val INCREMENT_PATTERN = InsnMatcher.compile("GETSTATIC ICONST_1 IADD PUTSTATIC")

@@ -68,7 +68,7 @@ class MacResizeTransformer : Transformer() {
         logger.info { "Removed $branchesRemoved branches to macOS-specific resize logic" }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
         private val DETECT_MAC_MATCHER = InsnMatcher.compile("GETSTATIC LDC INVOKEVIRTUAL (IFEQ | IFNE)")
     }

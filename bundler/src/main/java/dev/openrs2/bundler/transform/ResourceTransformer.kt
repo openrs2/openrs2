@@ -182,7 +182,7 @@ class ResourceTransformer(
         logger.info { "Replaced $glBlocks jaggl and $miscBlocks jagmisc resource constructor blocks" }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
 
         private const val RESOURCE_CONSTRUCTOR = """

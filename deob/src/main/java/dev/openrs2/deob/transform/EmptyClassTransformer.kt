@@ -102,7 +102,7 @@ class EmptyClassTransformer : Transformer() {
         logger.info { "Removed $removedClasses unused classes" }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
     }
 }

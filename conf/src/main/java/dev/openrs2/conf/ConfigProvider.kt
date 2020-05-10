@@ -17,7 +17,7 @@ class ConfigProvider @Inject constructor(private val mapper: ObjectMapper) : Pro
         }
     }
 
-    companion object {
+    private companion object {
         private val CONFIG_PATH = Paths.get("etc/config.yaml")
         private val EXAMPLE_CONFIG_PATH = Paths.get("etc/config.example.yaml")
     }

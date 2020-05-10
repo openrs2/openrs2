@@ -307,7 +307,7 @@ class ConstantArgTransformer @Inject constructor(private val profile: Profile) :
         logger.info { "Simplified $branchesSimplified branches and inlined $constantsInlined constants" }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
     }
 }

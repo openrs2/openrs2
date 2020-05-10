@@ -124,7 +124,7 @@ class EncloseTransformer : Transformer() {
         }
     }
 
-    companion object {
+    private companion object {
         private fun encloseLeft(parent: Expression, child: Expression) {
             val parentOp = Op.from(parent) ?: throw IllegalArgumentException()
             val childOp = Op.from(child) ?: return

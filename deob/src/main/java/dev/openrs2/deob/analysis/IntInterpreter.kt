@@ -145,7 +145,7 @@ class IntInterpreter(private val args: Array<IntValueSet>) : Interpreter<IntValu
         }
     }
 
-    companion object {
+    private companion object {
         private const val MAX_TRACKED_VALUES = 1
     }
 }

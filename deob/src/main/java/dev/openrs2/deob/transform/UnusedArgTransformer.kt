@@ -171,7 +171,7 @@ class UnusedArgTransformer @Inject constructor(private val profile: Profile) : T
         logger.info { "Removed $deletedArgs unused arguments" }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
         private val INT_SORTS = setOf(
             Type.BOOLEAN,

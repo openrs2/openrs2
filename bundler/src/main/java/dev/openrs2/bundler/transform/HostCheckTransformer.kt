@@ -62,7 +62,7 @@ class HostCheckTransformer : Transformer() {
         logger.info { "Removed $hostChecks host checks" }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
         private val GET_HOST_MATCHER = InsnMatcher.compile("INVOKEVIRTUAL INVOKEVIRTUAL INVOKEVIRTUAL")
     }

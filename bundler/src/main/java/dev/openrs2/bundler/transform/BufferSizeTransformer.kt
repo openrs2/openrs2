@@ -58,7 +58,7 @@ class BufferSizeTransformer : Transformer() {
         logger.info { "Resized $buffersResized buffers to 65536 bytes" }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
         private val GPP1_POS_MATCHER = InsnMatcher.compile("LDC (INVOKESPECIAL | INVOKEVIRTUAL) GETSTATIC")
         private val NEW_BUFFER_MATCHER = InsnMatcher.compile("NEW DUP (SIPUSH | LDC) INVOKESPECIAL PUTSTATIC")

@@ -46,7 +46,7 @@ class NameTransformer @Inject constructor(
         logger.info { "Replaced $names operator and game names" }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
     }
 }

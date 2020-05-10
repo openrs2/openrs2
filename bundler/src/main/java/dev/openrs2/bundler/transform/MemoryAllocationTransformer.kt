@@ -56,7 +56,7 @@ class MemoryAllocationTransformer : Transformer() {
         logger.info { "Zeroed $usedMemoryExprsZeroed used memory expressions" }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
 
         private val USED_MEMORY_MATCHER = InsnMatcher.compile("ALOAD INVOKEVIRTUAL ALOAD INVOKEVIRTUAL LSUB")

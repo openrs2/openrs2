@@ -113,7 +113,7 @@ class FinalTransformer : Transformer() {
         logger.info { "Updated final modifier on $classesChanged classes and $methodsChanged methods" }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
     }
 }

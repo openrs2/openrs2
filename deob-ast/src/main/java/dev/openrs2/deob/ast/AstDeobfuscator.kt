@@ -75,7 +75,7 @@ class AstDeobfuscator(private val modules: List<Path>) {
         }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
 
         private val TRANSFORMERS = listOf(

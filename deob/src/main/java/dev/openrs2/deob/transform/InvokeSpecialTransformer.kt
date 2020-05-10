@@ -86,7 +86,7 @@ class InvokeSpecialTransformer : Transformer() {
         logger.info { "Replaced $invokeSpecialsReplaced INVOKESPECIALs with INVOKEVIRTUAL" }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
     }
 }

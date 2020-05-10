@@ -51,7 +51,7 @@ class OverrideTransformer : Transformer() {
         logger.info { "Added $overrides override annotations" }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
         private val OVERRIDE_DESC: String = Type.getDescriptor(Override::class.java)
     }

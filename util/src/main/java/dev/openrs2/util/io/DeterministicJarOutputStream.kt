@@ -22,7 +22,7 @@ class DeterministicJarOutputStream : JarOutputStream {
         super.putNextEntry(ze)
     }
 
-    companion object {
+    private companion object {
         private val UNIX_EPOCH = FileTime.fromMillis(0)
     }
 }

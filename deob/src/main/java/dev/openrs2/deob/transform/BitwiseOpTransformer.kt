@@ -81,7 +81,7 @@ class BitwiseOpTransformer : Transformer() {
         logger.info { "Inlined $inlinedOps bitwise ops and removed ${methodOps.size} redundant methods" }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
         private val BITWISE_OP_MATCHER = InsnMatcher.compile("^ILOAD ILOAD (IXOR | IAND | IOR) IRETURN$")
         private const val BITWISE_OP_DESC = "(II)I"

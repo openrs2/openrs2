@@ -45,7 +45,7 @@ class DomainTransformer @Inject constructor(
         logger.info { "Replaced $domains domains" }
     }
 
-    companion object {
+    private companion object {
         private val logger = InlineLogger()
     }
 }

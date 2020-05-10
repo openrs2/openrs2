@@ -18,7 +18,7 @@ class FieldOrderTransformer : Transformer() {
         return false
     }
 
-    companion object {
+    private companion object {
         private const val CONSTRUCTOR = "<init>"
         private const val STATIC_CONSTRUCTOR = "<clinit>"
         private val STATIC_COMPARATOR = Comparator<FieldNode> { a, b ->
