@@ -51,18 +51,27 @@ licenseReport {
 val distTasks = listOf(
     "distTar",
     "distZip",
-    "installDist",
+    "installDist"
+)
+
+configure(tasks.filter { it.name in distTasks }) {
+    enabled = false
+}
+
+val shadowDistTasks = listOf(
     "installShadowDist",
     "shadowDistTar",
     "shadowDistZip"
 )
 
-configure(tasks.filter { it.name in distTasks }) {
+configure(tasks.filter { it.name in shadowDistTasks }) {
     dependsOn("generateAuthors", "generateLicenseReport")
 }
 
 distributions {
-    all {
+    named("shadow") {
+        distributionBaseName.set("openrs2-shadow")
+
         contents {
             from("$buildDir/AUTHORS")
             from("$rootDir/DCO")
@@ -82,16 +91,12 @@ distributions {
             }
         }
     }
-
-    named("shadow") {
-        distributionBaseName.set("openrs2-shadow")
-    }
 }
 
 publishing {
     publications.create<MavenPublication>("maven") {
         artifactId = "openrs2"
-        artifact(tasks.named("shadowDistZip").get())
+        setArtifacts(listOf(tasks.named("shadowDistZip").get()))
 
         pom {
             packaging = "zip"
