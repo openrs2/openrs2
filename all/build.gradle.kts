@@ -1,4 +1,5 @@
 import com.github.jk1.license.render.TextReportRenderer
+import java.nio.file.Files
 
 plugins {
     `maven-publish`
@@ -29,6 +30,20 @@ tasks.shadowJar {
     }
 }
 
+tasks.register("generateAuthors") {
+    inputs.dir("$rootDir/.git")
+    outputs.file("$buildDir/AUTHORS")
+
+    doLast {
+        Files.newOutputStream(buildDir.toPath().resolve("AUTHORS")).use { out ->
+            exec {
+                commandLine("git", "shortlog", "-esn", "HEAD")
+                standardOutput = out
+            }.assertNormalExitValue()
+        }
+    }
+}
+
 licenseReport {
     renderers = arrayOf(TextReportRenderer())
 }
@@ -43,12 +58,13 @@ val distTasks = listOf(
 )
 
 configure(tasks.filter { it.name in distTasks }) {
-    dependsOn("generateLicenseReport")
+    dependsOn("generateAuthors", "generateLicenseReport")
 }
 
 distributions {
     all {
         contents {
+            from("$buildDir/AUTHORS")
             from("${rootProject.projectDir}/DCO")
             from("${rootProject.projectDir}/LICENSE")
             from("${rootProject.projectDir}/README.md")
