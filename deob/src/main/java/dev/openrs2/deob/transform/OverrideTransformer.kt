@@ -53,6 +53,6 @@ class OverrideTransformer : Transformer() {
 
     private companion object {
         private val logger = InlineLogger()
-        private val OVERRIDE_DESC: String = Type.getDescriptor(Override::class.java)
+        private val OVERRIDE_DESC = Type.getDescriptor(Override::class.java)
     }
 }
