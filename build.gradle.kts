@@ -40,7 +40,7 @@ allprojects {
     plugins.withType<ApplicationPlugin> {
         tasks.named<JavaExec>("run") {
             standardInput = System.`in`
-            workingDir = rootProject.projectDir
+            workingDir = rootDir
         }
     }
 
@@ -212,7 +212,7 @@ fun commitHash(): String {
 }
 
 tasks.dokka {
-    outputDirectory = "${project.buildDir}/kdoc"
+    outputDirectory = "$buildDir/kdoc"
     outputFormat = "html"
 
     subProjects = subprojects.filter { it.isFree && it.name != "deob-annotations" }.map { it.name }

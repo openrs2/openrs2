@@ -65,14 +65,14 @@ distributions {
     all {
         contents {
             from("$buildDir/AUTHORS")
-            from("${rootProject.projectDir}/DCO")
-            from("${rootProject.projectDir}/LICENSE")
-            from("${rootProject.projectDir}/README.md")
-            from("${rootProject.projectDir}/etc/config.example.yaml") {
+            from("$rootDir/DCO")
+            from("$rootDir/LICENSE")
+            from("$rootDir/README.md")
+            from("$rootDir/etc/config.example.yaml") {
                 rename { "config.yaml" }
                 into("etc")
             }
-            from("${rootProject.projectDir}/share") {
+            from("$rootDir/share") {
                 exclude(".*", "*~")
                 into("share")
             }
