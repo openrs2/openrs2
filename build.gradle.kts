@@ -212,6 +212,8 @@ fun commitHash(): String {
 }
 
 tasks.dokka {
+    inputs.dir("$rootDir/.git")
+
     outputDirectory = "$buildDir/kdoc"
     outputFormat = "html"
 
