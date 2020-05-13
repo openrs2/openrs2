@@ -11,7 +11,7 @@ object Versions {
     const val guice = "4.2.3"
     const val inlineLogger = "1.0.2"
     const val jackson = "2.11.0"
-    const val javaParser = "3.15.21"
+    const val javaParser = "3.15.22"
     const val jdom = "2.0.6"
     const val jgrapht = "1.4.0"
     const val jimfs = "1.1"
