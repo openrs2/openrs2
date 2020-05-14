@@ -2,10 +2,10 @@ package dev.openrs2.compress.cli.gzip
 
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.options.option
-import dev.openrs2.cli.defaultStdin
-import dev.openrs2.cli.defaultStdout
-import dev.openrs2.cli.inputStream
-import dev.openrs2.cli.outputStream
+import com.github.ajalt.clikt.parameters.types.defaultStdin
+import com.github.ajalt.clikt.parameters.types.defaultStdout
+import com.github.ajalt.clikt.parameters.types.inputStream
+import com.github.ajalt.clikt.parameters.types.outputStream
 import dev.openrs2.compress.gzip.Gzip
 
 class GunzipCommand : CliktCommand(name = "gunzip") {

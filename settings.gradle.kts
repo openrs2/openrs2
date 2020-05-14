@@ -4,7 +4,6 @@ include(
     "all",
     "asm",
     "bundler",
-    "cli",
     "compress",
     "compress-cli",
     "conf",

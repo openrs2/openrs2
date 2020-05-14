@@ -2,8 +2,8 @@ package dev.openrs2.crc32
 
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.options.option
-import dev.openrs2.cli.defaultStdin
-import dev.openrs2.cli.inputStream
+import com.github.ajalt.clikt.parameters.types.defaultStdin
+import com.github.ajalt.clikt.parameters.types.inputStream
 import java.util.zip.CRC32
 
 fun main(args: Array<String>) = Crc32Command().main(args)

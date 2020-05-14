@@ -9,7 +9,7 @@ application {
 }
 
 dependencies {
-    api(project(":cli"))
+    api("com.github.ajalt:clikt:${Versions.clikt}")
 }
 
 publishing {
