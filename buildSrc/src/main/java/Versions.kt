@@ -19,7 +19,7 @@ object Versions {
     const val kotlin = "1.3.72"
     const val kotlinter = "2.3.2"
     const val logback = "1.2.3"
-    const val netty = "4.1.49.Final"
+    const val netty = "4.1.50.Final"
     const val openrs2Natives = "2.0.1"
     const val shadowPlugin = "5.2.0"
     const val versionsPlugin = "0.28.0"
