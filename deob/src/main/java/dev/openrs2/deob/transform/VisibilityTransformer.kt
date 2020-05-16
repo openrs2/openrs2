@@ -57,11 +57,6 @@ class VisibilityTransformer @Inject constructor(private val profile: Profile) : 
         classAccess: Int,
         access: Int
     ): Int {
-        if (classAccess and Opcodes.ACC_INTERFACE != 0) {
-            // interface members are always public
-            return Opcodes.ACC_PUBLIC
-        }
-
         val method = Type.getType(member.desc).sort == Type.METHOD
         if (method) {
             if (member.name == "<clinit>") {
@@ -80,6 +75,11 @@ class VisibilityTransformer @Inject constructor(private val profile: Profile) : 
         val abstract = method && access and Opcodes.ACC_ABSTRACT != 0
         val partitionReferences = references[partition]
         val partitionOwners = partition.mapTo(mutableSetOf(), MemberRef::owner)
+
+        val declaredByInterface = partitionOwners.any { classPath[it]!!.`interface` }
+        if (declaredByInterface) {
+            return Opcodes.ACC_PUBLIC
+        }
 
         // pick the weakest access level based on references in our own code
         val visibility = when {
