@@ -5,7 +5,9 @@ import com.github.javaparser.ast.expr.BinaryExpr
 import com.github.javaparser.ast.expr.EnclosedExpr
 import com.github.javaparser.ast.expr.Expression
 import dev.openrs2.deob.ast.util.walk
+import javax.inject.Singleton
 
+@Singleton
 class EncloseTransformer : Transformer() {
     private enum class Associativity {
         LEFT,

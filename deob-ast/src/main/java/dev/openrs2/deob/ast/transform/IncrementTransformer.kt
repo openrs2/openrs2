@@ -5,7 +5,9 @@ import com.github.javaparser.ast.expr.UnaryExpr
 import com.github.javaparser.ast.stmt.ExpressionStmt
 import com.github.javaparser.ast.stmt.ForStmt
 import dev.openrs2.deob.ast.util.walk
+import javax.inject.Singleton
 
+@Singleton
 class IncrementTransformer : Transformer() {
     override fun transformUnit(
         units: Map<String, CompilationUnit>,

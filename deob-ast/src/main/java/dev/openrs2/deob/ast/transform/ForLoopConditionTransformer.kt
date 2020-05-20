@@ -5,7 +5,9 @@ import com.github.javaparser.ast.expr.BinaryExpr
 import com.github.javaparser.ast.stmt.ForStmt
 import dev.openrs2.deob.ast.util.hasSideEffects
 import dev.openrs2.deob.ast.util.walk
+import javax.inject.Singleton
 
+@Singleton
 class ForLoopConditionTransformer : Transformer() {
     override fun transformUnit(
         units: Map<String, CompilationUnit>,

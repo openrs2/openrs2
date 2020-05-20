@@ -5,7 +5,9 @@ import com.github.javaparser.ast.expr.MethodCallExpr
 import com.github.javaparser.ast.expr.ObjectCreationExpr
 import com.github.javaparser.ast.expr.TypeExpr
 import dev.openrs2.deob.ast.util.walk
+import javax.inject.Singleton
 
+@Singleton
 class ValueOfTransformer : Transformer() {
     override fun transformUnit(
         units: Map<String, CompilationUnit>,

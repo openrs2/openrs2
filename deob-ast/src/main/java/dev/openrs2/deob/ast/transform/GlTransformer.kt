@@ -25,7 +25,9 @@ import dev.openrs2.deob.ast.gl.GlParameter
 import dev.openrs2.deob.ast.gl.GlRegistry
 import dev.openrs2.deob.ast.util.checkedAsInt
 import dev.openrs2.deob.ast.util.walk
+import javax.inject.Singleton
 
+@Singleton
 class GlTransformer(private val registry: GlRegistry = GlRegistry.parse()) : Transformer() {
     private val enums = mutableSetOf<GlEnum>()
 

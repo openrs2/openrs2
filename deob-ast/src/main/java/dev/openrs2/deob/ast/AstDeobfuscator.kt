@@ -10,26 +10,17 @@ import com.github.javaparser.symbolsolver.resolution.typesolvers.JavaParserTypeS
 import com.github.javaparser.symbolsolver.resolution.typesolvers.ReflectionTypeSolver
 import com.github.javaparser.utils.SourceRoot
 import com.github.michaelbull.logging.InlineLogger
-import dev.openrs2.deob.ast.transform.AddSubTransformer
-import dev.openrs2.deob.ast.transform.BinaryExprOrderTransformer
-import dev.openrs2.deob.ast.transform.BitMaskTransformer
-import dev.openrs2.deob.ast.transform.ComplementTransformer
-import dev.openrs2.deob.ast.transform.EncloseTransformer
-import dev.openrs2.deob.ast.transform.ForLoopConditionTransformer
-import dev.openrs2.deob.ast.transform.GlTransformer
-import dev.openrs2.deob.ast.transform.IdentityTransformer
-import dev.openrs2.deob.ast.transform.IfElseTransformer
-import dev.openrs2.deob.ast.transform.IncrementTransformer
-import dev.openrs2.deob.ast.transform.NegativeLiteralTransformer
-import dev.openrs2.deob.ast.transform.NewInstanceTransformer
-import dev.openrs2.deob.ast.transform.TernaryTransformer
-import dev.openrs2.deob.ast.transform.UnencloseTransformer
-import dev.openrs2.deob.ast.transform.ValueOfTransformer
+import dev.openrs2.deob.ast.transform.Transformer
 import java.nio.file.Path
 import java.util.function.Function
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class AstDeobfuscator(private val modules: List<Path>) {
-    fun run() {
+@Singleton
+class AstDeobfuscator @Inject constructor(
+    private val transformers: Set<@JvmSuppressWildcards Transformer>
+) {
+    fun run(modules: List<Path>) {
         val solver = CombinedTypeSolver(ReflectionTypeSolver(true))
         for (module in modules) {
             solver.add(JavaParserTypeSolver(module))
@@ -63,7 +54,7 @@ class AstDeobfuscator(private val modules: List<Path>) {
             }
         }
 
-        for (transformer in TRANSFORMERS) {
+        for (transformer in transformers) {
             logger.info { "Running transformer ${transformer.javaClass.simpleName}" }
             transformer.transform(units)
         }
@@ -78,23 +69,6 @@ class AstDeobfuscator(private val modules: List<Path>) {
     private companion object {
         private val logger = InlineLogger()
 
-        private val TRANSFORMERS = listOf(
-            UnencloseTransformer(),
-            NegativeLiteralTransformer(),
-            ComplementTransformer(),
-            IfElseTransformer(),
-            TernaryTransformer(),
-            BinaryExprOrderTransformer(),
-            AddSubTransformer(),
-            IdentityTransformer(),
-            BitMaskTransformer(),
-            ValueOfTransformer(),
-            NewInstanceTransformer(),
-            IncrementTransformer(),
-            ForLoopConditionTransformer(),
-            GlTransformer(),
-            EncloseTransformer()
-        )
         private val PC_ANNOTATION_REGEX = Regex("@Pc\\(([0-9]+)\\)\\s+")
 
         private fun stripNewlineAfterPcAnnotation(s: String): String {

@@ -10,7 +10,9 @@ import dev.openrs2.deob.ast.util.checkedAsLong
 import dev.openrs2.deob.ast.util.isIntegerOrLongLiteral
 import dev.openrs2.deob.ast.util.toLongLiteralExpr
 import dev.openrs2.deob.ast.util.walk
+import javax.inject.Singleton
 
+@Singleton
 class ComplementTransformer : Transformer() {
     override fun transformUnit(
         units: Map<String, CompilationUnit>,

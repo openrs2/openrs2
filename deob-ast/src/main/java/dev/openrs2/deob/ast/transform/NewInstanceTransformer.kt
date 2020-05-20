@@ -3,7 +3,9 @@ package dev.openrs2.deob.ast.transform
 import com.github.javaparser.ast.CompilationUnit
 import com.github.javaparser.ast.expr.MethodCallExpr
 import dev.openrs2.deob.ast.util.walk
+import javax.inject.Singleton
 
+@Singleton
 class NewInstanceTransformer : Transformer() {
     override fun transformUnit(
         units: Map<String, CompilationUnit>,

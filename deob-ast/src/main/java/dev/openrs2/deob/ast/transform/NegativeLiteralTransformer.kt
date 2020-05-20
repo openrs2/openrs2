@@ -5,7 +5,9 @@ import com.github.javaparser.ast.expr.UnaryExpr
 import dev.openrs2.deob.ast.util.isIntegerOrLongLiteral
 import dev.openrs2.deob.ast.util.negate
 import dev.openrs2.deob.ast.util.walk
+import javax.inject.Singleton
 
+@Singleton
 class NegativeLiteralTransformer : Transformer() {
     override fun transformUnit(
         units: Map<String, CompilationUnit>,

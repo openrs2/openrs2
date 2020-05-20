@@ -7,7 +7,9 @@ import com.github.javaparser.ast.stmt.Statement
 import dev.openrs2.deob.ast.util.countNots
 import dev.openrs2.deob.ast.util.not
 import dev.openrs2.deob.ast.util.walk
+import javax.inject.Singleton
 
+@Singleton
 class IfElseTransformer : Transformer() {
     override fun transformUnit(
         units: Map<String, CompilationUnit>,

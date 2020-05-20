@@ -10,7 +10,9 @@ import dev.openrs2.deob.ast.util.hasSideEffects
 import dev.openrs2.deob.ast.util.isString
 import dev.openrs2.deob.ast.util.negate
 import dev.openrs2.deob.ast.util.walk
+import javax.inject.Singleton
 
+@Singleton
 class AddSubTransformer : Transformer() {
     override fun transformUnit(
         units: Map<String, CompilationUnit>,

@@ -5,7 +5,9 @@ import com.github.javaparser.ast.expr.BinaryExpr
 import com.github.javaparser.ast.expr.Expression
 import com.github.javaparser.ast.expr.UnaryExpr
 import dev.openrs2.deob.ast.util.walk
+import javax.inject.Singleton
 
+@Singleton
 class IdentityTransformer : Transformer() {
     override fun transformUnit(
         units: Map<String, CompilationUnit>,
