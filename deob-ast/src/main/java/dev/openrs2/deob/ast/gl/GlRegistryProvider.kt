@@ -6,8 +6,8 @@ import javax.inject.Provider
 
 class GlRegistryProvider : Provider<GlRegistry> {
     override fun get(): GlRegistry {
-        Files.newInputStream(PATH).use { input ->
-            return GlRegistry.parse(input)
+        return Files.newInputStream(PATH).use { input ->
+            GlRegistry.parse(input)
         }
     }
 
