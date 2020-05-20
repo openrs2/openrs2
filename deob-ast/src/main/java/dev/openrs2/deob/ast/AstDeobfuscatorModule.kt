@@ -1,7 +1,10 @@
 package dev.openrs2.deob.ast
 
 import com.google.inject.AbstractModule
+import com.google.inject.Scopes
 import com.google.inject.multibindings.Multibinder
+import dev.openrs2.deob.ast.gl.GlRegistry
+import dev.openrs2.deob.ast.gl.GlRegistryProvider
 import dev.openrs2.deob.ast.transform.AddSubTransformer
 import dev.openrs2.deob.ast.transform.BinaryExprOrderTransformer
 import dev.openrs2.deob.ast.transform.BitMaskTransformer
@@ -21,6 +24,10 @@ import dev.openrs2.deob.ast.transform.ValueOfTransformer
 
 object AstDeobfuscatorModule : AbstractModule() {
     override fun configure() {
+        bind(GlRegistry::class.java)
+            .toProvider(GlRegistryProvider::class.java)
+            .`in`(Scopes.SINGLETON)
+
         val binder = Multibinder.newSetBinder(binder(), Transformer::class.java)
         binder.addBinding().to(UnencloseTransformer::class.java)
         binder.addBinding().to(NegativeLiteralTransformer::class.java)

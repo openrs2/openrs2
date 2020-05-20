@@ -23,10 +23,6 @@ data class GlRegistry(val enums: ImmutableSetMultimap<Long, GlEnum>, val command
             }
         }
 
-        fun parse(): GlRegistry {
-            return GlRegistry::class.java.getResourceAsStream("/dev/openrs2/deob/ast/gl.xml").use(::parse)
-        }
-
         fun parse(input: InputStream): GlRegistry {
             val root = SAXBuilder().build(input).rootElement
 

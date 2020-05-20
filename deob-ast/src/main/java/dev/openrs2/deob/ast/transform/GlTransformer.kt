@@ -25,10 +25,11 @@ import dev.openrs2.deob.ast.gl.GlParameter
 import dev.openrs2.deob.ast.gl.GlRegistry
 import dev.openrs2.deob.ast.util.checkedAsInt
 import dev.openrs2.deob.ast.util.walk
+import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class GlTransformer(private val registry: GlRegistry = GlRegistry.parse()) : Transformer() {
+class GlTransformer @Inject constructor(private val registry: GlRegistry) : Transformer() {
     private val enums = mutableSetOf<GlEnum>()
 
     override fun preTransform(units: Map<String, CompilationUnit>) {
