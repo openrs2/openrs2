@@ -8,8 +8,12 @@ import javax.inject.Provider
 
 class ProfileProvider @Inject constructor(private val mapper: ObjectMapper) : Provider<Profile> {
     override fun get(): Profile {
-        return Files.newBufferedReader(Paths.get("share/deob/profile.yaml")).use { reader ->
+        return Files.newBufferedReader(PATH).use { reader ->
             mapper.readValue(reader, Profile::class.java)
         }
+    }
+
+    companion object {
+        private val PATH = Paths.get("share/deob/profile.yaml")
     }
 }
