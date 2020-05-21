@@ -2,20 +2,22 @@ package dev.openrs2.deob.transform
 
 import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.ClassVersionUtils
+import dev.openrs2.asm.MemberDesc
 import dev.openrs2.asm.MemberRef
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
+import dev.openrs2.asm.getExpression
+import dev.openrs2.asm.isSequential
 import dev.openrs2.asm.transform.Transformer
 import dev.openrs2.deob.Profile
 import dev.openrs2.util.collect.DisjointSet
 import org.objectweb.asm.Opcodes
+import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.FieldInsnNode
 import org.objectweb.asm.tree.FieldNode
 import org.objectweb.asm.tree.InsnList
 import org.objectweb.asm.tree.InsnNode
-import org.objectweb.asm.tree.JumpInsnNode
-import org.objectweb.asm.tree.LabelNode
 import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.MethodNode
 import javax.inject.Inject
@@ -24,16 +26,17 @@ import kotlin.math.max
 
 @Singleton
 class StaticScramblingTransformer @Inject constructor(private val profile: Profile) : Transformer() {
-    private class FieldSet(val owner: ClassNode, val fields: List<FieldNode>, val clinit: MethodNode?) {
-        val dependencies = clinit?.instructions
-            ?.filterIsInstance<FieldInsnNode>()
-            ?.filter { it.opcode == Opcodes.GETSTATIC && it.owner != owner.name }
-            ?.mapTo(mutableSetOf(), ::MemberRef) ?: emptySet<MemberRef>()
+    private data class Field(val node: FieldNode, val initializer: InsnList, val version: Int, val maxStack: Int) {
+        val dependencies = initializer.asSequence()
+            .filterIsInstance<FieldInsnNode>()
+            .filter { it.opcode == Opcodes.GETSTATIC }
+            .map(::MemberRef)
+            .toSet()
     }
 
     private lateinit var inheritedFieldSets: DisjointSet<MemberRef>
     private lateinit var inheritedMethodSets: DisjointSet<MemberRef>
-    private val fieldSets = mutableMapOf<MemberRef, FieldSet>()
+    private val fields = mutableMapOf<DisjointSet.Partition<MemberRef>, Field>()
     private val fieldClasses = mutableMapOf<DisjointSet.Partition<MemberRef>, String>()
     private val methodClasses = mutableMapOf<DisjointSet.Partition<MemberRef>, String>()
     private var nextStaticClass: ClassNode? = null
@@ -73,63 +76,103 @@ class StaticScramblingTransformer @Inject constructor(private val profile: Profi
         return Pair(clazz, clinit)
     }
 
-    private fun spliceFields() {
-        val done = mutableSetOf<FieldSet>()
-        for (fieldSet in fieldSets.values) {
-            spliceFields(done, fieldSet)
+    private fun MethodNode.extractEntryExitBlocks(): List<AbstractInsnNode> {
+        /*
+         * Most (or all?) of the <clinit> methods have "simple" initializers
+         * that we're capable of moving in the first and last basic blocks of
+         * the method. The last basic block is always at the end of the code
+         * and ends in a RETURN. This allows us to avoid worrying about making
+         * a full basic block control flow graph here.
+         */
+        val entry = instructions.takeWhile { it.isSequential }
+
+        val last = instructions.lastOrNull()
+        if (last == null || last.opcode != Opcodes.RETURN) {
+            return entry
+        }
+
+        val exit = instructions.toList()
+            .dropLast(1)
+            .takeLastWhile { it.isSequential }
+
+        return entry.plus(exit)
+    }
+
+    private fun MethodNode.extractInitializers(owner: String): Pair<Map<MemberDesc, InsnList>, Set<MemberDesc>> {
+        val entryExitBlocks = extractEntryExitBlocks()
+
+        val simpleInitializers = mutableMapOf<MemberDesc, InsnList>()
+        val complexInitializers = instructions.asSequence()
+            .filter { !entryExitBlocks.contains(it) }
+            .filterIsInstance<FieldInsnNode>()
+            .filter { it.opcode == Opcodes.GETSTATIC && it.owner == owner }
+            .filter { !profile.excludedFields.matches(it.owner, it.name, it.desc) }
+            .map(::MemberDesc)
+            .toSet()
+
+        val putstatics = entryExitBlocks
+            .filterIsInstance<FieldInsnNode>()
+            .filter { it.opcode == Opcodes.PUTSTATIC && it.owner == owner }
+            .filter { !profile.excludedFields.matches(it.owner, it.name, it.desc) }
+
+        for (putstatic in putstatics) {
+            val desc = MemberDesc(putstatic)
+            if (simpleInitializers.containsKey(desc) || complexInitializers.contains(desc)) {
+                continue
+            }
+
+            // TODO(gpe): use a filter here (pure with no *LOADs?)
+            val expr = getExpression(putstatic) ?: continue
+
+            val initializer = InsnList()
+            for (insn in expr) {
+                instructions.remove(insn)
+                initializer.add(insn)
+            }
+            instructions.remove(putstatic)
+            initializer.add(putstatic)
+
+            simpleInitializers[desc] = initializer
+        }
+
+        return Pair(simpleInitializers, complexInitializers)
+    }
+
+    private fun spliceInitializers() {
+        val done = mutableSetOf<DisjointSet.Partition<MemberRef>>()
+        for ((partition, field) in fields) {
+            spliceInitializers(done, partition, field)
         }
     }
 
-    private fun spliceFields(done: MutableSet<FieldSet>, fieldSet: FieldSet) {
-        if (!done.add(fieldSet)) {
+    private fun spliceInitializers(
+        done: MutableSet<DisjointSet.Partition<MemberRef>>,
+        partition: DisjointSet.Partition<MemberRef>,
+        field: Field
+    ) {
+        if (!done.add(partition)) {
             return
         }
 
-        for (dependency in fieldSet.dependencies) {
-            val dependencyFieldSet = fieldSets[dependency] ?: continue
-            spliceFields(done, dependencyFieldSet)
+        for (dependency in field.dependencies) {
+            val dependencyPartition = inheritedFieldSets[dependency]!!
+            val dependencyField = fields[dependencyPartition] ?: continue
+            spliceInitializers(done, partition, dependencyField)
         }
 
-        val (staticClass, staticClinit) = nextClass()
-        staticClass.fields.addAll(fieldSet.fields)
-        staticClass.version = ClassVersionUtils.max(staticClass.version, fieldSet.owner.version)
+        val (staticClass, clinit) = nextClass()
+        staticClass.fields.add(field.node)
+        staticClass.version = ClassVersionUtils.max(staticClass.version, field.version)
+        clinit.instructions.insertBefore(clinit.instructions.last, field.initializer)
+        clinit.maxStack = max(clinit.maxStack, field.maxStack)
 
-        if (fieldSet.clinit != null) {
-            // remove tail RETURN
-            val insns = fieldSet.clinit.instructions
-            val last = insns.lastOrNull()
-            if (last != null && last.opcode == Opcodes.RETURN) {
-                insns.remove(last)
-            }
-
-            // replace any remaining RETURNs with a GOTO to the end of the method
-            val end = LabelNode()
-            insns.add(end)
-
-            for (insn in insns) {
-                if (insn.opcode == Opcodes.RETURN) {
-                    insns.set(insn, JumpInsnNode(Opcodes.GOTO, end))
-                }
-            }
-
-            // append just before the end of the static <clinit> RETURN
-            staticClinit.instructions.insertBefore(staticClinit.instructions.last, insns)
-
-            staticClinit.tryCatchBlocks.addAll(fieldSet.clinit.tryCatchBlocks)
-            staticClinit.maxStack = max(staticClinit.maxStack, fieldSet.clinit.maxStack)
-            staticClinit.maxLocals = max(staticClinit.maxLocals, fieldSet.clinit.maxLocals)
-        }
-
-        for (field in fieldSet.fields) {
-            val partition = inheritedFieldSets[MemberRef(fieldSet.owner, field)]!!
-            fieldClasses[partition] = staticClass.name
-        }
+        fieldClasses[partition] = staticClass.name
     }
 
     override fun preTransform(classPath: ClassPath) {
         inheritedFieldSets = classPath.createInheritedFieldSets()
         inheritedMethodSets = classPath.createInheritedMethodSets()
-        fieldSets.clear()
+        fields.clear()
         fieldClasses.clear()
         methodClasses.clear()
         nextStaticClass = null
@@ -143,22 +186,29 @@ class StaticScramblingTransformer @Inject constructor(private val profile: Profi
 
             for (clazz in library) {
                 // TODO(gpe): exclude the JSObject class
-                if (clazz.name == "jagex3/jagmisc/jagmisc") {
-                    continue
-                }
-
-                val fields = clazz.fields.filter { it.access and Opcodes.ACC_STATIC != 0 }
-                clazz.fields.removeAll(fields)
 
                 val clinit = clazz.methods.find { it.name == "<clinit>" }
-                if (clinit != null) {
-                    clazz.methods.remove(clinit)
-                }
+                val (simpleInitializers, complexInitializers) = clinit?.extractInitializers(clazz.name)
+                    ?: Pair(emptyMap(), emptySet())
 
-                val fieldSet = FieldSet(clazz, fields, clinit)
-                for (field in fields) {
-                    val ref = MemberRef(clazz, field)
-                    fieldSets[ref] = fieldSet
+                clazz.fields.removeIf { field ->
+                    if (field.access and Opcodes.ACC_STATIC == 0) {
+                        return@removeIf false
+                    } else if (profile.excludedFields.matches(clazz.name, field.name, field.desc)) {
+                        return@removeIf false
+                    }
+
+                    val desc = MemberDesc(field)
+                    if (complexInitializers.contains(desc)) {
+                        return@removeIf false
+                    }
+
+                    val initializer = simpleInitializers[desc] ?: InsnList()
+                    val maxStack = clinit?.maxStack ?: 0
+
+                    val partition = inheritedFieldSets[MemberRef(clazz, field)]!!
+                    fields[partition] = Field(field, initializer, clazz.version, maxStack)
+                    return@removeIf true
                 }
 
                 clazz.methods.removeIf { method ->
@@ -180,7 +230,7 @@ class StaticScramblingTransformer @Inject constructor(private val profile: Profi
                 }
             }
 
-            spliceFields()
+            spliceInitializers()
 
             for (clazz in staticClasses) {
                 library.add(clazz)
