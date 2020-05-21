@@ -228,6 +228,11 @@ class StaticScramblingTransformer @Inject constructor(private val profile: Profi
                     methodClasses[partition] = staticClass.name
                     return@removeIf true
                 }
+
+                val first = clinit?.instructions?.firstOrNull { it.opcode != -1 }
+                if (first != null && first.opcode == Opcodes.RETURN) {
+                    clazz.methods.remove(clinit)
+                }
             }
 
             spliceInitializers()
