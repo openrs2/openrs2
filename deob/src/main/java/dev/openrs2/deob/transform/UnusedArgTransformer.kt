@@ -11,7 +11,7 @@ import dev.openrs2.deob.ArgRef
 import dev.openrs2.deob.Profile
 import dev.openrs2.deob.analysis.ConstSourceInterpreter
 import dev.openrs2.deob.analysis.ConstSourceValue
-import dev.openrs2.deob.remap.TypedRemapper
+import dev.openrs2.deob.remap.MethodMappingGenerator
 import dev.openrs2.util.collect.DisjointSet
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.Type
@@ -75,7 +75,9 @@ class UnusedArgTransformer @Inject constructor(private val profile: Profile) : T
                     val invokePartition = inheritedMethodSets[MemberRef(insn)]
                     if (invokePartition == null) {
                         continue@frame
-                    } else if (!TypedRemapper.isMethodRenamable(classPath, profile.excludedMethods, invokePartition)) {
+                    } else if (
+                        !MethodMappingGenerator.isRenamable(classPath, profile.excludedMethods, invokePartition)
+                    ) {
                         continue@frame
                     }
 
@@ -119,7 +121,9 @@ class UnusedArgTransformer @Inject constructor(private val profile: Profile) : T
             }
 
             val partition = inheritedMethodSets[MemberRef(insn)]
-            if (partition == null || !TypedRemapper.isMethodRenamable(classPath, profile.excludedMethods, partition)) {
+            if (partition == null) {
+                continue
+            } else if (!MethodMappingGenerator.isRenamable(classPath, profile.excludedMethods, partition)) {
                 continue
             }
 
@@ -152,7 +156,7 @@ class UnusedArgTransformer @Inject constructor(private val profile: Profile) : T
     ): Boolean {
         // delete unused int args from the method itself
         val partition = inheritedMethodSets[MemberRef(clazz, method)]!!
-        if (!TypedRemapper.isMethodRenamable(classPath, profile.excludedMethods, partition)) {
+        if (!MethodMappingGenerator.isRenamable(classPath, profile.excludedMethods, partition)) {
             return false
         }
 
