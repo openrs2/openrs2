@@ -4,7 +4,6 @@ import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.io.LibraryReader
 import dev.openrs2.asm.io.LibraryWriter
 import dev.openrs2.asm.remap
-import org.objectweb.asm.commons.Remapper
 import org.objectweb.asm.tree.ClassNode
 import java.nio.file.Files
 import java.nio.file.Path
@@ -41,7 +40,7 @@ class Library() : Iterable<ClassNode> {
         return classes.values.iterator()
     }
 
-    fun remap(remapper: Remapper) {
+    fun remap(remapper: ExtendedRemapper) {
         for (clazz in classes.values) {
             clazz.remap(remapper)
         }

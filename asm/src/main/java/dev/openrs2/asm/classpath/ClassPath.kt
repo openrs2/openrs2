@@ -6,7 +6,6 @@ import dev.openrs2.asm.toBinaryClassName
 import dev.openrs2.util.collect.DisjointSet
 import dev.openrs2.util.collect.ForestDisjointSet
 import org.objectweb.asm.Opcodes
-import org.objectweb.asm.commons.Remapper
 import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.ClassNode
 
@@ -76,7 +75,7 @@ class ClassPath(
         return null
     }
 
-    fun remap(remapper: Remapper) {
+    fun remap(remapper: ExtendedRemapper) {
         for (library in libraries) {
             library.remap(remapper)
         }

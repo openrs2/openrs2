@@ -5,6 +5,7 @@ import dev.openrs2.asm.MemberDesc
 import dev.openrs2.asm.MemberRef
 import dev.openrs2.asm.classpath.ClassMetadata
 import dev.openrs2.asm.classpath.ClassPath
+import dev.openrs2.asm.classpath.ExtendedRemapper
 import dev.openrs2.asm.filter.ClassFilter
 import dev.openrs2.asm.filter.MemberFilter
 import dev.openrs2.deob.Profile
@@ -12,13 +13,12 @@ import dev.openrs2.util.collect.DisjointSet
 import dev.openrs2.util.indefiniteArticle
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.Type
-import org.objectweb.asm.commons.Remapper
 
 class TypedRemapper private constructor(
     private val classes: Map<String, String>,
     private val fields: Map<MemberRef, String>,
     private val methods: Map<MemberRef, String>
-) : Remapper() {
+) : ExtendedRemapper() {
     override fun map(internalName: String): String {
         return classes.getOrDefault(internalName, internalName)
     }

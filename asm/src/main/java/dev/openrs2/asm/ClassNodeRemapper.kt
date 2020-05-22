@@ -1,6 +1,6 @@
 package dev.openrs2.asm
 
-import org.objectweb.asm.commons.Remapper
+import dev.openrs2.asm.classpath.ExtendedRemapper
 import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.FieldInsnNode
@@ -11,7 +11,7 @@ import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.MultiANewArrayInsnNode
 import org.objectweb.asm.tree.TypeInsnNode
 
-fun ClassNode.remap(remapper: Remapper) {
+fun ClassNode.remap(remapper: ExtendedRemapper) {
     val originalName = name
     name = remapper.mapType(originalName)
     signature = remapper.mapSignature(signature, false)
@@ -45,18 +45,18 @@ fun ClassNode.remap(remapper: Remapper) {
     }
 }
 
-private fun AbstractInsnNode.remap(remapper: Remapper) {
+private fun AbstractInsnNode.remap(remapper: ExtendedRemapper) {
     when (this) {
         is FrameNode -> throw UnsupportedOperationException("SKIP_FRAMES and COMPUTE_FRAMES must be used")
         is FieldInsnNode -> {
             val originalOwner = owner
-            owner = remapper.mapType(originalOwner)
+            owner = remapper.mapFieldOwner(originalOwner, name, desc)
             name = remapper.mapFieldName(originalOwner, name, desc)
             desc = remapper.mapDesc(desc)
         }
         is MethodInsnNode -> {
             val originalOwner = owner
-            owner = remapper.mapType(originalOwner)
+            owner = remapper.mapMethodOwner(originalOwner, name, desc)
             name = remapper.mapMethodName(originalOwner, name, desc)
             desc = remapper.mapDesc(desc)
         }
