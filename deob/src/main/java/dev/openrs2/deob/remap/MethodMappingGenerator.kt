@@ -9,13 +9,13 @@ import org.objectweb.asm.Opcodes
 
 class MethodMappingGenerator(
     private val classPath: ClassPath,
-    private val excludedMethods: MemberFilter
+    private val excludedMethods: MemberFilter,
+    private val inheritedMethodSets: DisjointSet<MemberRef>
 ) {
-    private val inheritedMethodSets = classPath.createInheritedMethodSets()
     private var index = 0
 
-    fun generate(): Map<MemberRef, String> {
-        val mapping = mutableMapOf<MemberRef, String>()
+    fun generate(): Map<DisjointSet.Partition<MemberRef>, String> {
+        val mapping = mutableMapOf<DisjointSet.Partition<MemberRef>, String>()
 
         for (partition in inheritedMethodSets) {
             @Suppress("DEPRECATION")
@@ -24,9 +24,7 @@ class MethodMappingGenerator(
             }
 
             val mappedName = "method" + ++index
-            for (method in partition) {
-                mapping[method] = mappedName
-            }
+            mapping[partition] = mappedName
         }
 
         return mapping

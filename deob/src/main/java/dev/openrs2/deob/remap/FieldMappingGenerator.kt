@@ -10,13 +10,14 @@ import org.objectweb.asm.Type
 class FieldMappingGenerator(
     private val classPath: ClassPath,
     private val excludedFields: MemberFilter,
+    private val inheritedFieldSets: DisjointSet<MemberRef>,
     private val classMapping: Map<String, String>
 ) {
-    private val inheritedFieldSets = classPath.createInheritedFieldSets()
     private val nameGenerator = NameGenerator()
-    private val mapping = mutableMapOf<MemberRef, String>()
 
-    fun generate(): Map<MemberRef, String> {
+    fun generate(): Map<DisjointSet.Partition<MemberRef>, String> {
+        val mapping = mutableMapOf<DisjointSet.Partition<MemberRef>, String>()
+
         for (partition in inheritedFieldSets) {
             if (!isRenamable(partition)) {
                 continue
@@ -24,9 +25,7 @@ class FieldMappingGenerator(
 
             val type = Type.getType(partition.first().desc)
             val mappedName = generateName(type)
-            for (field in partition) {
-                mapping[field] = mappedName
-            }
+            mapping[partition] = mappedName
         }
 
         return mapping

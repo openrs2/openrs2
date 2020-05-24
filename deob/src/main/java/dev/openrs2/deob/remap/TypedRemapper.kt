@@ -5,22 +5,29 @@ import dev.openrs2.asm.MemberRef
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.ExtendedRemapper
 import dev.openrs2.deob.Profile
+import dev.openrs2.util.collect.DisjointSet
 
 class TypedRemapper private constructor(
+    private val inheritedFieldSets: DisjointSet<MemberRef>,
+    private val inheritedMethodSets: DisjointSet<MemberRef>,
     private val classes: Map<String, String>,
-    private val fields: Map<MemberRef, String>,
-    private val methods: Map<MemberRef, String>
+    private val fields: Map<DisjointSet.Partition<MemberRef>, String>,
+    private val methods: Map<DisjointSet.Partition<MemberRef>, String>
 ) : ExtendedRemapper() {
     override fun map(internalName: String): String {
         return classes.getOrDefault(internalName, internalName)
     }
 
     override fun mapFieldName(owner: String, name: String, descriptor: String): String {
-        return fields.getOrDefault(MemberRef(owner, name, descriptor), name)
+        val member = MemberRef(owner, name, descriptor)
+        val partition = inheritedFieldSets[member] ?: return name
+        return fields.getOrDefault(partition, name)
     }
 
     override fun mapMethodName(owner: String, name: String, descriptor: String): String {
-        return methods.getOrDefault(MemberRef(owner, name, descriptor), name)
+        val member = MemberRef(owner, name, descriptor)
+        val partition = inheritedMethodSets[member] ?: return name
+        return methods.getOrDefault(partition, name)
     }
 
     companion object {
@@ -29,15 +36,27 @@ class TypedRemapper private constructor(
         private val LIBRARY_PREFIX_REGEX = Regex("^(?:loader|unpackclass)_")
 
         fun create(classPath: ClassPath, profile: Profile): TypedRemapper {
+            val inheritedFieldSets = classPath.createInheritedFieldSets()
+            val inheritedMethodSets = classPath.createInheritedMethodSets()
+
             val classes = ClassMappingGenerator(classPath, profile.excludedClasses).generate()
-            val fields = FieldMappingGenerator(classPath, profile.excludedFields, classes).generate()
-            val methods = MethodMappingGenerator(classPath, profile.excludedMethods).generate()
+            val fields = FieldMappingGenerator(
+                classPath,
+                profile.excludedFields,
+                inheritedFieldSets,
+                classes
+            ).generate()
+            val methods = MethodMappingGenerator(
+                classPath,
+                profile.excludedMethods,
+                inheritedMethodSets
+            ).generate()
 
             verifyMapping(classes, profile.maxObfuscatedNameLen)
             verifyMemberMapping(fields, profile.maxObfuscatedNameLen)
             verifyMemberMapping(methods, profile.maxObfuscatedNameLen)
 
-            return TypedRemapper(classes, fields, methods)
+            return TypedRemapper(inheritedFieldSets, inheritedMethodSets, classes, fields, methods)
         }
 
         private fun verifyMapping(mapping: Map<String, String>, maxObfuscatedNameLen: Int) {
@@ -46,9 +65,12 @@ class TypedRemapper private constructor(
             }
         }
 
-        private fun verifyMemberMapping(mapping: Map<MemberRef, String>, maxObfuscatedNameLen: Int) {
+        private fun verifyMemberMapping(
+            mapping: Map<DisjointSet.Partition<MemberRef>, String>,
+            maxObfuscatedNameLen: Int
+        ) {
             for ((key, value) in mapping) {
-                verifyMapping(key.name, value, maxObfuscatedNameLen)
+                verifyMapping(key.first().name, value, maxObfuscatedNameLen)
             }
         }
 
