@@ -4,10 +4,12 @@ import dev.openrs2.asm.classpath.ExtendedRemapper
 import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.FieldInsnNode
+import org.objectweb.asm.tree.FieldNode
 import org.objectweb.asm.tree.FrameNode
 import org.objectweb.asm.tree.InvokeDynamicInsnNode
 import org.objectweb.asm.tree.LdcInsnNode
 import org.objectweb.asm.tree.MethodInsnNode
+import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.MultiANewArrayInsnNode
 import org.objectweb.asm.tree.TypeInsnNode
 
@@ -19,28 +21,36 @@ fun ClassNode.remap(remapper: ExtendedRemapper) {
     interfaces = interfaces?.map(remapper::mapType)
 
     for (field in fields) {
-        field.name = remapper.mapFieldName(originalName, field.name, field.desc)
-        field.desc = remapper.mapDesc(field.desc)
-        field.signature = remapper.mapSignature(field.signature, true)
-        field.value = remapper.mapValue(field.value)
+        field.remap(remapper, originalName)
     }
 
     for (method in methods) {
-        method.name = remapper.mapMethodName(originalName, method.name, method.desc)
-        method.desc = remapper.mapMethodDesc(method.desc)
-        method.signature = remapper.mapSignature(method.signature, false)
-        method.exceptions = method.exceptions.map(remapper::mapType)
+        method.remap(remapper, originalName)
+    }
+}
 
-        if (method.hasCode) {
-            ClassForNameUtils.remap(remapper, method)
+fun FieldNode.remap(remapper: ExtendedRemapper, owner: String) {
+    name = remapper.mapFieldName(owner, name, desc)
+    desc = remapper.mapDesc(desc)
+    signature = remapper.mapSignature(signature, true)
+    value = remapper.mapValue(value)
+}
 
-            for (insn in method.instructions) {
-                insn.remap(remapper)
-            }
+fun MethodNode.remap(remapper: ExtendedRemapper, owner: String) {
+    name = remapper.mapMethodName(owner, name, desc)
+    desc = remapper.mapMethodDesc(desc)
+    signature = remapper.mapSignature(signature, false)
+    exceptions = exceptions.map(remapper::mapType)
 
-            for (tryCatch in method.tryCatchBlocks) {
-                tryCatch.type = remapper.mapType(tryCatch.type)
-            }
+    if (hasCode) {
+        ClassForNameUtils.remap(remapper, this)
+
+        for (insn in instructions) {
+            insn.remap(remapper)
+        }
+
+        for (tryCatch in tryCatchBlocks) {
+            tryCatch.type = remapper.mapType(tryCatch.type)
         }
     }
 }
