@@ -55,7 +55,7 @@ fun MethodNode.remap(remapper: ExtendedRemapper, owner: String) {
     }
 }
 
-private fun AbstractInsnNode.remap(remapper: ExtendedRemapper) {
+fun AbstractInsnNode.remap(remapper: ExtendedRemapper) {
     when (this) {
         is FrameNode -> throw UnsupportedOperationException("SKIP_FRAMES and COMPUTE_FRAMES must be used")
         is FieldInsnNode -> {
