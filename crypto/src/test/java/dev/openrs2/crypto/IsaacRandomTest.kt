@@ -68,7 +68,7 @@ object IsaacRandomTest {
 
             for (line in lines) {
                 for (i in line.indices step 8) {
-                    elements += Integer.parseUnsignedInt(line.substring(i, i + 8), 16)
+                    elements += Integer.parseUnsignedInt(line, i, i + 8, 16)
                 }
             }
 
