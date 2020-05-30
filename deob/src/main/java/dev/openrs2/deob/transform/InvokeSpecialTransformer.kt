@@ -33,10 +33,10 @@ import javax.inject.Singleton
  * instruction, and non-virtual function calls are cheaper than virtual
  * function calls) or an obfuscation technique.
  *
- * The [StaticScramblingTransformer] moves static methods containing these
- * `INVOKESPECIAL` instructions to new classes. This change is still permitted
- * by the JVM specification, which does not place any restrictions on the class
- * referenced by the `INVOKESPECIAL` instruction.
+ * The [RemapTransformer] moves static methods containing these `INVOKESPECIAL`
+ * instructions to new classes. This change is still permitted by the JVM
+ * specification, which does not place any restrictions on the class referenced
+ * by the `INVOKESPECIAL` instruction.
  *
  * However, the
  * [verifier](https://github.com/openjdk/jdk11u/blob/3789983e89c9de252ef546a1b98a732a7d066650/src/java.base/share/native/libverify/check_code.c#L1342)
@@ -45,8 +45,8 @@ import javax.inject.Singleton
  * direct superclass illegal.
  *
  * This transformer replaces `INVOKESPECIAL` with equivalent `INVOKEVIRTUAL`
- * instructions where possible, allowing the [StaticScramblingTransformer] to
- * produce verifiable output.
+ * instructions where possible, allowing the [RemapTransformer] to produce
+ * verifiable output.
  */
 @Singleton
 class InvokeSpecialTransformer : Transformer() {

@@ -3,14 +3,14 @@ package dev.openrs2.asm.classpath
 import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.io.LibraryReader
 import dev.openrs2.asm.io.LibraryWriter
-import dev.openrs2.asm.remap
 import org.objectweb.asm.tree.ClassNode
 import java.nio.file.Files
 import java.nio.file.Path
+import java.util.SortedMap
 import java.util.TreeMap
 
 class Library() : Iterable<ClassNode> {
-    private var classes = TreeMap<String, ClassNode>()
+    private var classes: SortedMap<String, ClassNode> = TreeMap()
 
     constructor(library: Library) : this() {
         for (clazz in library.classes.values) {
@@ -41,11 +41,7 @@ class Library() : Iterable<ClassNode> {
     }
 
     fun remap(remapper: ExtendedRemapper) {
-        for (clazz in classes.values) {
-            clazz.remap(remapper)
-        }
-
-        classes = classes.mapKeysTo(TreeMap()) { (_, clazz) -> clazz.name }
+        classes = LibraryRemapper(remapper, classes).remap()
     }
 
     fun write(path: Path, writer: LibraryWriter, classPath: ClassPath) {

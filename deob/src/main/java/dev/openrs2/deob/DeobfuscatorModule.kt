@@ -30,7 +30,6 @@ import dev.openrs2.deob.transform.OverrideTransformer
 import dev.openrs2.deob.transform.RedundantGotoTransformer
 import dev.openrs2.deob.transform.RemapTransformer
 import dev.openrs2.deob.transform.ResetTransformer
-import dev.openrs2.deob.transform.StaticScramblingTransformer
 import dev.openrs2.deob.transform.UnusedArgTransformer
 import dev.openrs2.deob.transform.UnusedLocalTransformer
 import dev.openrs2.deob.transform.UnusedMethodTransformer
@@ -57,6 +56,8 @@ object DeobfuscatorModule : AbstractModule() {
         binder.addBinding().to(CanvasTransformer::class.java)
         binder.addBinding().to(FieldOrderTransformer::class.java)
         binder.addBinding().to(BitwiseOpTransformer::class.java)
+        binder.addBinding().to(ClassLiteralTransformer::class.java)
+        binder.addBinding().to(InvokeSpecialTransformer::class.java)
         binder.addBinding().to(RemapTransformer::class.java)
         binder.addBinding().to(ConstantArgTransformer::class.java)
         binder.addBinding().to(UnusedLocalTransformer::class.java)
@@ -64,9 +65,6 @@ object DeobfuscatorModule : AbstractModule() {
         binder.addBinding().to(UnusedArgTransformer::class.java)
         binder.addBinding().to(CounterTransformer::class.java)
         binder.addBinding().to(ResetTransformer::class.java)
-        binder.addBinding().to(ClassLiteralTransformer::class.java)
-        binder.addBinding().to(InvokeSpecialTransformer::class.java)
-        binder.addBinding().to(StaticScramblingTransformer::class.java)
         binder.addBinding().to(EmptyClassTransformer::class.java)
         binder.addBinding().to(MethodOrderTransformer::class.java)
         binder.addBinding().to(VisibilityTransformer::class.java)
