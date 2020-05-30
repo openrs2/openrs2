@@ -6,13 +6,16 @@ import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.ExtendedRemapper
 import dev.openrs2.deob.Profile
 import dev.openrs2.util.collect.DisjointSet
+import org.objectweb.asm.tree.AbstractInsnNode
 
 class TypedRemapper private constructor(
     private val inheritedFieldSets: DisjointSet<MemberRef>,
     private val inheritedMethodSets: DisjointSet<MemberRef>,
     private val classes: Map<String, String>,
     private val fields: Map<DisjointSet.Partition<MemberRef>, String>,
-    private val methods: Map<DisjointSet.Partition<MemberRef>, String>
+    private val methods: Map<DisjointSet.Partition<MemberRef>, String>,
+    private val staticFields: Map<DisjointSet.Partition<MemberRef>, StaticField>,
+    private val staticMethods: Map<DisjointSet.Partition<MemberRef>, String>
 ) : ExtendedRemapper() {
     override fun map(internalName: String): String {
         return classes.getOrDefault(internalName, internalName)
@@ -24,10 +27,28 @@ class TypedRemapper private constructor(
         return fields.getOrDefault(partition, name)
     }
 
+    override fun mapFieldOwner(owner: String, name: String, descriptor: String): String {
+        val member = MemberRef(owner, name, descriptor)
+        val partition = inheritedFieldSets[member] ?: return mapType(owner)
+        return staticFields[partition]?.owner ?: mapType(owner)
+    }
+
+    override fun getFieldInitializer(owner: String, name: String, descriptor: String): List<AbstractInsnNode>? {
+        val member = MemberRef(owner, name, descriptor)
+        val partition = inheritedFieldSets[member] ?: return null
+        return staticFields[partition]?.initializer
+    }
+
     override fun mapMethodName(owner: String, name: String, descriptor: String): String {
         val member = MemberRef(owner, name, descriptor)
         val partition = inheritedMethodSets[member] ?: return name
         return methods.getOrDefault(partition, name)
+    }
+
+    override fun mapMethodOwner(owner: String, name: String, descriptor: String): String {
+        val member = MemberRef(owner, name, descriptor)
+        val partition = inheritedMethodSets[member] ?: return mapType(owner)
+        return staticMethods.getOrDefault(partition, mapType(owner))
     }
 
     companion object {
@@ -56,7 +77,29 @@ class TypedRemapper private constructor(
             verifyMemberMapping(fields, profile.maxObfuscatedNameLen)
             verifyMemberMapping(methods, profile.maxObfuscatedNameLen)
 
-            return TypedRemapper(inheritedFieldSets, inheritedMethodSets, classes, fields, methods)
+            val staticClassNameGenerator = NameGenerator()
+            val staticFields = StaticFieldUnscrambler(
+                classPath,
+                profile.excludedFields,
+                inheritedFieldSets,
+                staticClassNameGenerator
+            ).unscramble()
+            val staticMethods = StaticMethodUnscrambler(
+                classPath,
+                profile.excludedMethods,
+                inheritedMethodSets,
+                staticClassNameGenerator
+            ).unscramble()
+
+            return TypedRemapper(
+                inheritedFieldSets,
+                inheritedMethodSets,
+                classes,
+                fields,
+                methods,
+                staticFields,
+                staticMethods
+            )
         }
 
         private fun verifyMapping(mapping: Map<String, String>, maxObfuscatedNameLen: Int) {
