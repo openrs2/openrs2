@@ -37,7 +37,7 @@ object ClassForNameUtils {
 
     fun remap(remapper: Remapper, method: MethodNode) {
         for (ldc in findLdcInsns(method)) {
-            val name = remapper.map(internalName(ldc))
+            val name = remapper.mapType(internalName(ldc))
             if (name != null) {
                 ldc.cst = name.toBinaryClassName()
             }
