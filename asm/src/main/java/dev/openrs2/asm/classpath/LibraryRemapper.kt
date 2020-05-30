@@ -2,6 +2,7 @@ package dev.openrs2.asm.classpath
 
 import dev.openrs2.asm.ClassVersionUtils
 import dev.openrs2.asm.MemberRef
+import dev.openrs2.asm.nextReal
 import dev.openrs2.asm.remap
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
@@ -160,13 +161,21 @@ class LibraryRemapper(
             }
 
             val clinit = clazz.methods.find { it.name == "<clinit>" } ?: createClinitMethod(clazz)
-            // TODO(gpe): check the <clinit> method only has a single RETURN and that it is the last instruction
+            check(hasSingleTailExit(clinit.instructions)) {
+                "${clazz.name}'s <clinit> method does not have a single RETURN at the end of the InsnList"
+            }
+
             clinit.maxStack = max(clinit.maxStack, field.initializer.maxStack)
             clinit.instructions.insertBefore(clinit.instructions.last, field.initializer.instructions)
         }
 
         clazz.version = ClassVersionUtils.max(clazz.version, field.version)
         clazz.fields.add(field.node)
+    }
+
+    private fun hasSingleTailExit(instructions: InsnList): Boolean {
+        val insn = instructions.singleOrNull { it.opcode == Opcodes.RETURN }
+        return insn != null && insn.nextReal == null
     }
 
     private fun spliceMethods() {
