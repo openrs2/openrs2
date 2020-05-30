@@ -54,7 +54,6 @@ class VisibilityTransformer @Inject constructor(private val profile: Profile) : 
         references: Multimap<DisjointSet.Partition<MemberRef>, String>,
         disjointSet: DisjointSet<MemberRef>,
         member: MemberRef,
-        classAccess: Int,
         access: Int
     ): Int {
         val method = Type.getType(member.desc).sort == Type.METHOD
@@ -119,7 +118,6 @@ class VisibilityTransformer @Inject constructor(private val profile: Profile) : 
                         fieldReferences,
                         inheritedFieldSets,
                         MemberRef(clazz, field),
-                        clazz.access,
                         access
                     )
                     field.access = (access and VISIBILITY_FLAGS.inv()) or visibility
@@ -137,7 +135,6 @@ class VisibilityTransformer @Inject constructor(private val profile: Profile) : 
                         methodReferences,
                         inheritedMethodSets,
                         MemberRef(clazz, method),
-                        clazz.access,
                         access
                     )
                     method.access = (access and VISIBILITY_FLAGS.inv()) or visibility
