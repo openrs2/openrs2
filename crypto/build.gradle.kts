@@ -6,8 +6,8 @@ plugins {
 dependencies {
     api("com.google.inject:guice:${Versions.guice}")
     api("io.netty:netty-buffer:${Versions.netty}")
-    api("org.bouncycastle:bcpkix-jdk15on:${Versions.bouncyCastle}")
-    api("org.bouncycastle:bcprov-jdk15on:${Versions.bouncyCastle}")
+    api("org.bouncycastle:bcpkix-jdk15on:${Versions.bouncyCastlePkix}")
+    api("org.bouncycastle:bcprov-jdk15on:${Versions.bouncyCastleProvider}")
 
     testImplementation("com.google.jimfs:jimfs:${Versions.jimfs}")
 }
