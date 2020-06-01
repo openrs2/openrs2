@@ -45,8 +45,8 @@ The CRC-32 values and SHA-256 checksums of the correct files are:
 |  `1692522675` | `0ab28a95e7c5993860ff439ebb331c0df02ad40aa1f544777ed91b46d30d3d24` | `nonfree/lib/runescape.jar`        |
 | `-1911426584` | `7c090e07f8d754d09804ff6e9733ef3ba227893b6b639436db90977b39122590` | `nonfree/lib/unpackclass.pack`     |
 
-The `nonfree` directory is included in the `.gitignore` file to prevent any
-non-free material from being accidentally included in the repository.
+The `.gitignore` file includes the `nonfree` directory to prevent any non-free
+material from being accidentally included in the repository.
 
 ## Building
 
