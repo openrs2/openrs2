@@ -4,7 +4,6 @@ import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
 import dev.openrs2.asm.transform.Transformer
-import org.objectweb.asm.Opcodes
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.FieldNode
@@ -30,12 +29,16 @@ class EmptyClassTransformer : Transformer() {
     }
 
     override fun transformClass(classPath: ClassPath, library: Library, clazz: ClassNode): Boolean {
-        if (clazz.access and Opcodes.ACC_INTERFACE == 0 && clazz.fields.isEmpty() && clazz.methods.isEmpty()) {
+        if (clazz.fields.isEmpty() && clazz.methods.isEmpty()) {
             emptyClasses.add(clazz.name)
         }
 
         if (clazz.superName != null) {
             referencedClasses.add(clazz.superName)
+        }
+
+        for (superInterface in clazz.interfaces) {
+            referencedClasses.add(superInterface)
         }
 
         return false
