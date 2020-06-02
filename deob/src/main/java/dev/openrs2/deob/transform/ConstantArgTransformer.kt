@@ -24,6 +24,7 @@ import dev.openrs2.deob.analysis.IntBranchResult.NEVER_TAKEN
 import dev.openrs2.deob.analysis.IntInterpreter
 import dev.openrs2.deob.analysis.IntValueSet
 import dev.openrs2.deob.filter.ReflectedConstructorFilter
+import dev.openrs2.deob.remap.MethodMappingGenerator
 import dev.openrs2.util.collect.DisjointSet
 import dev.openrs2.util.collect.removeFirstOrNull
 import org.objectweb.asm.Opcodes.GOTO
@@ -245,7 +246,17 @@ class ConstantArgTransformer @Inject constructor(private val profile: Profile) :
         return simplified
     }
 
-    private fun inlineConstantArgs(clazz: ClassNode, method: MethodNode, args: Array<IntValueSet>): Int {
+    private fun inlineConstantArgs(
+        classPath: ClassPath,
+        clazz: ClassNode,
+        method: MethodNode,
+        args: Array<IntValueSet>
+    ): Int {
+        val partition = inheritedMethodSets[MemberRef(clazz, method)]!!
+        if (!MethodMappingGenerator.isRenamable(classPath, profile.excludedMethods, partition)) {
+            return 0
+        }
+
         val analyzer = Analyzer(IntInterpreter(args))
         val frames = analyzer.analyze(clazz.name, method)
 
@@ -299,7 +310,7 @@ class ConstantArgTransformer @Inject constructor(private val profile: Profile) :
     override fun transformCode(classPath: ClassPath, library: Library, clazz: ClassNode, method: MethodNode): Boolean {
         val args = getArgs(MemberRef(clazz, method))
         branchesSimplified += simplifyBranches(clazz, method, args)
-        constantsInlined += inlineConstantArgs(clazz, method, args)
+        constantsInlined += inlineConstantArgs(classPath, clazz, method, args)
         return false
     }
 
