@@ -58,7 +58,7 @@ class ConstantArgTransformer @Inject constructor(private val profile: Profile) :
     private lateinit var inheritedMethodSets: DisjointSet<MemberRef>
     private lateinit var entryPoints: MemberFilter
     private var branchesSimplified = 0
-    private var constantsInlined = 0
+    private var constantsPropagated = 0
 
     override fun preTransform(classPath: ClassPath) {
         pendingMethods.clear()
@@ -67,7 +67,7 @@ class ConstantArgTransformer @Inject constructor(private val profile: Profile) :
         inheritedMethodSets = classPath.createInheritedMethodSets()
         entryPoints = UnionMemberFilter(profile.entryPoints, ReflectedConstructorFilter.create(classPath))
         branchesSimplified = 0
-        constantsInlined = 0
+        constantsPropagated = 0
 
         queueEntryPoints(classPath)
 
@@ -246,7 +246,7 @@ class ConstantArgTransformer @Inject constructor(private val profile: Profile) :
         return simplified
     }
 
-    private fun inlineConstantArgs(
+    private fun propagateConstantArgs(
         classPath: ClassPath,
         clazz: ClassNode,
         method: MethodNode,
@@ -310,12 +310,12 @@ class ConstantArgTransformer @Inject constructor(private val profile: Profile) :
     override fun transformCode(classPath: ClassPath, library: Library, clazz: ClassNode, method: MethodNode): Boolean {
         val args = getArgs(MemberRef(clazz, method))
         branchesSimplified += simplifyBranches(clazz, method, args)
-        constantsInlined += inlineConstantArgs(classPath, clazz, method, args)
+        constantsPropagated += propagateConstantArgs(classPath, clazz, method, args)
         return false
     }
 
     override fun postTransform(classPath: ClassPath) {
-        logger.info { "Simplified $branchesSimplified branches and inlined $constantsInlined constants" }
+        logger.info { "Simplified $branchesSimplified branches and propagated $constantsPropagated constants" }
     }
 
     private companion object {
