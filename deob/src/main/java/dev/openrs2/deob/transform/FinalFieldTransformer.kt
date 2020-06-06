@@ -5,6 +5,7 @@ import dev.openrs2.asm.MemberDesc
 import dev.openrs2.asm.MemberRef
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.Library
+import dev.openrs2.asm.removeDeadCode
 import dev.openrs2.asm.transform.Transformer
 import dev.openrs2.deob.analysis.FieldWriteAnalyzer
 import dev.openrs2.deob.analysis.FieldWriteCount
@@ -28,6 +29,8 @@ class FinalFieldTransformer : Transformer() {
     }
 
     override fun transformCode(classPath: ClassPath, library: Library, clazz: ClassNode, method: MethodNode): Boolean {
+        method.removeDeadCode(clazz.name)
+
         val constructor = method.name == "<init>" || method.name == "<clinit>"
         val constructorStatic = (method.access and Opcodes.ACC_STATIC) != 0
         val thisCall = if (constructor && !constructorStatic) {
