@@ -47,7 +47,7 @@ class FieldWriteAnalyzer(
                 count1 == null && count2 != null -> count2
                 count2 == null && count1 != null -> count1
                 count1 == count2 -> count1!!
-                else -> FieldWriteCount.UNKNOWN
+                else -> FieldWriteCount.ONCE_OR_MORE
             }
         }
 
@@ -81,10 +81,10 @@ class FieldWriteAnalyzer(
         val count = set.getOrDefault(member, FieldWriteCount.NEVER)
         return when {
             isThis && count == FieldWriteCount.NEVER -> set.plus(Pair(member, FieldWriteCount.EXACTLY_ONCE))
-            isThis && count == FieldWriteCount.EXACTLY_ONCE -> set.plus(Pair(member, FieldWriteCount.UNKNOWN))
+            isThis && count == FieldWriteCount.EXACTLY_ONCE -> set.plus(Pair(member, FieldWriteCount.ONCE_OR_MORE))
             // save an allocation if count is already set to UNKNOWN
-            count == FieldWriteCount.UNKNOWN -> set
-            else -> set.plus(Pair(member, FieldWriteCount.UNKNOWN))
+            count == FieldWriteCount.ONCE_OR_MORE -> set
+            else -> set.plus(Pair(member, FieldWriteCount.ONCE_OR_MORE))
         }
     }
 }

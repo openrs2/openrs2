@@ -3,5 +3,5 @@ package dev.openrs2.deob.analysis
 enum class FieldWriteCount {
     NEVER,
     EXACTLY_ONCE,
-    UNKNOWN
+    ONCE_OR_MORE
 }
