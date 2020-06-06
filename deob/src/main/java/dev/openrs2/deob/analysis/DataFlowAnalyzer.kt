@@ -21,6 +21,7 @@ abstract class DataFlowAnalyzer<T>(owner: String, private val method: MethodNode
         }
     }
 
+    protected open fun createEntrySet(): T = createInitialSet()
     protected abstract fun createInitialSet(): T
     protected abstract fun join(set1: T, set2: T): T
     protected abstract fun transfer(set: T, insn: AbstractInsnNode): T
@@ -42,6 +43,7 @@ abstract class DataFlowAnalyzer<T>(owner: String, private val method: MethodNode
     }
 
     fun analyze() {
+        val entrySet = createEntrySet()
         val initialSet = createInitialSet()
 
         val workList = LinkedHashSet<Int>()
@@ -55,7 +57,7 @@ abstract class DataFlowAnalyzer<T>(owner: String, private val method: MethodNode
             }
 
             val inSet = if (predecessors.isEmpty()) {
-                initialSet
+                entrySet
             } else {
                 predecessors.reduce(this::join)
             }
