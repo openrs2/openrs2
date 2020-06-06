@@ -98,6 +98,24 @@ class FinalFieldTransformer : Transformer() {
         return false
     }
 
+    override fun transformClass(classPath: ClassPath, library: Library, clazz: ClassNode): Boolean {
+        // if a class has no constructor all its fields must be non-final
+
+        val hasInstanceConstructor = clazz.methods.any { it.name == "<init>" }
+        val hasStaticConstructor = clazz.methods.any { it.name == "<clinit>" }
+
+        for (field in clazz.fields) {
+            val fieldStatic = (field.access and Opcodes.ACC_STATIC) != 0
+
+            if ((!hasInstanceConstructor && !fieldStatic) || (!hasStaticConstructor && fieldStatic)) {
+                val partition = inheritedFieldSets[MemberRef(clazz, field)]!!
+                nonFinalFields += partition
+            }
+        }
+
+        return false
+    }
+
     override fun transformField(classPath: ClassPath, library: Library, clazz: ClassNode, field: FieldNode): Boolean {
         if ((field.access and Opcodes.ACC_VOLATILE) != 0) {
             val partition = inheritedFieldSets[MemberRef(clazz, field)]!!
