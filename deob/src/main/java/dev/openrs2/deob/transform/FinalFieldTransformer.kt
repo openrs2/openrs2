@@ -14,7 +14,6 @@ import dev.openrs2.util.collect.DisjointSet
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.FieldInsnNode
-import org.objectweb.asm.tree.FieldNode
 import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.analysis.Analyzer
@@ -119,15 +118,6 @@ class FinalFieldTransformer : Transformer() {
         return false
     }
 
-    override fun transformField(classPath: ClassPath, library: Library, clazz: ClassNode, field: FieldNode): Boolean {
-        if ((field.access and Opcodes.ACC_VOLATILE) != 0) {
-            val partition = inheritedFieldSets[MemberRef(clazz, field)]!!
-            nonFinalFields += partition
-        }
-
-        return false
-    }
-
     override fun postTransform(classPath: ClassPath) {
         var fieldsChanged = 0
 
@@ -142,7 +132,7 @@ class FinalFieldTransformer : Transformer() {
                     if (nonFinalFields.contains(partition)) {
                         field.access = field.access and Opcodes.ACC_FINAL.inv()
                     } else {
-                        field.access = field.access or Opcodes.ACC_FINAL
+                        field.access = (field.access or Opcodes.ACC_FINAL) and Opcodes.ACC_VOLATILE.inv()
                     }
 
                     if (field.access != access) {
