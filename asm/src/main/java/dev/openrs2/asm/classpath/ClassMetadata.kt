@@ -71,6 +71,23 @@ abstract class ClassMetadata {
         return false
     }
 
+    fun resolveField(member: MemberDesc): ClassMetadata? {
+        // see https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-5.html#jvms-5.4.3.2
+
+        if (fields.contains(member)) {
+            return this
+        }
+
+        for (superInterface in superInterfaces) {
+            val field = superInterface.resolveField(member)
+            if (field != null) {
+                return field
+            }
+        }
+
+        return superClass?.resolveField(member)
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is ClassMetadata) return false

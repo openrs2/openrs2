@@ -18,6 +18,7 @@ import dev.openrs2.deob.transform.EmptyClassTransformer
 import dev.openrs2.deob.transform.ExceptionTracingTransformer
 import dev.openrs2.deob.transform.FernflowerExceptionTransformer
 import dev.openrs2.deob.transform.FieldOrderTransformer
+import dev.openrs2.deob.transform.FinalFieldTransformer
 import dev.openrs2.deob.transform.FinalTransformer
 import dev.openrs2.deob.transform.InvokeSpecialTransformer
 import dev.openrs2.deob.transform.MethodOrderTransformer
@@ -69,6 +70,7 @@ object DeobfuscatorModule : AbstractModule() {
         binder.addBinding().to(MethodOrderTransformer::class.java)
         binder.addBinding().to(VisibilityTransformer::class.java)
         binder.addBinding().to(FinalTransformer::class.java)
+        binder.addBinding().to(FinalFieldTransformer::class.java)
         binder.addBinding().to(OverrideTransformer::class.java)
         binder.addBinding().to(RedundantGotoTransformer::class.java)
         binder.addBinding().to(OriginalPcRestoreTransformer::class.java)
