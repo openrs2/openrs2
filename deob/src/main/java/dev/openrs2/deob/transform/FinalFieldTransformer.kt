@@ -29,7 +29,8 @@ class FinalFieldTransformer : Transformer() {
 
     override fun transformCode(classPath: ClassPath, library: Library, clazz: ClassNode, method: MethodNode): Boolean {
         val constructor = method.name == "<init>" || method.name == "<clinit>"
-        val thisCall = if (constructor && method.name == "<init>") {
+        val constructorStatic = (method.access and Opcodes.ACC_STATIC) != 0
+        val thisCall = if (constructor && !constructorStatic) {
             method.instructions.filterIsInstance<MethodInsnNode>()
                 .any { it.opcode == Opcodes.INVOKESPECIAL && it.owner == clazz.name && it.name == "<init>" }
         } else {
@@ -61,7 +62,8 @@ class FinalFieldTransformer : Transformer() {
                 }
 
                 val declaredOwner = classPath[insn.owner]!!.resolveField(MemberDesc(insn))!!.name
-                if (isThis && declaredOwner == clazz.name) {
+                val fieldStatic = insn.opcode == Opcodes.PUTSTATIC
+                if (isThis && declaredOwner == clazz.name && fieldStatic == constructorStatic) {
                     /*
                      * Writes inside constructors without a this(...) call to
                      * fields owned by the same class are analyzed separately - if
@@ -84,10 +86,9 @@ class FinalFieldTransformer : Transformer() {
             for (insn in exits) {
                 val counts = analyzer.getOutSet(insn) ?: emptyMap()
 
-                for (field in clazz.fields) {
-                    val count = counts.getOrDefault(MemberDesc(field), FieldWriteCount.NEVER)
+                for ((field, count) in counts) {
                     if (count != FieldWriteCount.EXACTLY_ONCE) {
-                        val partition = inheritedFieldSets[MemberRef(clazz, field)]!!
+                        val partition = inheritedFieldSets[MemberRef(clazz.name, field)]!!
                         nonFinalFields += partition
                     }
                 }

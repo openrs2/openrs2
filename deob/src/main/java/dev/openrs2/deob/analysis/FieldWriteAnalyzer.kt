@@ -15,11 +15,16 @@ class FieldWriteAnalyzer(
     private val classPath: ClassPath,
     private val frames: Array<Frame<ThisValue>>
 ) : DataFlowAnalyzer<Map<MemberDesc, FieldWriteCount>>(clazz.name, method) {
+    private val methodStatic = (method.access and Opcodes.ACC_STATIC) != 0
+
     override fun createEntrySet(): Map<MemberDesc, FieldWriteCount> {
         val set = mutableMapOf<MemberDesc, FieldWriteCount>()
 
         for (field in clazz.fields) {
-            set[MemberDesc(field)] = FieldWriteCount.NEVER
+            val fieldStatic = (field.access and Opcodes.ACC_STATIC) != 0
+            if (methodStatic == fieldStatic) {
+                set[MemberDesc(field)] = FieldWriteCount.NEVER
+            }
         }
 
         return set
@@ -60,7 +65,9 @@ class FieldWriteAnalyzer(
     ): Map<MemberDesc, FieldWriteCount> {
         if (insn !is FieldInsnNode) {
             return set
-        } else if (insn.opcode != Opcodes.PUTFIELD && insn.opcode != Opcodes.PUTSTATIC) {
+        } else if (methodStatic && insn.opcode != Opcodes.PUTSTATIC) {
+            return set
+        } else if (!methodStatic && insn.opcode != Opcodes.PUTFIELD) {
             return set
         }
 
