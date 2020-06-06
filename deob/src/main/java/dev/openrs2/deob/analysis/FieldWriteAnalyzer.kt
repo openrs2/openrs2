@@ -4,16 +4,27 @@ import dev.openrs2.asm.MemberDesc
 import dev.openrs2.asm.classpath.ClassPath
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.AbstractInsnNode
+import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.FieldInsnNode
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.analysis.Frame
 
 class FieldWriteAnalyzer(
-    private val owner: String,
+    private val clazz: ClassNode,
     private val method: MethodNode,
     private val classPath: ClassPath,
     private val frames: Array<Frame<ThisValue>>
-) : DataFlowAnalyzer<Map<MemberDesc, FieldWriteCount>>(owner, method) {
+) : DataFlowAnalyzer<Map<MemberDesc, FieldWriteCount>>(clazz.name, method) {
+    override fun createEntrySet(): Map<MemberDesc, FieldWriteCount> {
+        val set = mutableMapOf<MemberDesc, FieldWriteCount>()
+
+        for (field in clazz.fields) {
+            set[MemberDesc(field)] = FieldWriteCount.NEVER
+        }
+
+        return set
+    }
+
     override fun createInitialSet(): Map<MemberDesc, FieldWriteCount> {
         return emptyMap()
     }
@@ -29,13 +40,14 @@ class FieldWriteAnalyzer(
         val set = mutableMapOf<MemberDesc, FieldWriteCount>()
 
         for (member in set1.keys union set2.keys) {
-            val count1 = set1.getOrDefault(member, FieldWriteCount.NEVER)
-            val count2 = set2.getOrDefault(member, FieldWriteCount.NEVER)
+            val count1 = set1[member]
+            val count2 = set2[member]
 
-            set[member] = if (count1 == count2) {
-                count1
-            } else {
-                FieldWriteCount.UNKNOWN
+            set[member] = when {
+                count1 == null && count2 != null -> count2
+                count2 == null && count1 != null -> count1
+                count1 == count2 -> count1!!
+                else -> FieldWriteCount.UNKNOWN
             }
         }
 
@@ -54,7 +66,7 @@ class FieldWriteAnalyzer(
 
         val member = MemberDesc(insn)
         val declaredOwner = classPath[insn.owner]!!.resolveField(member)!!.name
-        if (declaredOwner != owner) {
+        if (declaredOwner != clazz.name) {
             return set
         }
 

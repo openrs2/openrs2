@@ -77,7 +77,7 @@ class FinalFieldTransformer : Transformer() {
         }
 
         if (constructorWithoutThisCall) {
-            val analyzer = FieldWriteAnalyzer(clazz.name, method, classPath, frames!!)
+            val analyzer = FieldWriteAnalyzer(clazz, method, classPath, frames!!)
             analyzer.analyze()
 
             val exits = method.instructions.filter { it.opcode == Opcodes.RETURN }
