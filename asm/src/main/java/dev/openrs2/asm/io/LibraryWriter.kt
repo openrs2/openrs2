@@ -1,9 +1,9 @@
 package dev.openrs2.asm.io
 
 import dev.openrs2.asm.classpath.ClassPath
-import dev.openrs2.asm.classpath.Library
+import org.objectweb.asm.tree.ClassNode
 import java.io.OutputStream
 
 interface LibraryWriter {
-    fun write(output: OutputStream, classPath: ClassPath, library: Library)
+    fun write(output: OutputStream, classPath: ClassPath, classes: Iterable<ClassNode>)
 }

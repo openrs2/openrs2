@@ -1,7 +1,6 @@
 package dev.openrs2.asm.io
 
 import dev.openrs2.asm.classpath.JsrInliner
-import dev.openrs2.asm.classpath.Library
 import dev.openrs2.util.io.entries
 import org.objectweb.asm.ClassReader
 import org.objectweb.asm.tree.ClassNode
@@ -11,8 +10,8 @@ import java.util.jar.JarInputStream
 object JarLibraryReader : LibraryReader {
     private const val CLASS_SUFFIX = ".class"
 
-    override fun read(input: InputStream): Library {
-        val library = Library()
+    override fun read(input: InputStream): Iterable<ClassNode> {
+        val classes = mutableListOf<ClassNode>()
 
         JarInputStream(input).use { jar ->
             for (entry in jar.entries) {
@@ -24,10 +23,10 @@ object JarLibraryReader : LibraryReader {
                 val reader = ClassReader(jar)
                 reader.accept(JsrInliner(clazz), ClassReader.SKIP_DEBUG or ClassReader.SKIP_FRAMES)
 
-                library.add(clazz)
+                classes += clazz
             }
         }
 
-        return library
+        return classes
     }
 }

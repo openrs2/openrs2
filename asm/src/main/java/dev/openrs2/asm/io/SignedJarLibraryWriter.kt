@@ -1,10 +1,10 @@
 package dev.openrs2.asm.io
 
 import dev.openrs2.asm.classpath.ClassPath
-import dev.openrs2.asm.classpath.Library
 import dev.openrs2.crypto.Pkcs12KeyStore
 import dev.openrs2.util.io.DeterministicJarOutputStream
 import dev.openrs2.util.io.entries
+import org.objectweb.asm.tree.ClassNode
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
@@ -17,11 +17,11 @@ class SignedJarLibraryWriter(
     private val manifest: Manifest,
     private val keyStore: Pkcs12KeyStore
 ) : LibraryWriter {
-    override fun write(output: OutputStream, classPath: ClassPath, library: Library) {
+    override fun write(output: OutputStream, classPath: ClassPath, classes: Iterable<ClassNode>) {
         val unsignedJar = Files.createTempFile(TEMP_PREFIX, JAR_SUFFIX)
         try {
             Files.newOutputStream(unsignedJar).use { unsignedOutput ->
-                ManifestJarLibraryWriter(manifest).write(unsignedOutput, classPath, library)
+                ManifestJarLibraryWriter(manifest).write(unsignedOutput, classPath, classes)
             }
 
             ByteArrayOutputStream().use { signedOutput ->

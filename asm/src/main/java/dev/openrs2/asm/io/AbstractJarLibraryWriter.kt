@@ -3,19 +3,19 @@ package dev.openrs2.asm.io
 import dev.openrs2.asm.ClassVersionUtils
 import dev.openrs2.asm.NopClassVisitor
 import dev.openrs2.asm.classpath.ClassPath
-import dev.openrs2.asm.classpath.Library
 import dev.openrs2.asm.classpath.StackFrameClassWriter
 import org.objectweb.asm.ClassWriter
 import org.objectweb.asm.Opcodes
+import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.util.CheckClassAdapter
 import java.io.OutputStream
 import java.util.jar.JarEntry
 import java.util.jar.JarOutputStream
 
 abstract class AbstractJarLibraryWriter : LibraryWriter {
-    override fun write(output: OutputStream, classPath: ClassPath, library: Library) {
+    override fun write(output: OutputStream, classPath: ClassPath, classes: Iterable<ClassNode>) {
         createJarOutputStream(output).use { jar ->
-            for (clazz in library) {
+            for (clazz in classes) {
                 val writer = if (ClassVersionUtils.gte(clazz.version, Opcodes.V1_7)) {
                     StackFrameClassWriter(classPath)
                 } else {

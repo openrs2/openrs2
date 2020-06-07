@@ -48,7 +48,7 @@ class Library() : Iterable<ClassNode> {
         logger.info { "Writing library $path" }
 
         Files.newOutputStream(path).use { output ->
-            writer.write(output, classPath, this)
+            writer.write(output, classPath, classes.values)
         }
     }
 
@@ -58,9 +58,15 @@ class Library() : Iterable<ClassNode> {
         fun read(path: Path, reader: LibraryReader): Library {
             logger.info { "Reading library $path" }
 
-            return Files.newInputStream(path).use { input ->
+            val classes = Files.newInputStream(path).use { input ->
                 reader.read(input)
             }
+
+            val library = Library()
+            for (clazz in classes) {
+                library.add(clazz)
+            }
+            return library
         }
     }
 }
