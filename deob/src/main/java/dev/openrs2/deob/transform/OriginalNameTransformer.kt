@@ -19,7 +19,7 @@ class OriginalNameTransformer : Transformer() {
         if (clazz.invisibleAnnotations == null) {
             clazz.invisibleAnnotations = mutableListOf()
         }
-        clazz.invisibleAnnotations.add(createOriginalClassAnnotation(clazz.name))
+        clazz.invisibleAnnotations.add(createClassAnnotation(clazz.name))
         return false
     }
 
@@ -32,7 +32,7 @@ class OriginalNameTransformer : Transformer() {
         if (field.invisibleAnnotations == null) {
             field.invisibleAnnotations = mutableListOf()
         }
-        field.invisibleAnnotations.add(createOriginalMemberAnnotation(clazz.name, field.name, field.desc))
+        field.invisibleAnnotations.add(createMemberAnnotation(clazz.name, field.name, field.desc))
         return false
     }
 
@@ -49,7 +49,7 @@ class OriginalNameTransformer : Transformer() {
         if (method.invisibleAnnotations == null) {
             method.invisibleAnnotations = mutableListOf()
         }
-        method.invisibleAnnotations.add(createOriginalMemberAnnotation(clazz.name, method.name, method.desc))
+        method.invisibleAnnotations.add(createMemberAnnotation(clazz.name, method.name, method.desc))
 
         val args = Type.getArgumentTypes(method.desc).size
         if (method.invisibleParameterAnnotations == null) {
@@ -61,20 +61,20 @@ class OriginalNameTransformer : Transformer() {
                 annotations = mutableListOf()
                 method.invisibleParameterAnnotations[i] = annotations
             }
-            annotations.add(createOriginalArgAnnotation(i))
+            annotations.add(createArgAnnotation(i))
         }
 
         return false
     }
 
     private companion object {
-        private fun createOriginalClassAnnotation(name: String): AnnotationNode {
+        private fun createClassAnnotation(name: String): AnnotationNode {
             val annotation = AnnotationNode(Type.getDescriptor(OriginalClass::class.java))
             annotation.values = listOf("value", name)
             return annotation
         }
 
-        private fun createOriginalMemberAnnotation(owner: String, name: String, desc: String): AnnotationNode {
+        private fun createMemberAnnotation(owner: String, name: String, desc: String): AnnotationNode {
             val annotation = AnnotationNode(Type.getDescriptor(OriginalMember::class.java))
             annotation.values = listOf(
                 "owner", owner,
@@ -84,7 +84,7 @@ class OriginalNameTransformer : Transformer() {
             return annotation
         }
 
-        private fun createOriginalArgAnnotation(index: Int): AnnotationNode {
+        private fun createArgAnnotation(index: Int): AnnotationNode {
             val annotation = AnnotationNode(Type.getDescriptor(OriginalArg::class.java))
             annotation.values = listOf("value", index)
             return annotation
