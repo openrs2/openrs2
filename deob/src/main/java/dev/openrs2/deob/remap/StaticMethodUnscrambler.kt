@@ -10,6 +10,7 @@ import org.objectweb.asm.Opcodes
 class StaticMethodUnscrambler(
     private val classPath: ClassPath,
     private val excludedMethods: MemberFilter,
+    private val scrambledLibraries: Set<String>,
     private val nameMap: NameMap,
     private val inheritedMethodSets: DisjointSet<MemberRef>,
     staticClassNameGenerator: NameGenerator
@@ -20,8 +21,7 @@ class StaticMethodUnscrambler(
         val owners = mutableMapOf<DisjointSet.Partition<MemberRef>, String>()
 
         for (library in classPath.libraries) {
-            if ("client" !in library) {
-                // TODO(gpe): improve detection of the client library
+            if (library.name !in scrambledLibraries) {
                 continue
             }
 

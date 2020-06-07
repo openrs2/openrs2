@@ -88,6 +88,7 @@ class TypedRemapper private constructor(
             val staticFields = StaticFieldUnscrambler(
                 classPath,
                 profile.excludedFields,
+                profile.scrambledLibraries,
                 nameMap,
                 inheritedFieldSets,
                 staticClassNameGenerator
@@ -95,6 +96,7 @@ class TypedRemapper private constructor(
             val staticMethods = StaticMethodUnscrambler(
                 classPath,
                 profile.excludedMethods,
+                profile.scrambledLibraries,
                 nameMap,
                 inheritedMethodSets,
                 staticClassNameGenerator

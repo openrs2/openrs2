@@ -31,4 +31,6 @@ entry_points:
   - "com/sun/opengl/impl/x11/DRIHack.end *"
   - "loader.<init> *"
   - "unpackclass.<init> *"
+scrambled_libraries:
+  - client
 max_obfuscated_name_len: 2

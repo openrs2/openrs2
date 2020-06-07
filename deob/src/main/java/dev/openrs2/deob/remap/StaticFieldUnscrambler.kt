@@ -16,6 +16,7 @@ import org.objectweb.asm.tree.MethodNode
 class StaticFieldUnscrambler(
     private val classPath: ClassPath,
     private val excludedFields: MemberFilter,
+    private val scrambledLibraries: Set<String>,
     private val nameMap: NameMap,
     private val inheritedFieldSets: DisjointSet<MemberRef>,
     staticClassNameGenerator: NameGenerator
@@ -26,8 +27,7 @@ class StaticFieldUnscrambler(
         val fields = mutableMapOf<DisjointSet.Partition<MemberRef>, StaticField>()
 
         for (library in classPath.libraries) {
-            if ("client" !in library) {
-                // TODO(gpe): improve detection of the client library
+            if (library.name !in scrambledLibraries) {
                 continue
             }
 

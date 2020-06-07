@@ -8,5 +8,6 @@ class Profile(
     val excludedMethods: GlobMemberFilter,
     val excludedFields: GlobMemberFilter,
     val entryPoints: GlobMemberFilter,
+    val scrambledLibraries: Set<String>,
     val maxObfuscatedNameLen: Int
 )
