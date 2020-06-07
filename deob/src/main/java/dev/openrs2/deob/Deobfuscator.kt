@@ -21,10 +21,10 @@ class Deobfuscator @Inject constructor(
     fun run(input: Path, output: Path) {
         // read input jars/packs
         logger.info { "Reading input jars" }
-        val unpackClass = Library.read(input.resolve("unpackclass.pack"), JarLibraryReader)
-        val loader = Library.read(input.resolve("loader_gl.jar"), JarLibraryReader)
-        val gl = Library.read(input.resolve("jaggl.pack200"), Pack200LibraryReader)
         val client = Library.read(input.resolve("runescape_gl.pack200"), Pack200LibraryReader)
+        val gl = Library.read(input.resolve("jaggl.pack200"), Pack200LibraryReader)
+        val loader = Library.read(input.resolve("loader_gl.jar"), JarLibraryReader)
+        val unpackClass = Library.read(input.resolve("unpackclass.pack"), JarLibraryReader)
 
         // overwrite client's classes with signed classes from the loader
         logger.info { "Moving signed classes from loader to signlink" }
@@ -46,7 +46,7 @@ class Deobfuscator @Inject constructor(
         val classPath = ClassPath(
             runtime,
             dependencies = emptyList(),
-            libraries = listOf(gl, client, loader, signlink, unpack, unpackClass)
+            libraries = listOf(client, gl, loader, signlink, unpack, unpackClass)
         )
 
         // deobfuscate
@@ -61,8 +61,8 @@ class Deobfuscator @Inject constructor(
 
         Files.createDirectories(output)
 
-        gl.write(output.resolve("jaggl.jar"), JarLibraryWriter, classPath)
         client.write(output.resolve("runescape_gl.jar"), JarLibraryWriter, classPath)
+        gl.write(output.resolve("jaggl.jar"), JarLibraryWriter, classPath)
         loader.write(output.resolve("loader_gl.jar"), JarLibraryWriter, classPath)
         signlink.write(output.resolve("signlink_gl.jar"), JarLibraryWriter, classPath)
         unpack.write(output.resolve("unpack_gl.jar"), JarLibraryWriter, classPath)
