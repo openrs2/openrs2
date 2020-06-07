@@ -27,7 +27,7 @@ class Deobfuscator @Inject constructor(
         val client = Library.read(input.resolve("runescape_gl.pack200"), Pack200LibraryReader)
 
         // overwrite client's classes with signed classes from the loader
-        logger.info { "Moving signed classes from loader" }
+        logger.info { "Moving signed classes from loader to signlink" }
         val signlink = Library()
         SignedClassUtils.move(loader, client, signlink)
 
