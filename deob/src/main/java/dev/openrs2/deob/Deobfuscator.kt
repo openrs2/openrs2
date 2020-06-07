@@ -22,62 +22,31 @@ class Deobfuscator @Inject constructor(
         // read input jars/packs
         logger.info { "Reading input jars" }
         val unpackClass = Library.read(input.resolve("unpackclass.pack"), JarLibraryReader)
-        val glUnpackClass = Library(unpackClass)
-        val loader = Library.read(input.resolve("loader.jar"), JarLibraryReader)
-        val glLoader = Library.read(input.resolve("loader_gl.jar"), JarLibraryReader)
+        val loader = Library.read(input.resolve("loader_gl.jar"), JarLibraryReader)
         val gl = Library.read(input.resolve("jaggl.pack200"), Pack200LibraryReader)
-        val client = Library.read(input.resolve("runescape.jar"), JarLibraryReader)
-        val glClient = Library.read(input.resolve("runescape_gl.pack200"), Pack200LibraryReader)
-
-        /*
-         * TODO(gpe): it'd be nice to have separate signlink.jar and
-         * signlink-unsigned.jar files so we don't (effectively) deobfuscate
-         * runescape.jar twice with different sets of names, but thinking about
-         * how this would work is tricky (as the naming must match)
-         */
-        val unsignedClient = Library(client)
+        val client = Library.read(input.resolve("runescape_gl.pack200"), Pack200LibraryReader)
 
         // overwrite client's classes with signed classes from the loader
         logger.info { "Moving signed classes from loader" }
-        val signLink = Library()
-        SignedClassUtils.move(loader, client, signLink)
-
-        logger.info { "Moving signed classes from loader_gl" }
-        val glSignLink = Library()
-        SignedClassUtils.move(glLoader, glClient, glSignLink)
+        val signlink = Library()
+        SignedClassUtils.move(loader, client, signlink)
 
         // move unpack class out of the loader (so the unpacker and loader can both depend on it)
         logger.info { "Moving unpack from loader to unpack" }
         val unpack = Library()
         unpack.add(loader.remove("unpack")!!)
 
-        logger.info { "Moving unpack from loader_gl to unpack_gl" }
-        val glUnpack = Library()
-        glUnpack.add(glLoader.remove("unpack")!!)
-
         // prefix remaining loader/unpacker classes (to avoid conflicts when we rename in the same classpath as the client)
         logger.info { "Prefixing loader and unpackclass class names" }
         loader.remap(PrefixRemapper.create(loader, "loader_", profile.excludedClasses))
-        glLoader.remap(PrefixRemapper.create(glLoader, "loader_", profile.excludedClasses))
         unpackClass.remap(PrefixRemapper.create(unpackClass, "unpackclass_", profile.excludedClasses))
-        glUnpackClass.remap(PrefixRemapper.create(glUnpackClass, "unpackclass_", profile.excludedClasses))
 
         // bundle libraries together into a common classpath
         val runtime = ClassLoader.getPlatformClassLoader()
         val classPath = ClassPath(
             runtime,
             dependencies = emptyList(),
-            libraries = listOf(client, loader, signLink, unpack, unpackClass)
-        )
-        val glClassPath = ClassPath(
-            runtime,
-            dependencies = emptyList(),
-            libraries = listOf(gl, glClient, glLoader, glSignLink, glUnpack, glUnpackClass)
-        )
-        val unsignedClassPath = ClassPath(
-            runtime,
-            dependencies = emptyList(),
-            libraries = listOf(unsignedClient)
+            libraries = listOf(gl, client, loader, signlink, unpack, unpackClass)
         )
 
         // deobfuscate
@@ -87,37 +56,17 @@ class Deobfuscator @Inject constructor(
             transformer.transform(classPath)
         }
 
-        logger.info { "Transforming client_gl" }
-        for (transformer in transformers) {
-            logger.info { "Running transformer ${transformer.javaClass.simpleName}" }
-            transformer.transform(glClassPath)
-        }
-
-        logger.info { "Transforming client_unsigned" }
-        for (transformer in transformers) {
-            logger.info { "Running transformer ${transformer.javaClass.simpleName}" }
-            transformer.transform(unsignedClassPath)
-        }
-
         // write output jars
         logger.info { "Writing output jars" }
 
         Files.createDirectories(output)
 
-        client.write(output.resolve("runescape.jar"), JarLibraryWriter, classPath)
-        loader.write(output.resolve("loader.jar"), JarLibraryWriter, classPath)
-        signLink.write(output.resolve("signlink.jar"), JarLibraryWriter, classPath)
-        unpack.write(output.resolve("unpack.jar"), JarLibraryWriter, classPath)
-        unpackClass.write(output.resolve("unpackclass.jar"), JarLibraryWriter, classPath)
-
-        gl.write(output.resolve("jaggl.jar"), JarLibraryWriter, glClassPath)
-        glClient.write(output.resolve("runescape_gl.jar"), JarLibraryWriter, glClassPath)
-        glLoader.write(output.resolve("loader_gl.jar"), JarLibraryWriter, glClassPath)
-        glSignLink.write(output.resolve("signlink_gl.jar"), JarLibraryWriter, glClassPath)
-        glUnpack.write(output.resolve("unpack_gl.jar"), JarLibraryWriter, glClassPath)
-        glUnpackClass.write(output.resolve("unpackclass_gl.jar"), JarLibraryWriter, glClassPath)
-
-        unsignedClient.write(output.resolve("runescape_unsigned.jar"), JarLibraryWriter, unsignedClassPath)
+        gl.write(output.resolve("jaggl.jar"), JarLibraryWriter, classPath)
+        client.write(output.resolve("runescape_gl.jar"), JarLibraryWriter, classPath)
+        loader.write(output.resolve("loader_gl.jar"), JarLibraryWriter, classPath)
+        signlink.write(output.resolve("signlink_gl.jar"), JarLibraryWriter, classPath)
+        unpack.write(output.resolve("unpack_gl.jar"), JarLibraryWriter, classPath)
+        unpackClass.write(output.resolve("unpackclass_gl.jar"), JarLibraryWriter, classPath)
     }
 
     private companion object {
