@@ -37,9 +37,7 @@ import javax.lang.model.element.VariableElement
     "map"
 )
 class NameMapProcessor : AbstractProcessor() {
-    private val classes = TreeMap<String, String>()
-    private val fields = TreeMap<MemberRef, Field>()
-    private val methods = TreeMap<MemberRef, Method>()
+    private val map = NameMap()
     private val mapper: ObjectMapper
     private lateinit var trees: Trees
     private lateinit var localScanner: LocalVariableScanner
@@ -67,7 +65,7 @@ class NameMapProcessor : AbstractProcessor() {
             check(element is TypeElement)
 
             val originalClass = element.getAnnotation(OriginalClass::class.java)!!
-            classes[originalClass.value] = element.qualifiedName.toString().toInternalClassName()
+            map.classes[originalClass.value] = element.qualifiedName.toString().toInternalClassName()
         }
 
         for (element in env.getElementsAnnotatedWith(OriginalMember::class.java)) {
@@ -79,7 +77,7 @@ class NameMapProcessor : AbstractProcessor() {
             val ref = MemberRef(originalMember.owner, originalMember.name, originalMember.descriptor)
 
             when (element) {
-                is VariableElement -> fields[ref] = Field(owner, name)
+                is VariableElement -> map.fields[ref] = Field(owner, name)
                 is ExecutableElement -> {
                     val arguments = element.parameters.map { parameter ->
                         val originalArg = parameter.getAnnotation(OriginalArg::class.java)!!
@@ -89,7 +87,7 @@ class NameMapProcessor : AbstractProcessor() {
                     val locals = TreeMap<Int, String>()
                     localScanner.scan(path, locals)
 
-                    methods[ref] = Method(owner, name, arguments, locals)
+                    map.methods[ref] = Method(owner, name, arguments, locals)
                 }
                 else -> error("Unexpected element type")
             }
@@ -98,8 +96,18 @@ class NameMapProcessor : AbstractProcessor() {
         if (env.processingOver()) {
             Files.createDirectories(mapPath.parent)
 
+            val combinedMap: NameMap
+            if (Files.exists(mapPath)) {
+                combinedMap = Files.newBufferedReader(mapPath).use { reader ->
+                    mapper.readValue(reader, NameMap::class.java)
+                }
+                combinedMap.add(map)
+            } else {
+                combinedMap = map
+            }
+
             Files.newBufferedWriter(mapPath).use { writer ->
-                mapper.writeValue(writer, NameMap(classes, fields, methods))
+                mapper.writeValue(writer, combinedMap)
             }
         }
 
