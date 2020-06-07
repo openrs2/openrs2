@@ -11,6 +11,10 @@ class NameMapProvider @Inject constructor(private val mapper: ObjectMapper) : Pr
     override fun get(): NameMap {
         val combinedMap = NameMap()
 
+        if (!Files.exists(PATH)) {
+            return combinedMap
+        }
+
         for (file in Files.list(PATH).filter(::isYamlFile)) {
             val map = Files.newBufferedReader(file).use { reader ->
                 mapper.readValue(reader, NameMap::class.java)
