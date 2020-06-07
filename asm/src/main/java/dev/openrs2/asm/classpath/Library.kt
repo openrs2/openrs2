@@ -9,10 +9,10 @@ import java.nio.file.Path
 import java.util.SortedMap
 import java.util.TreeMap
 
-class Library() : Iterable<ClassNode> {
+class Library(val name: String) : Iterable<ClassNode> {
     private var classes: SortedMap<String, ClassNode> = TreeMap()
 
-    constructor(library: Library) : this() {
+    constructor(name: String, library: Library) : this(name) {
         for (clazz in library.classes.values) {
             val copy = ClassNode()
             clazz.accept(copy)
@@ -55,14 +55,14 @@ class Library() : Iterable<ClassNode> {
     companion object {
         private val logger = InlineLogger()
 
-        fun read(path: Path, reader: LibraryReader): Library {
+        fun read(name: String, path: Path, reader: LibraryReader): Library {
             logger.info { "Reading library $path" }
 
             val classes = Files.newInputStream(path).use { input ->
                 reader.read(input)
             }
 
-            val library = Library()
+            val library = Library(name)
             for (clazz in classes) {
                 library.add(clazz)
             }

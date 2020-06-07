@@ -21,19 +21,19 @@ class Deobfuscator @Inject constructor(
     fun run(input: Path, output: Path) {
         // read input jars/packs
         logger.info { "Reading input jars" }
-        val client = Library.read(input.resolve("runescape_gl.pack200"), Pack200LibraryReader)
-        val gl = Library.read(input.resolve("jaggl.pack200"), Pack200LibraryReader)
-        val loader = Library.read(input.resolve("loader_gl.jar"), JarLibraryReader)
-        val unpackClass = Library.read(input.resolve("unpackclass.pack"), JarLibraryReader)
+        val client = Library.read("client", input.resolve("runescape_gl.pack200"), Pack200LibraryReader)
+        val gl = Library.read("gl", input.resolve("jaggl.pack200"), Pack200LibraryReader)
+        val loader = Library.read("loader", input.resolve("loader_gl.jar"), JarLibraryReader)
+        val unpackClass = Library.read("unpackclass", input.resolve("unpackclass.pack"), JarLibraryReader)
 
         // overwrite client's classes with signed classes from the loader
         logger.info { "Moving signed classes from loader to signlink" }
-        val signlink = Library()
+        val signlink = Library("signlink")
         SignedClassUtils.move(loader, client, signlink)
 
         // move unpack class out of the loader (so the unpacker and loader can both depend on it)
         logger.info { "Moving unpack from loader to unpack" }
-        val unpack = Library()
+        val unpack = Library("unpack")
         unpack.add(loader.remove("unpack")!!)
 
         // prefix remaining loader/unpacker classes (to avoid conflicts when we rename in the same classpath as the client)

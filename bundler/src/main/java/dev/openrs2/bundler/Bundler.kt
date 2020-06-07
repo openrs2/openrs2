@@ -42,12 +42,12 @@ class Bundler @Inject constructor(
     fun run(input: Path, output: Path, keyStorePath: Path) {
         // read input jars/packs
         logger.info { "Reading input jars" }
-        val unpacker = Library.read(input.resolve("unpackclass.pack"), JarLibraryReader)
-        val loader = Library.read(input.resolve("loader.jar"), JarLibraryReader)
-        val glLoader = Library.read(input.resolve("loader_gl.jar"), JarLibraryReader)
-        val gl = Library.read(input.resolve("jaggl.pack200"), Pack200LibraryReader)
-        val client = Library.read(input.resolve("runescape.jar"), JarLibraryReader)
-        val glClient = Library.read(input.resolve("runescape_gl.pack200"), Pack200LibraryReader)
+        val unpacker = Library.read("unpackclass", input.resolve("unpackclass.pack"), JarLibraryReader)
+        val loader = Library.read("loader_sd", input.resolve("loader.jar"), JarLibraryReader)
+        val glLoader = Library.read("loader_hd", input.resolve("loader_gl.jar"), JarLibraryReader)
+        val gl = Library.read("gl", input.resolve("jaggl.pack200"), Pack200LibraryReader)
+        val client = Library.read("client_sd", input.resolve("runescape.jar"), JarLibraryReader)
+        val glClient = Library.read("client_hd", input.resolve("runescape_gl.pack200"), Pack200LibraryReader)
 
         // bundle libraries together into a common classpath
         val runtime = ClassLoader.getPlatformClassLoader()
