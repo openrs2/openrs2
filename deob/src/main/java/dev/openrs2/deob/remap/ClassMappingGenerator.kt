@@ -3,11 +3,13 @@ package dev.openrs2.deob.remap
 import dev.openrs2.asm.classpath.ClassMetadata
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.filter.ClassFilter
+import dev.openrs2.deob.map.NameMap
 import org.objectweb.asm.Opcodes
 
 class ClassMappingGenerator(
     private val classPath: ClassPath,
-    private val excludedClasses: ClassFilter
+    private val excludedClasses: ClassFilter,
+    private val nameMap: NameMap
 ) {
     private val nameGenerator = NameGenerator()
     private val mapping = mutableMapOf<String, String>()
@@ -16,6 +18,9 @@ class ClassMappingGenerator(
         for (clazz in classPath.libraryClasses) {
             populateMapping(clazz)
         }
+
+        mapping.replaceAll(nameMap::mapClassName)
+
         return mapping
     }
 

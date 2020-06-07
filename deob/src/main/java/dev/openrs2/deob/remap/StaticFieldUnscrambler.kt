@@ -6,6 +6,7 @@ import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.filter.MemberFilter
 import dev.openrs2.asm.getExpression
 import dev.openrs2.asm.isSequential
+import dev.openrs2.deob.map.NameMap
 import dev.openrs2.util.collect.DisjointSet
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.AbstractInsnNode
@@ -15,6 +16,7 @@ import org.objectweb.asm.tree.MethodNode
 class StaticFieldUnscrambler(
     private val classPath: ClassPath,
     private val excludedFields: MemberFilter,
+    private val nameMap: NameMap,
     private val inheritedFieldSets: DisjointSet<MemberRef>,
     staticClassNameGenerator: NameGenerator
 ) {
@@ -50,7 +52,8 @@ class StaticFieldUnscrambler(
 
                     val member = MemberRef(clazz, field)
                     val partition = inheritedFieldSets[member]!!
-                    fields[partition] = StaticField(generator.generate(), simpleInitializers[desc])
+                    val owner = nameMap.mapFieldOwner(partition, generator.generate())
+                    fields[partition] = StaticField(owner, simpleInitializers[desc])
                 }
             }
         }

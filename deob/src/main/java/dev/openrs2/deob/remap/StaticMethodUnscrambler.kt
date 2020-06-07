@@ -3,12 +3,14 @@ package dev.openrs2.deob.remap
 import dev.openrs2.asm.MemberRef
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.filter.MemberFilter
+import dev.openrs2.deob.map.NameMap
 import dev.openrs2.util.collect.DisjointSet
 import org.objectweb.asm.Opcodes
 
 class StaticMethodUnscrambler(
     private val classPath: ClassPath,
     private val excludedMethods: MemberFilter,
+    private val nameMap: NameMap,
     private val inheritedMethodSets: DisjointSet<MemberRef>,
     staticClassNameGenerator: NameGenerator
 ) {
@@ -37,7 +39,7 @@ class StaticMethodUnscrambler(
 
                     val member = MemberRef(clazz, method)
                     val partition = inheritedMethodSets[member]!!
-                    owners[partition] = generator.generate()
+                    owners[partition] = nameMap.mapMethodOwner(partition, generator.generate())
                 }
             }
         }

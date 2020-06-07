@@ -3,6 +3,7 @@ package dev.openrs2.deob.remap
 import dev.openrs2.asm.MemberRef
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.filter.MemberFilter
+import dev.openrs2.deob.map.NameMap
 import dev.openrs2.util.collect.DisjointSet
 import dev.openrs2.util.indefiniteArticle
 import org.objectweb.asm.Type
@@ -10,6 +11,7 @@ import org.objectweb.asm.Type
 class FieldMappingGenerator(
     private val classPath: ClassPath,
     private val excludedFields: MemberFilter,
+    private val nameMap: NameMap,
     private val inheritedFieldSets: DisjointSet<MemberRef>,
     private val classMapping: Map<String, String>
 ) {
@@ -24,8 +26,7 @@ class FieldMappingGenerator(
             }
 
             val type = Type.getType(partition.first().desc)
-            val mappedName = generateName(type)
-            mapping[partition] = mappedName
+            mapping[partition] = nameMap.mapFieldName(partition, generateName(type))
         }
 
         return mapping

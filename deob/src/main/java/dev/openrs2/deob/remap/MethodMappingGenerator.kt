@@ -4,12 +4,14 @@ import dev.openrs2.asm.MemberDesc
 import dev.openrs2.asm.MemberRef
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.filter.MemberFilter
+import dev.openrs2.deob.map.NameMap
 import dev.openrs2.util.collect.DisjointSet
 import org.objectweb.asm.Opcodes
 
 class MethodMappingGenerator(
     private val classPath: ClassPath,
     private val excludedMethods: MemberFilter,
+    private val nameMap: NameMap,
     private val inheritedMethodSets: DisjointSet<MemberRef>
 ) {
     private var index = 0
@@ -23,8 +25,8 @@ class MethodMappingGenerator(
                 continue
             }
 
-            val mappedName = "method" + ++index
-            mapping[partition] = mappedName
+            val generatedName = "method" + ++index
+            mapping[partition] = nameMap.mapMethodName(partition, generatedName)
         }
 
         return mapping

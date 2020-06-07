@@ -5,6 +5,7 @@ import dev.openrs2.asm.MemberRef
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.ExtendedRemapper
 import dev.openrs2.deob.Profile
+import dev.openrs2.deob.map.NameMap
 import dev.openrs2.util.collect.DisjointSet
 import org.objectweb.asm.tree.AbstractInsnNode
 
@@ -56,20 +57,26 @@ class TypedRemapper private constructor(
 
         private val LIBRARY_PREFIX_REGEX = Regex("^(?:loader|unpackclass)_")
 
-        fun create(classPath: ClassPath, profile: Profile): TypedRemapper {
+        fun create(classPath: ClassPath, profile: Profile, nameMap: NameMap): TypedRemapper {
             val inheritedFieldSets = classPath.createInheritedFieldSets()
             val inheritedMethodSets = classPath.createInheritedMethodSets()
 
-            val classes = ClassMappingGenerator(classPath, profile.excludedClasses).generate()
+            val classes = ClassMappingGenerator(
+                classPath,
+                profile.excludedClasses,
+                nameMap
+            ).generate()
             val fields = FieldMappingGenerator(
                 classPath,
                 profile.excludedFields,
+                nameMap,
                 inheritedFieldSets,
                 classes
             ).generate()
             val methods = MethodMappingGenerator(
                 classPath,
                 profile.excludedMethods,
+                nameMap,
                 inheritedMethodSets
             ).generate()
 
@@ -81,12 +88,14 @@ class TypedRemapper private constructor(
             val staticFields = StaticFieldUnscrambler(
                 classPath,
                 profile.excludedFields,
+                nameMap,
                 inheritedFieldSets,
                 staticClassNameGenerator
             ).unscramble()
             val staticMethods = StaticMethodUnscrambler(
                 classPath,
                 profile.excludedMethods,
+                nameMap,
                 inheritedMethodSets,
                 staticClassNameGenerator
             ).unscramble()
