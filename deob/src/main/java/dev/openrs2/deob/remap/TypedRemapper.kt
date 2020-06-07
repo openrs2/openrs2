@@ -4,7 +4,9 @@ import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.MemberRef
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.ExtendedRemapper
+import dev.openrs2.asm.filter.UnionMemberFilter
 import dev.openrs2.deob.Profile
+import dev.openrs2.deob.filter.BrowserControlFilter
 import dev.openrs2.deob.map.NameMap
 import dev.openrs2.util.collect.DisjointSet
 import org.objectweb.asm.tree.AbstractInsnNode
@@ -84,10 +86,12 @@ class TypedRemapper private constructor(
             verifyMemberMapping(fields, profile.maxObfuscatedNameLen)
             verifyMemberMapping(methods, profile.maxObfuscatedNameLen)
 
+            val browserControlFilter = BrowserControlFilter.create(classPath)
+
             val staticClassNameGenerator = NameGenerator()
             val staticFields = StaticFieldUnscrambler(
                 classPath,
-                profile.excludedFields,
+                UnionMemberFilter(profile.excludedFields, browserControlFilter),
                 profile.scrambledLibraries,
                 nameMap,
                 inheritedFieldSets,
@@ -95,7 +99,7 @@ class TypedRemapper private constructor(
             ).unscramble()
             val staticMethods = StaticMethodUnscrambler(
                 classPath,
-                profile.excludedMethods,
+                UnionMemberFilter(profile.excludedMethods, browserControlFilter),
                 profile.scrambledLibraries,
                 nameMap,
                 inheritedMethodSets,

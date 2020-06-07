@@ -26,8 +26,6 @@ class StaticMethodUnscrambler(
             }
 
             for (clazz in library) {
-                // TODO(gpe): exclude the JSObject class
-
                 for (method in clazz.methods) {
                     if (method.access and Opcodes.ACC_STATIC == 0) {
                         continue

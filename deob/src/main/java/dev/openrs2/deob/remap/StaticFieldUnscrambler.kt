@@ -32,8 +32,6 @@ class StaticFieldUnscrambler(
             }
 
             for (clazz in library) {
-                // TODO(gpe): exclude the JSObject class
-
                 val clinit = clazz.methods.find { it.name == "<clinit>" }
                 val (simpleInitializers, complexInitializers) = clinit?.extractInitializers(clazz.name)
                     ?: Pair(emptyMap(), emptySet())
