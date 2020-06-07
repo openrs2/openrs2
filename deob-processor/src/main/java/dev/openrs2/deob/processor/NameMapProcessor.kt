@@ -96,6 +96,8 @@ class NameMapProcessor : AbstractProcessor() {
         }
 
         if (env.processingOver()) {
+            Files.createDirectories(mapPath.parent)
+
             Files.newBufferedWriter(mapPath).use { writer ->
                 mapper.writeValue(writer, NameMap(classes, fields, methods))
             }
