@@ -14,7 +14,7 @@ object Versions {
     const val jackson = "2.11.0"
     const val javaParser = "3.16.1"
     const val jdom = "2.0.6"
-    const val jgrapht = "1.4.0"
+    const val jgrapht = "1.5.0"
     const val jimfs = "1.1"
     const val junit = "5.6.2"
     const val kotlin = "1.3.72"
