@@ -5,9 +5,9 @@ import com.github.javaparser.ast.CompilationUnit
 import com.github.javaparser.printer.PrettyPrinter
 import com.github.javaparser.printer.PrettyPrinterConfiguration
 import com.github.javaparser.symbolsolver.JavaSymbolSolver
+import com.github.javaparser.symbolsolver.resolution.typesolvers.ClassLoaderTypeSolver
 import com.github.javaparser.symbolsolver.resolution.typesolvers.CombinedTypeSolver
 import com.github.javaparser.symbolsolver.resolution.typesolvers.JavaParserTypeSolver
-import com.github.javaparser.symbolsolver.resolution.typesolvers.ReflectionTypeSolver
 import com.github.javaparser.utils.SourceRoot
 import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.deob.ast.transform.Transformer
@@ -21,7 +21,7 @@ class AstDeobfuscator @Inject constructor(
     private val transformers: Set<@JvmSuppressWildcards Transformer>
 ) {
     fun run(modules: List<Path>) {
-        val solver = CombinedTypeSolver(ReflectionTypeSolver(true))
+        val solver = CombinedTypeSolver(ClassLoaderTypeSolver(ClassLoader.getPlatformClassLoader()))
         for (module in modules) {
             solver.add(JavaParserTypeSolver(module))
         }
