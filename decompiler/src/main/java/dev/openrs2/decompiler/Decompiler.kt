@@ -2,25 +2,21 @@ package dev.openrs2.decompiler
 
 import org.jetbrains.java.decompiler.main.Fernflower
 import org.jetbrains.java.decompiler.main.extern.IFernflowerPreferences
-import java.io.Closeable
-import java.nio.file.Path
 
-class Decompiler(
-    private val sources: List<Path>,
-    destination: (String) -> Path
-) : Closeable {
-    private val io = DecompilerIo(destination)
-    private val fernflower = Fernflower(io, io, OPTIONS, Slf4jFernflowerLogger)
-
+class Decompiler(private vararg val libraries: Library) {
     fun run() {
-        for (source in sources) {
-            fernflower.addSource(source.toFile())
-        }
-        fernflower.decompileContext()
-    }
+        for (library in libraries) {
+            DecompilerIo(library.destination).use { io ->
+                val fernflower = Fernflower(io, io, OPTIONS, Slf4jFernflowerLogger)
 
-    override fun close() {
-        io.close()
+                for (dependency in library.dependencies) {
+                    fernflower.addLibrary(dependency.toFile())
+                }
+                fernflower.addSource(library.source.toFile())
+
+                fernflower.decompileContext()
+            }
+        }
     }
 
     private companion object {

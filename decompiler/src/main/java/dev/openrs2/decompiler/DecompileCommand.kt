@@ -9,29 +9,47 @@ fun main(args: Array<String>) = DecompileCommand().main(args)
 class DecompileCommand : CliktCommand(name = "decompile") {
     override fun run() {
         val deobOutput = Paths.get("nonfree/var/cache/deob")
-        val sources = listOf(
-            deobOutput.resolve("runescape_gl.jar"),
-            deobOutput.resolve("jaggl.jar"),
-            deobOutput.resolve("loader_gl.jar"),
-            deobOutput.resolve("signlink_gl.jar"),
-            deobOutput.resolve("unpack_gl.jar"),
-            deobOutput.resolve("unpackclass_gl.jar")
+
+        val client = deobOutput.resolve("runescape_gl.jar")
+        val gl = deobOutput.resolve("jaggl.jar")
+        val loader = deobOutput.resolve("loader_gl.jar")
+        val signlink = deobOutput.resolve("signlink_gl.jar")
+        val unpack = deobOutput.resolve("unpack_gl.jar")
+        val unpackClass = deobOutput.resolve("unpackclass_gl.jar")
+
+        val decompiler = Decompiler(
+            Library(
+                source = client,
+                destination = getDestination("client"),
+                dependencies = listOf(gl, signlink)
+            ),
+            Library(
+                source = gl,
+                destination = getDestination("gl")
+            ),
+            Library(
+                source = loader,
+                destination = getDestination("loader"),
+                dependencies = listOf(signlink, unpack)
+            ),
+            Library(
+                source = signlink,
+                destination = getDestination("signlink")
+            ),
+            Library(
+                source = unpack,
+                destination = getDestination("unpack")
+            ),
+            Library(
+                source = unpackClass,
+                destination = getDestination("unpackclass"),
+                dependencies = listOf(unpack)
+            )
         )
-        Decompiler(sources, ::getDestination).use {
-            it.run()
-        }
+        decompiler.run()
     }
 
-    private fun getDestination(archive: String): Path {
-        var dir = archive.replace(JAR_SUFFIX_REGEX, "")
-        when (dir) {
-            "runescape" -> dir = "client"
-            "jaggl" -> dir = "gl"
-        }
+    private fun getDestination(dir: String): Path {
         return Paths.get("nonfree").resolve(dir).resolve("src/main/java")
-    }
-
-    private companion object {
-        private val JAR_SUFFIX_REGEX = Regex("(?:_gl)?[.]jar$")
     }
 }

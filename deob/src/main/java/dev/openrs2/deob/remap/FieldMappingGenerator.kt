@@ -61,7 +61,7 @@ class FieldMappingGenerator(
             }
             Type.OBJECT -> {
                 val className = classMapping.getOrDefault(elementType.internalName, elementType.internalName)
-                className.substring(className.lastIndexOf('/') + 1) + dimensions
+                className.getClassName() + dimensions
             }
             else -> throw IllegalArgumentException("Unknown field type $elementType")
         }

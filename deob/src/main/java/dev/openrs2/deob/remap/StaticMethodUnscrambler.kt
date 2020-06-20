@@ -37,7 +37,8 @@ class StaticMethodUnscrambler(
 
                     val member = MemberRef(clazz, method)
                     val partition = inheritedMethodSets[member]!!
-                    owners[partition] = nameMap.mapMethodOwner(partition, generator.generate())
+                    val owner = nameMap.mapMethodOwner(partition, generator.generate())
+                    owners[partition] = "${library.name}!$owner"
                 }
             }
         }

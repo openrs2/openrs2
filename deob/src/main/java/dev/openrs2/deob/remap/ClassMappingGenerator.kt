@@ -19,7 +19,11 @@ class ClassMappingGenerator(
             populateMapping(clazz)
         }
 
-        mapping.replaceAll(nameMap::mapClassName)
+        mapping.replaceAll { k, v ->
+            val (library, default) = v.splitAtLibraryBoundary()
+            val name = nameMap.mapClassName(k, default)
+            return@replaceAll "$library!$name"
+        }
 
         return mapping
     }
@@ -51,12 +55,12 @@ class ClassMappingGenerator(
 
     private fun generateName(clazz: ClassMetadata): String {
         val name = clazz.name
-        var mappedName = name.substring(0, name.lastIndexOf('/') + 1)
+        var mappedName = name.getLibraryAndPackageName()
 
         val superClass = clazz.superClass
         if (superClass != null && superClass.name != "java/lang/Object") {
             var superName = populateMapping(superClass)
-            superName = superName.substring(superName.lastIndexOf('/') + 1)
+            superName = superName.getClassName()
             mappedName += nameGenerator.generate(superName + "_Sub")
         } else if (clazz.`interface`) {
             mappedName += nameGenerator.generate("Interface")

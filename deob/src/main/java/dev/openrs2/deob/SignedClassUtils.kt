@@ -4,9 +4,6 @@ import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.InsnMatcher
 import dev.openrs2.asm.classpath.Library
 import org.objectweb.asm.Type
-import org.objectweb.asm.commons.ClassRemapper
-import org.objectweb.asm.commons.SimpleRemapper
-import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.LdcInsnNode
 import org.objectweb.asm.tree.MethodNode
 
@@ -23,13 +20,6 @@ object SignedClassUtils {
         val dependencies = findDependencies(loader, signedClasses)
         logger.info { "Identified signed class dependencies $dependencies" }
 
-        // rename dependencies of signed classes so they don't clash with client classes
-        val mapping = mutableMapOf<String, String>()
-        for (dependency in dependencies) {
-            mapping[dependency] = "loader_$dependency"
-        }
-        val remapper = SimpleRemapper(mapping)
-
         // delete original signed classes (these have no dependencies)
         for (name in signedClasses) {
             client.remove(name)
@@ -37,12 +27,7 @@ object SignedClassUtils {
 
         // move loader signed classes to signlink
         for (name in signedClasses union dependencies) {
-            val `in` = loader.remove(name)!!
-
-            val out = ClassNode()
-            `in`.accept(ClassRemapper(out, remapper))
-
-            signLink.add(out)
+            signLink.add(loader.remove(name)!!)
         }
     }
 

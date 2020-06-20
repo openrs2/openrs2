@@ -8,7 +8,7 @@ import java.nio.file.Path
 import java.util.jar.JarFile
 import java.util.jar.Manifest
 
-class DecompilerIo(private val destination: (String) -> Path) : IBytecodeProvider, IResultSaver, Closeable {
+class DecompilerIo(private val destination: Path) : IBytecodeProvider, IResultSaver, Closeable {
     private val inputJars = mutableMapOf<String, JarFile>()
 
     override fun getBytecode(externalPath: String, internalPath: String?): ByteArray {
@@ -62,7 +62,7 @@ class DecompilerIo(private val destination: (String) -> Path) : IBytecodeProvide
         entryName: String,
         content: String
     ) {
-        val p = destination(archiveName).resolve(entryName)
+        val p = destination.resolve(entryName)
         Files.createDirectories(p.parent)
         Files.newBufferedWriter(p).use {
             it.write(content)

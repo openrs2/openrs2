@@ -22,7 +22,11 @@ object Glob {
                     continue
                 }
 
-                regex.append("[^/]*")
+                /*
+                 * The deobfuscator uses ! in class names to separate the
+                 * library name from the rest of the package/class name.
+                 */
+                regex.append("[^/!]*")
             }
 
             when (ch) {

@@ -51,7 +51,7 @@ class StaticFieldUnscrambler(
                     val member = MemberRef(clazz, field)
                     val partition = inheritedFieldSets[member]!!
                     val owner = nameMap.mapFieldOwner(partition, generator.generate())
-                    fields[partition] = StaticField(owner, simpleInitializers[desc])
+                    fields[partition] = StaticField("${library.name}!$owner", simpleInitializers[desc])
                 }
             }
         }

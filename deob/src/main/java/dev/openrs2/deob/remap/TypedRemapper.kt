@@ -57,8 +57,6 @@ class TypedRemapper private constructor(
     companion object {
         private val logger = InlineLogger()
 
-        private val LIBRARY_PREFIX_REGEX = Regex("^(?:loader|unpackclass)_")
-
         fun create(classPath: ClassPath, profile: Profile, nameMap: NameMap): TypedRemapper {
             val inheritedFieldSets = classPath.createInheritedFieldSets()
             val inheritedMethodSets = classPath.createInheritedMethodSets()
@@ -133,7 +131,7 @@ class TypedRemapper private constructor(
         }
 
         private fun verifyMapping(name: String, mappedName: String, maxObfuscatedNameLen: Int) {
-            val originalName = name.replace(LIBRARY_PREFIX_REGEX, "")
+            val originalName = StripClassNamePrefixRemapper.map(name)
             if (originalName.length > maxObfuscatedNameLen && originalName != mappedName) {
                 logger.warn { "Remapping probably unobfuscated name $originalName to $mappedName" }
             }

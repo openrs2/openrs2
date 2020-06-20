@@ -7,7 +7,8 @@ import dev.openrs2.asm.io.JarLibraryReader
 import dev.openrs2.asm.io.JarLibraryWriter
 import dev.openrs2.asm.io.Pack200LibraryReader
 import dev.openrs2.asm.transform.Transformer
-import dev.openrs2.deob.remap.PrefixRemapper
+import dev.openrs2.deob.remap.ClassNamePrefixRemapper
+import dev.openrs2.deob.remap.StripClassNamePrefixRemapper
 import java.nio.file.Files
 import java.nio.file.Path
 import javax.inject.Inject
@@ -15,7 +16,6 @@ import javax.inject.Singleton
 
 @Singleton
 class Deobfuscator @Inject constructor(
-    private val profile: Profile,
     @DeobfuscatorQualifier private val transformers: Set<@JvmSuppressWildcards Transformer>
 ) {
     fun run(input: Path, output: Path) {
@@ -36,10 +36,47 @@ class Deobfuscator @Inject constructor(
         val unpack = Library("unpack")
         unpack.add(loader.remove("unpack")!!)
 
-        // prefix remaining loader/unpacker classes (to avoid conflicts when we rename in the same classpath as the client)
-        logger.info { "Prefixing loader and unpackclass class names" }
-        loader.remap(PrefixRemapper.create(loader, "loader_", profile.excludedClasses))
-        unpackClass.remap(PrefixRemapper.create(unpackClass, "unpackclass_", profile.excludedClasses))
+        /*
+         * Prefix class names with the name of the library the class
+         * came from (e.g. `a` => `client!a`).
+         *
+         * Using ! as the separator was chosen because it is not valid in Java
+         * source code, so we won't expect to see it in the obfuscator's input.
+         * Furthermore, if any prefixes accidentally remain unstripped, the
+         * problem will be detected quickly as the deobfuscator's output will
+         * not compile. It also mirrors the syntax used in JarURLConnection,
+         * which has a similar purpose.
+         *
+         * In the early parts of the deobfuscation pipeline, this allows us to
+         * disambiguate a small number of classes in the signlink which clash
+         * with classes in the client.
+         *
+         * After name mapping has been performed, it allows us to disambiguate
+         * classes across separate libraries that have been refactored and
+         * given the same name.
+         *
+         * For example, the client and unpackclass both contain many common
+         * classes (e.g. the exception wrapper, linked list/node classes,
+         * bzip2/gzip decompression classes, and so on). Giving these the same
+         * names across both the client and unpackclass is desirable.
+         *
+         * (Unfortunately we can't deduplicate the classes, as they both expose
+         * different sets of fields/methods, presumably as a result of the
+         * obfuscator removing unused code.)
+         */
+        val clientRemapper = ClassNamePrefixRemapper(client, gl, signlink)
+        val glRemapper = ClassNamePrefixRemapper(gl)
+        val loaderRemapper = ClassNamePrefixRemapper(loader, signlink, unpack)
+        val signlinkRemapper = ClassNamePrefixRemapper(signlink)
+        val unpackClassRemapper = ClassNamePrefixRemapper(unpackClass, unpack)
+        val unpackRemapper = ClassNamePrefixRemapper(unpack)
+
+        client.remap(clientRemapper)
+        gl.remap(glRemapper)
+        loader.remap(loaderRemapper)
+        signlink.remap(signlinkRemapper)
+        unpack.remap(unpackRemapper)
+        unpackClass.remap(unpackClassRemapper)
 
         // bundle libraries together into a common classpath
         val runtime = ClassLoader.getPlatformClassLoader()
@@ -55,6 +92,14 @@ class Deobfuscator @Inject constructor(
             logger.info { "Running transformer ${transformer.javaClass.simpleName}" }
             transformer.transform(classPath)
         }
+
+        // strip class name prefixes
+        client.remap(StripClassNamePrefixRemapper)
+        gl.remap(StripClassNamePrefixRemapper)
+        loader.remap(StripClassNamePrefixRemapper)
+        signlink.remap(StripClassNamePrefixRemapper)
+        unpack.remap(StripClassNamePrefixRemapper)
+        unpackClass.remap(StripClassNamePrefixRemapper)
 
         // write output jars
         logger.info { "Writing output jars" }
