@@ -1,5 +1,6 @@
 package dev.openrs2.crypto
 
+import dev.openrs2.util.io.useAtomicOutputStream
 import jdk.security.jarsigner.JarSigner
 import org.bouncycastle.asn1.nist.NISTObjectIdentifiers
 import org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers
@@ -66,7 +67,7 @@ class Pkcs12KeyStore private constructor(privateKeyEntry: KeyStore.PrivateKeyEnt
                 val entry = createPrivateKeyEntry(signerName)
                 keyStore.setEntry(ALIAS, entry, PASSWORD_PARAMETER)
 
-                Files.newOutputStream(path).use { output ->
+                path.useAtomicOutputStream { output ->
                     keyStore.store(output, PASSWORD_CHARS)
                 }
 

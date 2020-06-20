@@ -3,6 +3,7 @@ package dev.openrs2.asm.classpath
 import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.asm.io.LibraryReader
 import dev.openrs2.asm.io.LibraryWriter
+import dev.openrs2.util.io.useAtomicOutputStream
 import org.objectweb.asm.tree.ClassNode
 import java.nio.file.Files
 import java.nio.file.Path
@@ -47,7 +48,7 @@ class Library(val name: String) : Iterable<ClassNode> {
     fun write(path: Path, writer: LibraryWriter, classPath: ClassPath) {
         logger.info { "Writing library $path" }
 
-        Files.newOutputStream(path).use { output ->
+        path.useAtomicOutputStream { output ->
             writer.write(output, classPath, classes.values)
         }
     }

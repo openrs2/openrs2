@@ -1,5 +1,6 @@
 package dev.openrs2.decompiler
 
+import dev.openrs2.util.io.useAtomicBufferedWriter
 import org.jetbrains.java.decompiler.main.extern.IBytecodeProvider
 import org.jetbrains.java.decompiler.main.extern.IResultSaver
 import java.io.Closeable
@@ -64,7 +65,7 @@ class DecompilerIo(private val destination: Path) : IBytecodeProvider, IResultSa
     ) {
         val p = destination.resolve(entryName)
         Files.createDirectories(p.parent)
-        Files.newBufferedWriter(p).use {
+        p.useAtomicBufferedWriter {
             it.write(content)
         }
     }

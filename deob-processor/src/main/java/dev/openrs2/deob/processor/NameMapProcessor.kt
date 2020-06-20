@@ -11,6 +11,7 @@ import dev.openrs2.deob.annotation.OriginalMember
 import dev.openrs2.deob.map.Field
 import dev.openrs2.deob.map.Method
 import dev.openrs2.deob.map.NameMap
+import dev.openrs2.util.io.useAtomicBufferedWriter
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -106,7 +107,7 @@ class NameMapProcessor : AbstractProcessor() {
                 combinedMap = map
             }
 
-            Files.newBufferedWriter(mapPath).use { writer ->
+            mapPath.useAtomicBufferedWriter { writer ->
                 mapper.writeValue(writer, combinedMap)
             }
         }

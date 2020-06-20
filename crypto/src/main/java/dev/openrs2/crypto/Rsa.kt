@@ -1,5 +1,6 @@
 package dev.openrs2.crypto
 
+import dev.openrs2.util.io.useAtomicBufferedWriter
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufUtil
 import io.netty.buffer.Unpooled
@@ -201,8 +202,10 @@ object Rsa {
     }
 
     private fun writeSinglePemObject(path: Path, type: String, content: ByteArray) {
-        PemWriter(Files.newBufferedWriter(path)).use {
-            it.writeObject(PemObject(type, content))
+        path.useAtomicBufferedWriter { writer ->
+            PemWriter(writer).use {
+                it.writeObject(PemObject(type, content))
+            }
         }
     }
 }

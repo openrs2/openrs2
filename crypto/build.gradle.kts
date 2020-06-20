@@ -9,6 +9,8 @@ dependencies {
     api("org.bouncycastle:bcpkix-jdk15on:${Versions.bouncyCastlePkix}")
     api("org.bouncycastle:bcprov-jdk15on:${Versions.bouncyCastleProvider}")
 
+    implementation(project(":util"))
+
     testImplementation("com.google.jimfs:jimfs:${Versions.jimfs}")
 }
 
