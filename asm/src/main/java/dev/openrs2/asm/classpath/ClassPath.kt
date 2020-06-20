@@ -8,6 +8,7 @@ import dev.openrs2.util.collect.ForestDisjointSet
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.ClassNode
+import java.util.IdentityHashMap
 
 class ClassPath(
     private val runtime: ClassLoader,
@@ -25,7 +26,7 @@ class ClassPath(
      * Transformers to avoid adding extraneous labels until the last possible
      * moment, which would confuse some of our analyses if added earlier.
      */
-    val originalPcs = mutableMapOf<AbstractInsnNode, Int>()
+    val originalPcs = IdentityHashMap<AbstractInsnNode, Int>()
 
     val libraryClasses: Sequence<ClassMetadata>
         get() = libraries.asSequence().flatten().map { get(it.name)!! }
