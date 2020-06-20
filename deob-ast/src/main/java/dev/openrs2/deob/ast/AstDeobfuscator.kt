@@ -27,7 +27,7 @@ class AstDeobfuscator @Inject constructor(
         }
 
         val config = ParserConfiguration()
-            .setLanguageLevel(ParserConfiguration.LanguageLevel.JAVA_8)
+            .setLanguageLevel(ParserConfiguration.LanguageLevel.JAVA_11)
             .setSymbolResolver(JavaSymbolSolver(solver))
 
         val printerConfig = PrettyPrinterConfiguration()
