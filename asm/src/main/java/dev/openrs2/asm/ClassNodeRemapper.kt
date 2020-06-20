@@ -1,11 +1,13 @@
 package dev.openrs2.asm
 
 import dev.openrs2.asm.classpath.ExtendedRemapper
+import org.objectweb.asm.commons.Remapper
 import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.FieldInsnNode
 import org.objectweb.asm.tree.FieldNode
 import org.objectweb.asm.tree.FrameNode
+import org.objectweb.asm.tree.InnerClassNode
 import org.objectweb.asm.tree.InvokeDynamicInsnNode
 import org.objectweb.asm.tree.LdcInsnNode
 import org.objectweb.asm.tree.MethodInsnNode
@@ -28,6 +30,10 @@ fun ClassNode.remap(remapper: ExtendedRemapper) {
         outerMethodDesc = remapper.mapMethodDesc(outerMethodDesc)
     }
 
+    for (innerClass in innerClasses) {
+        innerClass.remap(remapper)
+    }
+
     for (field in fields) {
         field.remap(remapper, originalName)
     }
@@ -35,6 +41,12 @@ fun ClassNode.remap(remapper: ExtendedRemapper) {
     for (method in methods) {
         method.remap(remapper, originalName)
     }
+}
+
+fun InnerClassNode.remap(remapper: Remapper) {
+    name = remapper.mapType(name)
+    outerName = remapper.mapType(outerName)
+    innerName = remapper.mapType(innerName)
 }
 
 fun FieldNode.remap(remapper: ExtendedRemapper, owner: String) {
