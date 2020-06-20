@@ -20,6 +20,14 @@ fun ClassNode.remap(remapper: ExtendedRemapper) {
     superName = remapper.mapType(superName)
     interfaces = interfaces?.map(remapper::mapType)
 
+    val originalOuterClass = outerClass
+    outerClass = remapper.mapType(originalOuterClass)
+
+    if (outerMethod != null) {
+        outerMethod = remapper.mapMethodName(originalOuterClass, outerMethod, outerMethodDesc)
+        outerMethodDesc = remapper.mapMethodDesc(outerMethodDesc)
+    }
+
     for (field in fields) {
         field.remap(remapper, originalName)
     }
