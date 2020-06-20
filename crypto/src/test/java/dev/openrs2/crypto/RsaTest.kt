@@ -2,6 +2,7 @@ package dev.openrs2.crypto
 
 import com.google.common.jimfs.Configuration
 import com.google.common.jimfs.Jimfs
+import dev.openrs2.util.io.useTempFile
 import io.netty.buffer.Unpooled
 import org.bouncycastle.crypto.params.RSAKeyParameters
 import org.bouncycastle.crypto.params.RSAPrivateCrtKeyParameters
@@ -116,16 +117,13 @@ object RsaTest {
     @Test
     fun testReadPublicKey() {
         Jimfs.newFileSystem(Configuration.unix()).use { fs ->
-            val file = Files.createTempFile(fs.getPath("/"), "public", ".key")
-            try {
+            fs.getPath("/").useTempFile("public", ".key") { file ->
                 Files.write(file, PUBLIC_KEY_PEM)
 
                 val key = allowUnsafeMod { Rsa.readPublicKey(file) }
                 assertFalse(key.isPrivate)
                 assertEquals(PUBLIC_KEY.modulus, key.modulus)
                 assertEquals(PUBLIC_KEY.exponent, key.exponent)
-            } finally {
-                Files.deleteIfExists(file)
             }
         }
     }
@@ -133,13 +131,10 @@ object RsaTest {
     @Test
     fun testWritePublicKey() {
         Jimfs.newFileSystem(Configuration.unix()).use { fs ->
-            val file = Files.createTempFile(fs.getPath("/"), "public", ".key")
-            try {
+            fs.getPath("/").useTempFile("public", ".key") { file ->
                 Rsa.writePublicKey(file, PUBLIC_KEY)
 
                 assertEquals(PUBLIC_KEY_PEM, Files.readAllLines(file))
-            } finally {
-                Files.deleteIfExists(file)
             }
         }
     }
@@ -147,8 +142,7 @@ object RsaTest {
     @Test
     fun testReadPrivateKey() {
         Jimfs.newFileSystem(Configuration.unix()).use { fs ->
-            val file = Files.createTempFile(fs.getPath("/"), "private", ".key")
-            try {
+            fs.getPath("/").useTempFile("private", ".key") { file ->
                 Files.write(file, PRIVATE_KEY_PEM)
 
                 val key = allowUnsafeMod { Rsa.readPrivateKey(file) }
@@ -161,8 +155,6 @@ object RsaTest {
                 assertEquals(PRIVATE_KEY_CRT.dp, key.dp)
                 assertEquals(PRIVATE_KEY_CRT.dq, key.dq)
                 assertEquals(PRIVATE_KEY_CRT.qInv, key.qInv)
-            } finally {
-                Files.deleteIfExists(file)
             }
         }
     }
@@ -170,13 +162,10 @@ object RsaTest {
     @Test
     fun testWritePrivateKey() {
         Jimfs.newFileSystem(Configuration.unix()).use { fs ->
-            val file = Files.createTempFile(fs.getPath("/"), "private", ".key")
-            try {
+            fs.getPath("/").useTempFile("private", ".key") { file ->
                 Rsa.writePrivateKey(file, PRIVATE_KEY_CRT)
 
                 assertEquals(PRIVATE_KEY_PEM, Files.readAllLines(file))
-            } finally {
-                Files.deleteIfExists(file)
             }
         }
     }

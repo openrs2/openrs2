@@ -7,6 +7,35 @@ import java.nio.file.Files
 import java.nio.file.OpenOption
 import java.nio.file.Path
 import java.nio.file.StandardCopyOption
+import java.nio.file.attribute.FileAttribute
+
+inline fun <T> useTempFile(
+    prefix: String? = null,
+    suffix: String? = null,
+    vararg attributes: FileAttribute<*>,
+    f: (Path) -> T
+): T {
+    val tempFile = Files.createTempFile(prefix, suffix, *attributes)
+    try {
+        return f(tempFile)
+    } finally {
+        Files.deleteIfExists(tempFile)
+    }
+}
+
+inline fun <T> Path.useTempFile(
+    prefix: String? = null,
+    suffix: String? = null,
+    vararg attributes: FileAttribute<*>,
+    f: (Path) -> T
+): T {
+    val tempFile = Files.createTempFile(this, prefix, suffix, *attributes)
+    try {
+        return f(tempFile)
+    } finally {
+        Files.deleteIfExists(tempFile)
+    }
+}
 
 inline fun <T> Path.atomicWrite(f: (Path) -> T): T {
     val tempFile = Files.createTempFile(parent, ".$fileName", ".tmp")
