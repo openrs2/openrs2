@@ -15,6 +15,7 @@ import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.MultiANewArrayInsnNode
 import org.objectweb.asm.tree.ParameterNode
+import org.objectweb.asm.tree.TryCatchBlockNode
 import org.objectweb.asm.tree.TypeInsnNode
 
 fun ClassNode.remap(remapper: ExtendedRemapper) {
@@ -80,13 +81,17 @@ fun MethodNode.remap(remapper: ExtendedRemapper, owner: String) {
         }
 
         for (tryCatch in tryCatchBlocks) {
-            tryCatch.type = remapper.mapType(tryCatch.type)
+            tryCatch.remap(remapper)
         }
     }
 }
 
 fun ParameterNode.remap(remapper: ExtendedRemapper, owner: String, methodName: String, desc: String, index: Int) {
     name = remapper.mapArgumentName(owner, methodName, desc, index, name)
+}
+
+fun TryCatchBlockNode.remap(remapper: Remapper) {
+    type = remapper.mapType(type)
 }
 
 fun AbstractInsnNode.remap(remapper: ExtendedRemapper) {
