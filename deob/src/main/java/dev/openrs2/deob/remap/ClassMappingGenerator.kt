@@ -3,7 +3,7 @@ package dev.openrs2.deob.remap
 import dev.openrs2.asm.classpath.ClassMetadata
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.filter.ClassFilter
-import dev.openrs2.deob.map.NameMap
+import dev.openrs2.deob.util.map.NameMap
 import org.objectweb.asm.Opcodes
 
 class ClassMappingGenerator(

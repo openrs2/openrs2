@@ -1,4 +1,4 @@
-package dev.openrs2.deob.map
+package dev.openrs2.deob.util.map
 
 import dev.openrs2.asm.MemberRef
 import dev.openrs2.util.collect.DisjointSet

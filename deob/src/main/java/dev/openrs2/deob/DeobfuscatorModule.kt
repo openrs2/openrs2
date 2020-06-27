@@ -6,7 +6,6 @@ import com.google.inject.multibindings.Multibinder
 import dev.openrs2.asm.transform.Transformer
 import dev.openrs2.bundler.BundlerModule
 import dev.openrs2.bundler.transform.ResourceTransformer
-import dev.openrs2.deob.map.DeobfuscatorMapModule
 import dev.openrs2.deob.transform.BitShiftTransformer
 import dev.openrs2.deob.transform.BitwiseOpTransformer
 import dev.openrs2.deob.transform.BundlerTransformer
@@ -35,6 +34,7 @@ import dev.openrs2.deob.transform.UnusedArgTransformer
 import dev.openrs2.deob.transform.UnusedLocalTransformer
 import dev.openrs2.deob.transform.UnusedMethodTransformer
 import dev.openrs2.deob.transform.VisibilityTransformer
+import dev.openrs2.deob.util.map.DeobfuscatorMapModule
 
 object DeobfuscatorModule : AbstractModule() {
     override fun configure() {

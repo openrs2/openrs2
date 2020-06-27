@@ -13,11 +13,10 @@ publishing {
 
         pom {
             packaging = "jar"
-            name.set("OpenRS2 Deobfuscator Map")
+            name.set("OpenRS2 Deobfuscator Utilities")
             description.set(
                 """
-                Data structures for representing a map of obfuscated to
-                refactored names.
+                Common utility code used by all deobfuscator modules.
             """.trimIndent()
             )
         }

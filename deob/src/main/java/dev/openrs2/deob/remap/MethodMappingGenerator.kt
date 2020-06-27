@@ -4,7 +4,7 @@ import dev.openrs2.asm.MemberDesc
 import dev.openrs2.asm.MemberRef
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.filter.MemberFilter
-import dev.openrs2.deob.map.NameMap
+import dev.openrs2.deob.util.map.NameMap
 import dev.openrs2.util.collect.DisjointSet
 import org.objectweb.asm.Opcodes
 

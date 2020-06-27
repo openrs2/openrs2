@@ -1,4 +1,4 @@
-package dev.openrs2.deob.map
+package dev.openrs2.deob.util.map
 
 import com.google.inject.AbstractModule
 import com.google.inject.Scopes

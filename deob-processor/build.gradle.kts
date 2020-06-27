@@ -5,7 +5,7 @@ plugins {
 
 dependencies {
     implementation(project(":deob-annotations"))
-    implementation(project(":deob-map"))
+    implementation(project(":deob-util"))
     implementation(project(":yaml"))
 }
 

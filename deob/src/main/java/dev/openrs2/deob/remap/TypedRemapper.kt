@@ -7,7 +7,7 @@ import dev.openrs2.asm.classpath.ExtendedRemapper
 import dev.openrs2.asm.filter.UnionMemberFilter
 import dev.openrs2.deob.Profile
 import dev.openrs2.deob.filter.BrowserControlFilter
-import dev.openrs2.deob.map.NameMap
+import dev.openrs2.deob.util.map.NameMap
 import dev.openrs2.util.collect.DisjointSet
 import org.objectweb.asm.tree.AbstractInsnNode
 

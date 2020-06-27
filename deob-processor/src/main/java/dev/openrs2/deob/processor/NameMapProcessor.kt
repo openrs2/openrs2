@@ -8,9 +8,9 @@ import dev.openrs2.asm.toInternalClassName
 import dev.openrs2.deob.annotation.OriginalArg
 import dev.openrs2.deob.annotation.OriginalClass
 import dev.openrs2.deob.annotation.OriginalMember
-import dev.openrs2.deob.map.Field
-import dev.openrs2.deob.map.Method
-import dev.openrs2.deob.map.NameMap
+import dev.openrs2.deob.util.map.Field
+import dev.openrs2.deob.util.map.Method
+import dev.openrs2.deob.util.map.NameMap
 import dev.openrs2.util.io.useAtomicBufferedWriter
 import java.nio.file.Files
 import java.nio.file.Path

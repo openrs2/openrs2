@@ -1,4 +1,4 @@
-package dev.openrs2.deob.map
+package dev.openrs2.deob.util.map
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import java.nio.file.Files
