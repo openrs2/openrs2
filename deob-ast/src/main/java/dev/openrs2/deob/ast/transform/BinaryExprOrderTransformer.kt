@@ -2,16 +2,15 @@ package dev.openrs2.deob.ast.transform
 
 import com.github.javaparser.ast.CompilationUnit
 import com.github.javaparser.ast.expr.BinaryExpr
+import dev.openrs2.deob.ast.Library
+import dev.openrs2.deob.ast.LibraryGroup
 import dev.openrs2.deob.ast.util.isString
 import dev.openrs2.deob.ast.util.walk
 import javax.inject.Singleton
 
 @Singleton
 class BinaryExprOrderTransformer : Transformer() {
-    override fun transformUnit(
-        units: Map<String, CompilationUnit>,
-        unit: CompilationUnit
-    ) {
+    override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
         unit.walk { expr: BinaryExpr ->
             val op = expr.operator.flip() ?: return@walk
 

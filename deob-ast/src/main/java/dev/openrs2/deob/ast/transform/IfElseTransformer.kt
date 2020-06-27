@@ -4,6 +4,8 @@ import com.github.javaparser.ast.CompilationUnit
 import com.github.javaparser.ast.stmt.BlockStmt
 import com.github.javaparser.ast.stmt.IfStmt
 import com.github.javaparser.ast.stmt.Statement
+import dev.openrs2.deob.ast.Library
+import dev.openrs2.deob.ast.LibraryGroup
 import dev.openrs2.deob.ast.util.countNots
 import dev.openrs2.deob.ast.util.not
 import dev.openrs2.deob.ast.util.walk
@@ -11,10 +13,7 @@ import javax.inject.Singleton
 
 @Singleton
 class IfElseTransformer : Transformer() {
-    override fun transformUnit(
-        units: Map<String, CompilationUnit>,
-        unit: CompilationUnit
-    ) {
+    override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
         unit.walk { stmt: IfStmt ->
             stmt.elseStmt.ifPresent { elseStmt: Statement ->
                 val condition = stmt.condition

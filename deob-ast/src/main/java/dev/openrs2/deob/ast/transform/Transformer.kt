@@ -1,27 +1,31 @@
 package dev.openrs2.deob.ast.transform
 
 import com.github.javaparser.ast.CompilationUnit
+import dev.openrs2.deob.ast.Library
+import dev.openrs2.deob.ast.LibraryGroup
 
 abstract class Transformer {
-    fun transform(units: Map<String, CompilationUnit>) {
-        preTransform(units)
+    fun transform(group: LibraryGroup) {
+        preTransform(group)
 
-        for (unit in units.values) {
-            transformUnit(units, unit)
+        for (library in group) {
+            for (unit in library) {
+                transformUnit(group, library, unit)
+            }
         }
 
-        postTransform(units)
+        postTransform(group)
     }
 
-    protected open fun preTransform(units: Map<String, CompilationUnit>) {
+    protected open fun preTransform(group: LibraryGroup) {
         // empty
     }
 
-    protected open fun transformUnit(units: Map<String, CompilationUnit>, unit: CompilationUnit) {
+    protected open fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
         // empty
     }
 
-    protected open fun postTransform(units: Map<String, CompilationUnit>) {
+    protected open fun postTransform(group: LibraryGroup) {
         // empty
     }
 }

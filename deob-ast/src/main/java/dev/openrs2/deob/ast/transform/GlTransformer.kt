@@ -19,6 +19,8 @@ import com.github.javaparser.ast.type.PrimitiveType
 import com.github.javaparser.resolution.types.ResolvedPrimitiveType
 import com.github.javaparser.resolution.types.ResolvedType
 import com.github.michaelbull.logging.InlineLogger
+import dev.openrs2.deob.ast.Library
+import dev.openrs2.deob.ast.LibraryGroup
 import dev.openrs2.deob.ast.gl.GlCommand
 import dev.openrs2.deob.ast.gl.GlEnum
 import dev.openrs2.deob.ast.gl.GlParameter
@@ -31,16 +33,15 @@ import javax.inject.Singleton
 @Singleton
 class GlTransformer @Inject constructor(private val registry: GlRegistry) : Transformer() {
     private val enums = mutableSetOf<GlEnum>()
+    private var glUnit: CompilationUnit? = null
 
-    override fun preTransform(units: Map<String, CompilationUnit>) {
+    override fun preTransform(group: LibraryGroup) {
         enums.clear()
+        glUnit = group["gl"]?.get(GL_CLASS)
     }
 
-    override fun transformUnit(
-        units: Map<String, CompilationUnit>,
-        unit: CompilationUnit
-    ) {
-        if (!units.containsKey(GL_CLASS)) {
+    override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
+        if (glUnit == null) {
             return
         }
 
@@ -175,9 +176,12 @@ class GlTransformer @Inject constructor(private val registry: GlRegistry) : Tran
         }
     }
 
-    override fun postTransform(units: Map<String, CompilationUnit>) {
-        val glUnit = units[GL_CLASS] ?: return
-        val glInterface = glUnit.primaryType.get()
+    override fun postTransform(group: LibraryGroup) {
+        if (glUnit == null) {
+            return
+        }
+
+        val glInterface = glUnit!!.primaryType.get()
 
         // add missing fields
         val fields = enums.filter { glInterface.getFieldByName(it.name).isEmpty }

@@ -4,6 +4,8 @@ import com.github.javaparser.ast.CompilationUnit
 import com.github.javaparser.ast.expr.BinaryExpr
 import com.github.javaparser.ast.expr.EnclosedExpr
 import com.github.javaparser.ast.expr.Expression
+import dev.openrs2.deob.ast.Library
+import dev.openrs2.deob.ast.LibraryGroup
 import dev.openrs2.deob.ast.util.walk
 import javax.inject.Singleton
 
@@ -73,10 +75,7 @@ class EncloseTransformer : Transformer() {
         }
     }
 
-    override fun transformUnit(
-        units: Map<String, CompilationUnit>,
-        unit: CompilationUnit
-    ) {
+    override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
         unit.walk { expr: Expression ->
             when {
                 expr.isArrayAccessExpr -> {

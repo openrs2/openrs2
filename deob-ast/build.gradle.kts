@@ -11,6 +11,7 @@ application {
 dependencies {
     api("com.github.ajalt:clikt:${Versions.clikt}")
 
+    implementation(project(":deob-util"))
     implementation(project(":util"))
     implementation("com.github.javaparser:javaparser-symbol-solver-core:${Versions.javaParser}")
     implementation("com.google.guava:guava:${Versions.guava}")

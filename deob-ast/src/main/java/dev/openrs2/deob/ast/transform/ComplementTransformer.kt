@@ -5,6 +5,8 @@ import com.github.javaparser.ast.expr.BinaryExpr
 import com.github.javaparser.ast.expr.Expression
 import com.github.javaparser.ast.expr.IntegerLiteralExpr
 import com.github.javaparser.ast.expr.UnaryExpr
+import dev.openrs2.deob.ast.Library
+import dev.openrs2.deob.ast.LibraryGroup
 import dev.openrs2.deob.ast.util.checkedAsInt
 import dev.openrs2.deob.ast.util.checkedAsLong
 import dev.openrs2.deob.ast.util.isIntegerOrLongLiteral
@@ -14,10 +16,7 @@ import javax.inject.Singleton
 
 @Singleton
 class ComplementTransformer : Transformer() {
-    override fun transformUnit(
-        units: Map<String, CompilationUnit>,
-        unit: CompilationUnit
-    ) {
+    override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
         unit.walk { expr: BinaryExpr ->
             val op = complement(expr.operator) ?: return@walk
 

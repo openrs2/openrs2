@@ -3,6 +3,8 @@ package dev.openrs2.deob.ast.transform
 import com.github.javaparser.ast.CompilationUnit
 import com.github.javaparser.ast.expr.BinaryExpr
 import com.github.javaparser.ast.expr.IntegerLiteralExpr
+import dev.openrs2.deob.ast.Library
+import dev.openrs2.deob.ast.LibraryGroup
 import dev.openrs2.deob.ast.util.checkedAsInt
 import dev.openrs2.deob.ast.util.checkedAsLong
 import dev.openrs2.deob.ast.util.isIntegerOrLongLiteral
@@ -12,10 +14,7 @@ import javax.inject.Singleton
 
 @Singleton
 class BitMaskTransformer : Transformer() {
-    override fun transformUnit(
-        units: Map<String, CompilationUnit>,
-        unit: CompilationUnit
-    ) {
+    override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
         unit.walk { expr: BinaryExpr ->
             val shiftOp = expr.operator
             val left = expr.left

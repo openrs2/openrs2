@@ -2,6 +2,8 @@ package dev.openrs2.deob.ast.transform
 
 import com.github.javaparser.ast.CompilationUnit
 import com.github.javaparser.ast.expr.ConditionalExpr
+import dev.openrs2.deob.ast.Library
+import dev.openrs2.deob.ast.LibraryGroup
 import dev.openrs2.deob.ast.util.countNots
 import dev.openrs2.deob.ast.util.not
 import dev.openrs2.deob.ast.util.walk
@@ -9,10 +11,7 @@ import javax.inject.Singleton
 
 @Singleton
 class TernaryTransformer : Transformer() {
-    override fun transformUnit(
-        units: Map<String, CompilationUnit>,
-        unit: CompilationUnit
-    ) {
+    override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
         unit.walk { expr: ConditionalExpr ->
             val condition = expr.condition
             val notCondition = condition.not()

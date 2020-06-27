@@ -6,6 +6,8 @@ import com.github.javaparser.ast.expr.Expression
 import com.github.javaparser.ast.expr.IntegerLiteralExpr
 import com.github.javaparser.ast.expr.LongLiteralExpr
 import com.github.javaparser.ast.expr.UnaryExpr
+import dev.openrs2.deob.ast.Library
+import dev.openrs2.deob.ast.LibraryGroup
 import dev.openrs2.deob.ast.util.hasSideEffects
 import dev.openrs2.deob.ast.util.isString
 import dev.openrs2.deob.ast.util.negate
@@ -14,10 +16,7 @@ import javax.inject.Singleton
 
 @Singleton
 class AddSubTransformer : Transformer() {
-    override fun transformUnit(
-        units: Map<String, CompilationUnit>,
-        unit: CompilationUnit
-    ) {
+    override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
         unit.walk { expr: BinaryExpr ->
             val op = expr.operator
             val left = expr.left
