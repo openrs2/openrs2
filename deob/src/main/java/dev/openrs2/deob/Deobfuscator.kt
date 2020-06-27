@@ -28,8 +28,8 @@ class Deobfuscator @Inject constructor(
 
         // overwrite client's classes with signed classes from the loader
         logger.info { "Moving signed classes from loader to signlink" }
-        val signlink = Library("signlink")
-        SignedClassUtils.move(loader, client, signlink)
+        val signLink = Library("signlink")
+        SignedClassUtils.move(loader, client, signLink)
 
         // move unpack class out of the loader (so the unpacker and loader can both depend on it)
         logger.info { "Moving unpack from loader to unpack" }
@@ -64,17 +64,17 @@ class Deobfuscator @Inject constructor(
          * different sets of fields/methods, presumably as a result of the
          * obfuscator removing unused code.)
          */
-        val clientRemapper = ClassNamePrefixRemapper(client, gl, signlink)
+        val clientRemapper = ClassNamePrefixRemapper(client, gl, signLink)
         val glRemapper = ClassNamePrefixRemapper(gl)
-        val loaderRemapper = ClassNamePrefixRemapper(loader, signlink, unpack)
-        val signlinkRemapper = ClassNamePrefixRemapper(signlink)
+        val loaderRemapper = ClassNamePrefixRemapper(loader, signLink, unpack)
+        val signLinkRemapper = ClassNamePrefixRemapper(signLink)
         val unpackClassRemapper = ClassNamePrefixRemapper(unpackClass, unpack)
         val unpackRemapper = ClassNamePrefixRemapper(unpack)
 
         client.remap(clientRemapper)
         gl.remap(glRemapper)
         loader.remap(loaderRemapper)
-        signlink.remap(signlinkRemapper)
+        signLink.remap(signLinkRemapper)
         unpack.remap(unpackRemapper)
         unpackClass.remap(unpackClassRemapper)
 
@@ -83,7 +83,7 @@ class Deobfuscator @Inject constructor(
         val classPath = ClassPath(
             runtime,
             dependencies = emptyList(),
-            libraries = listOf(client, gl, loader, signlink, unpack, unpackClass)
+            libraries = listOf(client, gl, loader, signLink, unpack, unpackClass)
         )
 
         // deobfuscate
@@ -97,7 +97,7 @@ class Deobfuscator @Inject constructor(
         client.remap(StripClassNamePrefixRemapper)
         gl.remap(StripClassNamePrefixRemapper)
         loader.remap(StripClassNamePrefixRemapper)
-        signlink.remap(StripClassNamePrefixRemapper)
+        signLink.remap(StripClassNamePrefixRemapper)
         unpack.remap(StripClassNamePrefixRemapper)
         unpackClass.remap(StripClassNamePrefixRemapper)
 
@@ -109,7 +109,7 @@ class Deobfuscator @Inject constructor(
         client.write(output.resolve("client.jar"), JarLibraryWriter, classPath)
         gl.write(output.resolve("gl.jar"), JarLibraryWriter, classPath)
         loader.write(output.resolve("loader.jar"), JarLibraryWriter, classPath)
-        signlink.write(output.resolve("signlink.jar"), JarLibraryWriter, classPath)
+        signLink.write(output.resolve("signlink.jar"), JarLibraryWriter, classPath)
         unpack.write(output.resolve("unpack.jar"), JarLibraryWriter, classPath)
         unpackClass.write(output.resolve("unpackclass.jar"), JarLibraryWriter, classPath)
     }

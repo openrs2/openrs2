@@ -10,12 +10,12 @@ class Module(val name: String, val dependencies: Set<Module> = emptySet()) {
 
     companion object {
         private val gl = Module("gl")
-        private val signlink = Module("signlink")
+        private val signLink = Module("signlink")
         private val unpack = Module("unpack")
-        private val client = Module("client", setOf(gl, signlink))
-        private val loader = Module("loader", setOf(signlink, unpack))
+        private val client = Module("client", setOf(gl, signLink))
+        private val loader = Module("loader", setOf(signLink, unpack))
         private val unpackClass = Module("unpackclass", setOf(unpack))
 
-        val all = setOf(client, gl, loader, signlink, unpack, unpackClass)
+        val all = setOf(client, gl, loader, signLink, unpack, unpackClass)
     }
 }
