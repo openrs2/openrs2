@@ -7,7 +7,7 @@ import dev.openrs2.asm.classpath.Library
 import dev.openrs2.asm.hasCode
 import dev.openrs2.asm.removeArgument
 import dev.openrs2.asm.transform.Transformer
-import dev.openrs2.deob.ArgRef
+import dev.openrs2.deob.ArgPartition
 import dev.openrs2.deob.Profile
 import dev.openrs2.deob.analysis.ConstSourceInterpreter
 import dev.openrs2.deob.analysis.ConstSourceValue
@@ -26,7 +26,7 @@ import javax.inject.Singleton
 
 @Singleton
 class UnusedArgTransformer @Inject constructor(private val profile: Profile) : Transformer() {
-    private val retainedArgs = mutableSetOf<ArgRef>()
+    private val retainedArgs = mutableSetOf<ArgPartition>()
     private lateinit var inheritedMethodSets: DisjointSet<MemberRef>
     private var deletedArgs = 0
 
@@ -68,7 +68,7 @@ class UnusedArgTransformer @Inject constructor(private val profile: Profile) : T
 
                     val arg = localToArgMap[insn.`var`]
                     if (arg != null) {
-                        retainedArgs.add(ArgRef(partition, arg))
+                        retainedArgs.add(ArgPartition(partition, arg))
                     }
                 }
                 is MethodInsnNode -> {
@@ -85,7 +85,7 @@ class UnusedArgTransformer @Inject constructor(private val profile: Profile) : T
                     for (j in 0 until args) {
                         val source = frame.getStack(stackSize - args + j)
                         if (source !is ConstSourceValue.Single) {
-                            retainedArgs.add(ArgRef(invokePartition, j))
+                            retainedArgs.add(ArgPartition(invokePartition, j))
                         }
                     }
                 }
@@ -132,7 +132,7 @@ class UnusedArgTransformer @Inject constructor(private val profile: Profile) : T
             val newArgTypes = mutableListOf<Type>()
 
             for ((j, argType) in argTypes.withIndex()) {
-                if (argType.sort in INT_SORTS && ArgRef(partition, j) !in retainedArgs) {
+                if (argType.sort in INT_SORTS && ArgPartition(partition, j) !in retainedArgs) {
                     val value = frame.getStack(stackSize - argTypes.size + j) as ConstSourceValue.Single
                     deadInsns.add(value.source)
                 } else {
@@ -162,7 +162,7 @@ class UnusedArgTransformer @Inject constructor(private val profile: Profile) : T
 
         val argTypes = Type.getType(method.desc).argumentTypes
         for ((i, argType) in argTypes.withIndex().reversed()) {
-            if (argType.sort in INT_SORTS && ArgRef(partition, i) !in retainedArgs) {
+            if (argType.sort in INT_SORTS && ArgPartition(partition, i) !in retainedArgs) {
                 method.removeArgument(i)
                 deletedArgs++
             }

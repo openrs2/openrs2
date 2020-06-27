@@ -16,7 +16,7 @@ import dev.openrs2.asm.replaceExpression
 import dev.openrs2.asm.stackMetadata
 import dev.openrs2.asm.toAbstractInsnNode
 import dev.openrs2.asm.transform.Transformer
-import dev.openrs2.deob.ArgRef
+import dev.openrs2.deob.ArgPartition
 import dev.openrs2.deob.Profile
 import dev.openrs2.deob.analysis.IntBranch
 import dev.openrs2.deob.analysis.IntBranchResult.ALWAYS_TAKEN
@@ -54,7 +54,7 @@ import javax.inject.Singleton
 class ConstantArgTransformer @Inject constructor(private val profile: Profile) : Transformer() {
     private val pendingMethods = LinkedHashSet<MemberRef>()
     private val arglessMethods = mutableSetOf<DisjointSet.Partition<MemberRef>>()
-    private val argValues = mutableMapOf<ArgRef, IntValueSet>()
+    private val argValues = mutableMapOf<ArgPartition, IntValueSet>()
     private lateinit var inheritedMethodSets: DisjointSet<MemberRef>
     private lateinit var entryPoints: MemberFilter
     private var branchesSimplified = 0
@@ -131,7 +131,7 @@ class ConstantArgTransformer @Inject constructor(private val profile: Profile) :
     private fun getArgs(ref: MemberRef): Array<IntValueSet> {
         val partition = inheritedMethodSets[ref]!!
         val size = Type.getArgumentTypes(ref.desc).sumBy { it.size }
-        return Array(size) { i -> argValues[ArgRef(partition, i)] ?: IntValueSet.Unknown }
+        return Array(size) { i -> argValues[ArgPartition(partition, i)] ?: IntValueSet.Unknown }
     }
 
     private fun addArgValues(owner: ClassNode, method: MethodNode, args: Array<IntValueSet>) {
@@ -153,7 +153,7 @@ class ConstantArgTransformer @Inject constructor(private val profile: Profile) :
             var index = 0
             for (j in 0 until size) {
                 val value = frame.getStack(frame.stackSize - size + j)
-                if (addArgValues(ArgRef(invokedMethod, index), value.set)) {
+                if (addArgValues(ArgPartition(invokedMethod, index), value.set)) {
                     pendingMethods.addAll(invokedMethod)
                 }
                 index += value.size
@@ -165,8 +165,8 @@ class ConstantArgTransformer @Inject constructor(private val profile: Profile) :
         }
     }
 
-    private fun addArgValues(ref: ArgRef, value: IntValueSet): Boolean {
-        val old = argValues[ref]
+    private fun addArgValues(partition: ArgPartition, value: IntValueSet): Boolean {
+        val old = argValues[partition]
 
         val new = if (value.singleton != null) {
             if (old != null) {
@@ -177,7 +177,7 @@ class ConstantArgTransformer @Inject constructor(private val profile: Profile) :
         } else {
             IntValueSet.Unknown
         }
-        argValues[ref] = new
+        argValues[partition] = new
 
         return old != new
     }
