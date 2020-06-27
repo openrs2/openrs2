@@ -1,18 +1,19 @@
 package dev.openrs2.decompiler
 
+import dev.openrs2.deob.util.Module
 import org.jetbrains.java.decompiler.main.Fernflower
 import org.jetbrains.java.decompiler.main.extern.IFernflowerPreferences
 
-class Decompiler(private vararg val libraries: Library) {
+class Decompiler(private val modules: Set<Module>) {
     fun run() {
-        for (library in libraries) {
-            DecompilerIo(library.destination).use { io ->
+        for (module in modules) {
+            DecompilerIo(module.sources).use { io ->
                 val fernflower = Fernflower(io, io, OPTIONS, Slf4jFernflowerLogger)
 
-                for (dependency in library.dependencies) {
-                    fernflower.addLibrary(dependency.toFile())
+                for (dependency in module.transitiveDependencies) {
+                    fernflower.addLibrary(dependency.jar.toFile())
                 }
-                fernflower.addSource(library.source.toFile())
+                fernflower.addSource(module.jar.toFile())
 
                 fernflower.decompileContext()
             }

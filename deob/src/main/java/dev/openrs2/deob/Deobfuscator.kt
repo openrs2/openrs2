@@ -106,12 +106,12 @@ class Deobfuscator @Inject constructor(
 
         Files.createDirectories(output)
 
-        client.write(output.resolve("runescape_gl.jar"), JarLibraryWriter, classPath)
-        gl.write(output.resolve("jaggl.jar"), JarLibraryWriter, classPath)
-        loader.write(output.resolve("loader_gl.jar"), JarLibraryWriter, classPath)
-        signlink.write(output.resolve("signlink_gl.jar"), JarLibraryWriter, classPath)
-        unpack.write(output.resolve("unpack_gl.jar"), JarLibraryWriter, classPath)
-        unpackClass.write(output.resolve("unpackclass_gl.jar"), JarLibraryWriter, classPath)
+        client.write(output.resolve("client.jar"), JarLibraryWriter, classPath)
+        gl.write(output.resolve("gl.jar"), JarLibraryWriter, classPath)
+        loader.write(output.resolve("loader.jar"), JarLibraryWriter, classPath)
+        signlink.write(output.resolve("signlink.jar"), JarLibraryWriter, classPath)
+        unpack.write(output.resolve("unpack.jar"), JarLibraryWriter, classPath)
+        unpackClass.write(output.resolve("unpackclass.jar"), JarLibraryWriter, classPath)
     }
 
     private companion object {
