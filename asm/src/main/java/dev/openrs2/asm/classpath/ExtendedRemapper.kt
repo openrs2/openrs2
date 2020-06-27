@@ -15,4 +15,14 @@ abstract class ExtendedRemapper : Remapper() {
     open fun mapMethodOwner(owner: String, name: String, descriptor: String): String {
         return mapType(owner)
     }
+
+    open fun mapArgumentName(
+        owner: String,
+        name: String,
+        descriptor: String,
+        index: Int,
+        argumentName: String?
+    ): String? {
+        return argumentName
+    }
 }

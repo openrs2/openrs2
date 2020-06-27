@@ -5,6 +5,7 @@ import dev.openrs2.asm.MemberRef
 import dev.openrs2.asm.classpath.ClassPath
 import dev.openrs2.asm.classpath.ExtendedRemapper
 import dev.openrs2.asm.filter.UnionMemberFilter
+import dev.openrs2.deob.ArgRef
 import dev.openrs2.deob.Profile
 import dev.openrs2.deob.filter.BrowserControlFilter
 import dev.openrs2.deob.util.map.NameMap
@@ -17,6 +18,7 @@ class TypedRemapper private constructor(
     private val classes: Map<String, String>,
     private val fields: Map<DisjointSet.Partition<MemberRef>, String>,
     private val methods: Map<DisjointSet.Partition<MemberRef>, String>,
+    private val argumentNames: Map<ArgRef, String>,
     private val staticFields: Map<DisjointSet.Partition<MemberRef>, StaticField>,
     private val staticMethods: Map<DisjointSet.Partition<MemberRef>, String>
 ) : ExtendedRemapper() {
@@ -54,6 +56,17 @@ class TypedRemapper private constructor(
         return staticMethods.getOrDefault(partition, mapType(owner))
     }
 
+    override fun mapArgumentName(
+        owner: String,
+        name: String,
+        descriptor: String,
+        index: Int,
+        argumentName: String?
+    ): String? {
+        val argument = ArgRef(MemberRef(owner, name, descriptor), index)
+        return argumentNames[argument] ?: argumentName
+    }
+
     companion object {
         private val logger = InlineLogger()
 
@@ -79,6 +92,7 @@ class TypedRemapper private constructor(
                 nameMap,
                 inheritedMethodSets
             ).generate()
+            val argumentNames = ArgumentMappingGenerator(nameMap).generate()
 
             verifyMapping(classes, profile.maxObfuscatedNameLen)
             verifyMemberMapping(fields, profile.maxObfuscatedNameLen)
@@ -110,6 +124,7 @@ class TypedRemapper private constructor(
                 classes,
                 fields,
                 methods,
+                argumentNames,
                 staticFields,
                 staticMethods
             )

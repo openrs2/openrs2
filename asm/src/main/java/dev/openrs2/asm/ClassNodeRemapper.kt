@@ -1,6 +1,7 @@
 package dev.openrs2.asm
 
 import dev.openrs2.asm.classpath.ExtendedRemapper
+import org.objectweb.asm.Type
 import org.objectweb.asm.commons.Remapper
 import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.ClassNode
@@ -13,6 +14,7 @@ import org.objectweb.asm.tree.LdcInsnNode
 import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.MultiANewArrayInsnNode
+import org.objectweb.asm.tree.ParameterNode
 import org.objectweb.asm.tree.TypeInsnNode
 
 fun ClassNode.remap(remapper: ExtendedRemapper) {
@@ -57,6 +59,14 @@ fun FieldNode.remap(remapper: ExtendedRemapper, owner: String) {
 }
 
 fun MethodNode.remap(remapper: ExtendedRemapper, owner: String) {
+    if (parameters == null) {
+        parameters = List(Type.getArgumentTypes(desc).size) { ParameterNode(null, 0) }
+    }
+
+    for ((index, parameter) in parameters.withIndex()) {
+        parameter.remap(remapper, owner, name, desc, index)
+    }
+
     name = remapper.mapMethodName(owner, name, desc)
     desc = remapper.mapMethodDesc(desc)
     signature = remapper.mapSignature(signature, false)
@@ -73,6 +83,10 @@ fun MethodNode.remap(remapper: ExtendedRemapper, owner: String) {
             tryCatch.type = remapper.mapType(tryCatch.type)
         }
     }
+}
+
+fun ParameterNode.remap(remapper: ExtendedRemapper, owner: String, methodName: String, desc: String, index: Int) {
+    name = remapper.mapArgumentName(owner, methodName, desc, index, name)
 }
 
 fun AbstractInsnNode.remap(remapper: ExtendedRemapper) {
