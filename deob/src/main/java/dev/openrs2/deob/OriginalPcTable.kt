@@ -6,7 +6,10 @@ import org.objectweb.asm.ClassWriter
 import org.objectweb.asm.Label
 import org.objectweb.asm.tree.LabelNode
 
-class OriginalPcTable(private val pcs: Map<LabelNode, Int>) : Attribute("OriginalPcTable") {
+class OriginalPcTable(
+    private val pcs: Map<LabelNode, Int>,
+    private val names: Map<Int, String>
+) : Attribute("OriginalPcTable") {
     override fun isCodeAttribute(): Boolean {
         return true
     }
@@ -27,11 +30,19 @@ class OriginalPcTable(private val pcs: Map<LabelNode, Int>) : Attribute("Origina
         maxLocals: Int
     ): ByteVector {
         val buf = ByteVector()
+
         buf.putShort(pcs.size)
         for ((label, pc) in pcs) {
             buf.putShort(label.label.offset)
             buf.putShort(pc)
         }
+
+        buf.putShort(names.size)
+        for ((pc, name) in names) {
+            buf.putShort(pc)
+            buf.putShort(classWriter.newUTF8(name))
+        }
+
         return buf
     }
 }
