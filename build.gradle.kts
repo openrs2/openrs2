@@ -191,7 +191,7 @@ configure(subprojects.filter { it.isFree }) {
     }
 }
 
-val rejectVersionRegex = Regex("(?i)[._-](?:alpha|beta|rc|cr|m)")
+val rejectVersionRegex = Regex("(?i)[._-](?:alpha|beta|rc|cr|m|dev)")
 
 tasks.dependencyUpdates {
     gradleReleaseChannel = "current"
