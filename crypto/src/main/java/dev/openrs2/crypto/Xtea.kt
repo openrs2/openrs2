@@ -4,11 +4,14 @@ import io.netty.buffer.ByteBuf
 
 private const val GOLDEN_RATIO = 0x9e3779b9.toInt()
 private const val ROUNDS = 32
+private const val BLOCK_SIZE = 8
+private const val BLOCK_SIZE_MASK = BLOCK_SIZE - 1
 
 fun ByteBuf.xteaEncrypt(index: Int, length: Int, key: IntArray) {
     require(key.size == 4)
 
-    for (i in index until index + length step 8) {
+    val end = (index + length) and BLOCK_SIZE_MASK.inv()
+    for (i in index until end step BLOCK_SIZE) {
         var sum = 0
         var v0 = getInt(i)
         var v1 = getInt(i + 4)
@@ -27,7 +30,8 @@ fun ByteBuf.xteaEncrypt(index: Int, length: Int, key: IntArray) {
 fun ByteBuf.xteaDecrypt(index: Int, length: Int, key: IntArray) {
     require(key.size == 4)
 
-    for (i in index until index + length step 8) {
+    val end = (index + length) and BLOCK_SIZE_MASK.inv()
+    for (i in index until end step BLOCK_SIZE) {
         @Suppress("INTEGER_OVERFLOW")
         var sum = GOLDEN_RATIO * ROUNDS
         var v0 = getInt(i)
