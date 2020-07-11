@@ -10,7 +10,7 @@ private const val BLOCK_SIZE_MASK = BLOCK_SIZE - 1
 fun ByteBuf.xteaEncrypt(index: Int, length: Int, key: IntArray) {
     require(key.size == 4)
 
-    val end = (index + length) and BLOCK_SIZE_MASK.inv()
+    val end = index + (length and BLOCK_SIZE_MASK.inv())
     for (i in index until end step BLOCK_SIZE) {
         var sum = 0
         var v0 = getInt(i)
@@ -30,7 +30,7 @@ fun ByteBuf.xteaEncrypt(index: Int, length: Int, key: IntArray) {
 fun ByteBuf.xteaDecrypt(index: Int, length: Int, key: IntArray) {
     require(key.size == 4)
 
-    val end = (index + length) and BLOCK_SIZE_MASK.inv()
+    val end = index + (length and BLOCK_SIZE_MASK.inv())
     for (i in index until end step BLOCK_SIZE) {
         @Suppress("INTEGER_OVERFLOW")
         var sum = GOLDEN_RATIO * ROUNDS

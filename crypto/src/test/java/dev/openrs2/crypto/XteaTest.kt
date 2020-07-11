@@ -28,31 +28,31 @@ object XteaTest {
 
         // two blocks
         TestVector("00000000000000000000000000000000", "70e1225d6e4e76554141414141414141",
-            "4141414141414141ed23375a821a8c2d"),
-
-        // not a multiple of the block size
-        TestVector("00000000000000000000000000000000", "01", "01"),
-        TestVector("00000000000000000000000000000000", "01020304050607", "01020304050607"),
-        TestVector("00000000000000000000000000000000", "70e1225d6e4e765501", "414141414141414101"),
-        TestVector("00000000000000000000000000000000", "70e1225d6e4e765501020304050607",
-            "414141414141414101020304050607")
+            "4141414141414141ed23375a821a8c2d")
     )
 
     @Test
     fun testEncrypt() {
         for (vector in TEST_VECTORS) {
-            val buffer = Unpooled.copiedBuffer(vector.plaintext)
-            try {
-                buffer.xteaEncrypt(0, buffer.readableBytes(), vector.key)
+            for (i in 0..7) {
+                for (j in 0..7) {
+                    val header = ByteArray(i) { it.toByte() }
+                    val trailer = ByteArray(j) { it.toByte() }
 
-                val expected = Unpooled.wrappedBuffer(vector.ciphertext)
-                try {
-                    assertEquals(expected, buffer)
-                } finally {
-                    expected.release()
+                    val buffer = Unpooled.copiedBuffer(header, vector.plaintext, trailer)
+                    try {
+                        buffer.xteaEncrypt(i, vector.plaintext.size, vector.key)
+
+                        val expected = Unpooled.wrappedBuffer(header, vector.ciphertext, trailer)
+                        try {
+                            assertEquals(expected, buffer)
+                        } finally {
+                            expected.release()
+                        }
+                    } finally {
+                        buffer.release()
+                    }
                 }
-            } finally {
-                buffer.release()
             }
         }
     }
@@ -60,18 +60,25 @@ object XteaTest {
     @Test
     fun testDecrypt() {
         for (vector in TEST_VECTORS) {
-            val buffer = Unpooled.copiedBuffer(vector.ciphertext)
-            try {
-                buffer.xteaDecrypt(0, buffer.readableBytes(), vector.key)
+            for (i in 0..7) {
+                for (j in 0..7) {
+                    val header = ByteArray(i) { it.toByte() }
+                    val trailer = ByteArray(j) { it.toByte() }
 
-                val expected = Unpooled.wrappedBuffer(vector.plaintext)
-                try {
-                    assertEquals(expected, buffer)
-                } finally {
-                    expected.release()
+                    val buffer = Unpooled.copiedBuffer(header, vector.ciphertext, trailer)
+                    try {
+                        buffer.xteaDecrypt(i, vector.ciphertext.size, vector.key)
+
+                        val expected = Unpooled.wrappedBuffer(header, vector.plaintext, trailer)
+                        try {
+                            assertEquals(expected, buffer)
+                        } finally {
+                            expected.release()
+                        }
+                    } finally {
+                        buffer.release()
+                    }
                 }
-            } finally {
-                buffer.release()
             }
         }
     }
