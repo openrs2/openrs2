@@ -12,6 +12,7 @@ import dev.openrs2.deob.transform.BundlerTransformer
 import dev.openrs2.deob.transform.CanvasTransformer
 import dev.openrs2.deob.transform.ClassLiteralTransformer
 import dev.openrs2.deob.transform.ConstantArgTransformer
+import dev.openrs2.deob.transform.CopyPropagationTransformer
 import dev.openrs2.deob.transform.CounterTransformer
 import dev.openrs2.deob.transform.EmptyClassTransformer
 import dev.openrs2.deob.transform.ExceptionTracingTransformer
@@ -61,6 +62,7 @@ object DeobfuscatorModule : AbstractModule() {
         binder.addBinding().to(FieldOrderTransformer::class.java)
         binder.addBinding().to(BitwiseOpTransformer::class.java)
         binder.addBinding().to(ConstantArgTransformer::class.java)
+        binder.addBinding().to(CopyPropagationTransformer::class.java)
         binder.addBinding().to(UnusedLocalTransformer::class.java)
         binder.addBinding().to(UnusedMethodTransformer::class.java)
         binder.addBinding().to(UnusedArgTransformer::class.java)
