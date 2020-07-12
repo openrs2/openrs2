@@ -29,7 +29,7 @@ class UnusedLocalTransformer : Transformer() {
         val deadStores = mutableListOf<AbstractInsnNode>()
 
         for (insn in method.instructions) {
-            if (insn !is VarInsnNode || insn.opcode != Opcodes.ISTORE) {
+            if (insn !is VarInsnNode || !STORE_OPCODES.contains(insn.opcode)) {
                 continue
             }
 
@@ -56,5 +56,13 @@ class UnusedLocalTransformer : Transformer() {
 
     private companion object {
         private val logger = InlineLogger()
+
+        private val STORE_OPCODES = setOf(
+            Opcodes.ISTORE,
+            Opcodes.LSTORE,
+            Opcodes.FSTORE,
+            Opcodes.DSTORE,
+            Opcodes.ASTORE
+        )
     }
 }
