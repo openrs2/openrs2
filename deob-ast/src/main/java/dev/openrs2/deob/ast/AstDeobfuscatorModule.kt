@@ -17,6 +17,7 @@ import dev.openrs2.deob.ast.transform.IfElseTransformer
 import dev.openrs2.deob.ast.transform.IncrementTransformer
 import dev.openrs2.deob.ast.transform.NegativeLiteralTransformer
 import dev.openrs2.deob.ast.transform.NewInstanceTransformer
+import dev.openrs2.deob.ast.transform.RedundantCastTransformer
 import dev.openrs2.deob.ast.transform.TernaryTransformer
 import dev.openrs2.deob.ast.transform.Transformer
 import dev.openrs2.deob.ast.transform.UnencloseTransformer
@@ -42,6 +43,7 @@ object AstDeobfuscatorModule : AbstractModule() {
         binder.addBinding().to(NewInstanceTransformer::class.java)
         binder.addBinding().to(IncrementTransformer::class.java)
         binder.addBinding().to(ForLoopConditionTransformer::class.java)
+        binder.addBinding().to(RedundantCastTransformer::class.java)
         binder.addBinding().to(GlTransformer::class.java)
         binder.addBinding().to(EncloseTransformer::class.java)
     }
