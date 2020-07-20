@@ -9,6 +9,7 @@ import com.github.javaparser.ast.expr.NullLiteralExpr
 import com.github.javaparser.ast.expr.ObjectCreationExpr
 import com.github.javaparser.ast.expr.VariableDeclarationExpr
 import com.github.javaparser.resolution.MethodAmbiguityException
+import com.github.javaparser.resolution.declarations.ResolvedMethodLikeDeclaration
 import dev.openrs2.deob.ast.Library
 import dev.openrs2.deob.ast.LibraryGroup
 import dev.openrs2.deob.ast.util.walk
@@ -29,6 +30,8 @@ class RedundantCastTransformer : Transformer() {
                 val arg = expr.arguments[i]
                 if (!isCastedNull(arg)) {
                     continue
+                } else if (resolvesVariadicAmbiguity(i, expr.resolve(), arg as CastExpr)) {
+                    continue
                 }
 
                 expr.arguments[i] = NullLiteralExpr()
@@ -44,6 +47,8 @@ class RedundantCastTransformer : Transformer() {
             for (i in expr.arguments.indices) {
                 val arg = expr.arguments[i]
                 if (!isCastedNull(arg)) {
+                    continue
+                } else if (resolvesVariadicAmbiguity(i, expr.resolve(), arg as CastExpr)) {
                     continue
                 }
 
@@ -79,5 +84,16 @@ class RedundantCastTransformer : Transformer() {
             return false
         }
         return expr.expression is NullLiteralExpr
+    }
+
+    private fun resolvesVariadicAmbiguity(index: Int, method: ResolvedMethodLikeDeclaration, cast: CastExpr): Boolean {
+        if (index < method.numberOfParams) {
+            val param = method.getParam(index)
+            if (param.isVariadic && param.type == cast.type.resolve()) {
+                return true
+            }
+        }
+
+        return false
     }
 }
