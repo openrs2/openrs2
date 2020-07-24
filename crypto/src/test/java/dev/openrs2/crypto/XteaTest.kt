@@ -1,5 +1,6 @@
 package dev.openrs2.crypto
 
+import dev.openrs2.buffer.use
 import io.netty.buffer.ByteBufUtil
 import io.netty.buffer.Unpooled
 import kotlin.test.Test
@@ -39,18 +40,12 @@ object XteaTest {
                     val header = ByteArray(i) { it.toByte() }
                     val trailer = ByteArray(j) { it.toByte() }
 
-                    val buffer = Unpooled.copiedBuffer(header, vector.plaintext, trailer)
-                    try {
+                    Unpooled.copiedBuffer(header, vector.plaintext, trailer).use { buffer ->
                         buffer.xteaEncrypt(i, vector.plaintext.size, vector.key)
 
-                        val expected = Unpooled.wrappedBuffer(header, vector.ciphertext, trailer)
-                        try {
+                        Unpooled.wrappedBuffer(header, vector.ciphertext, trailer).use { expected ->
                             assertEquals(expected, buffer)
-                        } finally {
-                            expected.release()
                         }
-                    } finally {
-                        buffer.release()
                     }
                 }
             }
@@ -65,18 +60,12 @@ object XteaTest {
                     val header = ByteArray(i) { it.toByte() }
                     val trailer = ByteArray(j) { it.toByte() }
 
-                    val buffer = Unpooled.copiedBuffer(header, vector.ciphertext, trailer)
-                    try {
+                    Unpooled.copiedBuffer(header, vector.ciphertext, trailer).use { buffer ->
                         buffer.xteaDecrypt(i, vector.ciphertext.size, vector.key)
 
-                        val expected = Unpooled.wrappedBuffer(header, vector.plaintext, trailer)
-                        try {
+                        Unpooled.wrappedBuffer(header, vector.plaintext, trailer).use { expected ->
                             assertEquals(expected, buffer)
-                        } finally {
-                            expected.release()
                         }
-                    } finally {
-                        buffer.release()
                     }
                 }
             }

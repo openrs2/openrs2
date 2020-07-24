@@ -2,6 +2,7 @@ package dev.openrs2.crypto
 
 import com.google.common.jimfs.Configuration
 import com.google.common.jimfs.Jimfs
+import dev.openrs2.buffer.use
 import dev.openrs2.util.io.useTempFile
 import io.netty.buffer.Unpooled
 import org.bouncycastle.crypto.params.RSAKeyParameters
@@ -76,41 +77,23 @@ object RsaTest {
 
     @Test
     fun testEncryptByteBuf() {
-        val plaintext = Unpooled.wrappedBuffer(byteArrayOf(65))
-        try {
-            val ciphertext = plaintext.rsaEncrypt(PUBLIC_KEY)
-            try {
-                val expectedCiphertext = Unpooled.wrappedBuffer(byteArrayOf(10, 230.toByte()))
-                try {
+        Unpooled.wrappedBuffer(byteArrayOf(65)).use { plaintext ->
+            plaintext.rsaEncrypt(PUBLIC_KEY).use { ciphertext ->
+                Unpooled.wrappedBuffer(byteArrayOf(10, 230.toByte())).use { expectedCiphertext ->
                     assertEquals(expectedCiphertext, ciphertext)
-                } finally {
-                    expectedCiphertext.release()
                 }
-            } finally {
-                ciphertext.release()
             }
-        } finally {
-            plaintext.release()
         }
     }
 
     @Test
     fun testDecryptByteBuf() {
-        val ciphertext = Unpooled.wrappedBuffer(byteArrayOf(10, 230.toByte()))
-        try {
-            val plaintext = ciphertext.rsaDecrypt(PRIVATE_KEY)
-            try {
-                val expectedPlaintext = Unpooled.wrappedBuffer(byteArrayOf(65))
-                try {
+        Unpooled.wrappedBuffer(byteArrayOf(10, 230.toByte())).use { ciphertext ->
+            ciphertext.rsaDecrypt(PRIVATE_KEY).use { plaintext ->
+                Unpooled.wrappedBuffer(byteArrayOf(65)).use { expectedPlaintext ->
                     assertEquals(expectedPlaintext, plaintext)
-                } finally {
-                    expectedPlaintext.release()
                 }
-            } finally {
-                plaintext.release()
             }
-        } finally {
-            ciphertext.release()
         }
     }
 

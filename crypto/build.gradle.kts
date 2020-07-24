@@ -11,6 +11,7 @@ dependencies {
 
     implementation(project(":util"))
 
+    testImplementation(project(":buffer"))
     testImplementation("com.google.jimfs:jimfs:${Versions.jimfs}")
 }
 

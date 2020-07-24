@@ -3,6 +3,7 @@ rootProject.name = "openrs2"
 include(
     "all",
     "asm",
+    "buffer",
     "bundler",
     "compress",
     "compress-cli",
