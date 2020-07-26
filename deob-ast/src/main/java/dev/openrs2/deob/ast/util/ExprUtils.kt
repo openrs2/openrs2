@@ -32,22 +32,23 @@ fun Long.toLongLiteralExpr(): LongLiteralExpr {
 }
 
 fun Expression.negate(): Expression {
-    return if (isUnaryExpr && asUnaryExpr().operator == UnaryExpr.Operator.MINUS) {
-        asUnaryExpr().expression.clone()
-    } else if (isIntegerLiteralExpr) {
-        when (val n = asIntegerLiteralExpr().asNumber()) {
+    return when (this) {
+        is UnaryExpr -> when (operator) {
+            UnaryExpr.Operator.PLUS -> UnaryExpr(expression.clone(), UnaryExpr.Operator.MINUS)
+            UnaryExpr.Operator.MINUS -> expression.clone()
+            else -> UnaryExpr(clone(), UnaryExpr.Operator.MINUS)
+        }
+        is IntegerLiteralExpr -> when (val n = asNumber()) {
             IntegerLiteralExpr.MAX_31_BIT_UNSIGNED_VALUE_AS_LONG -> IntegerLiteralExpr(Integer.MIN_VALUE.toString())
             is Int -> IntegerLiteralExpr((-n.toInt()).toString())
             else -> error("Invalid IntegerLiteralExpr type")
         }
-    } else if (isLongLiteralExpr) {
-        when (val n = asLongLiteralExpr().asNumber()) {
+        is LongLiteralExpr -> when (val n = asNumber()) {
             LongLiteralExpr.MAX_63_BIT_UNSIGNED_VALUE_AS_BIG_INTEGER -> Long.MIN_VALUE.toLongLiteralExpr()
             is Long -> (-n).toLongLiteralExpr()
             else -> error("Invalid LongLiteralExpr type")
         }
-    } else {
-        throw IllegalArgumentException()
+        else -> UnaryExpr(clone(), UnaryExpr.Operator.MINUS)
     }
 }
 
