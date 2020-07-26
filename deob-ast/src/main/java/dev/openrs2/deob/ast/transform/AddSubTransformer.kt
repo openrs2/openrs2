@@ -19,32 +19,71 @@ class AddSubTransformer : Transformer() {
     override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
         unit.walk { expr: BinaryExpr ->
             val op = expr.operator
-            val left = expr.left
-            val right = expr.right
-            val type = expr.calculateResolvedType()
-
-            if (op == BinaryExpr.Operator.PLUS && type.isString()) {
+            if (op != BinaryExpr.Operator.PLUS && op != BinaryExpr.Operator.MINUS) {
                 return@walk
             }
 
-            if (op == BinaryExpr.Operator.PLUS && right.isNegative()) {
-                // x + -y => x - y
-                expr.operator = BinaryExpr.Operator.MINUS
-                expr.right = right.negate()
-            } else if (op == BinaryExpr.Operator.PLUS && left.isNegative()) {
-                if (expr.hasSideEffects()) {
-                    return@walk
+            val type = expr.calculateResolvedType()
+            if (type.isString()) {
+                return@walk
+            }
+
+            val terms = mutableListOf<Expression>()
+            addTerms(terms, expr, negate = false)
+
+            terms.sortWith(Comparator { a, b ->
+                // preserve the order of adjacent expressions with side effects
+                val aHasSideEffects = a.hasSideEffects()
+                val bHasSideEffects = b.hasSideEffects()
+                if (aHasSideEffects && bHasSideEffects) {
+                    return@Comparator 0
                 }
 
-                // -x + y => y - x
-                expr.operator = BinaryExpr.Operator.MINUS
-                expr.left = right.clone()
-                expr.right = left.negate()
-            } else if (op == BinaryExpr.Operator.MINUS && right.isNegative()) {
-                // x - -y => x + y
-                expr.operator = BinaryExpr.Operator.PLUS
-                expr.right = right.negate()
+                // push negative expressions to the right so we can replace unary minus with binary minus
+                val aNegative = a.isNegative()
+                val bNegative = b.isNegative()
+                if (aNegative && !bNegative) {
+                    return@Comparator 1
+                } else if (!aNegative && bNegative) {
+                    return@Comparator -1
+                }
+
+                return@Comparator 0
+            })
+
+            val newExpr = terms.reduce { left, right ->
+                if (right.isNegative()) {
+                    BinaryExpr(left.clone(), right.negate(), BinaryExpr.Operator.MINUS)
+                } else {
+                    BinaryExpr(left.clone(), right.clone(), BinaryExpr.Operator.PLUS)
+                }
             }
+
+            expr.replace(newExpr)
+        }
+    }
+
+    private fun addTerms(terms: MutableList<Expression>, expr: Expression, negate: Boolean) {
+        when {
+            expr is UnaryExpr -> when {
+                expr.operator == UnaryExpr.Operator.MINUS -> addTerms(terms, expr.expression, !negate)
+                negate -> terms += expr.negate()
+                else -> terms += expr
+            }
+            expr is BinaryExpr -> when {
+                expr.operator == BinaryExpr.Operator.PLUS -> {
+                    addTerms(terms, expr.left, negate)
+                    addTerms(terms, expr.right, negate)
+                }
+                expr.operator == BinaryExpr.Operator.MINUS -> {
+                    addTerms(terms, expr.left, negate)
+                    addTerms(terms, expr.right, !negate)
+                }
+                negate -> terms += expr.negate()
+                else -> terms += expr
+            }
+            negate -> terms += expr.negate()
+            else -> terms += expr
         }
     }
 
