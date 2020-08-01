@@ -122,3 +122,17 @@ fun Expression.hasSideEffects(): Boolean {
     // TODO(gpe): more cases
     return true
 }
+
+fun BinaryExpr.Operator.flip(): BinaryExpr.Operator? {
+    return when (this) {
+        BinaryExpr.Operator.PLUS, BinaryExpr.Operator.MULTIPLY -> this
+        BinaryExpr.Operator.EQUALS, BinaryExpr.Operator.NOT_EQUALS -> this
+        BinaryExpr.Operator.BINARY_AND, BinaryExpr.Operator.BINARY_OR -> this
+        BinaryExpr.Operator.XOR, BinaryExpr.Operator.OR, BinaryExpr.Operator.AND -> this
+        BinaryExpr.Operator.GREATER -> BinaryExpr.Operator.LESS
+        BinaryExpr.Operator.GREATER_EQUALS -> BinaryExpr.Operator.LESS_EQUALS
+        BinaryExpr.Operator.LESS -> BinaryExpr.Operator.GREATER
+        BinaryExpr.Operator.LESS_EQUALS -> BinaryExpr.Operator.GREATER_EQUALS
+        else -> null
+    }
+}

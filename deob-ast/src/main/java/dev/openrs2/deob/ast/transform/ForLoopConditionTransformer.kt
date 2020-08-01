@@ -1,10 +1,18 @@
 package dev.openrs2.deob.ast.transform
 
 import com.github.javaparser.ast.CompilationUnit
+import com.github.javaparser.ast.expr.AssignExpr
 import com.github.javaparser.ast.expr.BinaryExpr
+import com.github.javaparser.ast.expr.Expression
+import com.github.javaparser.ast.expr.UnaryExpr
+import com.github.javaparser.ast.expr.UnaryExpr.Operator.POSTFIX_DECREMENT
+import com.github.javaparser.ast.expr.UnaryExpr.Operator.POSTFIX_INCREMENT
+import com.github.javaparser.ast.expr.UnaryExpr.Operator.PREFIX_DECREMENT
+import com.github.javaparser.ast.expr.UnaryExpr.Operator.PREFIX_INCREMENT
 import com.github.javaparser.ast.stmt.ForStmt
 import dev.openrs2.deob.ast.Library
 import dev.openrs2.deob.ast.LibraryGroup
+import dev.openrs2.deob.ast.util.flip
 import dev.openrs2.deob.ast.util.hasSideEffects
 import dev.openrs2.deob.ast.util.walk
 import javax.inject.Singleton
@@ -13,6 +21,8 @@ import javax.inject.Singleton
 class ForLoopConditionTransformer : Transformer() {
     override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
         unit.walk { stmt: ForStmt ->
+            val updatedExprs = stmt.update.mapNotNull { it.getUpdatedExpr() }
+
             stmt.compare.ifPresent { compare ->
                 if (!compare.isBinaryExpr) {
                     return@ifPresent
@@ -23,14 +33,23 @@ class ForLoopConditionTransformer : Transformer() {
                     return@ifPresent
                 }
 
-                val flipped = when (expr.operator) {
-                    BinaryExpr.Operator.GREATER -> BinaryExpr.Operator.LESS
-                    BinaryExpr.Operator.GREATER_EQUALS -> BinaryExpr.Operator.LESS_EQUALS
-                    else -> return@ifPresent
-                }
+                val flipped = expr.operator.flip() ?: return@ifPresent
 
-                stmt.setCompare(BinaryExpr(expr.right, expr.left, flipped))
+                if (expr.left !in updatedExprs && expr.right in updatedExprs) {
+                    stmt.setCompare(BinaryExpr(expr.right, expr.left, flipped))
+                }
             }
+        }
+    }
+
+    private fun Expression.getUpdatedExpr(): Expression? {
+        return when (this) {
+            is UnaryExpr -> when (operator) {
+                PREFIX_INCREMENT, PREFIX_DECREMENT, POSTFIX_INCREMENT, POSTFIX_DECREMENT -> expression
+                else -> null
+            }
+            is AssignExpr -> target
+            else -> null
         }
     }
 }
