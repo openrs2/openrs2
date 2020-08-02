@@ -4,7 +4,10 @@ plugins {
 }
 
 dependencies {
+    api("org.tukaani:xz:${Versions.xz}")
+
     implementation(project(":util"))
+    implementation("com.google.guava:guava:${Versions.guava}")
     implementation("org.apache.commons:commons-compress:${Versions.commonsCompress}")
 }
 
@@ -17,7 +20,7 @@ publishing {
             name.set("OpenRS2 Compression")
             description.set(
                 """
-                Provides headerless implementations of bzip2 and gzip.
+                Provides headerless implementations of bzip2, gzip and LZMA.
             """.trimIndent()
             )
         }

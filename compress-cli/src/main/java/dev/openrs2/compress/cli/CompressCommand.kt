@@ -8,6 +8,8 @@ import dev.openrs2.compress.cli.deflate.DeflateCommand
 import dev.openrs2.compress.cli.deflate.InflateCommand
 import dev.openrs2.compress.cli.gzip.GunzipCommand
 import dev.openrs2.compress.cli.gzip.GzipCommand
+import dev.openrs2.compress.cli.lzma.LzmaCommand
+import dev.openrs2.compress.cli.lzma.UnlzmaCommand
 
 fun main(args: Array<String>) = CompressCommand().main(args)
 
@@ -19,7 +21,9 @@ class CompressCommand : NoOpCliktCommand(name = "compress") {
             DeflateCommand(),
             InflateCommand(),
             GzipCommand(),
-            GunzipCommand()
+            GunzipCommand(),
+            LzmaCommand(),
+            UnlzmaCommand()
         )
     }
 }

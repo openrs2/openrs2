@@ -24,4 +24,5 @@ object Versions {
     const val openrs2Natives = "2.0.1"
     const val shadowPlugin = "6.0.0"
     const val versionsPlugin = "0.29.0"
+    const val xz = "1.8"
 }

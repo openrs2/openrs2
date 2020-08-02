@@ -24,7 +24,7 @@ publishing {
             description.set(
                 """
                 Tools for compressing and uncompressing headerless bzip2,
-                DEFLATE and gzip files.
+                DEFLATE, gzip and LZMA files.
             """.trimIndent()
             )
         }
