@@ -25,7 +25,8 @@ publishing {
             description.set(
                 """
                 Provides implementations of cryptographic algorithms used by
-                the client, including RSA, ISAAC, XTEA and JAR signing.
+                the client, including RSA, ISAAC, XTEA, Whirlpool and JAR
+                signing.
             """.trimIndent()
             )
         }
