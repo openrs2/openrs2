@@ -19,6 +19,27 @@ class IfElseTransformer : Transformer() {
                 val condition = stmt.condition
                 val thenStmt = stmt.thenStmt
                 if (thenStmt.isIf() && !elseStmt.isIf()) {
+                    /*
+                     * Rewrite:
+                     *
+                     * if (a) {
+                     *     if (b) {
+                     *         ...
+                     *     }
+                     * } else {
+                     *     ...
+                     * }
+                     *
+                     * to:
+                     *
+                     * if (!a) {
+                     *     ...
+                     * } else {
+                     *     if (b) {
+                     *         ...
+                     *     }
+                     * }
+                     */
                     stmt.condition = condition.not()
                     stmt.thenStmt = elseStmt.clone()
                     stmt.setElseStmt(thenStmt.clone())
@@ -31,7 +52,26 @@ class IfElseTransformer : Transformer() {
                     return@ifPresent
                 }
 
-                // Prefer fewer NOTs in the if condition
+                /*
+                 * Prefer fewer NOTs in the if condition
+                 *
+                 * Rewrites:
+                 *
+                 * if (!a) {
+                 *     ...
+                 * } else {
+                 *     ....
+                 * }
+                 *
+                 * to:
+                 *
+                 * if (a) {
+                 *     ...
+                 * } else {
+                 *     ...
+                 * }
+                 *
+                 */
                 val notCondition = condition.not()
                 if (notCondition.countNots() < condition.countNots()) {
                     stmt.condition = notCondition
@@ -47,6 +87,21 @@ class IfElseTransformer : Transformer() {
             }
         }
 
+        /*
+         * Rewrite:
+         *
+         * } else {
+         *     if (a) {
+         *         ...
+         *     }
+         * }
+         *
+         * to:
+         *
+         * } else if (a) {
+         *     ....
+         * }
+         */
         unit.walk { stmt: IfStmt ->
             stmt.elseStmt.ifPresent { elseStmt ->
                 if (elseStmt.isIf()) {
@@ -58,9 +113,8 @@ class IfElseTransformer : Transformer() {
         /*
          * Rewrite:
          *
-         * ...
          * } else {
-         *     if (x != 123) {
+         *     if (!a) {
          *         ...
          *         throw ...;
          *     }
@@ -69,8 +123,7 @@ class IfElseTransformer : Transformer() {
          *
          * to:
          *
-         * ...
-         * } else if (x == 123) {
+         * } else if (a) {
          *     ...
          * } else {
          *     ...
