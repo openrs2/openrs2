@@ -268,8 +268,8 @@ class IsaacRandom {
 
     private companion object {
         private const val SIZEL = 8
-        private const val SIZE = 1.shl(SIZEL)
-        private const val MASK = (SIZE - 1).shl(2)
+        private const val SIZE = 1 shl SIZEL
+        private const val MASK = (SIZE - 1) shl 2
         private const val GOLDEN_RATIO = 0x9e3779b9.toInt()
     }
 }
