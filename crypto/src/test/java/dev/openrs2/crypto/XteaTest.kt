@@ -8,9 +8,9 @@ import kotlin.test.assertEquals
 
 object XteaTest {
     private class TestVector(key: String, plaintext: String, ciphertext: String) {
-        val key = IntArray(4) {
+        val key = XteaKey(IntArray(4) {
             Integer.parseUnsignedInt(key, it * 8, it * 8 + 8, 16)
-        }
+        })
         val plaintext: ByteArray = ByteBufUtil.decodeHexDump(plaintext)
         val ciphertext: ByteArray = ByteBufUtil.decodeHexDump(ciphertext)
     }

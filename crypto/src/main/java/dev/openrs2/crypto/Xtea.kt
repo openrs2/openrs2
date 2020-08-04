@@ -7,8 +7,17 @@ private const val ROUNDS = 32
 private const val BLOCK_SIZE = 8
 private const val BLOCK_SIZE_MASK = BLOCK_SIZE - 1
 
-fun ByteBuf.xteaEncrypt(index: Int, length: Int, key: IntArray) {
-    require(key.size == 4)
+inline class XteaKey(internal val k: IntArray) {
+    val isZero: Boolean
+        get() = k[0] == 0 && k[1] == 0 && k[2] == 0 && k[3] == 0
+
+    companion object {
+        val ZERO = XteaKey(IntArray(4))
+    }
+}
+
+fun ByteBuf.xteaEncrypt(index: Int, length: Int, key: XteaKey) {
+    require(key.k.size == 4)
 
     val end = index + (length and BLOCK_SIZE_MASK.inv())
     for (i in index until end step BLOCK_SIZE) {
@@ -17,9 +26,9 @@ fun ByteBuf.xteaEncrypt(index: Int, length: Int, key: IntArray) {
         var v1 = getInt(i + 4)
 
         for (j in 0 until ROUNDS) {
-            v0 += (((v1 shl 4) xor (v1 ushr 5)) + v1) xor (sum + key[sum and 3])
+            v0 += (((v1 shl 4) xor (v1 ushr 5)) + v1) xor (sum + key.k[sum and 3])
             sum += GOLDEN_RATIO
-            v1 += (((v0 shl 4) xor (v0 ushr 5)) + v0) xor (sum + key[(sum ushr 11) and 3])
+            v1 += (((v0 shl 4) xor (v0 ushr 5)) + v0) xor (sum + key.k[(sum ushr 11) and 3])
         }
 
         setInt(i, v0)
@@ -27,8 +36,8 @@ fun ByteBuf.xteaEncrypt(index: Int, length: Int, key: IntArray) {
     }
 }
 
-fun ByteBuf.xteaDecrypt(index: Int, length: Int, key: IntArray) {
-    require(key.size == 4)
+fun ByteBuf.xteaDecrypt(index: Int, length: Int, key: XteaKey) {
+    require(key.k.size == 4)
 
     val end = index + (length and BLOCK_SIZE_MASK.inv())
     for (i in index until end step BLOCK_SIZE) {
@@ -38,9 +47,9 @@ fun ByteBuf.xteaDecrypt(index: Int, length: Int, key: IntArray) {
         var v1 = getInt(i + 4)
 
         for (j in 0 until ROUNDS) {
-            v1 -= (((v0 shl 4) xor (v0 ushr 5)) + v0) xor (sum + key[(sum ushr 11) and 3])
+            v1 -= (((v0 shl 4) xor (v0 ushr 5)) + v0) xor (sum + key.k[(sum ushr 11) and 3])
             sum -= GOLDEN_RATIO
-            v0 -= (((v1 shl 4) xor (v1 ushr 5)) + v1) xor (sum + key[sum and 3])
+            v0 -= (((v1 shl 4) xor (v1 ushr 5)) + v1) xor (sum + key.k[sum and 3])
         }
 
         setInt(i, v0)
