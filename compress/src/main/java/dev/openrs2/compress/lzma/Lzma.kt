@@ -9,6 +9,10 @@ import java.io.InputStream
 import java.io.OutputStream
 
 object Lzma {
+    val BEST_SPEED = LZMA2Options(LZMA2Options.PRESET_MIN)
+    val DEFAULT_COMPRESSION = LZMA2Options(LZMA2Options.PRESET_DEFAULT)
+    val BEST_COMPRESSION = LZMA2Options(LZMA2Options.PRESET_MAX)
+
     fun createHeaderlessInputStream(input: InputStream, length: Long): InputStream {
         val headerInput = LittleEndianDataInputStream(input)
 
