@@ -1,8 +1,11 @@
 package dev.openrs2.deob.ast.transform
 
 import com.github.javaparser.ast.CompilationUnit
+import com.github.javaparser.ast.NodeList
+import com.github.javaparser.ast.expr.ConditionalExpr
 import com.github.javaparser.ast.stmt.BlockStmt
 import com.github.javaparser.ast.stmt.IfStmt
+import com.github.javaparser.ast.stmt.ReturnStmt
 import com.github.javaparser.ast.stmt.Statement
 import dev.openrs2.deob.ast.Library
 import dev.openrs2.deob.ast.LibraryGroup
@@ -165,6 +168,46 @@ class IfElseTransformer : Transformer() {
                 tail.statements.removeAt(0)
 
                 elseStmt.replace(IfStmt(condition, tail, thenStmt.clone()))
+            }
+        }
+
+        /**
+         * Rewrite:
+         *
+         * } else {
+         *     return a ? ... : ...;
+         * }
+         *
+         * to:
+         *
+         * } else if (a) {
+         *     return ...;
+         * } else {
+         *     return ...;
+         * }
+         */
+        unit.walk { stmt: IfStmt ->
+            stmt.elseStmt.ifPresent { elseStmt ->
+                // match
+                if (elseStmt !is BlockStmt) {
+                    return@ifPresent
+                }
+
+                val head = elseStmt.statements.singleOrNull() ?: return@ifPresent
+                if (head !is ReturnStmt) {
+                    return@ifPresent
+                }
+
+                head.expression.ifPresent { expr ->
+                    if (expr !is ConditionalExpr) {
+                        return@ifPresent
+                    }
+
+                    // replace
+                    val thenBlock = BlockStmt(NodeList(ReturnStmt(expr.thenExpr)))
+                    val elseBlock = BlockStmt(NodeList(ReturnStmt(expr.elseExpr)))
+                    stmt.setElseStmt(IfStmt(expr.condition, thenBlock, elseBlock))
+                }
             }
         }
     }
