@@ -8,6 +8,7 @@ import dev.openrs2.deob.ast.gl.GlRegistryProvider
 import dev.openrs2.deob.ast.transform.AddSubTransformer
 import dev.openrs2.deob.ast.transform.BinaryExprOrderTransformer
 import dev.openrs2.deob.ast.transform.BitMaskTransformer
+import dev.openrs2.deob.ast.transform.CharLiteralTransformer
 import dev.openrs2.deob.ast.transform.ComplementTransformer
 import dev.openrs2.deob.ast.transform.EncloseTransformer
 import dev.openrs2.deob.ast.transform.ForLoopConditionTransformer
@@ -33,6 +34,7 @@ object AstDeobfuscatorModule : AbstractModule() {
         binder.addBinding().to(UnencloseTransformer::class.java)
         binder.addBinding().to(NegativeLiteralTransformer::class.java)
         binder.addBinding().to(ComplementTransformer::class.java)
+        binder.addBinding().to(CharLiteralTransformer::class.java)
         binder.addBinding().to(IfElseTransformer::class.java)
         binder.addBinding().to(TernaryTransformer::class.java)
         binder.addBinding().to(BinaryExprOrderTransformer::class.java)
