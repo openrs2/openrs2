@@ -116,7 +116,7 @@ fun Expression.countNots(): Int {
 }
 
 fun Expression.hasSideEffects(): Boolean {
-    if (isLiteralExpr || isNameExpr || isFieldAccessExpr || isThisExpr) {
+    if (isLiteralExpr || isNameExpr || isThisExpr) {
         return false
     } else if (isUnaryExpr) {
         return asUnaryExpr().expression.hasSideEffects()
@@ -126,7 +126,11 @@ fun Expression.hasSideEffects(): Boolean {
     } else if (isArrayAccessExpr) {
         val access = asArrayAccessExpr()
         return access.name.hasSideEffects() || access.index.hasSideEffects()
+    } else if (isFieldAccessExpr) {
+        val access = asFieldAccessExpr()
+        return access.scope.hasSideEffects()
     }
+
     // TODO(gpe): more cases
     return true
 }
