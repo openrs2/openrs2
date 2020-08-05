@@ -14,9 +14,11 @@ import com.github.javaparser.ast.expr.BinaryExpr.Operator.PLUS
 import com.github.javaparser.ast.expr.CharLiteralExpr
 import com.github.javaparser.ast.expr.Expression
 import com.github.javaparser.ast.expr.IntegerLiteralExpr
+import com.github.javaparser.ast.expr.UnaryExpr
 import com.github.javaparser.resolution.types.ResolvedPrimitiveType
 import dev.openrs2.deob.ast.Library
 import dev.openrs2.deob.ast.LibraryGroup
+import dev.openrs2.deob.ast.util.checkedAsInt
 import dev.openrs2.deob.ast.util.walk
 import java.lang.Character.CONTROL
 import java.lang.Character.FORMAT
@@ -49,7 +51,14 @@ class CharLiteralTransformer : Transformer() {
             return
         }
 
-        b.replace(CharLiteralExpr(escape(b.asNumber().toChar())))
+        val n = b.checkedAsInt()
+        if (n < 0) {
+            val char = (-n).toChar()
+            b.replace(UnaryExpr(CharLiteralExpr(escape(char)), UnaryExpr.Operator.MINUS))
+        } else {
+            val char = n.toChar()
+            b.replace(CharLiteralExpr(escape(char)))
+        }
     }
 
     private fun escape(c: Char): String {
