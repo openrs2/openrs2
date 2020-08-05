@@ -1,10 +1,15 @@
 package dev.openrs2.deob.ast.util
 
+import com.github.javaparser.ast.expr.ArrayAccessExpr
 import com.github.javaparser.ast.expr.BinaryExpr
 import com.github.javaparser.ast.expr.BooleanLiteralExpr
 import com.github.javaparser.ast.expr.Expression
+import com.github.javaparser.ast.expr.FieldAccessExpr
 import com.github.javaparser.ast.expr.IntegerLiteralExpr
+import com.github.javaparser.ast.expr.LiteralExpr
 import com.github.javaparser.ast.expr.LongLiteralExpr
+import com.github.javaparser.ast.expr.NameExpr
+import com.github.javaparser.ast.expr.ThisExpr
 import com.github.javaparser.ast.expr.UnaryExpr
 
 fun IntegerLiteralExpr.checkedAsInt(): Int {
@@ -116,23 +121,15 @@ fun Expression.countNots(): Int {
 }
 
 fun Expression.hasSideEffects(): Boolean {
-    if (isLiteralExpr || isNameExpr || isThisExpr) {
-        return false
-    } else if (isUnaryExpr) {
-        return asUnaryExpr().expression.hasSideEffects()
-    } else if (isBinaryExpr) {
-        val binary = asBinaryExpr()
-        return binary.left.hasSideEffects() || binary.right.hasSideEffects()
-    } else if (isArrayAccessExpr) {
-        val access = asArrayAccessExpr()
-        return access.name.hasSideEffects() || access.index.hasSideEffects()
-    } else if (isFieldAccessExpr) {
-        val access = asFieldAccessExpr()
-        return access.scope.hasSideEffects()
+    return when (this) {
+        is LiteralExpr, is NameExpr, is ThisExpr -> false
+        is UnaryExpr -> expression.hasSideEffects()
+        is BinaryExpr -> left.hasSideEffects() || right.hasSideEffects()
+        is ArrayAccessExpr -> name.hasSideEffects() || index.hasSideEffects()
+        is FieldAccessExpr -> scope.hasSideEffects()
+        // TODO(gpe): more cases
+        else -> true
     }
-
-    // TODO(gpe): more cases
-    return true
 }
 
 fun BinaryExpr.Operator.flip(): BinaryExpr.Operator? {
