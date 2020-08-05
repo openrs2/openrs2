@@ -11,7 +11,9 @@ import dev.openrs2.deob.ast.util.checkedAsInt
 import dev.openrs2.deob.ast.util.checkedAsLong
 import dev.openrs2.deob.ast.util.toHexLiteralExpr
 import dev.openrs2.deob.ast.util.walk
+import javax.inject.Singleton
 
+@Singleton
 class HexLiteralTransformer : Transformer() {
     override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
         unit.walk { expr: BinaryExpr ->

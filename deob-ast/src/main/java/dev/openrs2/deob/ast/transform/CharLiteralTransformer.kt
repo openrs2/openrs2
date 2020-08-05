@@ -25,7 +25,9 @@ import java.lang.Character.PARAGRAPH_SEPARATOR
 import java.lang.Character.PRIVATE_USE
 import java.lang.Character.SURROGATE
 import java.lang.Character.UNASSIGNED
+import javax.inject.Singleton
 
+@Singleton
 class CharLiteralTransformer : Transformer() {
     override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
         unit.walk { expr: BinaryExpr ->

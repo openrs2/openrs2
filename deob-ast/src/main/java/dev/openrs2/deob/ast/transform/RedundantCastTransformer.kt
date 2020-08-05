@@ -13,7 +13,9 @@ import com.github.javaparser.resolution.declarations.ResolvedMethodLikeDeclarati
 import dev.openrs2.deob.ast.Library
 import dev.openrs2.deob.ast.LibraryGroup
 import dev.openrs2.deob.ast.util.walk
+import javax.inject.Singleton
 
+@Singleton
 class RedundantCastTransformer : Transformer() {
     override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
         // remove double casts
