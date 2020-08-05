@@ -116,7 +116,7 @@ fun Expression.countNots(): Int {
 }
 
 fun Expression.hasSideEffects(): Boolean {
-    if (isLiteralExpr || isNameExpr || isFieldAccessExpr) {
+    if (isLiteralExpr || isNameExpr || isFieldAccessExpr || isThisExpr) {
         return false
     } else if (isUnaryExpr) {
         return asUnaryExpr().expression.hasSideEffects()
