@@ -7,6 +7,7 @@ import com.github.javaparser.ast.stmt.BlockStmt
 import com.github.javaparser.ast.stmt.IfStmt
 import com.github.javaparser.ast.stmt.ReturnStmt
 import com.github.javaparser.ast.stmt.Statement
+import com.github.javaparser.ast.stmt.ThrowStmt
 import dev.openrs2.deob.ast.Library
 import dev.openrs2.deob.ast.LibraryGroup
 import dev.openrs2.deob.ast.util.countNots
@@ -78,7 +79,7 @@ class IfElseTransformer : Transformer() {
                 val notCondition = condition.not()
                 if (notCondition.countNots() < condition.countNots()) {
                     stmt.condition = notCondition
-                    if (elseStmt.isIfStmt) {
+                    if (elseStmt is IfStmt) {
                         val block = BlockStmt()
                         block.statements.add(elseStmt.clone())
                         stmt.thenStmt = block
@@ -136,23 +137,19 @@ class IfElseTransformer : Transformer() {
         unit.walk { stmt: IfStmt ->
             stmt.elseStmt.ifPresent { elseStmt ->
                 // match
-                if (!elseStmt.isBlockStmt) {
+                if (elseStmt !is BlockStmt) {
                     return@ifPresent
                 }
 
-                val blockStmt = elseStmt.asBlockStmt()
-                val statements = blockStmt.statements
+                val statements = elseStmt.statements
                 if (statements.isEmpty()) {
                     return@ifPresent
                 }
 
-                val head = statements[0]
-                if (!head.isIfStmt) {
+                val ifStmt = statements[0]
+                if (ifStmt !is IfStmt) {
                     return@ifPresent
-                }
-
-                val ifStmt = head.asIfStmt()
-                if (ifStmt.elseStmt.isPresent) {
+                } else if (ifStmt.elseStmt.isPresent) {
                     return@ifPresent
                 }
 
@@ -164,7 +161,7 @@ class IfElseTransformer : Transformer() {
                 // rewrite
                 val condition = ifStmt.condition.not()
 
-                val tail = blockStmt.clone()
+                val tail = elseStmt.clone()
                 tail.statements.removeAt(0)
 
                 elseStmt.replace(IfStmt(condition, tail, thenStmt.clone()))
@@ -213,25 +210,28 @@ class IfElseTransformer : Transformer() {
     }
 
     private fun Statement.isIf(): Boolean {
-        return when {
-            isIfStmt -> true
-            isBlockStmt -> {
-                val stmts = asBlockStmt().statements
-                stmts.size == 1 && stmts[0].isIfStmt
+        return when (this) {
+            is IfStmt -> true
+            is BlockStmt -> {
+                val stmts = statements
+                stmts.size == 1 && stmts[0] is IfStmt
             }
             else -> false
         }
     }
 
     private fun Statement.getIf(): Statement {
-        if (isIfStmt) {
-            return clone()
-        } else if (isBlockStmt) {
-            val stmts = asBlockStmt().statements
-            if (stmts.size == 1) {
-                val head = stmts[0]
-                if (head.isIfStmt) {
-                    return head.clone()
+        when (this) {
+            is IfStmt -> {
+                return clone()
+            }
+            is BlockStmt -> {
+                val stmts = statements
+                if (stmts.size == 1) {
+                    val head = stmts[0]
+                    if (head is IfStmt) {
+                        return head.clone()
+                    }
                 }
             }
         }
@@ -239,18 +239,18 @@ class IfElseTransformer : Transformer() {
     }
 
     private fun Statement.isTailThrowOrReturn(): Boolean {
-        return if (isThrowStmt || isReturnStmt) {
-            true
-        } else if (isBlockStmt) {
-            val stmts = asBlockStmt().statements
-            if (stmts.isEmpty()) {
-                return false
-            }
+        return when (this) {
+            is ThrowStmt, is ReturnStmt -> true
+            is BlockStmt -> {
+                val stmts = statements
+                if (stmts.isEmpty()) {
+                    return false
+                }
 
-            val tail = stmts[stmts.size - 1]
-            tail.isThrowStmt || tail.isReturnStmt
-        } else {
-            false
+                val tail = stmts[stmts.size - 1]
+                tail is ThrowStmt || tail is ReturnStmt
+            }
+            else -> false
         }
     }
 }

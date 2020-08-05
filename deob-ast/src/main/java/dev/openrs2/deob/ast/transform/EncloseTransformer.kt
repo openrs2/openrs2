@@ -1,9 +1,19 @@
 package dev.openrs2.deob.ast.transform
 
 import com.github.javaparser.ast.CompilationUnit
+import com.github.javaparser.ast.expr.ArrayAccessExpr
+import com.github.javaparser.ast.expr.ArrayCreationExpr
+import com.github.javaparser.ast.expr.AssignExpr
 import com.github.javaparser.ast.expr.BinaryExpr
+import com.github.javaparser.ast.expr.CastExpr
+import com.github.javaparser.ast.expr.ConditionalExpr
 import com.github.javaparser.ast.expr.EnclosedExpr
 import com.github.javaparser.ast.expr.Expression
+import com.github.javaparser.ast.expr.FieldAccessExpr
+import com.github.javaparser.ast.expr.InstanceOfExpr
+import com.github.javaparser.ast.expr.MethodCallExpr
+import com.github.javaparser.ast.expr.ObjectCreationExpr
+import com.github.javaparser.ast.expr.UnaryExpr
 import dev.openrs2.deob.ast.Library
 import dev.openrs2.deob.ast.LibraryGroup
 import dev.openrs2.deob.ast.util.walk
@@ -45,12 +55,12 @@ class EncloseTransformer : Transformer() {
 
         companion object {
             fun from(expr: Expression): Op? {
-                return when {
-                    expr.isArrayAccessExpr || expr.isFieldAccessExpr -> ACCESS_PARENS
-                    expr.isMethodCallExpr || expr.isEnclosedExpr -> ACCESS_PARENS
-                    expr.isUnaryExpr -> if (expr.asUnaryExpr().operator.isPostfix) POSTFIX else UNARY
-                    expr.isCastExpr || expr.isObjectCreationExpr || expr.isArrayCreationExpr -> CAST_NEW
-                    expr.isBinaryExpr -> when (expr.asBinaryExpr().operator) {
+                return when (expr) {
+                    is ArrayAccessExpr, is FieldAccessExpr -> ACCESS_PARENS
+                    is MethodCallExpr, is EnclosedExpr -> ACCESS_PARENS
+                    is UnaryExpr -> if (expr.operator.isPostfix) POSTFIX else UNARY
+                    is CastExpr, is ObjectCreationExpr, is ArrayCreationExpr -> CAST_NEW
+                    is BinaryExpr -> when (expr.operator) {
                         BinaryExpr.Operator.MULTIPLY -> MULTIPLICATIVE
                         BinaryExpr.Operator.DIVIDE, BinaryExpr.Operator.REMAINDER -> MULTIPLICATIVE
                         BinaryExpr.Operator.PLUS, BinaryExpr.Operator.MINUS -> ADDITIVE
@@ -66,9 +76,9 @@ class EncloseTransformer : Transformer() {
                         BinaryExpr.Operator.OR -> LOGICAL_OR
                         else -> null
                     }
-                    expr.isInstanceOfExpr -> RELATIONAL
-                    expr.isConditionalExpr -> TERNARY
-                    expr.isAssignExpr -> ASSIGNMENT
+                    is InstanceOfExpr -> RELATIONAL
+                    is ConditionalExpr -> TERNARY
+                    is AssignExpr -> ASSIGNMENT
                     else -> null
                 }
             }
@@ -77,49 +87,34 @@ class EncloseTransformer : Transformer() {
 
     override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
         unit.walk { expr: Expression ->
-            when {
-                expr.isArrayAccessExpr -> {
-                    val accessExpr = expr.asArrayAccessExpr()
-                    encloseLeft(expr, accessExpr.name)
-                }
-                expr.isFieldAccessExpr -> {
-                    encloseLeft(expr, expr.asFieldAccessExpr().scope)
-                }
-                expr.isMethodCallExpr -> {
-                    expr.asMethodCallExpr().scope.ifPresent { scope ->
+            when (expr) {
+                is ArrayAccessExpr -> encloseLeft(expr, expr.name)
+                is FieldAccessExpr -> encloseLeft(expr, expr.scope)
+                is MethodCallExpr -> {
+                    expr.scope.ifPresent { scope ->
                         encloseLeft(expr, scope)
                     }
                 }
-                expr.isUnaryExpr -> {
-                    val unaryExpr = expr.asUnaryExpr()
-                    encloseRight(expr, unaryExpr.expression)
-                }
-                expr.isCastExpr -> {
-                    encloseRight(expr, expr.asCastExpr().expression)
-                }
-                expr.isObjectCreationExpr -> {
-                    expr.asObjectCreationExpr().scope.ifPresent { scope ->
+                is UnaryExpr -> encloseRight(expr, expr.expression)
+                is CastExpr -> encloseRight(expr, expr.expression)
+                is ObjectCreationExpr -> {
+                    expr.scope.ifPresent { scope ->
                         encloseLeft(expr, scope)
                     }
                 }
-                expr.isBinaryExpr -> {
-                    val binaryExpr = expr.asBinaryExpr()
-                    encloseLeft(expr, binaryExpr.left)
-                    encloseRight(expr, binaryExpr.right)
+                is BinaryExpr -> {
+                    encloseLeft(expr, expr.left)
+                    encloseRight(expr, expr.right)
                 }
-                expr.isInstanceOfExpr -> {
-                    encloseLeft(expr, expr.asInstanceOfExpr().expression)
+                is InstanceOfExpr -> encloseLeft(expr, expr.expression)
+                is ConditionalExpr -> {
+                    encloseLeft(expr, expr.condition)
+                    encloseLeft(expr, expr.thenExpr)
+                    encloseRight(expr, expr.elseExpr)
                 }
-                expr.isConditionalExpr -> {
-                    val conditionalExpr = expr.asConditionalExpr()
-                    encloseLeft(expr, conditionalExpr.condition)
-                    encloseLeft(expr, conditionalExpr.thenExpr)
-                    encloseRight(expr, conditionalExpr.elseExpr)
-                }
-                expr.isAssignExpr -> {
-                    val assignExpr = expr.asAssignExpr()
-                    encloseLeft(expr, assignExpr.target)
-                    encloseRight(expr, assignExpr.value)
+                is AssignExpr -> {
+                    encloseLeft(expr, expr.target)
+                    encloseRight(expr, expr.value)
                 }
             }
         }

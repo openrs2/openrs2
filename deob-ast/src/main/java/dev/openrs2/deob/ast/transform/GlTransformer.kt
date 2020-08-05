@@ -9,13 +9,17 @@ import com.github.javaparser.ast.body.Parameter
 import com.github.javaparser.ast.body.TypeDeclaration
 import com.github.javaparser.ast.body.VariableDeclarator
 import com.github.javaparser.ast.expr.BinaryExpr
+import com.github.javaparser.ast.expr.ConditionalExpr
 import com.github.javaparser.ast.expr.Expression
 import com.github.javaparser.ast.expr.FieldAccessExpr
+import com.github.javaparser.ast.expr.IntegerLiteralExpr
 import com.github.javaparser.ast.expr.MethodCallExpr
 import com.github.javaparser.ast.expr.NameExpr
 import com.github.javaparser.ast.expr.SimpleName
 import com.github.javaparser.ast.type.PrimitiveType
+import com.github.javaparser.resolution.types.ResolvedArrayType
 import com.github.javaparser.resolution.types.ResolvedPrimitiveType
+import com.github.javaparser.resolution.types.ResolvedReferenceType
 import com.github.javaparser.resolution.types.ResolvedType
 import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.deob.ast.Library
@@ -65,11 +69,11 @@ class GlTransformer @Inject constructor(private val registry: GlRegistry) : Tran
     }
 
     private fun transformFramebufferStatus(unit: CompilationUnit, expr: Expression) {
-        if (!expr.isIntegerLiteralExpr) {
+        if (expr !is IntegerLiteralExpr) {
             return
         }
 
-        val value = expr.asIntegerLiteralExpr().checkedAsInt()
+        val value = expr.checkedAsInt()
         if (value.toLong() != GL_FRAMEBUFFER_COMPLETE.value) {
             return
         }
@@ -92,8 +96,8 @@ class GlTransformer @Inject constructor(private val registry: GlRegistry) : Tran
 
     private fun ResolvedType.isFollowedByOffset(): Boolean {
         return when {
-            isArray && asArrayType().componentType.isPrimitive -> true
-            isReferenceType && asReferenceType().qualifiedName == "java.lang.Object" -> true
+            this is ResolvedArrayType && componentType.isPrimitive -> true
+            this is ResolvedReferenceType && qualifiedName == "java.lang.Object" -> true
             else -> false
         }
     }
@@ -164,11 +168,11 @@ class GlTransformer @Inject constructor(private val registry: GlRegistry) : Tran
 
             expr.scope.ifPresent { scope ->
                 val type = scope.calculateResolvedType()
-                if (!type.isReferenceType) {
+                if (type !is ResolvedReferenceType) {
                     return@ifPresent
                 }
 
-                val name = type.asReferenceType().qualifiedName
+                val name = type.qualifiedName
                 if (name in GL_CLASSES) {
                     transformArguments(unit, expr)
                 }
@@ -235,16 +239,18 @@ class GlTransformer @Inject constructor(private val registry: GlRegistry) : Tran
         parameter: GlParameter,
         expr: Expression
     ) {
-        if (expr.isBinaryExpr) {
-            val binaryExpr = expr.asBinaryExpr()
-            transformExpr(unit, command, parameter, binaryExpr.left)
-            transformExpr(unit, command, parameter, binaryExpr.right)
-        } else if (expr.isConditionalExpr) {
-            val conditionalExpr = expr.asConditionalExpr()
-            transformExpr(unit, command, parameter, conditionalExpr.thenExpr)
-            transformExpr(unit, command, parameter, conditionalExpr.elseExpr)
-        } else if (expr.isIntegerLiteralExpr) {
-            transformIntegerLiteralExpr(unit, command, parameter, expr)
+        when (expr) {
+            is BinaryExpr -> {
+                transformExpr(unit, command, parameter, expr.left)
+                transformExpr(unit, command, parameter, expr.right)
+            }
+            is ConditionalExpr -> {
+                transformExpr(unit, command, parameter, expr.thenExpr)
+                transformExpr(unit, command, parameter, expr.elseExpr)
+            }
+            is IntegerLiteralExpr -> {
+                transformIntegerLiteralExpr(unit, command, parameter, expr)
+            }
         }
     }
 
@@ -252,9 +258,9 @@ class GlTransformer @Inject constructor(private val registry: GlRegistry) : Tran
         unit: CompilationUnit,
         command: GlCommand,
         parameter: GlParameter,
-        expr: Expression
+        expr: IntegerLiteralExpr
     ) {
-        var value = expr.asIntegerLiteralExpr().checkedAsInt()
+        var value = expr.checkedAsInt()
         val group = parameter.group ?: return
 
         if (parameter.bitfield) {
@@ -320,21 +326,21 @@ class GlTransformer @Inject constructor(private val registry: GlRegistry) : Tran
 
         private val FIELD_METHOD_COMPARATOR = Comparator<BodyDeclaration<*>> { a, b ->
             when {
-                a.isFieldDeclaration && !b.isFieldDeclaration -> -1
-                !a.isFieldDeclaration && b.isFieldDeclaration -> 1
+                a is FieldDeclaration && b !is FieldDeclaration -> -1
+                a !is FieldDeclaration && b is FieldDeclaration -> 1
                 else -> 0
             }
         }
 
         private fun BodyDeclaration<*>.getIntValue(): Int? {
-            if (!isFieldDeclaration) {
+            if (this !is FieldDeclaration) {
                 return null
             }
 
-            val variable = asFieldDeclaration().variables.firstOrNull() ?: return null
+            val variable = variables.firstOrNull() ?: return null
             return variable.initializer.map {
-                if (it.isIntegerLiteralExpr) {
-                    it.asIntegerLiteralExpr().checkedAsInt()
+                if (it is IntegerLiteralExpr) {
+                    it.checkedAsInt()
                 } else {
                     null
                 }

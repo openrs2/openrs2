@@ -88,14 +88,14 @@ class AddSubTransformer : Transformer() {
     }
 
     private fun Expression.isNegative(): Boolean {
-        return when {
-            isUnaryExpr -> asUnaryExpr().operator == UnaryExpr.Operator.MINUS
-            isIntegerLiteralExpr -> when (val n = asIntegerLiteralExpr().asNumber()) {
+        return when (this) {
+            is UnaryExpr -> operator == UnaryExpr.Operator.MINUS
+            is IntegerLiteralExpr -> when (val n = asNumber()) {
                 IntegerLiteralExpr.MAX_31_BIT_UNSIGNED_VALUE_AS_LONG -> false
                 is Int -> n < 0
                 else -> error("Invalid IntegerLiteralExpr type")
             }
-            isLongLiteralExpr -> when (val n = asLongLiteralExpr().asNumber()) {
+            is LongLiteralExpr -> when (val n = asNumber()) {
                 LongLiteralExpr.MAX_63_BIT_UNSIGNED_VALUE_AS_BIG_INTEGER -> false
                 is Long -> n < 0
                 else -> error("Invalid LongLiteralExpr type")

@@ -3,6 +3,8 @@ package dev.openrs2.deob.ast.transform
 import com.github.javaparser.ast.CompilationUnit
 import com.github.javaparser.ast.expr.BinaryExpr
 import com.github.javaparser.ast.expr.Expression
+import com.github.javaparser.ast.expr.LiteralExpr
+import com.github.javaparser.ast.expr.ThisExpr
 import dev.openrs2.deob.ast.Library
 import dev.openrs2.deob.ast.LibraryGroup
 import dev.openrs2.deob.ast.util.flip
@@ -32,5 +34,5 @@ class BinaryExprOrderTransformer : Transformer() {
     }
 
     private val Expression.isLiteralOrThisExpr: Boolean
-        get() = isLiteralExpr || isThisExpr
+        get() = this is LiteralExpr || this is ThisExpr
 }

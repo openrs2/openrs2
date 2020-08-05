@@ -13,22 +13,21 @@ import javax.inject.Singleton
 class IncrementTransformer : Transformer() {
     override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
         unit.walk { stmt: ExpressionStmt ->
-            if (!stmt.expression.isUnaryExpr) {
+            val expr = stmt.expression
+            if (expr !is UnaryExpr) {
                 return@walk
             }
 
-            val unaryExpr = stmt.expression.asUnaryExpr()
-            unaryExpr.operator = unaryExpr.operator.toPostfix()
+            expr.operator = expr.operator.toPostfix()
         }
 
         unit.walk { stmt: ForStmt ->
             for (expr in stmt.update) {
-                if (!expr.isUnaryExpr) {
+                if (expr !is UnaryExpr) {
                     continue
                 }
 
-                val unaryExpr = expr.asUnaryExpr()
-                unaryExpr.operator = unaryExpr.operator.toPostfix()
+                expr.operator = expr.operator.toPostfix()
             }
         }
     }

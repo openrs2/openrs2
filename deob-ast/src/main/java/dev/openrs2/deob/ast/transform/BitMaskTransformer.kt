@@ -3,11 +3,11 @@ package dev.openrs2.deob.ast.transform
 import com.github.javaparser.ast.CompilationUnit
 import com.github.javaparser.ast.expr.BinaryExpr
 import com.github.javaparser.ast.expr.IntegerLiteralExpr
+import com.github.javaparser.ast.expr.LongLiteralExpr
 import dev.openrs2.deob.ast.Library
 import dev.openrs2.deob.ast.LibraryGroup
 import dev.openrs2.deob.ast.util.checkedAsInt
 import dev.openrs2.deob.ast.util.checkedAsLong
-import dev.openrs2.deob.ast.util.isIntegerOrLongLiteral
 import dev.openrs2.deob.ast.util.toLongLiteralExpr
 import dev.openrs2.deob.ast.util.walk
 import javax.inject.Singleton
@@ -17,43 +17,46 @@ class BitMaskTransformer : Transformer() {
     override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
         unit.walk { expr: BinaryExpr ->
             val shiftOp = expr.operator
-            val left = expr.left
+            val bitwiseExpr = expr.left
             val shamtExpr = expr.right
 
-            if (shiftOp !in SHIFT_OPS || !left.isBinaryExpr || !shamtExpr.isIntegerLiteralExpr) {
+            if (shiftOp !in SHIFT_OPS || bitwiseExpr !is BinaryExpr || shamtExpr !is IntegerLiteralExpr) {
                 return@walk
             }
 
-            val bitwiseExpr = left.asBinaryExpr()
             val bitwiseOp = bitwiseExpr.operator
             val argExpr = bitwiseExpr.left
             var maskExpr = bitwiseExpr.right
 
-            if (bitwiseOp !in BITWISE_OPS || !maskExpr.isIntegerOrLongLiteral()) {
+            if (bitwiseOp !in BITWISE_OPS) {
                 return@walk
             }
 
-            val shamt = shamtExpr.asIntegerLiteralExpr().checkedAsInt()
-            if (maskExpr.isIntegerLiteralExpr) {
-                var mask = maskExpr.asIntegerLiteralExpr().checkedAsInt()
+            val shamt = shamtExpr.checkedAsInt()
+            when (maskExpr) {
+                is IntegerLiteralExpr -> {
+                    var mask = maskExpr.checkedAsInt()
 
-                mask = when (shiftOp) {
-                    BinaryExpr.Operator.SIGNED_RIGHT_SHIFT -> mask shr shamt
-                    BinaryExpr.Operator.UNSIGNED_RIGHT_SHIFT -> mask ushr shamt
-                    else -> error("Invalid shiftOp")
+                    mask = when (shiftOp) {
+                        BinaryExpr.Operator.SIGNED_RIGHT_SHIFT -> mask shr shamt
+                        BinaryExpr.Operator.UNSIGNED_RIGHT_SHIFT -> mask ushr shamt
+                        else -> error("Invalid shiftOp")
+                    }
+
+                    maskExpr = IntegerLiteralExpr(mask.toString())
                 }
+                is LongLiteralExpr -> {
+                    var mask = maskExpr.checkedAsLong()
 
-                maskExpr = IntegerLiteralExpr(mask.toString())
-            } else {
-                var mask = maskExpr.asLongLiteralExpr().checkedAsLong()
+                    mask = when (shiftOp) {
+                        BinaryExpr.Operator.SIGNED_RIGHT_SHIFT -> mask shr shamt
+                        BinaryExpr.Operator.UNSIGNED_RIGHT_SHIFT -> mask ushr shamt
+                        else -> error("Invalid shiftOp")
+                    }
 
-                mask = when (shiftOp) {
-                    BinaryExpr.Operator.SIGNED_RIGHT_SHIFT -> mask shr shamt
-                    BinaryExpr.Operator.UNSIGNED_RIGHT_SHIFT -> mask ushr shamt
-                    else -> error("Invalid shiftOp")
+                    maskExpr = mask.toLongLiteralExpr()
                 }
-
-                maskExpr = mask.toLongLiteralExpr()
+                else -> return@walk
             }
 
             expr.replace(BinaryExpr(BinaryExpr(argExpr.clone(), shamtExpr.clone(), shiftOp), maskExpr, bitwiseOp))

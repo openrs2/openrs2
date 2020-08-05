@@ -37,7 +37,7 @@ fun Long.toHexLiteralExpr(): LongLiteralExpr {
 }
 
 fun Expression.isIntegerOrLongLiteral(): Boolean {
-    return isIntegerLiteralExpr || isLongLiteralExpr
+    return this is IntegerLiteralExpr || this is LongLiteralExpr
 }
 
 fun Long.toLongLiteralExpr(): LongLiteralExpr {
@@ -66,48 +66,45 @@ fun Expression.negate(): Expression {
 }
 
 fun Expression.not(): Expression {
-    if (isUnaryExpr) {
-        val unary = asUnaryExpr()
-        if (unary.operator == UnaryExpr.Operator.LOGICAL_COMPLEMENT) {
-            return unary.expression.clone()
+    when (this) {
+        is UnaryExpr -> {
+            if (operator == UnaryExpr.Operator.LOGICAL_COMPLEMENT) {
+                return expression.clone()
+            }
         }
-    } else if (isBinaryExpr) {
-        val binary = asBinaryExpr()
-
-        val left = binary.left
-        val right = binary.right
-
-        @Suppress("NON_EXHAUSTIVE_WHEN")
-        when (binary.operator) {
-            BinaryExpr.Operator.EQUALS ->
-                return BinaryExpr(left.clone(), right.clone(), BinaryExpr.Operator.NOT_EQUALS)
-            BinaryExpr.Operator.NOT_EQUALS ->
-                return BinaryExpr(left.clone(), right.clone(), BinaryExpr.Operator.EQUALS)
-            BinaryExpr.Operator.GREATER ->
-                return BinaryExpr(left.clone(), right.clone(), BinaryExpr.Operator.LESS_EQUALS)
-            BinaryExpr.Operator.GREATER_EQUALS ->
-                return BinaryExpr(left.clone(), right.clone(), BinaryExpr.Operator.LESS)
-            BinaryExpr.Operator.LESS ->
-                return BinaryExpr(left.clone(), right.clone(), BinaryExpr.Operator.GREATER_EQUALS)
-            BinaryExpr.Operator.LESS_EQUALS ->
-                return BinaryExpr(left.clone(), right.clone(), BinaryExpr.Operator.GREATER)
-            BinaryExpr.Operator.AND ->
-                return BinaryExpr(left.not(), right.not(), BinaryExpr.Operator.OR)
-            BinaryExpr.Operator.OR ->
-                return BinaryExpr(left.not(), right.not(), BinaryExpr.Operator.AND)
+        is BinaryExpr -> {
+            @Suppress("NON_EXHAUSTIVE_WHEN")
+            when (operator) {
+                BinaryExpr.Operator.EQUALS ->
+                    return BinaryExpr(left.clone(), right.clone(), BinaryExpr.Operator.NOT_EQUALS)
+                BinaryExpr.Operator.NOT_EQUALS ->
+                    return BinaryExpr(left.clone(), right.clone(), BinaryExpr.Operator.EQUALS)
+                BinaryExpr.Operator.GREATER ->
+                    return BinaryExpr(left.clone(), right.clone(), BinaryExpr.Operator.LESS_EQUALS)
+                BinaryExpr.Operator.GREATER_EQUALS ->
+                    return BinaryExpr(left.clone(), right.clone(), BinaryExpr.Operator.LESS)
+                BinaryExpr.Operator.LESS ->
+                    return BinaryExpr(left.clone(), right.clone(), BinaryExpr.Operator.GREATER_EQUALS)
+                BinaryExpr.Operator.LESS_EQUALS ->
+                    return BinaryExpr(left.clone(), right.clone(), BinaryExpr.Operator.GREATER)
+                BinaryExpr.Operator.AND ->
+                    return BinaryExpr(left.not(), right.not(), BinaryExpr.Operator.OR)
+                BinaryExpr.Operator.OR ->
+                    return BinaryExpr(left.not(), right.not(), BinaryExpr.Operator.AND)
+            }
         }
-    } else if (isBooleanLiteralExpr) {
-        return BooleanLiteralExpr(!asBooleanLiteralExpr().value)
+        is BooleanLiteralExpr -> return BooleanLiteralExpr(!value)
     }
+
     return UnaryExpr(clone(), UnaryExpr.Operator.LOGICAL_COMPLEMENT)
 }
 
 fun Expression.countNots(): Int {
     var count = 0
 
-    if (isUnaryExpr && asUnaryExpr().operator == UnaryExpr.Operator.LOGICAL_COMPLEMENT) {
+    if (this is UnaryExpr && operator == UnaryExpr.Operator.LOGICAL_COMPLEMENT) {
         count++
-    } else if (isBinaryExpr && asBinaryExpr().operator == BinaryExpr.Operator.NOT_EQUALS) {
+    } else if (this is BinaryExpr && operator == BinaryExpr.Operator.NOT_EQUALS) {
         count++
     }
 

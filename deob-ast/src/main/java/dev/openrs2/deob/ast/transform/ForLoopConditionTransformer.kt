@@ -23,13 +23,10 @@ class ForLoopConditionTransformer : Transformer() {
         unit.walk { stmt: ForStmt ->
             val updatedExprs = stmt.update.mapNotNull { it.getUpdatedExpr() }
 
-            stmt.compare.ifPresent { compare ->
-                if (!compare.isBinaryExpr) {
+            stmt.compare.ifPresent { expr ->
+                if (expr !is BinaryExpr) {
                     return@ifPresent
-                }
-
-                val expr = compare.asBinaryExpr()
-                if (expr.hasSideEffects()) {
+                } else if (expr.hasSideEffects()) {
                     return@ifPresent
                 }
 

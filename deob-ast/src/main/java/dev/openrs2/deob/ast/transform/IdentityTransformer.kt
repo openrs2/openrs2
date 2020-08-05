@@ -3,6 +3,8 @@ package dev.openrs2.deob.ast.transform
 import com.github.javaparser.ast.CompilationUnit
 import com.github.javaparser.ast.expr.BinaryExpr
 import com.github.javaparser.ast.expr.Expression
+import com.github.javaparser.ast.expr.IntegerLiteralExpr
+import com.github.javaparser.ast.expr.LongLiteralExpr
 import com.github.javaparser.ast.expr.UnaryExpr
 import dev.openrs2.deob.ast.Library
 import dev.openrs2.deob.ast.LibraryGroup
@@ -47,17 +49,17 @@ class IdentityTransformer : Transformer() {
     }
 
     private fun Expression.isZero(): Boolean {
-        return when {
-            isIntegerLiteralExpr -> asIntegerLiteralExpr().asNumber() == 0
-            isLongLiteralExpr -> asLongLiteralExpr().asNumber() == 0L
+        return when (this) {
+            is IntegerLiteralExpr -> asNumber() == 0
+            is LongLiteralExpr -> asNumber() == 0L
             else -> false
         }
     }
 
     private fun Expression.isOne(): Boolean {
-        return when {
-            isIntegerLiteralExpr -> asIntegerLiteralExpr().asNumber() == 1
-            isLongLiteralExpr -> asLongLiteralExpr().asNumber() == 1L
+        return when (this) {
+            is IntegerLiteralExpr -> asNumber() == 1
+            is LongLiteralExpr -> asNumber() == 1L
             else -> false
         }
     }
