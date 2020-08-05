@@ -108,8 +108,9 @@ class IfElseTransformer : Transformer() {
          */
         unit.walk { stmt: IfStmt ->
             stmt.elseStmt.ifPresent { elseStmt ->
-                if (elseStmt.isIf()) {
-                    stmt.setElseStmt(elseStmt.getIf())
+                val ifStmt = elseStmt.getIf()
+                if (ifStmt != null) {
+                    stmt.setElseStmt(ifStmt)
                 }
             }
         }
@@ -210,44 +211,29 @@ class IfElseTransformer : Transformer() {
     }
 
     private fun Statement.isIf(): Boolean {
-        return when (this) {
-            is IfStmt -> true
-            is BlockStmt -> {
-                val stmts = statements
-                stmts.size == 1 && stmts[0] is IfStmt
-            }
-            else -> false
-        }
+        return getIf() != null
     }
 
-    private fun Statement.getIf(): Statement {
-        when (this) {
-            is IfStmt -> {
-                return clone()
-            }
+    private fun Statement.getIf(): Statement? {
+        return when (this) {
+            is IfStmt -> clone()
             is BlockStmt -> {
-                val stmts = statements
-                if (stmts.size == 1) {
-                    val head = stmts[0]
-                    if (head is IfStmt) {
-                        return head.clone()
-                    }
+                val head = statements.singleOrNull()
+                if (head is IfStmt) {
+                    head.clone()
+                } else {
+                    null
                 }
             }
+            else -> null
         }
-        throw IllegalArgumentException()
     }
 
     private fun Statement.isTailThrowOrReturn(): Boolean {
         return when (this) {
             is ThrowStmt, is ReturnStmt -> true
             is BlockStmt -> {
-                val stmts = statements
-                if (stmts.isEmpty()) {
-                    return false
-                }
-
-                val tail = stmts[stmts.size - 1]
+                val tail = statements.lastOrNull()
                 tail is ThrowStmt || tail is ReturnStmt
             }
             else -> false
