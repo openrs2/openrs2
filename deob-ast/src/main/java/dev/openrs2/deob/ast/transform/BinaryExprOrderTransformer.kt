@@ -2,6 +2,7 @@ package dev.openrs2.deob.ast.transform
 
 import com.github.javaparser.ast.CompilationUnit
 import com.github.javaparser.ast.expr.BinaryExpr
+import com.github.javaparser.ast.expr.Expression
 import dev.openrs2.deob.ast.Library
 import dev.openrs2.deob.ast.LibraryGroup
 import dev.openrs2.deob.ast.util.flip
@@ -22,11 +23,14 @@ class BinaryExprOrderTransformer : Transformer() {
 
             val left = expr.left
             val right = expr.right
-            if (left.isLiteralExpr && !right.isLiteralExpr) {
+            if (left.isLiteralOrThisExpr && !right.isLiteralOrThisExpr) {
                 expr.operator = op
                 expr.left = right.clone()
                 expr.right = left.clone()
             }
         }
     }
+
+    private val Expression.isLiteralOrThisExpr: Boolean
+        get() = isLiteralExpr || isThisExpr
 }
