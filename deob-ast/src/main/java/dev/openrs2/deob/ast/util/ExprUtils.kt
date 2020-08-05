@@ -15,12 +15,20 @@ fun IntegerLiteralExpr.checkedAsInt(): Int {
     return n
 }
 
+fun Int.toHexLiteralExpr(): IntegerLiteralExpr {
+    return IntegerLiteralExpr("0x${Integer.toUnsignedString(this, 16).toUpperCase()}")
+}
+
 fun LongLiteralExpr.checkedAsLong(): Long {
     val n = asNumber()
     if (n !is Long) {
         error("Invalid LongLiteralExpr type")
     }
     return n
+}
+
+fun Long.toHexLiteralExpr(): LongLiteralExpr {
+    return LongLiteralExpr("0x${java.lang.Long.toUnsignedString(this, 16).toUpperCase()}L")
 }
 
 fun Expression.isIntegerOrLongLiteral(): Boolean {

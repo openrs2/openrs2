@@ -11,7 +11,6 @@ import com.github.javaparser.ast.body.VariableDeclarator
 import com.github.javaparser.ast.expr.BinaryExpr
 import com.github.javaparser.ast.expr.Expression
 import com.github.javaparser.ast.expr.FieldAccessExpr
-import com.github.javaparser.ast.expr.IntegerLiteralExpr
 import com.github.javaparser.ast.expr.MethodCallExpr
 import com.github.javaparser.ast.expr.NameExpr
 import com.github.javaparser.ast.expr.SimpleName
@@ -26,6 +25,7 @@ import dev.openrs2.deob.ast.gl.GlEnum
 import dev.openrs2.deob.ast.gl.GlParameter
 import dev.openrs2.deob.ast.gl.GlRegistry
 import dev.openrs2.deob.ast.util.checkedAsInt
+import dev.openrs2.deob.ast.util.toHexLiteralExpr
 import dev.openrs2.deob.ast.util.walk
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -227,10 +227,6 @@ class GlTransformer @Inject constructor(private val registry: GlRegistry) : Tran
             NodeList(),
             VariableDeclarator(PrimitiveType.intType(), name, value.toInt().toHexLiteralExpr())
         )
-    }
-
-    private fun Int.toHexLiteralExpr(): IntegerLiteralExpr {
-        return IntegerLiteralExpr("0x${Integer.toUnsignedString(this, 16).toUpperCase()}")
     }
 
     private fun transformExpr(

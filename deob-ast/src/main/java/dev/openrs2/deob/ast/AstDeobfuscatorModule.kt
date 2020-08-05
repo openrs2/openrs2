@@ -13,6 +13,7 @@ import dev.openrs2.deob.ast.transform.ComplementTransformer
 import dev.openrs2.deob.ast.transform.EncloseTransformer
 import dev.openrs2.deob.ast.transform.ForLoopConditionTransformer
 import dev.openrs2.deob.ast.transform.GlTransformer
+import dev.openrs2.deob.ast.transform.HexLiteralTransformer
 import dev.openrs2.deob.ast.transform.IdentityTransformer
 import dev.openrs2.deob.ast.transform.IfElseTransformer
 import dev.openrs2.deob.ast.transform.IncrementTransformer
@@ -41,6 +42,7 @@ object AstDeobfuscatorModule : AbstractModule() {
         binder.addBinding().to(AddSubTransformer::class.java)
         binder.addBinding().to(IdentityTransformer::class.java)
         binder.addBinding().to(BitMaskTransformer::class.java)
+        binder.addBinding().to(HexLiteralTransformer::class.java)
         binder.addBinding().to(ValueOfTransformer::class.java)
         binder.addBinding().to(NewInstanceTransformer::class.java)
         binder.addBinding().to(IncrementTransformer::class.java)
