@@ -41,9 +41,9 @@ class CharLiteralTransformer : Transformer() {
     }
 
     private fun convertToCharLiteral(a: Expression, b: Expression) {
-        if (a.calculateResolvedType() != ResolvedPrimitiveType.CHAR) {
+        if (b !is IntegerLiteralExpr) {
             return
-        } else if (b !is IntegerLiteralExpr) {
+        } else if (a.calculateResolvedType() != ResolvedPrimitiveType.CHAR) {
             return
         }
 
