@@ -1,10 +1,12 @@
-package dev.openrs2.deob.util.map
+package dev.openrs2.deob.util
 
 import com.google.inject.AbstractModule
 import com.google.inject.Scopes
 import dev.openrs2.asm.AsmModule
+import dev.openrs2.deob.util.map.NameMap
+import dev.openrs2.deob.util.map.NameMapProvider
 
-object DeobfuscatorMapModule : AbstractModule() {
+object DeobfuscatorUtilModule : AbstractModule() {
     override fun configure() {
         install(AsmModule)
 

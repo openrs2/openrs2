@@ -35,12 +35,12 @@ import dev.openrs2.deob.transform.UnusedArgTransformer
 import dev.openrs2.deob.transform.UnusedLocalTransformer
 import dev.openrs2.deob.transform.UnusedMethodTransformer
 import dev.openrs2.deob.transform.VisibilityTransformer
-import dev.openrs2.deob.util.map.DeobfuscatorMapModule
+import dev.openrs2.deob.util.DeobfuscatorUtilModule
 
 object DeobfuscatorModule : AbstractModule() {
     override fun configure() {
         install(BundlerModule)
-        install(DeobfuscatorMapModule)
+        install(DeobfuscatorUtilModule)
 
         bind(Profile::class.java)
             .toProvider(ProfileProvider::class.java)
