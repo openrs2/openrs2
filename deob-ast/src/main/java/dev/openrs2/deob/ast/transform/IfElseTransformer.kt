@@ -2,6 +2,7 @@ package dev.openrs2.deob.ast.transform
 
 import com.github.javaparser.ast.CompilationUnit
 import com.github.javaparser.ast.NodeList
+import com.github.javaparser.ast.expr.BinaryExpr
 import com.github.javaparser.ast.expr.ConditionalExpr
 import com.github.javaparser.ast.stmt.BlockStmt
 import com.github.javaparser.ast.stmt.IfStmt
@@ -207,6 +208,35 @@ class IfElseTransformer : Transformer() {
                     stmt.setElseStmt(IfStmt(expr.condition, thenBlock, elseBlock))
                 }
             }
+        }
+
+        /*
+         * Rewrite:
+         *
+         * if (a) {
+         *     if (b) {
+         *         ...
+         *     }
+         * }
+         *
+         * to:
+         *
+         * if (a && b) {
+         *     ...
+         * }
+         */
+        unit.walk { outerStmt: IfStmt ->
+            if (outerStmt.elseStmt.isPresent) {
+                return@walk
+            }
+
+            val innerStmt = outerStmt.thenStmt.getIf() ?: return@walk
+            if (innerStmt.elseStmt.isPresent) {
+                return@walk
+            }
+
+            outerStmt.condition = BinaryExpr(outerStmt.condition, innerStmt.condition, BinaryExpr.Operator.AND)
+            outerStmt.thenStmt = innerStmt.thenStmt
         }
     }
 
