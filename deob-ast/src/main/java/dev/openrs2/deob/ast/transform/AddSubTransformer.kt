@@ -4,6 +4,7 @@ import com.github.javaparser.ast.CompilationUnit
 import com.github.javaparser.ast.expr.BinaryExpr
 import com.github.javaparser.ast.expr.Expression
 import com.github.javaparser.ast.expr.IntegerLiteralExpr
+import com.github.javaparser.ast.expr.LiteralExpr
 import com.github.javaparser.ast.expr.LongLiteralExpr
 import com.github.javaparser.ast.expr.UnaryExpr
 import dev.openrs2.deob.ast.Library
@@ -45,6 +46,15 @@ class AddSubTransformer : Transformer() {
                 if (aNegative && !bNegative) {
                     return@Comparator 1
                 } else if (!aNegative && bNegative) {
+                    return@Comparator -1
+                }
+
+                // push literals to the right
+                val aLiteral = a is LiteralExpr
+                val bLiteral = b is LiteralExpr
+                if (aLiteral && !bLiteral) {
+                    return@Comparator 1
+                } else if (!aLiteral && bLiteral) {
                     return@Comparator -1
                 }
 
