@@ -9,13 +9,13 @@ class Module(val name: String, val dependencies: Set<Module> = emptySet()) {
     val transitiveDependencies: Set<Module> = dependencies.plus(dependencies.flatMap { it.transitiveDependencies })
 
     companion object {
-        private val gl = Module("gl")
-        private val signLink = Module("signlink")
-        private val unpack = Module("unpack")
-        private val client = Module("client", setOf(gl, signLink))
-        private val loader = Module("loader", setOf(signLink, unpack))
-        private val unpackClass = Module("unpackclass", setOf(unpack))
+        private val GL = Module("gl")
+        private val SIGNLINK = Module("signlink")
+        private val UNPACK = Module("unpack")
+        private val CLIENT = Module("client", setOf(GL, SIGNLINK))
+        private val LOADER = Module("loader", setOf(SIGNLINK, UNPACK))
+        private val UNPACKCLASS = Module("unpackclass", setOf(UNPACK))
 
-        val all = setOf(client, gl, loader, signLink, unpack, unpackClass)
+        val ALL = setOf(CLIENT, GL, LOADER, SIGNLINK, UNPACK, UNPACKCLASS)
     }
 }

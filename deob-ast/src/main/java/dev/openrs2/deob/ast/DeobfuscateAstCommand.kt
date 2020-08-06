@@ -10,6 +10,6 @@ class DeobfuscateAstCommand : CliktCommand(name = "deob-ast") {
     override fun run() {
         val injector = Guice.createInjector(AstDeobfuscatorModule)
         val deobfuscator = injector.getInstance(AstDeobfuscator::class.java)
-        deobfuscator.run(Module.all)
+        deobfuscator.run(Module.ALL)
     }
 }

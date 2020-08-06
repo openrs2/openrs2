@@ -7,7 +7,7 @@ fun main(args: Array<String>) = DecompileCommand().main(args)
 
 class DecompileCommand : CliktCommand(name = "decompile") {
     override fun run() {
-        val decompiler = Decompiler(Module.all)
+        val decompiler = Decompiler(Module.ALL)
         decompiler.run()
     }
 }
