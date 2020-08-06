@@ -21,6 +21,14 @@ import javax.inject.Singleton
 @Singleton
 class IfElseTransformer : Transformer() {
     override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
+        var oldUnit: CompilationUnit
+        do {
+            oldUnit = unit.clone()
+            transform(unit)
+        } while (unit != oldUnit)
+    }
+
+    private fun transform(unit: CompilationUnit) {
         unit.walk { stmt: IfStmt ->
             stmt.elseStmt.ifPresent { elseStmt: Statement ->
                 val condition = stmt.condition
