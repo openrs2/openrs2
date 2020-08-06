@@ -214,7 +214,7 @@ class IfElseTransformer : Transformer() {
         return getIf() != null
     }
 
-    private fun Statement.getIf(): Statement? {
+    private fun Statement.getIf(): IfStmt? {
         return when (this) {
             is IfStmt -> clone()
             is BlockStmt -> {
