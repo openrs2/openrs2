@@ -8,9 +8,7 @@ import com.github.javaparser.ast.expr.BinaryExpr.Operator.GREATER
 import com.github.javaparser.ast.expr.BinaryExpr.Operator.GREATER_EQUALS
 import com.github.javaparser.ast.expr.BinaryExpr.Operator.LESS
 import com.github.javaparser.ast.expr.BinaryExpr.Operator.LESS_EQUALS
-import com.github.javaparser.ast.expr.BinaryExpr.Operator.MINUS
 import com.github.javaparser.ast.expr.BinaryExpr.Operator.NOT_EQUALS
-import com.github.javaparser.ast.expr.BinaryExpr.Operator.PLUS
 import com.github.javaparser.ast.expr.CharLiteralExpr
 import com.github.javaparser.ast.expr.Expression
 import com.github.javaparser.ast.expr.IntegerLiteralExpr
@@ -33,7 +31,7 @@ import javax.inject.Singleton
 class CharLiteralTransformer : Transformer() {
     override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
         unit.walk { expr: BinaryExpr ->
-            if (expr.operator in COMPARISON_OPERATORS || expr.operator == PLUS || expr.operator == MINUS) {
+            if (expr.operator in COMPARISON_OPERATORS) {
                 convertToCharLiteral(expr.left, expr.right)
                 convertToCharLiteral(expr.right, expr.left)
             }
