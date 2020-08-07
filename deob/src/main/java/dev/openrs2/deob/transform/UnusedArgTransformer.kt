@@ -17,10 +17,12 @@ import org.objectweb.asm.Opcodes
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.ClassNode
+import org.objectweb.asm.tree.IincInsnNode
 import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.VarInsnNode
 import org.objectweb.asm.tree.analysis.Analyzer
+import org.objectweb.asm.tree.analysis.Frame
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -46,6 +48,23 @@ class UnusedArgTransformer @Inject constructor(private val profile: Profile) : T
         }
     }
 
+    private fun retainArg(
+        partition: DisjointSet.Partition<MemberRef>,
+        localToArgMap: Map<Int, Int>,
+        frame: Frame<ConstSourceValue>,
+        local: Int
+    ) {
+        val source = frame.getLocal(local)
+        if (source !is ConstSourceValue.Arg) {
+            return
+        }
+
+        val arg = localToArgMap[local]
+        if (arg != null) {
+            retainedArgs.add(ArgPartition(partition, arg))
+        }
+    }
+
     private fun populateRetainedArgs(classPath: ClassPath, clazz: ClassNode, method: MethodNode) {
         val partition = inheritedMethodSets[MemberRef(clazz, method)]!!
         val localToArgMap = createLocalToArgMap(method)
@@ -62,15 +81,11 @@ class UnusedArgTransformer @Inject constructor(private val profile: Profile) : T
 
             when (val insn = method.instructions[i]) {
                 is VarInsnNode -> {
-                    if (insn.opcode != Opcodes.ILOAD) {
-                        continue@frame
-                    }
-
-                    val arg = localToArgMap[insn.`var`]
-                    if (arg != null) {
-                        retainedArgs.add(ArgPartition(partition, arg))
+                    if (insn.opcode == Opcodes.ILOAD) {
+                        retainArg(partition, localToArgMap, frame, insn.`var`)
                     }
                 }
+                is IincInsnNode -> retainArg(partition, localToArgMap, frame, insn.`var`)
                 is MethodInsnNode -> {
                     val invokePartition = inheritedMethodSets[MemberRef(insn)]
                     if (invokePartition == null) {
@@ -84,7 +99,7 @@ class UnusedArgTransformer @Inject constructor(private val profile: Profile) : T
                     val args = Type.getArgumentTypes(insn.desc).size
                     for (j in 0 until args) {
                         val source = frame.getStack(stackSize - args + j)
-                        if (source !is ConstSourceValue.Single) {
+                        if (source !is ConstSourceValue.Insn) {
                             retainedArgs.add(ArgPartition(invokePartition, j))
                         }
                     }
@@ -133,7 +148,7 @@ class UnusedArgTransformer @Inject constructor(private val profile: Profile) : T
 
             for ((j, argType) in argTypes.withIndex()) {
                 if (argType.sort in INT_SORTS && ArgPartition(partition, j) !in retainedArgs) {
-                    val value = frame.getStack(stackSize - argTypes.size + j) as ConstSourceValue.Single
+                    val value = frame.getStack(stackSize - argTypes.size + j) as ConstSourceValue.Insn
                     deadInsns.add(value.source)
                 } else {
                     newArgTypes.add(argType)

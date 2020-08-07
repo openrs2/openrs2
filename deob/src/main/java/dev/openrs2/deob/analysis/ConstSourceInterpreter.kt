@@ -15,10 +15,15 @@ class ConstSourceInterpreter : Interpreter<ConstSourceValue>(Opcodes.ASM8) {
         return ConstSourceValue.Unknown(basicValue)
     }
 
+    override fun newParameterValue(isInstanceMethod: Boolean, local: Int, type: Type): ConstSourceValue {
+        val basicValue = basicInterpreter.newParameterValue(isInstanceMethod, local, type)
+        return ConstSourceValue.Arg(basicValue)
+    }
+
     override fun newOperation(insn: AbstractInsnNode): ConstSourceValue {
         val basicValue = basicInterpreter.newOperation(insn)
         return if (insn.intConstant != null) {
-            ConstSourceValue.Single(basicValue, insn)
+            ConstSourceValue.Insn(basicValue, insn)
         } else {
             ConstSourceValue.Unknown(basicValue)
         }
@@ -74,10 +79,10 @@ class ConstSourceInterpreter : Interpreter<ConstSourceValue>(Opcodes.ASM8) {
 
     override fun merge(value1: ConstSourceValue, value2: ConstSourceValue): ConstSourceValue {
         val basicValue = basicInterpreter.merge(value1.basicValue, value2.basicValue)
-        return if (value1 is ConstSourceValue.Single && value1 == value2) {
-            value1
-        } else {
-            ConstSourceValue.Unknown(basicValue)
+        return when {
+            value1 is ConstSourceValue.Arg || value2 is ConstSourceValue.Arg -> ConstSourceValue.Arg(basicValue)
+            value1 == value2 -> value1
+            else -> ConstSourceValue.Unknown(basicValue)
         }
     }
 }
