@@ -177,7 +177,7 @@ class Whirlpool {
         private const val DIGESTBITS = 512
         private const val DIGESTBYTES = DIGESTBITS ushr 3
         private const val R = 10
-        private val sbox = "\u1823\uc6E8\u87B8\u014F\u36A6\ud2F5\u796F\u9152" +
+        private const val sbox = "\u1823\uc6E8\u87B8\u014F\u36A6\ud2F5\u796F\u9152" +
             "\u60Bc\u9B8E\uA30c\u7B35\u1dE0\ud7c2\u2E4B\uFE57" +
             "\u1577\u37E5\u9FF0\u4AdA\u58c9\u290A\uB1A0\u6B85" +
             "\uBd5d\u10F4\ucB3E\u0567\uE427\u418B\uA77d\u95d8" +
