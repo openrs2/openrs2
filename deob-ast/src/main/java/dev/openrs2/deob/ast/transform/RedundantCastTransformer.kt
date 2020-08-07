@@ -10,6 +10,15 @@ import com.github.javaparser.ast.expr.ObjectCreationExpr
 import com.github.javaparser.ast.expr.VariableDeclarationExpr
 import com.github.javaparser.resolution.MethodAmbiguityException
 import com.github.javaparser.resolution.declarations.ResolvedMethodLikeDeclaration
+import com.github.javaparser.resolution.types.ResolvedPrimitiveType
+import com.github.javaparser.resolution.types.ResolvedPrimitiveType.BYTE
+import com.github.javaparser.resolution.types.ResolvedPrimitiveType.CHAR
+import com.github.javaparser.resolution.types.ResolvedPrimitiveType.DOUBLE
+import com.github.javaparser.resolution.types.ResolvedPrimitiveType.FLOAT
+import com.github.javaparser.resolution.types.ResolvedPrimitiveType.INT
+import com.github.javaparser.resolution.types.ResolvedPrimitiveType.LONG
+import com.github.javaparser.resolution.types.ResolvedPrimitiveType.SHORT
+import com.google.common.collect.ImmutableSetMultimap
 import dev.openrs2.deob.ast.Library
 import dev.openrs2.deob.ast.LibraryGroup
 import dev.openrs2.deob.ast.util.walk
@@ -79,6 +88,36 @@ class RedundantCastTransformer : Transformer() {
                 expr.value = NullLiteralExpr()
             }
         }
+
+        // replace casts with widening/narrowing conversions
+        // see https://docs.oracle.com/javase/specs/jls/se11/html/jls-5.html
+        unit.walk { expr: CastExpr ->
+            expr.parentNode.ifPresent { parent ->
+                if (parent !is AssignExpr && parent !is CastExpr) {
+                    return@ifPresent
+                }
+
+                val outerType = expr.type
+                if (!outerType.isPrimitiveType) {
+                    return@ifPresent
+                }
+
+                val innerType = expr.expression.calculateResolvedType()
+                if (!innerType.isPrimitive) {
+                    return@ifPresent
+                }
+
+                val resolvedOuterType = outerType.resolve()
+
+                if (WIDENING_CONVERSIONS.containsEntry(innerType, resolvedOuterType)) {
+                    expr.replace(expr.expression.clone())
+                } else if (NARROWING_CONVERSIONS.containsEntry(innerType, resolvedOuterType) && parent is CastExpr) {
+                    expr.replace(expr.expression.clone())
+                } else if (innerType == BYTE && resolvedOuterType == CHAR && parent is CastExpr) {
+                    expr.replace(expr.expression.clone())
+                }
+            }
+        }
     }
 
     private fun isCastedNull(expr: Expression): Boolean {
@@ -97,5 +136,25 @@ class RedundantCastTransformer : Transformer() {
         }
 
         return false
+    }
+
+    private companion object {
+        private val WIDENING_CONVERSIONS = ImmutableSetMultimap.builder<ResolvedPrimitiveType, ResolvedPrimitiveType>()
+            .putAll(BYTE, SHORT, INT, LONG, FLOAT, DOUBLE)
+            .putAll(SHORT, INT, LONG, FLOAT, DOUBLE)
+            .putAll(CHAR, INT, LONG, FLOAT, DOUBLE)
+            .putAll(INT, LONG, FLOAT, DOUBLE)
+            .putAll(LONG, FLOAT, DOUBLE)
+            .putAll(FLOAT, DOUBLE)
+            .build()
+
+        private val NARROWING_CONVERSIONS = ImmutableSetMultimap.builder<ResolvedPrimitiveType, ResolvedPrimitiveType>()
+            .putAll(SHORT, BYTE, CHAR)
+            .putAll(CHAR, BYTE, SHORT)
+            .putAll(INT, BYTE, SHORT, CHAR)
+            .putAll(LONG, BYTE, SHORT, CHAR, INT)
+            .putAll(FLOAT, BYTE, SHORT, CHAR, INT, LONG)
+            .putAll(DOUBLE, BYTE, SHORT, CHAR, INT, LONG, FLOAT)
+            .build()
     }
 }
