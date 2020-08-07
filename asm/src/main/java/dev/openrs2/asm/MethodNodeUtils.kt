@@ -21,16 +21,16 @@ private fun localIndex(access: Int, argTypes: Array<Type>, argIndex: Int): Int {
     return localIndex
 }
 
-private fun remap(i: Int, argType: Type, localIndex: Int): Int {
-    return if (i >= localIndex) {
-        i - argType.size
-    } else {
-        i
+private fun remap(i: Int, argType: Type, localIndex: Int, newLocalIndex: Int): Int {
+    return when {
+        i > localIndex -> i - argType.size
+        i == localIndex -> newLocalIndex
+        else -> i
     }
 }
 
-private fun remapAll(indexes: List<Int>, argType: Type, localIndex: Int): MutableList<Int> {
-    return indexes.mapTo(mutableListOf()) { remap(it, argType, localIndex) }
+private fun remapAll(indexes: List<Int>, argType: Type, localIndex: Int, newLocalIndex: Int): MutableList<Int> {
+    return indexes.mapTo(mutableListOf()) { remap(it, argType, localIndex, newLocalIndex) }
 }
 
 fun MethodNode.removeArgument(argIndex: Int) {
@@ -68,35 +68,64 @@ fun MethodNode.removeArgument(argIndex: Int) {
 
     // remap locals
     val localIndex = localIndex(access, argTypes, argIndex)
-    maxLocals -= argType.size
+    val newLocalIndex = maxLocals - argType.size
 
     if (localVariables != null) {
-        localVariables.removeIf { it.index == localIndex }
         for (v in localVariables) {
-            v.index = remap(v.index, argType, localIndex)
+            v.index = remap(v.index, argType, localIndex, newLocalIndex)
         }
     }
 
     if (visibleLocalVariableAnnotations != null) {
-        visibleLocalVariableAnnotations.removeIf { localIndex in it.index }
         for (annotation in visibleLocalVariableAnnotations) {
-            annotation.index = remapAll(annotation.index, argType, localIndex)
+            annotation.index = remapAll(annotation.index, argType, localIndex, newLocalIndex)
         }
     }
 
     if (invisibleLocalVariableAnnotations != null) {
-        invisibleLocalVariableAnnotations.removeIf { localIndex in it.index }
         for (annotation in invisibleLocalVariableAnnotations) {
-            annotation.index = remapAll(annotation.index, argType, localIndex)
+            annotation.index = remapAll(annotation.index, argType, localIndex, newLocalIndex)
         }
     }
 
+    var newLocalIndexUsed = false
+
     for (insn in instructions) {
         when (insn) {
-            is VarInsnNode -> insn.`var` = remap(insn.`var`, argType, localIndex)
-            is IincInsnNode -> insn.`var` = remap(insn.`var`, argType, localIndex)
+            is VarInsnNode -> {
+                insn.`var` = remap(insn.`var`, argType, localIndex, newLocalIndex)
+
+                if (insn.`var` == newLocalIndex) {
+                    newLocalIndexUsed = true
+                }
+            }
+            is IincInsnNode -> {
+                insn.`var` = remap(insn.`var`, argType, localIndex, newLocalIndex)
+
+                if (insn.`var` == newLocalIndex) {
+                    newLocalIndexUsed = true
+                }
+            }
             is FrameNode -> throw UnsupportedOperationException("SKIP_FRAMES and COMPUTE_FRAMES must be used")
         }
+    }
+
+    if (newLocalIndexUsed) {
+        return
+    }
+
+    maxLocals -= argType.size
+
+    if (localVariables != null) {
+        localVariables.removeIf { it.index == newLocalIndex }
+    }
+
+    if (visibleLocalVariableAnnotations != null) {
+        visibleLocalVariableAnnotations.removeIf { newLocalIndex in it.index }
+    }
+
+    if (invisibleLocalVariableAnnotations != null) {
+        invisibleLocalVariableAnnotations.removeIf { newLocalIndex in it.index }
     }
 }
 
