@@ -1,6 +1,6 @@
 ---
 classes:
-  loader!a: "unpack_Sub1"
+  loader!a: "Pack200Unpacker"
   loader!b: "Class190"
   loader!d: "ClassLoader_Sub1"
   loader!f: "Class191"
@@ -105,19 +105,19 @@ fields:
     name: "aString375"
 methods:
   loader!a.<init> ([B)V:
-    owner: "unpack_Sub1"
+    owner: "Pack200Unpacker"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "in"
     locals: {}
   loader!a.a (I[B)[B:
-    owner: "unpack_Sub1"
-    name: "method4830"
+    owner: "Pack200Unpacker"
+    name: "pack200ToJar"
     arguments:
-      1: "arg0"
+      1: "in"
     locals:
-      5: "local5"
-      24: "local24"
+      5: "inWithHeader"
+      24: "out"
   loader!b.<init> (Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;II[I)V:
     owner: "Class190"
     name: "<init>"
