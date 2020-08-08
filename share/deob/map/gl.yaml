@@ -1,0 +1,2950 @@
+---
+classes:
+  gl!com/sun/opengl/impl/x11/DRIHack: "com/sun/opengl/impl/x11/DRIHack"
+  gl!jaggl/X11/dri: "jaggl/X11/dri"
+  gl!jaggl/context: "jaggl/context"
+  gl!jaggl/jagglcaps: "jaggl/jagglcaps"
+  gl!jaggl/jogl_wrapper/GLContextImpl: "jaggl/jogl_wrapper/GLContextImpl"
+  gl!jaggl/jogl_wrapper/GLDrawableFactoryImpl: "jaggl/jogl_wrapper/GLDrawableFactoryImpl"
+  gl!jaggl/jogl_wrapper/GLDrawableImpl: "jaggl/jogl_wrapper/GLDrawableImpl"
+  gl!jaggl/opengl: "jaggl/opengl"
+  gl!javax/media/opengl/GL: "javax/media/opengl/GL"
+  gl!javax/media/opengl/GLCapabilities: "javax/media/opengl/GLCapabilities"
+  gl!javax/media/opengl/GLCapabilitiesChooser: "javax/media/opengl/GLCapabilitiesChooser"
+  gl!javax/media/opengl/GLContext: "javax/media/opengl/GLContext"
+  gl!javax/media/opengl/GLDrawable: "javax/media/opengl/GLDrawable"
+  gl!javax/media/opengl/GLDrawableFactory: "javax/media/opengl/GLDrawableFactory"
+  gl!javax/media/opengl/GLException: "javax/media/opengl/GLException"
+fields:
+  gl!jaggl/context.extensionsString Ljava/util/HashSet;:
+    owner: "jaggl/context"
+    name: "extensionsString"
+  gl!jaggl/context.gl Lgl!jaggl/opengl;:
+    owner: "jaggl/context"
+    name: "gl"
+  gl!jaggl/jagglcaps.accumAlphaBits I:
+    owner: "jaggl/jagglcaps"
+    name: "accumAlphaBits"
+  gl!jaggl/jagglcaps.accumBlueBits I:
+    owner: "jaggl/jagglcaps"
+    name: "accumBlueBits"
+  gl!jaggl/jagglcaps.accumGreenBits I:
+    owner: "jaggl/jagglcaps"
+    name: "accumGreenBits"
+  gl!jaggl/jagglcaps.accumRedBits I:
+    owner: "jaggl/jagglcaps"
+    name: "accumRedBits"
+  gl!jaggl/jagglcaps.alphaBits I:
+    owner: "jaggl/jagglcaps"
+    name: "alphaBits"
+  gl!jaggl/jagglcaps.blueBits I:
+    owner: "jaggl/jagglcaps"
+    name: "blueBits"
+  gl!jaggl/jagglcaps.depthBits I:
+    owner: "jaggl/jagglcaps"
+    name: "depthBits"
+  gl!jaggl/jagglcaps.doubleBuffered Z:
+    owner: "jaggl/jagglcaps"
+    name: "doubleBuffered"
+  gl!jaggl/jagglcaps.greenBits I:
+    owner: "jaggl/jagglcaps"
+    name: "greenBits"
+  gl!jaggl/jagglcaps.hardwareAccelerated Z:
+    owner: "jaggl/jagglcaps"
+    name: "hardwareAccelerated"
+  gl!jaggl/jagglcaps.numSamples I:
+    owner: "jaggl/jagglcaps"
+    name: "numSamples"
+  gl!jaggl/jagglcaps.redBits I:
+    owner: "jaggl/jagglcaps"
+    name: "redBits"
+  gl!jaggl/jagglcaps.sampleBuffers Z:
+    owner: "jaggl/jagglcaps"
+    name: "sampleBuffers"
+  gl!jaggl/jagglcaps.stencilBits I:
+    owner: "jaggl/jagglcaps"
+    name: "stencilBits"
+  gl!jaggl/jagglcaps.stereo Z:
+    owner: "jaggl/jagglcaps"
+    name: "stereo"
+  gl!jaggl/jogl_wrapper/GLContextImpl.context_valid Z:
+    owner: "jaggl/jogl_wrapper/GLContextImpl"
+    name: "context_valid"
+  gl!jaggl/jogl_wrapper/GLContextImpl.drawable Lgl!jaggl/jogl_wrapper/GLDrawableImpl;:
+    owner: "jaggl/jogl_wrapper/GLContextImpl"
+    name: "drawable"
+  gl!jaggl/jogl_wrapper/GLContextImpl.gl Lgl!javax/media/opengl/GL;:
+    owner: "jaggl/jogl_wrapper/GLContextImpl"
+    name: "gl"
+  gl!jaggl/jogl_wrapper/GLDrawableImpl.capabilities Lgl!javax/media/opengl/GLCapabilities;:
+    owner: "jaggl/jogl_wrapper/GLDrawableImpl"
+    name: "capabilities"
+  gl!jaggl/jogl_wrapper/GLDrawableImpl.chosenCapabilities Lgl!javax/media/opengl/GLCapabilities;:
+    owner: "jaggl/jogl_wrapper/GLDrawableImpl"
+    name: "chosenCapabilities"
+  gl!jaggl/jogl_wrapper/GLDrawableImpl.component Ljava/awt/Component;:
+    owner: "jaggl/jogl_wrapper/GLDrawableImpl"
+    name: "component"
+  gl!javax/media/opengl/GLContext.currentContext Lgl!javax/media/opengl/GLContext;:
+    owner: "javax/media/opengl/GLContext"
+    name: "currentContext"
+  gl!javax/media/opengl/GLDrawableFactory.factory Lgl!javax/media/opengl/GLDrawableFactory;:
+    owner: "javax/media/opengl/GLDrawableFactory"
+    name: "factory"
+methods:
+  gl!com/sun/opengl/impl/x11/DRIHack.begin ()V:
+    owner: "com/sun/opengl/impl/x11/DRIHack"
+    name: "begin"
+    arguments: {}
+    locals: {}
+  gl!com/sun/opengl/impl/x11/DRIHack.end ()V:
+    owner: "com/sun/opengl/impl/x11/DRIHack"
+    name: "end"
+    arguments: {}
+    locals: {}
+  gl!jaggl/X11/dri.bind ()V:
+    owner: "jaggl/X11/dri"
+    name: "bind"
+    arguments: {}
+    locals:
+      3: "local3"
+      22: "local22"
+  gl!jaggl/X11/dri.close ()Z:
+    owner: "jaggl/X11/dri"
+    name: "close"
+    arguments: {}
+    locals: {}
+  gl!jaggl/X11/dri.open (Ljava/lang/String;)Z:
+    owner: "jaggl/X11/dri"
+    name: "open"
+    arguments:
+      0: "arg0"
+    locals: {}
+  gl!jaggl/context.choosePixelFormat (Ljava/awt/Component;II)Z:
+    owner: "jaggl/context"
+    name: "choosePixelFormat"
+    arguments:
+      0: "arg0"
+      1: "arg1"
+      2: "arg2"
+    locals:
+      8: "local8"
+  gl!jaggl/context.choosePixelFormat1 (Ljava/awt/Component;II)Z:
+    owner: "jaggl/context"
+    name: "choosePixelFormat1"
+    arguments:
+      0: "arg0"
+      1: "arg1"
+      2: "arg2"
+    locals: {}
+  gl!jaggl/context.createContext ()Z:
+    owner: "jaggl/context"
+    name: "createContext"
+    arguments: {}
+    locals: {}
+  gl!jaggl/context.destroy ()Z:
+    owner: "jaggl/context"
+    name: "destroy"
+    arguments: {}
+    locals: {}
+  gl!jaggl/context.getAlphaBits ()I:
+    owner: "jaggl/context"
+    name: "getAlphaBits"
+    arguments: {}
+    locals: {}
+  gl!jaggl/context.getExtensionsString ()Ljava/lang/String;:
+    owner: "jaggl/context"
+    name: "getExtensionsString"
+    arguments: {}
+    locals: {}
+  gl!jaggl/context.getLastError ()I:
+    owner: "jaggl/context"
+    name: "getLastError"
+    arguments: {}
+    locals: {}
+  gl!jaggl/context.isExtensionAvailable (Ljava/lang/String;)Z:
+    owner: "jaggl/context"
+    name: "isExtensionAvailable"
+    arguments:
+      0: "arg0"
+    locals:
+      14: "local14"
+      18: "local18"
+      26: "local26"
+  gl!jaggl/context.makeCurrent ()Z:
+    owner: "jaggl/context"
+    name: "makeCurrent"
+    arguments: {}
+    locals: {}
+  gl!jaggl/context.makeCurrent1 ()Z:
+    owner: "jaggl/context"
+    name: "makeCurrent1"
+    arguments: {}
+    locals: {}
+  gl!jaggl/context.releaseContext ()Z:
+    owner: "jaggl/context"
+    name: "releaseContext"
+    arguments: {}
+    locals: {}
+  gl!jaggl/context.setSwapInterval (I)V:
+    owner: "jaggl/context"
+    name: "setSwapInterval"
+    arguments:
+      0: "arg0"
+    locals: {}
+  gl!jaggl/context.swapBuffers ()Z:
+    owner: "jaggl/context"
+    name: "swapBuffers"
+    arguments: {}
+    locals: {}
+  gl!jaggl/jagglcaps.getAlphaBits ()I:
+    owner: "jaggl/jagglcaps"
+    name: "getAlphaBits"
+    arguments: {}
+    locals: {}
+  gl!jaggl/jagglcaps.getNumSamples ()I:
+    owner: "jaggl/jagglcaps"
+    name: "getNumSamples"
+    arguments: {}
+    locals: {}
+  gl!jaggl/jagglcaps.getSampleBuffers ()Z:
+    owner: "jaggl/jagglcaps"
+    name: "getSampleBuffers"
+    arguments: {}
+    locals: {}
+  gl!jaggl/jagglcaps.setAlphaBits (I)V:
+    owner: "jaggl/jagglcaps"
+    name: "setAlphaBits"
+    arguments:
+      0: "arg0"
+    locals: {}
+  gl!jaggl/jagglcaps.setNumSamples (I)V:
+    owner: "jaggl/jagglcaps"
+    name: "setNumSamples"
+    arguments:
+      0: "arg0"
+    locals: {}
+  gl!jaggl/jagglcaps.setSampleBuffers (Z)V:
+    owner: "jaggl/jagglcaps"
+    name: "setSampleBuffers"
+    arguments:
+      0: "arg0"
+    locals: {}
+  gl!jaggl/jagglcaps.toString ()Ljava/lang/String;:
+    owner: "jaggl/jagglcaps"
+    name: "toString"
+    arguments: {}
+    locals: {}
+  gl!jaggl/jogl_wrapper/GLContextImpl.<init> (Lgl!jaggl/jogl_wrapper/GLDrawableImpl;)V:
+    owner: "jaggl/jogl_wrapper/GLContextImpl"
+    name: "<init>"
+    arguments:
+      0: "arg0"
+    locals: {}
+  gl!jaggl/jogl_wrapper/GLContextImpl.create ()V:
+    owner: "jaggl/jogl_wrapper/GLContextImpl"
+    name: "create"
+    arguments: {}
+    locals:
+      15: "local15"
+  gl!jaggl/jogl_wrapper/GLContextImpl.destroy ()V:
+    owner: "jaggl/jogl_wrapper/GLContextImpl"
+    name: "destroy"
+    arguments: {}
+    locals: {}
+  gl!jaggl/jogl_wrapper/GLContextImpl.getGL ()Lgl!javax/media/opengl/GL;:
+    owner: "jaggl/jogl_wrapper/GLContextImpl"
+    name: "getGL"
+    arguments: {}
+    locals: {}
+  gl!jaggl/jogl_wrapper/GLContextImpl.makeCurrent ()I:
+    owner: "jaggl/jogl_wrapper/GLContextImpl"
+    name: "makeCurrent"
+    arguments: {}
+    locals:
+      1: "local1"
+  gl!jaggl/jogl_wrapper/GLContextImpl.release ()V:
+    owner: "jaggl/jogl_wrapper/GLContextImpl"
+    name: "release"
+    arguments: {}
+    locals: {}
+  gl!jaggl/jogl_wrapper/GLContextImpl.setGL (Lgl!javax/media/opengl/GL;)V:
+    owner: "jaggl/jogl_wrapper/GLContextImpl"
+    name: "setGL"
+    arguments:
+      0: "arg0"
+    locals: {}
+  ? gl!jaggl/jogl_wrapper/GLDrawableFactoryImpl.getGLDrawable (Ljava/lang/Object;Lgl!javax/media/opengl/GLCapabilities;Lgl!javax/media/opengl/GLCapabilitiesChooser;)Lgl!javax/media/opengl/GLDrawable;
+  : owner: "jaggl/jogl_wrapper/GLDrawableFactoryImpl"
+    name: "getGLDrawable"
+    arguments:
+      0: "arg0"
+      1: "arg1"
+      2: "arg2"
+    locals: {}
+  ? gl!jaggl/jogl_wrapper/GLDrawableImpl.<init> (Ljava/awt/Component;Lgl!javax/media/opengl/GLCapabilities;Lgl!javax/media/opengl/GLCapabilitiesChooser;)V
+  : owner: "jaggl/jogl_wrapper/GLDrawableImpl"
+    name: "<init>"
+    arguments:
+      0: "arg0"
+      1: "arg1"
+      2: "arg2"
+    locals: {}
+  gl!jaggl/jogl_wrapper/GLDrawableImpl.createContext (Lgl!javax/media/opengl/GLContext;)Lgl!javax/media/opengl/GLContext;:
+    owner: "jaggl/jogl_wrapper/GLDrawableImpl"
+    name: "createContext"
+    arguments:
+      0: "arg0"
+    locals: {}
+  gl!jaggl/jogl_wrapper/GLDrawableImpl.setRealized (Z)V:
+    owner: "jaggl/jogl_wrapper/GLDrawableImpl"
+    name: "setRealized"
+    arguments:
+      0: "arg0"
+    locals: {}
+  gl!jaggl/jogl_wrapper/GLDrawableImpl.swapBuffers ()V:
+    owner: "jaggl/jogl_wrapper/GLDrawableImpl"
+    name: "swapBuffers"
+    arguments: {}
+    locals: {}
+  gl!jaggl/opengl.getArray (Ljava/nio/Buffer;)Ljava/lang/Object;:
+    owner: "jaggl/opengl"
+    name: "getArray"
+    arguments:
+      0: "arg0"
+    locals: {}
+  gl!jaggl/opengl.getDirectBufferByteOffset (Ljava/nio/Buffer;)I:
+    owner: "jaggl/opengl"
+    name: "getDirectBufferByteOffset"
+    arguments:
+      0: "arg0"
+    locals: {}
+  gl!jaggl/opengl.getIndirectBufferByteOffset (Ljava/nio/Buffer;)I:
+    owner: "jaggl/opengl"
+    name: "getIndirectBufferByteOffset"
+    arguments:
+      0: "arg0"
+    locals:
+      6: "local6"
+  gl!jaggl/opengl.glActiveTexture (I)V:
+    owner: "jaggl/opengl"
+    name: "glActiveTexture"
+    arguments:
+      0: "texture"
+    locals: {}
+  gl!jaggl/opengl.glAlphaFunc (IF)V:
+    owner: "jaggl/opengl"
+    name: "glAlphaFunc"
+    arguments:
+      0: "func"
+      1: "ref"
+    locals: {}
+  gl!jaggl/opengl.glAttachObjectARB (II)V:
+    owner: "jaggl/opengl"
+    name: "glAttachObjectARB"
+    arguments:
+      0: "containerObj"
+      1: "obj"
+    locals: {}
+  gl!jaggl/opengl.glBegin (I)V:
+    owner: "jaggl/opengl"
+    name: "glBegin"
+    arguments:
+      0: "mode"
+    locals: {}
+  gl!jaggl/opengl.glBindBufferARB (II)V:
+    owner: "jaggl/opengl"
+    name: "glBindBufferARB"
+    arguments:
+      0: "target"
+      1: "buffer"
+    locals: {}
+  gl!jaggl/opengl.glBindFramebufferEXT (II)V:
+    owner: "jaggl/opengl"
+    name: "glBindFramebufferEXT"
+    arguments:
+      0: "target"
+      1: "framebuffer"
+    locals: {}
+  gl!jaggl/opengl.glBindProgramARB (II)V:
+    owner: "jaggl/opengl"
+    name: "glBindProgramARB"
+    arguments:
+      0: "target"
+      1: "program"
+    locals: {}
+  gl!jaggl/opengl.glBindRenderbufferEXT (II)V:
+    owner: "jaggl/opengl"
+    name: "glBindRenderbufferEXT"
+    arguments:
+      0: "target"
+      1: "renderbuffer"
+    locals: {}
+  gl!jaggl/opengl.glBindTexture (II)V:
+    owner: "jaggl/opengl"
+    name: "glBindTexture"
+    arguments:
+      0: "target"
+      1: "texture"
+    locals: {}
+  gl!jaggl/opengl.glBlendFunc (II)V:
+    owner: "jaggl/opengl"
+    name: "glBlendFunc"
+    arguments:
+      0: "sfactor"
+      1: "dfactor"
+    locals: {}
+  gl!jaggl/opengl.glBufferDataARB (IILjava/nio/Buffer;I)V:
+    owner: "jaggl/opengl"
+    name: "glBufferDataARB"
+    arguments:
+      0: "target"
+      1: "size"
+      2: "data"
+      3: "usage"
+    locals: {}
+  gl!jaggl/opengl.glBufferDataARB0 (IILjava/lang/Object;II)V:
+    owner: "jaggl/opengl"
+    name: "glBufferDataARB0"
+    arguments:
+      0: "target"
+      1: "size"
+      2: "data"
+      3: "dataOffset"
+      4: "usage"
+    locals: {}
+  gl!jaggl/opengl.glBufferDataARB1 (IILjava/lang/Object;II)V:
+    owner: "jaggl/opengl"
+    name: "glBufferDataARB1"
+    arguments:
+      0: "target"
+      1: "size"
+      2: "data"
+      3: "dataOffset"
+      4: "usage"
+    locals: {}
+  gl!jaggl/opengl.glBufferSubDataARB (IIILjava/nio/Buffer;)V:
+    owner: "jaggl/opengl"
+    name: "glBufferSubDataARB"
+    arguments:
+      0: "target"
+      1: "offset"
+      2: "size"
+      3: "data"
+    locals: {}
+  gl!jaggl/opengl.glBufferSubDataARB0 (IIILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glBufferSubDataARB0"
+    arguments:
+      0: "target"
+      1: "offset"
+      2: "size"
+      3: "data"
+      4: "dataOffset"
+    locals: {}
+  gl!jaggl/opengl.glBufferSubDataARB1 (IIILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glBufferSubDataARB1"
+    arguments:
+      0: "target"
+      1: "offset"
+      2: "size"
+      3: "data"
+      4: "dataOffset"
+    locals: {}
+  gl!jaggl/opengl.glCallList (I)V:
+    owner: "jaggl/opengl"
+    name: "glCallList"
+    arguments:
+      0: "list"
+    locals: {}
+  gl!jaggl/opengl.glCheckFramebufferStatusEXT (I)I:
+    owner: "jaggl/opengl"
+    name: "glCheckFramebufferStatusEXT"
+    arguments:
+      0: "target"
+    locals: {}
+  gl!jaggl/opengl.glClear (I)V:
+    owner: "jaggl/opengl"
+    name: "glClear"
+    arguments:
+      0: "mask"
+    locals: {}
+  gl!jaggl/opengl.glClearColor (FFFF)V:
+    owner: "jaggl/opengl"
+    name: "glClearColor"
+    arguments:
+      0: "red"
+      1: "green"
+      2: "blue"
+      3: "alpha"
+    locals: {}
+  gl!jaggl/opengl.glClearDepth (F)V:
+    owner: "jaggl/opengl"
+    name: "glClearDepth"
+    arguments:
+      0: "depth"
+    locals: {}
+  gl!jaggl/opengl.glClientActiveTexture (I)V:
+    owner: "jaggl/opengl"
+    name: "glClientActiveTexture"
+    arguments:
+      0: "texture"
+    locals: {}
+  gl!jaggl/opengl.glColor3ub (BBB)V:
+    owner: "jaggl/opengl"
+    name: "glColor3ub"
+    arguments:
+      0: "red"
+      1: "green"
+      2: "blue"
+    locals: {}
+  gl!jaggl/opengl.glColor4f (FFFF)V:
+    owner: "jaggl/opengl"
+    name: "glColor4f"
+    arguments:
+      0: "red"
+      1: "green"
+      2: "blue"
+      3: "alpha"
+    locals: {}
+  gl!jaggl/opengl.glColor4fv ([FI)V:
+    owner: "jaggl/opengl"
+    name: "glColor4fv"
+    arguments:
+      0: "v"
+      1: "vOffset"
+    locals: {}
+  gl!jaggl/opengl.glColor4fv1 (Ljava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glColor4fv1"
+    arguments:
+      0: "v"
+      1: "vOffset"
+    locals: {}
+  gl!jaggl/opengl.glColor4ub (BBBB)V:
+    owner: "jaggl/opengl"
+    name: "glColor4ub"
+    arguments:
+      0: "red"
+      1: "green"
+      2: "blue"
+      3: "alpha"
+    locals: {}
+  gl!jaggl/opengl.glColorMask (ZZZZ)V:
+    owner: "jaggl/opengl"
+    name: "glColorMask"
+    arguments:
+      0: "red"
+      1: "green"
+      2: "blue"
+      3: "alpha"
+    locals: {}
+  gl!jaggl/opengl.glColorMaterial (II)V:
+    owner: "jaggl/opengl"
+    name: "glColorMaterial"
+    arguments:
+      0: "face"
+      1: "mode"
+    locals: {}
+  gl!jaggl/opengl.glColorPointer (IIIJ)V:
+    owner: "jaggl/opengl"
+    name: "glColorPointer"
+    arguments:
+      0: "size"
+      1: "type"
+      2: "stride"
+      3: "pointer"
+    locals: {}
+  gl!jaggl/opengl.glColorPointer (IIILjava/nio/Buffer;)V:
+    owner: "jaggl/opengl"
+    name: "glColorPointer"
+    arguments:
+      0: "size"
+      1: "type"
+      2: "stride"
+      3: "pointer"
+    locals: {}
+  gl!jaggl/opengl.glColorPointer0 (IIILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glColorPointer0"
+    arguments:
+      0: "size"
+      1: "type"
+      2: "stride"
+      3: "pointer"
+      4: "pointerOffset"
+    locals: {}
+  gl!jaggl/opengl.glColorPointer1 (IIILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glColorPointer1"
+    arguments:
+      0: "size"
+      1: "type"
+      2: "stride"
+      3: "pointer"
+      4: "pointerOffset"
+    locals: {}
+  gl!jaggl/opengl.glCompileShaderARB (I)V:
+    owner: "jaggl/opengl"
+    name: "glCompileShaderARB"
+    arguments:
+      0: "shaderObj"
+    locals: {}
+  gl!jaggl/opengl.glCopyPixels (IIIII)V:
+    owner: "jaggl/opengl"
+    name: "glCopyPixels"
+    arguments:
+      0: "x"
+      1: "y"
+      2: "width"
+      3: "height"
+      4: "type"
+    locals: {}
+  gl!jaggl/opengl.glCopyTexImage2D (IIIIIIII)V:
+    owner: "jaggl/opengl"
+    name: "glCopyTexImage2D"
+    arguments:
+      0: "target"
+      1: "level"
+      2: "internalformat"
+      3: "x"
+      4: "y"
+      5: "width"
+      6: "height"
+      7: "border"
+    locals: {}
+  gl!jaggl/opengl.glCreateProgramObjectARB ()I:
+    owner: "jaggl/opengl"
+    name: "glCreateProgramObjectARB"
+    arguments: {}
+    locals: {}
+  gl!jaggl/opengl.glCreateShaderObjectARB (I)I:
+    owner: "jaggl/opengl"
+    name: "glCreateShaderObjectARB"
+    arguments:
+      0: "shaderType"
+    locals: {}
+  gl!jaggl/opengl.glCullFace (I)V:
+    owner: "jaggl/opengl"
+    name: "glCullFace"
+    arguments:
+      0: "mode"
+    locals: {}
+  gl!jaggl/opengl.glDeleteBuffersARB (I[II)V:
+    owner: "jaggl/opengl"
+    name: "glDeleteBuffersARB"
+    arguments:
+      0: "n"
+      1: "buffers"
+      2: "buffersOffset"
+    locals: {}
+  gl!jaggl/opengl.glDeleteBuffersARB1 (ILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glDeleteBuffersARB1"
+    arguments:
+      0: "n"
+      1: "buffers"
+      2: "buffersOffset"
+    locals: {}
+  gl!jaggl/opengl.glDeleteFramebuffersEXT (I[II)V:
+    owner: "jaggl/opengl"
+    name: "glDeleteFramebuffersEXT"
+    arguments:
+      0: "n"
+      1: "framebuffers"
+      2: "framebuffersOffset"
+    locals: {}
+  gl!jaggl/opengl.glDeleteFramebuffersEXT1 (ILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glDeleteFramebuffersEXT1"
+    arguments:
+      0: "n"
+      1: "framebuffers"
+      2: "framebuffersOffset"
+    locals: {}
+  gl!jaggl/opengl.glDeleteLists (II)V:
+    owner: "jaggl/opengl"
+    name: "glDeleteLists"
+    arguments:
+      0: "list"
+      1: "range"
+    locals: {}
+  gl!jaggl/opengl.glDeleteObjectARB (I)V:
+    owner: "jaggl/opengl"
+    name: "glDeleteObjectARB"
+    arguments:
+      0: "obj"
+    locals: {}
+  gl!jaggl/opengl.glDeleteRenderbuffersEXT (I[II)V:
+    owner: "jaggl/opengl"
+    name: "glDeleteRenderbuffersEXT"
+    arguments:
+      0: "n"
+      1: "renderbuffers"
+      2: "renderbuffersOffset"
+    locals: {}
+  gl!jaggl/opengl.glDeleteRenderbuffersEXT1 (ILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glDeleteRenderbuffersEXT1"
+    arguments:
+      0: "n"
+      1: "renderbuffers"
+      2: "renderbuffersOffset"
+    locals: {}
+  gl!jaggl/opengl.glDeleteTextures (I[II)V:
+    owner: "jaggl/opengl"
+    name: "glDeleteTextures"
+    arguments:
+      0: "n"
+      1: "textures"
+      2: "texturesOffset"
+    locals: {}
+  gl!jaggl/opengl.glDeleteTextures1 (ILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glDeleteTextures1"
+    arguments:
+      0: "n"
+      1: "textures"
+      2: "texturesOffset"
+    locals: {}
+  gl!jaggl/opengl.glDepthFunc (I)V:
+    owner: "jaggl/opengl"
+    name: "glDepthFunc"
+    arguments:
+      0: "func"
+    locals: {}
+  gl!jaggl/opengl.glDepthMask (Z)V:
+    owner: "jaggl/opengl"
+    name: "glDepthMask"
+    arguments:
+      0: "flag"
+    locals: {}
+  gl!jaggl/opengl.glDetachObjectARB (II)V:
+    owner: "jaggl/opengl"
+    name: "glDetachObjectARB"
+    arguments:
+      0: "containerObj"
+      1: "attachedObj"
+    locals: {}
+  gl!jaggl/opengl.glDisable (I)V:
+    owner: "jaggl/opengl"
+    name: "glDisable"
+    arguments:
+      0: "cap"
+    locals: {}
+  gl!jaggl/opengl.glDisableClientState (I)V:
+    owner: "jaggl/opengl"
+    name: "glDisableClientState"
+    arguments:
+      0: "array"
+    locals: {}
+  gl!jaggl/opengl.glDrawArrays (III)V:
+    owner: "jaggl/opengl"
+    name: "glDrawArrays"
+    arguments:
+      0: "mode"
+      1: "first"
+      2: "count"
+    locals: {}
+  gl!jaggl/opengl.glDrawBuffer (I)V:
+    owner: "jaggl/opengl"
+    name: "glDrawBuffer"
+    arguments:
+      0: "buf"
+    locals: {}
+  gl!jaggl/opengl.glDrawElements (IIIJ)V:
+    owner: "jaggl/opengl"
+    name: "glDrawElements"
+    arguments:
+      0: "mode"
+      1: "count"
+      2: "type"
+      3: "indices"
+    locals: {}
+  gl!jaggl/opengl.glDrawElements (IIILjava/nio/Buffer;)V:
+    owner: "jaggl/opengl"
+    name: "glDrawElements"
+    arguments:
+      0: "mode"
+      1: "count"
+      2: "type"
+      3: "indices"
+    locals: {}
+  gl!jaggl/opengl.glDrawElements0 (IIILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glDrawElements0"
+    arguments:
+      0: "mode"
+      1: "count"
+      2: "type"
+      3: "indices"
+      4: "indicesOffset"
+    locals: {}
+  gl!jaggl/opengl.glDrawElements1 (IIILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glDrawElements1"
+    arguments:
+      0: "mode"
+      1: "count"
+      2: "type"
+      3: "indices"
+      4: "indicesOffset"
+    locals: {}
+  gl!jaggl/opengl.glDrawPixels (IIIILjava/nio/Buffer;)V:
+    owner: "jaggl/opengl"
+    name: "glDrawPixels"
+    arguments:
+      0: "width"
+      1: "height"
+      2: "format"
+      3: "type"
+      4: "pixels"
+    locals: {}
+  gl!jaggl/opengl.glDrawPixels0 (IIIILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glDrawPixels0"
+    arguments:
+      0: "width"
+      1: "height"
+      2: "format"
+      3: "type"
+      4: "pixels"
+      5: "pixelsOffset"
+    locals: {}
+  gl!jaggl/opengl.glDrawPixels1 (IIIILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glDrawPixels1"
+    arguments:
+      0: "width"
+      1: "height"
+      2: "format"
+      3: "type"
+      4: "pixels"
+      5: "pixelsOffset"
+    locals: {}
+  gl!jaggl/opengl.glEnable (I)V:
+    owner: "jaggl/opengl"
+    name: "glEnable"
+    arguments:
+      0: "cap"
+    locals: {}
+  gl!jaggl/opengl.glEnableClientState (I)V:
+    owner: "jaggl/opengl"
+    name: "glEnableClientState"
+    arguments:
+      0: "array"
+    locals: {}
+  gl!jaggl/opengl.glEnd ()V:
+    owner: "jaggl/opengl"
+    name: "glEnd"
+    arguments: {}
+    locals: {}
+  gl!jaggl/opengl.glEndList ()V:
+    owner: "jaggl/opengl"
+    name: "glEndList"
+    arguments: {}
+    locals: {}
+  gl!jaggl/opengl.glFogf (IF)V:
+    owner: "jaggl/opengl"
+    name: "glFogf"
+    arguments:
+      0: "pname"
+      1: "param"
+    locals: {}
+  gl!jaggl/opengl.glFogfv (I[FI)V:
+    owner: "jaggl/opengl"
+    name: "glFogfv"
+    arguments:
+      0: "pname"
+      1: "params"
+      2: "paramsOffset"
+    locals: {}
+  gl!jaggl/opengl.glFogfv1 (ILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glFogfv1"
+    arguments:
+      0: "pname"
+      1: "params"
+      2: "paramsOffset"
+    locals: {}
+  gl!jaggl/opengl.glFogi (II)V:
+    owner: "jaggl/opengl"
+    name: "glFogi"
+    arguments:
+      0: "pname"
+      1: "param"
+    locals: {}
+  gl!jaggl/opengl.glFramebufferRenderbufferEXT (IIII)V:
+    owner: "jaggl/opengl"
+    name: "glFramebufferRenderbufferEXT"
+    arguments:
+      0: "target"
+      1: "attachment"
+      2: "renderbuffertarget"
+      3: "renderbuffer"
+    locals: {}
+  gl!jaggl/opengl.glFramebufferTexture2DEXT (IIIII)V:
+    owner: "jaggl/opengl"
+    name: "glFramebufferTexture2DEXT"
+    arguments:
+      0: "target"
+      1: "attachment"
+      2: "textarget"
+      3: "texture"
+      4: "level"
+    locals: {}
+  gl!jaggl/opengl.glGenBuffersARB (I[II)V:
+    owner: "jaggl/opengl"
+    name: "glGenBuffersARB"
+    arguments:
+      0: "n"
+      1: "buffers"
+      2: "buffersOffset"
+    locals: {}
+  gl!jaggl/opengl.glGenBuffersARB1 (ILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glGenBuffersARB1"
+    arguments:
+      0: "n"
+      1: "buffers"
+      2: "buffersOffset"
+    locals: {}
+  gl!jaggl/opengl.glGenFramebuffersEXT (I[II)V:
+    owner: "jaggl/opengl"
+    name: "glGenFramebuffersEXT"
+    arguments:
+      0: "n"
+      1: "framebuffers"
+      2: "framebuffersOffset"
+    locals: {}
+  gl!jaggl/opengl.glGenFramebuffersEXT1 (ILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glGenFramebuffersEXT1"
+    arguments:
+      0: "n"
+      1: "framebuffers"
+      2: "framebuffersOffset"
+    locals: {}
+  gl!jaggl/opengl.glGenLists (I)I:
+    owner: "jaggl/opengl"
+    name: "glGenLists"
+    arguments:
+      0: "range"
+    locals: {}
+  gl!jaggl/opengl.glGenProgramsARB (I[II)V:
+    owner: "jaggl/opengl"
+    name: "glGenProgramsARB"
+    arguments:
+      0: "n"
+      1: "programs"
+      2: "programsOffset"
+    locals: {}
+  gl!jaggl/opengl.glGenProgramsARB1 (ILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glGenProgramsARB1"
+    arguments:
+      0: "n"
+      1: "programs"
+      2: "programsOffset"
+    locals: {}
+  gl!jaggl/opengl.glGenRenderbuffersEXT (I[II)V:
+    owner: "jaggl/opengl"
+    name: "glGenRenderbuffersEXT"
+    arguments:
+      0: "n"
+      1: "renderbuffers"
+      2: "renderbuffersOffset"
+    locals: {}
+  gl!jaggl/opengl.glGenRenderbuffersEXT1 (ILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glGenRenderbuffersEXT1"
+    arguments:
+      0: "n"
+      1: "renderbuffers"
+      2: "renderbuffersOffset"
+    locals: {}
+  gl!jaggl/opengl.glGenTextures (I[II)V:
+    owner: "jaggl/opengl"
+    name: "glGenTextures"
+    arguments:
+      0: "n"
+      1: "textures"
+      2: "texturesOffset"
+    locals: {}
+  gl!jaggl/opengl.glGenTextures1 (ILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glGenTextures1"
+    arguments:
+      0: "n"
+      1: "textures"
+      2: "texturesOffset"
+    locals: {}
+  gl!jaggl/opengl.glGetFloatv (ILjava/nio/FloatBuffer;)V:
+    owner: "jaggl/opengl"
+    name: "glGetFloatv"
+    arguments:
+      0: "pname"
+      1: "data"
+    locals: {}
+  gl!jaggl/opengl.glGetFloatv (I[FI)V:
+    owner: "jaggl/opengl"
+    name: "glGetFloatv"
+    arguments:
+      0: "pname"
+      1: "data"
+      2: "dataOffset"
+    locals: {}
+  gl!jaggl/opengl.glGetFloatv0 (ILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glGetFloatv0"
+    arguments:
+      0: "pname"
+      1: "data"
+      2: "dataOffset"
+    locals: {}
+  gl!jaggl/opengl.glGetFloatv1 (ILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glGetFloatv1"
+    arguments:
+      0: "pname"
+      1: "data"
+      2: "dataOffset"
+    locals: {}
+  gl!jaggl/opengl.glGetInfoLogARB (II[II[BI)V:
+    owner: "jaggl/opengl"
+    name: "glGetInfoLogARB"
+    arguments:
+      0: "obj"
+      1: "maxLength"
+      2: "length"
+      3: "lengthOffset"
+      4: "infoLog"
+      5: "infoLogOffset"
+    locals: {}
+  gl!jaggl/opengl.glGetInfoLogARB1 (IILjava/lang/Object;I[BI)V:
+    owner: "jaggl/opengl"
+    name: "glGetInfoLogARB1"
+    arguments:
+      0: "obj"
+      1: "maxLength"
+      2: "length"
+      3: "lengthOffset"
+      4: "infoLog"
+      5: "infoLogOffset"
+    locals: {}
+  gl!jaggl/opengl.glGetIntegerv (I[II)V:
+    owner: "jaggl/opengl"
+    name: "glGetIntegerv"
+    arguments:
+      0: "pname"
+      1: "data"
+      2: "dataOffset"
+    locals: {}
+  gl!jaggl/opengl.glGetIntegerv1 (ILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glGetIntegerv1"
+    arguments:
+      0: "pname"
+      1: "data"
+      2: "dataOffset"
+    locals: {}
+  gl!jaggl/opengl.glGetObjectParameterivARB (II[II)V:
+    owner: "jaggl/opengl"
+    name: "glGetObjectParameterivARB"
+    arguments:
+      0: "obj"
+      1: "pname"
+      2: "params"
+      3: "paramsOffset"
+    locals: {}
+  gl!jaggl/opengl.glGetObjectParameterivARB1 (IILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glGetObjectParameterivARB1"
+    arguments:
+      0: "obj"
+      1: "pname"
+      2: "params"
+      3: "paramsOffset"
+    locals: {}
+  gl!jaggl/opengl.glGetString (I)Ljava/lang/String;:
+    owner: "jaggl/opengl"
+    name: "glGetString"
+    arguments:
+      0: "name"
+    locals: {}
+  gl!jaggl/opengl.glGetUniformLocation (ILjava/lang/String;)I:
+    owner: "jaggl/opengl"
+    name: "glGetUniformLocation"
+    arguments:
+      0: "program"
+      1: "name"
+    locals: {}
+  gl!jaggl/opengl.glHint (II)V:
+    owner: "jaggl/opengl"
+    name: "glHint"
+    arguments:
+      0: "target"
+      1: "mode"
+    locals: {}
+  gl!jaggl/opengl.glInterleavedArrays (IIJ)V:
+    owner: "jaggl/opengl"
+    name: "glInterleavedArrays"
+    arguments:
+      0: "format"
+      1: "stride"
+      2: "pointer"
+    locals: {}
+  gl!jaggl/opengl.glInterleavedArrays (IILjava/nio/Buffer;)V:
+    owner: "jaggl/opengl"
+    name: "glInterleavedArrays"
+    arguments:
+      0: "format"
+      1: "stride"
+      2: "pointer"
+    locals: {}
+  gl!jaggl/opengl.glInterleavedArrays0 (IILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glInterleavedArrays0"
+    arguments:
+      0: "format"
+      1: "stride"
+      2: "pointer"
+      3: "pointerOffset"
+    locals: {}
+  gl!jaggl/opengl.glInterleavedArrays1 (IILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glInterleavedArrays1"
+    arguments:
+      0: "format"
+      1: "stride"
+      2: "pointer"
+      3: "pointerOffset"
+    locals: {}
+  gl!jaggl/opengl.glLightModelfv (I[FI)V:
+    owner: "jaggl/opengl"
+    name: "glLightModelfv"
+    arguments:
+      0: "pname"
+      1: "params"
+      2: "paramsOffset"
+    locals: {}
+  gl!jaggl/opengl.glLightModelfv1 (ILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glLightModelfv1"
+    arguments:
+      0: "pname"
+      1: "params"
+      2: "paramsOffset"
+    locals: {}
+  gl!jaggl/opengl.glLightf (IIF)V:
+    owner: "jaggl/opengl"
+    name: "glLightf"
+    arguments:
+      0: "light"
+      1: "pname"
+      2: "param"
+    locals: {}
+  gl!jaggl/opengl.glLightfv (II[FI)V:
+    owner: "jaggl/opengl"
+    name: "glLightfv"
+    arguments:
+      0: "light"
+      1: "pname"
+      2: "params"
+      3: "paramsOffset"
+    locals: {}
+  gl!jaggl/opengl.glLightfv1 (IILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glLightfv1"
+    arguments:
+      0: "light"
+      1: "pname"
+      2: "params"
+      3: "paramsOffset"
+    locals: {}
+  gl!jaggl/opengl.glLineWidth (F)V:
+    owner: "jaggl/opengl"
+    name: "glLineWidth"
+    arguments:
+      0: "width"
+    locals: {}
+  gl!jaggl/opengl.glLinkProgramARB (I)V:
+    owner: "jaggl/opengl"
+    name: "glLinkProgramARB"
+    arguments:
+      0: "programObj"
+    locals: {}
+  gl!jaggl/opengl.glLoadIdentity ()V:
+    owner: "jaggl/opengl"
+    name: "glLoadIdentity"
+    arguments: {}
+    locals: {}
+  gl!jaggl/opengl.glLoadMatrixf ([FI)V:
+    owner: "jaggl/opengl"
+    name: "glLoadMatrixf"
+    arguments:
+      0: "m"
+      1: "mOffset"
+    locals: {}
+  gl!jaggl/opengl.glLoadMatrixf1 (Ljava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glLoadMatrixf1"
+    arguments:
+      0: "m"
+      1: "mOffset"
+    locals: {}
+  gl!jaggl/opengl.glMaterialfv (II[FI)V:
+    owner: "jaggl/opengl"
+    name: "glMaterialfv"
+    arguments:
+      0: "face"
+      1: "pname"
+      2: "params"
+      3: "paramsOffset"
+    locals: {}
+  gl!jaggl/opengl.glMaterialfv1 (IILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glMaterialfv1"
+    arguments:
+      0: "face"
+      1: "pname"
+      2: "params"
+      3: "paramsOffset"
+    locals: {}
+  gl!jaggl/opengl.glMatrixMode (I)V:
+    owner: "jaggl/opengl"
+    name: "glMatrixMode"
+    arguments:
+      0: "mode"
+    locals: {}
+  gl!jaggl/opengl.glMultiTexCoord2f (IFF)V:
+    owner: "jaggl/opengl"
+    name: "glMultiTexCoord2f"
+    arguments:
+      0: "target"
+      1: "s"
+      2: "t"
+    locals: {}
+  gl!jaggl/opengl.glMultiTexCoord2i (III)V:
+    owner: "jaggl/opengl"
+    name: "glMultiTexCoord2i"
+    arguments:
+      0: "target"
+      1: "s"
+      2: "t"
+    locals: {}
+  gl!jaggl/opengl.glNewList (II)V:
+    owner: "jaggl/opengl"
+    name: "glNewList"
+    arguments:
+      0: "list"
+      1: "mode"
+    locals: {}
+  gl!jaggl/opengl.glNormal3f (FFF)V:
+    owner: "jaggl/opengl"
+    name: "glNormal3f"
+    arguments:
+      0: "nx"
+      1: "ny"
+      2: "nz"
+    locals: {}
+  gl!jaggl/opengl.glNormalPointer (IIJ)V:
+    owner: "jaggl/opengl"
+    name: "glNormalPointer"
+    arguments:
+      0: "type"
+      1: "stride"
+      2: "pointer"
+    locals: {}
+  gl!jaggl/opengl.glNormalPointer (IILjava/nio/Buffer;)V:
+    owner: "jaggl/opengl"
+    name: "glNormalPointer"
+    arguments:
+      0: "type"
+      1: "stride"
+      2: "pointer"
+    locals: {}
+  gl!jaggl/opengl.glNormalPointer0 (IILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glNormalPointer0"
+    arguments:
+      0: "type"
+      1: "stride"
+      2: "pointer"
+      3: "pointerOffset"
+    locals: {}
+  gl!jaggl/opengl.glNormalPointer1 (IILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glNormalPointer1"
+    arguments:
+      0: "type"
+      1: "stride"
+      2: "pointer"
+      3: "pointerOffset"
+    locals: {}
+  gl!jaggl/opengl.glOrtho (DDDDDD)V:
+    owner: "jaggl/opengl"
+    name: "glOrtho"
+    arguments:
+      0: "left"
+      1: "right"
+      2: "bottom"
+      3: "top"
+      4: "zNear"
+      5: "zFar"
+    locals: {}
+  gl!jaggl/opengl.glPointParameterfARB (IF)V:
+    owner: "jaggl/opengl"
+    name: "glPointParameterfARB"
+    arguments:
+      0: "pname"
+      1: "param"
+    locals: {}
+  gl!jaggl/opengl.glPointParameterfvARB (I[FI)V:
+    owner: "jaggl/opengl"
+    name: "glPointParameterfvARB"
+    arguments:
+      0: "pname"
+      1: "params"
+      2: "paramsOffset"
+    locals: {}
+  gl!jaggl/opengl.glPointParameterfvARB1 (ILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glPointParameterfvARB1"
+    arguments:
+      0: "pname"
+      1: "params"
+      2: "paramsOffset"
+    locals: {}
+  gl!jaggl/opengl.glPointSize (F)V:
+    owner: "jaggl/opengl"
+    name: "glPointSize"
+    arguments:
+      0: "size"
+    locals: {}
+  gl!jaggl/opengl.glPolygonMode (II)V:
+    owner: "jaggl/opengl"
+    name: "glPolygonMode"
+    arguments:
+      0: "face"
+      1: "mode"
+    locals: {}
+  gl!jaggl/opengl.glPopAttrib ()V:
+    owner: "jaggl/opengl"
+    name: "glPopAttrib"
+    arguments: {}
+    locals: {}
+  gl!jaggl/opengl.glPopMatrix ()V:
+    owner: "jaggl/opengl"
+    name: "glPopMatrix"
+    arguments: {}
+    locals: {}
+  gl!jaggl/opengl.glProgramLocalParameter4fARB (IIFFFF)V:
+    owner: "jaggl/opengl"
+    name: "glProgramLocalParameter4fARB"
+    arguments:
+      0: "target"
+      1: "index"
+      2: "x"
+      3: "y"
+      4: "z"
+      5: "w"
+    locals: {}
+  gl!jaggl/opengl.glProgramLocalParameter4fvARB (IILjava/nio/FloatBuffer;)V:
+    owner: "jaggl/opengl"
+    name: "glProgramLocalParameter4fvARB"
+    arguments:
+      0: "target"
+      1: "index"
+      2: "params"
+    locals: {}
+  gl!jaggl/opengl.glProgramLocalParameter4fvARB (II[FI)V:
+    owner: "jaggl/opengl"
+    name: "glProgramLocalParameter4fvARB"
+    arguments:
+      0: "target"
+      1: "index"
+      2: "params"
+      3: "paramsOffset"
+    locals: {}
+  gl!jaggl/opengl.glProgramLocalParameter4fvARB0 (IILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glProgramLocalParameter4fvARB0"
+    arguments:
+      0: "target"
+      1: "index"
+      2: "params"
+      3: "paramsOffset"
+    locals: {}
+  gl!jaggl/opengl.glProgramLocalParameter4fvARB1 (IILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glProgramLocalParameter4fvARB1"
+    arguments:
+      0: "target"
+      1: "index"
+      2: "params"
+      3: "paramsOffset"
+    locals: {}
+  gl!jaggl/opengl.glProgramStringARB (IIILjava/lang/String;)V:
+    owner: "jaggl/opengl"
+    name: "glProgramStringARB"
+    arguments:
+      0: "target"
+      1: "format"
+      2: "len"
+      3: "string"
+    locals: {}
+  gl!jaggl/opengl.glPushAttrib (I)V:
+    owner: "jaggl/opengl"
+    name: "glPushAttrib"
+    arguments:
+      0: "mask"
+    locals: {}
+  gl!jaggl/opengl.glPushMatrix ()V:
+    owner: "jaggl/opengl"
+    name: "glPushMatrix"
+    arguments: {}
+    locals: {}
+  gl!jaggl/opengl.glRasterPos2i (II)V:
+    owner: "jaggl/opengl"
+    name: "glRasterPos2i"
+    arguments:
+      0: "x"
+      1: "y"
+    locals: {}
+  gl!jaggl/opengl.glReadBuffer (I)V:
+    owner: "jaggl/opengl"
+    name: "glReadBuffer"
+    arguments:
+      0: "src"
+    locals: {}
+  gl!jaggl/opengl.glRenderbufferStorageEXT (IIII)V:
+    owner: "jaggl/opengl"
+    name: "glRenderbufferStorageEXT"
+    arguments:
+      0: "target"
+      1: "internalformat"
+      2: "width"
+      3: "height"
+    locals: {}
+  gl!jaggl/opengl.glRotatef (FFFF)V:
+    owner: "jaggl/opengl"
+    name: "glRotatef"
+    arguments:
+      0: "angle"
+      1: "x"
+      2: "y"
+      3: "z"
+    locals: {}
+  gl!jaggl/opengl.glScalef (FFF)V:
+    owner: "jaggl/opengl"
+    name: "glScalef"
+    arguments:
+      0: "x"
+      1: "y"
+      2: "z"
+    locals: {}
+  gl!jaggl/opengl.glScissor (IIII)V:
+    owner: "jaggl/opengl"
+    name: "glScissor"
+    arguments:
+      0: "x"
+      1: "y"
+      2: "width"
+      3: "height"
+    locals: {}
+  gl!jaggl/opengl.glShadeModel (I)V:
+    owner: "jaggl/opengl"
+    name: "glShadeModel"
+    arguments:
+      0: "mode"
+    locals: {}
+  gl!jaggl/opengl.glShaderSourceARB (II[Ljava/lang/String;[II)V:
+    owner: "jaggl/opengl"
+    name: "glShaderSourceARB"
+    arguments:
+      0: "shaderObj"
+      1: "count"
+      2: "string"
+      3: "length"
+      4: "lengthOffset"
+    locals: {}
+  gl!jaggl/opengl.glShaderSourceARB0 (IILjava/lang/Object;[II)V:
+    owner: "jaggl/opengl"
+    name: "glShaderSourceARB0"
+    arguments:
+      0: "shaderObj"
+      1: "count"
+      2: "string"
+      3: "length"
+      4: "lengthOffset"
+    locals: {}
+  gl!jaggl/opengl.glTexCoord2f (FF)V:
+    owner: "jaggl/opengl"
+    name: "glTexCoord2f"
+    arguments:
+      0: "s"
+      1: "t"
+    locals: {}
+  gl!jaggl/opengl.glTexCoord2i (II)V:
+    owner: "jaggl/opengl"
+    name: "glTexCoord2i"
+    arguments:
+      0: "s"
+      1: "t"
+    locals: {}
+  gl!jaggl/opengl.glTexCoordPointer (IIIJ)V:
+    owner: "jaggl/opengl"
+    name: "glTexCoordPointer"
+    arguments:
+      0: "size"
+      1: "type"
+      2: "stride"
+      3: "pointer"
+    locals: {}
+  gl!jaggl/opengl.glTexCoordPointer (IIILjava/nio/Buffer;)V:
+    owner: "jaggl/opengl"
+    name: "glTexCoordPointer"
+    arguments:
+      0: "size"
+      1: "type"
+      2: "stride"
+      3: "pointer"
+    locals: {}
+  gl!jaggl/opengl.glTexCoordPointer0 (IIILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glTexCoordPointer0"
+    arguments:
+      0: "size"
+      1: "type"
+      2: "stride"
+      3: "pointer"
+      4: "pointerOffset"
+    locals: {}
+  gl!jaggl/opengl.glTexCoordPointer1 (IIILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glTexCoordPointer1"
+    arguments:
+      0: "size"
+      1: "type"
+      2: "stride"
+      3: "pointer"
+      4: "pointerOffset"
+    locals: {}
+  gl!jaggl/opengl.glTexEnvf (IIF)V:
+    owner: "jaggl/opengl"
+    name: "glTexEnvf"
+    arguments:
+      0: "target"
+      1: "pname"
+      2: "param"
+    locals: {}
+  gl!jaggl/opengl.glTexEnvfv (II[FI)V:
+    owner: "jaggl/opengl"
+    name: "glTexEnvfv"
+    arguments:
+      0: "target"
+      1: "pname"
+      2: "params"
+      3: "paramsOffset"
+    locals: {}
+  gl!jaggl/opengl.glTexEnvfv1 (IILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glTexEnvfv1"
+    arguments:
+      0: "target"
+      1: "pname"
+      2: "params"
+      3: "paramsOffset"
+    locals: {}
+  gl!jaggl/opengl.glTexEnvi (III)V:
+    owner: "jaggl/opengl"
+    name: "glTexEnvi"
+    arguments:
+      0: "target"
+      1: "pname"
+      2: "param"
+    locals: {}
+  gl!jaggl/opengl.glTexGenfv (II[FI)V:
+    owner: "jaggl/opengl"
+    name: "glTexGenfv"
+    arguments:
+      0: "coord"
+      1: "pname"
+      2: "params"
+      3: "paramsOffset"
+    locals: {}
+  gl!jaggl/opengl.glTexGenfv1 (IILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glTexGenfv1"
+    arguments:
+      0: "coord"
+      1: "pname"
+      2: "params"
+      3: "paramsOffset"
+    locals: {}
+  gl!jaggl/opengl.glTexGeni (III)V:
+    owner: "jaggl/opengl"
+    name: "glTexGeni"
+    arguments:
+      0: "coord"
+      1: "pname"
+      2: "param"
+    locals: {}
+  gl!jaggl/opengl.glTexImage1D (IIIIIIILjava/nio/Buffer;)V:
+    owner: "jaggl/opengl"
+    name: "glTexImage1D"
+    arguments:
+      0: "target"
+      1: "level"
+      2: "internalformat"
+      3: "width"
+      4: "border"
+      5: "format"
+      6: "type"
+      7: "pixels"
+    locals: {}
+  gl!jaggl/opengl.glTexImage1D0 (IIIIIIILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glTexImage1D0"
+    arguments:
+      0: "target"
+      1: "level"
+      2: "internalformat"
+      3: "width"
+      4: "border"
+      5: "format"
+      6: "type"
+      7: "pixels"
+      8: "pixelsOffset"
+    locals: {}
+  gl!jaggl/opengl.glTexImage1D1 (IIIIIIILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glTexImage1D1"
+    arguments:
+      0: "target"
+      1: "level"
+      2: "internalformat"
+      3: "width"
+      4: "border"
+      5: "format"
+      6: "type"
+      7: "pixels"
+      8: "pixelsOffset"
+    locals: {}
+  gl!jaggl/opengl.glTexImage2D (IIIIIIIILjava/nio/Buffer;)V:
+    owner: "jaggl/opengl"
+    name: "glTexImage2D"
+    arguments:
+      0: "target"
+      1: "level"
+      2: "internalformat"
+      3: "width"
+      4: "height"
+      5: "border"
+      6: "format"
+      7: "type"
+      8: "pixels"
+    locals: {}
+  gl!jaggl/opengl.glTexImage2D0 (IIIIIIIILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glTexImage2D0"
+    arguments:
+      0: "target"
+      1: "level"
+      2: "internalformat"
+      3: "width"
+      4: "height"
+      5: "border"
+      6: "format"
+      7: "type"
+      8: "pixels"
+      9: "pixelsOffset"
+    locals: {}
+  gl!jaggl/opengl.glTexImage2D1 (IIIIIIIILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glTexImage2D1"
+    arguments:
+      0: "target"
+      1: "level"
+      2: "internalformat"
+      3: "width"
+      4: "height"
+      5: "border"
+      6: "format"
+      7: "type"
+      8: "pixels"
+      9: "pixelsOffset"
+    locals: {}
+  gl!jaggl/opengl.glTexImage3D (IIIIIIIIILjava/nio/Buffer;)V:
+    owner: "jaggl/opengl"
+    name: "glTexImage3D"
+    arguments:
+      0: "target"
+      1: "level"
+      2: "internalformat"
+      3: "width"
+      4: "height"
+      5: "depth"
+      6: "border"
+      7: "format"
+      8: "type"
+      9: "pixels"
+    locals: {}
+  gl!jaggl/opengl.glTexImage3D0 (IIIIIIIIILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glTexImage3D0"
+    arguments:
+      0: "target"
+      1: "level"
+      2: "internalformat"
+      3: "width"
+      4: "height"
+      5: "depth"
+      6: "border"
+      7: "format"
+      8: "type"
+      9: "pixels"
+      10: "pixelsOffset"
+    locals: {}
+  gl!jaggl/opengl.glTexImage3D1 (IIIIIIIIILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glTexImage3D1"
+    arguments:
+      0: "target"
+      1: "level"
+      2: "internalformat"
+      3: "width"
+      4: "height"
+      5: "depth"
+      6: "border"
+      7: "format"
+      8: "type"
+      9: "pixels"
+      10: "pixelsOffset"
+    locals: {}
+  gl!jaggl/opengl.glTexParameteri (III)V:
+    owner: "jaggl/opengl"
+    name: "glTexParameteri"
+    arguments:
+      0: "target"
+      1: "pname"
+      2: "param"
+    locals: {}
+  gl!jaggl/opengl.glTranslatef (FFF)V:
+    owner: "jaggl/opengl"
+    name: "glTranslatef"
+    arguments:
+      0: "x"
+      1: "y"
+      2: "z"
+    locals: {}
+  gl!jaggl/opengl.glUniform1iARB (II)V:
+    owner: "jaggl/opengl"
+    name: "glUniform1iARB"
+    arguments:
+      0: "location"
+      1: "v0"
+    locals: {}
+  gl!jaggl/opengl.glUniform3fARB (IFFF)V:
+    owner: "jaggl/opengl"
+    name: "glUniform3fARB"
+    arguments:
+      0: "location"
+      1: "v0"
+      2: "v1"
+      3: "v2"
+    locals: {}
+  gl!jaggl/opengl.glUseProgramObjectARB (I)V:
+    owner: "jaggl/opengl"
+    name: "glUseProgramObjectARB"
+    arguments:
+      0: "programObj"
+    locals: {}
+  gl!jaggl/opengl.glVertex2f (FF)V:
+    owner: "jaggl/opengl"
+    name: "glVertex2f"
+    arguments:
+      0: "x"
+      1: "y"
+    locals: {}
+  gl!jaggl/opengl.glVertex2i (II)V:
+    owner: "jaggl/opengl"
+    name: "glVertex2i"
+    arguments:
+      0: "x"
+      1: "y"
+    locals: {}
+  gl!jaggl/opengl.glVertexPointer (IIIJ)V:
+    owner: "jaggl/opengl"
+    name: "glVertexPointer"
+    arguments:
+      0: "size"
+      1: "type"
+      2: "stride"
+      3: "pointer"
+    locals: {}
+  gl!jaggl/opengl.glVertexPointer (IIILjava/nio/Buffer;)V:
+    owner: "jaggl/opengl"
+    name: "glVertexPointer"
+    arguments:
+      0: "size"
+      1: "type"
+      2: "stride"
+      3: "pointer"
+    locals: {}
+  gl!jaggl/opengl.glVertexPointer0 (IIILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glVertexPointer0"
+    arguments:
+      0: "size"
+      1: "type"
+      2: "stride"
+      3: "pointer"
+      4: "pointerOffset"
+    locals: {}
+  gl!jaggl/opengl.glVertexPointer1 (IIILjava/lang/Object;I)V:
+    owner: "jaggl/opengl"
+    name: "glVertexPointer1"
+    arguments:
+      0: "size"
+      1: "type"
+      2: "stride"
+      3: "pointer"
+      4: "pointerOffset"
+    locals: {}
+  gl!jaggl/opengl.glViewport (IIII)V:
+    owner: "jaggl/opengl"
+    name: "glViewport"
+    arguments:
+      0: "x"
+      1: "y"
+      2: "width"
+      3: "height"
+    locals: {}
+  gl!jaggl/opengl.isDirect (Ljava/nio/Buffer;)Z:
+    owner: "jaggl/opengl"
+    name: "isDirect"
+    arguments:
+      0: "arg0"
+    locals: {}
+  gl!jaggl/opengl.isExtensionAvailable (Ljava/lang/String;)Z:
+    owner: "jaggl/opengl"
+    name: "isExtensionAvailable"
+    arguments:
+      0: "arg0"
+    locals: {}
+  gl!jaggl/opengl.setSwapInterval (I)V:
+    owner: "jaggl/opengl"
+    name: "setSwapInterval"
+    arguments:
+      0: "arg0"
+    locals: {}
+  gl!javax/media/opengl/GL.glActiveTexture (I)V:
+    owner: "javax/media/opengl/GL"
+    name: "glActiveTexture"
+    arguments:
+      0: "texture"
+    locals: {}
+  gl!javax/media/opengl/GL.glAlphaFunc (IF)V:
+    owner: "javax/media/opengl/GL"
+    name: "glAlphaFunc"
+    arguments:
+      0: "func"
+      1: "ref"
+    locals: {}
+  gl!javax/media/opengl/GL.glAttachObjectARB (II)V:
+    owner: "javax/media/opengl/GL"
+    name: "glAttachObjectARB"
+    arguments:
+      0: "containerObj"
+      1: "obj"
+    locals: {}
+  gl!javax/media/opengl/GL.glBegin (I)V:
+    owner: "javax/media/opengl/GL"
+    name: "glBegin"
+    arguments:
+      0: "mode"
+    locals: {}
+  gl!javax/media/opengl/GL.glBindBufferARB (II)V:
+    owner: "javax/media/opengl/GL"
+    name: "glBindBufferARB"
+    arguments:
+      0: "target"
+      1: "buffer"
+    locals: {}
+  gl!javax/media/opengl/GL.glBindFramebufferEXT (II)V:
+    owner: "javax/media/opengl/GL"
+    name: "glBindFramebufferEXT"
+    arguments:
+      0: "target"
+      1: "framebuffer"
+    locals: {}
+  gl!javax/media/opengl/GL.glBindProgramARB (II)V:
+    owner: "javax/media/opengl/GL"
+    name: "glBindProgramARB"
+    arguments:
+      0: "target"
+      1: "program"
+    locals: {}
+  gl!javax/media/opengl/GL.glBindRenderbufferEXT (II)V:
+    owner: "javax/media/opengl/GL"
+    name: "glBindRenderbufferEXT"
+    arguments:
+      0: "target"
+      1: "renderbuffer"
+    locals: {}
+  gl!javax/media/opengl/GL.glBindTexture (II)V:
+    owner: "javax/media/opengl/GL"
+    name: "glBindTexture"
+    arguments:
+      0: "target"
+      1: "texture"
+    locals: {}
+  gl!javax/media/opengl/GL.glBlendFunc (II)V:
+    owner: "javax/media/opengl/GL"
+    name: "glBlendFunc"
+    arguments:
+      0: "sfactor"
+      1: "dfactor"
+    locals: {}
+  gl!javax/media/opengl/GL.glBufferDataARB (IILjava/nio/Buffer;I)V:
+    owner: "javax/media/opengl/GL"
+    name: "glBufferDataARB"
+    arguments:
+      0: "target"
+      1: "size"
+      2: "data"
+      3: "usage"
+    locals: {}
+  gl!javax/media/opengl/GL.glBufferSubDataARB (IIILjava/nio/Buffer;)V:
+    owner: "javax/media/opengl/GL"
+    name: "glBufferSubDataARB"
+    arguments:
+      0: "target"
+      1: "offset"
+      2: "size"
+      3: "data"
+    locals: {}
+  gl!javax/media/opengl/GL.glCallList (I)V:
+    owner: "javax/media/opengl/GL"
+    name: "glCallList"
+    arguments:
+      0: "list"
+    locals: {}
+  gl!javax/media/opengl/GL.glCheckFramebufferStatusEXT (I)I:
+    owner: "javax/media/opengl/GL"
+    name: "glCheckFramebufferStatusEXT"
+    arguments:
+      0: "target"
+    locals: {}
+  gl!javax/media/opengl/GL.glClear (I)V:
+    owner: "javax/media/opengl/GL"
+    name: "glClear"
+    arguments:
+      0: "mask"
+    locals: {}
+  gl!javax/media/opengl/GL.glClearColor (FFFF)V:
+    owner: "javax/media/opengl/GL"
+    name: "glClearColor"
+    arguments:
+      0: "red"
+      1: "green"
+      2: "blue"
+      3: "alpha"
+    locals: {}
+  gl!javax/media/opengl/GL.glClearDepth (F)V:
+    owner: "javax/media/opengl/GL"
+    name: "glClearDepth"
+    arguments:
+      0: "depth"
+    locals: {}
+  gl!javax/media/opengl/GL.glClientActiveTexture (I)V:
+    owner: "javax/media/opengl/GL"
+    name: "glClientActiveTexture"
+    arguments:
+      0: "texture"
+    locals: {}
+  gl!javax/media/opengl/GL.glColor3ub (BBB)V:
+    owner: "javax/media/opengl/GL"
+    name: "glColor3ub"
+    arguments:
+      0: "red"
+      1: "green"
+      2: "blue"
+    locals: {}
+  gl!javax/media/opengl/GL.glColor4f (FFFF)V:
+    owner: "javax/media/opengl/GL"
+    name: "glColor4f"
+    arguments:
+      0: "red"
+      1: "green"
+      2: "blue"
+      3: "alpha"
+    locals: {}
+  gl!javax/media/opengl/GL.glColor4fv ([FI)V:
+    owner: "javax/media/opengl/GL"
+    name: "glColor4fv"
+    arguments:
+      0: "v"
+      1: "vOffset"
+    locals: {}
+  gl!javax/media/opengl/GL.glColor4ub (BBBB)V:
+    owner: "javax/media/opengl/GL"
+    name: "glColor4ub"
+    arguments:
+      0: "red"
+      1: "green"
+      2: "blue"
+      3: "alpha"
+    locals: {}
+  gl!javax/media/opengl/GL.glColorMask (ZZZZ)V:
+    owner: "javax/media/opengl/GL"
+    name: "glColorMask"
+    arguments:
+      0: "red"
+      1: "green"
+      2: "blue"
+      3: "alpha"
+    locals: {}
+  gl!javax/media/opengl/GL.glColorMaterial (II)V:
+    owner: "javax/media/opengl/GL"
+    name: "glColorMaterial"
+    arguments:
+      0: "face"
+      1: "mode"
+    locals: {}
+  gl!javax/media/opengl/GL.glColorPointer (IIIJ)V:
+    owner: "javax/media/opengl/GL"
+    name: "glColorPointer"
+    arguments:
+      0: "size"
+      1: "type"
+      2: "stride"
+      3: "pointer"
+    locals: {}
+  gl!javax/media/opengl/GL.glColorPointer (IIILjava/nio/Buffer;)V:
+    owner: "javax/media/opengl/GL"
+    name: "glColorPointer"
+    arguments:
+      0: "size"
+      1: "type"
+      2: "stride"
+      3: "pointer"
+    locals: {}
+  gl!javax/media/opengl/GL.glCompileShaderARB (I)V:
+    owner: "javax/media/opengl/GL"
+    name: "glCompileShaderARB"
+    arguments:
+      0: "shaderObj"
+    locals: {}
+  gl!javax/media/opengl/GL.glCopyPixels (IIIII)V:
+    owner: "javax/media/opengl/GL"
+    name: "glCopyPixels"
+    arguments:
+      0: "x"
+      1: "y"
+      2: "width"
+      3: "height"
+      4: "type"
+    locals: {}
+  gl!javax/media/opengl/GL.glCopyTexImage2D (IIIIIIII)V:
+    owner: "javax/media/opengl/GL"
+    name: "glCopyTexImage2D"
+    arguments:
+      0: "target"
+      1: "level"
+      2: "internalformat"
+      3: "x"
+      4: "y"
+      5: "width"
+      6: "height"
+      7: "border"
+    locals: {}
+  gl!javax/media/opengl/GL.glCreateProgramObjectARB ()I:
+    owner: "javax/media/opengl/GL"
+    name: "glCreateProgramObjectARB"
+    arguments: {}
+    locals: {}
+  gl!javax/media/opengl/GL.glCreateShaderObjectARB (I)I:
+    owner: "javax/media/opengl/GL"
+    name: "glCreateShaderObjectARB"
+    arguments:
+      0: "shaderType"
+    locals: {}
+  gl!javax/media/opengl/GL.glCullFace (I)V:
+    owner: "javax/media/opengl/GL"
+    name: "glCullFace"
+    arguments:
+      0: "mode"
+    locals: {}
+  gl!javax/media/opengl/GL.glDeleteBuffersARB (I[II)V:
+    owner: "javax/media/opengl/GL"
+    name: "glDeleteBuffersARB"
+    arguments:
+      0: "n"
+      1: "buffers"
+      2: "buffersOffset"
+    locals: {}
+  gl!javax/media/opengl/GL.glDeleteFramebuffersEXT (I[II)V:
+    owner: "javax/media/opengl/GL"
+    name: "glDeleteFramebuffersEXT"
+    arguments:
+      0: "n"
+      1: "framebuffers"
+      2: "framebuffersOffset"
+    locals: {}
+  gl!javax/media/opengl/GL.glDeleteLists (II)V:
+    owner: "javax/media/opengl/GL"
+    name: "glDeleteLists"
+    arguments:
+      0: "list"
+      1: "range"
+    locals: {}
+  gl!javax/media/opengl/GL.glDeleteObjectARB (I)V:
+    owner: "javax/media/opengl/GL"
+    name: "glDeleteObjectARB"
+    arguments:
+      0: "obj"
+    locals: {}
+  gl!javax/media/opengl/GL.glDeleteRenderbuffersEXT (I[II)V:
+    owner: "javax/media/opengl/GL"
+    name: "glDeleteRenderbuffersEXT"
+    arguments:
+      0: "n"
+      1: "renderbuffers"
+      2: "renderbuffersOffset"
+    locals: {}
+  gl!javax/media/opengl/GL.glDeleteTextures (I[II)V:
+    owner: "javax/media/opengl/GL"
+    name: "glDeleteTextures"
+    arguments:
+      0: "n"
+      1: "textures"
+      2: "texturesOffset"
+    locals: {}
+  gl!javax/media/opengl/GL.glDepthFunc (I)V:
+    owner: "javax/media/opengl/GL"
+    name: "glDepthFunc"
+    arguments:
+      0: "func"
+    locals: {}
+  gl!javax/media/opengl/GL.glDepthMask (Z)V:
+    owner: "javax/media/opengl/GL"
+    name: "glDepthMask"
+    arguments:
+      0: "flag"
+    locals: {}
+  gl!javax/media/opengl/GL.glDetachObjectARB (II)V:
+    owner: "javax/media/opengl/GL"
+    name: "glDetachObjectARB"
+    arguments:
+      0: "containerObj"
+      1: "attachedObj"
+    locals: {}
+  gl!javax/media/opengl/GL.glDisable (I)V:
+    owner: "javax/media/opengl/GL"
+    name: "glDisable"
+    arguments:
+      0: "cap"
+    locals: {}
+  gl!javax/media/opengl/GL.glDisableClientState (I)V:
+    owner: "javax/media/opengl/GL"
+    name: "glDisableClientState"
+    arguments:
+      0: "array"
+    locals: {}
+  gl!javax/media/opengl/GL.glDrawArrays (III)V:
+    owner: "javax/media/opengl/GL"
+    name: "glDrawArrays"
+    arguments:
+      0: "mode"
+      1: "first"
+      2: "count"
+    locals: {}
+  gl!javax/media/opengl/GL.glDrawBuffer (I)V:
+    owner: "javax/media/opengl/GL"
+    name: "glDrawBuffer"
+    arguments:
+      0: "buf"
+    locals: {}
+  gl!javax/media/opengl/GL.glDrawElements (IIIJ)V:
+    owner: "javax/media/opengl/GL"
+    name: "glDrawElements"
+    arguments:
+      0: "mode"
+      1: "count"
+      2: "type"
+      3: "indices"
+    locals: {}
+  gl!javax/media/opengl/GL.glDrawElements (IIILjava/nio/Buffer;)V:
+    owner: "javax/media/opengl/GL"
+    name: "glDrawElements"
+    arguments:
+      0: "mode"
+      1: "count"
+      2: "type"
+      3: "indices"
+    locals: {}
+  gl!javax/media/opengl/GL.glDrawPixels (IIIILjava/nio/Buffer;)V:
+    owner: "javax/media/opengl/GL"
+    name: "glDrawPixels"
+    arguments:
+      0: "width"
+      1: "height"
+      2: "format"
+      3: "type"
+      4: "pixels"
+    locals: {}
+  gl!javax/media/opengl/GL.glEnable (I)V:
+    owner: "javax/media/opengl/GL"
+    name: "glEnable"
+    arguments:
+      0: "cap"
+    locals: {}
+  gl!javax/media/opengl/GL.glEnableClientState (I)V:
+    owner: "javax/media/opengl/GL"
+    name: "glEnableClientState"
+    arguments:
+      0: "array"
+    locals: {}
+  gl!javax/media/opengl/GL.glEnd ()V:
+    owner: "javax/media/opengl/GL"
+    name: "glEnd"
+    arguments: {}
+    locals: {}
+  gl!javax/media/opengl/GL.glEndList ()V:
+    owner: "javax/media/opengl/GL"
+    name: "glEndList"
+    arguments: {}
+    locals: {}
+  gl!javax/media/opengl/GL.glFogf (IF)V:
+    owner: "javax/media/opengl/GL"
+    name: "glFogf"
+    arguments:
+      0: "pname"
+      1: "param"
+    locals: {}
+  gl!javax/media/opengl/GL.glFogfv (I[FI)V:
+    owner: "javax/media/opengl/GL"
+    name: "glFogfv"
+    arguments:
+      0: "pname"
+      1: "params"
+      2: "paramsOffset"
+    locals: {}
+  gl!javax/media/opengl/GL.glFogi (II)V:
+    owner: "javax/media/opengl/GL"
+    name: "glFogi"
+    arguments:
+      0: "pname"
+      1: "param"
+    locals: {}
+  gl!javax/media/opengl/GL.glFramebufferRenderbufferEXT (IIII)V:
+    owner: "javax/media/opengl/GL"
+    name: "glFramebufferRenderbufferEXT"
+    arguments:
+      0: "target"
+      1: "attachment"
+      2: "renderbuffertarget"
+      3: "renderbuffer"
+    locals: {}
+  gl!javax/media/opengl/GL.glFramebufferTexture2DEXT (IIIII)V:
+    owner: "javax/media/opengl/GL"
+    name: "glFramebufferTexture2DEXT"
+    arguments:
+      0: "target"
+      1: "attachment"
+      2: "textarget"
+      3: "texture"
+      4: "level"
+    locals: {}
+  gl!javax/media/opengl/GL.glGenBuffersARB (I[II)V:
+    owner: "javax/media/opengl/GL"
+    name: "glGenBuffersARB"
+    arguments:
+      0: "n"
+      1: "buffers"
+      2: "buffersOffset"
+    locals: {}
+  gl!javax/media/opengl/GL.glGenFramebuffersEXT (I[II)V:
+    owner: "javax/media/opengl/GL"
+    name: "glGenFramebuffersEXT"
+    arguments:
+      0: "n"
+      1: "framebuffers"
+      2: "framebuffersOffset"
+    locals: {}
+  gl!javax/media/opengl/GL.glGenLists (I)I:
+    owner: "javax/media/opengl/GL"
+    name: "glGenLists"
+    arguments:
+      0: "range"
+    locals: {}
+  gl!javax/media/opengl/GL.glGenProgramsARB (I[II)V:
+    owner: "javax/media/opengl/GL"
+    name: "glGenProgramsARB"
+    arguments:
+      0: "n"
+      1: "programs"
+      2: "programsOffset"
+    locals: {}
+  gl!javax/media/opengl/GL.glGenRenderbuffersEXT (I[II)V:
+    owner: "javax/media/opengl/GL"
+    name: "glGenRenderbuffersEXT"
+    arguments:
+      0: "n"
+      1: "renderbuffers"
+      2: "renderbuffersOffset"
+    locals: {}
+  gl!javax/media/opengl/GL.glGenTextures (I[II)V:
+    owner: "javax/media/opengl/GL"
+    name: "glGenTextures"
+    arguments:
+      0: "n"
+      1: "textures"
+      2: "texturesOffset"
+    locals: {}
+  gl!javax/media/opengl/GL.glGetFloatv (ILjava/nio/FloatBuffer;)V:
+    owner: "javax/media/opengl/GL"
+    name: "glGetFloatv"
+    arguments:
+      0: "pname"
+      1: "data"
+    locals: {}
+  gl!javax/media/opengl/GL.glGetFloatv (I[FI)V:
+    owner: "javax/media/opengl/GL"
+    name: "glGetFloatv"
+    arguments:
+      0: "pname"
+      1: "data"
+      2: "dataOffset"
+    locals: {}
+  gl!javax/media/opengl/GL.glGetInfoLogARB (II[II[BI)V:
+    owner: "javax/media/opengl/GL"
+    name: "glGetInfoLogARB"
+    arguments:
+      0: "obj"
+      1: "maxLength"
+      2: "length"
+      3: "lengthOffset"
+      4: "infoLog"
+      5: "infoLogOffset"
+    locals: {}
+  gl!javax/media/opengl/GL.glGetIntegerv (I[II)V:
+    owner: "javax/media/opengl/GL"
+    name: "glGetIntegerv"
+    arguments:
+      0: "pname"
+      1: "data"
+      2: "dataOffset"
+    locals: {}
+  gl!javax/media/opengl/GL.glGetObjectParameterivARB (II[II)V:
+    owner: "javax/media/opengl/GL"
+    name: "glGetObjectParameterivARB"
+    arguments:
+      0: "obj"
+      1: "pname"
+      2: "params"
+      3: "paramsOffset"
+    locals: {}
+  gl!javax/media/opengl/GL.glGetString (I)Ljava/lang/String;:
+    owner: "javax/media/opengl/GL"
+    name: "glGetString"
+    arguments:
+      0: "name"
+    locals: {}
+  gl!javax/media/opengl/GL.glGetUniformLocation (ILjava/lang/String;)I:
+    owner: "javax/media/opengl/GL"
+    name: "glGetUniformLocation"
+    arguments:
+      0: "program"
+      1: "name"
+    locals: {}
+  gl!javax/media/opengl/GL.glHint (II)V:
+    owner: "javax/media/opengl/GL"
+    name: "glHint"
+    arguments:
+      0: "target"
+      1: "mode"
+    locals: {}
+  gl!javax/media/opengl/GL.glInterleavedArrays (IIJ)V:
+    owner: "javax/media/opengl/GL"
+    name: "glInterleavedArrays"
+    arguments:
+      0: "format"
+      1: "stride"
+      2: "pointer"
+    locals: {}
+  gl!javax/media/opengl/GL.glInterleavedArrays (IILjava/nio/Buffer;)V:
+    owner: "javax/media/opengl/GL"
+    name: "glInterleavedArrays"
+    arguments:
+      0: "format"
+      1: "stride"
+      2: "pointer"
+    locals: {}
+  gl!javax/media/opengl/GL.glLightModelfv (I[FI)V:
+    owner: "javax/media/opengl/GL"
+    name: "glLightModelfv"
+    arguments:
+      0: "pname"
+      1: "params"
+      2: "paramsOffset"
+    locals: {}
+  gl!javax/media/opengl/GL.glLightf (IIF)V:
+    owner: "javax/media/opengl/GL"
+    name: "glLightf"
+    arguments:
+      0: "light"
+      1: "pname"
+      2: "param"
+    locals: {}
+  gl!javax/media/opengl/GL.glLightfv (II[FI)V:
+    owner: "javax/media/opengl/GL"
+    name: "glLightfv"
+    arguments:
+      0: "light"
+      1: "pname"
+      2: "params"
+      3: "paramsOffset"
+    locals: {}
+  gl!javax/media/opengl/GL.glLineWidth (F)V:
+    owner: "javax/media/opengl/GL"
+    name: "glLineWidth"
+    arguments:
+      0: "width"
+    locals: {}
+  gl!javax/media/opengl/GL.glLinkProgramARB (I)V:
+    owner: "javax/media/opengl/GL"
+    name: "glLinkProgramARB"
+    arguments:
+      0: "programObj"
+    locals: {}
+  gl!javax/media/opengl/GL.glLoadIdentity ()V:
+    owner: "javax/media/opengl/GL"
+    name: "glLoadIdentity"
+    arguments: {}
+    locals: {}
+  gl!javax/media/opengl/GL.glLoadMatrixf ([FI)V:
+    owner: "javax/media/opengl/GL"
+    name: "glLoadMatrixf"
+    arguments:
+      0: "m"
+      1: "mOffset"
+    locals: {}
+  gl!javax/media/opengl/GL.glMaterialfv (II[FI)V:
+    owner: "javax/media/opengl/GL"
+    name: "glMaterialfv"
+    arguments:
+      0: "face"
+      1: "pname"
+      2: "params"
+      3: "paramsOffset"
+    locals: {}
+  gl!javax/media/opengl/GL.glMatrixMode (I)V:
+    owner: "javax/media/opengl/GL"
+    name: "glMatrixMode"
+    arguments:
+      0: "mode"
+    locals: {}
+  gl!javax/media/opengl/GL.glMultiTexCoord2f (IFF)V:
+    owner: "javax/media/opengl/GL"
+    name: "glMultiTexCoord2f"
+    arguments:
+      0: "target"
+      1: "s"
+      2: "t"
+    locals: {}
+  gl!javax/media/opengl/GL.glMultiTexCoord2i (III)V:
+    owner: "javax/media/opengl/GL"
+    name: "glMultiTexCoord2i"
+    arguments:
+      0: "target"
+      1: "s"
+      2: "t"
+    locals: {}
+  gl!javax/media/opengl/GL.glNewList (II)V:
+    owner: "javax/media/opengl/GL"
+    name: "glNewList"
+    arguments:
+      0: "list"
+      1: "mode"
+    locals: {}
+  gl!javax/media/opengl/GL.glNormal3f (FFF)V:
+    owner: "javax/media/opengl/GL"
+    name: "glNormal3f"
+    arguments:
+      0: "nx"
+      1: "ny"
+      2: "nz"
+    locals: {}
+  gl!javax/media/opengl/GL.glNormalPointer (IIJ)V:
+    owner: "javax/media/opengl/GL"
+    name: "glNormalPointer"
+    arguments:
+      0: "type"
+      1: "stride"
+      2: "pointer"
+    locals: {}
+  gl!javax/media/opengl/GL.glNormalPointer (IILjava/nio/Buffer;)V:
+    owner: "javax/media/opengl/GL"
+    name: "glNormalPointer"
+    arguments:
+      0: "type"
+      1: "stride"
+      2: "pointer"
+    locals: {}
+  gl!javax/media/opengl/GL.glOrtho (DDDDDD)V:
+    owner: "javax/media/opengl/GL"
+    name: "glOrtho"
+    arguments:
+      0: "left"
+      1: "right"
+      2: "bottom"
+      3: "top"
+      4: "zNear"
+      5: "zFar"
+    locals: {}
+  gl!javax/media/opengl/GL.glPointParameterfARB (IF)V:
+    owner: "javax/media/opengl/GL"
+    name: "glPointParameterfARB"
+    arguments:
+      0: "pname"
+      1: "param"
+    locals: {}
+  gl!javax/media/opengl/GL.glPointParameterfvARB (I[FI)V:
+    owner: "javax/media/opengl/GL"
+    name: "glPointParameterfvARB"
+    arguments:
+      0: "pname"
+      1: "params"
+      2: "paramsOffset"
+    locals: {}
+  gl!javax/media/opengl/GL.glPointSize (F)V:
+    owner: "javax/media/opengl/GL"
+    name: "glPointSize"
+    arguments:
+      0: "size"
+    locals: {}
+  gl!javax/media/opengl/GL.glPolygonMode (II)V:
+    owner: "javax/media/opengl/GL"
+    name: "glPolygonMode"
+    arguments:
+      0: "face"
+      1: "mode"
+    locals: {}
+  gl!javax/media/opengl/GL.glPopAttrib ()V:
+    owner: "javax/media/opengl/GL"
+    name: "glPopAttrib"
+    arguments: {}
+    locals: {}
+  gl!javax/media/opengl/GL.glPopMatrix ()V:
+    owner: "javax/media/opengl/GL"
+    name: "glPopMatrix"
+    arguments: {}
+    locals: {}
+  gl!javax/media/opengl/GL.glProgramLocalParameter4fARB (IIFFFF)V:
+    owner: "javax/media/opengl/GL"
+    name: "glProgramLocalParameter4fARB"
+    arguments:
+      0: "target"
+      1: "index"
+      2: "x"
+      3: "y"
+      4: "z"
+      5: "w"
+    locals: {}
+  gl!javax/media/opengl/GL.glProgramLocalParameter4fvARB (IILjava/nio/FloatBuffer;)V:
+    owner: "javax/media/opengl/GL"
+    name: "glProgramLocalParameter4fvARB"
+    arguments:
+      0: "target"
+      1: "index"
+      2: "params"
+    locals: {}
+  gl!javax/media/opengl/GL.glProgramLocalParameter4fvARB (II[FI)V:
+    owner: "javax/media/opengl/GL"
+    name: "glProgramLocalParameter4fvARB"
+    arguments:
+      0: "target"
+      1: "index"
+      2: "params"
+      3: "paramsOffset"
+    locals: {}
+  gl!javax/media/opengl/GL.glProgramStringARB (IIILjava/lang/String;)V:
+    owner: "javax/media/opengl/GL"
+    name: "glProgramStringARB"
+    arguments:
+      0: "target"
+      1: "format"
+      2: "len"
+      3: "string"
+    locals: {}
+  gl!javax/media/opengl/GL.glPushAttrib (I)V:
+    owner: "javax/media/opengl/GL"
+    name: "glPushAttrib"
+    arguments:
+      0: "mask"
+    locals: {}
+  gl!javax/media/opengl/GL.glPushMatrix ()V:
+    owner: "javax/media/opengl/GL"
+    name: "glPushMatrix"
+    arguments: {}
+    locals: {}
+  gl!javax/media/opengl/GL.glRasterPos2i (II)V:
+    owner: "javax/media/opengl/GL"
+    name: "glRasterPos2i"
+    arguments:
+      0: "x"
+      1: "y"
+    locals: {}
+  gl!javax/media/opengl/GL.glReadBuffer (I)V:
+    owner: "javax/media/opengl/GL"
+    name: "glReadBuffer"
+    arguments:
+      0: "src"
+    locals: {}
+  gl!javax/media/opengl/GL.glRenderbufferStorageEXT (IIII)V:
+    owner: "javax/media/opengl/GL"
+    name: "glRenderbufferStorageEXT"
+    arguments:
+      0: "target"
+      1: "internalformat"
+      2: "width"
+      3: "height"
+    locals: {}
+  gl!javax/media/opengl/GL.glRotatef (FFFF)V:
+    owner: "javax/media/opengl/GL"
+    name: "glRotatef"
+    arguments:
+      0: "angle"
+      1: "x"
+      2: "y"
+      3: "z"
+    locals: {}
+  gl!javax/media/opengl/GL.glScalef (FFF)V:
+    owner: "javax/media/opengl/GL"
+    name: "glScalef"
+    arguments:
+      0: "x"
+      1: "y"
+      2: "z"
+    locals: {}
+  gl!javax/media/opengl/GL.glScissor (IIII)V:
+    owner: "javax/media/opengl/GL"
+    name: "glScissor"
+    arguments:
+      0: "x"
+      1: "y"
+      2: "width"
+      3: "height"
+    locals: {}
+  gl!javax/media/opengl/GL.glShadeModel (I)V:
+    owner: "javax/media/opengl/GL"
+    name: "glShadeModel"
+    arguments:
+      0: "mode"
+    locals: {}
+  gl!javax/media/opengl/GL.glShaderSourceARB (II[Ljava/lang/String;[II)V:
+    owner: "javax/media/opengl/GL"
+    name: "glShaderSourceARB"
+    arguments:
+      0: "shaderObj"
+      1: "count"
+      2: "string"
+      3: "length"
+      4: "lengthOffset"
+    locals: {}
+  gl!javax/media/opengl/GL.glTexCoord2f (FF)V:
+    owner: "javax/media/opengl/GL"
+    name: "glTexCoord2f"
+    arguments:
+      0: "s"
+      1: "t"
+    locals: {}
+  gl!javax/media/opengl/GL.glTexCoord2i (II)V:
+    owner: "javax/media/opengl/GL"
+    name: "glTexCoord2i"
+    arguments:
+      0: "s"
+      1: "t"
+    locals: {}
+  gl!javax/media/opengl/GL.glTexCoordPointer (IIIJ)V:
+    owner: "javax/media/opengl/GL"
+    name: "glTexCoordPointer"
+    arguments:
+      0: "size"
+      1: "type"
+      2: "stride"
+      3: "pointer"
+    locals: {}
+  gl!javax/media/opengl/GL.glTexCoordPointer (IIILjava/nio/Buffer;)V:
+    owner: "javax/media/opengl/GL"
+    name: "glTexCoordPointer"
+    arguments:
+      0: "size"
+      1: "type"
+      2: "stride"
+      3: "pointer"
+    locals: {}
+  gl!javax/media/opengl/GL.glTexEnvf (IIF)V:
+    owner: "javax/media/opengl/GL"
+    name: "glTexEnvf"
+    arguments:
+      0: "target"
+      1: "pname"
+      2: "param"
+    locals: {}
+  gl!javax/media/opengl/GL.glTexEnvfv (II[FI)V:
+    owner: "javax/media/opengl/GL"
+    name: "glTexEnvfv"
+    arguments:
+      0: "target"
+      1: "pname"
+      2: "params"
+      3: "paramsOffset"
+    locals: {}
+  gl!javax/media/opengl/GL.glTexEnvi (III)V:
+    owner: "javax/media/opengl/GL"
+    name: "glTexEnvi"
+    arguments:
+      0: "target"
+      1: "pname"
+      2: "param"
+    locals: {}
+  gl!javax/media/opengl/GL.glTexGenfv (II[FI)V:
+    owner: "javax/media/opengl/GL"
+    name: "glTexGenfv"
+    arguments:
+      0: "coord"
+      1: "pname"
+      2: "params"
+      3: "paramsOffset"
+    locals: {}
+  gl!javax/media/opengl/GL.glTexGeni (III)V:
+    owner: "javax/media/opengl/GL"
+    name: "glTexGeni"
+    arguments:
+      0: "coord"
+      1: "pname"
+      2: "param"
+    locals: {}
+  gl!javax/media/opengl/GL.glTexImage1D (IIIIIIILjava/nio/Buffer;)V:
+    owner: "javax/media/opengl/GL"
+    name: "glTexImage1D"
+    arguments:
+      0: "target"
+      1: "level"
+      2: "internalformat"
+      3: "width"
+      4: "border"
+      5: "format"
+      6: "type"
+      7: "pixels"
+    locals: {}
+  gl!javax/media/opengl/GL.glTexImage2D (IIIIIIIILjava/nio/Buffer;)V:
+    owner: "javax/media/opengl/GL"
+    name: "glTexImage2D"
+    arguments:
+      0: "target"
+      1: "level"
+      2: "internalformat"
+      3: "width"
+      4: "height"
+      5: "border"
+      6: "format"
+      7: "type"
+      8: "pixels"
+    locals: {}
+  gl!javax/media/opengl/GL.glTexImage3D (IIIIIIIIILjava/nio/Buffer;)V:
+    owner: "javax/media/opengl/GL"
+    name: "glTexImage3D"
+    arguments:
+      0: "target"
+      1: "level"
+      2: "internalformat"
+      3: "width"
+      4: "height"
+      5: "depth"
+      6: "border"
+      7: "format"
+      8: "type"
+      9: "pixels"
+    locals: {}
+  gl!javax/media/opengl/GL.glTexParameteri (III)V:
+    owner: "javax/media/opengl/GL"
+    name: "glTexParameteri"
+    arguments:
+      0: "target"
+      1: "pname"
+      2: "param"
+    locals: {}
+  gl!javax/media/opengl/GL.glTranslatef (FFF)V:
+    owner: "javax/media/opengl/GL"
+    name: "glTranslatef"
+    arguments:
+      0: "x"
+      1: "y"
+      2: "z"
+    locals: {}
+  gl!javax/media/opengl/GL.glUniform1iARB (II)V:
+    owner: "javax/media/opengl/GL"
+    name: "glUniform1iARB"
+    arguments:
+      0: "location"
+      1: "v0"
+    locals: {}
+  gl!javax/media/opengl/GL.glUniform3fARB (IFFF)V:
+    owner: "javax/media/opengl/GL"
+    name: "glUniform3fARB"
+    arguments:
+      0: "location"
+      1: "v0"
+      2: "v1"
+      3: "v2"
+    locals: {}
+  gl!javax/media/opengl/GL.glUseProgramObjectARB (I)V:
+    owner: "javax/media/opengl/GL"
+    name: "glUseProgramObjectARB"
+    arguments:
+      0: "programObj"
+    locals: {}
+  gl!javax/media/opengl/GL.glVertex2f (FF)V:
+    owner: "javax/media/opengl/GL"
+    name: "glVertex2f"
+    arguments:
+      0: "x"
+      1: "y"
+    locals: {}
+  gl!javax/media/opengl/GL.glVertex2i (II)V:
+    owner: "javax/media/opengl/GL"
+    name: "glVertex2i"
+    arguments:
+      0: "x"
+      1: "y"
+    locals: {}
+  gl!javax/media/opengl/GL.glVertexPointer (IIIJ)V:
+    owner: "javax/media/opengl/GL"
+    name: "glVertexPointer"
+    arguments:
+      0: "size"
+      1: "type"
+      2: "stride"
+      3: "pointer"
+    locals: {}
+  gl!javax/media/opengl/GL.glVertexPointer (IIILjava/nio/Buffer;)V:
+    owner: "javax/media/opengl/GL"
+    name: "glVertexPointer"
+    arguments:
+      0: "size"
+      1: "type"
+      2: "stride"
+      3: "pointer"
+    locals: {}
+  gl!javax/media/opengl/GL.glViewport (IIII)V:
+    owner: "javax/media/opengl/GL"
+    name: "glViewport"
+    arguments:
+      0: "x"
+      1: "y"
+      2: "width"
+      3: "height"
+    locals: {}
+  gl!javax/media/opengl/GL.isExtensionAvailable (Ljava/lang/String;)Z:
+    owner: "javax/media/opengl/GL"
+    name: "isExtensionAvailable"
+    arguments:
+      0: "arg0"
+    locals: {}
+  gl!javax/media/opengl/GL.setSwapInterval (I)V:
+    owner: "javax/media/opengl/GL"
+    name: "setSwapInterval"
+    arguments:
+      0: "arg0"
+    locals: {}
+  gl!javax/media/opengl/GLCapabilities.clone ()Ljava/lang/Object;:
+    owner: "javax/media/opengl/GLCapabilities"
+    name: "clone"
+    arguments: {}
+    locals:
+      3: "local3"
+  gl!javax/media/opengl/GLContext.<init> ()V:
+    owner: "javax/media/opengl/GLContext"
+    name: "<init>"
+    arguments: {}
+    locals: {}
+  gl!javax/media/opengl/GLContext.destroy ()V:
+    owner: "javax/media/opengl/GLContext"
+    name: "destroy"
+    arguments: {}
+    locals: {}
+  gl!javax/media/opengl/GLContext.getCurrent ()Lgl!javax/media/opengl/GLContext;:
+    owner: "javax/media/opengl/GLContext"
+    name: "getCurrent"
+    arguments: {}
+    locals: {}
+  gl!javax/media/opengl/GLContext.getGL ()Lgl!javax/media/opengl/GL;:
+    owner: "javax/media/opengl/GLContext"
+    name: "getGL"
+    arguments: {}
+    locals: {}
+  gl!javax/media/opengl/GLContext.makeCurrent ()I:
+    owner: "javax/media/opengl/GLContext"
+    name: "makeCurrent"
+    arguments: {}
+    locals: {}
+  gl!javax/media/opengl/GLContext.release ()V:
+    owner: "javax/media/opengl/GLContext"
+    name: "release"
+    arguments: {}
+    locals: {}
+  gl!javax/media/opengl/GLContext.setCurrent (Lgl!javax/media/opengl/GLContext;)V:
+    owner: "javax/media/opengl/GLContext"
+    name: "setCurrent"
+    arguments:
+      0: "arg0"
+    locals: {}
+  gl!javax/media/opengl/GLDrawable.createContext (Lgl!javax/media/opengl/GLContext;)Lgl!javax/media/opengl/GLContext;:
+    owner: "javax/media/opengl/GLDrawable"
+    name: "createContext"
+    arguments:
+      0: "arg0"
+    locals: {}
+  gl!javax/media/opengl/GLDrawable.setRealized (Z)V:
+    owner: "javax/media/opengl/GLDrawable"
+    name: "setRealized"
+    arguments:
+      0: "arg0"
+    locals: {}
+  gl!javax/media/opengl/GLDrawable.swapBuffers ()V:
+    owner: "javax/media/opengl/GLDrawable"
+    name: "swapBuffers"
+    arguments: {}
+    locals: {}
+  gl!javax/media/opengl/GLDrawableFactory.getFactory ()Lgl!javax/media/opengl/GLDrawableFactory;:
+    owner: "javax/media/opengl/GLDrawableFactory"
+    name: "getFactory"
+    arguments: {}
+    locals: {}
+  ? gl!javax/media/opengl/GLDrawableFactory.getGLDrawable (Ljava/lang/Object;Lgl!javax/media/opengl/GLCapabilities;Lgl!javax/media/opengl/GLCapabilitiesChooser;)Lgl!javax/media/opengl/GLDrawable;
+  : owner: "javax/media/opengl/GLDrawableFactory"
+    name: "getGLDrawable"
+    arguments:
+      0: "arg0"
+      1: "arg1"
+      2: "arg2"
+    locals: {}
+  gl!javax/media/opengl/GLException.<init> (Ljava/lang/String;)V:
+    owner: "javax/media/opengl/GLException"
+    name: "<init>"
+    arguments:
+      0: "arg0"
+    locals: {}
+  gl!javax/media/opengl/GLException.<init> (Ljava/lang/Throwable;)V:
+    owner: "javax/media/opengl/GLException"
+    name: "<init>"
+    arguments:
+      0: "arg0"
+    locals: {}

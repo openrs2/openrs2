@@ -1,0 +1,360 @@
+---
+classes:
+  loader!a: "unpack_Sub1"
+  loader!b: "Class190"
+  loader!d: "ClassLoader_Sub1"
+  loader!f: "Class191"
+  loader!g: "RuntimeException_Sub2"
+  loader!loader: "loader"
+fields:
+  loader!b.a Ljava/lang/String;:
+    owner: "Class190"
+    name: "aString370"
+  loader!b.b Ljava/lang/String;:
+    owner: "Class190"
+    name: "aString371"
+  loader!b.c [Ljava/lang/String;:
+    owner: "Class190"
+    name: "aStringArray45"
+  loader!b.d [I:
+    owner: "Class190"
+    name: "anIntArray682"
+  loader!b.e I:
+    owner: "Class190"
+    name: "anInt6096"
+  loader!b.f I:
+    owner: "Class190"
+    name: "anInt6097"
+  loader!d.a Ljava/util/Hashtable;:
+    owner: "ClassLoader_Sub1"
+    name: "aHashtable1"
+  loader!d.b Lunpack!unpack;:
+    owner: "ClassLoader_Sub1"
+    name: "anUnpack1"
+  loader!d.c Ljava/security/ProtectionDomain;:
+    owner: "ClassLoader_Sub1"
+    name: "aProtectionDomain1"
+  loader!d.d Lunpack!unpack;:
+    owner: "ClassLoader_Sub1"
+    name: "anUnpack2"
+  loader!f.a Lloader!b;:
+    owner: "Class191"
+    name: "aClass190_1"
+  loader!f.b Lloader!b;:
+    owner: "Class191"
+    name: "aClass190_2"
+  loader!f.c Lloader!b;:
+    owner: "Class191"
+    name: "aClass190_3"
+  loader!f.d Lloader!b;:
+    owner: "Class191"
+    name: "aClass190_4"
+  loader!f.e Lloader!b;:
+    owner: "Class191"
+    name: "aClass190_5"
+  loader!f.f [[Lloader!b;:
+    owner: "Class191"
+    name: "aClass190ArrayArray1"
+  loader!f.g [Lloader!b;:
+    owner: "Class191"
+    name: "aClass190Array1"
+  loader!g.a Ljava/lang/Throwable;:
+    owner: "RuntimeException_Sub2"
+    name: "aThrowable2"
+  loader!g.b I:
+    owner: "RuntimeException_Sub2"
+    name: "anInt6099"
+  loader!g.c Ljava/lang/String;:
+    owner: "RuntimeException_Sub2"
+    name: "aString372"
+  loader!loader.a Z:
+    owner: "loader"
+    name: "aBoolean423"
+  loader!loader.b Ljava/lang/String;:
+    owner: "loader"
+    name: "aString373"
+  loader!loader.c Z:
+    owner: "loader"
+    name: "aBoolean424"
+  loader!loader.d Ljava/applet/Applet;:
+    owner: "loader"
+    name: "anApplet1"
+  loader!loader.e I:
+    owner: "loader"
+    name: "anInt6101"
+  loader!loader.f Z:
+    owner: "loader"
+    name: "aBoolean425"
+  loader!loader.g Z:
+    owner: "loader"
+    name: "aBoolean426"
+  loader!loader.h I:
+    owner: "loader"
+    name: "anInt6102"
+  loader!loader.i Ljava/lang/String;:
+    owner: "loader"
+    name: "aString374"
+  loader!loader.j I:
+    owner: "loader"
+    name: "anInt6103"
+  loader!loader.k I:
+    owner: "loader"
+    name: "anInt6104"
+  loader!loader.l Ljava/lang/String;:
+    owner: "loader"
+    name: "aString375"
+methods:
+  loader!a.<init> ([B)V:
+    owner: "unpack_Sub1"
+    name: "<init>"
+    arguments:
+      0: "arg0"
+    locals: {}
+  loader!a.a (I[B)[B:
+    owner: "unpack_Sub1"
+    name: "method4830"
+    arguments:
+      1: "arg0"
+    locals:
+      5: "local5"
+      24: "local24"
+  loader!b.<init> (Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;II[I)V:
+    owner: "Class190"
+    name: "<init>"
+    arguments:
+      0: "arg0"
+      1: "arg1"
+      2: "arg2"
+      3: "arg3"
+      4: "arg4"
+      5: "arg5"
+    locals: {}
+  loader!d.<init> ()V:
+    owner: "ClassLoader_Sub1"
+    name: "<init>"
+    arguments: {}
+    locals:
+      15: "local15"
+      19: "local19"
+  loader!d.loadClass (Ljava/lang/String;Z)Ljava/lang/Class;:
+    owner: "ClassLoader_Sub1"
+    name: "loadClass"
+    arguments:
+      0: "arg0"
+      1: "arg1"
+    locals:
+      5: "local5"
+      21: "local21"
+      35: "local35"
+      54: "local54"
+      65: "local65"
+  loader!g.<init> (Ljava/lang/Throwable;Ljava/lang/String;)V:
+    owner: "RuntimeException_Sub2"
+    name: "<init>"
+    arguments:
+      0: "arg0"
+      1: "arg1"
+    locals: {}
+  loader!g.a (Ljava/lang/String;BLjava/lang/String;Ljava/lang/String;)Ljava/lang/String;:
+    owner: "RuntimeException_Sub2"
+    name: "method4832"
+    arguments:
+      0: "arg0"
+      2: "arg1"
+      3: "arg2"
+    locals:
+      5: "local5"
+  loader!g.a (Ljava/lang/String;I)V:
+    owner: "RuntimeException_Sub2"
+    name: "method4833"
+    arguments:
+      0: "arg0"
+    locals: {}
+  loader!g.a (Ljava/lang/Throwable;I)Ljava/lang/String;:
+    owner: "RuntimeException_Sub2"
+    name: "method4831"
+    arguments:
+      0: "arg0"
+    locals:
+      6: "local6"
+      16: "local16"
+      33: "local33"
+      38: "local38"
+      46: "local46"
+      54: "local54"
+      57: "local57"
+      60: "local60"
+      67: "local67"
+      74: "local74"
+      80: "local80"
+      90: "local90"
+      115: "local115"
+      129: "local129"
+  loader!g.a (Ljava/lang/Throwable;Ljava/lang/String;)Lloader!g;:
+    owner: "RuntimeException_Sub2"
+    name: "method4835"
+    arguments:
+      0: "arg0"
+      1: "arg1"
+    locals:
+      5: "local5"
+  loader!g.a (Ljava/lang/Throwable;ZLjava/applet/Applet;Ljava/lang/String;)V:
+    owner: "RuntimeException_Sub2"
+    name: "method4834"
+    arguments:
+      0: "arg0"
+      2: "arg1"
+      3: "arg2"
+    locals:
+      1: "local1"
+      42: "local42"
+      90: "local90"
+      96: "local96"
+      103: "local103"
+  loader!loader.a (ILjava/lang/String;)V:
+    owner: "loader"
+    name: "method4837"
+    arguments:
+      1: "arg0"
+    locals:
+      56: "local56"
+  loader!loader.a (Ljava/io/File;I)[B:
+    owner: "loader"
+    name: "method4840"
+    arguments:
+      0: "arg0"
+    locals:
+      8: "local8"
+      11: "local11"
+      29: "local29"
+      39: "local39"
+  loader!loader.a (Lloader!b;[BZB)Z:
+    owner: "loader"
+    name: "method4836"
+    arguments:
+      0: "arg0"
+      1: "arg1"
+      2: "arg2"
+    locals:
+      9: "local9"
+      22: "local22"
+      24: "local24"
+      45: "local45"
+  loader!loader.a (ZILloader!b;)[B:
+    owner: "loader"
+    name: "method4838"
+    arguments:
+      0: "arg0"
+      2: "arg1"
+    locals:
+      8: "local8"
+      12: "local12"
+      17: "local17"
+      21: "local21"
+      26: "local26"
+      34: "local34"
+      40: "local40"
+      63: "local63"
+      76: "local76"
+      86: "local86"
+      100: "local100"
+      113: "local113"
+      134: "local134"
+      145: "local145"
+      196: "local196"
+      225: "local225"
+      242: "local242"
+      247: "local247"
+      258: "local258"
+  loader!loader.a (ZILsignlink!pm;Lloader!b;)[B:
+    owner: "loader"
+    name: "method4839"
+    arguments:
+      0: "arg0"
+      2: "arg1"
+      3: "arg2"
+    locals:
+      7: "local7"
+      9: "local9"
+      26: "local26"
+      39: "local39"
+  loader!loader.a ([BLjava/io/File;B)Z:
+    owner: "loader"
+    name: "method4841"
+    arguments:
+      0: "arg0"
+      1: "arg1"
+    locals:
+      4: "local4"
+      21: "local21"
+  loader!loader.destroy ()V:
+    owner: "loader"
+    name: "destroy"
+    arguments: {}
+    locals: {}
+  loader!loader.init ()V:
+    owner: "loader"
+    name: "init"
+    arguments: {}
+    locals:
+      7: "local7"
+  loader!loader.paint (Ljava/awt/Graphics;)V:
+    owner: "loader"
+    name: "paint"
+    arguments:
+      0: "arg0"
+    locals: {}
+  loader!loader.run ()V:
+    owner: "loader"
+    name: "run"
+    arguments: {}
+    locals:
+      10: "local10"
+      18: "local18"
+      31: "local31"
+      36: "local36"
+      42: "local42"
+      64: "local64"
+      92: "local92"
+      100: "local100"
+      104: "local104"
+      112: "local112"
+      121: "local121"
+      123: "local123"
+      132: "local132"
+      142: "local142"
+      160: "local160"
+      171: "local171"
+      182: "local182"
+      189: "local189"
+      198: "local198"
+      216: "local216"
+      253: "local253"
+      288: "local288"
+      292: "local292"
+      337: "local337"
+      360: "local360"
+      376: "local376"
+      385: "local385"
+      395: "local395"
+      413: "local413"
+      420: "local420"
+      430: "local430"
+      532: "local532"
+      541: "local541"
+  loader!loader.start ()V:
+    owner: "loader"
+    name: "start"
+    arguments: {}
+    locals: {}
+  loader!loader.stop ()V:
+    owner: "loader"
+    name: "stop"
+    arguments: {}
+    locals: {}
+  loader!loader.update (Ljava/awt/Graphics;)V:
+    owner: "loader"
+    name: "update"
+    arguments:
+      0: "arg0"
+    locals: {}

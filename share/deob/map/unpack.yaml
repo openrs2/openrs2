@@ -1,0 +1,33 @@
+---
+classes:
+  unpack!unpack: "unpack"
+fields:
+  unpack!unpack.cache Ljava/util/Hashtable;:
+    owner: "unpack"
+    name: "cache"
+methods:
+  unpack!unpack.<init> ()V:
+    owner: "unpack"
+    name: "<init>"
+    arguments: {}
+    locals: {}
+  unpack!unpack.<init> ([B)V:
+    owner: "unpack"
+    name: "<init>"
+    arguments:
+      0: "arg0"
+    locals:
+      9: "local9"
+      17: "local17"
+      20: "local20"
+      26: "local26"
+      38: "local38"
+      47: "local47"
+      53: "local53"
+      66: "local66"
+  unpack!unpack.a (Ljava/lang/String;B)[B:
+    owner: "unpack"
+    name: "method4948"
+    arguments:
+      0: "arg0"
+    locals: {}
