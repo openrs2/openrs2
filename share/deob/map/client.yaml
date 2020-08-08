@@ -86,7 +86,7 @@ classes:
   client!gn: "Class4_Sub11"
   client!go: "Class72"
   client!h: "Class73"
-  client!hc: "Class75"
+  client!hc: "ByteArray"
   client!he: "Class53_Sub2"
   client!hf: "Class77_Sub1"
   client!hi: "Class79"
@@ -124,7 +124,7 @@ classes:
   client!kf: "Class104"
   client!kg: "Class105"
   client!kh: "Class4_Sub3_Sub4_Sub2"
-  client!ki: "Class75_Sub1"
+  client!ki: "DirectByteArray"
   client!kj: "Interface3"
   client!kk: "Class106"
   client!kl: "Class4_Sub1_Sub13"
@@ -3243,8 +3243,8 @@ fields:
     owner: "Class4_Sub11"
     name: "anInt2113"
   client!gn.v Z:
-    owner: "Static3"
-    name: "aBoolean145"
+    owner: "ByteArray"
+    name: "directBuffersUnsupported"
   client!gn.x I:
     owner: "Class4_Sub11"
     name: "anInt2115"
@@ -4911,8 +4911,8 @@ fields:
     owner: "Class4_Sub3_Sub4_Sub2"
     name: "aSoftReference1"
   client!ki.e Ljava/nio/ByteBuffer;:
-    owner: "Class75_Sub1"
-    name: "aByteBuffer11"
+    owner: "DirectByteArray"
+    name: "buffer"
   client!kk.a [B:
     owner: "Class106"
     name: "aByteArray30"
@@ -14210,13 +14210,13 @@ methods:
       0: "arg0"
     locals: {}
   client!c.a ([BZI)Ljava/lang/Object;:
-    owner: "Static10"
-    name: "method461"
+    owner: "ByteArray"
+    name: "wrap"
     arguments:
-      0: "arg0"
+      0: "bytes"
     locals:
-      19: "local19"
-      26: "local26"
+      19: "array"
+      26: "ex"
   client!c.b (IB)Z:
     owner: "Class24_Sub1"
     name: "method442"
@@ -21854,8 +21854,8 @@ methods:
       1: "arg1"
     locals: {}
   client!hc.a (I)[B:
-    owner: "Class75"
-    name: "method2324"
+    owner: "ByteArray"
+    name: "get"
     arguments: {}
     locals: {}
   client!hc.a (IB)V:
@@ -21864,10 +21864,10 @@ methods:
     arguments: {}
     locals: {}
   client!hc.a (I[B)V:
-    owner: "Class75"
-    name: "method2325"
+    owner: "ByteArray"
+    name: "set"
     arguments:
-      1: "arg0"
+      1: "bytes"
     locals: {}
   client!hd.a (IIII)V:
     owner: "Static18"
@@ -26381,16 +26381,16 @@ methods:
     arguments: {}
     locals: {}
   client!ki.a (I)[B:
-    owner: "Class75_Sub1"
-    name: "method2324"
+    owner: "DirectByteArray"
+    name: "get"
     arguments: {}
     locals:
-      4: "local4"
+      4: "bytes"
   client!ki.a (I[B)V:
-    owner: "Class75_Sub1"
-    name: "method2325"
+    owner: "DirectByteArray"
+    name: "set"
     arguments:
-      1: "arg0"
+      1: "bytes"
     locals: {}
   client!kj.a (IB)Lclient!mi;:
     owner: "Interface3"
@@ -35592,14 +35592,14 @@ methods:
       124: "local124"
       134: "local134"
   client!qa.a (IZLjava/lang/Object;)[B:
-    owner: "Static29"
-    name: "method3492"
+    owner: "ByteArray"
+    name: "unwrap"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "in"
+      1: "copy"
     locals:
-      20: "local20"
-      34: "local34"
+      20: "bytes"
+      34: "array"
   client!qa.a (Lclient!nh;Z)V:
     owner: "Static29"
     name: "method3493"
@@ -43702,13 +43702,13 @@ methods:
       2: "arg1"
     locals: {}
   client!vf.a ([BI)[B:
-    owner: "Static36"
-    name: "method4445"
+    owner: "ByteArray"
+    name: "copy"
     arguments:
-      0: "arg0"
+      0: "in"
     locals:
-      14: "local14"
-      17: "local17"
+      14: "len"
+      17: "out"
   client!vg.a (I)V:
     owner: "Class53_Sub4"
     name: "method3815"

@@ -1,6 +1,6 @@
 ---
 classes:
-  unpackclass!a: "Class198"
+  unpackclass!a: "ByteArray"
   unpackclass!aa: "Class199"
   unpackclass!c: "Class200"
   unpackclass!e: "Class201_Sub1"
@@ -22,8 +22,8 @@ classes:
   unpackclass!w: "Node"
 fields:
   unpackclass!a.a Z:
-    owner: "Class198"
-    name: "aBoolean428"
+    owner: "ByteArray"
+    name: "directBuffersUnsupported"
   unpackclass!aa.a I:
     owner: "Class199"
     name: "anInt6141"
@@ -413,40 +413,40 @@ fields:
     name: "prev"
 methods:
   unpackclass!a.a ()[B:
-    owner: "Class198"
-    name: "method4891"
+    owner: "ByteArray"
+    name: "get"
     arguments: {}
     locals: {}
   unpackclass!a.a (Ljava/lang/Object;Z)[B:
-    owner: "Class198"
-    name: "method4889"
+    owner: "ByteArray"
+    name: "unwrap"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "in"
+      1: "copy"
     locals:
-      9: "local9"
-      22: "local22"
+      9: "bytes"
+      22: "array"
   unpackclass!a.a ([B)[B:
-    owner: "Class198"
-    name: "method4890"
+    owner: "ByteArray"
+    name: "copy"
     arguments:
-      0: "arg0"
+      0: "in"
     locals:
-      2: "local2"
-      5: "local5"
+      2: "len"
+      5: "out"
   unpackclass!a.a ([BZ)Ljava/lang/Object;:
-    owner: "Class198"
-    name: "method4888"
+    owner: "ByteArray"
+    name: "wrap"
     arguments:
-      0: "arg0"
+      0: "bytes"
     locals:
-      14: "local14"
-      20: "local20"
+      14: "array"
+      20: "ex"
   unpackclass!a.b ([B)V:
-    owner: "Class198"
-    name: "method4892"
+    owner: "ByteArray"
+    name: "set"
     arguments:
-      0: "arg0"
+      0: "bytes"
     locals: {}
   unpackclass!aa.<init> (ZZ)V:
     owner: "Class199"
