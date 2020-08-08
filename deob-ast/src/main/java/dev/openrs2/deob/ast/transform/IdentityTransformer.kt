@@ -46,6 +46,12 @@ class IdentityTransformer : Transformer() {
                         expr.replace(expr.left)
                     }
                 }
+                BinaryExpr.Operator.DIVIDE -> {
+                    if (expr.right.isOne()) {
+                        // x / 1 => x
+                        expr.replace(expr.left)
+                    }
+                }
             }
         }
 
