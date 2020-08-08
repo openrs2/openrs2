@@ -162,7 +162,7 @@ classes:
   client!nf: "Class124"
   client!ng: "Class4_Sub3_Sub1"
   client!nh: "Class4_Sub19"
-  client!ni: "Class4"
+  client!ni: "Node"
   client!nk: "Interface4"
   client!nm: "Class102_Sub2"
   client!nn: "Class77_Sub2"
@@ -6723,17 +6723,17 @@ fields:
     owner: "Static5"
     name: "anInt6072"
   client!ni.c Lclient!ni;:
-    owner: "Class4"
-    name: "aClass4_234"
+    owner: "Node"
+    name: "prev"
   client!ni.f Lclient!ni;:
-    owner: "Class4"
-    name: "aClass4_235"
+    owner: "Node"
+    name: "next"
   client!ni.g I:
     owner: "Static5"
     name: "anInt6076"
   client!ni.i J:
-    owner: "Class4"
-    name: "aLong212"
+    owner: "Node"
+    name: "key"
   client!ni.k Ljava/lang/String;:
     owner: "Static5"
     name: "aString367"
@@ -32187,13 +32187,13 @@ methods:
       229: "local229"
       237: "local237"
   client!ni.b (B)Z:
-    owner: "Class4"
-    name: "method4815"
+    owner: "Node"
+    name: "isLinked"
     arguments: {}
     locals: {}
   client!ni.c (B)V:
-    owner: "Class4"
-    name: "method4817"
+    owner: "Node"
+    name: "unlink"
     arguments: {}
     locals: {}
   client!nj.a (I)Z:

@@ -19,7 +19,7 @@ classes:
   unpackclass!s: "Class201_Sub2"
   unpackclass!u: "Class212"
   unpackclass!unpackclass: "unpackclass"
-  unpackclass!w: "Class201"
+  unpackclass!w: "Node"
 fields:
   unpackclass!a.a Z:
     owner: "Class198"
@@ -406,11 +406,11 @@ fields:
     owner: "unpackclass"
     name: "aClass201_Sub2Array10"
   unpackclass!w.a Lunpackclass!w;:
-    owner: "Class201"
-    name: "aClass201_7"
+    owner: "Node"
+    name: "next"
   unpackclass!w.b Lunpackclass!w;:
-    owner: "Class201"
-    name: "aClass201_8"
+    owner: "Node"
+    name: "prev"
 methods:
   unpackclass!a.a ()[B:
     owner: "Class198"
@@ -1345,12 +1345,12 @@ methods:
       1: "arg1"
     locals: {}
   unpackclass!w.a ()V:
-    owner: "Class201"
-    name: "method4938"
+    owner: "Node"
+    name: "unlink"
     arguments: {}
     locals: {}
   unpackclass!w.b ()Z:
-    owner: "Class201"
-    name: "method4939"
+    owner: "Node"
+    name: "isLinked"
     arguments: {}
     locals: {}
