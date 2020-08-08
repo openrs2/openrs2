@@ -15,19 +15,19 @@ methods:
     owner: "unpack"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "in"
     locals:
-      9: "local9"
-      17: "local17"
-      20: "local20"
-      26: "local26"
-      38: "local38"
-      47: "local47"
-      53: "local53"
-      66: "local66"
+      9: "temp"
+      17: "zip"
+      20: "entry"
+      26: "path"
+      38: "name"
+      47: "out"
+      53: "len"
+      66: "bytes"
   unpack!unpack.a (Ljava/lang/String;B)[B:
     owner: "unpack"
-    name: "method4948"
+    name: "get"
     arguments:
-      0: "arg0"
+      0: "name"
     locals: {}
