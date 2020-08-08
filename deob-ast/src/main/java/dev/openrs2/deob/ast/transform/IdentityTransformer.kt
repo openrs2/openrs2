@@ -1,11 +1,13 @@
 package dev.openrs2.deob.ast.transform
 
 import com.github.javaparser.ast.CompilationUnit
+import com.github.javaparser.ast.expr.AssignExpr
 import com.github.javaparser.ast.expr.BinaryExpr
 import com.github.javaparser.ast.expr.Expression
 import com.github.javaparser.ast.expr.IntegerLiteralExpr
 import com.github.javaparser.ast.expr.LongLiteralExpr
 import com.github.javaparser.ast.expr.UnaryExpr
+import com.github.javaparser.ast.stmt.ExpressionStmt
 import dev.openrs2.deob.ast.Library
 import dev.openrs2.deob.ast.LibraryGroup
 import dev.openrs2.deob.ast.util.walk
@@ -43,6 +45,28 @@ class IdentityTransformer : Transformer() {
                         // x * 1 => x
                         expr.replace(expr.left)
                     }
+                }
+            }
+        }
+
+        unit.walk { expr: AssignExpr ->
+            val identity = when (expr.operator) {
+                // x += 0, x -= 0
+                AssignExpr.Operator.PLUS, AssignExpr.Operator.MINUS -> expr.value.isZero()
+                // x *= 1, x /= 1
+                AssignExpr.Operator.MULTIPLY, AssignExpr.Operator.DIVIDE -> expr.value.isOne()
+                else -> false
+            }
+
+            if (!identity) {
+                return@walk
+            }
+
+            expr.parentNode.ifPresent { parent ->
+                if (parent is ExpressionStmt) {
+                    parent.remove()
+                } else {
+                    expr.replace(expr.target.clone())
                 }
             }
         }
