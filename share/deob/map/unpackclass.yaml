@@ -7,7 +7,7 @@ classes:
   unpackclass!f: "LinkedList"
   unpackclass!g: "Class203"
   unpackclass!h: "Bzip2DState"
-  unpackclass!i: "Class205"
+  unpackclass!i: "IntHashTable"
   unpackclass!j: "Class206"
   unpackclass!k: "GzipDecompressor"
   unpackclass!l: "Class208"
@@ -223,8 +223,8 @@ fields:
     owner: "Bzip2DState"
     name: "selector"
   unpackclass!i.a [I:
-    owner: "Class205"
-    name: "anIntArray695"
+    owner: "IntHashTable"
+    name: "buckets"
   unpackclass!j.a Lunpackclass!s;:
     owner: "Class206"
     name: "aClass201_Sub2_2"
@@ -721,15 +721,15 @@ methods:
     locals:
       2: "next"
   unpackclass!i.<init> ([I)V:
-    owner: "Class205"
+    owner: "IntHashTable"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "keys"
     locals:
-      5: "local5"
-      28: "local28"
-      43: "local43"
-      53: "local53"
+      5: "bucketCount"
+      28: "i"
+      43: "value"
+      53: "hash"
   unpackclass!k.<init> ()V:
     owner: "GzipDecompressor"
     name: "<init>"
