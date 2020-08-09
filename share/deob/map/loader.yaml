@@ -4,7 +4,7 @@ classes:
   loader!b: "Resource"
   loader!d: "UnpackerClassLoader"
   loader!f: "Resources"
-  loader!g: "RuntimeException_Sub2"
+  loader!g: "TracingException"
   loader!loader: "loader"
 fields:
   loader!b.a Ljava/lang/String;:
@@ -59,14 +59,14 @@ fields:
     owner: "Resources"
     name: "miscNatives"
   loader!g.a Ljava/lang/Throwable;:
-    owner: "RuntimeException_Sub2"
-    name: "aThrowable2"
+    owner: "TracingException"
+    name: "cause"
   loader!g.b I:
-    owner: "RuntimeException_Sub2"
-    name: "anInt6099"
+    owner: "TracingException"
+    name: "clientCrc"
   loader!g.c Ljava/lang/String;:
-    owner: "RuntimeException_Sub2"
-    name: "aString372"
+    owner: "TracingException"
+    name: "message"
   loader!loader.a Z:
     owner: "loader"
     name: "destroyed"
@@ -149,68 +149,68 @@ methods:
       54: "bytes"
       65: "clazz"
   loader!g.<init> (Ljava/lang/Throwable;Ljava/lang/String;)V:
-    owner: "RuntimeException_Sub2"
+    owner: "TracingException"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "cause"
+      1: "message"
     locals: {}
   loader!g.a (Ljava/lang/String;BLjava/lang/String;Ljava/lang/String;)Ljava/lang/String;:
-    owner: "RuntimeException_Sub2"
-    name: "method4832"
+    owner: "TracingException"
+    name: "replace"
     arguments:
-      0: "arg0"
-      2: "arg1"
-      3: "arg2"
+      0: "s"
+      3: "target"
+      2: "replacement"
     locals:
-      5: "local5"
+      5: "i"
   loader!g.a (Ljava/lang/String;I)V:
-    owner: "RuntimeException_Sub2"
-    name: "method4833"
+    owner: "TracingException"
+    name: "print"
     arguments:
-      0: "arg0"
+      0: "message"
     locals: {}
   loader!g.a (Ljava/lang/Throwable;I)Ljava/lang/String;:
-    owner: "RuntimeException_Sub2"
-    name: "method4831"
+    owner: "TracingException"
+    name: "toString"
     arguments:
-      0: "arg0"
+      0: "ex"
     locals:
-      6: "local6"
-      16: "local16"
-      33: "local33"
-      38: "local38"
-      46: "local46"
-      54: "local54"
-      57: "local57"
-      60: "local60"
-      67: "local67"
-      74: "local74"
-      80: "local80"
-      90: "local90"
-      115: "local115"
-      129: "local129"
+      6: "message"
+      16: "tracingException"
+      33: "stringWriter"
+      38: "printWriter"
+      46: "stackTrace"
+      54: "reader"
+      57: "firstLine"
+      60: "line"
+      67: "openingBracketIndex"
+      74: "closingBracketIndex"
+      80: "classAndMethodName"
+      90: "trimmedClassAndMethodName"
+      115: "formattedLine"
+      129: "javaSuffixIndex"
   loader!g.a (Ljava/lang/Throwable;Ljava/lang/String;)Lloader!g;:
-    owner: "RuntimeException_Sub2"
-    name: "method4835"
+    owner: "TracingException"
+    name: "wrap"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "cause"
+      1: "message"
     locals:
-      5: "local5"
+      5: "ex"
   loader!g.a (Ljava/lang/Throwable;ZLjava/applet/Applet;Ljava/lang/String;)V:
-    owner: "RuntimeException_Sub2"
-    name: "method4834"
+    owner: "TracingException"
+    name: "report"
     arguments:
-      0: "arg0"
-      2: "arg1"
-      3: "arg2"
+      0: "ex"
+      2: "applet"
+      3: "suffix"
     locals:
-      1: "local1"
-      42: "local42"
-      90: "local90"
-      96: "local96"
-      103: "local103"
+      1: "message"
+      42: "encodedMessage"
+      90: "url"
+      96: "in"
+      103: "reportEx"
   loader!loader.a (ILjava/lang/String;)V:
     owner: "loader"
     name: "error"
