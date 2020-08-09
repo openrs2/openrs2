@@ -3,7 +3,7 @@ classes:
   signlink!c: "FullScreenManager"
   signlink!e: "CursorManager"
   signlink!ha: "Class194"
-  signlink!kd: "Class195"
+  signlink!kd: "FileOnDisk"
   signlink!le: "Interface5"
   signlink!pm: "SignLink"
   signlink!vk: "PrivilegedRequest"
@@ -27,17 +27,17 @@ fields:
     owner: "Class194"
     name: "aLong214"
   signlink!kd.a Ljava/io/RandomAccessFile;:
-    owner: "Class195"
-    name: "aRandomAccessFile1"
+    owner: "FileOnDisk"
+    name: "randomAccessFile"
   signlink!kd.b J:
-    owner: "Class195"
-    name: "aLong216"
+    owner: "FileOnDisk"
+    name: "maxLength"
   signlink!kd.c J:
-    owner: "Class195"
-    name: "aLong217"
+    owner: "FileOnDisk"
+    name: "position"
   signlink!kd.d Ljava/io/File;:
-    owner: "Class195"
-    name: "aFile1"
+    owner: "FileOnDisk"
+    name: "file"
   signlink!pm.A Ljava/util/Hashtable;:
     owner: "SignLink"
     name: "fileCache"
@@ -227,54 +227,54 @@ methods:
     locals:
       6: "local6"
   signlink!kd.<init> (Ljava/io/File;Ljava/lang/String;J)V:
-    owner: "Class195"
+    owner: "FileOnDisk"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "file"
+      1: "mode"
+      2: "maxLength"
     locals:
-      40: "local40"
+      40: "firstByte"
   signlink!kd.a (B)J:
-    owner: "Class195"
-    name: "method4855"
+    owner: "FileOnDisk"
+    name: "length"
     arguments: {}
     locals: {}
   signlink!kd.a (I)V:
-    owner: "Class195"
-    name: "method4853"
+    owner: "FileOnDisk"
+    name: "close"
     arguments: {}
     locals: {}
   signlink!kd.a (IIZ[B)V:
-    owner: "Class195"
-    name: "method4851"
+    owner: "FileOnDisk"
+    name: "write"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      3: "arg2"
+      3: "bytes"
+      1: "off"
+      0: "len"
     locals: {}
   signlink!kd.a (JB)V:
-    owner: "Class195"
-    name: "method4852"
+    owner: "FileOnDisk"
+    name: "seek"
     arguments:
-      0: "arg0"
+      0: "position"
     locals: {}
   signlink!kd.a ([BIII)I:
-    owner: "Class195"
-    name: "method4854"
+    owner: "FileOnDisk"
+    name: "read"
     arguments:
-      0: "arg0"
-      2: "arg1"
-      3: "arg2"
+      0: "bytes"
+      2: "len"
+      3: "off"
     locals:
-      6: "local6"
+      6: "n"
   signlink!kd.b (B)Ljava/io/File;:
-    owner: "Class195"
-    name: "method4850"
+    owner: "FileOnDisk"
+    name: "getFile"
     arguments: {}
     locals: {}
   signlink!kd.finalize ()V:
-    owner: "Class195"
+    owner: "FileOnDisk"
     name: "finalize"
     arguments: {}
     locals: {}
