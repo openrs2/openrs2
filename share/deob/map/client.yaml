@@ -278,7 +278,7 @@ classes:
   client!vm: "Class4_Sub1_Sub39"
   client!vn: "Class4_Sub3_Sub14_Sub1"
   client!w: "Class4_Sub3_Sub21"
-  client!wa: "Class4_Sub10_Sub1"
+  client!wa: "Packet"
   client!wb: "Class62_Sub1"
   client!wd: "Class4_Sub1_Sub21_Sub1"
   client!we: "Class184"
@@ -11028,8 +11028,8 @@ fields:
     owner: "Class4_Sub3_Sub21"
     name: "aClass53_Sub2_1"
   client!w.G [I:
-    owner: "Static7"
-    name: "anIntArray647"
+    owner: "Packet"
+    name: "BIT_MASKS"
   client!w.y I:
     owner: "Static7"
     name: "anInt5678"
@@ -11037,14 +11037,14 @@ fields:
     owner: "Static7"
     name: "anInt5679"
   client!wa.Ob Lclient!m;:
-    owner: "Class4_Sub10_Sub1"
-    name: "aClass113_1"
+    owner: "Packet"
+    name: "cipher"
   client!wa.Ub [I:
     owner: "Static7"
     name: "anIntArray650"
   client!wa.Yb I:
-    owner: "Class4_Sub10_Sub1"
-    name: "anInt5772"
+    owner: "Packet"
+    name: "bitPosition"
   client!wa.cc Z:
     owner: "Static7"
     name: "aBoolean393"
@@ -45122,10 +45122,10 @@ methods:
     arguments: {}
     locals: {}
   client!wa.<init> (I)V:
-    owner: "Class4_Sub10_Sub1"
+    owner: "Packet"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "size"
     locals: {}
   client!wa.a (BJ)V:
     owner: "Static37"
@@ -45134,13 +45134,13 @@ methods:
       1: "arg0"
     locals: {}
   client!wa.a (I[BII)V:
-    owner: "Class4_Sub10_Sub1"
-    name: "method4647"
+    owner: "Packet"
+    name: "writeEncryptedBytes"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "bytes"
+      2: "len"
     locals:
-      7: "local7"
+      7: "i"
   client!wa.a (Lclient!fd;I)V:
     owner: "Static37"
     name: "method4643"
@@ -45151,10 +45151,10 @@ methods:
       39: "local39"
       369: "local369"
   client!wa.a ([II)V:
-    owner: "Class4_Sub10_Sub1"
-    name: "method4639"
+    owner: "Packet"
+    name: "setKey"
     arguments:
-      0: "arg0"
+      0: "key"
     locals: {}
   client!wa.c (IB)V:
     owner: "Static37"
@@ -45163,32 +45163,32 @@ methods:
       0: "arg0"
     locals: {}
   client!wa.e (Z)I:
-    owner: "Class4_Sub10_Sub1"
-    name: "method4646"
+    owner: "Packet"
+    name: "readOpcode"
     arguments: {}
     locals: {}
   client!wa.m (II)V:
-    owner: "Class4_Sub10_Sub1"
-    name: "method4650"
+    owner: "Packet"
+    name: "writeOpcode"
     arguments:
-      1: "arg0"
+      1: "opcode"
     locals: {}
   client!wa.n (II)I:
-    owner: "Class4_Sub10_Sub1"
-    name: "method4651"
+    owner: "Packet"
+    name: "readableBits"
     arguments:
-      0: "arg0"
+      0: "position"
     locals: {}
   client!wa.o (II)I:
-    owner: "Class4_Sub10_Sub1"
-    name: "method4652"
+    owner: "Packet"
+    name: "readBits"
     arguments:
-      0: "arg0"
+      0: "bits"
     locals:
-      13: "local13"
-      18: "local18"
-      26: "local26"
-      77: "local77"
+      13: "bitPos"
+      18: "bytePos"
+      26: "value"
+      77: "value2"
   client!wa.p (B)V:
     owner: "Static37"
     name: "method4645"
@@ -45197,13 +45197,13 @@ methods:
       14: "local14"
       24: "local24"
   client!wa.q (I)V:
-    owner: "Class4_Sub10_Sub1"
-    name: "method4642"
+    owner: "Packet"
+    name: "startBitAccess"
     arguments: {}
     locals: {}
   client!wa.r (I)V:
-    owner: "Class4_Sub10_Sub1"
-    name: "method4644"
+    owner: "Packet"
+    name: "finishBitAccess"
     arguments: {}
     locals: {}
   client!wa.s (I)V:
