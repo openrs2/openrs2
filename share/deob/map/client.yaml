@@ -78,7 +78,7 @@ classes:
   client!ga: "Class62"
   client!gb: "Class63_Sub1"
   client!ge: "Class65"
-  client!gf: "Class66"
+  client!gf: "IntHashTable"
   client!gg: "Class11_Sub3"
   client!gh: "Class67"
   client!gk: "Class70"
@@ -2862,8 +2862,8 @@ fields:
     owner: "Static3"
     name: "anIntArray167"
   client!gf.d [I:
-    owner: "Class66"
-    name: "anIntArray168"
+    owner: "IntHashTable"
+    name: "buckets"
   client!gf.e I:
     owner: "Static3"
     name: "anInt2047"
@@ -20615,15 +20615,15 @@ methods:
       49: "local49"
       51: "local51"
   client!gf.<init> ([I)V:
-    owner: "Class66"
+    owner: "IntHashTable"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "keys"
     locals:
-      5: "local5"
-      32: "local32"
-      47: "local47"
-      63: "local63"
+      5: "bucketCount"
+      32: "i"
+      47: "value"
+      63: "hash"
   client!gf.a (B)V:
     owner: "Static16"
     name: "method1563"
@@ -20635,14 +20635,14 @@ methods:
     arguments: {}
     locals: {}
   client!gf.a (II)I:
-    owner: "Class66"
-    name: "method1564"
+    owner: "IntHashTable"
+    name: "get"
     arguments:
-      1: "arg0"
+      1: "key"
     locals:
-      11: "local11"
-      15: "local15"
-      29: "local29"
+      11: "mask"
+      15: "hash"
+      29: "value"
   client!gf.b (B)V:
     owner: "Static16"
     name: "method1566"
