@@ -1,6 +1,6 @@
 ---
 classes:
-  signlink!c: "Class192"
+  signlink!c: "FullScreenManager"
   signlink!e: "Class193"
   signlink!ha: "Class194"
   signlink!kd: "Class195"
@@ -9,11 +9,11 @@ classes:
   signlink!vk: "PrivilegedRequest"
 fields:
   signlink!c.a Ljava/awt/GraphicsDevice;:
-    owner: "Class192"
-    name: "aGraphicsDevice1"
+    owner: "FullScreenManager"
+    name: "device"
   signlink!c.b Ljava/awt/DisplayMode;:
-    owner: "Class192"
-    name: "aDisplayMode1"
+    owner: "FullScreenManager"
+    name: "previousDisplayMode"
   signlink!e.a Ljava/awt/Robot;:
     owner: "Class193"
     name: "aRobot1"
@@ -142,52 +142,52 @@ fields:
     name: "intArg2"
 methods:
   signlink!c.<init> ()V:
-    owner: "Class192"
+    owner: "FullScreenManager"
     name: "<init>"
     arguments: {}
     locals:
-      3: "local3"
-      15: "local15"
-      17: "local17"
-      27: "local27"
+      3: "env"
+      15: "devices"
+      17: "i"
+      27: "d"
   signlink!c.a (I)[I:
-    owner: "Class192"
-    name: "method4844"
+    owner: "FullScreenManager"
+    name: "getDisplayModes"
     arguments: {}
     locals:
-      3: "local3"
-      9: "local9"
-      17: "local17"
+      3: "displayModes"
+      9: "result"
+      17: "i"
   signlink!c.a (IIIBLjava/awt/Frame;I)V:
-    owner: "Class192"
-    name: "method4843"
+    owner: "FullScreenManager"
+    name: "enter"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      4: "arg3"
-      5: "arg4"
+      4: "frame"
+      1: "width"
+      0: "height"
+      2: "bitDepth"
+      5: "refreshRate"
     locals:
-      41: "local41"
-      45: "local45"
-      49: "local49"
-      51: "local51"
-      82: "local82"
+      41: "foundMode"
+      45: "previousRefreshRate"
+      49: "displayModes"
+      51: "i"
+      82: "r"
   signlink!c.a (Ljava/awt/Frame;B)V:
-    owner: "Class192"
-    name: "method4845"
+    owner: "FullScreenManager"
+    name: "setFullScreenWindow"
     arguments:
-      0: "arg0"
+      0: "frame"
     locals:
-      1: "local1"
-      6: "local6"
-      24: "local24"
-      36: "local36"
-      65: "local65"
-      72: "local72"
+      1: "wasValid"
+      6: "valid"
+      24: "v"
+      36: "ex"
+      65: "valid"
+      72: "ex"
   signlink!c.a (Z)V:
-    owner: "Class192"
-    name: "method4842"
+    owner: "FullScreenManager"
+    name: "exit"
     arguments: {}
     locals: {}
   signlink!e.<init> ()V:
