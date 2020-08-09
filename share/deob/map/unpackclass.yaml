@@ -2,8 +2,8 @@
 classes:
   unpackclass!a: "ByteArray"
   unpackclass!aa: "Class199"
-  unpackclass!c: "Class200"
-  unpackclass!e: "Class201_Sub1"
+  unpackclass!c: "BufferPool"
+  unpackclass!e: "Buffer"
   unpackclass!f: "Class202"
   unpackclass!g: "Class203"
   unpackclass!h: "Class204"
@@ -79,35 +79,35 @@ fields:
     owner: "Class199"
     name: "anInt6143"
   unpackclass!c.a I:
-    owner: "Class200"
-    name: "anInt6114"
+    owner: "BufferPool"
+    name: "smallBufferCount"
   unpackclass!c.b I:
-    owner: "Class200"
-    name: "anInt6115"
+    owner: "BufferPool"
+    name: "mediumBufferCount"
   unpackclass!c.c I:
-    owner: "Class200"
-    name: "anInt6116"
+    owner: "BufferPool"
+    name: "largeBufferCount"
   unpackclass!c.d [[B:
-    owner: "Class200"
-    name: "aByteArrayArray55"
+    owner: "BufferPool"
+    name: "smallBuffers"
   unpackclass!c.e [[B:
-    owner: "Class200"
-    name: "aByteArrayArray56"
+    owner: "BufferPool"
+    name: "mediumBuffers"
   unpackclass!c.f [[B:
-    owner: "Class200"
-    name: "aByteArrayArray57"
+    owner: "BufferPool"
+    name: "largeBuffers"
   unpackclass!e.d [B:
-    owner: "Class201_Sub1"
-    name: "aByteArray77"
+    owner: "Buffer"
+    name: "bytes"
   unpackclass!e.e I:
-    owner: "Class201_Sub1"
-    name: "anInt6119"
+    owner: "Buffer"
+    name: "position"
   unpackclass!e.f [I:
-    owner: "Class201_Sub1"
-    name: "anIntArray689"
+    owner: "Buffer"
+    name: "CRC32_TABLE"
   unpackclass!e.g [J:
-    owner: "Class201_Sub1"
-    name: "aLongArray59"
+    owner: "Buffer"
+    name: "CRC64_TABLE"
   unpackclass!f.a Lunpackclass!w;:
     owner: "Class202"
     name: "aClass201_5"
@@ -573,130 +573,130 @@ methods:
     arguments: {}
     locals: {}
   unpackclass!c.a (I)[B:
-    owner: "Class200"
-    name: "method4902"
+    owner: "BufferPool"
+    name: "allocate"
     arguments:
-      0: "arg0"
+      0: "len"
     locals:
-      12: "local12"
-      31: "local31"
-      50: "local50"
+      12: "bytes"
+      31: "bytes"
+      50: "bytes"
   unpackclass!e.<init> (I)V:
-    owner: "Class201_Sub1"
+    owner: "Buffer"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "len"
     locals: {}
   unpackclass!e.<init> ([B)V:
-    owner: "Class201_Sub1"
+    owner: "Buffer"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "bytes"
     locals: {}
   unpackclass!e.a (I)V:
-    owner: "Class201_Sub1"
-    name: "method4909"
+    owner: "Buffer"
+    name: "writeByte"
     arguments:
-      0: "arg0"
+      0: "value"
     locals: {}
   unpackclass!e.a (J)V:
-    owner: "Class201_Sub1"
-    name: "method4912"
+    owner: "Buffer"
+    name: "writeLong"
     arguments:
-      0: "arg0"
+      0: "value"
     locals: {}
   unpackclass!e.a ([BI)I:
-    owner: "Class201_Sub1"
-    name: "method4908"
+    owner: "Buffer"
+    name: "crc32"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "bytes"
+      1: "len"
     locals: {}
   unpackclass!e.a ([BII)I:
-    owner: "Class201_Sub1"
-    name: "method4907"
+    owner: "Buffer"
+    name: "crc32Internal"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "bytes"
+      2: "len"
     locals:
-      3: "local3"
-      5: "local5"
+      3: "crc"
+      5: "i"
   unpackclass!e.a ([III)V:
-    owner: "Class201_Sub1"
-    name: "method4921"
+    owner: "Buffer"
+    name: "xteaDecrypt"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "key"
+      2: "len"
     locals:
-      4: "local4"
-      13: "local13"
-      15: "local15"
-      20: "local20"
-      23: "local23"
-      25: "local25"
-      29: "local29"
+      4: "oldPosition"
+      13: "blocks"
+      15: "i"
+      20: "v0"
+      23: "v1"
+      25: "sum"
+      29: "round"
   unpackclass!e.b (I)V:
-    owner: "Class201_Sub1"
-    name: "method4910"
+    owner: "Buffer"
+    name: "writeShort"
     arguments:
-      0: "arg0"
+      0: "value"
     locals: {}
   unpackclass!e.b ([BII)V:
-    owner: "Class201_Sub1"
-    name: "method4913"
+    owner: "Buffer"
+    name: "writeBytes"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "bytes"
+      2: "len"
     locals:
-      3: "local3"
+      3: "i"
   unpackclass!e.c ()I:
-    owner: "Class201_Sub1"
-    name: "method4914"
+    owner: "Buffer"
+    name: "readUnsignedByte"
     arguments: {}
     locals: {}
   unpackclass!e.c (I)V:
-    owner: "Class201_Sub1"
-    name: "method4911"
+    owner: "Buffer"
+    name: "writeInt"
     arguments:
-      0: "arg0"
+      0: "value"
     locals: {}
   unpackclass!e.c ([BII)V:
-    owner: "Class201_Sub1"
-    name: "method4918"
+    owner: "Buffer"
+    name: "readBytes"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "bytes"
+      2: "len"
     locals:
-      3: "local3"
+      3: "i"
   unpackclass!e.d ()I:
-    owner: "Class201_Sub1"
-    name: "method4915"
+    owner: "Buffer"
+    name: "readUnsignedShort"
     arguments: {}
     locals: {}
   unpackclass!e.e ()I:
-    owner: "Class201_Sub1"
-    name: "method4916"
+    owner: "Buffer"
+    name: "readShort"
     arguments: {}
     locals:
       27: "local27"
   unpackclass!e.f ()I:
-    owner: "Class201_Sub1"
-    name: "method4917"
+    owner: "Buffer"
+    name: "readInt"
     arguments: {}
     locals: {}
   unpackclass!e.g ()I:
-    owner: "Class201_Sub1"
-    name: "method4919"
+    owner: "Buffer"
+    name: "readUnsignedSmart"
     arguments: {}
     locals:
-      7: "local7"
+      7: "peek"
   unpackclass!e.h ()I:
-    owner: "Class201_Sub1"
-    name: "method4920"
+    owner: "Buffer"
+    name: "readVarInt"
     arguments: {}
     locals:
-      12: "local12"
-      14: "local14"
+      12: "b"
+      14: "value"
   unpackclass!f.<init> ()V:
     owner: "Class202"
     name: "<init>"
