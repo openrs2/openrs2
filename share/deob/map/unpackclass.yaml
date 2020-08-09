@@ -9,7 +9,7 @@ classes:
   unpackclass!h: "Bzip2DState"
   unpackclass!i: "Class205"
   unpackclass!j: "Class206"
-  unpackclass!k: "Class207"
+  unpackclass!k: "GzipDecompressor"
   unpackclass!l: "Class208"
   unpackclass!n: "Class209"
   unpackclass!o: "Class210"
@@ -238,8 +238,8 @@ fields:
     owner: "Class206"
     name: "aClass201_Sub2Array1"
   unpackclass!k.a Ljava/util/zip/Inflater;:
-    owner: "Class207"
-    name: "anInflater2"
+    owner: "GzipDecompressor"
+    name: "inflater"
   unpackclass!n.a I:
     owner: "Class209"
     name: "anInt6136"
@@ -731,12 +731,12 @@ methods:
       43: "local43"
       53: "local53"
   unpackclass!k.<init> ()V:
-    owner: "Class207"
+    owner: "GzipDecompressor"
     name: "<init>"
     arguments: {}
     locals: {}
   unpackclass!k.<init> (III)V:
-    owner: "Class207"
+    owner: "GzipDecompressor"
     name: "<init>"
     arguments:
       0: "arg0"
@@ -744,13 +744,13 @@ methods:
       2: "arg2"
     locals: {}
   unpackclass!k.a (Lunpackclass!e;[B)V:
-    owner: "Class207"
-    name: "method4925"
+    owner: "GzipDecompressor"
+    name: "gunzip"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "in"
+      1: "out"
     locals:
-      55: "local55"
+      55: "ex"
   unpackclass!l.a ([BI[BII)V:
     owner: "Class208"
     name: "method4926"
