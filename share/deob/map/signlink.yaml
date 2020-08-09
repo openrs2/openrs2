@@ -1,7 +1,7 @@
 ---
 classes:
   signlink!c: "FullScreenManager"
-  signlink!e: "Class193"
+  signlink!e: "CursorManager"
   signlink!ha: "Class194"
   signlink!kd: "Class195"
   signlink!le: "Interface5"
@@ -15,11 +15,11 @@ fields:
     owner: "FullScreenManager"
     name: "previousDisplayMode"
   signlink!e.a Ljava/awt/Robot;:
-    owner: "Class193"
-    name: "aRobot1"
+    owner: "CursorManager"
+    name: "robot"
   signlink!e.b Ljava/awt/Component;:
-    owner: "Class193"
-    name: "aComponent3"
+    owner: "CursorManager"
+    name: "component"
   signlink!ha.a J:
     owner: "Class194"
     name: "aLong215"
@@ -191,34 +191,34 @@ methods:
     arguments: {}
     locals: {}
   signlink!e.<init> ()V:
-    owner: "Class193"
+    owner: "CursorManager"
     name: "<init>"
     arguments: {}
     locals: {}
   signlink!e.a (III)V:
-    owner: "Class193"
-    name: "method4848"
+    owner: "CursorManager"
+    name: "setPosition"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      2: "x"
+      0: "y"
     locals: {}
   signlink!e.a (IILjava/awt/Point;[ILjava/awt/Component;B)V:
-    owner: "Class193"
-    name: "method4847"
+    owner: "CursorManager"
+    name: "setCursor"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
+      4: "component"
+      0: "width"
+      1: "height"
+      3: "pixels"
+      2: "hotSpot"
     locals:
-      17: "local17"
+      17: "image"
   signlink!e.a (IZLjava/awt/Component;)V:
-    owner: "Class193"
-    name: "method4846"
+    owner: "CursorManager"
+    name: "setComponent"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "component"
+      1: "reset"
     locals: {}
   signlink!ha.a (I)J:
     owner: "Class194"
@@ -367,7 +367,7 @@ methods:
       4: "width"
       2: "height"
       3: "pixels"
-      1: "hotPoint"
+      1: "hotSpot"
     locals: {}
   signlink!pm.a (I)Lsignlink!vk;:
     owner: "SignLink"
@@ -522,8 +522,8 @@ methods:
       129: "clipboard"
       188: "ip"
       214: "frame"
-      273: "local273"
-      276: "local276"
+      273: "x"
+      276: "y"
       308: "url"
       323: "safeChars"
       325: "i"
@@ -532,9 +532,9 @@ methods:
       388: "runtime"
       394: "load0"
       460: "ex"
-      469: "local469"
-      495: "local495"
-      505: "local505"
+      469: "args"
+      495: "component"
+      505: "reset"
       516: "cacheSubDir"
       520: "preferences"
       529: "nativeLibraries"
