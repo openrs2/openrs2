@@ -2,7 +2,7 @@
 classes:
   signlink!c: "FullScreenManager"
   signlink!e: "CursorManager"
-  signlink!ha: "Class194"
+  signlink!ha: "MonotonicClock"
   signlink!kd: "FileOnDisk"
   signlink!le: "Interface5"
   signlink!pm: "SignLink"
@@ -21,11 +21,11 @@ fields:
     owner: "CursorManager"
     name: "component"
   signlink!ha.a J:
-    owner: "Class194"
-    name: "aLong215"
+    owner: "MonotonicClock"
+    name: "leapMillis"
   signlink!ha.b J:
-    owner: "Class194"
-    name: "aLong214"
+    owner: "MonotonicClock"
+    name: "previous"
   signlink!kd.a Ljava/io/RandomAccessFile;:
     owner: "FileOnDisk"
     name: "randomAccessFile"
@@ -221,11 +221,11 @@ methods:
       1: "reset"
     locals: {}
   signlink!ha.a (I)J:
-    owner: "Class194"
-    name: "method4849"
+    owner: "MonotonicClock"
+    name: "currentTimeMillis"
     arguments: {}
     locals:
-      6: "local6"
+      6: "now"
   signlink!kd.<init> (Ljava/io/File;Ljava/lang/String;J)V:
     owner: "FileOnDisk"
     name: "<init>"
