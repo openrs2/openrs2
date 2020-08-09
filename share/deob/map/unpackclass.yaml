@@ -4,7 +4,7 @@ classes:
   unpackclass!aa: "Class199"
   unpackclass!c: "BufferPool"
   unpackclass!e: "Buffer"
-  unpackclass!f: "Class202"
+  unpackclass!f: "LinkedList"
   unpackclass!g: "Class203"
   unpackclass!h: "Bzip2DState"
   unpackclass!i: "Class205"
@@ -109,11 +109,11 @@ fields:
     owner: "Buffer"
     name: "CRC64_TABLE"
   unpackclass!f.a Lunpackclass!w;:
-    owner: "Class202"
-    name: "aClass201_5"
+    owner: "LinkedList"
+    name: "sentinel"
   unpackclass!f.b Lunpackclass!w;:
-    owner: "Class202"
-    name: "aClass201_6"
+    owner: "LinkedList"
+    name: "cursor"
   unpackclass!g.a I:
     owner: "Class203"
     name: "anInt6120"
@@ -698,28 +698,28 @@ methods:
       12: "b"
       14: "value"
   unpackclass!f.<init> ()V:
-    owner: "Class202"
+    owner: "LinkedList"
     name: "<init>"
     arguments: {}
     locals: {}
   unpackclass!f.a ()Lunpackclass!w;:
-    owner: "Class202"
-    name: "method4923"
+    owner: "LinkedList"
+    name: "head"
     arguments: {}
     locals:
-      3: "local3"
+      3: "head"
   unpackclass!f.a (Lunpackclass!w;)V:
-    owner: "Class202"
-    name: "method4922"
+    owner: "LinkedList"
+    name: "add"
     arguments:
-      0: "arg0"
+      0: "node"
     locals: {}
   unpackclass!f.b ()Lunpackclass!w;:
-    owner: "Class202"
-    name: "method4924"
+    owner: "LinkedList"
+    name: "next"
     arguments: {}
     locals:
-      2: "local2"
+      2: "next"
   unpackclass!i.<init> ([I)V:
     owner: "Class205"
     name: "<init>"
