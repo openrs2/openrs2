@@ -39,25 +39,25 @@ fields:
     name: "secondaryUnpacker"
   loader!f.a Lloader!b;:
     owner: "Resources"
-    name: "unpackClass"
+    name: "UNPACK_CLASS"
   loader!f.b Lloader!b;:
     owner: "Resources"
-    name: "clientPack200"
+    name: "CLIENT_PACK200"
   loader!f.c Lloader!b;:
     owner: "Resources"
-    name: "clientPackClass"
+    name: "CLIENT_PACK_CLASS"
   loader!f.d Lloader!b;:
     owner: "Resources"
-    name: "glPack200"
+    name: "GL_PACK200"
   loader!f.e Lloader!b;:
     owner: "Resources"
-    name: "glPackClass"
+    name: "GL_PACK_CLASS"
   loader!f.f [[Lloader!b;:
     owner: "Resources"
-    name: "glNatives"
+    name: "GL_NATIVES"
   loader!f.g [Lloader!b;:
     owner: "Resources"
-    name: "miscNatives"
+    name: "MISC_NATIVES"
   loader!g.a Ljava/lang/Throwable;:
     owner: "TracingException"
     name: "cause"
