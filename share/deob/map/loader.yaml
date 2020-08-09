@@ -2,7 +2,7 @@
 classes:
   loader!a: "Pack200Unpacker"
   loader!b: "Resource"
-  loader!d: "ClassLoader_Sub1"
+  loader!d: "UnpackerClassLoader"
   loader!f: "Resources"
   loader!g: "RuntimeException_Sub2"
   loader!loader: "loader"
@@ -26,17 +26,17 @@ fields:
     owner: "Resource"
     name: "compressedSize"
   loader!d.a Ljava/util/Hashtable;:
-    owner: "ClassLoader_Sub1"
-    name: "aHashtable1"
+    owner: "UnpackerClassLoader"
+    name: "cache"
   loader!d.b Lunpack!unpack;:
-    owner: "ClassLoader_Sub1"
-    name: "anUnpack1"
+    owner: "UnpackerClassLoader"
+    name: "primaryUnpacker"
   loader!d.c Ljava/security/ProtectionDomain;:
-    owner: "ClassLoader_Sub1"
-    name: "aProtectionDomain1"
+    owner: "UnpackerClassLoader"
+    name: "protectionDomain"
   loader!d.d Lunpack!unpack;:
-    owner: "ClassLoader_Sub1"
-    name: "anUnpack2"
+    owner: "UnpackerClassLoader"
+    name: "secondaryUnpacker"
   loader!f.a Lloader!b;:
     owner: "Resources"
     name: "unpackClass"
@@ -130,24 +130,24 @@ methods:
       5: "checksum"
     locals: {}
   loader!d.<init> ()V:
-    owner: "ClassLoader_Sub1"
+    owner: "UnpackerClassLoader"
     name: "<init>"
     arguments: {}
     locals:
-      15: "local15"
-      19: "local19"
+      15: "codeSource"
+      19: "permissions"
   loader!d.loadClass (Ljava/lang/String;Z)Ljava/lang/Class;:
-    owner: "ClassLoader_Sub1"
+    owner: "UnpackerClassLoader"
     name: "loadClass"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "name"
+      1: "resolve"
     locals:
-      5: "local5"
-      21: "local21"
-      35: "local35"
-      54: "local54"
-      65: "local65"
+      5: "cachedClass"
+      21: "bytes"
+      35: "clazz"
+      54: "bytes"
+      65: "clazz"
   loader!g.<init> (Ljava/lang/Throwable;Ljava/lang/String;)V:
     owner: "RuntimeException_Sub2"
     name: "<init>"
