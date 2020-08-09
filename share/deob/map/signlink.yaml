@@ -4,7 +4,7 @@ classes:
   signlink!e: "CursorManager"
   signlink!ha: "MonotonicClock"
   signlink!kd: "FileOnDisk"
-  signlink!le: "Interface5"
+  signlink!le: "AudioSource"
   signlink!pm: "SignLink"
   signlink!vk: "PrivilegedRequest"
 fields:
@@ -279,44 +279,44 @@ methods:
     arguments: {}
     locals: {}
   signlink!le.a (IBI)V:
-    owner: "Interface5"
-    name: "method4861"
+    owner: "AudioSource"
+    name: "open"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      2: "channel"
+      0: "bufferSize"
     locals: {}
   signlink!le.a (II)V:
-    owner: "Interface5"
-    name: "method4859"
+    owner: "AudioSource"
+    name: "close"
     arguments:
-      0: "arg0"
+      0: "channel"
     locals: {}
   signlink!le.a (I[I)V:
-    owner: "Interface5"
-    name: "method4856"
+    owner: "AudioSource"
+    name: "write"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "channel"
+      1: "samples"
     locals: {}
   signlink!le.a (ZLjava/awt/Component;II)V:
-    owner: "Interface5"
-    name: "method4857"
+    owner: "AudioSource"
+    name: "init"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      3: "arg2"
+      1: "component"
+      0: "stereo"
+      3: "sampleRate"
     locals: {}
   signlink!le.b (II)V:
-    owner: "Interface5"
-    name: "method4860"
+    owner: "AudioSource"
+    name: "flush"
     arguments:
-      1: "arg0"
+      1: "channel"
     locals: {}
   signlink!le.c (II)I:
-    owner: "Interface5"
-    name: "method4858"
+    owner: "AudioSource"
+    name: "getBufferedSampleCount"
     arguments:
-      0: "arg0"
+      0: "channel"
     locals: {}
   signlink!pm.<init> (Ljava/applet/Applet;ILjava/lang/String;I)V:
     owner: "SignLink"
