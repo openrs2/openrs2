@@ -107,8 +107,8 @@ methods:
     name: "bind"
     arguments: {}
     locals:
-      3: "local3"
-      22: "local22"
+      3: "osName"
+      22: "success"
   gl!jaggl/X11/dri.close ()Z:
     owner: "jaggl/X11/dri"
     name: "close"
@@ -118,24 +118,24 @@ methods:
     owner: "jaggl/X11/dri"
     name: "open"
     arguments:
-      0: "arg0"
+      0: "path"
     locals: {}
   gl!jaggl/context.choosePixelFormat (Ljava/awt/Component;II)Z:
     owner: "jaggl/context"
     name: "choosePixelFormat"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "component"
+      1: "numSamples"
+      2: "alphaBits"
     locals:
-      8: "local8"
+      8: "result"
   gl!jaggl/context.choosePixelFormat1 (Ljava/awt/Component;II)Z:
     owner: "jaggl/context"
     name: "choosePixelFormat1"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "component"
+      1: "numSamples"
+      2: "alphaBits"
     locals: {}
   gl!jaggl/context.createContext ()Z:
     owner: "jaggl/context"
@@ -166,11 +166,11 @@ methods:
     owner: "jaggl/context"
     name: "isExtensionAvailable"
     arguments:
-      0: "arg0"
+      0: "extension"
     locals:
-      14: "local14"
-      18: "local18"
-      26: "local26"
+      14: "spaceSeparatedExtensions"
+      18: "extensions"
+      26: "i"
   gl!jaggl/context.makeCurrent ()Z:
     owner: "jaggl/context"
     name: "makeCurrent"
@@ -190,7 +190,7 @@ methods:
     owner: "jaggl/context"
     name: "setSwapInterval"
     arguments:
-      0: "arg0"
+      0: "swapInterval"
     locals: {}
   gl!jaggl/context.swapBuffers ()Z:
     owner: "jaggl/context"
@@ -216,19 +216,19 @@ methods:
     owner: "jaggl/jagglcaps"
     name: "setAlphaBits"
     arguments:
-      0: "arg0"
+      0: "alphaBits"
     locals: {}
   gl!jaggl/jagglcaps.setNumSamples (I)V:
     owner: "jaggl/jagglcaps"
     name: "setNumSamples"
     arguments:
-      0: "arg0"
+      0: "numSamples"
     locals: {}
   gl!jaggl/jagglcaps.setSampleBuffers (Z)V:
     owner: "jaggl/jagglcaps"
     name: "setSampleBuffers"
     arguments:
-      0: "arg0"
+      0: "sampleBuffers"
     locals: {}
   gl!jaggl/jagglcaps.toString ()Ljava/lang/String;:
     owner: "jaggl/jagglcaps"
@@ -239,14 +239,14 @@ methods:
     owner: "jaggl/jogl_wrapper/GLContextImpl"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "drawable"
     locals: {}
   gl!jaggl/jogl_wrapper/GLContextImpl.create ()V:
     owner: "jaggl/jogl_wrapper/GLContextImpl"
     name: "create"
     arguments: {}
     locals:
-      15: "local15"
+      15: "numSamples"
   gl!jaggl/jogl_wrapper/GLContextImpl.destroy ()V:
     owner: "jaggl/jogl_wrapper/GLContextImpl"
     name: "destroy"
@@ -262,7 +262,7 @@ methods:
     name: "makeCurrent"
     arguments: {}
     locals:
-      1: "local1"
+      1: "created"
   gl!jaggl/jogl_wrapper/GLContextImpl.release ()V:
     owner: "jaggl/jogl_wrapper/GLContextImpl"
     name: "release"
@@ -272,35 +272,35 @@ methods:
     owner: "jaggl/jogl_wrapper/GLContextImpl"
     name: "setGL"
     arguments:
-      0: "arg0"
+      0: "gl"
     locals: {}
   ? gl!jaggl/jogl_wrapper/GLDrawableFactoryImpl.getGLDrawable (Ljava/lang/Object;Lgl!javax/media/opengl/GLCapabilities;Lgl!javax/media/opengl/GLCapabilitiesChooser;)Lgl!javax/media/opengl/GLDrawable;
   : owner: "jaggl/jogl_wrapper/GLDrawableFactoryImpl"
     name: "getGLDrawable"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "target"
+      1: "capabilities"
+      2: "chooser"
     locals: {}
   ? gl!jaggl/jogl_wrapper/GLDrawableImpl.<init> (Ljava/awt/Component;Lgl!javax/media/opengl/GLCapabilities;Lgl!javax/media/opengl/GLCapabilitiesChooser;)V
   : owner: "jaggl/jogl_wrapper/GLDrawableImpl"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "component"
+      1: "capabilities"
+      2: "chooser"
     locals: {}
   gl!jaggl/jogl_wrapper/GLDrawableImpl.createContext (Lgl!javax/media/opengl/GLContext;)Lgl!javax/media/opengl/GLContext;:
     owner: "jaggl/jogl_wrapper/GLDrawableImpl"
     name: "createContext"
     arguments:
-      0: "arg0"
+      0: "context"
     locals: {}
   gl!jaggl/jogl_wrapper/GLDrawableImpl.setRealized (Z)V:
     owner: "jaggl/jogl_wrapper/GLDrawableImpl"
     name: "setRealized"
     arguments:
-      0: "arg0"
+      0: "realized"
     locals: {}
   gl!jaggl/jogl_wrapper/GLDrawableImpl.swapBuffers ()V:
     owner: "jaggl/jogl_wrapper/GLDrawableImpl"
@@ -311,21 +311,21 @@ methods:
     owner: "jaggl/opengl"
     name: "getArray"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals: {}
   gl!jaggl/opengl.getDirectBufferByteOffset (Ljava/nio/Buffer;)I:
     owner: "jaggl/opengl"
     name: "getDirectBufferByteOffset"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals: {}
   gl!jaggl/opengl.getIndirectBufferByteOffset (Ljava/nio/Buffer;)I:
     owner: "jaggl/opengl"
     name: "getIndirectBufferByteOffset"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals:
-      6: "local6"
+      6: "position"
   gl!jaggl/opengl.glActiveTexture (I)V:
     owner: "jaggl/opengl"
     name: "glActiveTexture"
@@ -1827,19 +1827,19 @@ methods:
     owner: "jaggl/opengl"
     name: "isDirect"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals: {}
   gl!jaggl/opengl.isExtensionAvailable (Ljava/lang/String;)Z:
     owner: "jaggl/opengl"
     name: "isExtensionAvailable"
     arguments:
-      0: "arg0"
+      0: "extension"
     locals: {}
   gl!jaggl/opengl.setSwapInterval (I)V:
     owner: "jaggl/opengl"
     name: "setSwapInterval"
     arguments:
-      0: "arg0"
+      0: "swapInterval"
     locals: {}
   gl!javax/media/opengl/GL.glActiveTexture (I)V:
     owner: "javax/media/opengl/GL"
@@ -2856,20 +2856,20 @@ methods:
     owner: "javax/media/opengl/GL"
     name: "isExtensionAvailable"
     arguments:
-      0: "arg0"
+      0: "extension"
     locals: {}
   gl!javax/media/opengl/GL.setSwapInterval (I)V:
     owner: "javax/media/opengl/GL"
     name: "setSwapInterval"
     arguments:
-      0: "arg0"
+      0: "swapInterval"
     locals: {}
   gl!javax/media/opengl/GLCapabilities.clone ()Ljava/lang/Object;:
     owner: "javax/media/opengl/GLCapabilities"
     name: "clone"
     arguments: {}
     locals:
-      3: "local3"
+      3: "ex"
   gl!javax/media/opengl/GLContext.<init> ()V:
     owner: "javax/media/opengl/GLContext"
     name: "<init>"
@@ -2904,19 +2904,19 @@ methods:
     owner: "javax/media/opengl/GLContext"
     name: "setCurrent"
     arguments:
-      0: "arg0"
+      0: "context"
     locals: {}
   gl!javax/media/opengl/GLDrawable.createContext (Lgl!javax/media/opengl/GLContext;)Lgl!javax/media/opengl/GLContext;:
     owner: "javax/media/opengl/GLDrawable"
     name: "createContext"
     arguments:
-      0: "arg0"
+      0: "context"
     locals: {}
   gl!javax/media/opengl/GLDrawable.setRealized (Z)V:
     owner: "javax/media/opengl/GLDrawable"
     name: "setRealized"
     arguments:
-      0: "arg0"
+      0: "realized"
     locals: {}
   gl!javax/media/opengl/GLDrawable.swapBuffers ()V:
     owner: "javax/media/opengl/GLDrawable"
@@ -2932,19 +2932,19 @@ methods:
   : owner: "javax/media/opengl/GLDrawableFactory"
     name: "getGLDrawable"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "target"
+      1: "capabilities"
+      2: "chooser"
     locals: {}
   gl!javax/media/opengl/GLException.<init> (Ljava/lang/String;)V:
     owner: "javax/media/opengl/GLException"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "message"
     locals: {}
   gl!javax/media/opengl/GLException.<init> (Ljava/lang/Throwable;)V:
     owner: "javax/media/opengl/GLException"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "cause"
     locals: {}
