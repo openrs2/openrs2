@@ -14,7 +14,7 @@ classes:
   unpackclass!n: "Class209"
   unpackclass!o: "Class210"
   unpackclass!p: "Class199_Sub1"
-  unpackclass!q: "RuntimeException_Sub3"
+  unpackclass!q: "TracingException"
   unpackclass!r: "Class211"
   unpackclass!s: "Class201_Sub2"
   unpackclass!u: "Class212"
@@ -801,20 +801,20 @@ methods:
       48: "local48"
       58: "local58"
   unpackclass!q.<init> (Ljava/lang/Throwable;Ljava/lang/String;)V:
-    owner: "RuntimeException_Sub3"
+    owner: "TracingException"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "cause"
+      1: "message"
     locals: {}
   unpackclass!q.a (Ljava/lang/Throwable;Ljava/lang/String;)Lunpackclass!q;:
-    owner: "RuntimeException_Sub3"
-    name: "method4937"
+    owner: "TracingException"
+    name: "wrap"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "cause"
+      1: "message"
     locals:
-      5: "local5"
+      5: "ex"
   unpackclass!u.a (ILunpackclass!h;)I:
     owner: "Class212"
     name: "method4945"
