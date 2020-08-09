@@ -678,7 +678,7 @@ methods:
     name: "readShort"
     arguments: {}
     locals:
-      27: "local27"
+      27: "value"
   unpackclass!e.f ()I:
     owner: "Buffer"
     name: "readInt"
