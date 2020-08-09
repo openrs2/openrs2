@@ -62,7 +62,7 @@ classes:
   client!eo: "Class52"
   client!f: "Class53_Sub1_Sub1"
   client!fa: "Class4_Sub1_Sub7"
-  client!fd: "Class4_Sub10"
+  client!fd: "Buffer"
   client!fe: "Class56_Sub1"
   client!ff: "Class57"
   client!fg: "Class4_Sub3_Sub7"
@@ -2505,11 +2505,11 @@ fields:
     owner: "Static2"
     name: "anIntArray649"
   client!fd.I [B:
-    owner: "Class4_Sub10"
-    name: "aByteArray71"
+    owner: "Buffer"
+    name: "bytes"
   client!fd.J I:
-    owner: "Class4_Sub10"
-    name: "anInt5709"
+    owner: "Buffer"
+    name: "position"
   client!fd.Q I:
     owner: "Static2"
     name: "anInt5716"
@@ -18021,35 +18021,35 @@ methods:
     arguments: {}
     locals: {}
   client!fd.<init> (I)V:
-    owner: "Class4_Sub10"
+    owner: "Buffer"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "size"
     locals: {}
   client!fd.<init> ([B)V:
-    owner: "Class4_Sub10"
+    owner: "Buffer"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "bytes"
     locals: {}
   client!fd.a (FI)V:
-    owner: "Class4_Sub10"
-    name: "method4632"
+    owner: "Buffer"
+    name: "writeFloatLE"
     arguments:
-      0: "arg0"
+      0: "value"
     locals:
-      13: "local13"
+      13: "bits"
   client!fd.a (IB)V:
-    owner: "Class4_Sub10"
-    name: "method4578"
+    owner: "Buffer"
+    name: "writeByteC"
     arguments:
-      0: "arg0"
+      0: "value"
     locals: {}
   client!fd.a (II)V:
-    owner: "Class4_Sub10"
-    name: "method4577"
+    owner: "Buffer"
+    name: "writeUnsignedSmart"
     arguments:
-      1: "arg0"
+      1: "value"
     locals: {}
   client!fd.a (IIIILclient!vh;BIII)V:
     owner: "Static15"
@@ -18080,335 +18080,335 @@ methods:
       186: "local186"
       212: "local212"
   client!fd.a (III[B)V:
-    owner: "Class4_Sub10"
-    name: "method4612"
+    owner: "Buffer"
+    name: "readBytes"
     arguments:
-      2: "arg0"
-      3: "arg1"
+      3: "bytes"
+      2: "len"
     locals:
-      7: "local7"
+      7: "i"
   client!fd.a (II[BI)V:
-    owner: "Class4_Sub10"
-    name: "method4600"
+    owner: "Buffer"
+    name: "readBytesA"
     arguments:
-      2: "arg0"
-      3: "arg1"
+      2: "bytes"
+      3: "len"
     locals:
-      9: "local9"
+      9: "i"
   client!fd.a (IJ)V:
-    owner: "Class4_Sub10"
-    name: "method4582"
+    owner: "Buffer"
+    name: "writeLong"
     arguments:
-      1: "arg0"
+      1: "value"
     locals: {}
   client!fd.a (IZ)V:
-    owner: "Class4_Sub10"
-    name: "method4599"
+    owner: "Buffer"
+    name: "writeIntLE"
     arguments:
-      0: "arg0"
+      0: "value"
     locals: {}
   client!fd.a (I[BIB)V:
-    owner: "Class4_Sub10"
-    name: "method4594"
+    owner: "Buffer"
+    name: "writeBytes"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "bytes"
+      2: "len"
     locals:
-      7: "local7"
+      7: "i"
   client!fd.a (JZI)V:
-    owner: "Class4_Sub10"
-    name: "method4606"
+    owner: "Buffer"
+    name: "writeVarLong"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "value"
+      2: "bytes"
     locals:
-      26: "local26"
+      26: "shift"
   client!fd.a (Ljava/lang/String;I)V:
-    owner: "Class4_Sub10"
-    name: "method4575"
+    owner: "Buffer"
+    name: "writeString"
     arguments:
-      0: "arg0"
+      0: "value"
     locals:
-      7: "local7"
+      7: "index"
   client!fd.a (Ljava/math/BigInteger;Ljava/math/BigInteger;I)V:
-    owner: "Class4_Sub10"
-    name: "method4628"
+    owner: "Buffer"
+    name: "rsaEncrypt"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      1: "exponent"
+      0: "modulus"
     locals:
-      6: "local6"
-      12: "local12"
-      23: "local23"
-      28: "local28"
-      31: "local31"
+      6: "len"
+      12: "plaintextBytes"
+      23: "plaintext"
+      28: "ciphertext"
+      31: "ciphertextBytes"
   client!fd.a (Z)I:
-    owner: "Class4_Sub10"
-    name: "method4576"
+    owner: "Buffer"
+    name: "readShort"
     arguments: {}
     locals:
-      37: "local37"
+      37: "value"
   client!fd.a (ZF)V:
-    owner: "Class4_Sub10"
-    name: "method4604"
+    owner: "Buffer"
+    name: "writeFloat"
     arguments:
-      1: "arg0"
+      1: "value"
     locals:
-      2: "local2"
+      2: "bits"
   client!fd.a (ZI)V:
-    owner: "Class4_Sub10"
-    name: "method4617"
+    owner: "Buffer"
+    name: "writeInt"
     arguments:
-      1: "arg0"
+      1: "value"
     locals: {}
   client!fd.a (Z[I)V:
-    owner: "Class4_Sub10"
-    name: "method4627"
+    owner: "Buffer"
+    name: "xteaEncrypt"
     arguments:
-      1: "arg0"
+      1: "key"
     locals:
-      10: "local10"
-      15: "local15"
-      22: "local22"
-      26: "local26"
-      28: "local28"
-      32: "local32"
+      10: "position"
+      15: "i"
+      22: "v0"
+      26: "v1"
+      28: "sum"
+      32: "rounds"
   client!fd.a ([IIZI)V:
-    owner: "Class4_Sub10"
-    name: "method4607"
+    owner: "Buffer"
+    name: "xteaDecrypt"
     arguments:
-      0: "arg0"
-      3: "arg1"
+      0: "key"
+      3: "len"
     locals:
-      11: "local11"
-      14: "local14"
-      24: "local24"
-      31: "local31"
-      35: "local35"
-      37: "local37"
-      41: "local41"
+      11: "blocks"
+      14: "position"
+      24: "i"
+      31: "v0"
+      35: "v1"
+      37: "sum"
+      41: "rounds"
   client!fd.b (BI)V:
-    owner: "Class4_Sub10"
-    name: "method4584"
+    owner: "Buffer"
+    name: "writeIntAlt3"
     arguments:
-      1: "arg0"
+      1: "value"
     locals: {}
   client!fd.b (I)I:
-    owner: "Class4_Sub10"
-    name: "method4583"
+    owner: "Buffer"
+    name: "readIntAlt3Reverse"
     arguments: {}
     locals: {}
   client!fd.b (IB)V:
-    owner: "Class4_Sub10"
-    name: "method4636"
+    owner: "Buffer"
+    name: "writeShortLEA"
     arguments:
-      0: "arg0"
+      0: "value"
     locals: {}
   client!fd.b (II)V:
-    owner: "Class4_Sub10"
-    name: "method4580"
+    owner: "Buffer"
+    name: "writeVarInt"
     arguments:
-      0: "arg0"
+      0: "value"
     locals: {}
   client!fd.b (II[BI)V:
-    owner: "Class4_Sub10"
-    name: "method4634"
+    owner: "Buffer"
+    name: "readBytesReverse"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "bytes"
+      1: "len"
     locals:
-      11: "local11"
+      11: "i"
   client!fd.b (Z)I:
-    owner: "Class4_Sub10"
-    name: "method4585"
+    owner: "Buffer"
+    name: "readShortLE"
     arguments: {}
     locals:
-      36: "local36"
+      36: "value"
   client!fd.c (BI)V:
-    owner: "Class4_Sub10"
-    name: "method4602"
+    owner: "Buffer"
+    name: "writeMedium"
     arguments:
-      1: "arg0"
+      1: "value"
     locals: {}
   client!fd.c (I)I:
-    owner: "Class4_Sub10"
-    name: "method4587"
+    owner: "Buffer"
+    name: "readIntAlt3"
     arguments: {}
     locals: {}
   client!fd.c (II)V:
-    owner: "Class4_Sub10"
-    name: "method4581"
+    owner: "Buffer"
+    name: "writeByte"
     arguments:
-      0: "arg0"
+      0: "value"
     locals: {}
   client!fd.c (Z)I:
-    owner: "Class4_Sub10"
-    name: "method4609"
+    owner: "Buffer"
+    name: "readVarInt"
     arguments: {}
     locals:
-      16: "local16"
-      22: "local22"
+      16: "b"
+      22: "value"
   client!fd.d (BI)V:
-    owner: "Class4_Sub10"
-    name: "method4603"
+    owner: "Buffer"
+    name: "writeShortLE"
     arguments:
-      1: "arg0"
+      1: "value"
     locals: {}
   client!fd.d (I)I:
-    owner: "Class4_Sub10"
-    name: "method4588"
+    owner: "Buffer"
+    name: "readUnsignedShortLEA"
     arguments: {}
     locals: {}
   client!fd.d (II)V:
-    owner: "Class4_Sub10"
-    name: "method4586"
+    owner: "Buffer"
+    name: "writeByteS"
     arguments:
-      1: "arg0"
+      1: "value"
     locals: {}
   client!fd.d (Z)I:
-    owner: "Class4_Sub10"
-    name: "method4620"
+    owner: "Buffer"
+    name: "readIntLE"
     arguments: {}
     locals: {}
   client!fd.e (B)I:
-    owner: "Class4_Sub10"
-    name: "method4579"
+    owner: "Buffer"
+    name: "readUnsignedSmart"
     arguments: {}
     locals:
-      14: "local14"
+      14: "peek"
   client!fd.e (BI)V:
-    owner: "Class4_Sub10"
-    name: "method4624"
+    owner: "Buffer"
+    name: "writeIntLE2"
     arguments:
-      1: "arg0"
+      1: "value"
     locals: {}
   client!fd.e (I)I:
-    owner: "Class4_Sub10"
-    name: "method4589"
+    owner: "Buffer"
+    name: "readUnsignedByteC"
     arguments: {}
     locals: {}
   client!fd.e (II)V:
-    owner: "Class4_Sub10"
-    name: "method4591"
+    owner: "Buffer"
+    name: "writeIntAlt3Reverse"
     arguments:
-      1: "arg0"
+      1: "value"
     locals: {}
   client!fd.f (B)I:
-    owner: "Class4_Sub10"
+    owner: "Buffer"
     name: "method4590"
     arguments: {}
     locals: {}
   client!fd.f (BI)V:
-    owner: "Class4_Sub10"
-    name: "method4638"
+    owner: "Buffer"
+    name: "writeByteLength"
     arguments:
-      1: "arg0"
+      1: "len"
     locals: {}
   client!fd.f (I)Ljava/lang/String;:
-    owner: "Class4_Sub10"
-    name: "method4593"
+    owner: "Buffer"
+    name: "readString"
     arguments: {}
     locals:
-      6: "local6"
+      6: "off"
   client!fd.f (II)J:
-    owner: "Class4_Sub10"
-    name: "method4596"
+    owner: "Buffer"
+    name: "readVarLong"
     arguments:
-      1: "arg0"
+      1: "bytes"
     locals:
-      23: "local23"
-      27: "local27"
+      23: "value"
+      27: "shift"
   client!fd.g (B)I:
-    owner: "Class4_Sub10"
-    name: "method4597"
+    owner: "Buffer"
+    name: "readSmart"
     arguments: {}
     locals:
-      11: "local11"
+      11: "peek"
   client!fd.g (I)I:
-    owner: "Class4_Sub10"
-    name: "method4595"
+    owner: "Buffer"
+    name: "readInt"
     arguments: {}
     locals: {}
   client!fd.g (II)V:
-    owner: "Class4_Sub10"
-    name: "method4610"
+    owner: "Buffer"
+    name: "writeIntLength"
     arguments:
-      0: "arg0"
+      0: "len"
     locals: {}
   client!fd.h (B)B:
-    owner: "Class4_Sub10"
-    name: "method4608"
+    owner: "Buffer"
+    name: "readByteS"
     arguments: {}
     locals: {}
   client!fd.h (I)I:
-    owner: "Class4_Sub10"
-    name: "method4598"
+    owner: "Buffer"
+    name: "readUnsignedMultiSmart"
     arguments: {}
     locals:
-      7: "local7"
-      11: "local11"
+      7: "total"
+      11: "value"
   client!fd.h (II)V:
-    owner: "Class4_Sub10"
-    name: "method4611"
+    owner: "Buffer"
+    name: "writeByteA"
     arguments:
-      0: "arg0"
+      0: "value"
     locals: {}
   client!fd.i (B)I:
-    owner: "Class4_Sub10"
-    name: "method4616"
+    owner: "Buffer"
+    name: "readUnsignedShort"
     arguments: {}
     locals: {}
   client!fd.i (I)Z:
-    owner: "Class4_Sub10"
-    name: "method4601"
+    owner: "Buffer"
+    name: "verifyCrc32"
     arguments: {}
     locals:
-      17: "local17"
-      21: "local21"
+      17: "actual"
+      21: "expected"
   client!fd.i (II)V:
-    owner: "Class4_Sub10"
-    name: "method4613"
+    owner: "Buffer"
+    name: "writeShortLE2"
     arguments:
-      1: "arg0"
+      1: "value"
     locals: {}
   client!fd.j (B)I:
-    owner: "Class4_Sub10"
-    name: "method4618"
+    owner: "Buffer"
+    name: "readUnsignedMedium"
     arguments: {}
     locals: {}
   client!fd.j (I)I:
-    owner: "Class4_Sub10"
-    name: "method4605"
+    owner: "Buffer"
+    name: "readUnsignedByteS"
     arguments: {}
     locals: {}
   client!fd.j (II)V:
-    owner: "Class4_Sub10"
-    name: "method4614"
+    owner: "Buffer"
+    name: "writeShortA"
     arguments:
       1: "arg0"
     locals: {}
   client!fd.k (B)J:
-    owner: "Class4_Sub10"
-    name: "method4622"
+    owner: "Buffer"
+    name: "readLong"
     arguments: {}
     locals:
-      17: "local17"
-      26: "local26"
+      17: "high"
+      26: "low"
   client!fd.k (I)B:
-    owner: "Class4_Sub10"
-    name: "method4615"
+    owner: "Buffer"
+    name: "readByteC"
     arguments: {}
     locals: {}
   client!fd.k (II)I:
-    owner: "Class4_Sub10"
-    name: "method4621"
+    owner: "Buffer"
+    name: "writeCrc32"
     arguments:
-      1: "arg0"
+      1: "off"
     locals:
-      11: "local11"
+      11: "checksum"
   client!fd.l (B)Ljava/lang/String;:
-    owner: "Class4_Sub10"
-    name: "method4625"
+    owner: "Buffer"
+    name: "fastReadString"
     arguments: {}
     locals: {}
   client!fd.l (I)V:
@@ -18417,47 +18417,47 @@ methods:
     arguments: {}
     locals: {}
   client!fd.l (II)V:
-    owner: "Class4_Sub10"
-    name: "method4631"
+    owner: "Buffer"
+    name: "writeShort"
     arguments:
-      1: "arg0"
+      1: "value"
     locals: {}
   client!fd.m (B)I:
-    owner: "Class4_Sub10"
-    name: "method4629"
+    owner: "Buffer"
+    name: "readUnsignedByte"
     arguments: {}
     locals: {}
   client!fd.m (I)I:
-    owner: "Class4_Sub10"
-    name: "method4623"
+    owner: "Buffer"
+    name: "readUnsignedByteA"
     arguments: {}
     locals: {}
   client!fd.n (B)I:
-    owner: "Class4_Sub10"
-    name: "method4630"
+    owner: "Buffer"
+    name: "readUnsignedShortA"
     arguments: {}
     locals: {}
   client!fd.n (I)I:
-    owner: "Class4_Sub10"
-    name: "method4626"
+    owner: "Buffer"
+    name: "readShortA"
     arguments: {}
     locals:
-      29: "local29"
+      29: "value"
   client!fd.o (B)I:
-    owner: "Class4_Sub10"
-    name: "method4635"
+    owner: "Buffer"
+    name: "readUnsignedShortLE"
     arguments: {}
     locals: {}
   client!fd.o (I)Ljava/lang/String;:
-    owner: "Class4_Sub10"
-    name: "method4633"
+    owner: "Buffer"
+    name: "readVersionedString"
     arguments: {}
     locals:
-      10: "local10"
-      33: "local33"
+      10: "version"
+      33: "off"
   client!fd.p (I)B:
-    owner: "Class4_Sub10"
-    name: "method4637"
+    owner: "Buffer"
+    name: "readByte"
     arguments: {}
     locals: {}
   client!fe.<init> (III)V:
