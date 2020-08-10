@@ -59,7 +59,7 @@ classes:
   client!ej: "Class4_Sub9"
   client!em: "Class50"
   client!en: "Class51"
-  client!eo: "Class52"
+  client!eo: "BufferedSocket"
   client!f: "Class53_Sub1_Sub1"
   client!fa: "Class4_Sub1_Sub7"
   client!fd: "Buffer"
@@ -2355,14 +2355,14 @@ fields:
     owner: "Static2"
     name: "aBigInteger1"
   client!eo.e Ljava/io/OutputStream;:
-    owner: "Class52"
-    name: "anOutputStream1"
+    owner: "BufferedSocket"
+    name: "out"
   client!eo.f Z:
-    owner: "Class52"
-    name: "aBoolean81"
+    owner: "BufferedSocket"
+    name: "closed"
   client!eo.j I:
-    owner: "Class52"
-    name: "anInt1366"
+    owner: "BufferedSocket"
+    name: "readPointer"
   client!eo.k [[[I:
     owner: "Static2"
     name: "anIntArrayArrayArray3"
@@ -2370,32 +2370,32 @@ fields:
     owner: "Static2"
     name: "anInt1367"
   client!eo.n [B:
-    owner: "Class52"
-    name: "aByteArray11"
+    owner: "BufferedSocket"
+    name: "buffer"
   client!eo.o Ljava/net/Socket;:
-    owner: "Class52"
-    name: "aSocket1"
+    owner: "BufferedSocket"
+    name: "socket"
   client!eo.q Z:
     owner: "Static2"
     name: "aBoolean82"
   client!eo.r Ljava/io/InputStream;:
-    owner: "Class52"
-    name: "anInputStream1"
+    owner: "BufferedSocket"
+    name: "in"
   client!eo.s Z:
-    owner: "Class52"
-    name: "aBoolean83"
+    owner: "BufferedSocket"
+    name: "error"
   client!eo.v [Lclient!fe;:
     owner: "Static2"
     name: "aClass56_Sub1Array1"
   client!eo.x Lsignlink!pm;:
-    owner: "Class52"
-    name: "aClass196_1"
+    owner: "BufferedSocket"
+    name: "signLink"
   client!eo.y Lsignlink!vk;:
-    owner: "Class52"
-    name: "aClass197_3"
+    owner: "BufferedSocket"
+    name: "thread"
   client!eo.z I:
-    owner: "Class52"
-    name: "anInt1373"
+    owner: "BufferedSocket"
+    name: "writePointer"
   client!f.Ac I:
     owner: "Class53_Sub1_Sub1"
     name: "anInt1584"
@@ -17374,37 +17374,37 @@ methods:
       657: "local657"
       663: "local663"
   client!eo.<init> (Ljava/net/Socket;Lsignlink!pm;)V:
-    owner: "Class52"
+    owner: "BufferedSocket"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "socket"
+      1: "signLink"
     locals: {}
   client!eo.a (B)I:
-    owner: "Class52"
-    name: "method1101"
+    owner: "BufferedSocket"
+    name: "available"
     arguments: {}
     locals: {}
   client!eo.a (I[BIB)V:
-    owner: "Class52"
-    name: "method1099"
+    owner: "BufferedSocket"
+    name: "read"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      1: "b"
+      0: "off"
+      2: "len"
     locals:
-      27: "local27"
+      27: "n"
   client!eo.a (I[BII)V:
-    owner: "Class52"
-    name: "method1107"
+    owner: "BufferedSocket"
+    name: "write"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "b"
+      2: "len"
     locals:
-      41: "local41"
+      41: "i"
   client!eo.a (Z)I:
-    owner: "Class52"
-    name: "method1105"
+    owner: "BufferedSocket"
+    name: "read"
     arguments: {}
     locals: {}
   client!eo.a (ZI)V:
@@ -17418,8 +17418,8 @@ methods:
       34: "local34"
       42: "local42"
   client!eo.b (B)V:
-    owner: "Class52"
-    name: "method1104"
+    owner: "BufferedSocket"
+    name: "breakConnection"
     arguments: {}
     locals: {}
   client!eo.b (I)V:
@@ -17431,33 +17431,33 @@ methods:
       185: "local185"
       217: "local217"
   client!eo.c (B)V:
-    owner: "Class52"
-    name: "method1106"
+    owner: "BufferedSocket"
+    name: "checkError"
     arguments: {}
     locals: {}
   client!eo.c (I)V:
-    owner: "Class52"
-    name: "method1103"
+    owner: "BufferedSocket"
+    name: "close"
     arguments: {}
     locals:
-      58: "local58"
+      58: "ex"
   client!eo.finalize ()V:
-    owner: "Class52"
+    owner: "BufferedSocket"
     name: "finalize"
     arguments: {}
     locals: {}
   client!eo.run ()V:
-    owner: "Class52"
+    owner: "BufferedSocket"
     name: "run"
     arguments: {}
     locals:
-      22: "local22"
-      25: "var2"
-      40: "var1"
-      71: "local71"
-      97: "local97"
-      123: "local123"
-      128: "local128"
+      22: "ex"
+      25: "off"
+      40: "len"
+      71: "ex"
+      97: "ex"
+      123: "ex"
+      128: "ex"
   client!f.a (IIB)Z:
     owner: "Static14"
     name: "method1176"
