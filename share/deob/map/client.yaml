@@ -207,7 +207,7 @@ classes:
   client!qi: "Class24"
   client!qj: "Class4_Sub1_Sub25"
   client!qk: "Class144"
-  client!ql: "Canvas_Sub2"
+  client!ql: "GameCanvas"
   client!qm: "Class145"
   client!qn: "Class4_Sub24"
   client!qo: "Class146"
@@ -256,7 +256,7 @@ classes:
   client!ub: "Class169"
   client!uc: "Class4_Sub1_Sub36"
   client!ud: "Class170"
-  client!ue: "Applet_Sub1"
+  client!ue: "GameShell"
   client!ug: "Class172"
   client!uh: "Class173"
   client!ui: "Class174"
@@ -756,8 +756,8 @@ fields:
     owner: "Class4_Sub5"
     name: "aLong17"
   client!bg.r Z:
-    owner: "Static1"
-    name: "aBoolean18"
+    owner: "GameShell"
+    name: "replaceCanvas"
   client!bg.u [Lclient!t;:
     owner: "Static1"
     name: "aClass160Array1"
@@ -1047,8 +1047,8 @@ fields:
     owner: "LocalisedText"
     name: "CHATCOL0"
   client!cb.o I:
-    owner: "Static1"
-    name: "anInt526"
+    owner: "GameShell"
+    name: "canvasWidth"
   client!cc.a Lclient!gl;:
     owner: "Static1"
     name: "aClass4_Sub3_Sub5_1"
@@ -1245,8 +1245,8 @@ fields:
     owner: "Static1"
     name: "aClass60_2"
   client!ck.db I:
-    owner: "Static1"
-    name: "anInt690"
+    owner: "GameShell"
+    name: "canvasHeight"
   client!ck.eb [I:
     owner: "Class4_Sub1_Sub5"
     name: "anIntArray57"
@@ -1263,8 +1263,8 @@ fields:
     owner: "Static1"
     name: "aByte1"
   client!client.ab Z:
-    owner: "Static1"
-    name: "aBoolean45"
+    owner: "GameShell"
+    name: "shutdown"
   client!client.cb I:
     owner: "Static1"
     name: "anInt777"
@@ -1509,8 +1509,8 @@ fields:
     owner: "Static1"
     name: "anInt885"
   client!db.i Lclient!ue;:
-    owner: "Static1"
-    name: "anApplet_Sub1_1"
+    owner: "GameShell"
+    name: "instance"
   client!db.l Lclient!fe;:
     owner: "Static1"
     name: "aClass56_Sub1_1"
@@ -2199,8 +2199,8 @@ fields:
     owner: "Static2"
     name: "aBoolean76"
   client!el.a Z:
-    owner: "Static2"
-    name: "aBoolean77"
+    owner: "GameShell"
+    name: "isJava5OrLater"
   client!el.c [[B:
     owner: "Static2"
     name: "aByteArrayArray11"
@@ -2475,8 +2475,8 @@ fields:
     owner: "Static2"
     name: "anInt1634"
   client!fa.fb I:
-    owner: "Static2"
-    name: "anInt1635"
+    owner: "GameShell"
+    name: "frameWidth"
   client!fb.a [Lclient!fe;:
     owner: "Static2"
     name: "aClass56_Sub1Array2"
@@ -3651,8 +3651,8 @@ fields:
     owner: "Static3"
     name: "anInt2298"
   client!ia.b Z:
-    owner: "Static3"
-    name: "aBoolean158"
+    owner: "GameShell"
+    name: "focus"
   client!ia.d [I:
     owner: "Static3"
     name: "anIntArray191"
@@ -3939,8 +3939,8 @@ fields:
     owner: "Class4_Sub3_Sub11"
     name: "anIntArrayArray20"
   client!ij.D Ljava/awt/Frame;:
-    owner: "Static3"
-    name: "aFrame1"
+    owner: "GameShell"
+    name: "fullScreenFrame"
   client!ij.H Z:
     owner: "Class4_Sub3_Sub11"
     name: "aBoolean163"
@@ -4989,8 +4989,8 @@ fields:
     owner: "Text"
     name: "CHATEFFECT2"
   client!ko.f Z:
-    owner: "Static4"
-    name: "aBoolean207"
+    owner: "GameShell"
+    name: "openWindowJavaScript"
   client!ko.g I:
     owner: "Static4"
     name: "anInt2979"
@@ -5727,8 +5727,8 @@ fields:
     owner: "Static4"
     name: "anInt3326"
   client!mg.q Ljava/awt/Frame;:
-    owner: "Static4"
-    name: "aFrame2"
+    owner: "GameShell"
+    name: "frame"
   client!mg.r I:
     owner: "Static4"
     name: "anInt3327"
@@ -6738,8 +6738,8 @@ fields:
     owner: "Text"
     name: "CHATCOL4"
   client!ni.l Ljava/awt/Canvas;:
-    owner: "Static5"
-    name: "aCanvas115"
+    owner: "GameShell"
+    name: "canvas"
   client!ni.m [[Lclient!wf;:
     owner: "Static5"
     name: "aClass185ArrayArray115"
@@ -8133,8 +8133,8 @@ fields:
     owner: "Class24"
     name: "aClass58_13"
   client!qi.j J:
-    owner: "Static5"
-    name: "aLong26"
+    owner: "GameShell"
+    name: "lastCanvasReplace"
   client!qi.l [Lclient!mi;:
     owner: "Class24"
     name: "aClass119Array2"
@@ -8196,8 +8196,8 @@ fields:
     owner: "LocalisedText"
     name: "MAINLOAD0B"
   client!qk.l I:
-    owner: "Static6"
-    name: "anInt4380"
+    owner: "GameShell"
+    name: "frameHeight"
   client!qk.p [I:
     owner: "Class144"
     name: "anIntArray463"
@@ -8232,8 +8232,8 @@ fields:
     owner: "Static6"
     name: "anIntArray465"
   client!ql.h Ljava/awt/Component;:
-    owner: "Canvas_Sub2"
-    name: "aComponent2"
+    owner: "GameCanvas"
+    name: "component"
   client!qm.b I:
     owner: "Static6"
     name: "anInt4397"
@@ -8559,8 +8559,8 @@ fields:
     owner: "Static6"
     name: "anInt4506"
   client!rg.bb Z:
-    owner: "Static6"
-    name: "aBoolean314"
+    owner: "GameShell"
+    name: "fullRedraw"
   client!rg.cb I:
     owner: "Class4_Sub1_Sub26"
     name: "anInt4507"
@@ -9273,8 +9273,8 @@ fields:
     owner: "Class4_Sub29"
     name: "anInt4858"
   client!sj.w I:
-    owner: "Static6"
-    name: "anInt4859"
+    owner: "GameShell"
+    name: "leftMargin"
   client!sj.x [Ljava/lang/String;:
     owner: "Static6"
     name: "aStringArray28"
@@ -10086,8 +10086,8 @@ fields:
     owner: "Class168"
     name: "anInt5255"
   client!ua.O Lsignlink!pm;:
-    owner: "Static7"
-    name: "aClass196_4"
+    owner: "GameShell"
+    name: "signLink"
   client!ua.P Z:
     owner: "Class168"
     name: "aBoolean357"
@@ -10299,11 +10299,11 @@ fields:
     owner: "Static7"
     name: "aLong35"
   client!ue.L Z:
-    owner: "Applet_Sub1"
-    name: "aBoolean42"
+    owner: "GameShell"
+    name: "miscNativesLoaded"
   client!ue.M Z:
-    owner: "Applet_Sub1"
-    name: "aBoolean43"
+    owner: "GameShell"
+    name: "error"
   client!ue.Q I:
     owner: "Static7"
     name: "anInt767"
@@ -10566,8 +10566,8 @@ fields:
     owner: "Static7"
     name: "anInt5437"
   client!v.w J:
-    owner: "Static7"
-    name: "aLong186"
+    owner: "GameShell"
+    name: "killTime"
   client!va.c [Lclient!ui;:
     owner: "Static7"
     name: "aClass174Array1"
@@ -10950,8 +10950,8 @@ fields:
     owner: "Static7"
     name: "anIntArray638"
   client!vl.b I:
-    owner: "Static7"
-    name: "anInt5622"
+    owner: "GameShell"
+    name: "topMargin"
   client!vl.c I:
     owner: "Static7"
     name: "anInt5623"
@@ -11130,8 +11130,8 @@ fields:
     owner: "Static7"
     name: "aBoolean399"
   client!wd.tb Z:
-    owner: "Static7"
-    name: "aBoolean400"
+    owner: "GameShell"
+    name: "focusIn"
   client!wd.wb Ljava/lang/String;:
     owner: "LocalisedText"
     name: "FRIENDLISTDUPE"
@@ -11217,8 +11217,8 @@ fields:
     owner: "Class185"
     name: "aByte26"
   client!wf.C Ljava/lang/Thread;:
-    owner: "Static7"
-    name: "aThread2"
+    owner: "GameShell"
+    name: "thread"
   client!wf.Cb I:
     owner: "Class185"
     name: "anInt5916"
@@ -15241,7 +15241,7 @@ methods:
     locals: {}
   client!client.a (B)V:
     owner: "client"
-    name: "method672"
+    name: "mainQuit"
     arguments: {}
     locals: {}
   client!client.a (Lclient!wf;)Lclient!on;:
@@ -15253,7 +15253,7 @@ methods:
       13: "local13"
   client!client.a (Z)V:
     owner: "client"
-    name: "method663"
+    name: "mainLoop"
     arguments: {}
     locals:
       25: "local25"
@@ -15356,7 +15356,7 @@ methods:
       1691: "local1691"
   client!client.b (B)V:
     owner: "client"
-    name: "method673"
+    name: "reset"
     arguments: {}
     locals: {}
   client!client.b (Lclient!wf;)Lclient!wf;:
@@ -15369,7 +15369,7 @@ methods:
       10: "local10"
   client!client.c (B)V:
     owner: "client"
-    name: "method681"
+    name: "mainInit"
     arguments: {}
     locals:
       174: "local174"
@@ -15397,7 +15397,7 @@ methods:
       305: "local305"
   client!client.e (I)V:
     owner: "client"
-    name: "method678"
+    name: "mainRedraw"
     arguments: {}
     locals:
       26: "local26"
@@ -36970,10 +36970,10 @@ methods:
       53: "local53"
       147: "local147"
   client!ql.<init> (Ljava/awt/Component;)V:
-    owner: "Canvas_Sub2"
+    owner: "GameCanvas"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "component"
     locals: {}
   client!ql.a (ILjava/lang/String;IZ)I:
     owner: "Static30"
@@ -37000,16 +37000,16 @@ methods:
     locals:
       50: "local50"
   client!ql.paint (Ljava/awt/Graphics;)V:
-    owner: "Canvas_Sub2"
+    owner: "GameCanvas"
     name: "paint"
     arguments:
-      0: "arg0"
+      0: "graphics"
     locals: {}
   client!ql.update (Ljava/awt/Graphics;)V:
-    owner: "Canvas_Sub2"
+    owner: "GameCanvas"
     name: "update"
     arguments:
-      0: "arg0"
+      0: "graphics"
     locals: {}
   client!qm.a (IIILclient!fd;)V:
     owner: "Class145"
@@ -42634,8 +42634,8 @@ methods:
     arguments: {}
     locals: {}
   client!ue.a (B)V:
-    owner: "Applet_Sub1"
-    name: "method672"
+    owner: "GameShell"
+    name: "mainQuit"
     arguments: {}
     locals: {}
   client!ue.a (BI)V:
@@ -42679,13 +42679,13 @@ methods:
       3216: "local3216"
       3240: "local3240"
   client!ue.a (BLjava/lang/String;)V:
-    owner: "Applet_Sub1"
-    name: "method670"
+    owner: "GameShell"
+    name: "error"
     arguments:
-      1: "arg0"
+      1: "error"
     locals:
-      35: "local35"
-      56: "local56"
+      35: "ex"
+      56: "ex"
   client!ue.a (BZ)V:
     owner: "Static35"
     name: "method665"
@@ -42693,8 +42693,8 @@ methods:
       1: "arg0"
     locals: {}
   client!ue.a (I)V:
-    owner: "Applet_Sub1"
-    name: "method666"
+    owner: "GameShell"
+    name: "mainLoopWrapper"
     arguments: {}
     locals:
       6: "local6"
@@ -42707,35 +42707,35 @@ methods:
     locals:
       10: "local10"
   client!ue.a (IIIII)V:
-    owner: "Applet_Sub1"
-    name: "method677"
+    owner: "GameShell"
+    name: "startApplet"
     arguments:
-      1: "arg0"
+      1: "cacheId"
     locals:
-      50: "local50"
-      80: "local80"
-      97: "local97"
+      50: "openWindowJavaScriptStr"
+      80: "request"
+      97: "ex"
   client!ue.a (IILjava/lang/String;IZIII)V:
-    owner: "Applet_Sub1"
-    name: "method679"
+    owner: "GameShell"
+    name: "startApplication"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "cacheId"
+      2: "cacheSubDir"
     locals:
-      44: "local44"
-      77: "local77"
+      44: "insets"
+      77: "request"
       94: "local94"
   client!ue.a (IZ)V:
-    owner: "Applet_Sub1"
-    name: "method675"
+    owner: "GameShell"
+    name: "shutdown"
     arguments:
-      1: "arg0"
+      1: "clean"
     locals:
-      43: "local43"
-      49: "local49"
-      70: "local70"
-      77: "local77"
-      87: "local87"
+      43: "ex"
+      49: "ex"
+      70: "ex"
+      77: "ex"
+      87: "ex"
   client!ue.a (Lclient!fh;B)V:
     owner: "Static35"
     name: "method667"
@@ -42748,13 +42748,13 @@ methods:
       136: "local136"
       168: "local168"
   client!ue.a (Z)V:
-    owner: "Applet_Sub1"
-    name: "method663"
+    owner: "GameShell"
+    name: "mainLoop"
     arguments: {}
     locals: {}
   client!ue.b (B)V:
-    owner: "Applet_Sub1"
-    name: "method673"
+    owner: "GameShell"
+    name: "reset"
     arguments: {}
     locals: {}
   client!ue.b (IZ)V:
@@ -42765,170 +42765,170 @@ methods:
     locals:
       13: "local13"
   client!ue.b (Z)V:
-    owner: "Applet_Sub1"
-    name: "method669"
+    owner: "GameShell"
+    name: "addCanvas"
     arguments: {}
     locals:
-      23: "local23"
-      57: "local57"
+      23: "container"
+      57: "insets"
   client!ue.c (B)V:
-    owner: "Applet_Sub1"
-    name: "method681"
+    owner: "GameShell"
+    name: "mainInit"
     arguments: {}
     locals: {}
   client!ue.c (I)Z:
-    owner: "Applet_Sub1"
-    name: "method671"
+    owner: "GameShell"
+    name: "isHostnameValid"
     arguments: {}
     locals: {}
   client!ue.c (Z)V:
-    owner: "Applet_Sub1"
+    owner: "GameShell"
     name: "method682"
     arguments: {}
     locals:
-      18: "local18"
-      48: "local48"
+      18: "request"
+      48: "ex"
   client!ue.d (I)V:
-    owner: "Applet_Sub1"
-    name: "method674"
+    owner: "GameShell"
+    name: "mainRedrawWrapper"
     arguments: {}
     locals:
       14: "local14"
       18: "local18"
       42: "local42"
-      86: "local86"
+      86: "insets"
   client!ue.destroy ()V:
-    owner: "Applet_Sub1"
+    owner: "GameShell"
     name: "destroy"
     arguments: {}
     locals: {}
   client!ue.e (I)V:
-    owner: "Applet_Sub1"
-    name: "method678"
+    owner: "GameShell"
+    name: "mainRedraw"
     arguments: {}
     locals: {}
   client!ue.focusGained (Ljava/awt/event/FocusEvent;)V:
-    owner: "Applet_Sub1"
+    owner: "GameShell"
     name: "focusGained"
     arguments:
-      0: "arg0"
+      0: "event"
     locals: {}
   client!ue.focusLost (Ljava/awt/event/FocusEvent;)V:
-    owner: "Applet_Sub1"
+    owner: "GameShell"
     name: "focusLost"
     arguments:
-      0: "arg0"
+      0: "event"
     locals: {}
   client!ue.getAppletContext ()Ljava/applet/AppletContext;:
-    owner: "Applet_Sub1"
+    owner: "GameShell"
     name: "getAppletContext"
     arguments: {}
     locals: {}
   client!ue.getCodeBase ()Ljava/net/URL;:
-    owner: "Applet_Sub1"
+    owner: "GameShell"
     name: "getCodeBase"
     arguments: {}
     locals: {}
   client!ue.getDocumentBase ()Ljava/net/URL;:
-    owner: "Applet_Sub1"
+    owner: "GameShell"
     name: "getDocumentBase"
     arguments: {}
     locals: {}
   client!ue.getParameter (Ljava/lang/String;)Ljava/lang/String;:
-    owner: "Applet_Sub1"
+    owner: "GameShell"
     name: "getParameter"
     arguments:
-      0: "arg0"
+      0: "name"
     locals: {}
   client!ue.init ()V:
-    owner: "Applet_Sub1"
+    owner: "GameShell"
     name: "init"
     arguments: {}
     locals: {}
   client!ue.paint (Ljava/awt/Graphics;)V:
-    owner: "Applet_Sub1"
+    owner: "GameShell"
     name: "paint"
     arguments:
-      0: "arg0"
+      0: "graphics"
     locals:
-      27: "local27"
+      27: "clipBounds"
   client!ue.providesignlink (Lsignlink!pm;)V:
-    owner: "Applet_Sub1"
+    owner: "GameShell"
     name: "providesignlink"
     arguments:
-      0: "arg0"
+      0: "signLink"
     locals: {}
   client!ue.run ()V:
-    owner: "Applet_Sub1"
+    owner: "GameShell"
     name: "run"
     arguments: {}
     locals:
-      10: "local10"
-      22: "local22"
-      75: "local75"
-      77: "local77"
-      89: "local89"
-      124: "local124"
-      140: "local140"
-      177: "local177"
-      197: "local197"
+      10: "javaVendor"
+      22: "javaVersion"
+      75: "i"
+      77: "minorVersion"
+      89: "c"
+      124: "setFocusCycleRoot"
+      140: "ex"
+      177: "i"
+      197: "ex"
   client!ue.start ()V:
-    owner: "Applet_Sub1"
+    owner: "GameShell"
     name: "start"
     arguments: {}
     locals: {}
   client!ue.stop ()V:
-    owner: "Applet_Sub1"
+    owner: "GameShell"
     name: "stop"
     arguments: {}
     locals: {}
   client!ue.update (Ljava/awt/Graphics;)V:
-    owner: "Applet_Sub1"
+    owner: "GameShell"
     name: "update"
     arguments:
-      0: "arg0"
+      0: "graphics"
     locals: {}
   client!ue.windowActivated (Ljava/awt/event/WindowEvent;)V:
-    owner: "Applet_Sub1"
+    owner: "GameShell"
     name: "windowActivated"
     arguments:
-      0: "arg0"
+      0: "event"
     locals: {}
   client!ue.windowClosed (Ljava/awt/event/WindowEvent;)V:
-    owner: "Applet_Sub1"
+    owner: "GameShell"
     name: "windowClosed"
     arguments:
-      0: "arg0"
+      0: "event"
     locals: {}
   client!ue.windowClosing (Ljava/awt/event/WindowEvent;)V:
-    owner: "Applet_Sub1"
+    owner: "GameShell"
     name: "windowClosing"
     arguments:
-      0: "arg0"
+      0: "event"
     locals: {}
   client!ue.windowDeactivated (Ljava/awt/event/WindowEvent;)V:
-    owner: "Applet_Sub1"
+    owner: "GameShell"
     name: "windowDeactivated"
     arguments:
-      0: "arg0"
+      0: "event"
     locals: {}
   client!ue.windowDeiconified (Ljava/awt/event/WindowEvent;)V:
-    owner: "Applet_Sub1"
+    owner: "GameShell"
     name: "windowDeiconified"
     arguments:
-      0: "arg0"
+      0: "event"
     locals: {}
   client!ue.windowIconified (Ljava/awt/event/WindowEvent;)V:
-    owner: "Applet_Sub1"
+    owner: "GameShell"
     name: "windowIconified"
     arguments:
-      0: "arg0"
+      0: "event"
     locals: {}
   client!ue.windowOpened (Ljava/awt/event/WindowEvent;)V:
-    owner: "Applet_Sub1"
+    owner: "GameShell"
     name: "windowOpened"
     arguments:
-      0: "arg0"
+      0: "event"
     locals: {}
   client!uf.a ()V:
     owner: "Static35"
