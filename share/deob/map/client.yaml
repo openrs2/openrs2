@@ -19,7 +19,7 @@ classes:
   client!bh: "Class19"
   client!bi: "Class20_Sub1"
   client!bj: "Class21"
-  client!bk: "RuntimeException_Sub1"
+  client!bk: "TracingException"
   client!bl: "Class4_Sub1_Sub2"
   client!bn: "Class4_Sub6_Sub1"
   client!bo: "Class23"
@@ -894,8 +894,8 @@ fields:
     owner: "Static1"
     name: "aByteArrayArray4"
   client!bk.c Ljava/lang/String;:
-    owner: "RuntimeException_Sub1"
-    name: "aString31"
+    owner: "TracingException"
+    name: "message"
   client!bk.d I:
     owner: "Static1"
     name: "anInt344"
@@ -909,8 +909,8 @@ fields:
     owner: "Static1"
     name: "aClass4_Sub3_Sub10_2"
   client!bk.h Ljava/lang/Throwable;:
-    owner: "RuntimeException_Sub1"
-    name: "aThrowable1"
+    owner: "TracingException"
+    name: "cause"
   client!bl.T I:
     owner: "Class4_Sub1_Sub2"
     name: "anInt371"
@@ -6069,8 +6069,8 @@ fields:
     owner: "LocalisedText"
     name: "GAME0_LOADING"
   client!mo.Z Lsignlink!pm;:
-    owner: "Static4"
-    name: "aClass196_3"
+    owner: "TracingException"
+    name: "signLink"
   client!mo.db [I:
     owner: "Static4"
     name: "anIntArray336"
@@ -10239,8 +10239,8 @@ fields:
     owner: "Static7"
     name: "anInt5281"
   client!ub.k I:
-    owner: "Static7"
-    name: "anInt5282"
+    owner: "TracingException"
+    name: "clientVersion"
   client!ub.l I:
     owner: "Static7"
     name: "anInt5283"
@@ -13635,11 +13635,11 @@ methods:
     locals:
       1: "local1"
   client!bk.<init> (Ljava/lang/Throwable;Ljava/lang/String;)V:
-    owner: "RuntimeException_Sub1"
+    owner: "TracingException"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "cause"
+      1: "message"
     locals: {}
   client!bk.a (IIBI)Lclient!rl;:
     owner: "Static10"
@@ -15066,13 +15066,13 @@ methods:
       53: "local53"
       65: "local65"
   client!cj.a (Ljava/lang/Throwable;Ljava/lang/String;)Lclient!bk;:
-    owner: "Static11"
-    name: "method612"
+    owner: "TracingException"
+    name: "wrap"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "cause"
+      1: "message"
     locals:
-      12: "local12"
+      12: "ex"
   client!cj.a (ZI)V:
     owner: "Static11"
     name: "method605"
@@ -15851,25 +15851,25 @@ methods:
       2: "arg1"
     locals: {}
   client!dc.a (ZLjava/lang/Throwable;)Ljava/lang/String;:
-    owner: "Static12"
-    name: "method744"
+    owner: "TracingException"
+    name: "toString"
     arguments:
-      1: "arg0"
+      1: "ex"
     locals:
-      14: "local14"
-      19: "local19"
-      36: "local36"
-      41: "local41"
-      49: "local49"
-      57: "local57"
-      60: "local60"
-      63: "local63"
-      72: "local72"
-      79: "local79"
-      88: "local88"
-      95: "local95"
-      120: "local120"
-      136: "local136"
+      14: "message"
+      19: "tracingException"
+      36: "stringWriter"
+      41: "printWriter"
+      49: "stackTrace"
+      57: "reader"
+      60: "firstLine"
+      63: "line"
+      72: "openingBracketIndex"
+      79: "closingBracketIndex"
+      88: "classAndMethodName"
+      95: "trimmedClassAndmethodName"
+      120: "formattedLine"
+      136: "javaSuffixIndex"
   client!dd.a ()I:
     owner: "Class4_Sub4_Sub1"
     name: "method754"
@@ -28948,10 +28948,10 @@ methods:
       10: "len"
       12: "i"
   client!ln.b (Ljava/lang/String;I)V:
-    owner: "Static24"
-    name: "method2651"
+    owner: "TracingException"
+    name: "print"
     arguments:
-      0: "arg0"
+      0: "message"
     locals: {}
   client!lo.a ()I:
     owner: "Class4_Sub6_Sub3"
@@ -32502,17 +32502,17 @@ methods:
       8: "local8"
       55: "local55"
   client!o.a (Ljava/lang/Throwable;ILjava/lang/String;)V:
-    owner: "Static26"
-    name: "method3059"
+    owner: "TracingException"
+    name: "report"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "ex"
+      2: "suffix"
     locals:
-      13: "local13"
-      54: "local54"
-      115: "local115"
-      133: "local133"
-      140: "local140"
+      13: "message"
+      54: "encodedMessage"
+      115: "request"
+      133: "in"
+      140: "reportEx"
   client!o.b ()I:
     owner: "Class53_Sub5"
     name: "method3813"
@@ -37611,14 +37611,14 @@ methods:
     locals:
       7: "local7"
   client!ri.a (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;I)Ljava/lang/String;:
-    owner: "Static31"
-    name: "method3736"
+    owner: "TracingException"
+    name: "replace"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "s"
+      2: "target"
+      1: "replacement"
     locals:
-      21: "local21"
+      21: "i"
   client!ri.a (ZI)Lclient!vc;:
     owner: "Class53_Sub7"
     name: "method3728"
