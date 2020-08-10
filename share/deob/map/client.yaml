@@ -3468,8 +3468,8 @@ fields:
     owner: "Text"
     name: "CHATEFFECT1"
   client!hj.b I:
-    owner: "Static3"
-    name: "anInt2194"
+    owner: "client"
+    name: "defaultPort"
   client!hj.c Ljava/lang/String;:
     owner: "LocalisedText"
     name: "PLEASEWAIT"
@@ -3714,8 +3714,8 @@ fields:
     owner: "Class84"
     name: "aClass4_78"
   client!ic.q I:
-    owner: "Static3"
-    name: "anInt2337"
+    owner: "client"
+    name: "worldListDefaultPort"
   client!ic.r I:
     owner: "Class84"
     name: "anInt2338"
@@ -6006,8 +6006,8 @@ fields:
     owner: "Static4"
     name: "aClass4_Sub3_Sub14_3"
   client!mm.c I:
-    owner: "Static4"
-    name: "anInt3358"
+    owner: "client"
+    name: "worldListPort"
   client!mm.e Ljava/lang/String;:
     owner: "LocalisedText"
     name: "CONLOST"
@@ -7651,7 +7651,7 @@ fields:
     name: "aBoolean297"
   client!pn.e I:
     owner: "client"
-    name: "worldId"
+    name: "worldListWorldId"
   client!pn.f Ljava/util/Random;:
     owner: "Static5"
     name: "aRandom1"
@@ -7908,8 +7908,8 @@ fields:
     owner: "Class53_Sub1"
     name: "aBoolean283"
   client!qc.kc I:
-    owner: "Static5"
-    name: "anInt4045"
+    owner: "client"
+    name: "alternatePort"
   client!qc.lb I:
     owner: "Class53_Sub1"
     name: "anInt4000"
@@ -9114,8 +9114,8 @@ fields:
     owner: "LocalisedText"
     name: "MAINLOAD90"
   client!se.Y Ljava/lang/String;:
-    owner: "Static6"
-    name: "aString291"
+    owner: "client"
+    name: "worldListHostname"
   client!se.Z Lclient!fh;:
     owner: "Static6"
     name: "aClass58_90"
@@ -9123,8 +9123,8 @@ fields:
     owner: "Static6"
     name: "anIntArray517"
   client!se.db Ljava/lang/String;:
-    owner: "Static6"
-    name: "aString292"
+    owner: "client"
+    name: "hostname"
   client!se.eb I:
     owner: "Static6"
     name: "anInt4793"
@@ -9222,8 +9222,8 @@ fields:
     owner: "Class157"
     name: "aByteArray64"
   client!si.l I:
-    owner: "Static6"
-    name: "anInt4846"
+    owner: "client"
+    name: "worldId"
   client!si.m I:
     owner: "Class157"
     name: "anInt4847"
@@ -9291,8 +9291,8 @@ fields:
     owner: "Static6"
     name: "aBoolean335"
   client!sk.f I:
-    owner: "Static6"
-    name: "anInt4866"
+    owner: "client"
+    name: "port"
   client!sk.g Lclient!ik;:
     owner: "Class158"
     name: "aClass89_2"
@@ -10701,8 +10701,8 @@ fields:
     owner: "Class180"
     name: "aClass53_6"
   client!vf.f I:
-    owner: "Static7"
-    name: "anInt5498"
+    owner: "client"
+    name: "worldListAlternatePort"
   client!vf.g Lclient!ud;:
     owner: "Static7"
     name: "aClass170_1"
