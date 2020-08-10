@@ -264,8 +264,8 @@ methods:
     name: "read"
     arguments:
       0: "bytes"
-      2: "len"
       3: "off"
+      2: "len"
     locals:
       6: "n"
   signlink!kd.b (B)Ljava/io/File;:

@@ -286,7 +286,7 @@ classes:
   client!wg: "Class4_Sub3_Sub22"
   client!wh: "Class4_Sub3_Sub23"
   client!wj: "Class187"
-  client!wl: "Class189"
+  client!wl: "BufferedFile"
   client!wm: "Class4_Sub33"
   client!wn: "Class4_Sub3_Sub24"
 fields:
@@ -11859,41 +11859,41 @@ fields:
     owner: "Static7"
     name: "aString365"
   client!wl.a [B:
-    owner: "Class189"
-    name: "aByteArray75"
+    owner: "BufferedFile"
+    name: "writeBuffer"
   client!wl.b [B:
-    owner: "Class189"
-    name: "aByteArray76"
+    owner: "BufferedFile"
+    name: "readBuffer"
   client!wl.c J:
-    owner: "Class189"
-    name: "aLong205"
+    owner: "BufferedFile"
+    name: "physicalLength"
   client!wl.f J:
-    owner: "Class189"
-    name: "aLong206"
+    owner: "BufferedFile"
+    name: "virtualLength"
   client!wl.k I:
-    owner: "Class189"
-    name: "anInt6057"
+    owner: "BufferedFile"
+    name: "writeLen"
   client!wl.l J:
-    owner: "Class189"
-    name: "aLong207"
+    owner: "BufferedFile"
+    name: "readPosition"
   client!wl.p Lsignlink!kd;:
-    owner: "Class189"
-    name: "aClass195_1"
+    owner: "BufferedFile"
+    name: "file"
   client!wl.q J:
-    owner: "Class189"
-    name: "aLong208"
+    owner: "BufferedFile"
+    name: "writePosition"
   client!wl.r I:
-    owner: "Class189"
-    name: "anInt6061"
+    owner: "BufferedFile"
+    name: "readLen"
   client!wl.s J:
-    owner: "Class189"
-    name: "aLong209"
+    owner: "BufferedFile"
+    name: "physicalPosition"
   client!wl.t J:
-    owner: "Class189"
-    name: "aLong210"
+    owner: "BufferedFile"
+    name: "virtualPosition"
   client!wl.u [J:
-    owner: "Class189"
-    name: "aLongArray58"
+    owner: "BufferedFile"
+    name: "CRC64_TABLE"
   client!wl.x Z:
     owner: "Static7"
     name: "aBoolean422"
@@ -46211,16 +46211,16 @@ methods:
       89: "local89"
       92: "local92"
   client!wl.<init> (Lsignlink!kd;II)V:
-    owner: "Class189"
+    owner: "BufferedFile"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "file"
+      1: "readBufferSize"
+      2: "writeBufferSize"
     locals: {}
   client!wl.a (B)J:
-    owner: "Class189"
-    name: "method4797"
+    owner: "BufferedFile"
+    name: "length"
     arguments: {}
     locals: {}
   client!wl.a (I)V:
@@ -46229,68 +46229,68 @@ methods:
     arguments: {}
     locals: {}
   client!wl.a (I[B)V:
-    owner: "Class189"
-    name: "method4803"
+    owner: "BufferedFile"
+    name: "read"
     arguments:
-      1: "arg0"
+      1: "b"
     locals: {}
   client!wl.a (I[BIB)V:
-    owner: "Class189"
-    name: "method4795"
+    owner: "BufferedFile"
+    name: "write"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      1: "b"
+      0: "off"
+      2: "len"
     locals:
-      99: "local99"
-      149: "local149"
-      151: "local151"
-      328: "local328"
-      419: "local419"
+      99: "n"
+      149: "end"
+      151: "start"
+      328: "copyLen"
+      419: "ex"
   client!wl.a (I[BII)V:
-    owner: "Class189"
-    name: "method4801"
+    owner: "BufferedFile"
+    name: "read"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      3: "arg2"
+      1: "b"
+      2: "off"
+      3: "len"
     locals:
-      76: "local76"
-      81: "local81"
-      110: "local110"
-      178: "local178"
-      212: "local212"
-      280: "local280"
-      316: "local316"
-      318: "local318"
-      440: "local440"
-      479: "local479"
+      76: "originalLen"
+      81: "originalPosition"
+      110: "n"
+      178: "n"
+      212: "copyLen"
+      280: "end"
+      316: "end"
+      318: "start"
+      440: "copyLen"
+      479: "ex"
   client!wl.a (ZJ)V:
-    owner: "Class189"
-    name: "method4798"
+    owner: "BufferedFile"
+    name: "seek"
     arguments:
-      1: "arg0"
+      1: "position"
     locals: {}
   client!wl.b (I)V:
-    owner: "Class189"
-    name: "method4796"
+    owner: "BufferedFile"
+    name: "fill"
     arguments: {}
     locals:
-      49: "local49"
-      67: "local67"
+      49: "len"
+      67: "n"
   client!wl.c (B)Ljava/io/File;:
-    owner: "Class189"
-    name: "method4802"
+    owner: "BufferedFile"
+    name: "getFile"
     arguments: {}
     locals: {}
   client!wl.c (I)V:
-    owner: "Class189"
-    name: "method4800"
+    owner: "BufferedFile"
+    name: "flush"
     arguments: {}
     locals:
-      58: "local58"
-      129: "local129"
-      203: "local203"
+      58: "start"
+      129: "end"
+      203: "copyLen"
   client!wm.a ()V:
     owner: "Class4_Sub33"
     name: "method4810"
