@@ -140,7 +140,7 @@ classes:
   client!li: "Class110"
   client!lj: "Class4_Sub1_Sub17"
   client!lk: "Class111"
-  client!ll: "Class112"
+  client!ll: "LinkedList"
   client!lm: "Class20_Sub2_Sub1"
   client!ln: "Class4_Sub3_Sub15"
   client!lo: "Class4_Sub6_Sub3"
@@ -5394,11 +5394,11 @@ fields:
     owner: "Static4"
     name: "anInt3196"
   client!ll.k Lclient!ni;:
-    owner: "Class112"
-    name: "aClass4_117"
+    owner: "LinkedList"
+    name: "sentinel"
   client!ll.p Lclient!ni;:
-    owner: "Class112"
-    name: "aClass4_118"
+    owner: "LinkedList"
+    name: "cursor"
   client!lm.A S:
     owner: "Class20_Sub2_Sub1"
     name: "aShort20"
@@ -28555,28 +28555,28 @@ methods:
     arguments: {}
     locals: {}
   client!ll.<init> ()V:
-    owner: "Class112"
+    owner: "LinkedList"
     name: "<init>"
     arguments: {}
     locals: {}
   client!ll.a (B)Lclient!ni;:
-    owner: "Class112"
-    name: "method2613"
+    owner: "LinkedList"
+    name: "tail"
     arguments: {}
     locals:
-      7: "local7"
+      7: "node"
   client!ll.a (BLclient!ni;)V:
-    owner: "Class112"
-    name: "method2612"
+    owner: "LinkedList"
+    name: "addTail"
     arguments:
-      1: "arg0"
+      1: "node"
     locals: {}
   client!ll.a (I)V:
-    owner: "Class112"
-    name: "method2606"
+    owner: "LinkedList"
+    name: "clear"
     arguments: {}
     locals:
-      9: "local9"
+      9: "node"
   client!ll.a (IB)I:
     owner: "Static24"
     name: "method2605"
@@ -28602,40 +28602,40 @@ methods:
       3: "arg2"
     locals: {}
   client!ll.a (Lclient!ni;B)V:
-    owner: "Class112"
-    name: "method2607"
+    owner: "LinkedList"
+    name: "addHead"
     arguments:
-      0: "arg0"
+      0: "node"
     locals: {}
   client!ll.a (Z)Lclient!ni;:
-    owner: "Class112"
-    name: "method2608"
+    owner: "LinkedList"
+    name: "removeHead"
     arguments: {}
     locals:
-      7: "local7"
+      7: "node"
   client!ll.b (I)Z:
-    owner: "Class112"
-    name: "method2609"
+    owner: "LinkedList"
+    name: "isEmpty"
     arguments: {}
     locals: {}
   client!ll.b (Z)Lclient!ni;:
-    owner: "Class112"
-    name: "method2615"
+    owner: "LinkedList"
+    name: "prev"
     arguments: {}
     locals:
-      8: "local8"
+      8: "node"
   client!ll.c (I)Lclient!ni;:
-    owner: "Class112"
-    name: "method2610"
+    owner: "LinkedList"
+    name: "head"
     arguments: {}
     locals:
-      7: "local7"
+      7: "node"
   client!ll.d (I)Lclient!ni;:
-    owner: "Class112"
-    name: "method2616"
+    owner: "LinkedList"
+    name: "next"
     arguments: {}
     locals:
-      13: "local13"
+      13: "node"
   client!lm.<init> (Lclient!bi;IIIIIIIII)V:
     owner: "Class20_Sub2_Sub1"
     name: "<init>"

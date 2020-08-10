@@ -710,7 +710,7 @@ methods:
       3: "head"
   unpackclass!f.a (Lunpackclass!w;)V:
     owner: "LinkedList"
-    name: "add"
+    name: "addTail"
     arguments:
       0: "node"
     locals: {}
