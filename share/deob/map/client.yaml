@@ -9312,8 +9312,8 @@ fields:
     owner: "Class158"
     name: "anInt4869"
   client!sl.V [C:
-    owner: "Static6"
-    name: "aCharArray3"
+    owner: "Cp1252Charset"
+    name: "CP1252_TABLE"
   client!sl.W I:
     owner: "Class4_Sub1_Sub32"
     name: "anInt4898"
@@ -13262,12 +13262,12 @@ methods:
       0: "arg0"
     locals: {}
   client!bg.a (BC)B:
-    owner: "Static10"
-    name: "method284"
+    owner: "Cp1252Charset"
+    name: "encodeChar"
     arguments:
-      1: "arg0"
+      1: "codepoint"
     locals:
-      36: "local36"
+      36: "b"
   client!bg.a (IIIIIIIIIZ)V:
     owner: "Static10"
     name: "method283"
@@ -23876,17 +23876,17 @@ methods:
     locals:
       27: "local27"
   client!ja.a ([BLjava/lang/String;IIII)I:
-    owner: "Static20"
-    name: "method1966"
+    owner: "Cp1252Charset"
+    name: "encodeString"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
+      1: "src"
+      2: "srcLen"
+      0: "dest"
+      3: "destOff"
     locals:
-      6: "local6"
-      8: "local8"
-      17: "local17"
+      6: "srcLen2"
+      8: "i"
+      17: "c"
   client!ja.b (I)V:
     owner: "Static20"
     name: "method1969"
@@ -28944,14 +28944,14 @@ methods:
       49: "local49"
       69: "local69"
   client!ln.a (Ljava/lang/String;I)I:
-    owner: "Static24"
-    name: "method2644"
+    owner: "StringUtils"
+    name: "hashCode"
     arguments:
-      0: "arg0"
+      0: "s"
     locals:
-      7: "local7"
-      10: "local10"
-      12: "local12"
+      7: "hash"
+      10: "len"
+      12: "i"
   client!ln.b (Ljava/lang/String;I)V:
     owner: "Static24"
     name: "method2651"
@@ -35815,13 +35815,13 @@ methods:
     locals:
       15: "local15"
   client!qb.a (ZB)C:
-    owner: "Static29"
-    name: "method3522"
+    owner: "Cp1252Charset"
+    name: "decodeChar"
     arguments:
-      1: "arg0"
+      1: "b"
     locals:
-      7: "local7"
-      47: "local47"
+      7: "codepoint"
+      47: "c"
   client!qc.a (BIIIZ)V:
     owner: "Class53_Sub1"
     name: "method3301"
@@ -36595,14 +36595,14 @@ methods:
       445: "local445"
       467: "local467"
   client!qi.a (CI)Z:
-    owner: "Static30"
-    name: "method424"
+    owner: "Cp1252Charset"
+    name: "isCharValid"
     arguments:
-      0: "arg0"
+      0: "codepoint"
     locals:
-      27: "local27"
-      29: "local29"
-      37: "local37"
+      27: "i"
+      29: "table"
+      37: "c"
   client!qi.a (I)V:
     owner: "Static30"
     name: "method420"
@@ -42448,18 +42448,18 @@ methods:
       34: "local34"
       85: "local85"
   client!ub.a (I[BZI)Ljava/lang/String;:
-    owner: "Static34"
-    name: "method4271"
+    owner: "Cp1252Charset"
+    name: "decodeString"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      3: "arg2"
+      1: "bytes"
+      0: "off"
+      3: "len"
     locals:
-      8: "local8"
-      14: "local14"
-      16: "local16"
-      32: "local32"
-      49: "local49"
+      8: "out"
+      14: "outLen"
+      16: "i"
+      32: "codepoint"
+      49: "c"
   client!ub.a (Z)V:
     owner: "Static34"
     name: "method4270"
