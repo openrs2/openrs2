@@ -106,7 +106,7 @@ classes:
   client!j: "Class4_Sub14"
   client!ja: "Class92"
   client!jagex3/jagmisc/jagmisc: "jagex3/jagmisc/jagmisc"
-  client!jb: "Class93"
+  client!jb: "GzipDecompressor"
   client!jc: "Class4_Sub3_Sub12"
   client!jd: "Class94"
   client!jf: "Class77"
@@ -4317,8 +4317,8 @@ fields:
     owner: "Static3"
     name: "anInt2522"
   client!jb.b Ljava/util/zip/Inflater;:
-    owner: "Class93"
-    name: "anInflater1"
+    owner: "GzipDecompressor"
+    name: "inflater"
   client!jb.f Lclient!ib;:
     owner: "Static3"
     name: "aClass4_Sub3_Sub10_4"
@@ -23921,12 +23921,12 @@ methods:
     arguments: {}
     locals: {}
   client!jb.<init> ()V:
-    owner: "Class93"
+    owner: "GzipDecompressor"
     name: "<init>"
     arguments: {}
     locals: {}
   client!jb.<init> (III)V:
-    owner: "Class93"
+    owner: "GzipDecompressor"
     name: "<init>"
     arguments:
       0: "arg0"
@@ -23964,13 +23964,13 @@ methods:
       4: "arg3"
     locals: {}
   client!jb.a (Lclient!fd;B[B)V:
-    owner: "Class93"
-    name: "method1979"
+    owner: "GzipDecompressor"
+    name: "gunzip"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "in"
+      2: "out"
     locals:
-      61: "local61"
+      61: "ex"
   client!jc.a (CZ)Z:
     owner: "Static21"
     name: "method1996"
