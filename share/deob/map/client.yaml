@@ -42248,12 +42248,12 @@ methods:
       1: "arg1"
     locals: {}
   client!ua.a (BJ)V:
-    owner: "Static34"
-    name: "method4267"
+    owner: "ThreadUtils"
+    name: "sleepUninterruptibly"
     arguments:
-      1: "arg0"
+      1: "millis"
     locals:
-      7: "local7"
+      7: "ex"
   client!ua.a (I)Z:
     owner: "Class168"
     name: "method4255"
@@ -45128,10 +45128,10 @@ methods:
       0: "size"
     locals: {}
   client!wa.a (BJ)V:
-    owner: "Static37"
-    name: "method4640"
+    owner: "ThreadUtils"
+    name: "sleep"
     arguments:
-      1: "arg0"
+      1: "millis"
     locals: {}
   client!wa.a (I[BII)V:
     owner: "Packet"
