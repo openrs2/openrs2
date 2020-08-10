@@ -387,8 +387,8 @@ fields:
     owner: "Static1"
     name: "anInt80"
   client!ac.db Ljava/lang/String;:
-    owner: "Static1"
-    name: "aString6"
+    owner: "LocalisedText"
+    name: "WALKHERE"
   client!ac.eb I:
     owner: "Class4_Sub1_Sub1"
     name: "anInt81"
@@ -402,8 +402,8 @@ fields:
     owner: "Class4_Sub1_Sub1"
     name: "anInt87"
   client!ac.nb Ljava/lang/String;:
-    owner: "Static1"
-    name: "aString7"
+    owner: "LocalisedText"
+    name: "MAINLOAD41B"
   client!ae.b Z:
     owner: "Class6"
     name: "aBoolean7"
@@ -411,8 +411,8 @@ fields:
     owner: "Static1"
     name: "aShortArray11"
   client!ae.d Ljava/lang/String;:
-    owner: "Static1"
-    name: "aString8"
+    owner: "LocalisedText"
+    name: "CLOSE"
   client!ae.e I:
     owner: "Static1"
     name: "anInt91"
@@ -474,8 +474,8 @@ fields:
     owner: "Class7"
     name: "aClass173Array1"
   client!ah.d Ljava/lang/String;:
-    owner: "Static1"
-    name: "aString10"
+    owner: "Text"
+    name: "CHATCOL10"
   client!ah.e I:
     owner: "Static1"
     name: "anInt119"
@@ -486,14 +486,14 @@ fields:
     owner: "Static1"
     name: "aClass58_4"
   client!aj.b Ljava/lang/String;:
-    owner: "Static1"
-    name: "aString11"
+    owner: "LocalisedText"
+    name: "LENT_ITEM_RETURN"
   client!aj.c [[[B:
     owner: "Static1"
     name: "aByteArrayArrayArray1"
   client!ak.b I:
-    owner: "Static1"
-    name: "anInt124"
+    owner: "client"
+    name: "language"
   client!ak.d I:
     owner: "Static1"
     name: "anInt126"
@@ -597,11 +597,11 @@ fields:
     owner: "Static1"
     name: "aClass26_2"
   client!ao.g Ljava/lang/String;:
-    owner: "Static1"
-    name: "aString22"
+    owner: "LocalisedText"
+    name: "EXAMINE"
   client!ao.h Ljava/lang/String;:
-    owner: "Static1"
-    name: "aString23"
+    owner: "LocalisedText"
+    name: "MAINLOAD30B"
   client!b.a [I:
     owner: "Static1"
     name: "anIntArray22"
@@ -645,8 +645,8 @@ fields:
     owner: "Static1"
     name: "anInt243"
   client!bb.F Ljava/lang/String;:
-    owner: "Static1"
-    name: "aString26"
+    owner: "LocalisedText"
+    name: "TAKE"
   client!bb.z Lclient!oc;:
     owner: "Class4_Sub3_Sub2"
     name: "aClass53_Sub6_1"
@@ -750,8 +750,8 @@ fields:
     owner: "Static1"
     name: "anIntArray35"
   client!bg.o Ljava/lang/String;:
-    owner: "Static1"
-    name: "aString29"
+    owner: "LocalisedText"
+    name: "RATING"
   client!bg.p J:
     owner: "Class4_Sub5"
     name: "aLong17"
@@ -762,8 +762,8 @@ fields:
     owner: "Static1"
     name: "aClass160Array1"
   client!bg.v Ljava/lang/String;:
-    owner: "Static1"
-    name: "aString30"
+    owner: "LocalisedText"
+    name: "MAINLOAD70"
   client!bh.b Lclient!uk;:
     owner: "Static1"
     name: "aClass175_4"
@@ -990,8 +990,8 @@ fields:
     owner: "Static1"
     name: "anInt420"
   client!c.A Ljava/lang/String;:
-    owner: "Static1"
-    name: "aString38"
+    owner: "LocalisedText"
+    name: "IGNORELISTFULL"
   client!c.E Lclient!dj;:
     owner: "Class24_Sub1"
     name: "aClass40_3"
@@ -1044,8 +1044,8 @@ fields:
     owner: "Static1"
     name: "aClass4_Sub6_Sub2_2"
   client!cb.n Ljava/lang/String;:
-    owner: "Static1"
-    name: "aString43"
+    owner: "LocalisedText"
+    name: "CHATCOL0"
   client!cb.o I:
     owner: "Static1"
     name: "anInt526"
@@ -1125,8 +1125,8 @@ fields:
     owner: "Static1"
     name: "anIntArrayArrayArray2"
   client!cg.e Ljava/lang/String;:
-    owner: "Static1"
-    name: "aString46"
+    owner: "LocalisedText"
+    name: "ATTEMPT_TO_REESTABLISH"
   client!cg.g Lclient!fh;:
     owner: "Static1"
     name: "aClass58_19"
@@ -1200,8 +1200,8 @@ fields:
     owner: "Static1"
     name: "anInt645"
   client!cj.H Ljava/lang/String;:
-    owner: "Static1"
-    name: "aString49"
+    owner: "LocalisedText"
+    name: "MILLION_SHORT"
   client!cj.I I:
     owner: "Static1"
     name: "anInt647"
@@ -1359,8 +1359,8 @@ fields:
     owner: "Class34"
     name: "anInt857"
   client!d.H Ljava/lang/String;:
-    owner: "Static1"
-    name: "aString56"
+    owner: "LocalisedText"
+    name: "MAINLOAD60"
   client!d.K I:
     owner: "Class34"
     name: "anInt860"
@@ -1407,8 +1407,8 @@ fields:
     owner: "Static1"
     name: "anInt837"
   client!d.k Ljava/lang/String;:
-    owner: "Static1"
-    name: "aString55"
+    owner: "LocalisedText"
+    name: "MINISEPARATOR"
   client!d.l I:
     owner: "Class34"
     name: "anInt838"
@@ -1668,8 +1668,8 @@ fields:
     owner: "Static2"
     name: "aClass58_27"
   client!df.f Ljava/lang/String;:
-    owner: "Static2"
-    name: "aString59"
+    owner: "Text"
+    name: "CHATCOL2"
   client!df.g [Ljava/lang/String;:
     owner: "Static2"
     name: "aStringArray5"
@@ -1818,8 +1818,8 @@ fields:
     owner: "Class42"
     name: "anInt1130"
   client!dm.i Ljava/lang/String;:
-    owner: "Static2"
-    name: "aString68"
+    owner: "LocalisedText"
+    name: "LOADINGDOTDOTDOT"
   client!dm.j Z:
     owner: "Class42"
     name: "aBoolean63"
@@ -1992,8 +1992,8 @@ fields:
     owner: "Static2"
     name: "aByteArray10"
   client!ef.f Ljava/lang/String;:
-    owner: "Static2"
-    name: "aString75"
+    owner: "Text"
+    name: "CHATEFFECT3"
   client!eg.A I:
     owner: "Class46"
     name: "anInt1240"
@@ -2169,8 +2169,8 @@ fields:
     owner: "Static2"
     name: "aClass26_11"
   client!ej.r Ljava/lang/String;:
-    owner: "Static2"
-    name: "aString80"
+    owner: "LocalisedText"
+    name: "MAINLOAD135B"
   client!ej.s I:
     owner: "Class4_Sub9"
     name: "anInt1283"
@@ -2325,14 +2325,14 @@ fields:
     owner: "Static2"
     name: "aClass58_39"
   client!en.j Ljava/lang/String;:
-    owner: "Static2"
-    name: "aString82"
+    owner: "LocalisedText"
+    name: "MAINLOAD120"
   client!en.p [Ljava/lang/String;:
     owner: "Static2"
     name: "aStringArray8"
   client!en.r Ljava/lang/String;:
-    owner: "Static2"
-    name: "aString83"
+    owner: "LocalisedText"
+    name: "MAINLOAD140"
   client!en.t Lclient!uk;:
     owner: "Class51"
     name: "aClass175_5"
@@ -2529,8 +2529,8 @@ fields:
     owner: "Static2"
     name: "aStringArray40"
   client!fd.wb [Ljava/lang/String;:
-    owner: "Static2"
-    name: "aStringArray41"
+    owner: "Language"
+    name: "ISO_CODES"
   client!fe.m [I:
     owner: "Class56_Sub1"
     name: "anIntArray120"
@@ -2835,14 +2835,14 @@ fields:
     owner: "Class63_Sub1"
     name: "aString111"
   client!gb.z Ljava/lang/String;:
-    owner: "Static3"
-    name: "aString112"
+    owner: "LocalisedText"
+    name: "MAINLOAD150B"
   client!gd.a [I:
     owner: "Static3"
     name: "anIntArray164"
   client!gd.b Ljava/lang/String;:
-    owner: "Static3"
-    name: "aString113"
+    owner: "LocalisedText"
+    name: "REMOVEFRIEND2"
   client!gd.g [Lclient!uj;:
     owner: "Static3"
     name: "aClass4_Sub3_Sub14Array8"
@@ -2871,8 +2871,8 @@ fields:
     owner: "Static3"
     name: "anInt2048"
   client!gg.l Ljava/lang/String;:
-    owner: "Static3"
-    name: "aString115"
+    owner: "LocalisedText"
+    name: "DROP"
   client!gg.m Lclient!fh;:
     owner: "Static3"
     name: "aClass58_44"
@@ -3186,8 +3186,8 @@ fields:
     owner: "Static3"
     name: "aLong67"
   client!gm.g Ljava/lang/String;:
-    owner: "Static3"
-    name: "aString118"
+    owner: "LocalisedText"
+    name: "TRADEREQ"
   client!gn.B Lclient!pc;:
     owner: "Class4_Sub11"
     name: "aClass4_Sub6_Sub4_3"
@@ -3315,8 +3315,8 @@ fields:
     owner: "Class73"
     name: "anInt2139"
   client!hb.a Ljava/lang/String;:
-    owner: "Static3"
-    name: "aString120"
+    owner: "LocalisedText"
+    name: "ATTACK"
   client!hb.b I:
     owner: "Static3"
     name: "anInt2140"
@@ -3363,8 +3363,8 @@ fields:
     owner: "Static3"
     name: "aBoolean147"
   client!he.C Ljava/lang/String;:
-    owner: "Static3"
-    name: "aString122"
+    owner: "LocalisedText"
+    name: "REMOVEIGNORE1"
   client!he.n Lclient!fh;:
     owner: "Static3"
     name: "aClass58_48"
@@ -3390,8 +3390,8 @@ fields:
     owner: "Class53_Sub2"
     name: "anInt2168"
   client!he.x Ljava/lang/String;:
-    owner: "Static3"
-    name: "aString121"
+    owner: "LocalisedText"
+    name: "MAINLOAD120B"
   client!hf.f J:
     owner: "Class77_Sub1"
     name: "aLong70"
@@ -3447,8 +3447,8 @@ fields:
     owner: "Static3"
     name: "anInt5400"
   client!hh.i Ljava/lang/String;:
-    owner: "Static3"
-    name: "aString325"
+    owner: "LocalisedText"
+    name: "CHATCOL2"
   client!hh.k Lclient!fh;:
     owner: "Static3"
     name: "aClass58_100"
@@ -3465,14 +3465,14 @@ fields:
     owner: "Static3"
     name: "anInt2193"
   client!hj.a Ljava/lang/String;:
-    owner: "Static3"
-    name: "aString123"
+    owner: "Text"
+    name: "CHATEFFECT1"
   client!hj.b I:
     owner: "Static3"
     name: "anInt2194"
   client!hj.c Ljava/lang/String;:
-    owner: "Static3"
-    name: "aString124"
+    owner: "LocalisedText"
+    name: "PLEASEWAIT"
   client!hj.e [I:
     owner: "Static3"
     name: "anIntArray181"
@@ -3519,8 +3519,8 @@ fields:
     owner: "Class81"
     name: "anIntArray186"
   client!hm.u Ljava/lang/String;:
-    owner: "Static3"
-    name: "aString128"
+    owner: "LocalisedText"
+    name: "IGNORELISTDUPE"
   client!hn.l I:
     owner: "Static3"
     name: "anInt5405"
@@ -3657,8 +3657,8 @@ fields:
     owner: "Static3"
     name: "anIntArray191"
   client!ia.e Ljava/lang/String;:
-    owner: "Static3"
-    name: "aString133"
+    owner: "LocalisedText"
+    name: "MEMBERS_OBJECT"
   client!ia.i Lclient!wf;:
     owner: "Static3"
     name: "aClass185_5"
@@ -4176,8 +4176,8 @@ fields:
     owner: "Static3"
     name: "aClass26_23"
   client!im.p Ljava/lang/String;:
-    owner: "Static3"
-    name: "aString139"
+    owner: "LocalisedText"
+    name: "FACEHERE"
   client!in.A [I:
     owner: "Static3"
     name: "anIntArray219"
@@ -4236,8 +4236,8 @@ fields:
     owner: "Static3"
     name: "aBooleanArray11"
   client!io.H Ljava/lang/String;:
-    owner: "Static3"
-    name: "aString144"
+    owner: "Text"
+    name: "CHATEFFECT5"
   client!io.o Lclient!wf;:
     owner: "Class4_Sub13"
     name: "aClass185_6"
@@ -4257,8 +4257,8 @@ fields:
     owner: "Class4_Sub13"
     name: "anObjectArray2"
   client!io.w Ljava/lang/String;:
-    owner: "Static3"
-    name: "aString142"
+    owner: "LocalisedText"
+    name: "CHATEFFECT5"
   client!io.x Ljava/lang/String;:
     owner: "Class4_Sub13"
     name: "aString143"
@@ -4269,20 +4269,20 @@ fields:
     owner: "Static3"
     name: "anInt2505"
   client!j.q Ljava/lang/String;:
-    owner: "Static3"
-    name: "aString146"
+    owner: "LocalisedText"
+    name: "FRIENDLISTFULL"
   client!j.s Z:
     owner: "Static3"
     name: "aBoolean173"
   client!j.t Ljava/lang/String;:
-    owner: "Static3"
-    name: "aString147"
+    owner: "LocalisedText"
+    name: "MAINLOAD65B"
   client!j.u Ljava/lang/String;:
-    owner: "Static3"
-    name: "aString148"
+    owner: "LocalisedText"
+    name: "MOREOPTIONS"
   client!j.v Ljava/lang/String;:
-    owner: "Static3"
-    name: "aString149"
+    owner: "LocalisedText"
+    name: "MAINLOAD41"
   client!j.w [B:
     owner: "Class4_Sub14"
     name: "aByteArray18"
@@ -4323,8 +4323,8 @@ fields:
     owner: "Static3"
     name: "aClass4_Sub3_Sub10_4"
   client!jb.i Ljava/lang/String;:
-    owner: "Static3"
-    name: "aString150"
+    owner: "LocalisedText"
+    name: "MAINLOAD130B"
   client!jb.j [I:
     owner: "Static3"
     name: "anIntArray223"
@@ -4371,8 +4371,8 @@ fields:
     owner: "Static3"
     name: "aLongArray16"
   client!jd.i Ljava/lang/String;:
-    owner: "Static3"
-    name: "aString154"
+    owner: "LocalisedText"
+    name: "CHATEFFECT1"
   client!jd.j I:
     owner: "Class94"
     name: "anInt2560"
@@ -4587,11 +4587,11 @@ fields:
     owner: "Static4"
     name: "anInt2665"
   client!jm.d Ljava/lang/String;:
-    owner: "Static4"
-    name: "aString160"
+    owner: "LocalisedText"
+    name: "MAINLOAD0"
   client!jm.e Ljava/lang/String;:
-    owner: "Static4"
-    name: "aString161"
+    owner: "LocalisedText"
+    name: "THOUSAND"
   client!jm.g Z:
     owner: "Static4"
     name: "aBoolean184"
@@ -4632,8 +4632,8 @@ fields:
     owner: "Static4"
     name: "anIntArray653"
   client!jo.N Ljava/lang/String;:
-    owner: "Static4"
-    name: "aString346"
+    owner: "Text"
+    name: "CHATCOL0"
   client!jo.O [I:
     owner: "Static4"
     name: "anIntArray654"
@@ -4752,8 +4752,8 @@ fields:
     owner: "Class104"
     name: "aByteArray28"
   client!kf.K Ljava/lang/String;:
-    owner: "Static4"
-    name: "aString170"
+    owner: "LocalisedText"
+    name: "CHATEFFECT3"
   client!kf.M I:
     owner: "Class104"
     name: "anInt2850"
@@ -4986,8 +4986,8 @@ fields:
     owner: "Static4"
     name: "anInt2977"
   client!ko.e Ljava/lang/String;:
-    owner: "Static4"
-    name: "aString177"
+    owner: "Text"
+    name: "CHATEFFECT2"
   client!ko.f Z:
     owner: "Static4"
     name: "aBoolean207"
@@ -5007,8 +5007,8 @@ fields:
     owner: "Static4"
     name: "aBooleanArrayArray4"
   client!l.s Ljava/lang/String;:
-    owner: "Static4"
-    name: "aString179"
+    owner: "LocalisedText"
+    name: "CHATCOL5"
   client!l.t B:
     owner: "Class4_Sub15"
     name: "aByte5"
@@ -5019,8 +5019,8 @@ fields:
     owner: "Static4"
     name: "aClass59_1"
   client!l.x Ljava/lang/String;:
-    owner: "Static4"
-    name: "aString180"
+    owner: "LocalisedText"
+    name: "REMOVEIGNORE2"
   client!l.y Ljava/lang/String;:
     owner: "Class4_Sub15"
     name: "aString181"
@@ -5037,8 +5037,8 @@ fields:
     owner: "Static4"
     name: "anInt3020"
   client!la.Y Ljava/lang/String;:
-    owner: "Static4"
-    name: "aString185"
+    owner: "LocalisedText"
+    name: "HIDDEN"
   client!la.Z [J:
     owner: "Static4"
     name: "aLongArray24"
@@ -5094,8 +5094,8 @@ fields:
     owner: "Class4_Sub6_Sub2"
     name: "anInt3085"
   client!ld.C Ljava/lang/String;:
-    owner: "Static4"
-    name: "aString187"
+    owner: "LocalisedText"
+    name: "LOADING"
   client!ld.Cb I:
     owner: "Static4"
     name: "anInt3086"
@@ -5277,8 +5277,8 @@ fields:
     owner: "Static4"
     name: "aShortArray126"
   client!lh.t Ljava/lang/String;:
-    owner: "Static4"
-    name: "aString368"
+    owner: "LocalisedText"
+    name: "MAINLOAD70B"
   client!lh.u J:
     owner: "Class4_Sub3"
     name: "aLong213"
@@ -5544,8 +5544,8 @@ fields:
     owner: "Static4"
     name: "anInt3407"
   client!ma.f Ljava/lang/String;:
-    owner: "Static4"
-    name: "aString211"
+    owner: "LocalisedText"
+    name: "MAINLOAD45B"
   client!ma.g I:
     owner: "Class56"
     name: "anInt3408"
@@ -5586,8 +5586,8 @@ fields:
     owner: "Static4"
     name: "anInt3290"
   client!mc.p Ljava/lang/String;:
-    owner: "Static4"
-    name: "aString198"
+    owner: "Text"
+    name: "CHATCOL1"
   client!mc.s [I:
     owner: "Static4"
     name: "anIntArray313"
@@ -5598,8 +5598,8 @@ fields:
     owner: "Class4_Sub16"
     name: "anInt3294"
   client!mc.w Ljava/lang/String;:
-    owner: "Static4"
-    name: "aString199"
+    owner: "LocalisedText"
+    name: "MAINLOAD40B"
   client!mc.x [Lclient!te;:
     owner: "Static4"
     name: "aClass4_Sub3_Sub19Array2"
@@ -5613,8 +5613,8 @@ fields:
     owner: "Static4"
     name: "anIntArray315"
   client!md.e Ljava/lang/String;:
-    owner: "Static4"
-    name: "aString200"
+    owner: "LocalisedText"
+    name: "MAINLOAD110B"
   client!md.f [Lclient!mc;:
     owner: "Class114"
     name: "aClass4_Sub16Array1"
@@ -5637,8 +5637,8 @@ fields:
     owner: "Class114"
     name: "anInt3305"
   client!md.n Ljava/lang/String;:
-    owner: "Static4"
-    name: "aString201"
+    owner: "LocalisedText"
+    name: "CONTINUE"
   client!md.o [Lclient!ag;:
     owner: "Static4"
     name: "aClass7Array1"
@@ -5667,8 +5667,8 @@ fields:
     owner: "Static4"
     name: "aClass99_1"
   client!mf.b Ljava/lang/String;:
-    owner: "Static4"
-    name: "aString202"
+    owner: "LocalisedText"
+    name: "CHOOSE_OPTION"
   client!mf.c [Lclient!co;:
     owner: "Static4"
     name: "aClass33Array2"
@@ -5685,8 +5685,8 @@ fields:
     owner: "Static4"
     name: "anInt3315"
   client!mf.i Ljava/lang/String;:
-    owner: "Static4"
-    name: "aString203"
+    owner: "LocalisedText"
+    name: "CHATCOL9"
   client!mf.j [I:
     owner: "Static4"
     name: "anIntArray316"
@@ -5697,8 +5697,8 @@ fields:
     owner: "Static4"
     name: "anInt3317"
   client!mf.m Ljava/lang/String;:
-    owner: "Static4"
-    name: "aString204"
+    owner: "Text"
+    name: "CHATCOL3"
   client!mg.a [I:
     owner: "Static4"
     name: "anIntArray317"
@@ -5736,8 +5736,8 @@ fields:
     owner: "Static4"
     name: "aByte6"
   client!mg.u Ljava/lang/String;:
-    owner: "Static4"
-    name: "aString205"
+    owner: "LocalisedText"
+    name: "IGNORECANTADDSELF"
   client!mg.v I:
     owner: "Static4"
     name: "anInt3329"
@@ -5793,8 +5793,8 @@ fields:
     owner: "Static4"
     name: "aClass58_76"
   client!mi.g Ljava/lang/String;:
-    owner: "Static4"
-    name: "aString206"
+    owner: "LocalisedText"
+    name: "MAINLOAD135"
   client!mi.h I:
     owner: "Static4"
     name: "anInt3336"
@@ -6009,8 +6009,8 @@ fields:
     owner: "Static4"
     name: "anInt3358"
   client!mm.e Ljava/lang/String;:
-    owner: "Static4"
-    name: "aString207"
+    owner: "LocalisedText"
+    name: "CONLOST"
   client!mm.f Lclient!cc;:
     owner: "Static4"
     name: "aClass26_32"
@@ -6066,8 +6066,8 @@ fields:
     owner: "Class4_Sub1_Sub18"
     name: "anInt3396"
   client!mo.X Ljava/lang/String;:
-    owner: "Static4"
-    name: "aString210"
+    owner: "LocalisedText"
+    name: "GAME0_LOADING"
   client!mo.Z Lsignlink!pm;:
     owner: "Static4"
     name: "aClass196_3"
@@ -6420,8 +6420,8 @@ fields:
     owner: "Static5"
     name: "aShortArrayArray2"
   client!nc.h Ljava/lang/String;:
-    owner: "Static5"
-    name: "aString213"
+    owner: "Text"
+    name: "CHATCOL5"
   client!nc.i [Lclient!ma;:
     owner: "Static5"
     name: "aClass56Array5"
@@ -6429,8 +6429,8 @@ fields:
     owner: "Static5"
     name: "anInt3483"
   client!nd.q Ljava/lang/String;:
-    owner: "Static5"
-    name: "aString215"
+    owner: "Text"
+    name: "CHATCOL11"
   client!nd.s I:
     owner: "Static5"
     name: "anInt3486"
@@ -6609,8 +6609,8 @@ fields:
     owner: "Static5"
     name: "aBoolean254"
   client!ng.B Ljava/lang/String;:
-    owner: "Static5"
-    name: "aString324"
+    owner: "LocalisedText"
+    name: "CHATCOL4"
   client!ng.C Z:
     owner: "Class4_Sub3_Sub1"
     name: "aBoolean364"
@@ -6687,8 +6687,8 @@ fields:
     owner: "Static5"
     name: "anInt3560"
   client!nh.o Ljava/lang/String;:
-    owner: "Static5"
-    name: "aString217"
+    owner: "Text"
+    name: "CHATCOL6"
   client!nh.q B:
     owner: "Class4_Sub19"
     name: "aByte14"
@@ -6735,8 +6735,8 @@ fields:
     owner: "Node"
     name: "key"
   client!ni.k Ljava/lang/String;:
-    owner: "Static5"
-    name: "aString367"
+    owner: "Text"
+    name: "CHATCOL4"
   client!ni.l Ljava/awt/Canvas;:
     owner: "Static5"
     name: "aCanvas115"
@@ -6768,8 +6768,8 @@ fields:
     owner: "Static5"
     name: "anInt3572"
   client!nl.g Ljava/lang/String;:
-    owner: "Static5"
-    name: "aString218"
+    owner: "LocalisedText"
+    name: "MAINLOAD50B"
   client!nm.M I:
     owner: "Class102_Sub2"
     name: "anInt3600"
@@ -6948,8 +6948,8 @@ fields:
     owner: "Static5"
     name: "anInt5206"
   client!ob.z Ljava/lang/String;:
-    owner: "Static5"
-    name: "aString314"
+    owner: "LocalisedText"
+    name: "USE"
   client!oc.A I:
     owner: "Class53_Sub6"
     name: "anInt3714"
@@ -7233,8 +7233,8 @@ fields:
     owner: "Static5"
     name: "anInt3897"
   client!ol.o Ljava/lang/String;:
-    owner: "Static5"
-    name: "aString230"
+    owner: "LocalisedText"
+    name: "MILLION"
   client!ol.p I:
     owner: "Class4_Sub20"
     name: "anInt3905"
@@ -7269,8 +7269,8 @@ fields:
     owner: "Class130"
     name: "aClass4_Sub3_51"
   client!om.o Ljava/lang/String;:
-    owner: "Static5"
-    name: "aString231"
+    owner: "Text"
+    name: "CHATCOL8"
   client!on.A I:
     owner: "Class4_Sub21"
     name: "anInt3939"
@@ -7284,8 +7284,8 @@ fields:
     owner: "Static5"
     name: "aBoolean278"
   client!on.z Ljava/lang/String;:
-    owner: "Static5"
-    name: "aString233"
+    owner: "LocalisedText"
+    name: "MAINLOAD50"
   client!oo.f J:
     owner: "Class77_Sub3"
     name: "aLong140"
@@ -7440,11 +7440,11 @@ fields:
     owner: "Static5"
     name: "anInt4112"
   client!pe.c Ljava/lang/String;:
-    owner: "Static5"
-    name: "aString239"
+    owner: "LocalisedText"
+    name: "THOUSAND_SHORT"
   client!pe.e Ljava/lang/String;:
-    owner: "Static5"
-    name: "aString240"
+    owner: "LocalisedText"
+    name: "MAINLOAD60B"
   client!pe.h I:
     owner: "Class133"
     name: "anInt4116"
@@ -7476,8 +7476,8 @@ fields:
     owner: "Class41"
     name: "anInt3767"
   client!pg.f Ljava/lang/String;:
-    owner: "Static5"
-    name: "aString224"
+    owner: "LocalisedText"
+    name: "FRIENDLOGOUT"
   client!pg.h Lclient!fh;:
     owner: "Static5"
     name: "aClass58_78"
@@ -7623,8 +7623,8 @@ fields:
     owner: "Static5"
     name: "anInt4207"
   client!pl.r Ljava/lang/String;:
-    owner: "Static5"
-    name: "aString247"
+    owner: "Text"
+    name: "CHATCOL9"
   client!pl.s Ljava/lang/String;:
     owner: "Class4_Sub22"
     name: "aString248"
@@ -7635,8 +7635,8 @@ fields:
     owner: "Static5"
     name: "anInterface1_1"
   client!pl.x Ljava/lang/String;:
-    owner: "Static5"
-    name: "aString249"
+    owner: "LocalisedText"
+    name: "FRIENDLOGIN"
   client!pl.y I:
     owner: "Static5"
     name: "anInt4210"
@@ -7644,8 +7644,8 @@ fields:
     owner: "Static5"
     name: "anIntArray447"
   client!pn.b Ljava/lang/String;:
-    owner: "Static5"
-    name: "aString250"
+    owner: "LocalisedText"
+    name: "CHATCOL11"
   client!pn.c Z:
     owner: "Static5"
     name: "aBoolean297"
@@ -7989,8 +7989,8 @@ fields:
     owner: "Class53_Sub1"
     name: "anInt3972"
   client!qc.zb Ljava/lang/String;:
-    owner: "Static5"
-    name: "aString235"
+    owner: "LocalisedText"
+    name: "CHATEFFECT4"
   client!qd.C I:
     owner: "Class4_Sub3_Sub16"
     name: "anInt4276"
@@ -8076,8 +8076,8 @@ fields:
     owner: "Static5"
     name: "anInt4304"
   client!qg.a Ljava/lang/String;:
-    owner: "Static5"
-    name: "aString256"
+    owner: "LocalisedText"
+    name: "MAINLOAD90B"
   client!qg.b Z:
     owner: "Class143"
     name: "aBoolean303"
@@ -8127,8 +8127,8 @@ fields:
     owner: "Class4_Sub23"
     name: "aClass157Array1"
   client!qi.a Ljava/lang/String;:
-    owner: "Static5"
-    name: "aString37"
+    owner: "LocalisedText"
+    name: "SELECT"
   client!qi.c Lclient!fh;:
     owner: "Class24"
     name: "aClass58_13"
@@ -8169,8 +8169,8 @@ fields:
     owner: "Static6"
     name: "aByteArrayArray35"
   client!qj.hb Ljava/lang/String;:
-    owner: "Static6"
-    name: "aString260"
+    owner: "LocalisedText"
+    name: "REMOVEFRIEND1"
   client!qj.ib [I:
     owner: "Static6"
     name: "anIntArray462"
@@ -8193,8 +8193,8 @@ fields:
     owner: "Static6"
     name: "anInt4375"
   client!qk.k Ljava/lang/String;:
-    owner: "Static6"
-    name: "aString262"
+    owner: "LocalisedText"
+    name: "MAINLOAD0B"
   client!qk.l I:
     owner: "Static6"
     name: "anInt4380"
@@ -8388,8 +8388,8 @@ fields:
     owner: "Static6"
     name: "anInt3224"
   client!r.m Ljava/lang/String;:
-    owner: "Static6"
-    name: "aString193"
+    owner: "LocalisedText"
+    name: "GAME1_LOADING"
   client!r.n Z:
     owner: "Static6"
     name: "aBoolean227"
@@ -8451,8 +8451,8 @@ fields:
     owner: "Class4_Sub25"
     name: "anInt4441"
   client!ra.y Ljava/lang/String;:
-    owner: "Static6"
-    name: "aString265"
+    owner: "LocalisedText"
+    name: "MAINLOAD80B"
   client!ra.z I:
     owner: "Class4_Sub25"
     name: "anInt4442"
@@ -8466,11 +8466,11 @@ fields:
     owner: "Static6"
     name: "anIntArray475"
   client!rb.e Ljava/lang/String;:
-    owner: "Static6"
-    name: "aString266"
+    owner: "LocalisedText"
+    name: "CHATCOL6"
   client!rb.f Ljava/lang/String;:
-    owner: "Static6"
-    name: "aString267"
+    owner: "LocalisedText"
+    name: "CHATEFFECT2"
   client!rc.c I:
     owner: "Static6"
     name: "anInt4451"
@@ -8589,8 +8589,8 @@ fields:
     owner: "Static6"
     name: "aClass62_Sub1Array2"
   client!rh.U Ljava/lang/String;:
-    owner: "Static6"
-    name: "aString275"
+    owner: "LocalisedText"
+    name: "CHECKING_FOR_UPDATES"
   client!rh.W I:
     owner: "Static6"
     name: "anInt4546"
@@ -8658,8 +8658,8 @@ fields:
     owner: "Class53_Sub7"
     name: "anInt4586"
   client!ri.J Ljava/lang/String;:
-    owner: "Static6"
-    name: "aString276"
+    owner: "LocalisedText"
+    name: "UNABLETOFIND"
   client!ri.K Z:
     owner: "Class53_Sub7"
     name: "aBoolean319"
@@ -8799,8 +8799,8 @@ fields:
     owner: "Class4_Sub1_Sub28"
     name: "anIntArray499"
   client!rm.gb Ljava/lang/String;:
-    owner: "Static6"
-    name: "aString282"
+    owner: "LocalisedText"
+    name: "OK"
   client!rm.hb I:
     owner: "Static6"
     name: "anInt4659"
@@ -9111,8 +9111,8 @@ fields:
     owner: "Static6"
     name: "aClass4_Sub3_Sub14Array12"
   client!se.X Ljava/lang/String;:
-    owner: "Static6"
-    name: "aString290"
+    owner: "LocalisedText"
+    name: "MAINLOAD90"
   client!se.Y Ljava/lang/String;:
     owner: "Static6"
     name: "aString291"
@@ -9165,8 +9165,8 @@ fields:
     owner: "Static6"
     name: "aClass58_91"
   client!sg.e Ljava/lang/String;:
-    owner: "Static6"
-    name: "aString293"
+    owner: "LocalisedText"
+    name: "CHATCOL10"
   client!sg.g [I:
     owner: "Static6"
     name: "anIntArray519"
@@ -9201,8 +9201,8 @@ fields:
     owner: "Static6"
     name: "anIntArray524"
   client!si.d Ljava/lang/String;:
-    owner: "Static6"
-    name: "aString296"
+    owner: "LocalisedText"
+    name: "CANCEL"
   client!si.e I:
     owner: "Class157"
     name: "anInt4841"
@@ -9303,8 +9303,8 @@ fields:
     owner: "Static6"
     name: "aLong169"
   client!sk.j Ljava/lang/String;:
-    owner: "Static6"
-    name: "aString298"
+    owner: "LocalisedText"
+    name: "CHATCOL3"
   client!sk.k I:
     owner: "Class158"
     name: "anInt4868"
@@ -10080,8 +10080,8 @@ fields:
     owner: "Class168"
     name: "anInt5254"
   client!ua.L Ljava/lang/String;:
-    owner: "Static7"
-    name: "aString315"
+    owner: "LocalisedText"
+    name: "CHATCOL8"
   client!ua.M I:
     owner: "Class168"
     name: "anInt5255"
@@ -10221,8 +10221,8 @@ fields:
     owner: "Class169"
     name: "anIntArray591"
   client!ub.c Ljava/lang/String;:
-    owner: "Static7"
-    name: "aString317"
+    owner: "LocalisedText"
+    name: "MAINLOAD10B"
   client!ub.d I:
     owner: "Class169"
     name: "anInt5275"
@@ -10350,8 +10350,8 @@ fields:
     owner: "Class172"
     name: "aClass20_11"
   client!ug.h Ljava/lang/String;:
-    owner: "Static7"
-    name: "aString320"
+    owner: "LocalisedText"
+    name: "SKILL"
   client!ug.l Lclient!mb;:
     owner: "Class172"
     name: "aClass20_12"
@@ -10449,8 +10449,8 @@ fields:
     owner: "Class174"
     name: "anIntArray613"
   client!ui.j Ljava/lang/String;:
-    owner: "Static7"
-    name: "aString321"
+    owner: "Text"
+    name: "CHATCOL7"
   client!uj.A I:
     owner: "Class4_Sub3_Sub14"
     name: "anInt5604"
@@ -10551,8 +10551,8 @@ fields:
     owner: "Static7"
     name: "anIntArray620"
   client!v.p Ljava/lang/String;:
-    owner: "Static7"
-    name: "aString329"
+    owner: "LocalisedText"
+    name: "MAINLOAD130"
   client!v.q [[Lclient!ih;:
     owner: "Static7"
     name: "aClass4_Sub12ArrayArray3"
@@ -10992,8 +10992,8 @@ fields:
     owner: "Static7"
     name: "aBoolean390"
   client!vl.r Ljava/lang/String;:
-    owner: "Static7"
-    name: "aString337"
+    owner: "Text"
+    name: "CHATEFFECT4"
   client!vl.s J:
     owner: "Class182"
     name: "aLong194"
@@ -11088,8 +11088,8 @@ fields:
     owner: "Class62_Sub1"
     name: "aClass51_3"
   client!wb.i Ljava/lang/String;:
-    owner: "Static7"
-    name: "aString343"
+    owner: "LocalisedText"
+    name: "CHATCOL7"
   client!wb.j Lclient!ja;:
     owner: "Class62_Sub1"
     name: "aClass92_3"
@@ -11109,8 +11109,8 @@ fields:
     owner: "Class62_Sub1"
     name: "aClass84_27"
   client!wb.t Ljava/lang/String;:
-    owner: "Static7"
-    name: "aString344"
+    owner: "LocalisedText"
+    name: "CHATCOL1"
   client!wb.x I:
     owner: "Class62_Sub1"
     name: "anInt5790"
@@ -11133,11 +11133,11 @@ fields:
     owner: "Static7"
     name: "aBoolean400"
   client!wd.wb Ljava/lang/String;:
-    owner: "Static7"
-    name: "aString347"
+    owner: "LocalisedText"
+    name: "FRIENDLISTDUPE"
   client!wd.xb Ljava/lang/String;:
-    owner: "Static7"
-    name: "aString348"
+    owner: "LocalisedText"
+    name: "LEVEL"
   client!wd.yb [I:
     owner: "Static7"
     name: "anIntArray656"
@@ -11775,8 +11775,8 @@ fields:
     owner: "Static7"
     name: "anIntArray678"
   client!wh.M Ljava/lang/String;:
-    owner: "Static7"
-    name: "aString363"
+    owner: "LocalisedText"
+    name: "FRIENDCANTADDSELF"
   client!wh.z [I:
     owner: "Class4_Sub3_Sub23"
     name: "anIntArray676"
@@ -11799,8 +11799,8 @@ fields:
     owner: "Class187"
     name: "aFloat149"
   client!wj.d Ljava/lang/String;:
-    owner: "Static7"
-    name: "aString364"
+    owner: "LocalisedText"
+    name: "MAINLOAD30"
   client!wj.e F:
     owner: "Class187"
     name: "aFloat150"
@@ -11928,8 +11928,8 @@ fields:
     owner: "Class4_Sub3_Sub24"
     name: "anInt6091"
   client!wn.L Ljava/lang/String;:
-    owner: "Static7"
-    name: "aString369"
+    owner: "LocalisedText"
+    name: "MAINLOAD80"
   client!wn.N I:
     owner: "Static7"
     name: "anInt6094"
@@ -21666,8 +21666,8 @@ methods:
       2: "arg1"
     locals: {}
   client!gn.b (I)V:
-    owner: "Static17"
-    name: "method1651"
+    owner: "LocalisedText"
+    name: "switchToFrench"
     arguments: {}
     locals: {}
   client!gn.c (I)V:
@@ -22429,10 +22429,10 @@ methods:
       2: "arg1"
     locals: {}
   client!hk.a (IZ)V:
-    owner: "Static19"
-    name: "method1776"
+    owner: "LocalisedText"
+    name: "setLanguage"
     arguments:
-      0: "arg0"
+      0: "language"
     locals: {}
   client!hk.a (IZI)V:
     owner: "Static19"
@@ -22723,12 +22723,12 @@ methods:
       194: "local194"
       200: "local200"
   client!ia.a (Ljava/lang/String;Z)I:
-    owner: "Static19"
-    name: "method1817"
+    owner: "Language"
+    name: "fromIsoCode"
     arguments:
-      0: "arg0"
+      0: "code"
     locals:
-      11: "local11"
+      11: "i"
   client!ia.a (Z)V:
     owner: "Static19"
     name: "method1818"
@@ -36679,8 +36679,8 @@ methods:
       54: "local54"
       92: "local92"
   client!qi.b (I)V:
-    owner: "Static30"
-    name: "method425"
+    owner: "LocalisedText"
+    name: "switchToGerman"
     arguments: {}
     locals: {}
   client!qi.c (IZ)Lclient!ln;:
@@ -42945,8 +42945,8 @@ methods:
       88: "local88"
       103: "local103"
   client!uf.a (B)V:
-    owner: "Static35"
-    name: "method4312"
+    owner: "LocalisedText"
+    name: "switchToPortuguese"
     arguments: {}
     locals: {}
   client!uf.a (BI)I:
