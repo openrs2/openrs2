@@ -93,7 +93,7 @@ classes:
   client!hk: "Class4_Sub1_Sub11"
   client!hl: "Class81"
   client!ho: "Class82"
-  client!ia: "InputStream_Sub1"
+  client!ia: "BrokenInputStream"
   client!ib: "Class4_Sub3_Sub10"
   client!ic: "Class84"
   client!ie: "BrowserControl"
@@ -177,7 +177,7 @@ classes:
   client!oh: "Class127"
   client!oi: "Class128"
   client!oj: "Class129"
-  client!ok: "OutputStream_Sub1"
+  client!ok: "BrokenOutputStream"
   client!ol: "Class4_Sub20"
   client!om: "Class130"
   client!on: "Class4_Sub21"
@@ -22738,7 +22738,7 @@ methods:
       122: "local122"
       159: "local159"
   client!ia.read ()I:
-    owner: "InputStream_Sub1"
+    owner: "BrokenInputStream"
     name: "read"
     arguments: {}
     locals: {}
@@ -33551,10 +33551,10 @@ methods:
     arguments: {}
     locals: {}
   client!ok.write (I)V:
-    owner: "OutputStream_Sub1"
+    owner: "BrokenOutputStream"
     name: "write"
     arguments:
-      0: "arg0"
+      0: "b"
     locals: {}
   client!ol.<init> (II)V:
     owner: "Class4_Sub20"
