@@ -96,7 +96,7 @@ classes:
   client!ia: "InputStream_Sub1"
   client!ib: "Class4_Sub3_Sub10"
   client!ic: "Class84"
-  client!ie: "Class86"
+  client!ie: "BrowserControl"
   client!ih: "Class4_Sub12"
   client!ij: "Class4_Sub3_Sub11"
   client!ik: "Class89"
@@ -22924,26 +22924,26 @@ methods:
       0: "arg0"
     locals: {}
   client!ie.a (ILjava/lang/String;Ljava/applet/Applet;)V:
-    owner: "Class86"
-    name: "method1853"
+    owner: "BrowserControl"
+    name: "eval"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "applet"
+      1: "s"
     locals: {}
   client!ie.a (Ljava/applet/Applet;ILjava/lang/String;)Ljava/lang/Object;:
-    owner: "Class86"
-    name: "method1851"
+    owner: "BrowserControl"
+    name: "call"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "applet"
+      2: "methodName"
     locals: {}
   client!ie.a ([Ljava/lang/Object;ILjava/applet/Applet;Ljava/lang/String;)Ljava/lang/Object;:
-    owner: "Class86"
-    name: "method1852"
+    owner: "BrowserControl"
+    name: "call"
     arguments:
-      0: "arg0"
-      2: "arg1"
-      3: "arg2"
+      2: "applet"
+      3: "methodName"
+      0: "args"
     locals: {}
   client!ig.b ()V:
     owner: "Static19"
