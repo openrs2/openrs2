@@ -220,7 +220,7 @@ classes:
   client!rh: "Class4_Sub1_Sub27"
   client!ri: "Class53_Sub7"
   client!rj: "Class152"
-  client!rk: "Class4_Sub26"
+  client!rk: "StringNode"
   client!rl: "Class4_Sub27"
   client!rm: "Class4_Sub1_Sub28"
   client!rn: "Class41_Sub2"
@@ -264,7 +264,7 @@ classes:
   client!uk: "Class175"
   client!ul: "Class4_Sub3_Sub1_Sub2"
   client!uo: "Class4_Sub3_Sub20"
-  client!v: "Class4_Sub32"
+  client!v: "IntNode"
   client!vb: "Class4_Sub1_Sub37"
   client!vc: "Class53"
   client!vd: "Class178"
@@ -8748,8 +8748,8 @@ fields:
     owner: "Static6"
     name: "anIntArray492"
   client!rk.u Ljava/lang/String;:
-    owner: "Class4_Sub26"
-    name: "aString278"
+    owner: "StringNode"
+    name: "value"
   client!rk.w [Lclient!fd;:
     owner: "Static6"
     name: "aClass4_Sub10Array1"
@@ -10557,8 +10557,8 @@ fields:
     owner: "Static7"
     name: "aClass4_Sub12ArrayArray3"
   client!v.r I:
-    owner: "Class4_Sub32"
-    name: "anInt5434"
+    owner: "IntNode"
+    name: "value"
   client!v.s [I:
     owner: "Static7"
     name: "anIntArray621"
@@ -37706,10 +37706,10 @@ methods:
     arguments: {}
     locals: {}
   client!rk.<init> (Ljava/lang/String;)V:
-    owner: "Class4_Sub26"
+    owner: "StringNode"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "value"
     locals: {}
   client!rk.a (IIIZII)V:
     owner: "Static31"
@@ -43415,15 +43415,15 @@ methods:
       0: "arg0"
     locals: {}
   client!v.<init> ()V:
-    owner: "Class4_Sub32"
+    owner: "IntNode"
     name: "<init>"
     arguments: {}
     locals: {}
   client!v.<init> (I)V:
-    owner: "Class4_Sub32"
+    owner: "IntNode"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "value"
     locals: {}
   client!v.a (BLclient!wf;)Z:
     owner: "Static36"
