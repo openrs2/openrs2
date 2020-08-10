@@ -1521,8 +1521,8 @@ fields:
     owner: "Static1"
     name: "anInt890"
   client!db.p Z:
-    owner: "Static1"
-    name: "aBoolean52"
+    owner: "client"
+    name: "advertSuppressed"
   client!db.q I:
     owner: "Static1"
     name: "anInt891"
@@ -2499,8 +2499,8 @@ fields:
     owner: "Static2"
     name: "anInt1641"
   client!fc.i Z:
-    owner: "Static2"
-    name: "aBoolean102"
+    owner: "client"
+    name: "javaScript"
   client!fd.Cb [I:
     owner: "Static2"
     name: "anIntArray649"
@@ -2514,8 +2514,8 @@ fields:
     owner: "Static2"
     name: "anInt5716"
   client!fd.U I:
-    owner: "Static2"
-    name: "anInt5720"
+    owner: "client"
+    name: "game"
   client!fd.V I:
     owner: "Static2"
     name: "anInt5721"
@@ -2700,8 +2700,8 @@ fields:
     owner: "Static2"
     name: "aFloat42"
   client!fm.n Z:
-    owner: "Static2"
-    name: "aBoolean118"
+    owner: "client"
+    name: "haveIe6"
   client!fm.p Lclient!wl;:
     owner: "Class60"
     name: "aClass189_3"
@@ -5538,8 +5538,8 @@ fields:
     owner: "Static4"
     name: "aClass185Array3"
   client!ma.d I:
-    owner: "Static4"
-    name: "anInt3406"
+    owner: "client"
+    name: "modeWhere"
   client!ma.e I:
     owner: "Static4"
     name: "anInt3407"
@@ -5661,8 +5661,8 @@ fields:
     owner: "Static4"
     name: "aClass4_Sub21_1"
   client!me.h Z:
-    owner: "Static4"
-    name: "aBoolean231"
+    owner: "client"
+    name: "objectTag"
   client!me.i Lclient!jm;:
     owner: "Static4"
     name: "aClass99_1"
@@ -6729,8 +6729,8 @@ fields:
     owner: "Node"
     name: "next"
   client!ni.g I:
-    owner: "Static5"
-    name: "anInt6076"
+    owner: "client"
+    name: "country"
   client!ni.i J:
     owner: "Node"
     name: "key"
@@ -7650,8 +7650,8 @@ fields:
     owner: "Static5"
     name: "aBoolean297"
   client!pn.e I:
-    owner: "Static5"
-    name: "anInt4213"
+    owner: "client"
+    name: "worldId"
   client!pn.f Ljava/util/Random;:
     owner: "Static5"
     name: "aRandom1"
@@ -8175,8 +8175,8 @@ fields:
     owner: "Static6"
     name: "anIntArray462"
   client!qj.jb Ljava/lang/String;:
-    owner: "Static6"
-    name: "aString261"
+    owner: "client"
+    name: "settings"
   client!qk.B [[I:
     owner: "Class144"
     name: "anIntArrayArray37"
@@ -9351,8 +9351,8 @@ fields:
     owner: "Class4_Sub1_Sub33"
     name: "anInt4937"
   client!sn.Y I:
-    owner: "Static6"
-    name: "anInt4938"
+    owner: "client"
+    name: "affiliate"
   client!sn.ab [Ljava/lang/String;:
     owner: "Static6"
     name: "aStringArray30"
@@ -10578,8 +10578,8 @@ fields:
     owner: "Static7"
     name: "anInt5440"
   client!va.f Lclient!client;:
-    owner: "Static7"
-    name: "aClient1"
+    owner: "client"
+    name: "instance"
   client!va.i [[B:
     owner: "Static7"
     name: "aByteArrayArray50"
@@ -10845,8 +10845,8 @@ fields:
     owner: "Class181"
     name: "aByte23"
   client!vh.hb I:
-    owner: "Static7"
-    name: "anInt5543"
+    owner: "client"
+    name: "modeWhat"
   client!vh.ib Z:
     owner: "Class181"
     name: "aBoolean378"
@@ -15469,23 +15469,23 @@ methods:
     name: "init"
     arguments: {}
     locals:
-      48: "local48"
+      48: "advertSuppressedStr"
       67: "local67"
-      76: "local76"
-      92: "local92"
-      108: "local108"
-      128: "local128"
-      143: "local143"
-      152: "local152"
-      158: "local158"
+      76: "objectTagStr"
+      92: "javaScriptStr"
+      108: "gameStr"
+      128: "ex"
+      143: "countryStr"
+      152: "ex"
+      158: "haveIe6Str"
   client!client.main ([Ljava/lang/String;)V:
     owner: "client"
     name: "main"
     arguments:
-      0: "arg0"
+      0: "args"
     locals:
-      131: "local131"
-      156: "local156"
+      131: "c"
+      156: "ex"
   client!cm.a (Lclient!fd;B)V:
     owner: "Class32"
     name: "method695"
@@ -17042,10 +17042,10 @@ methods:
       80: "local80"
       88: "local88"
   client!el.a (ILjava/lang/String;)V:
-    owner: "Static14"
-    name: "method1071"
+    owner: "client"
+    name: "printUsage"
     arguments:
-      1: "arg0"
+      1: "thing"
     locals: {}
   client!el.b (I)V:
     owner: "Static14"
