@@ -2901,8 +2901,8 @@ fields:
     owner: "Static3"
     name: "anInt2579"
   client!gh.e Lclient!jb;:
-    owner: "Static3"
-    name: "aClass93_2"
+    owner: "Js5Compression"
+    name: "GZIP_DECOMPRESSOR"
   client!gh.f I:
     owner: "Static3"
     name: "anInt2580"
@@ -11373,8 +11373,8 @@ fields:
     owner: "Class185"
     name: "aByte25"
   client!wf.Tc I:
-    owner: "Static7"
-    name: "anInt5956"
+    owner: "Js5Compression"
+    name: "MAX_LENGTH"
   client!wf.U [[I:
     owner: "Class185"
     name: "anIntArrayArray50"
@@ -22399,17 +22399,17 @@ methods:
     locals:
       5: "local5"
   client!hj.a (Z[B)[B:
-    owner: "Static19"
-    name: "method1749"
+    owner: "Js5Compression"
+    name: "uncompress"
     arguments:
-      1: "arg0"
+      1: "in"
     locals:
-      8: "local8"
-      12: "local12"
-      16: "local16"
-      47: "local47"
-      59: "local59"
-      84: "local84"
+      8: "buffer"
+      12: "type"
+      16: "len"
+      47: "out"
+      59: "uncompressedLen"
+      84: "out"
   client!hk.<init> ()V:
     owner: "Class4_Sub1_Sub11"
     name: "<init>"
