@@ -95,7 +95,7 @@ classes:
   client!ho: "Class82"
   client!ia: "BrokenInputStream"
   client!ib: "Class4_Sub3_Sub10"
-  client!ic: "Class84"
+  client!ic: "HashTable"
   client!ie: "BrowserControl"
   client!ih: "Class4_Sub12"
   client!ij: "Class4_Sub3_Sub11"
@@ -3699,26 +3699,26 @@ fields:
     owner: "Static3"
     name: "aBoolean159"
   client!ic.h Lclient!ni;:
-    owner: "Class84"
-    name: "aClass4_77"
+    owner: "HashTable"
+    name: "searchCursor"
   client!ic.l J:
-    owner: "Class84"
-    name: "aLong76"
+    owner: "HashTable"
+    name: "searchKey"
   client!ic.n [Lclient!ni;:
-    owner: "Class84"
-    name: "aClass4Array1"
+    owner: "HashTable"
+    name: "buckets"
   client!ic.o I:
-    owner: "Class84"
-    name: "anInt2336"
+    owner: "HashTable"
+    name: "bucketCount"
   client!ic.p Lclient!ni;:
-    owner: "Class84"
-    name: "aClass4_78"
+    owner: "HashTable"
+    name: "iteratorCursor"
   client!ic.q I:
     owner: "client"
     name: "worldListDefaultPort"
   client!ic.r I:
-    owner: "Class84"
-    name: "anInt2338"
+    owner: "HashTable"
+    name: "iteratorKey"
   client!id.c [Ljava/lang/String;:
     owner: "Static3"
     name: "aStringArray16"
@@ -22832,78 +22832,78 @@ methods:
     arguments: {}
     locals: {}
   client!ic.<init> (I)V:
-    owner: "Class84"
+    owner: "HashTable"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "bucketCount"
     locals:
-      13: "local13"
-      29: "local29"
+      13: "i"
+      29: "sentinel"
   client!ic.a (B)Lclient!ni;:
-    owner: "Class84"
-    name: "method1843"
+    owner: "HashTable"
+    name: "next"
     arguments: {}
     locals:
-      25: "local25"
-      58: "local58"
+      25: "node"
+      58: "node"
   client!ic.a (I)I:
-    owner: "Class84"
-    name: "method1839"
+    owner: "HashTable"
+    name: "getBucketCount"
     arguments: {}
     locals: {}
   client!ic.a (I[Lclient!ni;)I:
-    owner: "Class84"
-    name: "method1845"
+    owner: "HashTable"
+    name: "toArray"
     arguments:
-      1: "arg0"
+      1: "array"
     locals:
-      7: "local7"
-      9: "local9"
-      22: "local22"
-      25: "local25"
+      7: "size"
+      9: "i"
+      22: "sentinel"
+      25: "node"
   client!ic.a (JI)Lclient!ni;:
-    owner: "Class84"
-    name: "method1844"
+    owner: "HashTable"
+    name: "get"
     arguments:
-      0: "arg0"
+      0: "key"
     locals:
-      28: "local28"
-      50: "local50"
+      28: "sentinel"
+      50: "value"
   client!ic.a (Lclient!ni;IJ)V:
-    owner: "Class84"
-    name: "method1840"
+    owner: "HashTable"
+    name: "put"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      2: "key"
+      0: "value"
     locals:
-      27: "local27"
+      27: "sentinel"
   client!ic.b (B)Lclient!ni;:
-    owner: "Class84"
-    name: "method1846"
+    owner: "HashTable"
+    name: "nextWithKey"
     arguments: {}
     locals:
-      23: "local23"
-      38: "local38"
+      23: "sentinel"
+      38: "node"
   client!ic.b (I)I:
-    owner: "Class84"
-    name: "method1841"
+    owner: "HashTable"
+    name: "size"
     arguments: {}
     locals:
-      7: "local7"
-      9: "local9"
-      22: "local22"
-      25: "local25"
+      7: "size"
+      9: "i"
+      22: "sentinel"
+      25: "node"
   client!ic.c (B)V:
-    owner: "Class84"
-    name: "method1847"
+    owner: "HashTable"
+    name: "clear"
     arguments: {}
     locals:
-      7: "local7"
-      24: "local24"
-      27: "local27"
+      7: "i"
+      24: "sentinel"
+      27: "node"
   client!ic.c (I)Lclient!ni;:
-    owner: "Class84"
-    name: "method1842"
+    owner: "HashTable"
+    name: "head"
     arguments: {}
     locals: {}
   client!id.a (BLclient!fh;)V:
