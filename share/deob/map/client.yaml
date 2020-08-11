@@ -75,7 +75,7 @@ classes:
   client!fn: "Class4_Sub3_Sub8"
   client!fo: "Js5Index"
   client!g: "Class4_Sub3_Sub9"
-  client!ga: "Class62"
+  client!ga: "Js5ResourceProvider"
   client!gb: "Class63_Sub1"
   client!ge: "Class65"
   client!gf: "IntHashTable"
@@ -279,7 +279,7 @@ classes:
   client!vn: "Class4_Sub3_Sub14_Sub1"
   client!w: "Class4_Sub3_Sub21"
   client!wa: "Packet"
-  client!wb: "Class62_Sub1"
+  client!wb: "Js5ResourceProviderImpl"
   client!wd: "Class4_Sub1_Sub21_Sub1"
   client!we: "Class184"
   client!wf: "Class185"
@@ -588,8 +588,8 @@ fields:
     owner: "Static1"
     name: "aClass4_Sub3_Sub14Array2"
   client!an.f Lclient!wl;:
-    owner: "Static1"
-    name: "aClass189_1"
+    owner: "client"
+    name: "uid"
   client!an.g Lclient!fh;:
     owner: "Static1"
     name: "aClass58_7"
@@ -1215,8 +1215,8 @@ fields:
     owner: "Class4_Sub3_Sub3"
     name: "aClass84_2"
   client!cj.P Lclient!mg;:
-    owner: "Static1"
-    name: "aClass117_1"
+    owner: "client"
+    name: "js5MasterIndex"
   client!cj.W Lclient!ic;:
     owner: "Class4_Sub3_Sub3"
     name: "aClass84_3"
@@ -1242,8 +1242,8 @@ fields:
     owner: "Static1"
     name: "aBoolean38"
   client!ck.bb Lclient!fm;:
-    owner: "Static1"
-    name: "aClass60_2"
+    owner: "client"
+    name: "masterCache"
   client!ck.db I:
     owner: "GameShell"
     name: "canvasHeight"
@@ -1416,8 +1416,8 @@ fields:
     owner: "Class34"
     name: "anInt839"
   client!d.n [I:
-    owner: "Static1"
-    name: "anIntArray60"
+    owner: "client"
+    name: "JS5_ARCHIVE_WEIGHTS"
   client!d.o I:
     owner: "Class34"
     name: "anInt840"
@@ -2599,7 +2599,7 @@ fields:
     name: "anInt1797"
   client!fh.G Lclient!ga;:
     owner: "Js5"
-    name: "aClass62_1"
+    name: "provider"
   client!fh.H [Ljava/lang/Object;:
     owner: "Js5"
     name: "packed"
@@ -3567,8 +3567,8 @@ fields:
     owner: "GameShell"
     name: "framesPerSecond"
   client!ho.S Lclient!wl;:
-    owner: "Static3"
-    name: "aClass189_4"
+    owner: "client"
+    name: "cacheData"
   client!ho.T [I:
     owner: "Static3"
     name: "anIntArray190"
@@ -4416,8 +4416,8 @@ fields:
     owner: "Static3"
     name: "anInt2576"
   client!je.l Lclient!wl;:
-    owner: "Static3"
-    name: "aClass189_5"
+    owner: "client"
+    name: "cacheMasterIndex"
   client!je.m Lclient!ic;:
     owner: "Static3"
     name: "aClass84_10"
@@ -4995,8 +4995,8 @@ fields:
     owner: "Static4"
     name: "anInt2979"
   client!l.A [Lclient!wl;:
-    owner: "Static4"
-    name: "aClass189Array1"
+    owner: "client"
+    name: "cacheIndexes"
   client!l.p I:
     owner: "Class4_Sub15"
     name: "anInt2988"
@@ -5722,7 +5722,7 @@ fields:
     name: "request"
   client!mg.m [Lclient!wb;:
     owner: "Js5MasterIndex"
-    name: "aClass62_Sub1Array1"
+    name: "resourceProviders"
   client!mg.p I:
     owner: "GameShell"
     name: "logicCycles"
@@ -6616,7 +6616,7 @@ fields:
     name: "incomplete"
   client!ng.E Z:
     owner: "Js5Request"
-    name: "aBoolean365"
+    name: "orphan"
   client!ng.J [I:
     owner: "Static5"
     name: "anIntArray615"
@@ -8586,8 +8586,8 @@ fields:
     owner: "Class4_Sub1_Sub26"
     name: "anInt4517"
   client!rg.ob [Lclient!wb;:
-    owner: "Static6"
-    name: "aClass62_Sub1Array2"
+    owner: "client"
+    name: "js5Providers"
   client!rh.U Ljava/lang/String;:
     owner: "LocalisedText"
     name: "CHECKING_FOR_UPDATES"
@@ -11049,74 +11049,74 @@ fields:
     owner: "Static7"
     name: "aBoolean393"
   client!wb.C Lclient!fo;:
-    owner: "Class62_Sub1"
-    name: "aClass61_2"
+    owner: "Js5ResourceProviderImpl"
+    name: "index"
   client!wb.D Lsignlink!vk;:
     owner: "Static7"
     name: "aClass197_5"
   client!wb.F Lclient!ng;:
-    owner: "Class62_Sub1"
-    name: "aClass4_Sub3_Sub1_1"
+    owner: "Js5ResourceProviderImpl"
+    name: "indexRequest"
   client!wb.J I:
     owner: "Static7"
     name: "anInt5798"
   client!wb.L I:
-    owner: "Class62_Sub1"
-    name: "anInt5800"
+    owner: "Js5ResourceProviderImpl"
+    name: "expectedVersion"
   client!wb.N I:
-    owner: "Class62_Sub1"
-    name: "anInt5802"
+    owner: "Js5ResourceProviderImpl"
+    name: "group"
   client!wb.P Z:
-    owner: "Class62_Sub1"
-    name: "aBoolean394"
+    owner: "Js5ResourceProviderImpl"
+    name: "verifyAll"
   client!wb.Q Z:
-    owner: "Class62_Sub1"
-    name: "aBoolean395"
+    owner: "Js5ResourceProviderImpl"
+    name: "prefetchAll"
   client!wb.R Lclient!ll;:
-    owner: "Class62_Sub1"
-    name: "aClass112_29"
+    owner: "Js5ResourceProviderImpl"
+    name: "prefetchQueue"
   client!wb.S Lclient!ll;:
-    owner: "Class62_Sub1"
-    name: "aClass112_30"
+    owner: "Js5ResourceProviderImpl"
+    name: "groupQueue"
   client!wb.T J:
-    owner: "Class62_Sub1"
-    name: "aLong199"
+    owner: "Js5ResourceProviderImpl"
+    name: "orphanCheckTime"
   client!wb.U Z:
-    owner: "Class62_Sub1"
-    name: "aBoolean396"
+    owner: "Js5ResourceProviderImpl"
+    name: "discardOrphans"
   client!wb.g Lclient!en;:
-    owner: "Class62_Sub1"
-    name: "aClass51_3"
+    owner: "Js5ResourceProviderImpl"
+    name: "netQueue"
   client!wb.i Ljava/lang/String;:
     owner: "LocalisedText"
     name: "CHATCOL7"
   client!wb.j Lclient!ja;:
-    owner: "Class62_Sub1"
-    name: "aClass92_3"
+    owner: "Js5ResourceProviderImpl"
+    name: "cacheQueue"
   client!wb.l Lclient!fm;:
-    owner: "Class62_Sub1"
-    name: "aClass60_3"
+    owner: "Js5ResourceProviderImpl"
+    name: "masterCache"
   client!wb.n Lclient!fm;:
-    owner: "Class62_Sub1"
-    name: "aClass60_4"
+    owner: "Js5ResourceProviderImpl"
+    name: "cache"
   client!wb.o I:
-    owner: "Class62_Sub1"
-    name: "anInt5783"
+    owner: "Js5ResourceProviderImpl"
+    name: "verifiedGroups"
   client!wb.p I:
-    owner: "Class62_Sub1"
-    name: "anInt5784"
+    owner: "Js5ResourceProviderImpl"
+    name: "expectedChecksum"
   client!wb.q Lclient!ic;:
-    owner: "Class62_Sub1"
-    name: "aClass84_27"
+    owner: "Js5ResourceProviderImpl"
+    name: "requests"
   client!wb.t Ljava/lang/String;:
     owner: "LocalisedText"
     name: "CHATCOL1"
   client!wb.x I:
-    owner: "Class62_Sub1"
-    name: "anInt5790"
+    owner: "Js5ResourceProviderImpl"
+    name: "archive"
   client!wb.z [B:
-    owner: "Class62_Sub1"
-    name: "aByteArray72"
+    owner: "Js5ResourceProviderImpl"
+    name: "groupStatus"
   client!wc.a Lclient!fh;:
     owner: "Static7"
     name: "aClass58_102"
@@ -11907,8 +11907,8 @@ fields:
     owner: "Class4_Sub3_Sub24"
     name: "anInt6085"
   client!wn.B Ljava/util/zip/CRC32;:
-    owner: "Static7"
-    name: "aCRC32_1"
+    owner: "Js5ResourceProviderImpl"
+    name: "crc32"
   client!wn.D Lclient!u;:
     owner: "Class4_Sub3_Sub24"
     name: "aClass167_1"
@@ -15367,8 +15367,8 @@ methods:
     name: "mainInit"
     arguments: {}
     locals:
-      174: "local174"
-      230: "local230"
+      174: "i"
+      230: "ex"
   client!client.c (Lclient!wf;)Z:
     owner: "Static12"
     name: "method692"
@@ -15448,7 +15448,7 @@ methods:
       44: "local44"
       93: "local93"
       355: "local355"
-      357: "local357"
+      357: "i"
       540: "local540"
       543: "local543"
       582: "local582"
@@ -18887,7 +18887,7 @@ methods:
     owner: "Js5"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "provider"
       1: "discardPacked"
       2: "discardUnpacked"
     locals: {}
@@ -19781,17 +19781,17 @@ methods:
     arguments: {}
     locals: {}
   client!ga.<init> ()V:
-    owner: "Class62"
+    owner: "Js5ResourceProvider"
     name: "<init>"
     arguments: {}
     locals: {}
   client!ga.a (I)Lclient!fo;:
-    owner: "Class62"
+    owner: "Js5ResourceProvider"
     name: "fetchIndex"
     arguments: {}
     locals: {}
   client!ga.a (II)I:
-    owner: "Class62"
+    owner: "Js5ResourceProvider"
     name: "getPercentageComplete"
     arguments:
       0: "group"
@@ -19814,13 +19814,13 @@ methods:
     locals:
       24: "local24"
   client!ga.b (II)V:
-    owner: "Class62"
+    owner: "Js5ResourceProvider"
     name: "prefetchGroup"
     arguments:
       0: "group"
     locals: {}
   client!ga.c (II)[B:
-    owner: "Class62"
+    owner: "Js5ResourceProvider"
     name: "fetchGroup"
     arguments:
       1: "group"
@@ -29372,26 +29372,26 @@ methods:
     locals: {}
   client!mg.a (Lclient!fm;BLclient!fm;ZI)Lclient!wb;:
     owner: "Js5MasterIndex"
-    name: "method2712"
+    name: "getResourceProviderInternal"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "masterCache"
+      2: "cache"
       4: "archive"
     locals:
       48: "checksum"
       55: "version"
-      76: "local76"
+      76: "provider"
   client!mg.a (Lclient!fm;Lclient!fm;IB)Lclient!wb;:
     owner: "Js5MasterIndex"
-    name: "method2714"
+    name: "getResourceProvider"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "masterCache"
+      1: "cache"
       2: "archive"
     locals: {}
   client!mg.a (Z)V:
     owner: "Js5MasterIndex"
-    name: "method2706"
+    name: "tick"
     arguments: {}
     locals:
       12: "i"
@@ -33509,15 +33509,15 @@ methods:
     locals:
       13: "local13"
   client!oj.a (ZBZIZ)Lclient!fh;:
-    owner: "Static27"
-    name: "method3231"
+    owner: "client"
+    name: "createJs5"
     arguments:
-      0: "arg0"
-      2: "arg1"
-      3: "arg2"
-      4: "arg3"
+      3: "archive"
+      2: "discardPacked"
+      0: "discardUnpacked"
+      4: "prefetchAll"
     locals:
-      5: "local5"
+      5: "cache"
   client!oj.b (III[B[BI)I:
     owner: "HuffmanCodec"
     name: "decode"
@@ -45207,49 +45207,49 @@ methods:
     arguments: {}
     locals: {}
   client!wb.<init> (ILclient!fm;Lclient!fm;Lclient!en;Lclient!ja;IIZ)V:
-    owner: "Class62_Sub1"
+    owner: "Js5ResourceProviderImpl"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
-      5: "arg5"
-      6: "arg6"
-      7: "arg7"
+      0: "archive"
+      1: "cache"
+      2: "masterCache"
+      3: "netQueue"
+      4: "cacheQueue"
+      5: "expectedChecksum"
+      6: "expectedVersion"
+      7: "dicardOrphans"
     locals: {}
   client!wb.a (I)Lclient!fo;:
-    owner: "Class62_Sub1"
+    owner: "Js5ResourceProviderImpl"
     name: "fetchIndex"
     arguments: {}
     locals:
-      53: "local53"
-      74: "local74"
-      149: "local149"
+      53: "data"
+      74: "ex"
+      149: "ex"
   client!wb.a (II)I:
-    owner: "Class62_Sub1"
+    owner: "Js5ResourceProviderImpl"
     name: "getPercentageComplete"
     arguments:
       0: "group"
     locals:
-      9: "local9"
+      9: "request"
   client!wb.a (III)Lclient!ng;:
-    owner: "Class62_Sub1"
-    name: "method4672"
+    owner: "Js5ResourceProviderImpl"
+    name: "fetchGroupInner"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "group"
+      2: "type"
     locals:
-      13: "local13"
-      169: "local169"
-      197: "local197"
-      219: "local219"
-      244: "local244"
-      346: "local346"
-      378: "local378"
-      428: "local428"
-      455: "local455"
+      13: "request"
+      169: "data"
+      197: "checksum"
+      219: "ex"
+      244: "newRequest"
+      346: "checksum"
+      378: "truncatedVersion"
+      428: "ex"
+      455: "newRequest"
   client!wb.a (IIII)V:
     owner: "Static37"
     name: "method4661"
@@ -45270,25 +45270,25 @@ methods:
       7: "local7"
       46: "local46"
   client!wb.a (Z)V:
-    owner: "Class62_Sub1"
-    name: "method4666"
+    owner: "Js5ResourceProviderImpl"
+    name: "processPrefetchQueue"
     arguments: {}
     locals:
-      22: "local22"
-      32: "local32"
+      22: "node"
+      32: "group"
   client!wb.b (B)I:
-    owner: "Class62_Sub1"
-    name: "method4664"
+    owner: "Js5ResourceProviderImpl"
+    name: "getIndexPercentageComplete"
     arguments: {}
     locals: {}
   client!wb.b (I)I:
-    owner: "Class62_Sub1"
-    name: "method4660"
+    owner: "Js5ResourceProviderImpl"
+    name: "getTotalVerifiedGroups"
     arguments: {}
     locals:
-      27: "local27"
+      27: "node"
   client!wb.b (II)V:
-    owner: "Class62_Sub1"
+    owner: "Js5ResourceProviderImpl"
     name: "prefetchGroup"
     arguments:
       0: "group"
@@ -45296,8 +45296,8 @@ methods:
       22: "node"
       48: "node"
   client!wb.b (Z)I:
-    owner: "Class62_Sub1"
-    name: "method4667"
+    owner: "Js5ResourceProviderImpl"
+    name: "getVerifiedGroups"
     arguments: {}
     locals: {}
   client!wb.c (I)I:
@@ -45306,21 +45306,21 @@ methods:
     arguments: {}
     locals: {}
   client!wb.c (II)[B:
-    owner: "Class62_Sub1"
+    owner: "Js5ResourceProviderImpl"
     name: "fetchGroup"
     arguments:
       1: "group"
     locals:
-      9: "local9"
-      25: "local25"
+      9: "request"
+      25: "data"
   client!wb.c (Z)V:
     owner: "Static37"
     name: "method4670"
     arguments: {}
     locals: {}
   client!wb.d (I)V:
-    owner: "Class62_Sub1"
-    name: "method4668"
+    owner: "Js5ResourceProviderImpl"
+    name: "prefetchAll"
     arguments: {}
     locals: {}
   client!wb.d (II)I:
@@ -45330,24 +45330,24 @@ methods:
       1: "arg0"
     locals: {}
   client!wb.e (I)I:
-    owner: "Class62_Sub1"
-    name: "method4671"
+    owner: "Js5ResourceProviderImpl"
+    name: "getIndexSize"
     arguments: {}
     locals: {}
   client!wb.f (I)V:
-    owner: "Class62_Sub1"
-    name: "method4673"
+    owner: "Js5ResourceProviderImpl"
+    name: "tick"
     arguments: {}
     locals:
-      31: "local31"
-      36: "local36"
-      42: "local42"
-      145: "local145"
-      175: "local175"
-      182: "local182"
-      188: "local188"
-      290: "local290"
-      335: "local335"
+      31: "done"
+      36: "node"
+      42: "group"
+      145: "node"
+      175: "done"
+      182: "node"
+      188: "group"
+      290: "node"
+      335: "request"
   client!wc.a (II)V:
     owner: "Static37"
     name: "method4678"
