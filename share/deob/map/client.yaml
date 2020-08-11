@@ -6,7 +6,7 @@ classes:
   client!af: "Class4_Sub2"
   client!ag: "Class7"
   client!ai: "Interface1"
-  client!ak: "Class10"
+  client!ak: "SecondaryHashTable"
   client!al: "Class4_Sub3_Sub1_Sub1"
   client!am: "Class11_Sub1"
   client!ba: "Class15"
@@ -501,8 +501,8 @@ fields:
     owner: "Static1"
     name: "anInt127"
   client!ak.g J:
-    owner: "Class10"
-    name: "aLong5"
+    owner: "SecondaryHashTable"
+    name: "searchKey"
   client!ak.i [[[B:
     owner: "Static1"
     name: "aByteArrayArrayArray2"
@@ -513,17 +513,17 @@ fields:
     owner: "Static1"
     name: "anInt131"
   client!ak.l I:
-    owner: "Class10"
-    name: "anInt132"
+    owner: "SecondaryHashTable"
+    name: "bucketCount"
   client!ak.n [Z:
     owner: "Static1"
     name: "aBooleanArray2"
   client!ak.o [Lclient!lh;:
-    owner: "Class10"
-    name: "aClass4_Sub3Array1"
+    owner: "SecondaryHashTable"
+    name: "buckets"
   client!ak.p Lclient!lh;:
-    owner: "Class10"
-    name: "aClass4_Sub3_1"
+    owner: "SecondaryHashTable"
+    name: "searchCursor"
   client!ak.q I:
     owner: "Static1"
     name: "anInt134"
@@ -12552,36 +12552,36 @@ methods:
       1: "arg1"
     locals: {}
   client!ak.<init> (I)V:
-    owner: "Class10"
+    owner: "SecondaryHashTable"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "bucketCount"
     locals:
-      10: "local10"
-      22: "local22"
+      10: "i"
+      22: "sentinel"
   client!ak.a (BJ)Lclient!lh;:
-    owner: "Class10"
-    name: "method118"
+    owner: "SecondaryHashTable"
+    name: "get"
     arguments:
-      1: "arg0"
+      1: "key"
     locals:
-      26: "local26"
-      44: "local44"
+      26: "sentinel"
+      44: "node"
   client!ak.a (I)Lclient!lh;:
-    owner: "Class10"
-    name: "method117"
+    owner: "SecondaryHashTable"
+    name: "nextWithKey"
     arguments: {}
     locals:
-      30: "local30"
-      45: "local45"
+      30: "sentinel"
+      45: "node"
   client!ak.a (JLclient!lh;I)V:
-    owner: "Class10"
-    name: "method119"
+    owner: "SecondaryHashTable"
+    name: "put"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "key"
+      1: "value"
     locals:
-      32: "local32"
+      32: "sentinel"
   client!ak.a (Lclient!fh;Lclient!fh;III)Lclient!gl;:
     owner: "Static8"
     name: "method121"
