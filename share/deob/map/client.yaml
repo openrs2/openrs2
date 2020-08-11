@@ -12651,7 +12651,7 @@ methods:
       522: "local522"
   client!al.d (I)I:
     owner: "Js5CacheRequest"
-    name: "getReadyPercentage"
+    name: "getPercentageComplete"
     arguments: {}
     locals: {}
   client!al.e (B)[B:
@@ -18898,7 +18898,7 @@ methods:
     locals: {}
   client!fh.a (I)I:
     owner: "Js5"
-    name: "getReadyPercentage"
+    name: "getPercentageComplete"
     arguments: {}
     locals:
       13: "total"
@@ -19005,7 +19005,7 @@ methods:
       409: "fileId"
   client!fh.a (Ljava/lang/String;B)I:
     owner: "Js5"
-    name: "getReadyPercentage"
+    name: "getPercentageComplete"
     arguments:
       0: "group"
     locals:
@@ -19079,7 +19079,7 @@ methods:
       17: "groupId"
   client!fh.b (II)I:
     owner: "Js5"
-    name: "getReadyPercentage"
+    name: "getPercentageComplete"
     arguments:
       0: "group"
     locals: {}
@@ -19792,7 +19792,7 @@ methods:
     locals: {}
   client!ga.a (II)I:
     owner: "Class62"
-    name: "getReadyPercentage"
+    name: "getPercentageComplete"
     arguments:
       0: "group"
     locals: {}
@@ -32069,7 +32069,7 @@ methods:
       151: "local151"
   client!ng.d (I)I:
     owner: "Js5Request"
-    name: "getReadyPercentage"
+    name: "getPercentageComplete"
     arguments: {}
     locals: {}
   client!ng.e (B)[B:
@@ -43367,7 +43367,7 @@ methods:
       26: "local26"
   client!ul.d (I)I:
     owner: "Js5NetRequest"
-    name: "getReadyPercentage"
+    name: "getPercentageComplete"
     arguments: {}
     locals: {}
   client!ul.e (B)[B:
@@ -45229,7 +45229,7 @@ methods:
       149: "local149"
   client!wb.a (II)I:
     owner: "Class62_Sub1"
-    name: "getReadyPercentage"
+    name: "getPercentageComplete"
     arguments:
       0: "group"
     locals:
