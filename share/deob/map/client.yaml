@@ -25,7 +25,7 @@ classes:
   client!bo: "Class23"
   client!c: "Class24_Sub1"
   client!ca: "Class4_Sub1_Sub3"
-  client!cc: "Class26"
+  client!cc: "LruHashTable"
   client!cd: "Class27"
   client!cf: "Class4_Sub1_Sub4"
   client!ch: "Class30"
@@ -1056,20 +1056,20 @@ fields:
     owner: "Static1"
     name: "anInt528"
   client!cc.f Lclient!ic;:
-    owner: "Class26"
-    name: "aClass84_1"
+    owner: "LruHashTable"
+    name: "table"
   client!cc.h [I:
     owner: "Static1"
     name: "anIntArray47"
   client!cc.i I:
-    owner: "Class26"
-    name: "anInt532"
+    owner: "LruHashTable"
+    name: "available"
   client!cc.j Lclient!uk;:
-    owner: "Class26"
-    name: "aClass175_2"
+    owner: "LruHashTable"
+    name: "queue"
   client!cc.k I:
-    owner: "Class26"
-    name: "anInt533"
+    owner: "LruHashTable"
+    name: "capacity"
   client!cd.a Lclient!ij;:
     owner: "Class27"
     name: "aClass4_Sub3_Sub11_1"
@@ -14386,50 +14386,50 @@ methods:
       22: "local22"
       26: "local26"
   client!cc.<init> (I)V:
-    owner: "Class26"
+    owner: "LruHashTable"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "capacity"
     locals:
-      14: "local14"
+      14: "bucketCount"
   client!cc.a (B)V:
-    owner: "Class26"
-    name: "method511"
+    owner: "LruHashTable"
+    name: "clear"
     arguments: {}
     locals: {}
   client!cc.a (BI)V:
-    owner: "Class26"
-    name: "method517"
+    owner: "LruHashTable"
+    name: "sweep"
     arguments:
-      1: "arg0"
+      1: "maxAge"
     locals:
-      22: "local22"
-      45: "local45"
+      22: "node"
+      45: "softNode"
   client!cc.a (ILjava/lang/Object;J)V:
-    owner: "Class26"
-    name: "method510"
+    owner: "LruHashTable"
+    name: "put"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "key"
+      1: "value"
     locals:
-      31: "local31"
-      42: "local42"
+      31: "node"
+      42: "node"
   client!cc.a (JB)Ljava/lang/Object;:
-    owner: "Class26"
-    name: "method518"
+    owner: "LruHashTable"
+    name: "get"
     arguments:
-      0: "arg0"
+      0: "key"
     locals:
-      10: "local10"
-      26: "local26"
-      61: "local61"
+      10: "node"
+      26: "value"
+      61: "hardNode"
   client!cc.a (JI)V:
-    owner: "Class26"
-    name: "method512"
+    owner: "LruHashTable"
+    name: "remove"
     arguments:
-      0: "arg0"
+      0: "key"
     locals:
-      10: "local10"
+      10: "node"
   client!cc.a (Lclient!fh;ILclient!fh;)V:
     owner: "Static11"
     name: "method514"
@@ -14453,12 +14453,12 @@ methods:
       56: "local56"
       168: "local168"
   client!cc.a (Z)I:
-    owner: "Class26"
-    name: "method509"
+    owner: "LruHashTable"
+    name: "size"
     arguments: {}
     locals:
-      7: "local7"
-      18: "local18"
+      7: "size"
+      18: "node"
   client!cc.b (I)V:
     owner: "Static11"
     name: "method516"
@@ -14467,11 +14467,11 @@ methods:
       42: "local42"
       51: "local51"
   client!cc.b (Z)V:
-    owner: "Class26"
-    name: "method515"
+    owner: "LruHashTable"
+    name: "clearSoft"
     arguments: {}
     locals:
-      16: "local16"
+      16: "node"
   client!cd.a (IIC)C:
     owner: "Static11"
     name: "method523"
