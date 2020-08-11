@@ -26953,11 +26953,11 @@ methods:
       63: "local63"
       73: "local73"
   client!la.a (Lclient!lh;BLclient!lh;)V:
-    owner: "Static23"
-    name: "method2452"
+    owner: "SecondaryLinkedList"
+    name: "insertAfter"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      2: "node"
+      0: "position"
     locals: {}
   client!la.a (ZB)V:
     owner: "Static23"
