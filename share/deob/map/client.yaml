@@ -7,7 +7,7 @@ classes:
   client!ag: "Class7"
   client!ai: "Interface1"
   client!ak: "SecondaryHashTable"
-  client!al: "Class4_Sub3_Sub1_Sub1"
+  client!al: "Js5CacheRequest"
   client!am: "Class11_Sub1"
   client!ba: "Class15"
   client!bb: "Class4_Sub3_Sub2"
@@ -58,7 +58,7 @@ classes:
   client!ei: "HardReferenceNode"
   client!ej: "Class4_Sub9"
   client!em: "Class50"
-  client!en: "Class51"
+  client!en: "Js5NetQueue"
   client!eo: "BufferedSocket"
   client!f: "Class53_Sub1_Sub1"
   client!fa: "Class4_Sub1_Sub7"
@@ -104,7 +104,7 @@ classes:
   client!in: "Class11_Sub4"
   client!io: "Class4_Sub13"
   client!j: "Class4_Sub14"
-  client!ja: "Class92"
+  client!ja: "Js5CacheQueue"
   client!jagex3/jagmisc/jagmisc: "jagex3/jagmisc/jagmisc"
   client!jb: "GzipDecompressor"
   client!jc: "Class4_Sub3_Sub12"
@@ -160,7 +160,7 @@ classes:
   client!nd: "Class4_Sub18"
   client!ne: "Class20_Sub3"
   client!nf: "Class124"
-  client!ng: "Class4_Sub3_Sub1"
+  client!ng: "Js5Request"
   client!nh: "Class4_Sub19"
   client!ni: "Node"
   client!nk: "Interface4"
@@ -262,7 +262,7 @@ classes:
   client!ui: "Class174"
   client!uj: "Class4_Sub3_Sub14"
   client!uk: "SecondaryLinkedList"
-  client!ul: "Class4_Sub3_Sub1_Sub2"
+  client!ul: "Js5NetRequest"
   client!uo: "Class4_Sub3_Sub20"
   client!v: "IntNode"
   client!vb: "Class4_Sub1_Sub37"
@@ -531,8 +531,8 @@ fields:
     owner: "Static1"
     name: "anIntArray21"
   client!al.N I:
-    owner: "Class4_Sub3_Sub1_Sub1"
-    name: "anInt181"
+    owner: "Js5CacheRequest"
+    name: "type"
   client!al.P Lclient!ll;:
     owner: "Static1"
     name: "aClass112_1"
@@ -543,8 +543,8 @@ fields:
     owner: "Static1"
     name: "aClass4_Sub3_Sub14Array1"
   client!al.T [B:
-    owner: "Class4_Sub3_Sub1_Sub1"
-    name: "aByteArray3"
+    owner: "Js5CacheRequest"
+    name: "data"
   client!al.U S:
     owner: "Static1"
     name: "aShort1"
@@ -555,8 +555,8 @@ fields:
     owner: "Static1"
     name: "anInt185"
   client!al.Y Lclient!fm;:
-    owner: "Class4_Sub3_Sub1_Sub1"
-    name: "aClass60_1"
+    owner: "Js5CacheRequest"
+    name: "cache"
   client!am.B I:
     owner: "Static1"
     name: "anInt214"
@@ -2295,29 +2295,29 @@ fields:
     owner: "Static2"
     name: "anInt1333"
   client!en.A Lclient!fd;:
-    owner: "Class51"
-    name: "aClass4_Sub10_1"
+    owner: "Js5NetQueue"
+    name: "outBuffer"
   client!en.B J:
-    owner: "Class51"
-    name: "aLong54"
+    owner: "Js5NetQueue"
+    name: "previousTick"
   client!en.C Lclient!eo;:
-    owner: "Class51"
-    name: "aClass52_2"
+    owner: "Js5NetQueue"
+    name: "socket"
   client!en.D Lclient!fd;:
-    owner: "Class51"
-    name: "aClass4_Sub10_2"
+    owner: "Js5NetQueue"
+    name: "inBuffer"
   client!en.E I:
-    owner: "Class51"
-    name: "anInt1358"
+    owner: "Js5NetQueue"
+    name: "errors"
   client!en.F I:
-    owner: "Class51"
-    name: "anInt1359"
+    owner: "Js5NetQueue"
+    name: "state"
   client!en.G B:
-    owner: "Class51"
-    name: "aByte2"
+    owner: "Js5NetQueue"
+    name: "encryptionKey"
   client!en.H Lclient!ul;:
-    owner: "Class51"
-    name: "aClass4_Sub3_Sub1_Sub2_1"
+    owner: "Js5NetQueue"
+    name: "current"
   client!en.e I:
     owner: "Static2"
     name: "anInt1344"
@@ -2334,20 +2334,20 @@ fields:
     owner: "LocalisedText"
     name: "MAINLOAD140"
   client!en.t Lclient!uk;:
-    owner: "Class51"
-    name: "aClass175_5"
+    owner: "Js5NetQueue"
+    name: "pendingUrgentRequests"
   client!en.w Lclient!uk;:
-    owner: "Class51"
-    name: "aClass175_6"
+    owner: "Js5NetQueue"
+    name: "inFlightUrgentRequests"
   client!en.x Lclient!uk;:
-    owner: "Class51"
-    name: "aClass175_7"
+    owner: "Js5NetQueue"
+    name: "pendingPrefetchRequests"
   client!en.y Lclient!uk;:
-    owner: "Class51"
-    name: "aClass175_8"
+    owner: "Js5NetQueue"
+    name: "inFlightPrefetchRequests"
   client!en.z I:
-    owner: "Class51"
-    name: "anInt1357"
+    owner: "Js5NetQueue"
+    name: "latency"
   client!eo.a I:
     owner: "Static2"
     name: "anInt1360"
@@ -4296,23 +4296,23 @@ fields:
     owner: "Static3"
     name: "anIntArray222"
   client!ja.h Lclient!uk;:
-    owner: "Class92"
-    name: "aClass175_10"
+    owner: "Js5CacheQueue"
+    name: "queue"
   client!ja.m Z:
-    owner: "Class92"
-    name: "aBoolean174"
+    owner: "Js5CacheQueue"
+    name: "stop"
   client!ja.n I:
     owner: "Static3"
     name: "anInt2519"
   client!ja.o I:
-    owner: "Class92"
-    name: "anInt2520"
+    owner: "Js5CacheQueue"
+    name: "size"
   client!ja.p Lclient!fh;:
     owner: "Static3"
     name: "aClass58_58"
   client!ja.q Ljava/lang/Thread;:
-    owner: "Class92"
-    name: "aThread1"
+    owner: "Js5CacheQueue"
+    name: "thread"
   client!jb.a I:
     owner: "Static3"
     name: "anInt2522"
@@ -6612,17 +6612,17 @@ fields:
     owner: "LocalisedText"
     name: "CHATCOL4"
   client!ng.C Z:
-    owner: "Class4_Sub3_Sub1"
-    name: "aBoolean364"
+    owner: "Js5Request"
+    name: "incomplete"
   client!ng.E Z:
-    owner: "Class4_Sub3_Sub1"
+    owner: "Js5Request"
     name: "aBoolean365"
   client!ng.J [I:
     owner: "Static5"
     name: "anIntArray615"
   client!ng.y Z:
-    owner: "Class4_Sub3_Sub1"
-    name: "aBoolean363"
+    owner: "Js5Request"
+    name: "urgent"
   client!ng.z [Lclient!ml;:
     owner: "Static5"
     name: "aClass53_Sub3Array3"
@@ -10494,17 +10494,17 @@ fields:
     owner: "SecondaryLinkedList"
     name: "cursor"
   client!ul.K I:
-    owner: "Class4_Sub3_Sub1_Sub2"
-    name: "anInt5384"
+    owner: "Js5NetRequest"
+    name: "blockPosition"
   client!ul.M Lclient!cc;:
     owner: "Static7"
     name: "aClass26_55"
   client!ul.O B:
-    owner: "Class4_Sub3_Sub1_Sub2"
-    name: "aByte22"
+    owner: "Js5NetRequest"
+    name: "trailerLen"
   client!ul.R Lclient!fd;:
-    owner: "Class4_Sub3_Sub1_Sub2"
-    name: "aClass4_Sub10_10"
+    owner: "Js5NetRequest"
+    name: "data"
   client!ul.U I:
     owner: "Static7"
     name: "anInt5391"
@@ -12650,13 +12650,13 @@ methods:
       509: "local509"
       522: "local522"
   client!al.d (I)I:
-    owner: "Class4_Sub3_Sub1_Sub1"
-    name: "method4354"
+    owner: "Js5CacheRequest"
+    name: "getReadyPercentage"
     arguments: {}
     locals: {}
   client!al.e (B)[B:
-    owner: "Class4_Sub3_Sub1_Sub1"
-    name: "method4352"
+    owner: "Js5CacheRequest"
+    name: "getData"
     arguments: {}
     locals: {}
   client!am.<init> (IIIIIII)V:
@@ -17106,29 +17106,29 @@ methods:
     locals:
       23: "local23"
   client!en.a (B)V:
-    owner: "Class51"
-    name: "method1086"
+    owner: "Js5NetQueue"
+    name: "breakConnection"
     arguments: {}
     locals: {}
   client!en.a (BIZII)Lclient!ul;:
-    owner: "Class51"
-    name: "method1088"
+    owner: "Js5NetQueue"
+    name: "read"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      4: "arg3"
+      1: "archive"
+      4: "group"
+      2: "urgent"
+      0: "trailerLen"
     locals:
-      16: "local16"
-      20: "local20"
+      16: "key"
+      20: "request"
   client!en.a (BZ)V:
-    owner: "Class51"
-    name: "method1093"
+    owner: "Js5NetQueue"
+    name: "writeLoggedIn"
     arguments:
-      1: "arg0"
+      1: "loggedIn"
     locals:
-      43: "local43"
-      49: "local49"
+      43: "ex"
+      49: "closeEx"
   client!en.a (B[[BI[Lclient!em;[[I[[B[[F[[B[[F[[FI[[B)V:
     owner: "Static14"
     name: "method1094"
@@ -17223,8 +17223,8 @@ methods:
       1148: "local1148"
       1154: "local1154"
   client!en.a (I)I:
-    owner: "Class51"
-    name: "method1080"
+    owner: "Js5NetQueue"
+    name: "getPrefetchRequestCount"
     arguments: {}
     locals: {}
   client!en.a (IIII)Z:
@@ -17285,44 +17285,44 @@ methods:
       440: "local440"
       469: "local469"
   client!en.a (ILclient!eo;Z)V:
-    owner: "Class51"
-    name: "method1087"
+    owner: "Js5NetQueue"
+    name: "start"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "socket"
+      2: "loggedIn"
     locals:
-      15: "local15"
-      41: "local41"
-      64: "local64"
-      113: "local113"
-      119: "local119"
+      15: "ex"
+      41: "urgentRequest"
+      64: "prefetchRequest"
+      113: "ex"
+      119: "closeEx"
   client!en.a (Z)I:
-    owner: "Class51"
-    name: "method1092"
+    owner: "Js5NetQueue"
+    name: "getUrgentRequestCount"
     arguments: {}
     locals: {}
   client!en.b (B)V:
-    owner: "Class51"
-    name: "method1096"
+    owner: "Js5NetQueue"
+    name: "writeConnected"
     arguments: {}
     locals:
-      38: "local38"
-      44: "local44"
+      38: "ex"
+      44: "closeEx"
   client!en.b (I)V:
-    owner: "Class51"
-    name: "method1081"
+    owner: "Js5NetQueue"
+    name: "closeServer"
     arguments: {}
     locals:
-      36: "local36"
-      42: "local42"
+      36: "ex"
+      42: "closeEx"
   client!en.b (Z)Z:
-    owner: "Class51"
-    name: "method1095"
+    owner: "Js5NetQueue"
+    name: "isPrefetchRequestQueueFull"
     arguments: {}
     locals: {}
   client!en.c (I)Z:
-    owner: "Class51"
-    name: "method1083"
+    owner: "Js5NetQueue"
+    name: "isUrgentRequestQueueFull"
     arguments: {}
     locals: {}
   client!en.d (I)I:
@@ -17331,48 +17331,48 @@ methods:
     arguments: {}
     locals: {}
   client!en.f (I)V:
-    owner: "Class51"
-    name: "method1090"
+    owner: "Js5NetQueue"
+    name: "stop"
     arguments: {}
     locals: {}
   client!en.g (I)V:
-    owner: "Class51"
-    name: "method1091"
+    owner: "Js5NetQueue"
+    name: "rekey"
     arguments: {}
     locals:
-      9: "local9"
+      9: "ex"
   client!en.h (I)Z:
-    owner: "Class51"
-    name: "method1097"
+    owner: "Js5NetQueue"
+    name: "tick"
     arguments: {}
     locals:
-      11: "local11"
-      18: "local18"
-      46: "local46"
-      87: "local87"
-      146: "local146"
-      188: "local188"
-      198: "local198"
-      213: "local213"
-      242: "local242"
-      253: "local253"
-      301: "local301"
-      336: "local336"
-      343: "local343"
-      391: "local391"
-      416: "local416"
-      451: "local451"
-      473: "local473"
-      478: "local478"
-      483: "local483"
-      487: "local487"
-      498: "local498"
-      503: "local503"
-      510: "local510"
-      520: "local520"
-      581: "local581"
-      657: "local657"
-      663: "local663"
+      11: "now"
+      18: "duration"
+      46: "ex"
+      87: "request"
+      146: "request"
+      188: "i"
+      198: "available"
+      213: "needed"
+      242: "remaining"
+      253: "len"
+      301: "j"
+      336: "data"
+      343: "request"
+      391: "remaining"
+      416: "j"
+      451: "inBuffer"
+      473: "archive"
+      478: "group"
+      483: "flags"
+      487: "compressionType"
+      498: "urgent"
+      503: "uncompressedLen"
+      510: "key"
+      520: "request"
+      581: "headerLen"
+      657: "ex"
+      663: "closeEx"
   client!eo.<init> (Ljava/net/Socket;Lsignlink!pm;)V:
     owner: "BufferedSocket"
     name: "<init>"
@@ -23820,29 +23820,29 @@ methods:
       1: "arg0"
     locals: {}
   client!ja.<init> ()V:
-    owner: "Class92"
+    owner: "Js5CacheQueue"
     name: "<init>"
     arguments: {}
     locals:
-      20: "local20"
+      20: "request"
   client!ja.a (BLclient!fm;I)Lclient!al;:
-    owner: "Class92"
-    name: "method1973"
+    owner: "Js5CacheQueue"
+    name: "readSynchronous"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "cache"
+      2: "group"
     locals:
-      5: "local5"
-      23: "local23"
+      5: "request"
+      23: "other"
   client!ja.a (BLclient!fm;[BI)Lclient!al;:
-    owner: "Class92"
-    name: "method1968"
+    owner: "Js5CacheQueue"
+    name: "write"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      3: "arg2"
+      1: "cache"
+      3: "group"
+      2: "data"
     locals:
-      15: "local15"
+      15: "request"
   client!ja.a (IBI)V:
     owner: "Static20"
     name: "method1970"
@@ -23851,25 +23851,25 @@ methods:
       2: "arg1"
     locals: {}
   client!ja.a (ILclient!al;)V:
-    owner: "Class92"
-    name: "method1972"
+    owner: "Js5CacheQueue"
+    name: "enqueue"
     arguments:
-      1: "arg0"
+      1: "request"
     locals: {}
   client!ja.a (ILclient!fm;I)Lclient!al;:
-    owner: "Class92"
-    name: "method1965"
+    owner: "Js5CacheQueue"
+    name: "read"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "cache"
+      2: "group"
     locals:
-      7: "local7"
+      7: "request"
   client!ja.a (Z)V:
-    owner: "Class92"
-    name: "method1971"
+    owner: "Js5CacheQueue"
+    name: "stop"
     arguments: {}
     locals:
-      27: "local27"
+      27: "ex"
   client!ja.a ([BLjava/lang/String;IIII)I:
     owner: "Cp1252Charset"
     name: "encodeString"
@@ -23888,13 +23888,13 @@ methods:
     arguments: {}
     locals: {}
   client!ja.run ()V:
-    owner: "Class92"
+    owner: "Js5CacheQueue"
     name: "run"
     arguments: {}
     locals:
-      15: "local15"
-      30: "local30"
-      76: "local76"
+      15: "request"
+      30: "ex"
+      76: "ex"
   client!jagex3/jagmisc/jagmisc.Quit0 ()V:
     owner: "jagex3/jagmisc/jagmisc"
     name: "Quit0"
@@ -32068,13 +32068,13 @@ methods:
       107: "local107"
       151: "local151"
   client!ng.d (I)I:
-    owner: "Class4_Sub3_Sub1"
-    name: "method4354"
+    owner: "Js5Request"
+    name: "getReadyPercentage"
     arguments: {}
     locals: {}
   client!ng.e (B)[B:
-    owner: "Class4_Sub3_Sub1"
-    name: "method4352"
+    owner: "Js5Request"
+    name: "getData"
     arguments: {}
     locals: {}
   client!ng.e (I)[Lclient!fe;:
@@ -43366,13 +43366,13 @@ methods:
       22: "local22"
       26: "local26"
   client!ul.d (I)I:
-    owner: "Class4_Sub3_Sub1_Sub2"
-    name: "method4354"
+    owner: "Js5NetRequest"
+    name: "getReadyPercentage"
     arguments: {}
     locals: {}
   client!ul.e (B)[B:
-    owner: "Class4_Sub3_Sub1_Sub2"
-    name: "method4352"
+    owner: "Js5NetRequest"
+    name: "getData"
     arguments: {}
     locals: {}
   client!ul.g (I)V:
