@@ -470,7 +470,7 @@ methods:
     locals: {}
   unpackclass!aa.a (II[I)[B:
     owner: "Js5Index"
-    name: "getFile"
+    name: "fetchFile"
     arguments:
       0: "group"
       1: "file"
@@ -489,7 +489,7 @@ methods:
       19: "groupSize"
       24: "fileIds"
       43: "unpacked"
-      45: "found"
+      45: "valid"
       47: "i"
       53: "fileId"
       100: "compressed"
@@ -499,7 +499,7 @@ methods:
       191: "position"
       198: "stripes"
       211: "buffer"
-      214: "sizes"
+      214: "lens"
       219: "i"
       223: "len"
       225: "j"
@@ -550,7 +550,7 @@ methods:
     locals: {}
   unpackclass!aa.b (II)[B:
     owner: "Js5Index"
-    name: "getFile"
+    name: "fetchFile"
     arguments:
       0: "group"
       1: "file"

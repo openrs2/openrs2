@@ -66,7 +66,7 @@ classes:
   client!fe: "Class56_Sub1"
   client!ff: "Class57"
   client!fg: "Class4_Sub3_Sub7"
-  client!fh: "Class58"
+  client!fh: "Js5"
   client!fi: "Class4_Sub1_Sub8"
   client!fj: "Class4_Sub1_Sub9"
   client!fk: "Class59_Sub1"
@@ -2598,23 +2598,23 @@ fields:
     owner: "Static2"
     name: "anInt1797"
   client!fh.G Lclient!ga;:
-    owner: "Class58"
+    owner: "Js5"
     name: "aClass62_1"
   client!fh.H [Ljava/lang/Object;:
-    owner: "Class58"
-    name: "anObjectArray1"
+    owner: "Js5"
+    name: "packed"
   client!fh.L Lclient!fo;:
-    owner: "Class58"
-    name: "aClass61_1"
+    owner: "Js5"
+    name: "index"
   client!fh.g Z:
-    owner: "Class58"
-    name: "aBoolean107"
+    owner: "Js5"
+    name: "discardPacked"
   client!fh.p Z:
-    owner: "Class58"
-    name: "aBoolean108"
+    owner: "Js5"
+    name: "discardUnpacked"
   client!fh.s [[Ljava/lang/Object;:
-    owner: "Class58"
-    name: "anObjectArrayArray1"
+    owner: "Js5"
+    name: "unpacked"
   client!fi.U I:
     owner: "Class4_Sub1_Sub8"
     name: "anInt1831"
@@ -4524,8 +4524,8 @@ fields:
     owner: "Static4"
     name: "aCalendar1"
   client!jk.q Z:
-    owner: "Static4"
-    name: "aBoolean182"
+    owner: "Js5"
+    name: "RAISE_EXCEPTIONS"
   client!jk.s Z:
     owner: "Static4"
     name: "aBoolean183"
@@ -18884,185 +18884,185 @@ methods:
       23: "local23"
       52: "local52"
   client!fh.<init> (Lclient!ga;ZZ)V:
-    owner: "Class58"
+    owner: "Js5"
     name: "<init>"
     arguments:
       0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      1: "discardPacked"
+      2: "discardUnpacked"
     locals: {}
   client!fh.a (B)Z:
-    owner: "Class58"
-    name: "method1348"
+    owner: "Js5"
+    name: "isIndexReady"
     arguments: {}
     locals: {}
   client!fh.a (I)I:
-    owner: "Class58"
-    name: "method1345"
+    owner: "Js5"
+    name: "getReadyPercentage"
     arguments: {}
     locals:
-      13: "local13"
-      15: "local15"
-      17: "local17"
+      13: "total"
+      15: "complete"
+      17: "i"
   client!fh.a (IB)Z:
-    owner: "Class58"
-    name: "method1355"
+    owner: "Js5"
+    name: "isGroupReady"
     arguments:
-      0: "arg0"
+      0: "group"
     locals: {}
   client!fh.a (IBI)[B:
-    owner: "Class58"
-    name: "method1372"
+    owner: "Js5"
+    name: "fetchFile"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "group"
+      2: "file"
     locals: {}
   client!fh.a (II)V:
-    owner: "Class58"
-    name: "method1341"
+    owner: "Js5"
+    name: "prefetchGroup"
     arguments:
-      1: "arg0"
+      1: "group"
     locals: {}
   client!fh.a (III)Z:
-    owner: "Class58"
-    name: "method1353"
+    owner: "Js5"
+    name: "isFileValid"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      2: "group"
+      0: "file"
     locals: {}
   client!fh.a (II[II)[B:
-    owner: "Class58"
-    name: "method1361"
+    owner: "Js5"
+    name: "fetchFile"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      1: "group"
+      0: "file"
+      2: "key"
     locals:
-      32: "local32"
-      45: "local45"
-      62: "local62"
+      32: "success"
+      45: "success2"
+      62: "bytes"
   client!fh.a (ILjava/lang/String;)V:
-    owner: "Class58"
-    name: "method1357"
+    owner: "Js5"
+    name: "prefetchGroup"
     arguments:
-      1: "arg0"
+      1: "group"
     locals:
-      32: "local32"
+      32: "groupId"
   client!fh.a (ILjava/lang/String;Ljava/lang/String;)[B:
-    owner: "Class58"
-    name: "method1358"
+    owner: "Js5"
+    name: "fetchFile"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "group"
+      1: "file"
     locals:
-      31: "local31"
-      50: "local50"
+      31: "groupId"
+      50: "fileId"
   client!fh.a (IZ)[B:
-    owner: "Class58"
-    name: "method1343"
+    owner: "Js5"
+    name: "fetchFile"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!fh.a (IZI)Z:
-    owner: "Class58"
-    name: "method1370"
+    owner: "Js5"
+    name: "isFileReady"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "group"
+      2: "file"
     locals: {}
   client!fh.a (I[II)Z:
-    owner: "Class58"
-    name: "method1354"
+    owner: "Js5"
+    name: "unpackGroup"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "group"
+      1: "key"
     locals:
-      27: "local27"
-      33: "local33"
-      35: "local35"
-      57: "local57"
-      59: "local59"
-      71: "local71"
-      123: "local123"
-      128: "local128"
-      151: "local151"
-      153: "local153"
-      226: "local226"
-      229: "local229"
-      236: "local236"
-      241: "local241"
-      254: "local254"
-      259: "local259"
-      261: "local261"
-      289: "local289"
-      291: "local291"
-      313: "local313"
-      315: "local315"
-      320: "local320"
-      322: "local322"
-      366: "local366"
-      373: "local373"
-      409: "local409"
+      27: "fileIds"
+      33: "groupSize"
+      35: "valid"
+      57: "unpacked"
+      59: "i"
+      71: "fileId"
+      123: "compressed"
+      128: "buffer"
+      151: "uncompressed"
+      153: "ex"
+      226: "position"
+      229: "lens"
+      236: "stripes"
+      241: "buffer"
+      254: "i"
+      259: "len"
+      261: "j"
+      289: "extracted"
+      291: "i"
+      313: "off"
+      315: "i"
+      320: "len"
+      322: "j"
+      366: "i"
+      373: "fileId"
+      409: "fileId"
   client!fh.a (Ljava/lang/String;B)I:
-    owner: "Class58"
-    name: "method1342"
+    owner: "Js5"
+    name: "getReadyPercentage"
     arguments:
-      0: "arg0"
+      0: "group"
     locals:
-      30: "local30"
+      30: "groupId"
   client!fh.a (Ljava/lang/String;BLjava/lang/String;)Z:
-    owner: "Class58"
-    name: "method1340"
+    owner: "Js5"
+    name: "isFileReady"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "group"
+      2: "file"
     locals:
-      25: "local25"
-      52: "local52"
+      25: "groupId"
+      52: "fileId"
   client!fh.a (Ljava/lang/String;I)Z:
-    owner: "Class58"
-    name: "method1344"
+    owner: "Js5"
+    name: "isGroupNameValid"
     arguments:
-      0: "arg0"
+      0: "group"
     locals:
-      27: "local27"
+      27: "groupId"
   client!fh.a (Z)Z:
-    owner: "Class58"
-    name: "method1360"
+    owner: "Js5"
+    name: "fetchAll"
     arguments: {}
     locals:
-      14: "local14"
-      16: "local16"
-      32: "local32"
+      14: "success"
+      16: "i"
+      32: "groupId"
   client!fh.a (ZI)[I:
-    owner: "Class58"
-    name: "method1363"
+    owner: "Js5"
+    name: "getFileIds"
     arguments:
-      1: "arg0"
+      1: "group"
     locals:
-      27: "local27"
-      38: "local38"
+      27: "fileIds"
+      38: "i"
   client!fh.a (ZII)[B:
-    owner: "Class58"
-    name: "method1350"
+    owner: "Js5"
+    name: "fetchFileNoDiscard"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "group"
+      1: "file"
     locals:
-      29: "local29"
-      41: "local41"
+      29: "success"
+      41: "success2"
   client!fh.a (ZLjava/lang/String;)I:
-    owner: "Class58"
-    name: "method1362"
+    owner: "Js5"
+    name: "getGroupId"
     arguments:
-      1: "arg0"
+      1: "group"
     locals:
-      22: "local22"
+      22: "groupId"
   client!fh.a (ZZB)V:
-    owner: "Class58"
-    name: "method1356"
+    owner: "Js5"
+    name: "discardNames"
     arguments:
-      0: "arg0"
+      0: "groups"
     locals: {}
   client!fh.b (I)Lclient!fd;:
     owner: "Static15"
@@ -19071,57 +19071,57 @@ methods:
     locals:
       13: "local13"
   client!fh.b (IB)I:
-    owner: "Class58"
-    name: "method1367"
+    owner: "Js5"
+    name: "getGroupId"
     arguments:
-      0: "arg0"
+      0: "groupNameHash"
     locals:
-      17: "local17"
+      17: "groupId"
   client!fh.b (II)I:
-    owner: "Class58"
-    name: "method1346"
+    owner: "Js5"
+    name: "getReadyPercentage"
     arguments:
-      0: "arg0"
+      0: "group"
     locals: {}
   client!fh.b (Ljava/lang/String;I)Z:
-    owner: "Class58"
-    name: "method1365"
+    owner: "Js5"
+    name: "isFileReady"
     arguments:
-      0: "arg0"
+      0: "group"
     locals:
-      28: "local28"
+      28: "groupId"
   client!fh.b (ZI)V:
-    owner: "Class58"
-    name: "method1368"
+    owner: "Js5"
+    name: "discardUnpacked"
     arguments:
-      1: "arg0"
+      1: "group"
     locals: {}
   client!fh.c (I)V:
-    owner: "Class58"
-    name: "method1349"
+    owner: "Js5"
+    name: "discardUnpacked"
     arguments: {}
     locals:
-      11: "local11"
+      11: "i"
   client!fh.c (II)V:
-    owner: "Class58"
-    name: "method1352"
+    owner: "Js5"
+    name: "fetchGroup"
     arguments:
-      1: "arg0"
+      1: "group"
     locals: {}
   client!fh.d (I)I:
-    owner: "Class58"
-    name: "method1351"
+    owner: "Js5"
+    name: "capacity"
     arguments: {}
     locals: {}
   client!fh.d (II)Z:
-    owner: "Class58"
-    name: "method1359"
+    owner: "Js5"
+    name: "isFileReady"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!fh.e (I)I:
-    owner: "Class58"
-    name: "method1369"
+    owner: "Js5"
+    name: "getChecksum"
     arguments: {}
     locals: {}
   client!fh.e (II)Z:
@@ -19135,16 +19135,16 @@ methods:
       74: "local74"
       88: "local88"
   client!fh.f (II)Z:
-    owner: "Class58"
-    name: "method1366"
+    owner: "Js5"
+    name: "isGroupValid"
     arguments:
-      0: "arg0"
+      0: "group"
     locals: {}
   client!fh.g (II)I:
-    owner: "Class58"
-    name: "method1371"
+    owner: "Js5"
+    name: "getGroupCapacity"
     arguments:
-      0: "arg0"
+      0: "group"
     locals: {}
   client!fi.<init> ()V:
     owner: "Class4_Sub1_Sub8"
@@ -19787,14 +19787,14 @@ methods:
     locals: {}
   client!ga.a (I)Lclient!fo;:
     owner: "Class62"
-    name: "method4659"
+    name: "fetchIndex"
     arguments: {}
     locals: {}
   client!ga.a (II)I:
     owner: "Class62"
-    name: "method4655"
+    name: "getReadyPercentage"
     arguments:
-      0: "arg0"
+      0: "group"
     locals: {}
   client!ga.a (Lclient!ra;B)V:
     owner: "Static16"
@@ -19815,15 +19815,15 @@ methods:
       24: "local24"
   client!ga.b (II)V:
     owner: "Class62"
-    name: "method4656"
+    name: "prefetchGroup"
     arguments:
-      0: "arg0"
+      0: "group"
     locals: {}
   client!ga.c (II)[B:
     owner: "Class62"
-    name: "method4657"
+    name: "fetchGroup"
     arguments:
-      1: "arg0"
+      1: "group"
     locals: {}
   client!gb.a (II)[F:
     owner: "Static16"
@@ -45221,7 +45221,7 @@ methods:
     locals: {}
   client!wb.a (I)Lclient!fo;:
     owner: "Class62_Sub1"
-    name: "method4659"
+    name: "fetchIndex"
     arguments: {}
     locals:
       53: "local53"
@@ -45229,9 +45229,9 @@ methods:
       149: "local149"
   client!wb.a (II)I:
     owner: "Class62_Sub1"
-    name: "method4655"
+    name: "getReadyPercentage"
     arguments:
-      0: "arg0"
+      0: "group"
     locals:
       9: "local9"
   client!wb.a (III)Lclient!ng;:
@@ -45289,9 +45289,9 @@ methods:
       27: "local27"
   client!wb.b (II)V:
     owner: "Class62_Sub1"
-    name: "method4656"
+    name: "prefetchGroup"
     arguments:
-      0: "arg0"
+      0: "group"
     locals:
       22: "local22"
       48: "local48"
@@ -45307,9 +45307,9 @@ methods:
     locals: {}
   client!wb.c (II)[B:
     owner: "Class62_Sub1"
-    name: "method4657"
+    name: "fetchGroup"
     arguments:
-      1: "arg0"
+      1: "group"
     locals:
       9: "local9"
       25: "local25"
