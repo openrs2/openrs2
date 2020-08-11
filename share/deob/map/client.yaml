@@ -3718,7 +3718,7 @@ fields:
     name: "worldListDefaultPort"
   client!ic.r I:
     owner: "HashTable"
-    name: "iteratorKey"
+    name: "iteratorBucket"
   client!id.c [Ljava/lang/String;:
     owner: "Static3"
     name: "aStringArray16"
