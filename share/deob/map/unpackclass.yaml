@@ -1,7 +1,7 @@
 ---
 classes:
   unpackclass!a: "ByteArray"
-  unpackclass!aa: "Js5Index"
+  unpackclass!aa: "Js5"
   unpackclass!c: "BufferPool"
   unpackclass!e: "Buffer"
   unpackclass!f: "LinkedList"
@@ -25,58 +25,58 @@ fields:
     owner: "ByteArray"
     name: "directBuffersUnsupported"
   unpackclass!aa.a I:
-    owner: "Js5Index"
+    owner: "Js5"
     name: "size"
   unpackclass!aa.b [I:
-    owner: "Js5Index"
+    owner: "Js5"
     name: "groupIds"
   unpackclass!aa.c [I:
-    owner: "Js5Index"
+    owner: "Js5"
     name: "groupNameHashes"
   unpackclass!aa.d [I:
-    owner: "Js5Index"
+    owner: "Js5"
     name: "groupChecksums"
   unpackclass!aa.e [I:
-    owner: "Js5Index"
+    owner: "Js5"
     name: "groupVersions"
   unpackclass!aa.f [I:
-    owner: "Js5Index"
+    owner: "Js5"
     name: "groupSizes"
   unpackclass!aa.g [[I:
-    owner: "Js5Index"
+    owner: "Js5"
     name: "fileIds"
   unpackclass!aa.h [[I:
-    owner: "Js5Index"
+    owner: "Js5"
     name: "fileNameHashes"
   unpackclass!aa.i [Lunpackclass!i;:
-    owner: "Js5Index"
+    owner: "Js5"
     name: "fileNameHashTables"
   unpackclass!aa.j [Ljava/lang/Object;:
-    owner: "Js5Index"
+    owner: "Js5"
     name: "packed"
   unpackclass!aa.k [I:
-    owner: "Js5Index"
+    owner: "Js5"
     name: "groupCapacities"
   unpackclass!aa.l [[Ljava/lang/Object;:
-    owner: "Js5Index"
+    owner: "Js5"
     name: "unpacked"
   unpackclass!aa.m Lunpackclass!k;:
-    owner: "Js5Index"
+    owner: "Js5"
     name: "GZIP_DECOMPRESSOR"
   unpackclass!aa.n I:
-    owner: "Js5Index"
+    owner: "Js5"
     name: "checksum"
   unpackclass!aa.o Z:
-    owner: "Js5Index"
+    owner: "Js5"
     name: "discardPacked"
   unpackclass!aa.p Z:
-    owner: "Js5Index"
+    owner: "Js5"
     name: "discardUnpacked"
   unpackclass!aa.q Z:
-    owner: "Js5Index"
+    owner: "Js5"
     name: "RAISE_EXCEPTIONS"
   unpackclass!aa.r I:
-    owner: "Js5Index"
+    owner: "Js5"
     name: "MAX_LENGTH"
   unpackclass!c.a I:
     owner: "BufferPool"
@@ -449,27 +449,27 @@ methods:
       0: "bytes"
     locals: {}
   unpackclass!aa.<init> (ZZ)V:
-    owner: "Js5Index"
+    owner: "Js5"
     name: "<init>"
     arguments:
       0: "discardPacked"
       1: "discardUnpacked"
     locals: {}
   unpackclass!aa.a (I)Z:
-    owner: "Js5Index"
+    owner: "Js5"
     name: "isGroupValid"
     arguments:
       0: "group"
     locals: {}
   unpackclass!aa.a (II)Z:
-    owner: "Js5Index"
+    owner: "Js5"
     name: "isFileValid"
     arguments:
       0: "group"
       1: "file"
     locals: {}
   unpackclass!aa.a (II[I)[B:
-    owner: "Js5Index"
+    owner: "Js5"
     name: "fetchFile"
     arguments:
       0: "group"
@@ -480,7 +480,7 @@ methods:
       33: "success2"
       46: "bytes"
   unpackclass!aa.a (I[I)Z:
-    owner: "Js5Index"
+    owner: "Js5"
     name: "unpackGroup"
     arguments:
       0: "group"
@@ -513,7 +513,7 @@ methods:
       326: "fileId"
       361: "fileId"
   unpackclass!aa.a ([B)V:
-    owner: "Js5Index"
+    owner: "Js5"
     name: "read"
     arguments:
       0: "bytes"
@@ -543,20 +543,20 @@ methods:
       361: "j"
       375: "fileId"
   unpackclass!aa.b (I)V:
-    owner: "Js5Index"
+    owner: "Js5"
     name: "fetchGroup"
     arguments:
       0: "group"
     locals: {}
   unpackclass!aa.b (II)[B:
-    owner: "Js5Index"
+    owner: "Js5"
     name: "fetchFile"
     arguments:
       0: "group"
       1: "file"
     locals: {}
   unpackclass!aa.b ([B)[B:
-    owner: "Js5Index"
+    owner: "Js5"
     name: "uncompress"
     arguments:
       0: "in"
@@ -568,7 +568,7 @@ methods:
       36: "uncompressedLen"
       50: "out"
   unpackclass!aa.c (I)I:
-    owner: "Js5Index"
+    owner: "Js5"
     name: "getGroupCapacity"
     arguments: {}
     locals: {}
