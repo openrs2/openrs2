@@ -80,7 +80,7 @@ classes:
   client!ge: "Class65"
   client!gf: "IntHashTable"
   client!gg: "Class11_Sub3"
-  client!gh: "Class67"
+  client!gh: "ReferenceNodeFactory"
   client!gk: "Class70"
   client!gl: "Class4_Sub3_Sub5"
   client!gn: "Class4_Sub11"
@@ -110,7 +110,7 @@ classes:
   client!jc: "Class4_Sub3_Sub12"
   client!jd: "Class94"
   client!jf: "Class77"
-  client!jg: "Class67_Sub1"
+  client!jg: "SoftReferenceNodeFactory"
   client!jh: "Class96"
   client!jj: "Class4_Sub1_Sub12"
   client!jk: "Class98"
@@ -7185,8 +7185,8 @@ fields:
     owner: "Class127"
     name: "anInt3877"
   client!oi.c Lclient!gh;:
-    owner: "Static5"
-    name: "aClass67_1"
+    owner: "ReferenceNodeFactory"
+    name: "SOFT_REFERENCE_NODE_FACTORY"
   client!oi.g [Ljava/lang/String;:
     owner: "Static5"
     name: "aStringArray24"
@@ -20704,10 +20704,10 @@ methods:
       1: "arg1"
     locals: {}
   client!gh.a (ILclient!cn;)Lclient!cn;:
-    owner: "Class67"
-    name: "method2015"
+    owner: "ReferenceNodeFactory"
+    name: "create"
     arguments:
-      1: "arg0"
+      1: "node"
     locals: {}
   client!gh.a (I[Ljava/lang/Object;II[I)V:
     owner: "Static16"
@@ -24573,10 +24573,10 @@ methods:
     arguments: {}
     locals: {}
   client!jg.a (ILclient!cn;)Lclient!cn;:
-    owner: "Class67_Sub1"
-    name: "method2015"
+    owner: "SoftReferenceNodeFactory"
+    name: "create"
     arguments:
-      1: "arg0"
+      1: "node"
     locals: {}
   client!jh.a (BIIILclient!ch;II)V:
     owner: "Static21"
@@ -42154,11 +42154,11 @@ methods:
     arguments: {}
     locals: {}
   client!tn.b (I)Lclient!gh;:
-    owner: "Static34"
-    name: "method1541"
+    owner: "ReferenceNodeFactory"
+    name: "createSoftReferenceNodeFactory"
     arguments: {}
     locals:
-      15: "local15"
+      15: "ex"
   client!tn.c (I)Z:
     owner: "Class63"
     name: "method1544"
