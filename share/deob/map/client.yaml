@@ -88,7 +88,7 @@ classes:
   client!h: "Class73"
   client!hc: "ByteArray"
   client!he: "Class53_Sub2"
-  client!hf: "Class77_Sub1"
+  client!hf: "NanoTimer"
   client!hi: "Class79"
   client!hk: "Class4_Sub1_Sub11"
   client!hl: "Class81"
@@ -109,7 +109,7 @@ classes:
   client!jb: "GzipDecompressor"
   client!jc: "Class4_Sub3_Sub12"
   client!jd: "Class94"
-  client!jf: "Class77"
+  client!jf: "Timer"
   client!jg: "SoftReferenceNodeFactory"
   client!jh: "Class96"
   client!jj: "Class4_Sub1_Sub12"
@@ -165,7 +165,7 @@ classes:
   client!ni: "Node"
   client!nk: "Interface4"
   client!nm: "Class102_Sub2"
-  client!nn: "Class77_Sub2"
+  client!nn: "MiscTimer"
   client!no: "Class4_Sub1_Sub19"
   client!o: "Class53_Sub5"
   client!oa: "Class4_Sub3_Sub14_Sub2"
@@ -181,7 +181,7 @@ classes:
   client!ol: "Class4_Sub20"
   client!om: "Class130"
   client!on: "Class4_Sub21"
-  client!oo: "Class77_Sub3"
+  client!oo: "MillisTimer"
   client!p: "Class53_Sub1_Sub2"
   client!pa: "Class131"
   client!pb: "Class4_Sub8_Sub1"
@@ -384,8 +384,8 @@ fields:
     owner: "Class4_Sub1_Sub1"
     name: "anInt79"
   client!ac.cb I:
-    owner: "Static1"
-    name: "anInt80"
+    owner: "GameShell"
+    name: "timePerFrame"
   client!ac.db Ljava/lang/String;:
     owner: "LocalisedText"
     name: "WALKHERE"
@@ -1641,8 +1641,8 @@ fields:
     owner: "Static2"
     name: "aByteArrayArray9"
   client!de.s Lclient!jf;:
-    owner: "Static2"
-    name: "aClass77_1"
+    owner: "GameShell"
+    name: "timer"
   client!de.u I:
     owner: "Class11_Sub2"
     name: "anInt951"
@@ -3393,23 +3393,23 @@ fields:
     owner: "LocalisedText"
     name: "MAINLOAD120B"
   client!hf.f J:
-    owner: "Class77_Sub1"
-    name: "aLong70"
+    owner: "NanoTimer"
+    name: "time"
   client!hf.g J:
-    owner: "Class77_Sub1"
-    name: "aLong71"
+    owner: "NanoTimer"
+    name: "nextFrame"
   client!hf.h J:
-    owner: "Class77_Sub1"
-    name: "aLong72"
+    owner: "NanoTimer"
+    name: "previousFrame"
   client!hf.i I:
-    owner: "Class77_Sub1"
-    name: "anInt2178"
+    owner: "NanoTimer"
+    name: "durationPointer"
   client!hf.j I:
-    owner: "Class77_Sub1"
-    name: "anInt2179"
+    owner: "NanoTimer"
+    name: "windowSize"
   client!hf.k [J:
-    owner: "Class77_Sub1"
-    name: "aLongArray14"
+    owner: "NanoTimer"
+    name: "durations"
   client!hg.a I:
     owner: "Static3"
     name: "anInt2180"
@@ -3564,8 +3564,8 @@ fields:
     owner: "Static3"
     name: "anIntArray189"
   client!ho.R I:
-    owner: "Static3"
-    name: "anInt2295"
+    owner: "GameShell"
+    name: "framesPerSecond"
   client!ho.S Lclient!wl;:
     owner: "Static3"
     name: "aClass189_4"
@@ -4767,8 +4767,8 @@ fields:
     owner: "Static4"
     name: "anInt2853"
   client!kf.a I:
-    owner: "Static4"
-    name: "anInt2832"
+    owner: "GameShell"
+    name: "redrawTimePointer"
   client!kf.b [B:
     owner: "Bzip2DState"
     name: "strmNextIn"
@@ -5724,8 +5724,8 @@ fields:
     owner: "Class117"
     name: "aClass62_Sub1Array1"
   client!mg.p I:
-    owner: "Static4"
-    name: "anInt3326"
+    owner: "GameShell"
+    name: "logicCycles"
   client!mg.q Ljava/awt/Frame;:
     owner: "GameShell"
     name: "frame"
@@ -6438,8 +6438,8 @@ fields:
     owner: "Static5"
     name: "anInt3487"
   client!nd.u I:
-    owner: "Static5"
-    name: "anInt3488"
+    owner: "GameShell"
+    name: "partialRedraws"
   client!nd.w [I:
     owner: "Class4_Sub18"
     name: "anIntArray385"
@@ -6777,23 +6777,23 @@ fields:
     owner: "Static5"
     name: "anInterface5_1"
   client!nn.f J:
-    owner: "Class77_Sub2"
-    name: "aLong130"
+    owner: "MiscTimer"
+    name: "time"
   client!nn.g J:
-    owner: "Class77_Sub2"
-    name: "aLong131"
+    owner: "MiscTimer"
+    name: "nextFrame"
   client!nn.h I:
-    owner: "Class77_Sub2"
-    name: "anInt3604"
+    owner: "MiscTimer"
+    name: "durationPointer"
   client!nn.i I:
-    owner: "Class77_Sub2"
-    name: "anInt3605"
+    owner: "MiscTimer"
+    name: "windowSize"
   client!nn.j J:
-    owner: "Class77_Sub2"
-    name: "aLong132"
+    owner: "MiscTimer"
+    name: "previousFrame"
   client!nn.k [J:
-    owner: "Class77_Sub2"
-    name: "aLongArray28"
+    owner: "MiscTimer"
+    name: "durations"
   client!no.T Z:
     owner: "Class4_Sub1_Sub19"
     name: "aBoolean263"
@@ -6912,8 +6912,8 @@ fields:
     owner: "Static5"
     name: "anIntArray567"
   client!ob.k I:
-    owner: "Static5"
-    name: "anInt5197"
+    owner: "GameShell"
+    name: "logicTimePointer"
   client!ob.l Ljava/awt/Image;:
     owner: "Class59"
     name: "anImage5"
@@ -7287,23 +7287,23 @@ fields:
     owner: "LocalisedText"
     name: "MAINLOAD50"
   client!oo.f J:
-    owner: "Class77_Sub3"
-    name: "aLong140"
+    owner: "MillisTimer"
+    name: "nextFrame"
   client!oo.g [J:
-    owner: "Class77_Sub3"
-    name: "aLongArray34"
+    owner: "MillisTimer"
+    name: "durations"
   client!oo.h I:
-    owner: "Class77_Sub3"
-    name: "anInt3951"
+    owner: "MillisTimer"
+    name: "durationPointer"
   client!oo.i J:
-    owner: "Class77_Sub3"
-    name: "aLong141"
+    owner: "MillisTimer"
+    name: "previousFrame"
   client!oo.j I:
-    owner: "Class77_Sub3"
-    name: "anInt3952"
+    owner: "MillisTimer"
+    name: "windowSize"
   client!oo.k J:
-    owner: "Class77_Sub3"
-    name: "aLong142"
+    owner: "MillisTimer"
+    name: "time"
   client!p.nc Lclient!ic;:
     owner: "Static5"
     name: "aClass84_18"
@@ -8235,8 +8235,8 @@ fields:
     owner: "GameCanvas"
     name: "component"
   client!qm.b I:
-    owner: "Static6"
-    name: "anInt4397"
+    owner: "GameShell"
+    name: "minimumDelay"
   client!qm.c I:
     owner: "Static6"
     name: "anInt4398"
@@ -8574,8 +8574,8 @@ fields:
     owner: "Static6"
     name: "anInt4513"
   client!rg.kb [J:
-    owner: "Static6"
-    name: "aLongArray40"
+    owner: "GameShell"
+    name: "logicTimes"
   client!rg.lb I:
     owner: "Class4_Sub1_Sub26"
     name: "anInt4515"
@@ -10311,8 +10311,8 @@ fields:
     owner: "Static7"
     name: "anInt768"
   client!ue.i [J:
-    owner: "Static7"
-    name: "aLongArray8"
+    owner: "GameShell"
+    name: "redrawTimes"
   client!ue.m S:
     owner: "Static7"
     name: "aShort11"
@@ -15660,8 +15660,8 @@ methods:
     arguments: {}
     locals: {}
   client!d.c (I)J:
-    owner: "Static12"
-    name: "method727"
+    owner: "GameShell"
+    name: "time"
     arguments: {}
     locals: {}
   client!da.<init> (III)V:
@@ -19629,12 +19629,12 @@ methods:
       1: "expectedChecksum"
     locals: {}
   client!fo.a (B)Lclient!jf;:
-    owner: "Static16"
-    name: "method1500"
+    owner: "Timer"
+    name: "create"
     arguments: {}
     locals:
-      8: "local8"
-      20: "local20"
+      8: "ex"
+      20: "ex2"
   client!fo.a (IB)V:
     owner: "Static16"
     name: "method1501"
@@ -22124,36 +22124,36 @@ methods:
     arguments: {}
     locals: {}
   client!hf.<init> ()V:
-    owner: "Class77_Sub1"
+    owner: "NanoTimer"
     name: "<init>"
     arguments: {}
     locals: {}
   client!hf.a (B)J:
-    owner: "Class77_Sub1"
-    name: "method1731"
+    owner: "NanoTimer"
+    name: "getDelta"
     arguments: {}
     locals:
-      1: "local1"
-      7: "local7"
-      45: "local45"
-      47: "local47"
+      1: "current"
+      7: "duration"
+      45: "sum"
+      47: "i"
   client!hf.a (III)I:
-    owner: "Class77_Sub1"
-    name: "method3283"
+    owner: "NanoTimer"
+    name: "sleep"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "minimumDelay"
+      2: "timePerFrame"
     locals:
-      15: "local15"
-      31: "local31"
+      15: "timePerFrameNanos"
+      31: "logicCycles"
   client!hf.c (I)V:
-    owner: "Class77_Sub1"
-    name: "method3288"
+    owner: "NanoTimer"
+    name: "reset"
     arguments: {}
     locals: {}
   client!hf.d (I)J:
-    owner: "Class77_Sub1"
-    name: "method3289"
+    owner: "NanoTimer"
+    name: "time"
     arguments: {}
     locals: {}
   client!hg.a (II)V:
@@ -22268,12 +22268,12 @@ methods:
       160: "local160"
       184: "local184"
   client!hh.a (B)V:
-    owner: "Static18"
-    name: "method4371"
+    owner: "GameShell"
+    name: "resetTimer"
     arguments: {}
     locals:
-      10: "local10"
-      27: "local27"
+      10: "i"
+      27: "i"
   client!hh.a (II)V:
     owner: "Static18"
     name: "method4372"
@@ -24172,11 +24172,11 @@ methods:
       158: "local158"
       169: "local169"
   client!jf.a (III)I:
-    owner: "Class77"
-    name: "method3283"
+    owner: "Timer"
+    name: "sleep"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "minimumDelay"
+      2: "timePerFrame"
     locals: {}
   client!jf.a (IIIIIII)V:
     owner: "Static21"
@@ -24563,13 +24563,13 @@ methods:
     locals:
       10: "local10"
   client!jf.c (I)V:
-    owner: "Class77"
-    name: "method3288"
+    owner: "Timer"
+    name: "reset"
     arguments: {}
     locals: {}
   client!jf.d (I)J:
-    owner: "Class77"
-    name: "method3289"
+    owner: "Timer"
+    name: "time"
     arguments: {}
     locals: {}
   client!jg.a (ILclient!cn;)Lclient!cn;:
@@ -32366,38 +32366,38 @@ methods:
     arguments: {}
     locals: {}
   client!nn.<init> ()V:
-    owner: "Class77_Sub2"
+    owner: "MiscTimer"
     name: "<init>"
     arguments: {}
     locals: {}
   client!nn.a (III)I:
-    owner: "Class77_Sub2"
-    name: "method3283"
+    owner: "MiscTimer"
+    name: "sleep"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "minimumDelay"
+      2: "timePerFrame"
     locals:
-      13: "local13"
-      72: "local72"
+      13: "timePerFrameNanos"
+      72: "logicCycles"
   client!nn.c (I)V:
-    owner: "Class77_Sub2"
-    name: "method3288"
+    owner: "MiscTimer"
+    name: "reset"
     arguments: {}
     locals: {}
   client!nn.d (I)J:
-    owner: "Class77_Sub2"
-    name: "method3289"
+    owner: "MiscTimer"
+    name: "time"
     arguments: {}
     locals: {}
   client!nn.e (I)J:
-    owner: "Class77_Sub2"
-    name: "method3021"
+    owner: "MiscTimer"
+    name: "getDuration"
     arguments: {}
     locals:
-      1: "local1"
-      7: "local7"
-      12: "local12"
-      52: "local52"
+      1: "now"
+      7: "duration"
+      12: "sum"
+      52: "i"
   client!no.<init> ()V:
     owner: "Class4_Sub1_Sub19"
     name: "<init>"
@@ -33818,33 +33818,33 @@ methods:
     arguments: {}
     locals: {}
   client!oo.a (III)I:
-    owner: "Class77_Sub3"
-    name: "method3283"
+    owner: "MillisTimer"
+    name: "sleep"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "minimumDelay"
+      2: "timePerFrame"
     locals:
-      22: "local22"
-      70: "local70"
+      22: "timePerFrameNanos"
+      70: "logicCycles"
   client!oo.c (I)V:
-    owner: "Class77_Sub3"
-    name: "method3288"
+    owner: "MillisTimer"
+    name: "reset"
     arguments: {}
     locals: {}
   client!oo.d (I)J:
-    owner: "Class77_Sub3"
-    name: "method3289"
+    owner: "MillisTimer"
+    name: "time"
     arguments: {}
     locals: {}
   client!oo.e (I)J:
-    owner: "Class77_Sub3"
-    name: "method3290"
+    owner: "MillisTimer"
+    name: "getDelta"
     arguments: {}
     locals:
-      6: "local6"
-      12: "local12"
-      15: "local15"
-      55: "local55"
+      6: "now"
+      12: "duration"
+      15: "sum"
+      55: "i"
   client!p.a (BLclient!ua;)V:
     owner: "Class53_Sub1_Sub2"
     name: "method3317"
@@ -42692,8 +42692,8 @@ methods:
     name: "mainLoopWrapper"
     arguments: {}
     locals:
-      6: "local6"
-      10: "local10"
+      6: "now"
+      10: "previous"
   client!ue.a (II)V:
     owner: "Static35"
     name: "method676"
@@ -42778,7 +42778,7 @@ methods:
     locals: {}
   client!ue.c (Z)V:
     owner: "GameShell"
-    name: "method682"
+    name: "loadMiscNatives"
     arguments: {}
     locals:
       18: "request"
@@ -42788,9 +42788,9 @@ methods:
     name: "mainRedrawWrapper"
     arguments: {}
     locals:
-      14: "local14"
-      18: "local18"
-      42: "local42"
+      14: "now"
+      18: "previous"
+      42: "duration"
       86: "insets"
   client!ue.destroy ()V:
     owner: "GameShell"
@@ -45955,10 +45955,10 @@ methods:
       8: "local8"
       39: "local39"
   client!wi.a (II)V:
-    owner: "Static37"
-    name: "method4782"
+    owner: "GameShell"
+    name: "setFramesPerSecond"
     arguments:
-      0: "arg0"
+      0: "fps"
     locals: {}
   client!wi.a (IIIIIZII)Z:
     owner: "Static37"
