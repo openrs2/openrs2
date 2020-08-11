@@ -1113,8 +1113,8 @@ fields:
     owner: "Static1"
     name: "anIntArrayArray5"
   client!cf.ab J:
-    owner: "Static1"
-    name: "aLong29"
+    owner: "client"
+    name: "js5ConnectTime"
   client!cf.fb I:
     owner: "Class4_Sub1_Sub4"
     name: "anInt588"
@@ -1974,8 +1974,8 @@ fields:
     owner: "Static2"
     name: "aClass124_1"
   client!ee.a Lclient!ja;:
-    owner: "Static2"
-    name: "aClass92_1"
+    owner: "client"
+    name: "js5CacheQueue"
   client!ee.d Z:
     owner: "Static2"
     name: "aBoolean69"
@@ -2311,7 +2311,7 @@ fields:
     name: "errors"
   client!en.F I:
     owner: "Js5NetQueue"
-    name: "state"
+    name: "response"
   client!en.G B:
     owner: "Js5NetQueue"
     name: "encryptionKey"
@@ -2517,8 +2517,8 @@ fields:
     owner: "client"
     name: "game"
   client!fd.V I:
-    owner: "Static2"
-    name: "anInt5721"
+    owner: "client"
+    name: "js5ConnectDelay"
   client!fd.ib I:
     owner: "Static2"
     name: "anInt5734"
@@ -3504,8 +3504,8 @@ fields:
     owner: "Static3"
     name: "anInt2235"
   client!hk.kb Lclient!eo;:
-    owner: "Static3"
-    name: "aClass52_5"
+    owner: "client"
+    name: "js5Socket"
   client!hk.lb S:
     owner: "Static3"
     name: "aShort13"
@@ -6000,8 +6000,8 @@ fields:
     owner: "Class53_Sub3"
     name: "anIntArrayArray26"
   client!mm.a I:
-    owner: "Static4"
-    name: "anInt3357"
+    owner: "client"
+    name: "js5PrevErrors"
   client!mm.b Lclient!uj;:
     owner: "Static4"
     name: "aClass4_Sub3_Sub14_3"
@@ -6711,8 +6711,8 @@ fields:
     owner: "Class4_Sub19"
     name: "anInt3547"
   client!nh.x Lsignlink!vk;:
-    owner: "Static5"
-    name: "aClass197_4"
+    owner: "client"
+    name: "js5SocketRequest"
   client!nh.y Z:
     owner: "Class4_Sub19"
     name: "aBoolean256"
@@ -9390,8 +9390,8 @@ fields:
     owner: "Class4_Sub1_Sub33"
     name: "anIntArrayArray42"
   client!sn.qb I:
-    owner: "Static6"
-    name: "anInt4952"
+    owner: "client"
+    name: "js5ConnectState"
   client!sn.rb I:
     owner: "Static6"
     name: "anInt4953"
@@ -10515,8 +10515,8 @@ fields:
     owner: "Static7"
     name: "anInt5394"
   client!um.b Lclient!en;:
-    owner: "Static7"
-    name: "aClass51_2"
+    owner: "client"
+    name: "js5NetQueue"
   client!un.t Lclient!ic;:
     owner: "Static7"
     name: "aClass84_25"
@@ -15255,9 +15255,9 @@ methods:
       73: "local73"
   client!client.a (ZI)V:
     owner: "client"
-    name: "method684"
+    name: "setJs5Response"
     arguments:
-      1: "arg0"
+      1: "response"
     locals: {}
   client!client.a ([BI)V:
     owner: "client"
@@ -15377,19 +15377,19 @@ methods:
     locals: {}
   client!client.d (B)V:
     owner: "client"
-    name: "method689"
+    name: "js5NetworkTick"
     arguments: {}
     locals:
-      3: "local3"
+      3: "reconnect"
   client!client.e (B)V:
     owner: "client"
-    name: "method690"
+    name: "js5Connect"
     arguments: {}
     locals:
-      198: "local198"
-      259: "local259"
-      288: "local288"
-      305: "local305"
+      198: "buffer"
+      259: "response"
+      288: "loggedOut"
+      305: "ex"
   client!client.e (I)V:
     owner: "client"
     name: "mainRedraw"
