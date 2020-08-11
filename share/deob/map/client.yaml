@@ -149,7 +149,7 @@ classes:
   client!mb: "Class20"
   client!mc: "Class4_Sub16"
   client!md: "Class114"
-  client!mg: "Class117"
+  client!mg: "Js5MasterIndex"
   client!mi: "Class119"
   client!mj: "Class120"
   client!ml: "Class53_Sub3"
@@ -5703,8 +5703,8 @@ fields:
     owner: "Static4"
     name: "anIntArray317"
   client!mg.d Lclient!ja;:
-    owner: "Class117"
-    name: "aClass92_2"
+    owner: "Js5MasterIndex"
+    name: "cacheQueue"
   client!mg.f [I:
     owner: "Static4"
     name: "anIntArray318"
@@ -5712,16 +5712,16 @@ fields:
     owner: "Static4"
     name: "aClass106_5"
   client!mg.h Lclient!en;:
-    owner: "Class117"
-    name: "aClass51_1"
+    owner: "Js5MasterIndex"
+    name: "netQueue"
   client!mg.i Lclient!fd;:
-    owner: "Class117"
-    name: "aClass4_Sub10_6"
+    owner: "Js5MasterIndex"
+    name: "buffer"
   client!mg.j Lclient!ul;:
-    owner: "Class117"
-    name: "aClass4_Sub3_Sub1_Sub2_2"
+    owner: "Js5MasterIndex"
+    name: "request"
   client!mg.m [Lclient!wb;:
-    owner: "Class117"
+    owner: "Js5MasterIndex"
     name: "aClass62_Sub1Array1"
   client!mg.p I:
     owner: "GameShell"
@@ -29335,15 +29335,15 @@ methods:
       82: "local82"
       95: "local95"
   client!mg.<init> (Lclient!en;Lclient!ja;)V:
-    owner: "Class117"
+    owner: "Js5MasterIndex"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "netQueue"
+      1: "cacheQueue"
     locals: {}
   client!mg.a (B)Z:
-    owner: "Class117"
-    name: "method2707"
+    owner: "Js5MasterIndex"
+    name: "isReady"
     arguments: {}
     locals: {}
   client!mg.a (I)Lclient!fg;:
@@ -29371,31 +29371,31 @@ methods:
       0: "arg0"
     locals: {}
   client!mg.a (Lclient!fm;BLclient!fm;ZI)Lclient!wb;:
-    owner: "Class117"
+    owner: "Js5MasterIndex"
     name: "method2712"
     arguments:
       0: "arg0"
       2: "arg1"
-      4: "arg2"
+      4: "archive"
     locals:
-      48: "local48"
-      55: "local55"
+      48: "checksum"
+      55: "version"
       76: "local76"
   client!mg.a (Lclient!fm;Lclient!fm;IB)Lclient!wb;:
-    owner: "Class117"
+    owner: "Js5MasterIndex"
     name: "method2714"
     arguments:
       0: "arg0"
       1: "arg1"
-      2: "arg2"
+      2: "archive"
     locals: {}
   client!mg.a (Z)V:
-    owner: "Class117"
+    owner: "Js5MasterIndex"
     name: "method2706"
     arguments: {}
     locals:
-      12: "local12"
-      43: "local43"
+      12: "i"
+      43: "i"
   client!mg.a (ZI)V:
     owner: "Static24"
     name: "method2708"
@@ -45293,8 +45293,8 @@ methods:
     arguments:
       0: "group"
     locals:
-      22: "local22"
-      48: "local48"
+      22: "node"
+      48: "node"
   client!wb.b (Z)I:
     owner: "Class62_Sub1"
     name: "method4667"
