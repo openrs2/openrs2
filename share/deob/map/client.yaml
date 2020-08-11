@@ -35,7 +35,7 @@ classes:
   client!cl: "Interface2"
   client!client: "client"
   client!cm: "Class32"
-  client!cn: "Class4_Sub3_Sub4"
+  client!cn: "ReferenceNode"
   client!co: "Class33"
   client!d: "Class34"
   client!da: "Class35"
@@ -55,7 +55,7 @@ classes:
   client!ed: "Class4_Sub3_Sub6"
   client!eg: "Class46"
   client!eh: "Class47"
-  client!ei: "Class4_Sub3_Sub4_Sub1"
+  client!ei: "HardReferenceNode"
   client!ej: "Class4_Sub9"
   client!em: "Class50"
   client!en: "Class51"
@@ -123,7 +123,7 @@ classes:
   client!ke: "Class4_Sub3_Sub5_Sub2"
   client!kf: "Bzip2DState"
   client!kg: "Class105"
-  client!kh: "Class4_Sub3_Sub4_Sub2"
+  client!kh: "SoftReferenceNode"
   client!ki: "DirectByteArray"
   client!kj: "Interface3"
   client!kk: "Class106"
@@ -2112,8 +2112,8 @@ fields:
     owner: "Static2"
     name: "anIntArray97"
   client!ei.I Ljava/lang/Object;:
-    owner: "Class4_Sub3_Sub4_Sub1"
-    name: "anObject1"
+    owner: "HardReferenceNode"
+    name: "referent"
   client!ei.M I:
     owner: "Static2"
     name: "anInt1273"
@@ -4908,8 +4908,8 @@ fields:
     owner: "Class105"
     name: "anInt2869"
   client!kh.B Ljava/lang/ref/SoftReference;:
-    owner: "Class4_Sub3_Sub4_Sub2"
-    name: "aSoftReference1"
+    owner: "SoftReferenceNode"
+    name: "reference"
   client!ki.e Ljava/nio/ByteBuffer;:
     owner: "DirectByteArray"
     name: "buffer"
@@ -15533,7 +15533,7 @@ methods:
       358: "local358"
       366: "local366"
   client!cn.<init> ()V:
-    owner: "Class4_Sub3_Sub4"
+    owner: "ReferenceNode"
     name: "<init>"
     arguments: {}
     locals: {}
@@ -15553,13 +15553,13 @@ methods:
       2: "arg1"
     locals: {}
   client!cn.a (Z)Ljava/lang/Object;:
-    owner: "Class4_Sub3_Sub4"
-    name: "method2319"
+    owner: "ReferenceNode"
+    name: "get"
     arguments: {}
     locals: {}
   client!cn.d (I)Z:
-    owner: "Class4_Sub3_Sub4"
-    name: "method2320"
+    owner: "ReferenceNode"
+    name: "isSoft"
     arguments: {}
     locals: {}
   client!co.a (Ljava/util/Random;II)I:
@@ -16866,10 +16866,10 @@ methods:
       86: "local86"
       155: "local155"
   client!ei.<init> (Ljava/lang/Object;)V:
-    owner: "Class4_Sub3_Sub4_Sub1"
+    owner: "HardReferenceNode"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "referent"
     locals: {}
   client!ei.a (Lclient!fh;I)I:
     owner: "Static14"
@@ -16879,13 +16879,13 @@ methods:
     locals:
       5: "local5"
   client!ei.a (Z)Ljava/lang/Object;:
-    owner: "Class4_Sub3_Sub4_Sub1"
-    name: "method2319"
+    owner: "HardReferenceNode"
+    name: "get"
     arguments: {}
     locals: {}
   client!ei.d (I)Z:
-    owner: "Class4_Sub3_Sub4_Sub1"
-    name: "method2320"
+    owner: "HardReferenceNode"
+    name: "isSoft"
     arguments: {}
     locals: {}
   client!ei.f (I)V:
@@ -26360,19 +26360,19 @@ methods:
     arguments: {}
     locals: {}
   client!kh.<init> (Ljava/lang/Object;)V:
-    owner: "Class4_Sub3_Sub4_Sub2"
+    owner: "SoftReferenceNode"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "referent"
     locals: {}
   client!kh.a (Z)Ljava/lang/Object;:
-    owner: "Class4_Sub3_Sub4_Sub2"
-    name: "method2319"
+    owner: "SoftReferenceNode"
+    name: "get"
     arguments: {}
     locals: {}
   client!kh.d (I)Z:
-    owner: "Class4_Sub3_Sub4_Sub2"
-    name: "method2320"
+    owner: "SoftReferenceNode"
+    name: "isSoft"
     arguments: {}
     locals: {}
   client!ki.a (I)[B:
