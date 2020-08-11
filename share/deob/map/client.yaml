@@ -136,7 +136,7 @@ classes:
   client!ld: "Class4_Sub6_Sub2"
   client!lf: "Class4_Sub1_Sub16"
   client!lg: "Class109"
-  client!lh: "Class4_Sub3"
+  client!lh: "SecondaryNode"
   client!li: "Class110"
   client!lj: "Class4_Sub1_Sub17"
   client!lk: "Class111"
@@ -5268,8 +5268,8 @@ fields:
     owner: "Class109"
     name: "anIntArray300"
   client!lh.q Lclient!lh;:
-    owner: "Class4_Sub3"
-    name: "aClass4_Sub3_74"
+    owner: "SecondaryNode"
+    name: "secondaryPrev"
   client!lh.r [F:
     owner: "Static4"
     name: "aFloatArray64"
@@ -5280,11 +5280,11 @@ fields:
     owner: "LocalisedText"
     name: "MAINLOAD70B"
   client!lh.u J:
-    owner: "Class4_Sub3"
-    name: "aLong213"
+    owner: "SecondaryNode"
+    name: "secondaryKey"
   client!lh.v Lclient!lh;:
-    owner: "Class4_Sub3"
-    name: "aClass4_Sub3_75"
+    owner: "SecondaryNode"
+    name: "secondaryNext"
   client!li.a I:
     owner: "Class110"
     name: "anInt3130"
@@ -28338,13 +28338,13 @@ methods:
       7: "local7"
       9: "local9"
   client!lh.b (I)V:
-    owner: "Class4_Sub3"
-    name: "method4819"
+    owner: "SecondaryNode"
+    name: "unlinkSecondary"
     arguments: {}
     locals: {}
   client!lh.d (B)Z:
-    owner: "Class4_Sub3"
-    name: "method4821"
+    owner: "SecondaryNode"
+    name: "isSecondaryLinked"
     arguments: {}
     locals: {}
   client!li.a (B)V:
