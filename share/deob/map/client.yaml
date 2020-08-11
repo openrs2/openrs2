@@ -261,7 +261,7 @@ classes:
   client!uh: "Class173"
   client!ui: "Class174"
   client!uj: "Class4_Sub3_Sub14"
-  client!uk: "Class175"
+  client!uk: "SecondaryLinkedList"
   client!ul: "Class4_Sub3_Sub1_Sub2"
   client!uo: "Class4_Sub3_Sub20"
   client!v: "IntNode"
@@ -10488,11 +10488,11 @@ fields:
     owner: "Static7"
     name: "anInt5363"
   client!uk.i Lclient!lh;:
-    owner: "Class175"
-    name: "aClass4_Sub3_60"
+    owner: "SecondaryLinkedList"
+    name: "sentinel"
   client!uk.l Lclient!lh;:
-    owner: "Class175"
-    name: "aClass4_Sub3_61"
+    owner: "SecondaryLinkedList"
+    name: "cursor"
   client!ul.K I:
     owner: "Class4_Sub3_Sub1_Sub2"
     name: "anInt5384"
@@ -43235,22 +43235,22 @@ methods:
       1: "arg1"
     locals: {}
   client!uk.<init> ()V:
-    owner: "Class175"
+    owner: "SecondaryLinkedList"
     name: "<init>"
     arguments: {}
     locals: {}
   client!uk.a (B)Lclient!lh;:
-    owner: "Class175"
-    name: "method4332"
+    owner: "SecondaryLinkedList"
+    name: "head"
     arguments: {}
     locals:
-      9: "local9"
+      9: "node"
   client!uk.a (I)V:
-    owner: "Class175"
-    name: "method4337"
+    owner: "SecondaryLinkedList"
+    name: "clear"
     arguments: {}
     locals:
-      5: "local5"
+      5: "node"
   client!uk.a (IIII)I:
     owner: "Static35"
     name: "method4338"
@@ -43260,18 +43260,18 @@ methods:
       2: "arg2"
     locals: {}
   client!uk.a (ILclient!lh;)V:
-    owner: "Class175"
-    name: "method4333"
+    owner: "SecondaryLinkedList"
+    name: "addTail"
     arguments:
-      1: "arg0"
+      1: "node"
     locals: {}
   client!uk.a (Z)I:
-    owner: "Class175"
-    name: "method4334"
+    owner: "SecondaryLinkedList"
+    name: "size"
     arguments: {}
     locals:
-      3: "local3"
-      11: "local11"
+      3: "size"
+      11: "node"
   client!uk.a (ZIIII)V:
     owner: "Static35"
     name: "method4339"
@@ -43288,17 +43288,17 @@ methods:
       0: "arg0"
     locals: {}
   client!uk.b (I)Lclient!lh;:
-    owner: "Class175"
-    name: "method4340"
+    owner: "SecondaryLinkedList"
+    name: "next"
     arguments: {}
     locals:
-      2: "local2"
+      2: "node"
   client!uk.b (Z)Lclient!lh;:
-    owner: "Class175"
-    name: "method4336"
+    owner: "SecondaryLinkedList"
+    name: "removeHead"
     arguments: {}
     locals:
-      12: "local12"
+      12: "node"
   client!ul.a (IB)Lclient!td;:
     owner: "Static35"
     name: "method4361"
