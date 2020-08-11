@@ -200,7 +200,7 @@ classes:
   client!qb: "Class4_Sub1_Sub24"
   client!qc: "Class53_Sub1"
   client!qd: "Class4_Sub3_Sub16"
-  client!qe: "Class141"
+  client!qe: "HashTableIterator"
   client!qf: "Class142"
   client!qg: "Class143"
   client!qh: "Class4_Sub23"
@@ -8019,8 +8019,8 @@ fields:
     owner: "Static5"
     name: "anInt4285"
   client!qe.d I:
-    owner: "Class141"
-    name: "anInt4287"
+    owner: "HashTableIterator"
+    name: "bucket"
   client!qe.e Z:
     owner: "Static5"
     name: "aBoolean301"
@@ -8028,14 +8028,14 @@ fields:
     owner: "Static5"
     name: "anIntArray456"
   client!qe.g Lclient!ic;:
-    owner: "Class141"
-    name: "aClass84_20"
+    owner: "HashTableIterator"
+    name: "table"
   client!qe.k I:
     owner: "Static5"
     name: "anInt4291"
   client!qe.l Lclient!ni;:
-    owner: "Class141"
-    name: "aClass4_159"
+    owner: "HashTableIterator"
+    name: "cursor"
   client!qe.n I:
     owner: "Static5"
     name: "anInt4293"
@@ -36055,14 +36055,14 @@ methods:
     arguments: {}
     locals: {}
   client!qe.<init> (Lclient!ic;)V:
-    owner: "Class141"
+    owner: "HashTableIterator"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "table"
     locals: {}
   client!qe.a (B)Lclient!ni;:
-    owner: "Class141"
-    name: "method3540"
+    owner: "HashTableIterator"
+    name: "head"
     arguments: {}
     locals: {}
   client!qe.a (II)V:
@@ -36119,12 +36119,12 @@ methods:
       346: "local346"
       365: "local365"
   client!qe.b (B)Lclient!ni;:
-    owner: "Class141"
-    name: "method3544"
+    owner: "HashTableIterator"
+    name: "next"
     arguments: {}
     locals:
-      25: "local25"
-      50: "local50"
+      25: "node"
+      50: "node"
   client!qf.<init> (IIIIIIZ)V:
     owner: "Class142"
     name: "<init>"
