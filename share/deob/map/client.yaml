@@ -3330,8 +3330,8 @@ fields:
     owner: "Static3"
     name: "aClass169Array1"
   client!hb.i I:
-    owner: "Static3"
-    name: "anInt2145"
+    owner: "GameShell"
+    name: "instances"
   client!hb.j Lclient!fh;:
     owner: "Static3"
     name: "aClass58_47"
@@ -5466,8 +5466,8 @@ fields:
     owner: "Class4_Sub3_Sub15"
     name: "aClass4_Sub1_3"
   client!ln.R I:
-    owner: "Static4"
-    name: "anInt3256"
+    owner: "GameShell"
+    name: "maxMemory"
   client!ln.S [I:
     owner: "Class4_Sub3_Sub15"
     name: "anIntArray307"
@@ -15496,15 +15496,15 @@ methods:
       2: "arg1"
     locals: {}
   client!cm.a (Z)V:
-    owner: "Static12"
-    name: "method697"
+    owner: "GameShell"
+    name: "getMaxMemory"
     arguments: {}
     locals:
-      12: "local12"
-      16: "local16"
-      23: "local23"
-      33: "local33"
-      39: "local39"
+      12: "method"
+      16: "runtime"
+      23: "bytes"
+      33: "ex"
+      39: "ex"
   client!cm.a (ZI)V:
     owner: "Static12"
     name: "method694"
@@ -16676,13 +16676,13 @@ methods:
     arguments: {}
     locals: {}
   client!ef.a (Lsignlink!pm;Ljava/lang/Object;Z)V:
-    owner: "Static13"
-    name: "method1013"
+    owner: "GameShell"
+    name: "flush"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "signLink"
+      1: "source"
     locals:
-      12: "local12"
+      12: "i"
   client!eg.a (B)V:
     owner: "Class46"
     name: "method1022"
