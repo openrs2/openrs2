@@ -7,17 +7,54 @@ private const val ROUNDS = 32
 private const val BLOCK_SIZE = 8
 private const val BLOCK_SIZE_MASK = BLOCK_SIZE - 1
 
-inline class XteaKey(internal val k: IntArray) {
+class XteaKey(
+    private val k0: Int,
+    private val k1: Int,
+    private val k2: Int,
+    private val k3: Int
+) {
     val isZero: Boolean
-        get() = k[0] == 0 && k[1] == 0 && k[2] == 0 && k[3] == 0
+        get() = k0 == 0 && k1 == 0 && k2 == 0 && k3 == 0
+
+    fun toIntArray(): IntArray {
+        return intArrayOf(k0, k1, k2, k3)
+    }
+
+    fun toHex(): String {
+        return Integer.toUnsignedString(k0, 16).padStart(8, '0') +
+            Integer.toUnsignedString(k1, 16).padStart(8, '0') +
+            Integer.toUnsignedString(k2, 16).padStart(8, '0') +
+            Integer.toUnsignedString(k3, 16).padStart(8, '0')
+    }
+
+    override fun toString(): String {
+        return toHex()
+    }
 
     companion object {
-        val ZERO = XteaKey(IntArray(4))
+        val ZERO = XteaKey(0, 0, 0, 0)
+
+        fun fromIntArray(a: IntArray): XteaKey {
+            require(a.size == 4)
+
+            return XteaKey(a[0], a[1], a[2], a[3])
+        }
+
+        fun fromHex(s: String): XteaKey {
+            require(s.length == 32)
+
+            val k0 = Integer.parseUnsignedInt(s, 0, 8, 16)
+            val k1 = Integer.parseUnsignedInt(s, 8, 16, 16)
+            val k2 = Integer.parseUnsignedInt(s, 16, 24, 16)
+            val k3 = Integer.parseUnsignedInt(s, 24, 32, 16)
+
+            return XteaKey(k0, k1, k2, k3)
+        }
     }
 }
 
 fun ByteBuf.xteaEncrypt(index: Int, length: Int, key: XteaKey) {
-    require(key.k.size == 4)
+    val k = key.toIntArray()
 
     val end = index + (length and BLOCK_SIZE_MASK.inv())
     for (i in index until end step BLOCK_SIZE) {
@@ -26,9 +63,9 @@ fun ByteBuf.xteaEncrypt(index: Int, length: Int, key: XteaKey) {
         var v1 = getInt(i + 4)
 
         for (j in 0 until ROUNDS) {
-            v0 += (((v1 shl 4) xor (v1 ushr 5)) + v1) xor (sum + key.k[sum and 3])
+            v0 += (((v1 shl 4) xor (v1 ushr 5)) + v1) xor (sum + k[sum and 3])
             sum += GOLDEN_RATIO
-            v1 += (((v0 shl 4) xor (v0 ushr 5)) + v0) xor (sum + key.k[(sum ushr 11) and 3])
+            v1 += (((v0 shl 4) xor (v0 ushr 5)) + v0) xor (sum + k[(sum ushr 11) and 3])
         }
 
         setInt(i, v0)
@@ -37,7 +74,7 @@ fun ByteBuf.xteaEncrypt(index: Int, length: Int, key: XteaKey) {
 }
 
 fun ByteBuf.xteaDecrypt(index: Int, length: Int, key: XteaKey) {
-    require(key.k.size == 4)
+    val k = key.toIntArray()
 
     val end = index + (length and BLOCK_SIZE_MASK.inv())
     for (i in index until end step BLOCK_SIZE) {
@@ -47,9 +84,9 @@ fun ByteBuf.xteaDecrypt(index: Int, length: Int, key: XteaKey) {
         var v1 = getInt(i + 4)
 
         for (j in 0 until ROUNDS) {
-            v1 -= (((v0 shl 4) xor (v0 ushr 5)) + v0) xor (sum + key.k[(sum ushr 11) and 3])
+            v1 -= (((v0 shl 4) xor (v0 ushr 5)) + v0) xor (sum + k[(sum ushr 11) and 3])
             sum -= GOLDEN_RATIO
-            v0 -= (((v1 shl 4) xor (v1 ushr 5)) + v1) xor (sum + key.k[sum and 3])
+            v0 -= (((v1 shl 4) xor (v1 ushr 5)) + v1) xor (sum + k[sum and 3])
         }
 
         setInt(i, v0)

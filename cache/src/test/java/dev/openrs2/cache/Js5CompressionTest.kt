@@ -9,7 +9,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
 
 object Js5CompressionTest {
-    private val KEY = XteaKey(intArrayOf(0x00112233, 0x44556677, 0x8899AABB.toInt(), 0xCCDDEEFF.toInt()))
+    private val KEY = XteaKey.fromHex("00112233445566778899AABBCCDDEEFF")
 
     @Test
     fun testCompressNone() {
