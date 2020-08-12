@@ -5,6 +5,7 @@ include(
     "asm",
     "buffer",
     "bundler",
+    "cache",
     "compress",
     "compress-cli",
     "conf",
