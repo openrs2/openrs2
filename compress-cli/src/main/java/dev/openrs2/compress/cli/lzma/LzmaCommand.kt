@@ -15,7 +15,7 @@ import org.tukaani.xz.LZMA2Options
 class LzmaCommand : CliktCommand(name = "lzma") {
     private val input by option().inputStream().defaultStdin()
     private val output by option().outputStream().defaultStdout()
-    private val level by option().int().default(LZMA2Options.PRESET_MAX).validate {
+    private val level by option().int().default(LZMA2Options.PRESET_DEFAULT).validate {
         require(it >= LZMA2Options.PRESET_MIN && it <= LZMA2Options.PRESET_MAX) {
             "--level must be between ${LZMA2Options.PRESET_MIN} and ${LZMA2Options.PRESET_MAX} inclusive"
         }
