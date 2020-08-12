@@ -552,8 +552,8 @@ fields:
     owner: "Static1"
     name: "anIntArrayArray2"
   client!al.X I:
-    owner: "Static1"
-    name: "anInt185"
+    owner: "Preferences"
+    name: "brightness"
   client!al.Y Lclient!fm;:
     owner: "Js5CacheRequest"
     name: "cache"
@@ -774,8 +774,8 @@ fields:
     owner: "Static1"
     name: "anInt1047"
   client!bh.h I:
-    owner: "Static1"
-    name: "anInt1051"
+    owner: "Preferences"
+    name: "antiAliasingMode"
   client!bh.i I:
     owner: "Static1"
     name: "anInt1052"
@@ -897,8 +897,8 @@ fields:
     owner: "TracingException"
     name: "message"
   client!bk.d I:
-    owner: "Static1"
-    name: "anInt344"
+    owner: "Preferences"
+    name: "musicVolume"
   client!bk.e S:
     owner: "Static1"
     name: "aShort9"
@@ -957,8 +957,8 @@ fields:
     owner: "Class4_Sub6_Sub1"
     name: "aClass4_Sub6_Sub3_1"
   client!bn.L Z:
-    owner: "Static1"
-    name: "aBoolean27"
+    owner: "Preferences"
+    name: "groundTextures"
   client!bn.v [[S:
     owner: "Static1"
     name: "aShortArrayArray1"
@@ -1827,8 +1827,8 @@ fields:
     owner: "Static2"
     name: "aClass4_Sub3_Sub14Array6"
   client!dn.U Z:
-    owner: "Static2"
-    name: "aBoolean66"
+    owner: "Preferences"
+    name: "highDetailLighting"
   client!dn.V I:
     owner: "Class4_Sub1_Sub6"
     name: "anInt1157"
@@ -1977,8 +1977,8 @@ fields:
     owner: "client"
     name: "js5CacheQueue"
   client!ee.d Z:
-    owner: "Static2"
-    name: "aBoolean69"
+    owner: "Preferences"
+    name: "customCursors"
   client!ef.a Lclient!oj;:
     owner: "Static2"
     name: "aClass129_1"
@@ -2181,8 +2181,8 @@ fields:
     owner: "Class4_Sub9"
     name: "aClass4_Sub8_Sub1_1"
   client!ej.v Z:
-    owner: "Static2"
-    name: "aBoolean75"
+    owner: "Preferences"
+    name: "characterShadows"
   client!ej.w I:
     owner: "Class4_Sub9"
     name: "anInt1284"
@@ -2592,8 +2592,8 @@ fields:
     owner: "Class4_Sub3_Sub7"
     name: "anInt1769"
   client!fg.z Z:
-    owner: "Static2"
-    name: "aBoolean104"
+    owner: "Preferences"
+    name: "sentToServer"
   client!fh.E I:
     owner: "Static2"
     name: "anInt1797"
@@ -2667,8 +2667,8 @@ fields:
     owner: "Static2"
     name: "aClass4_Sub3_Sub14_2"
   client!fl.ab Z:
-    owner: "Static2"
-    name: "aBoolean117"
+    owner: "Preferences"
+    name: "manyIdleAnimations"
   client!fl.bb Lclient!ib;:
     owner: "Static2"
     name: "aClass4_Sub3_Sub10_3"
@@ -3180,8 +3180,8 @@ fields:
     owner: "Static3"
     name: "aShort12"
   client!gm.e Z:
-    owner: "Static3"
-    name: "aBoolean144"
+    owner: "Preferences"
+    name: "allLevelsVisible"
   client!gm.f J:
     owner: "Static3"
     name: "aLong67"
@@ -3648,8 +3648,8 @@ fields:
     owner: "Static3"
     name: "anInt2297"
   client!i.c I:
-    owner: "Static3"
-    name: "anInt2298"
+    owner: "Preferences"
+    name: "sceneryShadows"
   client!ia.b Z:
     owner: "GameShell"
     name: "focus"
@@ -3696,8 +3696,8 @@ fields:
     owner: "Class4_Sub3_Sub10"
     name: "anIntArray193"
   client!ic.g Z:
-    owner: "Static3"
-    name: "aBoolean159"
+    owner: "Preferences"
+    name: "groundDecoration"
   client!ic.h Lclient!ni;:
     owner: "HashTable"
     name: "searchCursor"
@@ -4497,8 +4497,8 @@ fields:
     owner: "Class4_Sub1_Sub12"
     name: "aBoolean181"
   client!jj.jb I:
-    owner: "Static3"
-    name: "anInt2627"
+    owner: "Preferences"
+    name: "fullScreenHeight"
   client!jj.kb I:
     owner: "Class4_Sub1_Sub12"
     name: "anInt2628"
@@ -4626,8 +4626,8 @@ fields:
     owner: "Class4_Sub1"
     name: "aClass35_41"
   client!jo.G Z:
-    owner: "Static4"
-    name: "aBoolean398"
+    owner: "Preferences"
+    name: "roofsVisible"
   client!jo.I [I:
     owner: "Static4"
     name: "anIntArray653"
@@ -5682,8 +5682,8 @@ fields:
     owner: "Static4"
     name: "anInt3314"
   client!mf.g I:
-    owner: "Static4"
-    name: "anInt3315"
+    owner: "Preferences"
+    name: "soundEffectsVolume"
   client!mf.i Ljava/lang/String;:
     owner: "LocalisedText"
     name: "CHATCOL9"
@@ -6078,8 +6078,8 @@ fields:
     owner: "Static4"
     name: "aBoolean241"
   client!mo.gb I:
-    owner: "Static4"
-    name: "anInt3403"
+    owner: "Preferences"
+    name: "fullScreenWidth"
   client!n.m I:
     owner: "Class56_Sub2"
     name: "anInt3414"
@@ -6531,8 +6531,8 @@ fields:
     owner: "Static5"
     name: "aShortArrayArray4"
   client!ne.ab I:
-    owner: "Static5"
-    name: "anInt3523"
+    owner: "Preferences"
+    name: "particles"
   client!ne.bb [I:
     owner: "Static5"
     name: "anIntArray387"
@@ -6810,8 +6810,8 @@ fields:
     owner: "Static5"
     name: "anInt3636"
   client!no.ab I:
-    owner: "Static5"
-    name: "anInt3637"
+    owner: "Preferences"
+    name: "displayMode"
   client!o.B I:
     owner: "Class53_Sub5"
     name: "anInt3661"
@@ -7245,7 +7245,7 @@ fields:
     owner: "Class4_Sub20"
     name: "anInt3908"
   client!ol.t I:
-    owner: "Static5"
+    owner: "Preferences"
     name: "anInt3909"
   client!ol.w [I:
     owner: "Static5"
@@ -7281,8 +7281,8 @@ fields:
     owner: "Static5"
     name: "aClass26_43"
   client!on.q Z:
-    owner: "Static5"
-    name: "aBoolean278"
+    owner: "Preferences"
+    name: "safeMode"
   client!on.z Ljava/lang/String;:
     owner: "LocalisedText"
     name: "MAINLOAD50"
@@ -7452,8 +7452,8 @@ fields:
     owner: "Class133"
     name: "anInt4119"
   client!pe.l I:
-    owner: "Static5"
-    name: "anInt4120"
+    owner: "Preferences"
+    name: "areaSoundsVolume"
   client!pe.n Lclient!wf;:
     owner: "Static5"
     name: "aClass185_11"
@@ -7572,7 +7572,7 @@ fields:
     owner: "Static5"
     name: "aClass4_Sub3_Sub14_4"
   client!pj.b Z:
-    owner: "Static5"
+    owner: "Preferences"
     name: "aBoolean293"
   client!pj.c I:
     owner: "Static5"
@@ -8031,8 +8031,8 @@ fields:
     owner: "HashTableIterator"
     name: "table"
   client!qe.k I:
-    owner: "Static5"
-    name: "anInt4291"
+    owner: "Preferences"
+    name: "buildArea"
   client!qe.l Lclient!ni;:
     owner: "HashTableIterator"
     name: "cursor"
@@ -8391,8 +8391,8 @@ fields:
     owner: "LocalisedText"
     name: "GAME1_LOADING"
   client!r.n Z:
-    owner: "Static6"
-    name: "aBoolean227"
+    owner: "Preferences"
+    name: "highDetailTextures"
   client!r.o Lclient!r;:
     owner: "Class20_Sub2"
     name: "aClass20_Sub2_5"
@@ -9954,8 +9954,8 @@ fields:
     owner: "Static7"
     name: "aClass26_18"
   client!tn.m Z:
-    owner: "Static7"
-    name: "aBoolean122"
+    owner: "Preferences"
+    name: "stereo"
   client!tn.o Z:
     owner: "Static7"
     name: "aBoolean123"
@@ -10293,8 +10293,8 @@ fields:
     owner: "Static7"
     name: "aClass58_99"
   client!ud.n Z:
-    owner: "Static7"
-    name: "aBoolean362"
+    owner: "Preferences"
+    name: "fog"
   client!ue.G J:
     owner: "Static7"
     name: "aLong35"
@@ -10989,8 +10989,8 @@ fields:
     owner: "Class182"
     name: "aClass53_10"
   client!vl.q Z:
-    owner: "Static7"
-    name: "aBoolean390"
+    owner: "Preferences"
+    name: "hdr"
   client!vl.r Ljava/lang/String;:
     owner: "Text"
     name: "CHATEFFECT4"
@@ -11046,8 +11046,8 @@ fields:
     owner: "Packet"
     name: "bitPosition"
   client!wa.cc Z:
-    owner: "Static7"
-    name: "aBoolean393"
+    owner: "Preferences"
+    name: "highDetailWater"
   client!wb.C Lclient!fo;:
     owner: "Js5ResourceProviderImpl"
     name: "index"
@@ -11793,8 +11793,8 @@ fields:
     owner: "Class187"
     name: "aFloat148"
   client!wj.b Z:
-    owner: "Static7"
-    name: "aBoolean421"
+    owner: "Preferences"
+    name: "flickeringEffects"
   client!wj.c F:
     owner: "Class187"
     name: "aFloat149"
@@ -16923,16 +16923,16 @@ methods:
       7: "arg6"
     locals: {}
   client!ej.a (ILsignlink!pm;)V:
-    owner: "Static14"
-    name: "method1055"
+    owner: "Preferences"
+    name: "write"
     arguments:
-      1: "arg0"
+      1: "signLink"
     locals:
-      3: "local3"
-      12: "local12"
-      36: "local36"
-      46: "local46"
-      57: "local57"
+      3: "file"
+      12: "request"
+      36: "buffer"
+      46: "ex"
+      57: "ex"
   client!ej.a (Ljava/lang/String;I)Ljava/lang/String;:
     owner: "Static14"
     name: "method1054"
@@ -19065,11 +19065,11 @@ methods:
       0: "groups"
     locals: {}
   client!fh.b (I)Lclient!fd;:
-    owner: "Static15"
-    name: "method1347"
+    owner: "Preferences"
+    name: "encode"
     arguments: {}
     locals:
-      13: "local13"
+      13: "buffer"
   client!fh.b (IB)I:
     owner: "Js5"
     name: "getGroupId"
@@ -30393,8 +30393,8 @@ methods:
       7: "local7"
       13: "local13"
   client!mo.f (B)I:
-    owner: "Static25"
-    name: "method2806"
+    owner: "Preferences"
+    name: "toInt"
     arguments: {}
     locals: {}
   client!mo.f (I)V:
@@ -31790,10 +31790,10 @@ methods:
     arguments: {}
     locals: {}
   client!ne.b (I)V:
-    owner: "Static26"
-    name: "method2957"
+    owner: "Preferences"
+    name: "setParticles"
     arguments:
-      0: "arg0"
+      0: "p"
     locals: {}
   client!ne.b (II)V:
     owner: "Static26"
@@ -31827,8 +31827,8 @@ methods:
       210: "local210"
       216: "local216"
   client!ne.c ()I:
-    owner: "Static26"
-    name: "method2954"
+    owner: "Preferences"
+    name: "getParticles"
     arguments: {}
     locals: {}
   client!ne.e ()V:
@@ -40933,18 +40933,18 @@ methods:
       271: "local271"
       281: "local281"
   client!te.a (Lsignlink!pm;I)V:
-    owner: "Static33"
-    name: "method4149"
+    owner: "Preferences"
+    name: "read"
     arguments:
-      0: "arg0"
+      0: "signLink"
     locals:
-      3: "local3"
-      84: "local84"
-      102: "local102"
-      108: "local108"
-      126: "local126"
-      153: "local153"
-      160: "local160"
+      3: "file"
+      84: "request"
+      102: "off"
+      108: "bytes"
+      126: "n"
+      153: "ex"
+      160: "ex"
   client!te.b (BI)Z:
     owner: "Class4_Sub3_Sub19"
     name: "method4150"
@@ -42682,10 +42682,10 @@ methods:
       35: "ex"
       56: "ex"
   client!ue.a (BZ)V:
-    owner: "Static35"
-    name: "method665"
+    owner: "Preferences"
+    name: "setAllLevelsVisible"
     arguments:
-      1: "arg0"
+      1: "visible"
     locals: {}
   client!ue.a (I)V:
     owner: "GameShell"
@@ -45137,14 +45137,14 @@ methods:
     locals:
       7: "i"
   client!wa.a (Lclient!fd;I)V:
-    owner: "Static37"
-    name: "method4643"
+    owner: "Preferences"
+    name: "decode"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals:
-      20: "local20"
-      39: "local39"
-      369: "local369"
+      20: "version"
+      39: "len"
+      369: "particles"
   client!wa.a ([II)V:
     owner: "Packet"
     name: "setKey"
