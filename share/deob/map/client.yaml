@@ -10219,7 +10219,7 @@ fields:
     name: "anInt5247"
   client!ub.b [I:
     owner: "Class169"
-    name: "anIntArray591"
+    name: "CRC32_TABLE"
   client!ub.c Ljava/lang/String;:
     owner: "LocalisedText"
     name: "MAINLOAD10B"
@@ -15546,11 +15546,11 @@ methods:
     locals:
       16: "local16"
   client!cn.a (II[B)I:
-    owner: "Static12"
-    name: "method2321"
+    owner: "Buffer"
+    name: "crc32"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      2: "bytes"
+      0: "len"
     locals: {}
   client!cn.a (Z)Ljava/lang/Object;:
     owner: "ReferenceNode"
@@ -28328,15 +28328,15 @@ methods:
     locals:
       13: "local13"
   client!lh.a ([BIII)I:
-    owner: "Static23"
-    name: "method4818"
+    owner: "Buffer"
+    name: "crc32"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      3: "arg2"
+      0: "bytes"
+      3: "off"
+      1: "len"
     locals:
-      7: "local7"
-      9: "local9"
+      7: "crc"
+      9: "i"
   client!lh.b (I)V:
     owner: "SecondaryNode"
     name: "unlinkSecondary"
