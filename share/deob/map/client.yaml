@@ -5205,8 +5205,8 @@ fields:
     owner: "Static4"
     name: "anInt3123"
   client!lf.cb [C:
-    owner: "Static4"
-    name: "aCharArray1"
+    owner: "Base37"
+    name: "BASE37_TABLE"
   client!lf.db [I:
     owner: "Static4"
     name: "anIntArray294"
@@ -22370,15 +22370,15 @@ methods:
       7: "arg6"
     locals: {}
   client!hi.a (ILjava/lang/String;)J:
-    owner: "Static18"
-    name: "method1746"
+    owner: "Base37"
+    name: "encode"
     arguments:
-      1: "arg0"
+      1: "in"
     locals:
-      3: "local3"
-      15: "local15"
-      17: "local17"
-      32: "local32"
+      3: "out"
+      15: "len"
+      17: "i"
+      32: "c"
   client!hi.a (Lclient!fd;BI)V:
     owner: "Class79"
     name: "method1743"
@@ -35472,17 +35472,17 @@ methods:
       55: "local55"
       66: "local66"
   client!pn.a (ZJ)Ljava/lang/String;:
-    owner: "Static29"
-    name: "method3477"
+    owner: "Base37"
+    name: "decodeTitleCase"
     arguments:
-      1: "arg0"
+      1: "in"
     locals:
-      45: "local45"
-      47: "local47"
-      63: "local63"
-      71: "local71"
-      85: "local85"
-      95: "local95"
+      45: "len"
+      47: "temp"
+      63: "out"
+      71: "prev"
+      85: "c"
+      95: "i"
   client!po.<init> (I)V:
     owner: "Class138"
     name: "<init>"
@@ -42991,15 +42991,15 @@ methods:
     locals:
       6: "local6"
   client!ug.a (IJ)Ljava/lang/String;:
-    owner: "Static35"
-    name: "method4319"
+    owner: "Base37"
+    name: "decodeLowerCase"
     arguments:
-      1: "arg0"
+      1: "in"
     locals:
-      31: "local31"
-      33: "local33"
-      49: "local49"
-      57: "local57"
+      31: "len"
+      33: "temp"
+      49: "out"
+      57: "prev"
   client!ug.b (B)Lclient!mb;:
     owner: "Class172"
     name: "method4320"
