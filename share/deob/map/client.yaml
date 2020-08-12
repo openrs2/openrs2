@@ -7590,8 +7590,8 @@ fields:
     owner: "Static5"
     name: "aBoolean294"
   client!pj.i Ljava/lang/String;:
-    owner: "Static5"
-    name: "aString243"
+    owner: "client"
+    name: "mainLoadSecondaryText"
   client!pj.j [I:
     owner: "Static5"
     name: "anIntArray440"
@@ -8010,14 +8010,14 @@ fields:
     owner: "Static5"
     name: "aClass112_27"
   client!qd.L Ljava/lang/String;:
-    owner: "Static5"
-    name: "aString255"
+    owner: "client"
+    name: "mainLoadPrimaryText"
   client!qd.M I:
     owner: "Class4_Sub3_Sub16"
     name: "anInt4283"
   client!qe.b I:
-    owner: "Static5"
-    name: "anInt4285"
+    owner: "client"
+    name: "mainLoadState"
   client!qe.d I:
     owner: "HashTableIterator"
     name: "bucket"
@@ -8781,8 +8781,8 @@ fields:
     owner: "Static6"
     name: "aClass112_28"
   client!rl.y I:
-    owner: "Static6"
-    name: "anInt4621"
+    owner: "client"
+    name: "mainLoadPercentage"
   client!rm.V I:
     owner: "Class4_Sub1_Sub28"
     name: "anInt4650"
@@ -15440,14 +15440,14 @@ methods:
     locals: {}
   client!client.h (I)V:
     owner: "client"
-    name: "method686"
+    name: "mainLoad"
     arguments: {}
     locals:
       32: "local32"
       41: "local41"
       44: "local44"
-      93: "local93"
-      355: "local355"
+      93: "i"
+      355: "percentage"
       357: "i"
       540: "local540"
       543: "local543"
@@ -15457,7 +15457,7 @@ methods:
       884: "local884"
       887: "local887"
       960: "local960"
-      1066: "local1066"
+      1066: "codec"
       1200: "local1200"
   client!client.init ()V:
     owner: "client"
