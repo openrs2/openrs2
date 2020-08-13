@@ -1,11 +1,12 @@
 package dev.openrs2.cache
 
 import dev.openrs2.compress.bzip2.Bzip2
-import dev.openrs2.compress.gzip.Gzip
+import dev.openrs2.compress.gzip.GzipLevelOutputStream
 import dev.openrs2.compress.lzma.Lzma
 import java.io.InputStream
 import java.io.OutputStream
 import java.util.zip.Deflater
+import java.util.zip.GZIPInputStream
 
 enum class Js5CompressionType {
     NONE,
@@ -17,7 +18,7 @@ enum class Js5CompressionType {
         return when (this) {
             NONE -> input
             BZIP2 -> Bzip2.createHeaderlessInputStream(input)
-            GZIP -> Gzip.createHeaderlessInputStream(input)
+            GZIP -> GZIPInputStream(input)
             LZMA -> Lzma.createHeaderlessInputStream(input, length.toLong())
         }
     }
@@ -26,7 +27,7 @@ enum class Js5CompressionType {
         return when (this) {
             NONE -> output
             BZIP2 -> Bzip2.createHeaderlessOutputStream(output)
-            GZIP -> Gzip.createHeaderlessOutputStream(output, Deflater.BEST_COMPRESSION)
+            GZIP -> GzipLevelOutputStream(output, Deflater.BEST_COMPRESSION)
             /*
              * LZMA at -9 has significantly higher CPU/memory requirements for
              * both compression _and_ decompression, so we use the default of
