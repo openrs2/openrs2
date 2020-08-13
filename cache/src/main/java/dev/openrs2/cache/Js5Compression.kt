@@ -28,12 +28,13 @@ object Js5Compression {
             val lenIndex = output.writerIndex()
             output.writeZero(4)
 
-            output.writeInt(input.readableBytes())
+            val uncompressedLen = input.readableBytes()
+            output.writeInt(uncompressedLen)
 
             val start = output.writerIndex()
 
             type.createOutputStream(ByteBufOutputStream(output)).use { outputStream ->
-                input.readBytes(outputStream, input.readableBytes())
+                input.readBytes(outputStream, uncompressedLen)
             }
 
             val len = output.writerIndex() - start
@@ -101,7 +102,7 @@ object Js5Compression {
 
             plaintext.alloc().buffer(uncompressedLen, uncompressedLen).use { output ->
                 type.createInputStream(ByteBufInputStream(plaintext, len), uncompressedLen).use { inputStream ->
-                    output.writeBytes(inputStream, output.writableBytes())
+                    output.writeBytes(inputStream, uncompressedLen)
                 }
 
                 return output.retain()
