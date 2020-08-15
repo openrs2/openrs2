@@ -33733,11 +33733,11 @@ methods:
       1: "arg0"
     locals: {}
   client!on.a (Lclient!ni;BLclient!ni;)V:
-    owner: "Static28"
-    name: "method3267"
+    owner: "LinkedList"
+    name: "insertBefore"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      2: "node"
+      0: "position"
     locals: {}
   client!on.a (Z)Z:
     owner: "Class4_Sub21"
