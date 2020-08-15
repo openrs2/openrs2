@@ -13,9 +13,9 @@ steps:
     commands:
       - ./gradlew --no-daemon publish
     environment:
-      ORG_GRADLE_PROJECT_openrs2RepoUsername:
+      ORG_GRADLE_PROJECT_openrs2Username:
         from_secret: repo_username
-      ORG_GRADLE_PROJECT_openrs2RepoPassword:
+      ORG_GRADLE_PROJECT_openrs2Password:
         from_secret: repo_password
     when:
       branch:

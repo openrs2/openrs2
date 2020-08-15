@@ -53,6 +53,10 @@ allprojects {
         }
     }
 
+    tasks.withType<JavaCompile> {
+        options.release.set(11)
+    }
+
     tasks.withType<KotlinCompile> {
         kotlinOptions {
             jvmTarget = "11"
@@ -138,16 +142,14 @@ configure(subprojects.filter { it.isFree }) {
         configure<PublishingExtension> {
             repositories {
                 maven {
+                    name = "openrs2"
                     url = if (version.toString().endsWith("-SNAPSHOT")) {
                         uri("https://repo.openrs2.dev/repository/openrs2-snapshots")
                     } else {
                         uri("https://repo.openrs2.dev/repository/openrs2")
                     }
 
-                    credentials {
-                        username = findProperty("openrs2RepoUsername")?.toString()
-                        password = findProperty("openrs2RepoPassword")?.toString()
-                    }
+                    credentials(PasswordCredentials::class)
                 }
             }
 
