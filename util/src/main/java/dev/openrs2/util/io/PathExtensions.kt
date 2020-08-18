@@ -2,12 +2,22 @@ package dev.openrs2.util.io
 
 import java.io.BufferedWriter
 import java.io.OutputStream
+import java.nio.channels.FileChannel
 import java.nio.charset.Charset
 import java.nio.file.Files
 import java.nio.file.OpenOption
 import java.nio.file.Path
 import java.nio.file.StandardCopyOption
+import java.nio.file.StandardOpenOption
 import java.nio.file.attribute.FileAttribute
+
+fun Path.fsync() {
+    require(Files.isRegularFile(this) || Files.isDirectory(this))
+
+    FileChannel.open(this, StandardOpenOption.READ).use { channel ->
+        channel.force(true)
+    }
+}
 
 inline fun <T> useTempFile(
     prefix: String? = null,
