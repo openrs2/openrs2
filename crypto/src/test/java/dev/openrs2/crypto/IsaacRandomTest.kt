@@ -61,8 +61,7 @@ object IsaacRandomTest {
     }
 
     private fun readVector(file: String): IntArray {
-        val path = "/dev/openrs2/crypto/$file"
-        val input = IsaacRandomTest::class.java.getResourceAsStream(path)
+        val input = IsaacRandomTest::class.java.getResourceAsStream("isaac/$file")
         return BufferedReader(InputStreamReader(input)).useLines { lines ->
             val elements = mutableListOf<Int>()
 

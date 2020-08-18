@@ -63,8 +63,7 @@ object WhirlpoolTest {
     private val NESSIE_ONE_VECTORS = readVectors("nessie-one-vectors.txt")
 
     private fun readVectors(file: String): List<ByteArray> {
-        val path = "/dev/openrs2/crypto/$file"
-        val input = WhirlpoolTest::class.java.getResourceAsStream(path)
+        val input = WhirlpoolTest::class.java.getResourceAsStream("whirlpool/$file")
         return input.bufferedReader().use { reader ->
             reader.lines()
                 .map(ByteBufUtil::decodeHexDump)

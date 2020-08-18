@@ -224,7 +224,7 @@ object Js5CompressionTest {
     }
 
     private fun read(name: String): ByteBuf {
-        Js5CompressionTest::class.java.getResourceAsStream(name).use { input ->
+        Js5CompressionTest::class.java.getResourceAsStream("compression/$name").use { input ->
             return Unpooled.wrappedBuffer(input.readAllBytes())
         }
     }
