@@ -13,4 +13,11 @@ object StringUtilsTest {
             "".indefiniteArticle()
         }
     }
+
+    @Test
+    fun testKrHashCode() {
+        assertEquals(0, "".krHashCode())
+        assertEquals(99162322, "hello".krHashCode())
+        assertEquals(92340183, "h€llo".krHashCode())
+    }
 }
