@@ -3,6 +3,8 @@ package dev.openrs2.util.charset
 import org.junit.jupiter.api.Assertions.assertArrayEquals
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 object Cp1252CharsetTest {
     @Test
@@ -97,5 +99,16 @@ object Cp1252CharsetTest {
                 ), Cp1252Charset
             )
         )
+    }
+
+    @Test
+    fun testContains() {
+        assertTrue(Cp1252Charset.contains(Cp1252Charset))
+        assertTrue(Cp1252Charset.contains(Charsets.US_ASCII))
+        assertFalse(Cp1252Charset.contains(Charsets.ISO_8859_1))
+        assertFalse(Cp1252Charset.contains(Charsets.UTF_8))
+        assertFalse(Cp1252Charset.contains(Charsets.UTF_16))
+        assertFalse(Cp1252Charset.contains(Charsets.UTF_16BE))
+        assertFalse(Cp1252Charset.contains(Charsets.UTF_16LE))
     }
 }
