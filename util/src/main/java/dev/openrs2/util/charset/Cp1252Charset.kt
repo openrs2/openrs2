@@ -6,10 +6,8 @@ import java.nio.charset.Charset
 import java.nio.charset.CharsetDecoder
 import java.nio.charset.CharsetEncoder
 import java.nio.charset.CoderResult
-import java.nio.charset.StandardCharsets
 
 object Cp1252Charset : Charset("Cp1252", null) {
-    private val ASCII_CHARSET = StandardCharsets.US_ASCII.javaClass
     private val CODE_PAGE = charArrayOf(
         '\u20AC', '\u0000', '\u201A', '\u0192', '\u201E', '\u2026', '\u2020', '\u2021',
         '\u02C6', '\u2030', '\u0160', '\u2039', '\u0152', '\u0000', '\u017D', '\u0000',
@@ -55,15 +53,11 @@ object Cp1252Charset : Charset("Cp1252", null) {
     }
 
     override fun contains(cs: Charset): Boolean {
-        return ASCII_CHARSET.isInstance(cs) || cs is Cp1252Charset
+        return Charsets.US_ASCII.contains(cs) || cs is Cp1252Charset
     }
 
     override fun newEncoder(): CharsetEncoder {
-        return object : CharsetEncoder(this, 1F, 1F) {
-            init {
-                replaceWith(byteArrayOf(REPLACEMENT_BYTE))
-            }
-
+        return object : CharsetEncoder(this, 1F, 1F, byteArrayOf(REPLACEMENT_BYTE)) {
             override fun encodeLoop(input: CharBuffer, output: ByteBuffer): CoderResult {
                 while (input.hasRemaining()) {
                     if (!output.hasRemaining()) {
