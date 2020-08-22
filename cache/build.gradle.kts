@@ -7,6 +7,7 @@ dependencies {
     implementation(project(":buffer"))
     implementation(project(":compress"))
     implementation(project(":crypto"))
+    implementation(project(":util"))
 }
 
 publishing {
