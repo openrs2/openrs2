@@ -4,7 +4,10 @@ import java.io.BufferedWriter
 import java.io.OutputStream
 import java.nio.channels.FileChannel
 import java.nio.charset.Charset
+import java.nio.file.CopyOption
+import java.nio.file.FileVisitOption
 import java.nio.file.Files
+import java.nio.file.LinkOption
 import java.nio.file.OpenOption
 import java.nio.file.Path
 import java.nio.file.StandardCopyOption
@@ -17,6 +20,61 @@ fun Path.fsync() {
     FileChannel.open(this, StandardOpenOption.READ).use { channel ->
         channel.force(true)
     }
+}
+
+fun Path.recursiveCopy(
+    destination: Path,
+    visitOptions: Array<FileVisitOption> = emptyArray(),
+    copyOptions: Array<CopyOption> = emptyArray()
+) {
+    for (sourceFile in Files.walk(this, *visitOptions)) {
+        val destinationFile = destination.resolve(this.relativize(sourceFile).toString())
+
+        if (Files.isDirectory(sourceFile)) {
+            Files.createDirectory(destinationFile)
+        } else {
+            Files.copy(sourceFile, destinationFile, *copyOptions)
+        }
+    }
+}
+
+fun Path.recursiveEquals(
+    other: Path,
+    linkOptions: Array<LinkOption> = emptyArray(),
+    openOptions: Array<OpenOption> = emptyArray()
+): Boolean {
+    val list1 = Files.newDirectoryStream(this).use { stream ->
+        stream.map { this.relativize(it).toString() }.sorted().toList()
+    }
+
+    val list2 = Files.newDirectoryStream(other).use { stream ->
+        stream.map { other.relativize(it).toString() }.sorted().toList()
+    }
+
+    if (list1 != list2) {
+        return false
+    }
+
+    for (file in list1) {
+        val file1 = this.resolve(file)
+        val file2 = other.resolve(file)
+
+        if (Files.isDirectory(file1, *linkOptions)) {
+            if (!Files.isDirectory(file2, *linkOptions)) {
+                return false
+            }
+        } else {
+            Files.newInputStream(file1, *openOptions).use { input1 ->
+                Files.newInputStream(file2, *openOptions).use { input2 ->
+                    if (!input1.contentEquals(input2)) {
+                        return false
+                    }
+                }
+            }
+        }
+    }
+
+    return true
 }
 
 inline fun <T> useTempFile(

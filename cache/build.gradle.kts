@@ -8,6 +8,8 @@ dependencies {
     implementation(project(":compress"))
     implementation(project(":crypto"))
     implementation(project(":util"))
+
+    testImplementation("com.google.jimfs:jimfs:${Versions.jimfs}")
 }
 
 publishing {
