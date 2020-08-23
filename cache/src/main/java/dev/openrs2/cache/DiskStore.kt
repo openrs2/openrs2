@@ -400,7 +400,7 @@ class DiskStore private constructor(
     }
 
     override fun remove(archive: Int, group: Int) {
-        checkArchive(archive)
+        checkGroup(archive, group)
 
         val index = indexes[archive] ?: return
 
