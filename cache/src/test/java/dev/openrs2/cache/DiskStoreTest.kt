@@ -18,6 +18,93 @@ object DiskStoreTest {
     private val root = Paths.get(DiskStoreTest::class.java.getResource("disk-store").toURI())
 
     @Test
+    fun testBounds() {
+        readTest("empty") { store ->
+            assertThrows<IllegalArgumentException> {
+                store.exists(-1)
+            }
+
+            assertThrows<IllegalArgumentException> {
+                store.exists(256)
+            }
+
+            assertThrows<IllegalArgumentException> {
+                store.list(-1)
+            }
+
+            assertThrows<IllegalArgumentException> {
+                store.list(256)
+            }
+
+            assertThrows<IllegalArgumentException> {
+                store.exists(-1, 0)
+            }
+
+            assertThrows<IllegalArgumentException> {
+                store.exists(256, 0)
+            }
+
+            assertThrows<IllegalArgumentException> {
+                store.exists(0, -1)
+            }
+
+            assertThrows<IllegalArgumentException> {
+                store.read(-1, 0).release()
+            }
+
+            assertThrows<IllegalArgumentException> {
+                store.read(256, 0).release()
+            }
+
+            assertThrows<IllegalArgumentException> {
+                store.read(0, -1).release()
+            }
+        }
+
+        writeTest("empty") { store ->
+            assertThrows<IllegalArgumentException> {
+                store.create(-1)
+            }
+
+            assertThrows<IllegalArgumentException> {
+                store.create(256)
+            }
+
+            assertThrows<IllegalArgumentException> {
+                store.write(-1, 0, Unpooled.EMPTY_BUFFER)
+            }
+
+            assertThrows<IllegalArgumentException> {
+                store.write(256, 0, Unpooled.EMPTY_BUFFER)
+            }
+
+            assertThrows<IllegalArgumentException> {
+                store.write(0, -1, Unpooled.EMPTY_BUFFER)
+            }
+
+            assertThrows<IllegalArgumentException> {
+                store.remove(-1)
+            }
+
+            assertThrows<IllegalArgumentException> {
+                store.remove(256)
+            }
+
+            assertThrows<IllegalArgumentException> {
+                store.remove(-1, 0)
+            }
+
+            assertThrows<IllegalArgumentException> {
+                store.remove(256, 0)
+            }
+
+            assertThrows<IllegalArgumentException> {
+                store.remove(0, -1)
+            }
+        }
+    }
+
+    @Test
     fun testCreateArchive() {
         writeTest("empty-archive") { store ->
             store.create(255)
