@@ -22130,7 +22130,7 @@ methods:
     locals: {}
   client!hf.a (B)J:
     owner: "NanoTimer"
-    name: "getDelta"
+    name: "getDuration"
     arguments: {}
     locals:
       1: "current"
@@ -33838,7 +33838,7 @@ methods:
     locals: {}
   client!oo.e (I)J:
     owner: "MillisTimer"
-    name: "getDelta"
+    name: "getDuration"
     arguments: {}
     locals:
       6: "now"
