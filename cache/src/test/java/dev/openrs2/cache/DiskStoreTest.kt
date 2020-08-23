@@ -187,6 +187,10 @@ object DiskStoreTest {
             assertEquals(listOf(1), store.list(255))
         }
 
+        readTest("fragmented") { store ->
+            assertEquals(listOf(0, 1), store.list(255))
+        }
+
         readTest("single-block-extended") { store ->
             assertEquals(listOf(65536), store.list(255))
         }
