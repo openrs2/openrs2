@@ -4,6 +4,8 @@ plugins {
 }
 
 dependencies {
+    api("io.netty:netty-buffer:${Versions.netty}")
+
     implementation(project(":buffer"))
     implementation(project(":compress"))
     implementation(project(":crypto"))
