@@ -7,9 +7,9 @@ import java.util.jar.Manifest
 import java.util.zip.Deflater
 import java.util.zip.ZipEntry
 
-class DeterministicJarOutputStream : JarOutputStream {
-    constructor(out: OutputStream) : super(out)
-    constructor(out: OutputStream, man: Manifest) : super(out, man)
+public class DeterministicJarOutputStream : JarOutputStream {
+    public constructor(out: OutputStream) : super(out)
+    public constructor(out: OutputStream, man: Manifest) : super(out, man)
 
     init {
         setLevel(Deflater.BEST_COMPRESSION)

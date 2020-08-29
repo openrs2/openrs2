@@ -8,7 +8,7 @@ import org.objectweb.asm.tree.ClassNode
 import javax.inject.Singleton
 
 @Singleton
-class CanvasTransformer : Transformer() {
+public class CanvasTransformer : Transformer() {
     override fun transformClass(
         classPath: ClassPath,
         library: Library,

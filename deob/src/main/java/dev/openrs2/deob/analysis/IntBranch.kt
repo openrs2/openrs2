@@ -13,8 +13,8 @@ import org.objectweb.asm.Opcodes.IF_ICMPLE
 import org.objectweb.asm.Opcodes.IF_ICMPLT
 import org.objectweb.asm.Opcodes.IF_ICMPNE
 
-object IntBranch {
-    fun evaluateUnary(opcode: Int, values: Set<Int>): IntBranchResult {
+public object IntBranch {
+    public fun evaluateUnary(opcode: Int, values: Set<Int>): IntBranchResult {
         require(values.isNotEmpty())
 
         var taken = 0
@@ -43,7 +43,7 @@ object IntBranch {
         }
     }
 
-    fun evaluateBinary(opcode: Int, values1: Set<Int>, values2: Set<Int>): IntBranchResult {
+    public fun evaluateBinary(opcode: Int, values1: Set<Int>, values2: Set<Int>): IntBranchResult {
         require(values1.isNotEmpty())
         require(values2.isNotEmpty())
 

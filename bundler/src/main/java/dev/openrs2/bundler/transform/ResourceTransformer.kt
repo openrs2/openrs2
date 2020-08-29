@@ -17,7 +17,7 @@ import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.TypeInsnNode
 
-class ResourceTransformer(
+public class ResourceTransformer(
     private val resources: List<Resource>? = null,
     private val glResources: List<List<Resource>> = Resource.compressGlNatives(),
     private val miscResources: List<Resource> = Resource.compressMiscNatives()

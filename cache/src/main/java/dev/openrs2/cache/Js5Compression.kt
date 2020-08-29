@@ -8,8 +8,8 @@ import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufInputStream
 import io.netty.buffer.ByteBufOutputStream
 
-object Js5Compression {
-    fun compress(input: ByteBuf, type: Js5CompressionType, key: XteaKey = XteaKey.ZERO): ByteBuf {
+public object Js5Compression {
+    public fun compress(input: ByteBuf, type: Js5CompressionType, key: XteaKey = XteaKey.ZERO): ByteBuf {
         input.alloc().buffer().use { output ->
             output.writeByte(type.ordinal)
 
@@ -48,7 +48,7 @@ object Js5Compression {
         }
     }
 
-    fun compressBest(input: ByteBuf, enableLzma: Boolean = false, key: XteaKey = XteaKey.ZERO): ByteBuf {
+    public fun compressBest(input: ByteBuf, enableLzma: Boolean = false, key: XteaKey = XteaKey.ZERO): ByteBuf {
         var best = compress(input.slice(), Js5CompressionType.NONE, key)
         try {
             for (type in Js5CompressionType.values()) {
@@ -73,7 +73,7 @@ object Js5Compression {
         }
     }
 
-    fun uncompress(input: ByteBuf, key: XteaKey = XteaKey.ZERO): ByteBuf {
+    public fun uncompress(input: ByteBuf, key: XteaKey = XteaKey.ZERO): ByteBuf {
         val typeId = input.readUnsignedByte().toInt()
         val type = Js5CompressionType.fromOrdinal(typeId)
         require(type != null) {

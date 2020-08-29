@@ -33,7 +33,7 @@ private fun remapAll(indexes: List<Int>, argType: Type, localIndex: Int, newLoca
     return indexes.mapTo(mutableListOf()) { remap(it, argType, localIndex, newLocalIndex) }
 }
 
-fun MethodNode.removeArgument(argIndex: Int) {
+public fun MethodNode.removeArgument(argIndex: Int) {
     // remove argument from the descriptor
     val type = Type.getType(desc)
     val argType = type.argumentTypes[argIndex]
@@ -129,7 +129,7 @@ fun MethodNode.removeArgument(argIndex: Int) {
     }
 }
 
-fun MethodNode.removeDeadCode(owner: String) {
+public fun MethodNode.removeDeadCode(owner: String) {
     var changed: Boolean
     do {
         changed = false
@@ -152,10 +152,10 @@ fun MethodNode.removeDeadCode(owner: String) {
     } while (changed)
 }
 
-val MethodNode.hasCode
+public val MethodNode.hasCode: Boolean
     get() = access and (Opcodes.ACC_NATIVE or Opcodes.ACC_ABSTRACT) == 0
 
-fun MethodNode.copy(): MethodNode {
+public fun MethodNode.copy(): MethodNode {
     val copy = MethodNode(
         access,
         name,

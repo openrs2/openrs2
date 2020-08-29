@@ -6,12 +6,12 @@ import org.objectweb.asm.tree.InsnList
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.util.Printer
 
-class InsnMatcher private constructor(private val regex: Regex) {
-    fun match(method: MethodNode): Sequence<List<AbstractInsnNode>> {
+public class InsnMatcher private constructor(private val regex: Regex) {
+    public fun match(method: MethodNode): Sequence<List<AbstractInsnNode>> {
         return match(method.instructions)
     }
 
-    fun match(list: InsnList): Sequence<List<AbstractInsnNode>> {
+    public fun match(list: InsnList): Sequence<List<AbstractInsnNode>> {
         val insns = ArrayList<AbstractInsnNode>(list.size())
         val builder = StringBuilder(list.size())
 
@@ -27,7 +27,7 @@ class InsnMatcher private constructor(private val regex: Regex) {
         }
     }
 
-    companion object {
+    public companion object {
         private const val PRIVATE_USE_AREA = 0xE000
         private val OPCODE_GROUPS = mapOf(
             "InsnNode" to intArrayOf(
@@ -260,7 +260,7 @@ class InsnMatcher private constructor(private val regex: Regex) {
             throw IllegalArgumentException("$opcode is not a valid opcode or opcode group")
         }
 
-        fun compile(regex: String): InsnMatcher {
+        public fun compile(regex: String): InsnMatcher {
             val pattern = StringBuilder()
             val opcode = StringBuilder()
 

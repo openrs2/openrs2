@@ -18,7 +18,7 @@ import org.objectweb.asm.tree.MethodNode
 import javax.inject.Singleton
 
 @Singleton
-class ClassLiteralTransformer : Transformer() {
+public class ClassLiteralTransformer : Transformer() {
     private val classForNameMethods = mutableListOf<MemberRef>()
     private var classLiterals = 0
 

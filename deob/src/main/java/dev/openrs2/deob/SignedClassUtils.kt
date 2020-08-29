@@ -7,12 +7,12 @@ import org.objectweb.asm.Type
 import org.objectweb.asm.tree.LdcInsnNode
 import org.objectweb.asm.tree.MethodNode
 
-object SignedClassUtils {
+public object SignedClassUtils {
     private val logger = InlineLogger()
     private val LOAD_SIGNED_CLASS_MATCHER =
         InsnMatcher.compile("LDC INVOKESTATIC ASTORE ALOAD GETFIELD ALOAD INVOKEVIRTUAL ALOAD INVOKEVIRTUAL POP")
 
-    fun move(loader: Library, client: Library, signLink: Library) {
+    public fun move(loader: Library, client: Library, signLink: Library) {
         // find signed classes
         val signedClasses = findSignedClasses(loader)
         logger.info { "Identified signed classes $signedClasses" }

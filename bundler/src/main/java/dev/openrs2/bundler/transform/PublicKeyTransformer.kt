@@ -12,7 +12,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class PublicKeyTransformer @Inject constructor(private val key: RSAPrivateCrtKeyParameters) : Transformer() {
+public class PublicKeyTransformer @Inject constructor(private val key: RSAPrivateCrtKeyParameters) : Transformer() {
     private var exponents = 0
     private var moduli = 0
 

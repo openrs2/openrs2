@@ -10,9 +10,9 @@ import dev.openrs2.deob.DeobfuscateCommand
 import dev.openrs2.deob.ast.DeobfuscateAstCommand
 import dev.openrs2.game.GameCommand
 
-fun main(args: Array<String>) = Command().main(args)
+public fun main(args: Array<String>): Unit = Command().main(args)
 
-class Command : NoOpCliktCommand(name = "openrs2") {
+public class Command : NoOpCliktCommand(name = "openrs2") {
     init {
         subcommands(
             BundleCommand(),

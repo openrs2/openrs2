@@ -18,7 +18,7 @@ import dev.openrs2.bundler.transform.TypoTransformer
 import dev.openrs2.conf.ConfigModule
 import dev.openrs2.crypto.CryptoModule
 
-object BundlerModule : AbstractModule() {
+public object BundlerModule : AbstractModule() {
     override fun configure() {
         install(ConfigModule)
         install(CryptoModule)

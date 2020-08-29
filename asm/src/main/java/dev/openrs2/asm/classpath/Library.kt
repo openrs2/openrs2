@@ -10,10 +10,10 @@ import java.nio.file.Path
 import java.util.SortedMap
 import java.util.TreeMap
 
-class Library(val name: String) : Iterable<ClassNode> {
+public class Library(public val name: String) : Iterable<ClassNode> {
     private var classes: SortedMap<String, ClassNode> = TreeMap()
 
-    constructor(name: String, library: Library) : this(name) {
+    public constructor(name: String, library: Library) : this(name) {
         for (clazz in library.classes.values) {
             val copy = ClassNode()
             clazz.accept(copy)
@@ -21,19 +21,19 @@ class Library(val name: String) : Iterable<ClassNode> {
         }
     }
 
-    operator fun contains(name: String): Boolean {
+    public operator fun contains(name: String): Boolean {
         return classes.containsKey(name)
     }
 
-    operator fun get(name: String): ClassNode? {
+    public operator fun get(name: String): ClassNode? {
         return classes[name]
     }
 
-    fun add(clazz: ClassNode): ClassNode? {
+    public fun add(clazz: ClassNode): ClassNode? {
         return classes.put(clazz.name, clazz)
     }
 
-    fun remove(name: String): ClassNode? {
+    public fun remove(name: String): ClassNode? {
         return classes.remove(name)
     }
 
@@ -41,11 +41,11 @@ class Library(val name: String) : Iterable<ClassNode> {
         return classes.values.iterator()
     }
 
-    fun remap(remapper: ExtendedRemapper) {
+    public fun remap(remapper: ExtendedRemapper) {
         classes = LibraryRemapper(remapper, classes).remap()
     }
 
-    fun write(path: Path, writer: LibraryWriter, classPath: ClassPath) {
+    public fun write(path: Path, writer: LibraryWriter, classPath: ClassPath) {
         logger.info { "Writing library $path" }
 
         path.useAtomicOutputStream { output ->
@@ -53,10 +53,10 @@ class Library(val name: String) : Iterable<ClassNode> {
         }
     }
 
-    companion object {
+    public companion object {
         private val logger = InlineLogger()
 
-        fun read(name: String, path: Path, reader: LibraryReader): Library {
+        public fun read(name: String, path: Path, reader: LibraryReader): Library {
             logger.info { "Reading library $path" }
 
             val classes = Files.newInputStream(path).use { input ->

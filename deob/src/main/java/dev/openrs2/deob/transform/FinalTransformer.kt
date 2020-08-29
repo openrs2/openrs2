@@ -12,7 +12,7 @@ import org.objectweb.asm.tree.MethodNode
 import javax.inject.Singleton
 
 @Singleton
-class FinalTransformer : Transformer() {
+public class FinalTransformer : Transformer() {
     private val superClasses = mutableListOf<String>()
     private lateinit var inheritedMethodSets: DisjointSet<MemberRef>
     private var methodsChanged = 0

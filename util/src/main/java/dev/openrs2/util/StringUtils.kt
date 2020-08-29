@@ -2,7 +2,7 @@ package dev.openrs2.util
 
 import dev.openrs2.util.charset.Cp1252Charset
 
-fun CharSequence.indefiniteArticle(): String {
+public fun CharSequence.indefiniteArticle(): String {
     require(isNotEmpty())
 
     return when (first().toLowerCase()) {
@@ -11,7 +11,7 @@ fun CharSequence.indefiniteArticle(): String {
     }
 }
 
-fun CharSequence.krHashCode(): Int {
+public fun CharSequence.krHashCode(): Int {
     var hash = 0
     for (c in this) {
         hash = ((hash shl 5) - hash) + Cp1252Charset.encode(c)

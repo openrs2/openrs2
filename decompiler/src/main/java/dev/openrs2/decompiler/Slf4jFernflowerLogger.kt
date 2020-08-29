@@ -3,7 +3,7 @@ package dev.openrs2.decompiler
 import com.github.michaelbull.logging.InlineLogger
 import org.jetbrains.java.decompiler.main.extern.IFernflowerLogger
 
-object Slf4jFernflowerLogger : IFernflowerLogger() {
+public object Slf4jFernflowerLogger : IFernflowerLogger() {
     private val logger = InlineLogger()
 
     override fun startClass(className: String) {

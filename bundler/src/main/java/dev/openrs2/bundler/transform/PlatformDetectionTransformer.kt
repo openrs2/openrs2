@@ -22,7 +22,7 @@ import org.objectweb.asm.tree.VarInsnNode
 import javax.inject.Singleton
 
 @Singleton
-class PlatformDetectionTransformer : Transformer() {
+public class PlatformDetectionTransformer : Transformer() {
     private var glBlocks = 0
     private var miscBlocks = 0
 

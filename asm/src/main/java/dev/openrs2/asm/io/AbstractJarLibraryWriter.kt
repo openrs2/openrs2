@@ -12,7 +12,7 @@ import java.io.OutputStream
 import java.util.jar.JarEntry
 import java.util.jar.JarOutputStream
 
-abstract class AbstractJarLibraryWriter : LibraryWriter {
+public abstract class AbstractJarLibraryWriter : LibraryWriter {
     override fun write(output: OutputStream, classPath: ClassPath, classes: Iterable<ClassNode>) {
         createJarOutputStream(output).use { jar ->
             for (clazz in classes) {

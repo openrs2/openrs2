@@ -13,7 +13,7 @@ import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.FieldInsnNode
 import org.objectweb.asm.tree.MethodNode
 
-class StaticFieldUnscrambler(
+public class StaticFieldUnscrambler(
     private val classPath: ClassPath,
     private val excludedFields: MemberFilter,
     private val scrambledLibraries: Set<String>,
@@ -23,7 +23,7 @@ class StaticFieldUnscrambler(
 ) {
     private val generator = StaticClassGenerator(staticClassNameGenerator, MAX_FIELDS_PER_CLASS)
 
-    fun unscramble(): Map<DisjointSet.Partition<MemberRef>, StaticField> {
+    public fun unscramble(): Map<DisjointSet.Partition<MemberRef>, StaticField> {
         val fields = mutableMapOf<DisjointSet.Partition<MemberRef>, StaticField>()
 
         for (library in classPath.libraries) {

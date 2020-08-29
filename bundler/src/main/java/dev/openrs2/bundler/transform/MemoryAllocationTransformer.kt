@@ -15,7 +15,7 @@ import org.objectweb.asm.tree.VarInsnNode
 import javax.inject.Singleton
 
 @Singleton
-class MemoryAllocationTransformer : Transformer() {
+public class MemoryAllocationTransformer : Transformer() {
     private var usedMemoryExprsZeroed = 0
 
     override fun preTransform(classPath: ClassPath) {

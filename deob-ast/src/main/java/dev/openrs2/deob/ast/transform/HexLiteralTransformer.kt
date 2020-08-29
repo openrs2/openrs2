@@ -14,7 +14,7 @@ import dev.openrs2.deob.ast.util.walk
 import javax.inject.Singleton
 
 @Singleton
-class HexLiteralTransformer : Transformer() {
+public class HexLiteralTransformer : Transformer() {
     override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
         unit.walk { expr: BinaryExpr ->
             if (expr.operator in SHIFT_OPS) {

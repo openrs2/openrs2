@@ -10,7 +10,7 @@ import com.github.ajalt.clikt.parameters.types.long
 import com.github.ajalt.clikt.parameters.types.outputStream
 import dev.openrs2.compress.lzma.Lzma
 
-class UnlzmaCommand : CliktCommand(name = "unlzma") {
+public class UnlzmaCommand : CliktCommand(name = "unlzma") {
     private val input by option().inputStream().defaultStdin()
     private val length by option().long().required()
     private val output by option().outputStream().defaultStdout()

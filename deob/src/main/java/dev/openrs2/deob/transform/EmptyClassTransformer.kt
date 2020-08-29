@@ -13,7 +13,7 @@ import org.objectweb.asm.tree.TypeInsnNode
 import javax.inject.Singleton
 
 @Singleton
-class EmptyClassTransformer : Transformer() {
+public class EmptyClassTransformer : Transformer() {
     private var removedClasses = 0
     private val emptyClasses = mutableSetOf<String>()
     private val referencedClasses = mutableSetOf<String>()

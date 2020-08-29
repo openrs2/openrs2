@@ -1,6 +1,6 @@
 package dev.openrs2.conf
 
-data class Config(
+public data class Config(
     val game: String,
     val operator: String,
     val domain: String

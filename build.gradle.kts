@@ -55,6 +55,12 @@ allprojects {
         }
     }
 
+    plugins.withType<KotlinPluginWrapper> {
+        kotlin {
+            explicitApi()
+        }
+    }
+
     plugins.withType<KotlinterPlugin> {
         configure<KotlinterExtension> {
             // see https://github.com/pinterest/ktlint/issues/764

@@ -13,7 +13,7 @@ import dev.openrs2.deob.ast.util.walk
 import javax.inject.Singleton
 
 @Singleton
-class BitMaskTransformer : Transformer() {
+public class BitMaskTransformer : Transformer() {
     override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
         /*
          * Transform:

@@ -49,7 +49,7 @@ import javax.inject.Singleton
  * verifiable output.
  */
 @Singleton
-class InvokeSpecialTransformer : Transformer() {
+public class InvokeSpecialTransformer : Transformer() {
     private var invokeSpecialsReplaced = 0
 
     override fun preTransform(classPath: ClassPath) {

@@ -19,7 +19,7 @@ import dev.openrs2.deob.ast.util.walk
 import javax.inject.Singleton
 
 @Singleton
-class IfElseTransformer : Transformer() {
+public class IfElseTransformer : Transformer() {
     override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
         var oldUnit: CompilationUnit
         do {

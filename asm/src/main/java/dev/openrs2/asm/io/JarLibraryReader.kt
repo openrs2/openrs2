@@ -7,7 +7,7 @@ import org.objectweb.asm.tree.ClassNode
 import java.io.InputStream
 import java.util.jar.JarInputStream
 
-object JarLibraryReader : LibraryReader {
+public object JarLibraryReader : LibraryReader {
     private const val CLASS_SUFFIX = ".class"
 
     override fun read(input: InputStream): Iterable<ClassNode> {

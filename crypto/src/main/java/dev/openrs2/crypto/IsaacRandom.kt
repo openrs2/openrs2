@@ -1,6 +1,6 @@
 package dev.openrs2.crypto
 
-class IsaacRandom {
+public class IsaacRandom {
     private var count = 0
     private val rsl: IntArray
     private val mem = IntArray(SIZE)
@@ -8,12 +8,12 @@ class IsaacRandom {
     private var b = 0
     private var c = 0
 
-    constructor() {
+    public constructor() {
         rsl = IntArray(SIZE)
         init(false)
     }
 
-    constructor(seed: IntArray) {
+    public constructor(seed: IntArray) {
         require(seed.size <= SIZE)
 
         rsl = seed.copyOf(SIZE)
@@ -257,7 +257,7 @@ class IsaacRandom {
         this.a = a
     }
 
-    fun nextInt(): Int {
+    public fun nextInt(): Int {
         if (count-- == 0) {
             isaac()
             count = SIZE - 1

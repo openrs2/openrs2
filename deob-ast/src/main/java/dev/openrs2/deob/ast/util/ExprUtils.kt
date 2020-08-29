@@ -12,7 +12,7 @@ import com.github.javaparser.ast.expr.NameExpr
 import com.github.javaparser.ast.expr.ThisExpr
 import com.github.javaparser.ast.expr.UnaryExpr
 
-fun IntegerLiteralExpr.checkedAsInt(): Int {
+public fun IntegerLiteralExpr.checkedAsInt(): Int {
     val n = asNumber()
     if (n !is Int) {
         error("Invalid IntegerLiteralExpr type")
@@ -20,11 +20,11 @@ fun IntegerLiteralExpr.checkedAsInt(): Int {
     return n
 }
 
-fun Int.toHexLiteralExpr(): IntegerLiteralExpr {
+public fun Int.toHexLiteralExpr(): IntegerLiteralExpr {
     return IntegerLiteralExpr("0x${Integer.toUnsignedString(this, 16).toUpperCase()}")
 }
 
-fun LongLiteralExpr.checkedAsLong(): Long {
+public fun LongLiteralExpr.checkedAsLong(): Long {
     val n = asNumber()
     if (n !is Long) {
         error("Invalid LongLiteralExpr type")
@@ -32,19 +32,19 @@ fun LongLiteralExpr.checkedAsLong(): Long {
     return n
 }
 
-fun Long.toHexLiteralExpr(): LongLiteralExpr {
+public fun Long.toHexLiteralExpr(): LongLiteralExpr {
     return LongLiteralExpr("0x${java.lang.Long.toUnsignedString(this, 16).toUpperCase()}L")
 }
 
-fun Expression.isIntegerOrLongLiteral(): Boolean {
+public fun Expression.isIntegerOrLongLiteral(): Boolean {
     return this is IntegerLiteralExpr || this is LongLiteralExpr
 }
 
-fun Long.toLongLiteralExpr(): LongLiteralExpr {
+public fun Long.toLongLiteralExpr(): LongLiteralExpr {
     return LongLiteralExpr(this.toString() + "L")
 }
 
-fun Expression.negate(): Expression {
+public fun Expression.negate(): Expression {
     return when (this) {
         is UnaryExpr -> when (operator) {
             UnaryExpr.Operator.PLUS -> UnaryExpr(expression.clone(), UnaryExpr.Operator.MINUS)
@@ -65,7 +65,7 @@ fun Expression.negate(): Expression {
     }
 }
 
-fun Expression.not(): Expression {
+public fun Expression.not(): Expression {
     when (this) {
         is UnaryExpr -> {
             if (operator == UnaryExpr.Operator.LOGICAL_COMPLEMENT) {
@@ -99,7 +99,7 @@ fun Expression.not(): Expression {
     return UnaryExpr(clone(), UnaryExpr.Operator.LOGICAL_COMPLEMENT)
 }
 
-fun Expression.countNots(): Int {
+public fun Expression.countNots(): Int {
     var count = 0
 
     if (this is UnaryExpr && operator == UnaryExpr.Operator.LOGICAL_COMPLEMENT) {
@@ -117,7 +117,7 @@ fun Expression.countNots(): Int {
     return count
 }
 
-fun Expression.hasSideEffects(): Boolean {
+public fun Expression.hasSideEffects(): Boolean {
     return when (this) {
         is LiteralExpr, is NameExpr, is ThisExpr -> false
         is UnaryExpr -> expression.hasSideEffects()
@@ -129,7 +129,7 @@ fun Expression.hasSideEffects(): Boolean {
     }
 }
 
-fun BinaryExpr.Operator.flip(): BinaryExpr.Operator? {
+public fun BinaryExpr.Operator.flip(): BinaryExpr.Operator? {
     return when (this) {
         BinaryExpr.Operator.PLUS, BinaryExpr.Operator.MULTIPLY -> this
         BinaryExpr.Operator.EQUALS, BinaryExpr.Operator.NOT_EQUALS -> this

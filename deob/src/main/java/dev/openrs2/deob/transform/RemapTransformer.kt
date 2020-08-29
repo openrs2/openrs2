@@ -9,7 +9,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class RemapTransformer @Inject constructor(
+public class RemapTransformer @Inject constructor(
     private val profile: Profile,
     private val nameMap: NameMap
 ) : Transformer() {

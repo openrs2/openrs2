@@ -14,7 +14,7 @@ import org.objectweb.asm.tree.MethodNode
 import javax.inject.Singleton
 
 @Singleton
-class RightClickTransformer : Transformer() {
+public class RightClickTransformer : Transformer() {
     private var metaDownCalls = 0
 
     override fun preTransform(classPath: ClassPath) {

@@ -6,7 +6,7 @@ import dev.openrs2.asm.AsmModule
 import dev.openrs2.deob.util.map.NameMap
 import dev.openrs2.deob.util.map.NameMapProvider
 
-object DeobfuscatorUtilModule : AbstractModule() {
+public object DeobfuscatorUtilModule : AbstractModule() {
     override fun configure() {
         install(AsmModule)
 

@@ -9,7 +9,7 @@ import org.objectweb.asm.tree.IincInsnNode
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.VarInsnNode
 
-class LiveVariableAnalyzer(owner: String, method: MethodNode) :
+public class LiveVariableAnalyzer(owner: String, method: MethodNode) :
     DataFlowAnalyzer<IntSet>(owner, method, backwards = true) {
 
     override fun createInitialSet(): IntSet {

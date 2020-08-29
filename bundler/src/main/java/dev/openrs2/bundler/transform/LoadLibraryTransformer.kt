@@ -13,7 +13,7 @@ import org.objectweb.asm.tree.MethodNode
 import javax.inject.Singleton
 
 @Singleton
-class LoadLibraryTransformer : Transformer() {
+public class LoadLibraryTransformer : Transformer() {
     private var jnilibs = 0
     private var amd64Checks = 0
     private var sunOsChecks = 0

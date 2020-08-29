@@ -7,7 +7,7 @@ import java.nio.charset.CharsetDecoder
 import java.nio.charset.CharsetEncoder
 import java.nio.charset.CoderResult
 
-object Cp1252Charset : Charset("Cp1252", null) {
+public object Cp1252Charset : Charset("Cp1252", null) {
     private val CODE_PAGE = charArrayOf(
         '\u20AC', '\u0000', '\u201A', '\u0192', '\u201E', '\u2026', '\u2020', '\u2021',
         '\u02C6', '\u2030', '\u0160', '\u2039', '\u0152', '\u0000', '\u017D', '\u0000',
@@ -34,7 +34,7 @@ object Cp1252Charset : Charset("Cp1252", null) {
         }
     }
 
-    fun decode(byte: Byte): Char {
+    public fun decode(byte: Byte): Char {
         val char = DECODE_TABLE[byte.toInt() and 0xFF]
         return if (char == '\u0000') {
             REPLACEMENT_CHAR
@@ -43,7 +43,7 @@ object Cp1252Charset : Charset("Cp1252", null) {
         }
     }
 
-    fun encode(char: Char): Byte {
+    public fun encode(char: Char): Byte {
         val byte = ENCODE_TABLE[char.toInt()]
         return if (byte.toInt() == 0) {
             REPLACEMENT_BYTE

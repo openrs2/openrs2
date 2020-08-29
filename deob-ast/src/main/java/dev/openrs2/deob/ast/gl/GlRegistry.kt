@@ -5,16 +5,16 @@ import com.google.common.collect.ImmutableSetMultimap
 import org.jdom2.input.SAXBuilder
 import java.io.InputStream
 
-data class GlEnum(val name: String, val value: Long)
+public data class GlEnum(val name: String, val value: Long)
 
-data class GlGroup(val name: String, val enums: List<GlEnum>)
+public data class GlGroup(val name: String, val enums: List<GlEnum>)
 
-data class GlParameter(val name: String, val bitfield: Boolean, val group: GlGroup?)
+public data class GlParameter(val name: String, val bitfield: Boolean, val group: GlGroup?)
 
-data class GlCommand(val name: String, val parameters: List<GlParameter>)
+public data class GlCommand(val name: String, val parameters: List<GlParameter>)
 
-data class GlRegistry(val enums: ImmutableSetMultimap<Long, GlEnum>, val commands: Map<String, GlCommand>) {
-    companion object {
+public data class GlRegistry(val enums: ImmutableSetMultimap<Long, GlEnum>, val commands: Map<String, GlCommand>) {
+    public companion object {
         private fun parseValue(s: String): Long {
             return if (s.startsWith("0x")) {
                 java.lang.Long.parseUnsignedLong(s.substring(2), 16)
@@ -23,7 +23,7 @@ data class GlRegistry(val enums: ImmutableSetMultimap<Long, GlEnum>, val command
             }
         }
 
-        fun parse(input: InputStream): GlRegistry {
+        public fun parse(input: InputStream): GlRegistry {
             val root = SAXBuilder().build(input).rootElement
 
             // create enums and groups

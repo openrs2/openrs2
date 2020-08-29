@@ -1,9 +1,9 @@
 package dev.openrs2.asm
 
-fun String.toBinaryClassName(): String {
+public fun String.toBinaryClassName(): String {
     return replace('/', '.')
 }
 
-fun String.toInternalClassName(): String {
+public fun String.toInternalClassName(): String {
     return replace('.', '/')
 }

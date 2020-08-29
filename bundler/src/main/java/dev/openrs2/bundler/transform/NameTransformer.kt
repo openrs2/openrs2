@@ -12,7 +12,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class NameTransformer @Inject constructor(
+public class NameTransformer @Inject constructor(
     private val config: Config
 ) : Transformer() {
     private var names = 0

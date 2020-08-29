@@ -1,9 +1,9 @@
 package dev.openrs2.deob.remap
 
-class NameGenerator {
+public class NameGenerator {
     private val prefixes = mutableMapOf<String, Int>()
 
-    fun generate(prefix: String): String {
+    public fun generate(prefix: String): String {
         require(prefix.isNotEmpty())
 
         val separator = if (prefix.last().isDigit()) {

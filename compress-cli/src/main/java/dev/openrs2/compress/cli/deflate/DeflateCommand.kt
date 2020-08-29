@@ -12,7 +12,7 @@ import com.github.ajalt.clikt.parameters.types.outputStream
 import java.util.zip.Deflater
 import java.util.zip.DeflaterOutputStream
 
-class DeflateCommand : CliktCommand(name = "deflate") {
+public class DeflateCommand : CliktCommand(name = "deflate") {
     private val input by option().inputStream().defaultStdin()
     private val output by option().outputStream().defaultStdout()
     private val level by option().int().default(Deflater.BEST_COMPRESSION).validate {

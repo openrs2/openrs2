@@ -11,7 +11,7 @@ import org.objectweb.asm.tree.FieldNode
 import javax.inject.Singleton
 
 @Singleton
-class FieldOrderTransformer : Transformer() {
+public class FieldOrderTransformer : Transformer() {
     override fun transformClass(classPath: ClassPath, library: Library, clazz: ClassNode): Boolean {
         sortFields(clazz, CONSTRUCTOR, Opcodes.PUTFIELD)
         sortFields(clazz, STATIC_CONSTRUCTOR, Opcodes.PUTSTATIC)

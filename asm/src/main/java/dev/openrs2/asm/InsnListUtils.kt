@@ -5,7 +5,7 @@ import org.objectweb.asm.tree.InsnList
 
 private val ANY_INSN = { _: AbstractInsnNode -> true }
 
-fun getExpression(
+public fun getExpression(
     last: AbstractInsnNode,
     filter: (AbstractInsnNode) -> Boolean = ANY_INSN
 ): List<AbstractInsnNode>? {
@@ -31,7 +31,7 @@ fun getExpression(
     return null
 }
 
-fun InsnList.replaceExpression(
+public fun InsnList.replaceExpression(
     last: AbstractInsnNode,
     replacement: AbstractInsnNode,
     filter: (AbstractInsnNode) -> Boolean = ANY_INSN
@@ -42,7 +42,7 @@ fun InsnList.replaceExpression(
     return true
 }
 
-fun InsnList.deleteExpression(
+public fun InsnList.deleteExpression(
     last: AbstractInsnNode,
     filter: (AbstractInsnNode) -> Boolean = ANY_INSN
 ): Boolean {

@@ -2,7 +2,7 @@ package dev.openrs2.util.io
 
 import java.io.OutputStream
 
-class SkipOutputStream(private val out: OutputStream, private var skipBytes: Long) : OutputStream() {
+public class SkipOutputStream(private val out: OutputStream, private var skipBytes: Long) : OutputStream() {
     override fun write(b: Int) {
         if (skipBytes == 0L) {
             out.write(b)

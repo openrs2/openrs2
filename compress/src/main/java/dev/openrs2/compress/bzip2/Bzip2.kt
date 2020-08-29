@@ -8,15 +8,15 @@ import java.io.InputStream
 import java.io.OutputStream
 import java.io.SequenceInputStream
 
-object Bzip2 {
+public object Bzip2 {
     private const val BLOCK_SIZE = 1
     private val HEADER = byteArrayOf('B'.toByte(), 'Z'.toByte(), 'h'.toByte(), ('0' + BLOCK_SIZE).toByte())
 
-    fun createHeaderlessInputStream(input: InputStream): InputStream {
+    public fun createHeaderlessInputStream(input: InputStream): InputStream {
         return BZip2CompressorInputStream(SequenceInputStream(ByteArrayInputStream(HEADER), input))
     }
 
-    fun createHeaderlessOutputStream(output: OutputStream): OutputStream {
+    public fun createHeaderlessOutputStream(output: OutputStream): OutputStream {
         return BZip2CompressorOutputStream(SkipOutputStream(output, HEADER.size.toLong()), BLOCK_SIZE)
     }
 }

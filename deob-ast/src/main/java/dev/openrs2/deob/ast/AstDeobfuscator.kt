@@ -7,10 +7,10 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class AstDeobfuscator @Inject constructor(
+public class AstDeobfuscator @Inject constructor(
     private val transformers: Set<@JvmSuppressWildcards Transformer>
 ) {
-    fun run(modules: Set<Module>) {
+    public fun run(modules: Set<Module>) {
         val group = LibraryGroup(modules.map(Library.Companion::parse))
 
         for (transformer in transformers) {

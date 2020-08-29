@@ -16,7 +16,7 @@ import dev.openrs2.deob.ast.util.walk
 import javax.inject.Singleton
 
 @Singleton
-class ComplementTransformer : Transformer() {
+public class ComplementTransformer : Transformer() {
     override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
         unit.walk { expr: BinaryExpr ->
             val op = complement(expr.operator) ?: return@walk

@@ -15,10 +15,10 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class Deobfuscator @Inject constructor(
+public class Deobfuscator @Inject constructor(
     @DeobfuscatorQualifier private val transformers: Set<@JvmSuppressWildcards Transformer>
 ) {
-    fun run(input: Path, output: Path) {
+    public fun run(input: Path, output: Path) {
         // read input jars/packs
         logger.info { "Reading input jars" }
         val client = Library.read("client", input.resolve("runescape_gl.pack200"), Pack200LibraryReader)

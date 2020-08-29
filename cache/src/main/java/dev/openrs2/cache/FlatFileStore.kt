@@ -15,7 +15,7 @@ import java.nio.file.Path
  * content-addressable version control systems, such as Git, than the native
  * format used by the client.
  */
-class FlatFileStore private constructor(
+public class FlatFileStore private constructor(
     private val root: Path,
     private val alloc: ByteBufAllocator
 ) : Store {
@@ -108,12 +108,12 @@ class FlatFileStore private constructor(
         // no-op
     }
 
-    companion object {
+    public companion object {
         private val ARCHIVE_NAME = Regex("[1-9][0-9]*")
         private val GROUP_NAME = Regex("[1-9][0-9]*[.]dat")
         private const val GROUP_EXTENSION = ".dat"
 
-        fun open(root: Path, alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT): Store {
+        public fun open(root: Path, alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT): Store {
             if (!Files.isDirectory(root)) {
                 throw FileNotFoundException()
             }
@@ -121,7 +121,7 @@ class FlatFileStore private constructor(
             return FlatFileStore(root, alloc)
         }
 
-        fun create(root: Path, alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT): Store {
+        public fun create(root: Path, alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT): Store {
             Files.createDirectories(root)
             return FlatFileStore(root, alloc)
         }

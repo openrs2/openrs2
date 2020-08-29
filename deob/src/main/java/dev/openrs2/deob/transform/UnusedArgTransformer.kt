@@ -27,7 +27,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class UnusedArgTransformer @Inject constructor(private val profile: Profile) : Transformer() {
+public class UnusedArgTransformer @Inject constructor(private val profile: Profile) : Transformer() {
     private val retainedArgs = mutableSetOf<ArgPartition>()
     private lateinit var inheritedMethodSets: DisjointSet<MemberRef>
     private var deletedArgs = 0

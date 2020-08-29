@@ -8,13 +8,13 @@ import java.io.OutputStream
 import java.util.zip.Deflater
 import java.util.zip.GZIPInputStream
 
-enum class Js5CompressionType {
+public enum class Js5CompressionType {
     NONE,
     BZIP2,
     GZIP,
     LZMA;
 
-    fun createInputStream(input: InputStream, length: Int): InputStream {
+    public fun createInputStream(input: InputStream, length: Int): InputStream {
         return when (this) {
             NONE -> input
             BZIP2 -> Bzip2.createHeaderlessInputStream(input)
@@ -23,7 +23,7 @@ enum class Js5CompressionType {
         }
     }
 
-    fun createOutputStream(output: OutputStream): OutputStream {
+    public fun createOutputStream(output: OutputStream): OutputStream {
         return when (this) {
             NONE -> output
             BZIP2 -> Bzip2.createHeaderlessOutputStream(output)
@@ -39,8 +39,8 @@ enum class Js5CompressionType {
         }
     }
 
-    companion object {
-        fun fromOrdinal(ordinal: Int): Js5CompressionType? {
+    public companion object {
+        public fun fromOrdinal(ordinal: Int): Js5CompressionType? {
             val values = values()
             return if (ordinal >= 0 && ordinal < values.size) {
                 values[ordinal]

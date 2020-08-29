@@ -4,7 +4,7 @@ import com.google.inject.AbstractModule
 import com.google.inject.Scopes
 import dev.openrs2.yaml.YamlModule
 
-object ConfigModule : AbstractModule() {
+public object ConfigModule : AbstractModule() {
     override fun configure() {
         install(YamlModule)
 

@@ -9,7 +9,7 @@ import com.github.ajalt.clikt.parameters.types.outputStream
 import java.util.zip.Inflater
 import java.util.zip.InflaterInputStream
 
-class InflateCommand : CliktCommand(name = "inflate") {
+public class InflateCommand : CliktCommand(name = "inflate") {
     private val input by option().inputStream().defaultStdin()
     private val output by option().outputStream().defaultStdout()
 

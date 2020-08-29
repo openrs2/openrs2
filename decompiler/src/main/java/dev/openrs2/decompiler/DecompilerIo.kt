@@ -9,7 +9,7 @@ import java.nio.file.Path
 import java.util.jar.JarFile
 import java.util.jar.Manifest
 
-class DecompilerIo(private val destination: Path) : IBytecodeProvider, IResultSaver, Closeable {
+public class DecompilerIo(private val destination: Path) : IBytecodeProvider, IResultSaver, Closeable {
     private val inputJars = mutableMapOf<String, JarFile>()
 
     override fun getBytecode(externalPath: String, internalPath: String?): ByteArray {

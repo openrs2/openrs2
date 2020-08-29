@@ -6,9 +6,9 @@ import com.github.ajalt.clikt.parameters.types.defaultStdin
 import com.github.ajalt.clikt.parameters.types.inputStream
 import java.util.zip.CRC32
 
-fun main(args: Array<String>) = Crc32Command().main(args)
+public fun main(args: Array<String>): Unit = Crc32Command().main(args)
 
-class Crc32Command : CliktCommand(name = "crc32") {
+public class Crc32Command : CliktCommand(name = "crc32") {
     private val input by option().inputStream().defaultStdin()
 
     override fun run() {

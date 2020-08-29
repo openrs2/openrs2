@@ -10,7 +10,7 @@ import dev.openrs2.deob.ast.util.walk
 import javax.inject.Singleton
 
 @Singleton
-class ValueOfTransformer : Transformer() {
+public class ValueOfTransformer : Transformer() {
     override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
         unit.walk { expr: ObjectCreationExpr ->
             if (expr.type.isBoxedType) {

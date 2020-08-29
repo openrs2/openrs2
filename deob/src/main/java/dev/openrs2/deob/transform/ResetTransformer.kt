@@ -19,7 +19,7 @@ import org.objectweb.asm.tree.VarInsnNode
 import javax.inject.Singleton
 
 @Singleton
-class ResetTransformer : Transformer() {
+public class ResetTransformer : Transformer() {
     private val resetMethods = mutableSetOf<MemberRef>()
 
     override fun preTransform(classPath: ClassPath) {

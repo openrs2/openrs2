@@ -2,7 +2,7 @@ package dev.openrs2.asm.classpath
 
 import org.objectweb.asm.ClassWriter
 
-class StackFrameClassWriter(private val classPath: ClassPath) : ClassWriter(COMPUTE_FRAMES) {
+public class StackFrameClassWriter(private val classPath: ClassPath) : ClassWriter(COMPUTE_FRAMES) {
     override fun getCommonSuperClass(type1: String, type2: String): String {
         var c = classPath[type1]!!
         val d = classPath[type2]!!

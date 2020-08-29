@@ -12,7 +12,7 @@ import dev.openrs2.deob.util.map.NameMap
 import dev.openrs2.util.collect.DisjointSet
 import org.objectweb.asm.tree.AbstractInsnNode
 
-class TypedRemapper private constructor(
+public class TypedRemapper private constructor(
     private val inheritedFieldSets: DisjointSet<MemberRef>,
     private val inheritedMethodSets: DisjointSet<MemberRef>,
     private val classes: Map<String, String>,
@@ -67,10 +67,10 @@ class TypedRemapper private constructor(
         return argumentNames[argument] ?: argumentName
     }
 
-    companion object {
+    public companion object {
         private val logger = InlineLogger()
 
-        fun create(classPath: ClassPath, profile: Profile, nameMap: NameMap): TypedRemapper {
+        public fun create(classPath: ClassPath, profile: Profile, nameMap: NameMap): TypedRemapper {
             val inheritedFieldSets = classPath.createInheritedFieldSets()
             val inheritedMethodSets = classPath.createInheritedMethodSets()
 

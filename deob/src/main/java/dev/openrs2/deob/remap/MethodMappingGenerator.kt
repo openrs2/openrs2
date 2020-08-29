@@ -8,7 +8,7 @@ import dev.openrs2.deob.util.map.NameMap
 import dev.openrs2.util.collect.DisjointSet
 import org.objectweb.asm.Opcodes
 
-class MethodMappingGenerator(
+public class MethodMappingGenerator(
     private val classPath: ClassPath,
     private val excludedMethods: MemberFilter,
     private val nameMap: NameMap,
@@ -16,7 +16,7 @@ class MethodMappingGenerator(
 ) {
     private var index = 0
 
-    fun generate(): Map<DisjointSet.Partition<MemberRef>, String> {
+    public fun generate(): Map<DisjointSet.Partition<MemberRef>, String> {
         val mapping = mutableMapOf<DisjointSet.Partition<MemberRef>, String>()
 
         for (partition in inheritedMethodSets) {
@@ -32,9 +32,9 @@ class MethodMappingGenerator(
         return mapping
     }
 
-    companion object {
+    public companion object {
         @Deprecated("No replacement yet")
-        fun isRenamable(
+        public fun isRenamable(
             classPath: ClassPath,
             excludedMethods: MemberFilter,
             partition: DisjointSet.Partition<MemberRef>

@@ -7,15 +7,15 @@ import dev.openrs2.asm.filter.MemberFilter
 import dev.openrs2.asm.hasCode
 import org.objectweb.asm.tree.MethodNode
 
-class ReflectedConstructorFilter private constructor(private val classes: Set<String>) : MemberFilter {
+public class ReflectedConstructorFilter private constructor(private val classes: Set<String>) : MemberFilter {
     override fun matches(owner: String, name: String, desc: String): Boolean {
         return classes.contains(owner) && name == "<init>"
     }
 
-    companion object {
+    public companion object {
         private val logger = InlineLogger()
 
-        fun create(classPath: ClassPath): MemberFilter {
+        public fun create(classPath: ClassPath): MemberFilter {
             val classes = mutableSetOf<String>()
 
             for (library in classPath.libraries) {

@@ -4,7 +4,7 @@ import dev.openrs2.util.io.DeterministicJarOutputStream
 import java.io.OutputStream
 import java.util.jar.JarOutputStream
 
-object JarLibraryWriter : AbstractJarLibraryWriter() {
+public object JarLibraryWriter : AbstractJarLibraryWriter() {
     override fun createJarOutputStream(output: OutputStream): JarOutputStream {
         return DeterministicJarOutputStream(output)
     }

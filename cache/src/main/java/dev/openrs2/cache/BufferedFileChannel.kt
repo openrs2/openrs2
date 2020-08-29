@@ -9,7 +9,7 @@ import java.nio.channels.FileChannel
 import kotlin.math.max
 import kotlin.math.min
 
-class BufferedFileChannel(
+public class BufferedFileChannel(
     private val channel: FileChannel,
     readBufferSize: Int,
     writeBufferSize: Int,
@@ -23,7 +23,7 @@ class BufferedFileChannel(
     private val writeBuffer = alloc.buffer(writeBufferSize, writeBufferSize)
     private var writePos = -1L
 
-    fun read(pos: Long, dest: ByteBuf, len: Int) {
+    public fun read(pos: Long, dest: ByteBuf, len: Int) {
         require(pos >= 0)
         require(len <= dest.writableBytes())
 
@@ -165,7 +165,7 @@ class BufferedFileChannel(
         }
     }
 
-    fun write(pos: Long, src: ByteBuf, len: Int) {
+    public fun write(pos: Long, src: ByteBuf, len: Int) {
         require(pos >= 0)
         require(len <= src.readableBytes())
 
@@ -277,7 +277,7 @@ class BufferedFileChannel(
         }
     }
 
-    fun size(): Long {
+    public fun size(): Long {
         return size
     }
 

@@ -13,7 +13,7 @@ import dev.openrs2.deob.ast.util.walk
 import javax.inject.Singleton
 
 @Singleton
-class BinaryExprOrderTransformer : Transformer() {
+public class BinaryExprOrderTransformer : Transformer() {
     override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
         unit.walk { expr: BinaryExpr ->
             val op = expr.operator.flip() ?: return@walk

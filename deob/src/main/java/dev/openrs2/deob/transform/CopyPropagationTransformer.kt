@@ -38,7 +38,7 @@ import javax.inject.Singleton
  * ```
  */
 @Singleton
-class CopyPropagationTransformer : Transformer() {
+public class CopyPropagationTransformer : Transformer() {
     private var propagatedLocals = 0
 
     override fun preTransform(classPath: ClassPath) {

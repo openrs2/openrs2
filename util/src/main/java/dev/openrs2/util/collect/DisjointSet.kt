@@ -5,13 +5,13 @@ package dev.openrs2.util.collect
  * non-overlapping subsets. New elements belong to singleton subsets. The
  * [union] function combines two subsets together into a single larger subset.
  */
-interface DisjointSet<T> : Iterable<DisjointSet.Partition<T>> {
-    interface Partition<T> : Iterable<T>
+public interface DisjointSet<T> : Iterable<DisjointSet.Partition<T>> {
+    public interface Partition<T> : Iterable<T>
 
-    val elements: Int
-    val partitions: Int
+    public val elements: Int
+    public val partitions: Int
 
-    fun add(x: T): Partition<T>
-    operator fun get(x: T): Partition<T>?
-    fun union(x: Partition<T>, y: Partition<T>)
+    public fun add(x: T): Partition<T>
+    public operator fun get(x: T): Partition<T>?
+    public fun union(x: Partition<T>, y: Partition<T>)
 }

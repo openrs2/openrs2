@@ -10,7 +10,7 @@ import java.io.IOException
  * A low-level interface for reading and writing raw groups directly to and
  * from a collection of JS5 archives.
  */
-interface Store : Flushable, Closeable {
+public interface Store : Flushable, Closeable {
     /**
      * Checks whether an archive exists.
      * @param archive the archive ID.
@@ -18,7 +18,7 @@ interface Store : Flushable, Closeable {
      * @throws IllegalArgumentException if the archive ID is out of bounds.
      * @throws IOException if an underlying I/O error occurs.
      */
-    fun exists(archive: Int): Boolean
+    public fun exists(archive: Int): Boolean
 
     /**
      * Checks whether a group exists.
@@ -29,14 +29,14 @@ interface Store : Flushable, Closeable {
      * bounds.
      * @throws IOException if an underlying I/O error occurs.
      */
-    fun exists(archive: Int, group: Int): Boolean
+    public fun exists(archive: Int, group: Int): Boolean
 
     /**
      * Lists all archives in the store.
      * @return a sorted list of archive IDs.
      * @throws IOException if an underlying I/O error occurs.
      */
-    fun list(): List<Int>
+    public fun list(): List<Int>
 
     /**
      * Lists all groups in an archive.
@@ -47,7 +47,7 @@ interface Store : Flushable, Closeable {
      * @throws FileNotFoundException if the archive does not exist.
      * @throws IOException if an underlying I/O error occurs.
      */
-    fun list(archive: Int): List<Int>
+    public fun list(archive: Int): List<Int>
 
     /**
      * Creates an archive. Does nothing if the archive already exists.
@@ -55,7 +55,7 @@ interface Store : Flushable, Closeable {
      * @throws IllegalArgumentException if the archive ID is out of bounds.
      * @throws IOException if an underlying I/O error occurs.
      */
-    fun create(archive: Int)
+    public fun create(archive: Int)
 
     /**
      * Reads a group.
@@ -71,7 +71,7 @@ interface Store : Flushable, Closeable {
      * @throws StoreCorruptException if the store is corrupt.
      * @throws IOException if an underlying I/O error occurs.
      */
-    fun read(archive: Int, group: Int): ByteBuf
+    public fun read(archive: Int, group: Int): ByteBuf
 
     /**
      * Writes a group. If the archive does not exist, it is created first. If a
@@ -87,7 +87,7 @@ interface Store : Flushable, Closeable {
      * @throws StoreFullException if the store is full.
      * @throws IOException if an underlying I/O error occurs.
      */
-    fun write(archive: Int, group: Int, buf: ByteBuf)
+    public fun write(archive: Int, group: Int, buf: ByteBuf)
 
     /**
      * Deletes an archive and all groups contained inside it. Does nothing if
@@ -96,7 +96,7 @@ interface Store : Flushable, Closeable {
      * @throws IllegalArgumentException if the archive ID is out of bounds.
      * @throws IOException if an underlying I/O error occurs.
      */
-    fun remove(archive: Int)
+    public fun remove(archive: Int)
 
     /**
      * Deletes a group. Does nothing if the archive or group does not exist.
@@ -106,17 +106,17 @@ interface Store : Flushable, Closeable {
      * bounds.
      * @throws IOException if an underlying I/O error occurs.
      */
-    fun remove(archive: Int, group: Int)
+    public fun remove(archive: Int, group: Int)
 
-    companion object {
+    public companion object {
         /**
          * The maximum archive ID.
          */
-        const val MAX_ARCHIVE = 255
+        public const val MAX_ARCHIVE: Int = 255
 
         /**
          * The maximum length of a group's contents in bytes.
          */
-        const val MAX_GROUP_SIZE = (1 shl 24) - 1
+        public const val MAX_GROUP_SIZE: Int = (1 shl 24) - 1
     }
 }

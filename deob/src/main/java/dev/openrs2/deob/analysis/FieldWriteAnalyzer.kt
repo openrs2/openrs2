@@ -9,7 +9,7 @@ import org.objectweb.asm.tree.FieldInsnNode
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.analysis.Frame
 
-class FieldWriteAnalyzer(
+public class FieldWriteAnalyzer(
     private val clazz: ClassNode,
     private val method: MethodNode,
     private val classPath: ClassPath,

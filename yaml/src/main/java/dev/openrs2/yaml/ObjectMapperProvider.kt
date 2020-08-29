@@ -8,7 +8,7 @@ import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import javax.inject.Inject
 import javax.inject.Provider
 
-class ObjectMapperProvider @Inject constructor(
+public class ObjectMapperProvider @Inject constructor(
     private val modules: Set<@JvmSuppressWildcards Module>
 ) : Provider<ObjectMapper> {
     override fun get(): ObjectMapper {

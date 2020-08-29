@@ -28,7 +28,7 @@ import java.lang.Character.UNASSIGNED
 import javax.inject.Singleton
 
 @Singleton
-class CharLiteralTransformer : Transformer() {
+public class CharLiteralTransformer : Transformer() {
     override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
         unit.walk { expr: BinaryExpr ->
             if (expr.operator in COMPARISON_OPERATORS) {

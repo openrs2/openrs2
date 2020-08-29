@@ -5,7 +5,7 @@ import com.sun.source.util.TreePathScanner
 import com.sun.source.util.Trees
 import dev.openrs2.deob.annotation.Pc
 
-class LocalVariableScanner(private val trees: Trees) : TreePathScanner<Void, MutableMap<Int, String>>() {
+public class LocalVariableScanner(private val trees: Trees) : TreePathScanner<Void, MutableMap<Int, String>>() {
     override fun visitVariable(node: VariableTree, p: MutableMap<Int, String>): Void? {
         val element = trees.getElement(currentPath)
 

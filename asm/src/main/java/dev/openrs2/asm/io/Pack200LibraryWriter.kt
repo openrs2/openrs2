@@ -9,7 +9,7 @@ import java.io.OutputStream
 import java.util.jar.JarInputStream
 import java.util.jar.Pack200
 
-object Pack200LibraryWriter : LibraryWriter {
+public object Pack200LibraryWriter : LibraryWriter {
     override fun write(output: OutputStream, classPath: ClassPath, classes: Iterable<ClassNode>) {
         ByteArrayOutputStream().use { tempOutput ->
             JarLibraryWriter.write(tempOutput, classPath, classes)

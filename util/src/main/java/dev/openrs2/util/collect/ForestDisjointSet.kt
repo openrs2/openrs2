@@ -7,7 +7,7 @@ import java.util.ArrayDeque
  * in chapter 21.3 of the third edition of CLRS. It uses path compression and
  * union by rank.
  */
-class ForestDisjointSet<T> : DisjointSet<T> {
+public class ForestDisjointSet<T> : DisjointSet<T> {
     private class Node<T>(val value: T) : DisjointSet.Partition<T> {
         val children = mutableListOf<Node<T>>()
         private var _parent = this
@@ -65,9 +65,9 @@ class ForestDisjointSet<T> : DisjointSet<T> {
     }
 
     private val nodes = mutableMapOf<T, Node<T>>()
-    override val elements
+    override val elements: Int
         get() = nodes.size
-    override var partitions = 0
+    override var partitions: Int = 0
         private set
 
     override fun add(x: T): DisjointSet.Partition<T> {

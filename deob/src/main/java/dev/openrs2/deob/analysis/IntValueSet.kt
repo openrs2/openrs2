@@ -1,7 +1,7 @@
 package dev.openrs2.deob.analysis
 
-sealed class IntValueSet {
-    data class Constant(val values: Set<Int>) : IntValueSet() {
+public sealed class IntValueSet {
+    public data class Constant(val values: Set<Int>) : IntValueSet() {
         init {
             require(values.isNotEmpty())
         }
@@ -22,7 +22,7 @@ sealed class IntValueSet {
         }
     }
 
-    object Unknown : IntValueSet() {
+    public object Unknown : IntValueSet() {
         override val singleton: Int?
             get() = null
 
@@ -31,11 +31,11 @@ sealed class IntValueSet {
         }
     }
 
-    abstract val singleton: Int?
-    abstract infix fun union(other: IntValueSet): IntValueSet
+    public abstract val singleton: Int?
+    public abstract infix fun union(other: IntValueSet): IntValueSet
 
-    companion object {
-        fun singleton(value: Int): IntValueSet {
+    public companion object {
+        public fun singleton(value: Int): IntValueSet {
             return Constant(setOf(value))
         }
     }

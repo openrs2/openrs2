@@ -21,7 +21,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class UnusedMethodTransformer @Inject constructor(private val profile: Profile) : Transformer() {
+public class UnusedMethodTransformer @Inject constructor(private val profile: Profile) : Transformer() {
     private lateinit var inheritedMethodSets: DisjointSet<MemberRef>
     private lateinit var excludedMethods: MemberFilter
     private val methodReferences = HashMultimap.create<DisjointSet.Partition<MemberRef>, MemberRef>()

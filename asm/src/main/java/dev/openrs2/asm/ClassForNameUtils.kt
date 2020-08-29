@@ -6,7 +6,7 @@ import org.objectweb.asm.tree.LdcInsnNode
 import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.MethodNode
 
-object ClassForNameUtils {
+public object ClassForNameUtils {
     private val INVOKE_MATCHER = InsnMatcher.compile("LDC INVOKESTATIC")
 
     private fun isClassForName(match: List<AbstractInsnNode>): Boolean {
@@ -31,11 +31,11 @@ object ClassForNameUtils {
         return (ldc.cst as String).toInternalClassName()
     }
 
-    fun findClassNames(method: MethodNode): Sequence<String> {
+    public fun findClassNames(method: MethodNode): Sequence<String> {
         return findLdcInsns(method).map(::internalName)
     }
 
-    fun remap(remapper: Remapper, method: MethodNode) {
+    public fun remap(remapper: Remapper, method: MethodNode) {
         for (ldc in findLdcInsns(method)) {
             val name = remapper.mapType(internalName(ldc))
             if (name != null) {

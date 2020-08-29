@@ -9,7 +9,7 @@ import org.objectweb.asm.tree.MethodNode
 import javax.inject.Singleton
 
 @Singleton
-class OriginalPcSaveTransformer : Transformer() {
+public class OriginalPcSaveTransformer : Transformer() {
     override fun transformCode(classPath: ClassPath, library: Library, clazz: ClassNode, method: MethodNode): Boolean {
         for ((pc, insn) in method.instructions.filter { it.opcode != -1 }.withIndex()) {
             classPath.originalPcs[insn] = pc

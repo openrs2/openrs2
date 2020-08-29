@@ -7,7 +7,7 @@ import java.nio.charset.CharsetDecoder
 import java.nio.charset.CharsetEncoder
 import java.nio.charset.CoderResult
 
-object ModifiedUtf8Charset : Charset("ModifiedUtf8", null) {
+public object ModifiedUtf8Charset : Charset("ModifiedUtf8", null) {
     override fun contains(cs: Charset): Boolean {
         return Charsets.UTF_8.contains(cs) || cs is Cp1252Charset || cs is ModifiedUtf8Charset
     }

@@ -14,7 +14,7 @@ import dev.openrs2.deob.ast.util.walk
 import javax.inject.Singleton
 
 @Singleton
-class IdentityTransformer : Transformer() {
+public class IdentityTransformer : Transformer() {
     override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
         unit.walk { expr: BinaryExpr ->
             @Suppress("NON_EXHAUSTIVE_WHEN")

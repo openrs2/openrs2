@@ -18,7 +18,7 @@ import dev.openrs2.deob.ast.util.walk
 import javax.inject.Singleton
 
 @Singleton
-class ForLoopConditionTransformer : Transformer() {
+public class ForLoopConditionTransformer : Transformer() {
     override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
         unit.walk { stmt: ForStmt ->
             val updatedExprs = stmt.update.mapNotNull { it.getUpdatedExpr() }

@@ -1,10 +1,10 @@
 package dev.openrs2.deob.analysis
 
-enum class IntBranchResult {
+public enum class IntBranchResult {
     ALWAYS_TAKEN, NEVER_TAKEN, UNKNOWN;
 
-    companion object {
-        fun fromTakenNotTaken(taken: Int, notTaken: Int): IntBranchResult {
+    public companion object {
+        public fun fromTakenNotTaken(taken: Int, notTaken: Int): IntBranchResult {
             require(taken != 0 || notTaken != 0)
 
             return when {

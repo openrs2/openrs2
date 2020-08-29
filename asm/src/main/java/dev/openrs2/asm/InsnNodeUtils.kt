@@ -200,7 +200,7 @@ private val THROW_RETURN_OPCODES = listOf(
     Opcodes.ATHROW
 )
 
-val AbstractInsnNode.nextReal: AbstractInsnNode?
+public val AbstractInsnNode.nextReal: AbstractInsnNode?
     get() {
         var insn = next
         while (insn != null && insn.opcode == -1) {
@@ -209,7 +209,7 @@ val AbstractInsnNode.nextReal: AbstractInsnNode?
         return insn
     }
 
-val AbstractInsnNode.previousReal: AbstractInsnNode?
+public val AbstractInsnNode.previousReal: AbstractInsnNode?
     get() {
         var insn = previous
         while (insn != null && insn.opcode == -1) {
@@ -218,7 +218,7 @@ val AbstractInsnNode.previousReal: AbstractInsnNode?
         return insn
     }
 
-val AbstractInsnNode.nextVirtual: AbstractInsnNode?
+public val AbstractInsnNode.nextVirtual: AbstractInsnNode?
     get() {
         var insn = next
         while (insn != null && insn.opcode != -1) {
@@ -227,7 +227,7 @@ val AbstractInsnNode.nextVirtual: AbstractInsnNode?
         return insn
     }
 
-val AbstractInsnNode.previousVirtual: AbstractInsnNode?
+public val AbstractInsnNode.previousVirtual: AbstractInsnNode?
     get() {
         var insn = previous
         while (insn != null && insn.opcode != -1) {
@@ -236,7 +236,7 @@ val AbstractInsnNode.previousVirtual: AbstractInsnNode?
         return insn
     }
 
-val AbstractInsnNode.intConstant: Int?
+public val AbstractInsnNode.intConstant: Int?
     get() = when (this) {
         is IntInsnNode -> {
             if (opcode == Opcodes.BIPUSH || opcode == Opcodes.SIPUSH) {
@@ -265,7 +265,7 @@ val AbstractInsnNode.intConstant: Int?
         }
     }
 
-val AbstractInsnNode.isSequential: Boolean
+public val AbstractInsnNode.isSequential: Boolean
     get() = when (this) {
         is LabelNode -> false
         is JumpInsnNode -> false
@@ -274,14 +274,14 @@ val AbstractInsnNode.isSequential: Boolean
         else -> opcode !in THROW_RETURN_OPCODES
     }
 
-val AbstractInsnNode.isPure: Boolean
+public val AbstractInsnNode.isPure: Boolean
     get() = when (opcode) {
         in PURE_OPCODES -> true
         in IMPURE_OPCODES -> false
         else -> throw IllegalArgumentException()
     }
 
-fun Int.toAbstractInsnNode(): AbstractInsnNode = when (this) {
+public fun Int.toAbstractInsnNode(): AbstractInsnNode = when (this) {
     -1 -> InsnNode(Opcodes.ICONST_M1)
     0 -> InsnNode(Opcodes.ICONST_0)
     1 -> InsnNode(Opcodes.ICONST_1)
@@ -294,7 +294,7 @@ fun Int.toAbstractInsnNode(): AbstractInsnNode = when (this) {
     else -> LdcInsnNode(this)
 }
 
-fun AbstractInsnNode.toPrettyString(): String {
+public fun AbstractInsnNode.toPrettyString(): String {
     val printer = Textifier()
 
     val visitor = TraceMethodVisitor(printer)
@@ -308,7 +308,7 @@ fun AbstractInsnNode.toPrettyString(): String {
     }
 }
 
-fun TryCatchBlockNode.isBodyEmpty(): Boolean {
+public fun TryCatchBlockNode.isBodyEmpty(): Boolean {
     var current = start.next
 
     while (true) {

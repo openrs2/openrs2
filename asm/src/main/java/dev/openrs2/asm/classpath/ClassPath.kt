@@ -10,10 +10,10 @@ import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.ClassNode
 import java.util.IdentityHashMap
 
-class ClassPath(
+public class ClassPath(
     private val runtime: ClassLoader,
     private val dependencies: List<Library>,
-    val libraries: List<Library>
+    public val libraries: List<Library>
 ) {
     private val cache = mutableMapOf<String, ClassMetadata?>()
 
@@ -26,9 +26,9 @@ class ClassPath(
      * Transformers to avoid adding extraneous labels until the last possible
      * moment, which would confuse some of our analyses if added earlier.
      */
-    val originalPcs = IdentityHashMap<AbstractInsnNode, Int>()
+    public val originalPcs: MutableMap<AbstractInsnNode, Int> = IdentityHashMap()
 
-    val libraryClasses: Sequence<ClassMetadata>
+    public val libraryClasses: Sequence<ClassMetadata>
         get() = libraries.asSequence().flatten().map { get(it.name)!! }
 
     private inline fun computeIfAbsent(name: String, f: (String) -> ClassMetadata?): ClassMetadata? {
@@ -41,7 +41,7 @@ class ClassPath(
         return clazz
     }
 
-    operator fun get(name: String): ClassMetadata? = computeIfAbsent(name) {
+    public operator fun get(name: String): ClassMetadata? = computeIfAbsent(name) {
         for (library in libraries) {
             val clazz = library[name]
             if (clazz != null) {
@@ -65,7 +65,7 @@ class ClassPath(
         return@computeIfAbsent ReflectionClassMetadata(this, clazz)
     }
 
-    fun getClassNode(name: String): ClassNode? {
+    public fun getClassNode(name: String): ClassNode? {
         for (library in libraries) {
             val clazz = library[name]
             if (clazz != null) {
@@ -76,7 +76,7 @@ class ClassPath(
         return null
     }
 
-    fun remap(remapper: ExtendedRemapper) {
+    public fun remap(remapper: ExtendedRemapper) {
         for (library in libraries) {
             library.remap(remapper)
         }
@@ -84,11 +84,11 @@ class ClassPath(
         cache.clear()
     }
 
-    fun createInheritedFieldSets(): DisjointSet<MemberRef> {
+    public fun createInheritedFieldSets(): DisjointSet<MemberRef> {
         return createInheritedMemberSets(ClassMetadata::fields, ClassMetadata::getFieldAccess, fields = true)
     }
 
-    fun createInheritedMethodSets(): DisjointSet<MemberRef> {
+    public fun createInheritedMethodSets(): DisjointSet<MemberRef> {
         return createInheritedMemberSets(ClassMetadata::methods, ClassMetadata::getMethodAccess, fields = false)
     }
 

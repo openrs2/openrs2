@@ -20,7 +20,7 @@ import dev.openrs2.deob.ast.util.walk
 import javax.inject.Singleton
 
 @Singleton
-class EncloseTransformer : Transformer() {
+public class EncloseTransformer : Transformer() {
     private enum class Associativity {
         LEFT,
         RIGHT,

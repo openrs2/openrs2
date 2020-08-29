@@ -35,7 +35,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class GlTransformer @Inject constructor(private val registry: GlRegistry) : Transformer() {
+public class GlTransformer @Inject constructor(private val registry: GlRegistry) : Transformer() {
     private val enums = mutableSetOf<GlEnum>()
     private var glUnit: CompilationUnit? = null
 

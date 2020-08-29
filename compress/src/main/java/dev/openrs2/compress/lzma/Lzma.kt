@@ -8,12 +8,12 @@ import org.tukaani.xz.LZMAOutputStream
 import java.io.InputStream
 import java.io.OutputStream
 
-object Lzma {
-    val BEST_SPEED = LZMA2Options(LZMA2Options.PRESET_MIN)
-    val DEFAULT_COMPRESSION = LZMA2Options(LZMA2Options.PRESET_DEFAULT)
-    val BEST_COMPRESSION = LZMA2Options(LZMA2Options.PRESET_MAX)
+public object Lzma {
+    public val BEST_SPEED: LZMA2Options = LZMA2Options(LZMA2Options.PRESET_MIN)
+    public val DEFAULT_COMPRESSION: LZMA2Options = LZMA2Options(LZMA2Options.PRESET_DEFAULT)
+    public val BEST_COMPRESSION: LZMA2Options = LZMA2Options(LZMA2Options.PRESET_MAX)
 
-    fun createHeaderlessInputStream(input: InputStream, length: Long): InputStream {
+    public fun createHeaderlessInputStream(input: InputStream, length: Long): InputStream {
         val headerInput = LittleEndianDataInputStream(input)
 
         val properties = headerInput.readByte()
@@ -22,7 +22,7 @@ object Lzma {
         return LZMAInputStream(input, length, properties, dictionarySize)
     }
 
-    fun createHeaderlessOutputStream(output: OutputStream, options: LZMA2Options): OutputStream {
+    public fun createHeaderlessOutputStream(output: OutputStream, options: LZMA2Options): OutputStream {
         val headerOutput = LittleEndianDataOutputStream(output)
         headerOutput.writeByte((options.pb * 5 + options.lp) * 9 + options.lc)
         headerOutput.writeInt(options.dictSize)

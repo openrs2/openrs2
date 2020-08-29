@@ -8,7 +8,7 @@ import org.objectweb.asm.tree.IincInsnNode
 import org.objectweb.asm.tree.analysis.BasicInterpreter
 import org.objectweb.asm.tree.analysis.Interpreter
 
-class IntInterpreter(private val args: Array<IntValueSet>) : Interpreter<IntValue>(Opcodes.ASM8) {
+public class IntInterpreter(private val args: Array<IntValueSet>) : Interpreter<IntValue>(Opcodes.ASM8) {
     private val basicInterpreter = BasicInterpreter()
 
     override fun newValue(type: Type?): IntValue? {

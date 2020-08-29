@@ -26,7 +26,7 @@ import dev.openrs2.deob.ast.transform.Transformer
 import dev.openrs2.deob.ast.transform.UnencloseTransformer
 import dev.openrs2.deob.ast.transform.ValueOfTransformer
 
-object AstDeobfuscatorModule : AbstractModule() {
+public object AstDeobfuscatorModule : AbstractModule() {
     override fun configure() {
         bind(GlRegistry::class.java)
             .toProvider(GlRegistryProvider::class.java)

@@ -18,7 +18,7 @@ import org.objectweb.asm.tree.ParameterNode
 import org.objectweb.asm.tree.TryCatchBlockNode
 import org.objectweb.asm.tree.TypeInsnNode
 
-fun ClassNode.remap(remapper: ExtendedRemapper) {
+public fun ClassNode.remap(remapper: ExtendedRemapper) {
     val originalName = name
     name = remapper.mapType(originalName)
     signature = remapper.mapSignature(signature, false)
@@ -46,20 +46,20 @@ fun ClassNode.remap(remapper: ExtendedRemapper) {
     }
 }
 
-fun InnerClassNode.remap(remapper: Remapper) {
+public fun InnerClassNode.remap(remapper: Remapper) {
     name = remapper.mapType(name)
     outerName = remapper.mapType(outerName)
     innerName = remapper.mapType(innerName)
 }
 
-fun FieldNode.remap(remapper: ExtendedRemapper, owner: String) {
+public fun FieldNode.remap(remapper: ExtendedRemapper, owner: String) {
     name = remapper.mapFieldName(owner, name, desc)
     desc = remapper.mapDesc(desc)
     signature = remapper.mapSignature(signature, true)
     value = remapper.mapValue(value)
 }
 
-fun MethodNode.remap(remapper: ExtendedRemapper, owner: String) {
+public fun MethodNode.remap(remapper: ExtendedRemapper, owner: String) {
     if (parameters == null) {
         parameters = List(Type.getArgumentTypes(desc).size) { ParameterNode(null, 0) }
     }
@@ -86,15 +86,21 @@ fun MethodNode.remap(remapper: ExtendedRemapper, owner: String) {
     }
 }
 
-fun ParameterNode.remap(remapper: ExtendedRemapper, owner: String, methodName: String, desc: String, index: Int) {
+public fun ParameterNode.remap(
+    remapper: ExtendedRemapper,
+    owner: String,
+    methodName: String,
+    desc: String,
+    index: Int
+) {
     name = remapper.mapArgumentName(owner, methodName, desc, index, name)
 }
 
-fun TryCatchBlockNode.remap(remapper: Remapper) {
+public fun TryCatchBlockNode.remap(remapper: Remapper) {
     type = remapper.mapType(type)
 }
 
-fun AbstractInsnNode.remap(remapper: ExtendedRemapper) {
+public fun AbstractInsnNode.remap(remapper: ExtendedRemapper) {
     when (this) {
         is FrameNode -> throw UnsupportedOperationException("SKIP_FRAMES and COMPUTE_FRAMES must be used")
         is FieldInsnNode -> {

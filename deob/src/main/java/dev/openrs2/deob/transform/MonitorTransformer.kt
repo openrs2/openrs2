@@ -43,7 +43,7 @@ import javax.inject.Singleton
  * necessary for Fernflower compatibility.
  */
 @Singleton
-class MonitorTransformer : Transformer() {
+public class MonitorTransformer : Transformer() {
     private var subroutinesInlined = 0
     private var tryRangesExtended = 0
     private var loadsReplaced = 0

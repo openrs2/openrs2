@@ -8,7 +8,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class BundlerTransformer @Inject constructor(
+public class BundlerTransformer @Inject constructor(
     @BundlerQualifier private val transformers: Set<@JvmSuppressWildcards Transformer>
 ) : Transformer() {
     override fun transform(classPath: ClassPath) {

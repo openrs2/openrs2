@@ -8,7 +8,7 @@ import com.github.ajalt.clikt.parameters.types.inputStream
 import com.github.ajalt.clikt.parameters.types.outputStream
 import dev.openrs2.compress.bzip2.Bzip2
 
-class Bzip2Command : CliktCommand(name = "bzip2") {
+public class Bzip2Command : CliktCommand(name = "bzip2") {
     private val input by option().inputStream().defaultStdin()
     private val output by option().outputStream().defaultStdout()
 

@@ -13,7 +13,7 @@ import org.objectweb.asm.tree.MethodNode
 import javax.inject.Singleton
 
 @Singleton
-class BitShiftTransformer : Transformer() {
+public class BitShiftTransformer : Transformer() {
     private var simplified = 0
 
     override fun preTransform(classPath: ClassPath) {

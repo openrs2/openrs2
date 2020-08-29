@@ -15,7 +15,7 @@ import org.objectweb.asm.tree.MethodNode
 import javax.inject.Singleton
 
 @Singleton
-class MacResizeTransformer : Transformer() {
+public class MacResizeTransformer : Transformer() {
     private var branchesRemoved = 0
 
     override fun preTransform(classPath: ClassPath) {

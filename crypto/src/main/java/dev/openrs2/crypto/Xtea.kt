@@ -7,20 +7,20 @@ private const val ROUNDS = 32
 private const val BLOCK_SIZE = 8
 private const val BLOCK_SIZE_MASK = BLOCK_SIZE - 1
 
-class XteaKey(
+public class XteaKey(
     private val k0: Int,
     private val k1: Int,
     private val k2: Int,
     private val k3: Int
 ) {
-    val isZero: Boolean
+    public val isZero: Boolean
         get() = k0 == 0 && k1 == 0 && k2 == 0 && k3 == 0
 
-    fun toIntArray(): IntArray {
+    public fun toIntArray(): IntArray {
         return intArrayOf(k0, k1, k2, k3)
     }
 
-    fun toHex(): String {
+    public fun toHex(): String {
         return Integer.toUnsignedString(k0, 16).padStart(8, '0') +
             Integer.toUnsignedString(k1, 16).padStart(8, '0') +
             Integer.toUnsignedString(k2, 16).padStart(8, '0') +
@@ -31,16 +31,16 @@ class XteaKey(
         return toHex()
     }
 
-    companion object {
-        val ZERO = XteaKey(0, 0, 0, 0)
+    public companion object {
+        public val ZERO: XteaKey = XteaKey(0, 0, 0, 0)
 
-        fun fromIntArray(a: IntArray): XteaKey {
+        public fun fromIntArray(a: IntArray): XteaKey {
             require(a.size == 4)
 
             return XteaKey(a[0], a[1], a[2], a[3])
         }
 
-        fun fromHex(s: String): XteaKey {
+        public fun fromHex(s: String): XteaKey {
             require(s.length == 32)
 
             val k0 = Integer.parseUnsignedInt(s, 0, 8, 16)
@@ -53,7 +53,7 @@ class XteaKey(
     }
 }
 
-fun ByteBuf.xteaEncrypt(index: Int, length: Int, key: XteaKey) {
+public fun ByteBuf.xteaEncrypt(index: Int, length: Int, key: XteaKey) {
     val k = key.toIntArray()
 
     val end = index + (length and BLOCK_SIZE_MASK.inv())
@@ -73,7 +73,7 @@ fun ByteBuf.xteaEncrypt(index: Int, length: Int, key: XteaKey) {
     }
 }
 
-fun ByteBuf.xteaDecrypt(index: Int, length: Int, key: XteaKey) {
+public fun ByteBuf.xteaDecrypt(index: Int, length: Int, key: XteaKey) {
     val k = key.toIntArray()
 
     val end = index + (length and BLOCK_SIZE_MASK.inv())

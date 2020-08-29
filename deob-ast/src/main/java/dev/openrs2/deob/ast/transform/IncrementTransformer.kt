@@ -10,7 +10,7 @@ import dev.openrs2.deob.ast.util.walk
 import javax.inject.Singleton
 
 @Singleton
-class IncrementTransformer : Transformer() {
+public class IncrementTransformer : Transformer() {
     override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
         unit.walk { stmt: ExpressionStmt ->
             val expr = stmt.expression

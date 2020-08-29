@@ -5,7 +5,7 @@ import com.google.inject.AbstractModule
 import com.google.inject.multibindings.Multibinder
 import dev.openrs2.yaml.YamlModule
 
-object AsmModule : AbstractModule() {
+public object AsmModule : AbstractModule() {
     override fun configure() {
         install(YamlModule)
 

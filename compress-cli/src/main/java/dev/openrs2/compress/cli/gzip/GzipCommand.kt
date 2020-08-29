@@ -12,7 +12,7 @@ import com.github.ajalt.clikt.parameters.types.outputStream
 import dev.openrs2.compress.gzip.Gzip
 import java.util.zip.Deflater
 
-class GzipCommand : CliktCommand(name = "gzip") {
+public class GzipCommand : CliktCommand(name = "gzip") {
     private val input by option().inputStream().defaultStdin()
     private val output by option().outputStream().defaultStdout()
     private val level by option().int().default(Deflater.BEST_COMPRESSION).validate {

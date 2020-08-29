@@ -2,8 +2,8 @@ package dev.openrs2.decompiler
 
 import java.nio.file.Path
 
-class Library(
-    val source: Path,
-    val destination: Path,
-    val dependencies: List<Path> = emptyList()
+public class Library(
+    public val source: Path,
+    public val destination: Path,
+    public val dependencies: List<Path> = emptyList()
 )

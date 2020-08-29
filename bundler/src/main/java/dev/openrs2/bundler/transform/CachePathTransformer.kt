@@ -12,7 +12,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class CachePathTransformer @Inject constructor(
+public class CachePathTransformer @Inject constructor(
     private val config: Config
 ) : Transformer() {
     private var paths = 0

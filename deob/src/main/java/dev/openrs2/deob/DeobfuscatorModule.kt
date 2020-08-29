@@ -37,7 +37,7 @@ import dev.openrs2.deob.transform.UnusedMethodTransformer
 import dev.openrs2.deob.transform.VisibilityTransformer
 import dev.openrs2.deob.util.DeobfuscatorUtilModule
 
-object DeobfuscatorModule : AbstractModule() {
+public object DeobfuscatorModule : AbstractModule() {
     override fun configure() {
         install(BundlerModule)
         install(DeobfuscatorUtilModule)

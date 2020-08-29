@@ -14,7 +14,7 @@ import org.objectweb.asm.tree.MethodNode
 import javax.inject.Singleton
 
 @Singleton
-class HostCheckTransformer : Transformer() {
+public class HostCheckTransformer : Transformer() {
     private var hostChecks = 0
 
     override fun preTransform(classPath: ClassPath) {

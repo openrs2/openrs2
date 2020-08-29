@@ -5,20 +5,20 @@ import dev.openrs2.asm.classpath.Library
 
 private val BOUNDARY_CHARS = charArrayOf('/', '!')
 
-fun String.splitAtLibraryBoundary(): Pair<String, String> {
+public fun String.splitAtLibraryBoundary(): Pair<String, String> {
     val index = indexOf('!')
     return Pair(substring(0, index), substring(index + 1))
 }
 
-fun String.getLibraryAndPackageName(): String {
+public fun String.getLibraryAndPackageName(): String {
     return substring(0, lastIndexOfAny(BOUNDARY_CHARS) + 1)
 }
 
-fun String.getClassName(): String {
+public fun String.getClassName(): String {
     return substring(lastIndexOfAny(BOUNDARY_CHARS) + 1)
 }
 
-class ClassNamePrefixRemapper(vararg libraries: Library) : ExtendedRemapper() {
+public class ClassNamePrefixRemapper(vararg libraries: Library) : ExtendedRemapper() {
     private val mapping = mutableMapOf<String, String>()
 
     init {
@@ -37,7 +37,7 @@ class ClassNamePrefixRemapper(vararg libraries: Library) : ExtendedRemapper() {
     }
 }
 
-object StripClassNamePrefixRemapper : ExtendedRemapper() {
+public object StripClassNamePrefixRemapper : ExtendedRemapper() {
     override fun map(internalName: String): String {
         return internalName.substring(internalName.indexOf('!') + 1)
     }

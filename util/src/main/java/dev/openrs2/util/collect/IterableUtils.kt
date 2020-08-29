@@ -1,10 +1,10 @@
 package dev.openrs2.util.collect
 
-fun <T> MutableIterable<T>.removeFirst(): T {
+public fun <T> MutableIterable<T>.removeFirst(): T {
     return removeFirstOrNull() ?: throw NoSuchElementException()
 }
 
-fun <T> MutableIterable<T>.removeFirstOrNull(): T? {
+public fun <T> MutableIterable<T>.removeFirstOrNull(): T? {
     val iterator = iterator()
     if (!iterator.hasNext()) {
         return null
@@ -16,7 +16,7 @@ fun <T> MutableIterable<T>.removeFirstOrNull(): T? {
     return element
 }
 
-inline fun <T> MutableIterable<T>.removeFirst(predicate: (T) -> Boolean): Boolean {
+public inline fun <T> MutableIterable<T>.removeFirst(predicate: (T) -> Boolean): Boolean {
     val iterator = iterator()
     for (element in iterator) {
         if (predicate(element)) {

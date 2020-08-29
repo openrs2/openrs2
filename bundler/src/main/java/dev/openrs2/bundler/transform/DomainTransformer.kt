@@ -12,7 +12,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class DomainTransformer @Inject constructor(
+public class DomainTransformer @Inject constructor(
     private val config: Config
 ) : Transformer() {
     private var domains = 0

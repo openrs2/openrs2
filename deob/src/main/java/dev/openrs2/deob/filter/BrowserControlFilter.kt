@@ -8,15 +8,15 @@ import dev.openrs2.asm.hasCode
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.MethodInsnNode
 
-class BrowserControlFilter private constructor(private val clazz: String) : MemberFilter {
+public class BrowserControlFilter private constructor(private val clazz: String) : MemberFilter {
     override fun matches(owner: String, name: String, desc: String): Boolean {
         return clazz == owner
     }
 
-    companion object {
+    public companion object {
         private val logger = InlineLogger()
 
-        fun create(classPath: ClassPath): MemberFilter {
+        public fun create(classPath: ClassPath): MemberFilter {
             val browserControlClass = findBrowserControlClass(classPath)
 
             return if (browserControlClass != null) {

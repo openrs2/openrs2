@@ -7,7 +7,7 @@ import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.VarInsnNode
 import java.util.Collections
 
-class CopyPropagationAnalyzer(owner: String, method: MethodNode) :
+public class CopyPropagationAnalyzer(owner: String, method: MethodNode) :
     DataFlowAnalyzer<Set<CopyAssignment>>(owner, method) {
 
     private val allAssignments = mutableSetOf<CopyAssignment>()

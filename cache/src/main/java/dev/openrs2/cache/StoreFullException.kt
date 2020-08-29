@@ -2,4 +2,4 @@ package dev.openrs2.cache
 
 import java.io.IOException
 
-class StoreFullException : IOException()
+public class StoreFullException : IOException()

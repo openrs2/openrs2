@@ -17,7 +17,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class OriginalPcRestoreTransformer @Inject constructor(private val nameMap: NameMap) : Transformer() {
+public class OriginalPcRestoreTransformer @Inject constructor(private val nameMap: NameMap) : Transformer() {
     private var originalPcsRestored = 0
 
     override fun preTransform(classPath: ClassPath) {

@@ -13,7 +13,7 @@ import org.objectweb.asm.tree.MethodNode
 import javax.inject.Singleton
 
 @Singleton
-class CounterTransformer : Transformer() {
+public class CounterTransformer : Transformer() {
     private val counters = mutableSetOf<MemberRef>()
 
     override fun preTransform(classPath: ClassPath) {

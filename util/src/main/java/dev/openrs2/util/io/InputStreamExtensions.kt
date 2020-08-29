@@ -3,7 +3,7 @@ package dev.openrs2.util.io
 import java.io.InputStream
 import java.util.Arrays
 
-fun InputStream.contentEquals(other: InputStream): Boolean {
+public fun InputStream.contentEquals(other: InputStream): Boolean {
     val buf1 = ByteArray(4096)
     val buf2 = ByteArray(4096)
 

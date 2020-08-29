@@ -6,7 +6,7 @@ import dev.openrs2.asm.filter.ClassFilter
 import dev.openrs2.deob.util.map.NameMap
 import org.objectweb.asm.Opcodes
 
-class ClassMappingGenerator(
+public class ClassMappingGenerator(
     private val classPath: ClassPath,
     private val excludedClasses: ClassFilter,
     private val nameMap: NameMap
@@ -14,7 +14,7 @@ class ClassMappingGenerator(
     private val nameGenerator = NameGenerator()
     private val mapping = mutableMapOf<String, String>()
 
-    fun generate(): Map<String, String> {
+    public fun generate(): Map<String, String> {
         for (clazz in classPath.libraryClasses) {
             populateMapping(clazz)
         }

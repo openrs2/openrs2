@@ -17,7 +17,7 @@ import kotlin.math.min
  * A [Store] implementation compatible with the native `main_file_cache.dat2`
  * and `main_file_cache.idx*` format used by the client.
  */
-class DiskStore private constructor(
+public class DiskStore private constructor(
     private val root: Path,
     private val data: BufferedFileChannel,
     private val indexes: Array<BufferedFileChannel?>,
@@ -436,7 +436,7 @@ class DiskStore private constructor(
         }
     }
 
-    companion object {
+    public companion object {
         private const val INDEX_ENTRY_SIZE = 6
 
         private const val BLOCK_HEADER_SIZE = 8
@@ -460,7 +460,7 @@ class DiskStore private constructor(
             return root.resolve("main_file_cache.idx$archive")
         }
 
-        fun open(root: Path, alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT): Store {
+        public fun open(root: Path, alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT): Store {
             val data = BufferedFileChannel(
                 FileChannel.open(dataPath(root), READ, WRITE),
                 DATA_BUFFER_SIZE,
@@ -485,7 +485,7 @@ class DiskStore private constructor(
             return DiskStore(root, data, archives, alloc)
         }
 
-        fun create(root: Path, alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT): Store {
+        public fun create(root: Path, alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT): Store {
             Files.createDirectories(root)
 
             val data = BufferedFileChannel(

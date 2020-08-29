@@ -15,7 +15,7 @@ import java.util.SortedMap
 import java.util.TreeMap
 import kotlin.math.max
 
-class LibraryRemapper(
+public class LibraryRemapper(
     private val remapper: ExtendedRemapper,
     private var classes: SortedMap<String, ClassNode>
 ) {
@@ -34,7 +34,7 @@ class LibraryRemapper(
     private val splicedFields = mutableSetOf<MemberRef>()
     private val methods = mutableListOf<Method>()
 
-    fun remap(): SortedMap<String, ClassNode> {
+    public fun remap(): SortedMap<String, ClassNode> {
         // extract static fields/methods that are being moved between classes
         extractFields()
         extractMethods()

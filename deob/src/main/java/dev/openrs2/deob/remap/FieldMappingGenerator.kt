@@ -8,7 +8,7 @@ import dev.openrs2.util.collect.DisjointSet
 import dev.openrs2.util.indefiniteArticle
 import org.objectweb.asm.Type
 
-class FieldMappingGenerator(
+public class FieldMappingGenerator(
     private val classPath: ClassPath,
     private val excludedFields: MemberFilter,
     private val nameMap: NameMap,
@@ -17,7 +17,7 @@ class FieldMappingGenerator(
 ) {
     private val nameGenerator = NameGenerator()
 
-    fun generate(): Map<DisjointSet.Partition<MemberRef>, String> {
+    public fun generate(): Map<DisjointSet.Partition<MemberRef>, String> {
         val mapping = mutableMapOf<DisjointSet.Partition<MemberRef>, String>()
 
         for (partition in inheritedFieldSets) {

@@ -13,8 +13,8 @@ import com.github.michaelbull.logging.InlineLogger
 import dev.openrs2.deob.util.Module
 import java.util.function.Function
 
-class Library(
-    val name: String,
+public class Library(
+    public val name: String,
     private val root: SourceRoot
 ) : Iterable<CompilationUnit> {
     private val units = mutableMapOf<String, CompilationUnit>()
@@ -26,7 +26,7 @@ class Library(
         }
     }
 
-    operator fun get(name: String): CompilationUnit? {
+    public operator fun get(name: String): CompilationUnit? {
         return units[name]
     }
 
@@ -34,12 +34,12 @@ class Library(
         return units.values.iterator()
     }
 
-    fun save() {
+    public fun save() {
         logger.info { "Saving root ${root.root}" }
         root.saveAll()
     }
 
-    companion object {
+    public companion object {
         private val logger = InlineLogger()
 
         private val PC_ANNOTATION_REGEX = Regex("@Pc\\(([0-9]+)\\)\\s+")
@@ -54,7 +54,7 @@ class Library(
             )::print
         ).andThen(::stripNewlineAfterPcAnnotation)
 
-        fun parse(module: Module): Library {
+        public fun parse(module: Module): Library {
             logger.info { "Parsing root ${module.sources}" }
 
             val solver = CombinedTypeSolver(

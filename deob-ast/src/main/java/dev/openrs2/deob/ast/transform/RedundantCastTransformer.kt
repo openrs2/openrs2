@@ -25,7 +25,7 @@ import dev.openrs2.deob.ast.util.walk
 import javax.inject.Singleton
 
 @Singleton
-class RedundantCastTransformer : Transformer() {
+public class RedundantCastTransformer : Transformer() {
     override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
         // remove double casts
         unit.walk { expr: CastExpr ->

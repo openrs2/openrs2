@@ -10,7 +10,7 @@ import dev.openrs2.deob.ast.util.walk
 import javax.inject.Singleton
 
 @Singleton
-class NegativeLiteralTransformer : Transformer() {
+public class NegativeLiteralTransformer : Transformer() {
     override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
         unit.walk { expr: UnaryExpr ->
             val operand = expr.expression

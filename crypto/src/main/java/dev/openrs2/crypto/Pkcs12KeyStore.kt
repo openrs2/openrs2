@@ -23,20 +23,20 @@ import java.time.ZoneOffset
 import java.util.Date
 import java.util.jar.JarFile
 
-class Pkcs12KeyStore private constructor(privateKeyEntry: KeyStore.PrivateKeyEntry, signerName: String) {
+public class Pkcs12KeyStore private constructor(privateKeyEntry: KeyStore.PrivateKeyEntry, signerName: String) {
     private val signer = JarSigner.Builder(privateKeyEntry)
         .signatureAlgorithm("SHA256withRSA")
         .digestAlgorithm("SHA-256")
         .signerName(signerName)
         .build()
 
-    fun signJar(input: Path, output: OutputStream) {
+    public fun signJar(input: Path, output: OutputStream) {
         JarFile(input.toFile()).use { file ->
             signer.sign(file, output)
         }
     }
 
-    companion object {
+    public companion object {
         private const val ALIAS = "openrs2"
 
         private const val PASSWORD = ALIAS
@@ -51,7 +51,7 @@ class Pkcs12KeyStore private constructor(privateKeyEntry: KeyStore.PrivateKeyEnt
         private val SHA256_WITH_RSA = AlgorithmIdentifier(PKCSObjectIdentifiers.sha256WithRSAEncryption)
         private val SHA256 = AlgorithmIdentifier(NISTObjectIdentifiers.id_sha256)
 
-        fun open(path: Path, signerName: String): Pkcs12KeyStore {
+        public fun open(path: Path, signerName: String): Pkcs12KeyStore {
             val keyStore = KeyStore.getInstance("PKCS12")
             if (Files.exists(path)) {
                 Files.newInputStream(path).use { input ->

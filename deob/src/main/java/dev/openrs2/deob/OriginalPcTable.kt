@@ -6,7 +6,7 @@ import org.objectweb.asm.ClassWriter
 import org.objectweb.asm.Label
 import org.objectweb.asm.tree.LabelNode
 
-class OriginalPcTable(
+public class OriginalPcTable(
     private val pcs: Map<LabelNode, Int>,
     private val names: Map<Int, String>
 ) : Attribute("OriginalPcTable") {

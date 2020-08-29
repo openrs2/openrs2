@@ -37,7 +37,7 @@ import javax.lang.model.element.VariableElement
 @SupportedOptions(
     "map"
 )
-class NameMapProcessor : AbstractProcessor() {
+public class NameMapProcessor : AbstractProcessor() {
     private val map = NameMap()
     private val mapper: ObjectMapper
     private lateinit var trees: Trees

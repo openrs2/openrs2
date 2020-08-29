@@ -23,7 +23,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class VisibilityTransformer @Inject constructor(private val profile: Profile) : Transformer() {
+public class VisibilityTransformer @Inject constructor(private val profile: Profile) : Transformer() {
     private lateinit var inheritedFieldSets: DisjointSet<MemberRef>
     private lateinit var inheritedMethodSets: DisjointSet<MemberRef>
     private lateinit var entryPoints: MemberFilter

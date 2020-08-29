@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule
 import javax.inject.Singleton
 
 @Singleton
-class AsmJacksonModule : SimpleModule() {
+public class AsmJacksonModule : SimpleModule() {
     init {
         addDeserializer(MemberRef::class.java, MemberRefDeserializer)
         addKeyDeserializer(MemberRef::class.java, MemberRefKeyDeserializer)

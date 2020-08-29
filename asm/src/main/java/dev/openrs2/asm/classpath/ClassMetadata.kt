@@ -2,16 +2,16 @@ package dev.openrs2.asm.classpath
 
 import dev.openrs2.asm.MemberDesc
 
-abstract class ClassMetadata {
-    abstract val name: String
-    abstract val dependency: Boolean
-    abstract val `interface`: Boolean
-    abstract val superClass: ClassMetadata?
-    abstract val superInterfaces: List<ClassMetadata>
-    abstract val fields: List<MemberDesc>
-    abstract val methods: List<MemberDesc>
+public abstract class ClassMetadata {
+    public abstract val name: String
+    public abstract val dependency: Boolean
+    public abstract val `interface`: Boolean
+    public abstract val superClass: ClassMetadata?
+    public abstract val superInterfaces: List<ClassMetadata>
+    public abstract val fields: List<MemberDesc>
+    public abstract val methods: List<MemberDesc>
 
-    val superClassAndInterfaces: List<ClassMetadata>
+    public val superClassAndInterfaces: List<ClassMetadata>
         get() {
             val clazz = superClass
             return if (clazz != null) {
@@ -21,10 +21,10 @@ abstract class ClassMetadata {
             }
         }
 
-    abstract fun getFieldAccess(field: MemberDesc): Int?
-    abstract fun getMethodAccess(method: MemberDesc): Int?
+    public abstract fun getFieldAccess(field: MemberDesc): Int?
+    public abstract fun getMethodAccess(method: MemberDesc): Int?
 
-    fun isOverride(method: MemberDesc): Boolean {
+    public fun isOverride(method: MemberDesc): Boolean {
         val superClass = this.superClass
         if (superClass != null) {
             if (method in superClass.methods) {
@@ -49,7 +49,7 @@ abstract class ClassMetadata {
         return false
     }
 
-    fun isAssignableFrom(type: ClassMetadata): Boolean {
+    public fun isAssignableFrom(type: ClassMetadata): Boolean {
         return type == this || isSuperClassOf(type) || isSuperInterfaceOf(type)
     }
 
@@ -71,7 +71,7 @@ abstract class ClassMetadata {
         return false
     }
 
-    fun resolveField(member: MemberDesc): ClassMetadata? {
+    public fun resolveField(member: MemberDesc): ClassMetadata? {
         // see https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-5.html#jvms-5.4.3.2
 
         if (fields.contains(member)) {

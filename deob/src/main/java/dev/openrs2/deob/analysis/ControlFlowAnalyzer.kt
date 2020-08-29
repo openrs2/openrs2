@@ -9,7 +9,7 @@ import org.objectweb.asm.tree.analysis.Analyzer
 import org.objectweb.asm.tree.analysis.BasicInterpreter
 import org.objectweb.asm.tree.analysis.BasicValue
 
-class ControlFlowAnalyzer : Analyzer<BasicValue>(BasicInterpreter()) {
+public class ControlFlowAnalyzer : Analyzer<BasicValue>(BasicInterpreter()) {
     private val graph = DefaultDirectedGraph<Int, DefaultEdge>(DefaultEdge::class.java)
 
     override fun newControlFlowEdge(insnIndex: Int, successorIndex: Int) {
@@ -23,7 +23,7 @@ class ControlFlowAnalyzer : Analyzer<BasicValue>(BasicInterpreter()) {
         return true
     }
 
-    fun createGraph(owner: String, method: MethodNode): Graph<Int, DefaultEdge> {
+    public fun createGraph(owner: String, method: MethodNode): Graph<Int, DefaultEdge> {
         analyze(owner, method)
         return AsUnmodifiableGraph(graph)
     }

@@ -1,11 +1,11 @@
 package dev.openrs2.asm.filter
 
-object Glob {
-    fun compile(pattern: String): Regex {
+public object Glob {
+    public fun compile(pattern: String): Regex {
         return compile(pattern, className = false)
     }
 
-    fun compileClass(pattern: String): Regex {
+    public fun compileClass(pattern: String): Regex {
         return compile(pattern, className = true)
     }
 

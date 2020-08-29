@@ -1,6 +1,6 @@
 package dev.openrs2.crypto
 
-class Whirlpool {
+public class Whirlpool {
     private val bitLength = ByteArray(32)
     private val buffer = ByteArray(64)
     private var bufferBits = 0
@@ -67,7 +67,7 @@ class Whirlpool {
         }
     }
 
-    fun NESSIEinit() {
+    public fun NESSIEinit() {
         bitLength.fill(0)
         bufferBits = 0
         bufferPos = 0
@@ -75,7 +75,7 @@ class Whirlpool {
         hash.fill(0)
     }
 
-    fun NESSIEadd(source: ByteArray, bits: Long) {
+    public fun NESSIEadd(source: ByteArray, bits: Long) {
         var sourceBits = bits
         var sourcePos = 0
         val sourceGap = (8 - (sourceBits.toInt() and 7)) and 7
@@ -138,7 +138,7 @@ class Whirlpool {
         }
     }
 
-    fun NESSIEfinalize(digest: ByteArray) {
+    public fun NESSIEfinalize(digest: ByteArray) {
         buffer[bufferPos] = (buffer[bufferPos].toInt() or (0x80 ushr (bufferBits and 7))).toByte()
         bufferPos++
 
@@ -173,7 +173,7 @@ class Whirlpool {
         }
     }
 
-    companion object {
+    public companion object {
         private const val DIGESTBITS = 512
         private const val DIGESTBYTES = DIGESTBITS ushr 3
         private const val R = 10
@@ -248,7 +248,7 @@ class Whirlpool {
             }
         }
 
-        fun whirlpool(data: ByteArray, off: Int = 0, len: Int = data.size): ByteArray {
+        public fun whirlpool(data: ByteArray, off: Int = 0, len: Int = data.size): ByteArray {
             val source: ByteArray
             if (off <= 0) {
                 source = data

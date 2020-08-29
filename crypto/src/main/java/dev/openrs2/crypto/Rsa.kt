@@ -28,7 +28,7 @@ import java.nio.file.Path
 import java.security.spec.KeySpec
 import java.security.spec.RSAPrivateCrtKeySpec
 
-val RSAPrivateCrtKeyParameters.publicKey
+public val RSAPrivateCrtKeyParameters.publicKey: RSAKeyParameters
     get() = RSAKeyParameters(false, modulus, publicExponent)
 
 private fun ByteBuf.toBigInteger(): BigInteger {
@@ -40,19 +40,19 @@ private fun BigInteger.toByteBuf(): ByteBuf {
     return Unpooled.wrappedBuffer(toByteArray())
 }
 
-fun ByteBuf.rsaEncrypt(key: RSAKeyParameters): ByteBuf {
+public fun ByteBuf.rsaEncrypt(key: RSAKeyParameters): ByteBuf {
     return Rsa.encrypt(toBigInteger(), key).toByteBuf()
 }
 
-fun ByteBuf.rsaDecrypt(key: RSAKeyParameters): ByteBuf {
+public fun ByteBuf.rsaDecrypt(key: RSAKeyParameters): ByteBuf {
     return Rsa.decrypt(toBigInteger(), key).toByteBuf()
 }
 
-fun RSAPrivateCrtKeyParameters.toKeySpec(): KeySpec {
+public fun RSAPrivateCrtKeyParameters.toKeySpec(): KeySpec {
     return RSAPrivateCrtKeySpec(modulus, publicExponent, exponent, p, q, dp, dq, qInv)
 }
 
-object Rsa {
+public object Rsa {
     private const val PUBLIC_KEY = "PUBLIC KEY"
     private const val PRIVATE_KEY = "PRIVATE KEY"
 
@@ -66,14 +66,14 @@ object Rsa {
      * The maximum output length of RSA encryption is the key size plus one, so
      * the maximum key size supported by the client is 126 bytes - or 1008 bits.
      */
-    const val CLIENT_KEY_LENGTH = 1008
+    public const val CLIENT_KEY_LENGTH: Int = 1008
 
-    const val JAR_KEY_LENGTH = 2048
+    public const val JAR_KEY_LENGTH: Int = 2048
 
     // 1 in 2^80
     private const val CERTAINTY = 80
 
-    fun generateKeyPair(length: Int): Pair<RSAKeyParameters, RSAPrivateCrtKeyParameters> {
+    public fun generateKeyPair(length: Int): Pair<RSAKeyParameters, RSAPrivateCrtKeyParameters> {
         val generator = RSAKeyPairGenerator()
         generator.init(RSAKeyGenerationParameters(F4, secureRandom, length, CERTAINTY))
 
@@ -81,7 +81,7 @@ object Rsa {
         return Pair(keyPair.public as RSAKeyParameters, keyPair.private as RSAPrivateCrtKeyParameters)
     }
 
-    fun encrypt(plaintext: BigInteger, key: RSAKeyParameters): BigInteger {
+    public fun encrypt(plaintext: BigInteger, key: RSAKeyParameters): BigInteger {
         require(!key.isPrivate)
         return plaintext.modPow(key.exponent, key.modulus)
     }
@@ -100,7 +100,7 @@ object Rsa {
         }
     }
 
-    fun decrypt(ciphertext: BigInteger, key: RSAKeyParameters): BigInteger {
+    public fun decrypt(ciphertext: BigInteger, key: RSAKeyParameters): BigInteger {
         require(key.isPrivate)
 
         if (key is RSAPrivateCrtKeyParameters) {
@@ -137,7 +137,7 @@ object Rsa {
         }
     }
 
-    fun readPublicKey(path: Path): RSAKeyParameters {
+    public fun readPublicKey(path: Path): RSAKeyParameters {
         val der = readSinglePemObject(path, PUBLIC_KEY)
 
         val spki = SubjectPublicKeyInfo.getInstance(der)
@@ -147,12 +147,12 @@ object Rsa {
         return RSAKeyParameters(false, key.modulus, key.publicExponent)
     }
 
-    fun writePublicKey(path: Path, key: RSAKeyParameters) {
+    public fun writePublicKey(path: Path, key: RSAKeyParameters) {
         val spki = SubjectPublicKeyInfoFactory.createSubjectPublicKeyInfo(key)
         return writeSinglePemObject(path, PUBLIC_KEY, spki.encoded)
     }
 
-    fun readPrivateKey(path: Path): RSAPrivateCrtKeyParameters {
+    public fun readPrivateKey(path: Path): RSAPrivateCrtKeyParameters {
         val der = readSinglePemObject(path, PRIVATE_KEY)
 
         val pki = PrivateKeyInfo.getInstance(der)
@@ -171,7 +171,7 @@ object Rsa {
         )
     }
 
-    fun writePrivateKey(path: Path, key: RSAKeyParameters) {
+    public fun writePrivateKey(path: Path, key: RSAKeyParameters) {
         val pki = PrivateKeyInfoFactory.createPrivateKeyInfo(key)
         return writeSinglePemObject(path, PRIVATE_KEY, pki.encoded)
     }

@@ -12,7 +12,7 @@ import org.objectweb.asm.tree.MethodNode
 import javax.inject.Singleton
 
 @Singleton
-class FernflowerExceptionTransformer : Transformer() {
+public class FernflowerExceptionTransformer : Transformer() {
     private var nopsInserted = 0
 
     override fun preTransform(classPath: ClassPath) {

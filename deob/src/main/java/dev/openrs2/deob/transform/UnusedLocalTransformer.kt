@@ -15,7 +15,7 @@ import org.objectweb.asm.tree.VarInsnNode
 import javax.inject.Singleton
 
 @Singleton
-class UnusedLocalTransformer : Transformer() {
+public class UnusedLocalTransformer : Transformer() {
     private var localsRemoved = 0
 
     override fun preTransform(classPath: ClassPath) {

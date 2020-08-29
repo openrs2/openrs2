@@ -12,7 +12,7 @@ import com.github.ajalt.clikt.parameters.types.outputStream
 import dev.openrs2.compress.lzma.Lzma
 import org.tukaani.xz.LZMA2Options
 
-class LzmaCommand : CliktCommand(name = "lzma") {
+public class LzmaCommand : CliktCommand(name = "lzma") {
     private val input by option().inputStream().defaultStdin()
     private val output by option().outputStream().defaultStdout()
     private val level by option().int().default(LZMA2Options.PRESET_DEFAULT).validate {

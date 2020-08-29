@@ -1,10 +1,10 @@
 package dev.openrs2.deob.remap
 
-class StaticClassGenerator(private val generator: NameGenerator, private val maxMembers: Int) {
+public class StaticClassGenerator(private val generator: NameGenerator, private val maxMembers: Int) {
     private var lastClass: String? = null
     private var members = 0
 
-    fun generate(): String {
+    public fun generate(): String {
         var clazz = lastClass
 
         if (clazz == null || members >= maxMembers) {

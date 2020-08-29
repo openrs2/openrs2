@@ -23,7 +23,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class Bundler @Inject constructor(
+public class Bundler @Inject constructor(
     @BundlerQualifier private val transformers: Set<@JvmSuppressWildcards Transformer>,
     private val config: Config
 ) {
@@ -39,7 +39,7 @@ class Bundler @Inject constructor(
         mainAttributes[PERMISSIONS] = "all-permissions"
     }
 
-    fun run(input: Path, output: Path, keyStorePath: Path) {
+    public fun run(input: Path, output: Path, keyStorePath: Path) {
         // read input jars/packs
         logger.info { "Reading input jars" }
         val unpacker = Library.read("unpackclass", input.resolve("unpackclass.pack"), JarLibraryReader)

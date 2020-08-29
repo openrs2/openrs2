@@ -14,7 +14,7 @@ import org.objectweb.asm.tree.MethodNode
 import javax.inject.Singleton
 
 @Singleton
-class OriginalNameTransformer : Transformer() {
+public class OriginalNameTransformer : Transformer() {
     override fun transformClass(classPath: ClassPath, library: Library, clazz: ClassNode): Boolean {
         if (clazz.invisibleAnnotations == null) {
             clazz.invisibleAnnotations = mutableListOf()

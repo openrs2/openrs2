@@ -51,7 +51,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ConstantArgTransformer @Inject constructor(private val profile: Profile) : Transformer() {
+public class ConstantArgTransformer @Inject constructor(private val profile: Profile) : Transformer() {
     private val pendingMethods = LinkedHashSet<MemberRef>()
     private val arglessMethods = mutableSetOf<DisjointSet.Partition<MemberRef>>()
     private val argValues = mutableMapOf<ArgPartition, IntValueSet>()

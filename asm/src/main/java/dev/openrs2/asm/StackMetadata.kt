@@ -9,7 +9,7 @@ import org.objectweb.asm.tree.LdcInsnNode
 import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.MultiANewArrayInsnNode
 
-data class StackMetadata(val pops: Int, val pushes: Int)
+public data class StackMetadata(val pops: Int, val pushes: Int)
 
 private val NONE = StackMetadata(0, 0)
 private val POP1 = StackMetadata(1, 0)
@@ -181,7 +181,7 @@ private val SIMPLE_OPCODES = mapOf(
     Opcodes.IFNONNULL to POP1
 )
 
-val AbstractInsnNode.stackMetadata
+public val AbstractInsnNode.stackMetadata: StackMetadata
     get() = when (this) {
         is LdcInsnNode -> if (cst is Double || cst is Long) {
             PUSH2

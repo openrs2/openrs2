@@ -13,7 +13,7 @@ import org.objectweb.asm.tree.MethodNode
 import javax.inject.Singleton
 
 @Singleton
-class RedundantGotoTransformer : Transformer() {
+public class RedundantGotoTransformer : Transformer() {
     private var removed = 0
 
     override fun preTransform(classPath: ClassPath) {

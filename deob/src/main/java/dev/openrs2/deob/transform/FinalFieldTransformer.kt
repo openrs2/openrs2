@@ -20,7 +20,7 @@ import org.objectweb.asm.tree.analysis.Analyzer
 import javax.inject.Singleton
 
 @Singleton
-class FinalFieldTransformer : Transformer() {
+public class FinalFieldTransformer : Transformer() {
     private lateinit var inheritedFieldSets: DisjointSet<MemberRef>
     private val nonFinalFields = mutableSetOf<DisjointSet.Partition<MemberRef>>()
 

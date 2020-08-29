@@ -15,7 +15,7 @@ import org.objectweb.asm.tree.MethodNode
 import javax.inject.Singleton
 
 @Singleton
-class BufferSizeTransformer : Transformer() {
+public class BufferSizeTransformer : Transformer() {
     private var buffer: MemberRef? = null
     private var buffersResized = 0
 

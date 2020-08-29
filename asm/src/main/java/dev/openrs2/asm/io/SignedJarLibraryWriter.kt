@@ -14,7 +14,7 @@ import java.nio.file.Files
 import java.util.jar.JarInputStream
 import java.util.jar.Manifest
 
-class SignedJarLibraryWriter(
+public class SignedJarLibraryWriter(
     private val manifest: Manifest,
     private val keyStore: Pkcs12KeyStore
 ) : LibraryWriter {

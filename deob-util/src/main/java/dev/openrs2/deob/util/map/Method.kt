@@ -2,7 +2,7 @@ package dev.openrs2.deob.util.map
 
 import java.util.SortedMap
 
-data class Method(
+public data class Method(
     val owner: String,
     val name: String,
     /*

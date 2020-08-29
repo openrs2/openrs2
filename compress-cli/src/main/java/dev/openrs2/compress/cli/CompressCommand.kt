@@ -11,9 +11,9 @@ import dev.openrs2.compress.cli.gzip.GzipCommand
 import dev.openrs2.compress.cli.lzma.LzmaCommand
 import dev.openrs2.compress.cli.lzma.UnlzmaCommand
 
-fun main(args: Array<String>) = CompressCommand().main(args)
+public fun main(args: Array<String>): Unit = CompressCommand().main(args)
 
-class CompressCommand : NoOpCliktCommand(name = "compress") {
+public class CompressCommand : NoOpCliktCommand(name = "compress") {
     init {
         subcommands(
             Bzip2Command(),

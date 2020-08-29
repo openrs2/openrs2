@@ -11,31 +11,31 @@ import java.security.MessageDigest
 import java.util.zip.CRC32
 import java.util.zip.Deflater
 
-class Resource(
-    val source: String,
-    val destination: String,
-    val crc: Int,
-    val digest: ByteArray,
-    val uncompressedSize: Int,
-    val content: ByteArray
+public class Resource(
+    public val source: String,
+    public val destination: String,
+    public val crc: Int,
+    public val digest: ByteArray,
+    public val uncompressedSize: Int,
+    public val content: ByteArray
 ) {
-    val sourceWithCrc: String
+    public val sourceWithCrc: String
         get() = source.replace(".", "_$crc.")
 
-    val compressedSize: Int
+    public val compressedSize: Int
         get() = content.size
 
     init {
         require(digest.size == 20)
     }
 
-    fun write(dir: Path) {
+    public fun write(dir: Path) {
         val path = dir.resolve(source)
         logger.info { "Writing resource $path" }
         Files.write(path, content)
     }
 
-    companion object {
+    public companion object {
         private val logger = InlineLogger()
 
         private fun compress(source: String, destination: String, uncompressed: ByteArray): Resource {
@@ -66,7 +66,7 @@ class Resource(
             return Resource(source, destination, crc.value.toInt(), digest.digest(), uncompressed.size, content)
         }
 
-        fun compressLibrary(
+        public fun compressLibrary(
             source: String,
             destination: String,
             classPath: ClassPath,
@@ -85,7 +85,7 @@ class Resource(
             return compress(source, destination, uncompressed)
         }
 
-        fun compressGlNatives() = listOf(
+        public fun compressGlNatives(): List<List<Resource>> = listOf(
             // Windows i386
             listOf(
                 compressNative("jaggl_0_0.lib", "jaggl.dll", "windows-i386/jaggl.dll")
@@ -119,7 +119,7 @@ class Resource(
             )
         )
 
-        fun compressMiscNatives() = listOf(
+        public fun compressMiscNatives(): List<Resource> = listOf(
             compressNative("jagmisc_0.lib", "jagmisc.dll", "windows-i386/jagmisc.dll"),
             compressNative("jagmisc_1.lib", "jagmisc.dll", "windows-amd64/jagmisc.dll")
         )

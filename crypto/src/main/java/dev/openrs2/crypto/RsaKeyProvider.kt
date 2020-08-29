@@ -5,7 +5,7 @@ import java.nio.file.Files
 import java.nio.file.Paths
 import javax.inject.Provider
 
-class RsaKeyProvider : Provider<RSAPrivateCrtKeyParameters> {
+public class RsaKeyProvider : Provider<RSAPrivateCrtKeyParameters> {
     override fun get(): RSAPrivateCrtKeyParameters {
         return if (Files.exists(PATH)) {
             Rsa.readPrivateKey(PATH)

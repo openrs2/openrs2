@@ -14,7 +14,7 @@ import java.nio.file.StandardCopyOption
 import java.nio.file.StandardOpenOption
 import java.nio.file.attribute.FileAttribute
 
-fun Path.fsync() {
+public fun Path.fsync() {
     require(Files.isRegularFile(this) || Files.isDirectory(this))
 
     FileChannel.open(this, StandardOpenOption.READ).use { channel ->
@@ -22,7 +22,7 @@ fun Path.fsync() {
     }
 }
 
-fun Path.recursiveCopy(
+public fun Path.recursiveCopy(
     destination: Path,
     visitOptions: Array<FileVisitOption> = emptyArray(),
     copyOptions: Array<CopyOption> = emptyArray()
@@ -38,7 +38,7 @@ fun Path.recursiveCopy(
     }
 }
 
-fun Path.recursiveEquals(
+public fun Path.recursiveEquals(
     other: Path,
     linkOptions: Array<LinkOption> = emptyArray(),
     openOptions: Array<OpenOption> = emptyArray()
@@ -77,7 +77,7 @@ fun Path.recursiveEquals(
     return true
 }
 
-inline fun <T> useTempFile(
+public inline fun <T> useTempFile(
     prefix: String? = null,
     suffix: String? = null,
     vararg attributes: FileAttribute<*>,
@@ -91,7 +91,7 @@ inline fun <T> useTempFile(
     }
 }
 
-inline fun <T> Path.useTempFile(
+public inline fun <T> Path.useTempFile(
     prefix: String? = null,
     suffix: String? = null,
     vararg attributes: FileAttribute<*>,
@@ -105,7 +105,7 @@ inline fun <T> Path.useTempFile(
     }
 }
 
-inline fun <T> Path.atomicWrite(f: (Path) -> T): T {
+public inline fun <T> Path.atomicWrite(f: (Path) -> T): T {
     val tempFile = Files.createTempFile(parent, ".$fileName", ".tmp")
     try {
         val result = f(tempFile)
@@ -116,7 +116,7 @@ inline fun <T> Path.atomicWrite(f: (Path) -> T): T {
     }
 }
 
-inline fun <T> Path.useAtomicBufferedWriter(vararg options: OpenOption, f: (BufferedWriter) -> T): T {
+public inline fun <T> Path.useAtomicBufferedWriter(vararg options: OpenOption, f: (BufferedWriter) -> T): T {
     return atomicWrite { path ->
         Files.newBufferedWriter(path, *options).use { writer ->
             f(writer)
@@ -124,7 +124,11 @@ inline fun <T> Path.useAtomicBufferedWriter(vararg options: OpenOption, f: (Buff
     }
 }
 
-inline fun <T> Path.useAtomicBufferedWriter(cs: Charset, vararg options: OpenOption, f: (BufferedWriter) -> T): T {
+public inline fun <T> Path.useAtomicBufferedWriter(
+    cs: Charset,
+    vararg options: OpenOption,
+    f: (BufferedWriter) -> T
+): T {
     return atomicWrite { path ->
         Files.newBufferedWriter(path, cs, *options).use { writer ->
             f(writer)
@@ -132,7 +136,7 @@ inline fun <T> Path.useAtomicBufferedWriter(cs: Charset, vararg options: OpenOpt
     }
 }
 
-inline fun <T> Path.useAtomicOutputStream(vararg options: OpenOption, f: (OutputStream) -> T): T {
+public inline fun <T> Path.useAtomicOutputStream(vararg options: OpenOption, f: (OutputStream) -> T): T {
     return atomicWrite { path ->
         Files.newOutputStream(path, *options).use { output ->
             f(output)

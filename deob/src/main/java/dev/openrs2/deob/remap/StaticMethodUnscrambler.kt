@@ -7,7 +7,7 @@ import dev.openrs2.deob.util.map.NameMap
 import dev.openrs2.util.collect.DisjointSet
 import org.objectweb.asm.Opcodes
 
-class StaticMethodUnscrambler(
+public class StaticMethodUnscrambler(
     private val classPath: ClassPath,
     private val excludedMethods: MemberFilter,
     private val scrambledLibraries: Set<String>,
@@ -17,7 +17,7 @@ class StaticMethodUnscrambler(
 ) {
     private val generator = StaticClassGenerator(staticClassNameGenerator, MAX_METHODS_PER_CLASS)
 
-    fun unscramble(): Map<DisjointSet.Partition<MemberRef>, String> {
+    public fun unscramble(): Map<DisjointSet.Partition<MemberRef>, String> {
         val owners = mutableMapOf<DisjointSet.Partition<MemberRef>, String>()
 
         for (library in classPath.libraries) {

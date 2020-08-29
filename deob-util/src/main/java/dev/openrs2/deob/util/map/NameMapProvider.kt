@@ -7,7 +7,7 @@ import java.nio.file.Paths
 import javax.inject.Inject
 import javax.inject.Provider
 
-class NameMapProvider @Inject constructor(private val mapper: ObjectMapper) : Provider<NameMap> {
+public class NameMapProvider @Inject constructor(private val mapper: ObjectMapper) : Provider<NameMap> {
     override fun get(): NameMap {
         val combinedMap = NameMap()
 

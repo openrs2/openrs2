@@ -8,14 +8,17 @@ import java.io.SequenceInputStream
 import java.util.zip.Deflater
 import java.util.zip.GZIPInputStream
 
-object Gzip {
+public object Gzip {
     private val HEADER = byteArrayOf(0x1F, 0x8B.toByte())
 
-    fun createHeaderlessInputStream(input: InputStream): InputStream {
+    public fun createHeaderlessInputStream(input: InputStream): InputStream {
         return GZIPInputStream(SequenceInputStream(ByteArrayInputStream(HEADER), input))
     }
 
-    fun createHeaderlessOutputStream(output: OutputStream, level: Int = Deflater.BEST_COMPRESSION): OutputStream {
+    public fun createHeaderlessOutputStream(
+        output: OutputStream,
+        level: Int = Deflater.BEST_COMPRESSION
+    ): OutputStream {
         return GzipLevelOutputStream(SkipOutputStream(output, HEADER.size.toLong()), level)
     }
 }

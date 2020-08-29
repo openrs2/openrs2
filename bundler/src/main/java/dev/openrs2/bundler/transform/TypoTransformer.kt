@@ -10,7 +10,7 @@ import org.objectweb.asm.tree.MethodNode
 import javax.inject.Singleton
 
 @Singleton
-class TypoTransformer : Transformer() {
+public class TypoTransformer : Transformer() {
     private var errorsFixed = 0
 
     override fun preTransform(classPath: ClassPath) {

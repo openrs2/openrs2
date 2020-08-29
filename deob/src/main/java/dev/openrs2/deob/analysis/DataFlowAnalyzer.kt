@@ -7,7 +7,7 @@ import org.jgrapht.graph.EdgeReversedGraph
 import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.MethodNode
 
-abstract class DataFlowAnalyzer<T>(owner: String, private val method: MethodNode, backwards: Boolean = false) {
+public abstract class DataFlowAnalyzer<T>(owner: String, private val method: MethodNode, backwards: Boolean = false) {
     private val graph: Graph<Int, DefaultEdge>
     private val inSets = mutableMapOf<Int, T>()
     private val outSets = mutableMapOf<Int, T>()
@@ -26,23 +26,23 @@ abstract class DataFlowAnalyzer<T>(owner: String, private val method: MethodNode
     protected abstract fun join(set1: T, set2: T): T
     protected abstract fun transfer(set: T, insn: AbstractInsnNode): T
 
-    fun getInSet(insn: AbstractInsnNode): T? {
+    public fun getInSet(insn: AbstractInsnNode): T? {
         return getInSet(method.instructions.indexOf(insn))
     }
 
-    fun getInSet(index: Int): T? {
+    public fun getInSet(index: Int): T? {
         return inSets[index]
     }
 
-    fun getOutSet(insn: AbstractInsnNode): T? {
+    public fun getOutSet(insn: AbstractInsnNode): T? {
         return getOutSet(method.instructions.indexOf(insn))
     }
 
-    fun getOutSet(index: Int): T? {
+    public fun getOutSet(index: Int): T? {
         return outSets[index]
     }
 
-    fun analyze() {
+    public fun analyze() {
         val entrySet = createEntrySet()
         val initialSet = createInitialSet()
 

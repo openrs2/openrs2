@@ -1,5 +1,5 @@
 package dev.openrs2.asm.filter
 
-interface ClassFilter {
-    fun matches(name: String): Boolean
+public interface ClassFilter {
+    public fun matches(name: String): Boolean
 }

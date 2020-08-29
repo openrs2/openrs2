@@ -29,7 +29,7 @@ import javax.inject.Singleton
  *   remove these exception handlers too.
  */
 @Singleton
-class ExceptionTracingTransformer : Transformer() {
+public class ExceptionTracingTransformer : Transformer() {
     private var tracingTryCatches = 0
 
     override fun preTransform(classPath: ClassPath) {
