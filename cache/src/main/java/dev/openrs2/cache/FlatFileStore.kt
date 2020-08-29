@@ -97,7 +97,7 @@ public class FlatFileStore private constructor(
 
     override fun remove(archive: Int) {
         val path = archivePath(archive)
-        if (!Files.exists(path)) {
+        if (!Files.isDirectory(path)) {
             return
         }
 
