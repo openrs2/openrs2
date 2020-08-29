@@ -13,9 +13,9 @@ indent_style = tab
 # @formatter:on
 indent_style = space
 indent_size = 4
-# see https://github.com/pinterest/ktlint/issues/527
+# see https://github.com/pinterest/ktlint/issues/764
 # noinspection EditorConfigKeyCorrectness
-disabled_rules = import-ordering
+disabled_rules = indent,parameter-list-wrapping
 
 # @formatter:off
 [*.{xml,yaml,yml}]

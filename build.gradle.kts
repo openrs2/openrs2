@@ -1,5 +1,7 @@
 import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jmailen.gradle.kotlinter.KotlinterExtension
+import org.jmailen.gradle.kotlinter.KotlinterPlugin
 import java.io.ByteArrayOutputStream
 import java.net.URL
 
@@ -50,6 +52,13 @@ allprojects {
 
             sourceCompatibility = JavaVersion.VERSION_11
             targetCompatibility = JavaVersion.VERSION_11
+        }
+    }
+
+    plugins.withType<KotlinterPlugin> {
+        configure<KotlinterExtension> {
+            // see https://github.com/pinterest/ktlint/issues/764
+            disabledRules = arrayOf("indent", "parameter-list-wrapping")
         }
     }
 
