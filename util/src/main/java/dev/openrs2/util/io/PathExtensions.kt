@@ -41,14 +41,15 @@ public fun Path.recursiveCopy(
 public fun Path.recursiveEquals(
     other: Path,
     linkOptions: Array<LinkOption> = emptyArray(),
-    openOptions: Array<OpenOption> = emptyArray()
+    openOptions: Array<OpenOption> = emptyArray(),
+    filter: (Path) -> Boolean = { true }
 ): Boolean {
     val list1 = Files.newDirectoryStream(this).use { stream ->
-        stream.map { this.relativize(it).toString() }.sorted().toList()
+        stream.filter(filter).map { this.relativize(it).toString() }.sorted().toList()
     }
 
     val list2 = Files.newDirectoryStream(other).use { stream ->
-        stream.map { other.relativize(it).toString() }.sorted().toList()
+        stream.filter(filter).map { other.relativize(it).toString() }.sorted().toList()
     }
 
     if (list1 != list2) {

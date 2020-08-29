@@ -48,7 +48,12 @@ public class FlatFileStore private constructor(
     }
 
     override fun list(archive: Int): List<Int> {
-        Files.newDirectoryStream(archivePath(archive)).use { stream ->
+        val path = archivePath(archive)
+        if (!Files.isDirectory(path)) {
+            throw FileNotFoundException()
+        }
+
+        Files.newDirectoryStream(path).use { stream ->
             return stream.filter { Files.isRegularFile(it) && GROUP_NAME.matches(it.fileName.toString()) }
                 .map { Integer.parseInt(it.fileName.toString().removeSuffix(GROUP_EXTENSION)) }
                 .sorted()
@@ -57,11 +62,16 @@ public class FlatFileStore private constructor(
     }
 
     override fun create(archive: Int) {
-        Files.createDirectory(archivePath(archive))
+        Files.createDirectories(archivePath(archive))
     }
 
     override fun read(archive: Int, group: Int): ByteBuf {
-        FileChannel.open(groupPath(archive, group)).use { channel ->
+        val path = groupPath(archive, group)
+        if (!Files.isRegularFile(path)) {
+            throw FileNotFoundException()
+        }
+
+        FileChannel.open(path).use { channel ->
             val size = channel.size()
             if (size > Store.MAX_GROUP_SIZE) {
                 throw StoreCorruptException("Group too large")
@@ -87,6 +97,9 @@ public class FlatFileStore private constructor(
 
     override fun remove(archive: Int) {
         val path = archivePath(archive)
+        if (!Files.exists(path)) {
+            return
+        }
 
         Files.newDirectoryStream(path).use { stream ->
             stream.filter { Files.isRegularFile(it) && GROUP_NAME.matches(it.fileName.toString()) }
@@ -109,8 +122,8 @@ public class FlatFileStore private constructor(
     }
 
     public companion object {
-        private val ARCHIVE_NAME = Regex("[1-9][0-9]*")
-        private val GROUP_NAME = Regex("[1-9][0-9]*[.]dat")
+        private val ARCHIVE_NAME = Regex("[0-9]+")
+        private val GROUP_NAME = Regex("[0-9]+[.]dat")
         private const val GROUP_EXTENSION = ".dat"
 
         public fun open(root: Path, alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT): Store {
