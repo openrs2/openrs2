@@ -109,7 +109,12 @@ class DiskStore private constructor(
             return index
         }
 
-        val newIndex = BufferedFileChannel(FileChannel.open(indexPath(root, archive), CREATE, READ, WRITE))
+        val newIndex = BufferedFileChannel(
+            FileChannel.open(indexPath(root, archive), CREATE, READ, WRITE),
+            INDEX_BUFFER_SIZE,
+            INDEX_BUFFER_SIZE,
+            alloc
+        )
         indexes[archive] = newIndex
         return newIndex
     }
@@ -444,6 +449,8 @@ class DiskStore private constructor(
         private const val MAX_BLOCK = (1 shl 24) - 1
 
         private val TEMP_BUFFER_SIZE = max(INDEX_ENTRY_SIZE, max(BLOCK_HEADER_SIZE, EXTENDED_BLOCK_HEADER_SIZE))
+        private const val INDEX_BUFFER_SIZE = INDEX_ENTRY_SIZE * 1000
+        private const val DATA_BUFFER_SIZE = BLOCK_SIZE * 10
 
         private fun dataPath(root: Path): Path {
             return root.resolve("main_file_cache.dat2")
@@ -454,22 +461,42 @@ class DiskStore private constructor(
         }
 
         fun open(root: Path, alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT): Store {
-            val data = BufferedFileChannel(FileChannel.open(dataPath(root), READ, WRITE))
+            val data = BufferedFileChannel(
+                FileChannel.open(dataPath(root), READ, WRITE),
+                DATA_BUFFER_SIZE,
+                DATA_BUFFER_SIZE,
+                alloc
+            )
+
             val archives = Array(Store.MAX_ARCHIVE + 1) { archive ->
                 val path = indexPath(root, archive)
                 if (Files.exists(path)) {
-                    BufferedFileChannel(FileChannel.open(path, READ, WRITE))
+                    BufferedFileChannel(
+                        FileChannel.open(path, READ, WRITE),
+                        INDEX_BUFFER_SIZE,
+                        INDEX_BUFFER_SIZE,
+                        alloc
+                    )
                 } else {
                     null
                 }
             }
+
             return DiskStore(root, data, archives, alloc)
         }
 
         fun create(root: Path, alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT): Store {
             Files.createDirectories(root)
-            val data = BufferedFileChannel(FileChannel.open(dataPath(root), CREATE, READ, WRITE))
+
+            val data = BufferedFileChannel(
+                FileChannel.open(dataPath(root), CREATE, READ, WRITE),
+                DATA_BUFFER_SIZE,
+                DATA_BUFFER_SIZE,
+                alloc
+            )
+
             val archives = Array<BufferedFileChannel?>(Store.MAX_ARCHIVE + 1) { null }
+
             return DiskStore(root, data, archives, alloc)
         }
     }
