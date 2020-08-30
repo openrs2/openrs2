@@ -9,7 +9,7 @@ A mixture of reasons:
   considered 530, but 550 has a better built-in world map viewer (it supports
   dungeons in addition to the main surface).
 * Availability of the original loader, client, game unpacker and jaggl jars.
-* Availability of the complete set of original client data files.
+* Availability of a large proportion of the original client data files.
 * Availability of a large proportion of the location file encryption keys.
 
 ## Why do the OpenRS2 Natives use Maven instead of Gradle?
