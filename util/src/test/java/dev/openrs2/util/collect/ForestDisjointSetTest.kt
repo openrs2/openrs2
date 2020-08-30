@@ -112,7 +112,7 @@ object ForestDisjointSetTest {
         set.union(set1, set.add(2))
         set.union(set1, set.add(3))
 
-        assertEquals(setOf(1, 2, 3), set1.asSequence().toSet())
+        assertEquals(setOf(1, 2, 3), set1.toSet())
     }
 
     @Test

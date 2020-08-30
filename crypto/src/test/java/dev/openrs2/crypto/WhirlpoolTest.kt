@@ -8,7 +8,7 @@ import kotlin.test.Test
 object WhirlpoolTest {
     private class IsoTestVector(input: String, expected: String) {
         val input = input.toByteArray(Charsets.US_ASCII)
-        val expected = ByteBufUtil.decodeHexDump(expected)
+        val expected: ByteArray = ByteBufUtil.decodeHexDump(expected)
     }
 
     private val ISO_TEST_VECTORS = listOf(
