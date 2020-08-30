@@ -56,6 +56,17 @@ object Js5CompressionTest {
     }
 
     @Test
+    fun testUncompressLargeGzip() {
+        read("gzip-large.dat").use { input ->
+            Js5Compression.uncompress(input).use { actual ->
+                read("large.dat").use { expected ->
+                    assertEquals(expected, actual)
+                }
+            }
+        }
+    }
+
+    @Test
     fun testCompressBzip2() {
         Unpooled.wrappedBuffer("OpenRS2".toByteArray()).use { expected ->
             Js5Compression.compress(expected.slice(), Js5CompressionType.BZIP2).use { compressed ->

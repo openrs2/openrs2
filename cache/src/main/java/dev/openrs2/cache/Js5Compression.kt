@@ -7,6 +7,7 @@ import dev.openrs2.crypto.xteaEncrypt
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufInputStream
 import io.netty.buffer.ByteBufOutputStream
+import java.io.EOFException
 
 public object Js5Compression {
     public fun compress(input: ByteBuf, type: Js5CompressionType, key: XteaKey = XteaKey.ZERO): ByteBuf {
@@ -102,7 +103,14 @@ public object Js5Compression {
 
             plaintext.alloc().buffer(uncompressedLen, uncompressedLen).use { output ->
                 type.createInputStream(ByteBufInputStream(plaintext, len), uncompressedLen).use { inputStream ->
-                    output.writeBytes(inputStream, uncompressedLen)
+                    var remaining = uncompressedLen
+                    while (remaining > 0) {
+                        val n = output.writeBytes(inputStream, remaining)
+                        if (n == -1) {
+                            throw EOFException()
+                        }
+                        remaining -= n
+                    }
                 }
 
                 return output.retain()
