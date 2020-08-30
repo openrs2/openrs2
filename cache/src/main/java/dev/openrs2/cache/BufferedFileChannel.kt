@@ -24,6 +24,8 @@ public class BufferedFileChannel(
     private var writePos = -1L
 
     init {
+        require(readBufferSize >= 0 && writeBufferSize >= 0)
+
         val buf = alloc.buffer(readBufferSize, readBufferSize)
         try {
             writeBuffer = alloc.buffer(writeBufferSize, writeBufferSize)
