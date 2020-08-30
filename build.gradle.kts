@@ -1,9 +1,9 @@
+import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jmailen.gradle.kotlinter.KotlinterExtension
 import org.jmailen.gradle.kotlinter.KotlinterPlugin
 import java.io.ByteArrayOutputStream
-import java.net.URL
 
 defaultTasks("build")
 
@@ -28,6 +28,7 @@ allprojects {
 
     repositories {
         mavenCentral()
+        jcenter()
         maven(url = "https://repo.openrs2.dev/repository/openrs2")
         mavenLocal()
         maven(url = "https://repo.openrs2.dev/repository/openrs2-snapshots")
@@ -113,6 +114,7 @@ configure(subprojects.filter { it.isFree }) {
     apply(plugin = "jacoco")
 
     plugins.withType<KotlinPluginWrapper> {
+        apply(plugin = "org.jetbrains.dokka")
         apply(plugin = "org.jmailen.kotlinter")
 
         dependencies {
@@ -126,6 +128,92 @@ configure(subprojects.filter { it.isFree }) {
                 version {
                     strictly(Versions.junit)
                 }
+            }
+        }
+    }
+
+    tasks.withType<DokkaTask> {
+        inputs.dir("$rootDir/.git")
+
+        dokkaSourceSets {
+            configureEach {
+                includeNonPublic = true
+                jdkVersion = 11
+                moduleDisplayName = "openrs2"
+
+                sourceLink {
+                    path = rootDir.toString()
+                    url = "https://git.openrs2.dev/openrs2/openrs2/src/commit/${commitHash()}"
+                    lineSuffix = "#L"
+                }
+
+                /*externalDocumentationLink {
+                    url = URL("https://asm.ow2.io/javadoc/")
+                }
+
+                externalDocumentationLink {
+                    url = URL("https://www.bouncycastle.org/docs/docs1.5on/")
+                }
+
+                externalDocumentationLink {
+                    url = URL("https://www.bouncycastle.org/docs/pkixdocs1.5on/")
+                }
+
+                externalDocumentationLink {
+                    url = URL("https://ajalt.github.io/clikt/api/clikt/")
+                }
+
+                externalDocumentationLink {
+                    url = URL("https://commons.apache.org/proper/commons-compress/javadocs/api-${Versions.commonsCompress}/")
+                }
+
+                externalDocumentationLink {
+                    url = URL("https://guava.dev/releases/${Versions.guava}/api/docs/")
+                }
+
+                externalDocumentationLink {
+                    url = URL("https://google.github.io/guice/api-docs/${Versions.guice}/javadoc/")
+                }
+
+                val jacksonVersion = Versions.jackson.split(".")
+                    .take(2)
+                    .joinToString(".")
+
+                externalDocumentationLink {
+                    url = URL("https://fasterxml.github.io/jackson-annotations/javadoc/$jacksonVersion/")
+                }
+
+                externalDocumentationLink {
+                    url = URL("https://fasterxml.github.io/jackson-core/javadoc/$jacksonVersion/")
+                }
+
+                externalDocumentationLink {
+                    url = URL("https://fasterxml.github.io/jackson-databind/javadoc/$jacksonVersion/")
+                }
+
+                externalDocumentationLink {
+                    url = URL("https://fasterxml.github.io/jackson-dataformats-text/javadoc/yaml/$jacksonVersion/")
+                }
+
+                externalDocumentationLink {
+                    url = URL("http://www.jdom.org/docs/apidocs/")
+                }
+
+                externalDocumentationLink {
+                    url = URL("https://google.github.io/jimfs/releases/${Versions.jimfs}/api/docs/")
+                }
+
+                externalDocumentationLink {
+                    url = URL("https://junit.org/junit5/docs/${Versions.junit}/api/")
+                }
+
+                externalDocumentationLink {
+                    val version = Versions.netty.split(".")
+                        .take(2)
+                        .joinToString(".")
+
+                    url = URL("https://netty.io/$version/api/")
+                }*/
             }
         }
     }
@@ -223,100 +311,6 @@ fun commitHash(): String {
         standardOutput = out
     }.assertNormalExitValue()
     return String(out.toByteArray(), Charsets.UTF_8).trim()
-}
-
-tasks.dokka {
-    inputs.dir("$rootDir/.git")
-
-    outputDirectory = "$buildDir/kdoc"
-    outputFormat = "html"
-
-    subProjects = subprojects.filter { it.isFree && it.name != "deob-annotations" }.map { it.name }
-
-    configuration {
-        includeNonPublic = true
-
-        /*
-         * XXX(gpe): ideally we'd use 11 here, but we're blocked on
-         * https://github.com/Kotlin/dokka/issues/294. 9 is the most recent
-         * working version for now.
-         */
-        jdkVersion = 9
-
-        sourceLink {
-            path = "."
-            url = "https://git.openrs2.dev/openrs2/openrs2/src/commit/${commitHash()}"
-            lineSuffix = "#L"
-        }
-
-        externalDocumentationLink {
-            url = URL("https://asm.ow2.io/javadoc/")
-        }
-
-        externalDocumentationLink {
-            url = URL("https://www.bouncycastle.org/docs/docs1.5on/")
-        }
-
-        externalDocumentationLink {
-            url = URL("https://www.bouncycastle.org/docs/pkixdocs1.5on/")
-        }
-
-        externalDocumentationLink {
-            url = URL("https://ajalt.github.io/clikt/api/clikt/")
-        }
-
-        externalDocumentationLink {
-            url = URL("https://commons.apache.org/proper/commons-compress/javadocs/api-${Versions.commonsCompress}/")
-        }
-
-        externalDocumentationLink {
-            url = URL("https://guava.dev/releases/${Versions.guava}/api/docs/")
-        }
-
-        externalDocumentationLink {
-            url = URL("https://google.github.io/guice/api-docs/${Versions.guice}/javadoc/")
-        }
-
-        val jacksonVersion = Versions.jackson.split(".")
-            .take(2)
-            .joinToString(".")
-
-        externalDocumentationLink {
-            url = URL("https://fasterxml.github.io/jackson-annotations/javadoc/$jacksonVersion/")
-        }
-
-        externalDocumentationLink {
-            url = URL("https://fasterxml.github.io/jackson-core/javadoc/$jacksonVersion/")
-        }
-
-        externalDocumentationLink {
-            url = URL("https://fasterxml.github.io/jackson-databind/javadoc/$jacksonVersion/")
-        }
-
-        externalDocumentationLink {
-            url = URL("https://fasterxml.github.io/jackson-dataformats-text/javadoc/yaml/$jacksonVersion/")
-        }
-
-        externalDocumentationLink {
-            url = URL("http://www.jdom.org/docs/apidocs/")
-        }
-
-        externalDocumentationLink {
-            url = URL("https://google.github.io/jimfs/releases/${Versions.jimfs}/api/docs/")
-        }
-
-        externalDocumentationLink {
-            url = URL("https://junit.org/junit5/docs/${Versions.junit}/api/")
-        }
-
-        externalDocumentationLink {
-            val version = Versions.netty.split(".")
-                .take(2)
-                .joinToString(".")
-
-            url = URL("https://netty.io/$version/api/")
-        }
-    }
 }
 
 tasks.wrapper {
