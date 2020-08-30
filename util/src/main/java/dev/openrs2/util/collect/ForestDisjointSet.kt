@@ -1,7 +1,5 @@
 package dev.openrs2.util.collect
 
-import java.util.ArrayDeque
-
 /**
  * A [DisjointSet] implementation backed by a disjoint-set forest, as described
  * in chapter 21.3 of the third edition of CLRS. It uses path compression and
@@ -58,7 +56,7 @@ public class ForestDisjointSet<T> : DisjointSet<T> {
         }
 
         override fun next(): T {
-            val node = queue.poll() ?: throw NoSuchElementException()
+            val node = queue.removeFirstOrNull() ?: throw NoSuchElementException()
             queue.addAll(node.children)
             return node.value
         }
