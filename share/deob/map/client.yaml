@@ -18042,7 +18042,7 @@ methods:
     locals: {}
   client!fd.a (II)V:
     owner: "Buffer"
-    name: "writeUnsignedSmart"
+    name: "writeUnsignedShortSmart"
     arguments:
       1: "value"
     locals: {}
@@ -18267,7 +18267,7 @@ methods:
     locals: {}
   client!fd.e (B)I:
     owner: "Buffer"
-    name: "readUnsignedSmart"
+    name: "readUnsignedShortSmart"
     arguments: {}
     locals:
       14: "peek"
@@ -18315,7 +18315,7 @@ methods:
       27: "shift"
   client!fd.g (B)I:
     owner: "Buffer"
-    name: "readSmart"
+    name: "readShortSmart"
     arguments: {}
     locals:
       11: "peek"
