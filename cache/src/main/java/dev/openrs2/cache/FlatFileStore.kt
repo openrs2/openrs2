@@ -14,6 +14,10 @@ import java.nio.file.Path
  * and groups as file system files. This format is much friendlier to
  * content-addressable version control systems, such as Git, than the native
  * format used by the client.
+ *
+ * Multiple read threads may use this class simultaneously. However, only a
+ * single thread may write at a time. Reads and writes must not happen
+ * simultaneously.
  */
 public class FlatFileStore private constructor(
     private val root: Path,

@@ -16,6 +16,8 @@ import kotlin.math.min
 /**
  * A [Store] implementation compatible with the native `main_file_cache.dat2`
  * and `main_file_cache.idx*` format used by the client.
+ *
+ * This class is not thread safe.
  */
 public class DiskStore private constructor(
     private val root: Path,
