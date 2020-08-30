@@ -117,9 +117,10 @@ should be taken to avoid inadvertently including any in contributions.
 
 OpenRS2 uses [Semantic Versioning][semver].
 
-## Community
+## Links
 
 * [Discord][discord]
+* [KDoc][kdoc]
 * [Website][www]
 
 ## License
@@ -138,6 +139,7 @@ available in the `LICENSE` file.
 [isc-badge]: https://img.shields.io/badge/license-ISC-informational
 [isc]: https://opensource.org/licenses/ISC
 [jdk]: https://jdk.java.net/
+[kdoc]: https://docs.openrs2.dev/
 [ktlint]: https://github.com/pinterest/ktlint#readme
 [rewriting-history]: https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History
 [semver]: https://semver.org/
