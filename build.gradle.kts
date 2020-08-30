@@ -304,15 +304,6 @@ tasks.dependencyUpdates {
     }
 }
 
-fun commitHash(): String {
-    val out = ByteArrayOutputStream()
-    exec {
-        commandLine("git", "rev-parse", "HEAD")
-        standardOutput = out
-    }.assertNormalExitValue()
-    return String(out.toByteArray(), Charsets.UTF_8).trim()
-}
-
 tasks.wrapper {
     distributionType = Wrapper.DistributionType.ALL
 }
@@ -390,4 +381,13 @@ project(":nonfree:unpackclass") {
             implementation(project(":nonfree:unpack"))
         }
     }
+}
+
+fun commitHash(): String {
+    val out = ByteArrayOutputStream()
+    exec {
+        commandLine("git", "rev-parse", "HEAD")
+        standardOutput = out
+    }.assertNormalExitValue()
+    return String(out.toByteArray(), Charsets.UTF_8).trim()
 }
