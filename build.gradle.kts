@@ -293,6 +293,10 @@ configure(subprojects.filter { it.isFree }) {
     }
 }
 
+tasks.build {
+    dependsOn(":dokkaHtmlCollector")
+}
+
 val rejectVersionRegex = Regex("(?i)[._-](?:alpha|beta|rc|cr|m|dev)")
 
 tasks.dependencyUpdates {
@@ -302,6 +306,23 @@ tasks.dependencyUpdates {
     rejectVersionIf {
         candidate.version.contains(rejectVersionRegex)
     }
+}
+
+tasks.register("publish") {
+    dependsOn("publishDokka")
+}
+
+tasks.register<Exec>("publishDokka") {
+    dependsOn(":dokkaHtmlCollector")
+
+    commandLine(
+        "rsync",
+        "-e",
+        "ssh -oStrictHostKeyChecking=accept-new",
+        "-rtz",
+        "$buildDir/dokka/htmlCollector/",
+        "build@docs.openrs2.dev:/srv/www/docs"
+    )
 }
 
 tasks.wrapper {

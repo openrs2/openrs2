@@ -11,12 +11,17 @@ steps:
   - name: deploy
     image: registry.openrs2.dev/openrs2-dev
     commands:
+      - install -dm0700 $${HOME}/.ssh
+      - echo -n "$${SSH_KEY}" > $${HOME}/.ssh/id_ed25519
+      - chmod 0600 $${HOME}/.ssh/id_ed25519
       - ./gradlew --no-daemon publish
     environment:
       ORG_GRADLE_PROJECT_openrs2Username:
         from_secret: repo_username
       ORG_GRADLE_PROJECT_openrs2Password:
         from_secret: repo_password
+      SSH_KEY:
+        from_secret: ssh_key
     when:
       branch:
         - master
