@@ -17,11 +17,21 @@ public class BufferedFileChannel(
 ) : Flushable, Closeable {
     private var size = channel.size()
 
-    private val readBuffer = alloc.buffer(readBufferSize, readBufferSize)
+    private val readBuffer: ByteBuf
     private var readPos = -1L
 
-    private val writeBuffer = alloc.buffer(writeBufferSize, writeBufferSize)
+    private val writeBuffer: ByteBuf
     private var writePos = -1L
+
+    init {
+        val buf = alloc.buffer(readBufferSize, readBufferSize)
+        try {
+            writeBuffer = alloc.buffer(writeBufferSize, writeBufferSize)
+            readBuffer = buf.retain()
+        } finally {
+            buf.release()
+        }
+    }
 
     public fun read(pos: Long, dest: ByteBuf, len: Int) {
         require(pos >= 0)
