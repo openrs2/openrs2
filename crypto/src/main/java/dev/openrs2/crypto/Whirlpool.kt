@@ -263,7 +263,7 @@ public class Whirlpool {
             whirlpool.NESSIEinit()
             whirlpool.NESSIEadd(source, (len * 8).toLong())
 
-            val digest = ByteArray(64)
+            val digest = ByteArray(DIGESTBYTES)
             whirlpool.NESSIEfinalize(digest)
             return digest
         }
