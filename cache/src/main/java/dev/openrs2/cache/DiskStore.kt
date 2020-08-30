@@ -81,24 +81,32 @@ public class DiskStore private constructor(
     override fun list(archive: Int): List<Int> {
         checkArchive(archive)
 
-        alloc.buffer(TEMP_BUFFER_SIZE, TEMP_BUFFER_SIZE).use { tempBuf ->
+        alloc.buffer(INDEX_BUFFER_SIZE, INDEX_BUFFER_SIZE).use { tempBuf ->
             val index = indexes[archive] ?: throw FileNotFoundException()
 
             val groups = mutableListOf<Int>()
 
-            val groupCount = min(index.size() / INDEX_ENTRY_SIZE, Int.MAX_VALUE.toLong()).toInt()
+            var remaining = min(index.size() / INDEX_ENTRY_SIZE, Int.MAX_VALUE.toLong()) * INDEX_ENTRY_SIZE
             var pos = 0L
-            for (group in 0 until groupCount) {
+            var group = 0
+            while (remaining > 0) {
                 tempBuf.clear()
-                index.read(pos, tempBuf, INDEX_ENTRY_SIZE)
-                tempBuf.skipBytes(3)
 
-                val block = tempBuf.readUnsignedMedium()
-                if (block != 0) {
-                    groups += group
+                val n = min(remaining, tempBuf.writableBytes().toLong()).toInt()
+                index.read(pos, tempBuf, n)
+                pos += n
+                remaining -= n
+
+                while (tempBuf.isReadable) {
+                    tempBuf.skipBytes(3)
+
+                    val block = tempBuf.readUnsignedMedium()
+                    if (block != 0) {
+                        groups += group
+                    }
+
+                    group++
                 }
-
-                pos += INDEX_ENTRY_SIZE
             }
 
             return groups
