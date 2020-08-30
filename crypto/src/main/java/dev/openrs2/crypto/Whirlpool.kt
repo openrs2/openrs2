@@ -175,7 +175,7 @@ public class Whirlpool {
 
     public companion object {
         private const val DIGESTBITS = 512
-        private const val DIGESTBYTES = DIGESTBITS ushr 3
+        public const val DIGESTBYTES: Int = DIGESTBITS ushr 3
         private const val R = 10
         private const val sbox = "\u1823\uc6E8\u87B8\u014F\u36A6\ud2F5\u796F\u9152" +
             "\u60Bc\u9B8E\uA30c\u7B35\u1dE0\ud7c2\u2E4B\uFE57" +
