@@ -315,6 +315,7 @@ tasks.register<Exec>("publishDokka") {
         "rsync",
         "-e",
         "ssh -oStrictHostKeyChecking=accept-new",
+        "--delete",
         "-rtz",
         "$buildDir/dokka/htmlCollector/",
         "build@docs.openrs2.dev:/srv/www/docs"
