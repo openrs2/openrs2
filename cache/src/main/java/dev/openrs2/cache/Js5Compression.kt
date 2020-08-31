@@ -49,14 +49,39 @@ public object Js5Compression {
         }
     }
 
-    public fun compressBest(input: ByteBuf, enableLzma: Boolean = false, key: XteaKey = XteaKey.ZERO): ByteBuf {
-        var best = compress(input.slice(), Js5CompressionType.NONE, key)
-        try {
-            for (type in Js5CompressionType.values()) {
-                if (type == Js5CompressionType.NONE || (type == Js5CompressionType.LZMA && !enableLzma)) {
-                    continue
-                }
+    public fun compressBest(
+        input: ByteBuf,
+        enableLzma: Boolean = false,
+        enableUncompressedEncryption: Boolean = false,
+        key: XteaKey = XteaKey.ZERO
+    ): ByteBuf {
+        val types = mutableListOf(Js5CompressionType.BZIP2, Js5CompressionType.GZIP)
+        if (enableLzma) {
+            types += Js5CompressionType.LZMA
+        }
+        if (enableUncompressedEncryption || key.isZero) {
+            /*
+             * The 550 client doesn't strip the 2 byte version trailer before
+             * passing a group to the XTEA decryption function. This causes the
+             * last block to be incorrectly decrypt in many cases (depending
+             * on the length of the group mod the XTEA block size).
+             *
+             * This doesn't cause any problems with the client's GZIP/BZIP2
+             * implementations, as the last block is always part of the trailer
+             * and the trailer isn't checked. However, it would corrupt the
+             * last block of an unencrypted group.
+             *
+             * TODO(gpe): are there any clients with LZMA support _and_ the
+             * decryption bug? Could the enableLzma flag be re-used for
+             * enableNoneWithKey? Or should LZMA also be disabled in clients
+             * with the decryption bug?
+             */
+            types += Js5CompressionType.NONE
+        }
 
+        var best = compress(input.slice(), types.first(), key)
+        try {
+            for (type in types.drop(1)) {
                 compress(input.slice(), type, key).use { output ->
                     if (output.readableBytes() < best.readableBytes()) {
                         best.release()

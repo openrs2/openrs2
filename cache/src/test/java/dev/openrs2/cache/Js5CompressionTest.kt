@@ -234,6 +234,27 @@ object Js5CompressionTest {
         }
     }
 
+    @Test
+    fun testUncompressedEncryption() {
+        Unpooled.wrappedBuffer("OpenRS2".toByteArray()).use { buf ->
+            Js5Compression.compressBest(buf.slice()).use { compressed ->
+                assertEquals(Js5CompressionType.NONE.ordinal, compressed.getUnsignedByte(0).toInt())
+            }
+
+            Js5Compression.compressBest(buf.slice(), enableUncompressedEncryption = true).use { compressed ->
+                assertEquals(Js5CompressionType.NONE.ordinal, compressed.getUnsignedByte(0).toInt())
+            }
+
+            Js5Compression.compressBest(buf.slice(), key = KEY).use { compressed ->
+                assertNotEquals(Js5CompressionType.NONE.ordinal, compressed.getUnsignedByte(0).toInt())
+            }
+
+            Js5Compression.compressBest(buf.slice(), key = KEY, enableUncompressedEncryption = true).use { compressed ->
+                assertEquals(Js5CompressionType.NONE.ordinal, compressed.getUnsignedByte(0).toInt())
+            }
+        }
+    }
+
     private fun read(name: String): ByteBuf {
         Js5CompressionTest::class.java.getResourceAsStream("compression/$name").use { input ->
             return Unpooled.wrappedBuffer(input.readAllBytes())
