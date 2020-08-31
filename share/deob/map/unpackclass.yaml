@@ -781,7 +781,7 @@ methods:
     arguments:
       0: "in"
       1: "discardPacked"
-      2: "discardUnapcked"
+      2: "discardUnpacked"
       3: "arg3"
     locals: {}
   unpackclass!p.a (Ljava/io/DataInputStream;Z)V:
