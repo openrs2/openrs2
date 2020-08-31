@@ -11,12 +11,14 @@ public fun ByteBuf.readShortSmart(): Int {
     }
 }
 
-public fun ByteBuf.writeShortSmart(v: Int) {
+public fun ByteBuf.writeShortSmart(v: Int): ByteBuf {
     when (v) {
         in -0x40..0x3F -> writeByte(v + 0x40)
         in -0x4000..0x3FFF -> writeShort(0x8000 or (v + 0x4000))
         else -> throw IllegalArgumentException()
     }
+
+    return this
 }
 
 public fun ByteBuf.readUnsignedShortSmart(): Int {
@@ -28,12 +30,14 @@ public fun ByteBuf.readUnsignedShortSmart(): Int {
     }
 }
 
-public fun ByteBuf.writeUnsignedShortSmart(v: Int) {
+public fun ByteBuf.writeUnsignedShortSmart(v: Int): ByteBuf {
     when (v) {
         in 0..0x7F -> writeByte(v)
         in 0..0x7FFF -> writeShort(0x8000 or v)
         else -> throw IllegalArgumentException()
     }
+
+    return this
 }
 
 public fun ByteBuf.readIntSmart(): Int {
@@ -45,12 +49,14 @@ public fun ByteBuf.readIntSmart(): Int {
     }
 }
 
-public fun ByteBuf.writeIntSmart(v: Int) {
+public fun ByteBuf.writeIntSmart(v: Int): ByteBuf {
     when (v) {
         in -0x4000..0x3FFF -> writeShort(v + 0x4000)
         in -0x40000000..0x3FFFFFFF -> writeInt(0x80000000.toInt() or (v + 0x40000000))
         else -> throw IllegalArgumentException()
     }
+
+    return this
 }
 
 public fun ByteBuf.readUnsignedIntSmart(): Int {
@@ -62,10 +68,12 @@ public fun ByteBuf.readUnsignedIntSmart(): Int {
     }
 }
 
-public fun ByteBuf.writeUnsignedIntSmart(v: Int) {
+public fun ByteBuf.writeUnsignedIntSmart(v: Int): ByteBuf {
     when (v) {
         in 0..0x7FFF -> writeShort(v)
         in 0..0x7FFFFFFF -> writeInt(0x80000000.toInt() or v)
         else -> throw IllegalArgumentException()
     }
+
+    return this
 }
