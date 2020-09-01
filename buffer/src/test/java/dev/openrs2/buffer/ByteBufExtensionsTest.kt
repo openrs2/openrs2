@@ -1,5 +1,6 @@
 package dev.openrs2.buffer
 
+import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.Unpooled
 import org.junit.jupiter.api.assertThrows
 import kotlin.test.Test
@@ -48,61 +49,61 @@ object ByteBufExtensionsTest {
     @Test
     fun testWriteShortSmart() {
         Unpooled.wrappedBuffer(byteArrayOf(0x00)).use { expected ->
-            Unpooled.buffer().use { actual ->
+            ByteBufAllocator.DEFAULT.buffer().use { actual ->
                 actual.writeShortSmart(-0x40)
                 assertEquals(expected, actual)
             }
         }
 
         Unpooled.wrappedBuffer(byteArrayOf(0x40)).use { expected ->
-            Unpooled.buffer().use { actual ->
+            ByteBufAllocator.DEFAULT.buffer().use { actual ->
                 actual.writeShortSmart(0)
                 assertEquals(expected, actual)
             }
         }
 
         Unpooled.wrappedBuffer(byteArrayOf(0x7F)).use { expected ->
-            Unpooled.buffer().use { actual ->
+            ByteBufAllocator.DEFAULT.buffer().use { actual ->
                 actual.writeShortSmart(0x3F)
                 assertEquals(expected, actual)
             }
         }
 
         Unpooled.wrappedBuffer(byteArrayOf(0x80.toByte(), 0x00)).use { expected ->
-            Unpooled.buffer().use { actual ->
+            ByteBufAllocator.DEFAULT.buffer().use { actual ->
                 actual.writeShortSmart(-0x4000)
                 assertEquals(expected, actual)
             }
         }
 
         Unpooled.wrappedBuffer(byteArrayOf(0xBF.toByte(), 0xBF.toByte())).use { expected ->
-            Unpooled.buffer().use { actual ->
+            ByteBufAllocator.DEFAULT.buffer().use { actual ->
                 actual.writeShortSmart(-0x41)
                 assertEquals(expected, actual)
             }
         }
 
         Unpooled.wrappedBuffer(byteArrayOf(0xC0.toByte(), 0x40.toByte())).use { expected ->
-            Unpooled.buffer().use { actual ->
+            ByteBufAllocator.DEFAULT.buffer().use { actual ->
                 actual.writeShortSmart(0x40)
                 assertEquals(expected, actual)
             }
         }
 
         Unpooled.wrappedBuffer(byteArrayOf(0xFF.toByte(), 0xFF.toByte())).use { expected ->
-            Unpooled.buffer().use { actual ->
+            ByteBufAllocator.DEFAULT.buffer().use { actual ->
                 actual.writeShortSmart(0x3FFF)
                 assertEquals(expected, actual)
             }
         }
 
-        Unpooled.buffer().use { buf ->
+        ByteBufAllocator.DEFAULT.buffer().use { buf ->
             assertThrows<IllegalArgumentException> {
                 buf.writeShortSmart(-0x4001)
             }
         }
 
-        Unpooled.buffer().use { buf ->
+        ByteBufAllocator.DEFAULT.buffer().use { buf ->
             assertThrows<IllegalArgumentException> {
                 buf.writeShortSmart(0x4000)
             }
@@ -145,54 +146,54 @@ object ByteBufExtensionsTest {
     @Test
     fun testWriteUnsignedShortSmart() {
         Unpooled.wrappedBuffer(byteArrayOf(0x00)).use { expected ->
-            Unpooled.buffer().use { actual ->
+            ByteBufAllocator.DEFAULT.buffer().use { actual ->
                 actual.writeUnsignedShortSmart(0)
                 assertEquals(expected, actual)
             }
         }
 
         Unpooled.wrappedBuffer(byteArrayOf(0x40)).use { expected ->
-            Unpooled.buffer().use { actual ->
+            ByteBufAllocator.DEFAULT.buffer().use { actual ->
                 actual.writeUnsignedShortSmart(0x40)
                 assertEquals(expected, actual)
             }
         }
 
         Unpooled.wrappedBuffer(byteArrayOf(0x7F)).use { expected ->
-            Unpooled.buffer().use { actual ->
+            ByteBufAllocator.DEFAULT.buffer().use { actual ->
                 actual.writeUnsignedShortSmart(0x7F)
                 assertEquals(expected, actual)
             }
         }
 
         Unpooled.wrappedBuffer(byteArrayOf(0x80.toByte(), 0x80.toByte())).use { expected ->
-            Unpooled.buffer().use { actual ->
+            ByteBufAllocator.DEFAULT.buffer().use { actual ->
                 actual.writeUnsignedShortSmart(0x80)
                 assertEquals(expected, actual)
             }
         }
 
         Unpooled.wrappedBuffer(byteArrayOf(0xC0.toByte(), 0x00)).use { expected ->
-            Unpooled.buffer().use { actual ->
+            ByteBufAllocator.DEFAULT.buffer().use { actual ->
                 actual.writeUnsignedShortSmart(0x4000)
                 assertEquals(expected, actual)
             }
         }
 
         Unpooled.wrappedBuffer(byteArrayOf(0xFF.toByte(), 0xFF.toByte())).use { expected ->
-            Unpooled.buffer().use { actual ->
+            ByteBufAllocator.DEFAULT.buffer().use { actual ->
                 actual.writeUnsignedShortSmart(0x7FFF)
                 assertEquals(expected, actual)
             }
         }
 
-        Unpooled.buffer().use { buf ->
+        ByteBufAllocator.DEFAULT.buffer().use { buf ->
             assertThrows<IllegalArgumentException> {
                 buf.writeUnsignedShortSmart(-0x1)
             }
         }
 
-        Unpooled.buffer().use { buf ->
+        ByteBufAllocator.DEFAULT.buffer().use { buf ->
             assertThrows<IllegalArgumentException> {
                 buf.writeUnsignedShortSmart(0x10000)
             }
@@ -240,28 +241,28 @@ object ByteBufExtensionsTest {
     @Test
     fun testWriteIntSmart() {
         Unpooled.wrappedBuffer(byteArrayOf(0x00, 0x00)).use { expected ->
-            Unpooled.buffer().use { actual ->
+            ByteBufAllocator.DEFAULT.buffer().use { actual ->
                 actual.writeIntSmart(-0x4000)
                 assertEquals(expected, actual)
             }
         }
 
         Unpooled.wrappedBuffer(byteArrayOf(0x40, 0x00)).use { expected ->
-            Unpooled.buffer().use { actual ->
+            ByteBufAllocator.DEFAULT.buffer().use { actual ->
                 actual.writeIntSmart(0)
                 assertEquals(expected, actual)
             }
         }
 
         Unpooled.wrappedBuffer(byteArrayOf(0x7F, 0xFF.toByte())).use { expected ->
-            Unpooled.buffer().use { actual ->
+            ByteBufAllocator.DEFAULT.buffer().use { actual ->
                 actual.writeIntSmart(0x3FFF)
                 assertEquals(expected, actual)
             }
         }
 
         Unpooled.wrappedBuffer(byteArrayOf(0x80.toByte(), 0x00, 0x00, 0x00)).use { expected ->
-            Unpooled.buffer().use { actual ->
+            ByteBufAllocator.DEFAULT.buffer().use { actual ->
                 actual.writeIntSmart(-0x40000000)
                 assertEquals(expected, actual)
             }
@@ -270,14 +271,14 @@ object ByteBufExtensionsTest {
         Unpooled.wrappedBuffer(
             byteArrayOf(0xBF.toByte(), 0xFF.toByte(), 0xBF.toByte(), 0xFF.toByte())
         ).use { expected ->
-            Unpooled.buffer().use { actual ->
+            ByteBufAllocator.DEFAULT.buffer().use { actual ->
                 actual.writeIntSmart(-0x4001)
                 assertEquals(expected, actual)
             }
         }
 
         Unpooled.wrappedBuffer(byteArrayOf(0xC0.toByte(), 0x00, 0x40.toByte(), 0x00)).use { expected ->
-            Unpooled.buffer().use { actual ->
+            ByteBufAllocator.DEFAULT.buffer().use { actual ->
                 actual.writeIntSmart(0x4000)
                 assertEquals(expected, actual)
             }
@@ -286,19 +287,19 @@ object ByteBufExtensionsTest {
         Unpooled.wrappedBuffer(
             byteArrayOf(0xFF.toByte(), 0xFF.toByte(), 0xFF.toByte(), 0xFF.toByte())
         ).use { expected ->
-            Unpooled.buffer().use { actual ->
+            ByteBufAllocator.DEFAULT.buffer().use { actual ->
                 actual.writeIntSmart(0x3FFFFFFF)
                 assertEquals(expected, actual)
             }
         }
 
-        Unpooled.buffer().use { buf ->
+        ByteBufAllocator.DEFAULT.buffer().use { buf ->
             assertThrows<IllegalArgumentException> {
                 buf.writeIntSmart(-0x40000001)
             }
         }
 
-        Unpooled.buffer().use { buf ->
+        ByteBufAllocator.DEFAULT.buffer().use { buf ->
             assertThrows<IllegalArgumentException> {
                 buf.writeIntSmart(0x40000000)
             }
@@ -341,35 +342,35 @@ object ByteBufExtensionsTest {
     @Test
     fun testWriteUnsignedIntSmart() {
         Unpooled.wrappedBuffer(byteArrayOf(0x00, 0x00)).use { expected ->
-            Unpooled.buffer().use { actual ->
+            ByteBufAllocator.DEFAULT.buffer().use { actual ->
                 actual.writeUnsignedIntSmart(0)
                 assertEquals(expected, actual)
             }
         }
 
         Unpooled.wrappedBuffer(byteArrayOf(0x40, 0x00)).use { expected ->
-            Unpooled.buffer().use { actual ->
+            ByteBufAllocator.DEFAULT.buffer().use { actual ->
                 actual.writeUnsignedIntSmart(0x4000)
                 assertEquals(expected, actual)
             }
         }
 
         Unpooled.wrappedBuffer(byteArrayOf(0x7F, 0xFF.toByte())).use { expected ->
-            Unpooled.buffer().use { actual ->
+            ByteBufAllocator.DEFAULT.buffer().use { actual ->
                 actual.writeUnsignedIntSmart(0x7FFF)
                 assertEquals(expected, actual)
             }
         }
 
         Unpooled.wrappedBuffer(byteArrayOf(0x80.toByte(), 0x00, 0x80.toByte(), 0x00)).use { expected ->
-            Unpooled.buffer().use { actual ->
+            ByteBufAllocator.DEFAULT.buffer().use { actual ->
                 actual.writeUnsignedIntSmart(0x8000)
                 assertEquals(expected, actual)
             }
         }
 
         Unpooled.wrappedBuffer(byteArrayOf(0xC0.toByte(), 0x00, 0x00, 0x00)).use { expected ->
-            Unpooled.buffer().use { actual ->
+            ByteBufAllocator.DEFAULT.buffer().use { actual ->
                 actual.writeUnsignedIntSmart(0x40000000)
                 assertEquals(expected, actual)
             }
@@ -378,13 +379,13 @@ object ByteBufExtensionsTest {
         Unpooled.wrappedBuffer(
             byteArrayOf(0xFF.toByte(), 0xFF.toByte(), 0xFF.toByte(), 0xFF.toByte())
         ).use { expected ->
-            Unpooled.buffer().use { actual ->
+            ByteBufAllocator.DEFAULT.buffer().use { actual ->
                 actual.writeUnsignedIntSmart(0x7FFFFFFF)
                 assertEquals(expected, actual)
             }
         }
 
-        Unpooled.buffer().use { buf ->
+        ByteBufAllocator.DEFAULT.buffer().use { buf ->
             assertThrows<IllegalArgumentException> {
                 buf.writeUnsignedIntSmart(0x80000000.toInt())
             }

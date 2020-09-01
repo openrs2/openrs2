@@ -3,6 +3,7 @@ package dev.openrs2.cache
 import com.google.common.jimfs.Configuration
 import com.google.common.jimfs.Jimfs
 import dev.openrs2.buffer.use
+import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.Unpooled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -155,7 +156,7 @@ object BufferedFileChannelTest {
             Files.write(path, "OpenRS2OpenRS2".toByteArray())
 
             BufferedFileChannel(FileChannel.open(path, READ), 8, 8).use { channel ->
-                Unpooled.buffer(7, 7).use { actual ->
+                ByteBufAllocator.DEFAULT.buffer(7, 7).use { actual ->
                     Unpooled.wrappedBuffer("OpenRS2".toByteArray()).use { expected ->
                         channel.read(0, actual, actual.writableBytes())
                         assertEquals(expected, actual)
@@ -177,7 +178,7 @@ object BufferedFileChannelTest {
             Files.write(path, "OpenRS2OpenRS2".toByteArray())
 
             BufferedFileChannel(FileChannel.open(path, READ), 8, 8).use { channel ->
-                Unpooled.buffer(14, 14).use { actual ->
+                ByteBufAllocator.DEFAULT.buffer(14, 14).use { actual ->
                     Unpooled.wrappedBuffer("OpenRS2OpenRS2".toByteArray()).use { expected ->
                         channel.read(0, actual, actual.writableBytes())
                         assertEquals(expected, actual)
@@ -193,7 +194,7 @@ object BufferedFileChannelTest {
             val path = fs.getPath("/test.dat")
 
             BufferedFileChannel(FileChannel.open(path, CREATE, READ, WRITE), 8, 8).use { channel ->
-                Unpooled.buffer(1, 1).use { buf ->
+                ByteBufAllocator.DEFAULT.buffer(1, 1).use { buf ->
                     assertThrows<EOFException> {
                         channel.read(0, buf, buf.writableBytes())
                     }
@@ -209,7 +210,7 @@ object BufferedFileChannelTest {
             Files.write(path, "OpenRS2OpenRS2".toByteArray())
 
             BufferedFileChannel(FileChannel.open(path, READ), 8, 8).use { channel ->
-                Unpooled.buffer(15, 15).use { buf ->
+                ByteBufAllocator.DEFAULT.buffer(15, 15).use { buf ->
                     assertThrows<EOFException> {
                         channel.read(0, buf, buf.writableBytes())
                     }
@@ -228,7 +229,7 @@ object BufferedFileChannelTest {
                     channel.write(7, buf, buf.readableBytes())
                 }
 
-                Unpooled.buffer(8, 8).use { actual ->
+                ByteBufAllocator.DEFAULT.buffer(8, 8).use { actual ->
                     channel.read(0, actual, actual.writableBytes())
 
                     Unpooled.wrappedBuffer(byteArrayOf(0, 0, 0, 0, 0, 0, 0, 1)).use { expected ->
@@ -249,7 +250,7 @@ object BufferedFileChannelTest {
                     channel.write(0, buf, buf.readableBytes())
                 }
 
-                Unpooled.buffer(7, 7).use { actual ->
+                ByteBufAllocator.DEFAULT.buffer(7, 7).use { actual ->
                     channel.read(0, actual, actual.writableBytes())
 
                     Unpooled.wrappedBuffer("OpenRS2".toByteArray()).use { expected ->
@@ -270,7 +271,7 @@ object BufferedFileChannelTest {
                     channel.write(0, buf, buf.readableBytes())
                 }
 
-                Unpooled.buffer(6, 6).use { actual ->
+                ByteBufAllocator.DEFAULT.buffer(6, 6).use { actual ->
                     channel.read(0, actual, actual.writableBytes())
 
                     Unpooled.wrappedBuffer("OpenRS".toByteArray()).use { expected ->
@@ -291,7 +292,7 @@ object BufferedFileChannelTest {
                     channel.write(0, buf, buf.readableBytes())
                 }
 
-                Unpooled.buffer(6, 6).use { actual ->
+                ByteBufAllocator.DEFAULT.buffer(6, 6).use { actual ->
                     channel.read(1, actual, actual.writableBytes())
 
                     Unpooled.wrappedBuffer("penRS2".toByteArray()).use { expected ->
@@ -314,7 +315,7 @@ object BufferedFileChannelTest {
                     channel.write(4, buf, buf.readableBytes())
                 }
 
-                Unpooled.buffer(14, 14).use { actual ->
+                ByteBufAllocator.DEFAULT.buffer(14, 14).use { actual ->
                     channel.read(0, actual, actual.writableBytes())
 
                     Unpooled.wrappedBuffer("OpenHelloenRS2".toByteArray()).use { expected ->
@@ -337,7 +338,7 @@ object BufferedFileChannelTest {
                     channel.write(4, buf, buf.readableBytes())
                 }
 
-                Unpooled.buffer(7, 7).use { actual ->
+                ByteBufAllocator.DEFAULT.buffer(7, 7).use { actual ->
                     channel.read(0, actual, actual.writableBytes())
 
                     Unpooled.wrappedBuffer("OpenHel".toByteArray()).use { expected ->
@@ -360,7 +361,7 @@ object BufferedFileChannelTest {
                     channel.write(4, buf, buf.readableBytes())
                 }
 
-                Unpooled.buffer(7, 7).use { actual ->
+                ByteBufAllocator.DEFAULT.buffer(7, 7).use { actual ->
                     channel.read(7, actual, actual.writableBytes())
 
                     Unpooled.wrappedBuffer("loenRS2".toByteArray()).use { expected ->
@@ -383,7 +384,7 @@ object BufferedFileChannelTest {
                     channel.write(4, buf, buf.readableBytes())
                 }
 
-                Unpooled.buffer(4, 4).use { actual ->
+                ByteBufAllocator.DEFAULT.buffer(4, 4).use { actual ->
                     channel.read(0, actual, actual.writableBytes())
 
                     Unpooled.wrappedBuffer("Open".toByteArray()).use { expected ->
@@ -391,7 +392,7 @@ object BufferedFileChannelTest {
                     }
                 }
 
-                Unpooled.buffer(5, 5).use { actual ->
+                ByteBufAllocator.DEFAULT.buffer(5, 5).use { actual ->
                     channel.read(9, actual, actual.writableBytes())
 
                     Unpooled.wrappedBuffer("enRS2".toByteArray()).use { expected ->
@@ -410,7 +411,7 @@ object BufferedFileChannelTest {
             Files.write(path, "OpenRS2OpenRS2".toByteArray())
 
             BufferedFileChannel(FileChannel.open(path, READ, WRITE), 4, 0).use { channel ->
-                Unpooled.buffer(4, 4).use { actual ->
+                ByteBufAllocator.DEFAULT.buffer(4, 4).use { actual ->
                     channel.read(4, actual, actual.writableBytes())
 
                     Unpooled.wrappedBuffer("RS2O".toByteArray()).use { expected ->
@@ -422,7 +423,7 @@ object BufferedFileChannelTest {
                     channel.write(4, buf.slice(), buf.readableBytes())
                 }
 
-                Unpooled.buffer(4, 4).use { actual ->
+                ByteBufAllocator.DEFAULT.buffer(4, 4).use { actual ->
                     channel.read(4, actual, actual.writableBytes())
 
                     Unpooled.wrappedBuffer("ABCD".toByteArray()).use { expected ->
@@ -441,7 +442,7 @@ object BufferedFileChannelTest {
             Files.write(path, "OpenRS2OpenRS2".toByteArray())
 
             BufferedFileChannel(FileChannel.open(path, READ, WRITE), 4, 0).use { channel ->
-                Unpooled.buffer(4, 4).use { actual ->
+                ByteBufAllocator.DEFAULT.buffer(4, 4).use { actual ->
                     channel.read(4, actual, actual.writableBytes())
 
                     Unpooled.wrappedBuffer("RS2O".toByteArray()).use { expected ->
@@ -453,7 +454,7 @@ object BufferedFileChannelTest {
                     channel.write(4, buf.slice(), buf.readableBytes())
                 }
 
-                Unpooled.buffer(4, 4).use { actual ->
+                ByteBufAllocator.DEFAULT.buffer(4, 4).use { actual ->
                     channel.read(4, actual, actual.writableBytes())
 
                     Unpooled.wrappedBuffer("ABCO".toByteArray()).use { expected ->
@@ -472,7 +473,7 @@ object BufferedFileChannelTest {
             Files.write(path, "OpenRS2OpenRS2".toByteArray())
 
             BufferedFileChannel(FileChannel.open(path, READ, WRITE), 4, 0).use { channel ->
-                Unpooled.buffer(4, 4).use { actual ->
+                ByteBufAllocator.DEFAULT.buffer(4, 4).use { actual ->
                     channel.read(4, actual, actual.writableBytes())
 
                     Unpooled.wrappedBuffer("RS2O".toByteArray()).use { expected ->
@@ -484,7 +485,7 @@ object BufferedFileChannelTest {
                     channel.write(5, buf.slice(), buf.readableBytes())
                 }
 
-                Unpooled.buffer(4, 4).use { actual ->
+                ByteBufAllocator.DEFAULT.buffer(4, 4).use { actual ->
                     channel.read(4, actual, actual.writableBytes())
 
                     Unpooled.wrappedBuffer("RBCD".toByteArray()).use { expected ->
@@ -503,7 +504,7 @@ object BufferedFileChannelTest {
             Files.write(path, "OpenRS2OpenRS2".toByteArray())
 
             BufferedFileChannel(FileChannel.open(path, READ, WRITE), 4, 0).use { channel ->
-                Unpooled.buffer(4, 4).use { actual ->
+                ByteBufAllocator.DEFAULT.buffer(4, 4).use { actual ->
                     channel.read(4, actual, actual.writableBytes())
 
                     Unpooled.wrappedBuffer("RS2O".toByteArray()).use { expected ->
@@ -515,7 +516,7 @@ object BufferedFileChannelTest {
                     channel.write(3, buf.slice(), buf.readableBytes())
                 }
 
-                Unpooled.buffer(4, 4).use { actual ->
+                ByteBufAllocator.DEFAULT.buffer(4, 4).use { actual ->
                     channel.read(4, actual, actual.writableBytes())
 
                     Unpooled.wrappedBuffer("ABCD".toByteArray()).use { expected ->
@@ -534,7 +535,7 @@ object BufferedFileChannelTest {
             Files.write(path, "OpenRS2OpenRS2".toByteArray())
 
             BufferedFileChannel(FileChannel.open(path, READ, WRITE), 4, 0).use { channel ->
-                Unpooled.buffer(4, 4).use { actual ->
+                ByteBufAllocator.DEFAULT.buffer(4, 4).use { actual ->
                     channel.read(4, actual, actual.writableBytes())
 
                     Unpooled.wrappedBuffer("RS2O".toByteArray()).use { expected ->
@@ -546,7 +547,7 @@ object BufferedFileChannelTest {
                     channel.write(4, buf.slice(), buf.readableBytes())
                 }
 
-                Unpooled.buffer(4, 4).use { actual ->
+                ByteBufAllocator.DEFAULT.buffer(4, 4).use { actual ->
                     channel.read(4, actual, actual.writableBytes())
 
                     Unpooled.wrappedBuffer("ABCD".toByteArray()).use { expected ->

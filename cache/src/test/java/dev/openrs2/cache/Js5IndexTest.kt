@@ -3,6 +3,7 @@ package dev.openrs2.cache
 import dev.openrs2.buffer.use
 import dev.openrs2.util.krHashCode
 import io.netty.buffer.ByteBuf
+import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.ByteBufUtil
 import io.netty.buffer.Unpooled
 import org.junit.jupiter.api.assertThrows
@@ -116,7 +117,7 @@ object Js5IndexTest {
 
     @Test
     fun testWriteEmpty() {
-        Unpooled.buffer().use { actual ->
+        ByteBufAllocator.DEFAULT.buffer().use { actual ->
             emptyIndex.write(actual)
 
             read("empty.dat").use { expected ->
@@ -151,7 +152,7 @@ object Js5IndexTest {
 
     @Test
     fun testWriteVersioned() {
-        Unpooled.buffer().use { actual ->
+        ByteBufAllocator.DEFAULT.buffer().use { actual ->
             versionedIndex.write(actual)
 
             read("versioned.dat").use { expected ->
@@ -171,7 +172,7 @@ object Js5IndexTest {
 
     @Test
     fun testWriteNoFlags() {
-        Unpooled.buffer().use { actual ->
+        ByteBufAllocator.DEFAULT.buffer().use { actual ->
             noFlagsIndex.write(actual)
 
             read("no-flags.dat").use { expected ->
@@ -191,7 +192,7 @@ object Js5IndexTest {
 
     @Test
     fun testWriteNamed() {
-        Unpooled.buffer().use { actual ->
+        ByteBufAllocator.DEFAULT.buffer().use { actual ->
             namedIndex.write(actual)
 
             read("named.dat").use { expected ->
@@ -211,7 +212,7 @@ object Js5IndexTest {
 
     @Test
     fun testWriteSmart() {
-        Unpooled.buffer().use { actual ->
+        ByteBufAllocator.DEFAULT.buffer().use { actual ->
             smartIndex.write(actual)
 
             read("smart.dat").use { expected ->
@@ -225,7 +226,7 @@ object Js5IndexTest {
         val index = Js5Index(Js5Protocol.ORIGINAL)
         index.createOrGet(65536)
 
-        Unpooled.buffer().use { buf ->
+        ByteBufAllocator.DEFAULT.buffer().use { buf ->
             assertThrows<IllegalStateException> {
                 index.write(buf)
             }
@@ -243,7 +244,7 @@ object Js5IndexTest {
 
     @Test
     fun testWriteDigest() {
-        Unpooled.buffer().use { actual ->
+        ByteBufAllocator.DEFAULT.buffer().use { actual ->
             digestIndex.write(actual)
 
             read("digest.dat").use { expected ->
@@ -254,7 +255,7 @@ object Js5IndexTest {
 
     @Test
     fun testWriteNullDigest() {
-        Unpooled.buffer().use { actual ->
+        ByteBufAllocator.DEFAULT.buffer().use { actual ->
             nullDigestIndex.write(actual)
 
             read("null-digest.dat").use { expected ->
@@ -274,7 +275,7 @@ object Js5IndexTest {
 
     @Test
     fun testWriteLengths() {
-        Unpooled.buffer().use { actual ->
+        ByteBufAllocator.DEFAULT.buffer().use { actual ->
             lengthsIndex.write(actual)
 
             read("lengths.dat").use { expected ->
@@ -294,7 +295,7 @@ object Js5IndexTest {
 
     @Test
     fun testWriteUncompressedChecksum() {
-        Unpooled.buffer().use { actual ->
+        ByteBufAllocator.DEFAULT.buffer().use { actual ->
             uncompressedChecksumIndex.write(actual)
 
             read("uncompressed-checksum.dat").use { expected ->
@@ -314,7 +315,7 @@ object Js5IndexTest {
 
     @Test
     fun testWriteAllFlags() {
-        Unpooled.buffer().use { actual ->
+        ByteBufAllocator.DEFAULT.buffer().use { actual ->
             allFlagsIndex.write(actual)
 
             read("all-flags.dat").use { expected ->
