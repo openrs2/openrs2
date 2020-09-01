@@ -113,7 +113,7 @@ public class DiskStore private constructor(
         }
     }
 
-    private fun getOrCreateIndex(archive: Int): BufferedFileChannel {
+    private fun createOrGetIndex(archive: Int): BufferedFileChannel {
         val index = indexes[archive]
         if (index != null) {
             return index
@@ -131,7 +131,7 @@ public class DiskStore private constructor(
 
     override fun create(archive: Int) {
         checkArchive(archive)
-        getOrCreateIndex(archive)
+        createOrGetIndex(archive)
     }
 
     override fun read(archive: Int, group: Int): ByteBuf {
@@ -255,7 +255,7 @@ public class DiskStore private constructor(
         val newSize = buf.readableBytes()
         require(newSize <= Store.MAX_GROUP_SIZE)
 
-        val index = getOrCreateIndex(archive)
+        val index = createOrGetIndex(archive)
 
         alloc.buffer(TEMP_BUFFER_SIZE, TEMP_BUFFER_SIZE).use { tempBuf ->
             // read existing index entry, if it exists
