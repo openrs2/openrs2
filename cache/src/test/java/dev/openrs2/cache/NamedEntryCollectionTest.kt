@@ -736,11 +736,156 @@ object NamedEntryCollectionTest {
     @Test
     fun testNameHashCollision() {
         val collection = TestCollection()
-        collection.createOrGet("hello")
 
-        val entry = collection.createOrGet(1)
-        assertThrows<IllegalStateException> {
-            entry.setName("hello")
-        }
+        val entry0 = collection.createOrGet(0)
+        val entry1 = collection.createOrGet(1)
+        val entry2 = collection.createOrGet(2)
+
+        entry0.setName("hello")
+        entry1.setName("hello")
+        entry2.setName("hello")
+
+        assertEquals(entry0, collection["hello"])
+
+        entry0.clearName()
+        assertEquals(entry1, collection["hello"])
+
+        entry1.clearName()
+        assertEquals(entry2, collection["hello"])
+
+        entry2.clearName()
+        assertNull(collection["hello"])
+    }
+
+    @Test
+    fun testNameHashCollisionOppositeOrder() {
+        val collection = TestCollection()
+
+        val entry0 = collection.createOrGet(0)
+        val entry1 = collection.createOrGet(1)
+        val entry2 = collection.createOrGet(2)
+
+        entry2.setName("hello")
+        entry1.setName("hello")
+        entry0.setName("hello")
+
+        assertEquals(entry0, collection["hello"])
+
+        entry2.clearName()
+        assertEquals(entry0, collection["hello"])
+
+        entry1.clearName()
+        assertEquals(entry0, collection["hello"])
+
+        entry0.clearName()
+        assertNull(collection["hello"])
+    }
+
+    @Test
+    fun testNameHashCollisionRemove() {
+        val collection = TestCollection()
+
+        val entry0 = collection.createOrGet(0)
+        val entry1 = collection.createOrGet(1)
+        val entry2 = collection.createOrGet(2)
+
+        entry0.setName("hello")
+        entry1.setName("hello")
+        entry2.setName("hello")
+
+        assertEquals(entry0, collection["hello"])
+
+        entry0.remove()
+        assertEquals(entry1, collection["hello"])
+
+        entry1.remove()
+        assertEquals(entry2, collection["hello"])
+
+        entry2.remove()
+        assertNull(collection["hello"])
+    }
+
+    @Test
+    fun testNameHashCollisionOppositeOrderRemove() {
+        val collection = TestCollection()
+
+        val entry0 = collection.createOrGet(0)
+        val entry1 = collection.createOrGet(1)
+        val entry2 = collection.createOrGet(2)
+
+        entry2.setName("hello")
+        entry1.setName("hello")
+        entry0.setName("hello")
+
+        assertEquals(entry0, collection["hello"])
+
+        entry2.remove()
+        assertEquals(entry0, collection["hello"])
+
+        entry1.remove()
+        assertEquals(entry0, collection["hello"])
+
+        entry0.remove()
+        assertNull(collection["hello"])
+    }
+
+    @Test
+    fun testNameHashCollisionRename() {
+        val collection = TestCollection()
+
+        val entry0 = collection.createOrGet(0)
+        val entry1 = collection.createOrGet(1)
+        val entry2 = collection.createOrGet(2)
+
+        entry0.setName("hello")
+        entry1.setName("hello")
+        entry2.setName("hello")
+
+        assertEquals(entry0, collection["hello"])
+
+        entry0.setName("entry0")
+        assertEquals(entry0, collection["entry0"])
+        assertEquals(entry1, collection["hello"])
+
+        entry1.setName("entry1")
+        assertEquals(entry0, collection["entry0"])
+        assertEquals(entry1, collection["entry1"])
+        assertEquals(entry2, collection["hello"])
+
+        entry2.setName("entry2")
+        assertEquals(entry0, collection["entry0"])
+        assertEquals(entry1, collection["entry1"])
+        assertEquals(entry2, collection["entry2"])
+        assertNull(collection["hello"])
+    }
+
+    @Test
+    fun testNameHashCollisionOppositeOrderRename() {
+        val collection = TestCollection()
+
+        val entry0 = collection.createOrGet(0)
+        val entry1 = collection.createOrGet(1)
+        val entry2 = collection.createOrGet(2)
+
+        entry2.setName("hello")
+        entry1.setName("hello")
+        entry0.setName("hello")
+
+        assertEquals(entry0, collection["hello"])
+
+        entry2.setName("entry2")
+        assertEquals(entry2, collection["entry2"])
+        assertEquals(entry0, collection["hello"])
+
+        entry1.setName("entry1")
+        assertEquals(entry1, collection["entry1"])
+        assertEquals(entry2, collection["entry2"])
+        assertEquals(entry0, collection["hello"])
+
+        entry0.setName("entry0")
+        assertEquals(entry0, collection["entry0"])
+        assertEquals(entry1, collection["entry1"])
+        assertEquals(entry2, collection["entry2"])
+        assertNull(collection["hello"])
     }
 }

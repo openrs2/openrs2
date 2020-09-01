@@ -1,9 +1,12 @@
 package dev.openrs2.cache
 
 import dev.openrs2.util.krHashCode
-import it.unimi.dsi.fastutil.ints.Int2IntMap
-import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap
 import it.unimi.dsi.fastutil.ints.Int2ObjectAVLTreeMap
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap
+import it.unimi.dsi.fastutil.ints.IntAVLTreeSet
+import it.unimi.dsi.fastutil.ints.IntSortedSet
+import it.unimi.dsi.fastutil.ints.IntSortedSets
 
 /**
  * A specialist collection type entirely designed for use by the [Js5Index]
@@ -34,17 +37,24 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectAVLTreeMap
  * none at all, but allowing a mixture in this implementation makes mutating
  * the index simpler.
  *
- * This implementation does not allow multiple entries with the same name hash,
- * and it throws an exception if it detects a collision. This differs from the
- * client's implementation, which does not throw an exception and allows the
- * colliding entry with the lowest ID to be referred to by the name.
+ * This implementation permits multiple entries to have the same name hash. In
+ * the event of a collision, the colliding entry with the lowest ID is returned
+ * from methods that look up an entry by its name hash. This implementation
+ * still behaves correctly if one of the colliding entries is removed: it will
+ * always return the entry with the next lowest ID.
+ *
+ * This is an edge case that is unlikely to be hit in practice: the 550 cache
+ * has no collisions, and the 876 cache only has a single collision (the hash
+ * for the empty string).
  */
 public abstract class NamedEntryCollection<T : NamedEntry>(
     private val entryConstructor: (NamedEntryCollection<T>, Int) -> T
 ) : MutableIterable<T> {
     private var singleEntry: T? = null
     private var entries: Int2ObjectAVLTreeMap<T>? = null
-    private var nameHashTable: Int2IntMap? = null
+
+    // XXX(gpe): unfortunately fastutil doesn't have a multimap type
+    private var nameHashTable: Int2ObjectMap<IntSortedSet>? = null
 
     public val size: Int
         get() {
@@ -116,9 +126,9 @@ public abstract class NamedEntryCollection<T : NamedEntry>(
         }
 
         val nameHashTable = nameHashTable ?: return null
-        val id = nameHashTable[nameHash]
-        return if (id != -1) {
-            get(id) ?: throw IllegalStateException()
+        val ids = nameHashTable.getOrDefault(nameHash, IntSortedSets.EMPTY_SET)
+        return if (ids.isNotEmpty()) {
+            get(ids.firstInt()) ?: throw IllegalStateException()
         } else {
             null
         }
@@ -150,9 +160,8 @@ public abstract class NamedEntryCollection<T : NamedEntry>(
                 entries[singleEntry.id] = singleEntry
 
                 if (singleEntry.nameHash != -1) {
-                    val nameHashTable = Int2IntOpenHashMap()
-                    nameHashTable.defaultReturnValue(-1)
-                    nameHashTable[singleEntry.nameHash] = singleEntry.id
+                    val nameHashTable = Int2ObjectOpenHashMap<IntSortedSet>()
+                    nameHashTable[singleEntry.nameHash] = IntSortedSets.singleton(singleEntry.id)
                     this.nameHashTable = nameHashTable
                 }
             }
@@ -224,18 +233,31 @@ public abstract class NamedEntryCollection<T : NamedEntry>(
 
         var nameHashTable = nameHashTable
         if (nameHashTable != null && prevNameHash != -1) {
-            nameHashTable.remove(prevNameHash)
+            val set = nameHashTable.get(prevNameHash)
+            check(set != null && set.contains(id))
+
+            if (set.size > 1) {
+                set.remove(id)
+            } else {
+                nameHashTable.remove(prevNameHash)
+            }
         }
 
         if (newNameHash != -1) {
             if (nameHashTable == null) {
-                nameHashTable = Int2IntOpenHashMap()
-                nameHashTable.defaultReturnValue(-1)
+                nameHashTable = Int2ObjectOpenHashMap()
             }
 
-            val prevId = nameHashTable.put(newNameHash, id)
-            check(prevId == -1) {
-                "Name hash collision: $newNameHash is already used by entry $prevId"
+            val set = nameHashTable[newNameHash]
+            when {
+                set == null -> nameHashTable[newNameHash] = IntSortedSets.singleton(id)
+                set.size == 1 -> {
+                    val newSet = IntAVLTreeSet()
+                    newSet.add(set.firstInt())
+                    newSet.add(id)
+                    nameHashTable[newNameHash] = newSet
+                }
+                else -> set.add(id)
             }
 
             this.nameHashTable = nameHashTable
@@ -262,14 +284,7 @@ public abstract class NamedEntryCollection<T : NamedEntry>(
             return
         }
 
-        val nameHashTable = nameHashTable ?: return
-        if (entry.nameHash != -1) {
-            nameHashTable.remove(entry.nameHash)
-
-            if (nameHashTable.isEmpty()) {
-                this.nameHashTable = null
-            }
-        }
+        rename(entry.id, entry.nameHash, -1)
     }
 
     override fun iterator(): MutableIterator<T> {
