@@ -10,6 +10,7 @@ dependencies {
     implementation(project(":compress"))
     implementation(project(":crypto"))
     implementation(project(":util"))
+    implementation("it.unimi.dsi:fastutil:${Versions.fastutil}")
 
     testImplementation("com.google.jimfs:jimfs:${Versions.jimfs}")
 }
