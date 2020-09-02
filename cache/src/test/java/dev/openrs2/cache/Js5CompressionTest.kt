@@ -320,6 +320,33 @@ object Js5CompressionTest {
         }
     }
 
+    @Test
+    fun testBzip2Corrupt() {
+        read("bzip2-corrupt.dat").use { compressed ->
+            assertThrows<IOException> {
+                Js5Compression.uncompress(compressed).release()
+            }
+        }
+    }
+
+    @Test
+    fun testGzipCorrupt() {
+        read("gzip-corrupt.dat").use { compressed ->
+            assertThrows<IOException> {
+                Js5Compression.uncompress(compressed).release()
+            }
+        }
+    }
+
+    @Test
+    fun testLzmaCorrupt() {
+        read("lzma-corrupt.dat").use { compressed ->
+            assertThrows<IOException> {
+                Js5Compression.uncompress(compressed).release()
+            }
+        }
+    }
+
     private fun read(name: String): ByteBuf {
         Js5CompressionTest::class.java.getResourceAsStream("compression/$name").use { input ->
             return Unpooled.wrappedBuffer(input.readAllBytes())
