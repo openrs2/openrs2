@@ -1,5 +1,6 @@
 package dev.openrs2.buffer
 
+import com.google.common.base.Preconditions
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufUtil
 import java.util.zip.CRC32
@@ -85,9 +86,7 @@ public fun ByteBuf.crc32(): Int {
 }
 
 public fun ByteBuf.crc32(index: Int, len: Int): Int {
-    if (index < 0 || index >= capacity() || len < 0 || (index + len) >= capacity()) {
-        throw IndexOutOfBoundsException()
-    }
+    Preconditions.checkPositionIndexes(index, index + len, capacity())
 
     val crc = CRC32()
     val count = nioBufferCount()

@@ -5,6 +5,8 @@ plugins {
 
 dependencies {
     api("io.netty:netty-buffer:${Versions.netty}")
+
+    implementation("com.google.guava:guava:${Versions.guava}")
 }
 
 publishing {
