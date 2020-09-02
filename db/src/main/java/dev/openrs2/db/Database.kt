@@ -85,13 +85,16 @@ public class Database(
             connection.autoCommit = false
 
             try {
-                try {
-                    val result = transaction.execute(connection)
-                    connection.commit()
-                    return result
-                } finally {
+                val result = try {
+                    transaction.execute(connection)
+                } catch (t: Throwable) {
                     connection.rollback()
+                    throw t
                 }
+
+                connection.commit()
+
+                return result
             } finally {
                 connection.autoCommit = oldAutoCommit
             }
