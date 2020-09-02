@@ -74,7 +74,7 @@ public abstract class NamedEntryCollection<T : NamedEntry>(
             }
 
             val entries = entries ?: return 0
-            check(entries.isNotEmpty())
+            assert(entries.isNotEmpty())
             return entries.lastIntKey() + 1
         }
 
@@ -128,7 +128,7 @@ public abstract class NamedEntryCollection<T : NamedEntry>(
         val nameHashTable = nameHashTable ?: return null
         val ids = nameHashTable.getOrDefault(nameHash, IntSortedSets.EMPTY_SET)
         return if (ids.isNotEmpty()) {
-            get(ids.firstInt()) ?: throw IllegalStateException()
+            get(ids.firstInt()) ?: throw AssertionError()
         } else {
             null
         }
@@ -210,20 +210,18 @@ public abstract class NamedEntryCollection<T : NamedEntry>(
 
         val singleEntry = singleEntry
         if (singleEntry != null) {
-            check(singleEntry.id != 0)
+            assert(singleEntry.id != 0)
             return 0
         }
 
-        val entries = entries
-        check(entries != null)
-
+        val entries = entries!!
         for (id in 0 until capacity) {
             if (!entries.containsKey(id)) {
                 return id
             }
         }
 
-        throw IllegalStateException()
+        throw AssertionError()
     }
 
     internal fun rename(id: Int, prevNameHash: Int, newNameHash: Int) {
@@ -234,7 +232,7 @@ public abstract class NamedEntryCollection<T : NamedEntry>(
         var nameHashTable = nameHashTable
         if (nameHashTable != null && prevNameHash != -1) {
             val set = nameHashTable.get(prevNameHash)
-            check(set != null && set.contains(id))
+            assert(set != null && set.contains(id))
 
             if (set.size > 1) {
                 set.remove(id)
