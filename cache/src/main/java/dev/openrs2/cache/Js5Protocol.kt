@@ -10,10 +10,10 @@ public enum class Js5Protocol {
 
     public companion object {
         private const val OFFSET = 5
+        private val values = values()
 
         public fun fromId(id: Int): Js5Protocol? {
             val ordinal = id - OFFSET
-            val values = values()
             return if (ordinal >= 0 && ordinal < values.size) {
                 values[ordinal]
             } else {

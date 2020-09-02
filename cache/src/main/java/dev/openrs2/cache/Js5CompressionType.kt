@@ -40,8 +40,9 @@ public enum class Js5CompressionType {
     }
 
     public companion object {
+        private val values = values()
+
         public fun fromOrdinal(ordinal: Int): Js5CompressionType? {
-            val values = values()
             return if (ordinal >= 0 && ordinal < values.size) {
                 values[ordinal]
             } else {
