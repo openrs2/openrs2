@@ -9,7 +9,7 @@ application {
 }
 
 dependencies {
-    api("com.github.ajalt:clikt:${Versions.clikt}")
+    api("com.github.ajalt.clikt:clikt:${Versions.clikt}")
 
     implementation(project(":deob-util"))
     implementation(project(":util"))

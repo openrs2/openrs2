@@ -10,7 +10,7 @@ application {
 
 dependencies {
     api(project(":asm"))
-    api("com.github.ajalt:clikt:${Versions.clikt}")
+    api("com.github.ajalt.clikt:clikt:${Versions.clikt}")
     api("com.google.inject:guice:${Versions.guice}")
 
     implementation(project(":conf"))
