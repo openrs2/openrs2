@@ -11,6 +11,7 @@ include(
     "conf",
     "crc32",
     "crypto",
+    "db",
     "decompiler",
     "deob",
     "deob-annotations",
