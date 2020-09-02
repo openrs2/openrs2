@@ -391,4 +391,64 @@ object ByteBufExtensionsTest {
             }
         }
     }
+
+    @Test
+    fun testCrc32() {
+        val s = "AAThe quick brown fox jumps over the lazy dogA"
+
+        /*
+         * Tests the hasArray() case. The slicedBuf trickery is to allow us
+         * to test a non-zero arrayOffset().
+         */
+        Unpooled.wrappedBuffer(s.toByteArray()).use { buf ->
+            val slicedBuf = buf.slice(1, buf.readableBytes() - 1)
+            assertEquals(0x414FA339, slicedBuf.crc32(1, slicedBuf.writerIndex() - 2))
+        }
+
+        // Tests the nioBufferCount() == 1 case.
+        Unpooled.wrappedBuffer(s.toByteArray()).use { buf ->
+            ByteBufAllocator.DEFAULT.directBuffer().use { directBuf ->
+                directBuf.writeBytes(buf, 0, buf.capacity())
+
+                assertEquals(0x414FA339, directBuf.crc32(2, directBuf.writerIndex() - 3))
+            }
+        }
+
+        // Tests the nioBufferCount() > 1 case.
+        Unpooled.wrappedBuffer(
+            Unpooled.wrappedBuffer("AAThe quick brown fox ".toByteArray()),
+            Unpooled.wrappedBuffer("jumps over the lazy dogA".toByteArray())
+        ).use { buf ->
+            assertEquals(0x414FA339, buf.crc32(2, buf.writerIndex() - 3))
+        }
+
+        /*
+         * Check the crc32() method (with no arguments) sets the index/length
+         * correctly.
+         */
+        Unpooled.wrappedBuffer(s.toByteArray()).use { buf ->
+            buf.readerIndex(2)
+            buf.writerIndex(buf.writerIndex() - 1)
+            assertEquals(0x414FA339, buf.crc32())
+        }
+    }
+
+    @Test
+    fun testCrc32Bounds() {
+        assertThrows<IndexOutOfBoundsException> {
+            Unpooled.EMPTY_BUFFER.crc32(-1, 0)
+        }
+
+        assertThrows<IndexOutOfBoundsException> {
+            Unpooled.EMPTY_BUFFER.crc32(0, -1)
+        }
+
+        assertThrows<IndexOutOfBoundsException> {
+            Unpooled.EMPTY_BUFFER.crc32(1, 0)
+        }
+
+        assertThrows<IndexOutOfBoundsException> {
+            Unpooled.EMPTY_BUFFER.crc32(0, 1)
+        }
+    }
 }

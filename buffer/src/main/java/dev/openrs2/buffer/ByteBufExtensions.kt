@@ -1,6 +1,8 @@
 package dev.openrs2.buffer
 
 import io.netty.buffer.ByteBuf
+import io.netty.buffer.ByteBufUtil
+import java.util.zip.CRC32
 
 public fun ByteBuf.readShortSmart(): Int {
     val peek = getUnsignedByte(readerIndex()).toInt()
@@ -76,4 +78,30 @@ public fun ByteBuf.writeUnsignedIntSmart(v: Int): ByteBuf {
     }
 
     return this
+}
+
+public fun ByteBuf.crc32(): Int {
+    return crc32(readerIndex(), readableBytes())
+}
+
+public fun ByteBuf.crc32(index: Int, len: Int): Int {
+    if (index < 0 || index >= capacity() || len < 0 || (index + len) >= capacity()) {
+        throw IndexOutOfBoundsException()
+    }
+
+    val crc = CRC32()
+    val count = nioBufferCount()
+
+    when {
+        hasArray() -> crc.update(array(), arrayOffset() + index, len)
+        count > 1 -> {
+            for (b in nioBuffers(index, len)) {
+                crc.update(b)
+            }
+        }
+        count == 1 -> crc.update(nioBuffer(index, len))
+        else -> crc.update(ByteBufUtil.getBytes(this, index, len))
+    }
+
+    return crc.value.toInt()
 }
