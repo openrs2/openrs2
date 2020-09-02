@@ -5,7 +5,7 @@ import dev.openrs2.crypto.XteaKey
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.Unpooled
 import org.junit.jupiter.api.assertThrows
-import java.io.EOFException
+import java.io.IOException
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
@@ -260,7 +260,7 @@ object Js5CompressionTest {
     @Test
     fun testInvalidType() {
         read("invalid-type.dat").use { compressed ->
-            assertThrows<IllegalArgumentException> {
+            assertThrows<IOException> {
                 Js5Compression.uncompress(compressed).release()
             }
         }
@@ -269,7 +269,7 @@ object Js5CompressionTest {
     @Test
     fun testInvalidLength() {
         read("invalid-length.dat").use { compressed ->
-            assertThrows<IllegalArgumentException> {
+            assertThrows<IOException> {
                 Js5Compression.uncompress(compressed).release()
             }
         }
@@ -278,7 +278,7 @@ object Js5CompressionTest {
     @Test
     fun testInvalidUncompressedLength() {
         read("invalid-uncompressed-length.dat").use { compressed ->
-            assertThrows<IllegalArgumentException> {
+            assertThrows<IOException> {
                 Js5Compression.uncompress(compressed).release()
             }
         }
@@ -287,7 +287,7 @@ object Js5CompressionTest {
     @Test
     fun testNoneEof() {
         read("none-eof.dat").use { compressed ->
-            assertThrows<IndexOutOfBoundsException> {
+            assertThrows<IOException> {
                 Js5Compression.uncompress(compressed).release()
             }
         }
@@ -296,7 +296,7 @@ object Js5CompressionTest {
     @Test
     fun testBzip2Eof() {
         read("bzip2-eof.dat").use { compressed ->
-            assertThrows<EOFException> {
+            assertThrows<IOException> {
                 Js5Compression.uncompress(compressed).release()
             }
         }
@@ -305,7 +305,7 @@ object Js5CompressionTest {
     @Test
     fun testGzipEof() {
         read("gzip-eof.dat").use { compressed ->
-            assertThrows<EOFException> {
+            assertThrows<IOException> {
                 Js5Compression.uncompress(compressed).release()
             }
         }
@@ -314,7 +314,7 @@ object Js5CompressionTest {
     @Test
     fun testLzmaEof() {
         read("lzma-eof.dat").use { compressed ->
-            assertThrows<EOFException> {
+            assertThrows<IOException> {
                 Js5Compression.uncompress(compressed).release()
             }
         }

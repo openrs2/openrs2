@@ -7,7 +7,7 @@ import dev.openrs2.crypto.xteaEncrypt
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufInputStream
 import io.netty.buffer.ByteBufOutputStream
-import java.io.EOFException
+import java.io.IOException
 
 public object Js5Compression {
     public fun compress(input: ByteBuf, type: Js5CompressionType, key: XteaKey = XteaKey.ZERO): ByteBuf {
@@ -102,16 +102,18 @@ public object Js5Compression {
     public fun uncompress(input: ByteBuf, key: XteaKey = XteaKey.ZERO): ByteBuf {
         val typeId = input.readUnsignedByte().toInt()
         val type = Js5CompressionType.fromOrdinal(typeId)
-        require(type != null) {
-            "Invalid compression type: $typeId"
-        }
+            ?: throw IOException("Invalid compression type: $typeId")
 
         val len = input.readInt()
-        require(len >= 0) {
-            "Length is negative: $len"
+        if (len < 0) {
+            throw IOException("Length is negative: $len")
         }
 
         if (type == Js5CompressionType.NONE) {
+            if (input.readableBytes() < len) {
+                throw IOException("Data truncated")
+            }
+
             input.readBytes(len).use { output ->
                 if (!key.isZero) {
                     output.xteaDecrypt(0, len, key)
@@ -120,10 +122,15 @@ public object Js5Compression {
             }
         }
 
-        decrypt(input, len + 4, key).use { plaintext ->
+        val lenWithUncompressedLen = len + 4
+        if (input.readableBytes() < lenWithUncompressedLen) {
+            throw IOException("Compressed data truncated")
+        }
+
+        decrypt(input, lenWithUncompressedLen, key).use { plaintext ->
             val uncompressedLen = plaintext.readInt()
-            require(uncompressedLen >= 0) {
-                "Uncompressed length is negative: $uncompressedLen"
+            if (uncompressedLen < 0) {
+                throw IOException("Uncompressed length is negative: $uncompressedLen")
             }
 
             plaintext.alloc().buffer(uncompressedLen, uncompressedLen).use { output ->
@@ -132,7 +139,7 @@ public object Js5Compression {
                     while (remaining > 0) {
                         val n = output.writeBytes(inputStream, remaining)
                         if (n == -1) {
-                            throw EOFException()
+                            throw IOException("Uncompressed data truncated")
                         }
                         remaining -= n
                     }
