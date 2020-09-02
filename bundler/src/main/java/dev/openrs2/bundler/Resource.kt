@@ -14,13 +14,13 @@ import java.util.zip.Deflater
 public class Resource(
     public val source: String,
     public val destination: String,
-    public val crc: Int,
+    public val checksum: Int,
     public val digest: ByteArray,
     public val uncompressedSize: Int,
     public val content: ByteArray
 ) {
-    public val sourceWithCrc: String
-        get() = source.replace(".", "_$crc.")
+    public val sourceWithChecksum: String
+        get() = source.replace(".", "_$checksum.")
 
     public val compressedSize: Int
         get() = content.size

@@ -41,7 +41,7 @@ public class ResourceTransformer(
 
                 // update the source (the CRC may have changed)
                 val source = match[3] as LdcInsnNode
-                source.cst = resource.sourceWithCrc
+                source.cst = resource.sourceWithChecksum
 
                 // update file sizes
                 method.instructions.set(match[22], resource.uncompressedSize.toAbstractInsnNode())
@@ -135,7 +135,7 @@ public class ResourceTransformer(
             list.add(TypeInsnNode(Opcodes.NEW, type))
             list.add(InsnNode(Opcodes.DUP))
             list.add(LdcInsnNode(resource.destination))
-            list.add(LdcInsnNode(resource.sourceWithCrc))
+            list.add(LdcInsnNode(resource.sourceWithChecksum))
 
             list.add(messages.size.toAbstractInsnNode())
             list.add(TypeInsnNode(Opcodes.ANEWARRAY, "java/lang/String"))
