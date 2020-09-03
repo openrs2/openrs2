@@ -4,11 +4,11 @@ plugins {
 }
 
 dependencies {
+    api(project(":crypto"))
     api("io.netty:netty-buffer:${Versions.netty}")
 
     implementation(project(":buffer"))
     implementation(project(":compress"))
-    implementation(project(":crypto"))
     implementation(project(":util"))
     implementation("it.unimi.dsi:fastutil:${Versions.fastutil}")
 
