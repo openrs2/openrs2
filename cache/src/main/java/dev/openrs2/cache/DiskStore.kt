@@ -462,7 +462,7 @@ public class DiskStore private constructor(
         private const val INDEX_BUFFER_SIZE = INDEX_ENTRY_SIZE * 1000
         private const val DATA_BUFFER_SIZE = BLOCK_SIZE * 10
 
-        private fun dataPath(root: Path): Path {
+        internal fun dataPath(root: Path): Path {
             return root.resolve("main_file_cache.dat2")
         }
 

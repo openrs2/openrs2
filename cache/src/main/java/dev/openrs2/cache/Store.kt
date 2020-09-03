@@ -5,6 +5,8 @@ import java.io.Closeable
 import java.io.FileNotFoundException
 import java.io.Flushable
 import java.io.IOException
+import java.nio.file.Files
+import java.nio.file.Path
 
 /**
  * A low-level interface for reading and writing raw groups directly to and
@@ -118,5 +120,19 @@ public interface Store : Flushable, Closeable {
          * The maximum length of a group's contents in bytes.
          */
         public const val MAX_GROUP_SIZE: Int = (1 shl 24) - 1
+
+        /**
+         * Opens a [Store], automatically detecting the type based on the
+         * presence or absence of the `main_file_cache.dat2` file.
+         * @param root the store's root directory.
+         * @throws IOException if an underlying I/O error occurs.
+         */
+        public fun open(root: Path): Store {
+            return if (Files.isRegularFile(DiskStore.dataPath(root))) {
+                DiskStore.open(root)
+            } else {
+                FlatFileStore.open(root)
+            }
+        }
     }
 }
