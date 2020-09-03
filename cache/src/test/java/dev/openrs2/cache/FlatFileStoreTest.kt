@@ -17,7 +17,7 @@ import kotlin.test.assertTrue
 
 object FlatFileStoreTest {
     private val IGNORE_GIT_EMPTY = { path: Path -> path.fileName.toString() != ".gitempty" }
-    private val root = Paths.get(FlatFileStoreTest::class.java.getResource("flat-file-store").toURI())
+    private val ROOT = Paths.get(FlatFileStoreTest::class.java.getResource("flat-file-store").toURI())
 
     @Test
     fun testBounds() {
@@ -243,7 +243,7 @@ object FlatFileStoreTest {
     }
 
     private fun readTest(name: String, f: (Store) -> Unit) {
-        FlatFileStore.open(root.resolve(name)).use { store ->
+        FlatFileStore.open(ROOT.resolve(name)).use { store ->
             f(store)
         }
     }
@@ -255,7 +255,7 @@ object FlatFileStoreTest {
                 f(store)
             }
 
-            val expected = root.resolve(name)
+            val expected = ROOT.resolve(name)
             assertTrue(expected.recursiveEquals(actual, filter = IGNORE_GIT_EMPTY))
         }
     }
@@ -263,13 +263,13 @@ object FlatFileStoreTest {
     private fun overwriteTest(src: String, name: String, f: (Store) -> Unit) {
         Jimfs.newFileSystem(Configuration.unix()).use { fs ->
             val actual = fs.getPath("/cache")
-            root.resolve(src).recursiveCopy(actual)
+            ROOT.resolve(src).recursiveCopy(actual)
 
             FlatFileStore.open(actual).use { store ->
                 f(store)
             }
 
-            val expected = root.resolve(name)
+            val expected = ROOT.resolve(name)
             assertTrue(expected.recursiveEquals(actual, filter = IGNORE_GIT_EMPTY))
         }
     }

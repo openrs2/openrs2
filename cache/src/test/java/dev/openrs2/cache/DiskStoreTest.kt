@@ -15,7 +15,7 @@ import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 object DiskStoreTest {
-    private val root = Paths.get(DiskStoreTest::class.java.getResource("disk-store").toURI())
+    private val ROOT = Paths.get(DiskStoreTest::class.java.getResource("disk-store").toURI())
 
     @Test
     fun testBounds() {
@@ -727,7 +727,7 @@ object DiskStoreTest {
     }
 
     private fun readTest(name: String, f: (Store) -> Unit) {
-        DiskStore.open(root.resolve(name)).use { store ->
+        DiskStore.open(ROOT.resolve(name)).use { store ->
             f(store)
         }
     }
@@ -739,7 +739,7 @@ object DiskStoreTest {
                 f(store)
             }
 
-            val expected = root.resolve(name)
+            val expected = ROOT.resolve(name)
             assertTrue(expected.recursiveEquals(actual))
         }
     }
@@ -747,13 +747,13 @@ object DiskStoreTest {
     private fun overwriteTest(src: String, name: String, f: (Store) -> Unit) {
         Jimfs.newFileSystem(Configuration.unix()).use { fs ->
             val actual = fs.getPath("/cache")
-            root.resolve(src).recursiveCopy(actual)
+            ROOT.resolve(src).recursiveCopy(actual)
 
             DiskStore.open(actual).use { store ->
                 f(store)
             }
 
-            val expected = root.resolve(name)
+            val expected = ROOT.resolve(name)
             assertTrue(expected.recursiveEquals(actual))
         }
     }
