@@ -1,6 +1,7 @@
 package dev.openrs2.cache
 
 import io.netty.buffer.ByteBuf
+import io.netty.buffer.ByteBufAllocator
 import java.io.Closeable
 import java.io.FileNotFoundException
 import java.io.Flushable
@@ -125,13 +126,15 @@ public interface Store : Flushable, Closeable {
          * Opens a [Store], automatically detecting the type based on the
          * presence or absence of the `main_file_cache.dat2` file.
          * @param root the store's root directory.
+         * @param alloc the [ByteBufAllocator] used to allocate buffers for
+         * groups read from the [Store] and for temporary internal use.
          * @throws IOException if an underlying I/O error occurs.
          */
-        public fun open(root: Path): Store {
+        public fun open(root: Path, alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT): Store {
             return if (Files.isRegularFile(DiskStore.dataPath(root))) {
-                DiskStore.open(root)
+                DiskStore.open(root, alloc)
             } else {
-                FlatFileStore.open(root)
+                FlatFileStore.open(root, alloc)
             }
         }
     }
