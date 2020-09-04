@@ -47,6 +47,8 @@ public class LiveVariableAnalyzer(owner: String, method: MethodNode) :
     private fun IntSet.plus(element: Int): IntSet {
         if (contains(element)) {
             return this
+        } else if (isEmpty()) {
+            return IntSets.singleton(element)
         }
 
         val newSet = IntOpenHashSet(this)
