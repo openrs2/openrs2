@@ -25,6 +25,6 @@ object Versions {
     const val netty = "4.1.51.Final"
     const val openrs2Natives = "2.0.1"
     const val shadowPlugin = "6.0.0"
-    const val versionsPlugin = "0.29.0"
+    const val versionsPlugin = "0.30.0"
     const val xz = "1.8"
 }
