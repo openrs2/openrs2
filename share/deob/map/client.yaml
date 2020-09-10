@@ -76,7 +76,7 @@ classes:
   client!fo: "Js5Index"
   client!g: "Class4_Sub3_Sub9"
   client!ga: "Js5ResourceProvider"
-  client!gb: "Class63_Sub1"
+  client!gb: "World"
   client!ge: "Class65"
   client!gf: "IntHashTable"
   client!gg: "Class11_Sub3"
@@ -215,7 +215,7 @@ classes:
   client!ra: "Class4_Sub25"
   client!rd: "Class149"
   client!re: "Class150"
-  client!rf: "Class151"
+  client!rf: "Country"
   client!rg: "Class4_Sub1_Sub26"
   client!rh: "Class4_Sub1_Sub27"
   client!ri: "Class53_Sub7"
@@ -249,7 +249,7 @@ classes:
   client!ti: "Class4_Sub1_Sub35"
   client!tj: "Class102"
   client!tm: "Class59_Sub2"
-  client!tn: "Class63"
+  client!tn: "AbstractWorld"
   client!to: "Class166"
   client!u: "Class167"
   client!ua: "NpcType"
@@ -1197,8 +1197,8 @@ fields:
     owner: "Static1"
     name: "aClass4_Sub3_Sub19Array1"
   client!cj.F I:
-    owner: "Static1"
-    name: "anInt645"
+    owner: "WorldList"
+    name: "maxId"
   client!cj.H Ljava/lang/String;:
     owner: "LocalisedText"
     name: "MILLION_SHORT"
@@ -2493,8 +2493,8 @@ fields:
     owner: "Static2"
     name: "anInt1637"
   client!fc.b [Lclient!gb;:
-    owner: "Static2"
-    name: "aClass63_Sub1Array1"
+    owner: "WorldList"
+    name: "worlds"
   client!fc.e I:
     owner: "Static2"
     name: "anInt1641"
@@ -2817,8 +2817,8 @@ fields:
     owner: "Static2"
     name: "anInt5778"
   client!gb.A I:
-    owner: "Class63_Sub1"
-    name: "anInt2037"
+    owner: "World"
+    name: "id"
   client!gb.q [I:
     owner: "Static2"
     name: "anIntArray162"
@@ -2826,14 +2826,14 @@ fields:
     owner: "Static2"
     name: "aClass106_2"
   client!gb.u Ljava/lang/String;:
-    owner: "Class63_Sub1"
-    name: "aString110"
+    owner: "World"
+    name: "activity"
   client!gb.w [I:
     owner: "Static2"
     name: "skyboxTextures"
   client!gb.x Ljava/lang/String;:
-    owner: "Class63_Sub1"
-    name: "aString111"
+    owner: "World"
+    name: "hostname"
   client!gb.z Ljava/lang/String;:
     owner: "LocalisedText"
     name: "MAINLOAD150B"
@@ -2904,8 +2904,8 @@ fields:
     owner: "Js5Compression"
     name: "GZIP_DECOMPRESSOR"
   client!gh.f I:
-    owner: "Static3"
-    name: "anInt2580"
+    owner: "WorldList"
+    name: "size"
   client!gh.h [Z:
     owner: "Static3"
     name: "aBooleanArray12"
@@ -4818,8 +4818,8 @@ fields:
     owner: "Bzip2DState"
     name: "k0"
   client!kf.t I:
-    owner: "Static4"
-    name: "anInt2842"
+    owner: "WorldList"
+    name: "checksum"
   client!kf.u Lclient!dj;:
     owner: "Static4"
     name: "aClass40_12"
@@ -8475,8 +8475,8 @@ fields:
     owner: "Static6"
     name: "anInt4451"
   client!rc.d [Lclient!rf;:
-    owner: "Static6"
-    name: "aClass151Array1"
+    owner: "WorldList"
+    name: "countries"
   client!rd.a I:
     owner: "Class149"
     name: "anInt4454"
@@ -8526,8 +8526,8 @@ fields:
     owner: "Static6"
     name: "anInt4466"
   client!rf.a I:
-    owner: "Class151"
-    name: "anInt4469"
+    owner: "Country"
+    name: "flag"
   client!rf.b Z:
     owner: "Static6"
     name: "aBoolean310"
@@ -8538,8 +8538,8 @@ fields:
     owner: "Static6"
     name: "aString269"
   client!rf.i Ljava/lang/String;:
-    owner: "Class151"
-    name: "aString270"
+    owner: "Country"
+    name: "name"
   client!rg.V I:
     owner: "Class4_Sub1_Sub26"
     name: "anInt4503"
@@ -8754,8 +8754,8 @@ fields:
     owner: "Static6"
     name: "aClass4_Sub10Array1"
   client!rl.o I:
-    owner: "Static6"
-    name: "anInt4615"
+    owner: "WorldList"
+    name: "minId"
   client!rl.q Lclient!kk;:
     owner: "Static6"
     name: "aClass106_8"
@@ -9324,8 +9324,8 @@ fields:
     owner: "Static6"
     name: "aClass26_52"
   client!sm.e Z:
-    owner: "Static6"
-    name: "aBoolean338"
+    owner: "WorldList"
+    name: "loaded"
   client!sm.f I:
     owner: "Static6"
     name: "anInt4907"
@@ -9939,17 +9939,17 @@ fields:
     owner: "Static7"
     name: "anIntArray571"
   client!tn.a I:
-    owner: "Class63"
-    name: "anInt2020"
+    owner: "AbstractWorld"
+    name: "flags"
   client!tn.b I:
-    owner: "Class63"
-    name: "anInt2021"
+    owner: "AbstractWorld"
+    name: "country"
   client!tn.c I:
     owner: "Static7"
     name: "anInt2022"
   client!tn.d I:
-    owner: "Class63"
-    name: "anInt2023"
+    owner: "AbstractWorld"
+    name: "players"
   client!tn.e Lclient!cc;:
     owner: "Static7"
     name: "aClass26_18"
@@ -17026,16 +17026,16 @@ methods:
     locals:
       25: "local25"
   client!el.a (ILclient!fd;)V:
-    owner: "Static14"
-    name: "method1072"
+    owner: "WorldList"
+    name: "decodeWorlds"
     arguments:
-      1: "arg0"
+      1: "buffer"
     locals:
-      9: "local9"
-      14: "local14"
-      69: "local69"
-      80: "local80"
-      88: "local88"
+      9: "countryCount"
+      14: "i"
+      69: "i"
+      80: "offset"
+      88: "world"
   client!el.a (ILjava/lang/String;)V:
     owner: "client"
     name: "printUsage"
@@ -20538,8 +20538,8 @@ methods:
       15080: "local15080"
       15103: "local15103"
   client!gb.a (Z)Lclient!rf;:
-    owner: "Class63_Sub1"
-    name: "method1552"
+    owner: "World"
+    name: "getCountry"
     arguments: {}
     locals: {}
   client!gb.e (I)Z:
@@ -20548,14 +20548,14 @@ methods:
     arguments: {}
     locals: {}
   client!gd.a (B[B)Z:
-    owner: "Static16"
-    name: "method1554"
+    owner: "WorldList"
+    name: "decode"
     arguments:
-      1: "arg0"
+      1: "bytes"
     locals:
-      8: "local8"
-      12: "local12"
-      38: "local38"
+      8: "buffer"
+      12: "updated"
+      38: "worldsUpdated"
   client!gd.a (I)V:
     owner: "Static16"
     name: "method1556"
@@ -23587,10 +23587,10 @@ methods:
     arguments: {}
     locals: {}
   client!im.a (BI)Lclient!gb;:
-    owner: "Static20"
-    name: "method1927"
+    owner: "WorldList"
+    name: "get"
     arguments:
-      1: "arg0"
+      1: "id"
     locals: {}
   client!im.a (I)V:
     owner: "Static20"
@@ -25977,12 +25977,12 @@ methods:
     name: "method2285"
     arguments: {}
     locals:
-      79: "local79"
+      79: "checksum"
       117: "local117"
       189: "local189"
-      233: "local233"
-      238: "local238"
-      249: "local249"
+      233: "i"
+      238: "id"
+      249: "world"
       278: "local278"
   client!kf.a (ILclient!fe;)V:
     owner: "Static22"
@@ -36072,14 +36072,14 @@ methods:
       0: "arg0"
     locals: {}
   client!qe.a (ILclient!fd;)V:
-    owner: "Static30"
-    name: "method3546"
+    owner: "WorldList"
+    name: "decodePlayers"
     arguments:
-      1: "arg0"
+      1: "buffer"
     locals:
-      3: "local3"
-      14: "local14"
-      18: "local18"
+      3: "i"
+      14: "id"
+      18: "players"
   client!qe.a (ZII)V:
     owner: "Static29"
     name: "method3543"
@@ -42124,13 +42124,13 @@ methods:
       0: "arg0"
     locals: {}
   client!tn.a (B)Z:
-    owner: "Class63"
-    name: "method1542"
+    owner: "AbstractWorld"
+    name: "isLootShare"
     arguments: {}
     locals: {}
   client!tn.a (I)Z:
-    owner: "Class63"
-    name: "method1540"
+    owner: "AbstractWorld"
+    name: "isMembers"
     arguments: {}
     locals: {}
   client!tn.a (III)Z:
@@ -42149,8 +42149,8 @@ methods:
       1: "arg1"
     locals: {}
   client!tn.b (B)Z:
-    owner: "Class63"
-    name: "method1543"
+    owner: "AbstractWorld"
+    name: "isQuickChat"
     arguments: {}
     locals: {}
   client!tn.b (I)Lclient!gh;:
@@ -42160,8 +42160,8 @@ methods:
     locals:
       15: "ex"
   client!tn.c (I)Z:
-    owner: "Class63"
-    name: "method1544"
+    owner: "AbstractWorld"
+    name: "isPvp"
     arguments: {}
     locals: {}
   client!tn.d (B)Lclient!vn;:
