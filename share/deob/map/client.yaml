@@ -2830,7 +2830,7 @@ fields:
     name: "aString110"
   client!gb.w [I:
     owner: "Static2"
-    name: "anIntArray163"
+    name: "skyboxTextures"
   client!gb.x Ljava/lang/String;:
     owner: "Class63_Sub1"
     name: "aString111"
@@ -15261,13 +15261,13 @@ methods:
     locals: {}
   client!client.a ([BI)V:
     owner: "client"
-    name: "method688"
+    name: "decodeDefaults"
     arguments:
-      0: "arg0"
+      0: "bytes"
     locals:
-      11: "local11"
-      15: "local15"
-      31: "local31"
+      11: "buffer"
+      15: "code"
+      31: "textures"
   client!client.a ([Lclient!wf;IIIIIII)V:
     owner: "Static12"
     name: "method693"
