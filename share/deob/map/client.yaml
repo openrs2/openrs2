@@ -19643,7 +19643,7 @@ methods:
     locals: {}
   client!fo.a ([BI)V:
     owner: "Js5Index"
-    name: "read"
+    name: "decode"
     arguments:
       0: "bytes"
     locals:
