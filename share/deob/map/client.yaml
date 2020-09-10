@@ -28429,7 +28429,7 @@ methods:
       2: "arg1"
     locals: {}
   client!lj.a (IB)I:
-    owner: "IntegerUtils"
+    owner: "IntUtils"
     name: "clp2"
     arguments:
       0: "v"
@@ -28578,7 +28578,7 @@ methods:
     locals:
       9: "node"
   client!ll.a (IB)I:
-    owner: "IntegerUtils"
+    owner: "IntUtils"
     name: "flp2"
     arguments:
       0: "v"
@@ -29256,7 +29256,7 @@ methods:
     locals:
       54: "local54"
   client!me.a (II)I:
-    owner: "IntegerUtils"
+    owner: "IntUtils"
     name: "bitCount"
     arguments:
       0: "v"
@@ -43437,7 +43437,7 @@ methods:
     arguments: {}
     locals: {}
   client!va.a (BI)Z:
-    owner: "IntegerUtils"
+    owner: "IntUtils"
     name: "isPowerOfTwo"
     arguments:
       1: "v"
