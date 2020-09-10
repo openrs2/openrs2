@@ -1980,8 +1980,8 @@ fields:
     owner: "Preferences"
     name: "customCursors"
   client!ef.a Lclient!oj;:
-    owner: "Static2"
-    name: "aClass129_1"
+    owner: "WordPack"
+    name: "huffmanCodec"
   client!ef.b I:
     owner: "Static2"
     name: "anInt1221"
@@ -12500,10 +12500,10 @@ methods:
     locals:
       8: "local8"
   client!ah.a (ILclient!fd;)Ljava/lang/String;:
-    owner: "Static8"
-    name: "method110"
+    owner: "WordPack"
+    name: "readString"
     arguments:
-      1: "arg0"
+      1: "buffer"
     locals: {}
   client!ah.a (ILclient!vh;ILclient!p;ILclient!f;II)V:
     owner: "Static8"
@@ -16946,15 +16946,15 @@ methods:
     arguments: {}
     locals: {}
   client!ej.b (Ljava/lang/String;I)[B:
-    owner: "Static14"
-    name: "method1061"
+    owner: "Cp1252Charset"
+    name: "encodeString"
     arguments:
-      0: "arg0"
+      0: "src"
     locals:
-      4: "local4"
-      13: "local13"
-      19: "local19"
-      30: "local30"
+      4: "srcLen"
+      13: "dest"
+      19: "i"
+      30: "c"
   client!ej.c (I)V:
     owner: "Static14"
     name: "method1059"
@@ -23944,10 +23944,10 @@ methods:
     arguments: {}
     locals: {}
   client!jb.a (ILclient!oj;)V:
-    owner: "Static20"
-    name: "method1978"
+    owner: "WordPack"
+    name: "init"
     arguments:
-      1: "arg0"
+      1: "huffmanCodec"
     locals: {}
   client!jb.a (IZIII)V:
     owner: "Static20"
@@ -36011,14 +36011,14 @@ methods:
     locals:
       7: "local7"
   client!qd.a (ZILclient!fd;)Ljava/lang/String;:
-    owner: "Static29"
-    name: "method3537"
+    owner: "WordPack"
+    name: "readStringInternal"
     arguments:
-      2: "arg0"
+      2: "buffer"
     locals:
-      12: "local12"
-      24: "local24"
-      48: "local48"
+      12: "len"
+      24: "bytes"
+      48: "ex"
   client!qd.b (BI)V:
     owner: "Static29"
     name: "method3534"
@@ -37331,14 +37331,14 @@ methods:
       22: "local22"
       35: "local35"
   client!rc.a (Lclient!fd;Ljava/lang/String;I)I:
-    owner: "Static31"
-    name: "method3655"
+    owner: "WordPack"
+    name: "writeString"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "buffer"
+      1: "s"
     locals:
-      6: "local6"
-      10: "local10"
+      6: "previousPosition"
+      10: "bytes"
   client!rc.a ([Ljava/lang/String;ZI[SI)V:
     owner: "Static31"
     name: "method3652"
