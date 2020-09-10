@@ -25,7 +25,7 @@ classes:
   client!bo: "Class23"
   client!c: "Class24_Sub1"
   client!ca: "Class4_Sub1_Sub3"
-  client!cc: "LruHashTable"
+  client!cc: "SoftLruHashTable"
   client!cd: "Class27"
   client!cf: "Class4_Sub1_Sub4"
   client!ch: "Class30"
@@ -1056,19 +1056,19 @@ fields:
     owner: "Static1"
     name: "anInt528"
   client!cc.f Lclient!ic;:
-    owner: "LruHashTable"
+    owner: "SoftLruHashTable"
     name: "table"
   client!cc.h [I:
     owner: "Static1"
     name: "anIntArray47"
   client!cc.i I:
-    owner: "LruHashTable"
+    owner: "SoftLruHashTable"
     name: "available"
   client!cc.j Lclient!uk;:
-    owner: "LruHashTable"
+    owner: "SoftLruHashTable"
     name: "queue"
   client!cc.k I:
-    owner: "LruHashTable"
+    owner: "SoftLruHashTable"
     name: "capacity"
   client!cd.a Lclient!ij;:
     owner: "Class27"
@@ -14386,19 +14386,19 @@ methods:
       22: "local22"
       26: "local26"
   client!cc.<init> (I)V:
-    owner: "LruHashTable"
+    owner: "SoftLruHashTable"
     name: "<init>"
     arguments:
       0: "capacity"
     locals:
       14: "bucketCount"
   client!cc.a (B)V:
-    owner: "LruHashTable"
+    owner: "SoftLruHashTable"
     name: "clear"
     arguments: {}
     locals: {}
   client!cc.a (BI)V:
-    owner: "LruHashTable"
+    owner: "SoftLruHashTable"
     name: "clean"
     arguments:
       1: "maxAge"
@@ -14406,7 +14406,7 @@ methods:
       22: "node"
       45: "softNode"
   client!cc.a (ILjava/lang/Object;J)V:
-    owner: "LruHashTable"
+    owner: "SoftLruHashTable"
     name: "put"
     arguments:
       2: "key"
@@ -14415,7 +14415,7 @@ methods:
       31: "node"
       42: "node"
   client!cc.a (JB)Ljava/lang/Object;:
-    owner: "LruHashTable"
+    owner: "SoftLruHashTable"
     name: "get"
     arguments:
       0: "key"
@@ -14424,7 +14424,7 @@ methods:
       26: "value"
       61: "hardNode"
   client!cc.a (JI)V:
-    owner: "LruHashTable"
+    owner: "SoftLruHashTable"
     name: "remove"
     arguments:
       0: "key"
@@ -14453,7 +14453,7 @@ methods:
       56: "local56"
       168: "local168"
   client!cc.a (Z)I:
-    owner: "LruHashTable"
+    owner: "SoftLruHashTable"
     name: "size"
     arguments: {}
     locals:
@@ -14467,7 +14467,7 @@ methods:
       42: "local42"
       51: "local51"
   client!cc.b (Z)V:
-    owner: "LruHashTable"
+    owner: "SoftLruHashTable"
     name: "clearSoft"
     arguments: {}
     locals:
