@@ -43,7 +43,7 @@ classes:
   client!dd: "Class4_Sub4_Sub1"
   client!de: "Class11_Sub2"
   client!dh: "Class4_Sub3_Sub5_Sub1"
-  client!dj: "Class40"
+  client!dj: "LruHashTable"
   client!dk: "Class19_Sub1"
   client!dl: "Class41_Sub1_Sub1"
   client!dm: "Class42"
@@ -1767,7 +1767,7 @@ fields:
     owner: "Static2"
     name: "aClass4_Sub4_Sub1_1"
   client!dj.f Lclient!lh;:
-    owner: "Class40"
+    owner: "LruHashTable"
     name: "aClass4_Sub3_18"
   client!dj.i [Z:
     owner: "Static2"
@@ -1779,19 +1779,19 @@ fields:
     owner: "Static2"
     name: "anInt1042"
   client!dj.o Lclient!uk;:
-    owner: "Class40"
+    owner: "LruHashTable"
     name: "queue"
   client!dj.p Lclient!fh;:
     owner: "client"
     name: "js5Archive9"
   client!dj.q Lclient!ic;:
-    owner: "Class40"
+    owner: "LruHashTable"
     name: "table"
   client!dj.r I:
-    owner: "Class40"
+    owner: "LruHashTable"
     name: "available"
   client!dj.s I:
-    owner: "Class40"
+    owner: "LruHashTable"
     name: "capacity"
   client!dk.k I:
     owner: "Class19_Sub1"
@@ -16175,14 +16175,14 @@ methods:
     locals:
       39: "local39"
   client!dj.<init> (I)V:
-    owner: "Class40"
+    owner: "LruHashTable"
     name: "<init>"
     arguments:
       0: "capacity"
     locals:
       16: "bucketCount"
   client!dj.a (B)V:
-    owner: "Class40"
+    owner: "LruHashTable"
     name: "clear"
     arguments: {}
     locals: {}
@@ -16204,7 +16204,7 @@ methods:
       1: "arg0"
     locals: {}
   client!dj.a (IJ)Lclient!lh;:
-    owner: "Class40"
+    owner: "LruHashTable"
     name: "get"
     arguments:
       1: "key"
@@ -16219,7 +16219,7 @@ methods:
     locals:
       17: "local17"
   client!dj.a (JILclient!lh;)V:
-    owner: "Class40"
+    owner: "LruHashTable"
     name: "put"
     arguments:
       0: "key"
@@ -16234,12 +16234,12 @@ methods:
       0: "arg0"
     locals: {}
   client!dj.c (I)Lclient!ni;:
-    owner: "Class40"
+    owner: "LruHashTable"
     name: "head"
     arguments: {}
     locals: {}
   client!dj.d (I)Lclient!ni;:
-    owner: "Class40"
+    owner: "LruHashTable"
     name: "next"
     arguments: {}
     locals: {}
