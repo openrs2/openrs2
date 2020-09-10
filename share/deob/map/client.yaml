@@ -14399,7 +14399,7 @@ methods:
     locals: {}
   client!cc.a (BI)V:
     owner: "LruHashTable"
-    name: "sweep"
+    name: "clean"
     arguments:
       1: "maxAge"
     locals:
@@ -23573,7 +23573,7 @@ methods:
       8: "local8"
   client!il.a (II)V:
     owner: "ObjTypeList"
-    name: "sweep"
+    name: "clean"
     arguments: {}
     locals: {}
   client!il.b (B)V:
@@ -32462,7 +32462,7 @@ methods:
     locals: {}
   client!o.a (II)V:
     owner: "NpcTypeList"
-    name: "sweep"
+    name: "clean"
     arguments: {}
     locals: {}
   client!o.a (IIIII)V:
