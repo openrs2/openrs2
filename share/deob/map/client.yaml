@@ -14468,7 +14468,7 @@ methods:
       51: "local51"
   client!cc.b (Z)V:
     owner: "SoftLruHashTable"
-    name: "clearSoft"
+    name: "removeSoft"
     arguments: {}
     locals:
       16: "node"
@@ -14675,7 +14675,7 @@ methods:
       67: "local67"
   client!cf.f (B)V:
     owner: "ObjTypeList"
-    name: "clearSoft"
+    name: "removeSoft"
     arguments: {}
     locals: {}
   client!cf.g (I)I:
@@ -33358,7 +33358,7 @@ methods:
       38: "local38"
   client!og.g (B)V:
     owner: "NpcTypeList"
-    name: "clearSoft"
+    name: "removeSoft"
     arguments: {}
     locals: {}
   client!og.g (I)V:
