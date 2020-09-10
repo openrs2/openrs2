@@ -342,8 +342,8 @@ fields:
     owner: "Static1"
     name: "anInt3"
   client!aa.d Lclient!fh;:
-    owner: "Static1"
-    name: "aClass58_1"
+    owner: "client"
+    name: "js5Archive20"
   client!aa.e [I:
     owner: "Static1"
     name: "anIntArray1"
@@ -483,8 +483,8 @@ fields:
     owner: "Static1"
     name: "anIntArray15"
   client!ah.g Lclient!fh;:
-    owner: "Static1"
-    name: "aClass58_4"
+    owner: "client"
+    name: "js5Archive8"
   client!aj.b Ljava/lang/String;:
     owner: "LocalisedText"
     name: "LENT_ITEM_RETURN"
@@ -654,8 +654,8 @@ fields:
     owner: "Static1"
     name: "aStringArray4"
   client!bc.o Lclient!fh;:
-    owner: "Static1"
-    name: "aClass58_24"
+    owner: "client"
+    name: "js5Archive21"
   client!bc.q [[I:
     owner: "Static1"
     name: "anIntArrayArray9"
@@ -768,8 +768,8 @@ fields:
     owner: "Static1"
     name: "aClass175_4"
   client!bh.c Lclient!fh;:
-    owner: "Static1"
-    name: "aClass58_30"
+    owner: "client"
+    name: "js5Archive25"
   client!bh.d I:
     owner: "Static1"
     name: "anInt1047"
@@ -972,8 +972,8 @@ fields:
     owner: "Static1"
     name: "aLong23"
   client!bo.e Lclient!fh;:
-    owner: "Static1"
-    name: "aClass58_10"
+    owner: "client"
+    name: "js5Archive22"
   client!bo.n [F:
     owner: "Class23"
     name: "aFloatArray9"
@@ -1665,8 +1665,8 @@ fields:
     owner: "Static2"
     name: "aClass4_Sub3_Sub5_Sub2_2"
   client!df.e Lclient!fh;:
-    owner: "Static2"
-    name: "aClass58_27"
+    owner: "client"
+    name: "js5Archive3"
   client!df.f Ljava/lang/String;:
     owner: "Text"
     name: "CHATCOL2"
@@ -1782,8 +1782,8 @@ fields:
     owner: "Class40"
     name: "aClass175_3"
   client!dj.p Lclient!fh;:
-    owner: "Static2"
-    name: "aClass58_29"
+    owner: "client"
+    name: "js5Archive9"
   client!dj.q Lclient!ic;:
     owner: "Class40"
     name: "aClass84_4"
@@ -2322,8 +2322,8 @@ fields:
     owner: "Static2"
     name: "anInt1344"
   client!en.i Lclient!fh;:
-    owner: "Static2"
-    name: "aClass58_39"
+    owner: "client"
+    name: "js5Archive2"
   client!en.j Ljava/lang/String;:
     owner: "LocalisedText"
     name: "MAINLOAD120"
@@ -3228,8 +3228,8 @@ fields:
     owner: "Class4_Sub11"
     name: "aClass4_Sub6_Sub4_2"
   client!gn.q Lclient!fh;:
-    owner: "Static3"
-    name: "aClass58_46"
+    owner: "client"
+    name: "js5Archive0"
   client!gn.r I:
     owner: "Class4_Sub11"
     name: "anInt2111"
@@ -3333,8 +3333,8 @@ fields:
     owner: "GameShell"
     name: "instances"
   client!hb.j Lclient!fh;:
-    owner: "Static3"
-    name: "aClass58_47"
+    owner: "client"
+    name: "js5Archive5"
   client!hc.b I:
     owner: "Static3"
     name: "anInt2885"
@@ -4224,8 +4224,8 @@ fields:
     owner: "Class4_Sub13"
     name: "anInt2495"
   client!io.D Lclient!fh;:
-    owner: "Static3"
-    name: "aClass58_57"
+    owner: "client"
+    name: "js5Archive11"
   client!io.E I:
     owner: "Static3"
     name: "anInt2496"
@@ -4968,8 +4968,8 @@ fields:
     owner: "Static4"
     name: "anInt2974"
   client!kn.F Lclient!fh;:
-    owner: "Static4"
-    name: "aClass58_66"
+    owner: "client"
+    name: "js5Archive1"
   client!kn.G [I:
     owner: "Static4"
     name: "anIntArray267"
@@ -5013,8 +5013,8 @@ fields:
     owner: "Class4_Sub15"
     name: "aByte5"
   client!l.u Lclient!fh;:
-    owner: "Static4"
-    name: "aClass58_67"
+    owner: "client"
+    name: "js5Archive13"
   client!l.w Lclient!ob;:
     owner: "Static4"
     name: "aClass59_1"
@@ -5031,8 +5031,8 @@ fields:
     owner: "Static4"
     name: "anInt3017"
   client!la.U Lclient!fh;:
-    owner: "Static4"
-    name: "aClass58_68"
+    owner: "client"
+    name: "js5Archive26"
   client!la.W I:
     owner: "Static4"
     name: "anInt3020"
@@ -5343,8 +5343,8 @@ fields:
     owner: "Static4"
     name: "anInt3171"
   client!lj.T Lclient!fh;:
-    owner: "Static4"
-    name: "aClass58_69"
+    owner: "client"
+    name: "js5Archive7"
   client!lj.U I:
     owner: "Class4_Sub1_Sub17"
     name: "anInt3172"
@@ -5526,8 +5526,8 @@ fields:
     owner: "IsaacRandom"
     name: "mem"
   client!m.p Lclient!fh;:
-    owner: "Static4"
-    name: "aClass58_73"
+    owner: "client"
+    name: "js5Archive12"
   client!ma.a I:
     owner: "Class56"
     name: "anInt3404"
@@ -5790,8 +5790,8 @@ fields:
     owner: "Class119"
     name: "aBoolean233"
   client!mi.f Lclient!fh;:
-    owner: "Static4"
-    name: "aClass58_76"
+    owner: "client"
+    name: "js5Archive16"
   client!mi.g Ljava/lang/String;:
     owner: "LocalisedText"
     name: "MAINLOAD135"
@@ -7257,8 +7257,8 @@ fields:
     owner: "Class130"
     name: "aClass175_13"
   client!om.f Lclient!fh;:
-    owner: "Static5"
-    name: "aClass58_79"
+    owner: "client"
+    name: "js5Archive19"
   client!om.j [S:
     owner: "Static5"
     name: "aShortArray74"
@@ -7314,8 +7314,8 @@ fields:
     owner: "Static5"
     name: "aString236"
   client!p.yc Lclient!fh;:
-    owner: "Static5"
-    name: "aClass58_80"
+    owner: "client"
+    name: "js5Archive28"
   client!p.zc [[[B:
     owner: "Static5"
     name: "aByteArrayArrayArray18"
@@ -7479,8 +7479,8 @@ fields:
     owner: "LocalisedText"
     name: "FRIENDLOGOUT"
   client!pg.h Lclient!fh;:
-    owner: "Static5"
-    name: "aClass58_78"
+    owner: "client"
+    name: "js5Archive14"
   client!pg.i I:
     owner: "Class41"
     name: "anInt3770"
@@ -7710,8 +7710,8 @@ fields:
     owner: "Static5"
     name: "aClass187ArrayArray1"
   client!qb.S Lclient!fh;:
-    owner: "Static5"
-    name: "aClass58_82"
+    owner: "client"
+    name: "js5Archive23"
   client!qb.V I:
     owner: "Class4_Sub1_Sub24"
     name: "anInt4259"
@@ -8100,8 +8100,8 @@ fields:
     owner: "Class4_Sub23"
     name: "anIntArray458"
   client!qh.C Lclient!fh;:
-    owner: "Static5"
-    name: "aClass58_83"
+    owner: "client"
+    name: "js5Archive15"
   client!qh.D [S:
     owner: "Class4_Sub23"
     name: "aShortArray80"
@@ -8400,8 +8400,8 @@ fields:
     owner: "Class20_Sub2"
     name: "aClass20_Sub2_6"
   client!r.r Lclient!fh;:
-    owner: "Static6"
-    name: "aClass58_71"
+    owner: "client"
+    name: "js5Archive10"
   client!r.s [[I:
     owner: "Static6"
     name: "anIntArrayArray25"
@@ -9045,8 +9045,8 @@ fields:
     owner: "Class153"
     name: "anInt4703"
   client!sa.k Lclient!fh;:
-    owner: "Static6"
-    name: "aClass58_87"
+    owner: "client"
+    name: "js5Archive24"
   client!sa.n I:
     owner: "Class153"
     name: "anInt4706"
@@ -9078,8 +9078,8 @@ fields:
     owner: "Static6"
     name: "aClass102_2"
   client!sc.gb Lclient!fh;:
-    owner: "Static6"
-    name: "aClass58_88"
+    owner: "client"
+    name: "js5Archive18"
   client!sc.ib I:
     owner: "Class4_Sub1_Sub29"
     name: "anInt4756"
@@ -9333,8 +9333,8 @@ fields:
     owner: "Static6"
     name: "aShortArrayArray6"
   client!sm.i Lclient!fh;:
-    owner: "Static6"
-    name: "aClass58_92"
+    owner: "client"
+    name: "js5Archive4"
   client!sn.T [[[I:
     owner: "Static6"
     name: "anIntArrayArrayArray14"
@@ -10044,8 +10044,8 @@ fields:
     owner: "Static7"
     name: "anIntArray587"
   client!u.h Lclient!fh;:
-    owner: "Static7"
-    name: "aClass58_96"
+    owner: "client"
+    name: "js5Archive17"
   client!u.i Lclient!dc;:
     owner: "Class167"
     name: "aClass37_1"
@@ -10257,8 +10257,8 @@ fields:
     owner: "Static7"
     name: "aClass58_97"
   client!uc.X Lclient!fh;:
-    owner: "Static7"
-    name: "aClass58_98"
+    owner: "client"
+    name: "js5Archive6"
   client!uc.Y [[[I:
     owner: "Static7"
     name: "anIntArrayArrayArray15"
@@ -11118,8 +11118,8 @@ fields:
     owner: "Js5ResourceProviderImpl"
     name: "groupStatus"
   client!wc.a Lclient!fh;:
-    owner: "Static7"
-    name: "aClass58_102"
+    owner: "client"
+    name: "js5Archive27"
   client!wc.b I:
     owner: "Static7"
     name: "anInt5803"
