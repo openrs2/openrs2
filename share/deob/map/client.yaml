@@ -60,7 +60,7 @@ classes:
   client!em: "Class50"
   client!en: "Js5NetQueue"
   client!eo: "BufferedSocket"
-  client!f: "Class53_Sub1_Sub1"
+  client!f: "Player"
   client!fa: "Class4_Sub1_Sub7"
   client!fd: "Buffer"
   client!fe: "Class56_Sub1"
@@ -107,7 +107,7 @@ classes:
   client!ja: "Js5CacheQueue"
   client!jagex3/jagmisc/jagmisc: "jagex3/jagmisc/jagmisc"
   client!jb: "GzipDecompressor"
-  client!jc: "Class4_Sub3_Sub12"
+  client!jc: "ParamType"
   client!jd: "Class94"
   client!jf: "Timer"
   client!jg: "SoftReferenceNodeFactory"
@@ -182,7 +182,7 @@ classes:
   client!om: "Class130"
   client!on: "Class4_Sub21"
   client!oo: "MillisTimer"
-  client!p: "Class53_Sub1_Sub2"
+  client!p: "Npc"
   client!pa: "Class131"
   client!pb: "Class4_Sub8_Sub1"
   client!pc: "Class4_Sub6_Sub4"
@@ -198,7 +198,7 @@ classes:
   client!q: "Class139"
   client!qa: "Class140"
   client!qb: "Class4_Sub1_Sub24"
-  client!qc: "Class53_Sub1"
+  client!qc: "PathingEntity"
   client!qd: "Class4_Sub3_Sub16"
   client!qe: "HashTableIterator"
   client!qf: "Class142"
@@ -206,7 +206,7 @@ classes:
   client!qh: "Class4_Sub23"
   client!qi: "Class24"
   client!qj: "Class4_Sub1_Sub25"
-  client!qk: "Class144"
+  client!qk: "PlayerAppearance"
   client!ql: "GameCanvas"
   client!qm: "Class145"
   client!qn: "Class4_Sub24"
@@ -242,7 +242,7 @@ classes:
   client!ta: "Class4_Sub30"
   client!tb: "Class161"
   client!tc: "Class4_Sub1_Sub34"
-  client!td: "Class162"
+  client!td: "ObjType"
   client!te: "Class4_Sub3_Sub19"
   client!tf: "Class4_Sub6"
   client!tg: "Class4_Sub31"
@@ -252,7 +252,7 @@ classes:
   client!tn: "Class63"
   client!to: "Class166"
   client!u: "Class167"
-  client!ua: "Class168"
+  client!ua: "NpcType"
   client!ub: "Class169"
   client!uc: "Class4_Sub1_Sub36"
   client!ud: "Class170"
@@ -594,8 +594,8 @@ fields:
     owner: "Static1"
     name: "aClass58_7"
   client!ao.f Lclient!cc;:
-    owner: "Static1"
-    name: "aClass26_2"
+    owner: "NpcTypeList"
+    name: "models"
   client!ao.g Ljava/lang/String;:
     owner: "LocalisedText"
     name: "EXAMINE"
@@ -705,7 +705,7 @@ fields:
     owner: "Static1"
     name: "aLong15"
   client!be.h Lclient!ke;:
-    owner: "Static1"
+    owner: "ObjTypeList"
     name: "aClass4_Sub3_Sub5_Sub2_1"
   client!be.i [B:
     owner: "Class17"
@@ -1287,8 +1287,8 @@ fields:
     owner: "Class32"
     name: "anInt795"
   client!cn.C Z:
-    owner: "Static1"
-    name: "aBoolean200"
+    owner: "ObjTypeList"
+    name: "allowMembers"
   client!co.a I:
     owner: "Class33"
     name: "anInt811"
@@ -1320,8 +1320,8 @@ fields:
     owner: "Class33"
     name: "anInt824"
   client!co.p Lclient!fh;:
-    owner: "Static1"
-    name: "aClass58_21"
+    owner: "NpcTypeList"
+    name: "modelsArchive"
   client!co.q I:
     owner: "Class33"
     name: "anInt825"
@@ -1659,8 +1659,8 @@ fields:
     owner: "Class11_Sub2"
     name: "anInt955"
   client!df.a Lclient!cc;:
-    owner: "Static2"
-    name: "aClass26_7"
+    owner: "ObjTypeList"
+    name: "models"
   client!df.d Lclient!ke;:
     owner: "Static2"
     name: "aClass4_Sub3_Sub5_Sub2_2"
@@ -1780,19 +1780,19 @@ fields:
     name: "anInt1042"
   client!dj.o Lclient!uk;:
     owner: "Class40"
-    name: "aClass175_3"
+    name: "queue"
   client!dj.p Lclient!fh;:
     owner: "client"
     name: "js5Archive9"
   client!dj.q Lclient!ic;:
     owner: "Class40"
-    name: "aClass84_4"
+    name: "table"
   client!dj.r I:
     owner: "Class40"
-    name: "anInt1044"
+    name: "available"
   client!dj.s I:
     owner: "Class40"
-    name: "anInt1045"
+    name: "capacity"
   client!dk.k I:
     owner: "Class19_Sub1"
     name: "anInt1054"
@@ -2397,59 +2397,59 @@ fields:
     owner: "BufferedSocket"
     name: "writePointer"
   client!f.Ac I:
-    owner: "Class53_Sub1_Sub1"
-    name: "anInt1584"
+    owner: "Player"
+    name: "skillLevel"
   client!f.Cc I:
-    owner: "Class53_Sub1_Sub1"
+    owner: "Player"
     name: "anInt1586"
   client!f.Dc I:
-    owner: "Class53_Sub1_Sub1"
-    name: "anInt1587"
+    owner: "Player"
+    name: "soundVolume"
   client!f.Ec I:
-    owner: "Class53_Sub1_Sub1"
-    name: "anInt1588"
+    owner: "Player"
+    name: "idleSound"
   client!f.Fc B:
-    owner: "Class53_Sub1_Sub1"
-    name: "aByte3"
+    owner: "Player"
+    name: "title"
   client!f.Gc I:
-    owner: "Class53_Sub1_Sub1"
-    name: "anInt1589"
+    owner: "Player"
+    name: "runSound"
   client!f.Jc Z:
-    owner: "Class53_Sub1_Sub1"
+    owner: "Player"
     name: "aBoolean98"
   client!f.Lc I:
-    owner: "Class53_Sub1_Sub1"
-    name: "anInt1593"
+    owner: "Player"
+    name: "team"
   client!f.Oc Ljava/lang/String;:
-    owner: "Class53_Sub1_Sub1"
-    name: "aString88"
+    owner: "Player"
+    name: "name"
   client!f.Pc I:
-    owner: "Class53_Sub1_Sub1"
-    name: "anInt1596"
+    owner: "Player"
+    name: "prayerIcon"
   client!f.Qc I:
-    owner: "Class53_Sub1_Sub1"
-    name: "anInt1597"
+    owner: "Player"
+    name: "combatLevel"
   client!f.Sc I:
     owner: "Static2"
     name: "anInt1599"
   client!f.Tc Lclient!qk;:
-    owner: "Class53_Sub1_Sub1"
-    name: "aClass144_2"
+    owner: "Player"
+    name: "appearance"
   client!f.pc I:
-    owner: "Class53_Sub1_Sub1"
-    name: "anInt1573"
+    owner: "Player"
+    name: "skullIcon"
   client!f.sc I:
-    owner: "Class53_Sub1_Sub1"
+    owner: "Player"
     name: "anInt1576"
   client!f.wc I:
-    owner: "Class53_Sub1_Sub1"
-    name: "anInt1580"
+    owner: "Player"
+    name: "walkSound"
   client!f.yc I:
-    owner: "Class53_Sub1_Sub1"
-    name: "anInt1582"
+    owner: "Player"
+    name: "soundRadius"
   client!f.zc I:
-    owner: "Class53_Sub1_Sub1"
-    name: "anInt1583"
+    owner: "Player"
+    name: "crawlSound"
   client!fa.S Lclient!ll;:
     owner: "Static2"
     name: "aClass112_8"
@@ -3597,8 +3597,8 @@ fields:
     owner: "Class82"
     name: "anInt2270"
   client!ho.j Lclient!cc;:
-    owner: "Static3"
-    name: "aClass26_22"
+    owner: "NpcTypeList"
+    name: "types"
   client!ho.k I:
     owner: "Class82"
     name: "anInt2271"
@@ -4335,8 +4335,8 @@ fields:
     owner: "Static3"
     name: "anInt2542"
   client!jc.B Ljava/lang/String;:
-    owner: "Class4_Sub3_Sub12"
-    name: "aString153"
+    owner: "ParamType"
+    name: "defaultString"
   client!jc.D Lclient!wf;:
     owner: "Static3"
     name: "aClass185_8"
@@ -4344,11 +4344,11 @@ fields:
     owner: "Static3"
     name: "aClass26_25"
   client!jc.H I:
-    owner: "Class4_Sub3_Sub12"
-    name: "anInt2546"
+    owner: "ParamType"
+    name: "defaultInt"
   client!jc.M C:
-    owner: "Class4_Sub3_Sub12"
-    name: "aChar3"
+    owner: "ParamType"
+    name: "type"
   client!jc.R I:
     owner: "Static3"
     name: "anInt2553"
@@ -5676,8 +5676,8 @@ fields:
     owner: "Static4"
     name: "aBoolean232"
   client!mf.e Lclient!fh;:
-    owner: "Static4"
-    name: "aClass58_74"
+    owner: "ParamTypeList"
+    name: "archive"
   client!mf.f I:
     owner: "Static4"
     name: "anInt3314"
@@ -5691,8 +5691,8 @@ fields:
     owner: "Static4"
     name: "anIntArray316"
   client!mf.k Lclient!fh;:
-    owner: "Static4"
-    name: "aClass58_75"
+    owner: "ObjTypeList"
+    name: "modelsArchive"
   client!mf.l I:
     owner: "Static4"
     name: "anInt3317"
@@ -6720,8 +6720,8 @@ fields:
     owner: "Class4_Sub19"
     name: "anInt3548"
   client!ni.a I:
-    owner: "Static5"
-    name: "anInt6072"
+    owner: "ObjTypeList"
+    name: "capacity"
   client!ni.c Lclient!ni;:
     owner: "Node"
     name: "prev"
@@ -6747,8 +6747,8 @@ fields:
     owner: "Static5"
     name: "anIntArray681"
   client!nj.h Lclient!cc;:
-    owner: "Static5"
-    name: "aClass26_35"
+    owner: "ObjTypeList"
+    name: "types"
   client!nj.i Lclient!ic;:
     owner: "Static5"
     name: "aClass84_17"
@@ -6849,8 +6849,8 @@ fields:
     owner: "Class53_Sub5"
     name: "anInt3648"
   client!o.r Lclient!cc;:
-    owner: "Static5"
-    name: "aClass26_37"
+    owner: "ObjTypeList"
+    name: "sprites"
   client!o.t I:
     owner: "Class53_Sub5"
     name: "anInt3653"
@@ -6900,8 +6900,8 @@ fields:
     owner: "Static5"
     name: "anIntArray564"
   client!ob.f Lclient!dj;:
-    owner: "Static5"
-    name: "aClass40_14"
+    owner: "ParamTypeList"
+    name: "types"
   client!ob.g [I:
     owner: "Static5"
     name: "anIntArray565"
@@ -7050,8 +7050,8 @@ fields:
     owner: "Class53_Sub6"
     name: "aDouble3"
   client!oc.z Lclient!cc;:
-    owner: "Static5"
-    name: "aClass26_39"
+    owner: "NpcTypeList"
+    name: "headModels"
   client!od.a I:
     owner: "Static5"
     name: "anInt3732"
@@ -7308,8 +7308,8 @@ fields:
     owner: "Static5"
     name: "aClass84_18"
   client!p.oc Lclient!ua;:
-    owner: "Class53_Sub1_Sub2"
-    name: "aClass168_1"
+    owner: "Npc"
+    name: "type"
   client!p.pc Ljava/lang/String;:
     owner: "Static5"
     name: "aString236"
@@ -7608,8 +7608,8 @@ fields:
     owner: "Static5"
     name: "anIntArray445"
   client!pk.U Lclient!fh;:
-    owner: "Static5"
-    name: "aClass58_81"
+    owner: "ObjTypeList"
+    name: "objArchive"
   client!pk.X F:
     owner: "Static5"
     name: "aFloat102"
@@ -7719,274 +7719,274 @@ fields:
     owner: "Static5"
     name: "anInt4260"
   client!qc.A I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt3973"
   client!qc.Ab I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4010"
   client!qc.B [I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anIntArray423"
   client!qc.Bb I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4011"
   client!qc.C I:
-    owner: "Class53_Sub1"
-    name: "anInt3974"
+    owner: "PathingEntity"
+    name: "x"
   client!qc.Cb I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4012"
   client!qc.D I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt3975"
   client!qc.Db I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4013"
   client!qc.E I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt3976"
   client!qc.Eb I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4014"
   client!qc.Fb I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4015"
   client!qc.G [Lclient!re;:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "aClass150Array3"
   client!qc.Gb I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4016"
   client!qc.H [B:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "aByteArray51"
   client!qc.Hb I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4017"
   client!qc.I I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt3978"
   client!qc.Ib I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4018"
   client!qc.Jb I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4019"
   client!qc.Kb I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4020"
   client!qc.L Ljava/lang/String;:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "aString234"
   client!qc.M I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt3981"
   client!qc.Mb I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4022"
   client!qc.N I:
-    owner: "Class53_Sub1"
-    name: "anInt3982"
+    owner: "PathingEntity"
+    name: "size"
   client!qc.Nb I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4023"
   client!qc.O I:
     owner: "Static5"
     name: "anInt3983"
   client!qc.P I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt3984"
   client!qc.Pb I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4025"
   client!qc.Q Z:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "aBoolean280"
   client!qc.Qb I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4026"
   client!qc.R I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt3985"
   client!qc.Rb I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4027"
   client!qc.S I:
-    owner: "Class53_Sub1"
-    name: "anInt3986"
+    owner: "PathingEntity"
+    name: "basId"
   client!qc.Sb I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4028"
   client!qc.T I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt3987"
   client!qc.Tb I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4029"
   client!qc.Ub I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4030"
   client!qc.V I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt3989"
   client!qc.Vb I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4031"
   client!qc.W I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt3990"
   client!qc.Wb I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4032"
   client!qc.X Z:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "aBoolean281"
   client!qc.Xb I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4033"
   client!qc.Yb I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4034"
   client!qc.Z I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt3992"
   client!qc.ab Lclient!ne;:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "aClass20_Sub3_6"
   client!qc.ac I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4036"
   client!qc.bb I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt3993"
   client!qc.bc I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4037"
   client!qc.cb I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt3994"
   client!qc.cc I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4038"
   client!qc.db [I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anIntArray424"
   client!qc.dc I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4039"
   client!qc.fb Z:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "aBoolean282"
   client!qc.fc [I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anIntArray426"
   client!qc.gb I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt3996"
   client!qc.gc I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4041"
   client!qc.hb I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt3997"
   client!qc.hc I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4042"
   client!qc.ib I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt3998"
   client!qc.ic I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4043"
   client!qc.jb I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt3999"
   client!qc.jc I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4044"
   client!qc.kb Z:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "aBoolean283"
   client!qc.kc I:
     owner: "client"
     name: "alternatePort"
   client!qc.lb I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4000"
   client!qc.lc I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4046"
   client!qc.m I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt3961"
   client!qc.mb I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4001"
   client!qc.mc Ljava/lang/Object;:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anObject5"
   client!qc.nb [I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anIntArray425"
   client!qc.o I:
     owner: "Static5"
     name: "anInt3963"
   client!qc.ob I:
-    owner: "Class53_Sub1"
-    name: "anInt4002"
+    owner: "PathingEntity"
+    name: "z"
   client!qc.p [I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anIntArray422"
   client!qc.pb Z:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "aBoolean284"
   client!qc.qb I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4003"
   client!qc.r Z:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "aBoolean279"
   client!qc.s I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt3965"
   client!qc.sb I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4005"
   client!qc.t I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt3966"
   client!qc.tb I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4006"
   client!qc.u I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt3967"
   client!qc.ub I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4007"
   client!qc.v I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt3968"
   client!qc.vb Z:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "aBoolean285"
   client!qc.wb I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4008"
   client!qc.x I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt3970"
   client!qc.xb [[I:
     owner: "Static5"
     name: "anIntArrayArray36"
   client!qc.y I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt3971"
   client!qc.yb I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt4009"
   client!qc.z I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "anInt3972"
   client!qc.zb Ljava/lang/String;:
     owner: "LocalisedText"
@@ -8022,8 +8022,8 @@ fields:
     owner: "HashTableIterator"
     name: "bucket"
   client!qe.e Z:
-    owner: "Static5"
-    name: "aBoolean301"
+    owner: "NpcTypeList"
+    name: "allowMembers"
   client!qe.f [I:
     owner: "Static5"
     name: "anIntArray456"
@@ -8178,17 +8178,17 @@ fields:
     owner: "client"
     name: "settings"
   client!qk.B [[I:
-    owner: "Class144"
+    owner: "PlayerAppearance"
     name: "anIntArrayArray37"
   client!qk.a I:
     owner: "Static6"
     name: "anInt4371"
   client!qk.b J:
-    owner: "Class144"
-    name: "aLong153"
+    owner: "PlayerAppearance"
+    name: "checksum"
   client!qk.c I:
-    owner: "Class144"
-    name: "anInt4372"
+    owner: "PlayerAppearance"
+    name: "basId"
   client!qk.f I:
     owner: "Static6"
     name: "anInt4375"
@@ -8199,11 +8199,11 @@ fields:
     owner: "GameShell"
     name: "frameHeight"
   client!qk.p [I:
-    owner: "Class144"
-    name: "anIntArray463"
+    owner: "PlayerAppearance"
+    name: "colors"
   client!qk.q Z:
-    owner: "Class144"
-    name: "aBoolean306"
+    owner: "PlayerAppearance"
+    name: "female"
   client!qk.r I:
     owner: "Static6"
     name: "anInt4384"
@@ -8211,14 +8211,14 @@ fields:
     owner: "Static6"
     name: "aClass106_7"
   client!qk.u J:
-    owner: "Class144"
+    owner: "PlayerAppearance"
     name: "aLong154"
   client!qk.w I:
-    owner: "Class144"
-    name: "anInt4387"
+    owner: "PlayerAppearance"
+    name: "npcId"
   client!qk.y [I:
-    owner: "Class144"
-    name: "anIntArray464"
+    owner: "PlayerAppearance"
+    name: "identikit"
   client!ql.a Lclient!fh;:
     owner: "Static6"
     name: "aClass58_84"
@@ -9066,8 +9066,8 @@ fields:
     owner: "Static6"
     name: "anInt4744"
   client!sc.U [Ljava/lang/String;:
-    owner: "Static6"
-    name: "aStringArray26"
+    owner: "ObjTypeList"
+    name: "defaultInventoryOps"
   client!sc.W I:
     owner: "Class4_Sub1_Sub29"
     name: "anInt4746"
@@ -9318,8 +9318,8 @@ fields:
     owner: "Class4_Sub1_Sub32"
     name: "anInt4898"
   client!sl.Y [Ljava/lang/String;:
-    owner: "Static6"
-    name: "aStringArray29"
+    owner: "ObjTypeList"
+    name: "defaultOps"
   client!sm.a Lclient!cc;:
     owner: "Static6"
     name: "aClass26_52"
@@ -9549,8 +9549,8 @@ fields:
     owner: "Static6"
     name: "aBigInteger2"
   client!tb.h [I:
-    owner: "Static6"
-    name: "anIntArray545"
+    owner: "Equipment"
+    name: "objIds"
   client!tb.j I:
     owner: "Static6"
     name: "anInt5016"
@@ -9561,179 +9561,179 @@ fields:
     owner: "Static6"
     name: "anIntArray549"
   client!td.A I:
-    owner: "Class162"
-    name: "anInt5067"
+    owner: "ObjType"
+    name: "lentLink"
   client!td.B I:
-    owner: "Class162"
-    name: "anInt5068"
+    owner: "ObjType"
+    name: "resizeZ"
   client!td.C Ljava/lang/String;:
-    owner: "Class162"
-    name: "aString308"
+    owner: "ObjType"
+    name: "name"
   client!td.D [S:
-    owner: "Class162"
-    name: "aShortArray101"
+    owner: "ObjType"
+    name: "recolorDestination"
   client!td.G I:
-    owner: "Class162"
+    owner: "ObjType"
     name: "anInt5070"
   client!td.H I:
-    owner: "Class162"
+    owner: "ObjType"
     name: "anInt5071"
   client!td.I C:
     owner: "Static6"
     name: "aChar4"
   client!td.J I:
-    owner: "Class162"
-    name: "anInt5072"
+    owner: "ObjType"
+    name: "cursor1"
   client!td.M [I:
-    owner: "Class162"
-    name: "anIntArray551"
+    owner: "ObjType"
+    name: "countCount"
   client!td.N [S:
-    owner: "Class162"
-    name: "aShortArray102"
+    owner: "ObjType"
+    name: "retextureSource"
   client!td.O I:
-    owner: "Class162"
-    name: "anInt5075"
+    owner: "ObjType"
+    name: "stackable"
   client!td.Q I:
-    owner: "Class162"
-    name: "anInt5077"
+    owner: "ObjType"
+    name: "lentTemplate"
   client!td.R I:
-    owner: "Class162"
-    name: "anInt5078"
+    owner: "ObjType"
+    name: "manHead"
   client!td.S I:
-    owner: "Class162"
-    name: "anInt5079"
+    owner: "ObjType"
+    name: "manWearZOff"
   client!td.T [S:
-    owner: "Class162"
-    name: "aShortArray103"
+    owner: "ObjType"
+    name: "recolorSource"
   client!td.U I:
-    owner: "Class162"
-    name: "anInt5080"
+    owner: "ObjType"
+    name: "xAngle2d"
   client!td.V I:
-    owner: "Class162"
+    owner: "ObjType"
     name: "anInt5081"
   client!td.W I:
-    owner: "Class162"
-    name: "anInt5082"
+    owner: "ObjType"
+    name: "womanHead"
   client!td.X I:
-    owner: "Class162"
-    name: "anInt5083"
+    owner: "ObjType"
+    name: "manWearXOff"
   client!td.Y I:
-    owner: "Class162"
-    name: "anInt5084"
+    owner: "ObjType"
+    name: "womanHead2"
   client!td.a I:
-    owner: "Class162"
-    name: "anInt5046"
+    owner: "ObjType"
+    name: "cursor2Op"
   client!td.b I:
-    owner: "Class162"
-    name: "anInt5047"
+    owner: "ObjType"
+    name: "resizeY"
   client!td.bb I:
-    owner: "Class162"
-    name: "anInt5087"
+    owner: "ObjType"
+    name: "cursor1Op"
   client!td.c I:
-    owner: "Class162"
-    name: "anInt5048"
+    owner: "ObjType"
+    name: "manWearYOff"
   client!td.cb I:
     owner: "Static6"
     name: "anInt5088"
   client!td.d I:
-    owner: "Class162"
+    owner: "ObjType"
     name: "anInt5049"
   client!td.db I:
-    owner: "Class162"
-    name: "anInt5089"
+    owner: "ObjType"
+    name: "certificateTemplate"
   client!td.eb I:
-    owner: "Class162"
+    owner: "ObjType"
     name: "anInt5090"
   client!td.f I:
-    owner: "Class162"
-    name: "anInt5051"
+    owner: "ObjType"
+    name: "contrast"
   client!td.g I:
-    owner: "Class162"
-    name: "anInt5052"
+    owner: "ObjType"
+    name: "womanWearYOff"
   client!td.gb [Ljava/lang/String;:
-    owner: "Class162"
-    name: "aStringArray32"
+    owner: "ObjType"
+    name: "inventoryOps"
   client!td.hb Z:
-    owner: "Class162"
-    name: "aBoolean350"
+    owner: "ObjType"
+    name: "members"
   client!td.i [B:
-    owner: "Class162"
-    name: "aByteArray66"
+    owner: "ObjType"
+    name: "recolorDestinationPalette"
   client!td.ib I:
-    owner: "Class162"
-    name: "anInt5092"
+    owner: "ObjType"
+    name: "womanWearXOff"
   client!td.j I:
-    owner: "Class162"
-    name: "anInt5054"
+    owner: "ObjType"
+    name: "manHead2"
   client!td.k Lclient!fh;:
     owner: "Static6"
     name: "aClass58_94"
   client!td.kb I:
-    owner: "Class162"
-    name: "anInt5094"
+    owner: "ObjType"
+    name: "resizeX"
   client!td.l I:
-    owner: "Class162"
-    name: "anInt5055"
+    owner: "ObjType"
+    name: "model"
   client!td.lb I:
-    owner: "Class162"
-    name: "anInt5095"
+    owner: "ObjType"
+    name: "yAngle2d"
   client!td.m I:
-    owner: "Class162"
-    name: "anInt5056"
+    owner: "ObjType"
+    name: "dummyItem"
   client!td.n [I:
     owner: "Static6"
     name: "anIntArray550"
   client!td.nb I:
-    owner: "Class162"
+    owner: "ObjType"
     name: "anInt5097"
   client!td.o I:
-    owner: "Class162"
-    name: "anInt5057"
+    owner: "ObjType"
+    name: "zoom2d"
   client!td.ob [S:
-    owner: "Class162"
-    name: "aShortArray104"
+    owner: "ObjType"
+    name: "retextureDestination"
   client!td.pb I:
-    owner: "Class162"
-    name: "anInt5098"
+    owner: "ObjType"
+    name: "yOffset2d"
   client!td.q Lclient!ic;:
-    owner: "Class162"
-    name: "aClass84_22"
+    owner: "ObjType"
+    name: "params"
   client!td.qb I:
-    owner: "Class162"
-    name: "anInt5099"
+    owner: "ObjType"
+    name: "team"
   client!td.rb I:
-    owner: "Class162"
-    name: "anInt5100"
+    owner: "ObjType"
+    name: "certificateLink"
   client!td.s I:
-    owner: "Class162"
-    name: "anInt5060"
+    owner: "ObjType"
+    name: "ambient"
   client!td.t I:
-    owner: "Class162"
-    name: "anInt5061"
+    owner: "ObjType"
+    name: "cursor2"
   client!td.tb [Ljava/lang/String;:
-    owner: "Class162"
-    name: "aStringArray33"
+    owner: "ObjType"
+    name: "ops"
   client!td.u Z:
-    owner: "Class162"
-    name: "aBoolean349"
+    owner: "ObjType"
+    name: "stockMarket"
   client!td.ub I:
-    owner: "Class162"
-    name: "anInt5102"
+    owner: "ObjType"
+    name: "cost"
   client!td.v I:
-    owner: "Class162"
+    owner: "ObjType"
     name: "anInt5062"
   client!td.w I:
-    owner: "Class162"
-    name: "anInt5063"
+    owner: "ObjType"
+    name: "womanWearZOff"
   client!td.wb [I:
-    owner: "Class162"
-    name: "anIntArray552"
+    owner: "ObjType"
+    name: "countObj"
   client!td.y I:
-    owner: "Class162"
-    name: "anInt5065"
+    owner: "ObjType"
+    name: "xOffset2d"
   client!td.z I:
-    owner: "Class162"
-    name: "anInt5066"
+    owner: "ObjType"
+    name: "id"
   client!te.A I:
     owner: "Static6"
     name: "anInt5117"
@@ -10053,106 +10053,106 @@ fields:
     owner: "Static7"
     name: "aShort45"
   client!ua.A I:
-    owner: "Class168"
+    owner: "NpcType"
     name: "anInt5248"
   client!ua.B I:
-    owner: "Class168"
+    owner: "NpcType"
     name: "anInt5249"
   client!ua.D [I:
-    owner: "Class168"
+    owner: "NpcType"
     name: "anIntArray589"
   client!ua.E [I:
-    owner: "Class168"
+    owner: "NpcType"
     name: "anIntArray590"
   client!ua.F [S:
-    owner: "Class168"
+    owner: "NpcType"
     name: "aShortArray108"
   client!ua.G I:
-    owner: "Class168"
+    owner: "NpcType"
     name: "anInt5251"
   client!ua.H I:
-    owner: "Class168"
+    owner: "NpcType"
     name: "anInt5252"
   client!ua.I S:
-    owner: "Class168"
+    owner: "NpcType"
     name: "aShort47"
   client!ua.K I:
-    owner: "Class168"
+    owner: "NpcType"
     name: "anInt5254"
   client!ua.L Ljava/lang/String;:
     owner: "LocalisedText"
     name: "CHATCOL8"
   client!ua.M I:
-    owner: "Class168"
-    name: "anInt5255"
+    owner: "NpcType"
+    name: "id"
   client!ua.O Lsignlink!pm;:
     owner: "GameShell"
     name: "signLink"
   client!ua.P Z:
-    owner: "Class168"
+    owner: "NpcType"
     name: "aBoolean357"
   client!ua.Q [S:
-    owner: "Class168"
+    owner: "NpcType"
     name: "aShortArray109"
   client!ua.S I:
-    owner: "Class168"
+    owner: "NpcType"
     name: "anInt5258"
   client!ua.T I:
-    owner: "Class168"
+    owner: "NpcType"
     name: "anInt5259"
   client!ua.V I:
-    owner: "Class168"
+    owner: "NpcType"
     name: "anInt5261"
   client!ua.W I:
-    owner: "Class168"
-    name: "anInt5262"
+    owner: "NpcType"
+    name: "size"
   client!ua.X B:
-    owner: "Class168"
+    owner: "NpcType"
     name: "aByte19"
   client!ua.Z I:
-    owner: "Class168"
+    owner: "NpcType"
     name: "anInt5264"
   client!ua.a B:
-    owner: "Class168"
+    owner: "NpcType"
     name: "aByte18"
   client!ua.ab I:
-    owner: "Class168"
+    owner: "NpcType"
     name: "anInt5265"
   client!ua.b Z:
-    owner: "Class168"
+    owner: "NpcType"
     name: "aBoolean354"
   client!ua.bb I:
-    owner: "Class168"
+    owner: "NpcType"
     name: "anInt5266"
   client!ua.c [S:
-    owner: "Class168"
+    owner: "NpcType"
     name: "aShortArray106"
   client!ua.cb I:
-    owner: "Class168"
+    owner: "NpcType"
     name: "anInt5267"
   client!ua.d I:
-    owner: "Class168"
+    owner: "NpcType"
     name: "anInt5233"
   client!ua.db B:
-    owner: "Class168"
+    owner: "NpcType"
     name: "aByte20"
   client!ua.e Z:
-    owner: "Class168"
+    owner: "NpcType"
     name: "aBoolean355"
   client!ua.f I:
-    owner: "Class168"
+    owner: "NpcType"
     name: "anInt5234"
   client!ua.fb B:
-    owner: "Class168"
+    owner: "NpcType"
     name: "aByte21"
   client!ua.g I:
-    owner: "Class168"
+    owner: "NpcType"
     name: "anInt5235"
   client!ua.gb Z:
-    owner: "Class168"
+    owner: "NpcType"
     name: "aBoolean358"
   client!ua.h [[I:
-    owner: "Class168"
+    owner: "NpcType"
     name: "anIntArrayArray45"
   client!ua.hb I:
     owner: "Static7"
@@ -10161,61 +10161,61 @@ fields:
     owner: "Static7"
     name: "anInt5236"
   client!ua.ib [Ljava/lang/String;:
-    owner: "Class168"
-    name: "aStringArray35"
+    owner: "NpcType"
+    name: "ops"
   client!ua.j Lclient!ic;:
-    owner: "Class168"
-    name: "aClass84_24"
+    owner: "NpcType"
+    name: "params"
   client!ua.jb [B:
-    owner: "Class168"
+    owner: "NpcType"
     name: "aByteArray68"
   client!ua.k S:
-    owner: "Class168"
+    owner: "NpcType"
     name: "aShort46"
   client!ua.l I:
-    owner: "Class168"
+    owner: "NpcType"
     name: "anInt5237"
   client!ua.lb Ljava/lang/String;:
-    owner: "Class168"
-    name: "aString316"
+    owner: "NpcType"
+    name: "name"
   client!ua.m I:
-    owner: "Class168"
+    owner: "NpcType"
     name: "anInt5238"
   client!ua.n I:
-    owner: "Class168"
+    owner: "NpcType"
     name: "anInt5239"
   client!ua.o I:
-    owner: "Class168"
+    owner: "NpcType"
     name: "anInt5240"
   client!ua.ob Z:
-    owner: "Class168"
+    owner: "NpcType"
     name: "aBoolean359"
   client!ua.p [S:
-    owner: "Class168"
+    owner: "NpcType"
     name: "aShortArray107"
   client!ua.q I:
-    owner: "Class168"
+    owner: "NpcType"
     name: "anInt5241"
   client!ua.r [I:
-    owner: "Class168"
+    owner: "NpcType"
     name: "anIntArray588"
   client!ua.t [[I:
-    owner: "Class168"
+    owner: "NpcType"
     name: "anIntArrayArray46"
   client!ua.u Z:
-    owner: "Class168"
+    owner: "NpcType"
     name: "aBoolean356"
   client!ua.v I:
-    owner: "Class168"
+    owner: "NpcType"
     name: "anInt5243"
   client!ua.x I:
-    owner: "Class168"
+    owner: "NpcType"
     name: "anInt5245"
   client!ua.y I:
-    owner: "Class168"
+    owner: "NpcType"
     name: "anInt5246"
   client!ua.z I:
-    owner: "Class168"
+    owner: "NpcType"
     name: "anInt5247"
   client!ub.b [I:
     owner: "Class169"
@@ -11781,8 +11781,8 @@ fields:
     owner: "Class4_Sub3_Sub23"
     name: "anIntArray676"
   client!wi.b Lclient!fh;:
-    owner: "Static7"
-    name: "aClass58_104"
+    owner: "NpcTypeList"
+    name: "npcsArchive"
   client!wi.d I:
     owner: "Static7"
     name: "anInt6030"
@@ -12941,10 +12941,10 @@ methods:
       24: "local24"
       36: "local36"
   client!bb.a (Lclient!fh;I)V:
-    owner: "Static9"
-    name: "method231"
+    owner: "ParamTypeList"
+    name: "init"
     arguments:
-      0: "arg0"
+      0: "archive"
     locals: {}
   client!bb.a ([IB[Ljava/lang/Object;)V:
     owner: "Static9"
@@ -14064,10 +14064,10 @@ methods:
       43: "local43"
       217: "local217"
   client!bo.a (II)I:
-    owner: "Static10"
-    name: "method394"
+    owner: "ObjTypeList"
+    name: "getGroupId"
     arguments:
-      1: "arg0"
+      1: "id"
     locals: {}
   client!bo.a (III)V:
     owner: "Static10"
@@ -14674,8 +14674,8 @@ methods:
       63: "local63"
       67: "local67"
   client!cf.f (B)V:
-    owner: "Static11"
-    name: "method556"
+    owner: "ObjTypeList"
+    name: "clearSoft"
     arguments: {}
     locals: {}
   client!cf.g (I)I:
@@ -16178,12 +16178,12 @@ methods:
     owner: "Class40"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "capacity"
     locals:
-      16: "local16"
+      16: "bucketCount"
   client!dj.a (B)V:
     owner: "Class40"
-    name: "method893"
+    name: "clear"
     arguments: {}
     locals: {}
   client!dj.a (BLjava/awt/Component;)V:
@@ -16193,8 +16193,8 @@ methods:
       1: "arg0"
     locals: {}
   client!dj.a (I)V:
-    owner: "Static13"
-    name: "method884"
+    owner: "NpcTypeList"
+    name: "clear"
     arguments: {}
     locals: {}
   client!dj.a (II)Ljava/lang/String;:
@@ -16205,11 +16205,11 @@ methods:
     locals: {}
   client!dj.a (IJ)Lclient!lh;:
     owner: "Class40"
-    name: "method889"
+    name: "get"
     arguments:
-      1: "arg0"
+      1: "key"
     locals:
-      18: "local18"
+      18: "value"
   client!dj.a (ILclient!fh;I)Lclient!qh;:
     owner: "Static13"
     name: "method887"
@@ -16220,13 +16220,13 @@ methods:
       17: "local17"
   client!dj.a (JILclient!lh;)V:
     owner: "Class40"
-    name: "method888"
+    name: "put"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "key"
+      2: "value"
     locals:
-      15: "local15"
-      31: "local31"
+      15: "first"
+      31: "second"
   client!dj.a (Ljava/awt/Component;I)V:
     owner: "Static13"
     name: "method891"
@@ -16235,12 +16235,12 @@ methods:
     locals: {}
   client!dj.c (I)Lclient!ni;:
     owner: "Class40"
-    name: "method886"
+    name: "head"
     arguments: {}
     locals: {}
   client!dj.d (I)Lclient!ni;:
     owner: "Class40"
-    name: "method890"
+    name: "next"
     arguments: {}
     locals: {}
   client!dk.a (B)I:
@@ -17472,7 +17472,7 @@ methods:
       110: "local110"
       148: "local148"
   client!f.a (IIIII)V:
-    owner: "Class53_Sub1_Sub1"
+    owner: "Player"
     name: "method3806"
     arguments:
       0: "arg0"
@@ -17485,7 +17485,7 @@ methods:
       55: "local55"
       78: "local78"
   client!f.a (IIIIIIIIJILclient!ne;)V:
-    owner: "Class53_Sub1_Sub1"
+    owner: "Player"
     name: "method3805"
     arguments:
       0: "arg0"
@@ -17526,7 +17526,7 @@ methods:
       572: "local572"
       736: "local736"
   client!f.a (IILclient!ne;IIIIIIIIBIILclient!vg;I)V:
-    owner: "Class53_Sub1_Sub1"
+    owner: "Player"
     name: "method1175"
     arguments:
       0: "arg0"
@@ -17551,7 +17551,7 @@ methods:
       59: "local59"
       61: "local61"
   client!f.a (IZBI)V:
-    owner: "Class53_Sub1_Sub1"
+    owner: "Player"
     name: "method1174"
     arguments:
       0: "arg0"
@@ -17559,67 +17559,67 @@ methods:
       3: "arg2"
     locals: {}
   client!f.a (Lclient!fd;B)V:
-    owner: "Class53_Sub1_Sub1"
-    name: "method1170"
+    owner: "Player"
+    name: "decodeAppearance"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals:
-      16: "local16"
-      20: "local20"
-      31: "local31"
-      35: "local35"
-      41: "local41"
-      64: "local64"
-      107: "local107"
-      116: "local116"
-      129: "local129"
-      136: "local136"
-      165: "local165"
-      176: "local176"
-      199: "local199"
-      201: "local201"
-      208: "local208"
-      242: "local242"
-      293: "local293"
-      304: "local304"
-      307: "local307"
-      310: "local310"
-      313: "local313"
-      316: "local316"
-      399: "local399"
+      16: "npcId"
+      20: "flags"
+      31: "showSkillLevel"
+      35: "gender"
+      41: "previousSize"
+      64: "identikit"
+      107: "i"
+      116: "msb"
+      129: "lsb"
+      136: "id"
+      165: "objId"
+      176: "team"
+      199: "colors"
+      201: "i"
+      208: "color"
+      242: "encodedName"
+      293: "previousSoundRadius"
+      304: "previousCrawlSound"
+      307: "previousIdleSound"
+      310: "previousWalkSound"
+      313: "previousRunSound"
+      316: "previousSoundVolume"
+      399: "previousNpcId"
   client!f.a (Lclient!fh;Lclient!ke;IZLclient!fh;)V:
-    owner: "Static14"
-    name: "method1171"
+    owner: "ObjTypeList"
+    name: "init"
     arguments:
-      0: "arg0"
+      0: "objArchive"
+      4: "modelsArchive"
       1: "arg1"
-      4: "arg2"
     locals:
-      11: "local11"
+      11: "maxGroupId"
   client!f.a (Z)I:
-    owner: "Class53_Sub1_Sub1"
+    owner: "Player"
     name: "method3303"
     arguments: {}
     locals: {}
   client!f.b ()I:
-    owner: "Class53_Sub1_Sub1"
+    owner: "Player"
     name: "method3813"
     arguments: {}
     locals: {}
   client!f.d (B)Ljava/lang/String;:
-    owner: "Class53_Sub1_Sub1"
+    owner: "Player"
     name: "method1173"
     arguments: {}
     locals:
       11: "local11"
   client!f.d (I)Z:
-    owner: "Class53_Sub1_Sub1"
+    owner: "Player"
     name: "method3310"
     arguments: {}
     locals: {}
   client!f.e (I)I:
-    owner: "Class53_Sub1_Sub1"
-    name: "method3311"
+    owner: "Player"
+    name: "getSize"
     arguments: {}
     locals: {}
   client!f.f (I)V:
@@ -17628,7 +17628,7 @@ methods:
     arguments: {}
     locals: {}
   client!f.finalize ()V:
-    owner: "Class53_Sub1_Sub1"
+    owner: "Player"
     name: "finalize"
     arguments: {}
     locals: {}
@@ -18874,15 +18874,15 @@ methods:
       10: "arg8"
     locals: {}
   client!fg.e (I)V:
-    owner: "Static15"
-    name: "method1338"
+    owner: "Equipment"
+    name: "init"
     arguments: {}
     locals:
-      8: "local8"
-      10: "local10"
-      12: "local12"
-      23: "local23"
-      52: "local52"
+      8: "ids"
+      10: "j"
+      12: "i"
+      23: "type"
+      52: "i"
   client!fh.<init> (Lclient!ga;ZZ)V:
     owner: "Js5"
     name: "<init>"
@@ -19548,14 +19548,14 @@ methods:
     arguments: {}
     locals: {}
   client!fn.a (II)Lclient!ua;:
-    owner: "Static15"
-    name: "method1495"
+    owner: "NpcTypeList"
+    name: "get"
     arguments:
-      1: "arg0"
+      1: "id"
     locals:
-      10: "local10"
-      26: "local26"
-      30: "local30"
+      10: "type"
+      26: "bytes"
+      30: "newType"
   client!fn.a (ILclient!fd;)V:
     owner: "Class4_Sub3_Sub8"
     name: "method1499"
@@ -22611,10 +22611,10 @@ methods:
       78: "local78"
       89: "local89"
   client!hn.a (ZI)V:
-    owner: "Static19"
-    name: "method4378"
+    owner: "NpcTypeList"
+    name: "setAllowMembers"
     arguments:
-      0: "arg0"
+      0: "allowMembers"
     locals: {}
   client!hn.b (I)V:
     owner: "Static19"
@@ -22677,14 +22677,14 @@ methods:
       49: "local49"
       55: "local55"
   client!i.a (IB)Lclient!jc;:
-    owner: "Static19"
-    name: "method1815"
+    owner: "ParamTypeList"
+    name: "get"
     arguments:
-      0: "arg0"
+      0: "id"
     locals:
-      16: "local16"
-      28: "local28"
-      32: "local32"
+      16: "type"
+      28: "bytes"
+      32: "newType"
   client!i.a (II)Lclient!wf;:
     owner: "Static19"
     name: "method1813"
@@ -23572,8 +23572,8 @@ methods:
     locals:
       8: "local8"
   client!il.a (II)V:
-    owner: "Static20"
-    name: "method1923"
+    owner: "ObjTypeList"
+    name: "sweep"
     arguments: {}
     locals: {}
   client!il.b (B)V:
@@ -24020,18 +24020,18 @@ methods:
       1164: "local1164"
       1208: "local1208"
   client!jc.a (Lclient!fd;I)V:
-    owner: "Class4_Sub3_Sub12"
-    name: "method1992"
+    owner: "ParamType"
+    name: "decode"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals:
-      9: "local9"
+      9: "code"
   client!jc.a (Lclient!fd;IZ)V:
-    owner: "Class4_Sub3_Sub12"
-    name: "method1999"
+    owner: "ParamType"
+    name: "decode"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "buffer"
+      1: "code"
     locals: {}
   client!jc.a (Z)V:
     owner: "Static21"
@@ -24060,8 +24060,8 @@ methods:
       40: "local40"
       42: "local42"
   client!jc.f (I)Z:
-    owner: "Class4_Sub3_Sub12"
-    name: "method1995"
+    owner: "ParamType"
+    name: "isString"
     arguments: {}
     locals: {}
   client!jd.a (BLclient!fh;)V:
@@ -26960,10 +26960,10 @@ methods:
       0: "position"
     locals: {}
   client!la.a (ZB)V:
-    owner: "Static23"
-    name: "method2453"
+    owner: "ObjTypeList"
+    name: "setAllowMembers"
     arguments:
-      0: "arg0"
+      0: "allowMembers"
     locals: {}
   client!la.b (II)[[I:
     owner: "Class4_Sub1_Sub15"
@@ -28429,10 +28429,10 @@ methods:
       2: "arg1"
     locals: {}
   client!lj.a (IB)I:
-    owner: "Static24"
-    name: "method2595"
+    owner: "IntegerUtils"
+    name: "clp2"
     arguments:
-      0: "arg0"
+      0: "v"
     locals: {}
   client!lj.a (IIIB)V:
     owner: "Class4_Sub1_Sub17"
@@ -28578,12 +28578,12 @@ methods:
     locals:
       9: "node"
   client!ll.a (IB)I:
-    owner: "Static24"
-    name: "method2605"
+    owner: "IntegerUtils"
+    name: "flp2"
     arguments:
-      0: "arg0"
+      0: "v"
     locals:
-      7: "local7"
+      7: "v2"
   client!ll.a (III)Lclient!ve;:
     owner: "Static24"
     name: "method2611"
@@ -29201,10 +29201,10 @@ methods:
       1: "arg1"
     locals: {}
   client!mc.a (IB)I:
-    owner: "Static24"
-    name: "method2690"
+    owner: "NpcTypeList"
+    name: "getFileId"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!mc.a (ILclient!fh;IBIIZ)V:
     owner: "Static24"
@@ -29256,12 +29256,12 @@ methods:
     locals:
       54: "local54"
   client!me.a (II)I:
-    owner: "Static24"
-    name: "method2700"
+    owner: "IntegerUtils"
+    name: "bitCount"
     arguments:
-      0: "arg0"
+      0: "v"
     locals:
-      1: "local1"
+      1: "bits"
   client!me.a (ILclient!fd;)Lclient!cd;:
     owner: "Static24"
     name: "method2701"
@@ -30379,10 +30379,10 @@ methods:
       535: "local535"
       537: "local537"
   client!mo.c (II)I:
-    owner: "Static25"
-    name: "method2808"
+    owner: "NpcTypeList"
+    name: "getGroupId"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!mo.d (II)I:
     owner: "Static25"
@@ -30398,8 +30398,8 @@ methods:
     arguments: {}
     locals: {}
   client!mo.f (I)V:
-    owner: "Static25"
-    name: "method2809"
+    owner: "ObjTypeList"
+    name: "clear"
     arguments: {}
     locals: {}
   client!n.<init> (IIIIII[B[I)V:
@@ -32461,8 +32461,8 @@ methods:
       0: "arg0"
     locals: {}
   client!o.a (II)V:
-    owner: "Static26"
-    name: "method3061"
+    owner: "NpcTypeList"
+    name: "sweep"
     arguments: {}
     locals: {}
   client!o.a (IIIII)V:
@@ -33357,8 +33357,8 @@ methods:
     locals:
       38: "local38"
   client!og.g (B)V:
-    owner: "Static27"
-    name: "method4705"
+    owner: "NpcTypeList"
+    name: "clearSoft"
     arguments: {}
     locals: {}
   client!og.g (I)V:
@@ -33846,10 +33846,10 @@ methods:
       15: "sum"
       55: "i"
   client!p.a (BLclient!ua;)V:
-    owner: "Class53_Sub1_Sub2"
-    name: "method3317"
+    owner: "Npc"
+    name: "setType"
     arguments:
-      1: "arg0"
+      1: "type"
     locals: {}
   client!p.a (IIIIB)V:
     owner: "Static28"
@@ -33864,7 +33864,7 @@ methods:
       15: "local15"
       17: "local17"
   client!p.a (IIIII)V:
-    owner: "Class53_Sub1_Sub2"
+    owner: "Npc"
     name: "method3806"
     arguments:
       0: "arg0"
@@ -33877,7 +33877,7 @@ methods:
       52: "local52"
       73: "local73"
   client!p.a (IIIIIIIIJILclient!ne;)V:
-    owner: "Class53_Sub1_Sub2"
+    owner: "Npc"
     name: "method3805"
     arguments:
       0: "arg0"
@@ -33925,23 +33925,23 @@ methods:
       80: "local80"
       102: "local102"
   client!p.a (Z)I:
-    owner: "Class53_Sub1_Sub2"
+    owner: "Npc"
     name: "method3303"
     arguments: {}
     locals:
       17: "local17"
   client!p.b ()I:
-    owner: "Class53_Sub1_Sub2"
+    owner: "Npc"
     name: "method3813"
     arguments: {}
     locals: {}
   client!p.d (I)Z:
-    owner: "Class53_Sub1_Sub2"
+    owner: "Npc"
     name: "method3310"
     arguments: {}
     locals: {}
   client!p.finalize ()V:
-    owner: "Class53_Sub1_Sub2"
+    owner: "Npc"
     name: "finalize"
     arguments: {}
     locals: {}
@@ -35818,7 +35818,7 @@ methods:
       7: "codepoint"
       47: "c"
   client!qc.a (BIIIZ)V:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "method3301"
     arguments:
       1: "arg0"
@@ -35836,13 +35836,13 @@ methods:
     arguments: {}
     locals: {}
   client!qc.a (II)V:
-    owner: "Class53_Sub1"
-    name: "method3316"
+    owner: "PathingEntity"
+    name: "setSize"
     arguments:
-      1: "arg0"
+      1: "size"
     locals: {}
   client!qc.a (IIII)V:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "method3304"
     arguments:
       0: "arg0"
@@ -35851,7 +35851,7 @@ methods:
     locals:
       7: "local7"
   client!qc.a (ILclient!vg;)V:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "method3305"
     arguments:
       1: "arg0"
@@ -35888,7 +35888,7 @@ methods:
       840: "local840"
       845: "local845"
   client!qc.a (Lclient!vg;BLclient!vg;)V:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "method3315"
     arguments:
       0: "arg0"
@@ -35899,7 +35899,7 @@ methods:
       67: "local67"
       70: "local70"
   client!qc.a (Lclient!vg;II)V:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "method3312"
     arguments:
       0: "arg0"
@@ -35935,22 +35935,22 @@ methods:
       233: "local233"
       240: "local240"
   client!qc.a (Z)I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "method3303"
     arguments: {}
     locals: {}
   client!qc.b (B)I:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "method3306"
     arguments: {}
     locals: {}
   client!qc.b (I)V:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "method3307"
     arguments: {}
     locals: {}
   client!qc.b (III)V:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "method3308"
     arguments:
       0: "arg0"
@@ -35976,19 +35976,19 @@ methods:
       32: "local32"
       36: "local36"
   client!qc.c (B)Lclient!d;:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "method3314"
     arguments: {}
     locals:
       15: "local15"
   client!qc.d (I)Z:
-    owner: "Class53_Sub1"
+    owner: "PathingEntity"
     name: "method3310"
     arguments: {}
     locals: {}
   client!qc.e (I)I:
-    owner: "Class53_Sub1"
-    name: "method3311"
+    owner: "PathingEntity"
+    name: "getSize"
     arguments: {}
     locals: {}
   client!qd.<init> (I)V:
@@ -36770,12 +36770,12 @@ methods:
     arguments: {}
     locals: {}
   client!qk.a (B)I:
-    owner: "Class144"
+    owner: "PlayerAppearance"
     name: "method3611"
     arguments: {}
     locals: {}
   client!qk.a (BII)V:
-    owner: "Class144"
+    owner: "PlayerAppearance"
     name: "method3604"
     arguments:
       1: "arg0"
@@ -36808,20 +36808,20 @@ methods:
       11: "local11"
       53: "local53"
   client!qk.a (II[II[IZ)V:
-    owner: "Class144"
-    name: "method3610"
+    owner: "PlayerAppearance"
+    name: "set"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      3: "arg2"
-      4: "arg3"
-      5: "arg4"
+      1: "npcId"
+      2: "identikit"
+      3: "basId"
+      4: "colors"
+      5: "female"
     locals:
       25: "local25"
       30: "local30"
       37: "local37"
   client!qk.a (ILclient!eg;IBI)Lclient!vg;:
-    owner: "Class144"
+    owner: "PlayerAppearance"
     name: "method3612"
     arguments:
       0: "arg0"
@@ -36842,7 +36842,7 @@ methods:
       162: "local162"
       164: "local164"
   client!qk.a (ILclient!eg;IIIIII)Lclient!vg;:
-    owner: "Class144"
+    owner: "PlayerAppearance"
     name: "method3609"
     arguments:
       1: "arg0"
@@ -36863,13 +36863,13 @@ methods:
       105: "local105"
       107: "local107"
   client!qk.a (ZI)V:
-    owner: "Class144"
-    name: "method3605"
+    owner: "PlayerAppearance"
+    name: "setGender"
     arguments:
-      0: "arg0"
+      0: "female"
     locals: {}
   client!qk.a ([Lclient!re;IIILclient!eg;IIZILclient!eg;ZI)Lclient!vg;:
-    owner: "Class144"
+    owner: "PlayerAppearance"
     name: "method3608"
     arguments:
       0: "arg0"
@@ -36949,21 +36949,21 @@ methods:
       1322: "local1322"
       1434: "local1434"
   client!qk.b (IBI)V:
-    owner: "Class144"
-    name: "method3613"
+    owner: "PlayerAppearance"
+    name: "setColor"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "i"
+      2: "color"
     locals: {}
   client!qk.c (I)V:
-    owner: "Class144"
-    name: "method3606"
+    owner: "PlayerAppearance"
+    name: "updateChecksum"
     arguments: {}
     locals:
-      8: "local8"
-      10: "local10"
-      53: "local53"
-      147: "local147"
+      8: "previousChecksum"
+      10: "CRC64_TABLE"
+      53: "i"
+      147: "i"
   client!ql.<init> (Ljava/awt/Component;)V:
     owner: "GameCanvas"
     name: "<init>"
@@ -40270,10 +40270,10 @@ methods:
       179: "local179"
       186: "local186"
   client!sn.c (II)I:
-    owner: "Static33"
-    name: "method4058"
+    owner: "ObjTypeList"
+    name: "getFileId"
     arguments:
-      1: "arg0"
+      1: "id"
     locals: {}
   client!sn.e (B)V:
     owner: "Class4_Sub1_Sub33"
@@ -40478,11 +40478,11 @@ methods:
     arguments: {}
     locals: {}
   client!t.a (Lclient!fh;ZILclient!fh;)V:
-    owner: "Static33"
-    name: "method4080"
+    owner: "NpcTypeList"
+    name: "init"
     arguments:
-      0: "arg0"
-      3: "arg1"
+      3: "npcs"
+      0: "models"
     locals: {}
   client!t.c (I)I:
     owner: "Class160"
@@ -40674,7 +40674,7 @@ methods:
       313: "local313"
       323: "local323"
   client!td.a (BZ)Z:
-    owner: "Class162"
+    owner: "ObjType"
     name: "method4128"
     arguments:
       1: "arg0"
@@ -40684,8 +40684,8 @@ methods:
       17: "local17"
       37: "local37"
   client!td.a (I)V:
-    owner: "Class162"
-    name: "method4127"
+    owner: "ObjType"
+    name: "postDecode"
     arguments: {}
     locals: {}
   client!td.a (III)Lclient!vl;:
@@ -40698,7 +40698,7 @@ methods:
     locals:
       7: "local7"
   client!td.a (IIIILclient!qk;Lclient!eg;I)Lclient!vg;:
-    owner: "Class162"
+    owner: "ObjType"
     name: "method4123"
     arguments:
       0: "arg0"
@@ -40716,42 +40716,42 @@ methods:
       131: "local131"
       154: "local154"
   client!td.a (IILclient!fd;)V:
-    owner: "Class162"
-    name: "method4136"
+    owner: "ObjType"
+    name: "decode"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      2: "buffer"
+      0: "code"
     locals:
-      162: "local162"
-      172: "local172"
-      461: "local461"
-      469: "local469"
-      477: "local477"
-      495: "local495"
-      499: "local499"
-      508: "local508"
-      632: "local632"
-      638: "local638"
-      657: "local657"
-      667: "local667"
+      162: "size"
+      172: "i"
+      461: "size"
+      469: "bucketCount"
+      477: "i"
+      495: "string"
+      499: "id"
+      508: "node"
+      632: "size"
+      638: "i"
+      657: "size"
+      667: "i"
   client!td.a (ILclient!td;Lclient!td;)V:
-    owner: "Class162"
-    name: "method4130"
+    owner: "ObjType"
+    name: "generateLent"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "link"
+      2: "template"
     locals:
       158: "local158"
   client!td.a (ILjava/lang/String;I)Ljava/lang/String;:
-    owner: "Class162"
-    name: "method4129"
+    owner: "ObjType"
+    name: "getParam"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "id"
+      1: "defaultValue"
     locals:
-      20: "local20"
+      20: "node"
   client!td.a (IZ)Lclient!ml;:
-    owner: "Class162"
+    owner: "ObjType"
     name: "method4125"
     arguments:
       1: "arg0"
@@ -40764,12 +40764,12 @@ methods:
       69: "local69"
       96: "local96"
   client!td.a (Lclient!fd;B)V:
-    owner: "Class162"
-    name: "method4120"
+    owner: "ObjType"
+    name: "decode"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals:
-      5: "local5"
+      5: "code"
   client!td.a (Lclient!fh;II)Z:
     owner: "Static33"
     name: "method4131"
@@ -40779,7 +40779,7 @@ methods:
     locals:
       13: "local13"
   client!td.a (Lclient!qk;I)Lclient!na;:
-    owner: "Class162"
+    owner: "ObjType"
     name: "method4135"
     arguments:
       0: "arg0"
@@ -40790,14 +40790,14 @@ methods:
       100: "local100"
       168: "local168"
   client!td.a (Lclient!td;Lclient!td;I)V:
-    owner: "Class162"
-    name: "method4122"
+    owner: "ObjType"
+    name: "generateCertificate"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "link"
+      1: "template"
     locals: {}
   client!td.a (ZI)Lclient!td;:
-    owner: "Class162"
+    owner: "ObjType"
     name: "method4124"
     arguments:
       1: "arg0"
@@ -40805,7 +40805,7 @@ methods:
       21: "local21"
       23: "local23"
   client!td.a (ZZ)Lclient!ml;:
-    owner: "Class162"
+    owner: "ObjType"
     name: "method4121"
     arguments:
       0: "arg0"
@@ -40821,13 +40821,13 @@ methods:
       167: "local167"
       191: "local191"
   client!td.b (III)I:
-    owner: "Class162"
-    name: "method4133"
+    owner: "ObjType"
+    name: "getParam"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "id"
+      2: "defaultValue"
     locals:
-      26: "local26"
+      26: "node"
   client!td.b (ZI)V:
     owner: "Static33"
     name: "method4132"
@@ -40835,7 +40835,7 @@ methods:
       0: "arg0"
     locals: {}
   client!td.c (ZI)Z:
-    owner: "Class162"
+    owner: "ObjType"
     name: "method4134"
     arguments:
       0: "arg0"
@@ -42250,7 +42250,7 @@ methods:
     locals:
       7: "ex"
   client!ua.a (I)Z:
-    owner: "Class168"
+    owner: "NpcType"
     name: "method4255"
     arguments: {}
     locals:
@@ -42265,7 +42265,7 @@ methods:
     locals:
       12: "local12"
   client!ua.a (IIILclient!eg;Lclient!eg;I[Lclient!re;III)Lclient!vg;:
-    owner: "Class168"
+    owner: "NpcType"
     name: "method4268"
     arguments:
       0: "arg0"
@@ -42339,15 +42339,15 @@ methods:
       1228: "local1228"
       1342: "local1342"
   client!ua.a (IILjava/lang/String;)Ljava/lang/String;:
-    owner: "Class168"
-    name: "method4258"
+    owner: "NpcType"
+    name: "getParam"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "id"
+      2: "defaultValue"
     locals:
-      23: "local23"
+      23: "node"
   client!ua.a (ILclient!eg;BII)Lclient!vg;:
-    owner: "Class168"
+    owner: "NpcType"
     name: "method4266"
     arguments:
       0: "arg0"
@@ -42365,18 +42365,18 @@ methods:
       132: "local132"
       184: "local184"
   client!ua.a (Lclient!fd;B)V:
-    owner: "Class168"
-    name: "method4263"
+    owner: "NpcType"
+    name: "decode"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals:
-      17: "local17"
+      17: "code"
   client!ua.a (Lclient!fd;BI)V:
-    owner: "Class168"
-    name: "method4259"
+    owner: "NpcType"
+    name: "decode"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "buffer"
+      2: "code"
     locals:
       15: "local15"
       21: "local21"
@@ -42385,12 +42385,12 @@ methods:
       248: "local248"
       289: "local289"
       297: "local297"
-      576: "local576"
-      583: "local583"
-      591: "local591"
-      607: "local607"
-      611: "local611"
-      620: "local620"
+      576: "size"
+      583: "buckets"
+      591: "i"
+      607: "string"
+      611: "id"
+      620: "node"
       714: "local714"
       716: "local716"
       723: "local723"
@@ -42408,27 +42408,27 @@ methods:
       0: "arg0"
     locals: {}
   client!ua.b (I)Z:
-    owner: "Class168"
+    owner: "NpcType"
     name: "method4260"
     arguments: {}
     locals:
       30: "local30"
       54: "local54"
   client!ua.b (III)I:
-    owner: "Class168"
-    name: "method4262"
+    owner: "NpcType"
+    name: "getParam"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "id"
+      1: "defaultValue"
     locals:
-      25: "local25"
+      25: "node"
   client!ua.c (I)V:
-    owner: "Class168"
-    name: "method4261"
+    owner: "NpcType"
+    name: "postDecode"
     arguments: {}
     locals: {}
   client!ua.d (I)Lclient!ua;:
-    owner: "Class168"
+    owner: "NpcType"
     name: "method4265"
     arguments: {}
     locals:
@@ -43300,14 +43300,14 @@ methods:
     locals:
       12: "node"
   client!ul.a (IB)Lclient!td;:
-    owner: "Static35"
-    name: "method4361"
+    owner: "ObjTypeList"
+    name: "get"
     arguments:
-      0: "arg0"
+      0: "id"
     locals:
-      18: "local18"
-      34: "local34"
-      38: "local38"
+      18: "type"
+      34: "bytes"
+      38: "newType"
   client!ul.a (ILclient!gb;ILclient!gb;Z)I:
     owner: "Static35"
     name: "method4366"
@@ -43437,10 +43437,10 @@ methods:
     arguments: {}
     locals: {}
   client!va.a (BI)Z:
-    owner: "Static36"
-    name: "method4408"
+    owner: "IntegerUtils"
+    name: "isPowerOfTwo"
     arguments:
-      1: "arg0"
+      1: "v"
     locals: {}
   client!va.a (II)V:
     owner: "Static36"
