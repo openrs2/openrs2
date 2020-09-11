@@ -279,7 +279,7 @@ classes:
   client!vn: "Class4_Sub3_Sub14_Sub1"
   client!w: "Class4_Sub3_Sub21"
   client!wa: "Packet"
-  client!wb: "Js5ResourceProviderImpl"
+  client!wb: "Js5CachedResourceProvider"
   client!wd: "Class4_Sub1_Sub21_Sub1"
   client!we: "Class184"
   client!wf: "Class185"
@@ -11049,73 +11049,73 @@ fields:
     owner: "Preferences"
     name: "highDetailWater"
   client!wb.C Lclient!fo;:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "index"
   client!wb.D Lsignlink!vk;:
     owner: "Static7"
     name: "aClass197_5"
   client!wb.F Lclient!ng;:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "indexRequest"
   client!wb.J I:
     owner: "Static7"
     name: "anInt5798"
   client!wb.L I:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "expectedVersion"
   client!wb.N I:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "group"
   client!wb.P Z:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "verifyAll"
   client!wb.Q Z:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "prefetchAll"
   client!wb.R Lclient!ll;:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "prefetchQueue"
   client!wb.S Lclient!ll;:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "groupQueue"
   client!wb.T J:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "orphanCheckTime"
   client!wb.U Z:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "discardOrphans"
   client!wb.g Lclient!en;:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "netQueue"
   client!wb.i Ljava/lang/String;:
     owner: "LocalisedText"
     name: "CHATCOL7"
   client!wb.j Lclient!ja;:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "cacheQueue"
   client!wb.l Lclient!fm;:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "masterCache"
   client!wb.n Lclient!fm;:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "cache"
   client!wb.o I:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "verifiedGroups"
   client!wb.p I:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "expectedChecksum"
   client!wb.q Lclient!ic;:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "requests"
   client!wb.t Ljava/lang/String;:
     owner: "LocalisedText"
     name: "CHATCOL1"
   client!wb.x I:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "archive"
   client!wb.z [B:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "groupStatus"
   client!wc.a Lclient!fh;:
     owner: "client"
@@ -11907,7 +11907,7 @@ fields:
     owner: "Class4_Sub3_Sub24"
     name: "anInt6085"
   client!wn.B Ljava/util/zip/CRC32;:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "crc32"
   client!wn.D Lclient!u;:
     owner: "Class4_Sub3_Sub24"
@@ -45207,7 +45207,7 @@ methods:
     arguments: {}
     locals: {}
   client!wb.<init> (ILclient!fm;Lclient!fm;Lclient!en;Lclient!ja;IIZ)V:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "<init>"
     arguments:
       0: "archive"
@@ -45220,7 +45220,7 @@ methods:
       7: "dicardOrphans"
     locals: {}
   client!wb.a (I)Lclient!fo;:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "fetchIndex"
     arguments: {}
     locals:
@@ -45228,14 +45228,14 @@ methods:
       74: "ex"
       149: "ex"
   client!wb.a (II)I:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "getPercentageComplete"
     arguments:
       0: "group"
     locals:
       9: "request"
   client!wb.a (III)Lclient!ng;:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "fetchGroupInner"
     arguments:
       1: "group"
@@ -45270,25 +45270,25 @@ methods:
       7: "local7"
       46: "local46"
   client!wb.a (Z)V:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "processPrefetchQueue"
     arguments: {}
     locals:
       22: "node"
       32: "group"
   client!wb.b (B)I:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "getIndexPercentageComplete"
     arguments: {}
     locals: {}
   client!wb.b (I)I:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "getTotalVerifiedGroups"
     arguments: {}
     locals:
       27: "node"
   client!wb.b (II)V:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "prefetchGroup"
     arguments:
       0: "group"
@@ -45296,7 +45296,7 @@ methods:
       22: "node"
       48: "node"
   client!wb.b (Z)I:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "getVerifiedGroups"
     arguments: {}
     locals: {}
@@ -45306,7 +45306,7 @@ methods:
     arguments: {}
     locals: {}
   client!wb.c (II)[B:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "fetchGroup"
     arguments:
       1: "group"
@@ -45319,7 +45319,7 @@ methods:
     arguments: {}
     locals: {}
   client!wb.d (I)V:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "prefetchAll"
     arguments: {}
     locals: {}
@@ -45330,12 +45330,12 @@ methods:
       1: "arg0"
     locals: {}
   client!wb.e (I)I:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "getIndexSize"
     arguments: {}
     locals: {}
   client!wb.f (I)V:
-    owner: "Js5ResourceProviderImpl"
+    owner: "Js5CachedResourceProvider"
     name: "tick"
     arguments: {}
     locals:
