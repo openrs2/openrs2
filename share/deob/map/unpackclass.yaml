@@ -514,7 +514,7 @@ methods:
       361: "fileId"
   unpackclass!aa.a ([B)V:
     owner: "Js5"
-    name: "read"
+    name: "decode"
     arguments:
       0: "bytes"
     locals:
