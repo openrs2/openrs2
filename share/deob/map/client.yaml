@@ -4401,8 +4401,8 @@ fields:
     owner: "Static3"
     name: "aClass26_26"
   client!je.d [Lclient!gb;:
-    owner: "Static3"
-    name: "aClass63_Sub1Array2"
+    owner: "WorldList"
+    name: "sorted"
   client!je.e I:
     owner: "Static3"
     name: "anInt2571"
@@ -14473,11 +14473,11 @@ methods:
     locals:
       16: "node"
   client!cd.a (IIC)C:
-    owner: "Static11"
-    name: "method523"
+    owner: "StringUtils"
+    name: "getFirstChar"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "c"
+      1: "language"
     locals: {}
   client!cd.a (IIZ)V:
     owner: "Static11"
@@ -14629,13 +14629,13 @@ methods:
     locals:
       5: "local5"
   client!cf.a (ZIIZI)V:
-    owner: "Static11"
-    name: "method553"
+    owner: "WorldList"
+    name: "sort"
     arguments:
-      0: "arg0"
-      2: "arg1"
-      3: "arg2"
-      4: "arg3"
+      2: "primaryField"
+      0: "primaryDesc"
+      4: "secondaryField"
+      3: "secondaryDesc"
     locals: {}
   client!cf.a ([ILclient!p;[II[I)V:
     owner: "Static11"
@@ -17664,18 +17664,18 @@ methods:
       68: "local68"
       79: "local79"
   client!fa.a (IZLclient!gb;ZLclient!gb;IZ)I:
-    owner: "Static14"
-    name: "method1202"
+    owner: "WorldList"
+    name: "compare"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
-      5: "arg5"
+      4: "x"
+      2: "y"
+      0: "primaryField"
+      1: "primaryDesc"
+      5: "secondaryField"
+      3: "secondaryDesc"
     locals:
-      15: "local15"
-      40: "local40"
+      15: "primary"
+      40: "secondary"
   client!fa.a (Ljava/lang/String;I)I:
     owner: "Static14"
     name: "method1201"
@@ -31481,13 +31481,13 @@ methods:
     locals:
       14: "local14"
   client!nb.a (IIC)I:
-    owner: "Static25"
-    name: "method2928"
+    owner: "StringUtils"
+    name: "getRank"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "c"
+      1: "language"
     locals:
-      12: "local12"
+      12: "rank"
   client!nb.a (III)Z:
     owner: "Class4_Sub17"
     name: "method2923"
@@ -39629,10 +39629,10 @@ methods:
       2: "arg1"
     locals: {}
   client!sc.a (CZ)C:
-    owner: "Static32"
-    name: "method3919"
+    owner: "StringUtils"
+    name: "getSecondChar"
     arguments:
-      0: "arg0"
+      0: "c"
     locals: {}
   client!sc.a (IB)Z:
     owner: "Static32"
@@ -43309,16 +43309,16 @@ methods:
       34: "bytes"
       38: "newType"
   client!ul.a (ILclient!gb;ILclient!gb;Z)I:
-    owner: "Static35"
-    name: "method4366"
+    owner: "WorldList"
+    name: "compare"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      3: "arg2"
-      4: "arg3"
+      3: "x"
+      1: "y"
+      2: "field"
+      4: "desc"
     locals:
-      11: "local11"
-      14: "local14"
+      11: "xPlayers"
+      14: "yPlayers"
   client!ul.a (ILclient!wf;IIIII)V:
     owner: "Static35"
     name: "method4360"
@@ -43341,21 +43341,21 @@ methods:
       384: "local384"
       386: "local386"
   client!ul.a (ZIIIZII)V:
-    owner: "Static35"
-    name: "method4365"
+    owner: "WorldList"
+    name: "sort"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
-      5: "arg5"
+      2: "primaryField"
+      0: "primaryDesc"
+      1: "secondaryField"
+      4: "secondaryDesc"
+      5: "lo"
+      3: "hi"
     locals:
-      15: "local15"
-      17: "local17"
-      21: "local21"
-      33: "local33"
-      55: "local55"
+      15: "mid"
+      17: "i"
+      21: "pivot"
+      33: "j"
+      55: "world"
   client!ul.b (IB)Lclient!qm;:
     owner: "Static35"
     name: "method4364"
@@ -45396,37 +45396,37 @@ methods:
       169: "local169"
       177: "local177"
   client!wd.a (ILjava/lang/String;ILjava/lang/String;)I:
-    owner: "Static37"
-    name: "method4711"
+    owner: "StringUtils"
+    name: "compare"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      3: "arg2"
+      3: "x"
+      1: "y"
+      2: "language"
     locals:
-      8: "local8"
-      15: "local15"
-      18: "local18"
-      20: "local20"
-      22: "local22"
-      24: "local24"
-      73: "local73"
-      83: "local83"
-      105: "local105"
-      110: "local110"
-      125: "local125"
-      128: "local128"
-      150: "local150"
-      152: "local152"
-      167: "local167"
-      174: "local174"
-      184: "local184"
-      188: "local188"
-      203: "local203"
-      206: "local206"
-      233: "local233"
-      240: "local240"
-      247: "local247"
-      251: "local251"
+      8: "xLen"
+      15: "xPos"
+      18: "yLen"
+      20: "xSecondChar"
+      22: "yPos"
+      24: "ySecondChar"
+      73: "xChar"
+      83: "yChar"
+      105: "xFirstChar"
+      110: "yFirstChar"
+      125: "xFirstCharLower"
+      128: "yFirstCharLower"
+      150: "len"
+      152: "i"
+      167: "yPos2"
+      174: "xPos2"
+      184: "xChar"
+      188: "yChar"
+      203: "xCharLower"
+      206: "yCharLower"
+      233: "delta"
+      240: "i"
+      247: "xChar"
+      251: "yChar"
   client!wd.a (IZ)V:
     owner: "Static37"
     name: "method4710"
