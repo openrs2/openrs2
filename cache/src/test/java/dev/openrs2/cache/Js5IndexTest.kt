@@ -319,8 +319,6 @@ object Js5IndexTest {
             allFlagsIndex.write(actual)
 
             read("all-flags.dat").use { expected ->
-                println(ByteBufUtil.prettyHexDump(actual))
-
                 assertEquals(expected, actual)
             }
         }
