@@ -466,6 +466,37 @@ object Js5CompressionTest {
         }
     }
 
+    @Test
+    fun testCompressedUnderflow() {
+        read("compressed-underflow.dat").use { compressed ->
+            assertThrows<IOException> {
+                Js5Compression.uncompress(compressed.slice()).release()
+            }
+
+            assertThrows<IOException> {
+                Js5Compression.isKeyValid(compressed.slice(), XteaKey.ZERO)
+            }
+        }
+    }
+
+    @Test
+    fun testUncompressedOverflow() {
+        read("uncompressed-overflow.dat").use { compressed ->
+            assertThrows<IOException> {
+                Js5Compression.uncompress(compressed).release()
+            }
+        }
+    }
+
+    @Test
+    fun testUncompressedUnderflow() {
+        read("uncompressed-underflow.dat").use { compressed ->
+            assertThrows<IOException> {
+                Js5Compression.uncompress(compressed).release()
+            }
+        }
+    }
+
     private fun read(name: String): ByteBuf {
         Js5CompressionTest::class.java.getResourceAsStream("compression/$name").use { input ->
             return Unpooled.wrappedBuffer(input.readAllBytes())
