@@ -23,7 +23,7 @@ public object Js5Compression {
         input.alloc().buffer().use { output ->
             output.writeByte(type.ordinal)
 
-            if (type == Js5CompressionType.NONE) {
+            if (type == Js5CompressionType.UNCOMPRESSED) {
                 val len = input.readableBytes()
                 output.writeInt(len)
                 output.writeBytes(input)
@@ -85,7 +85,7 @@ public object Js5Compression {
              * enableNoneWithKey? Or should LZMA also be disabled in clients
              * with the decryption bug?
              */
-            types += Js5CompressionType.NONE
+            types += Js5CompressionType.UNCOMPRESSED
         }
 
         var best = compress(input.slice(), types.first(), key)
@@ -118,7 +118,7 @@ public object Js5Compression {
             throw IOException("Length is negative: $len")
         }
 
-        if (type == Js5CompressionType.NONE) {
+        if (type == Js5CompressionType.UNCOMPRESSED) {
             if (input.readableBytes() < len) {
                 throw IOException("Data truncated")
             }
@@ -173,7 +173,7 @@ public object Js5Compression {
             throw IOException("Length is negative: $len")
         }
 
-        if (type == Js5CompressionType.NONE) {
+        if (type == Js5CompressionType.UNCOMPRESSED) {
             /*
              * There is no easy way for us to be sure whether an uncompressed
              * group's key is valid or not, as we'd need specific validation
@@ -223,7 +223,7 @@ public object Js5Compression {
             }
 
             when (type) {
-                Js5CompressionType.NONE -> throw AssertionError()
+                Js5CompressionType.UNCOMPRESSED -> throw AssertionError()
                 Js5CompressionType.BZIP2 -> {
                     val magic = ByteArray(BZIP2_MAGIC.size)
                     plaintext.readBytes(magic)

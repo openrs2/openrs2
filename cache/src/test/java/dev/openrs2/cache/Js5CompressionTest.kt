@@ -20,7 +20,7 @@ object Js5CompressionTest {
     fun testCompressNone() {
         read("none.dat").use { expected ->
             Unpooled.wrappedBuffer("OpenRS2".toByteArray()).use { input ->
-                Js5Compression.compress(input, Js5CompressionType.NONE).use { actual ->
+                Js5Compression.compress(input, Js5CompressionType.UNCOMPRESSED).use { actual ->
                     assertEquals(expected, actual)
                 }
             }
@@ -119,7 +119,7 @@ object Js5CompressionTest {
     fun testCompressNoneEncrypted() {
         read("none-encrypted.dat").use { expected ->
             Unpooled.wrappedBuffer("OpenRS2".repeat(3).toByteArray()).use { input ->
-                Js5Compression.compress(input, Js5CompressionType.NONE, KEY).use { actual ->
+                Js5Compression.compress(input, Js5CompressionType.UNCOMPRESSED, KEY).use { actual ->
                     assertEquals(expected, actual)
                 }
             }
@@ -206,12 +206,12 @@ object Js5CompressionTest {
     @Test
     fun testCompressBest() {
         Unpooled.wrappedBuffer("OpenRS2".repeat(100).toByteArray()).use { expected ->
-            val noneLen = Js5Compression.compress(expected.slice(), Js5CompressionType.NONE).use { compressed ->
+            val noneLen = Js5Compression.compress(expected.slice(), Js5CompressionType.UNCOMPRESSED).use { compressed ->
                 compressed.readableBytes()
             }
 
             Js5Compression.compressBest(expected.slice()).use { compressed ->
-                assertNotEquals(Js5CompressionType.NONE.ordinal, compressed.getUnsignedByte(0).toInt())
+                assertNotEquals(Js5CompressionType.UNCOMPRESSED.ordinal, compressed.getUnsignedByte(0).toInt())
                 assert(compressed.readableBytes() < noneLen)
 
                 Js5Compression.uncompress(compressed).use { actual ->
@@ -224,12 +224,12 @@ object Js5CompressionTest {
     @Test
     fun testCompressBestEncrypted() {
         Unpooled.wrappedBuffer("OpenRS2".repeat(100).toByteArray()).use { expected ->
-            val noneLen = Js5Compression.compress(expected.slice(), Js5CompressionType.NONE).use { compressed ->
+            val noneLen = Js5Compression.compress(expected.slice(), Js5CompressionType.UNCOMPRESSED).use { compressed ->
                 compressed.readableBytes()
             }
 
             Js5Compression.compressBest(expected.slice(), key = KEY).use { compressed ->
-                assertNotEquals(Js5CompressionType.NONE.ordinal, compressed.getUnsignedByte(0).toInt())
+                assertNotEquals(Js5CompressionType.UNCOMPRESSED.ordinal, compressed.getUnsignedByte(0).toInt())
                 assert(compressed.readableBytes() < noneLen)
 
                 Js5Compression.uncompress(compressed, KEY).use { actual ->
@@ -243,19 +243,19 @@ object Js5CompressionTest {
     fun testUncompressedEncryption() {
         Unpooled.wrappedBuffer("OpenRS2".toByteArray()).use { buf ->
             Js5Compression.compressBest(buf.slice()).use { compressed ->
-                assertEquals(Js5CompressionType.NONE.ordinal, compressed.getUnsignedByte(0).toInt())
+                assertEquals(Js5CompressionType.UNCOMPRESSED.ordinal, compressed.getUnsignedByte(0).toInt())
             }
 
             Js5Compression.compressBest(buf.slice(), enableUncompressedEncryption = true).use { compressed ->
-                assertEquals(Js5CompressionType.NONE.ordinal, compressed.getUnsignedByte(0).toInt())
+                assertEquals(Js5CompressionType.UNCOMPRESSED.ordinal, compressed.getUnsignedByte(0).toInt())
             }
 
             Js5Compression.compressBest(buf.slice(), key = KEY).use { compressed ->
-                assertNotEquals(Js5CompressionType.NONE.ordinal, compressed.getUnsignedByte(0).toInt())
+                assertNotEquals(Js5CompressionType.UNCOMPRESSED.ordinal, compressed.getUnsignedByte(0).toInt())
             }
 
             Js5Compression.compressBest(buf.slice(), key = KEY, enableUncompressedEncryption = true).use { compressed ->
-                assertEquals(Js5CompressionType.NONE.ordinal, compressed.getUnsignedByte(0).toInt())
+                assertEquals(Js5CompressionType.UNCOMPRESSED.ordinal, compressed.getUnsignedByte(0).toInt())
             }
         }
     }

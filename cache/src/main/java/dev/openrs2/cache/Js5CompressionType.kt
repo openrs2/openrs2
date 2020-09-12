@@ -9,14 +9,14 @@ import java.util.zip.Deflater
 import java.util.zip.GZIPInputStream
 
 public enum class Js5CompressionType {
-    NONE,
+    UNCOMPRESSED,
     BZIP2,
     GZIP,
     LZMA;
 
     public fun createInputStream(input: InputStream, length: Int): InputStream {
         return when (this) {
-            NONE -> input
+            UNCOMPRESSED -> input
             BZIP2 -> Bzip2.createHeaderlessInputStream(input)
             GZIP -> GZIPInputStream(input)
             LZMA -> Lzma.createHeaderlessInputStream(input, length.toLong())
@@ -25,7 +25,7 @@ public enum class Js5CompressionType {
 
     public fun createOutputStream(output: OutputStream): OutputStream {
         return when (this) {
-            NONE -> output
+            UNCOMPRESSED -> output
             BZIP2 -> Bzip2.createHeaderlessOutputStream(output)
             GZIP -> GzipLevelOutputStream(output, Deflater.BEST_COMPRESSION)
             /*
