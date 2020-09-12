@@ -1,7 +1,5 @@
 package dev.openrs2.crypto
 
-import java.io.BufferedReader
-import java.io.InputStreamReader
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import kotlin.test.Test
@@ -62,7 +60,7 @@ object IsaacRandomTest {
 
     private fun readVector(file: String): IntArray {
         val input = IsaacRandomTest::class.java.getResourceAsStream("isaac/$file")
-        return BufferedReader(InputStreamReader(input)).useLines { lines ->
+        return input.bufferedReader().useLines { lines ->
             val elements = mutableListOf<Int>()
 
             for (line in lines) {
