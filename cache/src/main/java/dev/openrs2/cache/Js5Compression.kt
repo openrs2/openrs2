@@ -152,6 +152,10 @@ public object Js5Compression {
                         }
                         remaining -= n
                     }
+
+                    if (inputStream.read() != -1) {
+                        throw IOException("Uncompressed data overflow")
+                    }
                 }
 
                 return output.retain()
