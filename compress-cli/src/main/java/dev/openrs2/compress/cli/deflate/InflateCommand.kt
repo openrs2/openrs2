@@ -11,7 +11,7 @@ import java.util.zip.InflaterInputStream
 
 public class InflateCommand : CliktCommand(name = "inflate") {
     private val input by option().inputStream().defaultStdin()
-    private val output by option().outputStream().defaultStdout()
+    private val output by option().outputStream(truncateExisting = true).defaultStdout()
 
     override fun run() {
         InflaterInputStream(input, Inflater(true)).use { input ->

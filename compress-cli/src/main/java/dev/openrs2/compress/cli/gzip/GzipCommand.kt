@@ -14,7 +14,7 @@ import java.util.zip.Deflater
 
 public class GzipCommand : CliktCommand(name = "gzip") {
     private val input by option().inputStream().defaultStdin()
-    private val output by option().outputStream().defaultStdout()
+    private val output by option().outputStream(truncateExisting = true).defaultStdout()
     private val level by option().int().default(Deflater.BEST_COMPRESSION).validate {
         require(it >= Deflater.NO_COMPRESSION && it <= Deflater.BEST_COMPRESSION) {
             "--level must be between ${Deflater.NO_COMPRESSION} and ${Deflater.BEST_COMPRESSION} inclusive"

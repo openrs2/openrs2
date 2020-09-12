@@ -10,7 +10,7 @@ import dev.openrs2.compress.gzip.Gzip
 
 public class GunzipCommand : CliktCommand(name = "gunzip") {
     private val input by option().inputStream().defaultStdin()
-    private val output by option().outputStream().defaultStdout()
+    private val output by option().outputStream(truncateExisting = true).defaultStdout()
 
     override fun run() {
         Gzip.createHeaderlessInputStream(input).use { input ->

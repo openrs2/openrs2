@@ -10,7 +10,7 @@ import dev.openrs2.compress.bzip2.Bzip2
 
 public class Bzip2Command : CliktCommand(name = "bzip2") {
     private val input by option().inputStream().defaultStdin()
-    private val output by option().outputStream().defaultStdout()
+    private val output by option().outputStream(truncateExisting = true).defaultStdout()
 
     override fun run() {
         input.use { input ->

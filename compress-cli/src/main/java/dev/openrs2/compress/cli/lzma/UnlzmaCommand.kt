@@ -13,7 +13,7 @@ import dev.openrs2.compress.lzma.Lzma
 public class UnlzmaCommand : CliktCommand(name = "unlzma") {
     private val input by option().inputStream().defaultStdin()
     private val length by option().long().required()
-    private val output by option().outputStream().defaultStdout()
+    private val output by option().outputStream(truncateExisting = true).defaultStdout()
 
     override fun run() {
         Lzma.createHeaderlessInputStream(input, length).use { input ->

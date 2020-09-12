@@ -10,7 +10,7 @@ import dev.openrs2.compress.bzip2.Bzip2
 
 public class Bunzip2Command : CliktCommand(name = "bunzip2") {
     private val input by option().inputStream().defaultStdin()
-    private val output by option().outputStream().defaultStdout()
+    private val output by option().outputStream(truncateExisting = true).defaultStdout()
 
     override fun run() {
         Bzip2.createHeaderlessInputStream(input).use { input ->
