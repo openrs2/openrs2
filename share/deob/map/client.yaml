@@ -114,7 +114,7 @@ classes:
   client!jh: "Class96"
   client!jj: "Class4_Sub1_Sub12"
   client!jk: "Class98"
-  client!jl: "Class4_Sub3_Sub13"
+  client!jl: "ClientScript"
   client!jm: "MouseRecorder"
   client!jn: "Class4_Sub3_Sub14_Sub1_Sub1"
   client!jo: "Class4_Sub1"
@@ -4545,44 +4545,44 @@ fields:
     owner: "Class98"
     name: "aClass84_12"
   client!jl.A [I:
-    owner: "Class4_Sub3_Sub13"
-    name: "anIntArray233"
+    owner: "ClientScript"
+    name: "intOperands"
   client!jl.B [[[Lclient!ll;:
     owner: "Static4"
     name: "aClass112ArrayArrayArray1"
   client!jl.C [I:
-    owner: "Class4_Sub3_Sub13"
-    name: "anIntArray234"
+    owner: "ClientScript"
+    name: "opcodes"
   client!jl.D [Ljava/lang/String;:
-    owner: "Class4_Sub3_Sub13"
-    name: "aStringArray19"
+    owner: "ClientScript"
+    name: "stringOperands"
   client!jl.E [Lclient!ic;:
-    owner: "Class4_Sub3_Sub13"
-    name: "aClass84Array1"
+    owner: "ClientScript"
+    name: "switchTables"
   client!jl.G I:
-    owner: "Class4_Sub3_Sub13"
-    name: "anInt2658"
+    owner: "ClientScript"
+    name: "intArgs"
   client!jl.I Ljava/lang/String;:
-    owner: "Class4_Sub3_Sub13"
-    name: "aString159"
+    owner: "ClientScript"
+    name: "name"
   client!jl.J I:
-    owner: "Class4_Sub3_Sub13"
-    name: "anInt2660"
+    owner: "ClientScript"
+    name: "stringLocals"
   client!jl.K I:
     owner: "Static4"
     name: "anInt2661"
   client!jl.L I:
-    owner: "Class4_Sub3_Sub13"
-    name: "anInt2662"
+    owner: "ClientScript"
+    name: "intLocals"
   client!jl.M I:
     owner: "Static4"
     name: "anInt2663"
   client!jl.y I:
-    owner: "Class4_Sub3_Sub13"
-    name: "anInt2656"
+    owner: "ClientScript"
+    name: "trigger"
   client!jl.z I:
-    owner: "Class4_Sub3_Sub13"
-    name: "anInt2657"
+    owner: "ClientScript"
+    name: "stringArgs"
   client!jm.b I:
     owner: "Static4"
     name: "anInt2665"
@@ -7323,8 +7323,8 @@ fields:
     owner: "Class131"
     name: "anInt4058"
   client!pa.c Lclient!dj;:
-    owner: "Static5"
-    name: "aClass40_13"
+    owner: "ClientScriptList"
+    name: "scripts"
   client!pa.h Z:
     owner: "Class131"
     name: "aBoolean286"
@@ -15577,14 +15577,14 @@ methods:
     arguments: {}
     locals: {}
   client!co.a (ZI)Lclient!jl;:
-    owner: "Static12"
-    name: "method718"
+    owner: "ClientScriptList"
+    name: "get"
     arguments:
-      1: "arg0"
+      1: "id"
     locals:
-      10: "local10"
-      21: "local21"
-      36: "local36"
+      10: "script"
+      21: "bytes"
+      36: "newScript"
   client!co.a ([SI[Ljava/lang/String;)V:
     owner: "Static12"
     name: "method714"
@@ -27475,10 +27475,10 @@ methods:
       180: "local180"
       236: "local236"
   client!lf.a (IIII)Lclient!jl;:
-    owner: "Static23"
-    name: "method2535"
+    owner: "ClientScriptList"
+    name: "get"
     arguments:
-      0: "arg0"
+      0: "trigger"
       1: "arg1"
       2: "arg2"
     locals:
@@ -33564,24 +33564,24 @@ methods:
       1: "arg1"
     locals: {}
   client!ol.a (B[B)Lclient!jl;:
-    owner: "Static28"
-    name: "method3247"
+    owner: "ClientScript"
+    name: "decode"
     arguments:
-      1: "arg0"
+      1: "bytes"
     locals:
-      9: "local9"
-      14: "local14"
-      25: "local25"
-      35: "local35"
-      42: "local42"
-      66: "local66"
-      77: "local77"
-      84: "local84"
-      91: "local91"
-      103: "local103"
-      107: "local107"
-      129: "local129"
-      161: "local161"
+      9: "script"
+      14: "buffer"
+      25: "trailerLen"
+      35: "trailerPos"
+      42: "instructions"
+      66: "switches"
+      77: "i"
+      84: "cases"
+      91: "table"
+      103: "value"
+      107: "offset"
+      129: "i"
+      161: "opcode"
   client!ol.a (Lclient!fg;IIIZILclient!nb;Lclient!ho;)V:
     owner: "Static28"
     name: "method3244"
