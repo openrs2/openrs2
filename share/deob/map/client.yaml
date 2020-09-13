@@ -2437,7 +2437,7 @@ fields:
     name: "appearance"
   client!f.pc I:
     owner: "Player"
-    name: "skullIcon"
+    name: "pkIcon"
   client!f.sc I:
     owner: "Player"
     name: "anInt1576"
