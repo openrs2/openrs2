@@ -87,7 +87,7 @@ classes:
   client!go: "Class72"
   client!h: "Class73"
   client!hc: "ByteArray"
-  client!he: "Class53_Sub2"
+  client!he: "ObjStack"
   client!hf: "NanoTimer"
   client!hi: "Class79"
   client!hk: "Class4_Sub1_Sub11"
@@ -277,7 +277,7 @@ classes:
   client!vl: "Class182"
   client!vm: "Class4_Sub1_Sub39"
   client!vn: "Class4_Sub3_Sub14_Sub1"
-  client!w: "Class4_Sub3_Sub21"
+  client!w: "ObjStackNode"
   client!wa: "Packet"
   client!wb: "Js5CachedResourceProvider"
   client!wd: "Class4_Sub1_Sub21_Sub1"
@@ -3375,7 +3375,7 @@ fields:
     owner: "Static3"
     name: "aClass26_21"
   client!he.q I:
-    owner: "Class53_Sub2"
+    owner: "ObjStack"
     name: "anInt2163"
   client!he.s I:
     owner: "Static3"
@@ -3384,11 +3384,11 @@ fields:
     owner: "Static3"
     name: "aClass4_Sub12ArrayArray1"
   client!he.u I:
-    owner: "Class53_Sub2"
-    name: "anInt2166"
+    owner: "ObjStack"
+    name: "count"
   client!he.w I:
-    owner: "Class53_Sub2"
-    name: "anInt2168"
+    owner: "ObjStack"
+    name: "type"
   client!he.x Ljava/lang/String;:
     owner: "LocalisedText"
     name: "MAINLOAD120B"
@@ -11025,8 +11025,8 @@ fields:
     owner: "Static7"
     name: "anIntArray646"
   client!w.C Lclient!he;:
-    owner: "Class4_Sub3_Sub21"
-    name: "aClass53_Sub2_1"
+    owner: "ObjStackNode"
+    name: "value"
   client!w.G [I:
     owner: "Packet"
     name: "BIT_MASKS"
@@ -22087,7 +22087,7 @@ methods:
     arguments: {}
     locals: {}
   client!he.a (IIIII)V:
-    owner: "Class53_Sub2"
+    owner: "ObjStack"
     name: "method3806"
     arguments:
       0: "arg0"
@@ -22097,7 +22097,7 @@ methods:
       4: "arg4"
     locals: {}
   client!he.a (IIIIIIIIJILclient!ne;)V:
-    owner: "Class53_Sub2"
+    owner: "ObjStack"
     name: "method3805"
     arguments:
       0: "arg0"
@@ -22114,7 +22114,7 @@ methods:
     locals:
       17: "local17"
   client!he.b ()I:
-    owner: "Class53_Sub2"
+    owner: "ObjStack"
     name: "method3813"
     arguments: {}
     locals: {}
@@ -45094,10 +45094,10 @@ methods:
       91: "local91"
       97: "local97"
   client!w.<init> (Lclient!he;)V:
-    owner: "Class4_Sub3_Sub21"
+    owner: "ObjStackNode"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "value"
     locals: {}
   client!w.a (IIIIIIII)V:
     owner: "Static36"
