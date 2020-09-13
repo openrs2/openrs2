@@ -115,7 +115,7 @@ classes:
   client!jj: "Class4_Sub1_Sub12"
   client!jk: "Class98"
   client!jl: "Class4_Sub3_Sub13"
-  client!jm: "Class99"
+  client!jm: "MouseRecorder"
   client!jn: "Class4_Sub3_Sub14_Sub1_Sub1"
   client!jo: "Class4_Sub1"
   client!kb: "Class102_Sub1"
@@ -4599,20 +4599,20 @@ fields:
     owner: "Static4"
     name: "aFloat62"
   client!jm.j Ljava/lang/Object;:
-    owner: "Class99"
-    name: "anObject4"
+    owner: "MouseRecorder"
+    name: "lock"
   client!jm.k Z:
-    owner: "Class99"
-    name: "aBoolean185"
+    owner: "MouseRecorder"
+    name: "running"
   client!jm.m I:
-    owner: "Class99"
-    name: "anInt2670"
+    owner: "MouseRecorder"
+    name: "samples"
   client!jm.n [I:
-    owner: "Class99"
-    name: "anIntArray235"
+    owner: "MouseRecorder"
+    name: "y"
   client!jm.o [I:
-    owner: "Class99"
-    name: "anIntArray236"
+    owner: "MouseRecorder"
+    name: "x"
   client!jo.C I:
     owner: "Static4"
     name: "anInt5826"
@@ -5664,8 +5664,8 @@ fields:
     owner: "client"
     name: "objectTag"
   client!me.i Lclient!jm;:
-    owner: "Static4"
-    name: "aClass99_1"
+    owner: "MouseRecorder"
+    name: "instance"
   client!mf.b Ljava/lang/String;:
     owner: "LocalisedText"
     name: "CHOOSE_OPTION"
@@ -24909,7 +24909,7 @@ methods:
     locals:
       13: "local13"
   client!jm.run ()V:
-    owner: "Class99"
+    owner: "MouseRecorder"
     name: "run"
     arguments: {}
     locals: {}
