@@ -18403,7 +18403,7 @@ methods:
       11: "checksum"
   client!fd.l (B)Ljava/lang/String;:
     owner: "Buffer"
-    name: "fastReadString"
+    name: "readStringFast"
     arguments: {}
     locals: {}
   client!fd.l (I)V:
