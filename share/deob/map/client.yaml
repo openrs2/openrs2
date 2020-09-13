@@ -1638,8 +1638,8 @@ fields:
     owner: "Static2"
     name: "aClass58_26"
   client!de.r [[B:
-    owner: "Static2"
-    name: "aByteArrayArray9"
+    owner: "BufferPool"
+    name: "smallBuffers"
   client!de.s Lclient!jf;:
     owner: "GameShell"
     name: "timer"
@@ -1839,8 +1839,8 @@ fields:
     owner: "Class4_Sub1_Sub6"
     name: "anInt1160"
   client!dn.Z I:
-    owner: "Static2"
-    name: "anInt1161"
+    owner: "BufferPool"
+    name: "largeBufferCount"
   client!dn.ab Lclient!wg;:
     owner: "Static2"
     name: "aClass4_Sub3_Sub22_1"
@@ -2100,8 +2100,8 @@ fields:
     owner: "Class47"
     name: "aClass4_Sub3_Sub14_Sub1_1"
   client!ei.B I:
-    owner: "Static2"
-    name: "anInt1266"
+    owner: "BufferPool"
+    name: "smallBufferCount"
   client!ei.D Lclient!ic;:
     owner: "Static2"
     name: "aClass84_5"
@@ -2202,8 +2202,8 @@ fields:
     owner: "GameShell"
     name: "isJava5OrLater"
   client!el.c [[B:
-    owner: "Static2"
-    name: "aByteArrayArray11"
+    owner: "BufferPool"
+    name: "largeBuffers"
   client!el.e [I:
     owner: "Static2"
     name: "anIntArray99"
@@ -6408,8 +6408,8 @@ fields:
     owner: "Class4_Sub17"
     name: "anInt3462"
   client!nc.b I:
-    owner: "Static5"
-    name: "anInt3472"
+    owner: "BufferPool"
+    name: "mediumBufferCount"
   client!nc.d Z:
     owner: "Static5"
     name: "aBoolean248"
@@ -7578,8 +7578,8 @@ fields:
     owner: "Static5"
     name: "anInt4163"
   client!pj.d [[B:
-    owner: "Static5"
-    name: "aByteArrayArray30"
+    owner: "BufferPool"
+    name: "mediumBuffers"
   client!pj.f I:
     owner: "Static5"
     name: "anInt4165"
@@ -40158,14 +40158,14 @@ methods:
     locals:
       14: "local14"
   client!sm.a (II)[B:
-    owner: "Static32"
-    name: "method4028"
+    owner: "BufferPool"
+    name: "allocate"
     arguments:
-      1: "arg0"
+      1: "size"
     locals:
-      22: "local22"
-      50: "local50"
-      72: "local72"
+      22: "bytes"
+      50: "bytes"
+      72: "bytes"
   client!sm.a (IIIIIIII)V:
     owner: "Static32"
     name: "method4031"
