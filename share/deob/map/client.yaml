@@ -5061,8 +5061,8 @@ fields:
     owner: "ScriptRunner"
     name: "intLocals"
   client!lb.k Lclient!f;:
-    owner: "Static4"
-    name: "aClass53_Sub1_Sub1_2"
+    owner: "Player"
+    name: "self"
   client!lb.l Lclient!r;:
     owner: "Class108"
     name: "aClass20_Sub2_2"
