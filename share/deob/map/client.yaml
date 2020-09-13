@@ -72,7 +72,7 @@ classes:
   client!fk: "BufferedImageFrameBuffer"
   client!fl: "Class4_Sub1_Sub10"
   client!fm: "Cache"
-  client!fn: "Class4_Sub3_Sub8"
+  client!fn: "InvType"
   client!fo: "Js5Index"
   client!g: "Class4_Sub3_Sub9"
   client!ga: "Js5ResourceProvider"
@@ -157,7 +157,7 @@ classes:
   client!n: "Class56_Sub2"
   client!na: "Class53_Sub4_Sub1"
   client!nb: "Class4_Sub17"
-  client!nd: "Class4_Sub18"
+  client!nd: "Inv"
   client!ne: "Class20_Sub3"
   client!nf: "Mouse"
   client!ng: "Js5Request"
@@ -2268,8 +2268,8 @@ fields:
     owner: "Class50"
     name: "aBoolean79"
   client!em.p Lclient!dj;:
-    owner: "Static2"
-    name: "aClass40_6"
+    owner: "InvTypeList"
+    name: "types"
   client!em.q I:
     owner: "Class50"
     name: "anInt1326"
@@ -2712,8 +2712,8 @@ fields:
     owner: "Cache"
     name: "archive"
   client!fn.y I:
-    owner: "Class4_Sub3_Sub8"
-    name: "anInt1963"
+    owner: "InvType"
+    name: "size"
   client!fo.a [I:
     owner: "Js5Index"
     name: "groupCapacities"
@@ -6441,11 +6441,11 @@ fields:
     owner: "GameShell"
     name: "partialRedraws"
   client!nd.w [I:
-    owner: "Class4_Sub18"
-    name: "anIntArray385"
+    owner: "Inv"
+    name: "types"
   client!nd.x [I:
-    owner: "Class4_Sub18"
-    name: "anIntArray386"
+    owner: "Inv"
+    name: "counts"
   client!nd.y Lclient!d;:
     owner: "Static5"
     name: "aClass34_1"
@@ -6750,8 +6750,8 @@ fields:
     owner: "ObjTypeList"
     name: "types"
   client!nj.i Lclient!ic;:
-    owner: "Static5"
-    name: "aClass84_17"
+    owner: "Inv"
+    name: "inventories"
   client!nj.j Lclient!wa;:
     owner: "Static5"
     name: "aClass4_Sub10_Sub1_2"
@@ -9918,8 +9918,8 @@ fields:
     owner: "Static6"
     name: "anInt5189"
   client!tl.c Lclient!fh;:
-    owner: "Static6"
-    name: "aClass58_95"
+    owner: "InvTypeList"
+    name: "archive"
   client!tm.A [I:
     owner: "Static6"
     name: "anIntArray570"
@@ -12196,13 +12196,13 @@ methods:
       109: "local109"
       124: "local124"
   client!ac.a (IIZ)I:
-    owner: "Static8"
-    name: "method70"
+    owner: "Inv"
+    name: "getItemType"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "id"
+      1: "slot"
     locals:
-      14: "local14"
+      14: "inv"
   client!ac.c (II)I:
     owner: "Static8"
     name: "method71"
@@ -13106,14 +13106,14 @@ methods:
       12: "local12"
       15: "local15"
   client!be.a (II)Lclient!fn;:
-    owner: "Static9"
-    name: "method264"
+    owner: "InvTypeList"
+    name: "get"
     arguments:
-      0: "arg0"
+      0: "id"
     locals:
-      18: "local18"
-      29: "local29"
-      33: "local33"
+      18: "type"
+      29: "bytes"
+      33: "newType"
   client!be.a (Lclient!fh;I)V:
     owner: "Static9"
     name: "method262"
@@ -15572,8 +15572,8 @@ methods:
       45: "local45"
       48: "local48"
   client!co.a (Z)V:
-    owner: "Static12"
-    name: "method715"
+    owner: "Inv"
+    name: "deleteAll"
     arguments: {}
     locals: {}
   client!co.a (ZI)Lclient!jl;:
@@ -17969,15 +17969,15 @@ methods:
       4: "arg3"
     locals: {}
   client!fc.a (IBI)I:
-    owner: "Static15"
-    name: "method1226"
+    owner: "Inv"
+    name: "getSlotTotal"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      2: "id"
+      0: "type"
     locals:
-      12: "local12"
-      35: "local35"
-      37: "local37"
+      12: "inv"
+      35: "total"
+      37: "i"
   client!fc.a (II)V:
     owner: "Static15"
     name: "method1224"
@@ -19557,12 +19557,12 @@ methods:
       26: "bytes"
       30: "newType"
   client!fn.a (ILclient!fd;)V:
-    owner: "Class4_Sub3_Sub8"
-    name: "method1499"
+    owner: "InvType"
+    name: "decode"
     arguments:
-      1: "arg0"
+      1: "buffer"
     locals:
-      8: "local8"
+      8: "code"
   client!fn.a (JIILjava/lang/String;Ljava/lang/String;SIB)V:
     owner: "Static16"
     name: "method1497"
@@ -19576,11 +19576,11 @@ methods:
       6: "arg6"
     locals: {}
   client!fn.a (Lclient!fd;II)V:
-    owner: "Class4_Sub3_Sub8"
-    name: "method1494"
+    owner: "InvType"
+    name: "decode"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "buffer"
+      1: "code"
     locals: {}
   client!fn.a (Z)V:
     owner: "Static16"
@@ -24127,17 +24127,17 @@ methods:
     arguments: {}
     locals: {}
   client!je.a (II)V:
-    owner: "Static21"
-    name: "method2010"
+    owner: "Inv"
+    name: "delete"
     arguments:
-      1: "arg0"
+      1: "id"
     locals:
-      16: "local16"
+      16: "inventory"
   client!je.a (ILclient!fh;)V:
-    owner: "Static21"
-    name: "method2011"
+    owner: "InvTypeList"
+    name: "init"
     arguments:
-      1: "arg0"
+      1: "archive"
     locals: {}
   client!je.a (IZLclient!wf;I)V:
     owner: "Static21"
@@ -24555,13 +24555,13 @@ methods:
       5989: "local5989"
       6012: "local6012"
   client!jf.b (III)I:
-    owner: "Static21"
-    name: "method3285"
+    owner: "Inv"
+    name: "getItemCount"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "id"
+      1: "slot"
     locals:
-      10: "local10"
+      10: "inv"
   client!jf.c (I)V:
     owner: "Timer"
     name: "reset"
@@ -31879,19 +31879,19 @@ methods:
     arguments: {}
     locals: {}
   client!nf.a (IIIII)V:
-    owner: "Static26"
-    name: "method2972"
+    owner: "Inv"
+    name: "set"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      3: "arg2"
-      4: "arg3"
+      1: "id"
+      2: "slot"
+      3: "type"
+      4: "count"
     locals:
-      12: "local12"
-      41: "local41"
-      46: "local46"
-      48: "local48"
-      74: "local74"
+      12: "inv"
+      41: "newTypes"
+      46: "newCounts"
+      48: "i"
+      74: "i"
   client!nf.a (IZ)Lclient!pa;:
     owner: "Static26"
     name: "method2971"
@@ -33637,18 +33637,18 @@ methods:
     locals:
       6: "local6"
   client!om.a (IBIZ)I:
-    owner: "Static28"
-    name: "method3248"
+    owner: "Inv"
+    name: "getTotalParam"
     arguments:
-      0: "arg0"
-      2: "arg1"
-      3: "arg2"
+      2: "id"
+      0: "param"
+      3: "stack"
     locals:
-      12: "local12"
-      19: "local19"
-      26: "local26"
-      61: "local61"
-      72: "local72"
+      12: "inv"
+      19: "total"
+      26: "i"
+      61: "type"
+      72: "node"
   client!om.a (II)V:
     owner: "Static28"
     name: "method3253"
@@ -40490,14 +40490,14 @@ methods:
     arguments: {}
     locals: {}
   client!ta.a (IB)I:
-    owner: "Static33"
-    name: "method4088"
+    owner: "Inv"
+    name: "getFreeSpace"
     arguments:
-      0: "arg0"
+      0: "id"
     locals:
-      18: "local18"
-      32: "local32"
-      34: "local34"
+      18: "inv"
+      32: "freeSpace"
+      34: "i"
   client!ta.a (II)I:
     owner: "Static33"
     name: "method4090"
@@ -43474,13 +43474,13 @@ methods:
       219: "local219"
       229: "local229"
   client!va.b (II)V:
-    owner: "Static36"
-    name: "method4407"
+    owner: "Inv"
+    name: "clear"
     arguments:
-      1: "arg0"
+      1: "id"
     locals:
-      8: "local8"
-      24: "local24"
+      8: "inv"
+      24: "i"
   client!vb.<init> ()V:
     owner: "Class4_Sub1_Sub37"
     name: "<init>"
