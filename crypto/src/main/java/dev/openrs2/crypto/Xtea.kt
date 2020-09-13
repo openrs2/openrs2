@@ -8,10 +8,10 @@ private const val BLOCK_SIZE = 8
 private const val BLOCK_SIZE_MASK = BLOCK_SIZE - 1
 
 public class XteaKey(
-    private val k0: Int,
-    private val k1: Int,
-    private val k2: Int,
-    private val k3: Int
+    public val k0: Int,
+    public val k1: Int,
+    public val k2: Int,
+    public val k3: Int
 ) {
     public val isZero: Boolean
         get() = k0 == 0 && k1 == 0 && k2 == 0 && k3 == 0
