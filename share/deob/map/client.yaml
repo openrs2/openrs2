@@ -69,7 +69,7 @@ classes:
   client!fh: "Js5"
   client!fi: "Class4_Sub1_Sub8"
   client!fj: "Class4_Sub1_Sub9"
-  client!fk: "Class59_Sub1"
+  client!fk: "BufferedImageFrameBuffer"
   client!fl: "Class4_Sub1_Sub10"
   client!fm: "Cache"
   client!fn: "Class4_Sub3_Sub8"
@@ -169,7 +169,7 @@ classes:
   client!no: "Class4_Sub1_Sub19"
   client!o: "Class53_Sub5"
   client!oa: "Class4_Sub3_Sub14_Sub2"
-  client!ob: "Class59"
+  client!ob: "FrameBuffer"
   client!oc: "Class53_Sub6"
   client!oe: "Class41_Sub2_Sub1"
   client!of: "Class4_Sub1_Sub20"
@@ -248,7 +248,7 @@ classes:
   client!tg: "Class4_Sub31"
   client!ti: "Class4_Sub1_Sub35"
   client!tj: "Class102"
-  client!tm: "Class59_Sub2"
+  client!tm: "ImageProducerFrameBuffer"
   client!tn: "AbstractWorld"
   client!to: "Class166"
   client!u: "Class167"
@@ -2655,8 +2655,8 @@ fields:
     owner: "Static2"
     name: "anInt1877"
   client!fk.A Ljava/awt/Component;:
-    owner: "Class59_Sub1"
-    name: "aComponent1"
+    owner: "BufferedImageFrameBuffer"
+    name: "component"
   client!fl.S I:
     owner: "Static2"
     name: "anInt1931"
@@ -5016,8 +5016,8 @@ fields:
     owner: "client"
     name: "js5Archive13"
   client!l.w Lclient!ob;:
-    owner: "Static4"
-    name: "aClass59_1"
+    owner: "client"
+    name: "frameBuffer"
   client!l.x Ljava/lang/String;:
     owner: "LocalisedText"
     name: "REMOVEIGNORE2"
@@ -6915,8 +6915,8 @@ fields:
     owner: "GameShell"
     name: "logicTimePointer"
   client!ob.l Ljava/awt/Image;:
-    owner: "Class59"
-    name: "anImage5"
+    owner: "FrameBuffer"
+    name: "image"
   client!ob.n I:
     owner: "Static5"
     name: "anInt5199"
@@ -6924,14 +6924,14 @@ fields:
     owner: "Static5"
     name: "aStringArray34"
   client!ob.p [I:
-    owner: "Class59"
-    name: "anIntArray568"
+    owner: "FrameBuffer"
+    name: "pixels"
   client!ob.q I:
-    owner: "Class59"
-    name: "anInt5200"
+    owner: "FrameBuffer"
+    name: "height"
   client!ob.r I:
-    owner: "Class59"
-    name: "anInt5201"
+    owner: "FrameBuffer"
+    name: "width"
   client!ob.u [I:
     owner: "Static5"
     name: "anIntArray569"
@@ -9924,8 +9924,8 @@ fields:
     owner: "Static6"
     name: "anIntArray570"
   client!tm.E Ljava/awt/image/ColorModel;:
-    owner: "Class59_Sub2"
-    name: "aColorModel1"
+    owner: "ImageProducerFrameBuffer"
+    name: "model"
   client!tm.G I:
     owner: "Static6"
     name: "anInt5211"
@@ -9933,8 +9933,8 @@ fields:
     owner: "Static6"
     name: "anInt5214"
   client!tm.N Ljava/awt/image/ImageConsumer;:
-    owner: "Class59_Sub2"
-    name: "anImageConsumer1"
+    owner: "ImageProducerFrameBuffer"
+    name: "consumer"
   client!tm.O [I:
     owner: "Static7"
     name: "anIntArray571"
@@ -10459,13 +10459,13 @@ fields:
     name: "anInt5606"
   client!uj.E I:
     owner: "Class4_Sub3_Sub14"
-    name: "anInt5608"
+    name: "height"
   client!uj.F [J:
     owner: "Static7"
     name: "aLongArray54"
   client!uj.G I:
     owner: "Class4_Sub3_Sub14"
-    name: "anInt5609"
+    name: "width"
   client!uj.H I:
     owner: "Static7"
     name: "anInt5610"
@@ -11017,7 +11017,7 @@ fields:
     name: "anIntArray644"
   client!vn.M [I:
     owner: "Class4_Sub3_Sub14_Sub1"
-    name: "anIntArray241"
+    name: "pixels"
   client!w.A I:
     owner: "Static7"
     name: "anInt5680"
@@ -15405,13 +15405,13 @@ methods:
       188: "local188"
       267: "local267"
       305: "local305"
-      364: "local364"
-      372: "local372"
-      384: "local384"
-      391: "local391"
-      393: "local393"
-      429: "local429"
-      436: "local436"
+      364: "graphics"
+      372: "i"
+      384: "ex"
+      391: "graphics"
+      393: "i"
+      429: "ex"
+      436: "i"
   client!client.f (I)V:
     owner: "client"
     name: "method683"
@@ -19309,33 +19309,33 @@ methods:
       65: "local65"
       101: "local101"
   client!fk.a (ILjava/awt/Graphics;BI)V:
-    owner: "Class59_Sub1"
-    name: "method4238"
+    owner: "BufferedImageFrameBuffer"
+    name: "draw"
     arguments:
-      1: "arg0"
+      1: "graphics"
     locals: {}
   client!fk.a (Ljava/awt/Component;IIB)V:
-    owner: "Class59_Sub1"
-    name: "method4242"
+    owner: "BufferedImageFrameBuffer"
+    name: "init"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "component"
+      1: "width"
+      2: "height"
     locals:
-      28: "local28"
-      36: "local36"
-      46: "local46"
+      28: "buffer"
+      36: "model"
+      46: "raster"
   client!fk.a (ZIIILjava/awt/Graphics;I)V:
-    owner: "Class59_Sub1"
-    name: "method4240"
+    owner: "BufferedImageFrameBuffer"
+    name: "draw"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      3: "arg2"
-      4: "arg3"
-      5: "arg4"
+      4: "graphics"
+      5: "x"
+      2: "y"
+      1: "width"
+      3: "height"
     locals:
-      6: "local6"
+      6: "clip"
   client!fl.<init> ()V:
     owner: "Class4_Sub1_Sub10"
     name: "<init>"
@@ -25315,7 +25315,7 @@ methods:
       41: "local41"
   client!jn.c ()[I:
     owner: "Class4_Sub3_Sub14_Sub1_Sub1"
-    name: "method2170"
+    name: "getPixels"
     arguments: {}
     locals: {}
   client!jn.c (II)V:
@@ -29145,7 +29145,7 @@ methods:
       83: "local83"
       110: "local110"
       208: "local208"
-      268: "local268"
+      268: "graphics"
       276: "local276"
       299: "local299"
       490: "local490"
@@ -29487,17 +29487,17 @@ methods:
     locals:
       8: "local8"
   client!mi.a (BIILjava/awt/Component;)Lclient!ob;:
-    owner: "Static25"
-    name: "method2727"
+    owner: "FrameBuffer"
+    name: "create"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      3: "arg2"
+      3: "component"
+      2: "width"
+      1: "height"
     locals:
-      12: "local12"
-      16: "local16"
-      25: "local25"
-      29: "local29"
+      12: "clazz"
+      16: "buffer"
+      25: "ex"
+      29: "buffer"
   client!mi.a (III)J:
     owner: "Static25"
     name: "method2726"
@@ -32826,10 +32826,10 @@ methods:
       1: "arg0"
     locals: {}
   client!ob.a (ILjava/awt/Graphics;BI)V:
-    owner: "Class59"
-    name: "method4238"
+    owner: "FrameBuffer"
+    name: "draw"
     arguments:
-      1: "arg0"
+      1: "graphics"
     locals: {}
   client!ob.a (Lclient!ic;Lclient!oh;B)Lclient!ih;:
     owner: "Static27"
@@ -32841,26 +32841,26 @@ methods:
       27: "local27"
       39: "local39"
   client!ob.a (Ljava/awt/Component;IIB)V:
-    owner: "Class59"
-    name: "method4242"
+    owner: "FrameBuffer"
+    name: "init"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "component"
+      1: "width"
+      2: "height"
     locals: {}
   client!ob.a (ZIIILjava/awt/Graphics;I)V:
-    owner: "Class59"
-    name: "method4240"
+    owner: "FrameBuffer"
+    name: "draw"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      3: "arg2"
-      4: "arg3"
-      5: "arg4"
+      4: "graphics"
+      5: "x"
+      2: "y"
+      1: "width"
+      3: "height"
     locals: {}
   client!ob.b (I)V:
-    owner: "Class59"
-    name: "method4244"
+    owner: "FrameBuffer"
+    name: "makeTarget"
     arguments: {}
     locals: {}
   client!oc.<init> (IIIIIIIIIII)V:
@@ -41933,18 +41933,18 @@ methods:
       25: "local25"
       37: "local37"
   client!tm.a (B)V:
-    owner: "Class59_Sub2"
-    name: "method4246"
+    owner: "ImageProducerFrameBuffer"
+    name: "setPixels"
     arguments: {}
     locals: {}
   client!tm.a (IIBII)V:
-    owner: "Class59_Sub2"
-    name: "method4252"
+    owner: "ImageProducerFrameBuffer"
+    name: "setPixels"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      3: "arg2"
-      4: "arg3"
+      0: "x"
+      3: "y"
+      1: "width"
+      4: "height"
     locals: {}
   client!tm.a (IIBIIIII)V:
     owner: "Static34"
@@ -41991,30 +41991,30 @@ methods:
       874: "local874"
       1005: "local1005"
   client!tm.a (ILjava/awt/Graphics;BI)V:
-    owner: "Class59_Sub2"
-    name: "method4238"
+    owner: "ImageProducerFrameBuffer"
+    name: "draw"
     arguments:
-      1: "arg0"
+      1: "graphics"
     locals: {}
   client!tm.a (Ljava/awt/Component;IIB)V:
-    owner: "Class59_Sub2"
-    name: "method4242"
+    owner: "ImageProducerFrameBuffer"
+    name: "init"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "component"
+      1: "width"
+      2: "height"
     locals: {}
   client!tm.a (ZIIILjava/awt/Graphics;I)V:
-    owner: "Class59_Sub2"
-    name: "method4240"
+    owner: "ImageProducerFrameBuffer"
+    name: "draw"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      3: "arg2"
-      4: "arg3"
-      5: "arg4"
+      4: "graphics"
+      5: "x"
+      2: "y"
+      1: "width"
+      3: "height"
     locals:
-      9: "local9"
+      9: "clip"
   client!tm.a (ZZLclient!wf;)V:
     owner: "Static34"
     name: "method4251"
@@ -42083,13 +42083,13 @@ methods:
       784: "local784"
       790: "local790"
   client!tm.addConsumer (Ljava/awt/image/ImageConsumer;)V:
-    owner: "Class59_Sub2"
+    owner: "ImageProducerFrameBuffer"
     name: "addConsumer"
     arguments:
-      0: "arg0"
+      0: "consumer"
     locals: {}
   client!tm.imageUpdate (Ljava/awt/Image;IIIII)Z:
-    owner: "Class59_Sub2"
+    owner: "ImageProducerFrameBuffer"
     name: "imageUpdate"
     arguments:
       0: "arg0"
@@ -42100,28 +42100,28 @@ methods:
       5: "arg5"
     locals: {}
   client!tm.isConsumer (Ljava/awt/image/ImageConsumer;)Z:
-    owner: "Class59_Sub2"
+    owner: "ImageProducerFrameBuffer"
     name: "isConsumer"
     arguments:
-      0: "arg0"
+      0: "consumer"
     locals: {}
   client!tm.removeConsumer (Ljava/awt/image/ImageConsumer;)V:
-    owner: "Class59_Sub2"
+    owner: "ImageProducerFrameBuffer"
     name: "removeConsumer"
     arguments:
-      0: "arg0"
+      0: "consumer"
     locals: {}
   client!tm.requestTopDownLeftRightResend (Ljava/awt/image/ImageConsumer;)V:
-    owner: "Class59_Sub2"
+    owner: "ImageProducerFrameBuffer"
     name: "requestTopDownLeftRightResend"
     arguments:
-      0: "arg0"
+      0: "consumer"
     locals: {}
   client!tm.startProduction (Ljava/awt/image/ImageConsumer;)V:
-    owner: "Class59_Sub2"
+    owner: "ImageProducerFrameBuffer"
     name: "startProduction"
     arguments:
-      0: "arg0"
+      0: "consumer"
     locals: {}
   client!tn.a (B)Z:
     owner: "AbstractWorld"
@@ -45018,7 +45018,7 @@ methods:
       85: "local85"
   client!vn.c ()[I:
     owner: "Class4_Sub3_Sub14_Sub1"
-    name: "method2170"
+    name: "getPixels"
     arguments: {}
     locals:
       6: "local6"
@@ -45055,7 +45055,7 @@ methods:
       25: "local25"
   client!vn.e ()V:
     owner: "Class4_Sub3_Sub14_Sub1"
-    name: "method2178"
+    name: "makeTarget"
     arguments: {}
     locals: {}
   client!vn.e (I)V:
