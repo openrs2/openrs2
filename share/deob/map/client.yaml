@@ -159,7 +159,7 @@ classes:
   client!nb: "Class4_Sub17"
   client!nd: "Class4_Sub18"
   client!ne: "Class20_Sub3"
-  client!nf: "Class124"
+  client!nf: "Mouse"
   client!ng: "Js5Request"
   client!nh: "Class4_Sub19"
   client!ni: "Node"
@@ -240,7 +240,7 @@ classes:
   client!so: "Class4_Sub3_Sub18"
   client!t: "Class160"
   client!ta: "Class4_Sub30"
-  client!tb: "Class161"
+  client!tb: "Keyboard"
   client!tc: "Class4_Sub1_Sub34"
   client!td: "ObjType"
   client!te: "Class4_Sub3_Sub19"
@@ -936,8 +936,8 @@ fields:
     owner: "Static1"
     name: "anInt379"
   client!bl.fb J:
-    owner: "Static1"
-    name: "aLong20"
+    owner: "Mouse"
+    name: "clickTime"
   client!bm.a Lclient!kf;:
     owner: "Bzip2Decompressor"
     name: "state"
@@ -1770,14 +1770,14 @@ fields:
     owner: "LruHashTable"
     name: "aClass4_Sub3_18"
   client!dj.i [Z:
-    owner: "Static2"
-    name: "aBooleanArray4"
+    owner: "Keyboard"
+    name: "pressedKeys"
   client!dj.j [[I:
     owner: "Static2"
     name: "anIntArrayArray10"
   client!dj.m I:
-    owner: "Static2"
-    name: "anInt1042"
+    owner: "Keyboard"
+    name: "keyCode"
   client!dj.o Lclient!uk;:
     owner: "LruHashTable"
     name: "queue"
@@ -1971,8 +1971,8 @@ fields:
     owner: "Static2"
     name: "aBoolean67"
   client!ed.z Lclient!nf;:
-    owner: "Static2"
-    name: "aClass124_1"
+    owner: "Mouse"
+    name: "instance"
   client!ee.a Lclient!ja;:
     owner: "client"
     name: "js5CacheQueue"
@@ -2193,8 +2193,8 @@ fields:
     owner: "Class4_Sub9"
     name: "anInt1285"
   client!ek.b I:
-    owner: "Static2"
-    name: "anInt1306"
+    owner: "Mouse"
+    name: "awtPressedButton"
   client!ek.c Z:
     owner: "Static2"
     name: "aBoolean76"
@@ -2595,8 +2595,8 @@ fields:
     owner: "Preferences"
     name: "sentToServer"
   client!fh.E I:
-    owner: "Static2"
-    name: "anInt1797"
+    owner: "Mouse"
+    name: "clickX"
   client!fh.G Lclient!ga;:
     owner: "Js5"
     name: "provider"
@@ -2619,8 +2619,8 @@ fields:
     owner: "Class4_Sub1_Sub8"
     name: "anInt1831"
   client!fi.V [I:
-    owner: "Static2"
-    name: "anIntArray125"
+    owner: "Keyboard"
+    name: "typedCodeQueue"
   client!fi.cb I:
     owner: "Class4_Sub1_Sub8"
     name: "anInt1838"
@@ -2805,8 +2805,8 @@ fields:
     owner: "Class4_Sub3_Sub9"
     name: "aString109"
   client!g.y I:
-    owner: "Static2"
-    name: "anInt1991"
+    owner: "Mouse"
+    name: "pressedButton"
   client!ga.a [I:
     owner: "Static2"
     name: "anIntArray651"
@@ -3996,8 +3996,8 @@ fields:
     owner: "Class89"
     name: "aBoolean167"
   client!ik.M I:
-    owner: "Static3"
-    name: "anInt2426"
+    owner: "Mouse"
+    name: "awtClickY"
   client!ik.N I:
     owner: "Class89"
     name: "anInt2427"
@@ -5679,8 +5679,8 @@ fields:
     owner: "ParamTypeList"
     name: "archive"
   client!mf.f I:
-    owner: "Static4"
-    name: "anInt3314"
+    owner: "Keyboard"
+    name: "eventQueueReaderIndex"
   client!mf.g I:
     owner: "Preferences"
     name: "soundEffectsVolume"
@@ -7599,14 +7599,14 @@ fields:
     owner: "Static5"
     name: "anIntArray441"
   client!pj.l [C:
-    owner: "Static5"
-    name: "aCharArray2"
+    owner: "Keyboard"
+    name: "typedCharQueue"
   client!pj.m [[B:
     owner: "Static5"
     name: "aByteArrayArray31"
   client!pk.S [I:
-    owner: "Static5"
-    name: "anIntArray445"
+    owner: "Keyboard"
+    name: "CODE_MAP"
   client!pk.U Lclient!fh;:
     owner: "ObjTypeList"
     name: "objArchive"
@@ -7656,8 +7656,8 @@ fields:
     owner: "Static5"
     name: "aRandom1"
   client!pn.g I:
-    owner: "Static5"
-    name: "anInt4214"
+    owner: "Mouse"
+    name: "idleLoops"
   client!pn.h I:
     owner: "Static5"
     name: "anInt4215"
@@ -8001,8 +8001,8 @@ fields:
     owner: "Class4_Sub3_Sub16"
     name: "anInt4278"
   client!qd.G I:
-    owner: "Static5"
-    name: "anInt4279"
+    owner: "Keyboard"
+    name: "idleLoops"
   client!qd.I I:
     owner: "Static5"
     name: "anInt4281"
@@ -8073,8 +8073,8 @@ fields:
     owner: "Static5"
     name: "anInt4303"
   client!qf.n I:
-    owner: "Static5"
-    name: "anInt4304"
+    owner: "Keyboard"
+    name: "typedQueueReaderIndex"
   client!qg.a Ljava/lang/String;:
     owner: "LocalisedText"
     name: "MAINLOAD90B"
@@ -8628,8 +8628,8 @@ fields:
     owner: "Static6"
     name: "anInt4555"
   client!rh.lb I:
-    owner: "Static6"
-    name: "anInt4556"
+    owner: "Mouse"
+    name: "awtY"
   client!rh.mb I:
     owner: "Class4_Sub1_Sub27"
     name: "anInt4557"
@@ -8694,8 +8694,8 @@ fields:
     owner: "Static6"
     name: "aClass4_Sub3_Sub14Array11"
   client!ri.Y I:
-    owner: "Static6"
-    name: "anInt4595"
+    owner: "Keyboard"
+    name: "eventQueueWriterIndex"
   client!ri.Z [I:
     owner: "Static6"
     name: "anIntArray489"
@@ -9159,8 +9159,8 @@ fields:
     owner: "Static6"
     name: "aClass185_14"
   client!sg.c I:
-    owner: "Static6"
-    name: "anInt4802"
+    owner: "Mouse"
+    name: "clickButton"
   client!sg.d Lclient!fh;:
     owner: "Static6"
     name: "aClass58_91"
@@ -9243,8 +9243,8 @@ fields:
     owner: "Static6"
     name: "anIntArray528"
   client!sj.C I:
-    owner: "Static6"
-    name: "anInt4861"
+    owner: "Keyboard"
+    name: "typedQueueWriterIndex"
   client!sj.D [I:
     owner: "Class4_Sub29"
     name: "anIntArray529"
@@ -9456,8 +9456,8 @@ fields:
     owner: "Class160"
     name: "anInt4976"
   client!t.d I:
-    owner: "Static6"
-    name: "anInt4977"
+    owner: "Mouse"
+    name: "awtX"
   client!t.e I:
     owner: "Static6"
     name: "anInt4978"
@@ -9579,8 +9579,8 @@ fields:
     owner: "ObjType"
     name: "anInt5071"
   client!td.I C:
-    owner: "Static6"
-    name: "aChar4"
+    owner: "Keyboard"
+    name: "keyChar"
   client!td.J I:
     owner: "ObjType"
     name: "cursor1"
@@ -10032,8 +10032,8 @@ fields:
     owner: "Static7"
     name: "anInt5230"
   client!u.d Lclient!tb;:
-    owner: "Static7"
-    name: "aClass161_1"
+    owner: "Keyboard"
+    name: "instance"
   client!u.e I:
     owner: "Static7"
     name: "anInt5231"
@@ -10248,8 +10248,8 @@ fields:
     owner: "Static7"
     name: "anIntArray595"
   client!uc.U [I:
-    owner: "Static7"
-    name: "anIntArray596"
+    owner: "Keyboard"
+    name: "eventQueue"
   client!uc.V [I:
     owner: "Static7"
     name: "anIntArray597"
@@ -10269,11 +10269,11 @@ fields:
     owner: "Static7"
     name: "anIntArray598"
   client!uc.cb I:
-    owner: "Static7"
-    name: "anInt5311"
+    owner: "Keyboard"
+    name: "prevTypedQueueWriterIndex"
   client!uc.db I:
-    owner: "Static7"
-    name: "anInt5312"
+    owner: "Mouse"
+    name: "clickY"
   client!ud.a I:
     owner: "Static7"
     name: "anInt5319"
@@ -10482,8 +10482,8 @@ fields:
     owner: "Class4_Sub3_Sub14"
     name: "anInt5602"
   client!uk.b I:
-    owner: "Static7"
-    name: "anInt5357"
+    owner: "Mouse"
+    name: "x"
   client!uk.h I:
     owner: "Static7"
     name: "anInt5363"
@@ -10974,8 +10974,8 @@ fields:
     owner: "Class182"
     name: "anInt5631"
   client!vl.l J:
-    owner: "Static7"
-    name: "aLong193"
+    owner: "Mouse"
+    name: "awtClickTime"
   client!vl.m Lclient!vc;:
     owner: "Class182"
     name: "aClass53_9"
@@ -11034,8 +11034,8 @@ fields:
     owner: "Static7"
     name: "anInt5678"
   client!w.z I:
-    owner: "Static7"
-    name: "anInt5679"
+    owner: "Mouse"
+    name: "awtClickButton"
   client!wa.Ob Lclient!m;:
     owner: "Packet"
     name: "cipher"
@@ -11823,8 +11823,8 @@ fields:
     owner: "Class187"
     name: "anInt6037"
   client!wj.m I:
-    owner: "Static7"
-    name: "anInt6038"
+    owner: "Mouse"
+    name: "y"
   client!wj.o F:
     owner: "Class187"
     name: "aFloat152"
@@ -11850,8 +11850,8 @@ fields:
     owner: "Static7"
     name: "aCalendar2"
   client!wk.e I:
-    owner: "Static7"
-    name: "anInt6049"
+    owner: "Mouse"
+    name: "awtClickX"
   client!wk.f I:
     owner: "Static7"
     name: "anInt6050"
@@ -14991,14 +14991,14 @@ methods:
     arguments: {}
     locals: {}
   client!ci.a (BLjava/awt/Component;)V:
-    owner: "Static11"
-    name: "method588"
+    owner: "Keyboard"
+    name: "stop"
     arguments:
-      1: "arg0"
+      1: "component"
     locals: {}
   client!ci.a (I)V:
-    owner: "Static11"
-    name: "method587"
+    owner: "Mouse"
+    name: "loop"
     arguments: {}
     locals: {}
   client!ci.a (IIIILclient!vc;IJIIII)Z:
@@ -15025,8 +15025,8 @@ methods:
       2: "arg1"
     locals: {}
   client!ci.a (Z)V:
-    owner: "Static11"
-    name: "method589"
+    owner: "Keyboard"
+    name: "quit"
     arguments: {}
     locals: {}
   client!cj.a (II)I:
@@ -16187,10 +16187,10 @@ methods:
     arguments: {}
     locals: {}
   client!dj.a (BLjava/awt/Component;)V:
-    owner: "Static13"
-    name: "method883"
+    owner: "Mouse"
+    name: "start"
     arguments:
-      1: "arg0"
+      1: "component"
     locals: {}
   client!dj.a (I)V:
     owner: "NpcTypeList"
@@ -16228,10 +16228,10 @@ methods:
       15: "first"
       31: "second"
   client!dj.a (Ljava/awt/Component;I)V:
-    owner: "Static13"
-    name: "method891"
+    owner: "Mouse"
+    name: "stop"
     arguments:
-      0: "arg0"
+      0: "component"
     locals: {}
   client!dj.c (I)Lclient!ni;:
     owner: "LruHashTable"
@@ -19230,8 +19230,8 @@ methods:
       23: "local23"
       34: "local34"
   client!fi.h (I)V:
-    owner: "Static15"
-    name: "method1402"
+    owner: "Keyboard"
+    name: "init"
     arguments: {}
     locals: {}
   client!fj.<init> ()V:
@@ -22565,8 +22565,8 @@ methods:
     arguments: {}
     locals: {}
   client!hm.e (I)I:
-    owner: "Static19"
-    name: "method1794"
+    owner: "Keyboard"
+    name: "getIdleLoops"
     arguments: {}
     locals: {}
   client!hn.a (IIIIII)V:
@@ -23630,13 +23630,13 @@ methods:
       3: "arg3"
     locals: {}
   client!im.a (ILjava/awt/Component;)V:
-    owner: "Static20"
-    name: "method1926"
+    owner: "Keyboard"
+    name: "start"
     arguments:
-      1: "arg0"
+      1: "component"
     locals:
-      1: "local1"
-      20: "local20"
+      1: "setFocusTraversalKeysEnabled"
+      20: "ex"
   client!im.b (I)V:
     owner: "Static20"
     name: "method1932"
@@ -26635,8 +26635,8 @@ methods:
     arguments: {}
     locals: {}
   client!kl.f (B)Z:
-    owner: "Static22"
-    name: "method2361"
+    owner: "Keyboard"
+    name: "nextKey"
     arguments: {}
     locals: {}
   client!kl.f (I)V:
@@ -31902,61 +31902,61 @@ methods:
       20: "local20"
       24: "local24"
   client!nf.focusGained (Ljava/awt/event/FocusEvent;)V:
-    owner: "Class124"
+    owner: "Mouse"
     name: "focusGained"
     arguments:
-      0: "arg0"
+      0: "event"
     locals: {}
   client!nf.focusLost (Ljava/awt/event/FocusEvent;)V:
-    owner: "Class124"
+    owner: "Mouse"
     name: "focusLost"
     arguments:
-      0: "arg0"
+      0: "event"
     locals: {}
   client!nf.mouseClicked (Ljava/awt/event/MouseEvent;)V:
-    owner: "Class124"
+    owner: "Mouse"
     name: "mouseClicked"
     arguments:
-      0: "arg0"
+      0: "event"
     locals: {}
   client!nf.mouseDragged (Ljava/awt/event/MouseEvent;)V:
-    owner: "Class124"
+    owner: "Mouse"
     name: "mouseDragged"
     arguments:
-      0: "arg0"
+      0: "event"
     locals: {}
   client!nf.mouseEntered (Ljava/awt/event/MouseEvent;)V:
-    owner: "Class124"
+    owner: "Mouse"
     name: "mouseEntered"
     arguments:
-      0: "arg0"
+      0: "event"
     locals: {}
   client!nf.mouseExited (Ljava/awt/event/MouseEvent;)V:
-    owner: "Class124"
+    owner: "Mouse"
     name: "mouseExited"
     arguments:
-      0: "arg0"
+      0: "event"
     locals: {}
   client!nf.mouseMoved (Ljava/awt/event/MouseEvent;)V:
-    owner: "Class124"
+    owner: "Mouse"
     name: "mouseMoved"
     arguments:
-      0: "arg0"
+      0: "event"
     locals: {}
   client!nf.mousePressed (Ljava/awt/event/MouseEvent;)V:
-    owner: "Class124"
+    owner: "Mouse"
     name: "mousePressed"
     arguments:
-      0: "arg0"
+      0: "event"
     locals:
-      32: "local32"
+      32: "modifiers"
   client!nf.mouseReleased (Ljava/awt/event/MouseEvent;)V:
-    owner: "Class124"
+    owner: "Mouse"
     name: "mouseReleased"
     arguments:
-      0: "arg0"
+      0: "event"
     locals:
-      9: "local9"
+      9: "modifiers"
   client!ng.a (IIIIIII)I:
     owner: "Static26"
     name: "method4356"
@@ -36138,12 +36138,12 @@ methods:
       6: "arg6"
     locals: {}
   client!qf.a (I)V:
-    owner: "Static30"
-    name: "method3547"
+    owner: "Keyboard"
+    name: "loop"
     arguments: {}
     locals:
-      25: "local25"
-      49: "local49"
+      25: "event"
+      49: "i"
   client!qf.a (Lclient!fd;I)Lclient!jo;:
     owner: "Static30"
     name: "method3549"
@@ -40556,43 +40556,43 @@ methods:
     locals:
       14: "local14"
   client!tb.focusGained (Ljava/awt/event/FocusEvent;)V:
-    owner: "Class161"
+    owner: "Keyboard"
     name: "focusGained"
     arguments:
-      0: "arg0"
+      0: "event"
     locals: {}
   client!tb.focusLost (Ljava/awt/event/FocusEvent;)V:
-    owner: "Class161"
+    owner: "Keyboard"
     name: "focusLost"
     arguments:
-      0: "arg0"
+      0: "event"
     locals: {}
   client!tb.keyPressed (Ljava/awt/event/KeyEvent;)V:
-    owner: "Class161"
+    owner: "Keyboard"
     name: "keyPressed"
     arguments:
-      0: "arg0"
+      0: "event"
     locals:
-      7: "local7"
-      19: "local19"
-      71: "local71"
-      87: "local87"
+      7: "code"
+      19: "code2"
+      71: "index"
+      87: "modifiers"
   client!tb.keyReleased (Ljava/awt/event/KeyEvent;)V:
-    owner: "Class161"
+    owner: "Keyboard"
     name: "keyReleased"
     arguments:
-      0: "arg0"
+      0: "event"
     locals:
-      10: "local10"
-      25: "local25"
+      10: "code"
+      25: "code2"
   client!tb.keyTyped (Ljava/awt/event/KeyEvent;)V:
-    owner: "Class161"
+    owner: "Keyboard"
     name: "keyTyped"
     arguments:
-      0: "arg0"
+      0: "event"
     locals:
-      9: "local9"
-      27: "local27"
+      9: "c"
+      27: "index"
   client!tc.<init> ()V:
     owner: "Class4_Sub1_Sub34"
     name: "<init>"
@@ -43663,8 +43663,8 @@ methods:
       32: "local32"
       39: "local39"
   client!ve.a (I)I:
-    owner: "Static36"
-    name: "method4441"
+    owner: "Mouse"
+    name: "getIdleLoops"
     arguments: {}
     locals: {}
   client!ve.a (IIIIIIIII)Z:
@@ -44501,10 +44501,10 @@ methods:
       49: "local49"
       69: "local69"
   client!vm.c (II)V:
-    owner: "Static36"
-    name: "method4553"
+    owner: "Mouse"
+    name: "setIdleLoops"
     arguments:
-      1: "arg0"
+      1: "idleLoops"
     locals: {}
   client!vm.e (B)V:
     owner: "Class4_Sub1_Sub39"
@@ -46224,8 +46224,8 @@ methods:
     arguments: {}
     locals: {}
   client!wl.a (I)V:
-    owner: "Static38"
-    name: "method4794"
+    owner: "Mouse"
+    name: "quit"
     arguments: {}
     locals: {}
   client!wl.a (I[B)V:
