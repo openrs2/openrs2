@@ -2299,7 +2299,7 @@ fields:
     name: "outBuffer"
   client!en.B J:
     owner: "Js5NetQueue"
-    name: "previousTick"
+    name: "previousLoop"
   client!en.C Lclient!eo;:
     owner: "Js5NetQueue"
     name: "socket"
@@ -15377,7 +15377,7 @@ methods:
     locals: {}
   client!client.d (B)V:
     owner: "client"
-    name: "js5NetworkTick"
+    name: "js5NetworkLoop"
     arguments: {}
     locals:
       3: "reconnect"
@@ -17343,7 +17343,7 @@ methods:
       9: "ex"
   client!en.h (I)Z:
     owner: "Js5NetQueue"
-    name: "tick"
+    name: "loop"
     arguments: {}
     locals:
       11: "now"
@@ -29391,7 +29391,7 @@ methods:
     locals: {}
   client!mg.a (Z)V:
     owner: "Js5MasterIndex"
-    name: "tick"
+    name: "loop"
     arguments: {}
     locals:
       12: "i"
@@ -45336,7 +45336,7 @@ methods:
     locals: {}
   client!wb.f (I)V:
     owner: "Js5CachedResourceProvider"
-    name: "tick"
+    name: "loop"
     arguments: {}
     locals:
       31: "done"
