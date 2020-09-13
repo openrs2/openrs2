@@ -266,7 +266,7 @@ classes:
   client!uo: "Class4_Sub3_Sub20"
   client!v: "IntNode"
   client!vb: "Class4_Sub1_Sub37"
-  client!vc: "Class53"
+  client!vc: "Entity"
   client!vd: "Class178"
   client!ve: "Class179"
   client!vf: "Class180"
@@ -43543,17 +43543,17 @@ methods:
     arguments: {}
     locals: {}
   client!vc.a ()Z:
-    owner: "Class53"
+    owner: "Entity"
     name: "method3808"
     arguments: {}
     locals: {}
   client!vc.a (III)Lclient!vc;:
-    owner: "Class53"
+    owner: "Entity"
     name: "method3809"
     arguments: {}
     locals: {}
   client!vc.a (IIIII)V:
-    owner: "Class53"
+    owner: "Entity"
     name: "method3806"
     arguments:
       0: "arg0"
@@ -43563,7 +43563,7 @@ methods:
       4: "arg4"
     locals: {}
   client!vc.a (IIIIIIIIJILclient!ne;)V:
-    owner: "Class53"
+    owner: "Entity"
     name: "method3805"
     arguments:
       0: "arg0"
@@ -43613,7 +43613,7 @@ methods:
       0: "arg0"
     locals: {}
   client!vc.a (Lclient!vc;IIIZ)V:
-    owner: "Class53"
+    owner: "Entity"
     name: "method3807"
     arguments:
       0: "arg0"
@@ -43623,7 +43623,7 @@ methods:
       4: "arg4"
     locals: {}
   client!vc.b ()I:
-    owner: "Class53"
+    owner: "Entity"
     name: "method3813"
     arguments: {}
     locals: {}
