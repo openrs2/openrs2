@@ -45130,7 +45130,7 @@ methods:
     locals: {}
   client!wa.a (I[BII)V:
     owner: "Packet"
-    name: "writeEncryptedBytes"
+    name: "readEncryptedBytes"
     arguments:
       1: "bytes"
       2: "len"
