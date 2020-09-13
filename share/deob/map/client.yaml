@@ -44,7 +44,7 @@ classes:
   client!de: "Class11_Sub2"
   client!dh: "Class4_Sub3_Sub5_Sub1"
   client!dj: "LruHashTable"
-  client!dk: "AwtMouseWheel"
+  client!dk: "JavaMouseWheel"
   client!dl: "Class41_Sub1_Sub1"
   client!dm: "Class42"
   client!dn: "Class4_Sub1_Sub6"
@@ -1794,7 +1794,7 @@ fields:
     owner: "LruHashTable"
     name: "capacity"
   client!dk.k I:
-    owner: "AwtMouseWheel"
+    owner: "JavaMouseWheel"
     name: "wheelRotation"
   client!dl.O [B:
     owner: "Class41_Sub1_Sub1"
@@ -16244,25 +16244,25 @@ methods:
     arguments: {}
     locals: {}
   client!dk.a (B)I:
-    owner: "AwtMouseWheel"
+    owner: "JavaMouseWheel"
     name: "getWheelRotation"
     arguments: {}
     locals:
       10: "wheelRotation"
   client!dk.a (Ljava/awt/Component;B)V:
-    owner: "AwtMouseWheel"
+    owner: "JavaMouseWheel"
     name: "stop"
     arguments:
       0: "component"
     locals: {}
   client!dk.a (Ljava/awt/Component;Z)V:
-    owner: "AwtMouseWheel"
+    owner: "JavaMouseWheel"
     name: "start"
     arguments:
       0: "component"
     locals: {}
   client!dk.mouseWheelMoved (Ljava/awt/event/MouseWheelEvent;)V:
-    owner: "AwtMouseWheel"
+    owner: "JavaMouseWheel"
     name: "mouseWheelMoved"
     arguments:
       0: "event"
