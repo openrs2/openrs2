@@ -30,7 +30,7 @@ classes:
   client!cf: "Class4_Sub1_Sub4"
   client!ch: "Class30"
   client!ci: "Class31"
-  client!cj: "Class4_Sub3_Sub3"
+  client!cj: "EnumType"
   client!ck: "Class4_Sub1_Sub5"
   client!cl: "Interface2"
   client!client: "client"
@@ -193,7 +193,7 @@ classes:
   client!ph: "Class4_Sub1_Sub22"
   client!pi: "Class135"
   client!pk: "Class4_Sub1_Sub23"
-  client!pl: "Class4_Sub22"
+  client!pl: "EnumInverseNode"
   client!po: "Class138"
   client!q: "Class139"
   client!qa: "Class140"
@@ -1134,8 +1134,8 @@ fields:
     owner: "Static1"
     name: "aFloat21"
   client!cg.i Lclient!fh;:
-    owner: "Static1"
-    name: "aClass58_20"
+    owner: "EnumTypeList"
+    name: "archive"
   client!cg.k I:
     owner: "Static1"
     name: "anInt593"
@@ -1191,8 +1191,8 @@ fields:
     owner: "Static1"
     name: "aClass98_1"
   client!cj.B I:
-    owner: "Class4_Sub3_Sub3"
-    name: "anInt642"
+    owner: "EnumType"
+    name: "defaultInt"
   client!cj.C [Lclient!te;:
     owner: "Static1"
     name: "aClass4_Sub3_Sub19Array1"
@@ -1206,20 +1206,20 @@ fields:
     owner: "Static1"
     name: "anInt647"
   client!cj.J Ljava/lang/String;:
-    owner: "Class4_Sub3_Sub3"
-    name: "aString50"
+    owner: "EnumType"
+    name: "defaultString"
   client!cj.K C:
-    owner: "Class4_Sub3_Sub3"
-    name: "aChar2"
+    owner: "EnumType"
+    name: "keyType"
   client!cj.O Lclient!ic;:
-    owner: "Class4_Sub3_Sub3"
-    name: "aClass84_2"
+    owner: "EnumType"
+    name: "inverseTable"
   client!cj.P Lclient!mg;:
     owner: "client"
     name: "js5MasterIndex"
   client!cj.W Lclient!ic;:
-    owner: "Class4_Sub3_Sub3"
-    name: "aClass84_3"
+    owner: "EnumType"
+    name: "table"
   client!cj.X J:
     owner: "Static1"
     name: "aLong32"
@@ -1227,8 +1227,8 @@ fields:
     owner: "Static1"
     name: "anInt640"
   client!cj.z C:
-    owner: "Class4_Sub3_Sub3"
-    name: "aChar1"
+    owner: "EnumType"
+    name: "valueType"
   client!ck.T I:
     owner: "Class4_Sub1_Sub5"
     name: "anInt682"
@@ -2847,8 +2847,8 @@ fields:
     owner: "Static3"
     name: "aClass4_Sub3_Sub14Array8"
   client!gd.j Lclient!dj;:
-    owner: "Static3"
-    name: "aClass40_9"
+    owner: "EnumTypeList"
+    name: "types"
   client!ge.b [I:
     owner: "Class65"
     name: "anIntArray165"
@@ -7626,8 +7626,8 @@ fields:
     owner: "Text"
     name: "CHATCOL9"
   client!pl.s Ljava/lang/String;:
-    owner: "Class4_Sub22"
-    name: "aString248"
+    owner: "EnumInverseNode"
+    name: "value"
   client!pl.u [Lclient!te;:
     owner: "Static5"
     name: "aClass4_Sub3_Sub19Array4"
@@ -15030,30 +15030,30 @@ methods:
     arguments: {}
     locals: {}
   client!cj.a (II)I:
-    owner: "Class4_Sub3_Sub3"
-    name: "method601"
+    owner: "EnumType"
+    name: "getInt"
     arguments:
-      1: "arg0"
+      1: "key"
     locals:
-      17: "local17"
+      17: "node"
   client!cj.a (ILclient!fd;I)V:
-    owner: "Class4_Sub3_Sub3"
-    name: "method603"
+    owner: "EnumType"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals:
-      68: "local68"
-      78: "local78"
-      87: "local87"
-      99: "local99"
+      68: "size"
+      78: "i"
+      87: "key"
+      99: "node"
   client!cj.a (ILjava/lang/String;)Z:
-    owner: "Class4_Sub3_Sub3"
-    name: "method611"
+    owner: "EnumType"
+    name: "containsValue"
     arguments:
-      1: "arg0"
+      1: "value"
     locals:
-      36: "local36"
+      36: "node"
   client!cj.a (ILsignlink!pm;)[Lclient!ub;:
     owner: "Static11"
     name: "method610"
@@ -15081,40 +15081,40 @@ methods:
     locals:
       15: "local15"
   client!cj.a (ZLclient!fd;)V:
-    owner: "Class4_Sub3_Sub3"
-    name: "method609"
+    owner: "EnumType"
+    name: "decode"
     arguments:
-      1: "arg0"
+      1: "buffer"
     locals:
-      9: "local9"
+      9: "code"
   client!cj.b (II)Z:
-    owner: "Class4_Sub3_Sub3"
-    name: "method604"
+    owner: "EnumType"
+    name: "containsValue"
     arguments:
-      1: "arg0"
+      1: "value"
     locals:
-      32: "local32"
+      32: "node"
   client!cj.c (II)Ljava/lang/String;:
-    owner: "Class4_Sub3_Sub3"
-    name: "method606"
+    owner: "EnumType"
+    name: "getString"
     arguments:
-      0: "arg0"
+      0: "key"
     locals:
-      18: "local18"
+      18: "node"
   client!cj.d (I)V:
-    owner: "Class4_Sub3_Sub3"
-    name: "method602"
+    owner: "EnumType"
+    name: "inverseStrings"
     arguments: {}
     locals:
-      22: "local22"
-      34: "local34"
+      22: "node"
+      34: "inverseNode"
   client!cj.e (I)V:
-    owner: "Class4_Sub3_Sub3"
-    name: "method607"
+    owner: "EnumType"
+    name: "inverseInts"
     arguments: {}
     locals:
-      24: "local24"
-      33: "local33"
+      24: "node"
+      33: "inverseNode"
   client!ck.<init> ()V:
     owner: "Class4_Sub1_Sub5"
     name: "<init>"
@@ -16905,10 +16905,10 @@ methods:
       169: "local169"
       231: "local231"
   client!ej.a (II)I:
-    owner: "Static14"
-    name: "method1056"
+    owner: "EnumTypeList"
+    name: "getFileId"
     arguments:
-      1: "arg0"
+      1: "id"
     locals: {}
   client!ej.a (IIIIIIII)V:
     owner: "Static14"
@@ -21836,10 +21836,10 @@ methods:
     locals:
       16: "local16"
   client!hb.a (IB)I:
-    owner: "Static18"
-    name: "method1677"
+    owner: "EnumTypeList"
+    name: "getGroupId"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!hb.a (I[Lclient!ih;)V:
     owner: "Static18"
@@ -23814,10 +23814,10 @@ methods:
       227: "local227"
       318: "local318"
   client!j.a (ILclient!fh;)V:
-    owner: "Static20"
-    name: "method1964"
+    owner: "EnumTypeList"
+    name: "init"
     arguments:
-      1: "arg0"
+      1: "archive"
     locals: {}
   client!ja.<init> ()V:
     owner: "Js5CacheQueue"
@@ -24779,14 +24779,14 @@ methods:
       1: "arg1"
     locals: {}
   client!jk.a (BI)Lclient!cj;:
-    owner: "Static21"
-    name: "method2056"
+    owner: "EnumTypeList"
+    name: "get"
     arguments:
-      1: "arg0"
+      1: "id"
     locals:
-      6: "local6"
-      33: "local33"
-      37: "local37"
+      6: "type"
+      33: "bytes"
+      37: "newType"
   client!jk.a (I)V:
     owner: "Static21"
     name: "method2063"
@@ -29044,14 +29044,14 @@ methods:
     locals:
       13: "i"
   client!m.a (BLjava/lang/String;)J:
-    owner: "Static24"
-    name: "method2682"
+    owner: "StringUtils"
+    name: "longHashCode"
     arguments:
-      1: "arg0"
+      1: "s"
     locals:
-      13: "local13"
-      15: "local15"
-      17: "local17"
+      13: "len"
+      15: "hash"
+      17: "i"
   client!m.a (I)V:
     owner: "IsaacRandom"
     name: "init"
@@ -35340,11 +35340,11 @@ methods:
     locals:
       15: "local15"
   client!pl.<init> (Ljava/lang/String;I)V:
-    owner: "Class4_Sub22"
+    owner: "EnumInverseNode"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "value"
+      1: "key"
     locals: {}
   client!pl.a (BLclient!fh;Lclient!fh;)V:
     owner: "Static29"
