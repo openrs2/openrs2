@@ -282,7 +282,7 @@ classes:
   client!wb: "Js5CachedResourceProvider"
   client!wd: "Class4_Sub1_Sub21_Sub1"
   client!we: "Class184"
-  client!wf: "Class185"
+  client!wf: "Component"
   client!wg: "Class4_Sub3_Sub22"
   client!wh: "Class4_Sub3_Sub23"
   client!wj: "Class187"
@@ -2907,8 +2907,8 @@ fields:
     owner: "WorldList"
     name: "size"
   client!gh.h [Z:
-    owner: "Static3"
-    name: "aBooleanArray12"
+    owner: "InterfaceList"
+    name: "loaded"
   client!gh.i I:
     owner: "Static3"
     name: "anInt2582"
@@ -3498,8 +3498,8 @@ fields:
     owner: "Static3"
     name: "aClass53_Sub1_Sub2Array1"
   client!hk.ib Lclient!fh;:
-    owner: "Static3"
-    name: "aClass58_49"
+    owner: "InterfaceList"
+    name: "fontMetricsArchive"
   client!hk.jb I:
     owner: "Static3"
     name: "anInt2235"
@@ -4206,8 +4206,8 @@ fields:
     owner: "Class11_Sub4"
     name: "anInt2474"
   client!in.u Lclient!fh;:
-    owner: "Static3"
-    name: "aClass58_56"
+    owner: "InterfaceList"
+    name: "archive"
   client!in.v I:
     owner: "Class11_Sub4"
     name: "anInt2475"
@@ -4458,8 +4458,8 @@ fields:
     owner: "Static3"
     name: "aBoolean178"
   client!ji.a Lclient!fh;:
-    owner: "Static3"
-    name: "aClass58_61"
+    owner: "InterfaceList"
+    name: "spritesArchive"
   client!ji.b I:
     owner: "Static3"
     name: "anInt2587"
@@ -6741,8 +6741,8 @@ fields:
     owner: "GameShell"
     name: "canvas"
   client!ni.m [[Lclient!wf;:
-    owner: "Static5"
-    name: "aClass185ArrayArray115"
+    owner: "InterfaceList"
+    name: "components"
   client!ni.n [I:
     owner: "Static5"
     name: "anIntArray681"
@@ -10290,8 +10290,8 @@ fields:
     owner: "Static7"
     name: "anIntArray599"
   client!ud.l Lclient!fh;:
-    owner: "Static7"
-    name: "aClass58_99"
+    owner: "InterfaceList"
+    name: "modelsArchive"
   client!ud.n Z:
     owner: "Preferences"
     name: "fog"
@@ -11199,514 +11199,514 @@ fields:
     owner: "Class184"
     name: "anInt5881"
   client!wf.Ab [Ljava/lang/Object;:
-    owner: "Class185"
+    owner: "Component"
     name: "anObjectArray17"
   client!wf.Ac [Ljava/lang/Object;:
-    owner: "Class185"
+    owner: "Component"
     name: "anObjectArray24"
   client!wf.Ad [I:
-    owner: "Class185"
+    owner: "Component"
     name: "anIntArray673"
   client!wf.B [Ljava/lang/Object;:
-    owner: "Class185"
+    owner: "Component"
     name: "anObjectArray8"
   client!wf.Bb Z:
-    owner: "Class185"
+    owner: "Component"
     name: "aBoolean410"
   client!wf.Bc B:
-    owner: "Class185"
+    owner: "Component"
     name: "aByte26"
   client!wf.C Ljava/lang/Thread;:
     owner: "GameShell"
     name: "thread"
   client!wf.Cb I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5916"
   client!wf.Cc [Ljava/lang/String;:
-    owner: "Class185"
+    owner: "Component"
     name: "aStringArray43"
   client!wf.Cd Z:
-    owner: "Class185"
+    owner: "Component"
     name: "aBoolean419"
   client!wf.D [Ljava/lang/Object;:
-    owner: "Class185"
+    owner: "Component"
     name: "anObjectArray9"
   client!wf.Db Z:
-    owner: "Class185"
+    owner: "Component"
     name: "aBoolean411"
   client!wf.Dc I:
     owner: "Static7"
     name: "anInt5946"
   client!wf.Dd I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5979"
   client!wf.E [Ljava/lang/Object;:
-    owner: "Class185"
+    owner: "Component"
     name: "anObjectArray10"
   client!wf.Eb I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5917"
   client!wf.Ec [Ljava/lang/Object;:
-    owner: "Class185"
+    owner: "Component"
     name: "anObjectArray25"
   client!wf.F [B:
-    owner: "Class185"
+    owner: "Component"
     name: "aByteArray73"
   client!wf.Fb I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5918"
   client!wf.Fc I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5947"
   client!wf.G Z:
-    owner: "Class185"
+    owner: "Component"
     name: "aBoolean405"
   client!wf.Gc [Ljava/lang/String;:
-    owner: "Class185"
+    owner: "Component"
     name: "aStringArray44"
   client!wf.H [I:
-    owner: "Class185"
+    owner: "Component"
     name: "anIntArray658"
   client!wf.Hb [Ljava/lang/Object;:
-    owner: "Class185"
+    owner: "Component"
     name: "anObjectArray18"
   client!wf.Hc I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5948"
   client!wf.I Z:
-    owner: "Class185"
+    owner: "Component"
     name: "aBoolean406"
   client!wf.Ib I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5920"
   client!wf.Ic [Ljava/lang/Object;:
-    owner: "Class185"
+    owner: "Component"
     name: "anObjectArray26"
   client!wf.J [Ljava/lang/Object;:
-    owner: "Class185"
+    owner: "Component"
     name: "anObjectArray11"
   client!wf.Jb I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5921"
   client!wf.Jc I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5949"
   client!wf.K Z:
-    owner: "Class185"
+    owner: "Component"
     name: "aBoolean407"
   client!wf.Kb I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5922"
   client!wf.Kc I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5950"
   client!wf.L I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5895"
   client!wf.Lb I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5923"
   client!wf.Lc I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5951"
   client!wf.M I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5896"
   client!wf.Mb I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5924"
   client!wf.Mc [Ljava/lang/Object;:
-    owner: "Class185"
+    owner: "Component"
     name: "anObjectArray27"
   client!wf.N B:
-    owner: "Class185"
+    owner: "Component"
     name: "aByte24"
   client!wf.Nc [I:
-    owner: "Class185"
+    owner: "Component"
     name: "anIntArray670"
   client!wf.O Ljava/lang/String;:
-    owner: "Class185"
+    owner: "Component"
     name: "aString352"
   client!wf.Ob I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5926"
   client!wf.Oc I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5952"
   client!wf.P I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5897"
   client!wf.Pb [Ljava/lang/Object;:
-    owner: "Class185"
+    owner: "Component"
     name: "anObjectArray19"
   client!wf.Pc S:
-    owner: "Class185"
+    owner: "Component"
     name: "aShort49"
   client!wf.Q I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5898"
   client!wf.Qb I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5927"
   client!wf.Qc I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5953"
   client!wf.R I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5899"
   client!wf.Rb I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5928"
   client!wf.Rc I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5954"
   client!wf.S I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5900"
   client!wf.Sb I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5929"
   client!wf.T I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5901"
   client!wf.Tb B:
-    owner: "Class185"
+    owner: "Component"
     name: "aByte25"
   client!wf.Tc I:
     owner: "Js5Compression"
     name: "MAX_LENGTH"
   client!wf.U [[I:
-    owner: "Class185"
+    owner: "Component"
     name: "anIntArrayArray50"
   client!wf.Ub Z:
-    owner: "Class185"
+    owner: "Component"
     name: "aBoolean412"
   client!wf.Uc I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5957"
   client!wf.V Z:
-    owner: "Class185"
+    owner: "Component"
     name: "aBoolean408"
   client!wf.Vb Z:
-    owner: "Class185"
+    owner: "Component"
     name: "aBoolean413"
   client!wf.Vc I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5958"
   client!wf.W I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5902"
   client!wf.Wb I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5930"
   client!wf.Wc [I:
-    owner: "Class185"
+    owner: "Component"
     name: "anIntArray671"
   client!wf.X [I:
-    owner: "Class185"
+    owner: "Component"
     name: "anIntArray659"
   client!wf.Xb I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5931"
   client!wf.Y I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5903"
   client!wf.Yb [I:
-    owner: "Class185"
+    owner: "Component"
     name: "anIntArray667"
   client!wf.Yc [Lclient!wf;:
-    owner: "Class185"
+    owner: "Component"
     name: "aClass185Array4"
   client!wf.Z I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5904"
   client!wf.Zb I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5932"
   client!wf.Zc I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5960"
   client!wf.ac [Ljava/lang/Object;:
-    owner: "Class185"
+    owner: "Component"
     name: "anObjectArray20"
   client!wf.bb [Ljava/lang/Object;:
-    owner: "Class185"
+    owner: "Component"
     name: "anObjectArray12"
   client!wf.bc I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5933"
   client!wf.bd [Ljava/lang/Object;:
-    owner: "Class185"
+    owner: "Component"
     name: "anObjectArray28"
   client!wf.cb I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5906"
   client!wf.cc I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5934"
   client!wf.cd I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5962"
   client!wf.d [Ljava/lang/Object;:
-    owner: "Class185"
+    owner: "Component"
     name: "anObjectArray3"
   client!wf.db [I:
-    owner: "Class185"
+    owner: "Component"
     name: "anIntArray660"
   client!wf.dc I:
     owner: "Static7"
     name: "anInt5935"
   client!wf.dd I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5963"
   client!wf.e I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5885"
   client!wf.eb Ljava/lang/String;:
-    owner: "Class185"
+    owner: "Component"
     name: "aString353"
   client!wf.ec I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5936"
   client!wf.ed I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5964"
   client!wf.f Lclient!wf;:
-    owner: "Class185"
+    owner: "Component"
     name: "aClass185_17"
   client!wf.fb [Ljava/lang/Object;:
-    owner: "Class185"
+    owner: "Component"
     name: "anObjectArray13"
   client!wf.fc I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5937"
   client!wf.fd I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5965"
   client!wf.g [Ljava/lang/Object;:
-    owner: "Class185"
+    owner: "Component"
     name: "anObjectArray4"
   client!wf.gb I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5907"
   client!wf.gc I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5938"
   client!wf.gd [I:
-    owner: "Class185"
+    owner: "Component"
     name: "anIntArray672"
   client!wf.h Lclient!on;:
-    owner: "Class185"
+    owner: "Component"
     name: "aClass4_Sub21_2"
   client!wf.hb I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5908"
   client!wf.hc I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5939"
   client!wf.hd [Ljava/lang/Object;:
-    owner: "Class185"
+    owner: "Component"
     name: "anObjectArray29"
   client!wf.i Ljava/lang/String;:
-    owner: "Class185"
+    owner: "Component"
     name: "aString349"
   client!wf.ib [I:
-    owner: "Class185"
+    owner: "Component"
     name: "anIntArray661"
   client!wf.ic [Ljava/lang/Object;:
-    owner: "Class185"
+    owner: "Component"
     name: "anObjectArray21"
   client!wf.id I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5966"
   client!wf.j I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5886"
   client!wf.jb [Ljava/lang/Object;:
-    owner: "Class185"
+    owner: "Component"
     name: "anObjectArray14"
   client!wf.jc I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5940"
   client!wf.jd I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5967"
   client!wf.k Ljava/lang/String;:
-    owner: "Class185"
+    owner: "Component"
     name: "aString350"
   client!wf.kb [I:
-    owner: "Class185"
+    owner: "Component"
     name: "anIntArray662"
   client!wf.kc [Ljava/lang/Object;:
-    owner: "Class185"
+    owner: "Component"
     name: "anObjectArray22"
   client!wf.kd I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5968"
   client!wf.l I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5887"
   client!wf.lb [I:
-    owner: "Class185"
+    owner: "Component"
     name: "anIntArray663"
   client!wf.lc Z:
-    owner: "Class185"
+    owner: "Component"
     name: "aBoolean414"
   client!wf.m I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5888"
   client!wf.mb I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5909"
   client!wf.mc [Ljava/lang/Object;:
-    owner: "Class185"
+    owner: "Component"
     name: "anObjectArray23"
   client!wf.md [Ljava/lang/Object;:
-    owner: "Class185"
+    owner: "Component"
     name: "anObjectArray30"
   client!wf.n Z:
-    owner: "Class185"
+    owner: "Component"
     name: "aBoolean402"
   client!wf.nb [I:
-    owner: "Class185"
+    owner: "Component"
     name: "anIntArray664"
   client!wf.nc I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5941"
   client!wf.nd I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5970"
   client!wf.ob Z:
-    owner: "Class185"
+    owner: "Component"
     name: "aBoolean409"
   client!wf.oc [I:
-    owner: "Class185"
+    owner: "Component"
     name: "anIntArray668"
   client!wf.od [Ljava/lang/Object;:
-    owner: "Class185"
+    owner: "Component"
     name: "anObjectArray31"
   client!wf.p Z:
-    owner: "Class185"
+    owner: "Component"
     name: "aBoolean403"
   client!wf.pb I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5910"
   client!wf.pc [I:
-    owner: "Class185"
+    owner: "Component"
     name: "anIntArray669"
   client!wf.pd I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5971"
   client!wf.q I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5890"
   client!wf.qb [I:
-    owner: "Class185"
+    owner: "Component"
     name: "anIntArray665"
   client!wf.qc Z:
-    owner: "Class185"
+    owner: "Component"
     name: "aBoolean415"
   client!wf.qd I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5972"
   client!wf.r [Ljava/lang/Object;:
-    owner: "Class185"
+    owner: "Component"
     name: "anObjectArray5"
   client!wf.rb [I:
-    owner: "Class185"
+    owner: "Component"
     name: "anIntArray666"
   client!wf.rc Z:
-    owner: "Class185"
-    name: "aBoolean416"
+    owner: "Component"
+    name: "if3"
   client!wf.rd [Ljava/lang/Object;:
-    owner: "Class185"
+    owner: "Component"
     name: "anObjectArray32"
   client!wf.s Z:
-    owner: "Class185"
+    owner: "Component"
     name: "aBoolean404"
   client!wf.sb [Ljava/lang/Object;:
-    owner: "Class185"
+    owner: "Component"
     name: "anObjectArray15"
   client!wf.sc [S:
     owner: "Static7"
     name: "aShortArray122"
   client!wf.t [Ljava/lang/Object;:
-    owner: "Class185"
+    owner: "Component"
     name: "anObjectArray6"
   client!wf.tb Ljava/lang/String;:
-    owner: "Class185"
+    owner: "Component"
     name: "aString354"
   client!wf.tc I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5942"
   client!wf.u I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5891"
   client!wf.ub I:
-    owner: "Class185"
-    name: "anInt5911"
+    owner: "Component"
+    name: "type"
   client!wf.uc I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5943"
   client!wf.ud I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5975"
   client!wf.v I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5892"
   client!wf.vb I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5912"
   client!wf.vc Z:
-    owner: "Class185"
+    owner: "Component"
     name: "aBoolean417"
   client!wf.vd I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5976"
   client!wf.w [Ljava/lang/Object;:
-    owner: "Class185"
+    owner: "Component"
     name: "anObjectArray7"
   client!wf.wb I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5913"
   client!wf.wc Z:
-    owner: "Class185"
+    owner: "Component"
     name: "aBoolean418"
   client!wf.wd B:
-    owner: "Class185"
+    owner: "Component"
     name: "aByte27"
   client!wf.x I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5893"
   client!wf.xb [Ljava/lang/Object;:
-    owner: "Class185"
+    owner: "Component"
     name: "anObjectArray16"
   client!wf.xc I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5944"
   client!wf.xd S:
-    owner: "Class185"
+    owner: "Component"
     name: "aShort50"
   client!wf.y [I:
-    owner: "Class185"
+    owner: "Component"
     name: "anIntArray657"
   client!wf.yb I:
-    owner: "Class185"
-    name: "anInt5914"
+    owner: "Component"
+    name: "id"
   client!wf.yc [B:
-    owner: "Class185"
+    owner: "Component"
     name: "aByteArray74"
   client!wf.yd I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5977"
   client!wf.z Ljava/lang/String;:
-    owner: "Class185"
+    owner: "Component"
     name: "aString351"
   client!wf.zc I:
-    owner: "Class185"
+    owner: "Component"
     name: "anInt5945"
   client!wf.zd Ljava/lang/String;:
-    owner: "Class185"
+    owner: "Component"
     name: "aString355"
   client!wg.A I:
     owner: "Class4_Sub3_Sub22"
@@ -17043,8 +17043,8 @@ methods:
       1: "thing"
     locals: {}
   client!el.b (I)V:
-    owner: "Static14"
-    name: "method1068"
+    owner: "InterfaceList"
+    name: "clear"
     arguments: {}
     locals: {}
   client!el.b (II)V:
@@ -19125,15 +19125,15 @@ methods:
     arguments: {}
     locals: {}
   client!fh.e (II)Z:
-    owner: "Static15"
-    name: "method1364"
+    owner: "InterfaceList"
+    name: "load"
     arguments:
-      1: "arg0"
+      1: "id"
     locals:
-      29: "local29"
-      53: "local53"
-      74: "local74"
-      88: "local88"
+      29: "capacity"
+      53: "i"
+      74: "bytes"
+      88: "component"
   client!fh.f (II)Z:
     owner: "Js5"
     name: "isGroupValid"
@@ -22686,14 +22686,14 @@ methods:
       28: "bytes"
       32: "newType"
   client!i.a (II)Lclient!wf;:
-    owner: "Static19"
-    name: "method1813"
+    owner: "InterfaceList"
+    name: "getComponent"
     arguments:
-      1: "arg0"
+      1: "id"
     locals:
-      7: "local7"
-      19: "local19"
-      34: "local34"
+      7: "interfaceId"
+      19: "slot"
+      34: "success"
   client!i.b (II)Lclient!qa;:
     owner: "Static19"
     name: "method1816"
@@ -40125,13 +40125,13 @@ methods:
       944: "local944"
       948: "local948"
   client!sl.c (II)V:
-    owner: "Static32"
-    name: "method4025"
+    owner: "InterfaceList"
+    name: "discard"
     arguments:
-      1: "arg0"
+      1: "id"
     locals:
-      25: "local25"
-      27: "local27"
+      25: "discard"
+      27: "i"
   client!sl.c (IIIIII)V:
     owner: "Static32"
     name: "method4022"
@@ -45584,7 +45584,7 @@ methods:
       432: "local432"
       437: "local437"
   client!wf.a (BI)Lclient!uj;:
-    owner: "Class185"
+    owner: "Component"
     name: "method4724"
     arguments:
       1: "arg0"
@@ -45600,7 +45600,7 @@ methods:
       2: "arg1"
     locals: {}
   client!wf.a (B[Lclient!ma;)Lclient!gl;:
-    owner: "Class185"
+    owner: "Component"
     name: "method4734"
     arguments:
       1: "arg0"
@@ -45608,12 +45608,12 @@ methods:
       28: "local28"
       42: "local42"
   client!wf.a (I)Lclient!eh;:
-    owner: "Class185"
+    owner: "Component"
     name: "method4726"
     arguments: {}
     locals: {}
   client!wf.a (IBI)V:
-    owner: "Class185"
+    owner: "Component"
     name: "method4733"
     arguments:
       0: "arg0"
@@ -45626,7 +45626,7 @@ methods:
     arguments: {}
     locals: {}
   client!wf.a (III)V:
-    owner: "Class185"
+    owner: "Component"
     name: "method4725"
     arguments:
       0: "arg0"
@@ -45636,7 +45636,7 @@ methods:
       30: "local30"
       53: "local53"
   client!wf.a (ILclient!fd;)[I:
-    owner: "Class185"
+    owner: "Component"
     name: "method4730"
     arguments:
       1: "arg0"
@@ -45645,7 +45645,7 @@ methods:
       27: "local27"
       29: "local29"
   client!wf.a (Lclient!eg;Lclient!qk;IBIIZ)Lclient!vg;:
-    owner: "Class185"
+    owner: "Component"
     name: "method4723"
     arguments:
       0: "arg0"
@@ -45669,10 +45669,10 @@ methods:
       235: "local235"
       246: "local246"
   client!wf.a (Lclient!fd;I)V:
-    owner: "Class185"
-    name: "method4728"
+    owner: "Component"
+    name: "decodeIf1"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals:
       110: "local110"
       126: "local126"
@@ -45694,7 +45694,7 @@ methods:
       750: "local750"
       808: "local808"
   client!wf.a (Ljava/lang/String;II)V:
-    owner: "Class185"
+    owner: "Component"
     name: "method4722"
     arguments:
       0: "arg0"
@@ -45703,7 +45703,7 @@ methods:
       15: "local15"
       20: "local20"
   client!wf.a (ZB)Lclient!uj;:
-    owner: "Class185"
+    owner: "Component"
     name: "method4729"
     arguments:
       0: "arg0"
@@ -45732,10 +45732,10 @@ methods:
     locals:
       7: "local7"
   client!wf.b (ILclient!fd;)V:
-    owner: "Class185"
-    name: "method4732"
+    owner: "Component"
+    name: "decodeIf3"
     arguments:
-      1: "arg0"
+      1: "buffer"
     locals:
       160: "local160"
       460: "local460"
@@ -45751,7 +45751,7 @@ methods:
       638: "local638"
       661: "local661"
   client!wf.c (I)Z:
-    owner: "Class185"
+    owner: "Component"
     name: "method4738"
     arguments: {}
     locals:
@@ -45762,7 +45762,7 @@ methods:
       88: "local88"
       90: "local90"
   client!wf.c (ILclient!fd;)[Ljava/lang/Object;:
-    owner: "Class185"
+    owner: "Component"
     name: "method4740"
     arguments:
       1: "arg0"
@@ -46016,13 +46016,13 @@ methods:
       1: "arg1"
     locals: {}
   client!wj.a (Lclient!fh;ILclient!fh;Lclient!fh;Lclient!fh;)V:
-    owner: "Static37"
-    name: "method4787"
+    owner: "InterfaceList"
+    name: "init"
     arguments:
-      0: "arg0"
-      2: "arg1"
-      3: "arg2"
-      4: "arg3"
+      3: "archive"
+      4: "modelsArchive"
+      0: "spritesArchive"
+      2: "fontMetricsArchive"
     locals: {}
   client!wj.a (Lclient!fh;Lclient!fh;Lclient!fh;I)V:
     owner: "Static37"
