@@ -224,7 +224,7 @@ classes:
   client!rl: "Class4_Sub27"
   client!rm: "Class4_Sub1_Sub28"
   client!rn: "Class41_Sub2"
-  client!ro: "Class4_Sub3_Sub17"
+  client!ro: "StructType"
   client!s: "Class53_Sub4_Sub2"
   client!sa: "Class153"
   client!sb: "Class4_Sub28"
@@ -2028,8 +2028,8 @@ fields:
     owner: "Class46"
     name: "anIntArray93"
   client!eg.i Lclient!fh;:
-    owner: "Static2"
-    name: "aClass58_36"
+    owner: "StructTypeList"
+    name: "archive"
   client!eg.l Z:
     owner: "Class46"
     name: "aBoolean70"
@@ -3174,8 +3174,8 @@ fields:
     owner: "Static3"
     name: "anInt2102"
   client!gm.c Lclient!dj;:
-    owner: "Static3"
-    name: "aClass40_10"
+    owner: "StructTypeList"
+    name: "types"
   client!gm.d S:
     owner: "Static3"
     name: "aShort12"
@@ -8823,8 +8823,8 @@ fields:
     owner: "Class41_Sub2"
     name: "anIntArray406"
   client!ro.C Lclient!ic;:
-    owner: "Class4_Sub3_Sub17"
-    name: "aClass84_21"
+    owner: "StructType"
+    name: "params"
   client!ro.H Lclient!wf;:
     owner: "Static6"
     name: "aClass185_13"
@@ -22907,10 +22907,10 @@ methods:
     arguments: {}
     locals: {}
   client!id.a (BLclient!fh;)V:
-    owner: "Static19"
-    name: "method1850"
+    owner: "StructTypeList"
+    name: "init"
     arguments:
-      1: "arg0"
+      1: "archive"
     locals: {}
   client!id.a (IB)I:
     owner: "Static19"
@@ -33306,14 +33306,14 @@ methods:
     arguments: {}
     locals: {}
   client!og.c (II)Lclient!ro;:
-    owner: "Static27"
-    name: "method4703"
+    owner: "StructTypeList"
+    name: "get"
     arguments:
-      1: "arg0"
+      1: "id"
     locals:
-      6: "local6"
-      21: "local21"
-      25: "local25"
+      6: "type"
+      21: "bytes"
+      25: "newType"
   client!og.c (IIIIII)V:
     owner: "Static27"
     name: "method4706"
@@ -38157,13 +38157,13 @@ methods:
     arguments: {}
     locals: {}
   client!ro.a (III)I:
-    owner: "Class4_Sub3_Sub17"
-    name: "method3800"
+    owner: "StructType"
+    name: "getParam"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      1: "id"
+      0: "defaultValue"
     locals:
-      19: "local19"
+      19: "node"
   client!ro.a (IIIB)I:
     owner: "Static31"
     name: "method3802"
@@ -38233,33 +38233,33 @@ methods:
       616: "local616"
       633: "local633"
   client!ro.a (Lclient!fd;BI)V:
-    owner: "Class4_Sub3_Sub17"
-    name: "method3799"
+    owner: "StructType"
+    name: "decode"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "buffer"
+      2: "code"
     locals:
-      12: "local12"
-      21: "local21"
-      29: "local29"
-      41: "local41"
-      45: "local45"
-      54: "local54"
+      12: "size"
+      21: "bucketCount"
+      29: "i"
+      41: "string"
+      45: "id"
+      54: "node"
   client!ro.a (Lclient!fd;I)V:
-    owner: "Class4_Sub3_Sub17"
-    name: "method3801"
+    owner: "StructType"
+    name: "decode"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals:
-      9: "local9"
+      9: "code"
   client!ro.a (Ljava/lang/String;IB)Ljava/lang/String;:
-    owner: "Class4_Sub3_Sub17"
-    name: "method3804"
+    owner: "StructType"
+    name: "getParam"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      1: "id"
+      0: "defaultValue"
     locals:
-      22: "local22"
+      22: "node"
   client!ro.a (ZB)V:
     owner: "Static31"
     name: "method3803"
