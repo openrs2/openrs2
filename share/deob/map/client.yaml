@@ -271,7 +271,7 @@ classes:
   client!ve: "Class179"
   client!vf: "Class180"
   client!vg: "Class53_Sub4"
-  client!vh: "Class181"
+  client!vh: "LocType"
   client!vi: "Class4_Sub1_Sub38"
   client!vj: "Class4_Sub3_Sub14_Sub2_Sub1"
   client!vl: "Class182"
@@ -1680,8 +1680,8 @@ fields:
     owner: "Static2"
     name: "anInt2245"
   client!dg.m Z:
-    owner: "Static2"
-    name: "aBoolean152"
+    owner: "LocTypeList"
+    name: "allowMembers"
   client!dg.n [I:
     owner: "Static2"
     name: "anIntArray187"
@@ -2187,8 +2187,8 @@ fields:
     owner: "Class4_Sub9"
     name: "anInt1284"
   client!ej.x Lclient!fh;:
-    owner: "Static2"
-    name: "aClass58_38"
+    owner: "LocTypeList"
+    name: "locsArchive"
   client!ej.y I:
     owner: "Class4_Sub9"
     name: "anInt1285"
@@ -2856,8 +2856,8 @@ fields:
     owner: "Static3"
     name: "anIntArray166"
   client!gf.a Lclient!cc;:
-    owner: "Static3"
-    name: "aClass26_19"
+    owner: "LocTypeList"
+    name: "types"
   client!gf.c [I:
     owner: "Static3"
     name: "anIntArray167"
@@ -6012,7 +6012,7 @@ fields:
     owner: "LocalisedText"
     name: "CONLOST"
   client!mm.f Lclient!cc;:
-    owner: "Static4"
+    owner: "LocTypeList"
     name: "aClass26_32"
   client!mm.g I:
     owner: "Static4"
@@ -7278,7 +7278,7 @@ fields:
     owner: "Class4_Sub21"
     name: "anInt3947"
   client!on.K Lclient!cc;:
-    owner: "Static5"
+    owner: "LocTypeList"
     name: "aClass26_43"
   client!on.q Z:
     owner: "Preferences"
@@ -9951,7 +9951,7 @@ fields:
     owner: "AbstractWorld"
     name: "players"
   client!tn.e Lclient!cc;:
-    owner: "Static7"
+    owner: "LocTypeList"
     name: "aClass26_18"
   client!tn.m Z:
     owner: "Preferences"
@@ -10254,8 +10254,8 @@ fields:
     owner: "Static7"
     name: "anIntArray597"
   client!uc.W Lclient!fh;:
-    owner: "Static7"
-    name: "aClass58_97"
+    owner: "LocTypeList"
+    name: "modelsArchive"
   client!uc.X Lclient!fh;:
     owner: "client"
     name: "js5Archive6"
@@ -10725,205 +10725,205 @@ fields:
     owner: "Class53_Sub4"
     name: "aBoolean324"
   client!vh.A I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5521"
   client!vh.Ab Z:
-    owner: "Class181"
+    owner: "LocType"
     name: "aBoolean383"
   client!vh.B [I:
     owner: "Static7"
     name: "anIntArray629"
   client!vh.Bb I:
-    owner: "Class181"
-    name: "anInt5553"
+    owner: "LocType"
+    name: "id"
   client!vh.C I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5522"
   client!vh.Cb Z:
-    owner: "Class181"
+    owner: "LocType"
     name: "aBoolean384"
   client!vh.D I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5523"
   client!vh.E [S:
-    owner: "Class181"
+    owner: "LocType"
     name: "aShortArray118"
   client!vh.Eb I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5555"
   client!vh.F I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5524"
   client!vh.Fb Z:
-    owner: "Class181"
+    owner: "LocType"
     name: "aBoolean385"
   client!vh.G I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5525"
   client!vh.H I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5526"
   client!vh.Hb [I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anIntArray633"
   client!vh.I I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5527"
   client!vh.J I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5528"
   client!vh.K I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5529"
   client!vh.L Z:
-    owner: "Class181"
+    owner: "LocType"
     name: "aBoolean374"
   client!vh.M I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5530"
   client!vh.N I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5531"
   client!vh.P I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5533"
   client!vh.R Ljava/lang/String;:
-    owner: "Class181"
-    name: "aString332"
+    owner: "LocType"
+    name: "name"
   client!vh.S [Ljava/lang/String;:
-    owner: "Class181"
-    name: "aStringArray39"
+    owner: "LocType"
+    name: "ops"
   client!vh.T [I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anIntArray630"
   client!vh.U Z:
-    owner: "Class181"
-    name: "aBoolean375"
+    owner: "LocType"
+    name: "members"
   client!vh.V [I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anIntArray631"
   client!vh.W Z:
-    owner: "Class181"
+    owner: "LocType"
     name: "aBoolean376"
   client!vh.X I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5535"
   client!vh.Y I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5536"
   client!vh.Z I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5537"
   client!vh.a [S:
-    owner: "Class181"
+    owner: "LocType"
     name: "aShortArray116"
   client!vh.ab I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5538"
   client!vh.c I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5505"
   client!vh.d [I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anIntArray627"
   client!vh.db Z:
-    owner: "Class181"
+    owner: "LocType"
     name: "aBoolean377"
   client!vh.eb I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5541"
   client!vh.f Lclient!wf;:
     owner: "Static7"
     name: "aClass185_16"
   client!vh.fb [S:
-    owner: "Class181"
+    owner: "LocType"
     name: "aShortArray119"
   client!vh.g I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5507"
   client!vh.h B:
-    owner: "Class181"
+    owner: "LocType"
     name: "aByte23"
   client!vh.hb I:
     owner: "client"
     name: "modeWhat"
   client!vh.ib Z:
-    owner: "Class181"
+    owner: "LocType"
     name: "aBoolean378"
   client!vh.j I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5509"
   client!vh.jb Z:
-    owner: "Class181"
+    owner: "LocType"
     name: "aBoolean379"
   client!vh.k Z:
-    owner: "Class181"
+    owner: "LocType"
     name: "aBoolean371"
   client!vh.kb Z:
-    owner: "Class181"
+    owner: "LocType"
     name: "aBoolean380"
   client!vh.lb Lclient!ic;:
-    owner: "Class181"
-    name: "aClass84_26"
+    owner: "LocType"
+    name: "params"
   client!vh.m Z:
-    owner: "Class181"
+    owner: "LocType"
     name: "aBoolean372"
   client!vh.mb I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5544"
   client!vh.nb S:
-    owner: "Class181"
+    owner: "LocType"
     name: "aShort48"
   client!vh.o I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5512"
   client!vh.ob Z:
-    owner: "Class181"
+    owner: "LocType"
     name: "aBoolean381"
   client!vh.p I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5513"
   client!vh.qb I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5546"
   client!vh.r I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5515"
   client!vh.rb [I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anIntArray632"
   client!vh.s I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5516"
   client!vh.sb [B:
-    owner: "Class181"
+    owner: "LocType"
     name: "aByteArray70"
   client!vh.t [S:
-    owner: "Class181"
+    owner: "LocType"
     name: "aShortArray117"
   client!vh.u [I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anIntArray628"
   client!vh.ub Z:
-    owner: "Class181"
+    owner: "LocType"
     name: "aBoolean382"
   client!vh.v Z:
-    owner: "Class181"
+    owner: "LocType"
     name: "aBoolean373"
   client!vh.vb I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5548"
   client!vh.w I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5517"
   client!vh.y I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5519"
   client!vh.yb I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5551"
   client!vh.zb I:
-    owner: "Class181"
+    owner: "LocType"
     name: "anInt5552"
   client!vi.T I:
     owner: "Static7"
@@ -12410,14 +12410,14 @@ methods:
       120: "local120"
       126: "local126"
   client!af.a (II)Lclient!vh;:
-    owner: "Static8"
-    name: "method99"
+    owner: "LocTypeList"
+    name: "get"
     arguments:
-      0: "arg0"
+      0: "id"
     locals:
-      14: "local14"
-      28: "local28"
-      32: "local32"
+      14: "type"
+      28: "bytes"
+      32: "newType"
   client!af.a (IIIIBII)V:
     owner: "Static8"
     name: "method100"
@@ -32123,10 +32123,10 @@ methods:
       81: "local81"
       117: "local117"
   client!nh.a (ZI)I:
-    owner: "Static26"
-    name: "method2980"
+    owner: "LocTypeList"
+    name: "getFileId"
     arguments:
-      1: "arg0"
+      1: "id"
     locals: {}
   client!nh.d (B)Lclient!g;:
     owner: "Static26"
@@ -33773,8 +33773,8 @@ methods:
       199: "local199"
       204: "local204"
   client!on.c (II)V:
-    owner: "Static28"
-    name: "method3278"
+    owner: "LocTypeList"
+    name: "clean"
     arguments: {}
     locals: {}
   client!on.d (B)Z:
@@ -36765,8 +36765,8 @@ methods:
       924: "local924"
       975: "local975"
   client!qj.g (I)V:
-    owner: "Static30"
-    name: "method3599"
+    owner: "LocTypeList"
+    name: "clear"
     arguments: {}
     locals: {}
   client!qk.a (B)I:
@@ -40829,10 +40829,10 @@ methods:
     locals:
       26: "node"
   client!td.b (ZI)V:
-    owner: "Static33"
-    name: "method4132"
+    owner: "LocTypeList"
+    name: "setAllowMembers"
     arguments:
-      0: "arg0"
+      0: "allowMembers"
     locals: {}
   client!td.c (ZI)Z:
     owner: "ObjType"
@@ -41909,11 +41909,11 @@ methods:
     arguments: {}
     locals: {}
   client!tl.a (ILclient!fh;ZLclient!fh;)V:
-    owner: "Static34"
-    name: "method4232"
+    owner: "LocTypeList"
+    name: "init"
     arguments:
-      1: "arg0"
-      3: "arg1"
+      1: "locsArchive"
+      3: "modelsArchive"
     locals: {}
   client!tl.a (ILjava/lang/String;)V:
     owner: "Static34"
@@ -43432,8 +43432,8 @@ methods:
       1: "arg0"
     locals: {}
   client!v.b (I)V:
-    owner: "Static35"
-    name: "method4400"
+    owner: "LocTypeList"
+    name: "removeSoft"
     arguments: {}
     locals: {}
   client!va.a (BI)Z:
@@ -44058,20 +44058,20 @@ methods:
     arguments: {}
     locals: {}
   client!vh.a (BI)Z:
-    owner: "Class181"
+    owner: "LocType"
     name: "method4465"
     arguments:
       1: "arg0"
     locals:
       26: "local26"
   client!vh.a (BII)I:
-    owner: "Class181"
-    name: "method4451"
+    owner: "LocType"
+    name: "getParam"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "id"
+      1: "defaultValue"
     locals:
-      27: "local27"
+      27: "node"
   client!vh.a (BZ)V:
     owner: "Static36"
     name: "method4462"
@@ -44087,7 +44087,7 @@ methods:
     arguments: {}
     locals: {}
   client!vh.a (IBI)Lclient!ml;:
-    owner: "Class181"
+    owner: "LocType"
     name: "method4452"
     arguments:
       0: "arg0"
@@ -44137,7 +44137,7 @@ methods:
       375: "local375"
       459: "local459"
   client!vh.a (II)Z:
-    owner: "Class181"
+    owner: "LocType"
     name: "method4457"
     arguments:
       0: "arg0"
@@ -44146,11 +44146,11 @@ methods:
       61: "local61"
       63: "local63"
   client!vh.a (IILclient!fd;)V:
-    owner: "Class181"
-    name: "method4461"
+    owner: "LocType"
+    name: "decode"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      2: "buffer"
+      0: "code"
     locals:
       188: "local188"
       194: "local194"
@@ -44159,12 +44159,12 @@ methods:
       501: "local501"
       511: "local511"
       525: "local525"
-      600: "local600"
-      608: "local608"
-      616: "local616"
-      628: "local628"
-      632: "local632"
-      641: "local641"
+      600: "size"
+      608: "bucketCount"
+      616: "i"
+      628: "string"
+      632: "id"
+      641: "node"
       732: "local732"
       778: "local778"
       786: "local786"
@@ -44177,14 +44177,14 @@ methods:
       1037: "local1037"
       1067: "local1067"
   client!vh.a (ILclient!fd;)V:
-    owner: "Class181"
-    name: "method4454"
+    owner: "LocType"
+    name: "decode"
     arguments:
-      1: "arg0"
+      1: "buffer"
     locals:
-      9: "local9"
+      9: "code"
   client!vh.a (IZII[[I[[IZIIILclient!fe;)Lclient!jh;:
-    owner: "Class181"
+    owner: "LocType"
     name: "method4450"
     arguments:
       0: "arg0"
@@ -44210,7 +44210,7 @@ methods:
       297: "local297"
       329: "local329"
   client!vh.a (IZIZ)Lclient!s;:
-    owner: "Class181"
+    owner: "LocType"
     name: "method4456"
     arguments:
       0: "arg0"
@@ -44236,7 +44236,7 @@ methods:
       386: "local386"
       410: "local410"
   client!vh.a (I[[IIIIIZIII[[ILclient!eg;Lclient!fe;I)Lclient!jh;:
-    owner: "Class181"
+    owner: "LocType"
     name: "method4458"
     arguments:
       0: "arg0"
@@ -44262,22 +44262,22 @@ methods:
       207: "local207"
       236: "local236"
   client!vh.a (Ljava/lang/String;II)Ljava/lang/String;:
-    owner: "Class181"
-    name: "method4467"
+    owner: "LocType"
+    name: "getParam"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      1: "id"
+      0: "defaultValue"
     locals:
-      25: "local25"
+      25: "node"
   client!vh.a (Z)Z:
-    owner: "Class181"
+    owner: "LocType"
     name: "method4449"
     arguments: {}
     locals:
       13: "local13"
       15: "local15"
   client!vh.b (I)Lclient!vh;:
-    owner: "Class181"
+    owner: "LocType"
     name: "method4453"
     arguments: {}
     locals:
@@ -44289,22 +44289,22 @@ methods:
     arguments: {}
     locals: {}
   client!vh.e (I)I:
-    owner: "Class181"
+    owner: "LocType"
     name: "method4460"
     arguments: {}
     locals:
       23: "local23"
       25: "local25"
   client!vh.f (I)Z:
-    owner: "Class181"
+    owner: "LocType"
     name: "method4463"
     arguments: {}
     locals:
       31: "local31"
       54: "local54"
   client!vh.g (I)V:
-    owner: "Class181"
-    name: "method4466"
+    owner: "LocType"
+    name: "postDecode"
     arguments: {}
     locals:
       35: "local35"
@@ -45324,10 +45324,10 @@ methods:
     arguments: {}
     locals: {}
   client!wb.d (II)I:
-    owner: "Static37"
-    name: "method4662"
+    owner: "LocTypeList"
+    name: "getGroupId"
     arguments:
-      1: "arg0"
+      1: "id"
     locals: {}
   client!wb.e (I)I:
     owner: "Js5CachedResourceProvider"
