@@ -100,7 +100,7 @@ classes:
   client!ih: "Class4_Sub12"
   client!ij: "Class4_Sub3_Sub11"
   client!ik: "Class89"
-  client!im: "Class91"
+  client!im: "AudioThread"
   client!in: "Class11_Sub4"
   client!io: "Class4_Sub13"
   client!j: "Class4_Sub14"
@@ -118,7 +118,7 @@ classes:
   client!jm: "MouseRecorder"
   client!jn: "Class4_Sub3_Sub14_Sub1_Sub1"
   client!jo: "Class4_Sub1"
-  client!kb: "Class102_Sub1"
+  client!kb: "JavaAudioChannel"
   client!kc: "Class103"
   client!ke: "Class4_Sub3_Sub5_Sub2"
   client!kf: "Bzip2DState"
@@ -164,7 +164,7 @@ classes:
   client!nh: "Class4_Sub19"
   client!ni: "Node"
   client!nk: "Interface4"
-  client!nm: "Class102_Sub2"
+  client!nm: "SignLinkAudioChannel"
   client!nn: "MiscTimer"
   client!no: "Class4_Sub1_Sub19"
   client!o: "Class53_Sub5"
@@ -247,7 +247,7 @@ classes:
   client!tf: "Class4_Sub6"
   client!tg: "Class4_Sub31"
   client!ti: "Class4_Sub1_Sub35"
-  client!tj: "Class102"
+  client!tj: "AudioChannel"
   client!tm: "ImageProducerFrameBuffer"
   client!tn: "AbstractWorld"
   client!to: "Class166"
@@ -1026,8 +1026,8 @@ fields:
     owner: "Class4_Sub1_Sub3"
     name: "anInt501"
   client!ca.Z Lclient!tj;:
-    owner: "Static1"
-    name: "aClass102_1"
+    owner: "client"
+    name: "musicChannel"
   client!ca.bb I:
     owner: "Static1"
     name: "anInt504"
@@ -4155,20 +4155,20 @@ fields:
     owner: "Static3"
     name: "anIntArray217"
   client!im.c Z:
-    owner: "Class91"
-    name: "aBoolean170"
+    owner: "AudioThread"
+    name: "stop"
   client!im.e Lsignlink!pm;:
-    owner: "Class91"
-    name: "aClass196_2"
+    owner: "AudioThread"
+    name: "signLink"
   client!im.f [Lclient!tj;:
-    owner: "Class91"
-    name: "aClass102Array1"
+    owner: "AudioThread"
+    name: "channels"
   client!im.h Lclient!jh;:
     owner: "Static3"
     name: "aClass96_1"
   client!im.j Z:
-    owner: "Class91"
-    name: "aBoolean171"
+    owner: "AudioThread"
+    name: "running"
   client!im.k [Lclient!ma;:
     owner: "Static3"
     name: "aClass56Array3"
@@ -4527,8 +4527,8 @@ fields:
     owner: "Js5"
     name: "RAISE_EXCEPTIONS"
   client!jk.s Z:
-    owner: "Static4"
-    name: "aBoolean183"
+    owner: "AudioChannel"
+    name: "stereo"
   client!jk.t I:
     owner: "Static4"
     name: "anInt2643"
@@ -4539,8 +4539,8 @@ fields:
     owner: "Static4"
     name: "anIntArray231"
   client!jk.w Lclient!im;:
-    owner: "Static4"
-    name: "aClass91_1"
+    owner: "AudioChannel"
+    name: "thread"
   client!jk.x Lclient!ic;:
     owner: "Class98"
     name: "aClass84_12"
@@ -4683,20 +4683,20 @@ fields:
     owner: "Static4"
     name: "aBoolean189"
   client!kb.M Z:
-    owner: "Class102_Sub1"
-    name: "aBoolean196"
+    owner: "JavaAudioChannel"
+    name: "reopenAfterFlush"
   client!kb.N Ljavax/sound/sampled/SourceDataLine;:
-    owner: "Class102_Sub1"
-    name: "aSourceDataLine1"
+    owner: "JavaAudioChannel"
+    name: "line"
   client!kb.O I:
-    owner: "Class102_Sub1"
-    name: "anInt2805"
+    owner: "JavaAudioChannel"
+    name: "lineBufferSize"
   client!kb.P Ljavax/sound/sampled/AudioFormat;:
-    owner: "Class102_Sub1"
-    name: "anAudioFormat1"
+    owner: "JavaAudioChannel"
+    name: "format"
   client!kb.Q [B:
-    owner: "Class102_Sub1"
-    name: "aByteArray20"
+    owner: "JavaAudioChannel"
+    name: "binarySamples"
   client!kc.a I:
     owner: "Class103"
     name: "anInt2806"
@@ -5472,8 +5472,8 @@ fields:
     owner: "Class4_Sub3_Sub15"
     name: "anIntArray307"
   client!ln.T I:
-    owner: "Static4"
-    name: "anInt3257"
+    owner: "AudioChannel"
+    name: "threadPriority"
   client!ln.V S:
     owner: "Static4"
     name: "aShort25"
@@ -6771,11 +6771,11 @@ fields:
     owner: "LocalisedText"
     name: "MAINLOAD50B"
   client!nm.M I:
-    owner: "Class102_Sub2"
-    name: "anInt3600"
+    owner: "SignLinkAudioChannel"
+    name: "channel"
   client!nm.N Lsignlink!le;:
-    owner: "Static5"
-    name: "anInterface5_1"
+    owner: "SignLinkAudioChannel"
+    name: "audioSource"
   client!nn.f J:
     owner: "MiscTimer"
     name: "time"
@@ -9075,8 +9075,8 @@ fields:
     owner: "Class4_Sub1_Sub29"
     name: "anInt4748"
   client!sc.fb Lclient!tj;:
-    owner: "Static6"
-    name: "aClass102_2"
+    owner: "client"
+    name: "soundChannel"
   client!sc.gb Lclient!fh;:
     owner: "client"
     name: "js5Archive18"
@@ -9828,64 +9828,64 @@ fields:
     owner: "Static6"
     name: "aShortArrayArray7"
   client!tj.A I:
-    owner: "Class102"
+    owner: "AudioChannel"
     name: "anInt3593"
   client!tj.B I:
-    owner: "Class102"
+    owner: "AudioChannel"
     name: "anInt3594"
   client!tj.C I:
-    owner: "Class102"
-    name: "anInt3595"
+    owner: "AudioChannel"
+    name: "sampleRate"
   client!tj.D [Lclient!tf;:
-    owner: "Class102"
+    owner: "AudioChannel"
     name: "aClass4_Sub6Array5"
   client!tj.E I:
-    owner: "Class102"
-    name: "anInt3596"
+    owner: "AudioChannel"
+    name: "bufferSize"
   client!tj.F [Lclient!tf;:
-    owner: "Class102"
+    owner: "AudioChannel"
     name: "aClass4_Sub6Array6"
   client!tj.G I:
-    owner: "Class102"
+    owner: "AudioChannel"
     name: "anInt3597"
   client!tj.H I:
-    owner: "Class102"
+    owner: "AudioChannel"
     name: "anInt3598"
   client!tj.I J:
-    owner: "Class102"
+    owner: "AudioChannel"
     name: "aLong128"
   client!tj.K J:
-    owner: "Class102"
-    name: "aLong129"
+    owner: "AudioChannel"
+    name: "closeUntil"
   client!tj.L Z:
-    owner: "Class102"
+    owner: "AudioChannel"
     name: "aBoolean260"
   client!tj.b Lclient!tf;:
-    owner: "Class102"
+    owner: "AudioChannel"
     name: "aClass4_Sub6_7"
   client!tj.e J:
-    owner: "Class102"
+    owner: "AudioChannel"
     name: "aLong126"
   client!tj.g I:
-    owner: "Class102"
+    owner: "AudioChannel"
     name: "anInt3577"
   client!tj.h Z:
     owner: "Static6"
     name: "aBoolean258"
   client!tj.o [I:
-    owner: "Class102"
-    name: "anIntArray393"
+    owner: "AudioChannel"
+    name: "samples"
   client!tj.q J:
     owner: "Static6"
     name: "aLong127"
   client!tj.r Z:
-    owner: "Class102"
+    owner: "AudioChannel"
     name: "aBoolean259"
   client!tj.s I:
     owner: "Static6"
     name: "anInt3585"
   client!tj.z I:
-    owner: "Class102"
+    owner: "AudioChannel"
     name: "anInt3592"
   client!tk.a I:
     owner: "Static6"
@@ -10513,7 +10513,7 @@ fields:
     name: "aClass4_Sub31_2"
   client!um.a I:
     owner: "Static7"
-    name: "anInt5394"
+    name: "sampleRate"
   client!um.b Lclient!en;:
     owner: "client"
     name: "js5NetQueue"
@@ -12606,10 +12606,10 @@ methods:
       21: "local21"
       28: "local28"
   client!al.a (IZIB)V:
-    owner: "Static9"
-    name: "method175"
+    owner: "AudioChannel"
+    name: "init"
     arguments:
-      1: "arg0"
+      1: "stereo"
     locals: {}
   client!al.a (IZZZ)V:
     owner: "Static9"
@@ -14362,10 +14362,10 @@ methods:
       65: "local65"
       69: "local69"
   client!ca.d (II)I:
-    owner: "Static11"
-    name: "method496"
+    owner: "IntUtils"
+    name: "bitCountFast"
     arguments:
-      1: "arg0"
+      1: "v"
     locals: {}
   client!ca.f (B)Lclient!fg;:
     owner: "Static11"
@@ -23649,13 +23649,13 @@ methods:
       103: "local103"
       112: "local112"
   client!im.run ()V:
-    owner: "Class91"
+    owner: "AudioThread"
     name: "run"
     arguments: {}
     locals:
-      13: "local13"
-      23: "local23"
-      48: "local48"
+      13: "i"
+      23: "channel"
+      48: "ex"
   client!in.<init> (IIIIIIIIII)V:
     owner: "Class11_Sub4"
     name: "<init>"
@@ -25749,47 +25749,47 @@ methods:
       889: "local889"
       930: "local930"
   client!kb.a ()I:
-    owner: "Class102_Sub1"
-    name: "method3002"
+    owner: "JavaAudioChannel"
+    name: "getBufferedSampleCount"
     arguments: {}
     locals: {}
   client!kb.a (Ljava/awt/Component;)V:
-    owner: "Class102_Sub1"
-    name: "method3006"
+    owner: "JavaAudioChannel"
+    name: "init"
     arguments:
-      0: "arg0"
+      0: "component"
     locals:
-      1: "local1"
-      9: "local9"
-      17: "local17"
-      23: "local23"
+      1: "mixers"
+      9: "i"
+      17: "mixer"
+      23: "name"
   client!kb.b ()V:
-    owner: "Class102_Sub1"
-    name: "method3004"
+    owner: "JavaAudioChannel"
+    name: "close"
     arguments: {}
     locals: {}
   client!kb.b (I)V:
-    owner: "Class102_Sub1"
-    name: "method2999"
+    owner: "JavaAudioChannel"
+    name: "open"
     arguments:
-      0: "arg0"
+      0: "bufferSize"
     locals:
-      20: "local20"
-      36: "local36"
+      20: "info"
+      36: "ex"
   client!kb.c ()V:
-    owner: "Class102_Sub1"
-    name: "method3005"
+    owner: "JavaAudioChannel"
+    name: "write"
     arguments: {}
     locals:
-      1: "local1"
-      9: "local9"
-      17: "local17"
+      1: "len"
+      9: "i"
+      17: "sample"
   client!kb.d ()V:
-    owner: "Class102_Sub1"
-    name: "method3011"
+    owner: "JavaAudioChannel"
+    name: "flush"
     arguments: {}
     locals:
-      34: "local34"
+      34: "info"
   client!kc.<init> ()V:
     owner: "Class103"
     name: "<init>"
@@ -30344,18 +30344,18 @@ methods:
       29: "local29"
       40: "local40"
   client!mo.a (Ljava/awt/Component;BILsignlink!pm;I)Lclient!tj;:
-    owner: "Static25"
-    name: "method2807"
+    owner: "AudioChannel"
+    name: "create"
     arguments:
-      0: "arg0"
-      2: "arg1"
-      3: "arg2"
-      4: "arg3"
+      0: "component"
+      3: "signLink"
+      4: "channelId"
+      2: "sampleRate"
     locals:
-      38: "local38"
-      123: "local123"
-      129: "local129"
-      192: "local192"
+      38: "channel"
+      123: "ex"
+      129: "channel"
+      192: "ex2"
   client!mo.a (Z)V:
     owner: "Static25"
     name: "method2811"
@@ -32327,42 +32327,42 @@ methods:
     arguments: {}
     locals: {}
   client!nm.<init> (Lsignlink!pm;I)V:
-    owner: "Class102_Sub2"
+    owner: "SignLinkAudioChannel"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "signLink"
+      1: "channel"
     locals: {}
   client!nm.a ()I:
-    owner: "Class102_Sub2"
-    name: "method3002"
+    owner: "SignLinkAudioChannel"
+    name: "getBufferedSampleCount"
     arguments: {}
     locals: {}
   client!nm.a (Ljava/awt/Component;)V:
-    owner: "Class102_Sub2"
-    name: "method3006"
+    owner: "SignLinkAudioChannel"
+    name: "init"
     arguments:
-      0: "arg0"
+      0: "component"
     locals: {}
   client!nm.b ()V:
-    owner: "Class102_Sub2"
-    name: "method3004"
+    owner: "SignLinkAudioChannel"
+    name: "close"
     arguments: {}
     locals: {}
   client!nm.b (I)V:
-    owner: "Class102_Sub2"
-    name: "method2999"
+    owner: "SignLinkAudioChannel"
+    name: "open"
     arguments:
-      0: "arg0"
+      0: "bufferSize"
     locals: {}
   client!nm.c ()V:
-    owner: "Class102_Sub2"
-    name: "method3005"
+    owner: "SignLinkAudioChannel"
+    name: "write"
     arguments: {}
     locals: {}
   client!nm.d ()V:
-    owner: "Class102_Sub2"
-    name: "method3011"
+    owner: "SignLinkAudioChannel"
+    name: "flush"
     arguments: {}
     locals: {}
   client!nn.<init> ()V:
@@ -41236,27 +41236,27 @@ methods:
     arguments: {}
     locals: {}
   client!tj.a ()I:
-    owner: "Class102"
-    name: "method3002"
+    owner: "AudioChannel"
+    name: "getBufferedSampleCount"
     arguments: {}
     locals: {}
   client!tj.a (B)V:
-    owner: "Class102"
+    owner: "AudioChannel"
     name: "method2998"
     arguments: {}
     locals:
-      18: "local18"
-      58: "local58"
-      96: "local96"
+      18: "now"
+      58: "ex"
+      96: "bufferedSamples"
       117: "local117"
-      262: "local262"
+      262: "ex"
   client!tj.a (BI)V:
-    owner: "Class102"
+    owner: "AudioChannel"
     name: "method2995"
     arguments: {}
     locals: {}
   client!tj.a (I)V:
-    owner: "Class102"
+    owner: "AudioChannel"
     name: "method2996"
     arguments: {}
     locals: {}
@@ -41332,7 +41332,7 @@ methods:
     locals:
       4: "local4"
   client!tj.a (ILclient!tf;B)V:
-    owner: "Class102"
+    owner: "AudioChannel"
     name: "method2994"
     arguments:
       0: "arg0"
@@ -41341,19 +41341,19 @@ methods:
       3: "local3"
       8: "local8"
   client!tj.a (Lclient!tf;I)V:
-    owner: "Class102"
+    owner: "AudioChannel"
     name: "method3008"
     arguments:
       0: "arg0"
     locals: {}
   client!tj.a (Ljava/awt/Component;)V:
-    owner: "Class102"
-    name: "method3006"
+    owner: "AudioChannel"
+    name: "init"
     arguments:
-      0: "arg0"
+      0: "component"
     locals: {}
   client!tj.a ([II)V:
-    owner: "Class102"
+    owner: "AudioChannel"
     name: "method3012"
     arguments:
       0: "arg0"
@@ -41376,25 +41376,25 @@ methods:
       212: "local212"
       227: "local227"
   client!tj.b ()V:
-    owner: "Class102"
-    name: "method3004"
+    owner: "AudioChannel"
+    name: "close"
     arguments: {}
     locals: {}
   client!tj.b (B)V:
-    owner: "Class102"
+    owner: "AudioChannel"
     name: "method3009"
     arguments: {}
     locals:
-      18: "local18"
+      18: "ex"
   client!tj.b (I)V:
-    owner: "Class102"
-    name: "method2999"
+    owner: "AudioChannel"
+    name: "open"
     arguments:
-      0: "arg0"
+      0: "bufferSize"
     locals: {}
   client!tj.c ()V:
-    owner: "Class102"
-    name: "method3005"
+    owner: "AudioChannel"
+    name: "write"
     arguments: {}
     locals: {}
   client!tj.c (I)V:
@@ -41436,17 +41436,17 @@ methods:
       844: "local844"
       853: "local853"
   client!tj.d ()V:
-    owner: "Class102"
-    name: "method3011"
+    owner: "AudioChannel"
+    name: "flush"
     arguments: {}
     locals: {}
   client!tj.d (I)V:
-    owner: "Class102"
-    name: "method3001"
+    owner: "AudioChannel"
+    name: "quit"
     arguments: {}
     locals:
-      17: "local17"
-      19: "local19"
+      17: "stop"
+      19: "i"
   client!tj.e (I)V:
     owner: "Static33"
     name: "method3007"
