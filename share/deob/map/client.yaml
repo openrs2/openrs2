@@ -17332,7 +17332,7 @@ methods:
     locals: {}
   client!en.f (I)V:
     owner: "Js5NetQueue"
-    name: "stop"
+    name: "quit"
     arguments: {}
     locals: {}
   client!en.g (I)V:
@@ -23866,7 +23866,7 @@ methods:
       7: "request"
   client!ja.a (Z)V:
     owner: "Js5CacheQueue"
-    name: "stop"
+    name: "quit"
     arguments: {}
     locals:
       27: "ex"
