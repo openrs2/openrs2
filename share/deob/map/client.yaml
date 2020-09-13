@@ -16,7 +16,7 @@ classes:
   client!be: "Class17"
   client!bf: "Class18"
   client!bg: "Class4_Sub5"
-  client!bh: "Class19"
+  client!bh: "MouseWheel"
   client!bi: "Class20_Sub1"
   client!bj: "Class21"
   client!bk: "TracingException"
@@ -44,7 +44,7 @@ classes:
   client!de: "Class11_Sub2"
   client!dh: "Class4_Sub3_Sub5_Sub1"
   client!dj: "LruHashTable"
-  client!dk: "Class19_Sub1"
+  client!dk: "AwtMouseWheel"
   client!dl: "Class41_Sub1_Sub1"
   client!dm: "Class42"
   client!dn: "Class4_Sub1_Sub6"
@@ -1794,8 +1794,8 @@ fields:
     owner: "LruHashTable"
     name: "capacity"
   client!dk.k I:
-    owner: "Class19_Sub1"
-    name: "anInt1054"
+    owner: "AwtMouseWheel"
+    name: "wheelRotation"
   client!dl.O [B:
     owner: "Class41_Sub1_Sub1"
     name: "aByteArray9"
@@ -9180,8 +9180,8 @@ fields:
     owner: "Static6"
     name: "anInt4835"
   client!sh.ab Lclient!bh;:
-    owner: "Static6"
-    name: "aClass19_1"
+    owner: "client"
+    name: "mouseWheel"
   client!sh.cb I:
     owner: "Static6"
     name: "anInt4837"
@@ -13380,8 +13380,8 @@ methods:
       141: "local141"
       172: "local172"
   client!bh.a (B)I:
-    owner: "Class19"
-    name: "method899"
+    owner: "MouseWheel"
+    name: "getWheelRotation"
     arguments: {}
     locals: {}
   client!bh.a (II)Lclient!jo;:
@@ -13431,16 +13431,16 @@ methods:
       290: "local290"
       294: "local294"
   client!bh.a (Ljava/awt/Component;B)V:
-    owner: "Class19"
-    name: "method894"
+    owner: "MouseWheel"
+    name: "stop"
     arguments:
-      0: "arg0"
+      0: "component"
     locals: {}
   client!bh.a (Ljava/awt/Component;Z)V:
-    owner: "Class19"
-    name: "method900"
+    owner: "MouseWheel"
+    name: "start"
     arguments:
-      0: "arg0"
+      0: "component"
     locals: {}
   client!bh.b (I)V:
     owner: "Static10"
@@ -13724,11 +13724,11 @@ methods:
       141: "local141"
       149: "local149"
   client!bl.f (I)Lclient!bh;:
-    owner: "Static10"
-    name: "method345"
+    owner: "MouseWheel"
+    name: "create"
     arguments: {}
     locals:
-      15: "local15"
+      15: "ex"
   client!bm.a (ILclient!kf;)I:
     owner: "Bzip2Decompressor"
     name: "getBits"
@@ -15252,7 +15252,7 @@ methods:
     arguments: {}
     locals:
       25: "local25"
-      73: "local73"
+      73: "wheelRotation"
   client!client.a (ZI)V:
     owner: "client"
     name: "setJs5Response"
@@ -16244,28 +16244,28 @@ methods:
     arguments: {}
     locals: {}
   client!dk.a (B)I:
-    owner: "Class19_Sub1"
-    name: "method899"
+    owner: "AwtMouseWheel"
+    name: "getWheelRotation"
     arguments: {}
     locals:
-      10: "local10"
+      10: "wheelRotation"
   client!dk.a (Ljava/awt/Component;B)V:
-    owner: "Class19_Sub1"
-    name: "method894"
+    owner: "AwtMouseWheel"
+    name: "stop"
     arguments:
-      0: "arg0"
+      0: "component"
     locals: {}
   client!dk.a (Ljava/awt/Component;Z)V:
-    owner: "Class19_Sub1"
-    name: "method900"
+    owner: "AwtMouseWheel"
+    name: "start"
     arguments:
-      0: "arg0"
+      0: "component"
     locals: {}
   client!dk.mouseWheelMoved (Ljava/awt/event/MouseWheelEvent;)V:
-    owner: "Class19_Sub1"
+    owner: "AwtMouseWheel"
     name: "mouseWheelMoved"
     arguments:
-      0: "arg0"
+      0: "event"
     locals: {}
   client!dl.<init> ()V:
     owner: "Class41_Sub1_Sub1"
