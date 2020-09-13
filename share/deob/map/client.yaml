@@ -34,7 +34,7 @@ classes:
   client!ck: "Class4_Sub1_Sub5"
   client!cl: "Interface2"
   client!client: "client"
-  client!cm: "Class32"
+  client!cm: "VarbitType"
   client!cn: "ReferenceNode"
   client!co: "Class33"
   client!d: "Class34"
@@ -89,7 +89,7 @@ classes:
   client!hc: "ByteArray"
   client!he: "ObjStack"
   client!hf: "NanoTimer"
-  client!hi: "Class79"
+  client!hi: "VarpType"
   client!hk: "Class4_Sub1_Sub11"
   client!hl: "Class81"
   client!ho: "Class82"
@@ -1269,8 +1269,8 @@ fields:
     owner: "Static1"
     name: "anInt777"
   client!cm.a I:
-    owner: "Class32"
-    name: "anInt787"
+    owner: "VarbitType"
+    name: "baseVar"
   client!cm.b I:
     owner: "Static1"
     name: "anInt788"
@@ -1281,11 +1281,11 @@ fields:
     owner: "Static1"
     name: "aBoolean47"
   client!cm.i I:
-    owner: "Class32"
-    name: "anInt794"
+    owner: "VarbitType"
+    name: "startBit"
   client!cm.j I:
-    owner: "Class32"
-    name: "anInt795"
+    owner: "VarbitType"
+    name: "endBit"
   client!cn.C Z:
     owner: "ObjTypeList"
     name: "allowMembers"
@@ -3456,8 +3456,8 @@ fields:
     owner: "Static3"
     name: "aShortArray32"
   client!hi.f I:
-    owner: "Class79"
-    name: "anInt2191"
+    owner: "VarpType"
+    name: "clientCode"
   client!hi.g F:
     owner: "Static3"
     name: "aFloat51"
@@ -4341,8 +4341,8 @@ fields:
     owner: "Static3"
     name: "aClass185_8"
   client!jc.G Lclient!cc;:
-    owner: "Static3"
-    name: "aClass26_25"
+    owner: "VarbitTypeList"
+    name: "types"
   client!jc.H I:
     owner: "ParamType"
     name: "defaultInt"
@@ -4398,8 +4398,8 @@ fields:
     owner: "Class94"
     name: "anInt2568"
   client!je.c Lclient!cc;:
-    owner: "Static3"
-    name: "aClass26_26"
+    owner: "VarpTypeList"
+    name: "types"
   client!je.d [Lclient!gb;:
     owner: "WorldList"
     name: "sorted"
@@ -7515,8 +7515,8 @@ fields:
     owner: "Static5"
     name: "anInt4156"
   client!ph.cb I:
-    owner: "Static5"
-    name: "anInt4158"
+    owner: "VarpTypeList"
+    name: "capacity"
   client!ph.db Lclient!gl;:
     owner: "Static5"
     name: "aClass4_Sub3_Sub5_3"
@@ -8640,8 +8640,8 @@ fields:
     owner: "Static6"
     name: "aClass56_1"
   client!ri.A Lclient!fh;:
-    owner: "Static6"
-    name: "aClass58_86"
+    owner: "VarbitTypeList"
+    name: "archive"
   client!ri.B I:
     owner: "Class53_Sub7"
     name: "anInt4580"
@@ -9666,8 +9666,8 @@ fields:
     owner: "ObjType"
     name: "manHead2"
   client!td.k Lclient!fh;:
-    owner: "Static6"
-    name: "aClass58_94"
+    owner: "VarpTypeList"
+    name: "archive"
   client!td.kb I:
     owner: "ObjType"
     name: "resizeX"
@@ -12739,10 +12739,10 @@ methods:
       23: "local23"
       30: "local30"
   client!am.b (II)I:
-    owner: "Static9"
-    name: "method192"
+    owner: "VarbitTypeList"
+    name: "getGroupId"
     arguments:
-      1: "arg0"
+      1: "id"
     locals: {}
   client!an.a (I)V:
     owner: "Static9"
@@ -13115,10 +13115,10 @@ methods:
       29: "bytes"
       33: "newType"
   client!be.a (Lclient!fh;I)V:
-    owner: "Static9"
-    name: "method262"
+    owner: "VarpTypeList"
+    name: "init"
     arguments:
-      0: "arg0"
+      0: "archive"
     locals: {}
   client!bf.<init> ()V:
     owner: "Class18"
@@ -15482,18 +15482,18 @@ methods:
       131: "c"
       156: "ex"
   client!cm.a (Lclient!fd;B)V:
-    owner: "Class32"
-    name: "method695"
+    owner: "VarbitType"
+    name: "decode"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals:
-      15: "local15"
+      15: "code"
   client!cm.a (Lclient!fd;BI)V:
-    owner: "Class32"
-    name: "method696"
+    owner: "VarbitType"
+    name: "decode"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "buffer"
+      2: "code"
     locals: {}
   client!cm.a (Z)V:
     owner: "GameShell"
@@ -16496,14 +16496,14 @@ methods:
     arguments: {}
     locals: {}
   client!ea.a (BI)Lclient!hi;:
-    owner: "Static13"
-    name: "method935"
+    owner: "VarpTypeList"
+    name: "get"
     arguments:
-      1: "arg0"
+      1: "id"
     locals:
-      17: "local17"
-      29: "local29"
-      33: "local33"
+      17: "type"
+      29: "bytes"
+      33: "newType"
   client!ea.a (I)V:
     owner: "Class41_Sub1"
     name: "method3144"
@@ -16996,14 +16996,14 @@ methods:
     arguments: {}
     locals: {}
   client!el.a (II)Lclient!cm;:
-    owner: "Static14"
-    name: "method1065"
+    owner: "VarbitTypeList"
+    name: "get"
     arguments:
-      0: "arg0"
+      0: "id"
     locals:
-      10: "local10"
-      42: "local42"
-      46: "local46"
+      10: "type"
+      42: "bytes"
+      46: "newType"
   client!el.a (III)V:
     owner: "Static14"
     name: "method1064"
@@ -19636,10 +19636,10 @@ methods:
       8: "ex"
       20: "ex2"
   client!fo.a (IB)V:
-    owner: "Static16"
-    name: "method1501"
+    owner: "VarbitTypeList"
+    name: "resize"
     arguments:
-      0: "arg0"
+      0: "bucketCount"
     locals: {}
   client!fo.a ([BI)V:
     owner: "Js5Index"
@@ -22082,8 +22082,8 @@ methods:
     locals:
       17: "local17"
   client!he.a (IB)V:
-    owner: "Static18"
-    name: "method1716"
+    owner: "VarbitTypeList"
+    name: "clean"
     arguments: {}
     locals: {}
   client!he.a (IIIII)V:
@@ -22380,19 +22380,19 @@ methods:
       17: "i"
       32: "c"
   client!hi.a (Lclient!fd;BI)V:
-    owner: "Class79"
-    name: "method1743"
+    owner: "VarpType"
+    name: "decode"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "buffer"
+      2: "code"
     locals: {}
   client!hi.a (Lclient!fd;I)V:
-    owner: "Class79"
-    name: "method1747"
+    owner: "VarpType"
+    name: "decode"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals:
-      5: "local5"
+      5: "code"
   client!hj.a (Z[B)[B:
     owner: "Js5Compression"
     name: "uncompress"
@@ -22560,8 +22560,8 @@ methods:
       1: "arg0"
     locals: {}
   client!hm.d (I)V:
-    owner: "Static19"
-    name: "method1793"
+    owner: "VarpTypeList"
+    name: "removeSoft"
     arguments: {}
     locals: {}
   client!hm.e (I)I:
@@ -31527,8 +31527,8 @@ methods:
       39: "local39"
       47: "local47"
   client!nb.b (Z)V:
-    owner: "Static25"
-    name: "method2924"
+    owner: "VarbitTypeList"
+    name: "clear"
     arguments: {}
     locals: {}
   client!nb.c (I)V:
@@ -33546,8 +33546,8 @@ methods:
       1: "arg0"
     locals: {}
   client!ok.b (BI)V:
-    owner: "Static27"
-    name: "method3236"
+    owner: "VarpTypeList"
+    name: "clean"
     arguments: {}
     locals: {}
   client!ok.write (I)V:
@@ -39689,8 +39689,8 @@ methods:
     arguments: {}
     locals: {}
   client!sc.f (I)V:
-    owner: "Static32"
-    name: "method3916"
+    owner: "VarbitTypeList"
+    name: "removeSoft"
     arguments: {}
     locals: {}
   client!sd.a (IZZIII)V:
@@ -40499,10 +40499,10 @@ methods:
       32: "freeSpace"
       34: "i"
   client!ta.a (II)I:
-    owner: "Static33"
-    name: "method4090"
+    owner: "VarbitTypeList"
+    name: "getFileId"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!ta.a (ZI)V:
     owner: "Static33"
@@ -41202,10 +41202,10 @@ methods:
       30: "local30"
       32: "local32"
   client!ti.a (Lclient!fh;B)V:
-    owner: "Static33"
-    name: "method4198"
+    owner: "VarbitTypeList"
+    name: "init"
     arguments:
-      0: "arg0"
+      0: "archive"
     locals: {}
   client!ti.a (Lclient!wf;B)Z:
     owner: "Static33"
@@ -41231,8 +41231,8 @@ methods:
     arguments: {}
     locals: {}
   client!ti.f (I)V:
-    owner: "Static33"
-    name: "method4200"
+    owner: "VarpTypeList"
+    name: "clear"
     arguments: {}
     locals: {}
   client!tj.a ()I:
