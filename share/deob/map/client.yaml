@@ -92,7 +92,7 @@ classes:
   client!hi: "VarpType"
   client!hk: "TextureOp1"
   client!hl: "Class81"
-  client!ho: "Class82"
+  client!ho: "MelType"
   client!ia: "BrokenInputStream"
   client!ib: "Class4_Sub3_Sub10"
   client!ic: "HashTable"
@@ -1500,8 +1500,8 @@ fields:
     owner: "Static1"
     name: "anInt881"
   client!db.c Lclient!fh;:
-    owner: "Static1"
-    name: "aClass58_23"
+    owner: "MelTypeList"
+    name: "archive"
   client!db.e [I:
     owner: "Static1"
     name: "anIntArray63"
@@ -3528,37 +3528,37 @@ fields:
     owner: "Static3"
     name: "aStringArray37"
   client!ho.A I:
-    owner: "Class82"
+    owner: "MelType"
     name: "anInt2282"
   client!ho.B I:
-    owner: "Class82"
+    owner: "MelType"
     name: "anInt2283"
   client!ho.C I:
-    owner: "Class82"
+    owner: "MelType"
     name: "anInt2284"
   client!ho.D Lclient!ll;:
     owner: "Static3"
     name: "aClass112_13"
   client!ho.E I:
-    owner: "Class82"
+    owner: "MelType"
     name: "anInt2285"
   client!ho.F I:
-    owner: "Class82"
+    owner: "MelType"
     name: "anInt2286"
   client!ho.G I:
-    owner: "Class82"
+    owner: "MelType"
     name: "anInt2287"
   client!ho.K I:
-    owner: "Class82"
+    owner: "MelType"
     name: "anInt2291"
   client!ho.L I:
-    owner: "Class82"
-    name: "anInt2292"
+    owner: "MelType"
+    name: "id"
   client!ho.M Z:
-    owner: "Class82"
+    owner: "MelType"
     name: "aBoolean157"
   client!ho.P I:
-    owner: "Class82"
+    owner: "MelType"
     name: "anInt2294"
   client!ho.Q [I:
     owner: "Static3"
@@ -3576,70 +3576,70 @@ fields:
     owner: "Static3"
     name: "anInt2296"
   client!ho.a I:
-    owner: "Class82"
+    owner: "MelType"
     name: "anInt2265"
   client!ho.b Z:
-    owner: "Class82"
+    owner: "MelType"
     name: "aBoolean154"
   client!ho.c I:
-    owner: "Class82"
+    owner: "MelType"
     name: "anInt2266"
   client!ho.d I:
-    owner: "Class82"
+    owner: "MelType"
     name: "anInt2267"
   client!ho.e F:
     owner: "Static3"
     name: "aFloat54"
   client!ho.g Z:
-    owner: "Class82"
+    owner: "MelType"
     name: "aBoolean155"
   client!ho.i I:
-    owner: "Class82"
+    owner: "MelType"
     name: "anInt2270"
   client!ho.j Lclient!cc;:
     owner: "NpcTypeList"
     name: "types"
   client!ho.k I:
-    owner: "Class82"
+    owner: "MelType"
     name: "anInt2271"
   client!ho.l I:
     owner: "Static3"
     name: "anInt2272"
   client!ho.m [I:
-    owner: "Class82"
+    owner: "MelType"
     name: "anIntArray188"
   client!ho.n I:
     owner: "Static3"
     name: "anInt2273"
   client!ho.o I:
-    owner: "Class82"
+    owner: "MelType"
     name: "anInt2274"
   client!ho.p I:
-    owner: "Class82"
+    owner: "MelType"
     name: "anInt2275"
   client!ho.q Z:
-    owner: "Class82"
+    owner: "MelType"
     name: "aBoolean156"
   client!ho.r I:
-    owner: "Class82"
+    owner: "MelType"
     name: "anInt2276"
   client!ho.s I:
-    owner: "Class82"
+    owner: "MelType"
     name: "anInt2277"
   client!ho.t Ljava/lang/String;:
-    owner: "Class82"
+    owner: "MelType"
     name: "aString130"
   client!ho.v [Ljava/lang/String;:
-    owner: "Class82"
+    owner: "MelType"
     name: "aStringArray15"
   client!ho.w I:
-    owner: "Class82"
+    owner: "MelType"
     name: "anInt2279"
   client!ho.x I:
-    owner: "Class82"
+    owner: "MelType"
     name: "anInt2280"
   client!ho.z Ljava/lang/String;:
-    owner: "Class82"
+    owner: "MelType"
     name: "aString131"
   client!i.a Ljava/lang/String;:
     owner: "Static3"
@@ -4173,8 +4173,8 @@ fields:
     owner: "Static3"
     name: "aClass56Array3"
   client!im.m Lclient!cc;:
-    owner: "Static3"
-    name: "aClass26_23"
+    owner: "MelTypeList"
+    name: "sprites"
   client!im.p Ljava/lang/String;:
     owner: "LocalisedText"
     name: "FACEHERE"
@@ -4452,8 +4452,8 @@ fields:
     owner: "Static3"
     name: "anIntArray225"
   client!jh.k Lclient!fh;:
-    owner: "Static3"
-    name: "aClass58_60"
+    owner: "MelTypeList"
+    name: "spritesArchive"
   client!jh.l Z:
     owner: "Static3"
     name: "aBoolean178"
@@ -4953,8 +4953,8 @@ fields:
     owner: "TextureOp29"
     name: "aClass11Array1"
   client!km.Z Lclient!cc;:
-    owner: "Static4"
-    name: "aClass26_28"
+    owner: "MelTypeList"
+    name: "types"
   client!km.cb [I:
     owner: "Bzip2DState"
     name: "tt"
@@ -17005,11 +17005,11 @@ methods:
       42: "bytes"
       46: "newType"
   client!el.a (III)V:
-    owner: "Static14"
-    name: "method1064"
+    owner: "MelTypeList"
+    name: "resize"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "capacity"
+      1: "spritesCapacity"
     locals: {}
   client!el.a (IIIBIIIII)V:
     owner: "Static14"
@@ -22621,7 +22621,7 @@ methods:
     arguments: {}
     locals: {}
   client!ho.a (B)Lclient!fe;:
-    owner: "Class82"
+    owner: "MelType"
     name: "method1808"
     arguments: {}
     locals:
@@ -22635,7 +22635,7 @@ methods:
       2: "arg1"
     locals: {}
   client!ho.a (I)Z:
-    owner: "Class82"
+    owner: "MelType"
     name: "method1810"
     arguments: {}
     locals:
@@ -22648,24 +22648,24 @@ methods:
       0: "value"
     locals: {}
   client!ho.a (IILclient!fd;)V:
-    owner: "Class82"
-    name: "method1809"
+    owner: "MelType"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "buffer"
+      1: "code"
     locals:
       262: "local262"
       270: "local270"
       301: "local301"
   client!ho.a (Lclient!fd;I)V:
-    owner: "Class82"
-    name: "method1806"
+    owner: "MelType"
+    name: "decode"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals:
-      15: "local15"
+      15: "code"
   client!ho.a (ZZZ)Lclient!ma;:
-    owner: "Class82"
+    owner: "MelType"
     name: "method1811"
     arguments:
       0: "arg0"
@@ -25600,14 +25600,14 @@ methods:
       108: "local108"
       119: "local119"
   client!k.a (ZI)Lclient!ho;:
-    owner: "Static22"
-    name: "method2191"
+    owner: "MelTypeList"
+    name: "get"
     arguments:
-      1: "arg0"
+      1: "id"
     locals:
-      10: "local10"
-      26: "local26"
-      30: "local30"
+      10: "type"
+      26: "bytes"
+      30: "newType"
   client!ka.a (IIIIIILclient!vc;IJ)Z:
     owner: "Static22"
     name: "method2196"
@@ -31512,8 +31512,8 @@ methods:
       1: "arg0"
     locals: {}
   client!nb.b (I)V:
-    owner: "Static25"
-    name: "method2925"
+    owner: "MelTypeList"
+    name: "clear"
     arguments: {}
     locals: {}
   client!nb.b (III)I:
@@ -32321,8 +32321,8 @@ methods:
       25: "local25"
       39: "local39"
   client!nl.b (I)V:
-    owner: "Static26"
-    name: "method2993"
+    owner: "MelTypeList"
+    name: "removeSoft"
     arguments: {}
     locals: {}
   client!nm.<init> (Lsignlink!pm;I)V:
@@ -35346,11 +35346,11 @@ methods:
       1: "key"
     locals: {}
   client!pl.a (BLclient!fh;Lclient!fh;)V:
-    owner: "Static29"
-    name: "method3474"
+    owner: "MelTypeList"
+    name: "init"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "archive"
+      2: "spritesArchive"
     locals: {}
   client!pl.a (IIIIB)V:
     owner: "Static29"
@@ -45552,8 +45552,8 @@ methods:
       397: "local397"
       399: "local399"
   client!we.a (ZI)V:
-    owner: "Static37"
-    name: "method4717"
+    owner: "MelTypeList"
+    name: "clean"
     arguments: {}
     locals: {}
   client!wf.a ()V:
