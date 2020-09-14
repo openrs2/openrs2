@@ -187,7 +187,7 @@ classes:
   client!pb: "Class4_Sub8_Sub1"
   client!pc: "Class4_Sub6_Sub4"
   client!pd: "Class132"
-  client!pe: "Class133"
+  client!pe: "CursorType"
   client!pf: "Class134"
   client!pg: "Class41"
   client!ph: "TextureOp19"
@@ -438,8 +438,8 @@ fields:
     owner: "Static1"
     name: "anIntArray14"
   client!af.E Lclient!fh;:
-    owner: "Static1"
-    name: "aClass58_3"
+    owner: "CursorTypeList"
+    name: "archive"
   client!af.F I:
     owner: "Static1"
     name: "anInt113"
@@ -4308,8 +4308,8 @@ fields:
     owner: "Js5CacheQueue"
     name: "size"
   client!ja.p Lclient!fh;:
-    owner: "Static3"
-    name: "aClass58_58"
+    owner: "CursorTypeList"
+    name: "spritesArchive"
   client!ja.q Ljava/lang/Thread;:
     owner: "Js5CacheQueue"
     name: "thread"
@@ -7224,8 +7224,8 @@ fields:
     owner: "Static5"
     name: "anInt3896"
   client!ok.h Lclient!cc;:
-    owner: "Static5"
-    name: "aClass26_42"
+    owner: "CursorTypeList"
+    name: "types"
   client!ok.i [Lclient!te;:
     owner: "Static5"
     name: "aClass4_Sub3_Sub19Array3"
@@ -7434,8 +7434,8 @@ fields:
     owner: "Class132"
     name: "anIntArray431"
   client!pe.a I:
-    owner: "Class133"
-    name: "anInt4111"
+    owner: "CursorType"
+    name: "hotSpotY"
   client!pe.b I:
     owner: "Terrain"
     name: "anInt4112"
@@ -7446,11 +7446,11 @@ fields:
     owner: "LocalisedText"
     name: "MAINLOAD60B"
   client!pe.h I:
-    owner: "Class133"
-    name: "anInt4116"
+    owner: "CursorType"
+    name: "spriteId"
   client!pe.k I:
-    owner: "Class133"
-    name: "anInt4119"
+    owner: "CursorType"
+    name: "hotSpotX"
   client!pe.l I:
     owner: "Preferences"
     name: "areaSoundsVolume"
@@ -8601,8 +8601,8 @@ fields:
     owner: "TextureOp15"
     name: "anInt4549"
   client!rh.ab Lclient!cc;:
-    owner: "Static6"
-    name: "aClass26_46"
+    owner: "CursorTypeList"
+    name: "sprites"
   client!rh.cb [S:
     owner: "TextureOp15"
     name: "aShortArray81"
@@ -12391,8 +12391,8 @@ methods:
     arguments: {}
     locals: {}
   client!ae.c (I)V:
-    owner: "Static8"
-    name: "method91"
+    owner: "CursorTypeList"
+    name: "removeSoft"
     arguments: {}
     locals: {}
   client!af.<init> (I[B)V:
@@ -14431,11 +14431,11 @@ methods:
     locals:
       10: "node"
   client!cc.a (Lclient!fh;ILclient!fh;)V:
-    owner: "Static11"
-    name: "method514"
+    owner: "CursorTypeList"
+    name: "init"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "archive"
+      2: "spritesArchive"
     locals: {}
   client!cc.a (Lclient!io;ZI)V:
     owner: "ScriptRunner"
@@ -26831,14 +26831,14 @@ methods:
       522: "local522"
       535: "local535"
   client!km.d (II)Lclient!pe;:
-    owner: "Static22"
-    name: "method2390"
+    owner: "CursorTypeList"
+    name: "get"
     arguments:
-      1: "arg0"
+      1: "id"
     locals:
-      14: "local14"
-      28: "local28"
-      32: "local32"
+      14: "type"
+      28: "bytes"
+      32: "newType"
   client!km.f (I)V:
     owner: "Static22"
     name: "method2387"
@@ -34756,19 +34756,19 @@ methods:
     locals:
       1: "local1"
   client!pe.a (B)Lclient!vn;:
-    owner: "Class133"
-    name: "method3401"
+    owner: "CursorType"
+    name: "getSprite"
     arguments: {}
     locals:
-      17: "local17"
-      30: "local30"
+      17: "sprite"
+      30: "newSprite"
   client!pe.a (BLclient!fd;II)V:
-    owner: "Class133"
-    name: "method3399"
+    owner: "CursorType"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      3: "arg2"
+      1: "buffer"
+      3: "id"
+      2: "code"
     locals: {}
   client!pe.a (II)V:
     owner: "Static29"
@@ -34778,13 +34778,13 @@ methods:
     locals:
       4: "local4"
   client!pe.a (IILclient!fd;)V:
-    owner: "Class133"
-    name: "method3398"
+    owner: "CursorType"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "buffer"
+      1: "id"
     locals:
-      5: "local5"
+      5: "code"
   client!pe.b (I)V:
     owner: "Static29"
     name: "method3400"
@@ -42455,8 +42455,8 @@ methods:
       32: "codepoint"
       49: "c"
   client!ub.a (Z)V:
-    owner: "Static34"
-    name: "method4270"
+    owner: "CursorTypeList"
+    name: "clear"
     arguments: {}
     locals: {}
   client!uc.<init> ()V:
@@ -45620,8 +45620,8 @@ methods:
     locals:
       8: "local8"
   client!wf.a (II)V:
-    owner: "Static37"
-    name: "method4727"
+    owner: "CursorTypeList"
+    name: "clean"
     arguments: {}
     locals: {}
   client!wf.a (III)V:
