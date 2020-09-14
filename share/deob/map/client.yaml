@@ -37,7 +37,7 @@ classes:
   client!cm: "VarbitType"
   client!cn: "ReferenceNode"
   client!co: "Scenery"
-  client!d: "Class34"
+  client!d: "BasType"
   client!da: "Class35"
   client!dc: "Class37"
   client!dd: "Class4_Sub4_Sub1"
@@ -174,7 +174,7 @@ classes:
   client!oe: "Class41_Sub2_Sub1"
   client!of: "TextureOp8"
   client!og: "TextureOp39"
-  client!oh: "Class127"
+  client!oh: "FloType"
   client!oi: "Class128"
   client!oj: "HuffmanCodec"
   client!ok: "BrokenOutputStream"
@@ -183,7 +183,7 @@ classes:
   client!on: "Class4_Sub21"
   client!oo: "MillisTimer"
   client!p: "Npc"
-  client!pa: "Class131"
+  client!pa: "FluType"
   client!pb: "Class4_Sub8_Sub1"
   client!pc: "Class4_Sub6_Sub4"
   client!pd: "Class132"
@@ -208,7 +208,7 @@ classes:
   client!qj: "TextureOp16"
   client!qk: "PlayerAppearance"
   client!ql: "GameCanvas"
-  client!qm: "Class145"
+  client!qm: "SkyBoxType"
   client!qn: "Class4_Sub24"
   client!qo: "Class146"
   client!r: "Class20_Sub2"
@@ -226,7 +226,7 @@ classes:
   client!rn: "Class41_Sub2"
   client!ro: "StructType"
   client!s: "GlModel"
-  client!sa: "Class153"
+  client!sa: "SkyBoxSphereType"
   client!sb: "GlCleanerProgram"
   client!sc: "TextureOp30"
   client!se: "TextureOp13"
@@ -267,7 +267,7 @@ classes:
   client!v: "IntNode"
   client!vb: "TextureOp12"
   client!vc: "Entity"
-  client!vd: "Class178"
+  client!vd: "LightType"
   client!ve: "Wall"
   client!vf: "Class180"
   client!vg: "Model"
@@ -357,8 +357,8 @@ fields:
     owner: "Static1"
     name: "aClass4_Sub3_Sub10_1"
   client!ab.e Lclient!fh;:
-    owner: "Static1"
-    name: "aClass58_2"
+    owner: "FluTypeList"
+    name: "archive"
   client!ab.j Lsignlink!vk;:
     owner: "Static1"
     name: "aClass197_1"
@@ -1080,8 +1080,8 @@ fields:
     owner: "Static1"
     name: "aClass130_1"
   client!cd.g Lclient!cc;:
-    owner: "Static1"
-    name: "aClass26_6"
+    owner: "FluTypeList"
+    name: "types"
   client!cd.k [I:
     owner: "Class27"
     name: "anIntArray48"
@@ -1095,7 +1095,7 @@ fields:
     owner: "Static1"
     name: "anInt548"
   client!ce.d I:
-    owner: "Static1"
+    owner: "FloType"
     name: "anInt549"
   client!ce.g I:
     owner: "Protocol"
@@ -1338,70 +1338,70 @@ fields:
     owner: "Scenery"
     name: "aLong38"
   client!d.A I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt852"
   client!d.B I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt853"
   client!d.C I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt854"
   client!d.D I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt855"
   client!d.E I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt856"
   client!d.F [[I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anIntArrayArray7"
   client!d.G I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt857"
   client!d.H Ljava/lang/String;:
     owner: "LocalisedText"
     name: "MAINLOAD60"
   client!d.K I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt860"
   client!d.L I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt861"
   client!d.M I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt862"
   client!d.N I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt863"
   client!d.P I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt865"
   client!d.R I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt867"
   client!d.a I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt828"
   client!d.b I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt829"
   client!d.c I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt830"
   client!d.d I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt831"
   client!d.e I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt832"
   client!d.f I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt833"
   client!d.g I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt834"
   client!d.h I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt835"
   client!d.j I:
     owner: "Static1"
@@ -1410,43 +1410,43 @@ fields:
     owner: "LocalisedText"
     name: "MINISEPARATOR"
   client!d.l I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt838"
   client!d.m I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt839"
   client!d.n [I:
     owner: "client"
     name: "JS5_ARCHIVE_WEIGHTS"
   client!d.o I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt840"
   client!d.p I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt841"
   client!d.q I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt842"
   client!d.r I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt843"
   client!d.s I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt844"
   client!d.u I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt846"
   client!d.v I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt847"
   client!d.w I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt848"
   client!d.y I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt850"
   client!d.z I:
-    owner: "Class34"
+    owner: "BasType"
     name: "anInt851"
   client!da.a [I:
     owner: "Class35"
@@ -2166,7 +2166,7 @@ fields:
     owner: "Class4_Sub9"
     name: "anInt1304"
   client!ej.p Lclient!cc;:
-    owner: "Static2"
+    owner: "SkyBoxTypeList"
     name: "aClass26_11"
   client!ej.r Ljava/lang/String;:
     owner: "LocalisedText"
@@ -2511,8 +2511,8 @@ fields:
     owner: "Buffer"
     name: "position"
   client!fd.Q I:
-    owner: "Static2"
-    name: "anInt5716"
+    owner: "FloTypeList"
+    name: "capacity"
   client!fd.U I:
     owner: "client"
     name: "game"
@@ -2646,8 +2646,8 @@ fields:
     owner: "Static2"
     name: "anInt1874"
   client!fj.ab Lclient!cc;:
-    owner: "Static2"
-    name: "aClass26_16"
+    owner: "SkyBoxSphereTypeList"
+    name: "types"
   client!fj.bb Z:
     owner: "TextureOp9"
     name: "aBoolean114"
@@ -3723,8 +3723,8 @@ fields:
     owner: "Static3"
     name: "aStringArray16"
   client!id.d Lclient!fh;:
-    owner: "Static3"
-    name: "aClass58_52"
+    owner: "SkyBoxTypeList"
+    name: "archive"
   client!id.e [I:
     owner: "Static3"
     name: "anIntArray196"
@@ -4194,8 +4194,8 @@ fields:
     owner: "Static3"
     name: "anIntArray218"
   client!in.q Lclient!fh;:
-    owner: "Static3"
-    name: "aClass58_55"
+    owner: "FloTypeList"
+    name: "archive"
   client!in.r I:
     owner: "Class11_Sub4"
     name: "anInt2472"
@@ -4218,8 +4218,8 @@ fields:
     owner: "Class4_Sub13"
     name: "op"
   client!io.B Lclient!cc;:
-    owner: "Static3"
-    name: "aClass26_24"
+    owner: "FloTypeList"
+    name: "types"
   client!io.C I:
     owner: "Class4_Sub13"
     name: "mouseX"
@@ -5088,8 +5088,8 @@ fields:
     owner: "Static4"
     name: "aFloat59"
   client!lc.j Lclient!fh;:
-    owner: "Static4"
-    name: "aClass58_54"
+    owner: "LightTypeList"
+    name: "archive"
   client!ld.Bb I:
     owner: "Class4_Sub6_Sub2"
     name: "anInt3085"
@@ -7152,37 +7152,37 @@ fields:
     owner: "Static5"
     name: "anInt5848"
   client!oh.c Z:
-    owner: "Class127"
+    owner: "FloType"
     name: "aBoolean273"
   client!oh.d I:
-    owner: "Class127"
+    owner: "FloType"
     name: "anInt3868"
   client!oh.e Z:
-    owner: "Class127"
+    owner: "FloType"
     name: "aBoolean274"
   client!oh.f Z:
-    owner: "Class127"
+    owner: "FloType"
     name: "aBoolean275"
   client!oh.g I:
-    owner: "Class127"
+    owner: "FloType"
     name: "anInt3869"
   client!oh.h I:
-    owner: "Class127"
+    owner: "FloType"
     name: "anInt3870"
   client!oh.i I:
-    owner: "Class127"
+    owner: "FloType"
     name: "anInt3871"
   client!oh.l I:
-    owner: "Class127"
+    owner: "FloType"
     name: "anInt3874"
   client!oh.n Lclient!kk;:
     owner: "Static5"
     name: "aClass106_6"
   client!oh.o I:
-    owner: "Class127"
+    owner: "FloType"
     name: "anInt3876"
   client!oh.p I:
-    owner: "Class127"
+    owner: "FloType"
     name: "anInt3877"
   client!oi.c Lclient!gh;:
     owner: "ReferenceNodeFactory"
@@ -7320,40 +7320,40 @@ fields:
     owner: "Static5"
     name: "aByteArrayArrayArray18"
   client!pa.b I:
-    owner: "Class131"
+    owner: "FluType"
     name: "anInt4058"
   client!pa.c Lclient!dj;:
     owner: "ClientScriptList"
     name: "scripts"
   client!pa.h Z:
-    owner: "Class131"
+    owner: "FluType"
     name: "aBoolean286"
   client!pa.i [[S:
     owner: "Static5"
     name: "aShortArrayArray5"
   client!pa.k I:
-    owner: "Class131"
+    owner: "FluType"
     name: "anInt4064"
   client!pa.m I:
     owner: "Static5"
     name: "anInt4066"
   client!pa.n I:
-    owner: "Class131"
+    owner: "FluType"
     name: "anInt4067"
   client!pa.o I:
-    owner: "Class131"
+    owner: "FluType"
     name: "anInt4068"
   client!pa.r I:
-    owner: "Class131"
+    owner: "FluType"
     name: "anInt4071"
   client!pa.u I:
-    owner: "Class131"
+    owner: "FluType"
     name: "anInt4074"
   client!pa.v Z:
     owner: "Static5"
     name: "aBoolean287"
   client!pa.w I:
-    owner: "Class131"
+    owner: "FluType"
     name: "anInt4075"
   client!pb.p [B:
     owner: "Class4_Sub8_Sub1"
@@ -8220,8 +8220,8 @@ fields:
     owner: "PlayerAppearance"
     name: "identikit"
   client!ql.a Lclient!fh;:
-    owner: "Static6"
-    name: "aClass58_84"
+    owner: "BasTypeList"
+    name: "archive"
   client!ql.c Lclient!kj;:
     owner: "Static6"
     name: "anInterface3_1"
@@ -8241,7 +8241,7 @@ fields:
     owner: "Static6"
     name: "anInt4398"
   client!qm.d I:
-    owner: "Class145"
+    owner: "SkyBoxType"
     name: "anInt4399"
   client!qm.e I:
     owner: "Static6"
@@ -8250,10 +8250,10 @@ fields:
     owner: "Static6"
     name: "anInt4403"
   client!qm.i [I:
-    owner: "Class145"
+    owner: "SkyBoxType"
     name: "anIntArray466"
   client!qm.k I:
-    owner: "Class145"
+    owner: "SkyBoxType"
     name: "anInt4405"
   client!qm.l [[B:
     owner: "Static6"
@@ -9027,31 +9027,31 @@ fields:
     owner: "Static6"
     name: "aFloat119"
   client!sa.b I:
-    owner: "Class153"
+    owner: "SkyBoxSphereType"
     name: "anInt4696"
   client!sa.c I:
-    owner: "Class153"
+    owner: "SkyBoxSphereType"
     name: "anInt4697"
   client!sa.d I:
-    owner: "Class153"
+    owner: "SkyBoxSphereType"
     name: "anInt4698"
   client!sa.f Z:
-    owner: "Class153"
+    owner: "SkyBoxSphereType"
     name: "aBoolean327"
   client!sa.g I:
-    owner: "Class153"
+    owner: "SkyBoxSphereType"
     name: "anInt4700"
   client!sa.j I:
-    owner: "Class153"
+    owner: "SkyBoxSphereType"
     name: "anInt4703"
   client!sa.k Lclient!fh;:
     owner: "client"
     name: "js5Archive24"
   client!sa.n I:
-    owner: "Class153"
+    owner: "SkyBoxSphereType"
     name: "anInt4706"
   client!sa.o I:
-    owner: "Class153"
+    owner: "SkyBoxSphereType"
     name: "anInt4707"
   client!sa.q I:
     owner: "Static6"
@@ -9117,8 +9117,8 @@ fields:
     owner: "client"
     name: "worldListHostname"
   client!se.Z Lclient!fh;:
-    owner: "Static6"
-    name: "aClass58_90"
+    owner: "SkyBoxSphereTypeList"
+    name: "archive"
   client!se.ab [I:
     owner: "Static6"
     name: "anIntArray517"
@@ -9171,8 +9171,8 @@ fields:
     owner: "Static6"
     name: "anIntArray519"
   client!sh.T Lclient!cc;:
-    owner: "Static6"
-    name: "aClass26_51"
+    owner: "BasTypeList"
+    name: "types"
   client!sh.W I:
     owner: "TextureOp35"
     name: "anInt4832"
@@ -9321,8 +9321,8 @@ fields:
     owner: "ObjTypeList"
     name: "defaultOps"
   client!sm.a Lclient!cc;:
-    owner: "Static6"
-    name: "aClass26_52"
+    owner: "SkyBoxTypeList"
+    name: "types"
   client!sm.e Z:
     owner: "WorldList"
     name: "loaded"
@@ -9816,8 +9816,8 @@ fields:
     owner: "Static6"
     name: "anInt5173"
   client!ti.V Lclient!cc;:
-    owner: "Static6"
-    name: "aClass26_54"
+    owner: "LightTypeList"
+    name: "types"
   client!ti.X I:
     owner: "Static6"
     name: "anInt5177"
@@ -10635,16 +10635,16 @@ fields:
     owner: "Static7"
     name: "originZ"
   client!vd.d I:
-    owner: "Class178"
+    owner: "LightType"
     name: "anInt5480"
   client!vd.e I:
-    owner: "Class178"
+    owner: "LightType"
     name: "anInt5481"
   client!vd.f I:
-    owner: "Class178"
+    owner: "LightType"
     name: "anInt5482"
   client!vd.h I:
-    owner: "Class178"
+    owner: "LightType"
     name: "anInt5484"
   client!vd.i [I:
     owner: "Static7"
@@ -13697,10 +13697,10 @@ methods:
       7: "tile"
       13: "wallDecor"
   client!bl.a (ILclient!fh;)V:
-    owner: "Static10"
-    name: "method346"
+    owner: "LightTypeList"
+    name: "init"
     arguments:
-      1: "arg0"
+      1: "archive"
     locals: {}
   client!bl.b (II)[[I:
     owner: "TextureOp25"
@@ -14328,14 +14328,14 @@ methods:
       2: "code"
     locals: {}
   client!ca.a (IB)Lclient!vd;:
-    owner: "Static11"
-    name: "method494"
+    owner: "LightTypeList"
+    name: "get"
     arguments:
-      0: "arg0"
+      0: "id"
     locals:
-      10: "local10"
-      28: "local28"
-      32: "local32"
+      10: "type"
+      28: "bytes"
+      32: "newType"
   client!ca.a (Lclient!fh;III)[Lclient!ma;:
     owner: "Static11"
     name: "method495"
@@ -15639,24 +15639,24 @@ methods:
     locals:
       8: "local8"
   client!d.a (IILclient!fd;)V:
-    owner: "Class34"
+    owner: "BasType"
     name: "method724"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "buffer"
+      1: "code"
     locals:
       138: "local138"
       146: "local146"
   client!d.a (Lclient!fd;B)V:
-    owner: "Class34"
-    name: "method720"
+    owner: "BasType"
+    name: "decode"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals:
-      17: "local17"
+      17: "code"
   client!d.b (I)V:
-    owner: "Class34"
-    name: "method725"
+    owner: "BasType"
+    name: "postDecode"
     arguments: {}
     locals: {}
   client!d.c (I)J:
@@ -15974,8 +15974,8 @@ methods:
       32: "local32"
       39: "local39"
   client!de.b (IZ)V:
-    owner: "Static12"
-    name: "method775"
+    owner: "FluTypeList"
+    name: "clean"
     arguments: {}
     locals: {}
   client!df.a (B)V:
@@ -16302,8 +16302,8 @@ methods:
       760: "local760"
       782: "local782"
   client!dm.b (I)V:
-    owner: "Static13"
-    name: "method941"
+    owner: "SkyBoxTypeList"
+    name: "clear"
     arguments: {}
     locals: {}
   client!dn.<init> ()V:
@@ -16517,18 +16517,18 @@ methods:
       1: "arg1"
     locals: {}
   client!ea.a (IBIII)Lclient!eh;:
-    owner: "Static13"
+    owner: "SkyBoxTypeList"
     name: "method936"
     arguments:
+      3: "id"
       0: "arg0"
       2: "arg1"
-      3: "arg2"
       4: "arg3"
     locals:
       39: "local39"
       45: "local45"
       52: "local52"
-      56: "local56"
+      56: "type"
       68: "local68"
       83: "local83"
       120: "local120"
@@ -17048,8 +17048,8 @@ methods:
     arguments: {}
     locals: {}
   client!el.b (II)V:
-    owner: "Static14"
-    name: "method1067"
+    owner: "LightTypeList"
+    name: "clean"
     arguments: {}
     locals: {}
   client!em.<init> (Lclient!fd;)V:
@@ -20571,10 +20571,10 @@ methods:
     locals:
       11: "local11"
   client!gd.a (Lclient!fh;B)V:
-    owner: "Static16"
-    name: "method1560"
+    owner: "SkyBoxTypeList"
+    name: "init"
     arguments:
-      0: "arg0"
+      0: "archive"
     locals: {}
   client!gd.a (Lclient!fh;ILjava/lang/String;Z)Lclient!po;:
     owner: "Static16"
@@ -21853,8 +21853,8 @@ methods:
     arguments: {}
     locals: {}
   client!hc.a (IB)V:
-    owner: "Static18"
-    name: "method2323"
+    owner: "FloTypeList"
+    name: "clean"
     arguments: {}
     locals: {}
   client!hc.a (I[B)V:
@@ -23581,8 +23581,8 @@ methods:
     arguments: {}
     locals: {}
   client!il.b (I)V:
-    owner: "Static20"
-    name: "method1925"
+    owner: "SkyBoxSphereTypeList"
+    name: "removeSoft"
     arguments: {}
     locals: {}
   client!im.a (BI)Lclient!gb;:
@@ -24747,8 +24747,8 @@ methods:
       19: "local19"
       35: "local35"
   client!jj.f (B)V:
-    owner: "Static21"
-    name: "method2048"
+    owner: "BasTypeList"
+    name: "removeSoft"
     arguments: {}
     locals: {}
   client!jj.f (I)V:
@@ -28471,10 +28471,10 @@ methods:
       1: "arg1"
     locals: {}
   client!lj.a (Lclient!fh;B)V:
-    owner: "Static24"
-    name: "method2599"
+    owner: "SkyBoxSphereTypeList"
+    name: "init"
     arguments:
-      0: "arg0"
+      0: "archive"
     locals: {}
   client!lj.b (II)[[I:
     owner: "TextureOp17"
@@ -31539,14 +31539,14 @@ methods:
       52: "local52"
       82: "local82"
   client!nc.a (BI)Lclient!oh;:
-    owner: "Static26"
-    name: "method2935"
+    owner: "FloTypeList"
+    name: "get"
     arguments:
-      1: "arg0"
+      1: "id"
     locals:
-      6: "local6"
-      27: "local27"
-      31: "local31"
+      6: "type"
+      27: "bytes"
+      31: "newType"
   client!nc.a (III)Lclient!dm;:
     owner: "Terrain"
     name: "removeGroundDecor"
@@ -31892,14 +31892,14 @@ methods:
       48: "i"
       74: "i"
   client!nf.a (IZ)Lclient!pa;:
-    owner: "Static26"
-    name: "method2971"
+    owner: "FluTypeList"
+    name: "get"
     arguments:
-      0: "arg0"
+      0: "id"
     locals:
-      10: "local10"
-      20: "local20"
-      24: "local24"
+      10: "type"
+      20: "bytes"
+      24: "newType"
   client!nf.focusGained (Ljava/awt/event/FocusEvent;)V:
     owner: "Mouse"
     name: "focusGained"
@@ -33361,8 +33361,8 @@ methods:
     arguments: {}
     locals: {}
   client!og.g (I)V:
-    owner: "Static27"
-    name: "method4707"
+    owner: "FloTypeList"
+    name: "removeSoft"
     arguments: {}
     locals: {}
   client!og.h (B)V:
@@ -33376,21 +33376,21 @@ methods:
     arguments: {}
     locals: {}
   client!oh.a (IIILclient!fd;)V:
-    owner: "Class127"
-    name: "method3223"
+    owner: "FloType"
+    name: "decode"
     arguments:
-      0: "arg0"
-      2: "arg1"
-      3: "arg2"
+      3: "buffer"
+      2: "id"
+      0: "code"
     locals: {}
   client!oh.a (ILclient!fd;I)V:
-    owner: "Class127"
-    name: "method3221"
+    owner: "FloType"
+    name: "decode"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      1: "buffer"
+      0: "id"
     locals:
-      15: "local15"
+      15: "code"
   client!oh.b (II)I:
     owner: "Static27"
     name: "method3220"
@@ -33421,10 +33421,10 @@ methods:
       3: "arg1"
     locals: {}
   client!oi.a (Lclient!fh;I)V:
-    owner: "Static27"
-    name: "method3228"
+    owner: "FloTypeList"
+    name: "init"
     arguments:
-      0: "arg0"
+      0: "archive"
     locals: {}
   client!oj.<init> ([B)V:
     owner: "HuffmanCodec"
@@ -33701,8 +33701,8 @@ methods:
     locals:
       8: "local8"
   client!om.e (B)V:
-    owner: "Static28"
-    name: "method3258"
+    owner: "FluTypeList"
+    name: "removeSoft"
     arguments: {}
     locals: {}
   client!on.<init> (II)V:
@@ -33744,8 +33744,8 @@ methods:
     arguments: {}
     locals: {}
   client!on.b (BI)V:
-    owner: "Static28"
-    name: "method3268"
+    owner: "BasTypeList"
+    name: "clean"
     arguments: {}
     locals: {}
   client!on.b (I)Z:
@@ -33945,7 +33945,7 @@ methods:
     arguments: {}
     locals: {}
   client!pa.a (BI)V:
-    owner: "Class131"
+    owner: "FluType"
     name: "method3330"
     arguments:
       1: "arg0"
@@ -34016,21 +34016,21 @@ methods:
       6: "arg5"
     locals: {}
   client!pa.a (ILclient!fd;IB)V:
-    owner: "Class131"
-    name: "method3328"
+    owner: "FluType"
+    name: "decode"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      1: "buffer"
+      2: "code"
+      0: "id"
     locals: {}
   client!pa.a (Lclient!fd;II)V:
-    owner: "Class131"
-    name: "method3326"
+    owner: "FluType"
+    name: "decode"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "buffer"
+      2: "id"
     locals:
-      13: "local13"
+      13: "code"
   client!pa.a (ZLclient!gl;Z)V:
     owner: "Static28"
     name: "method3331"
@@ -35830,8 +35830,8 @@ methods:
       71: "local71"
       103: "local103"
   client!qc.a (I)V:
-    owner: "Static29"
-    name: "method3302"
+    owner: "SkyBoxTypeList"
+    name: "removeSoft"
     arguments: {}
     locals: {}
   client!qc.a (II)V:
@@ -36738,8 +36738,8 @@ methods:
       118: "local118"
       120: "local120"
   client!qj.c (II)V:
-    owner: "Static30"
-    name: "method3594"
+    owner: "SkyBoxTypeList"
+    name: "clean"
     arguments: {}
     locals: {}
   client!qj.f (B)V:
@@ -36782,8 +36782,8 @@ methods:
     locals:
       7: "local7"
   client!qk.a (I)V:
-    owner: "Static30"
-    name: "method3601"
+    owner: "BasTypeList"
+    name: "clear"
     arguments: {}
     locals: {}
   client!qk.a (IBI)I:
@@ -37006,22 +37006,22 @@ methods:
       0: "graphics"
     locals: {}
   client!qm.a (IIILclient!fd;)V:
-    owner: "Class145"
-    name: "method3617"
+    owner: "SkyBoxType"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      3: "arg2"
+      3: "buffer"
+      2: "id"
+      1: "code"
     locals:
       26: "local26"
   client!qm.a (IILclient!fd;)V:
-    owner: "Class145"
-    name: "method3618"
+    owner: "SkyBoxType"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "buffer"
+      1: "id"
     locals:
-      15: "local15"
+      15: "code"
   client!qm.a (Lclient!wf;IIIIIII)V:
     owner: "Static30"
     name: "method3619"
@@ -37316,8 +37316,8 @@ methods:
     arguments: {}
     locals: {}
   client!rc.a (I)V:
-    owner: "Static31"
-    name: "method3653"
+    owner: "LightTypeList"
+    name: "clear"
     arguments: {}
     locals: {}
   client!rc.a (II)Lclient!ke;:
@@ -39558,18 +39558,18 @@ methods:
     arguments: {}
     locals: {}
   client!sa.a (BILclient!fd;)V:
-    owner: "Class153"
-    name: "method3886"
+    owner: "SkyBoxSphereType"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "buffer"
+      1: "id"
     locals:
-      9: "local9"
+      9: "code"
   client!sa.a (BLclient!fh;)V:
-    owner: "Static32"
-    name: "method3884"
+    owner: "BasTypeList"
+    name: "init"
     arguments:
-      1: "arg0"
+      1: "archive"
     locals: {}
   client!sa.a (IB)V:
     owner: "Static32"
@@ -39594,12 +39594,12 @@ methods:
       7: "tile"
       14: "wallDecor"
   client!sa.a (IILclient!fd;I)V:
-    owner: "Class153"
-    name: "method3883"
+    owner: "SkyBoxSphereType"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      3: "arg2"
+      2: "buffer"
+      3: "code"
+      1: "id"
     locals: {}
   client!sa.a (ILclient!fh;I)Lclient!ma;:
     owner: "Static32"
@@ -39828,8 +39828,8 @@ methods:
       162: "local162"
       164: "local164"
   client!sg.a (I)V:
-    owner: "Static32"
-    name: "method3956"
+    owner: "FloTypeList"
+    name: "clear"
     arguments: {}
     locals: {}
   client!sh.<init> ()V:
@@ -41903,8 +41903,8 @@ methods:
       91: "local91"
       113: "local113"
   client!tl.a (II)V:
-    owner: "Static34"
-    name: "method4235"
+    owner: "SkyBoxSphereTypeList"
+    name: "clean"
     arguments: {}
     locals: {}
   client!tl.a (ILclient!fh;ZLclient!fh;)V:
@@ -42517,8 +42517,8 @@ methods:
       25: "local25"
       43: "local43"
   client!uc.f (B)V:
-    owner: "Static35"
-    name: "method4296"
+    owner: "LightTypeList"
+    name: "removeSoft"
     arguments: {}
     locals: {}
   client!uc.f (I)V:
@@ -42955,8 +42955,8 @@ methods:
       22: "local22"
       29: "local29"
   client!uf.a (I)V:
-    owner: "Static35"
-    name: "method4313"
+    owner: "FluTypeList"
+    name: "clear"
     arguments: {}
     locals: {}
   client!ug.<init> ()V:
@@ -43356,14 +43356,14 @@ methods:
       33: "j"
       55: "world"
   client!ul.b (IB)Lclient!qm;:
-    owner: "Static35"
-    name: "method4364"
+    owner: "SkyBoxTypeList"
+    name: "get"
     arguments:
-      0: "arg0"
+      0: "id"
     locals:
-      10: "local10"
-      22: "local22"
-      26: "local26"
+      10: "type"
+      22: "bytes"
+      26: "newType"
   client!ul.d (I)I:
     owner: "Js5NetRequest"
     name: "getPercentageComplete"
@@ -43606,10 +43606,10 @@ methods:
       224: "local224"
       290: "local290"
   client!vc.a (Lclient!fh;I)V:
-    owner: "Static36"
-    name: "method3814"
+    owner: "FluTypeList"
+    name: "init"
     arguments:
-      0: "arg0"
+      0: "archive"
     locals: {}
   client!vc.a (Lclient!vc;IIIZ)V:
     owner: "Entity"
@@ -43634,21 +43634,21 @@ methods:
       5: "local5"
       12: "local12"
   client!vd.a (IILclient!fd;B)V:
-    owner: "Class178"
-    name: "method4437"
+    owner: "LightType"
+    name: "decode"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      2: "buffer"
+      0: "id"
+      1: "code"
     locals: {}
   client!vd.a (ZLclient!fd;I)V:
-    owner: "Class178"
-    name: "method4438"
+    owner: "LightType"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "id"
     locals:
-      5: "local5"
+      5: "code"
   client!ve.a (BIIII)I:
     owner: "Static36"
     name: "method4443"
@@ -45201,8 +45201,8 @@ methods:
     arguments: {}
     locals: {}
   client!wa.s (I)V:
-    owner: "Static37"
-    name: "method4649"
+    owner: "SkyBoxSphereTypeList"
+    name: "clear"
     arguments: {}
     locals: {}
   client!wb.<init> (ILclient!fm;Lclient!fm;Lclient!en;Lclient!ja;IIZ)V:
@@ -45713,14 +45713,14 @@ methods:
       86: "local86"
       156: "local156"
   client!wf.b (BI)Lclient!sa;:
-    owner: "Static37"
-    name: "method4731"
+    owner: "SkyBoxSphereTypeList"
+    name: "get"
     arguments:
-      1: "arg0"
+      1: "id"
     locals:
-      10: "local10"
-      22: "local22"
-      26: "local26"
+      10: "type"
+      22: "bytes"
+      26: "newType"
   client!wf.b (III)J:
     owner: "Static37"
     name: "method4739"
@@ -45907,14 +45907,14 @@ methods:
     locals:
       20: "local20"
   client!wh.a (II)Lclient!d;:
-    owner: "Static37"
-    name: "method4776"
+    owner: "BasTypeList"
+    name: "get"
     arguments:
-      1: "arg0"
+      1: "id"
     locals:
-      10: "local10"
-      27: "local27"
-      31: "local31"
+      10: "type"
+      27: "bytes"
+      31: "newType"
   client!wh.a (IIIIZII)V:
     owner: "Static37"
     name: "method4773"
