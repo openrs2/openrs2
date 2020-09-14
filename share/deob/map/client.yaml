@@ -1,7 +1,7 @@
 ---
 classes:
   client!a: "Class1"
-  client!ac: "Class4_Sub1_Sub1"
+  client!ac: "TextureOp28"
   client!ae: "Class6"
   client!af: "Class4_Sub2"
   client!ag: "Class7"
@@ -20,18 +20,18 @@ classes:
   client!bi: "Class20_Sub1"
   client!bj: "Class21"
   client!bk: "TracingException"
-  client!bl: "Class4_Sub1_Sub2"
+  client!bl: "TextureOp25"
   client!bn: "Class4_Sub6_Sub1"
   client!bo: "Class23"
-  client!c: "Class24_Sub1"
-  client!ca: "Class4_Sub1_Sub3"
+  client!c: "Js5GlTextureProvider"
+  client!ca: "TextureOp11"
   client!cc: "SoftLruHashTable"
   client!cd: "Class27"
-  client!cf: "Class4_Sub1_Sub4"
+  client!cf: "TextureOp6"
   client!ch: "Class30"
   client!ci: "Class31"
   client!cj: "EnumType"
-  client!ck: "Class4_Sub1_Sub5"
+  client!ck: "TextureOp32"
   client!cl: "Interface2"
   client!client: "client"
   client!cm: "VarbitType"
@@ -47,11 +47,11 @@ classes:
   client!dk: "JavaMouseWheel"
   client!dl: "Class41_Sub1_Sub1"
   client!dm: "Class42"
-  client!dn: "Class4_Sub1_Sub6"
+  client!dn: "TextureOp31"
   client!e: "Class4_Sub7"
   client!ea: "Class41_Sub1"
   client!eb: "Class4_Sub8"
-  client!ec: "Class43"
+  client!ec: "GlShader"
   client!ed: "Class4_Sub3_Sub6"
   client!eg: "Class46"
   client!eh: "Class47"
@@ -61,16 +61,16 @@ classes:
   client!en: "Js5NetQueue"
   client!eo: "BufferedSocket"
   client!f: "Player"
-  client!fa: "Class4_Sub1_Sub7"
+  client!fa: "TextureOp3"
   client!fd: "Buffer"
-  client!fe: "Class56_Sub1"
+  client!fe: "SoftwareIndexedSprite"
   client!ff: "Class57"
   client!fg: "Class4_Sub3_Sub7"
   client!fh: "Js5"
-  client!fi: "Class4_Sub1_Sub8"
-  client!fj: "Class4_Sub1_Sub9"
+  client!fi: "TextureOp36"
+  client!fj: "TextureOp9"
   client!fk: "BufferedImageFrameBuffer"
-  client!fl: "Class4_Sub1_Sub10"
+  client!fl: "TextureOp21"
   client!fm: "Cache"
   client!fn: "InvType"
   client!fo: "Js5Index"
@@ -90,7 +90,7 @@ classes:
   client!he: "ObjStack"
   client!hf: "NanoTimer"
   client!hi: "VarpType"
-  client!hk: "Class4_Sub1_Sub11"
+  client!hk: "TextureOp1"
   client!hl: "Class81"
   client!ho: "Class82"
   client!ia: "BrokenInputStream"
@@ -112,12 +112,12 @@ classes:
   client!jf: "Timer"
   client!jg: "SoftReferenceNodeFactory"
   client!jh: "Class96"
-  client!jj: "Class4_Sub1_Sub12"
+  client!jj: "TextureOp34"
   client!jk: "Class98"
   client!jl: "ClientScript"
   client!jm: "MouseRecorder"
-  client!jn: "Class4_Sub3_Sub14_Sub1_Sub1"
-  client!jo: "Class4_Sub1"
+  client!jn: "SoftwareAlphaSprite"
+  client!jo: "TextureOp"
   client!kb: "JavaAudioChannel"
   client!kc: "Class103"
   client!ke: "Class4_Sub3_Sub5_Sub2"
@@ -125,36 +125,36 @@ classes:
   client!kg: "Class105"
   client!kh: "SoftReferenceNode"
   client!ki: "DirectByteArray"
-  client!kj: "Interface3"
+  client!kj: "TextureProvider"
   client!kk: "Class106"
-  client!kl: "Class4_Sub1_Sub13"
-  client!km: "Class4_Sub1_Sub14"
+  client!kl: "TextureOp38"
+  client!km: "TextureOp29"
   client!l: "Class4_Sub15"
-  client!la: "Class4_Sub1_Sub15"
+  client!la: "TextureOp20"
   client!lb: "Class108"
   client!lc: "Class11"
   client!ld: "Class4_Sub6_Sub2"
-  client!lf: "Class4_Sub1_Sub16"
+  client!lf: "TextureOp14"
   client!lg: "Class109"
   client!lh: "SecondaryNode"
   client!li: "Class110"
-  client!lj: "Class4_Sub1_Sub17"
-  client!lk: "Class111"
+  client!lj: "TextureOp17"
+  client!lk: "GlBuffer"
   client!ll: "LinkedList"
   client!lm: "Class20_Sub2_Sub1"
-  client!ln: "Class4_Sub3_Sub15"
+  client!ln: "Texture"
   client!lo: "Class4_Sub6_Sub3"
   client!m: "IsaacRandom"
-  client!ma: "Class56"
+  client!ma: "IndexedSprite"
   client!mb: "Class20"
   client!mc: "Class4_Sub16"
   client!md: "Class114"
   client!mg: "Js5MasterIndex"
-  client!mi: "Class119"
+  client!mi: "Material"
   client!mj: "Class120"
   client!ml: "Class53_Sub3"
-  client!mo: "Class4_Sub1_Sub18"
-  client!n: "Class56_Sub2"
+  client!mo: "TextureOp26"
+  client!n: "GlIndexedSprite"
   client!na: "Class53_Sub4_Sub1"
   client!nb: "Class4_Sub17"
   client!nd: "Inv"
@@ -163,17 +163,17 @@ classes:
   client!ng: "Js5Request"
   client!nh: "Class4_Sub19"
   client!ni: "Node"
-  client!nk: "Interface4"
+  client!nk: "GlTextureProvider"
   client!nm: "SignLinkAudioChannel"
   client!nn: "MiscTimer"
-  client!no: "Class4_Sub1_Sub19"
+  client!no: "TextureOp33"
   client!o: "Class53_Sub5"
-  client!oa: "Class4_Sub3_Sub14_Sub2"
+  client!oa: "GlSprite"
   client!ob: "FrameBuffer"
   client!oc: "Class53_Sub6"
   client!oe: "Class41_Sub2_Sub1"
-  client!of: "Class4_Sub1_Sub20"
-  client!og: "Class4_Sub1_Sub21"
+  client!of: "TextureOp8"
+  client!og: "TextureOp39"
   client!oh: "Class127"
   client!oi: "Class128"
   client!oj: "HuffmanCodec"
@@ -190,22 +190,22 @@ classes:
   client!pe: "Class133"
   client!pf: "Class134"
   client!pg: "Class41"
-  client!ph: "Class4_Sub1_Sub22"
+  client!ph: "TextureOp19"
   client!pi: "Class135"
-  client!pk: "Class4_Sub1_Sub23"
+  client!pk: "TextureOp2"
   client!pl: "EnumInverseNode"
   client!po: "Class138"
   client!q: "Class139"
   client!qa: "Class140"
-  client!qb: "Class4_Sub1_Sub24"
+  client!qb: "TextureOp0"
   client!qc: "PathingEntity"
-  client!qd: "Class4_Sub3_Sub16"
+  client!qd: "GlSolidColorTexture"
   client!qe: "HashTableIterator"
   client!qf: "Class142"
   client!qg: "Class143"
   client!qh: "Class4_Sub23"
-  client!qi: "Class24"
-  client!qj: "Class4_Sub1_Sub25"
+  client!qi: "Js5TextureProvider"
+  client!qj: "TextureOp16"
   client!qk: "PlayerAppearance"
   client!ql: "GameCanvas"
   client!qm: "Class145"
@@ -216,37 +216,37 @@ classes:
   client!rd: "Class149"
   client!re: "Class150"
   client!rf: "Country"
-  client!rg: "Class4_Sub1_Sub26"
-  client!rh: "Class4_Sub1_Sub27"
+  client!rg: "TextureOp37"
+  client!rh: "TextureOp15"
   client!ri: "Class53_Sub7"
   client!rj: "Class152"
   client!rk: "StringNode"
   client!rl: "Class4_Sub27"
-  client!rm: "Class4_Sub1_Sub28"
+  client!rm: "TextureOp27"
   client!rn: "Class41_Sub2"
   client!ro: "StructType"
   client!s: "Class53_Sub4_Sub2"
   client!sa: "Class153"
-  client!sb: "Class4_Sub28"
-  client!sc: "Class4_Sub1_Sub29"
-  client!se: "Class4_Sub1_Sub30"
+  client!sb: "GlCleanerProgram"
+  client!sc: "TextureOp30"
+  client!se: "TextureOp13"
   client!sf: "Class155"
-  client!sh: "Class4_Sub1_Sub31"
+  client!sh: "TextureOp35"
   client!si: "Class157"
   client!sj: "Class4_Sub29"
   client!sk: "Class158"
-  client!sl: "Class4_Sub1_Sub32"
-  client!sn: "Class4_Sub1_Sub33"
-  client!so: "Class4_Sub3_Sub18"
+  client!sl: "TextureOp7"
+  client!sn: "TextureOp4"
+  client!so: "GlTexture"
   client!t: "Class160"
   client!ta: "Class4_Sub30"
   client!tb: "Keyboard"
-  client!tc: "Class4_Sub1_Sub34"
+  client!tc: "TextureOp22"
   client!td: "ObjType"
   client!te: "Class4_Sub3_Sub19"
   client!tf: "Class4_Sub6"
   client!tg: "Class4_Sub31"
-  client!ti: "Class4_Sub1_Sub35"
+  client!ti: "TextureOp24"
   client!tj: "AudioChannel"
   client!tm: "ImageProducerFrameBuffer"
   client!tn: "AbstractWorld"
@@ -254,33 +254,33 @@ classes:
   client!u: "Class167"
   client!ua: "NpcType"
   client!ub: "Class169"
-  client!uc: "Class4_Sub1_Sub36"
+  client!uc: "TextureOp23"
   client!ud: "Class170"
   client!ue: "GameShell"
   client!ug: "Class172"
   client!uh: "Class173"
   client!ui: "StackFrame"
-  client!uj: "Class4_Sub3_Sub14"
+  client!uj: "Sprite"
   client!uk: "SecondaryLinkedList"
   client!ul: "Js5NetRequest"
   client!uo: "Class4_Sub3_Sub20"
   client!v: "IntNode"
-  client!vb: "Class4_Sub1_Sub37"
+  client!vb: "TextureOp12"
   client!vc: "Entity"
   client!vd: "Class178"
   client!ve: "Class179"
   client!vf: "Class180"
   client!vg: "Class53_Sub4"
   client!vh: "LocType"
-  client!vi: "Class4_Sub1_Sub38"
-  client!vj: "Class4_Sub3_Sub14_Sub2_Sub1"
+  client!vi: "TextureOp5"
+  client!vj: "GlAlphaSprite"
   client!vl: "Class182"
-  client!vm: "Class4_Sub1_Sub39"
-  client!vn: "Class4_Sub3_Sub14_Sub1"
+  client!vm: "TextureOp10"
+  client!vn: "SoftwareSprite"
   client!w: "ObjStackNode"
   client!wa: "Packet"
   client!wb: "Js5CachedResourceProvider"
-  client!wd: "Class4_Sub1_Sub21_Sub1"
+  client!wd: "TextureOp18"
   client!we: "Class184"
   client!wf: "Component"
   client!wg: "Class4_Sub3_Sub22"
@@ -366,22 +366,22 @@ fields:
     owner: "Static1"
     name: "aFloat5"
   client!ac.U I:
-    owner: "Class4_Sub1_Sub1"
+    owner: "TextureOp28"
     name: "anInt72"
   client!ac.W I:
-    owner: "Class4_Sub1_Sub1"
+    owner: "TextureOp28"
     name: "anInt74"
   client!ac.X I:
-    owner: "Class4_Sub1_Sub1"
+    owner: "TextureOp28"
     name: "anInt75"
   client!ac.Y I:
-    owner: "Class4_Sub1_Sub1"
+    owner: "TextureOp28"
     name: "anInt76"
   client!ac.Z I:
-    owner: "Class4_Sub1_Sub1"
+    owner: "TextureOp28"
     name: "anInt77"
   client!ac.bb I:
-    owner: "Class4_Sub1_Sub1"
+    owner: "TextureOp28"
     name: "anInt79"
   client!ac.cb I:
     owner: "GameShell"
@@ -390,16 +390,16 @@ fields:
     owner: "LocalisedText"
     name: "WALKHERE"
   client!ac.eb I:
-    owner: "Class4_Sub1_Sub1"
+    owner: "TextureOp28"
     name: "anInt81"
   client!ac.fb I:
-    owner: "Class4_Sub1_Sub1"
+    owner: "TextureOp28"
     name: "anInt82"
   client!ac.hb I:
-    owner: "Class4_Sub1_Sub1"
+    owner: "TextureOp28"
     name: "anInt84"
   client!ac.kb I:
-    owner: "Class4_Sub1_Sub1"
+    owner: "TextureOp28"
     name: "anInt87"
   client!ac.nb Ljava/lang/String;:
     owner: "LocalisedText"
@@ -912,19 +912,19 @@ fields:
     owner: "TracingException"
     name: "cause"
   client!bl.T I:
-    owner: "Class4_Sub1_Sub2"
+    owner: "TextureOp25"
     name: "anInt371"
   client!bl.V I:
-    owner: "Class4_Sub1_Sub2"
+    owner: "TextureOp25"
     name: "anInt373"
   client!bl.W I:
-    owner: "Class4_Sub1_Sub2"
+    owner: "TextureOp25"
     name: "anInt374"
   client!bl.Z [I:
-    owner: "Class4_Sub1_Sub2"
+    owner: "TextureOp25"
     name: "anIntArray40"
   client!bl.bb I:
-    owner: "Class4_Sub1_Sub2"
+    owner: "TextureOp25"
     name: "anInt378"
   client!bl.cb Lclient!cc;:
     owner: "Static1"
@@ -993,29 +993,29 @@ fields:
     owner: "LocalisedText"
     name: "IGNORELISTFULL"
   client!c.E Lclient!dj;:
-    owner: "Class24_Sub1"
-    name: "aClass40_3"
+    owner: "Js5GlTextureProvider"
+    name: "solidColorSprites"
   client!c.J Lclient!fh;:
-    owner: "Class24_Sub1"
-    name: "aClass58_15"
+    owner: "Js5GlTextureProvider"
+    name: "texturesArchive"
   client!c.L [[[I:
     owner: "Static1"
     name: "anIntArrayArrayArray1"
   client!c.N Lclient!fh;:
-    owner: "Class24_Sub1"
-    name: "aClass58_16"
+    owner: "Js5GlTextureProvider"
+    name: "spritesArchive"
   client!c.W I:
     owner: "Static1"
     name: "anInt466"
   client!c.X Lclient!dj;:
-    owner: "Class24_Sub1"
-    name: "aClass40_4"
+    owner: "Js5GlTextureProvider"
+    name: "glTextures"
   client!c.v I:
-    owner: "Class24_Sub1"
-    name: "anInt447"
+    owner: "Js5GlTextureProvider"
+    name: "capacity"
   client!c.y Z:
-    owner: "Class24_Sub1"
-    name: "aBoolean28"
+    owner: "Js5GlTextureProvider"
+    name: "lowDetail"
   client!ca.S I:
     owner: "Static1"
     name: "anInt497"
@@ -1023,7 +1023,7 @@ fields:
     owner: "Static1"
     name: "anIntArray46"
   client!ca.X I:
-    owner: "Class4_Sub1_Sub3"
+    owner: "TextureOp11"
     name: "anInt501"
   client!ca.Z Lclient!tj;:
     owner: "client"
@@ -1032,10 +1032,10 @@ fields:
     owner: "Static1"
     name: "anInt504"
   client!ca.cb I:
-    owner: "Class4_Sub1_Sub3"
+    owner: "TextureOp11"
     name: "anInt505"
   client!ca.fb I:
-    owner: "Class4_Sub1_Sub3"
+    owner: "TextureOp11"
     name: "anInt508"
   client!cb.l I:
     owner: "Static1"
@@ -1104,7 +1104,7 @@ fields:
     owner: "Static1"
     name: "aFloat20"
   client!cf.V I:
-    owner: "Class4_Sub1_Sub4"
+    owner: "TextureOp6"
     name: "anInt581"
   client!cf.W Lclient!wf;:
     owner: "Static1"
@@ -1116,7 +1116,7 @@ fields:
     owner: "client"
     name: "js5ConnectTime"
   client!cf.fb I:
-    owner: "Class4_Sub1_Sub4"
+    owner: "TextureOp6"
     name: "anInt588"
   client!cg.a Z:
     owner: "Static1"
@@ -1230,13 +1230,13 @@ fields:
     owner: "EnumType"
     name: "valueType"
   client!ck.T I:
-    owner: "Class4_Sub1_Sub5"
+    owner: "TextureOp32"
     name: "anInt682"
   client!ck.W I:
-    owner: "Class4_Sub1_Sub5"
+    owner: "TextureOp32"
     name: "anInt685"
   client!ck.X I:
-    owner: "Class4_Sub1_Sub5"
+    owner: "TextureOp32"
     name: "anInt686"
   client!ck.ab Z:
     owner: "Static1"
@@ -1248,7 +1248,7 @@ fields:
     owner: "GameShell"
     name: "canvasHeight"
   client!ck.eb [I:
-    owner: "Class4_Sub1_Sub5"
+    owner: "TextureOp32"
     name: "anIntArray57"
   client!ck.fb [Lclient!uj;:
     owner: "Static1"
@@ -1702,7 +1702,7 @@ fields:
     name: "anInt2248"
   client!dh.K I:
     owner: "Class4_Sub3_Sub5_Sub1"
-    name: "anInt1021"
+    name: "contextId"
   client!dh.W [I:
     owner: "Class4_Sub3_Sub5_Sub1"
     name: "anIntArray82"
@@ -1830,13 +1830,13 @@ fields:
     owner: "Preferences"
     name: "highDetailLighting"
   client!dn.V I:
-    owner: "Class4_Sub1_Sub6"
+    owner: "TextureOp31"
     name: "anInt1157"
   client!dn.X I:
-    owner: "Class4_Sub1_Sub6"
+    owner: "TextureOp31"
     name: "anInt1159"
   client!dn.Y I:
-    owner: "Class4_Sub1_Sub6"
+    owner: "TextureOp31"
     name: "anInt1160"
   client!dn.Z I:
     owner: "BufferPool"
@@ -1845,7 +1845,7 @@ fields:
     owner: "Static2"
     name: "aClass4_Sub3_Sub22_1"
   client!dn.db I:
-    owner: "Class4_Sub1_Sub6"
+    owner: "TextureOp31"
     name: "anInt1164"
   client!dn.eb I:
     owner: "Static2"
@@ -1941,17 +1941,17 @@ fields:
     owner: "Class4_Sub8"
     name: "anInt4083"
   client!ec.a I:
-    owner: "Class43"
-    name: "anInt1199"
+    owner: "GlShader"
+    name: "id"
   client!ec.b I:
-    owner: "Static2"
-    name: "anInt1200"
+    owner: "GlShader"
+    name: "GL_FRAGMENT_SHADER"
   client!ec.c [I:
-    owner: "Static2"
-    name: "anIntArray91"
+    owner: "GlShader"
+    name: "temp"
   client!ec.d I:
-    owner: "Class43"
-    name: "anInt1201"
+    owner: "GlShader"
+    name: "contextId"
   client!ed.A I:
     owner: "Static2"
     name: "anInt1213"
@@ -2532,10 +2532,10 @@ fields:
     owner: "Language"
     name: "ISO_CODES"
   client!fe.m [I:
-    owner: "Class56_Sub1"
+    owner: "SoftwareIndexedSprite"
     name: "anIntArray120"
   client!fe.n [B:
-    owner: "Class56_Sub1"
+    owner: "SoftwareIndexedSprite"
     name: "aByteArray15"
   client!ff.a I:
     owner: "Static2"
@@ -2616,25 +2616,25 @@ fields:
     owner: "Js5"
     name: "unpacked"
   client!fi.U I:
-    owner: "Class4_Sub1_Sub8"
+    owner: "TextureOp36"
     name: "anInt1831"
   client!fi.V [I:
     owner: "Keyboard"
     name: "typedCodeQueue"
   client!fi.cb I:
-    owner: "Class4_Sub1_Sub8"
+    owner: "TextureOp36"
     name: "anInt1838"
   client!fi.fb [I:
-    owner: "Class4_Sub1_Sub8"
+    owner: "TextureOp36"
     name: "anIntArray126"
   client!fi.hb [I:
     owner: "Static2"
     name: "anIntArray127"
   client!fi.ib I:
-    owner: "Class4_Sub1_Sub8"
+    owner: "TextureOp36"
     name: "anInt1842"
   client!fj.T Z:
-    owner: "Class4_Sub1_Sub9"
+    owner: "TextureOp9"
     name: "aBoolean113"
   client!fj.V I:
     owner: "Static2"
@@ -2649,7 +2649,7 @@ fields:
     owner: "Static2"
     name: "aClass26_16"
   client!fj.bb Z:
-    owner: "Class4_Sub1_Sub9"
+    owner: "TextureOp9"
     name: "aBoolean114"
   client!fj.eb I:
     owner: "Static2"
@@ -2913,151 +2913,151 @@ fields:
     owner: "Static3"
     name: "anInt2582"
   client!gi.A Z:
-    owner: "Static3"
-    name: "aBoolean134"
+    owner: "GlRenderer"
+    name: "arbFboSupported"
   client!gi.B [F:
-    owner: "Static3"
-    name: "aFloatArray20"
+    owner: "GlRenderer"
+    name: "matrix"
   client!gi.C F:
-    owner: "Static3"
+    owner: "GlRenderer"
     name: "aFloat47"
   client!gi.D F:
-    owner: "Static3"
+    owner: "GlRenderer"
     name: "aFloat48"
   client!gi.E Z:
-    owner: "Static3"
-    name: "aBoolean135"
+    owner: "GlRenderer"
+    name: "arbVboSupported"
   client!gi.F Z:
-    owner: "Static3"
-    name: "aBoolean136"
+    owner: "GlRenderer"
+    name: "normalArrayEnabled"
   client!gi.G Z:
-    owner: "Static3"
-    name: "aBoolean137"
+    owner: "GlRenderer"
+    name: "extTexture3dSupported"
   client!gi.H I:
-    owner: "Static3"
-    name: "anInt2083"
+    owner: "GlRenderer"
+    name: "canvasHeight"
   client!gi.I I:
-    owner: "Static3"
-    name: "anInt2084"
+    owner: "GlRenderer"
+    name: "version"
   client!gi.J Z:
-    owner: "Static3"
-    name: "aBoolean138"
+    owner: "GlRenderer"
+    name: "enabled"
   client!gi.K Z:
-    owner: "Static3"
+    owner: "GlRenderer"
     name: "aBoolean139"
   client!gi.L I:
-    owner: "Static3"
+    owner: "GlRenderer"
     name: "anInt2085"
   client!gi.M I:
-    owner: "Static3"
+    owner: "GlRenderer"
     name: "anInt2086"
   client!gi.N Z:
-    owner: "Static3"
+    owner: "GlRenderer"
     name: "aBoolean140"
   client!gi.O Z:
-    owner: "Static3"
-    name: "aBoolean141"
+    owner: "GlRenderer"
+    name: "arbTextureFloatSupported"
   client!gi.P I:
-    owner: "Static3"
-    name: "anInt2087"
+    owner: "GlRenderer"
+    name: "textureId"
   client!gi.Q I:
-    owner: "Static3"
+    owner: "GlRenderer"
     name: "anInt2088"
   client!gi.R Z:
-    owner: "Static3"
-    name: "aBoolean142"
+    owner: "GlRenderer"
+    name: "fogEnabled"
   client!gi.S F:
-    owner: "Static3"
+    owner: "GlRenderer"
     name: "aFloat49"
   client!gi.T Z:
-    owner: "Static3"
-    name: "aBoolean143"
+    owner: "GlRenderer"
+    name: "arbVertexProgramSupported"
   client!gi.U I:
-    owner: "Static3"
+    owner: "GlRenderer"
     name: "anInt2089"
   client!gi.V I:
-    owner: "Static3"
-    name: "anInt2090"
+    owner: "GlRenderer"
+    name: "maxTextureCoords"
   client!gi.W I:
-    owner: "Static3"
-    name: "anInt2091"
+    owner: "GlRenderer"
+    name: "textureCombineAlphaMode"
   client!gi.a I:
-    owner: "Static3"
-    name: "anInt2073"
+    owner: "GlRenderer"
+    name: "textureCombineRgbMode"
   client!gi.b I:
-    owner: "Static3"
+    owner: "GlRenderer"
     name: "anInt2074"
   client!gi.c I:
-    owner: "Static3"
+    owner: "GlRenderer"
     name: "anInt2075"
   client!gi.d Z:
-    owner: "Static3"
-    name: "aBoolean125"
+    owner: "GlRenderer"
+    name: "depthTestEnabled"
   client!gi.e Lgl!javax/media/opengl/GL;:
-    owner: "Static3"
-    name: "aGL1"
+    owner: "GlRenderer"
+    name: "gl"
   client!gi.f Z:
-    owner: "Static3"
-    name: "aBoolean126"
+    owner: "GlRenderer"
+    name: "bigEndian"
   client!gi.g I:
-    owner: "Static3"
+    owner: "GlRenderer"
     name: "anInt2076"
   client!gi.h F:
-    owner: "Static3"
+    owner: "GlRenderer"
     name: "aFloat45"
   client!gi.i Z:
-    owner: "Static3"
-    name: "aBoolean127"
+    owner: "GlRenderer"
+    name: "arbTextureRectangleSupported"
   client!gi.j Z:
-    owner: "Static3"
-    name: "aBoolean128"
+    owner: "GlRenderer"
+    name: "arbTextureCubeMapSupported"
   client!gi.k I:
-    owner: "Static3"
-    name: "anInt2077"
+    owner: "GlRenderer"
+    name: "maxTextureImageUnits"
   client!gi.l I:
-    owner: "Static3"
+    owner: "GlRenderer"
     name: "anInt2078"
   client!gi.m Ljava/lang/String;:
-    owner: "Static3"
-    name: "aString116"
+    owner: "GlRenderer"
+    name: "renderer"
   client!gi.n Lgl!javax/media/opengl/GLDrawable;:
-    owner: "Static3"
-    name: "aGLDrawable1"
+    owner: "GlRenderer"
+    name: "drawable"
   client!gi.o Ljava/lang/String;:
-    owner: "Static3"
-    name: "aString117"
+    owner: "GlRenderer"
+    name: "vendor"
   client!gi.p Z:
-    owner: "Static3"
+    owner: "GlRenderer"
     name: "aBoolean129"
   client!gi.q I:
-    owner: "Static3"
+    owner: "GlRenderer"
     name: "anInt2079"
   client!gi.r Lgl!javax/media/opengl/GLContext;:
-    owner: "Static3"
-    name: "aGLContext1"
+    owner: "GlRenderer"
+    name: "context"
   client!gi.s Z:
-    owner: "Static3"
-    name: "aBoolean130"
+    owner: "GlRenderer"
+    name: "arbMultisampleSupported"
   client!gi.t I:
-    owner: "Static3"
-    name: "anInt2080"
+    owner: "GlRenderer"
+    name: "canvasWidth"
   client!gi.u Z:
-    owner: "Static3"
-    name: "aBoolean131"
+    owner: "GlRenderer"
+    name: "arbFragmentShaderSupported"
   client!gi.v I:
-    owner: "Static3"
-    name: "anInt2081"
+    owner: "GlRenderer"
+    name: "maxTextureUnits"
   client!gi.w I:
-    owner: "Static3"
+    owner: "GlRenderer"
     name: "anInt2082"
   client!gi.x Z:
-    owner: "Static3"
+    owner: "GlRenderer"
     name: "aBoolean132"
   client!gi.y Z:
-    owner: "Static3"
-    name: "aBoolean133"
+    owner: "GlRenderer"
+    name: "lightingEnabled"
   client!gi.z F:
-    owner: "Static3"
+    owner: "GlRenderer"
     name: "aFloat46"
   client!gj.a I:
     owner: "Static3"
@@ -3480,16 +3480,16 @@ fields:
     owner: "Static3"
     name: "anIntArray185"
   client!hk.W I:
-    owner: "Class4_Sub1_Sub11"
+    owner: "TextureOp1"
     name: "anInt2225"
   client!hk.Y I:
-    owner: "Class4_Sub1_Sub11"
+    owner: "TextureOp1"
     name: "anInt2227"
   client!hk.ab Lclient!wa;:
     owner: "Static3"
     name: "aClass4_Sub10_Sub1_1"
   client!hk.bb I:
-    owner: "Class4_Sub1_Sub11"
+    owner: "TextureOp1"
     name: "anInt2229"
   client!hk.eb I:
     owner: "Static3"
@@ -3667,10 +3667,10 @@ fields:
     name: "anIntArray194"
   client!ib.B I:
     owner: "Class4_Sub3_Sub10"
-    name: "anInt2320"
+    name: "id"
   client!ib.C I:
     owner: "Class4_Sub3_Sub10"
-    name: "anInt2321"
+    name: "size"
   client!ib.D [I:
     owner: "Static3"
     name: "anIntArray195"
@@ -3688,7 +3688,7 @@ fields:
     name: "aFloatArray23"
   client!ib.I I:
     owner: "Class4_Sub3_Sub10"
-    name: "anInt2325"
+    name: "contextId"
   client!ib.y Lclient!dj;:
     owner: "Static3"
     name: "aClass40_11"
@@ -4470,40 +4470,40 @@ fields:
     owner: "Static3"
     name: "anInt2616"
   client!jj.T [S:
-    owner: "Class4_Sub1_Sub12"
+    owner: "TextureOp34"
     name: "aShortArray37"
   client!jj.U [B:
-    owner: "Class4_Sub1_Sub12"
+    owner: "TextureOp34"
     name: "aByteArray19"
   client!jj.X [I:
     owner: "Static3"
     name: "anIntArray230"
   client!jj.Z I:
-    owner: "Class4_Sub1_Sub12"
+    owner: "TextureOp34"
     name: "anInt2620"
   client!jj.ab I:
-    owner: "Class4_Sub1_Sub12"
+    owner: "TextureOp34"
     name: "anInt2621"
   client!jj.bb [Z:
     owner: "Static3"
     name: "aBooleanArray13"
   client!jj.db [S:
-    owner: "Class4_Sub1_Sub12"
+    owner: "TextureOp34"
     name: "aShortArray38"
   client!jj.gb I:
-    owner: "Class4_Sub1_Sub12"
+    owner: "TextureOp34"
     name: "anInt2625"
   client!jj.hb Z:
-    owner: "Class4_Sub1_Sub12"
+    owner: "TextureOp34"
     name: "aBoolean181"
   client!jj.jb I:
     owner: "Preferences"
     name: "fullScreenHeight"
   client!jj.kb I:
-    owner: "Class4_Sub1_Sub12"
+    owner: "TextureOp34"
     name: "anInt2628"
   client!jj.nb I:
-    owner: "Class4_Sub1_Sub12"
+    owner: "TextureOp34"
     name: "anInt2631"
   client!jk.c Lclient!fh;:
     owner: "Class98"
@@ -4617,13 +4617,13 @@ fields:
     owner: "Static4"
     name: "anInt5826"
   client!jo.D [Lclient!jo;:
-    owner: "Class4_Sub1"
+    owner: "TextureOp"
     name: "aClass4_Sub1Array42"
   client!jo.E [J:
     owner: "Static4"
     name: "aLongArray56"
   client!jo.F Lclient!da;:
-    owner: "Class4_Sub1"
+    owner: "TextureOp"
     name: "aClass35_41"
   client!jo.G Z:
     owner: "Preferences"
@@ -4644,16 +4644,16 @@ fields:
     owner: "Static4"
     name: "aFloat146"
   client!jo.R I:
-    owner: "Class4_Sub1"
+    owner: "TextureOp"
     name: "anInt5832"
   client!jo.v F:
     owner: "Static4"
     name: "aFloat145"
   client!jo.y Z:
-    owner: "Class4_Sub1"
+    owner: "TextureOp"
     name: "aBoolean397"
   client!jo.z Lclient!md;:
-    owner: "Class4_Sub1"
+    owner: "TextureOp"
     name: "aClass114_41"
   client!k.b Lclient!vn;:
     owner: "Static4"
@@ -4699,7 +4699,7 @@ fields:
     name: "binarySamples"
   client!kc.a I:
     owner: "Class103"
-    name: "anInt2806"
+    name: "textureId"
   client!kc.b I:
     owner: "Class103"
     name: "anInt2807"
@@ -4891,7 +4891,7 @@ fields:
     name: "anInt2865"
   client!kg.s I:
     owner: "Class105"
-    name: "anInt2866"
+    name: "contextId"
   client!kg.t I:
     owner: "Class105"
     name: "anInt2867"
@@ -4929,13 +4929,13 @@ fields:
     owner: "Class106"
     name: "anIntArray258"
   client!kl.S I:
-    owner: "Class4_Sub1_Sub13"
+    owner: "TextureOp38"
     name: "anInt2914"
   client!kl.T I:
-    owner: "Class4_Sub1_Sub13"
+    owner: "TextureOp38"
     name: "anInt2915"
   client!kl.X I:
-    owner: "Class4_Sub1_Sub13"
+    owner: "TextureOp38"
     name: "anInt2919"
   client!kl.Y I:
     owner: "Static4"
@@ -4944,13 +4944,13 @@ fields:
     owner: "Static4"
     name: "aClass84_13"
   client!kl.cb I:
-    owner: "Class4_Sub1_Sub13"
+    owner: "TextureOp38"
     name: "anInt2923"
   client!kl.db I:
-    owner: "Class4_Sub1_Sub13"
+    owner: "TextureOp38"
     name: "anInt2924"
   client!km.T [Lclient!lc;:
-    owner: "Class4_Sub1_Sub14"
+    owner: "TextureOp29"
     name: "aClass11Array1"
   client!km.Z Lclient!cc;:
     owner: "Static4"
@@ -5043,7 +5043,7 @@ fields:
     owner: "Static4"
     name: "aLongArray24"
   client!la.ab I:
-    owner: "Class4_Sub1_Sub15"
+    owner: "TextureOp20"
     name: "anInt3022"
   client!la.cb Z:
     owner: "Static4"
@@ -5052,7 +5052,7 @@ fields:
     owner: "Static4"
     name: "anInt3024"
   client!la.fb I:
-    owner: "Class4_Sub1_Sub15"
+    owner: "TextureOp20"
     name: "anInt3026"
   client!lb.e Lclient!r;:
     owner: "Class108"
@@ -5211,17 +5211,17 @@ fields:
     owner: "Static4"
     name: "anIntArray294"
   client!lf.eb I:
-    owner: "Class4_Sub1_Sub16"
+    owner: "TextureOp14"
     name: "anInt3124"
   client!lg.a I:
     owner: "Static4"
     name: "anInt3125"
   client!lg.b F:
-    owner: "Static4"
-    name: "aFloat74"
+    owner: "ColorUtils"
+    name: "brightness"
   client!lg.c [I:
-    owner: "Static4"
-    name: "anIntArray295"
+    owner: "ColorUtils"
+    name: "HSL_TO_RGB"
   client!lg.d I:
     owner: "Static4"
     name: "anInt3126"
@@ -5346,50 +5346,50 @@ fields:
     owner: "client"
     name: "js5Archive7"
   client!lj.U I:
-    owner: "Class4_Sub1_Sub17"
+    owner: "TextureOp17"
     name: "anInt3172"
   client!lj.W I:
-    owner: "Class4_Sub1_Sub17"
+    owner: "TextureOp17"
     name: "anInt3174"
   client!lj.X I:
-    owner: "Class4_Sub1_Sub17"
+    owner: "TextureOp17"
     name: "anInt3175"
   client!lj.Y I:
-    owner: "Class4_Sub1_Sub17"
+    owner: "TextureOp17"
     name: "anInt3176"
   client!lj.bb I:
-    owner: "Class4_Sub1_Sub17"
+    owner: "TextureOp17"
     name: "anInt3179"
   client!lj.fb I:
     owner: "Static4"
     name: "anInt3183"
   client!lj.hb I:
-    owner: "Class4_Sub1_Sub17"
+    owner: "TextureOp17"
     name: "anInt3185"
   client!lj.ib I:
-    owner: "Class4_Sub1_Sub17"
+    owner: "TextureOp17"
     name: "anInt3186"
   client!lj.jb I:
-    owner: "Class4_Sub1_Sub17"
+    owner: "TextureOp17"
     name: "anInt3187"
   client!lj.lb I:
-    owner: "Class4_Sub1_Sub17"
+    owner: "TextureOp17"
     name: "anInt3189"
   client!lj.mb [F:
     owner: "Static4"
     name: "aFloatArray36"
   client!lk.a I:
-    owner: "Class111"
-    name: "anInt3190"
+    owner: "GlBuffer"
+    name: "contextId"
   client!lk.b Z:
-    owner: "Class111"
-    name: "aBoolean225"
+    owner: "GlBuffer"
+    name: "stream"
   client!lk.c I:
-    owner: "Class111"
-    name: "anInt3191"
+    owner: "GlBuffer"
+    name: "size"
   client!lk.d I:
-    owner: "Class111"
-    name: "anInt3192"
+    owner: "GlBuffer"
+    name: "id"
   client!ll.d I:
     owner: "Static4"
     name: "anInt3196"
@@ -5445,13 +5445,13 @@ fields:
     owner: "Class20_Sub2_Sub1"
     name: "anInt3232"
   client!ln.B [I:
-    owner: "Class4_Sub3_Sub15"
+    owner: "Texture"
     name: "anIntArray306"
   client!ln.F I:
     owner: "Static4"
     name: "anInt3250"
   client!ln.J Lclient!jo;:
-    owner: "Class4_Sub3_Sub15"
+    owner: "Texture"
     name: "aClass4_Sub1_2"
   client!ln.K I:
     owner: "Static4"
@@ -5460,16 +5460,16 @@ fields:
     owner: "Static4"
     name: "aClass26_30"
   client!ln.O [Lclient!jo;:
-    owner: "Class4_Sub3_Sub15"
+    owner: "Texture"
     name: "aClass4_Sub1Array19"
   client!ln.P Lclient!jo;:
-    owner: "Class4_Sub3_Sub15"
+    owner: "Texture"
     name: "aClass4_Sub1_3"
   client!ln.R I:
     owner: "GameShell"
     name: "maxMemory"
   client!ln.S [I:
-    owner: "Class4_Sub3_Sub15"
+    owner: "Texture"
     name: "anIntArray307"
   client!ln.T I:
     owner: "AudioChannel"
@@ -5484,7 +5484,7 @@ fields:
     owner: "Static4"
     name: "anInt3260"
   client!ln.y Lclient!jo;:
-    owner: "Class4_Sub3_Sub15"
+    owner: "Texture"
     name: "aClass4_Sub1_1"
   client!lo.s Lclient!ll;:
     owner: "Class4_Sub6_Sub3"
@@ -5529,10 +5529,10 @@ fields:
     owner: "client"
     name: "js5Archive12"
   client!ma.a I:
-    owner: "Class56"
+    owner: "IndexedSprite"
     name: "anInt3404"
   client!ma.b I:
-    owner: "Class56"
+    owner: "IndexedSprite"
     name: "anInt3405"
   client!ma.c [Lclient!wf;:
     owner: "Static4"
@@ -5547,19 +5547,19 @@ fields:
     owner: "LocalisedText"
     name: "MAINLOAD45B"
   client!ma.g I:
-    owner: "Class56"
+    owner: "IndexedSprite"
     name: "anInt3408"
   client!ma.h I:
     owner: "Static4"
     name: "anInt3409"
   client!ma.i I:
-    owner: "Class56"
+    owner: "IndexedSprite"
     name: "anInt3410"
   client!ma.k I:
-    owner: "Class56"
+    owner: "IndexedSprite"
     name: "anInt3412"
   client!ma.l I:
-    owner: "Class56"
+    owner: "IndexedSprite"
     name: "anInt3413"
   client!mb.b I:
     owner: "Static4"
@@ -5742,41 +5742,41 @@ fields:
     owner: "Static4"
     name: "anInt3329"
   client!mh.a I:
-    owner: "Static4"
-    name: "anInt3330"
+    owner: "GlCleaner"
+    name: "onCardTexture"
   client!mh.b I:
-    owner: "Static4"
-    name: "anInt3331"
+    owner: "GlCleaner"
+    name: "onCardGeometry"
   client!mh.c I:
-    owner: "Static4"
-    name: "anInt3332"
+    owner: "GlCleaner"
+    name: "contextId"
   client!mh.d J:
-    owner: "Static4"
-    name: "aLong118"
+    owner: "GlCleaner"
+    name: "lastGcTime"
   client!mh.e Lclient!ll;:
-    owner: "Static4"
-    name: "aClass112_18"
+    owner: "GlCleaner"
+    name: "buffers"
   client!mh.f I:
-    owner: "Static4"
-    name: "anInt3333"
+    owner: "GlCleaner"
+    name: "onCard2d"
   client!mh.g Lclient!ll;:
-    owner: "Static4"
-    name: "aClass112_19"
+    owner: "GlCleaner"
+    name: "textures2d"
   client!mh.h Lclient!ll;:
-    owner: "Static4"
-    name: "aClass112_20"
+    owner: "GlCleaner"
+    name: "textures"
   client!mh.i Lclient!ll;:
-    owner: "Static4"
-    name: "aClass112_21"
+    owner: "GlCleaner"
+    name: "lists"
   client!mh.j Lclient!ll;:
-    owner: "Static4"
-    name: "aClass112_22"
+    owner: "GlCleaner"
+    name: "programs"
   client!mh.k Lclient!ll;:
-    owner: "Static4"
-    name: "aClass112_23"
+    owner: "GlCleaner"
+    name: "shaders"
   client!mh.l [I:
-    owner: "Static4"
-    name: "anIntArray319"
+    owner: "GlCleaner"
+    name: "ids"
   client!mi.b I:
     owner: "Static4"
     name: "anInt3335"
@@ -5787,7 +5787,7 @@ fields:
     owner: "Static4"
     name: "aByteArrayArrayArray17"
   client!mi.e Z:
-    owner: "Class119"
+    owner: "Material"
     name: "aBoolean233"
   client!mi.f Lclient!fh;:
     owner: "client"
@@ -5799,31 +5799,31 @@ fields:
     owner: "Static4"
     name: "anInt3336"
   client!mi.i Z:
-    owner: "Class119"
-    name: "aBoolean234"
+    owner: "Material"
+    name: "lowDetail"
   client!mi.j Z:
-    owner: "Class119"
+    owner: "Material"
     name: "aBoolean235"
   client!mi.l B:
-    owner: "Class119"
+    owner: "Material"
     name: "aByte7"
   client!mi.m B:
-    owner: "Class119"
+    owner: "Material"
     name: "aByte8"
   client!mi.n B:
-    owner: "Class119"
+    owner: "Material"
     name: "aByte9"
   client!mi.p B:
-    owner: "Class119"
+    owner: "Material"
     name: "aByte10"
   client!mi.q S:
-    owner: "Class119"
+    owner: "Material"
     name: "aShort26"
   client!mi.r Z:
-    owner: "Class119"
+    owner: "Material"
     name: "aBoolean236"
   client!mi.s Z:
-    owner: "Class119"
+    owner: "Material"
     name: "aBoolean237"
   client!mj.a I:
     owner: "Class120"
@@ -6060,10 +6060,10 @@ fields:
     owner: "Static4"
     name: "anInt3367"
   client!mo.T I:
-    owner: "Class4_Sub1_Sub18"
+    owner: "TextureOp26"
     name: "anInt3394"
   client!mo.V I:
-    owner: "Class4_Sub1_Sub18"
+    owner: "TextureOp26"
     name: "anInt3396"
   client!mo.X Ljava/lang/String;:
     owner: "LocalisedText"
@@ -6081,25 +6081,25 @@ fields:
     owner: "Preferences"
     name: "fullScreenWidth"
   client!n.m I:
-    owner: "Class56_Sub2"
+    owner: "GlIndexedSprite"
     name: "anInt3414"
   client!n.n I:
-    owner: "Class56_Sub2"
-    name: "anInt3415"
+    owner: "GlIndexedSprite"
+    name: "contextId"
   client!n.o I:
-    owner: "Class56_Sub2"
+    owner: "GlIndexedSprite"
     name: "anInt3416"
   client!n.p I:
-    owner: "Class56_Sub2"
+    owner: "GlIndexedSprite"
     name: "anInt3417"
   client!n.q I:
-    owner: "Class56_Sub2"
+    owner: "GlIndexedSprite"
     name: "anInt3418"
   client!n.r I:
-    owner: "Class56_Sub2"
+    owner: "GlIndexedSprite"
     name: "anInt3419"
   client!n.s I:
-    owner: "Class56_Sub2"
+    owner: "GlIndexedSprite"
     name: "anInt3420"
   client!na.A I:
     owner: "Class53_Sub4_Sub1"
@@ -6795,13 +6795,13 @@ fields:
     owner: "MiscTimer"
     name: "durations"
   client!no.T Z:
-    owner: "Class4_Sub1_Sub19"
+    owner: "TextureOp33"
     name: "aBoolean263"
   client!no.U Lclient!fd;:
     owner: "Static5"
     name: "aClass4_Sub10_8"
   client!no.X I:
-    owner: "Class4_Sub1_Sub19"
+    owner: "TextureOp33"
     name: "anInt3634"
   client!no.Y I:
     owner: "Static5"
@@ -6867,25 +6867,25 @@ fields:
     owner: "Class53_Sub5"
     name: "anInt3659"
   client!oa.M I:
-    owner: "Class4_Sub3_Sub14_Sub2"
-    name: "anInt5614"
+    owner: "GlSprite"
+    name: "textureId"
   client!oa.N I:
-    owner: "Class4_Sub3_Sub14_Sub2"
-    name: "anInt5615"
+    owner: "GlSprite"
+    name: "contextId"
   client!oa.O I:
-    owner: "Class4_Sub3_Sub14_Sub2"
+    owner: "GlSprite"
     name: "anInt5616"
   client!oa.P I:
-    owner: "Class4_Sub3_Sub14_Sub2"
+    owner: "GlSprite"
     name: "anInt5617"
   client!oa.Q I:
-    owner: "Class4_Sub3_Sub14_Sub2"
-    name: "anInt5618"
+    owner: "GlSprite"
+    name: "listId"
   client!oa.R I:
-    owner: "Class4_Sub3_Sub14_Sub2"
-    name: "anInt5619"
+    owner: "GlSprite"
+    name: "size"
   client!oa.S I:
-    owner: "Class4_Sub3_Sub14_Sub2"
+    owner: "GlSprite"
     name: "anInt5620"
   client!ob.a [I:
     owner: "Static5"
@@ -7104,34 +7104,34 @@ fields:
     owner: "Class41_Sub2_Sub1"
     name: "aByteArray49"
   client!of.U [[I:
-    owner: "Class4_Sub1_Sub20"
+    owner: "TextureOp8"
     name: "anIntArrayArray34"
   client!of.W I:
     owner: "Static5"
     name: "anInt3815"
   client!of.X [I:
-    owner: "Class4_Sub1_Sub20"
+    owner: "TextureOp8"
     name: "anIntArray410"
   client!of.Z Lclient!gl;:
     owner: "Static5"
     name: "aClass4_Sub3_Sub5_2"
   client!of.cb [S:
-    owner: "Class4_Sub1_Sub20"
+    owner: "TextureOp8"
     name: "aShortArray73"
   client!of.db I:
-    owner: "Class4_Sub1_Sub20"
+    owner: "TextureOp8"
     name: "anInt3819"
   client!of.hb [I:
-    owner: "Class4_Sub1_Sub20"
+    owner: "TextureOp8"
     name: "anIntArray411"
   client!og.T I:
-    owner: "Class4_Sub1_Sub21"
+    owner: "TextureOp39"
     name: "anInt5834"
   client!og.Z I:
     owner: "Static5"
     name: "anInt5840"
   client!og.cb I:
-    owner: "Class4_Sub1_Sub21"
+    owner: "TextureOp39"
     name: "anInt5843"
   client!og.db F:
     owner: "Static5"
@@ -7140,10 +7140,10 @@ fields:
     owner: "Static5"
     name: "aLongArray57"
   client!og.ib I:
-    owner: "Class4_Sub1_Sub21"
+    owner: "TextureOp39"
     name: "anInt5847"
   client!og.jb [I:
-    owner: "Class4_Sub1_Sub21"
+    owner: "TextureOp39"
     name: "anIntArray655"
   client!og.kb Lclient!ib;:
     owner: "Static5"
@@ -7462,7 +7462,7 @@ fields:
     name: "aClass43Array1"
   client!pf.b I:
     owner: "Class134"
-    name: "anInt4122"
+    name: "contextId"
   client!pf.c [I:
     owner: "Static5"
     name: "anIntArray432"
@@ -7509,7 +7509,7 @@ fields:
     owner: "Static5"
     name: "aClass4_Sub6_Sub3_2"
   client!ph.Y I:
-    owner: "Class4_Sub1_Sub22"
+    owner: "TextureOp19"
     name: "anInt4154"
   client!ph.ab I:
     owner: "Static5"
@@ -7713,7 +7713,7 @@ fields:
     owner: "client"
     name: "js5Archive23"
   client!qb.V I:
-    owner: "Class4_Sub1_Sub24"
+    owner: "TextureOp0"
     name: "anInt4259"
   client!qb.W I:
     owner: "Static5"
@@ -7992,14 +7992,14 @@ fields:
     owner: "LocalisedText"
     name: "CHATEFFECT4"
   client!qd.C I:
-    owner: "Class4_Sub3_Sub16"
-    name: "anInt4276"
+    owner: "GlSolidColorTexture"
+    name: "textureSize"
   client!qd.E [I:
-    owner: "Class4_Sub3_Sub16"
-    name: "anIntArray455"
+    owner: "GlSolidColorTexture"
+    name: "BIT_MASKS"
   client!qd.F I:
-    owner: "Class4_Sub3_Sub16"
-    name: "anInt4278"
+    owner: "GlSolidColorTexture"
+    name: "textureId"
   client!qd.G I:
     owner: "Keyboard"
     name: "idleLoops"
@@ -8013,8 +8013,8 @@ fields:
     owner: "client"
     name: "mainLoadPrimaryText"
   client!qd.M I:
-    owner: "Class4_Sub3_Sub16"
-    name: "anInt4283"
+    owner: "GlSolidColorTexture"
+    name: "contextId"
   client!qe.b I:
     owner: "client"
     name: "mainLoadState"
@@ -8130,31 +8130,31 @@ fields:
     owner: "LocalisedText"
     name: "SELECT"
   client!qi.c Lclient!fh;:
-    owner: "Class24"
-    name: "aClass58_13"
+    owner: "Js5TextureProvider"
+    name: "texturesArchive"
   client!qi.j J:
     owner: "GameShell"
     name: "lastCanvasReplace"
   client!qi.l [Lclient!mi;:
-    owner: "Class24"
-    name: "aClass119Array2"
+    owner: "Js5TextureProvider"
+    name: "materials"
   client!qi.m Lclient!fh;:
-    owner: "Class24"
-    name: "aClass58_14"
+    owner: "Js5TextureProvider"
+    name: "spritesArchive"
   client!qi.o I:
     owner: "Static5"
     name: "anInt441"
   client!qi.p Lclient!dj;:
-    owner: "Class24"
-    name: "aClass40_2"
+    owner: "Js5TextureProvider"
+    name: "textures"
   client!qj.S I:
     owner: "Static5"
     name: "anInt4357"
   client!qj.U I:
-    owner: "Class4_Sub1_Sub25"
+    owner: "TextureOp16"
     name: "anInt4359"
   client!qj.V I:
-    owner: "Class4_Sub1_Sub25"
+    owner: "TextureOp16"
     name: "anInt4360"
   client!qj.Y I:
     owner: "Static6"
@@ -8163,7 +8163,7 @@ fields:
     owner: "Static6"
     name: "anInt4366"
   client!qj.db I:
-    owner: "Class4_Sub1_Sub25"
+    owner: "TextureOp16"
     name: "anInt4368"
   client!qj.eb [[B:
     owner: "Static6"
@@ -8541,13 +8541,13 @@ fields:
     owner: "Country"
     name: "name"
   client!rg.V I:
-    owner: "Class4_Sub1_Sub26"
+    owner: "TextureOp37"
     name: "anInt4503"
   client!rg.W I:
-    owner: "Class4_Sub1_Sub26"
+    owner: "TextureOp37"
     name: "anInt4504"
   client!rg.X I:
-    owner: "Class4_Sub1_Sub26"
+    owner: "TextureOp37"
     name: "anInt4505"
   client!rg.Y [I:
     owner: "Static6"
@@ -8562,10 +8562,10 @@ fields:
     owner: "GameShell"
     name: "fullRedraw"
   client!rg.cb I:
-    owner: "Class4_Sub1_Sub26"
+    owner: "TextureOp37"
     name: "anInt4507"
   client!rg.db I:
-    owner: "Class4_Sub1_Sub26"
+    owner: "TextureOp37"
     name: "anInt4508"
   client!rg.gb I:
     owner: "Static6"
@@ -8577,13 +8577,13 @@ fields:
     owner: "GameShell"
     name: "logicTimes"
   client!rg.lb I:
-    owner: "Class4_Sub1_Sub26"
+    owner: "TextureOp37"
     name: "anInt4515"
   client!rg.mb I:
     owner: "Static6"
     name: "anInt4516"
   client!rg.nb I:
-    owner: "Class4_Sub1_Sub26"
+    owner: "TextureOp37"
     name: "anInt4517"
   client!rg.ob [Lclient!wb;:
     owner: "client"
@@ -8595,28 +8595,28 @@ fields:
     owner: "Static6"
     name: "anInt4546"
   client!rh.Y I:
-    owner: "Class4_Sub1_Sub27"
+    owner: "TextureOp15"
     name: "anInt4548"
   client!rh.Z I:
-    owner: "Class4_Sub1_Sub27"
+    owner: "TextureOp15"
     name: "anInt4549"
   client!rh.ab Lclient!cc;:
     owner: "Static6"
     name: "aClass26_46"
   client!rh.cb [S:
-    owner: "Class4_Sub1_Sub27"
+    owner: "TextureOp15"
     name: "aShortArray81"
   client!rh.db I:
-    owner: "Class4_Sub1_Sub27"
+    owner: "TextureOp15"
     name: "anInt4551"
   client!rh.eb I:
-    owner: "Class4_Sub1_Sub27"
+    owner: "TextureOp15"
     name: "anInt4552"
   client!rh.fb I:
-    owner: "Class4_Sub1_Sub27"
+    owner: "TextureOp15"
     name: "anInt4553"
   client!rh.gb [B:
-    owner: "Class4_Sub1_Sub27"
+    owner: "TextureOp15"
     name: "aByteArray61"
   client!rh.ib Z:
     owner: "Static6"
@@ -8631,7 +8631,7 @@ fields:
     owner: "Mouse"
     name: "awtY"
   client!rh.mb I:
-    owner: "Class4_Sub1_Sub27"
+    owner: "TextureOp15"
     name: "anInt4557"
   client!rh.nb I:
     owner: "Static6"
@@ -8784,19 +8784,19 @@ fields:
     owner: "client"
     name: "mainLoadPercentage"
   client!rm.V I:
-    owner: "Class4_Sub1_Sub28"
+    owner: "TextureOp27"
     name: "anInt4650"
   client!rm.Y I:
-    owner: "Class4_Sub1_Sub28"
+    owner: "TextureOp27"
     name: "anInt4653"
   client!rm.Z I:
-    owner: "Class4_Sub1_Sub28"
+    owner: "TextureOp27"
     name: "anInt4654"
   client!rm.bb [I:
-    owner: "Class4_Sub1_Sub28"
+    owner: "TextureOp27"
     name: "anIntArray498"
   client!rm.eb [I:
-    owner: "Class4_Sub1_Sub28"
+    owner: "TextureOp27"
     name: "anIntArray499"
   client!rm.gb Ljava/lang/String;:
     owner: "LocalisedText"
@@ -9057,11 +9057,11 @@ fields:
     owner: "Static6"
     name: "anInt4709"
   client!sb.o [Lclient!ec;:
-    owner: "Class4_Sub28"
-    name: "aClass43Array2"
+    owner: "GlCleanerProgram"
+    name: "shaders"
   client!sb.p I:
-    owner: "Class4_Sub28"
-    name: "anInt4717"
+    owner: "GlCleanerProgram"
+    name: "id"
   client!sc.T I:
     owner: "Static6"
     name: "anInt4744"
@@ -9069,10 +9069,10 @@ fields:
     owner: "ObjTypeList"
     name: "defaultInventoryOps"
   client!sc.W I:
-    owner: "Class4_Sub1_Sub29"
+    owner: "TextureOp30"
     name: "anInt4746"
   client!sc.Y I:
-    owner: "Class4_Sub1_Sub29"
+    owner: "TextureOp30"
     name: "anInt4748"
   client!sc.fb Lclient!tj;:
     owner: "client"
@@ -9081,7 +9081,7 @@ fields:
     owner: "client"
     name: "js5Archive18"
   client!sc.ib I:
-    owner: "Class4_Sub1_Sub29"
+    owner: "TextureOp30"
     name: "anInt4756"
   client!sc.jb [Ljava/lang/String;:
     owner: "Static6"
@@ -9174,7 +9174,7 @@ fields:
     owner: "Static6"
     name: "aClass26_51"
   client!sh.W I:
-    owner: "Class4_Sub1_Sub31"
+    owner: "TextureOp35"
     name: "anInt4832"
   client!sh.Z I:
     owner: "Static6"
@@ -9315,7 +9315,7 @@ fields:
     owner: "Cp1252Charset"
     name: "CP1252_TABLE"
   client!sl.W I:
-    owner: "Class4_Sub1_Sub32"
+    owner: "TextureOp7"
     name: "anInt4898"
   client!sl.Y [Ljava/lang/String;:
     owner: "ObjTypeList"
@@ -9339,16 +9339,16 @@ fields:
     owner: "Static6"
     name: "anIntArrayArrayArray14"
   client!sn.U I:
-    owner: "Class4_Sub1_Sub33"
+    owner: "TextureOp4"
     name: "anInt4935"
   client!sn.V I:
-    owner: "Class4_Sub1_Sub33"
+    owner: "TextureOp4"
     name: "anInt4936"
   client!sn.W [Z:
     owner: "Static6"
     name: "aBooleanArray24"
   client!sn.X I:
-    owner: "Class4_Sub1_Sub33"
+    owner: "TextureOp4"
     name: "anInt4937"
   client!sn.Y I:
     owner: "client"
@@ -9357,37 +9357,37 @@ fields:
     owner: "Static6"
     name: "aStringArray30"
   client!sn.cb [[I:
-    owner: "Class4_Sub1_Sub33"
+    owner: "TextureOp4"
     name: "anIntArrayArray41"
   client!sn.db I:
-    owner: "Class4_Sub1_Sub33"
+    owner: "TextureOp4"
     name: "anInt4941"
   client!sn.eb I:
-    owner: "Class4_Sub1_Sub33"
+    owner: "TextureOp4"
     name: "anInt4942"
   client!sn.fb I:
-    owner: "Class4_Sub1_Sub33"
+    owner: "TextureOp4"
     name: "anInt4943"
   client!sn.gb I:
-    owner: "Class4_Sub1_Sub33"
+    owner: "TextureOp4"
     name: "anInt4944"
   client!sn.hb I:
-    owner: "Class4_Sub1_Sub33"
+    owner: "TextureOp4"
     name: "anInt4945"
   client!sn.ib I:
     owner: "Static6"
     name: "anInt4946"
   client!sn.kb I:
-    owner: "Class4_Sub1_Sub33"
+    owner: "TextureOp4"
     name: "anInt4948"
   client!sn.lb [I:
-    owner: "Class4_Sub1_Sub33"
+    owner: "TextureOp4"
     name: "anIntArray536"
   client!sn.mb I:
-    owner: "Class4_Sub1_Sub33"
+    owner: "TextureOp4"
     name: "anInt4949"
   client!sn.nb [[I:
-    owner: "Class4_Sub1_Sub33"
+    owner: "TextureOp4"
     name: "anIntArrayArray42"
   client!sn.qb I:
     owner: "client"
@@ -9396,62 +9396,62 @@ fields:
     owner: "Static6"
     name: "anInt4953"
   client!sn.sb I:
-    owner: "Class4_Sub1_Sub33"
+    owner: "TextureOp4"
     name: "anInt4954"
   client!so.A [I:
-    owner: "Class4_Sub3_Sub18"
+    owner: "GlTexture"
     name: "anIntArray538"
   client!so.B I:
-    owner: "Class4_Sub3_Sub18"
-    name: "anInt4967"
+    owner: "GlTexture"
+    name: "combineRgbMode"
   client!so.C I:
-    owner: "Class4_Sub3_Sub18"
+    owner: "GlTexture"
     name: "anInt4968"
   client!so.D [I:
     owner: "Static6"
     name: "anIntArray539"
   client!so.E I:
-    owner: "Class4_Sub3_Sub18"
+    owner: "GlTexture"
     name: "anInt4969"
   client!so.F Z:
-    owner: "Class4_Sub3_Sub18"
-    name: "aBoolean342"
+    owner: "GlTexture"
+    name: "wrapT"
   client!so.G I:
-    owner: "Class4_Sub3_Sub18"
+    owner: "GlTexture"
     name: "anInt4970"
   client!so.H I:
-    owner: "Class4_Sub3_Sub18"
+    owner: "GlTexture"
     name: "anInt4971"
   client!so.I I:
-    owner: "Class4_Sub3_Sub18"
-    name: "anInt4972"
+    owner: "GlTexture"
+    name: "contextId"
   client!so.J Lclient!ln;:
-    owner: "Class4_Sub3_Sub18"
-    name: "aClass4_Sub3_Sub15_1"
+    owner: "GlTexture"
+    name: "texture"
   client!so.K Z:
-    owner: "Class4_Sub3_Sub18"
+    owner: "GlTexture"
     name: "aBoolean343"
   client!so.L Z:
-    owner: "Class4_Sub3_Sub18"
+    owner: "GlTexture"
     name: "aBoolean344"
   client!so.M I:
-    owner: "Class4_Sub3_Sub18"
-    name: "anInt4973"
+    owner: "GlTexture"
+    name: "textureSize"
   client!so.N Z:
-    owner: "Class4_Sub3_Sub18"
+    owner: "GlTexture"
     name: "aBoolean345"
   client!so.O F:
-    owner: "Class4_Sub3_Sub18"
+    owner: "GlTexture"
     name: "aFloat131"
   client!so.P Z:
-    owner: "Class4_Sub3_Sub18"
-    name: "aBoolean346"
+    owner: "GlTexture"
+    name: "wrapS"
   client!so.y Z:
-    owner: "Class4_Sub3_Sub18"
+    owner: "GlTexture"
     name: "aBoolean341"
   client!so.z I:
-    owner: "Class4_Sub3_Sub18"
-    name: "anInt4966"
+    owner: "GlTexture"
+    name: "textureId"
   client!t.c I:
     owner: "Class160"
     name: "anInt4976"
@@ -10452,19 +10452,19 @@ fields:
     owner: "Text"
     name: "CHATCOL7"
   client!uj.A I:
-    owner: "Class4_Sub3_Sub14"
+    owner: "Sprite"
     name: "anInt5604"
   client!uj.C I:
-    owner: "Class4_Sub3_Sub14"
+    owner: "Sprite"
     name: "anInt5606"
   client!uj.E I:
-    owner: "Class4_Sub3_Sub14"
+    owner: "Sprite"
     name: "height"
   client!uj.F [J:
     owner: "Static7"
     name: "aLongArray54"
   client!uj.G I:
-    owner: "Class4_Sub3_Sub14"
+    owner: "Sprite"
     name: "width"
   client!uj.H I:
     owner: "Static7"
@@ -10473,13 +10473,13 @@ fields:
     owner: "Static7"
     name: "anInt5611"
   client!uj.J I:
-    owner: "Class4_Sub3_Sub14"
+    owner: "Sprite"
     name: "anInt5612"
   client!uj.L Z:
     owner: "Static7"
     name: "aBoolean388"
   client!uj.y I:
-    owner: "Class4_Sub3_Sub14"
+    owner: "Sprite"
     name: "anInt5602"
   client!uk.b I:
     owner: "Mouse"
@@ -10593,13 +10593,13 @@ fields:
     owner: "Static7"
     name: "anIntArray625"
   client!vb.U I:
-    owner: "Class4_Sub1_Sub37"
+    owner: "TextureOp12"
     name: "anInt5470"
   client!vb.V Lclient!cc;:
     owner: "Static7"
     name: "aClass26_56"
   client!vb.W I:
-    owner: "Class4_Sub1_Sub37"
+    owner: "TextureOp12"
     name: "anInt5471"
   client!vb.X [S:
     owner: "Static7"
@@ -10614,7 +10614,7 @@ fields:
     owner: "Static7"
     name: "aBoolean370"
   client!vb.eb I:
-    owner: "Class4_Sub1_Sub37"
+    owner: "TextureOp12"
     name: "anInt5476"
   client!vc.a Lclient!po;:
     owner: "Static7"
@@ -10929,10 +10929,10 @@ fields:
     owner: "Static7"
     name: "anInt5584"
   client!vi.V I:
-    owner: "Class4_Sub1_Sub38"
+    owner: "TextureOp5"
     name: "anInt5586"
   client!vi.W I:
-    owner: "Class4_Sub1_Sub38"
+    owner: "TextureOp5"
     name: "anInt5587"
   client!vi.Y [[[Lclient!nh;:
     owner: "Static7"
@@ -11007,16 +11007,16 @@ fields:
     owner: "Static7"
     name: "anIntArray643"
   client!vm.W [[I:
-    owner: "Class4_Sub1_Sub39"
+    owner: "TextureOp10"
     name: "anIntArrayArray49"
   client!vm.Y F:
     owner: "Static7"
     name: "aFloat144"
   client!vm.bb [I:
-    owner: "Class4_Sub1_Sub39"
+    owner: "TextureOp10"
     name: "anIntArray644"
   client!vn.M [I:
-    owner: "Class4_Sub3_Sub14_Sub1"
+    owner: "SoftwareSprite"
     name: "pixels"
   client!w.A I:
     owner: "Static7"
@@ -12069,19 +12069,19 @@ methods:
     locals:
       3: "local3"
   client!ac.<init> ()V:
-    owner: "Class4_Sub1_Sub1"
+    owner: "TextureOp28"
     name: "<init>"
     arguments: {}
     locals: {}
   client!ac.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub1"
-    name: "method4687"
+    owner: "TextureOp28"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals: {}
   client!ac.a (II)[I:
-    owner: "Class4_Sub1_Sub1"
+    owner: "TextureOp28"
     name: "method4694"
     arguments:
       1: "arg0"
@@ -12141,7 +12141,7 @@ methods:
     locals:
       3: "local3"
   client!ac.a (IIIIILjava/util/Random;[[I)V:
-    owner: "Class4_Sub1_Sub1"
+    owner: "TextureOp28"
     name: "method69"
     arguments:
       0: "arg0"
@@ -12210,8 +12210,8 @@ methods:
       0: "arg0"
     locals: {}
   client!ac.e (B)V:
-    owner: "Class4_Sub1_Sub1"
-    name: "method4700"
+    owner: "TextureOp28"
+    name: "postDecode"
     arguments: {}
     locals: {}
   client!ad.a ([BI[BII)V:
@@ -12535,15 +12535,15 @@ methods:
     arguments: {}
     locals: {}
   client!aj.a (CLjava/lang/String;Z)I:
-    owner: "Static8"
-    name: "method114"
+    owner: "StringUtils"
+    name: "countMatches"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      1: "s"
+      0: "c"
     locals:
-      3: "local3"
-      10: "local10"
-      16: "local16"
+      3: "count"
+      10: "len"
+      16: "i"
   client!aj.a (Lclient!fh;Lclient!fh;B)V:
     owner: "Static8"
     name: "method113"
@@ -13385,10 +13385,10 @@ methods:
     arguments: {}
     locals: {}
   client!bh.a (II)Lclient!jo;:
-    owner: "Static10"
-    name: "method897"
+    owner: "TextureOp"
+    name: "create"
     arguments:
-      1: "arg0"
+      1: "type"
     locals: {}
   client!bh.a (IIZIIII)V:
     owner: "Static10"
@@ -13673,16 +13673,16 @@ methods:
       8: "local8"
       42: "local42"
   client!bl.<init> ()V:
-    owner: "Class4_Sub1_Sub2"
+    owner: "TextureOp25"
     name: "<init>"
     arguments: {}
     locals: {}
   client!bl.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub2"
-    name: "method4687"
+    owner: "TextureOp25"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals:
       55: "local55"
   client!bl.a (IIII)V:
@@ -13703,7 +13703,7 @@ methods:
       1: "arg0"
     locals: {}
   client!bl.b (II)[[I:
-    owner: "Class4_Sub1_Sub2"
+    owner: "TextureOp25"
     name: "method4695"
     arguments:
       0: "arg0"
@@ -14114,39 +14114,39 @@ methods:
     arguments: {}
     locals: {}
   client!c.<init> (Lclient!fh;Lclient!fh;Lclient!fh;IZ)V:
-    owner: "Class24_Sub1"
+    owner: "Js5GlTextureProvider"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
+      0: "texturesArchive"
+      2: "spritesArchive"
+      1: "materialsArchive"
+      3: "capacity"
+      4: "lowDetail"
     locals: {}
   client!c.a (BI)I:
-    owner: "Class24_Sub1"
+    owner: "Js5GlTextureProvider"
     name: "method447"
     arguments:
       1: "arg0"
     locals: {}
   client!c.a (BII)V:
-    owner: "Class24_Sub1"
+    owner: "Js5GlTextureProvider"
     name: "method454"
     arguments:
+      2: "id"
       1: "arg0"
-      2: "arg1"
     locals:
       29: "local29"
-      34: "local34"
-      50: "local50"
+      34: "texture"
+      50: "solidColorTexture"
   client!c.a (FII)[I:
-    owner: "Class24_Sub1"
+    owner: "Js5GlTextureProvider"
     name: "method445"
     arguments:
+      2: "id"
       0: "arg0"
-      2: "arg1"
     locals:
-      4: "local4"
+      4: "texture"
   client!c.a (IIIIIII)V:
     owner: "Static10"
     name: "method462"
@@ -14162,12 +14162,12 @@ methods:
       16: "local16"
       24: "local24"
   client!c.a (IZ)Z:
-    owner: "Class24_Sub1"
-    name: "method448"
+    owner: "Js5GlTextureProvider"
+    name: "isGlTextureReady"
     arguments:
-      0: "arg0"
+      0: "id"
     locals:
-      15: "local15"
+      15: "texture"
   client!c.a (Lclient!fh;Lclient!fh;I)I:
     owner: "Static10"
     name: "method464"
@@ -14189,20 +14189,20 @@ methods:
     arguments: {}
     locals: {}
   client!c.a (ZFZII)Lclient!vn;:
-    owner: "Class24_Sub1"
+    owner: "Js5GlTextureProvider"
     name: "method452"
     arguments:
+      4: "id"
       0: "arg0"
       1: "arg1"
       3: "arg2"
-      4: "arg3"
     locals:
-      8: "local8"
+      8: "texture"
   client!c.a (ZI)V:
-    owner: "Class24_Sub1"
-    name: "method457"
+    owner: "Js5GlTextureProvider"
+    name: "setLowDetail"
     arguments:
-      0: "arg0"
+      0: "lowDetail"
     locals: {}
   client!c.a ([BZI)Ljava/lang/Object;:
     owner: "ByteArray"
@@ -14213,119 +14213,119 @@ methods:
       19: "array"
       26: "ex"
   client!c.b (IB)Z:
-    owner: "Class24_Sub1"
+    owner: "Js5GlTextureProvider"
     name: "method442"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!c.b (II)Z:
-    owner: "Class24_Sub1"
+    owner: "Js5GlTextureProvider"
     name: "method441"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!c.b (IZ)I:
-    owner: "Class24_Sub1"
+    owner: "Js5GlTextureProvider"
     name: "method450"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!c.c (I)V:
-    owner: "Class24_Sub1"
-    name: "method460"
+    owner: "Js5GlTextureProvider"
+    name: "clear"
     arguments: {}
     locals: {}
   client!c.c (IB)[I:
-    owner: "Class24_Sub1"
+    owner: "Js5GlTextureProvider"
     name: "method449"
     arguments:
-      0: "arg0"
+      0: "id"
     locals:
-      8: "local8"
+      8: "texture"
   client!c.c (II)Z:
-    owner: "Class24_Sub1"
+    owner: "Js5GlTextureProvider"
     name: "method443"
     arguments:
-      1: "arg0"
+      1: "id"
     locals: {}
   client!c.c (IZ)Lclient!ln;:
-    owner: "Class24_Sub1"
-    name: "method421"
+    owner: "Js5GlTextureProvider"
+    name: "getTexture"
     arguments:
-      0: "arg0"
+      0: "id"
     locals:
       14: "local14"
   client!c.d (IB)V:
-    owner: "Class24_Sub1"
-    name: "method463"
+    owner: "Js5GlTextureProvider"
+    name: "resize"
     arguments:
-      0: "arg0"
+      0: "capacity"
     locals: {}
   client!c.d (II)I:
-    owner: "Class24_Sub1"
+    owner: "Js5GlTextureProvider"
     name: "method444"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!c.e (II)I:
-    owner: "Class24_Sub1"
+    owner: "Js5GlTextureProvider"
     name: "method446"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!c.f (II)V:
-    owner: "Class24_Sub1"
+    owner: "Js5GlTextureProvider"
     name: "method451"
     arguments:
-      1: "arg0"
+      1: "id"
     locals: {}
   client!c.g (II)Z:
-    owner: "Class24_Sub1"
-    name: "method453"
+    owner: "Js5GlTextureProvider"
+    name: "isLowDetail"
     arguments:
-      1: "arg0"
+      1: "id"
     locals: {}
   client!c.h (II)I:
-    owner: "Class24_Sub1"
+    owner: "Js5GlTextureProvider"
     name: "method455"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!c.i (II)V:
-    owner: "Class24_Sub1"
+    owner: "Js5GlTextureProvider"
     name: "method458"
     arguments:
       0: "arg0"
     locals:
-      13: "local13"
+      13: "texture"
   client!c.j (II)Lclient!so;:
-    owner: "Class24_Sub1"
-    name: "method459"
+    owner: "Js5GlTextureProvider"
+    name: "getGlTexture"
     arguments:
-      0: "arg0"
+      0: "id"
     locals:
-      17: "local17"
-      28: "local28"
+      17: "texture"
+      28: "bytes"
       40: "local40"
   client!c.k (II)Lclient!qd;:
-    owner: "Class24_Sub1"
-    name: "method465"
+    owner: "Js5GlTextureProvider"
+    name: "getSolidColorTexture"
     arguments:
-      1: "arg0"
+      1: "id"
     locals:
-      11: "local11"
-      27: "local27"
+      11: "texture"
+      27: "newTexture"
   client!ca.<init> ()V:
-    owner: "Class4_Sub1_Sub3"
+    owner: "TextureOp11"
     name: "<init>"
     arguments: {}
     locals: {}
   client!ca.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub3"
-    name: "method4687"
+    owner: "TextureOp11"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals: {}
   client!ca.a (IB)Lclient!vd;:
     owner: "Static11"
@@ -14344,7 +14344,7 @@ methods:
       1: "arg1"
     locals: {}
   client!ca.b (II)[[I:
-    owner: "Class4_Sub1_Sub3"
+    owner: "TextureOp11"
     name: "method4695"
     arguments:
       0: "arg0"
@@ -14600,19 +14600,19 @@ methods:
       108: "local108"
       298: "local298"
   client!cf.<init> ()V:
-    owner: "Class4_Sub1_Sub4"
+    owner: "TextureOp6"
     name: "<init>"
     arguments: {}
     locals: {}
   client!cf.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub4"
-    name: "method4687"
+    owner: "TextureOp6"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals: {}
   client!cf.a (II)[I:
-    owner: "Class4_Sub1_Sub4"
+    owner: "TextureOp6"
     name: "method4694"
     arguments:
       1: "arg0"
@@ -14656,7 +14656,7 @@ methods:
       61: "local61"
       155: "local155"
   client!cf.b (II)[[I:
-    owner: "Class4_Sub1_Sub4"
+    owner: "TextureOp6"
     name: "method4695"
     arguments:
       0: "arg0"
@@ -15116,19 +15116,19 @@ methods:
       24: "node"
       33: "inverseNode"
   client!ck.<init> ()V:
-    owner: "Class4_Sub1_Sub5"
+    owner: "TextureOp32"
     name: "<init>"
     arguments: {}
     locals: {}
   client!ck.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub5"
-    name: "method4687"
+    owner: "TextureOp32"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals: {}
   client!ck.a (II)[I:
-    owner: "Class4_Sub1_Sub5"
+    owner: "TextureOp32"
     name: "method4694"
     arguments:
       1: "arg0"
@@ -15188,8 +15188,8 @@ methods:
       1: "arg0"
     locals: {}
   client!ck.e (B)V:
-    owner: "Class4_Sub1_Sub5"
-    name: "method4700"
+    owner: "TextureOp32"
+    name: "postDecode"
     arguments: {}
     locals: {}
   client!ck.f (B)V:
@@ -15204,7 +15204,7 @@ methods:
     locals:
       61: "local61"
   client!ck.h (B)V:
-    owner: "Class4_Sub1_Sub5"
+    owner: "TextureOp32"
     name: "method642"
     arguments: {}
     locals:
@@ -15618,18 +15618,18 @@ methods:
       39: "local39"
       46: "local46"
   client!d.a (ICLjava/lang/String;)[Ljava/lang/String;:
-    owner: "Static12"
-    name: "method721"
+    owner: "StringUtils"
+    name: "split"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "s"
+      1: "delim"
     locals:
-      10: "local10"
-      15: "local15"
-      17: "local17"
-      19: "local19"
-      21: "local21"
-      26: "local26"
+      10: "matches"
+      15: "parts"
+      17: "part"
+      19: "start"
+      21: "i"
+      26: "end"
   client!d.a (III)V:
     owner: "Static12"
     name: "method722"
@@ -15758,10 +15758,10 @@ methods:
       27: "local27"
       55: "local55"
   client!db.a (ZLjava/lang/String;)I:
-    owner: "Static12"
-    name: "method737"
+    owner: "StringUtils"
+    name: "parseInt"
     arguments:
-      1: "arg0"
+      1: "s"
     locals: {}
   client!dc.a (B)V:
     owner: "Class37"
@@ -16307,19 +16307,19 @@ methods:
     arguments: {}
     locals: {}
   client!dn.<init> ()V:
-    owner: "Class4_Sub1_Sub6"
+    owner: "TextureOp31"
     name: "<init>"
     arguments: {}
     locals: {}
   client!dn.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub6"
-    name: "method4687"
+    owner: "TextureOp31"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals: {}
   client!dn.a (II)[I:
-    owner: "Class4_Sub1_Sub6"
+    owner: "TextureOp31"
     name: "method4694"
     arguments:
       1: "arg0"
@@ -16551,24 +16551,24 @@ methods:
     arguments: {}
     locals: {}
   client!ec.<init> (II)V:
-    owner: "Class43"
+    owner: "GlShader"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "id"
+      1: "type"
     locals: {}
   client!ec.a (Ljava/lang/String;I)Lclient!ec;:
-    owner: "Static13"
-    name: "method991"
+    owner: "GlShader"
+    name: "create"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "code"
+      1: "type"
     locals:
-      1: "local1"
-      5: "local5"
-      59: "local59"
+      1: "gl"
+      5: "id"
+      59: "log"
   client!ec.finalize ()V:
-    owner: "Class43"
+    owner: "GlShader"
     name: "finalize"
     arguments: {}
     locals: {}
@@ -17633,12 +17633,12 @@ methods:
     arguments: {}
     locals: {}
   client!fa.<init> ()V:
-    owner: "Class4_Sub1_Sub7"
+    owner: "TextureOp3"
     name: "<init>"
     arguments: {}
     locals: {}
   client!fa.a (II)[I:
-    owner: "Class4_Sub1_Sub7"
+    owner: "TextureOp3"
     name: "method4694"
     arguments:
       1: "arg0"
@@ -18456,7 +18456,7 @@ methods:
     arguments: {}
     locals: {}
   client!fe.<init> (III)V:
-    owner: "Class56_Sub1"
+    owner: "SoftwareIndexedSprite"
     name: "<init>"
     arguments:
       0: "arg0"
@@ -18464,7 +18464,7 @@ methods:
       2: "arg2"
     locals: {}
   client!fe.<init> (IIIIII[B[I)V:
-    owner: "Class56_Sub1"
+    owner: "SoftwareIndexedSprite"
     name: "<init>"
     arguments:
       0: "arg0"
@@ -18477,7 +18477,7 @@ methods:
       7: "arg7"
     locals: {}
   client!fe.a ()V:
-    owner: "Class56_Sub1"
+    owner: "SoftwareIndexedSprite"
     name: "method1309"
     arguments: {}
     locals:
@@ -18486,7 +18486,7 @@ methods:
       14: "local14"
       60: "local60"
   client!fe.a (II)V:
-    owner: "Class56_Sub1"
+    owner: "SoftwareIndexedSprite"
     name: "method2815"
     arguments:
       0: "arg0"
@@ -18504,7 +18504,7 @@ methods:
       74: "local74"
       107: "local107"
   client!fe.a (III)V:
-    owner: "Class56_Sub1"
+    owner: "SoftwareIndexedSprite"
     name: "method2816"
     arguments:
       0: "arg0"
@@ -18523,7 +18523,7 @@ methods:
       74: "local74"
       107: "local107"
   client!fe.a (IIII)V:
-    owner: "Class56_Sub1"
+    owner: "SoftwareIndexedSprite"
     name: "method1315"
     arguments:
       0: "arg0"
@@ -18547,7 +18547,7 @@ methods:
       172: "local172"
       187: "local187"
   client!fe.a (IIIII)V:
-    owner: "Class56_Sub1"
+    owner: "SoftwareIndexedSprite"
     name: "method1316"
     arguments:
       0: "arg0"
@@ -18572,7 +18572,7 @@ methods:
       172: "local172"
       187: "local187"
   client!fe.a (IIIIII)V:
-    owner: "Class56_Sub1"
+    owner: "SoftwareIndexedSprite"
     name: "method1314"
     arguments:
       0: "arg0"
@@ -18664,7 +18664,7 @@ methods:
       1460: "local1460"
       1575: "local1575"
   client!fe.a (II[I[I)V:
-    owner: "Class56_Sub1"
+    owner: "SoftwareIndexedSprite"
     name: "method1321"
     arguments:
       0: "arg0"
@@ -18776,7 +18776,7 @@ methods:
       61: "local61"
       65: "local65"
   client!fe.b ()V:
-    owner: "Class56_Sub1"
+    owner: "SoftwareIndexedSprite"
     name: "method1312"
     arguments: {}
     locals:
@@ -18785,7 +18785,7 @@ methods:
       13: "local13"
       17: "local17"
   client!fe.b (III)V:
-    owner: "Class56_Sub1"
+    owner: "SoftwareIndexedSprite"
     name: "method1311"
     arguments:
       0: "arg0"
@@ -18821,7 +18821,7 @@ methods:
       26: "local26"
       30: "local30"
   client!fe.c ()V:
-    owner: "Class56_Sub1"
+    owner: "SoftwareIndexedSprite"
     name: "method1313"
     arguments: {}
     locals:
@@ -18831,7 +18831,7 @@ methods:
       19: "local19"
       44: "local44"
   client!fe.d ()V:
-    owner: "Class56_Sub1"
+    owner: "SoftwareIndexedSprite"
     name: "method1320"
     arguments: {}
     locals:
@@ -19147,16 +19147,16 @@ methods:
       0: "group"
     locals: {}
   client!fi.<init> ()V:
-    owner: "Class4_Sub1_Sub8"
+    owner: "TextureOp36"
     name: "<init>"
     arguments: {}
     locals: {}
   client!fi.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub8"
-    name: "method4687"
+    owner: "TextureOp36"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals: {}
   client!fi.a (Lclient!wf;I)Lclient!wf;:
     owner: "Static15"
@@ -19190,7 +19190,7 @@ methods:
       28: "local28"
       32: "local32"
   client!fi.b (II)[[I:
-    owner: "Class4_Sub1_Sub8"
+    owner: "TextureOp36"
     name: "method4695"
     arguments:
       0: "arg0"
@@ -19212,17 +19212,17 @@ methods:
       0: "arg0"
     locals: {}
   client!fi.d (B)I:
-    owner: "Class4_Sub1_Sub8"
+    owner: "TextureOp36"
     name: "method4691"
     arguments: {}
     locals: {}
   client!fi.e (I)V:
-    owner: "Class4_Sub1_Sub8"
+    owner: "TextureOp36"
     name: "method4696"
     arguments: {}
     locals: {}
   client!fi.g (I)Z:
-    owner: "Class4_Sub1_Sub8"
+    owner: "TextureOp36"
     name: "method1399"
     arguments: {}
     locals:
@@ -19235,19 +19235,19 @@ methods:
     arguments: {}
     locals: {}
   client!fj.<init> ()V:
-    owner: "Class4_Sub1_Sub9"
+    owner: "TextureOp9"
     name: "<init>"
     arguments: {}
     locals: {}
   client!fj.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub9"
-    name: "method4687"
+    owner: "TextureOp9"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals: {}
   client!fj.a (II)[I:
-    owner: "Class4_Sub1_Sub9"
+    owner: "TextureOp9"
     name: "method4694"
     arguments:
       1: "arg0"
@@ -19293,7 +19293,7 @@ methods:
       767: "local767"
       774: "local774"
   client!fj.b (II)[[I:
-    owner: "Class4_Sub1_Sub9"
+    owner: "TextureOp9"
     name: "method4695"
     arguments:
       0: "arg0"
@@ -19337,19 +19337,19 @@ methods:
     locals:
       6: "clip"
   client!fl.<init> ()V:
-    owner: "Class4_Sub1_Sub10"
+    owner: "TextureOp21"
     name: "<init>"
     arguments: {}
     locals: {}
   client!fl.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub10"
-    name: "method4687"
+    owner: "TextureOp21"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals: {}
   client!fl.a (II)[I:
-    owner: "Class4_Sub1_Sub10"
+    owner: "TextureOp21"
     name: "method4694"
     arguments:
       1: "arg0"
@@ -19399,7 +19399,7 @@ methods:
       2: "arg1"
     locals: {}
   client!fl.b (II)[[I:
-    owner: "Class4_Sub1_Sub10"
+    owner: "TextureOp21"
     name: "method4695"
     arguments:
       0: "arg0"
@@ -20731,18 +20731,18 @@ methods:
     locals:
       8: "local8"
   client!gi.a ()V:
-    owner: "Static16"
+    owner: "GlRenderer"
     name: "method1585"
     arguments: {}
     locals: {}
   client!gi.a (F)V:
-    owner: "Static17"
+    owner: "GlRenderer"
     name: "method1613"
     arguments:
       0: "arg0"
     locals: {}
   client!gi.a (FF)V:
-    owner: "Static17"
+    owner: "GlRenderer"
     name: "method1621"
     arguments:
       0: "arg0"
@@ -20752,7 +20752,7 @@ methods:
       29: "local29"
       42: "local42"
   client!gi.a (FFF)V:
-    owner: "Static17"
+    owner: "GlRenderer"
     name: "method1609"
     arguments:
       0: "arg0"
@@ -20760,7 +20760,7 @@ methods:
       2: "arg2"
     locals: {}
   client!gi.a (FFFFFF)V:
-    owner: "Static17"
+    owner: "GlRenderer"
     name: "method1604"
     arguments:
       0: "arg0"
@@ -20772,20 +20772,20 @@ methods:
     locals:
       3: "local3"
   client!gi.a (I)V:
-    owner: "Static17"
-    name: "method1597"
+    owner: "GlRenderer"
+    name: "setTextureCombineRgbMode"
     arguments:
-      0: "arg0"
+      0: "mode"
     locals: {}
   client!gi.a (II)V:
-    owner: "Static16"
+    owner: "GlRenderer"
     name: "method1584"
     arguments:
       0: "arg0"
       1: "arg1"
     locals: {}
   client!gi.a (IIII)V:
-    owner: "Static16"
+    owner: "GlRenderer"
     name: "method1583"
     arguments:
       0: "arg0"
@@ -20794,7 +20794,7 @@ methods:
       3: "arg3"
     locals: {}
   client!gi.a (IIIIII)V:
-    owner: "Static17"
+    owner: "GlRenderer"
     name: "method1598"
     arguments:
       0: "arg0"
@@ -20812,7 +20812,7 @@ methods:
       30: "local30"
       37: "local37"
   client!gi.a (IIIIIIFFII)V:
-    owner: "Static16"
+    owner: "GlRenderer"
     name: "method1582"
     arguments:
       0: "arg0"
@@ -20831,65 +20831,65 @@ methods:
       25: "local25"
       35: "local35"
   client!gi.a (Ljava/awt/Canvas;)V:
-    owner: "Static17"
-    name: "method1611"
+    owner: "GlRenderer"
+    name: "createAndDestroyContext"
     arguments:
-      0: "arg0"
+      0: "canvas"
     locals:
-      5: "local5"
-      11: "local11"
-      18: "local18"
-      30: "local30"
+      5: "factory"
+      11: "drawable"
+      18: "context"
+      30: "ex"
   client!gi.a (Ljava/awt/Canvas;I)I:
-    owner: "Static17"
-    name: "method1623"
+    owner: "GlRenderer"
+    name: "init"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "canvas"
+      1: "numSamples"
     locals: {}
   client!gi.a (Ljava/awt/Canvas;ILgl!javax/media/opengl/GLContext;)I:
-    owner: "Static16"
-    name: "method1594"
+    owner: "GlRenderer"
+    name: "init"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "canvas"
+      1: "numSamples"
+      2: "context"
     locals:
-      8: "local8"
-      18: "local18"
-      29: "local29"
-      36: "local36"
-      41: "local41"
-      66: "local66"
-      78: "local78"
-      82: "local82"
-      99: "local99"
+      8: "capabilities"
+      18: "factory"
+      29: "makeCurrentAttempts"
+      36: "result"
+      41: "ex"
+      66: "result"
+      78: "swapBuffersAttempts"
+      82: "ex"
+      99: "ex"
   client!gi.a (Z)V:
-    owner: "Static16"
-    name: "method1588"
+    owner: "GlRenderer"
+    name: "setDepthTestEnabled"
     arguments:
-      0: "arg0"
+      0: "enabled"
     locals: {}
   client!gi.b ()V:
-    owner: "Static16"
+    owner: "GlRenderer"
     name: "method1586"
     arguments: {}
     locals: {}
   client!gi.b (I)V:
-    owner: "Static17"
-    name: "method1600"
+    owner: "GlRenderer"
+    name: "setTextureId"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!gi.b (II)V:
-    owner: "Static16"
-    name: "method1587"
+    owner: "GlRenderer"
+    name: "setCanvasSize"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "width"
+      1: "height"
     locals: {}
   client!gi.b (IIII)V:
-    owner: "Static17"
+    owner: "GlRenderer"
     name: "method1599"
     arguments:
       0: "arg0"
@@ -20898,24 +20898,24 @@ methods:
       3: "arg3"
     locals: {}
   client!gi.b (Z)V:
-    owner: "Static16"
-    name: "method1592"
+    owner: "GlRenderer"
+    name: "setNormalArrayEnabled"
     arguments:
-      0: "arg0"
+      0: "enabled"
     locals: {}
   client!gi.c ()V:
-    owner: "Static16"
-    name: "method1589"
+    owner: "GlRenderer"
+    name: "disableDepthMask"
     arguments: {}
     locals: {}
   client!gi.c (I)V:
-    owner: "Static17"
-    name: "method1607"
+    owner: "GlRenderer"
+    name: "setTextureCombineAlphaMode"
     arguments:
-      0: "arg0"
+      0: "mode"
     locals: {}
   client!gi.c (IIII)V:
-    owner: "Static17"
+    owner: "GlRenderer"
     name: "method1606"
     arguments:
       0: "arg0"
@@ -20924,135 +20924,135 @@ methods:
       3: "arg3"
     locals: {}
   client!gi.c (Z)V:
-    owner: "Static16"
-    name: "method1593"
+    owner: "GlRenderer"
+    name: "setFogEnabled"
     arguments:
-      0: "arg0"
+      0: "enabled"
     locals: {}
   client!gi.d ()V:
-    owner: "Static16"
+    owner: "GlRenderer"
     name: "method1590"
     arguments: {}
     locals: {}
   client!gi.d (I)V:
-    owner: "Static17"
-    name: "method1615"
+    owner: "GlRenderer"
+    name: "clearColorBuffer"
     arguments:
-      0: "arg0"
+      0: "rgb"
     locals: {}
   client!gi.d (Z)V:
-    owner: "Static17"
-    name: "method1610"
+    owner: "GlRenderer"
+    name: "setLightingEnabled"
     arguments:
-      0: "arg0"
+      0: "enabled"
     locals: {}
   client!gi.e ()V:
-    owner: "Static16"
-    name: "method1591"
+    owner: "GlRenderer"
+    name: "enableDepthMask"
     arguments: {}
     locals: {}
   client!gi.e (I)V:
-    owner: "Static17"
-    name: "method1617"
+    owner: "GlRenderer"
+    name: "clearColorAndDepthBuffers"
     arguments:
-      0: "arg0"
+      0: "rgb"
     locals: {}
   client!gi.f ()V:
-    owner: "Static16"
+    owner: "GlRenderer"
     name: "method1595"
     arguments: {}
     locals: {}
   client!gi.g ()V:
-    owner: "Static17"
+    owner: "GlRenderer"
     name: "method1596"
     arguments: {}
     locals: {}
   client!gi.h ()V:
-    owner: "Static17"
+    owner: "GlRenderer"
     name: "method1601"
     arguments: {}
     locals: {}
   client!gi.j ()V:
-    owner: "Static17"
-    name: "method1603"
+    owner: "GlRenderer"
+    name: "clearDepthBuffer"
     arguments: {}
     locals: {}
   client!gi.k ()V:
-    owner: "Static17"
-    name: "method1605"
+    owner: "GlRenderer"
+    name: "quit"
     arguments: {}
     locals:
-      6: "local6"
-      18: "local18"
-      22: "local22"
-      31: "local31"
+      6: "ex"
+      18: "ex"
+      22: "ex"
+      31: "ex"
   client!gi.l ()V:
-    owner: "Static17"
+    owner: "GlRenderer"
     name: "method1608"
     arguments: {}
     locals:
       2: "local2"
   client!gi.m ()F:
-    owner: "Static17"
+    owner: "GlRenderer"
     name: "method1612"
     arguments: {}
     locals: {}
   client!gi.n ()I:
-    owner: "Static17"
+    owner: "GlRenderer"
     name: "method1614"
     arguments: {}
     locals:
-      9: "local9"
+      9: "temp"
   client!gi.o ()I:
-    owner: "Static17"
-    name: "method1616"
+    owner: "GlRenderer"
+    name: "checkContext"
     arguments: {}
     locals:
-      1: "local1"
-      12: "local12"
-      39: "local39"
-      43: "local43"
-      52: "local52"
-      57: "local57"
-      65: "local65"
-      100: "local100"
-      197: "local197"
-      204: "local204"
-      206: "local206"
-      214: "local214"
-      216: "local216"
-      224: "local224"
-      292: "local292"
-      299: "local299"
+      1: "result"
+      12: "vendor"
+      39: "version"
+      43: "versionParts"
+      52: "major"
+      57: "minor"
+      65: "ex"
+      100: "data"
+      197: "renderer"
+      204: "v"
+      206: "x"
+      214: "rendererParts"
+      216: "i"
+      224: "part"
+      292: "temp"
+      299: "ex"
   client!gi.p ()V:
-    owner: "Static17"
+    owner: "GlRenderer"
     name: "method1618"
     arguments: {}
     locals: {}
   client!gi.q ()V:
-    owner: "Static17"
+    owner: "GlRenderer"
     name: "method1619"
     arguments: {}
     locals:
       2: "local2"
   client!gi.r ()F:
-    owner: "Static17"
+    owner: "GlRenderer"
     name: "method1620"
     arguments: {}
     locals: {}
   client!gi.s ()V:
-    owner: "Static17"
-    name: "method1622"
+    owner: "GlRenderer"
+    name: "swapBuffers"
     arguments: {}
     locals:
-      3: "local3"
+      3: "ex"
   client!gi.t ()V:
-    owner: "Static17"
+    owner: "GlRenderer"
     name: "method1624"
     arguments: {}
     locals: {}
   client!gi.u ()V:
-    owner: "Static17"
+    owner: "GlRenderer"
     name: "method1625"
     arguments: {}
     locals: {}
@@ -22405,22 +22405,22 @@ methods:
       59: "uncompressedLen"
       84: "out"
   client!hk.<init> ()V:
-    owner: "Class4_Sub1_Sub11"
+    owner: "TextureOp1"
     name: "<init>"
     arguments: {}
     locals: {}
   client!hk.<init> (I)V:
-    owner: "Class4_Sub1_Sub11"
+    owner: "TextureOp1"
     name: "<init>"
     arguments:
       0: "arg0"
     locals: {}
   client!hk.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub11"
-    name: "method4687"
+    owner: "TextureOp1"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals: {}
   client!hk.a (IZ)V:
     owner: "LocalisedText"
@@ -22472,7 +22472,7 @@ methods:
       407: "local407"
       415: "local415"
   client!hk.b (II)[[I:
-    owner: "Class4_Sub1_Sub11"
+    owner: "TextureOp1"
     name: "method4695"
     arguments:
       0: "arg0"
@@ -22483,7 +22483,7 @@ methods:
       32: "local32"
       34: "local34"
   client!hk.c (II)V:
-    owner: "Class4_Sub1_Sub11"
+    owner: "TextureOp1"
     name: "method1774"
     arguments:
       1: "arg0"
@@ -22762,8 +22762,8 @@ methods:
     name: "method1832"
     arguments: {}
     locals:
-      8: "local8"
-      11: "local11"
+      8: "gl"
+      11: "temp"
   client!ib.a (Lclient!ib;Lclient!ib;F)Lclient!ib;:
     owner: "Class4_Sub3_Sub10"
     name: "method1835"
@@ -22772,7 +22772,7 @@ methods:
       1: "arg1"
       2: "arg2"
     locals:
-      1: "local1"
+      1: "gl"
       10: "local10"
       31: "local31"
       63: "local63"
@@ -22811,7 +22811,7 @@ methods:
     name: "method1834"
     arguments: {}
     locals:
-      1: "local1"
+      1: "gl"
       20: "local20"
       22: "local22"
       30: "local30"
@@ -24630,27 +24630,27 @@ methods:
     locals:
       20: "local20"
   client!jj.<init> ()V:
-    owner: "Class4_Sub1_Sub12"
+    owner: "TextureOp34"
     name: "<init>"
     arguments: {}
     locals: {}
   client!jj.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub12"
-    name: "method4687"
+    owner: "TextureOp34"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals:
       81: "local81"
   client!jj.a (II)[I:
-    owner: "Class4_Sub1_Sub12"
+    owner: "TextureOp34"
     name: "method4694"
     arguments:
       1: "arg0"
     locals:
       15: "local15"
   client!jj.a (IIIIIII)I:
-    owner: "Class4_Sub1_Sub12"
+    owner: "TextureOp34"
     name: "method2051"
     arguments:
       0: "arg0"
@@ -24686,7 +24686,7 @@ methods:
       4: "arg3"
     locals: {}
   client!jj.a ([III)V:
-    owner: "Class4_Sub1_Sub12"
+    owner: "TextureOp34"
     name: "method2053"
     arguments:
       0: "arg0"
@@ -24740,8 +24740,8 @@ methods:
       461: "local461"
       475: "local475"
   client!jj.e (B)V:
-    owner: "Class4_Sub1_Sub12"
-    name: "method4700"
+    owner: "TextureOp34"
+    name: "postDecode"
     arguments: {}
     locals:
       19: "local19"
@@ -24764,7 +24764,7 @@ methods:
       133: "local133"
       151: "local151"
   client!jj.g (B)V:
-    owner: "Class4_Sub1_Sub12"
+    owner: "TextureOp34"
     name: "method2049"
     arguments: {}
     locals:
@@ -24913,14 +24913,14 @@ methods:
     arguments: {}
     locals: {}
   client!jn.<init> (II)V:
-    owner: "Class4_Sub3_Sub14_Sub1_Sub1"
+    owner: "SoftwareAlphaSprite"
     name: "<init>"
     arguments:
       0: "arg0"
       1: "arg1"
     locals: {}
   client!jn.<init> (IIIIII[I)V:
-    owner: "Class4_Sub3_Sub14_Sub1_Sub1"
+    owner: "SoftwareAlphaSprite"
     name: "<init>"
     arguments:
       0: "arg0"
@@ -24932,7 +24932,7 @@ methods:
       6: "arg6"
     locals: {}
   client!jn.a (II)V:
-    owner: "Class4_Sub3_Sub14_Sub1_Sub1"
+    owner: "SoftwareAlphaSprite"
     name: "method4506"
     arguments:
       0: "arg0"
@@ -24950,7 +24950,7 @@ methods:
       74: "local74"
       107: "local107"
   client!jn.a (III)V:
-    owner: "Class4_Sub3_Sub14_Sub1_Sub1"
+    owner: "SoftwareAlphaSprite"
     name: "method4513"
     arguments:
       0: "arg0"
@@ -24969,7 +24969,7 @@ methods:
       74: "local74"
       107: "local107"
   client!jn.a (IIII)V:
-    owner: "Class4_Sub3_Sub14_Sub1_Sub1"
+    owner: "SoftwareAlphaSprite"
     name: "method4507"
     arguments:
       0: "arg0"
@@ -24993,7 +24993,7 @@ methods:
       177: "local177"
       192: "local192"
   client!jn.a (IIIII)V:
-    owner: "Class4_Sub3_Sub14_Sub1_Sub1"
+    owner: "SoftwareAlphaSprite"
     name: "method4504"
     arguments:
       0: "arg0"
@@ -25018,7 +25018,7 @@ methods:
       177: "local177"
       192: "local192"
   client!jn.a (IIIIIIDI)V:
-    owner: "Class4_Sub3_Sub14_Sub1_Sub1"
+    owner: "SoftwareAlphaSprite"
     name: "method2173"
     arguments:
       0: "arg0"
@@ -25041,7 +25041,7 @@ methods:
       105: "local105"
       164: "local164"
   client!jn.a (IIIIIIII[I[I)V:
-    owner: "Class4_Sub3_Sub14_Sub1_Sub1"
+    owner: "SoftwareAlphaSprite"
     name: "method2165"
     arguments:
       0: "arg0"
@@ -25073,7 +25073,7 @@ methods:
       127: "local127"
       186: "local186"
   client!jn.b (II)V:
-    owner: "Class4_Sub3_Sub14_Sub1_Sub1"
+    owner: "SoftwareAlphaSprite"
     name: "method4510"
     arguments:
       0: "arg0"
@@ -25091,7 +25091,7 @@ methods:
       74: "local74"
       107: "local107"
   client!jn.b (IIIIII)V:
-    owner: "Class4_Sub3_Sub14_Sub1_Sub1"
+    owner: "SoftwareAlphaSprite"
     name: "method4508"
     arguments:
       0: "arg0"
@@ -25211,7 +25211,7 @@ methods:
       1844: "local1844"
       1848: "local1848"
   client!jn.b (IIIIIIII[I[I)V:
-    owner: "Class4_Sub3_Sub14_Sub1_Sub1"
+    owner: "SoftwareAlphaSprite"
     name: "method2167"
     arguments:
       0: "arg0"
@@ -25313,12 +25313,12 @@ methods:
       37: "local37"
       41: "local41"
   client!jn.c ()[I:
-    owner: "Class4_Sub3_Sub14_Sub1_Sub1"
+    owner: "SoftwareAlphaSprite"
     name: "getPixels"
     arguments: {}
     locals: {}
   client!jn.c (II)V:
-    owner: "Class4_Sub3_Sub14_Sub1_Sub1"
+    owner: "SoftwareAlphaSprite"
     name: "method4511"
     arguments:
       0: "arg0"
@@ -25376,27 +25376,27 @@ methods:
       26: "local26"
       30: "local30"
   client!jo.<init> (IZ)V:
-    owner: "Class4_Sub1"
+    owner: "TextureOp"
     name: "<init>"
     arguments:
       0: "arg0"
       1: "arg1"
     locals: {}
   client!jo.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1"
-    name: "method4687"
+    owner: "TextureOp"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals: {}
   client!jo.a (II)[I:
-    owner: "Class4_Sub1"
+    owner: "TextureOp"
     name: "method4694"
     arguments:
       1: "arg0"
     locals: {}
   client!jo.a (IIB)[[I:
-    owner: "Class4_Sub1"
+    owner: "TextureOp"
     name: "method4686"
     arguments:
       0: "arg0"
@@ -25405,7 +25405,7 @@ methods:
       27: "local27"
       35: "local35"
   client!jo.a (III)V:
-    owner: "Class4_Sub1"
+    owner: "TextureOp"
     name: "method4697"
     arguments:
       0: "arg0"
@@ -25497,13 +25497,13 @@ methods:
       265: "local265"
       272: "local272"
   client!jo.b (II)[[I:
-    owner: "Class4_Sub1"
+    owner: "TextureOp"
     name: "method4695"
     arguments:
       0: "arg0"
     locals: {}
   client!jo.b (III)[I:
-    owner: "Class4_Sub1"
+    owner: "TextureOp"
     name: "method4699"
     arguments:
       1: "arg0"
@@ -25525,12 +25525,12 @@ methods:
       29: "local29"
       31: "local31"
   client!jo.c (I)I:
-    owner: "Class4_Sub1"
+    owner: "TextureOp"
     name: "method4688"
     arguments: {}
     locals: {}
   client!jo.d (B)I:
-    owner: "Class4_Sub1"
+    owner: "TextureOp"
     name: "method4691"
     arguments: {}
     locals: {}
@@ -25541,12 +25541,12 @@ methods:
     locals:
       8: "local8"
   client!jo.e (B)V:
-    owner: "Class4_Sub1"
-    name: "method4700"
+    owner: "TextureOp"
+    name: "postDecode"
     arguments: {}
     locals: {}
   client!jo.e (I)V:
-    owner: "Class4_Sub1"
+    owner: "TextureOp"
     name: "method4696"
     arguments: {}
     locals: {}
@@ -25794,8 +25794,8 @@ methods:
     name: "<init>"
     arguments: {}
     locals:
-      9: "local9"
-      12: "local12"
+      9: "gl"
+      12: "temp"
   client!kc.a ()V:
     owner: "Class103"
     name: "method2237"
@@ -26387,25 +26387,25 @@ methods:
       1: "bytes"
     locals: {}
   client!kj.a (IB)Lclient!mi;:
-    owner: "Interface3"
-    name: "method417"
+    owner: "TextureProvider"
+    name: "getMaterial"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!kj.a (IFIIIZ)[I:
-    owner: "Interface3"
+    owner: "TextureProvider"
     name: "method415"
     arguments:
+      2: "id"
       0: "arg0"
       1: "arg1"
-      2: "arg2"
       3: "arg3"
     locals: {}
   client!kj.a (II)Z:
-    owner: "Interface3"
-    name: "method416"
+    owner: "TextureProvider"
+    name: "isTextureReady"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!kk.<init> (IZLjava/awt/Component;)V:
     owner: "Class106"
@@ -26569,7 +26569,7 @@ methods:
     arguments: {}
     locals: {}
   client!kl.<init> ()V:
-    owner: "Class4_Sub1_Sub13"
+    owner: "TextureOp38"
     name: "<init>"
     arguments: {}
     locals: {}
@@ -26581,14 +26581,14 @@ methods:
       1: "local1"
       8: "local8"
   client!kl.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub13"
-    name: "method4687"
+    owner: "TextureOp38"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals: {}
   client!kl.a (II)[I:
-    owner: "Class4_Sub1_Sub13"
+    owner: "TextureOp38"
     name: "method4694"
     arguments:
       1: "arg0"
@@ -26629,8 +26629,8 @@ methods:
       2: "arg1"
     locals: {}
   client!kl.e (B)V:
-    owner: "Class4_Sub1_Sub13"
-    name: "method4700"
+    owner: "TextureOp38"
+    name: "postDecode"
     arguments: {}
     locals: {}
   client!kl.f (B)Z:
@@ -26644,21 +26644,21 @@ methods:
     arguments: {}
     locals: {}
   client!km.<init> ()V:
-    owner: "Class4_Sub1_Sub14"
+    owner: "TextureOp29"
     name: "<init>"
     arguments: {}
     locals: {}
   client!km.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub14"
-    name: "method4687"
+    owner: "TextureOp29"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals:
       11: "local11"
       24: "local24"
   client!km.a (B[[I)V:
-    owner: "Class4_Sub1_Sub14"
+    owner: "TextureOp29"
     name: "method2391"
     arguments:
       1: "arg0"
@@ -26670,7 +26670,7 @@ methods:
       49: "local49"
       52: "local52"
   client!km.a (II)[I:
-    owner: "Class4_Sub1_Sub14"
+    owner: "TextureOp29"
     name: "method4694"
     arguments:
       1: "arg0"
@@ -26775,7 +26775,7 @@ methods:
       1500: "local1500"
       1502: "local1502"
   client!km.b (II)[[I:
-    owner: "Class4_Sub1_Sub14"
+    owner: "TextureOp29"
     name: "method4695"
     arguments:
       0: "arg0"
@@ -26927,19 +26927,19 @@ methods:
     locals:
       7: "local7"
   client!la.<init> ()V:
-    owner: "Class4_Sub1_Sub15"
+    owner: "TextureOp20"
     name: "<init>"
     arguments: {}
     locals: {}
   client!la.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub15"
-    name: "method4687"
+    owner: "TextureOp20"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals: {}
   client!la.a (II)[I:
-    owner: "Class4_Sub1_Sub15"
+    owner: "TextureOp20"
     name: "method4694"
     arguments:
       1: "arg0"
@@ -26965,7 +26965,7 @@ methods:
       0: "allowMembers"
     locals: {}
   client!la.b (II)[[I:
-    owner: "Class4_Sub1_Sub15"
+    owner: "TextureOp20"
     name: "method4695"
     arguments:
       0: "arg0"
@@ -27448,19 +27448,19 @@ methods:
     locals:
       19: "local19"
   client!lf.<init> ()V:
-    owner: "Class4_Sub1_Sub16"
+    owner: "TextureOp14"
     name: "<init>"
     arguments: {}
     locals: {}
   client!lf.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub16"
-    name: "method4687"
+    owner: "TextureOp14"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals: {}
   client!lf.a (II)[I:
-    owner: "Class4_Sub1_Sub16"
+    owner: "TextureOp14"
     name: "method4694"
     arguments:
       1: "arg0"
@@ -27535,10 +27535,10 @@ methods:
     arguments: {}
     locals: {}
   client!lg.a (F)V:
-    owner: "Static23"
-    name: "method2539"
+    owner: "ColorUtils"
+    name: "setBrightness"
     arguments:
-      0: "arg0"
+      0: "brightness"
     locals: {}
   client!lg.a (II)I:
     owner: "Static23"
@@ -28074,36 +28074,36 @@ methods:
     arguments: {}
     locals: {}
   client!lg.b (F)V:
-    owner: "Static23"
-    name: "method2541"
+    owner: "ColorUtils"
+    name: "setBrightnessInternal"
     arguments:
-      0: "arg0"
+      0: "brightness"
     locals: {}
   client!lg.b (II)V:
-    owner: "Static23"
-    name: "method2545"
+    owner: "ColorUtils"
+    name: "init"
     arguments: {}
     locals:
-      3: "local3"
-      5: "local5"
-      17: "local17"
-      26: "local26"
-      28: "local28"
-      36: "local36"
-      38: "local38"
-      40: "local40"
-      42: "local42"
-      56: "local56"
-      71: "local71"
-      75: "local75"
-      89: "local89"
-      243: "local243"
-      248: "local248"
-      253: "local253"
-      258: "local258"
-      263: "local263"
-      268: "local268"
-      278: "local278"
+      3: "i"
+      5: "j"
+      17: "h"
+      26: "s"
+      28: "k"
+      36: "l"
+      38: "r"
+      40: "g"
+      42: "b"
+      56: "q"
+      71: "p"
+      75: "tr"
+      89: "tb"
+      243: "rPow"
+      248: "gPow"
+      253: "bPow"
+      258: "ir"
+      263: "ig"
+      268: "ib"
+      278: "rgb"
   client!lg.b (IIIIIIIIIIIIIIIIIII)V:
     owner: "Static23"
     name: "method2558"
@@ -28416,16 +28416,16 @@ methods:
       269: "local269"
       288: "local288"
   client!lj.<init> ()V:
-    owner: "Class4_Sub1_Sub17"
+    owner: "TextureOp17"
     name: "<init>"
     arguments: {}
     locals: {}
   client!lj.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub17"
-    name: "method4687"
+    owner: "TextureOp17"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals: {}
   client!lj.a (IB)I:
     owner: "IntUtils"
@@ -28434,7 +28434,7 @@ methods:
       0: "v"
     locals: {}
   client!lj.a (IIIB)V:
-    owner: "Class4_Sub1_Sub17"
+    owner: "TextureOp17"
     name: "method2594"
     arguments:
       0: "arg0"
@@ -28450,7 +28450,7 @@ methods:
       81: "local81"
       85: "local85"
   client!lj.a (IIII)V:
-    owner: "Class4_Sub1_Sub17"
+    owner: "TextureOp17"
     name: "method2596"
     arguments:
       0: "arg0"
@@ -28477,7 +28477,7 @@ methods:
       0: "arg0"
     locals: {}
   client!lj.b (II)[[I:
-    owner: "Class4_Sub1_Sub17"
+    owner: "TextureOp17"
     name: "method4695"
     arguments:
       0: "arg0"
@@ -28503,53 +28503,53 @@ methods:
       13: "local13"
       22: "local22"
   client!lk.<init> ()V:
-    owner: "Class111"
+    owner: "GlBuffer"
     name: "<init>"
     arguments: {}
     locals: {}
   client!lk.<init> (Z)V:
-    owner: "Class111"
+    owner: "GlBuffer"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "stream"
     locals:
-      9: "local9"
-      12: "local12"
+      9: "gl"
+      12: "temp"
   client!lk.a ()V:
-    owner: "Class111"
-    name: "method2603"
+    owner: "GlBuffer"
+    name: "bindElementArray"
     arguments: {}
     locals:
-      1: "local1"
+      1: "gl"
   client!lk.a (Ljava/nio/ByteBuffer;)V:
-    owner: "Class111"
-    name: "method2600"
+    owner: "GlBuffer"
+    name: "updateArrayBuffer"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals:
-      6: "local6"
+      6: "gl"
   client!lk.b ()V:
-    owner: "Class111"
-    name: "method2604"
+    owner: "GlBuffer"
+    name: "bindArray"
     arguments: {}
     locals:
-      1: "local1"
+      1: "gl"
   client!lk.b (Ljava/nio/ByteBuffer;)V:
-    owner: "Class111"
-    name: "method2601"
+    owner: "GlBuffer"
+    name: "setElementArrayBuffer"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals:
-      1: "local1"
+      1: "gl"
   client!lk.c (Ljava/nio/ByteBuffer;)V:
-    owner: "Class111"
-    name: "method2602"
+    owner: "GlBuffer"
+    name: "setArrayBuffer"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals:
-      1: "local1"
+      1: "gl"
   client!lk.finalize ()V:
-    owner: "Class111"
+    owner: "GlBuffer"
     name: "finalize"
     arguments: {}
     locals: {}
@@ -28745,10 +28745,10 @@ methods:
     locals:
       4: "local4"
   client!ln.<init> (Lclient!fd;)V:
-    owner: "Class4_Sub3_Sub15"
+    owner: "Texture"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals:
       5: "local5"
       9: "local9"
@@ -28768,7 +28768,7 @@ methods:
       133: "local133"
       190: "local190"
   client!ln.a (DIILclient!kj;Lclient!fh;IZ)Lclient!vn;:
-    owner: "Class4_Sub3_Sub15"
+    owner: "Texture"
     name: "method2645"
     arguments:
       0: "arg0"
@@ -28795,12 +28795,12 @@ methods:
       175: "local175"
       207: "local207"
   client!ln.a (DZILclient!fh;Lclient!kj;IZI)[I:
-    owner: "Class4_Sub3_Sub15"
+    owner: "Texture"
     name: "method2653"
     arguments:
       0: "arg0"
       1: "arg1"
-      3: "arg2"
+      3: "spritesArchive"
       4: "arg3"
       5: "arg4"
       6: "arg5"
@@ -28827,7 +28827,7 @@ methods:
       188: "local188"
       226: "local226"
   client!ln.a (IBILclient!fh;DLclient!kj;Z)[I:
-    owner: "Class4_Sub3_Sub15"
+    owner: "Texture"
     name: "method2646"
     arguments:
       0: "arg0"
@@ -28857,7 +28857,7 @@ methods:
       208: "local208"
       261: "local261"
   client!ln.a (IBZLclient!kj;Lclient!fh;I)[F:
-    owner: "Class4_Sub3_Sub15"
+    owner: "Texture"
     name: "method2648"
     arguments:
       0: "arg0"
@@ -28891,7 +28891,7 @@ methods:
     locals:
       42: "local42"
   client!ln.a (ILclient!kj;Lclient!fh;IDIZ)Lclient!jn;:
-    owner: "Class4_Sub3_Sub15"
+    owner: "Texture"
     name: "method2650"
     arguments:
       0: "arg0"
@@ -28928,15 +28928,15 @@ methods:
       3: "arg2"
     locals: {}
   client!ln.a (Lclient!kj;Lclient!fh;I)Z:
-    owner: "Class4_Sub3_Sub15"
-    name: "method2649"
+    owner: "Texture"
+    name: "isReady"
     arguments:
       0: "arg0"
-      1: "arg1"
+      1: "spritesArchive"
     locals:
-      26: "local26"
-      49: "local49"
-      69: "local69"
+      26: "i"
+      49: "i"
+      69: "i"
   client!ln.a (Ljava/lang/String;I)I:
     owner: "StringUtils"
     name: "hashCode"
@@ -29126,7 +29126,7 @@ methods:
       27: "x"
       121: "y"
   client!ma.<init> ()V:
-    owner: "Class56"
+    owner: "IndexedSprite"
     name: "<init>"
     arguments: {}
     locals: {}
@@ -29149,14 +29149,14 @@ methods:
       299: "local299"
       490: "local490"
   client!ma.a (II)V:
-    owner: "Class56"
+    owner: "IndexedSprite"
     name: "method2815"
     arguments:
       0: "arg0"
       1: "arg1"
     locals: {}
   client!ma.a (III)V:
-    owner: "Class56"
+    owner: "IndexedSprite"
     name: "method2816"
     arguments:
       0: "arg0"
@@ -29414,77 +29414,77 @@ methods:
       99: "local99"
       101: "local101"
   client!mh.a ()V:
-    owner: "Static24"
-    name: "method2716"
+    owner: "GlCleaner"
+    name: "clear"
     arguments: {}
     locals: {}
   client!mh.a (II)V:
-    owner: "Static24"
-    name: "method2717"
+    owner: "GlCleaner"
+    name: "deleteList"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "id"
+      1: "contextId"
     locals:
-      7: "local7"
+      7: "node"
   client!mh.a (III)V:
-    owner: "Static25"
-    name: "method2720"
+    owner: "GlCleaner"
+    name: "deleteTexture"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "id"
+      1: "size"
+      2: "contextId"
     locals:
-      8: "local8"
+      8: "node"
   client!mh.a (I[Lclient!ec;I)V:
-    owner: "Static24"
-    name: "method2715"
+    owner: "GlCleaner"
+    name: "deleteProgram"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "id"
+      1: "shaders"
+      2: "contextId"
     locals: {}
   client!mh.b (II)V:
-    owner: "Static25"
-    name: "method2723"
+    owner: "GlCleaner"
+    name: "deleteShader"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "id"
+      1: "contextId"
     locals:
-      7: "local7"
+      7: "node"
   client!mh.b (III)V:
-    owner: "Static25"
-    name: "method2721"
+    owner: "GlCleaner"
+    name: "deleteBuffer"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "id"
+      1: "size"
+      2: "contextId"
     locals:
-      8: "local8"
+      8: "node"
   client!mh.c ()V:
-    owner: "Static25"
-    name: "method2719"
+    owner: "GlCleaner"
+    name: "loop"
     arguments: {}
     locals:
-      1: "local1"
-      3: "local3"
-      8: "local8"
-      48: "local48"
-      79: "local79"
-      119: "local119"
-      126: "local126"
-      136: "local136"
-      141: "local141"
-      167: "local167"
-      174: "local174"
+      1: "gl"
+      3: "n"
+      8: "buffer"
+      48: "texture2d"
+      79: "texture"
+      119: "list"
+      126: "id"
+      136: "program"
+      141: "i"
+      167: "shader"
+      174: "id"
   client!mh.c (III)V:
-    owner: "Static25"
-    name: "method2722"
+    owner: "GlCleaner"
+    name: "deleteTexture2d"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "id"
+      1: "size"
+      2: "contextId"
     locals:
-      8: "local8"
+      8: "node"
   client!mi.a (BIILjava/awt/Component;)Lclient!ob;:
     owner: "FrameBuffer"
     name: "create"
@@ -30321,19 +30321,19 @@ methods:
       27: "local27"
       55: "local55"
   client!mo.<init> ()V:
-    owner: "Class4_Sub1_Sub18"
+    owner: "TextureOp26"
     name: "<init>"
     arguments: {}
     locals: {}
   client!mo.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub18"
-    name: "method4687"
+    owner: "TextureOp26"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals: {}
   client!mo.a (II)[I:
-    owner: "Class4_Sub1_Sub18"
+    owner: "TextureOp26"
     name: "method4694"
     arguments:
       1: "arg0"
@@ -30402,7 +30402,7 @@ methods:
     arguments: {}
     locals: {}
   client!n.<init> (IIIIII[B[I)V:
-    owner: "Class56_Sub2"
+    owner: "GlIndexedSprite"
     name: "<init>"
     arguments:
       0: "arg0"
@@ -30415,13 +30415,13 @@ methods:
       7: "arg7"
     locals: {}
   client!n.<init> (Lclient!fe;)V:
-    owner: "Class56_Sub2"
+    owner: "GlIndexedSprite"
     name: "<init>"
     arguments:
       0: "arg0"
     locals: {}
   client!n.a ()V:
-    owner: "Class56_Sub2"
+    owner: "GlIndexedSprite"
     name: "method2817"
     arguments: {}
     locals:
@@ -30429,13 +30429,13 @@ methods:
       15: "local15"
       17: "local17"
   client!n.a (I)V:
-    owner: "Class56_Sub2"
+    owner: "GlIndexedSprite"
     name: "method2818"
     arguments: {}
     locals:
       9: "local9"
   client!n.a (II)V:
-    owner: "Class56_Sub2"
+    owner: "GlIndexedSprite"
     name: "method2815"
     arguments:
       0: "arg0"
@@ -30443,7 +30443,7 @@ methods:
     locals:
       12: "local12"
   client!n.a (III)V:
-    owner: "Class56_Sub2"
+    owner: "GlIndexedSprite"
     name: "method2816"
     arguments:
       0: "arg0"
@@ -30452,7 +30452,7 @@ methods:
     locals:
       12: "local12"
   client!n.a (IILclient!oa;)V:
-    owner: "Class56_Sub2"
+    owner: "GlIndexedSprite"
     name: "method2820"
     arguments:
       0: "arg0"
@@ -30467,7 +30467,7 @@ methods:
       107: "local107"
       115: "local115"
   client!n.a ([B[I)V:
-    owner: "Class56_Sub2"
+    owner: "GlIndexedSprite"
     name: "method2819"
     arguments:
       0: "arg0"
@@ -30485,7 +30485,7 @@ methods:
       95: "local95"
       102: "local102"
   client!n.finalize ()V:
-    owner: "Class56_Sub2"
+    owner: "GlIndexedSprite"
     name: "finalize"
     arguments: {}
     locals: {}
@@ -32211,96 +32211,96 @@ methods:
     locals:
       13: "local13"
   client!nk.a (BI)I:
-    owner: "Interface4"
+    owner: "GlTextureProvider"
     name: "method447"
     arguments:
       1: "arg0"
     locals: {}
   client!nk.a (BII)V:
-    owner: "Interface4"
+    owner: "GlTextureProvider"
     name: "method454"
     arguments:
+      2: "id"
       1: "arg0"
-      2: "arg1"
     locals: {}
   client!nk.a (FII)[I:
-    owner: "Interface4"
+    owner: "GlTextureProvider"
     name: "method445"
     arguments:
+      2: "id"
       0: "arg0"
-      2: "arg1"
     locals: {}
   client!nk.a (IZ)Z:
-    owner: "Interface4"
-    name: "method448"
+    owner: "GlTextureProvider"
+    name: "isGlTextureReady"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!nk.a (ZFZII)Lclient!vn;:
-    owner: "Interface4"
+    owner: "GlTextureProvider"
     name: "method452"
     arguments:
+      4: "id"
       0: "arg0"
       1: "arg1"
       3: "arg2"
-      4: "arg3"
     locals: {}
   client!nk.b (IB)Z:
-    owner: "Interface4"
+    owner: "GlTextureProvider"
     name: "method442"
     arguments:
       0: "arg0"
     locals: {}
   client!nk.b (II)Z:
-    owner: "Interface4"
+    owner: "GlTextureProvider"
     name: "method441"
     arguments:
       0: "arg0"
     locals: {}
   client!nk.b (IZ)I:
-    owner: "Interface4"
+    owner: "GlTextureProvider"
     name: "method450"
     arguments:
       0: "arg0"
     locals: {}
   client!nk.c (IB)[I:
-    owner: "Interface4"
+    owner: "GlTextureProvider"
     name: "method449"
     arguments:
       0: "arg0"
     locals: {}
   client!nk.c (II)Z:
-    owner: "Interface4"
+    owner: "GlTextureProvider"
     name: "method443"
     arguments:
       1: "arg0"
     locals: {}
   client!nk.d (II)I:
-    owner: "Interface4"
+    owner: "GlTextureProvider"
     name: "method444"
     arguments:
       0: "arg0"
     locals: {}
   client!nk.e (II)I:
-    owner: "Interface4"
+    owner: "GlTextureProvider"
     name: "method446"
     arguments:
       0: "arg0"
     locals: {}
   client!nk.f (II)V:
-    owner: "Interface4"
+    owner: "GlTextureProvider"
     name: "method451"
     arguments:
       1: "arg0"
     locals: {}
   client!nk.g (II)Z:
-    owner: "Interface4"
-    name: "method453"
+    owner: "GlTextureProvider"
+    name: "isLowDetail"
     arguments:
-      1: "arg0"
+      1: "id"
     locals: {}
   client!nk.h (II)I:
-    owner: "Interface4"
+    owner: "GlTextureProvider"
     name: "method455"
     arguments:
       0: "arg0"
@@ -32398,19 +32398,19 @@ methods:
       12: "sum"
       52: "i"
   client!no.<init> ()V:
-    owner: "Class4_Sub1_Sub19"
+    owner: "TextureOp33"
     name: "<init>"
     arguments: {}
     locals: {}
   client!no.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub19"
-    name: "method4687"
+    owner: "TextureOp33"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals: {}
   client!no.b (II)[[I:
-    owner: "Class4_Sub1_Sub19"
+    owner: "TextureOp33"
     name: "method4695"
     arguments:
       0: "arg0"
@@ -32547,7 +32547,7 @@ methods:
       13: "local13"
       22: "local22"
   client!oa.<init> (IIIIII[I)V:
-    owner: "Class4_Sub3_Sub14_Sub2"
+    owner: "GlSprite"
     name: "<init>"
     arguments:
       0: "arg0"
@@ -32559,38 +32559,38 @@ methods:
       6: "arg6"
     locals: {}
   client!oa.<init> (Lclient!vn;)V:
-    owner: "Class4_Sub3_Sub14_Sub2"
+    owner: "GlSprite"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "sprite"
     locals: {}
   client!oa.a ()V:
-    owner: "Class4_Sub3_Sub14_Sub2"
+    owner: "GlSprite"
     name: "method4516"
     arguments: {}
     locals:
       7: "local7"
       15: "local15"
-      17: "local17"
+      17: "gl"
   client!oa.a (II)V:
-    owner: "Class4_Sub3_Sub14_Sub2"
+    owner: "GlSprite"
     name: "method4506"
     arguments:
       0: "arg0"
       1: "arg1"
     locals:
-      12: "local12"
+      12: "gl"
   client!oa.a (III)V:
-    owner: "Class4_Sub3_Sub14_Sub2"
+    owner: "GlSprite"
     name: "method4513"
     arguments:
       0: "arg0"
       1: "arg1"
       2: "arg2"
     locals:
-      12: "local12"
+      12: "gl"
   client!oa.a (IIII)V:
-    owner: "Class4_Sub3_Sub14_Sub2"
+    owner: "GlSprite"
     name: "method4507"
     arguments:
       0: "arg0"
@@ -32608,7 +32608,7 @@ methods:
       33: "local33"
       47: "local47"
       76: "local76"
-      123: "local123"
+      123: "gl"
       132: "local132"
       137: "local137"
       142: "local142"
@@ -32616,7 +32616,7 @@ methods:
       155: "local155"
       163: "local163"
   client!oa.a (IIIII)V:
-    owner: "Class4_Sub3_Sub14_Sub2"
+    owner: "GlSprite"
     name: "method4504"
     arguments:
       0: "arg0"
@@ -32635,7 +32635,7 @@ methods:
       33: "local33"
       47: "local47"
       76: "local76"
-      123: "local123"
+      123: "gl"
       132: "local132"
       137: "local137"
       142: "local142"
@@ -32644,7 +32644,7 @@ methods:
       163: "local163"
       168: "local168"
   client!oa.a (IIIIIIIILclient!oa;)V:
-    owner: "Class4_Sub3_Sub14_Sub2"
+    owner: "GlSprite"
     name: "method4519"
     arguments:
       0: "arg0"
@@ -32657,7 +32657,7 @@ methods:
       7: "arg7"
       8: "arg8"
     locals:
-      11: "local11"
+      11: "gl"
       43: "local43"
       48: "local48"
       51: "local51"
@@ -32677,14 +32677,14 @@ methods:
       211: "local211"
       217: "local217"
   client!oa.a (IILclient!oa;)V:
-    owner: "Class4_Sub3_Sub14_Sub2"
+    owner: "GlSprite"
     name: "method4517"
     arguments:
       0: "arg0"
       1: "arg1"
       2: "arg2"
     locals:
-      11: "local11"
+      11: "gl"
       47: "local47"
       56: "local56"
       68: "local68"
@@ -32692,7 +32692,7 @@ methods:
       107: "local107"
       115: "local115"
   client!oa.a ([I)V:
-    owner: "Class4_Sub3_Sub14_Sub2"
+    owner: "GlSprite"
     name: "method4515"
     arguments:
       0: "arg0"
@@ -32706,18 +32706,18 @@ methods:
       49: "local49"
       54: "local54"
       91: "local91"
-      93: "local93"
+      93: "gl"
       100: "local100"
   client!oa.b (II)V:
-    owner: "Class4_Sub3_Sub14_Sub2"
+    owner: "GlSprite"
     name: "method4510"
     arguments:
       0: "arg0"
       1: "arg1"
     locals:
-      12: "local12"
+      12: "gl"
   client!oa.b (IIII)V:
-    owner: "Class4_Sub3_Sub14_Sub2"
+    owner: "GlSprite"
     name: "method4518"
     arguments:
       0: "arg0"
@@ -32725,7 +32725,7 @@ methods:
       2: "arg2"
       3: "arg3"
     locals:
-      2: "local2"
+      2: "gl"
       16: "local16"
       24: "local24"
       39: "local39"
@@ -32733,7 +32733,7 @@ methods:
       53: "local53"
       60: "local60"
   client!oa.b (IIIII)V:
-    owner: "Class4_Sub3_Sub14_Sub2"
+    owner: "GlSprite"
     name: "method4514"
     arguments:
       0: "arg0"
@@ -32742,7 +32742,7 @@ methods:
       3: "arg3"
       4: "arg4"
     locals:
-      2: "local2"
+      2: "gl"
       16: "local16"
       24: "local24"
       39: "local39"
@@ -32751,7 +32751,7 @@ methods:
       60: "local60"
       65: "local65"
   client!oa.b (IIIIII)V:
-    owner: "Class4_Sub3_Sub14_Sub2"
+    owner: "GlSprite"
     name: "method4508"
     arguments:
       0: "arg0"
@@ -32761,37 +32761,37 @@ methods:
       4: "arg4"
       5: "arg5"
     locals:
-      2: "local2"
+      2: "gl"
   client!oa.c (II)V:
-    owner: "Class4_Sub3_Sub14_Sub2"
+    owner: "GlSprite"
     name: "method4511"
     arguments:
       0: "arg0"
       1: "arg1"
     locals:
-      12: "local12"
+      12: "gl"
       35: "local35"
       43: "local43"
   client!oa.c (IIIIII)V:
-    owner: "Class4_Sub3_Sub14_Sub2"
+    owner: "GlSprite"
     name: "method4520"
     arguments:
       2: "arg0"
       3: "arg1"
       4: "arg2"
     locals:
-      2: "local2"
+      2: "gl"
       15: "local15"
       22: "local22"
   client!oa.e (I)V:
-    owner: "Class4_Sub3_Sub14_Sub2"
+    owner: "GlSprite"
     name: "method4521"
     arguments:
       0: "arg0"
     locals:
-      9: "local9"
+      9: "gl"
   client!oa.finalize ()V:
-    owner: "Class4_Sub3_Sub14_Sub2"
+    owner: "GlSprite"
     name: "finalize"
     arguments: {}
     locals: {}
@@ -33155,16 +33155,16 @@ methods:
     arguments: {}
     locals: {}
   client!of.<init> ()V:
-    owner: "Class4_Sub1_Sub20"
+    owner: "TextureOp8"
     name: "<init>"
     arguments: {}
     locals: {}
   client!of.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub20"
-    name: "method4687"
+    owner: "TextureOp8"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals:
       26: "local26"
   client!of.a (BLjava/lang/String;)V:
@@ -33182,7 +33182,7 @@ methods:
       99: "local99"
       115: "local115"
   client!of.a (II)[I:
-    owner: "Class4_Sub1_Sub20"
+    owner: "TextureOp8"
     name: "method4694"
     arguments:
       1: "arg0"
@@ -33198,7 +33198,7 @@ methods:
     locals:
       21: "local21"
   client!of.c (II)[I:
-    owner: "Class4_Sub1_Sub20"
+    owner: "TextureOp8"
     name: "method3181"
     arguments:
       0: "arg0"
@@ -33212,8 +33212,8 @@ methods:
       2: "arg2"
     locals: {}
   client!of.e (B)V:
-    owner: "Class4_Sub1_Sub20"
-    name: "method4700"
+    owner: "TextureOp8"
+    name: "postDecode"
     arguments: {}
     locals: {}
   client!of.f (B)V:
@@ -33222,7 +33222,7 @@ methods:
     arguments: {}
     locals: {}
   client!of.f (I)V:
-    owner: "Class4_Sub1_Sub20"
+    owner: "TextureOp8"
     name: "method3182"
     arguments: {}
     locals:
@@ -33263,7 +33263,7 @@ methods:
       389: "local389"
       403: "local403"
   client!of.g (I)V:
-    owner: "Class4_Sub1_Sub20"
+    owner: "TextureOp8"
     name: "method3183"
     arguments: {}
     locals:
@@ -33272,19 +33272,19 @@ methods:
       22: "local22"
       31: "local31"
   client!og.<init> ()V:
-    owner: "Class4_Sub1_Sub21"
+    owner: "TextureOp39"
     name: "<init>"
     arguments: {}
     locals: {}
   client!og.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub21"
-    name: "method4687"
+    owner: "TextureOp39"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals: {}
   client!og.b (II)[[I:
-    owner: "Class4_Sub1_Sub21"
+    owner: "TextureOp39"
     name: "method4695"
     arguments:
       0: "arg0"
@@ -33300,7 +33300,7 @@ methods:
       120: "local120"
       127: "local127"
   client!og.c (I)I:
-    owner: "Class4_Sub1_Sub21"
+    owner: "TextureOp39"
     name: "method4688"
     arguments: {}
     locals: {}
@@ -33326,7 +33326,7 @@ methods:
       31: "local31"
       42: "local42"
   client!og.e (I)V:
-    owner: "Class4_Sub1_Sub21"
+    owner: "TextureOp39"
     name: "method4696"
     arguments: {}
     locals: {}
@@ -33350,7 +33350,7 @@ methods:
       240: "local240"
       245: "local245"
   client!og.f (I)Z:
-    owner: "Class4_Sub1_Sub21"
+    owner: "TextureOp39"
     name: "method4702"
     arguments: {}
     locals:
@@ -33486,19 +33486,19 @@ methods:
       169: "bitPos5"
       170: "bytePos5"
   client!oj.a (IIZLjava/lang/String;)Z:
-    owner: "Static27"
-    name: "method3229"
+    owner: "StringUtils"
+    name: "isIntInternal"
     arguments:
-      3: "arg0"
+      3: "s"
     locals:
-      27: "local27"
-      29: "local29"
-      42: "local42"
-      44: "local44"
-      46: "local46"
-      53: "local53"
-      76: "local76"
-      126: "local126"
+      27: "negative"
+      29: "valid"
+      42: "len"
+      44: "value"
+      46: "i"
+      53: "c"
+      76: "digit"
+      126: "nextValue"
   client!oj.a (I[B)[B:
     owner: "Static27"
     name: "method3230"
@@ -35114,19 +35114,19 @@ methods:
     locals:
       18: "local18"
   client!ph.<init> ()V:
-    owner: "Class4_Sub1_Sub22"
+    owner: "TextureOp19"
     name: "<init>"
     arguments: {}
     locals: {}
   client!ph.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub22"
-    name: "method4687"
+    owner: "TextureOp19"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals: {}
   client!ph.a (II)[I:
-    owner: "Class4_Sub1_Sub22"
+    owner: "TextureOp19"
     name: "method4694"
     arguments:
       1: "arg0"
@@ -35168,7 +35168,7 @@ methods:
       183: "local183"
       189: "local189"
   client!ph.b (II)[[I:
-    owner: "Class4_Sub1_Sub22"
+    owner: "TextureOp19"
     name: "method4695"
     arguments:
       0: "arg0"
@@ -35198,8 +35198,8 @@ methods:
       5: "arg4"
     locals: {}
   client!ph.e (B)V:
-    owner: "Class4_Sub1_Sub22"
-    name: "method4700"
+    owner: "TextureOp19"
+    name: "postDecode"
     arguments: {}
     locals: {}
   client!ph.f (I)V:
@@ -35281,12 +35281,12 @@ methods:
       1: "arg0"
     locals: {}
   client!pk.<init> ()V:
-    owner: "Class4_Sub1_Sub23"
+    owner: "TextureOp2"
     name: "<init>"
     arguments: {}
     locals: {}
   client!pk.a (II)[I:
-    owner: "Class4_Sub1_Sub23"
+    owner: "TextureOp2"
     name: "method4694"
     arguments:
       1: "arg0"
@@ -35369,10 +35369,10 @@ methods:
       1: "arg0"
     locals: {}
   client!pl.a (Ljava/lang/String;B)Z:
-    owner: "Static29"
-    name: "method3473"
+    owner: "StringUtils"
+    name: "isInt"
     arguments:
-      0: "arg0"
+      0: "s"
     locals: {}
   client!pl.c (I)V:
     owner: "Static29"
@@ -35784,25 +35784,25 @@ methods:
       16: "local16"
       18: "local18"
   client!qb.<init> ()V:
-    owner: "Class4_Sub1_Sub24"
+    owner: "TextureOp0"
     name: "<init>"
     arguments: {}
     locals: {}
   client!qb.<init> (I)V:
-    owner: "Class4_Sub1_Sub24"
+    owner: "TextureOp0"
     name: "<init>"
     arguments:
       0: "arg0"
     locals: {}
   client!qb.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub24"
-    name: "method4687"
+    owner: "TextureOp0"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals: {}
   client!qb.a (II)[I:
-    owner: "Class4_Sub1_Sub24"
+    owner: "TextureOp0"
     name: "method4694"
     arguments:
       1: "arg0"
@@ -35991,16 +35991,16 @@ methods:
     arguments: {}
     locals: {}
   client!qd.<init> (I)V:
-    owner: "Class4_Sub3_Sub16"
+    owner: "GlSolidColorTexture"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "hsl"
     locals:
-      9: "local9"
-      12: "local12"
-      32: "local32"
-      58: "local58"
-      61: "local61"
+      9: "gl"
+      12: "temp"
+      32: "rgb"
+      58: "bytes"
+      61: "buffer"
   client!qd.a (III)I:
     owner: "Static29"
     name: "method3538"
@@ -36043,13 +36043,13 @@ methods:
       133: "local133"
       182: "local182"
   client!qd.e (I)V:
-    owner: "Class4_Sub3_Sub16"
+    owner: "GlSolidColorTexture"
     name: "method3539"
     arguments: {}
     locals:
-      6: "local6"
+      6: "flags"
   client!qd.finalize ()V:
-    owner: "Class4_Sub3_Sub16"
+    owner: "GlSolidColorTexture"
     name: "finalize"
     arguments: {}
     locals: {}
@@ -36144,16 +36144,16 @@ methods:
       25: "event"
       49: "i"
   client!qf.a (Lclient!fd;I)Lclient!jo;:
-    owner: "Static30"
-    name: "method3549"
+    owner: "TextureOp"
+    name: "decode"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals:
-      13: "local13"
-      17: "local17"
-      26: "local26"
-      28: "local28"
-      35: "local35"
+      13: "type"
+      17: "op"
+      26: "codes"
+      28: "i"
+      35: "code"
   client!qg.a (I)V:
     owner: "Static30"
     name: "method3551"
@@ -36561,33 +36561,33 @@ methods:
       40: "local40"
       51: "local51"
   client!qi.<init> (Lclient!fh;Lclient!fh;Lclient!fh;)V:
-    owner: "Class24"
+    owner: "Js5TextureProvider"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      1: "texturesArchive"
+      2: "spritesArchive"
+      0: "materialsArchive"
     locals:
-      24: "local24"
-      28: "local28"
-      34: "local34"
-      60: "local60"
-      88: "local88"
-      117: "local117"
-      149: "local149"
-      180: "local180"
-      206: "local206"
-      232: "local232"
-      254: "local254"
-      277: "local277"
-      315: "local315"
-      337: "local337"
-      355: "local355"
-      377: "local377"
-      406: "local406"
-      424: "local424"
-      445: "local445"
-      467: "local467"
+      24: "buffer"
+      28: "materials"
+      34: "i"
+      60: "i"
+      88: "i"
+      117: "i"
+      149: "i"
+      180: "i"
+      206: "i"
+      232: "i"
+      254: "i"
+      277: "i"
+      315: "i"
+      337: "i"
+      355: "i"
+      377: "i"
+      406: "i"
+      424: "i"
+      445: "i"
+      467: "i"
   client!qi.a (CI)Z:
     owner: "Cp1252Charset"
     name: "isCharValid"
@@ -36603,27 +36603,27 @@ methods:
     arguments: {}
     locals: {}
   client!qi.a (IB)Lclient!mi;:
-    owner: "Class24"
-    name: "method417"
+    owner: "Js5TextureProvider"
+    name: "getMaterial"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!qi.a (IFIIIZ)[I:
-    owner: "Class24"
+    owner: "Js5TextureProvider"
     name: "method415"
     arguments:
+      2: "id"
       0: "arg0"
       1: "arg1"
-      2: "arg2"
       3: "arg3"
     locals: {}
   client!qi.a (II)Z:
-    owner: "Class24"
-    name: "method416"
+    owner: "Js5TextureProvider"
+    name: "isTextureReady"
     arguments:
-      0: "arg0"
+      0: "id"
     locals:
-      11: "local11"
+      11: "texture"
   client!qi.a (IIIIIZIIIII)V:
     owner: "Static30"
     name: "method418"
@@ -36678,16 +36678,16 @@ methods:
     arguments: {}
     locals: {}
   client!qi.c (IZ)Lclient!ln;:
-    owner: "Class24"
-    name: "method421"
+    owner: "Js5TextureProvider"
+    name: "getTexture"
     arguments:
-      0: "arg0"
+      0: "id"
     locals:
-      10: "local10"
-      21: "local21"
-      34: "local34"
+      10: "texture"
+      21: "bytes"
+      34: "newTexture"
   client!qj.<init> ()V:
-    owner: "Class4_Sub1_Sub25"
+    owner: "TextureOp16"
     name: "<init>"
     arguments: {}
     locals: {}
@@ -36701,14 +36701,14 @@ methods:
       31: "local31"
       58: "local58"
   client!qj.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub25"
-    name: "method4687"
+    owner: "TextureOp16"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals: {}
   client!qj.a (II)[I:
-    owner: "Class4_Sub1_Sub25"
+    owner: "TextureOp16"
     name: "method4694"
     arguments:
       1: "arg0"
@@ -36970,20 +36970,20 @@ methods:
       0: "component"
     locals: {}
   client!ql.a (ILjava/lang/String;IZ)I:
-    owner: "Static30"
-    name: "method3614"
+    owner: "StringUtils"
+    name: "parseInt"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      1: "s"
+      0: "base"
     locals:
-      27: "local27"
-      29: "local29"
-      32: "local32"
-      34: "local34"
-      42: "local42"
-      53: "local53"
-      98: "local98"
-      132: "local132"
+      27: "negative"
+      29: "valid"
+      32: "len"
+      34: "value"
+      42: "i"
+      53: "c"
+      98: "digit"
+      132: "nextValue"
   client!ql.a (Ljava/lang/String;Ljava/lang/String;IB)V:
     owner: "Static30"
     name: "method3615"
@@ -37432,19 +37432,19 @@ methods:
       7: "local7"
       19: "local19"
   client!rg.<init> ()V:
-    owner: "Class4_Sub1_Sub26"
+    owner: "TextureOp37"
     name: "<init>"
     arguments: {}
     locals: {}
   client!rg.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub26"
-    name: "method4687"
+    owner: "TextureOp37"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals: {}
   client!rg.a (II)[I:
-    owner: "Class4_Sub1_Sub26"
+    owner: "TextureOp37"
     name: "method4694"
     arguments:
       1: "arg0"
@@ -37465,7 +37465,7 @@ methods:
       1: "arg1"
     locals: {}
   client!rg.b (IIB)Z:
-    owner: "Class4_Sub1_Sub26"
+    owner: "TextureOp37"
     name: "method3690"
     arguments:
       0: "arg0"
@@ -37474,7 +37474,7 @@ methods:
       13: "local13"
       23: "local23"
   client!rg.c (III)Z:
-    owner: "Class4_Sub1_Sub26"
+    owner: "TextureOp37"
     name: "method3687"
     arguments:
       0: "arg0"
@@ -37483,8 +37483,8 @@ methods:
       9: "local9"
       24: "local24"
   client!rg.e (B)V:
-    owner: "Class4_Sub1_Sub26"
-    name: "method4700"
+    owner: "TextureOp37"
+    name: "postDecode"
     arguments: {}
     locals: {}
   client!rg.f (B)V:
@@ -37493,19 +37493,19 @@ methods:
     arguments: {}
     locals: {}
   client!rh.<init> ()V:
-    owner: "Class4_Sub1_Sub27"
+    owner: "TextureOp15"
     name: "<init>"
     arguments: {}
     locals: {}
   client!rh.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub27"
-    name: "method4687"
+    owner: "TextureOp15"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals: {}
   client!rh.a (II)[I:
-    owner: "Class4_Sub1_Sub27"
+    owner: "TextureOp15"
     name: "method4694"
     arguments:
       1: "arg0"
@@ -37544,12 +37544,12 @@ methods:
     locals:
       12: "local12"
   client!rh.e (B)V:
-    owner: "Class4_Sub1_Sub27"
-    name: "method4700"
+    owner: "TextureOp15"
+    name: "postDecode"
     arguments: {}
     locals: {}
   client!rh.f (I)V:
-    owner: "Class4_Sub1_Sub27"
+    owner: "TextureOp15"
     name: "method3715"
     arguments: {}
     locals:
@@ -37784,19 +37784,19 @@ methods:
       387: "local387"
       393: "local393"
   client!rm.<init> ()V:
-    owner: "Class4_Sub1_Sub28"
+    owner: "TextureOp27"
     name: "<init>"
     arguments: {}
     locals: {}
   client!rm.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub28"
-    name: "method4687"
+    owner: "TextureOp27"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals: {}
   client!rm.a (II)[I:
-    owner: "Class4_Sub1_Sub28"
+    owner: "TextureOp27"
     name: "method4694"
     arguments:
       1: "arg0"
@@ -38018,8 +38018,8 @@ methods:
       2858: "local2858"
       2863: "local2863"
   client!rm.e (B)V:
-    owner: "Class4_Sub1_Sub28"
-    name: "method4700"
+    owner: "TextureOp27"
+    name: "postDecode"
     arguments: {}
     locals: {}
   client!rm.f (B)V:
@@ -38035,7 +38035,7 @@ methods:
       45: "local45"
       68: "local68"
   client!rm.g (B)V:
-    owner: "Class4_Sub1_Sub28"
+    owner: "TextureOp27"
     name: "method3784"
     arguments: {}
     locals:
@@ -39609,23 +39609,23 @@ methods:
       2: "arg1"
     locals: {}
   client!sb.<init> (I[Lclient!ec;)V:
-    owner: "Class4_Sub28"
+    owner: "GlCleanerProgram"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "id"
+      1: "shaders"
     locals: {}
   client!sc.<init> ()V:
-    owner: "Class4_Sub1_Sub29"
+    owner: "TextureOp30"
     name: "<init>"
     arguments: {}
     locals: {}
   client!sc.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub29"
-    name: "method4687"
+    owner: "TextureOp30"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals: {}
   client!sc.a (CZ)C:
     owner: "StringUtils"
@@ -39640,7 +39640,7 @@ methods:
       0: "arg0"
     locals: {}
   client!sc.a (II)[I:
-    owner: "Class4_Sub1_Sub29"
+    owner: "TextureOp30"
     name: "method4694"
     arguments:
       1: "arg0"
@@ -39662,7 +39662,7 @@ methods:
       0: "arg0"
     locals: {}
   client!sc.b (II)[[I:
-    owner: "Class4_Sub1_Sub29"
+    owner: "TextureOp30"
     name: "method4695"
     arguments:
       0: "arg0"
@@ -39683,8 +39683,8 @@ methods:
       0: "arg0"
     locals: {}
   client!sc.e (B)V:
-    owner: "Class4_Sub1_Sub29"
-    name: "method4700"
+    owner: "TextureOp30"
+    name: "postDecode"
     arguments: {}
     locals: {}
   client!sc.f (I)V:
@@ -39722,12 +39722,12 @@ methods:
       27: "local27"
       59: "local59"
   client!se.<init> ()V:
-    owner: "Class4_Sub1_Sub30"
+    owner: "TextureOp13"
     name: "<init>"
     arguments: {}
     locals: {}
   client!se.a (II)[I:
-    owner: "Class4_Sub1_Sub30"
+    owner: "TextureOp13"
     name: "method4694"
     arguments:
       1: "arg0"
@@ -39780,7 +39780,7 @@ methods:
     arguments: {}
     locals: {}
   client!se.c (III)I:
-    owner: "Class4_Sub1_Sub30"
+    owner: "TextureOp13"
     name: "method3950"
     arguments:
       0: "arg0"
@@ -39833,19 +39833,19 @@ methods:
     arguments: {}
     locals: {}
   client!sh.<init> ()V:
-    owner: "Class4_Sub1_Sub31"
+    owner: "TextureOp35"
     name: "<init>"
     arguments: {}
     locals: {}
   client!sh.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub31"
-    name: "method4687"
+    owner: "TextureOp35"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals: {}
   client!sh.a (II)[I:
-    owner: "Class4_Sub1_Sub31"
+    owner: "TextureOp35"
     name: "method4694"
     arguments:
       1: "arg0"
@@ -39968,19 +39968,19 @@ methods:
       5: "arg5"
     locals: {}
   client!sl.<init> ()V:
-    owner: "Class4_Sub1_Sub32"
+    owner: "TextureOp7"
     name: "<init>"
     arguments: {}
     locals: {}
   client!sl.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub32"
-    name: "method4687"
+    owner: "TextureOp7"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals: {}
   client!sl.a (II)[I:
-    owner: "Class4_Sub1_Sub32"
+    owner: "TextureOp7"
     name: "method4694"
     arguments:
       1: "arg0"
@@ -40057,7 +40057,7 @@ methods:
       69: "local69"
       166: "local166"
   client!sl.b (II)[[I:
-    owner: "Class4_Sub1_Sub32"
+    owner: "TextureOp7"
     name: "method4695"
     arguments:
       0: "arg0"
@@ -40237,19 +40237,19 @@ methods:
     arguments: {}
     locals: {}
   client!sn.<init> ()V:
-    owner: "Class4_Sub1_Sub33"
+    owner: "TextureOp4"
     name: "<init>"
     arguments: {}
     locals: {}
   client!sn.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub33"
-    name: "method4687"
+    owner: "TextureOp4"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals: {}
   client!sn.a (II)[I:
-    owner: "Class4_Sub1_Sub33"
+    owner: "TextureOp4"
     name: "method4694"
     arguments:
       1: "arg0"
@@ -40275,12 +40275,12 @@ methods:
       1: "id"
     locals: {}
   client!sn.e (B)V:
-    owner: "Class4_Sub1_Sub33"
-    name: "method4700"
+    owner: "TextureOp4"
+    name: "postDecode"
     arguments: {}
     locals: {}
   client!sn.f (I)V:
-    owner: "Class4_Sub1_Sub33"
+    owner: "TextureOp4"
     name: "method4057"
     arguments: {}
     locals:
@@ -40294,12 +40294,12 @@ methods:
       139: "local139"
       153: "local153"
   client!so.<init> (Lclient!fd;)V:
-    owner: "Class4_Sub3_Sub18"
+    owner: "GlTexture"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals:
-      62: "local62"
+      62: "combineRgbMode"
       76: "local76"
   client!so.a (IIIIII[F)V:
     owner: "Static33"
@@ -40368,20 +40368,20 @@ methods:
       139: "local139"
       270: "local270"
   client!so.a (Lclient!kj;Lclient!fh;)Z:
-    owner: "Class4_Sub3_Sub18"
-    name: "method4076"
+    owner: "GlTexture"
+    name: "isReady"
     arguments:
       0: "arg0"
-      1: "arg1"
+      1: "spritesArchive"
     locals: {}
   client!so.a (Lclient!kj;Lclient!fh;FZ)[I:
-    owner: "Class4_Sub3_Sub18"
+    owner: "GlTexture"
     name: "method4073"
     arguments:
       0: "arg0"
-      1: "arg1"
+      1: "spritesArchive"
       2: "arg2"
-      3: "arg3"
+      3: "lowDetail"
     locals:
       50: "local50"
       54: "local54"
@@ -40413,16 +40413,16 @@ methods:
       268: "local268"
       274: "local274"
   client!so.a (Lclient!kj;Lclient!fh;I)Z:
-    owner: "Class4_Sub3_Sub18"
+    owner: "GlTexture"
     name: "method4077"
     arguments:
       0: "arg0"
-      1: "arg1"
+      1: "spritesArchive"
       2: "arg2"
     locals:
-      10: "local10"
-      13: "local13"
-      32: "local32"
+      10: "gl"
+      13: "flags"
+      32: "temp"
       64: "local64"
       148: "local148"
       160: "local160"
@@ -40430,16 +40430,16 @@ methods:
       367: "local367"
       377: "local377"
   client!so.a (Lclient!kj;Lclient!fh;Z)[I:
-    owner: "Class4_Sub3_Sub18"
+    owner: "GlTexture"
     name: "method4071"
     arguments:
       0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      1: "spritesArchive"
+      2: "lowDetail"
     locals:
       14: "local14"
   client!so.d (I)V:
-    owner: "Class4_Sub3_Sub18"
+    owner: "GlTexture"
     name: "method4074"
     arguments:
       0: "arg0"
@@ -40456,7 +40456,7 @@ methods:
       77: "local77"
       95: "local95"
   client!so.finalize ()V:
-    owner: "Class4_Sub3_Sub18"
+    owner: "GlTexture"
     name: "finalize"
     arguments: {}
     locals: {}
@@ -40593,19 +40593,19 @@ methods:
       9: "c"
       27: "index"
   client!tc.<init> ()V:
-    owner: "Class4_Sub1_Sub34"
+    owner: "TextureOp22"
     name: "<init>"
     arguments: {}
     locals: {}
   client!tc.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub34"
-    name: "method4687"
+    owner: "TextureOp22"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals: {}
   client!tc.a (II)[I:
-    owner: "Class4_Sub1_Sub34"
+    owner: "TextureOp22"
     name: "method4694"
     arguments:
       1: "arg0"
@@ -40623,7 +40623,7 @@ methods:
       12: "local12"
       15: "local15"
   client!tc.b (II)[[I:
-    owner: "Class4_Sub1_Sub34"
+    owner: "TextureOp22"
     name: "method4695"
     arguments:
       0: "arg0"
@@ -41184,12 +41184,12 @@ methods:
       2: "arg2"
     locals: {}
   client!ti.<init> ()V:
-    owner: "Class4_Sub1_Sub35"
+    owner: "TextureOp24"
     name: "<init>"
     arguments: {}
     locals: {}
   client!ti.a (II)[I:
-    owner: "Class4_Sub1_Sub35"
+    owner: "TextureOp24"
     name: "method4694"
     arguments:
       1: "arg0"
@@ -42460,12 +42460,12 @@ methods:
     arguments: {}
     locals: {}
   client!uc.<init> ()V:
-    owner: "Class4_Sub1_Sub36"
+    owner: "TextureOp23"
     name: "<init>"
     arguments: {}
     locals: {}
   client!uc.a (BII)V:
-    owner: "Class4_Sub1_Sub36"
+    owner: "TextureOp23"
     name: "method4301"
     arguments:
       1: "arg0"
@@ -42475,14 +42475,14 @@ methods:
       13: "local13"
       24: "local24"
   client!uc.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub36"
-    name: "method4687"
+    owner: "TextureOp23"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals: {}
   client!uc.a (II)[I:
-    owner: "Class4_Sub1_Sub36"
+    owner: "TextureOp23"
     name: "method4694"
     arguments:
       1: "arg0"
@@ -42505,7 +42505,7 @@ methods:
       1: "arg0"
     locals: {}
   client!uc.b (II)[[I:
-    owner: "Class4_Sub1_Sub36"
+    owner: "TextureOp23"
     name: "method4695"
     arguments:
       0: "arg0"
@@ -43148,12 +43148,12 @@ methods:
     locals:
       31: "local31"
   client!uj.<init> ()V:
-    owner: "Class4_Sub3_Sub14"
+    owner: "Sprite"
     name: "<init>"
     arguments: {}
     locals: {}
   client!uj.a (IBIII)V:
-    owner: "Class4_Sub3_Sub14"
+    owner: "Sprite"
     name: "method4509"
     arguments:
       0: "arg0"
@@ -43164,14 +43164,14 @@ methods:
       4: "local4"
       21: "local21"
   client!uj.a (II)V:
-    owner: "Class4_Sub3_Sub14"
+    owner: "Sprite"
     name: "method4506"
     arguments:
       0: "arg0"
       1: "arg1"
     locals: {}
   client!uj.a (III)V:
-    owner: "Class4_Sub3_Sub14"
+    owner: "Sprite"
     name: "method4513"
     arguments:
       0: "arg0"
@@ -43179,7 +43179,7 @@ methods:
       2: "arg2"
     locals: {}
   client!uj.a (IIII)V:
-    owner: "Class4_Sub3_Sub14"
+    owner: "Sprite"
     name: "method4507"
     arguments:
       0: "arg0"
@@ -43188,7 +43188,7 @@ methods:
       3: "arg3"
     locals: {}
   client!uj.a (IIIII)V:
-    owner: "Class4_Sub3_Sub14"
+    owner: "Sprite"
     name: "method4504"
     arguments:
       0: "arg0"
@@ -43209,14 +43209,14 @@ methods:
       5: "local5"
       15: "local15"
   client!uj.b (II)V:
-    owner: "Class4_Sub3_Sub14"
+    owner: "Sprite"
     name: "method4510"
     arguments:
       0: "arg0"
       1: "arg1"
     locals: {}
   client!uj.b (IIIIII)V:
-    owner: "Class4_Sub3_Sub14"
+    owner: "Sprite"
     name: "method4508"
     arguments:
       0: "arg0"
@@ -43227,7 +43227,7 @@ methods:
       5: "arg5"
     locals: {}
   client!uj.c (II)V:
-    owner: "Class4_Sub3_Sub14"
+    owner: "Sprite"
     name: "method4511"
     arguments:
       0: "arg0"
@@ -43481,7 +43481,7 @@ methods:
       8: "inv"
       24: "i"
   client!vb.<init> ()V:
-    owner: "Class4_Sub1_Sub37"
+    owner: "TextureOp12"
     name: "<init>"
     arguments: {}
     locals: {}
@@ -43496,14 +43496,14 @@ methods:
     locals:
       6: "local6"
   client!vb.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub37"
-    name: "method4687"
+    owner: "TextureOp12"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals: {}
   client!vb.a (II)[I:
-    owner: "Class4_Sub1_Sub37"
+    owner: "TextureOp12"
     name: "method4694"
     arguments:
       1: "arg0"
@@ -43537,8 +43537,8 @@ methods:
       93: "local93"
       96: "local96"
   client!vb.e (B)V:
-    owner: "Class4_Sub1_Sub37"
-    name: "method4700"
+    owner: "TextureOp12"
+    name: "postDecode"
     arguments: {}
     locals: {}
   client!vc.a ()Z:
@@ -44308,19 +44308,19 @@ methods:
     locals:
       35: "local35"
   client!vi.<init> ()V:
-    owner: "Class4_Sub1_Sub38"
+    owner: "TextureOp5"
     name: "<init>"
     arguments: {}
     locals: {}
   client!vi.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub38"
-    name: "method4687"
+    owner: "TextureOp5"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals: {}
   client!vi.a (II)[I:
-    owner: "Class4_Sub1_Sub38"
+    owner: "TextureOp5"
     name: "method4694"
     arguments:
       1: "arg0"
@@ -44342,7 +44342,7 @@ methods:
       167: "local167"
       169: "local169"
   client!vi.b (II)[[I:
-    owner: "Class4_Sub1_Sub38"
+    owner: "TextureOp5"
     name: "method4695"
     arguments:
       0: "arg0"
@@ -44382,7 +44382,7 @@ methods:
       270: "local270"
       277: "local277"
   client!vj.<init> (IIIIII[I)V:
-    owner: "Class4_Sub3_Sub14_Sub2_Sub1"
+    owner: "GlAlphaSprite"
     name: "<init>"
     arguments:
       0: "arg0"
@@ -44394,13 +44394,13 @@ methods:
       6: "arg6"
     locals: {}
   client!vj.<init> (Lclient!vn;)V:
-    owner: "Class4_Sub3_Sub14_Sub2_Sub1"
+    owner: "GlAlphaSprite"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "sprite"
     locals: {}
   client!vj.a ([I)V:
-    owner: "Class4_Sub3_Sub14_Sub2_Sub1"
+    owner: "GlAlphaSprite"
     name: "method4515"
     arguments:
       0: "arg0"
@@ -44409,13 +44409,13 @@ methods:
       22: "local22"
       24: "local24"
       32: "local32"
-      34: "local34"
-      40: "local40"
+      34: "y"
+      40: "x"
       49: "local49"
       54: "local54"
       94: "local94"
-      96: "local96"
-      103: "local103"
+      96: "gl"
+      103: "temp"
   client!vl.a (I)V:
     owner: "Static36"
     name: "method4522"
@@ -44457,21 +44457,21 @@ methods:
       2: "arg1"
     locals: {}
   client!vm.<init> ()V:
-    owner: "Class4_Sub1_Sub39"
+    owner: "TextureOp10"
     name: "<init>"
     arguments: {}
     locals: {}
   client!vm.a (BLclient!fd;I)V:
-    owner: "Class4_Sub1_Sub39"
-    name: "method4687"
+    owner: "TextureOp10"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals:
       13: "local13"
       31: "local31"
   client!vm.a (IB)V:
-    owner: "Class4_Sub1_Sub39"
+    owner: "TextureOp10"
     name: "method4549"
     arguments:
       0: "arg0"
@@ -44486,7 +44486,7 @@ methods:
       4: "arg3"
     locals: {}
   client!vm.b (II)[[I:
-    owner: "Class4_Sub1_Sub39"
+    owner: "TextureOp10"
     name: "method4695"
     arguments:
       0: "arg0"
@@ -44506,12 +44506,12 @@ methods:
       1: "idleLoops"
     locals: {}
   client!vm.e (B)V:
-    owner: "Class4_Sub1_Sub39"
-    name: "method4700"
+    owner: "TextureOp10"
+    name: "postDecode"
     arguments: {}
     locals: {}
   client!vm.f (I)V:
-    owner: "Class4_Sub1_Sub39"
+    owner: "TextureOp10"
     name: "method4550"
     arguments: {}
     locals:
@@ -44532,14 +44532,14 @@ methods:
       199: "local199"
       203: "local203"
   client!vn.<init> (II)V:
-    owner: "Class4_Sub3_Sub14_Sub1"
+    owner: "SoftwareSprite"
     name: "<init>"
     arguments:
       0: "arg0"
       1: "arg1"
     locals: {}
   client!vn.<init> (IIIIII[I)V:
-    owner: "Class4_Sub3_Sub14_Sub1"
+    owner: "SoftwareSprite"
     name: "<init>"
     arguments:
       0: "arg0"
@@ -44551,7 +44551,7 @@ methods:
       6: "arg6"
     locals: {}
   client!vn.a ()V:
-    owner: "Class4_Sub3_Sub14_Sub1"
+    owner: "SoftwareSprite"
     name: "method2164"
     arguments: {}
     locals:
@@ -44561,7 +44561,7 @@ methods:
       21: "local21"
       29: "local29"
   client!vn.a (II)V:
-    owner: "Class4_Sub3_Sub14_Sub1"
+    owner: "SoftwareSprite"
     name: "method4506"
     arguments:
       0: "arg0"
@@ -44579,7 +44579,7 @@ methods:
       74: "local74"
       107: "local107"
   client!vn.a (III)V:
-    owner: "Class4_Sub3_Sub14_Sub1"
+    owner: "SoftwareSprite"
     name: "method4513"
     arguments:
       0: "arg0"
@@ -44598,7 +44598,7 @@ methods:
       74: "local74"
       107: "local107"
   client!vn.a (IIII)V:
-    owner: "Class4_Sub3_Sub14_Sub1"
+    owner: "SoftwareSprite"
     name: "method4507"
     arguments:
       0: "arg0"
@@ -44622,7 +44622,7 @@ methods:
       177: "local177"
       192: "local192"
   client!vn.a (IIIII)V:
-    owner: "Class4_Sub3_Sub14_Sub1"
+    owner: "SoftwareSprite"
     name: "method4504"
     arguments:
       0: "arg0"
@@ -44647,7 +44647,7 @@ methods:
       177: "local177"
       192: "local192"
   client!vn.a (IIIIIIDI)V:
-    owner: "Class4_Sub3_Sub14_Sub1"
+    owner: "SoftwareSprite"
     name: "method2173"
     arguments:
       0: "arg0"
@@ -44667,7 +44667,7 @@ methods:
       93: "local93"
       128: "local128"
   client!vn.a (IIIIIIII[I[I)V:
-    owner: "Class4_Sub3_Sub14_Sub1"
+    owner: "SoftwareSprite"
     name: "method2165"
     arguments:
       0: "arg0"
@@ -44696,7 +44696,7 @@ methods:
       115: "local115"
       150: "local150"
   client!vn.a (II[I[I)V:
-    owner: "Class4_Sub3_Sub14_Sub1"
+    owner: "SoftwareSprite"
     name: "method2171"
     arguments:
       0: "arg0"
@@ -44837,7 +44837,7 @@ methods:
       29: "local29"
       35: "local35"
   client!vn.b ()V:
-    owner: "Class4_Sub3_Sub14_Sub1"
+    owner: "SoftwareSprite"
     name: "method2169"
     arguments: {}
     locals:
@@ -44848,7 +44848,7 @@ methods:
       30: "local30"
       36: "local36"
   client!vn.b (II)V:
-    owner: "Class4_Sub3_Sub14_Sub1"
+    owner: "SoftwareSprite"
     name: "method4510"
     arguments:
       0: "arg0"
@@ -44866,7 +44866,7 @@ methods:
       74: "local74"
       107: "local107"
   client!vn.b (IIIIII)V:
-    owner: "Class4_Sub3_Sub14_Sub1"
+    owner: "SoftwareSprite"
     name: "method4508"
     arguments:
       0: "arg0"
@@ -44959,7 +44959,7 @@ methods:
       1436: "local1436"
       1548: "local1548"
   client!vn.b (IIIIIIII[I[I)V:
-    owner: "Class4_Sub3_Sub14_Sub1"
+    owner: "SoftwareSprite"
     name: "method2167"
     arguments:
       0: "arg0"
@@ -45016,7 +45016,7 @@ methods:
       78: "local78"
       85: "local85"
   client!vn.c ()[I:
-    owner: "Class4_Sub3_Sub14_Sub1"
+    owner: "SoftwareSprite"
     name: "getPixels"
     arguments: {}
     locals:
@@ -45027,7 +45027,7 @@ methods:
       30: "local30"
       40: "local40"
   client!vn.c (II)V:
-    owner: "Class4_Sub3_Sub14_Sub1"
+    owner: "SoftwareSprite"
     name: "method4511"
     arguments:
       0: "arg0"
@@ -45045,7 +45045,7 @@ methods:
       85: "local85"
       118: "local118"
   client!vn.d ()V:
-    owner: "Class4_Sub3_Sub14_Sub1"
+    owner: "SoftwareSprite"
     name: "method2176"
     arguments: {}
     locals:
@@ -45053,12 +45053,12 @@ methods:
       19: "local19"
       25: "local25"
   client!vn.e ()V:
-    owner: "Class4_Sub3_Sub14_Sub1"
+    owner: "SoftwareSprite"
     name: "makeTarget"
     arguments: {}
     locals: {}
   client!vn.e (I)V:
-    owner: "Class4_Sub3_Sub14_Sub1"
+    owner: "SoftwareSprite"
     name: "method2168"
     arguments:
       0: "arg0"
@@ -45067,7 +45067,7 @@ methods:
       11: "local11"
       16: "local16"
   client!vn.f (I)V:
-    owner: "Class4_Sub3_Sub14_Sub1"
+    owner: "SoftwareSprite"
     name: "method2174"
     arguments:
       0: "arg0"
@@ -45078,7 +45078,7 @@ methods:
       16: "local16"
       25: "local25"
   client!vn.g (I)V:
-    owner: "Class4_Sub3_Sub14_Sub1"
+    owner: "SoftwareSprite"
     name: "method2177"
     arguments:
       0: "arg0"
@@ -45455,7 +45455,7 @@ methods:
       67: "i"
       78: "s"
   client!wd.b (II)[[I:
-    owner: "Class4_Sub1_Sub21_Sub1"
+    owner: "TextureOp18"
     name: "method4695"
     arguments:
       0: "arg0"
