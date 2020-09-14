@@ -193,7 +193,7 @@ classes:
   client!ph: "TextureOp19"
   client!pi: "Class135"
   client!pk: "TextureOp2"
-  client!pl: "EnumInverseNode"
+  client!pl: "EnumStringEntry"
   client!po: "Class138"
   client!q: "Class139"
   client!qa: "Class140"
@@ -7626,7 +7626,7 @@ fields:
     owner: "Text"
     name: "CHATCOL9"
   client!pl.s Ljava/lang/String;:
-    owner: "EnumInverseNode"
+    owner: "EnumStringEntry"
     name: "value"
   client!pl.u [Lclient!te;:
     owner: "Static5"
@@ -15107,7 +15107,7 @@ methods:
     arguments: {}
     locals:
       22: "node"
-      34: "inverseNode"
+      34: "entry"
   client!cj.e (I)V:
     owner: "EnumType"
     name: "inverseInts"
@@ -35339,7 +35339,7 @@ methods:
     locals:
       15: "local15"
   client!pl.<init> (Ljava/lang/String;I)V:
-    owner: "EnumInverseNode"
+    owner: "EnumStringEntry"
     name: "<init>"
     arguments:
       0: "value"
