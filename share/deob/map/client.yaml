@@ -137,7 +137,7 @@ classes:
   client!lf: "TextureOp14"
   client!lg: "MathUtils"
   client!lh: "SecondaryNode"
-  client!li: "Class110"
+  client!li: "SpotAnimType"
   client!lj: "TextureOp17"
   client!lk: "GlBuffer"
   client!ll: "LinkedList"
@@ -4518,8 +4518,8 @@ fields:
     owner: "Class98"
     name: "aClass84_11"
   client!jk.n Lclient!fh;:
-    owner: "Static3"
-    name: "aClass58_64"
+    owner: "SpotAnimTypeList"
+    name: "modelsArchive"
   client!jk.o Ljava/util/Calendar;:
     owner: "Static4"
     name: "aCalendar1"
@@ -5286,7 +5286,7 @@ fields:
     owner: "SecondaryNode"
     name: "secondaryNext"
   client!li.a I:
-    owner: "Class110"
+    owner: "SpotAnimType"
     name: "anInt3130"
   client!li.b I:
     owner: "Static4"
@@ -5295,49 +5295,49 @@ fields:
     owner: "Static4"
     name: "anIntArray301"
   client!li.d I:
-    owner: "Class110"
+    owner: "SpotAnimType"
     name: "anInt3132"
   client!li.e Z:
-    owner: "Class110"
+    owner: "SpotAnimType"
     name: "aBoolean221"
   client!li.f I:
-    owner: "Class110"
+    owner: "SpotAnimType"
     name: "anInt3133"
   client!li.g I:
-    owner: "Class110"
+    owner: "SpotAnimType"
     name: "anInt3134"
   client!li.h [[Z:
     owner: "Terrain"
     name: "aBooleanArrayArray5"
   client!li.i [S:
-    owner: "Class110"
+    owner: "SpotAnimType"
     name: "aShortArray45"
   client!li.k [S:
     owner: "Static4"
     name: "aShortArray46"
   client!li.l I:
-    owner: "Class110"
+    owner: "SpotAnimType"
     name: "anInt3136"
   client!li.m I:
-    owner: "Class110"
+    owner: "SpotAnimType"
     name: "anInt3137"
   client!li.n I:
-    owner: "Class110"
-    name: "anInt3138"
+    owner: "SpotAnimType"
+    name: "id"
   client!li.s Z:
-    owner: "Class110"
+    owner: "SpotAnimType"
     name: "aBoolean222"
   client!li.u I:
-    owner: "Class110"
+    owner: "SpotAnimType"
     name: "anInt3144"
   client!li.v [S:
-    owner: "Class110"
+    owner: "SpotAnimType"
     name: "aShortArray47"
   client!li.w [S:
-    owner: "Class110"
+    owner: "SpotAnimType"
     name: "aShortArray48"
   client!li.x [S:
-    owner: "Class110"
+    owner: "SpotAnimType"
     name: "aShortArray49"
   client!lj.S I:
     owner: "Static4"
@@ -8052,8 +8052,8 @@ fields:
     owner: "Class142"
     name: "anInt4298"
   client!qf.f Lclient!cc;:
-    owner: "Static5"
-    name: "aClass26_45"
+    owner: "SpotAnimTypeList"
+    name: "types"
   client!qf.g I:
     owner: "Class142"
     name: "anInt4299"
@@ -9105,8 +9105,8 @@ fields:
     owner: "Static6"
     name: "anInt4761"
   client!sd.i Lclient!fh;:
-    owner: "Static6"
-    name: "aClass58_89"
+    owner: "SpotAnimTypeList"
+    name: "archive"
   client!se.W [Lclient!uj;:
     owner: "Static6"
     name: "aClass4_Sub3_Sub14Array12"
@@ -10671,8 +10671,8 @@ fields:
     owner: "Wall"
     name: "x"
   client!ve.j Lclient!cc;:
-    owner: "Static7"
-    name: "aClass26_57"
+    owner: "SpotAnimTypeList"
+    name: "models"
   client!ve.k I:
     owner: "Wall"
     name: "anInt5493"
@@ -12672,8 +12672,8 @@ methods:
       6: "arg6"
     locals: {}
   client!am.a (II)V:
-    owner: "Static9"
-    name: "method191"
+    owner: "SpotAnimTypeList"
+    name: "clean"
     arguments: {}
     locals: {}
   client!am.a (IIB)V:
@@ -17684,8 +17684,8 @@ methods:
     locals:
       12: "local12"
   client!fa.f (B)V:
-    owner: "Static14"
-    name: "method1203"
+    owner: "SpotAnimTypeList"
+    name: "removeSoft"
     arguments: {}
     locals: {}
   client!fb.a ()V:
@@ -22912,10 +22912,10 @@ methods:
       1: "archive"
     locals: {}
   client!id.a (IB)I:
-    owner: "Static19"
-    name: "method1848"
+    owner: "SpotAnimTypeList"
+    name: "getFileId"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!ie.a (ILjava/lang/String;Ljava/applet/Applet;)V:
     owner: "BrowserControl"
@@ -24092,14 +24092,14 @@ methods:
       33: "local33"
       68: "local68"
   client!jd.a (II)Lclient!li;:
-    owner: "Static21"
-    name: "method2004"
+    owner: "SpotAnimTypeList"
+    name: "get"
     arguments:
-      1: "arg0"
+      1: "id"
     locals:
-      10: "local10"
-      25: "local25"
-      29: "local29"
+      10: "type"
+      25: "bytes"
+      29: "newType"
   client!jd.a (IIIIII)Z:
     owner: "Static21"
     name: "method2003"
@@ -26622,11 +26622,11 @@ methods:
       251: "local251"
       255: "local255"
   client!kl.a (ILclient!fh;Lclient!fh;)V:
-    owner: "Static22"
-    name: "method2362"
+    owner: "SpotAnimTypeList"
+    name: "init"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "archive"
+      2: "modelsArchive"
     locals: {}
   client!kl.e (B)V:
     owner: "TextureOp38"
@@ -28353,24 +28353,24 @@ methods:
     locals:
       7: "local7"
   client!li.a (IIIB)Lclient!vg;:
-    owner: "Class110"
+    owner: "SpotAnimType"
     name: "method2569"
     arguments:
       0: "arg0"
       1: "arg1"
       2: "arg2"
     locals:
-      9: "local9"
+      9: "model"
       22: "local22"
       34: "local34"
       57: "local57"
       113: "local113"
   client!li.a (IILclient!fd;)V:
-    owner: "Class110"
-    name: "method2564"
+    owner: "SpotAnimType"
+    name: "decode"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      2: "buffer"
+      0: "code"
     locals:
       93: "local93"
       103: "local103"
@@ -28384,12 +28384,12 @@ methods:
     locals:
       20: "local20"
   client!li.a (Lclient!fd;Z)V:
-    owner: "Class110"
-    name: "method2568"
+    owner: "SpotAnimType"
+    name: "decode"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals:
-      9: "local9"
+      9: "code"
   client!li.a ([II)[I:
     owner: "Static24"
     name: "method2566"
@@ -29794,13 +29794,13 @@ methods:
       1538: "local1538"
       1542: "local1542"
   client!ml.a (Lclient!fh;II)Lclient!ml;:
-    owner: "Static25"
-    name: "method2752"
+    owner: "Class53_Sub3"
+    name: "create"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "archive"
+      1: "id"
     locals:
-      5: "local5"
+      5: "bytes"
   client!ml.a (Lclient!ml;IS)I:
     owner: "Class53_Sub3"
     name: "method2741"
@@ -33689,10 +33689,10 @@ methods:
       148: "local148"
       163: "local163"
   client!om.b (II)I:
-    owner: "Static28"
-    name: "method3257"
+    owner: "SpotAnimTypeList"
+    name: "getGroupId"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!om.d (B)Lclient!lh;:
     owner: "Class130"
@@ -37742,8 +37742,8 @@ methods:
       521: "local521"
       562: "local562"
   client!rk.c (I)V:
-    owner: "Static31"
-    name: "method3745"
+    owner: "SpotAnimTypeList"
+    name: "clear"
     arguments: {}
     locals: {}
   client!rl.a (Lclient!wa;ZI)V:
