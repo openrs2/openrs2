@@ -148,72 +148,74 @@ configure(subprojects.filter { it.isFree }) {
                     remoteLineSuffix.set("#L")
                 }
 
-                externalDocumentationLink {
-                    url.set(URL("https://asm.ow2.io/javadoc/"))
-                }
+                if (project.hasProperty("externalDocumentationLinks")) {
+                    externalDocumentationLink {
+                        url.set(URL("https://asm.ow2.io/javadoc/"))
+                    }
 
-                externalDocumentationLink {
-                    url.set(URL("https://www.bouncycastle.org/docs/docs1.5on/"))
-                }
+                    externalDocumentationLink {
+                        url.set(URL("https://www.bouncycastle.org/docs/docs1.5on/"))
+                    }
 
-                externalDocumentationLink {
-                    url.set(URL("https://www.bouncycastle.org/docs/pkixdocs1.5on/"))
-                }
+                    externalDocumentationLink {
+                        url.set(URL("https://www.bouncycastle.org/docs/pkixdocs1.5on/"))
+                    }
 
-                externalDocumentationLink {
-                    url.set(URL("https://ajalt.github.io/clikt/api/clikt/"))
-                }
+                    externalDocumentationLink {
+                        url.set(URL("https://ajalt.github.io/clikt/api/clikt/"))
+                    }
 
-                externalDocumentationLink {
-                    url.set(URL("https://commons.apache.org/proper/commons-compress/javadocs/api-${Versions.commonsCompress}/"))
-                }
+                    externalDocumentationLink {
+                        url.set(URL("https://commons.apache.org/proper/commons-compress/javadocs/api-${Versions.commonsCompress}/"))
+                    }
 
-                externalDocumentationLink {
-                    url.set(URL("https://guava.dev/releases/${Versions.guava}/api/docs/"))
-                }
+                    externalDocumentationLink {
+                        url.set(URL("https://guava.dev/releases/${Versions.guava}/api/docs/"))
+                    }
 
-                externalDocumentationLink {
-                    url.set(URL("https://google.github.io/guice/api-docs/${Versions.guice}/javadoc/"))
-                }
+                    externalDocumentationLink {
+                        url.set(URL("https://google.github.io/guice/api-docs/${Versions.guice}/javadoc/"))
+                    }
 
-                val jacksonVersion = Versions.jackson.split(".")
-                    .take(2)
-                    .joinToString(".")
-
-                externalDocumentationLink {
-                    url.set(URL("https://fasterxml.github.io/jackson-annotations/javadoc/$jacksonVersion/"))
-                }
-
-                externalDocumentationLink {
-                    url.set(URL("https://fasterxml.github.io/jackson-core/javadoc/$jacksonVersion/"))
-                }
-
-                externalDocumentationLink {
-                    url.set(URL("https://fasterxml.github.io/jackson-databind/javadoc/$jacksonVersion/"))
-                }
-
-                externalDocumentationLink {
-                    url.set(URL("https://fasterxml.github.io/jackson-dataformats-text/javadoc/yaml/$jacksonVersion/"))
-                }
-
-                externalDocumentationLink {
-                    url.set(URL("http://www.jdom.org/docs/apidocs/"))
-                }
-
-                externalDocumentationLink {
-                    url.set(URL("https://google.github.io/jimfs/releases/${Versions.jimfs}/api/docs/"))
-                }
-
-                externalDocumentationLink {
-                    url.set(URL("https://junit.org/junit5/docs/${Versions.junit}/api/"))
-                }
-
-                externalDocumentationLink {
-                    val version = Versions.netty.split(".")
+                    val jacksonVersion = Versions.jackson.split(".")
                         .take(2)
                         .joinToString(".")
 
-                    url.set(URL("https://netty.io/$version/api/"))
+                    externalDocumentationLink {
+                        url.set(URL("https://fasterxml.github.io/jackson-annotations/javadoc/$jacksonVersion/"))
+                    }
+
+                    externalDocumentationLink {
+                        url.set(URL("https://fasterxml.github.io/jackson-core/javadoc/$jacksonVersion/"))
+                    }
+
+                    externalDocumentationLink {
+                        url.set(URL("https://fasterxml.github.io/jackson-databind/javadoc/$jacksonVersion/"))
+                    }
+
+                    externalDocumentationLink {
+                        url.set(URL("https://fasterxml.github.io/jackson-dataformats-text/javadoc/yaml/$jacksonVersion/"))
+                    }
+
+                    externalDocumentationLink {
+                        url.set(URL("http://www.jdom.org/docs/apidocs/"))
+                    }
+
+                    externalDocumentationLink {
+                        url.set(URL("https://google.github.io/jimfs/releases/${Versions.jimfs}/api/docs/"))
+                    }
+
+                    externalDocumentationLink {
+                        url.set(URL("https://junit.org/junit5/docs/${Versions.junit}/api/"))
+                    }
+
+                    externalDocumentationLink {
+                        val version = Versions.netty.split(".")
+                            .take(2)
+                            .joinToString(".")
+
+                        url.set(URL("https://netty.io/$version/api/"))
+                    }
                 }
             }
         }
