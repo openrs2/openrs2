@@ -1,9 +1,9 @@
 ---
 classes:
-  client!a: "Class1"
+  client!a: "AnimFrame"
   client!ac: "TextureOp28"
   client!ae: "Class6"
-  client!af: "Class4_Sub2"
+  client!af: "AnimBase"
   client!ag: "Class7"
   client!ai: "Interface1"
   client!ak: "SecondaryHashTable"
@@ -53,7 +53,7 @@ classes:
   client!eb: "Class4_Sub8"
   client!ec: "GlShader"
   client!ed: "SpotAnimNode"
-  client!eg: "Class46"
+  client!eg: "SeqType"
   client!eh: "Class47"
   client!ei: "HardReferenceNode"
   client!ej: "Class4_Sub9"
@@ -243,7 +243,7 @@ classes:
   client!tb: "Keyboard"
   client!tc: "TextureOp22"
   client!td: "ObjType"
-  client!te: "Class4_Sub3_Sub19"
+  client!te: "AnimFrameset"
   client!tf: "Class4_Sub6"
   client!tg: "Class4_Sub31"
   client!ti: "TextureOp24"
@@ -291,37 +291,37 @@ classes:
   client!wn: "Class4_Sub3_Sub24"
 fields:
   client!a.a [S:
-    owner: "Class1"
+    owner: "AnimFrame"
     name: "aShortArray1"
   client!a.b [S:
     owner: "Static1"
     name: "aShortArray2"
   client!a.c [S:
-    owner: "Class1"
+    owner: "AnimFrame"
     name: "aShortArray3"
   client!a.d [S:
-    owner: "Class1"
+    owner: "AnimFrame"
     name: "aShortArray4"
   client!a.e Z:
-    owner: "Class1"
+    owner: "AnimFrame"
     name: "aBoolean1"
   client!a.f [B:
-    owner: "Class1"
+    owner: "AnimFrame"
     name: "aByteArray1"
   client!a.g [B:
     owner: "Static1"
     name: "aByteArray2"
   client!a.h [S:
-    owner: "Class1"
+    owner: "AnimFrame"
     name: "aShortArray5"
   client!a.i [S:
     owner: "Static1"
     name: "aShortArray6"
   client!a.j Z:
-    owner: "Class1"
+    owner: "AnimFrame"
     name: "aBoolean2"
   client!a.k I:
-    owner: "Class1"
+    owner: "AnimFrame"
     name: "anInt1"
   client!a.l [S:
     owner: "Static1"
@@ -333,11 +333,11 @@ fields:
     owner: "Static1"
     name: "aShortArray9"
   client!a.o [S:
-    owner: "Class1"
+    owner: "AnimFrame"
     name: "aShortArray10"
   client!a.p Lclient!af;:
-    owner: "Class1"
-    name: "aClass4_Sub2_1"
+    owner: "AnimFrame"
+    name: "base"
   client!aa.b I:
     owner: "Static1"
     name: "anInt3"
@@ -429,7 +429,7 @@ fields:
     owner: "Static1"
     name: "anIntArray13"
   client!af.B [[I:
-    owner: "Class4_Sub2"
+    owner: "AnimBase"
     name: "anIntArrayArray1"
   client!af.C [[[Lclient!nh;:
     owner: "Terrain"
@@ -444,26 +444,26 @@ fields:
     owner: "Static1"
     name: "anInt113"
   client!af.o [I:
-    owner: "Class4_Sub2"
+    owner: "AnimBase"
     name: "anIntArray11"
   client!af.q Lsignlink!vk;:
     owner: "Static1"
     name: "aClass197_2"
   client!af.r I:
-    owner: "Class4_Sub2"
+    owner: "AnimBase"
     name: "anInt107"
   client!af.t [I:
-    owner: "Class4_Sub2"
+    owner: "AnimBase"
     name: "anIntArray12"
   client!af.v Lclient!cc;:
     owner: "Static1"
     name: "aClass26_1"
   client!af.x [Z:
-    owner: "Class4_Sub2"
+    owner: "AnimBase"
     name: "aBooleanArray1"
   client!af.z I:
-    owner: "Class4_Sub2"
-    name: "anInt112"
+    owner: "AnimBase"
+    name: "id"
   client!ag.a I:
     owner: "Class7"
     name: "anInt114"
@@ -1911,8 +1911,8 @@ fields:
     owner: "Static2"
     name: "anIntArray85"
   client!ea.I Lclient!fh;:
-    owner: "Static2"
-    name: "aClass58_35"
+    owner: "SeqTypeList"
+    name: "animsArchive"
   client!ea.K I:
     owner: "Static2"
     name: "anInt1121"
@@ -1995,73 +1995,73 @@ fields:
     owner: "Text"
     name: "CHATEFFECT3"
   client!eg.A I:
-    owner: "Class46"
+    owner: "SeqType"
     name: "anInt1240"
   client!eg.B Z:
-    owner: "Class46"
+    owner: "SeqType"
     name: "aBoolean73"
   client!eg.D Ljava/lang/String;:
     owner: "Static2"
     name: "aString76"
   client!eg.E I:
-    owner: "Class46"
+    owner: "SeqType"
     name: "anInt1242"
   client!eg.F [[I:
-    owner: "Class46"
+    owner: "SeqType"
     name: "anIntArrayArray11"
   client!eg.G I:
-    owner: "Class46"
+    owner: "SeqType"
     name: "anInt1243"
   client!eg.H I:
     owner: "Static2"
     name: "anInt1244"
   client!eg.a I:
-    owner: "Class46"
-    name: "anInt1223"
+    owner: "SeqType"
+    name: "id"
   client!eg.b [Z:
-    owner: "Class46"
+    owner: "SeqType"
     name: "aBooleanArray6"
   client!eg.c I:
-    owner: "Class46"
+    owner: "SeqType"
     name: "anInt1224"
   client!eg.d [I:
-    owner: "Class46"
+    owner: "SeqType"
     name: "anIntArray93"
   client!eg.i Lclient!fh;:
     owner: "StructTypeList"
     name: "archive"
   client!eg.l Z:
-    owner: "Class46"
+    owner: "SeqType"
     name: "aBoolean70"
   client!eg.m I:
     owner: "Static2"
     name: "anInt1231"
   client!eg.n I:
-    owner: "Class46"
+    owner: "SeqType"
     name: "anInt1232"
   client!eg.s [Lclient!uj;:
     owner: "Static2"
     name: "aClass4_Sub3_Sub14Array7"
   client!eg.t I:
-    owner: "Class46"
+    owner: "SeqType"
     name: "anInt1237"
   client!eg.u I:
-    owner: "Class46"
+    owner: "SeqType"
     name: "anInt1238"
   client!eg.v [I:
-    owner: "Class46"
+    owner: "SeqType"
     name: "anIntArray94"
   client!eg.w I:
-    owner: "Class46"
+    owner: "SeqType"
     name: "anInt1239"
   client!eg.x Z:
-    owner: "Class46"
+    owner: "SeqType"
     name: "aBoolean71"
   client!eg.y Z:
-    owner: "Class46"
+    owner: "SeqType"
     name: "aBoolean72"
   client!eg.z [I:
-    owner: "Class46"
+    owner: "SeqType"
     name: "anIntArray95"
   client!eh.a I:
     owner: "Class47"
@@ -2874,8 +2874,8 @@ fields:
     owner: "LocalisedText"
     name: "DROP"
   client!gg.m Lclient!fh;:
-    owner: "Static3"
-    name: "aClass58_44"
+    owner: "SeqTypeList"
+    name: "archive"
   client!gg.n I:
     owner: "Class11_Sub3"
     name: "anInt2059"
@@ -9543,8 +9543,8 @@ fields:
     owner: "Static6"
     name: "anIntArray544"
   client!tb.e Lclient!cc;:
-    owner: "Static6"
-    name: "aClass26_53"
+    owner: "SeqTypeList"
+    name: "types"
   client!tb.g Ljava/math/BigInteger;:
     owner: "Static6"
     name: "aBigInteger2"
@@ -9738,8 +9738,8 @@ fields:
     owner: "Static6"
     name: "anInt5117"
   client!te.B [Lclient!a;:
-    owner: "Class4_Sub3_Sub19"
-    name: "aClass1Array1"
+    owner: "AnimFrameset"
+    name: "frames"
   client!te.D Lclient!uj;:
     owner: "Static6"
     name: "aClass4_Sub3_Sub14_8"
@@ -10584,8 +10584,8 @@ fields:
     owner: "Static7"
     name: "aByteArrayArray50"
   client!va.j Lclient!fh;:
-    owner: "Static7"
-    name: "aClass58_101"
+    owner: "SeqTypeList"
+    name: "basesArchive"
   client!va.k Z:
     owner: "Static7"
     name: "aBoolean367"
@@ -10620,8 +10620,8 @@ fields:
     owner: "Static7"
     name: "aClass138_14"
   client!vc.f Lclient!cc;:
-    owner: "Static7"
-    name: "aClass26_49"
+    owner: "SeqTypeList"
+    name: "animFramesets"
   client!vc.j [Lclient!we;:
     owner: "Terrain"
     name: "aClass184Array13"
@@ -11941,11 +11941,11 @@ fields:
     name: "anInt6084"
 methods:
   client!a.<init> ([BLclient!af;)V:
-    owner: "Class1"
+    owner: "AnimFrame"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "bytes"
+      1: "base"
     locals:
       21: "local21"
       26: "local26"
@@ -12396,13 +12396,13 @@ methods:
     arguments: {}
     locals: {}
   client!af.<init> (I[B)V:
-    owner: "Class4_Sub2"
+    owner: "AnimBase"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "id"
+      1: "bytes"
     locals:
-      11: "local11"
+      11: "buffer"
       38: "local38"
       54: "local54"
       79: "local79"
@@ -16684,8 +16684,8 @@ methods:
     locals:
       12: "i"
   client!eg.a (B)V:
-    owner: "Class46"
-    name: "method1022"
+    owner: "SeqType"
+    name: "postDecode"
     arguments: {}
     locals: {}
   client!eg.a (IIIIB)V:
@@ -16699,7 +16699,7 @@ methods:
     locals:
       10: "local10"
   client!eg.a (IIIIILclient!vg;)Lclient!vg;:
-    owner: "Class46"
+    owner: "SeqType"
     name: "method1021"
     arguments:
       0: "arg0"
@@ -16713,7 +16713,7 @@ methods:
       40: "local40"
       116: "local116"
   client!eg.a (IIILclient!vg;I)Lclient!vg;:
-    owner: "Class46"
+    owner: "SeqType"
     name: "method1018"
     arguments:
       1: "arg0"
@@ -16726,7 +16726,7 @@ methods:
       43: "local43"
       102: "local102"
   client!eg.a (Lclient!fd;II)V:
-    owner: "Class46"
+    owner: "SeqType"
     name: "method1020"
     arguments:
       0: "arg0"
@@ -16746,8 +16746,8 @@ methods:
       335: "local335"
       337: "local337"
   client!eg.a (Lclient!fd;Z)V:
-    owner: "Class46"
-    name: "method1016"
+    owner: "SeqType"
+    name: "decode"
     arguments:
       0: "arg0"
     locals:
@@ -16762,7 +16762,7 @@ methods:
       4: "arg3"
     locals: {}
   client!eg.a (ZIILclient!vg;I)Lclient!vg;:
-    owner: "Class46"
+    owner: "SeqType"
     name: "method1017"
     arguments:
       1: "arg0"
@@ -16782,7 +16782,7 @@ methods:
       161: "local161"
       246: "local246"
   client!eg.a (ZIILclient!vg;II)Lclient!vg;:
-    owner: "Class46"
+    owner: "SeqType"
     name: "method1014"
     arguments:
       1: "arg0"
@@ -19206,10 +19206,10 @@ methods:
       115: "local115"
       122: "local122"
   client!fi.c (II)I:
-    owner: "Static15"
-    name: "method1397"
+    owner: "SeqTypeList"
+    name: "getGroupId"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!fi.d (B)I:
     owner: "TextureOp36"
@@ -23882,8 +23882,8 @@ methods:
       8: "i"
       17: "c"
   client!ja.b (I)V:
-    owner: "Static20"
-    name: "method1969"
+    owner: "SeqTypeList"
+    name: "removeSoft"
     arguments: {}
     locals: {}
   client!ja.run ()V:
@@ -27321,14 +27321,14 @@ methods:
     arguments: {}
     locals: {}
   client!ld.b (II)Lclient!eg;:
-    owner: "Static23"
-    name: "method2494"
+    owner: "SeqTypeList"
+    name: "get"
     arguments:
-      0: "arg0"
+      0: "id"
     locals:
-      10: "local10"
-      25: "local25"
-      29: "local29"
+      10: "type"
+      25: "bytes"
+      29: "newType"
   client!ld.b (III)V:
     owner: "Class4_Sub6_Sub2"
     name: "method2477"
@@ -33217,8 +33217,8 @@ methods:
     arguments: {}
     locals: {}
   client!of.f (B)V:
-    owner: "Static27"
-    name: "method3180"
+    owner: "SeqTypeList"
+    name: "clear"
     arguments: {}
     locals: {}
   client!of.f (I)V:
@@ -39887,16 +39887,16 @@ methods:
       21: "local21"
       25: "local25"
   client!sh.d (II)Lclient!te;:
-    owner: "Static32"
-    name: "method3984"
+    owner: "SeqTypeList"
+    name: "getAnimFrameset"
     arguments:
-      0: "arg0"
+      0: "id"
     locals:
-      19: "local19"
-      31: "local31"
+      19: "frameset"
+      31: "newFrameset"
   client!si.a (IB)V:
-    owner: "Static32"
-    name: "method3986"
+    owner: "SeqTypeList"
+    name: "clean"
     arguments: {}
     locals: {}
   client!si.a (Lclient!to;IIIIIIZ)V:
@@ -40843,28 +40843,28 @@ methods:
       9: "local9"
       25: "local25"
   client!te.<init> (Lclient!fh;Lclient!fh;IZ)V:
-    owner: "Class4_Sub3_Sub19"
+    owner: "AnimFrameset"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "animsArchive"
+      1: "basesArchive"
+      2: "id"
       3: "arg3"
     locals:
-      7: "local7"
-      12: "local12"
-      21: "local21"
-      23: "local23"
-      35: "local35"
-      37: "local37"
-      51: "local51"
-      56: "local56"
-      95: "local95"
+      7: "bases"
+      12: "capacity"
+      21: "fileIds"
+      23: "i"
+      35: "bytes"
+      37: "base"
+      51: "baseId"
+      56: "b"
+      95: "baseBytes"
   client!te.a (II)Z:
-    owner: "Class4_Sub3_Sub19"
+    owner: "AnimFrameset"
     name: "method4151"
     arguments:
-      1: "arg0"
+      1: "frame"
     locals: {}
   client!te.a (IIIIZ)I:
     owner: "Static33"
@@ -40945,10 +40945,10 @@ methods:
       153: "ex"
       160: "ex"
   client!te.b (BI)Z:
-    owner: "Class4_Sub3_Sub19"
+    owner: "AnimFrameset"
     name: "method4150"
     arguments:
-      1: "arg0"
+      1: "frame"
     locals: {}
   client!tf.a ()I:
     owner: "Class4_Sub6"
@@ -42499,10 +42499,10 @@ methods:
       13: "local13"
       15: "local15"
   client!uc.a (ZI)I:
-    owner: "Static35"
-    name: "method4299"
+    owner: "SeqTypeList"
+    name: "getFileId"
     arguments:
-      1: "arg0"
+      1: "id"
     locals: {}
   client!uc.b (II)[[I:
     owner: "TextureOp23"
@@ -45783,20 +45783,20 @@ methods:
       6: "arg6"
     locals: {}
   client!wg.a (BILclient!fh;Lclient!fh;Z)Lclient!te;:
-    owner: "Static37"
-    name: "method4756"
+    owner: "AnimFrameset"
+    name: "create"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      3: "arg2"
+      2: "animsArchive"
+      3: "basesArchive"
+      1: "id"
     locals:
-      7: "local7"
-      12: "local12"
-      14: "local14"
-      30: "local30"
-      52: "local52"
-      60: "local60"
-      97: "local97"
+      7: "ready"
+      12: "fileIds"
+      14: "i"
+      30: "bytes"
+      52: "baseId"
+      60: "baseBytes"
+      97: "ex"
   client!wg.a (IIB[I)Z:
     owner: "Class4_Sub3_Sub22"
     name: "method4758"
@@ -46024,12 +46024,12 @@ methods:
       2: "fontMetricsArchive"
     locals: {}
   client!wj.a (Lclient!fh;Lclient!fh;Lclient!fh;I)V:
-    owner: "Static37"
-    name: "method4785"
+    owner: "SeqTypeList"
+    name: "init"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "archive"
+      2: "animsArchive"
+      1: "basesArchive"
     locals: {}
   client!wj.b (B)V:
     owner: "Static37"
