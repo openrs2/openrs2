@@ -711,8 +711,8 @@ fields:
     owner: "Class17"
     name: "aByteArray4"
   client!be.j [I:
-    owner: "Static1"
-    name: "anIntArray27"
+    owner: "PathingEntity"
+    name: "ANGLES"
   client!bf.a [I:
     owner: "Class18"
     name: "anIntArray28"
@@ -777,8 +777,8 @@ fields:
     owner: "Preferences"
     name: "antiAliasingMode"
   client!bh.i I:
-    owner: "Static1"
-    name: "anInt1052"
+    owner: "Protocol"
+    name: "length"
   client!bh.j I:
     owner: "Static1"
     name: "anInt1053"
@@ -1098,8 +1098,8 @@ fields:
     owner: "Static1"
     name: "anInt549"
   client!ce.g I:
-    owner: "Static1"
-    name: "anInt552"
+    owner: "Protocol"
+    name: "opcode"
   client!cf.U F:
     owner: "Static1"
     name: "aFloat20"
@@ -1653,8 +1653,8 @@ fields:
     owner: "Class11_Sub2"
     name: "anInt953"
   client!de.x I:
-    owner: "Static2"
-    name: "anInt954"
+    owner: "client"
+    name: "loop"
   client!de.y I:
     owner: "Class11_Sub2"
     name: "anInt955"
@@ -3486,8 +3486,8 @@ fields:
     owner: "TextureOp1"
     name: "anInt2227"
   client!hk.ab Lclient!wa;:
-    owner: "Static3"
-    name: "aClass4_Sub10_Sub1_1"
+    owner: "Protocol"
+    name: "outboundBuffer"
   client!hk.bb I:
     owner: "TextureOp1"
     name: "anInt2229"
@@ -4425,8 +4425,8 @@ fields:
     owner: "Static3"
     name: "aClass112_26"
   client!jf.d Lclient!eo;:
-    owner: "Static3"
-    name: "aClass52_7"
+    owner: "Protocol"
+    name: "socket"
   client!jh.a Lclient!vc;:
     owner: "Class96"
     name: "aClass53_3"
@@ -4668,8 +4668,8 @@ fields:
     owner: "Static4"
     name: "aBooleanArrayArray3"
   client!ka.a [I:
-    owner: "Static4"
-    name: "anIntArray242"
+    owner: "Protocol"
+    name: "PACKET_LENGTHS"
   client!ka.d I:
     owner: "Static4"
     name: "anInt2747"
@@ -6753,8 +6753,8 @@ fields:
     owner: "Inv"
     name: "inventories"
   client!nj.j Lclient!wa;:
-    owner: "Static5"
-    name: "aClass4_Sub10_Sub1_2"
+    owner: "Protocol"
+    name: "inboundBuffer"
   client!nj.k [[Lclient!ih;:
     owner: "Terrain"
     name: "aClass4_Sub12ArrayArray2"
@@ -7615,7 +7615,7 @@ fields:
     name: "aFloat102"
   client!pk.Y I:
     owner: "Protocol"
-    name: "removed"
+    name: "removedCount"
   client!pk.ab I:
     owner: "Static5"
     name: "anInt4197"
@@ -8751,8 +8751,8 @@ fields:
     owner: "StringNode"
     name: "value"
   client!rk.w [Lclient!fd;:
-    owner: "Static6"
-    name: "aClass4_Sub10Array1"
+    owner: "PlayerList"
+    name: "appearanceCache"
   client!rl.o I:
     owner: "WorldList"
     name: "minId"
@@ -9099,8 +9099,8 @@ fields:
     owner: "Static6"
     name: "anInt4759"
   client!sd.g I:
-    owner: "Static6"
-    name: "anInt4760"
+    owner: "Protocol"
+    name: "extendedCount"
   client!sd.h I:
     owner: "Static6"
     name: "anInt4761"
@@ -10041,8 +10041,8 @@ fields:
     owner: "Class167"
     name: "anInt5232"
   client!u.g [I:
-    owner: "Static7"
-    name: "anIntArray587"
+    owner: "Protocol"
+    name: "extendedIds"
   client!u.h Lclient!fh;:
     owner: "client"
     name: "js5Archive17"
@@ -15714,17 +15714,17 @@ methods:
       249: "local249"
       254: "local254"
   client!db.a (I)V:
-    owner: "Static12"
-    name: "method734"
+    owner: "Protocol"
+    name: "readNewNpcInfo"
     arguments: {}
     locals:
-      22: "local22"
-      31: "local31"
-      49: "local49"
+      22: "id"
+      31: "created"
+      49: "npc"
       77: "local77"
       89: "local89"
       102: "local102"
-      116: "local116"
+      116: "extended"
       139: "local139"
   client!db.a (IIIIIIII)V:
     owner: "Static12"
@@ -24191,11 +24191,11 @@ methods:
     locals:
       3: "local3"
   client!jf.b (I)Z:
-    owner: "Static21"
-    name: "method3287"
+    owner: "Protocol"
+    name: "readPacketInternal"
     arguments: {}
     locals:
-      15: "local15"
+      15: "available"
       130: "local130"
       180: "local180"
       184: "local184"
@@ -25551,12 +25551,12 @@ methods:
     arguments: {}
     locals: {}
   client!k.a (I)V:
-    owner: "Static22"
-    name: "method2189"
+    owner: "Protocol"
+    name: "readSelfPlayerInfo"
     arguments: {}
     locals:
-      7: "local7"
-      19: "local19"
+      7: "updated"
+      19: "type"
       42: "local42"
       54: "local54"
       82: "local82"
@@ -32518,17 +32518,17 @@ methods:
     arguments: {}
     locals: {}
   client!o.b (B)V:
-    owner: "Static26"
-    name: "method3056"
+    owner: "Protocol"
+    name: "readNpcInfo"
     arguments: {}
     locals:
-      13: "local13"
+      13: "size"
       23: "i"
-      62: "local62"
-      73: "local73"
-      77: "local77"
-      82: "local82"
-      106: "local106"
+      62: "i"
+      73: "id"
+      77: "npc"
+      82: "updated"
+      106: "type"
       151: "local151"
       161: "local161"
       201: "local201"
@@ -36492,20 +36492,20 @@ methods:
       0: "arg0"
     locals: {}
   client!qh.a (IIILclient!f;)V:
-    owner: "Static30"
-    name: "method3565"
+    owner: "Protocol"
+    name: "readPlayerExtendedInfo"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      3: "arg2"
+      3: "player"
+      0: "id"
+      1: "flags"
     locals:
       14: "local14"
       18: "local18"
       43: "local43"
       53: "local53"
-      68: "local68"
-      71: "local71"
-      76: "local76"
+      68: "len"
+      71: "bytes"
+      76: "buffer"
       117: "local117"
       120: "local120"
       123: "local123"
@@ -36756,8 +36756,8 @@ methods:
       111: "local111"
       118: "local118"
       152: "local152"
-      197: "local197"
-      594: "local594"
+      197: "key"
+      594: "i"
       626: "local626"
       906: "local906"
       916: "local916"
@@ -40504,7 +40504,7 @@ methods:
       0: "id"
     locals: {}
   client!ta.a (ZI)V:
-    owner: "Static33"
+    owner: "Protocol"
     name: "readRebuildPacket"
     arguments:
       0: "dynamic"
@@ -42434,13 +42434,13 @@ methods:
       13: "local13"
       68: "local68"
   client!ub.a (I)V:
-    owner: "Static34"
-    name: "method4269"
+    owner: "Protocol"
+    name: "readPlayerInfoPacket"
     arguments: {}
     locals:
-      19: "local19"
-      34: "local34"
-      85: "local85"
+      19: "i"
+      34: "id"
+      85: "i"
   client!ub.a (I[BZI)Ljava/lang/String;:
     owner: "Cp1252Charset"
     name: "decodeString"
@@ -42522,14 +42522,14 @@ methods:
     arguments: {}
     locals: {}
   client!uc.f (I)V:
-    owner: "Static35"
-    name: "method4298"
+    owner: "Protocol"
+    name: "readExtendedNpcInfo"
     arguments: {}
     locals:
-      3: "local3"
-      10: "local10"
-      14: "local14"
-      18: "local18"
+      3: "i"
+      10: "id"
+      14: "npc"
+      18: "flags"
       43: "local43"
       49: "local49"
       74: "local74"
@@ -42583,14 +42583,14 @@ methods:
       101: "local101"
       116: "local116"
   client!ud.a (I)V:
-    owner: "Static35"
-    name: "method4308"
+    owner: "Protocol"
+    name: "readPlayerExtendedInfo"
     arguments: {}
     locals:
-      13: "local13"
-      24: "local24"
-      28: "local28"
-      32: "local32"
+      13: "i"
+      24: "id"
+      28: "player"
+      32: "flags"
   client!ud.a (IB)I:
     owner: "Class170"
     name: "method4302"
@@ -42965,17 +42965,17 @@ methods:
     arguments: {}
     locals: {}
   client!ug.a (B)V:
-    owner: "Static35"
-    name: "method4318"
+    owner: "Protocol"
+    name: "readNewPlayerInfo"
     arguments: {}
     locals:
-      18: "local18"
-      27: "local27"
-      65: "local65"
+      18: "id"
+      27: "created"
+      65: "player"
       75: "local75"
       88: "local88"
       97: "local97"
-      102: "local102"
+      102: "extended"
       119: "local119"
   client!ug.a (BLclient!mb;)V:
     owner: "Class172"
@@ -43455,17 +43455,17 @@ methods:
       1: "arg0"
     locals: {}
   client!va.b (I)V:
-    owner: "Static36"
-    name: "method4406"
+    owner: "Protocol"
+    name: "readPlayerInfo"
     arguments: {}
     locals:
-      6: "local6"
-      23: "local23"
-      55: "local55"
-      62: "local62"
-      66: "local66"
-      73: "local73"
-      94: "local94"
+      6: "size"
+      23: "i"
+      55: "i"
+      62: "id"
+      66: "player"
+      73: "updated"
+      94: "type"
       140: "local140"
       150: "local150"
       193: "local193"
@@ -43680,14 +43680,14 @@ methods:
       8: "arg7"
     locals: {}
   client!ve.b (I)Z:
-    owner: "Static36"
-    name: "method4442"
+    owner: "Protocol"
+    name: "readPacket"
     arguments: {}
     locals:
-      16: "local16"
-      21: "local21"
-      63: "local63"
-      65: "local65"
+      16: "ex"
+      21: "ex"
+      63: "message"
+      65: "i"
   client!vf.a (BII)V:
     owner: "Static36"
     name: "method4444"
@@ -44417,13 +44417,13 @@ methods:
       96: "gl"
       103: "temp"
   client!vl.a (I)V:
-    owner: "Static36"
-    name: "method4522"
+    owner: "Protocol"
+    name: "readNpcInfoPacket"
     arguments: {}
     locals:
-      17: "local17"
-      28: "local28"
-      87: "local87"
+      17: "i"
+      28: "id"
+      87: "i"
   client!vl.a (IIIII)V:
     owner: "Static36"
     name: "method4524"
@@ -46037,7 +46037,7 @@ methods:
     arguments: {}
     locals: {}
   client!wj.c (B)V:
-    owner: "Static38"
+    owner: "Protocol"
     name: "readZonePacket"
     arguments: {}
     locals:
