@@ -202,7 +202,7 @@ classes:
   client!qd: "GlSolidColorTexture"
   client!qe: "HashTableIterator"
   client!qf: "Class142"
-  client!qg: "Class143"
+  client!qg: "MsiType"
   client!qh: "Class4_Sub23"
   client!qi: "Js5TextureProvider"
   client!qj: "TextureOp16"
@@ -420,7 +420,7 @@ fields:
     owner: "Class6"
     name: "anInt96"
   client!ae.k I:
-    owner: "Static1"
+    owner: "MsiTypeList"
     name: "anInt97"
   client!ae.l Z:
     owner: "Static1"
@@ -1476,8 +1476,8 @@ fields:
     owner: "Class35"
     name: "anInt874"
   client!da.l Lclient!fh;:
-    owner: "Static1"
-    name: "aClass58_22"
+    owner: "MsiTypeList"
+    name: "archive"
   client!da.m Lclient!ld;:
     owner: "Static1"
     name: "aClass4_Sub6_Sub2_3"
@@ -7491,8 +7491,8 @@ fields:
     owner: "Class41"
     name: "anInt3771"
   client!pg.l Lclient!cc;:
-    owner: "Static5"
-    name: "aClass26_41"
+    owner: "MsiTypeList"
+    name: "sprites"
   client!pg.m I:
     owner: "Class41"
     name: "anInt3772"
@@ -7929,7 +7929,7 @@ fields:
     owner: "PathingEntity"
     name: "anIntArray425"
   client!qc.o I:
-    owner: "Static5"
+    owner: "MsiTypeList"
     name: "anInt3963"
   client!qc.ob I:
     owner: "PathingEntity"
@@ -8079,10 +8079,10 @@ fields:
     owner: "LocalisedText"
     name: "MAINLOAD90B"
   client!qg.b Z:
-    owner: "Class143"
+    owner: "MsiType"
     name: "aBoolean303"
   client!qg.d I:
-    owner: "Class143"
+    owner: "MsiType"
     name: "anInt4306"
   client!qg.g I:
     owner: "Terrain"
@@ -8091,8 +8091,8 @@ fields:
     owner: "Static5"
     name: "aClass185_12"
   client!qg.k I:
-    owner: "Class143"
-    name: "anInt4312"
+    owner: "MsiType"
+    name: "spriteId"
   client!qh.A [B:
     owner: "Class4_Sub23"
     name: "aByteArray57"
@@ -9297,7 +9297,7 @@ fields:
     owner: "Class158"
     name: "aClass89_2"
   client!sk.h I:
-    owner: "Static6"
+    owner: "MsiTypeList"
     name: "anInt4867"
   client!sk.i J:
     owner: "Static6"
@@ -10497,8 +10497,8 @@ fields:
     owner: "Js5NetRequest"
     name: "blockPosition"
   client!ul.M Lclient!cc;:
-    owner: "Static7"
-    name: "aClass26_55"
+    owner: "MsiTypeList"
+    name: "types"
   client!ul.O B:
     owner: "Js5NetRequest"
     name: "trailerLen"
@@ -11727,8 +11727,8 @@ fields:
     owner: "Static7"
     name: "aShortArray124"
   client!wg.L Lclient!fh;:
-    owner: "Static7"
-    name: "aClass58_103"
+    owner: "MsiTypeList"
+    name: "spritesArchive"
   client!wg.M Lclient!ll;:
     owner: "Class4_Sub3_Sub22"
     name: "aClass112_31"
@@ -12052,11 +12052,11 @@ methods:
       1: "arg0"
     locals: {}
   client!ab.a (ILclient!fh;Lclient!fh;)V:
-    owner: "Static8"
-    name: "method5"
+    owner: "MsiTypeList"
+    name: "init"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "archive"
+      1: "spritesArchive"
     locals:
       10: "local10"
       19: "local19"
@@ -14986,8 +14986,8 @@ methods:
       0: "arg0"
     locals: {}
   client!ci.a (BI)V:
-    owner: "Static11"
-    name: "method586"
+    owner: "MsiTypeList"
+    name: "clean"
     arguments: {}
     locals: {}
   client!ci.a (BLjava/awt/Component;)V:
@@ -19181,14 +19181,14 @@ methods:
     locals:
       12: "local12"
   client!fi.b (BI)Lclient!qg;:
-    owner: "Static15"
-    name: "method1400"
+    owner: "MsiTypeList"
+    name: "get"
     arguments:
-      1: "arg0"
+      1: "id"
     locals:
-      10: "local10"
-      28: "local28"
-      32: "local32"
+      10: "type"
+      28: "bytes"
+      32: "newType"
   client!fi.b (II)[[I:
     owner: "TextureOp36"
     name: "method4695"
@@ -26639,8 +26639,8 @@ methods:
     arguments: {}
     locals: {}
   client!kl.f (I)V:
-    owner: "Static22"
-    name: "method2359"
+    owner: "MsiTypeList"
+    name: "removeSoft"
     arguments: {}
     locals: {}
   client!km.<init> ()V:
@@ -33807,8 +33807,8 @@ methods:
     arguments: {}
     locals: {}
   client!on.g (I)V:
-    owner: "Static28"
-    name: "method3281"
+    owner: "MsiTypeList"
+    name: "clear"
     arguments: {}
     locals: {}
   client!on.h (I)Z:
@@ -36321,31 +36321,31 @@ methods:
       39: "local39"
       57: "local57"
   client!qg.a (ILclient!fd;II)V:
-    owner: "Class143"
-    name: "method3552"
+    owner: "MsiType"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      3: "arg2"
+      1: "buffer"
+      2: "id"
+      3: "code"
     locals: {}
   client!qg.a (IZI)Lclient!fe;:
-    owner: "Class143"
-    name: "method3557"
+    owner: "MsiType"
+    name: "getSprite"
     arguments:
       1: "arg0"
       2: "arg1"
     locals:
-      23: "local23"
-      44: "local44"
+      23: "sprite"
+      44: "newSprite"
       66: "local66"
   client!qg.a (IZLclient!fd;)V:
-    owner: "Class143"
-    name: "method3556"
+    owner: "MsiType"
+    name: "decode"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      2: "buffer"
+      0: "id"
     locals:
-      9: "local9"
+      9: "code"
   client!qg.a (ZIZILjava/lang/String;IIBJZLjava/lang/String;)V:
     owner: "Static30"
     name: "method3553"
