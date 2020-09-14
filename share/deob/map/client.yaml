@@ -196,7 +196,7 @@ classes:
   client!pl: "EnumStringEntry"
   client!po: "Class138"
   client!q: "Class139"
-  client!qa: "Class140"
+  client!qa: "IdkType"
   client!qb: "TextureOp0"
   client!qc: "PathingEntity"
   client!qd: "GlSolidColorTexture"
@@ -477,8 +477,8 @@ fields:
     owner: "Text"
     name: "CHATCOL10"
   client!ah.e I:
-    owner: "Static1"
-    name: "anInt119"
+    owner: "IdkTypeList"
+    name: "capacity"
   client!ah.f [I:
     owner: "Static1"
     name: "anIntArray15"
@@ -1020,7 +1020,7 @@ fields:
     owner: "Static1"
     name: "anInt497"
   client!ca.V [I:
-    owner: "Static1"
+    owner: "PlayerAppearance"
     name: "anIntArray46"
   client!ca.X I:
     owner: "TextureOp11"
@@ -3366,8 +3366,8 @@ fields:
     owner: "LocalisedText"
     name: "REMOVEIGNORE1"
   client!he.n Lclient!fh;:
-    owner: "Static3"
-    name: "aClass58_48"
+    owner: "IdkTypeList"
+    name: "modelsArchive"
   client!he.o I:
     owner: "Static3"
     name: "anInt2162"
@@ -7677,34 +7677,34 @@ fields:
     owner: "Static5"
     name: "aClass4_Sub10_Sub1_3"
   client!qa.a [S:
-    owner: "Class140"
+    owner: "IdkType"
     name: "aShortArray75"
   client!qa.d [S:
-    owner: "Class140"
+    owner: "IdkType"
     name: "aShortArray76"
   client!qa.e [S:
-    owner: "Class140"
+    owner: "IdkType"
     name: "aShortArray77"
   client!qa.h I:
     owner: "Static5"
     name: "anInt4224"
   client!qa.k Z:
-    owner: "Class140"
+    owner: "IdkType"
     name: "aBoolean298"
   client!qa.m [S:
-    owner: "Class140"
+    owner: "IdkType"
     name: "aShortArray78"
   client!qa.o [I:
-    owner: "Class140"
+    owner: "IdkType"
     name: "anIntArray449"
   client!qa.q I:
     owner: "Static5"
     name: "anInt4230"
   client!qa.r [I:
-    owner: "Class140"
+    owner: "IdkType"
     name: "anIntArray450"
   client!qa.s I:
-    owner: "Class140"
+    owner: "IdkType"
     name: "anInt4231"
   client!qa.t [[Lclient!wj;:
     owner: "Static5"
@@ -8457,8 +8457,8 @@ fields:
     owner: "Loc"
     name: "shape"
   client!rb.a Lclient!fh;:
-    owner: "Static6"
-    name: "aClass58_85"
+    owner: "IdkTypeList"
+    name: "archive"
   client!rb.c F:
     owner: "Static6"
     name: "aFloat108"
@@ -8622,7 +8622,7 @@ fields:
     owner: "Static6"
     name: "aBoolean317"
   client!rh.jb [I:
-    owner: "Static6"
+    owner: "PlayerAppearance"
     name: "anIntArray487"
   client!rh.kb I:
     owner: "Static6"
@@ -9681,7 +9681,7 @@ fields:
     owner: "ObjType"
     name: "dummyItem"
   client!td.n [I:
-    owner: "Static6"
+    owner: "PlayerAppearance"
     name: "anIntArray550"
   client!td.nb I:
     owner: "ObjType"
@@ -10596,8 +10596,8 @@ fields:
     owner: "TextureOp12"
     name: "anInt5470"
   client!vb.V Lclient!cc;:
-    owner: "Static7"
-    name: "aClass26_56"
+    owner: "IdkTypeList"
+    name: "types"
   client!vb.W I:
     owner: "TextureOp12"
     name: "anInt5471"
@@ -22694,14 +22694,14 @@ methods:
       19: "slot"
       34: "success"
   client!i.b (II)Lclient!qa;:
-    owner: "Static19"
-    name: "method1816"
+    owner: "IdkTypeList"
+    name: "get"
     arguments:
-      1: "arg0"
+      1: "id"
     locals:
-      6: "local6"
-      27: "local27"
-      31: "local31"
+      6: "type"
+      27: "bytes"
+      31: "newType"
   client!ia.a (Lclient!wf;ILjava/lang/String;)Ljava/lang/String;:
     owner: "Cs1ScriptRunner"
     name: "interpolate"
@@ -24872,8 +24872,8 @@ methods:
       0: "arg0"
     locals: {}
   client!jm.a (II)V:
-    owner: "Static21"
-    name: "method2082"
+    owner: "IdkTypeList"
+    name: "clean"
     arguments: {}
     locals: {}
   client!jm.a (IIIIII)V:
@@ -34042,8 +34042,8 @@ methods:
       16: "local16"
       70: "local70"
   client!pa.b (B)V:
-    owner: "Static28"
-    name: "method3329"
+    owner: "IdkTypeList"
+    name: "removeSoft"
     arguments: {}
     locals: {}
   client!pb.<init> (I[BII)V:
@@ -35543,7 +35543,7 @@ methods:
     arguments: {}
     locals: {}
   client!qa.a (B)Lclient!ml;:
-    owner: "Class140"
+    owner: "IdkType"
     name: "method3490"
     arguments: {}
     locals:
@@ -35573,11 +35573,11 @@ methods:
       336: "local336"
       367: "local367"
   client!qa.a (ILclient!fd;Z)V:
-    owner: "Class140"
-    name: "method3491"
+    owner: "IdkType"
+    name: "decode"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      1: "buffer"
+      0: "code"
     locals:
       22: "local22"
       28: "local28"
@@ -35737,12 +35737,12 @@ methods:
       3045: "local3045"
       3065: "local3065"
   client!qa.a (ZLclient!fd;)V:
-    owner: "Class140"
-    name: "method3496"
+    owner: "IdkType"
+    name: "decode"
     arguments:
-      1: "arg0"
+      1: "buffer"
     locals:
-      5: "local5"
+      5: "code"
   client!qa.a ([Lclient!wf;BI)V:
     owner: "Static29"
     name: "method3495"
@@ -35759,14 +35759,14 @@ methods:
       261: "local261"
       272: "local272"
   client!qa.b (B)Z:
-    owner: "Class140"
+    owner: "IdkType"
     name: "method3494"
     arguments: {}
     locals:
       13: "local13"
       22: "local22"
   client!qa.b (I)Lclient!ml;:
-    owner: "Class140"
+    owner: "IdkType"
     name: "method3489"
     arguments: {}
     locals:
@@ -35777,7 +35777,7 @@ methods:
       58: "local58"
       81: "local81"
   client!qa.c (I)Z:
-    owner: "Class140"
+    owner: "IdkType"
     name: "method3497"
     arguments: {}
     locals:
@@ -36778,7 +36778,7 @@ methods:
     name: "method3604"
     arguments:
       1: "arg0"
-      2: "arg1"
+      2: "id"
     locals:
       7: "local7"
   client!qk.a (I)V:
@@ -36816,9 +36816,9 @@ methods:
       4: "colors"
       5: "female"
     locals:
-      25: "local25"
-      30: "local30"
-      37: "local37"
+      25: "i"
+      30: "id"
+      37: "type"
   client!qk.a (ILclient!eg;IBI)Lclient!vg;:
     owner: "PlayerAppearance"
     name: "method3612"
@@ -44052,8 +44052,8 @@ methods:
     arguments: {}
     locals: {}
   client!vh.a (B)V:
-    owner: "Static36"
-    name: "method4448"
+    owner: "IdkTypeList"
+    name: "clear"
     arguments: {}
     locals: {}
   client!vh.a (BI)Z:
@@ -44450,11 +44450,11 @@ methods:
       349: "local349"
       358: "local358"
   client!vl.a (ILclient!fh;Lclient!fh;)V:
-    owner: "Static36"
-    name: "method4523"
+    owner: "IdkTypeList"
+    name: "init"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "archive"
+      1: "modelsArchive"
     locals: {}
   client!vm.<init> ()V:
     owner: "TextureOp10"
