@@ -2205,8 +2205,8 @@ fields:
     owner: "BufferPool"
     name: "largeBuffers"
   client!el.e [I:
-    owner: "Static2"
-    name: "anIntArray99"
+    owner: "Protocol"
+    name: "removedIds"
   client!el.f Lclient!cc;:
     owner: "Static2"
     name: "aClass26_12"
@@ -3495,7 +3495,7 @@ fields:
     owner: "Static3"
     name: "anInt2232"
   client!hk.hb [Lclient!p;:
-    owner: "Npc"
+    owner: "NpcList"
     name: "npcs"
   client!hk.ib Lclient!fh;:
     owner: "InterfaceList"
@@ -4290,8 +4290,8 @@ fields:
     owner: "Static3"
     name: "aShortArray35"
   client!ja.b I:
-    owner: "Static3"
-    name: "anInt2510"
+    owner: "PlayerList"
+    name: "size"
   client!ja.g [I:
     owner: "Static3"
     name: "anIntArray222"
@@ -5061,7 +5061,7 @@ fields:
     owner: "ScriptRunner"
     name: "intLocals"
   client!lb.k Lclient!f;:
-    owner: "Player"
+    owner: "PlayerList"
     name: "self"
   client!lb.l Lclient!r;:
     owner: "Class108"
@@ -5700,8 +5700,8 @@ fields:
     owner: "Text"
     name: "CHATCOL3"
   client!mg.a [I:
-    owner: "Static4"
-    name: "anIntArray317"
+    owner: "PlayerList"
+    name: "ids"
   client!mg.d Lclient!ja;:
     owner: "Js5MasterIndex"
     name: "cacheQueue"
@@ -6414,7 +6414,7 @@ fields:
     owner: "Static5"
     name: "aBoolean248"
   client!nc.e [Lclient!f;:
-    owner: "Player"
+    owner: "PlayerList"
     name: "players"
   client!nc.f [[S:
     owner: "Static5"
@@ -7614,8 +7614,8 @@ fields:
     owner: "Static5"
     name: "aFloat102"
   client!pk.Y I:
-    owner: "Static5"
-    name: "anInt4195"
+    owner: "Protocol"
+    name: "removed"
   client!pk.ab I:
     owner: "Static5"
     name: "anInt4197"
@@ -8472,7 +8472,7 @@ fields:
     owner: "LocalisedText"
     name: "CHATEFFECT2"
   client!rc.c I:
-    owner: "Npc"
+    owner: "NpcList"
     name: "size"
   client!rc.d [Lclient!rf;:
     owner: "WorldList"
@@ -9945,7 +9945,7 @@ fields:
     owner: "AbstractWorld"
     name: "country"
   client!tn.c I:
-    owner: "Player"
+    owner: "PlayerList"
     name: "selfId"
   client!tn.d I:
     owner: "AbstractWorld"
@@ -10245,7 +10245,7 @@ fields:
     owner: "Static7"
     name: "anInt5283"
   client!uc.T [I:
-    owner: "Npc"
+    owner: "NpcList"
     name: "ids"
   client!uc.U [I:
     owner: "Keyboard"
@@ -32523,7 +32523,7 @@ methods:
     arguments: {}
     locals:
       13: "local13"
-      23: "local23"
+      23: "i"
       62: "local62"
       73: "local73"
       77: "local77"
