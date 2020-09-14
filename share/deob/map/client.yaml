@@ -10,7 +10,7 @@ classes:
   client!al: "Js5CacheRequest"
   client!am: "Class11_Sub1"
   client!ba: "Class15"
-  client!bb: "Class4_Sub3_Sub2"
+  client!bb: "ProjAnimNode"
   client!bc: "Class4_Sub4"
   client!bd: "Class16"
   client!be: "Class17"
@@ -52,7 +52,7 @@ classes:
   client!ea: "Class41_Sub1"
   client!eb: "Class4_Sub8"
   client!ec: "GlShader"
-  client!ed: "Class4_Sub3_Sub6"
+  client!ed: "SpotAnimNode"
   client!eg: "Class46"
   client!eh: "Class47"
   client!ei: "HardReferenceNode"
@@ -155,7 +155,7 @@ classes:
   client!ml: "Class53_Sub3"
   client!mo: "TextureOp26"
   client!n: "GlIndexedSprite"
-  client!na: "Class53_Sub4_Sub1"
+  client!na: "SoftwareModel"
   client!nb: "Class4_Sub17"
   client!nd: "Inv"
   client!ne: "Class20_Sub3"
@@ -167,10 +167,10 @@ classes:
   client!nm: "SignLinkAudioChannel"
   client!nn: "MiscTimer"
   client!no: "TextureOp33"
-  client!o: "Class53_Sub5"
+  client!o: "SpotAnim"
   client!oa: "GlSprite"
   client!ob: "FrameBuffer"
-  client!oc: "Class53_Sub6"
+  client!oc: "ProjAnim"
   client!oe: "Class41_Sub2_Sub1"
   client!of: "TextureOp8"
   client!og: "TextureOp39"
@@ -225,7 +225,7 @@ classes:
   client!rm: "TextureOp27"
   client!rn: "Class41_Sub2"
   client!ro: "StructType"
-  client!s: "Class53_Sub4_Sub2"
+  client!s: "GlModel"
   client!sa: "Class153"
   client!sb: "GlCleanerProgram"
   client!sc: "TextureOp30"
@@ -270,7 +270,7 @@ classes:
   client!vd: "Class178"
   client!ve: "Class179"
   client!vf: "Class180"
-  client!vg: "Class53_Sub4"
+  client!vg: "Model"
   client!vh: "LocType"
   client!vi: "TextureOp5"
   client!vj: "GlAlphaSprite"
@@ -648,8 +648,8 @@ fields:
     owner: "LocalisedText"
     name: "TAKE"
   client!bb.z Lclient!oc;:
-    owner: "Class4_Sub3_Sub2"
-    name: "aClass53_Sub6_1"
+    owner: "ProjAnimNode"
+    name: "value"
   client!bc.D [Ljava/lang/String;:
     owner: "Static1"
     name: "aStringArray4"
@@ -1956,8 +1956,8 @@ fields:
     owner: "Static2"
     name: "anInt1213"
   client!ed.C Lclient!o;:
-    owner: "Class4_Sub3_Sub6"
-    name: "aClass53_Sub5_1"
+    owner: "SpotAnimNode"
+    name: "value"
   client!ed.F [Z:
     owner: "Static2"
     name: "aBooleanArray5"
@@ -6102,85 +6102,85 @@ fields:
     owner: "GlIndexedSprite"
     name: "anInt3420"
   client!na.A I:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "anInt3437"
   client!na.Ab [I:
     owner: "Static4"
     name: "anIntArray367"
   client!na.B [I:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "anIntArray342"
   client!na.Bb [I:
     owner: "Static4"
     name: "anIntArray368"
   client!na.C [B:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "aByteArray43"
   client!na.Cb I:
     owner: "Static4"
     name: "anInt3443"
   client!na.D S:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "aShort38"
   client!na.Db [Z:
     owner: "Static4"
     name: "aBooleanArray16"
   client!na.E S:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "aShort39"
   client!na.Eb [S:
     owner: "Static4"
     name: "aShortArray67"
   client!na.F [I:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "anIntArray343"
   client!na.Fb [B:
     owner: "Static4"
     name: "aByteArray46"
   client!na.G Z:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "aBoolean245"
   client!na.Gb [I:
     owner: "Static4"
     name: "anIntArray369"
   client!na.H [I:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "anIntArray344"
   client!na.Hb [I:
     owner: "Static4"
     name: "anIntArray370"
   client!na.I [Lclient!u;:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "aClass167Array2"
   client!na.Ib [I:
     owner: "Static4"
     name: "anIntArray371"
   client!na.J [S:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "aShortArray63"
   client!na.Jb [I:
     owner: "Static4"
     name: "anIntArray372"
   client!na.K S:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "aShort40"
   client!na.Kb [I:
     owner: "Static4"
     name: "anIntArray373"
   client!na.L [I:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "anIntArray345"
   client!na.Lb [Z:
     owner: "Static4"
     name: "aBooleanArray17"
   client!na.M [I:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "anIntArray346"
   client!na.Mb [I:
     owner: "Static4"
     name: "anIntArray374"
   client!na.N I:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "anInt3438"
   client!na.Nb Z:
     owner: "Static4"
@@ -6192,37 +6192,37 @@ fields:
     owner: "Static4"
     name: "anIntArray375"
   client!na.P [S:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "aShortArray64"
   client!na.Pb Z:
     owner: "Static4"
     name: "aBoolean247"
   client!na.Q [I:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "anIntArray347"
   client!na.Qb [I:
     owner: "Static4"
     name: "anIntArray376"
   client!na.R S:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "aShort41"
   client!na.Rb [I:
     owner: "Static4"
     name: "anIntArray377"
   client!na.S [[I:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "anIntArrayArray29"
   client!na.Sb [[I:
     owner: "Static4"
     name: "anIntArrayArray33"
   client!na.T [I:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "anIntArray348"
   client!na.Tb [I:
     owner: "Static4"
     name: "anIntArray378"
   client!na.U [Lclient!sk;:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "aClass158Array2"
   client!na.Ub [I:
     owner: "Static4"
@@ -6240,28 +6240,28 @@ fields:
     owner: "Static4"
     name: "anIntArray380"
   client!na.X [I:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "anIntArray351"
   client!na.Xb [I:
     owner: "Static4"
     name: "anIntArray381"
   client!na.Y I:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "anInt3439"
   client!na.Z I:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "anInt3440"
   client!na.ab S:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "aShort42"
   client!na.bb [[I:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "anIntArrayArray30"
   client!na.cb [I:
     owner: "Static4"
     name: "anIntArray352"
   client!na.db [I:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "anIntArray353"
   client!na.eb [S:
     owner: "Static4"
@@ -6291,73 +6291,73 @@ fields:
     owner: "Static4"
     name: "anIntArray357"
   client!na.n Z:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "aBoolean244"
   client!na.nb [I:
     owner: "Static4"
     name: "anIntArray358"
   client!na.o B:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "aByte12"
   client!na.ob [I:
     owner: "Static4"
     name: "anIntArray359"
   client!na.p S:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "aShort35"
   client!na.pb [[I:
     owner: "Static4"
     name: "anIntArrayArray31"
   client!na.q [I:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "anIntArray339"
   client!na.qb [I:
     owner: "Static4"
     name: "anIntArray360"
   client!na.r S:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "aShort36"
   client!na.rb [I:
     owner: "Static4"
     name: "anIntArray361"
   client!na.s [S:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "aShortArray61"
   client!na.sb [I:
     owner: "Static4"
     name: "anIntArray362"
   client!na.t [S:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "aShortArray62"
   client!na.tb [[I:
     owner: "Static4"
     name: "anIntArrayArray32"
   client!na.u [B:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "aByteArray41"
   client!na.ub I:
     owner: "Static4"
     name: "anInt3441"
   client!na.v S:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "aShort37"
   client!na.vb [I:
     owner: "Static4"
     name: "anIntArray363"
   client!na.w [I:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "anIntArray340"
   client!na.wb I:
     owner: "Static4"
     name: "anInt3442"
   client!na.x [B:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "aByteArray42"
   client!na.xb [I:
     owner: "Static4"
     name: "anIntArray364"
   client!na.y [I:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "anIntArray341"
   client!na.yb [I:
     owner: "Static4"
@@ -6813,58 +6813,58 @@ fields:
     owner: "Preferences"
     name: "displayMode"
   client!o.B I:
-    owner: "Class53_Sub5"
+    owner: "SpotAnim"
     name: "anInt3661"
   client!o.C Z:
-    owner: "Class53_Sub5"
+    owner: "SpotAnim"
     name: "aBoolean264"
   client!o.D I:
-    owner: "Class53_Sub5"
+    owner: "SpotAnim"
     name: "anInt3662"
   client!o.E Lclient!ne;:
-    owner: "Class53_Sub5"
+    owner: "SpotAnim"
     name: "aClass20_Sub3_4"
   client!o.F Lclient!eg;:
-    owner: "Class53_Sub5"
+    owner: "SpotAnim"
     name: "aClass46_1"
   client!o.I I:
-    owner: "Class53_Sub5"
+    owner: "SpotAnim"
     name: "anInt3665"
   client!o.J [I:
     owner: "Static5"
     name: "anIntArray398"
   client!o.K I:
-    owner: "Class53_Sub5"
+    owner: "SpotAnim"
     name: "anInt3666"
   client!o.L Z:
-    owner: "Class53_Sub5"
+    owner: "SpotAnim"
     name: "aBoolean265"
   client!o.N [I:
     owner: "Static5"
     name: "anIntArray399"
   client!o.m I:
-    owner: "Class53_Sub5"
+    owner: "SpotAnim"
     name: "anInt3647"
   client!o.n I:
-    owner: "Class53_Sub5"
+    owner: "SpotAnim"
     name: "anInt3648"
   client!o.r Lclient!cc;:
     owner: "ObjTypeList"
     name: "sprites"
   client!o.t I:
-    owner: "Class53_Sub5"
+    owner: "SpotAnim"
     name: "anInt3653"
   client!o.v I:
-    owner: "Class53_Sub5"
+    owner: "SpotAnim"
     name: "anInt3655"
   client!o.w I:
     owner: "Static5"
     name: "anInt3656"
   client!o.x I:
-    owner: "Class53_Sub5"
+    owner: "SpotAnim"
     name: "anInt3657"
   client!o.z I:
-    owner: "Class53_Sub5"
+    owner: "SpotAnim"
     name: "anInt3659"
   client!oa.M I:
     owner: "GlSprite"
@@ -6951,70 +6951,70 @@ fields:
     owner: "LocalisedText"
     name: "USE"
   client!oc.A I:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "anInt3714"
   client!oc.B I:
     owner: "Static5"
     name: "anInt3715"
   client!oc.D I:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "anInt3717"
   client!oc.E D:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "aDouble4"
   client!oc.F I:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "anInt3718"
   client!oc.G D:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "aDouble5"
   client!oc.H Z:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "aBoolean268"
   client!oc.I I:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "anInt3719"
   client!oc.J I:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "anInt3720"
   client!oc.L Lclient!eg;:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "aClass46_2"
   client!oc.M D:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "aDouble6"
   client!oc.N I:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "anInt3722"
   client!oc.O I:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "anInt3723"
   client!oc.Q I:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "anInt3725"
   client!oc.R D:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "aDouble7"
   client!oc.S I:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "anInt3726"
   client!oc.T I:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "anInt3727"
   client!oc.U D:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "aDouble8"
   client!oc.V D:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "aDouble9"
   client!oc.W I:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "anInt3728"
   client!oc.Y I:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "anInt3730"
   client!oc.Z D:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "aDouble10"
   client!oc.ab Lclient!wf;:
     owner: "Static5"
@@ -7023,31 +7023,31 @@ fields:
     owner: "Static5"
     name: "anInt3731"
   client!oc.o I:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "anInt3707"
   client!oc.p [I:
     owner: "Static5"
     name: "anIntArray402"
   client!oc.q Lclient!ne;:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "aClass20_Sub3_5"
   client!oc.r I:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "anInt3708"
   client!oc.s I:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "anInt3709"
   client!oc.u I:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "anInt3711"
   client!oc.w Z:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "aBoolean267"
   client!oc.x I:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "anInt3713"
   client!oc.y D:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "aDouble3"
   client!oc.z Lclient!cc;:
     owner: "NpcTypeList"
@@ -8835,193 +8835,193 @@ fields:
     owner: "Static6"
     name: "anInt4679"
   client!s.A [S:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "aShortArray92"
   client!s.Ab F:
     owner: "Static6"
     name: "aFloat120"
   client!s.B [Lclient!u;:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "aClass167Array3"
   client!s.C Lclient!rj;:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "aClass152_1"
   client!s.D B:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "aByte15"
   client!s.E I:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "anInt4688"
   client!s.F I:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "anInt4689"
   client!s.H Lclient!ff;:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "aClass57_4"
   client!s.I [S:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "aShortArray93"
   client!s.J [I:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "anIntArray505"
   client!s.K [S:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "aShortArray94"
   client!s.M I:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "anInt4690"
   client!s.N [F:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "aFloatArray54"
   client!s.O Lclient!ff;:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "aClass57_5"
   client!s.P Lclient!ba;:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "aClass15_1"
   client!s.Q Lclient!fd;:
     owner: "Static6"
     name: "aClass4_Sub10_9"
   client!s.R [B:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "aByteArray62"
   client!s.S [S:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "aShortArray95"
   client!s.T [F:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "aFloatArray55"
   client!s.U [I:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "anIntArray506"
   client!s.V [S:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "aShortArray96"
   client!s.W [S:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "aShortArray97"
   client!s.X [I:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "anIntArray507"
   client!s.Y [S:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "aShortArray98"
   client!s.Z Z:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "aBoolean325"
   client!s.ab [[I:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "anIntArrayArray39"
   client!s.bb Lclient!lk;:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "aClass111_7"
   client!s.cb [J:
     owner: "Static6"
     name: "aLongArray43"
   client!s.db [B:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "aByteArray63"
   client!s.eb Lclient!s;:
     owner: "Static6"
     name: "aClass53_Sub4_Sub2_1"
   client!s.fb [[I:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "anIntArrayArray40"
   client!s.gb Ljava/nio/ByteBuffer;:
     owner: "Static6"
     name: "aByteBuffer15"
   client!s.hb B:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "aByte16"
   client!s.ib Lclient!s;:
     owner: "Static6"
     name: "aClass53_Sub4_Sub2_2"
   client!s.jb I:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "anInt4691"
   client!s.kb Lclient!s;:
     owner: "Static6"
     name: "aClass53_Sub4_Sub2_3"
   client!s.lb [Lclient!sk;:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "aClass158Array3"
   client!s.mb Lclient!s;:
     owner: "Static6"
     name: "aClass53_Sub4_Sub2_4"
   client!s.n [S:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "aShortArray87"
   client!s.nb Lclient!s;:
     owner: "Static6"
     name: "aClass53_Sub4_Sub2_5"
   client!s.o [I:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "anIntArray502"
   client!s.ob Lclient!s;:
     owner: "Static6"
     name: "aClass53_Sub4_Sub2_6"
   client!s.p [S:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "aShortArray88"
   client!s.pb I:
     owner: "Static6"
     name: "anInt4692"
   client!s.q Lclient!ff;:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "aClass57_1"
   client!s.qb Z:
     owner: "Static6"
     name: "aBoolean326"
   client!s.r Lclient!ff;:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "aClass57_2"
   client!s.rb I:
     owner: "Static6"
     name: "anInt4693"
   client!s.s [S:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "aShortArray89"
   client!s.sb F:
     owner: "Static6"
     name: "aFloat115"
   client!s.t [I:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "anIntArray503"
   client!s.tb F:
     owner: "Static6"
     name: "aFloat116"
   client!s.u S:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "aShort43"
   client!s.ub [I:
     owner: "Static6"
     name: "anIntArray508"
   client!s.v [S:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "aShortArray90"
   client!s.vb F:
     owner: "Static6"
     name: "aFloat117"
   client!s.w S:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "aShort44"
   client!s.wb F:
     owner: "Static6"
     name: "aFloat118"
   client!s.x Lclient!ff;:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "aClass57_3"
   client!s.xb I:
     owner: "Static6"
     name: "anInt4694"
   client!s.y [S:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "aShortArray91"
   client!s.yb [I:
     owner: "Static6"
     name: "anIntArray509"
   client!s.z [I:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "anIntArray504"
   client!s.zb F:
     owner: "Static6"
@@ -10722,7 +10722,7 @@ fields:
     owner: "Class180"
     name: "anInt5503"
   client!vg.m Z:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "aBoolean324"
   client!vh.A I:
     owner: "LocType"
@@ -12918,10 +12918,10 @@ methods:
       1: "local1"
       5: "local5"
   client!bb.<init> (Lclient!oc;)V:
-    owner: "Class4_Sub3_Sub2"
+    owner: "ProjAnimNode"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "value"
     locals: {}
   client!bb.a (IB)V:
     owner: "Static9"
@@ -16573,10 +16573,10 @@ methods:
     arguments: {}
     locals: {}
   client!ed.<init> (Lclient!o;)V:
-    owner: "Class4_Sub3_Sub6"
+    owner: "SpotAnimNode"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "value"
     locals: {}
   client!ed.a (II)Z:
     owner: "Static13"
@@ -30490,12 +30490,12 @@ methods:
     arguments: {}
     locals: {}
   client!na.<init> ()V:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "<init>"
     arguments: {}
     locals: {}
   client!na.<init> (Lclient!ml;IIIII)V:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "<init>"
     arguments:
       0: "arg0"
@@ -30537,7 +30537,7 @@ methods:
       875: "local875"
       898: "local898"
   client!na.<init> ([Lclient!na;I)V:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "<init>"
     arguments:
       0: "arg0"
@@ -30566,7 +30566,7 @@ methods:
       662: "local662"
       735: "local735"
   client!na.a (I)V:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method3815"
     arguments:
       0: "arg0"
@@ -30584,7 +30584,7 @@ methods:
     locals:
       7: "local7"
   client!na.a (IIII)V:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method3834"
     arguments:
       0: "arg0"
@@ -30620,7 +30620,7 @@ methods:
       502: "local502"
       516: "local516"
   client!na.a (IIIIIIII)Z:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method2901"
     arguments:
       0: "arg0"
@@ -30633,7 +30633,7 @@ methods:
       7: "arg7"
     locals: {}
   client!na.a (IIIIIIIIJILclient!ne;)V:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method3805"
     arguments:
       0: "arg0"
@@ -30710,7 +30710,7 @@ methods:
       806: "local806"
       901: "local901"
   client!na.a (IIIIIIIJ)V:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method3822"
     arguments:
       1: "arg0"
@@ -30744,7 +30744,7 @@ methods:
       165: "local165"
       240: "local240"
   client!na.a (II[[I[[IIIIZ)Lclient!na;:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method2910"
     arguments:
       0: "arg0"
@@ -30856,7 +30856,7 @@ methods:
       1489: "local1489"
       1493: "local1493"
   client!na.a (I[IIIIZ)V:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method3843"
     arguments:
       0: "arg0"
@@ -30919,7 +30919,7 @@ methods:
       662: "local662"
       676: "local676"
   client!na.a (I[IIIIZI[I)V:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method3837"
     arguments:
       0: "arg0"
@@ -31073,13 +31073,13 @@ methods:
       2213: "local2213"
       2227: "local2227"
   client!na.a (Lclient!vg;)Lclient!vg;:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method2903"
     arguments:
       0: "arg0"
     locals: {}
   client!na.a (ZZJIILclient!ne;)V:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method2902"
     arguments:
       0: "arg0"
@@ -31184,7 +31184,7 @@ methods:
       1413: "local1413"
       1419: "local1419"
   client!na.a (ZZLclient!na;[B[S[I[I[I)Lclient!vg;:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method2908"
     arguments:
       0: "arg0"
@@ -31201,7 +31201,7 @@ methods:
       106: "local106"
       153: "local153"
   client!na.a (ZZZ)Lclient!vg;:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method3831"
     arguments:
       0: "arg0"
@@ -31209,12 +31209,12 @@ methods:
       2: "arg2"
     locals: {}
   client!na.b ()I:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method3813"
     arguments: {}
     locals: {}
   client!na.b (I)V:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method3817"
     arguments:
       0: "arg0"
@@ -31224,7 +31224,7 @@ methods:
       9: "local9"
       29: "local29"
   client!na.b (III)V:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method3823"
     arguments:
       0: "arg0"
@@ -31234,7 +31234,7 @@ methods:
       1: "local1"
       7: "local7"
   client!na.b (IIIIIIII)V:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method2911"
     arguments:
       1: "arg0"
@@ -31268,7 +31268,7 @@ methods:
       165: "local165"
       234: "local234"
   client!na.b (ZZZ)Lclient!vg;:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method3833"
     arguments:
       0: "arg0"
@@ -31276,12 +31276,12 @@ methods:
       2: "arg2"
     locals: {}
   client!na.c ()I:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method3818"
     arguments: {}
     locals: {}
   client!na.c (I)V:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method3832"
     arguments:
       0: "arg0"
@@ -31291,7 +31291,7 @@ methods:
       9: "local9"
       29: "local29"
   client!na.c (III)V:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method3824"
     arguments:
       0: "arg0"
@@ -31300,7 +31300,7 @@ methods:
     locals:
       1: "local1"
   client!na.c (ZZZ)Lclient!vg;:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method3836"
     arguments:
       0: "arg0"
@@ -31308,12 +31308,12 @@ methods:
       2: "arg2"
     locals: {}
   client!na.d ()V:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method3819"
     arguments: {}
     locals: {}
   client!na.d (I)V:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method2904"
     arguments:
       0: "arg0"
@@ -31326,14 +31326,14 @@ methods:
       146: "local146"
       151: "local151"
   client!na.e ()V:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method3820"
     arguments: {}
     locals:
       1: "local1"
       10: "local10"
   client!na.e (I)V:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method2907"
     arguments:
       0: "arg0"
@@ -31379,7 +31379,7 @@ methods:
       972: "local972"
       984: "local984"
   client!na.f ()I:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method3826"
     arguments: {}
     locals: {}
@@ -31390,40 +31390,40 @@ methods:
       0: "arg0"
     locals: {}
   client!na.g ()V:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method3827"
     arguments: {}
     locals:
       1: "local1"
       10: "local10"
   client!na.h ()V:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method3828"
     arguments: {}
     locals:
       1: "local1"
   client!na.i ()I:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method3829"
     arguments: {}
     locals: {}
   client!na.j ()Z:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method3830"
     arguments: {}
     locals: {}
   client!na.k ()I:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method3838"
     arguments: {}
     locals: {}
   client!na.l ()I:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method3841"
     arguments: {}
     locals: {}
   client!na.m ()I:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method3842"
     arguments: {}
     locals: {}
@@ -31433,7 +31433,7 @@ methods:
     arguments: {}
     locals: {}
   client!na.p ()V:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method2909"
     arguments: {}
     locals:
@@ -31452,7 +31452,7 @@ methods:
       74: "local74"
       85: "local85"
   client!na.q ()V:
-    owner: "Class53_Sub4_Sub1"
+    owner: "SoftwareModel"
     name: "method2913"
     arguments: {}
     locals:
@@ -32434,7 +32434,7 @@ methods:
       146: "local146"
       148: "local148"
   client!o.<init> (IIIIIII)V:
-    owner: "Class53_Sub5"
+    owner: "SpotAnim"
     name: "<init>"
     arguments:
       0: "arg0"
@@ -32447,14 +32447,14 @@ methods:
     locals:
       45: "local45"
   client!o.a (I)Lclient!vg;:
-    owner: "Class53_Sub5"
+    owner: "SpotAnim"
     name: "method3060"
     arguments: {}
     locals:
       17: "local17"
       27: "local27"
   client!o.a (IB)V:
-    owner: "Class53_Sub5"
+    owner: "SpotAnim"
     name: "method3058"
     arguments:
       0: "arg0"
@@ -32465,7 +32465,7 @@ methods:
     arguments: {}
     locals: {}
   client!o.a (IIIII)V:
-    owner: "Class53_Sub5"
+    owner: "SpotAnim"
     name: "method3806"
     arguments:
       0: "arg0"
@@ -32476,7 +32476,7 @@ methods:
     locals:
       10: "local10"
   client!o.a (IIIIIIIIJILclient!ne;)V:
-    owner: "Class53_Sub5"
+    owner: "SpotAnim"
     name: "method3805"
     arguments:
       0: "arg0"
@@ -32493,7 +32493,7 @@ methods:
     locals:
       7: "local7"
   client!o.a (ILclient!vg;)V:
-    owner: "Class53_Sub5"
+    owner: "SpotAnim"
     name: "method3057"
     arguments:
       1: "arg0"
@@ -32513,7 +32513,7 @@ methods:
       133: "in"
       140: "reportEx"
   client!o.b ()I:
-    owner: "Class53_Sub5"
+    owner: "SpotAnim"
     name: "method3813"
     arguments: {}
     locals: {}
@@ -32863,7 +32863,7 @@ methods:
     arguments: {}
     locals: {}
   client!oc.<init> (IIIIIIIIIII)V:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "<init>"
     arguments:
       0: "arg0"
@@ -32887,13 +32887,13 @@ methods:
     locals:
       36: "local36"
   client!oc.a (II)V:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "method3103"
     arguments:
       0: "arg0"
     locals: {}
   client!oc.a (IIIII)V:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "method3806"
     arguments:
       0: "arg0"
@@ -32904,7 +32904,7 @@ methods:
     locals:
       11: "local11"
   client!oc.a (IIIIIIIIJILclient!ne;)V:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "method3805"
     arguments:
       0: "arg0"
@@ -32921,7 +32921,7 @@ methods:
     locals:
       7: "local7"
   client!oc.a (ILclient!vg;)V:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "method3106"
     arguments:
       1: "arg0"
@@ -32929,19 +32929,19 @@ methods:
       4: "local4"
       51: "local51"
   client!oc.a (Z)Lclient!vg;:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "method3108"
     arguments: {}
     locals:
       14: "local14"
       24: "local24"
   client!oc.b ()I:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "method3813"
     arguments: {}
     locals: {}
   client!oc.b (IIIII)V:
-    owner: "Class53_Sub6"
+    owner: "ProjAnim"
     name: "method3105"
     arguments:
       1: "arg0"
@@ -38272,12 +38272,12 @@ methods:
     arguments: {}
     locals: {}
   client!s.<init> ()V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "<init>"
     arguments: {}
     locals: {}
   client!s.<init> (Lclient!ml;IIZ)V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "<init>"
     arguments:
       0: "arg0"
@@ -38423,7 +38423,7 @@ methods:
       2317: "local2317"
       2326: "local2326"
   client!s.a ()Z:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3808"
     arguments: {}
     locals: {}
@@ -38439,7 +38439,7 @@ methods:
       17: "local17"
       26: "local26"
   client!s.a (I)V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3815"
     arguments:
       0: "arg0"
@@ -38449,12 +38449,12 @@ methods:
       9: "local9"
       29: "local29"
   client!s.a (III)Lclient!vc;:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3809"
     arguments: {}
     locals: {}
   client!s.a (IIII)V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3834"
     arguments:
       0: "arg0"
@@ -38513,7 +38513,7 @@ methods:
       136: "local136"
       180: "local180"
   client!s.a (IIIIIIII)Z:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3868"
     arguments:
       0: "arg0"
@@ -38526,7 +38526,7 @@ methods:
       7: "arg7"
     locals: {}
   client!s.a (IIIIIIIIJILclient!ne;)V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3805"
     arguments:
       0: "arg0"
@@ -38603,7 +38603,7 @@ methods:
       717: "local717"
       753: "local753"
   client!s.a (IIIIIIIJ)V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3822"
     arguments:
       1: "arg0"
@@ -38684,7 +38684,7 @@ methods:
       118: "local118"
       139: "local139"
   client!s.a (IILclient!s;[[I[[IIII)V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3859"
     arguments:
       0: "arg0"
@@ -38771,7 +38771,7 @@ methods:
       105: "local105"
       116: "local116"
   client!s.a (I[IIIIZ)V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3843"
     arguments:
       0: "arg0"
@@ -38852,7 +38852,7 @@ methods:
       938: "local938"
       952: "local952"
   client!s.a (I[IIIIZI[I)V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3837"
     arguments:
       0: "arg0"
@@ -39030,7 +39030,7 @@ methods:
       2524: "local2524"
       2538: "local2538"
   client!s.a (Lclient!fe;)Lclient!fe;:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3854"
     arguments:
       0: "arg0"
@@ -39060,7 +39060,7 @@ methods:
       322: "local322"
       326: "local326"
   client!s.a (Lclient!ml;IJIIIIFF)S:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3853"
     arguments:
       0: "arg0"
@@ -39079,7 +39079,7 @@ methods:
       15: "local15"
       23: "local23"
   client!s.a (Lclient!vc;IIIZ)V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3807"
     arguments:
       0: "arg0"
@@ -39144,7 +39144,7 @@ methods:
       466: "local466"
       476: "local476"
   client!s.a (SS)V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3845"
     arguments:
       0: "arg0"
@@ -39156,7 +39156,7 @@ methods:
       41: "local41"
       43: "local43"
   client!s.a (ZZZ)Lclient!vg;:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3831"
     arguments:
       0: "arg0"
@@ -39164,7 +39164,7 @@ methods:
       2: "arg2"
     locals: {}
   client!s.a (ZZZLclient!s;Lclient!s;)Lclient!vg;:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3873"
     arguments:
       0: "arg0"
@@ -39178,7 +39178,7 @@ methods:
       199: "local199"
       319: "local319"
   client!s.a (ZZZZZ)V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3870"
     arguments:
       0: "arg0"
@@ -39244,7 +39244,7 @@ methods:
       1218: "local1218"
       1298: "local1298"
   client!s.a (ZZZZZZZ)V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3872"
     arguments:
       0: "arg0"
@@ -39256,7 +39256,7 @@ methods:
     locals:
       26: "local26"
   client!s.a (ZZZZZZZZZZZ)Lclient!s;:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3852"
     arguments:
       0: "arg0"
@@ -39287,12 +39287,12 @@ methods:
     locals:
       2: "local2"
   client!s.b ()I:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3813"
     arguments: {}
     locals: {}
   client!s.b (I)V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3817"
     arguments:
       0: "arg0"
@@ -39302,7 +39302,7 @@ methods:
       9: "local9"
       29: "local29"
   client!s.b (III)V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3823"
     arguments:
       0: "arg0"
@@ -39312,7 +39312,7 @@ methods:
       1: "local1"
       7: "local7"
   client!s.b (SS)V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3867"
     arguments:
       0: "arg0"
@@ -39320,7 +39320,7 @@ methods:
     locals:
       1: "local1"
   client!s.b (ZZZ)Lclient!vg;:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3833"
     arguments:
       0: "arg0"
@@ -39328,12 +39328,12 @@ methods:
       2: "arg2"
     locals: {}
   client!s.c ()I:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3818"
     arguments: {}
     locals: {}
   client!s.c (I)V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3832"
     arguments:
       0: "arg0"
@@ -39343,7 +39343,7 @@ methods:
       9: "local9"
       29: "local29"
   client!s.c (III)V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3824"
     arguments:
       0: "arg0"
@@ -39352,7 +39352,7 @@ methods:
     locals:
       1: "local1"
   client!s.c (ZZZ)Lclient!vg;:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3836"
     arguments:
       0: "arg0"
@@ -39360,26 +39360,26 @@ methods:
       2: "arg2"
     locals: {}
   client!s.d ()V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3819"
     arguments: {}
     locals:
       1: "local1"
   client!s.d (I)V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3855"
     arguments:
       0: "arg0"
     locals: {}
   client!s.e ()V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3820"
     arguments: {}
     locals:
       1: "local1"
       10: "local10"
   client!s.e (I)V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3857"
     arguments: {}
     locals:
@@ -39390,63 +39390,63 @@ methods:
       64: "local64"
       84: "local84"
   client!s.f ()I:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3826"
     arguments: {}
     locals: {}
   client!s.f (I)V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3861"
     arguments:
       0: "arg0"
     locals: {}
   client!s.g ()V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3827"
     arguments: {}
     locals:
       1: "local1"
       10: "local10"
   client!s.h ()V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3828"
     arguments: {}
     locals:
       1: "local1"
   client!s.i ()I:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3829"
     arguments: {}
     locals: {}
   client!s.j ()Z:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3830"
     arguments: {}
     locals:
       6: "local6"
       12: "local12"
   client!s.k ()I:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3838"
     arguments: {}
     locals: {}
   client!s.l ()I:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3841"
     arguments: {}
     locals: {}
   client!s.m ()I:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3842"
     arguments: {}
     locals: {}
   client!s.o ()I:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3847"
     arguments: {}
     locals: {}
   client!s.p ()V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3848"
     arguments: {}
     locals:
@@ -39455,14 +39455,14 @@ methods:
       34: "local34"
       43: "local43"
   client!s.q ()V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3849"
     arguments: {}
     locals:
       7: "local7"
       33: "local33"
   client!s.r ()V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3850"
     arguments: {}
     locals:
@@ -39471,7 +39471,7 @@ methods:
       39: "local39"
       48: "local48"
   client!s.s ()V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3851"
     arguments: {}
     locals:
@@ -39481,7 +39481,7 @@ methods:
       95: "local95"
       115: "local115"
   client!s.t ()V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3858"
     arguments: {}
     locals:
@@ -39494,7 +39494,7 @@ methods:
       434: "local434"
       439: "local439"
   client!s.u ()V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3862"
     arguments: {}
     locals:
@@ -39503,7 +39503,7 @@ methods:
       34: "local34"
       43: "local43"
   client!s.v ()V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3865"
     arguments: {}
     locals:
@@ -39522,7 +39522,7 @@ methods:
       74: "local74"
       91: "local91"
   client!s.w ()V:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3866"
     arguments: {}
     locals:
@@ -39543,7 +39543,7 @@ methods:
       153: "local153"
       164: "local164"
   client!s.x ()I:
-    owner: "Class53_Sub4_Sub2"
+    owner: "GlModel"
     name: "method3869"
     arguments: {}
     locals: {}
@@ -43704,13 +43704,13 @@ methods:
       14: "len"
       17: "out"
   client!vg.a (I)V:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3815"
     arguments:
       0: "arg0"
     locals: {}
   client!vg.a (IIII)V:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3834"
     arguments:
       0: "arg0"
@@ -43719,7 +43719,7 @@ methods:
       3: "arg3"
     locals: {}
   client!vg.a (IIIII)V:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3806"
     arguments:
       0: "arg0"
@@ -43729,7 +43729,7 @@ methods:
       4: "arg4"
     locals: {}
   client!vg.a (IIIIIIIIJILclient!ne;)V:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3805"
     arguments:
       0: "arg0"
@@ -43745,7 +43745,7 @@ methods:
       10: "arg10"
     locals: {}
   client!vg.a (IIIIIIIJ)V:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3822"
     arguments:
       1: "arg0"
@@ -43757,7 +43757,7 @@ methods:
       7: "arg6"
     locals: {}
   client!vg.a (I[IIIIZ)V:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3843"
     arguments:
       0: "arg0"
@@ -43768,7 +43768,7 @@ methods:
       5: "arg5"
     locals: {}
   client!vg.a (I[IIIIZI[I)V:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3837"
     arguments:
       0: "arg0"
@@ -43781,7 +43781,7 @@ methods:
       7: "arg7"
     locals: {}
   client!vg.a (Lclient!af;Lclient!a;Lclient!a;II[ZZZI[I)V:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3825"
     arguments:
       0: "arg0"
@@ -43828,7 +43828,7 @@ methods:
       486: "local486"
       521: "local521"
   client!vg.a (Lclient!te;I)V:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3844"
     arguments:
       0: "arg0"
@@ -43839,7 +43839,7 @@ methods:
       17: "local17"
       26: "local26"
   client!vg.a (Lclient!te;ILclient!te;IIIIZ[I)V:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3839"
     arguments:
       0: "arg0"
@@ -43856,7 +43856,7 @@ methods:
       15: "local15"
       17: "local17"
   client!vg.a (Lclient!te;ILclient!te;IIILclient!te;ILclient!te;III[ZZ)V:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3816"
     arguments:
       0: "arg0"
@@ -43880,7 +43880,7 @@ methods:
       50: "local50"
       52: "local52"
   client!vg.a (Lclient!te;ILclient!te;IIIZ)V:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3835"
     arguments:
       0: "arg0"
@@ -43895,7 +43895,7 @@ methods:
       15: "local15"
       17: "local17"
   client!vg.a (ZZZ)Lclient!vg;:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3831"
     arguments:
       0: "arg0"
@@ -43917,7 +43917,7 @@ methods:
       53: "local53"
       79: "local79"
   client!vg.a ([[IIIIII)V:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3840"
     arguments:
       0: "arg0"
@@ -43948,18 +43948,18 @@ methods:
       149: "local149"
       164: "local164"
   client!vg.b ()I:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3813"
     arguments: {}
     locals: {}
   client!vg.b (I)V:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3817"
     arguments:
       0: "arg0"
     locals: {}
   client!vg.b (III)V:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3823"
     arguments:
       0: "arg0"
@@ -43967,7 +43967,7 @@ methods:
       2: "arg2"
     locals: {}
   client!vg.b (ZZZ)Lclient!vg;:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3833"
     arguments:
       0: "arg0"
@@ -43975,18 +43975,18 @@ methods:
       2: "arg2"
     locals: {}
   client!vg.c ()I:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3818"
     arguments: {}
     locals: {}
   client!vg.c (I)V:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3832"
     arguments:
       0: "arg0"
     locals: {}
   client!vg.c (III)V:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3824"
     arguments:
       0: "arg0"
@@ -43994,7 +43994,7 @@ methods:
       2: "arg2"
     locals: {}
   client!vg.c (ZZZ)Lclient!vg;:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3836"
     arguments:
       0: "arg0"
@@ -44002,52 +44002,52 @@ methods:
       2: "arg2"
     locals: {}
   client!vg.d ()V:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3819"
     arguments: {}
     locals: {}
   client!vg.e ()V:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3820"
     arguments: {}
     locals: {}
   client!vg.f ()I:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3826"
     arguments: {}
     locals: {}
   client!vg.g ()V:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3827"
     arguments: {}
     locals: {}
   client!vg.h ()V:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3828"
     arguments: {}
     locals: {}
   client!vg.i ()I:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3829"
     arguments: {}
     locals: {}
   client!vg.j ()Z:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3830"
     arguments: {}
     locals: {}
   client!vg.k ()I:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3838"
     arguments: {}
     locals: {}
   client!vg.l ()I:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3841"
     arguments: {}
     locals: {}
   client!vg.m ()I:
-    owner: "Class53_Sub4"
+    owner: "Model"
     name: "method3842"
     arguments: {}
     locals: {}
