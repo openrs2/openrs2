@@ -771,8 +771,8 @@ fields:
     owner: "client"
     name: "js5Archive25"
   client!bh.d I:
-    owner: "Static1"
-    name: "anInt1047"
+    owner: "LoginManager"
+    name: "type"
   client!bh.h I:
     owner: "Preferences"
     name: "antiAliasingMode"
@@ -969,8 +969,8 @@ fields:
     owner: "Class4_Sub6_Sub1"
     name: "aClass4_Sub6_Sub2_1"
   client!bo.b J:
-    owner: "Static1"
-    name: "aLong23"
+    owner: "LoginManager"
+    name: "encodedUsername"
   client!bo.e Lclient!fh;:
     owner: "client"
     name: "js5Archive22"
@@ -1278,8 +1278,8 @@ fields:
     owner: "Static1"
     name: "anInt789"
   client!cm.d Z:
-    owner: "Static1"
-    name: "aBoolean47"
+    owner: "LoginManager"
+    name: "playerUnderage"
   client!cm.i I:
     owner: "VarbitType"
     name: "startBit"
@@ -1920,8 +1920,8 @@ fields:
     owner: "Class41_Sub1"
     name: "anInt1122"
   client!ea.M I:
-    owner: "Static2"
-    name: "anInt1123"
+    owner: "WorldList"
+    name: "bufferOff"
   client!ea.N I:
     owner: "Class41_Sub1"
     name: "anInt1124"
@@ -1953,8 +1953,8 @@ fields:
     owner: "GlShader"
     name: "contextId"
   client!ed.A I:
-    owner: "Static2"
-    name: "anInt1213"
+    owner: "CreateManager"
+    name: "loops"
   client!ed.C Lclient!o;:
     owner: "SpotAnimNode"
     name: "value"
@@ -1968,8 +1968,8 @@ fields:
     owner: "Static2"
     name: "aBoolean68"
   client!ed.y Z:
-    owner: "Static2"
-    name: "aBoolean67"
+    owner: "LoginManager"
+    name: "mapQuickChat"
   client!ed.z Lclient!nf;:
     owner: "Mouse"
     name: "instance"
@@ -1989,8 +1989,8 @@ fields:
     owner: "Terrain"
     name: "aClass33Array1"
   client!ef.e [B:
-    owner: "Static2"
-    name: "aByteArray10"
+    owner: "WorldList"
+    name: "buffer"
   client!ef.f Ljava/lang/String;:
     owner: "Text"
     name: "CHATEFFECT3"
@@ -2001,8 +2001,8 @@ fields:
     owner: "SeqType"
     name: "aBoolean73"
   client!eg.D Ljava/lang/String;:
-    owner: "Static2"
-    name: "aString76"
+    owner: "LoginManager"
+    name: "password"
   client!eg.E I:
     owner: "SeqType"
     name: "anInt1242"
@@ -2328,8 +2328,8 @@ fields:
     owner: "LocalisedText"
     name: "MAINLOAD120"
   client!en.p [Ljava/lang/String;:
-    owner: "Static2"
-    name: "aStringArray8"
+    owner: "CreateManager"
+    name: "suggestedNames"
   client!en.r Ljava/lang/String;:
     owner: "LocalisedText"
     name: "MAINLOAD140"
@@ -2352,8 +2352,8 @@ fields:
     owner: "Static2"
     name: "anInt1360"
   client!eo.b Ljava/math/BigInteger;:
-    owner: "Static2"
-    name: "aBigInteger1"
+    owner: "Protocol"
+    name: "MODULUS"
   client!eo.e Ljava/io/OutputStream;:
     owner: "BufferedSocket"
     name: "out"
@@ -2496,8 +2496,8 @@ fields:
     owner: "WorldList"
     name: "worlds"
   client!fc.e I:
-    owner: "Static2"
-    name: "anInt1641"
+    owner: "LoginManager"
+    name: "reply"
   client!fc.i Z:
     owner: "client"
     name: "javaScript"
@@ -2652,8 +2652,8 @@ fields:
     owner: "TextureOp9"
     name: "aBoolean114"
   client!fj.eb I:
-    owner: "Static2"
-    name: "anInt1877"
+    owner: "LoginManager"
+    name: "playerModLevel"
   client!fk.A Ljava/awt/Component;:
     owner: "BufferedImageFrameBuffer"
     name: "component"
@@ -2910,8 +2910,8 @@ fields:
     owner: "InterfaceList"
     name: "loaded"
   client!gh.i I:
-    owner: "Static3"
-    name: "anInt2582"
+    owner: "LoginManager"
+    name: "hopTime"
   client!gi.A Z:
     owner: "GlRenderer"
     name: "arbFboSupported"
@@ -3642,8 +3642,8 @@ fields:
     owner: "MelType"
     name: "aString131"
   client!i.a Ljava/lang/String;:
-    owner: "Static3"
-    name: "aString132"
+    owner: "LoginManager"
+    name: "username"
   client!i.b I:
     owner: "Static3"
     name: "anInt2297"
@@ -4407,14 +4407,14 @@ fields:
     owner: "Static3"
     name: "anInt2571"
   client!je.h I:
-    owner: "Static3"
-    name: "anInt2574"
+    owner: "LoginManager"
+    name: "step"
   client!je.j [[[Lclient!nh;:
     owner: "Terrain"
     name: "surfaceTiles"
   client!je.k I:
-    owner: "Static3"
-    name: "anInt2576"
+    owner: "LoginManager"
+    name: "staffModLevel"
   client!je.l Lclient!wl;:
     owner: "client"
     name: "cacheMasterIndex"
@@ -4965,8 +4965,8 @@ fields:
     owner: "ScriptRunner"
     name: "stringLocals"
   client!kn.E I:
-    owner: "Static4"
-    name: "anInt2974"
+    owner: "LoginManager"
+    name: "autoLoops"
   client!kn.F Lclient!fh;:
     owner: "client"
     name: "js5Archive1"
@@ -5550,8 +5550,8 @@ fields:
     owner: "IndexedSprite"
     name: "anInt3408"
   client!ma.h I:
-    owner: "Static4"
-    name: "anInt3409"
+    owner: "CreateManager"
+    name: "errors"
   client!ma.i I:
     owner: "IndexedSprite"
     name: "anInt3410"
@@ -6075,8 +6075,8 @@ fields:
     owner: "Static4"
     name: "anIntArray336"
   client!mo.eb Z:
-    owner: "Static4"
-    name: "aBoolean241"
+    owner: "LoginManager"
+    name: "parentalAdvertConsent"
   client!mo.gb I:
     owner: "Preferences"
     name: "fullScreenWidth"
@@ -6762,8 +6762,8 @@ fields:
     owner: "Static5"
     name: "anIntArray392"
   client!nl.d I:
-    owner: "Static5"
-    name: "anInt3570"
+    owner: "LoginManager"
+    name: "errors"
   client!nl.f I:
     owner: "Static5"
     name: "anInt3572"
@@ -7246,13 +7246,13 @@ fields:
     name: "anInt3908"
   client!ol.t I:
     owner: "Preferences"
-    name: "anInt3909"
+    name: "favouriteWorlds"
   client!ol.w [I:
     owner: "Static5"
     name: "anIntArray419"
   client!om.c Z:
-    owner: "Static5"
-    name: "aBoolean277"
+    owner: "MouseRecorder"
+    name: "enabled"
   client!om.d Lclient!uk;:
     owner: "Class130"
     name: "aClass175_13"
@@ -7350,8 +7350,8 @@ fields:
     owner: "FluType"
     name: "anInt4074"
   client!pa.v Z:
-    owner: "Static5"
-    name: "aBoolean287"
+    owner: "LoginManager"
+    name: "parentalChatConsent"
   client!pa.w I:
     owner: "FluType"
     name: "anInt4075"
@@ -7665,8 +7665,8 @@ fields:
     owner: "Class138"
     name: "anIntArray448"
   client!po.b I:
-    owner: "Static5"
-    name: "anInt4216"
+    owner: "LoginManager"
+    name: "autoErrors"
   client!po.e [Lclient!fg;:
     owner: "Class138"
     name: "aClass4_Sub3_Sub7Array1"
@@ -7674,8 +7674,8 @@ fields:
     owner: "Class138"
     name: "anInt4219"
   client!po.g Lclient!wa;:
-    owner: "Static5"
-    name: "aClass4_Sub10_Sub1_3"
+    owner: "LoginManager"
+    name: "buffer"
   client!qa.a [S:
     owner: "IdkType"
     name: "aShortArray75"
@@ -8112,8 +8112,8 @@ fields:
     owner: "Class4_Sub23"
     name: "aByteArray56"
   client!qh.q I:
-    owner: "Static5"
-    name: "anInt4324"
+    owner: "LoginManager"
+    name: "disallowResult"
   client!qh.s [Lclient!pb;:
     owner: "Class4_Sub23"
     name: "aClass4_Sub8_Sub1Array1"
@@ -8385,8 +8385,8 @@ fields:
     owner: "Class146"
     name: "anIntArray472"
   client!r.k I:
-    owner: "Static6"
-    name: "anInt3224"
+    owner: "WorldList"
+    name: "iterator"
   client!r.m Ljava/lang/String;:
     owner: "LocalisedText"
     name: "GAME1_LOADING"
@@ -8499,8 +8499,8 @@ fields:
     owner: "Static6"
     name: "anInt4457"
   client!re.d I:
-    owner: "Static6"
-    name: "anInt4458"
+    owner: "LoginManager"
+    name: "loops"
   client!re.f I:
     owner: "Class150"
     name: "anInt4460"
@@ -8760,14 +8760,14 @@ fields:
     owner: "Static6"
     name: "aClass106_8"
   client!rl.r I:
-    owner: "Static6"
-    name: "anInt4617"
+    owner: "WorldList"
+    name: "bufferLen"
   client!rl.s [[[I:
     owner: "Terrain"
     name: "tileHeights"
   client!rl.t I:
-    owner: "Static6"
-    name: "anInt4618"
+    owner: "WorldList"
+    name: "errors"
   client!rl.u [I:
     owner: "Static6"
     name: "anIntArray494"
@@ -9096,8 +9096,8 @@ fields:
     owner: "Static6"
     name: "aBoolean330"
   client!sd.f I:
-    owner: "Static6"
-    name: "anInt4759"
+    owner: "CreateManager"
+    name: "step"
   client!sd.g I:
     owner: "Protocol"
     name: "extendedCount"
@@ -9300,8 +9300,8 @@ fields:
     owner: "MsiTypeList"
     name: "anInt4867"
   client!sk.i J:
-    owner: "Static6"
-    name: "aLong169"
+    owner: "WorldList"
+    name: "closeTime"
   client!sk.j Ljava/lang/String;:
     owner: "LocalisedText"
     name: "CHATCOL3"
@@ -9546,8 +9546,8 @@ fields:
     owner: "SeqTypeList"
     name: "types"
   client!tb.g Ljava/math/BigInteger;:
-    owner: "Static6"
-    name: "aBigInteger2"
+    owner: "Protocol"
+    name: "EXPONENT"
   client!tb.h [I:
     owner: "Equipment"
     name: "objIds"
@@ -9735,8 +9735,8 @@ fields:
     owner: "ObjType"
     name: "id"
   client!te.A I:
-    owner: "Static6"
-    name: "anInt5117"
+    owner: "LoginManager"
+    name: "autoStep"
   client!te.B [Lclient!a;:
     owner: "AnimFrameset"
     name: "frames"
@@ -9813,8 +9813,8 @@ fields:
     owner: "Static6"
     name: "anIntArray555"
   client!ti.S I:
-    owner: "Static6"
-    name: "anInt5173"
+    owner: "CreateManager"
+    name: "reply"
   client!ti.V Lclient!cc;:
     owner: "LightTypeList"
     name: "types"
@@ -9876,8 +9876,8 @@ fields:
     owner: "AudioChannel"
     name: "samples"
   client!tj.q J:
-    owner: "Static6"
-    name: "aLong127"
+    owner: "LoginManager"
+    name: "serverKey"
   client!tj.r Z:
     owner: "AudioChannel"
     name: "aBoolean259"
@@ -10275,8 +10275,8 @@ fields:
     owner: "Mouse"
     name: "clickY"
   client!ud.a I:
-    owner: "Static7"
-    name: "anInt5319"
+    owner: "WorldList"
+    name: "step"
   client!ud.b I:
     owner: "Class170"
     name: "anInt5320"
@@ -10296,8 +10296,8 @@ fields:
     owner: "Preferences"
     name: "fog"
   client!ue.G J:
-    owner: "Static7"
-    name: "aLong35"
+    owner: "WorldList"
+    name: "openTime"
   client!ue.L Z:
     owner: "GameShell"
     name: "miscNativesLoaded"
@@ -10611,8 +10611,8 @@ fields:
     owner: "Static7"
     name: "anInt5473"
   client!vb.bb Z:
-    owner: "Static7"
-    name: "aBoolean370"
+    owner: "LoginManager"
+    name: "mapMembers"
   client!vb.eb I:
     owner: "TextureOp12"
     name: "anInt5476"
@@ -11052,8 +11052,8 @@ fields:
     owner: "Js5CachedResourceProvider"
     name: "index"
   client!wb.D Lsignlink!vk;:
-    owner: "Static7"
-    name: "aClass197_5"
+    owner: "Protocol"
+    name: "socketRequest"
   client!wb.F Lclient!ng;:
     owner: "Js5CachedResourceProvider"
     name: "indexRequest"
@@ -11127,8 +11127,8 @@ fields:
     owner: "Static7"
     name: "aClass94Array1"
   client!wd.qb Z:
-    owner: "Static7"
-    name: "aBoolean399"
+    owner: "LoginManager"
+    name: "playerMember"
   client!wd.tb Z:
     owner: "GameShell"
     name: "focusIn"
@@ -12046,10 +12046,10 @@ methods:
       4: "hasUnderwaterLevel"
     locals: {}
   client!ab.a (IJ)V:
-    owner: "Static8"
-    name: "method13"
+    owner: "CreateManager"
+    name: "checkName"
     arguments:
-      1: "arg0"
+      1: "username"
     locals: {}
   client!ab.a (ILclient!fh;Lclient!fh;)V:
     owner: "MsiTypeList"
@@ -12441,7 +12441,7 @@ methods:
       28: "local28"
       30: "local30"
   client!af.d (B)V:
-    owner: "Static8"
+    owner: "LoginManager"
     name: "method101"
     arguments: {}
     locals: {}
@@ -15458,7 +15458,7 @@ methods:
       887: "local887"
       960: "local960"
       1066: "codec"
-      1200: "local1200"
+      1200: "reply"
   client!client.init ()V:
     owner: "client"
     name: "init"
@@ -17423,13 +17423,13 @@ methods:
     arguments: {}
     locals: {}
   client!eo.b (I)V:
-    owner: "Static14"
-    name: "method1100"
+    owner: "LoginManager"
+    name: "loopAuto"
     arguments: {}
     locals:
-      131: "local131"
-      185: "local185"
-      217: "local217"
+      131: "reply"
+      185: "worldId"
+      217: "ex"
   client!eo.c (B)V:
     owner: "BufferedSocket"
     name: "checkError"
@@ -20084,32 +20084,32 @@ methods:
       7537: "local7537"
       7540: "local7540"
       7542: "local7542"
-      7710: "local7710"
+      7710: "world"
       7716: "local7716"
       7728: "local7728"
-      7735: "local7735"
+      7735: "country"
       7758: "local7758"
       7768: "local7768"
-      7796: "local7796"
+      7796: "world"
       7801: "local7801"
       7811: "local7811"
       7833: "local7833"
       7845: "local7845"
-      7852: "local7852"
+      7852: "country"
       7880: "local7880"
-      7883: "local7883"
+      7883: "id"
       7950: "local7950"
-      7953: "local7953"
-      7957: "local7957"
+      7953: "id"
+      7957: "world"
       7963: "local7963"
       7968: "local7968"
       7990: "local7990"
       7996: "local7996"
-      8003: "local8003"
-      8031: "local8031"
-      8044: "local8044"
-      8050: "local8050"
-      8063: "local8063"
+      8003: "country"
+      8031: "primaryField"
+      8044: "primaryDesc"
+      8050: "secondaryField"
+      8063: "secondaryDesc"
       8089: "local8089"
       8093: "local8093"
       8119: "local8119"
@@ -22489,8 +22489,8 @@ methods:
       1: "arg0"
     locals: {}
   client!hk.g (I)Lclient!gb;:
-    owner: "Static19"
-    name: "method1777"
+    owner: "WorldList"
+    name: "next"
     arguments: {}
     locals: {}
   client!hl.<init> ()V:
@@ -24038,8 +24038,8 @@ methods:
     arguments: {}
     locals: {}
   client!jc.d (I)Lclient!gb;:
-    owner: "Static20"
-    name: "method1991"
+    owner: "WorldList"
+    name: "head"
     arguments: {}
     locals: {}
   client!jc.e (B)I:
@@ -25972,17 +25972,17 @@ methods:
     locals:
       45: "local45"
   client!kf.a (I)I:
-    owner: "Static22"
-    name: "method2285"
+    owner: "WorldList"
+    name: "fetch"
     arguments: {}
     locals:
       79: "checksum"
-      117: "local117"
-      189: "local189"
+      117: "reply"
+      189: "n"
       233: "i"
       238: "id"
       249: "world"
-      278: "local278"
+      278: "ex"
   client!kf.a (ILclient!fe;)V:
     owner: "Static22"
     name: "method2284"
@@ -33539,10 +33539,10 @@ methods:
       235: "node8"
       270: "node9"
   client!ok.a (BI)I:
-    owner: "Static27"
-    name: "method3235"
+    owner: "WorldList"
+    name: "close"
     arguments:
-      1: "arg0"
+      1: "reply"
     locals: {}
   client!ok.b (BI)V:
     owner: "VarpTypeList"
@@ -36347,26 +36347,26 @@ methods:
     locals:
       9: "code"
   client!qg.a (ZIZILjava/lang/String;IIBJZLjava/lang/String;)V:
-    owner: "Static30"
-    name: "method3553"
+    owner: "CreateManager"
+    name: "createAccount"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
-      5: "arg5"
-      6: "arg6"
-      8: "arg7"
-      9: "arg8"
-      10: "arg9"
+      8: "username"
+      10: "password"
+      4: "email"
+      1: "day"
+      5: "month"
+      6: "year"
+      3: "country"
+      2: "runeScapeNewsletters"
+      9: "otherNewsletters"
+      0: "shareDetailsWithBusinessPartners"
     locals:
-      12: "local12"
-      14: "local14"
-      32: "local32"
-      118: "local118"
-      131: "local131"
-      133: "local133"
+      12: "key"
+      14: "i"
+      32: "rsaBuffer"
+      118: "xteaBuffer"
+      131: "padding"
+      133: "i"
   client!qg.b (I)V:
     owner: "Static30"
     name: "method3555"
@@ -36749,20 +36749,20 @@ methods:
     locals:
       12: "local12"
   client!qj.g (B)V:
-    owner: "Static30"
-    name: "method3600"
+    owner: "LoginManager"
+    name: "loop"
     arguments: {}
     locals:
-      111: "local111"
-      118: "local118"
-      152: "local152"
+      111: "encodedUsername"
+      118: "usernameHash"
+      152: "reply"
       197: "key"
       594: "i"
-      626: "local626"
-      906: "local906"
-      916: "local916"
-      924: "local924"
-      975: "local975"
+      626: "reply"
+      906: "ex"
+      916: "ex"
+      924: "ex"
+      975: "ex"
   client!qj.g (I)V:
     owner: "LocTypeList"
     name: "clear"
@@ -36985,14 +36985,14 @@ methods:
       98: "digit"
       132: "nextValue"
   client!ql.a (Ljava/lang/String;Ljava/lang/String;IB)V:
-    owner: "Static30"
-    name: "method3615"
+    owner: "LoginManager"
+    name: "login"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      1: "username"
+      0: "password"
+      2: "type"
     locals:
-      50: "local50"
+      50: "rsaBuffer"
   client!ql.paint (Ljava/awt/Graphics;)V:
     owner: "GameCanvas"
     name: "paint"
@@ -43272,13 +43272,13 @@ methods:
       3: "size"
       11: "node"
   client!uk.a (ZIIII)V:
-    owner: "Static35"
-    name: "method4339"
+    owner: "CreateManager"
+    name: "checkInfo"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      3: "arg2"
-      4: "arg3"
+      4: "day"
+      3: "month"
+      1: "year"
+      2: "country"
     locals: {}
   client!uk.a ([[IB)V:
     owner: "Static35"
@@ -43400,13 +43400,13 @@ methods:
       1: "arg0"
     locals: {}
   client!un.c (B)V:
-    owner: "Static35"
-    name: "method4382"
+    owner: "CreateManager"
+    name: "loop"
     arguments: {}
     locals:
-      129: "local129"
-      199: "local199"
-      226: "local226"
+      129: "reply"
+      199: "i"
+      226: "ex"
   client!uo.<init> ([B)V:
     owner: "Class4_Sub3_Sub20"
     name: "<init>"
@@ -45504,16 +45504,16 @@ methods:
     locals:
       6: "loc"
   client!we.a (BI)Z:
-    owner: "Static37"
-    name: "method4720"
+    owner: "WorldList"
+    name: "switchWorld"
     arguments:
-      1: "arg0"
+      1: "id"
     locals:
-      8: "local8"
-      52: "local52"
-      54: "local54"
-      130: "local130"
-      140: "local140"
+      8: "world"
+      52: "port"
+      54: "settings"
+      130: "url"
+      140: "ex"
   client!we.a (I)V:
     owner: "Static37"
     name: "method4718"
