@@ -15,7 +15,7 @@ classes:
   client!bd: "Class16"
   client!be: "Class17"
   client!bf: "Class18"
-  client!bg: "Class4_Sub5"
+  client!bg: "LongNode"
   client!bh: "MouseWheel"
   client!bi: "Class20_Sub1"
   client!bj: "Class21"
@@ -74,7 +74,7 @@ classes:
   client!fm: "Cache"
   client!fn: "InvType"
   client!fo: "Js5Index"
-  client!g: "Class4_Sub3_Sub9"
+  client!g: "DelayedStateChange"
   client!ga: "Js5ResourceProvider"
   client!gb: "World"
   client!ge: "Class65"
@@ -348,8 +348,8 @@ fields:
     owner: "Static1"
     name: "anIntArray1"
   client!aa.f [I:
-    owner: "Static1"
-    name: "anIntArray2"
+    owner: "VarpDomain"
+    name: "varps"
   client!ab.a I:
     owner: "Static1"
     name: "centralZoneZ"
@@ -669,8 +669,8 @@ fields:
     owner: "Static1"
     name: "anInt925"
   client!bc.v [Ljava/lang/String;:
-    owner: "Static1"
-    name: "aStringArray3"
+    owner: "VarcDomain"
+    name: "varcstrs"
   client!bc.x I:
     owner: "Static1"
     name: "anInt927"
@@ -753,8 +753,8 @@ fields:
     owner: "LocalisedText"
     name: "RATING"
   client!bg.p J:
-    owner: "Class4_Sub5"
-    name: "aLong17"
+    owner: "LongNode"
+    name: "value"
   client!bg.r Z:
     owner: "GameShell"
     name: "replaceCanvas"
@@ -765,8 +765,8 @@ fields:
     owner: "LocalisedText"
     name: "MAINLOAD70"
   client!bh.b Lclient!uk;:
-    owner: "Static1"
-    name: "aClass175_4"
+    owner: "DelayedStateChange"
+    name: "clientQueue"
   client!bh.c Lclient!fh;:
     owner: "client"
     name: "js5Archive25"
@@ -1272,8 +1272,8 @@ fields:
     owner: "VarbitType"
     name: "baseVar"
   client!cm.b I:
-    owner: "Static1"
-    name: "anInt788"
+    owner: "VarpDomain"
+    name: "updatedVarpsWriterIndex"
   client!cm.c I:
     owner: "Static1"
     name: "anInt789"
@@ -1494,8 +1494,8 @@ fields:
     owner: "Class35"
     name: "aBoolean51"
   client!da.u [I:
-    owner: "Static1"
-    name: "anIntArray62"
+    owner: "VarpDomain"
+    name: "serverVarps"
   client!db.b I:
     owner: "Static1"
     name: "anInt881"
@@ -2775,14 +2775,14 @@ fields:
     owner: "Js5Index"
     name: "capacity"
   client!g.A I:
-    owner: "Class4_Sub3_Sub9"
-    name: "anInt1993"
+    owner: "DelayedStateChange"
+    name: "primaryIntArg"
   client!g.B [I:
     owner: "Static2"
     name: "anIntArray159"
   client!g.C I:
-    owner: "Class4_Sub3_Sub9"
-    name: "anInt1994"
+    owner: "DelayedStateChange"
+    name: "tertiaryIntArg"
   client!g.D J:
     owner: "Static2"
     name: "aLong66"
@@ -2799,11 +2799,11 @@ fields:
     owner: "Static2"
     name: "anIntArray160"
   client!g.O I:
-    owner: "Class4_Sub3_Sub9"
-    name: "anInt2001"
+    owner: "DelayedStateChange"
+    name: "secondaryIntArg"
   client!g.R Ljava/lang/String;:
-    owner: "Class4_Sub3_Sub9"
-    name: "aString109"
+    owner: "DelayedStateChange"
+    name: "stringArg"
   client!g.y I:
     owner: "Mouse"
     name: "pressedButton"
@@ -3951,8 +3951,8 @@ fields:
     owner: "Static3"
     name: "anIntArray211"
   client!ij.N Lclient!ic;:
-    owner: "Static3"
-    name: "aClass84_8"
+    owner: "DelayedStateChange"
+    name: "changes"
   client!ij.O [I:
     owner: "QuickChatPhraseType"
     name: "automaticResponses"
@@ -4179,8 +4179,8 @@ fields:
     owner: "LocalisedText"
     name: "FACEHERE"
   client!in.A [I:
-    owner: "Static3"
-    name: "anIntArray219"
+    owner: "VarcDomain"
+    name: "updatedVarcstrs"
   client!in.l I:
     owner: "Class11_Sub4"
     name: "anInt2468"
@@ -4191,8 +4191,8 @@ fields:
     owner: "Class11_Sub4"
     name: "anInt2470"
   client!in.p [I:
-    owner: "Static3"
-    name: "anIntArray218"
+    owner: "VarcDomain"
+    name: "updatedVarcs"
   client!in.q Lclient!fh;:
     owner: "FloTypeList"
     name: "archive"
@@ -4443,14 +4443,14 @@ fields:
     owner: "Class96"
     name: "aClass56_Sub1_3"
   client!jh.h Lclient!uk;:
-    owner: "Static3"
-    name: "aClass175_11"
+    owner: "DelayedStateChange"
+    name: "serverQueue"
   client!jh.i I:
     owner: "Static3"
     name: "anInt2586"
   client!jh.j [I:
-    owner: "Static3"
-    name: "anIntArray225"
+    owner: "VarpDomain"
+    name: "updatedVarps"
   client!jh.k Lclient!fh;:
     owner: "MelTypeList"
     name: "spritesArchive"
@@ -5730,8 +5730,8 @@ fields:
     owner: "GameShell"
     name: "frame"
   client!mg.r I:
-    owner: "Static4"
-    name: "anInt3327"
+    owner: "VarcDomain"
+    name: "updatedVarcstrsWriterIndex"
   client!mg.t B:
     owner: "Static4"
     name: "aByte6"
@@ -7617,8 +7617,8 @@ fields:
     owner: "Protocol"
     name: "removedCount"
   client!pk.ab I:
-    owner: "Static5"
-    name: "anInt4197"
+    owner: "VarcDomain"
+    name: "updatedVarcsWriterIndex"
   client!pl.q I:
     owner: "Static5"
     name: "anInt4207"
@@ -8172,8 +8172,8 @@ fields:
     owner: "LocalisedText"
     name: "REMOVEFRIEND1"
   client!qj.ib [I:
-    owner: "Static6"
-    name: "anIntArray462"
+    owner: "VarcDomain"
+    name: "varcs"
   client!qj.jb Ljava/lang/String;:
     owner: "client"
     name: "settings"
@@ -10518,8 +10518,8 @@ fields:
     owner: "client"
     name: "js5NetQueue"
   client!un.t Lclient!ic;:
-    owner: "Static7"
-    name: "aClass84_25"
+    owner: "VarpDomain"
+    name: "pendingUpdates"
   client!un.u Lclient!wf;:
     owner: "Static7"
     name: "aClass185_15"
@@ -12493,12 +12493,12 @@ methods:
     locals:
       2: "local2"
   client!ah.a (II)V:
-    owner: "Static8"
+    owner: "DelayedStateChange"
     name: "method111"
     arguments:
-      0: "arg0"
+      0: "id"
     locals:
-      8: "local8"
+      8: "change"
   client!ah.a (ILclient!fd;)Ljava/lang/String;:
     owner: "WordPack"
     name: "readString"
@@ -12597,14 +12597,14 @@ methods:
       0: "arg0"
     locals: {}
   client!al.a (IBI)V:
-    owner: "Static8"
-    name: "method173"
+    owner: "VarpDomain"
+    name: "setVarpServer"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "id"
+      2: "value"
     locals:
-      21: "local21"
-      28: "local28"
+      21: "node"
+      28: "newNode"
   client!al.a (IZIB)V:
     owner: "AudioChannel"
     name: "init"
@@ -13256,10 +13256,10 @@ methods:
       9: "local9"
       16: "local16"
   client!bg.<init> (J)V:
-    owner: "Class4_Sub5"
+    owner: "LongNode"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "value"
     locals: {}
   client!bg.a (BC)B:
     owner: "Cp1252Charset"
@@ -14070,13 +14070,13 @@ methods:
       1: "id"
     locals: {}
   client!bo.a (III)V:
-    owner: "Static10"
-    name: "method397"
+    owner: "DelayedStateChange"
+    name: "setVarcServer"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "id"
+      1: "value"
     locals:
-      8: "local8"
+      8: "change"
   client!bo.a (ILclient!fh;)Z:
     owner: "Static10"
     name: "method398"
@@ -14695,7 +14695,7 @@ methods:
       3787: "local3787"
       3794: "local3794"
       3801: "local3801"
-      3857: "local3857"
+      3857: "i"
       3886: "local3886"
       3945: "local3945"
       3969: "local3969"
@@ -15326,8 +15326,8 @@ methods:
       1127: "local1127"
       1142: "local1142"
       1181: "local1181"
-      1196: "local1196"
-      1205: "local1205"
+      1196: "i"
+      1205: "varp"
       1207: "local1207"
       1222: "local1222"
       1261: "local1261"
@@ -15538,13 +15538,13 @@ methods:
     arguments: {}
     locals: {}
   client!cn.a (III)Lclient!g;:
-    owner: "Static12"
-    name: "method2322"
+    owner: "DelayedStateChange"
+    name: "create"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "type"
+      1: "id"
     locals:
-      16: "local16"
+      16: "change"
   client!cn.a (II[B)I:
     owner: "Buffer"
     name: "crc32"
@@ -15598,14 +15598,14 @@ methods:
     arguments: {}
     locals: {}
   client!d.a (BIII)V:
-    owner: "Static12"
+    owner: "DelayedStateChange"
     name: "method726"
     arguments:
-      1: "arg0"
+      1: "id"
       2: "arg1"
       3: "arg2"
     locals:
-      12: "local12"
+      12: "change"
   client!d.a (I)[F:
     owner: "Static12"
     name: "method723"
@@ -15631,13 +15631,13 @@ methods:
       21: "i"
       26: "end"
   client!d.a (III)V:
-    owner: "Static12"
+    owner: "DelayedStateChange"
     name: "method722"
     arguments:
-      0: "arg0"
+      0: "id"
       1: "arg1"
     locals:
-      8: "local8"
+      8: "change"
   client!d.a (IILclient!fd;)V:
     owner: "BasType"
     name: "method724"
@@ -15749,14 +15749,14 @@ methods:
     locals:
       19: "local19"
   client!db.a (IZ)I:
-    owner: "Static12"
-    name: "method735"
+    owner: "VarpDomain"
+    name: "poll"
     arguments:
-      1: "arg0"
+      1: "head"
     locals:
-      13: "local13"
-      27: "local27"
-      55: "local55"
+      13: "now"
+      27: "node"
+      55: "id"
   client!db.a (ZLjava/lang/String;)I:
     owner: "StringUtils"
     name: "parseInt"
@@ -15979,12 +15979,12 @@ methods:
     arguments: {}
     locals: {}
   client!df.a (B)V:
-    owner: "Static12"
-    name: "method778"
+    owner: "VarpDomain"
+    name: "clear"
     arguments: {}
     locals:
-      11: "local11"
-      18: "local18"
+      11: "i"
+      18: "type"
   client!df.a (BLclient!wf;)Ljava/lang/String;:
     owner: "Static12"
     name: "method780"
@@ -15992,12 +15992,12 @@ methods:
       1: "arg0"
     locals: {}
   client!df.a (II)V:
-    owner: "Static12"
+    owner: "DelayedStateChange"
     name: "method779"
     arguments:
-      1: "arg0"
+      1: "id"
     locals:
-      10: "local10"
+      10: "change"
   client!dh.<init> ([B[I[I[I[I[[B)V:
     owner: "Class4_Sub3_Sub5_Sub1"
     name: "<init>"
@@ -16689,15 +16689,15 @@ methods:
     arguments: {}
     locals: {}
   client!eg.a (IIIIB)V:
-    owner: "Static13"
+    owner: "DelayedStateChange"
     name: "method1019"
     arguments:
+      3: "id"
+      2: "arg2"
       0: "arg0"
       1: "arg1"
-      2: "arg2"
-      3: "arg3"
     locals:
-      10: "local10"
+      10: "change"
   client!eg.a (IIIIILclient!vg;)Lclient!vg;:
     owner: "SeqType"
     name: "method1021"
@@ -17979,12 +17979,12 @@ methods:
       35: "total"
       37: "i"
   client!fc.a (II)V:
-    owner: "Static15"
+    owner: "DelayedStateChange"
     name: "method1224"
     arguments:
-      0: "arg0"
+      0: "id"
     locals:
-      8: "local8"
+      8: "change"
   client!fc.a (IIIIIIII)Z:
     owner: "Static15"
     name: "method1223"
@@ -19672,11 +19672,11 @@ methods:
       404: "j"
       420: "fileId"
   client!g.<init> (II)V:
-    owner: "Class4_Sub3_Sub9"
+    owner: "DelayedStateChange"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "type"
+      1: "id"
     locals: {}
   client!g.a (BLclient!fh;Lclient!ai;Lclient!fh;)V:
     owner: "QuickChatPhraseTypeList"
@@ -19756,28 +19756,28 @@ methods:
       3: "arg1"
     locals: {}
   client!g.d (I)I:
-    owner: "Class4_Sub3_Sub9"
-    name: "method1515"
+    owner: "DelayedStateChange"
+    name: "getType"
     arguments: {}
     locals: {}
   client!g.e (B)V:
-    owner: "Class4_Sub3_Sub9"
-    name: "method1519"
+    owner: "DelayedStateChange"
+    name: "pushClient"
     arguments: {}
     locals: {}
   client!g.e (I)I:
-    owner: "Class4_Sub3_Sub9"
-    name: "method1516"
+    owner: "DelayedStateChange"
+    name: "getId"
     arguments: {}
     locals: {}
   client!g.f (B)V:
-    owner: "Class4_Sub3_Sub9"
-    name: "method1520"
+    owner: "DelayedStateChange"
+    name: "pushServer"
     arguments: {}
     locals: {}
   client!g.g (I)J:
-    owner: "Class4_Sub3_Sub9"
-    name: "method1522"
+    owner: "DelayedStateChange"
+    name: "getTime"
     arguments: {}
     locals: {}
   client!ga.<init> ()V:
@@ -20638,8 +20638,8 @@ methods:
       15: "hash"
       29: "value"
   client!gf.b (B)V:
-    owner: "Static16"
-    name: "method1566"
+    owner: "DelayedStateChange"
+    name: "clear"
     arguments: {}
     locals: {}
   client!gg.<init> (IIIIIII)V:
@@ -22429,13 +22429,13 @@ methods:
       0: "language"
     locals: {}
   client!hk.a (IZI)V:
-    owner: "Static19"
+    owner: "DelayedStateChange"
     name: "method1773"
     arguments:
+      2: "id"
       0: "arg0"
-      2: "arg1"
     locals:
-      14: "local14"
+      14: "change"
   client!hk.a (Lclient!em;[I[[FIILclient!pi;[[FI[[FI[[I)V:
     owner: "Static19"
     name: "method1778"
@@ -23972,12 +23972,12 @@ methods:
       0: "arg0"
     locals: {}
   client!jc.a (II)V:
-    owner: "Static21"
+    owner: "DelayedStateChange"
     name: "method1994"
     arguments:
-      1: "arg0"
+      1: "id"
     locals:
-      6: "local6"
+      6: "change"
   client!jc.a (IIIIIIIIIIIZ)V:
     owner: "PathFinder"
     name: "findPathN"
@@ -24196,7 +24196,7 @@ methods:
     arguments: {}
     locals:
       15: "available"
-      130: "local130"
+      130: "i"
       180: "local180"
       184: "local184"
       193: "local193"
@@ -24614,13 +24614,13 @@ methods:
       14: "local14"
       19: "local19"
   client!ji.a (IIB)V:
-    owner: "Static21"
+    owner: "DelayedStateChange"
     name: "method2021"
     arguments:
+      1: "id"
       0: "arg0"
-      1: "arg1"
     locals:
-      8: "local8"
+      8: "change"
   client!ji.a (I[F)[F:
     owner: "Static21"
     name: "method2023"
@@ -24900,13 +24900,13 @@ methods:
       4: "local4"
       15: "local15"
   client!jm.a (IILjava/lang/String;)V:
-    owner: "Static21"
+    owner: "DelayedStateChange"
     name: "method2079"
     arguments:
-      1: "arg0"
+      1: "id"
       2: "arg1"
     locals:
-      13: "local13"
+      13: "change"
   client!jm.run ()V:
     owner: "MouseRecorder"
     name: "run"
@@ -27085,18 +27085,18 @@ methods:
       1: "arg0"
     locals: {}
   client!lc.b (III)V:
-    owner: "Static23"
-    name: "method1937"
+    owner: "VarpDomain"
+    name: "setVarbitClient"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "id"
+      2: "value"
     locals:
-      7: "local7"
-      10: "local10"
-      13: "local13"
-      16: "local16"
-      23: "local23"
-      40: "local40"
+      7: "type"
+      10: "varp"
+      13: "start"
+      16: "end"
+      23: "mask"
+      40: "shiftedMask"
   client!ld.<init> ()V:
     owner: "Class4_Sub6_Sub2"
     name: "<init>"
@@ -28320,12 +28320,12 @@ methods:
     arguments: {}
     locals: {}
   client!lh.a (IZ)V:
-    owner: "Static23"
-    name: "method4822"
+    owner: "DelayedStateChange"
+    name: "setVarcstrClient"
     arguments:
-      0: "arg0"
+      0: "id"
     locals:
-      13: "local13"
+      13: "change"
   client!lh.a ([BIII)I:
     owner: "Buffer"
     name: "crc32"
@@ -32128,12 +32128,12 @@ methods:
       1: "id"
     locals: {}
   client!nh.d (B)Lclient!g;:
-    owner: "Static26"
-    name: "method2984"
+    owner: "DelayedStateChange"
+    name: "poll"
     arguments: {}
     locals:
-      10: "local10"
-      35: "local35"
+      10: "serverChange"
+      35: "clientChange"
   client!ni.a (B)V:
     owner: "Static26"
     name: "method4812"
@@ -34771,12 +34771,12 @@ methods:
       2: "code"
     locals: {}
   client!pe.a (II)V:
-    owner: "Static29"
-    name: "method3396"
+    owner: "DelayedStateChange"
+    name: "setVarcClient"
     arguments:
-      1: "arg0"
+      1: "id"
     locals:
-      4: "local4"
+      4: "changed"
   client!pe.a (IILclient!fd;)V:
     owner: "CursorType"
     name: "decode"
@@ -35353,15 +35353,15 @@ methods:
       2: "spritesArchive"
     locals: {}
   client!pl.a (IIIIB)V:
-    owner: "Static29"
+    owner: "DelayedStateChange"
     name: "method3471"
     arguments:
+      2: "id"
       0: "arg0"
-      1: "arg1"
-      2: "arg2"
       3: "arg3"
+      1: "arg1"
     locals:
-      18: "local18"
+      18: "change"
   client!pl.a (IJ)V:
     owner: "Static29"
     name: "method3475"
@@ -35399,10 +35399,10 @@ methods:
       449: "local449"
       466: "local466"
       489: "local489"
-      658: "local658"
-      683: "local683"
-      689: "local689"
-      693: "local693"
+      658: "varp"
+      683: "change"
+      689: "type"
+      693: "id"
       732: "local732"
       735: "local735"
       738: "local738"
@@ -36022,10 +36022,10 @@ methods:
     owner: "Static29"
     name: "method3534"
     arguments:
-      1: "arg0"
+      1: "id"
     locals:
-      20: "local20"
-      27: "local27"
+      20: "clientCode"
+      27: "value"
   client!qd.b (IIIIII)V:
     owner: "Static29"
     name: "method3536"
@@ -36080,14 +36080,14 @@ methods:
       14: "id"
       18: "players"
   client!qe.a (ZII)V:
-    owner: "Static29"
-    name: "method3543"
+    owner: "VarpDomain"
+    name: "setVarpClient"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "id"
+      2: "value"
     locals:
-      20: "local20"
-      30: "local30"
+      20: "node"
+      30: "newNode"
   client!qe.a ([BI)V:
     owner: "Static29"
     name: "method3542"
@@ -36308,18 +36308,18 @@ methods:
       3596: "local3596"
       3601: "local3601"
   client!qg.a (III)V:
-    owner: "Static30"
-    name: "method3550"
+    owner: "VarpDomain"
+    name: "setVarbitServer"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "id"
+      1: "value"
     locals:
-      7: "local7"
-      10: "local10"
-      13: "local13"
-      16: "local16"
-      39: "local39"
-      57: "local57"
+      7: "type"
+      10: "varp"
+      13: "start"
+      16: "end"
+      39: "mask"
+      57: "shiftedMask"
   client!qg.a (ILclient!fd;II)V:
     owner: "MsiType"
     name: "decode"
@@ -37535,14 +37535,14 @@ methods:
       282: "local282"
       390: "local390"
   client!rh.a (IIII)V:
-    owner: "Static31"
+    owner: "DelayedStateChange"
     name: "method3716"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      1: "id"
       3: "arg2"
+      0: "arg0"
     locals:
-      12: "local12"
+      12: "change"
   client!rh.e (B)V:
     owner: "TextureOp15"
     name: "postDecode"
@@ -37853,13 +37853,13 @@ methods:
       78: "local78"
       89: "local89"
   client!rm.a (Ljava/lang/String;IB)V:
-    owner: "Static31"
-    name: "method3779"
+    owner: "DelayedStateChange"
+    name: "setVarcstrServer"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      1: "id"
+      0: "value"
     locals:
-      8: "local8"
+      8: "change"
   client!rm.a ([Lclient!ch;B[[[IZ)V:
     owner: "Static31"
     name: "method3778"
@@ -40150,12 +40150,12 @@ methods:
       115: "local115"
       117: "local117"
   client!sl.d (II)V:
-    owner: "Static32"
+    owner: "DelayedStateChange"
     name: "method4026"
     arguments:
-      0: "arg0"
+      0: "id"
     locals:
-      14: "local14"
+      14: "change"
   client!sm.a (II)[B:
     owner: "BufferPool"
     name: "allocate"
@@ -40548,12 +40548,12 @@ methods:
       523: "mapZ"
       536: "mapSquare"
   client!ta.b (ZI)V:
-    owner: "Static33"
+    owner: "DelayedStateChange"
     name: "method4092"
     arguments:
-      1: "arg0"
+      1: "id"
     locals:
-      14: "local14"
+      14: "change"
   client!tb.focusGained (Ljava/awt/event/FocusEvent;)V:
     owner: "Keyboard"
     name: "focusGained"
@@ -41323,13 +41323,13 @@ methods:
       895: "local895"
       917: "local917"
   client!tj.a (IIZ)V:
-    owner: "Static33"
+    owner: "DelayedStateChange"
     name: "method2997"
     arguments:
-      0: "arg0"
+      0: "id"
       1: "arg1"
     locals:
-      4: "local4"
+      4: "change"
   client!tj.a (ILclient!tf;B)V:
     owner: "AudioChannel"
     name: "method2994"
@@ -42694,12 +42694,12 @@ methods:
       6: "now"
       10: "previous"
   client!ue.a (II)V:
-    owner: "Static35"
+    owner: "DelayedStateChange"
     name: "method676"
     arguments:
-      0: "arg0"
+      0: "id"
     locals:
-      10: "local10"
+      10: "change"
   client!ue.a (IIIII)V:
     owner: "GameShell"
     name: "startApplet"
@@ -42752,12 +42752,12 @@ methods:
     arguments: {}
     locals: {}
   client!ue.b (IZ)V:
-    owner: "Static35"
+    owner: "DelayedStateChange"
     name: "method680"
     arguments:
-      0: "arg0"
+      0: "id"
     locals:
-      13: "local13"
+      13: "change"
   client!ue.b (Z)V:
     owner: "GameShell"
     name: "addCanvas"
@@ -42944,16 +42944,16 @@ methods:
     arguments: {}
     locals: {}
   client!uf.a (BI)I:
-    owner: "Static35"
-    name: "method4311"
+    owner: "VarpDomain"
+    name: "getVarbit"
     arguments:
-      1: "arg0"
+      1: "id"
     locals:
-      13: "local13"
-      16: "local16"
-      19: "local19"
-      22: "local22"
-      29: "local29"
+      13: "type"
+      16: "varp"
+      19: "start"
+      22: "end"
+      29: "mask"
   client!uf.a (I)V:
     owner: "FluTypeList"
     name: "clear"
@@ -43442,12 +43442,12 @@ methods:
       1: "v"
     locals: {}
   client!va.a (II)V:
-    owner: "Static36"
+    owner: "DelayedStateChange"
     name: "method4405"
     arguments:
-      0: "arg0"
+      0: "id"
     locals:
-      10: "local10"
+      10: "change"
   client!va.a (ZI)V:
     owner: "Static36"
     name: "method4404"
@@ -43486,15 +43486,15 @@ methods:
     arguments: {}
     locals: {}
   client!vb.a (BIIII)V:
-    owner: "Static36"
+    owner: "DelayedStateChange"
     name: "method4433"
     arguments:
+      4: "id"
+      3: "arg2"
       1: "arg0"
       2: "arg1"
-      3: "arg2"
-      4: "arg3"
     locals:
-      6: "local6"
+      6: "change"
   client!vb.a (BLclient!fd;I)V:
     owner: "TextureOp12"
     name: "decode"
@@ -45348,12 +45348,12 @@ methods:
       290: "node"
       335: "request"
   client!wc.a (II)V:
-    owner: "Static37"
+    owner: "DelayedStateChange"
     name: "method4678"
     arguments:
-      0: "arg0"
+      0: "id"
     locals:
-      6: "local6"
+      6: "change"
   client!wc.a (IIZBLclient!qk;II)Lclient!uj;:
     owner: "Static37"
     name: "method4676"
@@ -46309,13 +46309,13 @@ methods:
       1: "arg1"
     locals: {}
   client!wn.a (III)V:
-    owner: "Static38"
+    owner: "DelayedStateChange"
     name: "method4824"
     arguments:
-      1: "arg0"
+      1: "id"
       2: "arg1"
     locals:
-      4: "local4"
+      4: "change"
   client!wn.a (IIII)V:
     owner: "Class4_Sub3_Sub24"
     name: "method4827"
