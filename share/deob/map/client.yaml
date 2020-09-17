@@ -98,7 +98,7 @@ classes:
   client!ic: "HashTable"
   client!ie: "BrowserControl"
   client!ih: "Class4_Sub12"
-  client!ij: "Class4_Sub3_Sub11"
+  client!ij: "QuickChatPhraseType"
   client!ik: "Class89"
   client!im: "AudioThread"
   client!in: "Class11_Sub4"
@@ -284,7 +284,7 @@ classes:
   client!we: "Class184"
   client!wf: "Component"
   client!wg: "Class4_Sub3_Sub22"
-  client!wh: "Class4_Sub3_Sub23"
+  client!wh: "QuickChatCatType"
   client!wj: "Class187"
   client!wl: "BufferedFile"
   client!wm: "Class4_Sub33"
@@ -1128,8 +1128,8 @@ fields:
     owner: "LocalisedText"
     name: "ATTEMPT_TO_REESTABLISH"
   client!cg.g Lclient!fh;:
-    owner: "Static1"
-    name: "aClass58_19"
+    owner: "QuickChatPhraseTypeList"
+    name: "archive"
   client!cg.h F:
     owner: "Static1"
     name: "aFloat21"
@@ -1173,8 +1173,8 @@ fields:
     owner: "Class31"
     name: "anInt621"
   client!ci.e Lclient!dj;:
-    owner: "Static1"
-    name: "aClass40_5"
+    owner: "QuickChatPhraseTypeList"
+    name: "types"
   client!ci.f Lclient!qk;:
     owner: "Static1"
     name: "aClass144_1"
@@ -1587,8 +1587,8 @@ fields:
     owner: "Class37"
     name: "anInt911"
   client!dc.x I:
-    owner: "Static2"
-    name: "anInt912"
+    owner: "QuickChatPhraseTypeList"
+    name: "capacity"
   client!dc.z I:
     owner: "Static2"
     name: "anInt914"
@@ -1635,8 +1635,8 @@ fields:
     owner: "Static2"
     name: "anInt946"
   client!de.p Lclient!fh;:
-    owner: "Static2"
-    name: "aClass58_26"
+    owner: "QuickChatCatTypeList"
+    name: "globalArchive"
   client!de.r [[B:
     owner: "BufferPool"
     name: "smallBuffers"
@@ -3936,13 +3936,13 @@ fields:
     owner: "Static3"
     name: "anIntArrayArrayArray7"
   client!ij.A [[I:
-    owner: "Class4_Sub3_Sub11"
+    owner: "QuickChatPhraseType"
     name: "anIntArrayArray20"
   client!ij.D Ljava/awt/Frame;:
     owner: "GameShell"
     name: "fullScreenFrame"
   client!ij.H Z:
-    owner: "Class4_Sub3_Sub11"
+    owner: "QuickChatPhraseType"
     name: "aBoolean163"
   client!ij.L Lclient!vn;:
     owner: "Static3"
@@ -3954,16 +3954,16 @@ fields:
     owner: "Static3"
     name: "aClass84_8"
   client!ij.O [I:
-    owner: "Class4_Sub3_Sub11"
+    owner: "QuickChatPhraseType"
     name: "anIntArray212"
   client!ij.S [Ljava/lang/String;:
-    owner: "Class4_Sub3_Sub11"
+    owner: "QuickChatPhraseType"
     name: "aStringArray17"
   client!ij.T I:
     owner: "Static3"
     name: "anInt2394"
   client!ij.z [I:
-    owner: "Class4_Sub3_Sub11"
+    owner: "QuickChatPhraseType"
     name: "anIntArray210"
   client!ik.A I:
     owner: "Class89"
@@ -4821,8 +4821,8 @@ fields:
     owner: "WorldList"
     name: "checksum"
   client!kf.u Lclient!dj;:
-    owner: "Static4"
-    name: "aClass40_12"
+    owner: "QuickChatCatTypeList"
+    name: "types"
   client!kf.v I:
     owner: "Bzip2DState"
     name: "nInUse"
@@ -5502,8 +5502,8 @@ fields:
     owner: "IsaacRandom"
     name: "count"
   client!m.d Lclient!fh;:
-    owner: "Static4"
-    name: "aClass58_72"
+    owner: "QuickChatPhraseTypeList"
+    name: "globalArchive"
   client!m.e I:
     owner: "IsaacRandom"
     name: "c"
@@ -7632,7 +7632,7 @@ fields:
     owner: "Static5"
     name: "aClass4_Sub3_Sub19Array4"
   client!pl.v Lclient!ai;:
-    owner: "Static5"
+    owner: "QuickChatPhraseTypeList"
     name: "anInterface1_1"
   client!pl.x Ljava/lang/String;:
     owner: "LocalisedText"
@@ -9162,8 +9162,8 @@ fields:
     owner: "Mouse"
     name: "clickButton"
   client!sg.d Lclient!fh;:
-    owner: "Static6"
-    name: "aClass58_91"
+    owner: "QuickChatCatTypeList"
+    name: "archive"
   client!sg.e Ljava/lang/String;:
     owner: "LocalisedText"
     name: "CHATCOL10"
@@ -11760,16 +11760,16 @@ fields:
     owner: "Static7"
     name: "anInt6022"
   client!wh.C Ljava/lang/String;:
-    owner: "Class4_Sub3_Sub23"
+    owner: "QuickChatCatType"
     name: "aString362"
   client!wh.D [I:
-    owner: "Class4_Sub3_Sub23"
+    owner: "QuickChatCatType"
     name: "anIntArray677"
   client!wh.F [C:
-    owner: "Class4_Sub3_Sub23"
+    owner: "QuickChatCatType"
     name: "aCharArray4"
   client!wh.J [C:
-    owner: "Class4_Sub3_Sub23"
+    owner: "QuickChatCatType"
     name: "aCharArray5"
   client!wh.L [I:
     owner: "Static7"
@@ -11778,7 +11778,7 @@ fields:
     owner: "LocalisedText"
     name: "FRIENDCANTADDSELF"
   client!wh.z [I:
-    owner: "Class4_Sub3_Sub23"
+    owner: "QuickChatCatType"
     name: "anIntArray676"
   client!wi.b Lclient!fh;:
     owner: "NpcTypeList"
@@ -11844,8 +11844,8 @@ fields:
     owner: "Static7"
     name: "anIntArray679"
   client!wk.a I:
-    owner: "Static7"
-    name: "anInt6046"
+    owner: "QuickChatPhraseTypeList"
+    name: "globalCapacity"
   client!wk.c Ljava/util/Calendar;:
     owner: "Static7"
     name: "aCalendar2"
@@ -19392,11 +19392,11 @@ methods:
       162: "local162"
       166: "local166"
   client!fl.a (Lclient!fh;ILclient!fh;)V:
-    owner: "Static15"
-    name: "method1473"
+    owner: "QuickChatCatTypeList"
+    name: "init"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "archive"
+      2: "globalArchive"
     locals: {}
   client!fl.b (II)[[I:
     owner: "TextureOp21"
@@ -19679,12 +19679,12 @@ methods:
       1: "arg1"
     locals: {}
   client!g.a (BLclient!fh;Lclient!ai;Lclient!fh;)V:
-    owner: "Static16"
-    name: "method1521"
+    owner: "QuickChatPhraseTypeList"
+    name: "init"
     arguments:
-      1: "arg0"
+      3: "archive"
+      1: "globalArchive"
       2: "arg1"
-      3: "arg2"
     locals: {}
   client!g.a (IIIIIII)V:
     owner: "Static16"
@@ -23418,20 +23418,20 @@ methods:
       1: "arg0"
     locals: {}
   client!ij.a (II)I:
-    owner: "Class4_Sub3_Sub11"
+    owner: "QuickChatPhraseType"
     name: "method1905"
     arguments:
       0: "arg0"
     locals: {}
   client!ij.a (III)I:
-    owner: "Class4_Sub3_Sub11"
+    owner: "QuickChatPhraseType"
     name: "method1904"
     arguments:
       0: "arg0"
       2: "arg1"
     locals: {}
   client!ij.a (ILclient!fd;)Ljava/lang/String;:
-    owner: "Class4_Sub3_Sub11"
+    owner: "QuickChatPhraseType"
     name: "method1909"
     arguments:
       1: "arg0"
@@ -23439,11 +23439,11 @@ methods:
       16: "local16"
       21: "local21"
   client!ij.a (IZLclient!fd;)V:
-    owner: "Class4_Sub3_Sub11"
-    name: "method1906"
+    owner: "QuickChatPhraseType"
+    name: "decode"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      2: "buffer"
+      0: "code"
     locals:
       27: "local27"
       37: "local37"
@@ -23464,14 +23464,14 @@ methods:
       44: "j"
       84: "i"
   client!ij.a (Lclient!fd;I)V:
-    owner: "Class4_Sub3_Sub11"
-    name: "method1908"
+    owner: "QuickChatPhraseType"
+    name: "decode"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals:
-      14: "local14"
+      14: "code"
   client!ij.a ([IBLclient!fd;)V:
-    owner: "Class4_Sub3_Sub11"
+    owner: "QuickChatPhraseType"
     name: "method1911"
     arguments:
       0: "arg0"
@@ -23480,18 +23480,18 @@ methods:
       13: "local13"
       29: "local29"
   client!ij.d (I)I:
-    owner: "Class4_Sub3_Sub11"
+    owner: "QuickChatPhraseType"
     name: "method1903"
     arguments: {}
     locals: {}
   client!ij.e (I)V:
-    owner: "Class4_Sub3_Sub11"
+    owner: "QuickChatPhraseType"
     name: "method1910"
     arguments: {}
     locals:
       20: "local20"
   client!ij.f (I)Ljava/lang/String;:
-    owner: "Class4_Sub3_Sub11"
+    owner: "QuickChatPhraseType"
     name: "method1913"
     arguments: {}
     locals:
@@ -23700,7 +23700,7 @@ methods:
       62: "local62"
       69: "local69"
   client!in.a (JII[I)Ljava/lang/String;:
-    owner: "Static20"
+    owner: "QuickChatPhraseTypeList"
     name: "method1940"
     arguments:
       0: "arg0"
@@ -23775,14 +23775,14 @@ methods:
       0: "arg0"
     locals: {}
   client!j.a (II)Lclient!wh;:
-    owner: "Static20"
-    name: "method1961"
+    owner: "QuickChatCatTypeList"
+    name: "get"
     arguments:
-      0: "arg0"
+      0: "id"
     locals:
-      10: "local10"
-      26: "local26"
-      38: "local38"
+      10: "type"
+      26: "bytes"
+      38: "newType"
   client!j.a (III)J:
     owner: "Static20"
     name: "method1960"
@@ -32312,14 +32312,14 @@ methods:
       1: "arg0"
     locals: {}
   client!nl.a (IZ)Lclient!ij;:
-    owner: "Static26"
-    name: "method2991"
+    owner: "QuickChatPhraseTypeList"
+    name: "get"
     arguments:
-      0: "arg0"
+      0: "id"
     locals:
-      10: "local10"
-      25: "local25"
-      39: "local39"
+      10: "type"
+      25: "bytes"
+      39: "newType"
   client!nl.b (I)V:
     owner: "MelTypeList"
     name: "removeSoft"
@@ -45893,14 +45893,14 @@ methods:
     locals:
       23: "local23"
   client!wh.a (BLclient!fd;)V:
-    owner: "Class4_Sub3_Sub23"
-    name: "method4772"
+    owner: "QuickChatCatType"
+    name: "decode"
     arguments:
-      1: "arg0"
+      1: "buffer"
     locals:
-      5: "local5"
+      5: "code"
   client!wh.a (CI)I:
-    owner: "Class4_Sub3_Sub23"
+    owner: "QuickChatCatType"
     name: "method4774"
     arguments:
       0: "arg0"
@@ -45927,11 +45927,11 @@ methods:
       6: "arg5"
     locals: {}
   client!wh.a (ILclient!fd;I)V:
-    owner: "Class4_Sub3_Sub23"
-    name: "method4779"
+    owner: "QuickChatCatType"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "buffer"
+      2: "code"
     locals:
       39: "local39"
       49: "local49"
@@ -45940,14 +45940,14 @@ methods:
       105: "local105"
       119: "local119"
   client!wh.b (CI)I:
-    owner: "Class4_Sub3_Sub23"
+    owner: "QuickChatCatType"
     name: "method4777"
     arguments:
       0: "arg0"
     locals:
       21: "local21"
   client!wh.e (I)V:
-    owner: "Class4_Sub3_Sub23"
+    owner: "QuickChatCatType"
     name: "method4778"
     arguments: {}
     locals:
