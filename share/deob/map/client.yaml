@@ -2776,13 +2776,13 @@ fields:
     name: "capacity"
   client!g.A I:
     owner: "DelayedStateChange"
-    name: "primaryIntArg"
+    name: "intArg1"
   client!g.B [I:
     owner: "Static2"
     name: "anIntArray159"
   client!g.C I:
     owner: "DelayedStateChange"
-    name: "tertiaryIntArg"
+    name: "intArg3"
   client!g.D J:
     owner: "Static2"
     name: "aLong66"
@@ -2800,7 +2800,7 @@ fields:
     name: "anIntArray160"
   client!g.O I:
     owner: "DelayedStateChange"
-    name: "secondaryIntArg"
+    name: "intArg2"
   client!g.R Ljava/lang/String;:
     owner: "DelayedStateChange"
     name: "stringArg"
