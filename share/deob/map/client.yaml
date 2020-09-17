@@ -36493,7 +36493,7 @@ methods:
     locals: {}
   client!qh.a (IIILclient!f;)V:
     owner: "Protocol"
-    name: "readPlayerExtendedInfo"
+    name: "readExtendedPlayerInfo"
     arguments:
       3: "player"
       0: "id"
@@ -42584,7 +42584,7 @@ methods:
       116: "local116"
   client!ud.a (I)V:
     owner: "Protocol"
-    name: "readPlayerExtendedInfo"
+    name: "readExtendedPlayerInfo"
     arguments: {}
     locals:
       13: "i"
