@@ -5,7 +5,7 @@ classes:
   client!ae: "Class6"
   client!af: "AnimBase"
   client!ag: "Class7"
-  client!ai: "Interface1"
+  client!ai: "QuickChatCommandDecoder"
   client!ak: "SecondaryHashTable"
   client!al: "Js5CacheRequest"
   client!am: "Class11_Sub1"
@@ -26,7 +26,7 @@ classes:
   client!c: "Js5GlTextureProvider"
   client!ca: "TextureOp11"
   client!cc: "SoftLruHashTable"
-  client!cd: "Class27"
+  client!cd: "QuickChatPhrase"
   client!cf: "TextureOp6"
   client!ch: "CollisionMap"
   client!ci: "Class31"
@@ -175,7 +175,7 @@ classes:
   client!of: "TextureOp8"
   client!og: "TextureOp39"
   client!oh: "FloType"
-  client!oi: "Class128"
+  client!oi: "Js5QuickChatCommandDecoder"
   client!oj: "HuffmanCodec"
   client!ok: "BrokenOutputStream"
   client!ol: "Class4_Sub20"
@@ -1071,11 +1071,11 @@ fields:
     owner: "SoftLruHashTable"
     name: "capacity"
   client!cd.a Lclient!ij;:
-    owner: "Class27"
-    name: "aClass4_Sub3_Sub11_1"
+    owner: "QuickChatPhrase"
+    name: "type"
   client!cd.b I:
-    owner: "Class27"
-    name: "anInt540"
+    owner: "QuickChatPhrase"
+    name: "id"
   client!cd.f Lclient!om;:
     owner: "Static1"
     name: "aClass130_1"
@@ -1083,8 +1083,8 @@ fields:
     owner: "FluTypeList"
     name: "types"
   client!cd.k [I:
-    owner: "Class27"
-    name: "anIntArray48"
+    owner: "QuickChatPhrase"
+    name: "values"
   client!ce.a I:
     owner: "Static1"
     name: "anInt547"
@@ -1569,8 +1569,8 @@ fields:
     owner: "Class37"
     name: "anInt904"
   client!dc.p [I:
-    owner: "Static2"
-    name: "anIntArray64"
+    owner: "QuickChatPhraseType"
+    name: "DYNAMIC_COMMAND_ENCODE_BYTES"
   client!dc.q I:
     owner: "Class37"
     name: "anInt905"
@@ -3654,8 +3654,8 @@ fields:
     owner: "GameShell"
     name: "focus"
   client!ia.d [I:
-    owner: "Static3"
-    name: "anIntArray191"
+    owner: "QuickChatPhraseType"
+    name: "DYNAMIC_COMMAND_DECODE_BYTES"
   client!ia.e Ljava/lang/String;:
     owner: "LocalisedText"
     name: "MEMBERS_OBJECT"
@@ -3937,13 +3937,13 @@ fields:
     name: "anIntArrayArrayArray7"
   client!ij.A [[I:
     owner: "QuickChatPhraseType"
-    name: "anIntArrayArray20"
+    name: "dynamicCommandParams"
   client!ij.D Ljava/awt/Frame;:
     owner: "GameShell"
     name: "fullScreenFrame"
   client!ij.H Z:
     owner: "QuickChatPhraseType"
-    name: "aBoolean163"
+    name: "searchable"
   client!ij.L Lclient!vn;:
     owner: "Static3"
     name: "aClass4_Sub3_Sub14_Sub1_3"
@@ -3955,16 +3955,16 @@ fields:
     name: "aClass84_8"
   client!ij.O [I:
     owner: "QuickChatPhraseType"
-    name: "anIntArray212"
+    name: "automaticResponses"
   client!ij.S [Ljava/lang/String;:
     owner: "QuickChatPhraseType"
-    name: "aStringArray17"
+    name: "text"
   client!ij.T I:
     owner: "Static3"
     name: "anInt2394"
   client!ij.z [I:
     owner: "QuickChatPhraseType"
-    name: "anIntArray210"
+    name: "dynamicCommands"
   client!ik.A I:
     owner: "Class89"
     name: "anInt2419"
@@ -7633,7 +7633,7 @@ fields:
     name: "aClass4_Sub3_Sub19Array4"
   client!pl.v Lclient!ai;:
     owner: "QuickChatPhraseTypeList"
-    name: "anInterface1_1"
+    name: "commandDecoder"
   client!pl.x Ljava/lang/String;:
     owner: "LocalisedText"
     name: "FRIENDLOGIN"
@@ -8025,8 +8025,8 @@ fields:
     owner: "NpcTypeList"
     name: "allowMembers"
   client!qe.f [I:
-    owner: "Static5"
-    name: "anIntArray456"
+    owner: "QuickChatPhraseType"
+    name: "DYNAMIC_COMMAND_PARAM_LENGTHS"
   client!qe.g Lclient!ic;:
     owner: "HashTableIterator"
     name: "table"
@@ -11761,16 +11761,16 @@ fields:
     name: "anInt6022"
   client!wh.C Ljava/lang/String;:
     owner: "QuickChatCatType"
-    name: "aString362"
+    name: "description"
   client!wh.D [I:
     owner: "QuickChatCatType"
-    name: "anIntArray677"
+    name: "subcategories"
   client!wh.F [C:
     owner: "QuickChatCatType"
-    name: "aCharArray4"
+    name: "subcategoryShortcuts"
   client!wh.J [C:
     owner: "QuickChatCatType"
-    name: "aCharArray5"
+    name: "phraseShortcuts"
   client!wh.L [I:
     owner: "Static7"
     name: "anIntArray678"
@@ -11779,7 +11779,7 @@ fields:
     name: "FRIENDCANTADDSELF"
   client!wh.z [I:
     owner: "QuickChatCatType"
-    name: "anIntArray676"
+    name: "phrases"
   client!wi.b Lclient!fh;:
     owner: "NpcTypeList"
     name: "npcsArchive"
@@ -12522,12 +12522,12 @@ methods:
       156: "local156"
       168: "local168"
   client!ai.a (J[IBI)Ljava/lang/String;:
-    owner: "Interface1"
-    name: "method3224"
+    owner: "QuickChatCommandDecoder"
+    name: "decode"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      3: "arg2"
+      3: "command"
+      1: "params"
+      0: "value"
     locals: {}
   client!aj.a (B)V:
     owner: "Static8"
@@ -19684,7 +19684,7 @@ methods:
     arguments:
       3: "archive"
       1: "globalArchive"
-      2: "arg1"
+      2: "textDecoder"
     locals: {}
   client!g.a (IIIIIII)V:
     owner: "Static16"
@@ -23419,25 +23419,25 @@ methods:
     locals: {}
   client!ij.a (II)I:
     owner: "QuickChatPhraseType"
-    name: "method1905"
+    name: "getDynamicCommand"
     arguments:
-      0: "arg0"
+      0: "i"
     locals: {}
   client!ij.a (III)I:
     owner: "QuickChatPhraseType"
-    name: "method1904"
+    name: "getDynamicCommandParam"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      2: "i"
+      0: "j"
     locals: {}
   client!ij.a (ILclient!fd;)Ljava/lang/String;:
     owner: "QuickChatPhraseType"
-    name: "method1909"
+    name: "decodeMessage"
     arguments:
-      1: "arg0"
+      1: "buffer"
     locals:
-      16: "local16"
-      21: "local21"
+      16: "s"
+      21: "i"
   client!ij.a (IZLclient!fd;)V:
     owner: "QuickChatPhraseType"
     name: "decode"
@@ -23445,12 +23445,12 @@ methods:
       2: "buffer"
       0: "code"
     locals:
-      27: "local27"
-      37: "local37"
-      48: "local48"
-      63: "local63"
-      103: "local103"
-      109: "local109"
+      27: "len"
+      37: "i"
+      48: "command"
+      63: "j"
+      103: "len"
+      109: "i"
   client!ij.a (Lclient!co;)V:
     owner: "Terrain"
     name: "removeScenery"
@@ -23472,16 +23472,16 @@ methods:
       14: "code"
   client!ij.a ([IBLclient!fd;)V:
     owner: "QuickChatPhraseType"
-    name: "method1911"
+    name: "encodeMessage"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      2: "buffer"
+      0: "values"
     locals:
-      13: "local13"
-      29: "local29"
+      13: "i"
+      29: "bytes"
   client!ij.d (I)I:
     owner: "QuickChatPhraseType"
-    name: "method1903"
+    name: "getDynamicCommandCount"
     arguments: {}
     locals: {}
   client!ij.e (I)V:
@@ -23489,14 +23489,14 @@ methods:
     name: "method1910"
     arguments: {}
     locals:
-      20: "local20"
+      20: "i"
   client!ij.f (I)Ljava/lang/String;:
     owner: "QuickChatPhraseType"
-    name: "method1913"
+    name: "getText"
     arguments: {}
     locals:
-      6: "local6"
-      31: "local31"
+      6: "s"
+      31: "i"
   client!ik.a (B)V:
     owner: "Class89"
     name: "method1919"
@@ -23701,13 +23701,13 @@ methods:
       69: "local69"
   client!in.a (JII[I)Ljava/lang/String;:
     owner: "QuickChatPhraseTypeList"
-    name: "method1940"
+    name: "decodeCommand"
     arguments:
-      0: "arg0"
-      2: "arg1"
-      3: "arg2"
+      2: "command"
+      3: "params"
+      0: "value"
     locals:
-      18: "local18"
+      18: "s"
   client!in.a (ZI)V:
     owner: "Static20"
     name: "method1942"
@@ -24439,11 +24439,11 @@ methods:
       4288: "local4288"
       4295: "local4295"
       4299: "local4299"
-      4303: "local4303"
+      4303: "phraseId"
       4305: "local4305"
       4307: "local4307"
       4333: "local4333"
-      4375: "local4375"
+      4375: "message"
       4452: "local4452"
       4456: "local4456"
       4460: "local4460"
@@ -24491,12 +24491,12 @@ methods:
       5116: "local5116"
       5121: "local5121"
       5125: "local5125"
-      5129: "local5129"
+      5129: "phraseId"
       5131: "local5131"
       5137: "local5137"
       5139: "local5139"
       5167: "local5167"
-      5214: "local5214"
+      5214: "message"
       5282: "local5282"
       5286: "local5286"
       5290: "local5290"
@@ -24544,8 +24544,8 @@ methods:
       5841: "local5841"
       5867: "local5867"
       5909: "local5909"
-      5913: "local5913"
-      5920: "local5920"
+      5913: "phraseId"
+      5920: "message"
       5941: "local5941"
       5945: "local5945"
       5951: "local5951"
@@ -29262,12 +29262,12 @@ methods:
     locals:
       1: "bits"
   client!me.a (ILclient!fd;)Lclient!cd;:
-    owner: "Static24"
-    name: "method2701"
+    owner: "QuickChatPhrase"
+    name: "decode"
     arguments:
-      1: "arg0"
+      1: "buffer"
     locals:
-      7: "local7"
+      7: "phrase"
   client!me.a (ZLjava/lang/String;I)V:
     owner: "Static24"
     name: "method2699"
@@ -33404,15 +33404,15 @@ methods:
       1: "arg0"
     locals: {}
   client!oi.a (J[IBI)Ljava/lang/String;:
-    owner: "Class128"
-    name: "method3224"
+    owner: "Js5QuickChatCommandDecoder"
+    name: "decode"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      3: "arg2"
+      3: "command"
+      1: "params"
+      0: "value"
     locals:
-      18: "local18"
-      38: "local38"
+      18: "type"
+      38: "type"
   client!oi.a (Lclient!fh;BII)[Lclient!uj;:
     owner: "Static27"
     name: "method3225"
@@ -36520,9 +36520,9 @@ methods:
       264: "local264"
       266: "local266"
       284: "local284"
-      314: "local314"
-      333: "local333"
-      343: "local343"
+      314: "phraseId"
+      333: "message"
+      343: "phrase"
       450: "local450"
       454: "local454"
       456: "local456"
@@ -45901,11 +45901,11 @@ methods:
       5: "code"
   client!wh.a (CI)I:
     owner: "QuickChatCatType"
-    name: "method4774"
+    name: "getPhraseByShortcut"
     arguments:
-      0: "arg0"
+      0: "shortcut"
     locals:
-      20: "local20"
+      20: "i"
   client!wh.a (II)Lclient!d;:
     owner: "BasTypeList"
     name: "get"
@@ -45933,26 +45933,26 @@ methods:
       1: "buffer"
       2: "code"
     locals:
-      39: "local39"
-      49: "local49"
-      69: "local69"
-      95: "local95"
-      105: "local105"
-      119: "local119"
+      39: "len"
+      49: "i"
+      69: "phrase"
+      95: "len"
+      105: "i"
+      119: "shortcut"
   client!wh.b (CI)I:
     owner: "QuickChatCatType"
-    name: "method4777"
+    name: "getSubcategoryByShortcut"
     arguments:
-      0: "arg0"
+      0: "shortcut"
     locals:
-      21: "local21"
+      21: "i"
   client!wh.e (I)V:
     owner: "QuickChatCatType"
     name: "method4778"
     arguments: {}
     locals:
-      8: "local8"
-      39: "local39"
+      8: "i"
+      39: "i"
   client!wi.a (II)V:
     owner: "GameShell"
     name: "setFramesPerSecond"
