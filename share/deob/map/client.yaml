@@ -17,7 +17,7 @@ classes:
   client!bf: "Class18"
   client!bg: "LongNode"
   client!bh: "MouseWheel"
-  client!bi: "ParticleEmitterNode"
+  client!bi: "ParticleEmitter"
   client!bj: "Class21"
   client!bk: "TracingException"
   client!bl: "TextureOp25"
@@ -131,7 +131,7 @@ classes:
   client!km: "TextureOp29"
   client!l: "Class4_Sub15"
   client!la: "TextureOp20"
-  client!lb: "SecondarySceneGraphLinkedList"
+  client!lb: "SecondaryParticleLinkedList"
   client!lc: "Class11"
   client!ld: "Class4_Sub6_Sub2"
   client!lf: "TextureOp14"
@@ -146,7 +146,7 @@ classes:
   client!lo: "Class4_Sub6_Sub3"
   client!m: "IsaacRandom"
   client!ma: "IndexedSprite"
-  client!mb: "SceneGraphNode"
+  client!mb: "ParticleNode"
   client!mc: "Class4_Sub16"
   client!md: "Class114"
   client!mg: "Js5MasterIndex"
@@ -211,7 +211,7 @@ classes:
   client!qm: "SkyBoxType"
   client!qn: "Class4_Sub24"
   client!qo: "Class146"
-  client!r: "SecondarySceneGraphNode"
+  client!r: "SecondaryParticleNode"
   client!ra: "Loc"
   client!rd: "Class149"
   client!re: "Class150"
@@ -234,7 +234,7 @@ classes:
   client!sh: "TextureOp35"
   client!si: "Class157"
   client!sj: "ReflectionCheck"
-  client!sk: "ParticleEmitter"
+  client!sk: "ModelParticleEmitter"
   client!sl: "TextureOp7"
   client!sn: "TextureOp4"
   client!so: "GlTexture"
@@ -251,13 +251,13 @@ classes:
   client!tm: "ImageProducerFrameBuffer"
   client!tn: "AbstractWorld"
   client!to: "Class166"
-  client!u: "ParticleEffector"
+  client!u: "ModelParticleEffector"
   client!ua: "NpcType"
   client!ub: "Class169"
   client!uc: "TextureOp23"
   client!ud: "Class170"
   client!ue: "GameShell"
-  client!ug: "SceneGraphLinkedList"
+  client!ug: "ParticleLinkedList"
   client!uh: "Class173"
   client!ui: "GoSubFrame"
   client!uj: "Sprite"
@@ -288,7 +288,7 @@ classes:
   client!wj: "Class187"
   client!wl: "BufferedFile"
   client!wm: "Class4_Sub33"
-  client!wn: "ParticleEffectorNode"
+  client!wn: "ParticleEffector"
 fields:
   client!a.a [S:
     owner: "AnimFrame"
@@ -786,70 +786,70 @@ fields:
     owner: "Static1"
     name: "anInt322"
   client!bi.C Z:
-    owner: "ParticleEmitterNode"
+    owner: "ParticleEmitter"
     name: "aBoolean19"
   client!bi.D J:
-    owner: "ParticleEmitterNode"
+    owner: "ParticleEmitter"
     name: "aLong18"
   client!bi.E I:
-    owner: "ParticleEmitterNode"
+    owner: "ParticleEmitter"
     name: "anInt323"
   client!bi.F I:
-    owner: "ParticleEmitterNode"
+    owner: "ParticleEmitter"
     name: "anInt324"
   client!bi.G I:
-    owner: "ParticleEmitterNode"
+    owner: "ParticleEmitter"
     name: "particlesSize"
   client!bi.H I:
-    owner: "ParticleEmitterNode"
+    owner: "ParticleEmitter"
     name: "anInt326"
   client!bi.L I:
-    owner: "ParticleEmitterNode"
+    owner: "ParticleEmitter"
     name: "anInt330"
   client!bi.M I:
     owner: "Static1"
     name: "anInt331"
   client!bi.N Lclient!ug;:
-    owner: "ParticleEmitterNode"
+    owner: "ParticleEmitter"
     name: "particles"
   client!bi.O I:
-    owner: "ParticleEmitterNode"
+    owner: "ParticleEmitter"
     name: "anInt332"
   client!bi.P Z:
-    owner: "ParticleEmitterNode"
+    owner: "ParticleEmitter"
     name: "aBoolean20"
   client!bi.R Lclient!ne;:
-    owner: "ParticleEmitterNode"
+    owner: "ParticleEmitter"
     name: "system"
   client!bi.S I:
-    owner: "ParticleEmitterNode"
+    owner: "ParticleEmitter"
     name: "anInt334"
   client!bi.U I:
-    owner: "ParticleEmitterNode"
+    owner: "ParticleEmitter"
     name: "anInt336"
   client!bi.W I:
-    owner: "ParticleEmitterNode"
+    owner: "ParticleEmitter"
     name: "anInt338"
   client!bi.X I:
-    owner: "ParticleEmitterNode"
+    owner: "ParticleEmitter"
     name: "anInt339"
   client!bi.Y I:
-    owner: "ParticleEmitterNode"
+    owner: "ParticleEmitter"
     name: "anInt340"
   client!bi.k I:
-    owner: "ParticleEmitterNode"
+    owner: "ParticleEmitter"
     name: "anInt307"
   client!bi.m I:
-    owner: "ParticleEmitterNode"
+    owner: "ParticleEmitter"
     name: "anInt309"
   client!bi.n I:
-    owner: "ParticleEmitterNode"
+    owner: "ParticleEmitter"
     name: "anInt310"
   client!bi.o I:
-    owner: "ParticleEmitterNode"
+    owner: "ParticleEmitter"
     name: "anInt311"
   client!bi.p I:
-    owner: "ParticleEmitterNode"
+    owner: "ParticleEmitter"
     name: "anInt312"
   client!bi.r I:
     owner: "Static1"
@@ -858,25 +858,25 @@ fields:
     owner: "Static1"
     name: "anInt315"
   client!bi.t I:
-    owner: "ParticleEmitterNode"
+    owner: "ParticleEmitter"
     name: "anInt316"
   client!bi.u Lclient!sk;:
-    owner: "ParticleEmitterNode"
+    owner: "ParticleEmitter"
     name: "emitter"
   client!bi.v Lclient!ik;:
-    owner: "ParticleEmitterNode"
+    owner: "ParticleEmitter"
     name: "type"
   client!bi.w I:
-    owner: "ParticleEmitterNode"
+    owner: "ParticleEmitter"
     name: "anInt317"
   client!bi.x I:
-    owner: "ParticleEmitterNode"
+    owner: "ParticleEmitter"
     name: "anInt318"
   client!bi.y I:
-    owner: "ParticleEmitterNode"
+    owner: "ParticleEmitter"
     name: "anInt319"
   client!bi.z I:
-    owner: "ParticleEmitterNode"
+    owner: "ParticleEmitter"
     name: "anInt320"
   client!bj.a I:
     owner: "Class21"
@@ -5055,7 +5055,7 @@ fields:
     owner: "TextureOp20"
     name: "anInt3026"
   client!lb.e Lclient!r;:
-    owner: "SecondarySceneGraphLinkedList"
+    owner: "SecondaryParticleLinkedList"
     name: "sentinel"
   client!lb.j [I:
     owner: "ScriptRunner"
@@ -5064,7 +5064,7 @@ fields:
     owner: "PlayerList"
     name: "self"
   client!lb.l Lclient!r;:
-    owner: "SecondarySceneGraphLinkedList"
+    owner: "SecondaryParticleLinkedList"
     name: "cursor"
   client!lc.a I:
     owner: "Class11"
@@ -5565,10 +5565,10 @@ fields:
     owner: "Static4"
     name: "anInt3493"
   client!mb.d Lclient!mb;:
-    owner: "SceneGraphNode"
+    owner: "ParticleNode"
     name: "next"
   client!mb.e Lclient!mb;:
-    owner: "SceneGraphNode"
+    owner: "ParticleNode"
     name: "prev"
   client!mb.f F:
     owner: "Static4"
@@ -6151,7 +6151,7 @@ fields:
     name: "anIntArray370"
   client!na.I [Lclient!u;:
     owner: "SoftwareModel"
-    name: "aClass167Array2"
+    name: "particleEffectors"
   client!na.Ib [I:
     owner: "Static4"
     name: "anIntArray371"
@@ -6223,7 +6223,7 @@ fields:
     name: "anIntArray378"
   client!na.U [Lclient!sk;:
     owner: "SoftwareModel"
-    name: "aClass158Array2"
+    name: "particleEmitters"
   client!na.Ub [I:
     owner: "Static4"
     name: "anIntArray379"
@@ -8394,10 +8394,10 @@ fields:
     owner: "Preferences"
     name: "highDetailTextures"
   client!r.o Lclient!r;:
-    owner: "SecondarySceneGraphNode"
+    owner: "SecondaryParticleNode"
     name: "secondaryNext"
   client!r.q Lclient!r;:
-    owner: "SecondarySceneGraphNode"
+    owner: "SecondaryParticleNode"
     name: "secondaryPrev"
   client!r.r Lclient!fh;:
     owner: "client"
@@ -8842,7 +8842,7 @@ fields:
     name: "aFloat120"
   client!s.B [Lclient!u;:
     owner: "GlModel"
-    name: "aClass167Array3"
+    name: "particleEffectors"
   client!s.C Lclient!rj;:
     owner: "GlModel"
     name: "aClass152_1"
@@ -8944,7 +8944,7 @@ fields:
     name: "aClass53_Sub4_Sub2_3"
   client!s.lb [Lclient!sk;:
     owner: "GlModel"
-    name: "aClass158Array3"
+    name: "particleEmitters"
   client!s.mb Lclient!s;:
     owner: "Static6"
     name: "aClass53_Sub4_Sub2_4"
@@ -9285,7 +9285,7 @@ fields:
     owner: "Static6"
     name: "anInt4863"
   client!sk.c I:
-    owner: "ParticleEmitter"
+    owner: "ModelParticleEmitter"
     name: "anInt4864"
   client!sk.e Z:
     owner: "Static6"
@@ -9294,7 +9294,7 @@ fields:
     owner: "client"
     name: "port"
   client!sk.g Lclient!ik;:
-    owner: "ParticleEmitter"
+    owner: "ModelParticleEmitter"
     name: "type"
   client!sk.h I:
     owner: "MsiTypeList"
@@ -9306,10 +9306,10 @@ fields:
     owner: "LocalisedText"
     name: "CHATCOL3"
   client!sk.k I:
-    owner: "ParticleEmitter"
+    owner: "ModelParticleEmitter"
     name: "anInt4868"
   client!sk.l I:
-    owner: "ParticleEmitter"
+    owner: "ModelParticleEmitter"
     name: "anInt4869"
   client!sl.V [C:
     owner: "Cp1252Charset"
@@ -10038,7 +10038,7 @@ fields:
     owner: "Static7"
     name: "anInt5231"
   client!u.f I:
-    owner: "ParticleEffector"
+    owner: "ModelParticleEffector"
     name: "anInt5232"
   client!u.g [I:
     owner: "Protocol"
@@ -10047,7 +10047,7 @@ fields:
     owner: "client"
     name: "js5Archive17"
   client!u.i Lclient!dc;:
-    owner: "ParticleEffector"
+    owner: "ModelParticleEffector"
     name: "type"
   client!u.j S:
     owner: "Static7"
@@ -10347,13 +10347,13 @@ fields:
     owner: "Static7"
     name: "anIntArray601"
   client!ug.f Lclient!mb;:
-    owner: "SceneGraphLinkedList"
+    owner: "ParticleLinkedList"
     name: "sentinel"
   client!ug.h Ljava/lang/String;:
     owner: "LocalisedText"
     name: "SKILL"
   client!ug.l Lclient!mb;:
-    owner: "SceneGraphLinkedList"
+    owner: "ParticleLinkedList"
     name: "cursor"
   client!ug.m I:
     owner: "Static7"
@@ -11904,28 +11904,28 @@ fields:
     owner: "Class4_Sub33"
     name: "anInt6071"
   client!wn.A I:
-    owner: "ParticleEffectorNode"
+    owner: "ParticleEffector"
     name: "anInt6085"
   client!wn.B Ljava/util/zip/CRC32;:
     owner: "Js5CachedResourceProvider"
     name: "crc32"
   client!wn.D Lclient!u;:
-    owner: "ParticleEffectorNode"
+    owner: "ParticleEffector"
     name: "effector"
   client!wn.F I:
-    owner: "ParticleEffectorNode"
+    owner: "ParticleEffector"
     name: "anInt6087"
   client!wn.G I:
-    owner: "ParticleEffectorNode"
+    owner: "ParticleEffector"
     name: "anInt6088"
   client!wn.H I:
-    owner: "ParticleEffectorNode"
+    owner: "ParticleEffector"
     name: "anInt6089"
   client!wn.I I:
-    owner: "ParticleEffectorNode"
+    owner: "ParticleEffector"
     name: "anInt6090"
   client!wn.J I:
-    owner: "ParticleEffectorNode"
+    owner: "ParticleEffector"
     name: "anInt6091"
   client!wn.L Ljava/lang/String;:
     owner: "LocalisedText"
@@ -11934,10 +11934,10 @@ fields:
     owner: "Static7"
     name: "anInt6094"
   client!wn.O I:
-    owner: "ParticleEffectorNode"
+    owner: "ParticleEffector"
     name: "anInt6095"
   client!wn.z I:
-    owner: "ParticleEffectorNode"
+    owner: "ParticleEffector"
     name: "anInt6084"
 methods:
   client!a.<init> ([BLclient!af;)V:
@@ -13448,7 +13448,7 @@ methods:
     arguments: {}
     locals: {}
   client!bi.<init> (Lclient!sk;Lclient!ne;J)V:
-    owner: "ParticleEmitterNode"
+    owner: "ParticleEmitter"
     name: "<init>"
     arguments:
       0: "emitter"
@@ -13489,7 +13489,7 @@ methods:
       10: "local10"
       30: "local30"
   client!bi.a (IIIIIIIIII)V:
-    owner: "ParticleEmitterNode"
+    owner: "ParticleEmitter"
     name: "method309"
     arguments:
       0: "arg0"
@@ -13506,7 +13506,7 @@ methods:
       70: "local70"
       86: "local86"
   client!bi.a (IIZIJI)V:
-    owner: "ParticleEmitterNode"
+    owner: "ParticleEmitter"
     name: "method307"
     arguments:
       0: "arg0"
@@ -26985,7 +26985,7 @@ methods:
       101: "local101"
       107: "local107"
   client!lb.<init> ()V:
-    owner: "SecondarySceneGraphLinkedList"
+    owner: "SecondaryParticleLinkedList"
     name: "<init>"
     arguments: {}
     locals: {}
@@ -26997,7 +26997,7 @@ methods:
       8: "local8"
       10: "local10"
   client!lb.a (ILclient!r;)V:
-    owner: "SecondarySceneGraphLinkedList"
+    owner: "SecondaryParticleLinkedList"
     name: "addTail"
     arguments:
       1: "node"
@@ -27024,19 +27024,19 @@ methods:
     arguments: {}
     locals: {}
   client!lb.b (I)V:
-    owner: "SecondarySceneGraphLinkedList"
+    owner: "SecondaryParticleLinkedList"
     name: "clear"
     arguments: {}
     locals:
       5: "node"
   client!lb.c (B)Lclient!r;:
-    owner: "SecondarySceneGraphLinkedList"
+    owner: "SecondaryParticleLinkedList"
     name: "head"
     arguments: {}
     locals:
       18: "node"
   client!lb.d (B)Lclient!r;:
-    owner: "SecondarySceneGraphLinkedList"
+    owner: "SecondaryParticleLinkedList"
     name: "next"
     arguments: {}
     locals:
@@ -29173,7 +29173,7 @@ methods:
     locals:
       32: "local32"
   client!mb.a (I)V:
-    owner: "SceneGraphNode"
+    owner: "ParticleNode"
     name: "unlink"
     arguments: {}
     locals: {}
@@ -37311,7 +37311,7 @@ methods:
     locals:
       30: "local30"
   client!r.c (I)V:
-    owner: "SecondarySceneGraphNode"
+    owner: "SecondaryParticleNode"
     name: "unlinkSecondary"
     arguments: {}
     locals: {}
@@ -39938,7 +39938,7 @@ methods:
       6: "local6"
       36: "local36"
   client!sk.<init> (IIII)V:
-    owner: "ParticleEmitter"
+    owner: "ModelParticleEmitter"
     name: "<init>"
     arguments:
       0: "id"
@@ -39948,7 +39948,7 @@ methods:
     locals:
       5: "type"
   client!sk.<init> (Lclient!ik;III)V:
-    owner: "ParticleEmitter"
+    owner: "ModelParticleEmitter"
     name: "<init>"
     arguments:
       0: "type"
@@ -42228,14 +42228,14 @@ methods:
       707: "local707"
       709: "local709"
   client!u.<init> (II)V:
-    owner: "ParticleEffector"
+    owner: "ModelParticleEffector"
     name: "<init>"
     arguments:
       0: "id"
       1: "arg1"
     locals: {}
   client!u.<init> (Lclient!dc;I)V:
-    owner: "ParticleEffector"
+    owner: "ModelParticleEffector"
     name: "<init>"
     arguments:
       0: "type"
@@ -42960,7 +42960,7 @@ methods:
     arguments: {}
     locals: {}
   client!ug.<init> ()V:
-    owner: "SceneGraphLinkedList"
+    owner: "ParticleLinkedList"
     name: "<init>"
     arguments: {}
     locals: {}
@@ -42978,13 +42978,13 @@ methods:
       102: "extended"
       119: "local119"
   client!ug.a (BLclient!mb;)V:
-    owner: "SceneGraphLinkedList"
+    owner: "ParticleLinkedList"
     name: "addTail"
     arguments:
       1: "node"
     locals: {}
   client!ug.a (I)Lclient!mb;:
-    owner: "SceneGraphLinkedList"
+    owner: "ParticleLinkedList"
     name: "next"
     arguments: {}
     locals:
@@ -43000,13 +43000,13 @@ methods:
       49: "out"
       57: "prev"
   client!ug.b (B)Lclient!mb;:
-    owner: "SceneGraphLinkedList"
+    owner: "ParticleLinkedList"
     name: "head"
     arguments: {}
     locals:
       9: "node"
   client!ug.b (I)I:
-    owner: "SceneGraphLinkedList"
+    owner: "ParticleLinkedList"
     name: "size"
     arguments: {}
     locals:
@@ -46302,7 +46302,7 @@ methods:
       0: "arg0"
     locals: {}
   client!wn.<init> (Lclient!u;Lclient!ne;)V:
-    owner: "ParticleEffectorNode"
+    owner: "ParticleEffector"
     name: "<init>"
     arguments:
       0: "effector"
@@ -46317,7 +46317,7 @@ methods:
     locals:
       4: "change"
   client!wn.a (IIII)V:
-    owner: "ParticleEffectorNode"
+    owner: "ParticleEffector"
     name: "method4827"
     arguments:
       1: "arg0"
