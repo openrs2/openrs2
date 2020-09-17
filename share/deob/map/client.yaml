@@ -9,7 +9,7 @@ classes:
   client!ak: "SecondaryHashTable"
   client!al: "Js5CacheRequest"
   client!am: "Class11_Sub1"
-  client!ba: "Class15"
+  client!ba: "BoundingBox"
   client!bb: "ProjAnimNode"
   client!bc: "Class4_Sub4"
   client!bd: "Class16"
@@ -615,28 +615,28 @@ fields:
     owner: "Static1"
     name: "anInt227"
   client!ba.a S:
-    owner: "Class15"
+    owner: "BoundingBox"
     name: "aShort2"
   client!ba.b S:
-    owner: "Class15"
+    owner: "BoundingBox"
     name: "aShort3"
   client!ba.c Z:
-    owner: "Class15"
-    name: "aBoolean15"
+    owner: "BoundingBox"
+    name: "valid"
   client!ba.d S:
-    owner: "Class15"
+    owner: "BoundingBox"
     name: "aShort4"
   client!ba.e S:
-    owner: "Class15"
+    owner: "BoundingBox"
     name: "aShort5"
   client!ba.f S:
-    owner: "Class15"
+    owner: "BoundingBox"
     name: "aShort6"
   client!ba.g S:
-    owner: "Class15"
+    owner: "BoundingBox"
     name: "aShort7"
   client!ba.h S:
-    owner: "Class15"
+    owner: "BoundingBox"
     name: "aShort8"
   client!bb.C I:
     owner: "Static1"
@@ -8878,7 +8878,7 @@ fields:
     name: "aClass57_5"
   client!s.P Lclient!ba;:
     owner: "GlModel"
-    name: "aClass15_1"
+    name: "bounds"
   client!s.Q Lclient!fd;:
     owner: "Static6"
     name: "aClass4_Sub10_9"
@@ -39504,7 +39504,7 @@ methods:
       43: "local43"
   client!s.v ()V:
     owner: "GlModel"
-    name: "method3865"
+    name: "calculateBounds"
     arguments: {}
     locals:
       1: "local1"
