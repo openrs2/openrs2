@@ -259,7 +259,7 @@ classes:
   client!ue: "GameShell"
   client!ug: "Class172"
   client!uh: "Class173"
-  client!ui: "StackFrame"
+  client!ui: "GoSubFrame"
   client!uj: "Sprite"
   client!uk: "SecondaryLinkedList"
   client!ul: "Js5NetRequest"
@@ -10434,19 +10434,19 @@ fields:
     owner: "Static7"
     name: "anIntArray612"
   client!ui.a Lclient!jl;:
-    owner: "StackFrame"
+    owner: "GoSubFrame"
     name: "script"
   client!ui.c [Ljava/lang/String;:
-    owner: "StackFrame"
+    owner: "GoSubFrame"
     name: "stringLocals"
   client!ui.f I:
-    owner: "StackFrame"
+    owner: "GoSubFrame"
     name: "pc"
   client!ui.g [[S:
     owner: "Static7"
     name: "aShortArrayArray8"
   client!ui.h [I:
-    owner: "StackFrame"
+    owner: "GoSubFrame"
     name: "intLocals"
   client!ui.j Ljava/lang/String;:
     owner: "Text"
