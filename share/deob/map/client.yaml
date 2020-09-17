@@ -152,7 +152,7 @@ classes:
   client!mg: "Js5MasterIndex"
   client!mi: "Material"
   client!mj: "Class120"
-  client!ml: "Class53_Sub3"
+  client!ml: "RawModel"
   client!mo: "TextureOp26"
   client!n: "GlIndexedSprite"
   client!na: "SoftwareModel"
@@ -5838,58 +5838,58 @@ fields:
     owner: "Class120"
     name: "anInt3343"
   client!ml.A [B:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aByteArray33"
   client!ml.B S:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aShort28"
   client!ml.C S:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aShort29"
   client!ml.D [S:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aShortArray54"
   client!ml.E S:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aShort30"
   client!ml.F Z:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aBoolean238"
   client!ml.G [B:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aByteArray34"
   client!ml.H [Lclient!sk;:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "particleEmitters"
   client!ml.I [I:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "anIntArray325"
   client!ml.J [S:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aShortArray55"
   client!ml.K S:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aShort31"
   client!ml.L [S:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aShortArray56"
   client!ml.M [B:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aByteArray35"
   client!ml.N [B:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aByteArray36"
   client!ml.O [Lclient!ci;:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aClass31Array1"
   client!ml.P [B:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aByteArray37"
   client!ml.Q [Lclient!mj;:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aClass120Array1"
   client!ml.R [I:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "anIntArray326"
   client!ml.S [I:
     owner: "Static4"
@@ -5898,106 +5898,106 @@ fields:
     owner: "Static4"
     name: "anIntArray328"
   client!ml.U [[I:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "anIntArrayArray27"
   client!ml.V [B:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aByteArray38"
   client!ml.W I:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "anInt3355"
   client!ml.X [Lclient!u;:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "particleEffectors"
   client!ml.Y [B:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aByteArray39"
   client!ml.Z S:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aShort32"
   client!ml.ab [I:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "anIntArray329"
   client!ml.bb [I:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "anIntArray330"
   client!ml.cb [S:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aShortArray57"
   client!ml.db [Lclient!ci;:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aClass31Array2"
   client!ml.eb S:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aShort33"
   client!ml.fb [B:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aByteArray40"
   client!ml.gb I:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "anInt3356"
   client!ml.hb [I:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "anIntArray331"
   client!ml.ib [I:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "anIntArray332"
   client!ml.jb B:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aByte11"
   client!ml.kb [S:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aShortArray58"
   client!ml.lb [S:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aShortArray59"
   client!ml.m [S:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aShortArray51"
   client!ml.mb S:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aShort34"
   client!ml.n [B:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aByteArray31"
   client!ml.nb [S:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aShortArray60"
   client!ml.o [S:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aShortArray52"
   client!ml.p [I:
     owner: "Static4"
     name: "anIntArray321"
   client!ml.q S:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aShort27"
   client!ml.r I:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "anInt3352"
   client!ml.s I:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "anInt3353"
   client!ml.t [S:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aShortArray53"
   client!ml.u [I:
     owner: "Static4"
     name: "anIntArray322"
   client!ml.v [B:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "aByteArray32"
   client!ml.w [I:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "anIntArray323"
   client!ml.x [I:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "anIntArray324"
   client!ml.y I:
     owner: "Static4"
     name: "anInt3354"
   client!ml.z [[I:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "anIntArrayArray26"
   client!mm.a I:
     owner: "client"
@@ -29560,12 +29560,12 @@ methods:
       225: "local225"
       234: "local234"
   client!ml.<init> ()V:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "<init>"
     arguments: {}
     locals: {}
   client!ml.<init> (III)V:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "<init>"
     arguments:
       0: "arg0"
@@ -29573,7 +29573,7 @@ methods:
       2: "arg2"
     locals: {}
   client!ml.<init> (Lclient!ml;ZZZZ)V:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "<init>"
     arguments:
       0: "arg0"
@@ -29586,13 +29586,13 @@ methods:
       108: "local108"
       139: "local139"
   client!ml.<init> ([B)V:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "bytes"
     locals: {}
   client!ml.<init> ([Lclient!ml;I)V:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "<init>"
     arguments:
       0: "arg0"
@@ -29628,12 +29628,12 @@ methods:
       665: "local665"
       680: "local680"
   client!ml.a ()Z:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "method3808"
     arguments: {}
     locals: {}
   client!ml.a (I)V:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "method2740"
     arguments: {}
     locals:
@@ -29642,12 +29642,12 @@ methods:
       9: "local9"
       29: "local29"
   client!ml.a (III)Lclient!vc;:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "method3809"
     arguments: {}
     locals: {}
   client!ml.a (IIIBSB)I:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "method2756"
     arguments:
       0: "arg0"
@@ -29657,7 +29657,7 @@ methods:
       5: "arg4"
     locals: {}
   client!ml.a (IIIII)V:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "method3806"
     arguments:
       0: "arg0"
@@ -29667,7 +29667,7 @@ methods:
       4: "arg4"
     locals: {}
   client!ml.a (IIIIIIIIJILclient!ne;)V:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "method3805"
     arguments:
       0: "arg0"
@@ -29683,7 +29683,7 @@ methods:
       10: "arg10"
     locals: {}
   client!ml.a (II[[I[[IIIIZZ)Lclient!ml;:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "method2766"
     arguments:
       0: "arg0"
@@ -29794,7 +29794,7 @@ methods:
       1538: "local1538"
       1542: "local1542"
   client!ml.a (Lclient!fh;II)Lclient!ml;:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "create"
     arguments:
       0: "archive"
@@ -29802,7 +29802,7 @@ methods:
     locals:
       5: "bytes"
   client!ml.a (Lclient!ml;IS)I:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "method2741"
     arguments:
       0: "arg0"
@@ -29815,7 +29815,7 @@ methods:
       16: "local16"
       40: "local40"
   client!ml.a (Lclient!vc;IIIZ)V:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "method3807"
     arguments:
       0: "arg0"
@@ -29840,7 +29840,7 @@ methods:
       237: "local237"
       282: "local282"
   client!ml.a (SS)V:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "method2753"
     arguments:
       0: "arg0"
@@ -29848,10 +29848,10 @@ methods:
     locals:
       5: "local5"
   client!ml.a ([B)V:
-    owner: "Class53_Sub3"
-    name: "method2751"
+    owner: "RawModel"
+    name: "decodeOld"
     arguments:
-      0: "arg0"
+      0: "bytes"
     locals:
       1: "local1"
       3: "local3"
@@ -29920,7 +29920,7 @@ methods:
       53: "local53"
       79: "local79"
   client!ml.a ([[IIIIII)V:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "method2746"
     arguments:
       0: "arg0"
@@ -29951,12 +29951,12 @@ methods:
       149: "local149"
       164: "local164"
   client!ml.b ()I:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "method3813"
     arguments: {}
     locals: {}
   client!ml.b (I)V:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "method2758"
     arguments:
       0: "arg0"
@@ -29966,7 +29966,7 @@ methods:
       9: "local9"
       29: "local29"
   client!ml.b (III)V:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "method2743"
     arguments:
       0: "arg0"
@@ -29976,8 +29976,8 @@ methods:
       1: "local1"
       7: "local7"
   client!ml.b (IIIII)Lclient!na;:
-    owner: "Class53_Sub3"
-    name: "method2759"
+    owner: "RawModel"
+    name: "createSoftwareModel"
     arguments:
       0: "arg0"
       1: "arg1"
@@ -29986,7 +29986,7 @@ methods:
       4: "arg4"
     locals: {}
   client!ml.b (SS)V:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "method2768"
     arguments:
       0: "arg0"
@@ -29994,10 +29994,10 @@ methods:
     locals:
       1: "local1"
   client!ml.b ([B)V:
-    owner: "Class53_Sub3"
-    name: "method2755"
+    owner: "RawModel"
+    name: "decodeNew"
     arguments:
-      0: "arg0"
+      0: "bytes"
     locals:
       4: "local4"
       9: "local9"
@@ -30072,14 +30072,14 @@ methods:
       1225: "local1225"
       1233: "local1233"
   client!ml.c ()V:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "method2742"
     arguments: {}
     locals:
       1: "local1"
       10: "local10"
   client!ml.c (I)V:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "method2769"
     arguments:
       0: "arg0"
@@ -30089,7 +30089,7 @@ methods:
       9: "local9"
       29: "local29"
   client!ml.c (III)V:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "method2754"
     arguments:
       0: "arg0"
@@ -30109,8 +30109,8 @@ methods:
       127: "local127"
       147: "local147"
   client!ml.c (IIIII)Lclient!vg;:
-    owner: "Class53_Sub3"
-    name: "method2761"
+    owner: "RawModel"
+    name: "createModel"
     arguments:
       0: "arg0"
       1: "arg1"
@@ -30118,9 +30118,9 @@ methods:
       3: "arg3"
       4: "arg4"
     locals:
-      9: "local9"
+      9: "model"
   client!ml.d ()V:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "method2744"
     arguments: {}
     locals:
@@ -30141,7 +30141,7 @@ methods:
       147: "local147"
       156: "local156"
   client!ml.d (III)I:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "method2763"
     arguments:
       0: "arg0"
@@ -30149,13 +30149,13 @@ methods:
     locals:
       1: "local1"
   client!ml.e ()V:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "method2745"
     arguments: {}
     locals:
       1: "local1"
   client!ml.e (III)V:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "method2767"
     arguments:
       0: "arg0"
@@ -30164,14 +30164,14 @@ methods:
     locals:
       1: "local1"
   client!ml.f ()V:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "method2747"
     arguments: {}
     locals:
       1: "local1"
       10: "local10"
   client!ml.g ()V:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "method2748"
     arguments: {}
     locals:
@@ -30179,24 +30179,24 @@ methods:
       18: "local18"
       27: "local27"
   client!ml.h ()Lclient!ml;:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "method2749"
     arguments: {}
     locals:
       3: "local3"
       13: "local13"
   client!ml.j ()V:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "method2757"
     arguments: {}
     locals: {}
   client!ml.k ()V:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "method2760"
     arguments: {}
     locals: {}
   client!ml.l ()V:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "method2764"
     arguments: {}
     locals:
@@ -30222,7 +30222,7 @@ methods:
       214: "local214"
       317: "local317"
   client!ml.m ()V:
-    owner: "Class53_Sub3"
+    owner: "RawModel"
     name: "method2765"
     arguments: {}
     locals:
@@ -30498,7 +30498,7 @@ methods:
     owner: "SoftwareModel"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "model"
       1: "arg1"
       2: "arg2"
       3: "arg3"
@@ -38280,7 +38280,7 @@ methods:
     owner: "GlModel"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "model"
       1: "arg1"
       2: "arg2"
       3: "arg3"
