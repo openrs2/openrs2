@@ -42,7 +42,7 @@ classes:
   client!dc: "ParticleEffectorType"
   client!dd: "Class4_Sub4_Sub1"
   client!de: "Class11_Sub2"
-  client!dh: "Class4_Sub3_Sub5_Sub1"
+  client!dh: "GlFont"
   client!dj: "LruHashTable"
   client!dk: "JavaMouseWheel"
   client!dl: "Class41_Sub1_Sub1"
@@ -82,7 +82,7 @@ classes:
   client!gg: "Class11_Sub3"
   client!gh: "ReferenceNodeFactory"
   client!gk: "Class70"
-  client!gl: "Class4_Sub3_Sub5"
+  client!gl: "Font"
   client!gn: "Class4_Sub11"
   client!go: "Class72"
   client!h: "Class73"
@@ -120,7 +120,7 @@ classes:
   client!jo: "TextureOp"
   client!kb: "JavaAudioChannel"
   client!kc: "Class103"
-  client!ke: "Class4_Sub3_Sub5_Sub2"
+  client!ke: "SoftwareFont"
   client!kf: "Bzip2DState"
   client!kg: "Class105"
   client!kh: "SoftReferenceNode"
@@ -1701,20 +1701,20 @@ fields:
     owner: "Static2"
     name: "anInt2248"
   client!dh.K I:
-    owner: "Class4_Sub3_Sub5_Sub1"
+    owner: "GlFont"
     name: "contextId"
   client!dh.W [I:
-    owner: "Class4_Sub3_Sub5_Sub1"
-    name: "anIntArray82"
+    owner: "GlFont"
+    name: "listIds"
   client!dh.X I:
-    owner: "Class4_Sub3_Sub5_Sub1"
-    name: "anInt1022"
+    owner: "GlFont"
+    name: "size"
   client!dh.Y I:
-    owner: "Class4_Sub3_Sub5_Sub1"
+    owner: "GlFont"
     name: "anInt1023"
   client!dh.Z I:
-    owner: "Class4_Sub3_Sub5_Sub1"
-    name: "anInt1024"
+    owner: "GlFont"
+    name: "textureId"
   client!di.a I:
     owner: "Static2"
     name: "anInt1025"
@@ -3099,31 +3099,31 @@ fields:
     owner: "Class70"
     name: "anInt2101"
   client!gl.A [I:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "anIntArray247"
   client!gl.B I:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "anInt2820"
   client!gl.C [B:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "aByteArray22"
   client!gl.D [Lclient!ma;:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "aClass56Array4"
   client!gl.E Ljava/lang/StringBuffer;:
     owner: "Static3"
     name: "aStringBuffer3"
   client!gl.F [I:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "anIntArray248"
   client!gl.G [I:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "anIntArray249"
   client!gl.H [I:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "anIntArray250"
   client!gl.I [I:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "anIntArray251"
   client!gl.J I:
     owner: "Static3"
@@ -3147,7 +3147,7 @@ fields:
     owner: "Static3"
     name: "anInt2827"
   client!gl.R I:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "anInt2828"
   client!gl.S I:
     owner: "Static3"
@@ -3162,10 +3162,10 @@ fields:
     owner: "Static3"
     name: "aStringArray20"
   client!gl.y I:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "anInt2819"
   client!gl.z [I:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "anIntArray246"
   client!gm.a [I:
     owner: "Static3"
@@ -4722,7 +4722,7 @@ fields:
     owner: "Class103"
     name: "aByteBuffer8"
   client!ke.K [[B:
-    owner: "Class4_Sub3_Sub5_Sub2"
+    owner: "SoftwareFont"
     name: "aByteArrayArray18"
   client!kf.A I:
     owner: "Bzip2DState"
@@ -15999,7 +15999,7 @@ methods:
     locals:
       10: "change"
   client!dh.<init> ([B[I[I[I[I[[B)V:
-    owner: "Class4_Sub3_Sub5_Sub1"
+    owner: "GlFont"
     name: "<init>"
     arguments:
       0: "arg0"
@@ -16010,7 +16010,7 @@ methods:
       5: "arg5"
     locals: {}
   client!dh.a (IIIIIIIZ)V:
-    owner: "Class4_Sub3_Sub5_Sub1"
+    owner: "GlFont"
     name: "method2264"
     arguments:
       0: "arg0"
@@ -16021,9 +16021,9 @@ methods:
       5: "arg5"
       6: "arg6"
     locals:
-      2: "local2"
+      2: "gl"
   client!dh.a (IIIIIIZ)V:
-    owner: "Class4_Sub3_Sub5_Sub1"
+    owner: "GlFont"
     name: "method2253"
     arguments:
       0: "arg0"
@@ -16033,7 +16033,7 @@ methods:
       4: "arg4"
       5: "arg5"
     locals:
-      4: "local4"
+      4: "gl"
       32: "local32"
       39: "local39"
       51: "local51"
@@ -16043,9 +16043,9 @@ methods:
       107: "local107"
       118: "local118"
       129: "local129"
-      226: "local226"
+      226: "gl"
   client!dh.a ([[B)V:
-    owner: "Class4_Sub3_Sub5_Sub1"
+    owner: "GlFont"
     name: "method868"
     arguments:
       0: "arg0"
@@ -16065,25 +16065,25 @@ methods:
       115: "local115"
       126: "local126"
       153: "local153"
-      155: "local155"
+      155: "gl"
       162: "local162"
   client!dh.b ()V:
-    owner: "Class4_Sub3_Sub5_Sub1"
+    owner: "GlFont"
     name: "method869"
     arguments: {}
     locals:
-      9: "local9"
+      9: "gl"
       11: "local11"
       21: "local21"
       28: "local28"
       40: "local40"
       52: "local52"
   client!dh.finalize ()V:
-    owner: "Class4_Sub3_Sub5_Sub1"
+    owner: "GlFont"
     name: "finalize"
     arguments: {}
     locals:
-      21: "local21"
+      21: "i"
   client!di.a ()V:
     owner: "Static12"
     name: "method870"
@@ -21231,13 +21231,13 @@ methods:
       4: "local4"
       7: "local7"
   client!gl.<init> ([B)V:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "<init>"
     arguments:
       0: "arg0"
     locals: {}
   client!gl.<init> ([B[I[I[I[I)V:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "<init>"
     arguments:
       0: "arg0"
@@ -21250,20 +21250,20 @@ methods:
       23: "local23"
       25: "local25"
   client!gl.a (C)I:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "method2277"
     arguments:
       0: "arg0"
     locals: {}
   client!gl.a (II)V:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "method2258"
     arguments:
       0: "arg0"
       1: "arg1"
     locals: {}
   client!gl.a (III)V:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "method2276"
     arguments:
       0: "arg0"
@@ -21271,7 +21271,7 @@ methods:
       2: "arg2"
     locals: {}
   client!gl.a (IIIIIIIZ)V:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "method2264"
     arguments:
       0: "arg0"
@@ -21283,7 +21283,7 @@ methods:
       6: "arg6"
     locals: {}
   client!gl.a (IIIIIIZ)V:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "method2253"
     arguments:
       0: "arg0"
@@ -21294,7 +21294,7 @@ methods:
       5: "arg5"
     locals: {}
   client!gl.a (Ljava/lang/String;)I:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "method2252"
     arguments:
       0: "arg0"
@@ -21310,7 +21310,7 @@ methods:
       121: "local121"
       132: "local132"
   client!gl.a (Ljava/lang/String;I)V:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "method2257"
     arguments:
       0: "arg0"
@@ -21322,7 +21322,7 @@ methods:
       8: "local8"
       15: "local15"
   client!gl.a (Ljava/lang/String;II)V:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "method2254"
     arguments:
       0: "arg0"
@@ -21344,7 +21344,7 @@ methods:
       197: "local197"
       318: "local318"
   client!gl.a (Ljava/lang/String;IIII)V:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "method2259"
     arguments:
       0: "arg0"
@@ -21354,7 +21354,7 @@ methods:
       4: "arg4"
     locals: {}
   client!gl.a (Ljava/lang/String;IIIII)V:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "method2256"
     arguments:
       0: "arg0"
@@ -21368,7 +21368,7 @@ methods:
       15: "local15"
       17: "local17"
   client!gl.a (Ljava/lang/String;IIIIII)V:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "method2266"
     arguments:
       0: "arg0"
@@ -21383,7 +21383,7 @@ methods:
       25: "local25"
       27: "local27"
   client!gl.a (Ljava/lang/String;IIIIIIIII)I:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "method2255"
     arguments:
       0: "arg0"
@@ -21398,7 +21398,7 @@ methods:
       9: "arg9"
     locals: {}
   client!gl.a (Ljava/lang/String;IIIIIIIIII)I:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "method2260"
     arguments:
       0: "arg0"
@@ -21418,7 +21418,7 @@ methods:
       118: "local118"
       135: "local135"
   client!gl.a (Ljava/lang/String;IIIIIIIILjava/util/Random;I[I)I:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "method2269"
     arguments:
       0: "arg0"
@@ -21442,7 +21442,7 @@ methods:
       49: "local49"
       51: "local51"
   client!gl.a (Ljava/lang/String;IIIILjava/util/Random;I)I:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "method2263"
     arguments:
       0: "arg0"
@@ -21456,7 +21456,7 @@ methods:
       25: "local25"
       27: "local27"
   client!gl.a (Ljava/lang/String;II[I[I)V:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "method2268"
     arguments:
       0: "arg0"
@@ -21485,7 +21485,7 @@ methods:
       241: "local241"
       382: "local382"
   client!gl.a (Ljava/lang/String;[I[Ljava/lang/String;)I:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "method2279"
     arguments:
       0: "arg0"
@@ -21507,7 +21507,7 @@ methods:
       337: "local337"
       349: "local349"
   client!gl.a ([B)V:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "method2251"
     arguments:
       0: "arg0"
@@ -21530,7 +21530,7 @@ methods:
       182: "local182"
       194: "local194"
   client!gl.a ([Lclient!ma;[I)V:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "method2267"
     arguments:
       0: "arg0"
@@ -21575,7 +21575,7 @@ methods:
       31: "local31"
       38: "local38"
   client!gl.b (Ljava/lang/String;I)I:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "method2261"
     arguments:
       0: "arg0"
@@ -21586,7 +21586,7 @@ methods:
       14: "local14"
       23: "local23"
   client!gl.b (Ljava/lang/String;II)I:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "method2273"
     arguments:
       0: "arg0"
@@ -21595,7 +21595,7 @@ methods:
       15: "local15"
       21: "local21"
   client!gl.b (Ljava/lang/String;IIII)V:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "method2271"
     arguments:
       0: "arg0"
@@ -21605,7 +21605,7 @@ methods:
       4: "arg4"
     locals: {}
   client!gl.b (Ljava/lang/String;IIIII)V:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "method2262"
     arguments:
       0: "arg0"
@@ -21618,21 +21618,21 @@ methods:
       12: "local12"
       14: "local14"
   client!gl.c (Ljava/lang/String;)V:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "method2278"
     arguments:
       0: "arg0"
     locals:
       125: "local125"
   client!gl.c (Ljava/lang/String;I)I:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "method2274"
     arguments:
       0: "arg0"
       1: "arg1"
     locals: {}
   client!gl.c (Ljava/lang/String;IIII)V:
-    owner: "Class4_Sub3_Sub5"
+    owner: "Font"
     name: "method2275"
     arguments:
       0: "arg0"
@@ -25840,13 +25840,13 @@ methods:
       154: "local154"
       293: "local293"
   client!ke.<init> ([B)V:
-    owner: "Class4_Sub3_Sub5_Sub2"
+    owner: "SoftwareFont"
     name: "<init>"
     arguments:
       0: "arg0"
     locals: {}
   client!ke.<init> ([B[I[I[I[I[[B)V:
-    owner: "Class4_Sub3_Sub5_Sub2"
+    owner: "SoftwareFont"
     name: "<init>"
     arguments:
       0: "arg0"
@@ -25857,7 +25857,7 @@ methods:
       5: "arg5"
     locals: {}
   client!ke.a (IIIIIIIZ)V:
-    owner: "Class4_Sub3_Sub5_Sub2"
+    owner: "SoftwareFont"
     name: "method2264"
     arguments:
       0: "arg0"
@@ -25876,7 +25876,7 @@ methods:
       58: "local58"
       91: "local91"
   client!ke.a (IIIIIIZ)V:
-    owner: "Class4_Sub3_Sub5_Sub2"
+    owner: "SoftwareFont"
     name: "method2253"
     arguments:
       0: "arg0"
