@@ -263,7 +263,7 @@ classes:
   client!uj: "Sprite"
   client!uk: "SecondaryLinkedList"
   client!ul: "Js5NetRequest"
-  client!uo: "Class4_Sub3_Sub20"
+  client!uo: "ByteArraySecondaryNode"
   client!v: "IntNode"
   client!vb: "TextureOp12"
   client!vc: "Entity"
@@ -10542,8 +10542,8 @@ fields:
     owner: "Static7"
     name: "anInt5426"
   client!uo.y [B:
-    owner: "Class4_Sub3_Sub20"
-    name: "aByteArray69"
+    owner: "ByteArraySecondaryNode"
+    name: "value"
   client!uo.z I:
     owner: "Static7"
     name: "anInt5425"
@@ -43408,10 +43408,10 @@ methods:
       199: "i"
       226: "ex"
   client!uo.<init> ([B)V:
-    owner: "Class4_Sub3_Sub20"
+    owner: "ByteArraySecondaryNode"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "value"
     locals: {}
   client!v.<init> ()V:
     owner: "IntNode"
