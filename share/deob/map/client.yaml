@@ -103,7 +103,7 @@ classes:
   client!im: "AudioThread"
   client!in: "Class11_Sub4"
   client!io: "Class4_Sub13"
-  client!j: "Class4_Sub14"
+  client!j: "ByteArrayNode"
   client!ja: "Js5CacheQueue"
   client!jagex3/jagmisc/jagmisc: "jagex3/jagmisc/jagmisc"
   client!jb: "GzipDecompressor"
@@ -4284,8 +4284,8 @@ fields:
     owner: "LocalisedText"
     name: "MAINLOAD41"
   client!j.w [B:
-    owner: "Class4_Sub14"
-    name: "aByteArray18"
+    owner: "ByteArrayNode"
+    name: "value"
   client!j.x [S:
     owner: "Static3"
     name: "aShortArray35"
@@ -23769,10 +23769,10 @@ methods:
       35: "local35"
       104: "local104"
   client!j.<init> ([B)V:
-    owner: "Class4_Sub14"
+    owner: "ByteArrayNode"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "value"
     locals: {}
   client!j.a (II)Lclient!wh;:
     owner: "QuickChatCatTypeList"
