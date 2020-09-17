@@ -238,7 +238,7 @@ classes:
   client!sl: "TextureOp7"
   client!sn: "TextureOp4"
   client!so: "GlTexture"
-  client!t: "Class160"
+  client!t: "StockMarketOffer"
   client!ta: "Class4_Sub30"
   client!tb: "Keyboard"
   client!tc: "TextureOp22"
@@ -759,8 +759,8 @@ fields:
     owner: "GameShell"
     name: "replaceCanvas"
   client!bg.u [Lclient!t;:
-    owner: "Static1"
-    name: "aClass160Array1"
+    owner: "StockMarketManager"
+    name: "offers"
   client!bg.v Ljava/lang/String;:
     owner: "LocalisedText"
     name: "MAINLOAD70"
@@ -9453,8 +9453,8 @@ fields:
     owner: "GlTexture"
     name: "textureId"
   client!t.c I:
-    owner: "Class160"
-    name: "anInt4976"
+    owner: "StockMarketOffer"
+    name: "count"
   client!t.d I:
     owner: "Mouse"
     name: "awtX"
@@ -9468,20 +9468,20 @@ fields:
     owner: "Static6"
     name: "anIntArray540"
   client!t.h B:
-    owner: "Class160"
-    name: "aByte17"
+    owner: "StockMarketOffer"
+    name: "statusAndType"
   client!t.i I:
-    owner: "Class160"
-    name: "anInt4980"
+    owner: "StockMarketOffer"
+    name: "completedCount"
   client!t.j I:
-    owner: "Class160"
-    name: "anInt4981"
+    owner: "StockMarketOffer"
+    name: "completedGold"
   client!t.k I:
-    owner: "Class160"
-    name: "anInt4982"
+    owner: "StockMarketOffer"
+    name: "price"
   client!t.l I:
-    owner: "Class160"
-    name: "anInt4983"
+    owner: "StockMarketOffer"
+    name: "item"
   client!t.n [I:
     owner: "Static6"
     name: "anIntArray541"
@@ -14699,7 +14699,7 @@ methods:
       3886: "local3886"
       3945: "local3945"
       3969: "local3969"
-      3987: "local3987"
+      3987: "i"
       4001: "local4001"
   client!cg.a (IIIIZ)I:
     owner: "PerlinNoise"
@@ -24552,7 +24552,7 @@ methods:
       5979: "local5979"
       5985: "local5985"
       5989: "local5989"
-      6012: "local6012"
+      6012: "slot"
   client!jf.b (III)I:
     owner: "Inv"
     name: "getItemCount"
@@ -40461,19 +40461,19 @@ methods:
     arguments: {}
     locals: {}
   client!t.<init> ()V:
-    owner: "Class160"
+    owner: "StockMarketOffer"
     name: "<init>"
     arguments: {}
     locals: {}
   client!t.<init> (Lclient!fd;)V:
-    owner: "Class160"
+    owner: "StockMarketOffer"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals: {}
   client!t.a (I)I:
-    owner: "Class160"
-    name: "method4078"
+    owner: "StockMarketOffer"
+    name: "getType"
     arguments: {}
     locals: {}
   client!t.a (Lclient!fh;ZILclient!fh;)V:
@@ -40484,8 +40484,8 @@ methods:
       0: "models"
     locals: {}
   client!t.c (I)I:
-    owner: "Class160"
-    name: "method4081"
+    owner: "StockMarketOffer"
+    name: "getStatus"
     arguments: {}
     locals: {}
   client!ta.a (IB)I:
