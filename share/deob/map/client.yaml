@@ -10849,7 +10849,7 @@ fields:
     name: "modeWhat"
   client!vh.ib Z:
     owner: "LocType"
-    name: "aBoolean378"
+    name: "mapSceneRotated"
   client!vh.j I:
     owner: "LocType"
     name: "anInt5509"
@@ -10885,10 +10885,10 @@ fields:
     name: "cursor1Op"
   client!vh.qb I:
     owner: "LocType"
-    name: "anInt5546"
+    name: "mapSceneAngleOffset"
   client!vh.r I:
     owner: "LocType"
-    name: "anInt5515"
+    name: "mapSceneId"
   client!vh.rb [I:
     owner: "LocType"
     name: "anIntArray632"
@@ -23146,12 +23146,12 @@ methods:
       775: "local775"
       785: "local785"
       808: "local808"
-      819: "local819"
-      823: "local823"
-      832: "local832"
-      838: "local838"
+      819: "mapScene"
+      823: "mapSceneId"
+      832: "type"
+      838: "angle"
       849: "local849"
-      855: "local855"
+      855: "sprite"
       864: "local864"
       871: "local871"
       880: "local880"
@@ -36333,11 +36333,11 @@ methods:
     name: "getSprite"
     arguments:
       1: "arg0"
-      2: "arg1"
+      2: "angle"
     locals:
       23: "sprite"
       44: "newSprite"
-      66: "local66"
+      66: "i"
   client!qg.a (IZLclient!fd;)V:
     owner: "MsiType"
     name: "decode"
@@ -40894,16 +40894,16 @@ methods:
     owner: "Static33"
     name: "method4155"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      4: "arg2"
-      6: "arg3"
+      1: "z"
+      2: "locType"
+      4: "x"
+      6: "angle"
     locals:
-      10: "local10"
-      22: "local22"
-      45: "local45"
-      53: "local53"
-      56: "local56"
+      10: "msiType"
+      22: "angle2"
+      45: "sprite"
+      53: "width"
+      56: "length"
       73: "local73"
       76: "local76"
   client!te.a (ILjava/lang/String;)Ljava/lang/Class;:
