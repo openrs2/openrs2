@@ -21562,18 +21562,18 @@ methods:
       64: "local64"
       77: "local77"
   client!gl.b (Ljava/lang/String;)Ljava/lang/String;:
-    owner: "Static17"
-    name: "method2265"
+    owner: "StringUtils"
+    name: "escape"
     arguments:
-      0: "arg0"
+      0: "s"
     locals:
-      2: "local2"
-      4: "local4"
-      6: "local6"
-      13: "local13"
-      29: "local29"
-      31: "local31"
-      38: "local38"
+      2: "len"
+      4: "escapedLen"
+      6: "i"
+      13: "c"
+      29: "buffer"
+      31: "i"
+      38: "c"
   client!gl.b (Ljava/lang/String;I)I:
     owner: "Font"
     name: "method2261"
@@ -22598,17 +22598,17 @@ methods:
       167: "local167"
       181: "local181"
   client!hn.a (IIIZ)Ljava/lang/String;:
-    owner: "Static19"
-    name: "method4377"
+    owner: "IntUtils"
+    name: "toStringInternal"
     arguments:
-      0: "arg0"
+      0: "v"
     locals:
-      46: "local46"
-      50: "local50"
-      65: "local65"
-      73: "local73"
-      78: "local78"
-      89: "local89"
+      46: "len"
+      50: "temp"
+      65: "chars"
+      73: "i"
+      78: "prevValue"
+      89: "digit"
   client!hn.a (ZI)V:
     owner: "NpcTypeList"
     name: "setAllowMembers"
@@ -23412,10 +23412,10 @@ methods:
       15: "local15"
       23: "local23"
   client!ij.a (IC)Z:
-    owner: "Static20"
-    name: "method1907"
+    owner: "Cp1252Charset"
+    name: "isPrintable"
     arguments:
-      1: "arg0"
+      1: "c"
     locals: {}
   client!ij.a (II)I:
     owner: "QuickChatPhraseType"
@@ -33392,10 +33392,10 @@ methods:
     locals:
       15: "code"
   client!oh.b (II)I:
-    owner: "Static27"
-    name: "method3220"
+    owner: "IntUtils"
+    name: "signum"
     arguments:
-      1: "arg0"
+      1: "v"
     locals: {}
   client!oi.a (BI)Ljava/lang/String;:
     owner: "Static27"
@@ -35275,10 +35275,10 @@ methods:
       149: "local149"
       173: "local173"
   client!pj.a (ZIZ)Ljava/lang/String;:
-    owner: "Static29"
-    name: "method3436"
+    owner: "IntUtils"
+    name: "toString"
     arguments:
-      1: "arg0"
+      1: "v"
     locals: {}
   client!pk.<init> ()V:
     owner: "TextureOp2"
@@ -43520,22 +43520,22 @@ methods:
       95: "local95"
       118: "local118"
   client!vb.a (JZIII)Ljava/lang/String;:
-    owner: "Static36"
-    name: "method4434"
+    owner: "LongUtils"
+    name: "fixedPointToString"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      3: "arg2"
-      4: "arg3"
+      0: "value"
+      1: "thousandsSeparators"
+      3: "fractionalDigits"
+      4: "language"
     locals:
-      3: "local3"
-      5: "local5"
-      11: "local11"
-      53: "local53"
-      58: "local58"
-      68: "local68"
-      93: "local93"
-      96: "local96"
+      3: "decimalSeparator"
+      5: "thousandsSeparator"
+      11: "negative"
+      53: "buffer"
+      58: "i"
+      68: "prevValue"
+      93: "i"
+      96: "prevValue"
   client!vb.e (B)V:
     owner: "TextureOp12"
     name: "postDecode"
