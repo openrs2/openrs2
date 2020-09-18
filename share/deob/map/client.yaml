@@ -253,7 +253,7 @@ classes:
   client!to: "Class166"
   client!u: "ModelParticleEffector"
   client!ua: "NpcType"
-  client!ub: "Class169"
+  client!ub: "DisplayMode"
   client!uc: "TextureOp23"
   client!ud: "Class170"
   client!ue: "GameShell"
@@ -3327,8 +3327,8 @@ fields:
     owner: "ScriptRunner"
     name: "arrays"
   client!hb.h [Lclient!ub;:
-    owner: "Static3"
-    name: "aClass169Array1"
+    owner: "DisplayMode"
+    name: "modes"
   client!hb.i I:
     owner: "GameShell"
     name: "instances"
@@ -10218,23 +10218,23 @@ fields:
     owner: "NpcType"
     name: "anInt5247"
   client!ub.b [I:
-    owner: "Class169"
+    owner: "DisplayMode"
     name: "CRC32_TABLE"
   client!ub.c Ljava/lang/String;:
     owner: "LocalisedText"
     name: "MAINLOAD10B"
   client!ub.d I:
-    owner: "Class169"
-    name: "anInt5275"
+    owner: "DisplayMode"
+    name: "height"
   client!ub.e I:
-    owner: "Class169"
-    name: "anInt5276"
+    owner: "DisplayMode"
+    name: "width"
   client!ub.f I:
-    owner: "Class169"
-    name: "anInt5277"
+    owner: "DisplayMode"
+    name: "refreshRate"
   client!ub.h I:
-    owner: "Class169"
-    name: "anInt5279"
+    owner: "DisplayMode"
+    name: "bitDepth"
   client!ub.j I:
     owner: "Static7"
     name: "anInt5281"
@@ -12182,19 +12182,19 @@ methods:
       509: "local509"
       518: "local518"
   client!ac.a (IIIILsignlink!pm;I)Ljava/awt/Frame;:
-    owner: "Static8"
-    name: "method67"
+    owner: "DisplayMode"
+    name: "enterFullScreen"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      4: "arg3"
+      4: "signLink"
+      1: "width"
+      2: "height"
+      0: "bitDepth"
     locals:
-      26: "local26"
-      34: "local34"
-      36: "local36"
-      109: "local109"
-      124: "local124"
+      26: "modes"
+      34: "valid"
+      36: "i"
+      109: "request"
+      124: "frame"
   client!ac.a (IIZ)I:
     owner: "Inv"
     name: "getItemType"
@@ -12947,11 +12947,11 @@ methods:
       0: "archive"
     locals: {}
   client!bb.a ([IB[Ljava/lang/Object;)V:
-    owner: "Static9"
-    name: "method232"
+    owner: "ArrayUtils"
+    name: "sort"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "keys"
+      2: "values"
     locals: {}
   client!bc.a ()I:
     owner: "Class4_Sub4"
@@ -15055,16 +15055,16 @@ methods:
     locals:
       36: "node"
   client!cj.a (ILsignlink!pm;)[Lclient!ub;:
-    owner: "Static11"
-    name: "method610"
+    owner: "DisplayMode"
+    name: "getModesInternal"
     arguments:
-      1: "arg0"
+      1: "signLink"
     locals:
-      17: "local17"
-      39: "local39"
-      45: "local45"
-      53: "local53"
-      65: "local65"
+      17: "request"
+      39: "result"
+      45: "modes"
+      53: "i"
+      65: "mode"
   client!cj.a (Ljava/lang/Throwable;Ljava/lang/String;)Lclient!bk;:
     owner: "TracingException"
     name: "wrap"
@@ -20709,21 +20709,21 @@ methods:
       1: "node"
     locals: {}
   client!gh.a (I[Ljava/lang/Object;II[I)V:
-    owner: "Static16"
-    name: "method2017"
+    owner: "ArrayUtils"
+    name: "sort"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      4: "arg3"
+      4: "keys"
+      1: "values"
+      2: "lo"
+      0: "hi"
     locals:
-      10: "local10"
-      12: "local12"
-      16: "local16"
-      30: "local30"
-      42: "local42"
-      68: "local68"
-      82: "local82"
+      10: "mid"
+      12: "i"
+      16: "pivotKey"
+      30: "pivotValue"
+      42: "j"
+      68: "key"
+      82: "value"
   client!gh.b (I)V:
     owner: "Static16"
     name: "method2014"
@@ -29507,20 +29507,20 @@ methods:
     locals:
       7: "tile"
   client!mi.b (B)[Lclient!ub;:
-    owner: "Static25"
-    name: "method2725"
+    owner: "DisplayMode"
+    name: "getModes"
     arguments: {}
     locals:
-      9: "local9"
-      13: "local13"
-      15: "local15"
-      17: "local17"
-      25: "local25"
-      46: "local46"
-      53: "local53"
-      107: "local107"
-      109: "local109"
-      117: "local117"
+      9: "modes"
+      13: "validModes"
+      15: "validModesSize"
+      17: "i"
+      25: "mode"
+      46: "j"
+      53: "other"
+      107: "resolutions"
+      109: "i"
+      117: "mode"
   client!mj.a (IIBLclient!fh;)[Lclient!vn;:
     owner: "Static25"
     name: "method2729"
@@ -37367,13 +37367,13 @@ methods:
       1: "arg0"
     locals: {}
   client!re.a (Lsignlink!pm;Ljava/awt/Frame;Z)V:
-    owner: "Static31"
-    name: "method3658"
+    owner: "DisplayMode"
+    name: "exitFullScreen"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "signLink"
+      1: "frame"
     locals:
-      10: "local10"
+      10: "request"
   client!rf.a (BI)V:
     owner: "Static31"
     name: "method3661"

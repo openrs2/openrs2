@@ -378,9 +378,9 @@ methods:
     owner: "SignLink"
     name: "enterFullScreen"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      4: "arg2"
+      1: "width"
+      2: "height"
+      4: "bitDepth"
     locals: {}
   signlink!pm.a (IILjava/lang/Object;IB)Lsignlink!vk;:
     owner: "SignLink"
