@@ -188,7 +188,7 @@ classes:
   client!pc: "Class4_Sub6_Sub4"
   client!pd: "Class132"
   client!pe: "CursorType"
-  client!pf: "Class134"
+  client!pf: "GlProgram"
   client!pg: "Class41"
   client!ph: "TextureOp19"
   client!pi: "Class135"
@@ -7458,17 +7458,17 @@ fields:
     owner: "Static5"
     name: "aClass185_11"
   client!pf.a [Lclient!ec;:
-    owner: "Class134"
-    name: "aClass43Array1"
+    owner: "GlProgram"
+    name: "shaders"
   client!pf.b I:
-    owner: "Class134"
+    owner: "GlProgram"
     name: "contextId"
   client!pf.c [I:
-    owner: "Static5"
-    name: "anIntArray432"
+    owner: "GlProgram"
+    name: "temp"
   client!pf.d I:
-    owner: "Class134"
-    name: "anInt4123"
+    owner: "GlProgram"
+    name: "id"
   client!pg.a I:
     owner: "Static5"
     name: "anInt3764"
@@ -34808,26 +34808,26 @@ methods:
       281: "local281"
       325: "local325"
   client!pf.<init> (I[Lclient!ec;)V:
-    owner: "Class134"
+    owner: "GlProgram"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "id"
+      1: "shaders"
     locals: {}
   client!pf.a ([Lclient!ec;)Lclient!pf;:
-    owner: "Static29"
-    name: "method3402"
+    owner: "GlProgram"
+    name: "create"
     arguments:
-      0: "arg0"
+      0: "shaders"
     locals:
-      1: "local1"
-      20: "local20"
-      23: "local23"
-      25: "local25"
-      74: "local74"
-      96: "local96"
+      1: "i"
+      20: "gl"
+      23: "program"
+      25: "i"
+      74: "log"
+      96: "i"
   client!pf.finalize ()V:
-    owner: "Class134"
+    owner: "GlProgram"
     name: "finalize"
     arguments: {}
     locals: {}
