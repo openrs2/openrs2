@@ -15182,10 +15182,10 @@ methods:
       134: "local134"
       142: "local142"
   client!ck.a (ZC)Z:
-    owner: "Static11"
-    name: "method636"
+    owner: "CharUtils"
+    name: "isLetterOrDigit"
     arguments:
-      1: "arg0"
+      1: "c"
     locals: {}
   client!ck.e (B)V:
     owner: "TextureOp32"
@@ -19537,10 +19537,10 @@ methods:
       125: "local125"
       127: "local127"
   client!fm.a (ZC)Z:
-    owner: "Static15"
-    name: "method1478"
+    owner: "CharUtils"
+    name: "isDigit"
     arguments:
-      1: "arg0"
+      1: "c"
     locals: {}
   client!fm.toString ()Ljava/lang/String;:
     owner: "Cache"
@@ -23966,10 +23966,10 @@ methods:
     locals:
       61: "ex"
   client!jc.a (CZ)Z:
-    owner: "Static21"
-    name: "method1996"
+    owner: "CharUtils"
+    name: "isLetter"
     arguments:
-      0: "arg0"
+      0: "c"
     locals: {}
   client!jc.a (II)V:
     owner: "DelayedStateChange"
