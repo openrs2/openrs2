@@ -48,7 +48,7 @@ classes:
   client!dl: "Class41_Sub1_Sub1"
   client!dm: "GroundDecor"
   client!dn: "TextureOp31"
-  client!e: "Class4_Sub7"
+  client!e: "MapAreaChunk"
   client!ea: "Class41_Sub1"
   client!eb: "Class4_Sub8"
   client!ec: "GlShader"
@@ -65,7 +65,7 @@ classes:
   client!fd: "Buffer"
   client!fe: "SoftwareIndexedSprite"
   client!ff: "Class57"
-  client!fg: "Class4_Sub3_Sub7"
+  client!fg: "MapElement"
   client!fh: "Js5"
   client!fi: "TextureOp36"
   client!fj: "TextureOp9"
@@ -194,7 +194,7 @@ classes:
   client!pi: "Class135"
   client!pk: "TextureOp2"
   client!pl: "EnumStringEntry"
-  client!po: "Class138"
+  client!po: "MapElementList"
   client!q: "Class139"
   client!qa: "IdkType"
   client!qb: "TextureOp0"
@@ -283,7 +283,7 @@ classes:
   client!wd: "TextureOp18"
   client!we: "Class184"
   client!wf: "Component"
-  client!wg: "Class4_Sub3_Sub22"
+  client!wg: "MapArea"
   client!wh: "QuickChatCatType"
   client!wj: "Class187"
   client!wl: "BufferedFile"
@@ -537,8 +537,8 @@ fields:
     owner: "Static1"
     name: "aClass112_1"
   client!al.R Lclient!kk;:
-    owner: "Static1"
-    name: "aClass106_1"
+    owner: "WorldMap"
+    name: "font19"
   client!al.S [Lclient!uj;:
     owner: "Static1"
     name: "aClass4_Sub3_Sub14Array1"
@@ -1854,41 +1854,41 @@ fields:
     owner: "ChangeLocRequest"
     name: "queue"
   client!e.C I:
-    owner: "Class4_Sub7"
-    name: "anInt1188"
+    owner: "MapAreaChunk"
+    name: "sourceMaxX"
   client!e.F [[[B:
     owner: "Static2"
     name: "aByteArrayArrayArray3"
   client!e.o I:
-    owner: "Class4_Sub7"
-    name: "anInt1176"
+    owner: "MapAreaChunk"
+    name: "displayMinZ"
   client!e.p I:
-    owner: "Class4_Sub7"
-    name: "anInt1177"
+    owner: "MapAreaChunk"
+    name: "sourceY"
   client!e.q I:
-    owner: "Class4_Sub7"
-    name: "anInt1178"
+    owner: "MapAreaChunk"
+    name: "displayMaxX"
   client!e.r I:
-    owner: "Class4_Sub7"
-    name: "anInt1179"
+    owner: "MapAreaChunk"
+    name: "displayMaxZ"
   client!e.s I:
-    owner: "Class4_Sub7"
-    name: "anInt1180"
+    owner: "MapAreaChunk"
+    name: "sourceMinX"
   client!e.u I:
-    owner: "Class4_Sub7"
-    name: "anInt1182"
+    owner: "MapAreaChunk"
+    name: "displayY"
   client!e.v Lclient!ll;:
     owner: "Static2"
     name: "aClass112_6"
   client!e.w I:
-    owner: "Class4_Sub7"
-    name: "anInt1183"
+    owner: "MapAreaChunk"
+    name: "sourceMaxZ"
   client!e.y I:
-    owner: "Class4_Sub7"
-    name: "anInt1185"
+    owner: "MapAreaChunk"
+    name: "sourceMinZ"
   client!e.z I:
-    owner: "Class4_Sub7"
-    name: "anInt1186"
+    owner: "MapAreaChunk"
+    name: "displayMinX"
   client!ea.A I:
     owner: "Class41_Sub1"
     name: "anInt1116"
@@ -2562,35 +2562,35 @@ fields:
     owner: "Class57"
     name: "aClass111_1"
   client!fg.A Z:
-    owner: "Class4_Sub3_Sub7"
-    name: "aBoolean105"
+    owner: "MapElement"
+    name: "hover"
   client!fg.B I:
-    owner: "Class4_Sub3_Sub7"
-    name: "anInt1760"
+    owner: "MapElement"
+    name: "id"
   client!fg.E I:
-    owner: "Class4_Sub3_Sub7"
-    name: "anInt1763"
+    owner: "MapElement"
+    name: "y"
   client!fg.F I:
-    owner: "Class4_Sub3_Sub7"
+    owner: "MapElement"
     name: "anInt1764"
   client!fg.H Z:
-    owner: "Class4_Sub3_Sub7"
+    owner: "MapElement"
     name: "aBoolean106"
   client!fg.J [[[B:
     owner: "Static2"
     name: "aByteArrayArrayArray4"
   client!fg.K I:
-    owner: "Class4_Sub3_Sub7"
+    owner: "MapElement"
     name: "anInt1766"
   client!fg.L I:
     owner: "Static2"
     name: "anInt1767"
   client!fg.M I:
-    owner: "Class4_Sub3_Sub7"
-    name: "anInt1768"
+    owner: "MapElement"
+    name: "x"
   client!fg.N I:
-    owner: "Class4_Sub3_Sub7"
-    name: "anInt1769"
+    owner: "MapElement"
+    name: "z"
   client!fg.z Z:
     owner: "Preferences"
     name: "sentToServer"
@@ -2823,8 +2823,8 @@ fields:
     owner: "Static2"
     name: "anIntArray162"
   client!gb.r Lclient!kk;:
-    owner: "Static2"
-    name: "aClass106_2"
+    owner: "WorldMap"
+    name: "font22"
   client!gb.u Ljava/lang/String;:
     owner: "World"
     name: "activity"
@@ -3535,7 +3535,7 @@ fields:
     name: "anInt2283"
   client!ho.C I:
     owner: "MelType"
-    name: "anInt2284"
+    name: "category"
   client!ho.D Lclient!ll;:
     owner: "Static3"
     name: "aClass112_13"
@@ -3544,13 +3544,13 @@ fields:
     name: "anInt2285"
   client!ho.F I:
     owner: "MelType"
-    name: "anInt2286"
+    name: "textColor"
   client!ho.G I:
     owner: "MelType"
-    name: "anInt2287"
+    name: "hoverTextColor"
   client!ho.K I:
     owner: "MelType"
-    name: "anInt2291"
+    name: "hoverSprite"
   client!ho.L I:
     owner: "MelType"
     name: "id"
@@ -3580,7 +3580,7 @@ fields:
     name: "anInt2265"
   client!ho.b Z:
     owner: "MelType"
-    name: "aBoolean154"
+    name: "worldMapVisible"
   client!ho.c I:
     owner: "MelType"
     name: "anInt2266"
@@ -3592,10 +3592,10 @@ fields:
     name: "aFloat54"
   client!ho.g Z:
     owner: "MelType"
-    name: "aBoolean155"
+    name: "miniMapVisible"
   client!ho.i I:
     owner: "MelType"
-    name: "anInt2270"
+    name: "textSize"
   client!ho.j Lclient!cc;:
     owner: "NpcTypeList"
     name: "types"
@@ -3613,34 +3613,34 @@ fields:
     name: "anInt2273"
   client!ho.o I:
     owner: "MelType"
-    name: "anInt2274"
+    name: "fillColor"
   client!ho.p I:
     owner: "MelType"
     name: "anInt2275"
   client!ho.q Z:
     owner: "MelType"
-    name: "aBoolean156"
+    name: "randomizePosition"
   client!ho.r I:
     owner: "MelType"
     name: "anInt2276"
   client!ho.s I:
     owner: "MelType"
-    name: "anInt2277"
+    name: "sprite"
   client!ho.t Ljava/lang/String;:
     owner: "MelType"
-    name: "aString130"
+    name: "opBase"
   client!ho.v [Ljava/lang/String;:
     owner: "MelType"
-    name: "aStringArray15"
+    name: "ops"
   client!ho.w I:
     owner: "MelType"
-    name: "anInt2279"
+    name: "worldMapSprite"
   client!ho.x I:
     owner: "MelType"
-    name: "anInt2280"
+    name: "outlineColor"
   client!ho.z Ljava/lang/String;:
     owner: "MelType"
-    name: "aString131"
+    name: "text"
   client!i.a Ljava/lang/String;:
     owner: "LoginManager"
     name: "username"
@@ -3858,17 +3858,17 @@ fields:
     owner: "Static3"
     name: "anInt2973"
   client!ii.a Lclient!ic;:
-    owner: "Static3"
-    name: "aClass84_14"
+    owner: "MapAreaList"
+    name: "areas"
   client!ii.b Lclient!fh;:
-    owner: "Static3"
-    name: "aClass58_65"
+    owner: "MapAreaList"
+    name: "archive"
   client!ii.c Lclient!uk;:
     owner: "Static3"
     name: "aClass175_12"
   client!ii.d Lclient!wg;:
-    owner: "Static3"
-    name: "aClass4_Sub3_Sub22_3"
+    owner: "WorldMap"
+    name: "currentMap"
   client!ii.e I:
     owner: "Static3"
     name: "anInt2960"
@@ -4533,8 +4533,8 @@ fields:
     owner: "Static4"
     name: "anInt2643"
   client!jk.u I:
-    owner: "Static4"
-    name: "anInt2644"
+    owner: "WorldMap"
+    name: "loadPercentage"
   client!jk.v [I:
     owner: "Static4"
     name: "anIntArray231"
@@ -4659,8 +4659,8 @@ fields:
     owner: "Static4"
     name: "aClass4_Sub3_Sub14_Sub1_4"
   client!k.c Lclient!kk;:
-    owner: "Static4"
-    name: "aClass106_3"
+    owner: "WorldMap"
+    name: "font12"
   client!k.d I:
     owner: "Static4"
     name: "anInt2741"
@@ -5655,8 +5655,8 @@ fields:
     owner: "Static4"
     name: "anInt3309"
   client!me.d Lclient!kk;:
-    owner: "Static4"
-    name: "aClass106_4"
+    owner: "WorldMap"
+    name: "font17"
   client!me.g Lclient!on;:
     owner: "Static4"
     name: "aClass4_Sub21_1"
@@ -5709,8 +5709,8 @@ fields:
     owner: "Static4"
     name: "anIntArray318"
   client!mg.g Lclient!kk;:
-    owner: "Static4"
-    name: "aClass106_5"
+    owner: "WorldMap"
+    name: "font14"
   client!mg.h Lclient!en;:
     owner: "Js5MasterIndex"
     name: "netQueue"
@@ -6385,7 +6385,7 @@ fields:
     name: "anInt3469"
   client!nb.I Lclient!fg;:
     owner: "Class4_Sub17"
-    name: "aClass4_Sub3_Sub7_1"
+    name: "element"
   client!nb.r [Ljava/lang/String;:
     owner: "Static4"
     name: "aStringArray23"
@@ -7176,8 +7176,8 @@ fields:
     owner: "FloType"
     name: "anInt3874"
   client!oh.n Lclient!kk;:
-    owner: "Static5"
-    name: "aClass106_6"
+    owner: "WorldMap"
+    name: "font26"
   client!oh.o I:
     owner: "FloType"
     name: "anInt3876"
@@ -7662,17 +7662,17 @@ fields:
     owner: "Static5"
     name: "anInt4215"
   client!po.a [I:
-    owner: "Class138"
-    name: "anIntArray448"
+    owner: "MapElementList"
+    name: "positions"
   client!po.b I:
     owner: "LoginManager"
     name: "autoErrors"
   client!po.e [Lclient!fg;:
-    owner: "Class138"
-    name: "aClass4_Sub3_Sub7Array1"
+    owner: "MapElementList"
+    name: "elements"
   client!po.f I:
-    owner: "Class138"
-    name: "anInt4219"
+    owner: "MapElementList"
+    name: "size"
   client!po.g Lclient!wa;:
     owner: "LoginManager"
     name: "buffer"
@@ -8208,8 +8208,8 @@ fields:
     owner: "Static6"
     name: "anInt4384"
   client!qk.s Lclient!kk;:
-    owner: "Static6"
-    name: "aClass106_7"
+    owner: "WorldMap"
+    name: "font11"
   client!qk.u J:
     owner: "PlayerAppearance"
     name: "aLong154"
@@ -8757,8 +8757,8 @@ fields:
     owner: "WorldList"
     name: "minId"
   client!rl.q Lclient!kk;:
-    owner: "Static6"
-    name: "aClass106_8"
+    owner: "WorldMap"
+    name: "font30"
   client!rl.r I:
     owner: "WorldList"
     name: "bufferLen"
@@ -11709,20 +11709,20 @@ fields:
     owner: "Component"
     name: "aString355"
   client!wg.A I:
-    owner: "Class4_Sub3_Sub22"
-    name: "anInt5993"
+    owner: "MapArea"
+    name: "id"
   client!wg.C I:
-    owner: "Class4_Sub3_Sub22"
-    name: "anInt5995"
+    owner: "MapArea"
+    name: "backgroundColor"
   client!wg.D I:
-    owner: "Class4_Sub3_Sub22"
-    name: "anInt5996"
+    owner: "MapArea"
+    name: "displayMinZ"
   client!wg.E I:
     owner: "Static7"
     name: "anInt5997"
   client!wg.I Z:
-    owner: "Class4_Sub3_Sub22"
-    name: "aBoolean420"
+    owner: "MapArea"
+    name: "valid"
   client!wg.J [S:
     owner: "Static7"
     name: "aShortArray124"
@@ -11730,32 +11730,32 @@ fields:
     owner: "MsiTypeList"
     name: "spritesArchive"
   client!wg.M Lclient!ll;:
-    owner: "Class4_Sub3_Sub22"
-    name: "aClass112_31"
+    owner: "MapArea"
+    name: "chunks"
   client!wg.N I:
-    owner: "Class4_Sub3_Sub22"
-    name: "anInt6002"
+    owner: "MapArea"
+    name: "displayMaxX"
   client!wg.S I:
-    owner: "Class4_Sub3_Sub22"
-    name: "anInt6006"
+    owner: "MapArea"
+    name: "defaultZoom"
   client!wg.T I:
-    owner: "Class4_Sub3_Sub22"
-    name: "anInt6007"
+    owner: "MapArea"
+    name: "displayMaxZ"
   client!wg.U Ljava/lang/String;:
-    owner: "Class4_Sub3_Sub22"
-    name: "aString358"
+    owner: "MapArea"
+    name: "group"
   client!wg.V I:
     owner: "Static7"
     name: "anInt6008"
   client!wg.X Ljava/lang/String;:
-    owner: "Class4_Sub3_Sub22"
-    name: "aString359"
+    owner: "MapArea"
+    name: "name"
   client!wg.y I:
-    owner: "Class4_Sub3_Sub22"
-    name: "anInt5991"
+    owner: "MapArea"
+    name: "displayMinX"
   client!wg.z I:
-    owner: "Class4_Sub3_Sub22"
-    name: "anInt5992"
+    owner: "MapArea"
+    name: "defaultPosition"
   client!wh.B I:
     owner: "Static7"
     name: "anInt6022"
@@ -16425,57 +16425,57 @@ methods:
     arguments: {}
     locals: {}
   client!e.<init> (IIIIIIIIII)V:
-    owner: "Class4_Sub7"
+    owner: "MapAreaChunk"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
-      5: "arg5"
-      6: "arg6"
-      7: "arg7"
-      8: "arg8"
-      9: "arg9"
+      0: "sourceY"
+      1: "displayY"
+      2: "sourceMinX"
+      3: "sourceMinZ"
+      4: "sourceMaxX"
+      5: "sourceMaxZ"
+      6: "displayMinX"
+      7: "displayMinZ"
+      8: "displayMaxX"
+      9: "displayMaxZ"
     locals: {}
   client!e.a (BIII)Z:
-    owner: "Class4_Sub7"
-    name: "method978"
+    owner: "MapAreaChunk"
+    name: "containsSource"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      3: "arg2"
+      3: "y"
+      1: "x"
+      2: "z"
     locals: {}
   client!e.a (IBI)Z:
-    owner: "Class4_Sub7"
-    name: "method980"
+    owner: "MapAreaChunk"
+    name: "containsSource"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      2: "x"
+      0: "z"
     locals: {}
   client!e.a (IIB[I)V:
-    owner: "Class4_Sub7"
-    name: "method981"
+    owner: "MapAreaChunk"
+    name: "convertSourceToDisplay"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      3: "arg2"
+      1: "x"
+      0: "z"
+      3: "position"
     locals: {}
   client!e.a (III)Z:
-    owner: "Class4_Sub7"
-    name: "method979"
+    owner: "MapAreaChunk"
+    name: "containsDisplay"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "x"
+      1: "z"
     locals: {}
   client!e.a (II[II)V:
-    owner: "Class4_Sub7"
-    name: "method983"
+    owner: "MapAreaChunk"
+    name: "convertDisplayToSource"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      1: "x"
+      0: "z"
+      2: "position"
     locals: {}
   client!ea.<init> (IIIIIFFF)V:
     owner: "Class41_Sub1"
@@ -20577,37 +20577,37 @@ methods:
       0: "archive"
     locals: {}
   client!gd.a (Lclient!fh;ILjava/lang/String;Z)Lclient!po;:
-    owner: "Static16"
-    name: "method1555"
+    owner: "MapElementList"
+    name: "create"
     arguments:
-      0: "arg0"
-      2: "arg1"
-      3: "arg2"
+      0: "archive"
+      2: "group"
+      3: "allowMembers"
     locals:
-      10: "local10"
-      23: "local23"
+      10: "groupId"
+      23: "fileIds"
       29: "local29"
-      31: "local31"
-      39: "local39"
-      59: "local59"
-      63: "local63"
-      67: "local67"
-      71: "local71"
+      31: "i"
+      39: "j"
+      59: "buffer"
+      63: "position"
+      67: "id"
+      71: "members"
   client!gd.b (I)V:
     owner: "Static16"
     name: "method1557"
     arguments: {}
     locals: {}
   client!ge.a (IILclient!fd;)Lclient!wg;:
-    owner: "Static16"
-    name: "method1562"
+    owner: "MapArea"
+    name: "create"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "id"
+      2: "buffer"
     locals:
-      41: "local41"
-      49: "local49"
-      51: "local51"
+      41: "area"
+      49: "len"
+      51: "i"
   client!gf.<init> ([I)V:
     owner: "IntHashTable"
     name: "<init>"
@@ -22656,7 +22656,7 @@ methods:
     locals:
       262: "local262"
       270: "local270"
-      301: "local301"
+      301: "flags"
   client!ho.a (Lclient!fd;I)V:
     owner: "MelType"
     name: "decode"
@@ -23068,19 +23068,19 @@ methods:
       15: "local15"
       23: "local23"
   client!ii.a (I)V:
-    owner: "Static19"
-    name: "method2402"
+    owner: "WorldMap"
+    name: "setCurrentMap"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!ii.a (II)Lclient!wg;:
-    owner: "Static19"
-    name: "method2394"
+    owner: "MapAreaList"
+    name: "getContainingSource"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "x"
+      1: "z"
     locals:
-      4: "local4"
+      4: "area"
   client!ii.a (IIII)V:
     owner: "Static19"
     name: "method2396"
@@ -23229,14 +23229,14 @@ methods:
       32: "local32"
       42: "local42"
   client!ii.a (Lclient!fh;)V:
-    owner: "Static19"
-    name: "method2393"
+    owner: "MapAreaList"
+    name: "init"
     arguments:
-      0: "arg0"
+      0: "archive"
     locals:
-      9: "local9"
-      14: "local14"
-      16: "local16"
+      9: "groupId"
+      14: "fileIds"
+      16: "i"
   client!ii.a ([IIIIIIIIIZ)V:
     owner: "Static20"
     name: "method2409"
@@ -23331,20 +23331,20 @@ methods:
       1423: "local1423"
       1430: "local1430"
   client!ii.b (I)Lclient!wg;:
-    owner: "Static20"
-    name: "method2405"
+    owner: "MapAreaList"
+    name: "get"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!ii.b (II)Lclient!uk;:
-    owner: "Static19"
-    name: "method2395"
+    owner: "MapAreaList"
+    name: "getAllContainingSource"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "x"
+      1: "z"
     locals:
-      3: "local3"
-      8: "local8"
+      3: "areas"
+      8: "area"
   client!ii.b (IIII)Lclient!ll;:
     owner: "Static20"
     name: "method2410"
@@ -23549,8 +23549,8 @@ methods:
     locals:
       5: "code"
   client!il.a (B)V:
-    owner: "Static20"
-    name: "method1922"
+    owner: "WorldMap"
+    name: "load"
     arguments: {}
     locals:
       70: "local70"
@@ -31470,7 +31470,7 @@ methods:
     owner: "Class4_Sub17"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "element"
     locals: {}
   client!nb.a (BLclient!p;)V:
     owner: "Static25"
@@ -33585,16 +33585,16 @@ methods:
     owner: "Static28"
     name: "method3244"
     arguments:
-      0: "arg0"
+      0: "element"
       1: "arg1"
       2: "arg2"
       3: "arg3"
       4: "arg4"
       6: "arg5"
-      7: "arg6"
+      7: "type"
     locals:
-      3: "local3"
-      123: "local123"
+      3: "font"
+      123: "textColor"
       141: "local141"
       144: "local144"
       164: "local164"
@@ -35483,10 +35483,10 @@ methods:
       85: "c"
       95: "i"
   client!po.<init> (I)V:
-    owner: "Class138"
+    owner: "MapElementList"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "size"
     locals: {}
   client!po.a (BIIIIIII)V:
     owner: "Static29"
@@ -45771,16 +45771,16 @@ methods:
       21: "local21"
       32: "local32"
   client!wg.<init> (ILjava/lang/String;Ljava/lang/String;IIZI)V:
-    owner: "Class4_Sub3_Sub22"
+    owner: "MapArea"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
-      5: "arg5"
-      6: "arg6"
+      0: "id"
+      1: "group"
+      2: "name"
+      3: "defaultPosition"
+      4: "backgroundColor"
+      5: "valid"
+      6: "defaultZoom"
     locals: {}
   client!wg.a (BILclient!fh;Lclient!fh;Z)Lclient!te;:
     owner: "AnimFrameset"
@@ -45798,22 +45798,22 @@ methods:
       60: "baseBytes"
       97: "ex"
   client!wg.a (IIB[I)Z:
-    owner: "Class4_Sub3_Sub22"
-    name: "method4758"
+    owner: "MapArea"
+    name: "convertDisplayToSource"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      3: "arg2"
+      0: "x"
+      1: "z"
+      3: "position"
     locals:
-      11: "local11"
+      11: "chunk"
   client!wg.a (III)Z:
-    owner: "Class4_Sub3_Sub22"
-    name: "method4754"
+    owner: "MapArea"
+    name: "containsSource"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "x"
+      2: "z"
     locals:
-      11: "local11"
+      11: "chunk"
   client!wg.a (IIIILjava/lang/String;)V:
     owner: "Static37"
     name: "method4752"
@@ -45827,24 +45827,24 @@ methods:
       22: "local22"
       40: "local40"
   client!wg.a (III[II)Z:
-    owner: "Class4_Sub3_Sub22"
-    name: "method4753"
+    owner: "MapArea"
+    name: "convertSourceToDisplay"
     arguments:
-      0: "arg0"
-      2: "arg1"
-      3: "arg2"
-      4: "arg3"
+      2: "y"
+      4: "x"
+      0: "z"
+      3: "position"
     locals:
-      16: "local16"
+      16: "chunk"
   client!wg.a ([IIBI)Z:
-    owner: "Class4_Sub3_Sub22"
-    name: "method4755"
+    owner: "MapArea"
+    name: "convertSourceToDisplay"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      3: "arg2"
+      3: "x"
+      1: "z"
+      0: "position"
     locals:
-      19: "local19"
+      19: "chunk"
   client!wg.a ([[FII[[I[[F[[ILclient!ih;IIZF[[FIIIIII)I:
     owner: "Static37"
     name: "method4757"
@@ -45887,11 +45887,11 @@ methods:
       396: "local396"
       404: "local404"
   client!wg.d (I)V:
-    owner: "Class4_Sub3_Sub22"
-    name: "method4759"
+    owner: "MapArea"
+    name: "computeBounds"
     arguments: {}
     locals:
-      23: "local23"
+      23: "chunk"
   client!wh.a (BLclient!fd;)V:
     owner: "QuickChatCatType"
     name: "decode"
