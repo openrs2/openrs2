@@ -1,13 +1,14 @@
 package dev.openrs2.deob.util.map
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import dev.openrs2.yaml.Yaml
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 import javax.inject.Inject
 import javax.inject.Provider
 
-public class NameMapProvider @Inject constructor(private val mapper: ObjectMapper) : Provider<NameMap> {
+public class NameMapProvider @Inject constructor(@Yaml private val mapper: ObjectMapper) : Provider<NameMap> {
     override fun get(): NameMap {
         val combinedMap = NameMap()
 

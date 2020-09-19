@@ -2,6 +2,7 @@ package dev.openrs2.deob.processor
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.google.inject.Guice
+import com.google.inject.Key
 import com.sun.source.util.Trees
 import dev.openrs2.asm.MemberRef
 import dev.openrs2.asm.toInternalClassName
@@ -12,6 +13,7 @@ import dev.openrs2.deob.util.map.Field
 import dev.openrs2.deob.util.map.Method
 import dev.openrs2.deob.util.map.NameMap
 import dev.openrs2.util.io.useAtomicBufferedWriter
+import dev.openrs2.yaml.Yaml
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -45,7 +47,7 @@ public class NameMapProcessor : AbstractProcessor() {
 
     init {
         val injector = Guice.createInjector(DeobfuscatorProcessorModule)
-        mapper = injector.getInstance(ObjectMapper::class.java)
+        mapper = injector.getInstance(Key.get(ObjectMapper::class.java, Yaml::class.java))
     }
 
     override fun init(env: ProcessingEnvironment) {

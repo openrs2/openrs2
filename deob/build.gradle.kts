@@ -14,6 +14,7 @@ dependencies {
     implementation(project(":bundler"))
     implementation(project(":deob-annotations"))
     implementation(project(":deob-util"))
+    implementation(project(":yaml"))
     implementation("com.google.guava:guava:${Versions.guava}")
     implementation("it.unimi.dsi:fastutil:${Versions.fastutil}")
     implementation("org.jgrapht:jgrapht-core:${Versions.jgrapht}")

@@ -1,12 +1,13 @@
 package dev.openrs2.conf
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import dev.openrs2.yaml.Yaml
 import java.nio.file.Files
 import java.nio.file.Paths
 import javax.inject.Inject
 import javax.inject.Provider
 
-public class ConfigProvider @Inject constructor(private val mapper: ObjectMapper) : Provider<Config> {
+public class ConfigProvider @Inject constructor(@Yaml private val mapper: ObjectMapper) : Provider<Config> {
     override fun get(): Config {
         if (Files.notExists(CONFIG_PATH)) {
             Files.copy(EXAMPLE_CONFIG_PATH, CONFIG_PATH)

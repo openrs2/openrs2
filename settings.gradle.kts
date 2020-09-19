@@ -19,6 +19,7 @@ include(
     "deob-processor",
     "deob-util",
     "game",
+    "json",
     "nonfree",
     "nonfree:client",
     "nonfree:gl",
