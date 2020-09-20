@@ -18,7 +18,7 @@ classes:
   client!bg: "LongNode"
   client!bh: "MouseWheel"
   client!bi: "ParticleEmitter"
-  client!bj: "Class21"
+  client!bj: "WaterMaterial"
   client!bk: "TracingException"
   client!bl: "TextureOp25"
   client!bn: "Class4_Sub6_Sub1"
@@ -32,7 +32,7 @@ classes:
   client!ci: "Class31"
   client!cj: "EnumType"
   client!ck: "TextureOp32"
-  client!cl: "Interface2"
+  client!cl: "Material"
   client!client: "client"
   client!cm: "VarbitType"
   client!cn: "ReferenceNode"
@@ -150,7 +150,7 @@ classes:
   client!mc: "Class4_Sub16"
   client!md: "Class114"
   client!mg: "Js5MasterIndex"
-  client!mi: "Material"
+  client!mi: "TextureMeta"
   client!mj: "Class120"
   client!ml: "RawModel"
   client!mo: "TextureOp26"
@@ -558,8 +558,8 @@ fields:
     owner: "Js5CacheRequest"
     name: "cache"
   client!am.B I:
-    owner: "Static1"
-    name: "anInt214"
+    owner: "MaterialManager"
+    name: "currentArg"
   client!am.o Lclient!ll;:
     owner: "Static1"
     name: "aClass112_2"
@@ -879,17 +879,17 @@ fields:
     owner: "ParticleEmitter"
     name: "anInt320"
   client!bj.a I:
-    owner: "Class21"
-    name: "anInt341"
+    owner: "WaterMaterial"
+    name: "listId"
   client!bj.b Z:
     owner: "Static1"
     name: "aBoolean21"
   client!bj.c I:
-    owner: "Class21"
-    name: "anInt342"
+    owner: "WaterMaterial"
+    name: "textureId"
   client!bj.d [F:
-    owner: "Class21"
-    name: "aFloatArray8"
+    owner: "WaterMaterial"
+    name: "tempVertex"
   client!bk.a [[B:
     owner: "Static1"
     name: "aByteArrayArray4"
@@ -2953,7 +2953,7 @@ fields:
     name: "anInt2086"
   client!gi.N Z:
     owner: "GlRenderer"
-    name: "aBoolean140"
+    name: "textureMatrixModified"
   client!gi.O Z:
     owner: "GlRenderer"
     name: "arbTextureFloatSupported"
@@ -4353,8 +4353,8 @@ fields:
     owner: "Static3"
     name: "anInt2553"
   client!jc.S Z:
-    owner: "Static3"
-    name: "aBoolean175"
+    owner: "MaterialManager"
+    name: "renderingUnderwater"
   client!jd.a I:
     owner: "Static3"
     name: "anInt2554"
@@ -5787,7 +5787,7 @@ fields:
     owner: "Static4"
     name: "tileFlags"
   client!mi.e Z:
-    owner: "Material"
+    owner: "TextureMeta"
     name: "aBoolean233"
   client!mi.f Lclient!fh;:
     owner: "client"
@@ -5799,31 +5799,31 @@ fields:
     owner: "Static4"
     name: "anInt3336"
   client!mi.i Z:
-    owner: "Material"
+    owner: "TextureMeta"
     name: "lowDetail"
   client!mi.j Z:
-    owner: "Material"
+    owner: "TextureMeta"
     name: "aBoolean235"
   client!mi.l B:
-    owner: "Material"
+    owner: "TextureMeta"
     name: "aByte7"
   client!mi.m B:
-    owner: "Material"
-    name: "aByte8"
+    owner: "TextureMeta"
+    name: "materialId"
   client!mi.n B:
-    owner: "Material"
-    name: "aByte9"
+    owner: "TextureMeta"
+    name: "materialArg"
   client!mi.p B:
-    owner: "Material"
+    owner: "TextureMeta"
     name: "aByte10"
   client!mi.q S:
-    owner: "Material"
+    owner: "TextureMeta"
     name: "aShort26"
   client!mi.r Z:
-    owner: "Material"
+    owner: "TextureMeta"
     name: "aBoolean236"
   client!mi.s Z:
-    owner: "Material"
+    owner: "TextureMeta"
     name: "aBoolean237"
   client!mj.a I:
     owner: "Class120"
@@ -8137,7 +8137,7 @@ fields:
     name: "lastCanvasReplace"
   client!qi.l [Lclient!mi;:
     owner: "Js5TextureProvider"
-    name: "materials"
+    name: "metadata"
   client!qi.m Lclient!fh;:
     owner: "Js5TextureProvider"
     name: "spritesArchive"
@@ -9210,8 +9210,8 @@ fields:
     owner: "Class157"
     name: "anInt4842"
   client!si.h [Lclient!cl;:
-    owner: "Static6"
-    name: "anInterface2Array1"
+    owner: "MaterialManager"
+    name: "materials"
   client!si.i I:
     owner: "Static6"
     name: "anInt4844"
@@ -10323,8 +10323,8 @@ fields:
     owner: "Static7"
     name: "aBooleanArray25"
   client!uf.c I:
-    owner: "Static7"
-    name: "anInt5330"
+    owner: "MaterialManager"
+    name: "currentMaterialId"
   client!uf.d Lclient!uj;:
     owner: "Static7"
     name: "aClass4_Sub3_Sub14_9"
@@ -11959,8 +11959,8 @@ methods:
       77: "local77"
       277: "local277"
   client!aa.a (I)V:
-    owner: "Static8"
-    name: "method3"
+    owner: "MaterialManager"
+    name: "quit"
     arguments: {}
     locals: {}
   client!aa.a (ZIIZIIII)V:
@@ -12343,15 +12343,15 @@ methods:
       11: "local11"
   client!ae.a ()V:
     owner: "Class6"
-    name: "method3483"
+    name: "unbind"
     arguments: {}
     locals:
       5: "local5"
   client!ae.a (I)V:
     owner: "Class6"
-    name: "method3486"
+    name: "setArgument"
     arguments:
-      0: "arg0"
+      0: "arg"
     locals: {}
   client!ae.a (III)V:
     owner: "Static8"
@@ -12373,7 +12373,7 @@ methods:
       155: "local155"
   client!ae.b ()V:
     owner: "Class6"
-    name: "method3484"
+    name: "bind"
     arguments: {}
     locals:
       5: "local5"
@@ -12387,7 +12387,7 @@ methods:
       8: "z"
   client!ae.c ()I:
     owner: "Class6"
-    name: "method3485"
+    name: "getFlags"
     arguments: {}
     locals: {}
   client!ae.c (I)V:
@@ -13068,19 +13068,19 @@ methods:
     locals: {}
   client!bd.a ()V:
     owner: "Class16"
-    name: "method3483"
+    name: "unbind"
     arguments: {}
     locals: {}
   client!bd.a (I)V:
     owner: "Class16"
-    name: "method3486"
+    name: "setArgument"
     arguments:
-      0: "arg0"
+      0: "arg"
     locals:
       1: "local1"
   client!bd.b ()V:
     owner: "Class16"
-    name: "method3484"
+    name: "bind"
     arguments: {}
     locals:
       1: "local1"
@@ -13088,7 +13088,7 @@ methods:
       21: "local21"
   client!bd.c ()I:
     owner: "Class16"
-    name: "method3485"
+    name: "getFlags"
     arguments: {}
     locals: {}
   client!bd.d ()V:
@@ -13579,36 +13579,36 @@ methods:
     arguments: {}
     locals: {}
   client!bj.<init> ()V:
-    owner: "Class21"
+    owner: "WaterMaterial"
     name: "<init>"
     arguments: {}
     locals:
-      17: "local17"
-      20: "local20"
-      22: "local22"
-      40: "local40"
+      17: "temp"
+      20: "texture"
+      22: "i"
+      40: "gl"
   client!bj.a ()V:
-    owner: "Class21"
-    name: "method3483"
+    owner: "WaterMaterial"
+    name: "unbind"
     arguments: {}
     locals:
-      1: "local1"
+      1: "gl"
   client!bj.a (I)V:
-    owner: "Class21"
-    name: "method3486"
+    owner: "WaterMaterial"
+    name: "setArgument"
     arguments:
-      0: "arg0"
+      0: "arg"
     locals:
-      1: "local1"
+      1: "gl"
   client!bj.b ()V:
-    owner: "Class21"
-    name: "method3484"
+    owner: "WaterMaterial"
+    name: "bind"
     arguments: {}
     locals:
-      1: "local1"
+      1: "gl"
   client!bj.c ()I:
-    owner: "Class21"
-    name: "method3485"
+    owner: "WaterMaterial"
+    name: "getFlags"
     arguments: {}
     locals: {}
   client!bj.d ()V:
@@ -13629,11 +13629,11 @@ methods:
     locals:
       1: "local1"
   client!bj.g ()V:
-    owner: "Class21"
-    name: "method317"
+    owner: "WaterMaterial"
+    name: "createLists"
     arguments: {}
     locals:
-      1: "local1"
+      1: "gl"
   client!bk.<init> (Ljava/lang/Throwable;Ljava/lang/String;)V:
     owner: "TracingException"
     name: "<init>"
@@ -14038,7 +14038,7 @@ methods:
     locals: {}
   client!bo.a ()V:
     owner: "Class23"
-    name: "method3483"
+    name: "unbind"
     arguments: {}
     locals:
       5: "local5"
@@ -14053,9 +14053,9 @@ methods:
       37: "local37"
   client!bo.a (I)V:
     owner: "Class23"
-    name: "method3486"
+    name: "setArgument"
     arguments:
-      0: "arg0"
+      0: "arg"
     locals:
       7: "local7"
       16: "local16"
@@ -14098,7 +14098,7 @@ methods:
     locals: {}
   client!bo.b ()V:
     owner: "Class23"
-    name: "method3484"
+    name: "bind"
     arguments: {}
     locals:
       5: "local5"
@@ -14110,7 +14110,7 @@ methods:
       7: "local7"
   client!bo.c ()I:
     owner: "Class23"
-    name: "method3485"
+    name: "getFlags"
     arguments: {}
     locals: {}
   client!c.<init> (Lclient!fh;Lclient!fh;Lclient!fh;IZ)V:
@@ -15214,24 +15214,24 @@ methods:
       93: "local93"
       106: "local106"
   client!cl.a ()V:
-    owner: "Interface2"
-    name: "method3483"
+    owner: "Material"
+    name: "unbind"
     arguments: {}
     locals: {}
   client!cl.a (I)V:
-    owner: "Interface2"
-    name: "method3486"
+    owner: "Material"
+    name: "setArgument"
     arguments:
-      0: "arg0"
+      0: "arg"
     locals: {}
   client!cl.b ()V:
-    owner: "Interface2"
-    name: "method3484"
+    owner: "Material"
+    name: "bind"
     arguments: {}
     locals: {}
   client!cl.c ()I:
-    owner: "Interface2"
-    name: "method3485"
+    owner: "Material"
+    name: "getFlags"
     arguments: {}
     locals: {}
   client!client.a (B)V:
@@ -16420,8 +16420,8 @@ methods:
     arguments: {}
     locals: {}
   client!dn.f (I)V:
-    owner: "Static13"
-    name: "method968"
+    owner: "MaterialManager"
+    name: "init"
     arguments: {}
     locals: {}
   client!e.<init> (IIIIIIIIII)V:
@@ -18840,8 +18840,8 @@ methods:
       21: "local21"
       27: "local27"
   client!ff.a (B)I:
-    owner: "Static15"
-    name: "method1323"
+    owner: "MaterialManager"
+    name: "getFlags"
     arguments: {}
     locals: {}
   client!ff.a (Lclient!tf;B)V:
@@ -20753,11 +20753,11 @@ methods:
       42: "local42"
   client!gi.a (FFF)V:
     owner: "GlRenderer"
-    name: "method1609"
+    name: "translateTextureMatrix"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "x"
+      1: "y"
+      2: "z"
     locals: {}
   client!gi.a (FFFFFF)V:
     owner: "GlRenderer"
@@ -20959,7 +20959,7 @@ methods:
     locals: {}
   client!gi.f ()V:
     owner: "GlRenderer"
-    name: "method1595"
+    name: "resetTextureMatrix"
     arguments: {}
     locals: {}
   client!gi.g ()V:
@@ -21192,21 +21192,21 @@ methods:
       141: "local141"
   client!gk.a ()V:
     owner: "Class70"
-    name: "method3483"
+    name: "unbind"
     arguments: {}
     locals:
       5: "local5"
   client!gk.a (I)V:
     owner: "Class70"
-    name: "method3486"
+    name: "setArgument"
     arguments:
-      0: "arg0"
+      0: "arg"
     locals:
       5: "local5"
       58: "local58"
   client!gk.b ()V:
     owner: "Class70"
-    name: "method3484"
+    name: "bind"
     arguments: {}
     locals:
       5: "local5"
@@ -21214,7 +21214,7 @@ methods:
       87: "local87"
   client!gk.c ()I:
     owner: "Class70"
-    name: "method3485"
+    name: "getFlags"
     arguments: {}
     locals: {}
   client!gk.e ()V:
@@ -22501,26 +22501,26 @@ methods:
       19: "local19"
   client!hl.a ()V:
     owner: "Class81"
-    name: "method3483"
+    name: "unbind"
     arguments: {}
     locals:
       1: "local1"
   client!hl.a (I)V:
     owner: "Class81"
-    name: "method3486"
+    name: "setArgument"
     arguments:
-      0: "arg0"
+      0: "arg"
     locals:
       1: "local1"
   client!hl.b ()V:
     owner: "Class81"
-    name: "method3484"
+    name: "bind"
     arguments: {}
     locals:
       1: "local1"
   client!hl.c ()I:
     owner: "Class81"
-    name: "method3485"
+    name: "getFlags"
     arguments: {}
     locals: {}
   client!hl.d ()V:
@@ -22949,28 +22949,28 @@ methods:
     name: "method1856"
     arguments: {}
     locals:
-      1: "local1"
-      6: "local6"
-      65: "local65"
+      1: "gl"
+      6: "ids"
+      65: "i"
   client!ig.d ()V:
     owner: "Static19"
     name: "method1857"
     arguments: {}
     locals:
-      1: "local1"
-      6: "local6"
-      65: "local65"
+      1: "gl"
+      6: "ids"
+      65: "i"
   client!ig.e ()V:
     owner: "Static19"
     name: "method1858"
     arguments: {}
     locals:
-      4: "local4"
-      11: "local11"
-      29: "local29"
-      48: "local48"
-      55: "local55"
-      73: "local73"
+      4: "gl"
+      11: "ids"
+      29: "gl"
+      48: "gl"
+      55: "ids"
+      73: "gl"
   client!ig.f ()V:
     owner: "Static19"
     name: "method1859"
@@ -26388,7 +26388,7 @@ methods:
     locals: {}
   client!kj.a (IB)Lclient!mi;:
     owner: "TextureProvider"
-    name: "getMaterial"
+    name: "getMetadata"
     arguments:
       0: "id"
     locals: {}
@@ -28883,13 +28883,13 @@ methods:
       193: "local193"
       243: "local243"
   client!ln.a (III)V:
-    owner: "Static24"
-    name: "method2652"
+    owner: "MaterialManager"
+    name: "setMaterial"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "materialId"
+      1: "arg"
     locals:
-      42: "local42"
+      42: "material"
   client!ln.a (ILclient!kj;Lclient!fh;IDIZ)Lclient!jn;:
     owner: "Texture"
     name: "method2650"
@@ -35523,23 +35523,23 @@ methods:
       123: "local123"
   client!q.a ()V:
     owner: "Class139"
-    name: "method3483"
+    name: "unbind"
     arguments: {}
     locals: {}
   client!q.a (I)V:
     owner: "Class139"
-    name: "method3486"
+    name: "setArgument"
     arguments:
-      0: "arg0"
+      0: "arg"
     locals: {}
   client!q.b ()V:
     owner: "Class139"
-    name: "method3484"
+    name: "bind"
     arguments: {}
     locals: {}
   client!q.c ()I:
     owner: "Class139"
-    name: "method3485"
+    name: "getFlags"
     arguments: {}
     locals: {}
   client!qa.a (B)Lclient!ml;:
@@ -36569,7 +36569,7 @@ methods:
       0: "materialsArchive"
     locals:
       24: "buffer"
-      28: "materials"
+      28: "len"
       34: "i"
       60: "i"
       88: "i"
@@ -36604,7 +36604,7 @@ methods:
     locals: {}
   client!qi.a (IB)Lclient!mi;:
     owner: "Js5TextureProvider"
-    name: "getMaterial"
+    name: "getMetadata"
     arguments:
       0: "id"
     locals: {}
@@ -39871,12 +39871,12 @@ methods:
       1: "arg1"
     locals: {}
   client!sh.a (ZI)V:
-    owner: "Static32"
-    name: "method3981"
+    owner: "MaterialManager"
+    name: "resetArgument"
     arguments:
-      1: "arg0"
+      1: "materialId"
     locals:
-      16: "local16"
+      16: "id"
   client!sh.c (II)Lclient!ik;:
     owner: "ParticleEmitterTypeList"
     name: "get"
@@ -40427,8 +40427,8 @@ methods:
       148: "local148"
       160: "local160"
       209: "local209"
-      367: "local367"
-      377: "local377"
+      367: "y"
+      377: "x"
   client!so.a (Lclient!kj;Lclient!fh;Z)[I:
     owner: "GlTexture"
     name: "method4071"
