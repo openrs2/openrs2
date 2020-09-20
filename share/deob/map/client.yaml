@@ -195,7 +195,7 @@ classes:
   client!pk: "TextureOp2"
   client!pl: "EnumStringEntry"
   client!po: "MapElementList"
-  client!q: "Class139"
+  client!q: "UnlitMaterial"
   client!qa: "IdkType"
   client!qb: "TextureOp0"
   client!qc: "PathingEntity"
@@ -35522,23 +35522,23 @@ methods:
       94: "local94"
       123: "local123"
   client!q.a ()V:
-    owner: "Class139"
+    owner: "UnlitMaterial"
     name: "unbind"
     arguments: {}
     locals: {}
   client!q.a (I)V:
-    owner: "Class139"
+    owner: "UnlitMaterial"
     name: "setArgument"
     arguments:
       0: "arg"
     locals: {}
   client!q.b ()V:
-    owner: "Class139"
+    owner: "UnlitMaterial"
     name: "bind"
     arguments: {}
     locals: {}
   client!q.c ()I:
-    owner: "Class139"
+    owner: "UnlitMaterial"
     name: "getFlags"
     arguments: {}
     locals: {}
