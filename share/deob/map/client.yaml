@@ -57,7 +57,7 @@ classes:
   client!eh: "Class47"
   client!ei: "HardReferenceNode"
   client!ej: "Class4_Sub9"
-  client!em: "Class50"
+  client!em: "Light"
   client!en: "Js5NetQueue"
   client!eo: "BufferedSocket"
   client!f: "Player"
@@ -2220,76 +2220,76 @@ fields:
     owner: "Static2"
     name: "anInt1334"
   client!em.D F:
-    owner: "Class50"
+    owner: "Light"
     name: "aFloat33"
   client!em.G I:
-    owner: "Class50"
-    name: "anInt1338"
+    owner: "Light"
+    name: "x"
   client!em.a Ljava/lang/String;:
     owner: "Static2"
     name: "aString81"
   client!em.b I:
-    owner: "Class50"
-    name: "anInt1318"
+    owner: "Light"
+    name: "radius"
   client!em.d Z:
-    owner: "Class50"
+    owner: "Light"
     name: "aBoolean78"
   client!em.e [S:
-    owner: "Class50"
+    owner: "Light"
     name: "aShortArray28"
   client!em.f I:
-    owner: "Class50"
-    name: "anInt1320"
+    owner: "Light"
+    name: "z"
   client!em.g I:
-    owner: "Class50"
-    name: "anInt1321"
+    owner: "Light"
+    name: "color"
   client!em.h I:
-    owner: "Class50"
-    name: "anInt1322"
+    owner: "Light"
+    name: "y"
   client!em.i I:
-    owner: "Class50"
+    owner: "Light"
     name: "anInt1323"
   client!em.j [F:
-    owner: "Class50"
-    name: "aFloatArray16"
+    owner: "Light"
+    name: "diffuse"
   client!em.k I:
-    owner: "Class50"
+    owner: "Light"
     name: "anInt1324"
   client!em.l I:
     owner: "Static2"
     name: "anInt1325"
   client!em.m Lclient!pi;:
-    owner: "Class50"
+    owner: "Light"
     name: "aClass135_1"
   client!em.n Lclient!eo;:
     owner: "Static2"
     name: "aClass52_1"
   client!em.o Z:
-    owner: "Class50"
+    owner: "Light"
     name: "aBoolean79"
   client!em.p Lclient!dj;:
     owner: "InvTypeList"
     name: "types"
   client!em.q I:
-    owner: "Class50"
+    owner: "Light"
     name: "anInt1326"
   client!em.s Z:
-    owner: "Class50"
+    owner: "Light"
     name: "aBoolean80"
   client!em.t I:
-    owner: "Class50"
+    owner: "Light"
     name: "anInt1328"
   client!em.u F:
-    owner: "Class50"
-    name: "aFloat32"
+    owner: "Light"
+    name: "quadraticAttenuation"
   client!em.v I:
-    owner: "Class50"
+    owner: "Light"
     name: "anInt1329"
   client!em.x I:
-    owner: "Class50"
+    owner: "Light"
     name: "anInt1331"
   client!em.y I:
-    owner: "Class50"
+    owner: "Light"
     name: "anInt1332"
   client!em.z I:
     owner: "Static2"
@@ -7053,53 +7053,53 @@ fields:
     owner: "NpcTypeList"
     name: "headModels"
   client!od.a I:
-    owner: "Static5"
-    name: "anInt3732"
+    owner: "LightingManager"
+    name: "width"
   client!od.b I:
-    owner: "Static5"
-    name: "anInt3733"
+    owner: "LightingManager"
+    name: "length"
   client!od.c [Lclient!em;:
-    owner: "Static5"
-    name: "aClass50Array1"
+    owner: "LightingManager"
+    name: "lights"
   client!od.d I:
-    owner: "Static5"
+    owner: "LightingManager"
     name: "anInt3734"
   client!od.e I:
-    owner: "Static5"
+    owner: "LightingManager"
     name: "anInt3735"
   client!od.f [[[I:
-    owner: "Static5"
+    owner: "LightingManager"
     name: "anIntArrayArrayArray10"
   client!od.g [Z:
-    owner: "Static5"
+    owner: "LightingManager"
     name: "aBooleanArray20"
   client!od.h I:
-    owner: "Static5"
-    name: "anInt3736"
+    owner: "LightingManager"
+    name: "lightCount"
   client!od.i I:
-    owner: "Static5"
+    owner: "LightingManager"
     name: "anInt3737"
   client!od.j [I:
-    owner: "Static5"
+    owner: "LightingManager"
     name: "anIntArray403"
   client!od.k I:
-    owner: "Static5"
-    name: "anInt3738"
+    owner: "LightingManager"
+    name: "height"
   client!od.l [Z:
-    owner: "Static5"
-    name: "aBooleanArray21"
+    owner: "LightingManager"
+    name: "enabledLights"
   client!od.m I:
-    owner: "Static5"
+    owner: "LightingManager"
     name: "anInt3739"
   client!od.n I:
-    owner: "Static5"
+    owner: "LightingManager"
     name: "anInt3740"
   client!od.o [I:
-    owner: "Static5"
+    owner: "LightingManager"
     name: "anIntArray404"
   client!od.p [F:
-    owner: "Static5"
-    name: "aFloatArray43"
+    owner: "LightingManager"
+    name: "tempPosition"
   client!oe.B [B:
     owner: "Class41_Sub2_Sub1"
     name: "aByteArray49"
@@ -17053,21 +17053,21 @@ methods:
     arguments: {}
     locals: {}
   client!em.<init> (Lclient!fd;)V:
-    owner: "Class50"
+    owner: "Light"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals:
-      81: "local81"
+      81: "i"
       108: "local108"
   client!em.a (I)V:
-    owner: "Class50"
+    owner: "Light"
     name: "method1074"
     arguments: {}
     locals:
       11: "local11"
   client!em.a (IIIII)V:
-    owner: "Class50"
+    owner: "Light"
     name: "method1073"
     arguments:
       0: "arg0"
@@ -17083,7 +17083,7 @@ methods:
     locals:
       12: "local12"
   client!em.a (ZZI)V:
-    owner: "Class50"
+    owner: "Light"
     name: "method1076"
     arguments:
       0: "arg0"
@@ -17094,7 +17094,7 @@ methods:
       56: "local56"
       120: "local120"
   client!em.b (I)V:
-    owner: "Class50"
+    owner: "Light"
     name: "method1075"
     arguments: {}
     locals:
@@ -32954,28 +32954,28 @@ methods:
       30: "local30"
       69: "local69"
   client!od.a ()V:
-    owner: "Static27"
+    owner: "LightingManager"
     name: "method3110"
     arguments: {}
     locals:
-      3: "local3"
-      8: "local8"
-      13: "local13"
+      3: "y"
+      8: "x"
+      13: "z"
   client!od.a (I)V:
-    owner: "Static27"
-    name: "method3124"
+    owner: "LightingManager"
+    name: "disableLight"
     arguments:
-      0: "arg0"
+      0: "i"
     locals:
-      14: "local14"
-      16: "local16"
+      14: "light"
+      16: "gl"
   client!od.a (III)V:
-    owner: "Static27"
+    owner: "LightingManager"
     name: "method3109"
     arguments: {}
     locals: {}
   client!od.a (IIIII)V:
-    owner: "Static27"
+    owner: "LightingManager"
     name: "method3117"
     arguments:
       0: "arg0"
@@ -32984,21 +32984,21 @@ methods:
       3: "arg3"
       4: "arg4"
     locals:
-      4: "local4"
+      4: "i"
       20: "local20"
       28: "local28"
       47: "local47"
       55: "local55"
   client!od.a (IIIIII)V:
-    owner: "Static27"
+    owner: "LightingManager"
     name: "method3114"
     arguments:
       0: "arg0"
       1: "arg1"
       2: "arg2"
-      3: "arg3"
-      4: "arg4"
-      5: "arg5"
+      3: "y"
+      4: "x"
+      5: "z"
     locals:
       20: "local20"
       31: "local31"
@@ -33009,19 +33009,19 @@ methods:
       81: "local81"
       115: "local115"
   client!od.a (IIIIIII)V:
-    owner: "Static27"
+    owner: "LightingManager"
     name: "method3119"
     arguments:
       0: "arg0"
       1: "arg1"
       2: "arg2"
       3: "arg3"
-      4: "arg4"
-      5: "arg5"
-      6: "arg6"
+      4: "y"
+      5: "x"
+      6: "z"
     locals: {}
   client!od.a (IIIIIIII)V:
-    owner: "Static27"
+    owner: "LightingManager"
     name: "method3115"
     arguments:
       0: "arg0"
@@ -33033,7 +33033,7 @@ methods:
       6: "arg6"
       7: "arg7"
     locals:
-      20: "local20"
+      20: "i"
       31: "local31"
       33: "local33"
       35: "local35"
@@ -33046,16 +33046,16 @@ methods:
       123: "local123"
       157: "local157"
   client!od.a (II[[[Lclient!nh;)V:
-    owner: "Static27"
+    owner: "LightingManager"
     name: "method3116"
     arguments:
       0: "arg0"
       1: "arg1"
       2: "arg2"
     locals:
-      4: "local4"
-      56: "local56"
-      63: "local63"
+      4: "gl"
+      56: "i"
+      63: "light"
       66: "local66"
       76: "local76"
       84: "local84"
@@ -33067,72 +33067,72 @@ methods:
       155: "local155"
       160: "local160"
   client!od.a (ILclient!em;III)V:
-    owner: "Static27"
-    name: "method3125"
+    owner: "LightingManager"
+    name: "enableLight"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
+      0: "i"
+      1: "light"
+      2: "x"
+      3: "y"
+      4: "z"
     locals:
-      5: "local5"
-      7: "local7"
+      5: "lightId"
+      7: "gl"
   client!od.a (IZ)V:
-    owner: "Static27"
+    owner: "LightingManager"
     name: "method3111"
     arguments:
       0: "arg0"
       1: "arg1"
     locals:
-      1: "local1"
+      1: "i"
   client!od.a (Lclient!em;)V:
-    owner: "Static27"
-    name: "method3113"
+    owner: "LightingManager"
+    name: "addLight"
     arguments:
-      0: "arg0"
+      0: "light"
     locals: {}
   client!od.b ()V:
-    owner: "Static27"
+    owner: "LightingManager"
     name: "method3112"
     arguments: {}
     locals:
-      1: "local1"
+      1: "i"
   client!od.c ()V:
-    owner: "Static27"
+    owner: "LightingManager"
     name: "method3118"
     arguments: {}
     locals:
-      1: "local1"
-      3: "local3"
-      10: "local10"
-      47: "local47"
+      1: "gl"
+      3: "i"
+      10: "light"
+      47: "i"
   client!od.d ()V:
-    owner: "Static27"
+    owner: "LightingManager"
     name: "method3120"
     arguments: {}
     locals: {}
   client!od.f ()V:
-    owner: "Static27"
+    owner: "LightingManager"
     name: "method3122"
     arguments: {}
     locals:
-      1: "local1"
-      8: "local8"
-      11: "local11"
-      19: "local19"
-      26: "local26"
+      1: "i"
+      8: "light"
+      11: "minY"
+      19: "maxY"
+      26: "y"
       31: "local31"
-      39: "local39"
-      55: "local55"
-      66: "local66"
+      39: "minZ"
+      55: "maxZ"
+      66: "z"
       75: "local75"
-      87: "local87"
-      95: "local95"
-      110: "local110"
+      87: "minX"
+      95: "maxX"
+      110: "x"
       121: "local121"
   client!od.g ()V:
-    owner: "Static27"
+    owner: "LightingManager"
     name: "method3123"
     arguments: {}
     locals: {}
