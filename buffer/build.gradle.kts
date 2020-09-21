@@ -4,6 +4,7 @@ plugins {
 }
 
 dependencies {
+    api("com.google.inject:guice:${Versions.guice}")
     api("io.netty:netty-buffer:${Versions.netty}")
 
     implementation("com.google.guava:guava:${Versions.guava}")
