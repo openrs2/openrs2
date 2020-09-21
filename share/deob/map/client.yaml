@@ -84,7 +84,7 @@ classes:
   client!gk: "LiquidMaterial"
   client!gl: "Font"
   client!gn: "Class4_Sub11"
-  client!go: "Class72"
+  client!go: "MidiDecoder"
   client!h: "Class73"
   client!hc: "ByteArray"
   client!he: "ObjStack"
@@ -203,7 +203,7 @@ classes:
   client!qe: "HashTableIterator"
   client!qf: "Class142"
   client!qg: "MsiType"
-  client!qh: "Class4_Sub23"
+  client!qh: "Instrument"
   client!qi: "Js5TextureProvider"
   client!qj: "TextureOp16"
   client!qk: "PlayerAppearance"
@@ -3255,32 +3255,32 @@ fields:
     owner: "Class4_Sub11"
     name: "anInt2117"
   client!go.a Lclient!fd;:
-    owner: "Class72"
-    name: "aClass4_Sub10_3"
+    owner: "MidiDecoder"
+    name: "buffer"
   client!go.b [B:
-    owner: "Static3"
-    name: "aByteArray16"
+    owner: "MidiDecoder"
+    name: "STATUS_LENGTHS"
   client!go.c I:
-    owner: "Class72"
-    name: "anInt2129"
+    owner: "MidiDecoder"
+    name: "division"
   client!go.d [I:
-    owner: "Class72"
-    name: "anIntArray173"
+    owner: "MidiDecoder"
+    name: "times"
   client!go.e J:
-    owner: "Class72"
+    owner: "MidiDecoder"
     name: "aLong69"
   client!go.f [I:
-    owner: "Class72"
-    name: "anIntArray174"
+    owner: "MidiDecoder"
+    name: "positions"
   client!go.g [I:
-    owner: "Class72"
-    name: "anIntArray175"
+    owner: "MidiDecoder"
+    name: "statuses"
   client!go.h I:
-    owner: "Class72"
-    name: "anInt2130"
+    owner: "MidiDecoder"
+    name: "tempo"
   client!go.i [I:
-    owner: "Class72"
-    name: "anIntArray176"
+    owner: "MidiDecoder"
+    name: "startPositions"
   client!h.a [I:
     owner: "Class73"
     name: "anIntArray177"
@@ -5107,7 +5107,7 @@ fields:
     name: "aClass4_Sub9ArrayArray2"
   client!ld.Gb Lclient!go;:
     owner: "Class4_Sub6_Sub2"
-    name: "aClass72_1"
+    name: "decoder"
   client!ld.Hb J:
     owner: "Class4_Sub6_Sub2"
     name: "aLong110"
@@ -5134,7 +5134,7 @@ fields:
     name: "anIntArray278"
   client!ld.Nb Lclient!tg;:
     owner: "Class4_Sub6_Sub2"
-    name: "aClass4_Sub31_1"
+    name: "song"
   client!ld.Ob I:
     owner: "Class4_Sub6_Sub2"
     name: "anInt3091"
@@ -5179,7 +5179,7 @@ fields:
     name: "anIntArray287"
   client!ld.ob Lclient!ic;:
     owner: "Class4_Sub6_Sub2"
-    name: "aClass84_15"
+    name: "instruments"
   client!ld.qb [I:
     owner: "Class4_Sub6_Sub2"
     name: "anIntArray288"
@@ -8094,37 +8094,37 @@ fields:
     owner: "MsiType"
     name: "spriteId"
   client!qh.A [B:
-    owner: "Class4_Sub23"
+    owner: "Instrument"
     name: "aByteArray57"
   client!qh.B [I:
-    owner: "Class4_Sub23"
+    owner: "Instrument"
     name: "anIntArray458"
   client!qh.C Lclient!fh;:
     owner: "client"
     name: "js5Archive15"
   client!qh.D [S:
-    owner: "Class4_Sub23"
+    owner: "Instrument"
     name: "aShortArray80"
   client!qh.E [B:
-    owner: "Class4_Sub23"
+    owner: "Instrument"
     name: "aByteArray58"
   client!qh.p [B:
-    owner: "Class4_Sub23"
+    owner: "Instrument"
     name: "aByteArray56"
   client!qh.q I:
     owner: "LoginManager"
     name: "disallowResult"
   client!qh.s [Lclient!pb;:
-    owner: "Class4_Sub23"
+    owner: "Instrument"
     name: "aClass4_Sub8_Sub1Array1"
   client!qh.t I:
-    owner: "Class4_Sub23"
+    owner: "Instrument"
     name: "anInt4326"
   client!qh.w I:
     owner: "Static5"
     name: "anInt4329"
   client!qh.y [Lclient!si;:
-    owner: "Class4_Sub23"
+    owner: "Instrument"
     name: "aClass157Array1"
   client!qi.a Ljava/lang/String;:
     owner: "LocalisedText"
@@ -9763,7 +9763,7 @@ fields:
     name: "midiBytes"
   client!tg.p Lclient!ic;:
     owner: "Song"
-    name: "aClass84_23"
+    name: "programs"
   client!th.a I:
     owner: "Static6"
     name: "anInt5133"
@@ -16211,13 +16211,13 @@ methods:
     locals:
       18: "value"
   client!dj.a (ILclient!fh;I)Lclient!qh;:
-    owner: "Static13"
-    name: "method887"
+    owner: "Instrument"
+    name: "create"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      1: "archive"
+      0: "id"
     locals:
-      17: "local17"
+      17: "bytes"
   client!dj.a (JILclient!lh;)V:
     owner: "LruHashTable"
     name: "put"
@@ -21679,130 +21679,130 @@ methods:
     arguments: {}
     locals: {}
   client!go.<init> ()V:
-    owner: "Class72"
+    owner: "MidiDecoder"
     name: "<init>"
     arguments: {}
     locals: {}
   client!go.<init> ([B)V:
-    owner: "Class72"
+    owner: "MidiDecoder"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "bytes"
     locals: {}
   client!go.a ()V:
-    owner: "Class72"
-    name: "method1658"
+    owner: "MidiDecoder"
+    name: "release"
     arguments: {}
     locals: {}
   client!go.a (I)J:
-    owner: "Class72"
+    owner: "MidiDecoder"
     name: "method1657"
     arguments:
       0: "arg0"
     locals: {}
   client!go.a (II)I:
-    owner: "Class72"
-    name: "method1672"
+    owner: "MidiDecoder"
+    name: "getNextEvent"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "track"
+      1: "status"
     locals:
-      7: "local7"
-      12: "local12"
-      17: "local17"
-      32: "local32"
-      33: "local33"
-      38: "local38"
-      56: "local56"
-      65: "local65"
-      78: "local78"
-      80: "local80"
+      7: "type"
+      12: "len"
+      17: "buffer"
+      32: "tempo"
+      33: "skipBytes"
+      38: "time"
+      56: "buffer"
+      65: "buffer"
+      78: "len"
+      80: "event"
   client!go.a (J)V:
-    owner: "Class72"
+    owner: "MidiDecoder"
     name: "method1662"
     arguments:
       0: "arg0"
     locals:
-      6: "local6"
-      8: "local8"
+      6: "tracks"
+      8: "i"
   client!go.a ([B)V:
-    owner: "Class72"
-    name: "method1661"
+    owner: "MidiDecoder"
+    name: "init"
     arguments:
-      0: "arg0"
+      0: "bytes"
     locals:
-      12: "local12"
-      27: "local27"
-      35: "local35"
-      40: "local40"
-      53: "local53"
-      68: "local68"
+      12: "tracks"
+      27: "i"
+      35: "id"
+      40: "len"
+      53: "buffer"
+      68: "j"
   client!go.b ()V:
-    owner: "Class72"
-    name: "method1660"
+    owner: "MidiDecoder"
+    name: "loadEndOfTrackPosition"
     arguments: {}
     locals: {}
   client!go.b (I)V:
-    owner: "Class72"
-    name: "method1659"
+    owner: "MidiDecoder"
+    name: "addDeltaTime"
     arguments:
-      0: "arg0"
+      0: "track"
     locals:
-      4: "local4"
-      6: "local6"
+      4: "deltaTime"
+      6: "times"
   client!go.c ()Z:
-    owner: "Class72"
-    name: "method1664"
+    owner: "MidiDecoder"
+    name: "isValid"
     arguments: {}
     locals: {}
   client!go.c (I)V:
-    owner: "Class72"
-    name: "method1663"
+    owner: "MidiDecoder"
+    name: "loadTrackPosition"
     arguments:
-      0: "arg0"
+      0: "track"
     locals: {}
   client!go.d ()Z:
-    owner: "Class72"
-    name: "method1665"
+    owner: "MidiDecoder"
+    name: "hasNextTrack"
     arguments: {}
     locals:
-      3: "local3"
-      5: "local5"
+      3: "tracks"
+      5: "i"
   client!go.d (I)I:
-    owner: "Class72"
-    name: "method1669"
+    owner: "MidiDecoder"
+    name: "getNextEventInternal"
     arguments:
-      0: "arg0"
+      0: "track"
     locals:
-      7: "local7"
-      13: "local13"
-      42: "local42"
-      57: "local57"
-      97: "local97"
+      7: "statusByte"
+      13: "status"
+      42: "len"
+      57: "status2"
+      97: "buffer"
   client!go.e ()I:
-    owner: "Class72"
-    name: "method1666"
+    owner: "MidiDecoder"
+    name: "getNextTrack"
     arguments: {}
     locals:
-      3: "local3"
-      5: "local5"
-      7: "local7"
-      9: "local9"
+      3: "tracks"
+      5: "track"
+      7: "minTime"
+      9: "i"
   client!go.e (I)V:
-    owner: "Class72"
-    name: "method1670"
+    owner: "MidiDecoder"
+    name: "saveTrackPosition"
     arguments:
-      0: "arg0"
+      0: "track"
     locals: {}
   client!go.f (I)I:
-    owner: "Class72"
-    name: "method1671"
+    owner: "MidiDecoder"
+    name: "getNextEvent"
     arguments:
-      0: "arg0"
+      0: "track"
     locals: {}
   client!go.g ()I:
-    owner: "Class72"
-    name: "method1668"
+    owner: "MidiDecoder"
+    name: "getTrackCount"
     arguments: {}
     locals: {}
   client!h.<init> ()V:
@@ -27146,15 +27146,15 @@ methods:
     owner: "Class4_Sub6_Sub2"
     name: "method2511"
     arguments:
-      2: "arg0"
-      3: "arg1"
+      2: "song"
+      3: "archive"
       4: "arg2"
     locals:
-      9: "local9"
-      24: "local24"
-      36: "local36"
-      43: "local43"
-      53: "local53"
+      9: "valid"
+      24: "samplingRates"
+      36: "node"
+      43: "program"
+      53: "instrument"
   client!ld.a (ILclient!ej;)Z:
     owner: "Class4_Sub6_Sub2"
     name: "method2491"
@@ -27269,11 +27269,11 @@ methods:
     name: "method2483"
     arguments:
       0: "arg0"
-      2: "arg1"
+      2: "song"
       3: "arg2"
     locals:
-      24: "local24"
-      26: "local26"
+      24: "tracks"
+      26: "i"
   client!ld.a (ZLclient!tg;B)V:
     owner: "Class4_Sub6_Sub2"
     name: "method2504"
@@ -27411,7 +27411,7 @@ methods:
     name: "method2484"
     arguments: {}
     locals:
-      7: "local7"
+      7: "instrument"
   client!ld.d (III)V:
     owner: "Class4_Sub6_Sub2"
     name: "method2487"
@@ -36373,13 +36373,13 @@ methods:
     arguments: {}
     locals: {}
   client!qh.<init> ([B)V:
-    owner: "Class4_Sub23"
+    owner: "Instrument"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "bytes"
     locals:
       9: "local9"
-      38: "local38"
+      38: "buffer"
       52: "local52"
       54: "local54"
       71: "local71"
@@ -36531,7 +36531,7 @@ methods:
       670: "local670"
       674: "local674"
   client!qh.a (Z)V:
-    owner: "Class4_Sub23"
+    owner: "Instrument"
     name: "method3570"
     arguments: {}
     locals: {}
@@ -36547,17 +36547,17 @@ methods:
       20: "local20"
       27: "local27"
   client!qh.a ([ILclient!jk;I[B)Z:
-    owner: "Class4_Sub23"
+    owner: "Instrument"
     name: "method3566"
     arguments:
-      0: "arg0"
+      0: "samplingRates"
       1: "arg1"
-      3: "arg2"
+      3: "keys"
     locals:
-      15: "local15"
+      15: "valid"
       17: "local17"
       19: "local19"
-      21: "local21"
+      21: "i"
       40: "local40"
       51: "local51"
   client!qi.<init> (Lclient!fh;Lclient!fh;Lclient!fh;)V:
@@ -37049,7 +37049,7 @@ methods:
     owner: "Class4_Sub24"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "bytes"
     locals: {}
   client!qn.a ()I:
     owner: "Static30"
@@ -37061,23 +37061,23 @@ methods:
     owner: "Static30"
     name: "method3628"
     arguments:
-      0: "arg0"
+      0: "archive"
     locals:
-      7: "local7"
+      7: "bytes"
   client!qn.a (Lclient!fh;II)Lclient!qn;:
     owner: "Static30"
     name: "method3636"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "archive"
+      1: "groupId"
+      2: "fileId"
     locals:
-      16: "local16"
+      16: "bytes"
   client!qn.a ([B)V:
     owner: "Static30"
     name: "method3630"
     arguments:
-      0: "arg0"
+      0: "bytes"
     locals:
       17: "local17"
       26: "local26"
@@ -37109,7 +37109,7 @@ methods:
     owner: "Static30"
     name: "method3629"
     arguments:
-      0: "arg0"
+      0: "bytes"
     locals: {}
   client!qn.a ([I)Lclient!pb;:
     owner: "Class4_Sub24"
@@ -37223,11 +37223,11 @@ methods:
       1301: "local1301"
   client!qn.b ([B)V:
     owner: "Class4_Sub24"
-    name: "method3631"
+    name: "decode"
     arguments:
-      0: "arg0"
+      0: "bytes"
     locals:
-      4: "local4"
+      4: "buffer"
       40: "local40"
       46: "local46"
       51: "local51"
@@ -41076,40 +41076,40 @@ methods:
       940: "pitchWheelLsb"
   client!tg.a ()V:
     owner: "Song"
-    name: "method4163"
+    name: "createPrograms"
     arguments: {}
     locals:
-      12: "local12"
-      15: "local15"
-      29: "local29"
-      32: "local32"
-      34: "local34"
-      51: "local51"
-      56: "local56"
-      69: "local69"
-      85: "local85"
-      92: "local92"
-      98: "local98"
-      104: "local104"
-      140: "local140"
-      146: "local146"
-      161: "local161"
-      167: "local167"
-      173: "local173"
-      179: "local179"
-      187: "local187"
+      12: "banks"
+      15: "programs"
+      29: "song"
+      32: "tracks"
+      34: "i"
+      51: "track"
+      56: "time"
+      69: "event"
+      85: "status"
+      92: "channel"
+      98: "controller"
+      104: "value"
+      140: "channel"
+      146: "program"
+      161: "channel"
+      167: "key"
+      173: "velocity"
+      179: "program"
+      187: "node"
   client!tg.a (Lclient!fh;II)Lclient!tg;:
-    owner: "Static33"
-    name: "method4165"
+    owner: "Song"
+    name: "create"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "archive"
+      1: "groupId"
+      2: "fileId"
     locals:
-      5: "local5"
+      5: "bytes"
   client!tg.b ()V:
     owner: "Song"
-    name: "method4164"
+    name: "releasePrograms"
     arguments: {}
     locals: {}
   client!th.a ()I:
