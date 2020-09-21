@@ -7,7 +7,7 @@ import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.analysis.BasicInterpreter
 import org.objectweb.asm.tree.analysis.Interpreter
 
-public class ConstSourceInterpreter : Interpreter<ConstSourceValue>(Opcodes.ASM8) {
+public class ConstSourceInterpreter : Interpreter<ConstSourceValue>(Opcodes.ASM9) {
     private val basicInterpreter = BasicInterpreter()
 
     override fun newValue(type: Type?): ConstSourceValue? {

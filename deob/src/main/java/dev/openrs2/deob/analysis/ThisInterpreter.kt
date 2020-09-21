@@ -6,7 +6,7 @@ import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.analysis.BasicInterpreter
 import org.objectweb.asm.tree.analysis.Interpreter
 
-public class ThisInterpreter : Interpreter<ThisValue>(Opcodes.ASM8) {
+public class ThisInterpreter : Interpreter<ThisValue>(Opcodes.ASM9) {
     private val basicInterpreter = BasicInterpreter()
 
     override fun newValue(type: Type?): ThisValue? {
