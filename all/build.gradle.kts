@@ -15,6 +15,7 @@ application {
 }
 
 dependencies {
+    implementation(project(":archive"))
     implementation(project(":bundler"))
     implementation(project(":compress-cli"))
     implementation(project(":crc32"))

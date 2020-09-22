@@ -2,6 +2,7 @@ package dev.openrs2
 
 import com.github.ajalt.clikt.core.NoOpCliktCommand
 import com.github.ajalt.clikt.core.subcommands
+import dev.openrs2.archive.ArchiveCommand
 import dev.openrs2.bundler.BundleCommand
 import dev.openrs2.compress.cli.CompressCommand
 import dev.openrs2.crc32.Crc32Command
@@ -15,6 +16,7 @@ public fun main(args: Array<String>): Unit = Command().main(args)
 public class Command : NoOpCliktCommand(name = "openrs2") {
     init {
         subcommands(
+            ArchiveCommand(),
             BundleCommand(),
             CompressCommand(),
             Crc32Command(),

@@ -41,14 +41,24 @@ public class XteaKey(
         }
 
         public fun fromHex(s: String): XteaKey {
-            require(s.length == 32)
+            return fromHexOrNull(s) ?: throw IllegalArgumentException()
+        }
 
-            val k0 = Integer.parseUnsignedInt(s, 0, 8, 16)
-            val k1 = Integer.parseUnsignedInt(s, 8, 16, 16)
-            val k2 = Integer.parseUnsignedInt(s, 16, 24, 16)
-            val k3 = Integer.parseUnsignedInt(s, 24, 32, 16)
+        public fun fromHexOrNull(s: String): XteaKey? {
+            if (s.length != 32) {
+                return null
+            }
 
-            return XteaKey(k0, k1, k2, k3)
+            try {
+                val k0 = Integer.parseUnsignedInt(s, 0, 8, 16)
+                val k1 = Integer.parseUnsignedInt(s, 8, 16, 16)
+                val k2 = Integer.parseUnsignedInt(s, 16, 24, 16)
+                val k3 = Integer.parseUnsignedInt(s, 24, 32, 16)
+
+                return XteaKey(k0, k1, k2, k3)
+            } catch (ex: NumberFormatException) {
+                return null
+            }
         }
     }
 }

@@ -2,6 +2,7 @@ rootProject.name = "openrs2"
 
 include(
     "all",
+    "archive",
     "asm",
     "buffer",
     "bundler",
