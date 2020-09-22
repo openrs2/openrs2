@@ -12,7 +12,7 @@ public class GenerateCommand : CliktCommand(name = "generate") {
 
         val names = mutableSetOf<String>()
 
-        for (x in 0..255) {
+        for (x in 0..99) {
             for (z in 0..255) {
                 for (prefix in PREFIXES) {
                     names += "$prefix${x}_$z"
