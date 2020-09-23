@@ -2,9 +2,9 @@ package dev.openrs2.archive
 
 import dev.openrs2.db.Database
 import dev.openrs2.db.PostgresDeadlockDetector
-import javax.inject.Provider
 import org.flywaydb.core.Flyway
 import org.postgresql.ds.PGSimpleDataSource
+import javax.inject.Provider
 
 public class DatabaseProvider : Provider<Database> {
     override fun get(): Database {
