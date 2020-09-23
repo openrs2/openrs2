@@ -12,7 +12,7 @@ import dev.openrs2.db.Database
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.ByteBufUtil
-import io.netty.util.ReferenceCounted
+import io.netty.buffer.DefaultByteBufHolder
 import java.io.IOException
 import java.sql.Connection
 import java.sql.Types
@@ -25,8 +25,8 @@ public class CacheImporter @Inject constructor(
     private val alloc: ByteBufAllocator
 ) {
     private abstract class Container(
-        private val data: ByteBuf
-    ) : ReferenceCounted by data {
+        data: ByteBuf
+    ) : DefaultByteBufHolder(data) {
         val bytes: ByteArray = ByteBufUtil.getBytes(data, data.readerIndex(), data.readableBytes(), false)
         val crc32 = data.crc32()
         val whirlpool = Whirlpool.whirlpool(bytes)
