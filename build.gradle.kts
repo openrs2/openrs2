@@ -140,7 +140,7 @@ configure(subprojects.filter { it.isFree }) {
             configureEach {
                 includeNonPublic.set(true)
                 jdkVersion.set(11)
-                moduleDisplayName.set("openrs2")
+                moduleName.set("openrs2")
 
                 sourceLink {
                     localDirectory.set(rootDir)
