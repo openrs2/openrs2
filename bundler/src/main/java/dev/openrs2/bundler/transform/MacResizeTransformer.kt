@@ -27,6 +27,7 @@ public class MacResizeTransformer : Transformer() {
             val getstatic = match[0] as FieldInsnNode
             if (
                 getstatic.owner == "loader" ||
+                getstatic.owner == "loader!loader" ||
                 getstatic.owner == clazz.name ||
                 getstatic.desc != "Ljava/lang/String;"
             ) {
