@@ -6,6 +6,7 @@ import dev.openrs2.asm.transform.Transformer
 import dev.openrs2.bundler.transform.BufferSizeTransformer
 import dev.openrs2.bundler.transform.CachePathTransformer
 import dev.openrs2.bundler.transform.DomainTransformer
+import dev.openrs2.bundler.transform.HighDpiTransformer
 import dev.openrs2.bundler.transform.HostCheckTransformer
 import dev.openrs2.bundler.transform.LoadLibraryTransformer
 import dev.openrs2.bundler.transform.MacResizeTransformer
@@ -36,5 +37,6 @@ public object BundlerModule : AbstractModule() {
         binder.addBinding().to(PublicKeyTransformer::class.java)
         binder.addBinding().to(RightClickTransformer::class.java)
         binder.addBinding().to(TypoTransformer::class.java)
+        binder.addBinding().to(HighDpiTransformer::class.java)
     }
 }
