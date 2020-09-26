@@ -19,6 +19,7 @@ excluded_methods:
   - "*!javax/media/opengl/**.* *"
 excluded_fields:
   - "*!**.cache *"
+  - "*!**.canvasScale *"
   - "*!com/sun/opengl/impl/x11/**.* *"
   - "*!jaggl/**.* *"
   - "*!javax/media/opengl/**.* *"
