@@ -13,7 +13,7 @@ object Versions {
     const val guice = "4.2.3"
     const val h2 = "1.4.200"
     const val inlineLogger = "1.0.2"
-    const val jackson = "2.11.2"
+    const val jackson = "2.11.3"
     const val javaParser = "3.16.1"
     const val jdom = "2.0.6"
     const val jgrapht = "1.5.0"
