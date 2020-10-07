@@ -5,7 +5,7 @@ plugins {
 }
 
 application {
-    mainClassName = "dev.openrs2.compress.cli.CompressCommandKt"
+    mainClassName = "org.openrs2.compress.cli.CompressCommandKt"
 }
 
 dependencies {

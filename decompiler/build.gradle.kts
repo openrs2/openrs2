@@ -5,7 +5,7 @@ plugins {
 }
 
 application {
-    mainClassName = "dev.openrs2.decompiler.DecompileCommandKt"
+    mainClassName = "org.openrs2.decompiler.DecompileCommandKt"
     applicationDefaultJvmArgs = listOf("-Xmx3G")
 }
 
@@ -14,7 +14,7 @@ dependencies {
 
     implementation(project(":deob-util"))
     implementation(project(":util"))
-    implementation("dev.openrs2:fernflower:${Versions.fernflower}")
+    implementation("org.openrs2:fernflower:${Versions.fernflower}")
 }
 
 publishing {

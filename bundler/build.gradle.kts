@@ -5,7 +5,7 @@ plugins {
 }
 
 application {
-    mainClassName = "dev.openrs2.bundler.BundleCommandKt"
+    mainClassName = "org.openrs2.bundler.BundleCommandKt"
 }
 
 dependencies {
@@ -15,7 +15,7 @@ dependencies {
 
     implementation(project(":conf"))
     implementation(project(":crypto"))
-    implementation("dev.openrs2:openrs2-natives-all:${Versions.openrs2Natives}")
+    implementation("org.openrs2:openrs2-natives-all:${Versions.openrs2Natives}")
 }
 
 publishing {

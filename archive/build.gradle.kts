@@ -5,7 +5,7 @@ plugins {
 }
 
 application {
-    mainClassName = "dev.openrs2.archive.ArchiveCommandKt"
+    mainClassName = "org.openrs2.archive.ArchiveCommandKt"
 }
 
 dependencies {

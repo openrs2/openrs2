@@ -5,7 +5,7 @@ plugins {
 }
 
 application {
-    mainClassName = "dev.openrs2.crc32.Crc32CommandKt"
+    mainClassName = "org.openrs2.crc32.Crc32CommandKt"
 }
 
 dependencies {
