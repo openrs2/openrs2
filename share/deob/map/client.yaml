@@ -4,7 +4,7 @@ classes:
   client!ac: "TextureOp28"
   client!ae: "Class6"
   client!af: "AnimBase"
-  client!ag: "Class7"
+  client!ag: "SynthSound"
   client!ai: "QuickChatCommandDecoder"
   client!ak: "SecondaryHashTable"
   client!al: "Js5CacheRequest"
@@ -50,7 +50,7 @@ classes:
   client!dn: "TextureOp31"
   client!e: "MapAreaChunk"
   client!ea: "Class41_Sub1"
-  client!eb: "Class4_Sub8"
+  client!eb: "Sound"
   client!ec: "GlShader"
   client!ed: "SpotAnimNode"
   client!eg: "SeqType"
@@ -85,7 +85,7 @@ classes:
   client!gl: "Font"
   client!gn: "Class4_Sub11"
   client!go: "MidiDecoder"
-  client!h: "Class73"
+  client!h: "Envelope"
   client!hc: "ByteArray"
   client!he: "ObjStack"
   client!hf: "NanoTimer"
@@ -184,7 +184,7 @@ classes:
   client!oo: "MillisTimer"
   client!p: "Npc"
   client!pa: "FluType"
-  client!pb: "Class4_Sub8_Sub1"
+  client!pb: "PcmSound"
   client!pc: "Class4_Sub6_Sub4"
   client!pd: "Class132"
   client!pe: "CursorType"
@@ -203,7 +203,7 @@ classes:
   client!qe: "HashTableIterator"
   client!qf: "Class142"
   client!qg: "MsiType"
-  client!qh: "Instrument"
+  client!qh: "MidiInstrument"
   client!qi: "Js5TextureProvider"
   client!qj: "TextureOp16"
   client!qk: "PlayerAppearance"
@@ -255,10 +255,10 @@ classes:
   client!ua: "NpcType"
   client!ub: "DisplayMode"
   client!uc: "TextureOp23"
-  client!ud: "Class170"
+  client!ud: "Resampler"
   client!ue: "GameShell"
   client!ug: "ParticleLinkedList"
-  client!uh: "Class173"
+  client!uh: "SynthInstrument"
   client!ui: "GoSubFrame"
   client!uj: "Sprite"
   client!uk: "SecondaryLinkedList"
@@ -465,14 +465,14 @@ fields:
     owner: "AnimBase"
     name: "id"
   client!ag.a I:
-    owner: "Class7"
-    name: "anInt114"
+    owner: "SynthSound"
+    name: "end"
   client!ag.b I:
-    owner: "Class7"
-    name: "anInt115"
+    owner: "SynthSound"
+    name: "start"
   client!ag.c [Lclient!uh;:
-    owner: "Class7"
-    name: "aClass173Array1"
+    owner: "SynthSound"
+    name: "instruments"
   client!ah.d Ljava/lang/String;:
     owner: "Text"
     name: "CHATCOL10"
@@ -1938,8 +1938,8 @@ fields:
     owner: "Static2"
     name: "aClass4_Sub16_2"
   client!eb.o I:
-    owner: "Class4_Sub8"
-    name: "anInt4083"
+    owner: "Sound"
+    name: "position"
   client!ec.a I:
     owner: "GlShader"
     name: "id"
@@ -3282,38 +3282,38 @@ fields:
     owner: "MidiDecoder"
     name: "startPositions"
   client!h.a [I:
-    owner: "Class73"
-    name: "anIntArray177"
+    owner: "Envelope"
+    name: "levels"
   client!h.b I:
-    owner: "Class73"
-    name: "anInt2131"
+    owner: "Envelope"
+    name: "maxInterval"
   client!h.c I:
-    owner: "Class73"
-    name: "anInt2132"
+    owner: "Envelope"
+    name: "minInterval"
   client!h.d [I:
-    owner: "Class73"
-    name: "anIntArray178"
+    owner: "Envelope"
+    name: "times"
   client!h.e I:
-    owner: "Class73"
-    name: "anInt2133"
+    owner: "Envelope"
+    name: "wavetable"
   client!h.f I:
-    owner: "Class73"
-    name: "anInt2134"
+    owner: "Envelope"
+    name: "stages"
   client!h.g I:
-    owner: "Class73"
-    name: "anInt2135"
+    owner: "Envelope"
+    name: "nextTime"
   client!h.h I:
-    owner: "Class73"
-    name: "anInt2136"
+    owner: "Envelope"
+    name: "phase"
   client!h.i I:
-    owner: "Class73"
-    name: "anInt2137"
+    owner: "Envelope"
+    name: "level"
   client!h.j I:
-    owner: "Class73"
-    name: "anInt2138"
+    owner: "Envelope"
+    name: "time"
   client!h.k I:
-    owner: "Class73"
-    name: "anInt2139"
+    owner: "Envelope"
+    name: "slope"
   client!hb.a Ljava/lang/String;:
     owner: "LocalisedText"
     name: "ATTACK"
@@ -7356,20 +7356,20 @@ fields:
     owner: "FluType"
     name: "anInt4075"
   client!pb.p [B:
-    owner: "Class4_Sub8_Sub1"
-    name: "aByteArray52"
+    owner: "PcmSound"
+    name: "samples"
   client!pb.q I:
-    owner: "Class4_Sub8_Sub1"
-    name: "anInt4084"
+    owner: "PcmSound"
+    name: "start"
   client!pb.r I:
-    owner: "Class4_Sub8_Sub1"
-    name: "anInt4085"
+    owner: "PcmSound"
+    name: "rate"
   client!pb.s Z:
-    owner: "Class4_Sub8_Sub1"
+    owner: "PcmSound"
     name: "aBoolean288"
   client!pb.t I:
-    owner: "Class4_Sub8_Sub1"
-    name: "anInt4086"
+    owner: "PcmSound"
+    name: "end"
   client!pc.A I:
     owner: "Class4_Sub6_Sub4"
     name: "anInt4102"
@@ -8094,37 +8094,37 @@ fields:
     owner: "MsiType"
     name: "spriteId"
   client!qh.A [B:
-    owner: "Instrument"
+    owner: "MidiInstrument"
     name: "aByteArray57"
   client!qh.B [I:
-    owner: "Instrument"
+    owner: "MidiInstrument"
     name: "anIntArray458"
   client!qh.C Lclient!fh;:
     owner: "client"
     name: "js5Archive15"
   client!qh.D [S:
-    owner: "Instrument"
+    owner: "MidiInstrument"
     name: "aShortArray80"
   client!qh.E [B:
-    owner: "Instrument"
+    owner: "MidiInstrument"
     name: "aByteArray58"
   client!qh.p [B:
-    owner: "Instrument"
+    owner: "MidiInstrument"
     name: "aByteArray56"
   client!qh.q I:
     owner: "LoginManager"
     name: "disallowResult"
   client!qh.s [Lclient!pb;:
-    owner: "Instrument"
+    owner: "MidiInstrument"
     name: "aClass4_Sub8_Sub1Array1"
   client!qh.t I:
-    owner: "Instrument"
+    owner: "MidiInstrument"
     name: "anInt4326"
   client!qh.w I:
     owner: "Static5"
     name: "anInt4329"
   client!qh.y [Lclient!si;:
-    owner: "Instrument"
+    owner: "MidiInstrument"
     name: "aClass157Array1"
   client!qi.a Ljava/lang/String;:
     owner: "LocalisedText"
@@ -10278,13 +10278,13 @@ fields:
     owner: "WorldList"
     name: "step"
   client!ud.b I:
-    owner: "Class170"
-    name: "anInt5320"
+    owner: "Resampler"
+    name: "outputRate"
   client!ud.c I:
-    owner: "Class170"
-    name: "anInt5321"
+    owner: "Resampler"
+    name: "inputRate"
   client!ud.j [[I:
-    owner: "Class170"
+    owner: "Resampler"
     name: "anIntArrayArray47"
   client!ud.k [I:
     owner: "Static7"
@@ -10359,80 +10359,80 @@ fields:
     owner: "Static7"
     name: "anInt5345"
   client!uh.a Lclient!h;:
-    owner: "Class173"
-    name: "aClass73_1"
+    owner: "SynthInstrument"
+    name: "gateOpenPhaseEnvelope"
   client!uh.b Lclient!h;:
-    owner: "Class173"
-    name: "aClass73_2"
+    owner: "SynthInstrument"
+    name: "amplitudeModulationAmplitudeEnvelope"
   client!uh.c Lclient!h;:
-    owner: "Class173"
-    name: "aClass73_3"
+    owner: "SynthInstrument"
+    name: "gateClosedPhaseEnvelope"
   client!uh.d I:
-    owner: "Class173"
-    name: "anInt5346"
+    owner: "SynthInstrument"
+    name: "duration"
   client!uh.e Lclient!h;:
-    owner: "Class173"
-    name: "aClass73_4"
+    owner: "SynthInstrument"
+    name: "amplitudeEnvelope"
   client!uh.f [I:
-    owner: "Class173"
-    name: "anIntArray602"
+    owner: "SynthInstrument"
+    name: "SINE"
   client!uh.g Lclient!h;:
-    owner: "Class173"
-    name: "aClass73_5"
+    owner: "SynthInstrument"
+    name: "amplitudeModulationEnvelope"
   client!uh.h I:
-    owner: "Class173"
-    name: "anInt5347"
+    owner: "SynthInstrument"
+    name: "delayTime"
   client!uh.i I:
-    owner: "Class173"
-    name: "anInt5348"
+    owner: "SynthInstrument"
+    name: "delayMix"
   client!uh.j I:
-    owner: "Class173"
-    name: "anInt5349"
+    owner: "SynthInstrument"
+    name: "start"
   client!uh.k Lclient!h;:
-    owner: "Class173"
-    name: "aClass73_6"
+    owner: "SynthInstrument"
+    name: "phaseModulationEnvelope"
   client!uh.l [I:
-    owner: "Static7"
-    name: "anIntArray603"
+    owner: "SynthInstrument"
+    name: "samples"
   client!uh.m Lclient!h;:
-    owner: "Class173"
-    name: "aClass73_7"
+    owner: "SynthInstrument"
+    name: "phaseEnvelope"
   client!uh.n [I:
-    owner: "Class173"
+    owner: "SynthInstrument"
     name: "anIntArray604"
   client!uh.o [I:
-    owner: "Class173"
-    name: "anIntArray605"
+    owner: "SynthInstrument"
+    name: "oscillatorAmplitudes"
   client!uh.p Lclient!qo;:
-    owner: "Class173"
+    owner: "SynthInstrument"
     name: "aClass146_1"
   client!uh.q [I:
-    owner: "Class173"
-    name: "anIntArray606"
+    owner: "SynthInstrument"
+    name: "oscillatorStartMillis"
   client!uh.r Lclient!h;:
-    owner: "Class173"
-    name: "aClass73_8"
+    owner: "SynthInstrument"
+    name: "phaseModulationAmplitudeEnvelope"
   client!uh.s [I:
-    owner: "Class173"
-    name: "anIntArray607"
+    owner: "SynthInstrument"
+    name: "NOISE"
   client!uh.t [I:
-    owner: "Static7"
-    name: "anIntArray608"
+    owner: "SynthInstrument"
+    name: "oscillatorMinIntervals"
   client!uh.u [I:
-    owner: "Static7"
-    name: "anIntArray609"
+    owner: "SynthInstrument"
+    name: "oscillatorStartSamples"
   client!uh.v [I:
-    owner: "Static7"
-    name: "anIntArray610"
+    owner: "SynthInstrument"
+    name: "scaledOscillatorAmplitudes"
   client!uh.w [I:
-    owner: "Static7"
-    name: "anIntArray611"
+    owner: "SynthInstrument"
+    name: "oscillatorTimes"
   client!uh.x Lclient!h;:
-    owner: "Class173"
+    owner: "SynthInstrument"
     name: "aClass73_9"
   client!uh.y [I:
-    owner: "Static7"
-    name: "anIntArray612"
+    owner: "SynthInstrument"
+    name: "oscillatorIntervalRanges"
   client!ui.a Lclient!jl;:
     owner: "GoSubFrame"
     name: "script"
@@ -10704,8 +10704,8 @@ fields:
     owner: "client"
     name: "worldListAlternatePort"
   client!vf.g Lclient!ud;:
-    owner: "Static7"
-    name: "aClass170_1"
+    owner: "client"
+    name: "resampler"
   client!vf.h Lclient!vc;:
     owner: "Class180"
     name: "aClass53_7"
@@ -12446,52 +12446,52 @@ methods:
     arguments: {}
     locals: {}
   client!ag.<init> (Lclient!fd;)V:
-    owner: "Class7"
+    owner: "SynthSound"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals:
-      7: "local7"
-      14: "local14"
+      7: "i"
+      14: "wavetable"
   client!ag.a ()[B:
-    owner: "Class7"
-    name: "method104"
+    owner: "SynthSound"
+    name: "getSamples"
     arguments: {}
     locals:
-      1: "local1"
-      3: "local3"
-      49: "local49"
-      52: "local52"
-      54: "local54"
-      72: "local72"
-      82: "local82"
-      94: "local94"
-      96: "local96"
-      111: "local111"
+      1: "end"
+      3: "i"
+      49: "samplesLen"
+      52: "samples"
+      54: "i"
+      72: "duration"
+      82: "start"
+      94: "instrumentSamples"
+      96: "j"
+      111: "sample"
   client!ag.a (Lclient!fh;II)Lclient!ag;:
-    owner: "Static8"
-    name: "method106"
+    owner: "SynthSound"
+    name: "create"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "archive"
+      1: "group"
+      2: "file"
     locals:
-      5: "local5"
+      5: "bytes"
   client!ag.b ()I:
-    owner: "Class7"
-    name: "method105"
+    owner: "SynthSound"
+    name: "getStart"
     arguments: {}
     locals:
-      1: "local1"
-      3: "local3"
-      55: "local55"
-      67: "local67"
+      1: "start"
+      3: "i"
+      55: "i"
+      67: "instrument"
   client!ag.c ()Lclient!pb;:
-    owner: "Class7"
-    name: "method107"
+    owner: "SynthSound"
+    name: "toPcmSound"
     arguments: {}
     locals:
-      2: "local2"
+      2: "samples"
   client!ah.a (II)V:
     owner: "DelayedStateChange"
     name: "method111"
@@ -16211,7 +16211,7 @@ methods:
     locals:
       18: "value"
   client!dj.a (ILclient!fh;I)Lclient!qh;:
-    owner: "Instrument"
+    owner: "MidiInstrument"
     name: "create"
     arguments:
       1: "archive"
@@ -16546,7 +16546,7 @@ methods:
     locals:
       15: "local15"
   client!eb.<init> ()V:
-    owner: "Class4_Sub8"
+    owner: "Sound"
     name: "<init>"
     arguments: {}
     locals: {}
@@ -21806,34 +21806,34 @@ methods:
     arguments: {}
     locals: {}
   client!h.<init> ()V:
-    owner: "Class73"
+    owner: "Envelope"
     name: "<init>"
     arguments: {}
     locals: {}
   client!h.a ()V:
-    owner: "Class73"
-    name: "method1673"
+    owner: "Envelope"
+    name: "reset"
     arguments: {}
     locals: {}
   client!h.a (I)I:
-    owner: "Class73"
-    name: "method1675"
+    owner: "Envelope"
+    name: "nextLevel"
     arguments:
-      0: "arg0"
+      0: "duration"
     locals: {}
   client!h.a (Lclient!fd;)V:
-    owner: "Class73"
-    name: "method1674"
+    owner: "Envelope"
+    name: "decode"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals: {}
   client!h.b (Lclient!fd;)V:
-    owner: "Class73"
-    name: "method1676"
+    owner: "Envelope"
+    name: "decodeStages"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals:
-      16: "local16"
+      16: "i"
   client!hb.a (IB)I:
     owner: "EnumTypeList"
     name: "getGroupId"
@@ -34047,29 +34047,29 @@ methods:
     arguments: {}
     locals: {}
   client!pb.<init> (I[BII)V:
-    owner: "Class4_Sub8_Sub1"
+    owner: "PcmSound"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
+      0: "rate"
+      1: "samples"
+      2: "start"
+      3: "end"
     locals: {}
   client!pb.<init> (I[BIIZ)V:
-    owner: "Class4_Sub8_Sub1"
+    owner: "PcmSound"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
+      0: "rate"
+      1: "samples"
+      2: "start"
+      3: "end"
       4: "arg4"
     locals: {}
   client!pb.a (Lclient!ud;)Lclient!pb;:
-    owner: "Class4_Sub8_Sub1"
-    name: "method3338"
+    owner: "PcmSound"
+    name: "resample"
     arguments:
-      0: "arg0"
+      0: "resampler"
     locals: {}
   client!pc.<init> (Lclient!pb;II)V:
     owner: "Class4_Sub6_Sub4"
@@ -36373,7 +36373,7 @@ methods:
     arguments: {}
     locals: {}
   client!qh.<init> ([B)V:
-    owner: "Instrument"
+    owner: "MidiInstrument"
     name: "<init>"
     arguments:
       0: "bytes"
@@ -36531,7 +36531,7 @@ methods:
       670: "local670"
       674: "local674"
   client!qh.a (Z)V:
-    owner: "Instrument"
+    owner: "MidiInstrument"
     name: "method3570"
     arguments: {}
     locals: {}
@@ -36547,7 +36547,7 @@ methods:
       20: "local20"
       27: "local27"
   client!qh.a ([ILclient!jk;I[B)Z:
-    owner: "Instrument"
+    owner: "MidiInstrument"
     name: "method3566"
     arguments:
       0: "samplingRates"
@@ -36787,13 +36787,13 @@ methods:
     arguments: {}
     locals: {}
   client!qk.a (IBI)I:
-    owner: "Static30"
-    name: "method3603"
+    owner: "Resampler"
+    name: "gcd"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "a"
+      2: "b"
     locals:
-      32: "local32"
+      32: "aModB"
   client!qk.a (IBIIII)V:
     owner: "Static30"
     name: "method3607"
@@ -37290,17 +37290,17 @@ methods:
       30: "local30"
   client!qo.a (Lclient!fd;Lclient!h;)V:
     owner: "Class146"
-    name: "method3642"
+    name: "decode"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "buffer"
+      1: "envelope"
     locals:
       3: "local3"
       37: "local37"
-      39: "local39"
-      44: "local44"
-      78: "local78"
-      83: "local83"
+      39: "i"
+      44: "j"
+      78: "i"
+      83: "j"
   client!qo.b (IIF)F:
     owner: "Class146"
     name: "method3643"
@@ -42548,40 +42548,40 @@ methods:
       358: "local358"
       365: "local365"
   client!ud.<init> (II)V:
-    owner: "Class170"
+    owner: "Resampler"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "inputRate"
+      1: "outputRate"
     locals:
-      12: "local12"
-      33: "local33"
+      12: "gcd"
+      33: "i"
       48: "local48"
       53: "local53"
       61: "local61"
       67: "local67"
-      78: "local78"
+      78: "ratio"
       96: "local96"
       98: "local98"
       127: "local127"
   client!ud.a (B[B)[B:
-    owner: "Class170"
-    name: "method4305"
+    owner: "Resampler"
+    name: "resample"
     arguments:
-      1: "arg0"
+      1: "samples"
     locals:
-      29: "local29"
-      31: "local31"
-      34: "local34"
+      29: "outputCount"
+      31: "outputPos"
+      34: "outputSamples"
       36: "local36"
-      38: "local38"
-      46: "local46"
+      38: "inputPos"
+      46: "inputSample"
       51: "local51"
-      53: "local53"
+      53: "j"
       77: "local77"
       82: "local82"
-      101: "local101"
-      116: "local116"
+      101: "i"
+      116: "sample"
   client!ud.a (I)V:
     owner: "Protocol"
     name: "readExtendedPlayerInfo"
@@ -42592,16 +42592,16 @@ methods:
       28: "player"
       32: "flags"
   client!ud.a (IB)I:
-    owner: "Class170"
-    name: "method4302"
+    owner: "Resampler"
+    name: "scaleRate"
     arguments:
-      0: "arg0"
+      0: "rate"
     locals: {}
   client!ud.a (II)I:
-    owner: "Class170"
-    name: "method4303"
+    owner: "Resampler"
+    name: "scalePosition"
     arguments:
-      1: "arg0"
+      1: "position"
     locals: {}
   client!ud.a (JB)V:
     owner: "Static35"
@@ -43020,39 +43020,39 @@ methods:
       14: "local14"
       20: "local20"
   client!uh.a (II)[I:
-    owner: "Class173"
-    name: "method4325"
+    owner: "SynthInstrument"
+    name: "getSamples"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "count"
+      1: "millis"
     locals:
-      16: "local16"
-      24: "local24"
-      26: "local26"
-      28: "local28"
-      63: "local63"
-      65: "local65"
-      67: "local67"
-      102: "local102"
-      177: "local177"
-      185: "local185"
-      190: "local190"
-      198: "local198"
-      203: "local203"
-      233: "local233"
-      238: "local238"
-      266: "local266"
-      281: "local281"
-      285: "local285"
-      337: "local337"
-      341: "local341"
-      343: "local343"
-      351: "local351"
-      356: "local356"
-      374: "local374"
-      424: "local424"
-      426: "local426"
-      430: "local430"
+      16: "samplesPerMilli"
+      24: "phaseModulationIntervalRange"
+      26: "phaseModulationMinInterval"
+      28: "intervalModulationTime"
+      63: "amplitudeModulationIntervalRange"
+      65: "amplitudeModulationMinInterval"
+      67: "amplitudeModulationTime"
+      102: "i"
+      177: "i"
+      185: "intervalMultiplier"
+      190: "amplitudeMultiplier"
+      198: "interval"
+      203: "amplitude"
+      233: "interval"
+      238: "amplitude"
+      266: "j"
+      281: "k"
+      285: "temp"
+      337: "time"
+      341: "closed"
+      343: "i"
+      351: "closedPhase"
+      356: "openPhase"
+      374: "duration"
+      424: "delay"
+      426: "i"
+      430: "samples"
       469: "local469"
       478: "local478"
       487: "local487"
@@ -43068,25 +43068,25 @@ methods:
       721: "local721"
       727: "local727"
       757: "local757"
-      798: "local798"
+      798: "i"
   client!uh.a (III)I:
-    owner: "Class173"
-    name: "method4326"
+    owner: "SynthInstrument"
+    name: "wavetableLookup"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      2: "wavetable"
+      0: "time"
+      1: "amplitude"
     locals: {}
   client!uh.a (Lclient!fd;)V:
-    owner: "Class173"
-    name: "method4323"
+    owner: "SynthInstrument"
+    name: "decode"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals:
-      21: "local21"
-      51: "local51"
-      81: "local81"
-      109: "local109"
+      21: "phaseModulationWavetable"
+      51: "amplitudeModulationWavetable"
+      81: "gateWavetable"
+      109: "i"
       116: "local116"
   client!ui.a (IIBI)I:
     owner: "Static35"
