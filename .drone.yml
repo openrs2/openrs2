@@ -4,12 +4,12 @@ name: default
 
 steps:
   - name: build
-    image: registry.openrs2.dev/openrs2-dev
+    image: registry.openrs2.org/openrs2-dev
     commands:
       - ./gradlew --no-daemon clean build
 
   - name: deploy
-    image: registry.openrs2.dev/openrs2-dev
+    image: registry.openrs2.org/openrs2-dev
     commands:
       - install -dm0700 $${HOME}/.ssh
       - echo -n "$${SSH_KEY}" > $${HOME}/.ssh/id_ed25519

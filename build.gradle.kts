@@ -24,15 +24,15 @@ repositories {
 }
 
 allprojects {
-    group = "dev.openrs2"
+    group = "org.openrs2"
     version = "0.1.0-SNAPSHOT"
 
     repositories {
         mavenCentral()
         jcenter()
-        maven(url = "https://repo.openrs2.dev/repository/openrs2")
+        maven(url = "https://repo.openrs2.org/repository/openrs2")
         mavenLocal()
-        maven(url = "https://repo.openrs2.dev/repository/openrs2-snapshots")
+        maven(url = "https://repo.openrs2.org/repository/openrs2-snapshots")
     }
 
     plugins.withType<BasePlugin> {
@@ -144,7 +144,7 @@ configure(subprojects.filter { it.isFree }) {
 
                 sourceLink {
                     localDirectory.set(rootDir)
-                    remoteUrl.set(URL("https://git.openrs2.dev/openrs2/openrs2/src/commit/${commitHash()}"))
+                    remoteUrl.set(URL("https://git.openrs2.org/openrs2/openrs2/src/commit/${commitHash()}"))
                     remoteLineSuffix.set("#L")
                 }
 
@@ -247,9 +247,9 @@ configure(subprojects.filter { it.isFree }) {
                 maven {
                     name = "openrs2"
                     url = if (version.toString().endsWith("-SNAPSHOT")) {
-                        uri("https://repo.openrs2.dev/repository/openrs2-snapshots")
+                        uri("https://repo.openrs2.org/repository/openrs2-snapshots")
                     } else {
-                        uri("https://repo.openrs2.dev/repository/openrs2")
+                        uri("https://repo.openrs2.org/repository/openrs2")
                     }
 
                     credentials(PasswordCredentials::class)
@@ -260,12 +260,12 @@ configure(subprojects.filter { it.isFree }) {
                 artifactId = "openrs2-${project.name}"
 
                 pom {
-                    url.set("https://www.openrs2.dev/")
+                    url.set("https://www.openrs2.org/")
                     inceptionYear.set("2019")
 
                     organization {
                         name.set("OpenRS2 Authors")
-                        url.set("https://www.openrs2.dev/")
+                        url.set("https://www.openrs2.org/")
                     }
 
                     licenses {
@@ -276,19 +276,19 @@ configure(subprojects.filter { it.isFree }) {
                     }
 
                     scm {
-                        connection.set("scm:git:https://git.openrs2.dev/openrs2/openrs2.git")
-                        developerConnection.set("scm:git:git@git.openrs2.dev:openrs2/openrs2.git")
-                        url.set("https://git.openrs2.dev/openrs2/openrs2")
+                        connection.set("scm:git:https://git.openrs2.org/openrs2/openrs2.git")
+                        developerConnection.set("scm:git:git@git.openrs2.org:openrs2/openrs2.git")
+                        url.set("https://git.openrs2.org/openrs2/openrs2")
                     }
 
                     issueManagement {
                         system.set("Gitea")
-                        url.set("https://git.openrs2.dev/openrs2/openrs2")
+                        url.set("https://git.openrs2.org/openrs2/openrs2")
                     }
 
                     ciManagement {
                         system.set("Drone")
-                        url.set("https://build.openrs2.dev/openrs2/openrs2/")
+                        url.set("https://build.openrs2.org/openrs2/openrs2/")
                     }
                 }
             }
@@ -321,7 +321,7 @@ tasks.register<Exec>("publishDokka") {
         "--delete",
         "-rtz",
         "$buildDir/dokka/htmlCollector/",
-        "build@docs.openrs2.dev:/srv/www/docs"
+        "build@docs.openrs2.org:/srv/www/docs"
     )
 }
 

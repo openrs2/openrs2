@@ -7,4 +7,4 @@ game: "OpenRS2"
 operator: "OpenRS2"
 # The game's domain name. All references to "runescape.com" are replaced with
 # this string. It should, at a minimum, have `www` and `www-wtqa` hostnames.
-domain: "openrs2.dev"
+domain: "openrs2.org"
