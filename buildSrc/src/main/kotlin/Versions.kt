@@ -8,7 +8,7 @@ object Versions {
     const val dokka = "1.4.10"
     const val fastutil = "8.4.2"
     const val fernflower = "1.1.0"
-    const val flyway = "7.0.0"
+    const val flyway = "7.0.1"
     const val guava = "29.0-jre"
     const val guice = "4.2.3"
     const val h2 = "1.4.200"
@@ -26,7 +26,7 @@ object Versions {
     const val netty = "4.1.52.Final"
     const val openrs2Natives = "3.0.0"
     const val postgres = "42.2.16"
-    const val shadowPlugin = "6.0.0"
+    const val shadowPlugin = "6.1.0"
     const val versionsPlugin = "0.33.0"
     const val xz = "1.8"
 }
