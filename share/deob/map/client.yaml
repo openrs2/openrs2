@@ -22553,10 +22553,10 @@ methods:
       163: "local163"
       167: "local167"
   client!hm.a (BLjava/lang/String;)I:
-    owner: "Static19"
-    name: "method1791"
+    owner: "Buffer"
+    name: "getStringLength"
     arguments:
-      1: "arg0"
+      1: "value"
     locals: {}
   client!hm.d (I)V:
     owner: "VarpTypeList"
