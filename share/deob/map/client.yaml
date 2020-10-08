@@ -179,7 +179,7 @@ classes:
   client!oj: "HuffmanCodec"
   client!ok: "BrokenOutputStream"
   client!ol: "Class4_Sub20"
-  client!om: "Class130"
+  client!om: "SecondaryLinkedListIterator"
   client!on: "Class4_Sub21"
   client!oo: "MillisTimer"
   client!p: "Npc"
@@ -7254,8 +7254,8 @@ fields:
     owner: "MouseRecorder"
     name: "enabled"
   client!om.d Lclient!uk;:
-    owner: "Class130"
-    name: "aClass175_13"
+    owner: "SecondaryLinkedListIterator"
+    name: "list"
   client!om.f Lclient!fh;:
     owner: "client"
     name: "js5Archive19"
@@ -7266,8 +7266,8 @@ fields:
     owner: "Static5"
     name: "anInt3920"
   client!om.n Lclient!lh;:
-    owner: "Class130"
-    name: "aClass4_Sub3_51"
+    owner: "SecondaryLinkedListIterator"
+    name: "cursor"
   client!om.o Ljava/lang/String;:
     owner: "Text"
     name: "CHATCOL8"
@@ -33630,11 +33630,11 @@ methods:
     arguments: {}
     locals: {}
   client!om.a (I)Lclient!lh;:
-    owner: "Class130"
-    name: "method3250"
+    owner: "SecondaryLinkedListIterator"
+    name: "next"
     arguments: {}
     locals:
-      6: "local6"
+      6: "node"
   client!om.a (IBIZ)I:
     owner: "Inv"
     name: "getTotalParam"
@@ -33669,10 +33669,10 @@ methods:
       5: "arg2"
     locals: {}
   client!om.a (ILclient!uk;)V:
-    owner: "Class130"
-    name: "method3256"
+    owner: "SecondaryLinkedListIterator"
+    name: "init"
     arguments:
-      1: "arg0"
+      1: "list"
     locals: {}
   client!om.b (B)V:
     owner: "Static28"
@@ -33695,11 +33695,11 @@ methods:
       0: "id"
     locals: {}
   client!om.d (B)Lclient!lh;:
-    owner: "Class130"
-    name: "method3255"
+    owner: "SecondaryLinkedListIterator"
+    name: "head"
     arguments: {}
     locals:
-      8: "local8"
+      8: "node"
   client!om.e (B)V:
     owner: "FluTypeList"
     name: "removeSoft"
