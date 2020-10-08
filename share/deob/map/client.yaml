@@ -180,7 +180,7 @@ classes:
   client!ok: "BrokenOutputStream"
   client!ol: "Class4_Sub20"
   client!om: "SecondaryLinkedListIterator"
-  client!on: "Class4_Sub21"
+  client!on: "ServerActiveProperties"
   client!oo: "MillisTimer"
   client!p: "Npc"
   client!pa: "FluType"
@@ -5658,8 +5658,8 @@ fields:
     owner: "WorldMap"
     name: "font17"
   client!me.g Lclient!on;:
-    owner: "Static4"
-    name: "aClass4_Sub21_1"
+    owner: "Component"
+    name: "DEFAULT_SERVER_ACTIVE_PROPERTIES"
   client!me.h Z:
     owner: "client"
     name: "objectTag"
@@ -7272,11 +7272,11 @@ fields:
     owner: "Text"
     name: "CHATCOL8"
   client!on.A I:
-    owner: "Class4_Sub21"
-    name: "anInt3939"
+    owner: "ServerActiveProperties"
+    name: "targetParam"
   client!on.J I:
-    owner: "Class4_Sub21"
-    name: "anInt3947"
+    owner: "ServerActiveProperties"
+    name: "events"
   client!on.K Lclient!cc;:
     owner: "LocTypeList"
     name: "aClass26_43"
@@ -11452,7 +11452,7 @@ fields:
     name: "anObjectArray3"
   client!wf.db [I:
     owner: "Component"
-    name: "anIntArray660"
+    name: "objTypes"
   client!wf.dc I:
     owner: "Static7"
     name: "anInt5935"
@@ -11497,7 +11497,7 @@ fields:
     name: "anIntArray672"
   client!wf.h Lclient!on;:
     owner: "Component"
-    name: "aClass4_Sub21_2"
+    name: "serverActiveProperties"
   client!wf.hb I:
     owner: "Component"
     name: "anInt5908"
@@ -11512,7 +11512,7 @@ fields:
     name: "aString349"
   client!wf.ib [I:
     owner: "Component"
-    name: "anIntArray661"
+    name: "objCounts"
   client!wf.ic [Ljava/lang/Object;:
     owner: "Component"
     name: "anObjectArray21"
@@ -24199,10 +24199,10 @@ methods:
       130: "i"
       180: "local180"
       184: "local184"
-      193: "local193"
-      213: "local213"
-      217: "local217"
-      221: "local221"
+      193: "component"
+      213: "count"
+      217: "slot"
+      221: "id"
       356: "local356"
       360: "local360"
       364: "local364"
@@ -24431,8 +24431,8 @@ methods:
       4190: "local4190"
       4194: "local4194"
       4226: "local4226"
-      4232: "local4232"
-      4234: "local4234"
+      4232: "component"
+      4234: "slot"
       4270: "local4270"
       4278: "local4278"
       4283: "local4283"
@@ -24519,12 +24519,12 @@ methods:
       5521: "local5521"
       5536: "local5536"
       5540: "local5540"
-      5557: "local5557"
-      5570: "local5570"
-      5595: "local5595"
-      5597: "local5597"
-      5608: "local5608"
-      5612: "local5612"
+      5557: "component"
+      5570: "slot"
+      5595: "len"
+      5597: "i"
+      5608: "id"
+      5612: "count"
       5687: "local5687"
       5691: "local5691"
       5695: "local5695"
@@ -24890,8 +24890,8 @@ methods:
     owner: "Static21"
     name: "method2081"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "targetMask"
+      1: "targetParam"
       2: "arg2"
       3: "arg3"
       4: "arg4"
@@ -33706,17 +33706,17 @@ methods:
     arguments: {}
     locals: {}
   client!on.<init> (II)V:
-    owner: "Class4_Sub21"
+    owner: "ServerActiveProperties"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "events"
+      1: "targetParam"
     locals: {}
   client!on.a (II)Z:
-    owner: "Class4_Sub21"
-    name: "method3266"
+    owner: "ServerActiveProperties"
+    name: "isButtonEnabled"
     arguments:
-      0: "arg0"
+      0: "button"
     locals: {}
   client!on.a (IIB)V:
     owner: "Static28"
@@ -33739,8 +33739,8 @@ methods:
       0: "position"
     locals: {}
   client!on.a (Z)Z:
-    owner: "Class4_Sub21"
-    name: "method3280"
+    owner: "ServerActiveProperties"
+    name: "isUseTarget"
     arguments: {}
     locals: {}
   client!on.b (BI)V:
@@ -33749,8 +33749,8 @@ methods:
     arguments: {}
     locals: {}
   client!on.b (I)Z:
-    owner: "Class4_Sub21"
-    name: "method3269"
+    owner: "ServerActiveProperties"
+    name: "isObjSwapEnabled"
     arguments: {}
     locals: {}
   client!on.b (II)I:
@@ -33777,33 +33777,33 @@ methods:
     arguments: {}
     locals: {}
   client!on.d (B)Z:
-    owner: "Class4_Sub21"
-    name: "method3265"
+    owner: "ServerActiveProperties"
+    name: "isDragTarget"
     arguments: {}
     locals: {}
   client!on.d (I)I:
-    owner: "Class4_Sub21"
-    name: "method3273"
+    owner: "ServerActiveProperties"
+    name: "getTargetMask"
     arguments: {}
     locals: {}
   client!on.e (B)I:
-    owner: "Class4_Sub21"
-    name: "method3271"
+    owner: "ServerActiveProperties"
+    name: "getDragDepth"
     arguments: {}
     locals: {}
   client!on.e (I)Z:
-    owner: "Class4_Sub21"
-    name: "method3275"
+    owner: "ServerActiveProperties"
+    name: "isObjUseEnabled"
     arguments: {}
     locals: {}
   client!on.f (B)Z:
-    owner: "Class4_Sub21"
-    name: "method3274"
+    owner: "ServerActiveProperties"
+    name: "isResumePauseButtonEnabled"
     arguments: {}
     locals: {}
   client!on.f (I)Z:
-    owner: "Class4_Sub21"
-    name: "method3279"
+    owner: "ServerActiveProperties"
+    name: "isObjReplaceEnabled"
     arguments: {}
     locals: {}
   client!on.g (I)V:
@@ -33812,8 +33812,8 @@ methods:
     arguments: {}
     locals: {}
   client!on.h (I)Z:
-    owner: "Class4_Sub21"
-    name: "method3282"
+    owner: "ServerActiveProperties"
+    name: "isObjOpsEnabled"
     arguments: {}
     locals: {}
   client!oo.a (III)I:
@@ -35424,12 +35424,12 @@ methods:
       1117: "local1117"
       1137: "local1137"
       1175: "local1175"
-      1306: "local1306"
+      1306: "component"
       1312: "local1312"
-      1343: "local1343"
-      1345: "local1345"
-      1380: "local1380"
-      1382: "local1382"
+      1343: "destSlot"
+      1345: "sourceSlot"
+      1380: "sourceSlot"
+      1382: "destSlot"
       1483: "local1483"
       1487: "local1487"
       1542: "local1542"
@@ -39578,10 +39578,10 @@ methods:
       0: "arg0"
     locals: {}
   client!sa.a (II)I:
-    owner: "Static32"
-    name: "method3882"
+    owner: "ServerActiveProperties"
+    name: "getTargetMask"
     arguments:
-      0: "arg0"
+      0: "events"
     locals: {}
   client!sa.a (III)Lclient!vl;:
     owner: "Terrain"
@@ -45613,12 +45613,12 @@ methods:
     locals: {}
   client!wf.a (IBI)V:
     owner: "Component"
-    name: "method4733"
+    name: "swapObjs"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "i"
+      2: "j"
     locals:
-      8: "local8"
+      8: "temp"
   client!wf.a (II)V:
     owner: "CursorTypeList"
     name: "clean"
