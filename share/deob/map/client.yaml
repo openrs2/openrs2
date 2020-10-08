@@ -102,7 +102,7 @@ classes:
   client!ik: "ParticleEmitterType"
   client!im: "AudioThread"
   client!in: "Class11_Sub4"
-  client!io: "Class4_Sub13"
+  client!io: "HookRequest"
   client!j: "ByteArrayNode"
   client!ja: "Js5CacheQueue"
   client!jagex3/jagmisc/jagmisc: "jagex3/jagmisc/jagmisc"
@@ -4215,13 +4215,13 @@ fields:
     owner: "Class11_Sub4"
     name: "anInt2476"
   client!io.A I:
-    owner: "Class4_Sub13"
+    owner: "HookRequest"
     name: "op"
   client!io.B Lclient!cc;:
     owner: "FloTypeList"
     name: "types"
   client!io.C I:
-    owner: "Class4_Sub13"
+    owner: "HookRequest"
     name: "mouseX"
   client!io.D Lclient!fh;:
     owner: "client"
@@ -4239,31 +4239,31 @@ fields:
     owner: "Text"
     name: "CHATEFFECT5"
   client!io.o Lclient!wf;:
-    owner: "Class4_Sub13"
+    owner: "HookRequest"
     name: "target"
   client!io.p I:
-    owner: "Class4_Sub13"
+    owner: "HookRequest"
     name: "keyCode"
   client!io.q Lclient!wf;:
-    owner: "Class4_Sub13"
+    owner: "HookRequest"
     name: "source"
   client!io.s I:
-    owner: "Class4_Sub13"
+    owner: "HookRequest"
     name: "keyChar"
   client!io.u Z:
-    owner: "Class4_Sub13"
+    owner: "HookRequest"
     name: "aBoolean172"
   client!io.v [Ljava/lang/Object;:
-    owner: "Class4_Sub13"
+    owner: "HookRequest"
     name: "arguments"
   client!io.w Ljava/lang/String;:
     owner: "LocalisedText"
     name: "CHATEFFECT5"
   client!io.x Ljava/lang/String;:
-    owner: "Class4_Sub13"
+    owner: "HookRequest"
     name: "opBase"
   client!io.y I:
-    owner: "Class4_Sub13"
+    owner: "HookRequest"
     name: "mouseY"
   client!j.o I:
     owner: "Static3"
