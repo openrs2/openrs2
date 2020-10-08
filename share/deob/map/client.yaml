@@ -772,7 +772,7 @@ fields:
     name: "js5Archive25"
   client!bh.d I:
     owner: "LoginManager"
-    name: "type"
+    name: "anInt1407"
   client!bh.h I:
     owner: "Preferences"
     name: "antiAliasingMode"
@@ -36990,7 +36990,7 @@ methods:
     arguments:
       1: "username"
       0: "password"
-      2: "type"
+      2: "arg2"
     locals:
       50: "rsaBuffer"
   client!ql.paint (Ljava/awt/Graphics;)V:
