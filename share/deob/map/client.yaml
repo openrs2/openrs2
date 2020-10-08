@@ -129,7 +129,7 @@ classes:
   client!kk: "WorldMapFont"
   client!kl: "TextureOp38"
   client!km: "TextureOp29"
-  client!l: "Class4_Sub15"
+  client!l: "ClanMember"
   client!la: "TextureOp20"
   client!lb: "SecondaryParticleLinkedList"
   client!lc: "Class11"
@@ -4998,8 +4998,8 @@ fields:
     owner: "client"
     name: "cacheIndexes"
   client!l.p I:
-    owner: "Class4_Sub15"
-    name: "anInt2988"
+    owner: "ClanMember"
+    name: "world"
   client!l.q I:
     owner: "Static4"
     name: "anInt2989"
@@ -5010,8 +5010,8 @@ fields:
     owner: "LocalisedText"
     name: "CHATCOL5"
   client!l.t B:
-    owner: "Class4_Sub15"
-    name: "aByte5"
+    owner: "ClanMember"
+    name: "rank"
   client!l.u Lclient!fh;:
     owner: "client"
     name: "js5Archive13"
@@ -5022,11 +5022,11 @@ fields:
     owner: "LocalisedText"
     name: "REMOVEIGNORE2"
   client!l.y Ljava/lang/String;:
-    owner: "Class4_Sub15"
-    name: "aString181"
+    owner: "ClanMember"
+    name: "worldName"
   client!l.z Ljava/lang/String;:
-    owner: "Class4_Sub15"
-    name: "aString182"
+    owner: "ClanMember"
+    name: "username"
   client!la.S I:
     owner: "Static4"
     name: "anInt3017"
