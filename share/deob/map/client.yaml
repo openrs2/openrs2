@@ -38,7 +38,7 @@ classes:
   client!cn: "ReferenceNode"
   client!co: "Scenery"
   client!d: "BasType"
-  client!da: "Class35"
+  client!da: "MonochromeImageCache"
   client!dc: "ParticleEffectorType"
   client!dd: "Class4_Sub4_Sub1"
   client!de: "Class11_Sub2"
@@ -147,8 +147,8 @@ classes:
   client!m: "IsaacRandom"
   client!ma: "IndexedSprite"
   client!mb: "ParticleNode"
-  client!mc: "Class4_Sub16"
-  client!md: "Class114"
+  client!mc: "ColorImageCacheEntry"
+  client!md: "ColorImageCache"
   client!mg: "Js5MasterIndex"
   client!mi: "TextureMeta"
   client!mj: "Class120"
@@ -178,7 +178,7 @@ classes:
   client!oi: "Js5QuickChatCommandDecoder"
   client!oj: "HuffmanCodec"
   client!ok: "BrokenOutputStream"
-  client!ol: "Class4_Sub20"
+  client!ol: "MonochromeImageCacheEntry"
   client!om: "SecondaryLinkedListIterator"
   client!on: "ServerActiveProperties"
   client!oo: "MillisTimer"
@@ -1449,32 +1449,32 @@ fields:
     owner: "BasType"
     name: "anInt851"
   client!da.a [I:
-    owner: "Class35"
+    owner: "MonochromeImageCache"
     name: "anIntArray61"
   client!da.b I:
-    owner: "Class35"
-    name: "anInt869"
+    owner: "MonochromeImageCache"
+    name: "capacity"
   client!da.d Z:
     owner: "Static1"
     name: "aBoolean49"
   client!da.f [Lclient!ol;:
-    owner: "Class35"
-    name: "aClass4_Sub20Array1"
+    owner: "MonochromeImageCache"
+    name: "entries"
   client!da.g I:
-    owner: "Class35"
-    name: "anInt872"
+    owner: "MonochromeImageCache"
+    name: "size"
   client!da.h Z:
     owner: "Static1"
     name: "aBoolean50"
   client!da.i [[I:
-    owner: "Class35"
-    name: "anIntArrayArray8"
+    owner: "MonochromeImageCache"
+    name: "pixels"
   client!da.j I:
     owner: "Static1"
     name: "anInt873"
   client!da.k I:
-    owner: "Class35"
-    name: "anInt874"
+    owner: "MonochromeImageCache"
+    name: "height"
   client!da.l Lclient!fh;:
     owner: "MsiTypeList"
     name: "archive"
@@ -1482,17 +1482,17 @@ fields:
     owner: "Static1"
     name: "aClass4_Sub6_Sub2_3"
   client!da.n I:
-    owner: "Class35"
-    name: "anInt875"
+    owner: "MonochromeImageCache"
+    name: "singleRow"
   client!da.o I:
     owner: "Static1"
     name: "anInt876"
   client!da.s Lclient!ll;:
-    owner: "Class35"
-    name: "aClass112_4"
+    owner: "MonochromeImageCache"
+    name: "recentlyUsed"
   client!da.t Z:
-    owner: "Class35"
-    name: "aBoolean51"
+    owner: "MonochromeImageCache"
+    name: "invalid"
   client!da.u [I:
     owner: "VarpDomain"
     name: "serverVarps"
@@ -1935,8 +1935,8 @@ fields:
     owner: "Class41_Sub1"
     name: "anInt1113"
   client!ea.y Lclient!mc;:
-    owner: "Static2"
-    name: "aClass4_Sub16_2"
+    owner: "ColorImageCacheEntry"
+    name: "VALID"
   client!eb.o I:
     owner: "Sound"
     name: "position"
@@ -4624,7 +4624,7 @@ fields:
     name: "aLongArray56"
   client!jo.F Lclient!da;:
     owner: "TextureOp"
-    name: "aClass35_41"
+    name: "monochromeImageCache"
   client!jo.G Z:
     owner: "Preferences"
     name: "roofsVisible"
@@ -4645,16 +4645,16 @@ fields:
     name: "aFloat146"
   client!jo.R I:
     owner: "TextureOp"
-    name: "anInt5832"
+    name: "imageCacheCapacity"
   client!jo.v F:
     owner: "Static4"
     name: "aFloat145"
   client!jo.y Z:
     owner: "TextureOp"
-    name: "aBoolean397"
+    name: "monochrome"
   client!jo.z Lclient!md;:
     owner: "TextureOp"
-    name: "aClass114_41"
+    name: "colorImageCache"
   client!k.b Lclient!vn;:
     owner: "Static4"
     name: "aClass4_Sub3_Sub14_Sub1_4"
@@ -5592,11 +5592,11 @@ fields:
     owner: "Static4"
     name: "anIntArray313"
   client!mc.t I:
-    owner: "Class4_Sub16"
-    name: "anInt3293"
+    owner: "ColorImageCacheEntry"
+    name: "index"
   client!mc.u I:
-    owner: "Class4_Sub16"
-    name: "anInt3294"
+    owner: "ColorImageCacheEntry"
+    name: "row"
   client!mc.w Ljava/lang/String;:
     owner: "LocalisedText"
     name: "MAINLOAD40B"
@@ -5607,8 +5607,8 @@ fields:
     owner: "Static4"
     name: "aFloatArray38"
   client!md.a Lclient!ll;:
-    owner: "Class114"
-    name: "aClass112_17"
+    owner: "ColorImageCache"
+    name: "recentlyUsed"
   client!md.b [I:
     owner: "Static4"
     name: "anIntArray315"
@@ -5616,26 +5616,26 @@ fields:
     owner: "LocalisedText"
     name: "MAINLOAD110B"
   client!md.f [Lclient!mc;:
-    owner: "Class114"
-    name: "aClass4_Sub16Array1"
+    owner: "ColorImageCache"
+    name: "entries"
   client!md.g I:
-    owner: "Class114"
-    name: "anInt3300"
+    owner: "ColorImageCache"
+    name: "height"
   client!md.h I:
-    owner: "Class114"
-    name: "anInt3301"
+    owner: "ColorImageCache"
+    name: "size"
   client!md.i I:
     owner: "Static4"
     name: "anInt3302"
   client!md.k [[[I:
-    owner: "Class114"
-    name: "anIntArrayArrayArray8"
+    owner: "ColorImageCache"
+    name: "pixels"
   client!md.l I:
     owner: "Static4"
     name: "anInt3304"
   client!md.m I:
-    owner: "Class114"
-    name: "anInt3305"
+    owner: "ColorImageCache"
+    name: "singleRow"
   client!md.n Ljava/lang/String;:
     owner: "LocalisedText"
     name: "CONTINUE"
@@ -5643,11 +5643,11 @@ fields:
     owner: "Static4"
     name: "aClass7Array1"
   client!md.q I:
-    owner: "Class114"
-    name: "anInt3307"
+    owner: "ColorImageCache"
+    name: "capacity"
   client!md.r Z:
-    owner: "Class114"
-    name: "aBoolean230"
+    owner: "ColorImageCache"
+    name: "invalid"
   client!me.b [[[I:
     owner: "Static4"
     name: "anIntArrayArrayArray9"
@@ -7215,8 +7215,8 @@ fields:
     owner: "HuffmanCodec"
     name: "symbolTree"
   client!ok.d Lclient!ol;:
-    owner: "Static5"
-    name: "aClass4_Sub20_1"
+    owner: "MonochromeImageCacheEntry"
+    name: "VALID"
   client!ok.f F:
     owner: "Static5"
     name: "aFloat97"
@@ -7236,14 +7236,14 @@ fields:
     owner: "LocalisedText"
     name: "MILLION"
   client!ol.p I:
-    owner: "Class4_Sub20"
-    name: "anInt3905"
+    owner: "MonochromeImageCacheEntry"
+    name: "index"
   client!ol.r I:
     owner: "Static5"
     name: "anInt3907"
   client!ol.s I:
-    owner: "Class4_Sub20"
-    name: "anInt3908"
+    owner: "MonochromeImageCacheEntry"
+    name: "row"
   client!ol.t I:
     owner: "Preferences"
     name: "favouriteWorlds"
@@ -15665,33 +15665,33 @@ methods:
     arguments: {}
     locals: {}
   client!da.<init> (III)V:
-    owner: "Class35"
+    owner: "MonochromeImageCache"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "capacity"
+      1: "height"
+      2: "width"
     locals: {}
   client!da.a (B)V:
-    owner: "Class35"
-    name: "method733"
+    owner: "MonochromeImageCache"
+    name: "clear"
     arguments: {}
     locals:
-      7: "local7"
+      7: "i"
   client!da.a (I)[[I:
-    owner: "Class35"
-    name: "method729"
+    owner: "MonochromeImageCache"
+    name: "get"
     arguments: {}
     locals:
-      29: "local29"
+      29: "row"
   client!da.a (II)[I:
-    owner: "Class35"
-    name: "method730"
+    owner: "MonochromeImageCache"
+    name: "get"
     arguments:
-      0: "arg0"
+      0: "row"
     locals:
-      33: "local33"
-      69: "local69"
+      33: "entry"
+      69: "lruEntry"
   client!da.a (ZIIILclient!gn;I)V:
     owner: "Static12"
     name: "method731"
@@ -19218,7 +19218,7 @@ methods:
     locals: {}
   client!fi.e (I)V:
     owner: "TextureOp36"
-    name: "method4696"
+    name: "clearImageCache"
     arguments: {}
     locals: {}
   client!fi.g (I)Z:
@@ -25406,12 +25406,12 @@ methods:
       35: "local35"
   client!jo.a (III)V:
     owner: "TextureOp"
-    name: "method4697"
+    name: "createImageCache"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "height"
+      2: "width"
     locals:
-      12: "local12"
+      12: "capacity"
   client!jo.a (IIIIIIIIII)V:
     owner: "Static22"
     name: "method4693"
@@ -25547,7 +25547,7 @@ methods:
     locals: {}
   client!jo.e (I)V:
     owner: "TextureOp"
-    name: "method4696"
+    name: "clearImageCache"
     arguments: {}
     locals: {}
   client!k.a (I)V:
@@ -28772,10 +28772,10 @@ methods:
     name: "method2645"
     arguments:
       0: "arg0"
-      2: "arg1"
+      2: "width"
       3: "arg2"
       4: "arg3"
-      5: "arg4"
+      5: "height"
     locals:
       27: "local27"
       29: "local29"
@@ -29193,11 +29193,11 @@ methods:
       3: "arg3"
     locals: {}
   client!mc.<init> (II)V:
-    owner: "Class4_Sub16"
+    owner: "ColorImageCacheEntry"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "row"
+      1: "index"
     locals: {}
   client!mc.a (IB)I:
     owner: "NpcTypeList"
@@ -29221,33 +29221,33 @@ methods:
     locals:
       16: "local16"
   client!md.<init> (III)V:
-    owner: "Class114"
+    owner: "ColorImageCache"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "capacity"
+      1: "height"
+      2: "width"
     locals: {}
   client!md.a (B)V:
-    owner: "Class114"
-    name: "method2693"
+    owner: "ColorImageCache"
+    name: "clear"
     arguments: {}
     locals:
-      11: "local11"
+      11: "i"
   client!md.a (I)[[[I:
-    owner: "Class114"
-    name: "method2694"
+    owner: "ColorImageCache"
+    name: "get"
     arguments: {}
     locals:
-      17: "local17"
+      17: "row"
   client!md.a (II)[[I:
-    owner: "Class114"
-    name: "method2696"
+    owner: "ColorImageCache"
+    name: "get"
     arguments:
-      0: "arg0"
+      0: "row"
     locals:
-      30: "local30"
-      47: "local47"
+      30: "entry"
+      47: "lruEntry"
   client!me.a (I)V:
     owner: "Static24"
     name: "method2697"
@@ -33327,7 +33327,7 @@ methods:
       42: "local42"
   client!og.e (I)V:
     owner: "TextureOp39"
-    name: "method4696"
+    name: "clearImageCache"
     arguments: {}
     locals: {}
   client!og.f (B)V:
@@ -33556,11 +33556,11 @@ methods:
       0: "b"
     locals: {}
   client!ol.<init> (II)V:
-    owner: "Class4_Sub20"
+    owner: "MonochromeImageCacheEntry"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "row"
+      1: "index"
     locals: {}
   client!ol.a (B[B)Lclient!jl;:
     owner: "ClientScript"
@@ -44535,8 +44535,8 @@ methods:
     owner: "SoftwareSprite"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "width"
+      1: "height"
     locals: {}
   client!vn.<init> (IIIIII[I)V:
     owner: "SoftwareSprite"
