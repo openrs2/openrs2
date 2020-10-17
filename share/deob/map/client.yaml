@@ -507,8 +507,8 @@ fields:
     owner: "Static1"
     name: "aByteArrayArrayArray2"
   client!ak.j I:
-    owner: "Static1"
-    name: "anInt130"
+    owner: "Sprites"
+    name: "compassId"
   client!ak.k I:
     owner: "Static1"
     name: "anInt131"
@@ -540,8 +540,8 @@ fields:
     owner: "WorldMap"
     name: "font19"
   client!al.S [Lclient!uj;:
-    owner: "Static1"
-    name: "aClass4_Sub3_Sub14Array1"
+    owner: "Sprites"
+    name: "headIconsPrayer"
   client!al.T [B:
     owner: "Js5CacheRequest"
     name: "data"
@@ -585,8 +585,8 @@ fields:
     owner: "Static1"
     name: "aClass27_1"
   client!am.z [Lclient!uj;:
-    owner: "Static1"
-    name: "aClass4_Sub3_Sub14Array2"
+    owner: "Sprites"
+    name: "mapFlag"
   client!an.f Lclient!wl;:
     owner: "client"
     name: "uid"
@@ -706,7 +706,7 @@ fields:
     name: "aLong15"
   client!be.h Lclient!ke;:
     owner: "ObjTypeList"
-    name: "aClass4_Sub3_Sub5_Sub2_1"
+    name: "font"
   client!be.i [B:
     owner: "Class17"
     name: "aByteArray4"
@@ -783,8 +783,8 @@ fields:
     owner: "Static1"
     name: "anInt1053"
   client!bi.B I:
-    owner: "Static1"
-    name: "anInt322"
+    owner: "TitleScreen"
+    name: "logoId"
   client!bi.C Z:
     owner: "ParticleEmitter"
     name: "aBoolean19"
@@ -1050,8 +1050,8 @@ fields:
     owner: "GameShell"
     name: "canvasWidth"
   client!cc.a Lclient!gl;:
-    owner: "Static1"
-    name: "aClass4_Sub3_Sub5_1"
+    owner: "Fonts"
+    name: "p11Full"
   client!cc.c I:
     owner: "Static1"
     name: "anInt528"
@@ -1251,8 +1251,8 @@ fields:
     owner: "TextureOp32"
     name: "anIntArray57"
   client!ck.fb [Lclient!uj;:
-    owner: "Static1"
-    name: "aClass4_Sub3_Sub14Array3"
+    owner: "Sprites"
+    name: "hintMapMarkers"
   client!client.U I:
     owner: "Static1"
     name: "anInt771"
@@ -1515,8 +1515,8 @@ fields:
     owner: "Static1"
     name: "aClass56_Sub1_1"
   client!db.n I:
-    owner: "Static1"
-    name: "anInt889"
+    owner: "SpriteLoader"
+    name: "width"
   client!db.o I:
     owner: "Static1"
     name: "anInt890"
@@ -1590,8 +1590,8 @@ fields:
     owner: "QuickChatPhraseTypeList"
     name: "capacity"
   client!dc.z I:
-    owner: "Static2"
-    name: "anInt914"
+    owner: "Sprites"
+    name: "p11FullId"
   client!dd.E Lclient!pf;:
     owner: "Class4_Sub4_Sub1"
     name: "aClass134_1"
@@ -1662,8 +1662,8 @@ fields:
     owner: "ObjTypeList"
     name: "models"
   client!df.d Lclient!ke;:
-    owner: "Static2"
-    name: "aClass4_Sub3_Sub5_Sub2_2"
+    owner: "Fonts"
+    name: "p11FullSoftware"
   client!df.e Lclient!fh;:
     owner: "client"
     name: "js5Archive3"
@@ -1689,11 +1689,11 @@ fields:
     owner: "Static2"
     name: "anInt2246"
   client!dg.p [Lclient!uj;:
-    owner: "Static2"
-    name: "aClass4_Sub3_Sub14Array9"
+    owner: "Sprites"
+    name: "hintMapEdge"
   client!dg.q [Lclient!uj;:
-    owner: "Static2"
-    name: "aClass4_Sub3_Sub14Array10"
+    owner: "Sprites"
+    name: "hitMarks"
   client!dg.r I:
     owner: "Static2"
     name: "anInt2247"
@@ -1824,8 +1824,8 @@ fields:
     owner: "GroundDecor"
     name: "aBoolean63"
   client!dn.T [Lclient!uj;:
-    owner: "Static2"
-    name: "aClass4_Sub3_Sub14Array6"
+    owner: "Sprites"
+    name: "mapDots"
   client!dn.U Z:
     owner: "Preferences"
     name: "highDetailLighting"
@@ -1908,8 +1908,8 @@ fields:
     owner: "Static2"
     name: "aBooleanArrayArray2"
   client!ea.H [I:
-    owner: "Static2"
-    name: "anIntArray85"
+    owner: "SpriteLoader"
+    name: "palette"
   client!ea.I Lclient!fh;:
     owner: "SeqTypeList"
     name: "animsArchive"
@@ -2040,8 +2040,8 @@ fields:
     owner: "SeqType"
     name: "anInt1232"
   client!eg.s [Lclient!uj;:
-    owner: "Static2"
-    name: "aClass4_Sub3_Sub14Array7"
+    owner: "Sprites"
+    name: "hitBarDefault"
   client!eg.t I:
     owner: "SeqType"
     name: "anInt1237"
@@ -2460,8 +2460,8 @@ fields:
     owner: "Static2"
     name: "anInt1629"
   client!fa.ab I:
-    owner: "Static2"
-    name: "anInt1632"
+    owner: "Sprites"
+    name: "floorShadowsId"
   client!fa.bb Z:
     owner: "Static2"
     name: "aBoolean101"
@@ -2478,8 +2478,8 @@ fields:
     owner: "GameShell"
     name: "frameWidth"
   client!fb.a [Lclient!fe;:
-    owner: "Static2"
-    name: "aClass56_Sub1Array2"
+    owner: "Sprites"
+    name: "floorShadows"
   client!fb.b I:
     owner: "Static2"
     name: "anInt1636"
@@ -2533,10 +2533,10 @@ fields:
     name: "ISO_CODES"
   client!fe.m [I:
     owner: "SoftwareIndexedSprite"
-    name: "anIntArray120"
+    name: "palette"
   client!fe.n [B:
     owner: "SoftwareIndexedSprite"
-    name: "aByteArray15"
+    name: "pixels"
   client!ff.a I:
     owner: "Terrain"
     name: "anInt1742"
@@ -2751,8 +2751,8 @@ fields:
     owner: "Static2"
     name: "aClass58_42"
   client!fo.o I:
-    owner: "Static2"
-    name: "anInt1975"
+    owner: "Sprites"
+    name: "headIconsPrayerId"
   client!fo.p I:
     owner: "Static2"
     name: "anInt1976"
@@ -2844,8 +2844,8 @@ fields:
     owner: "LocalisedText"
     name: "REMOVEFRIEND2"
   client!gd.g [Lclient!uj;:
-    owner: "Static3"
-    name: "aClass4_Sub3_Sub14Array8"
+    owner: "Sprites"
+    name: "headIconsPk"
   client!gd.j Lclient!dj;:
     owner: "EnumTypeList"
     name: "types"
@@ -2889,8 +2889,8 @@ fields:
     owner: "Static3"
     name: "aClass4_Sub3_Sub14_Sub1_2"
   client!gg.v Z:
-    owner: "Static3"
-    name: "aBoolean124"
+    owner: "TitleScreen"
+    name: "loaded"
   client!gg.w I:
     owner: "Class11_Sub3"
     name: "anInt2066"
@@ -3109,7 +3109,7 @@ fields:
     name: "aByteArray22"
   client!gl.D [Lclient!ma;:
     owner: "Font"
-    name: "aClass56Array4"
+    name: "nameIcons"
   client!gl.E Ljava/lang/StringBuffer;:
     owner: "Static3"
     name: "aStringBuffer3"
@@ -3195,8 +3195,8 @@ fields:
     owner: "Class4_Sub11"
     name: "anInt2119"
   client!gn.D I:
-    owner: "Static3"
-    name: "anInt2120"
+    owner: "Sprites"
+    name: "hitMarksId"
   client!gn.G Z:
     owner: "Class4_Sub11"
     name: "aBoolean146"
@@ -3369,8 +3369,8 @@ fields:
     owner: "IdkTypeList"
     name: "modelsArchive"
   client!he.o I:
-    owner: "Static3"
-    name: "anInt2162"
+    owner: "SpriteLoader"
+    name: "height"
   client!he.p Lclient!cc;:
     owner: "ParticleEffectorTypeList"
     name: "types"
@@ -3477,8 +3477,8 @@ fields:
     owner: "Static3"
     name: "anIntArray181"
   client!hk.S [I:
-    owner: "Static3"
-    name: "anIntArray185"
+    owner: "SpriteLoader"
+    name: "innerWidths"
   client!hk.W I:
     owner: "TextureOp1"
     name: "anInt2225"
@@ -3573,8 +3573,8 @@ fields:
     owner: "Static3"
     name: "anIntArray190"
   client!ho.U I:
-    owner: "Static3"
-    name: "anInt2296"
+    owner: "Sprites"
+    name: "mapDotsId"
   client!ho.a I:
     owner: "MelType"
     name: "anInt2265"
@@ -4149,8 +4149,8 @@ fields:
     owner: "Static3"
     name: "aClass84_9"
   client!il.e I:
-    owner: "Static3"
-    name: "anInt2449"
+    owner: "Sprites"
+    name: "nameIconsId"
   client!il.f [I:
     owner: "Static3"
     name: "anIntArray217"
@@ -4170,8 +4170,8 @@ fields:
     owner: "AudioThread"
     name: "running"
   client!im.k [Lclient!ma;:
-    owner: "Static3"
-    name: "aClass56Array3"
+    owner: "Sprites"
+    name: "nameIcons"
   client!im.m Lclient!cc;:
     owner: "MelTypeList"
     name: "sprites"
@@ -4638,8 +4638,8 @@ fields:
     owner: "Static4"
     name: "anIntArray654"
   client!jo.P [[B:
-    owner: "Static4"
-    name: "aByteArrayArray54"
+    owner: "SpriteLoader"
+    name: "alpha"
   client!jo.Q F:
     owner: "Static4"
     name: "aFloat146"
@@ -4674,8 +4674,8 @@ fields:
     owner: "Static4"
     name: "anInt2747"
   client!ka.e I:
-    owner: "Static4"
-    name: "anInt2748"
+    owner: "SpriteLoader"
+    name: "frames"
   client!ka.g Lclient!wf;:
     owner: "Static4"
     name: "aClass185_9"
@@ -5530,10 +5530,10 @@ fields:
     name: "js5Archive12"
   client!ma.a I:
     owner: "IndexedSprite"
-    name: "anInt3404"
+    name: "xOffset"
   client!ma.b I:
     owner: "IndexedSprite"
-    name: "anInt3405"
+    name: "yOffset"
   client!ma.c [Lclient!wf;:
     owner: "Static4"
     name: "aClass185Array3"
@@ -5548,19 +5548,19 @@ fields:
     name: "MAINLOAD45B"
   client!ma.g I:
     owner: "IndexedSprite"
-    name: "anInt3408"
+    name: "width"
   client!ma.h I:
     owner: "CreateManager"
     name: "errors"
   client!ma.i I:
     owner: "IndexedSprite"
-    name: "anInt3410"
+    name: "innerHeight"
   client!ma.k I:
     owner: "IndexedSprite"
-    name: "anInt3412"
+    name: "innerWidth"
   client!ma.l I:
     owner: "IndexedSprite"
-    name: "anInt3413"
+    name: "height"
   client!mb.b I:
     owner: "Static4"
     name: "anInt3493"
@@ -5652,8 +5652,8 @@ fields:
     owner: "Static4"
     name: "anIntArrayArrayArray9"
   client!me.c I:
-    owner: "Static4"
-    name: "anInt3309"
+    owner: "Sprites"
+    name: "b12FullId"
   client!me.d Lclient!kk;:
     owner: "WorldMap"
     name: "font17"
@@ -6082,25 +6082,25 @@ fields:
     name: "fullScreenWidth"
   client!n.m I:
     owner: "GlIndexedSprite"
-    name: "anInt3414"
+    name: "listId"
   client!n.n I:
     owner: "GlIndexedSprite"
     name: "contextId"
   client!n.o I:
     owner: "GlIndexedSprite"
-    name: "anInt3416"
+    name: "powerOfTwoWidth"
   client!n.p I:
     owner: "GlIndexedSprite"
-    name: "anInt3417"
+    name: "powerOfTwoHeight"
   client!n.q I:
     owner: "GlIndexedSprite"
-    name: "anInt3418"
+    name: "textureId"
   client!n.r I:
     owner: "GlIndexedSprite"
-    name: "anInt3419"
+    name: "size"
   client!n.s I:
     owner: "GlIndexedSprite"
-    name: "anInt3420"
+    name: "filterMode"
   client!na.A I:
     owner: "SoftwareModel"
     name: "anInt3437"
@@ -6423,8 +6423,8 @@ fields:
     owner: "Text"
     name: "CHATCOL5"
   client!nc.i [Lclient!ma;:
-    owner: "Static5"
-    name: "aClass56Array5"
+    owner: "Sprites"
+    name: "scrollbar"
   client!nd.o I:
     owner: "Static5"
     name: "anInt3483"
@@ -6681,8 +6681,8 @@ fields:
     owner: "Tile"
     name: "groundDecor"
   client!nh.W [I:
-    owner: "Static5"
-    name: "anIntArray391"
+    owner: "SpriteLoader"
+    name: "yOffsets"
   client!nh.X I:
     owner: "Static5"
     name: "anInt3560"
@@ -7026,8 +7026,8 @@ fields:
     owner: "ProjAnim"
     name: "anInt3707"
   client!oc.p [I:
-    owner: "Static5"
-    name: "anIntArray402"
+    owner: "SpriteLoader"
+    name: "xOffsets"
   client!oc.q Lclient!ne;:
     owner: "ProjAnim"
     name: "aClass20_Sub3_5"
@@ -7113,8 +7113,8 @@ fields:
     owner: "TextureOp8"
     name: "anIntArray410"
   client!of.Z Lclient!gl;:
-    owner: "Static5"
-    name: "aClass4_Sub3_Sub5_2"
+    owner: "Fonts"
+    name: "p12Full"
   client!of.cb [S:
     owner: "TextureOp8"
     name: "aShortArray73"
@@ -7518,8 +7518,8 @@ fields:
     owner: "VarpTypeList"
     name: "capacity"
   client!ph.db Lclient!gl;:
-    owner: "Static5"
-    name: "aClass4_Sub3_Sub5_3"
+    owner: "Fonts"
+    name: "b12Full"
   client!pi.a I:
     owner: "Class135"
     name: "anInt4159"
@@ -7575,8 +7575,8 @@ fields:
     owner: "Preferences"
     name: "aBoolean293"
   client!pj.c I:
-    owner: "Static5"
-    name: "anInt4163"
+    owner: "Sprites"
+    name: "scrollbarId"
   client!pj.d [[B:
     owner: "BufferPool"
     name: "mediumBuffers"
@@ -7620,8 +7620,8 @@ fields:
     owner: "VarcDomain"
     name: "updatedVarcsWriterIndex"
   client!pl.q I:
-    owner: "Static5"
-    name: "anInt4207"
+    owner: "Sprites"
+    name: "hintHeadIconsId"
   client!pl.r Ljava/lang/String;:
     owner: "Text"
     name: "CHATCOL9"
@@ -8004,8 +8004,8 @@ fields:
     owner: "Keyboard"
     name: "idleLoops"
   client!qd.I I:
-    owner: "Static5"
-    name: "anInt4281"
+    owner: "Sprites"
+    name: "headIconsPkId"
   client!qd.J Lclient!ll;:
     owner: "Static5"
     name: "aClass112_27"
@@ -8064,8 +8064,8 @@ fields:
     owner: "Class142"
     name: "anInt4301"
   client!qf.k [Z:
-    owner: "Static5"
-    name: "aBooleanArray22"
+    owner: "SpriteLoader"
+    name: "hasAlpha"
   client!qf.l I:
     owner: "Static5"
     name: "anInt4302"
@@ -8157,8 +8157,8 @@ fields:
     owner: "TextureOp16"
     name: "anInt4360"
   client!qj.Y I:
-    owner: "Static6"
-    name: "anInt4363"
+    owner: "Sprites"
+    name: "hitBarDefaultId"
   client!qj.bb I:
     owner: "Static6"
     name: "anInt4366"
@@ -8181,8 +8181,8 @@ fields:
     owner: "PlayerAppearance"
     name: "anIntArrayArray37"
   client!qk.a I:
-    owner: "Static6"
-    name: "anInt4371"
+    owner: "Sprites"
+    name: "hintMapEdgeId"
   client!qk.b J:
     owner: "PlayerAppearance"
     name: "checksum"
@@ -8256,8 +8256,8 @@ fields:
     owner: "SkyBoxType"
     name: "anInt4405"
   client!qm.l [[B:
-    owner: "Static6"
-    name: "aByteArrayArray36"
+    owner: "SpriteLoader"
+    name: "pixels"
   client!qn.A I:
     owner: "Class4_Sub24"
     name: "anInt4417"
@@ -8637,8 +8637,8 @@ fields:
     owner: "Static6"
     name: "anInt4558"
   client!rh.ob Lclient!ma;:
-    owner: "Static6"
-    name: "aClass56_1"
+    owner: "TitleScreen"
+    name: "logo"
   client!ri.A Lclient!fh;:
     owner: "VarbitTypeList"
     name: "archive"
@@ -8691,8 +8691,8 @@ fields:
     owner: "Loc"
     name: "anInt4594"
   client!ri.X [Lclient!uj;:
-    owner: "Static6"
-    name: "aClass4_Sub3_Sub14Array11"
+    owner: "Sprites"
+    name: "hintHeadIcons"
   client!ri.Y I:
     owner: "Keyboard"
     name: "eventQueueWriterIndex"
@@ -8805,8 +8805,8 @@ fields:
     owner: "Static6"
     name: "anInt4659"
   client!rn.F I:
-    owner: "Static6"
-    name: "anInt3786"
+    owner: "Sprites"
+    name: "crossId"
   client!rn.r I:
     owner: "Class41_Sub2"
     name: "anInt3776"
@@ -8829,8 +8829,8 @@ fields:
     owner: "Static6"
     name: "aClass185_13"
   client!ro.I I:
-    owner: "Static6"
-    name: "anInt4677"
+    owner: "TitleScreen"
+    name: "titleBgId"
   client!ro.K I:
     owner: "Static6"
     name: "anInt4679"
@@ -9108,8 +9108,8 @@ fields:
     owner: "SpotAnimTypeList"
     name: "archive"
   client!se.W [Lclient!uj;:
-    owner: "Static6"
-    name: "aClass4_Sub3_Sub14Array12"
+    owner: "Sprites"
+    name: "cross"
   client!se.X Ljava/lang/String;:
     owner: "LocalisedText"
     name: "MAINLOAD90"
@@ -9237,8 +9237,8 @@ fields:
     owner: "Class157"
     name: "anInt4848"
   client!si.q Lclient!uj;:
-    owner: "Static6"
-    name: "aClass4_Sub3_Sub14_6"
+    owner: "Sprites"
+    name: "compass"
   client!sj.A [I:
     owner: "Static6"
     name: "anIntArray528"
@@ -9555,8 +9555,8 @@ fields:
     owner: "Static6"
     name: "anInt5016"
   client!tb.k Lclient!uj;:
-    owner: "Static6"
-    name: "aClass4_Sub3_Sub14_7"
+    owner: "TitleScreen"
+    name: "titleBg"
   client!tc.V [I:
     owner: "Static6"
     name: "anIntArray549"
@@ -10029,8 +10029,8 @@ fields:
     owner: "Static7"
     name: "anInt5228"
   client!u.c I:
-    owner: "Static7"
-    name: "anInt5230"
+    owner: "Sprites"
+    name: "mapFlagId"
   client!u.d Lclient!tb;:
     owner: "Keyboard"
     name: "instance"
@@ -10332,8 +10332,8 @@ fields:
     owner: "Static7"
     name: "anInt5331"
   client!uf.f I:
-    owner: "Static7"
-    name: "anInt5332"
+    owner: "Sprites"
+    name: "hintMapMarkersId"
   client!uf.g I:
     owner: "Static7"
     name: "anInt5333"
@@ -11004,8 +11004,8 @@ fields:
     owner: "Static7"
     name: "anInt5634"
   client!vm.V [I:
-    owner: "Static7"
-    name: "anIntArray643"
+    owner: "SpriteLoader"
+    name: "innerHeights"
   client!vm.W [[I:
     owner: "TextureOp10"
     name: "anIntArrayArray49"
@@ -11829,8 +11829,8 @@ fields:
     owner: "Class187"
     name: "aFloat152"
   client!wj.p I:
-    owner: "Static7"
-    name: "anInt6040"
+    owner: "Sprites"
+    name: "p12FullId"
   client!wj.q F:
     owner: "Class187"
     name: "aFloat153"
@@ -12430,16 +12430,16 @@ methods:
       6: "arg5"
     locals: {}
   client!af.c (I)[Lclient!vn;:
-    owner: "Static8"
-    name: "method103"
+    owner: "SpriteLoader"
+    name: "createSoftwareSprites"
     arguments: {}
     locals:
-      8: "local8"
-      10: "local10"
-      21: "local21"
-      24: "local24"
-      28: "local28"
-      30: "local30"
+      8: "sprites"
+      10: "i"
+      21: "len"
+      24: "destPixels"
+      28: "srcPixels"
+      30: "j"
   client!af.d (B)V:
     owner: "LoginManager"
     name: "method101"
@@ -12545,11 +12545,11 @@ methods:
       10: "len"
       16: "i"
   client!aj.a (Lclient!fh;Lclient!fh;B)V:
-    owner: "Static8"
-    name: "method113"
+    owner: "Fonts"
+    name: "load"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "spritesArchive"
+      1: "fontMetricsArchive"
     locals: {}
   client!ak.<init> (I)V:
     owner: "SecondaryHashTable"
@@ -12583,12 +12583,12 @@ methods:
     locals:
       32: "sentinel"
   client!ak.a (Lclient!fh;Lclient!fh;III)Lclient!gl;:
-    owner: "Static8"
-    name: "method121"
+    owner: "SpriteLoader"
+    name: "loadFont"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      3: "arg2"
+      0: "spritesArchive"
+      1: "fontMetricsArchive"
+      3: "id"
     locals: {}
   client!ak.a (Lclient!ho;I)Z:
     owner: "Static8"
@@ -12750,14 +12750,14 @@ methods:
     arguments: {}
     locals: {}
   client!an.a (ILclient!fh;II)Z:
-    owner: "Static9"
-    name: "method197"
+    owner: "SpriteLoader"
+    name: "decode"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      3: "arg2"
+      1: "archive"
+      2: "groupId"
+      3: "fileId"
     locals:
-      9: "local9"
+      9: "bytes"
   client!an.a (Lclient!fd;ZZZIIIIIIII)V:
     owner: "Static9"
     name: "method195"
@@ -12796,11 +12796,11 @@ methods:
       13: "local13"
       28: "local28"
   client!ao.a (I)Lclient!ma;:
-    owner: "Static9"
-    name: "method204"
+    owner: "SpriteLoader"
+    name: "createIndexedSprite"
     arguments: {}
     locals:
-      31: "local31"
+      31: "sprite"
   client!ao.a (IIIILclient!vc;Lclient!vc;IIIIJ)V:
     owner: "Terrain"
     name: "setWallDecor"
@@ -13552,12 +13552,12 @@ methods:
       898: "particle"
       941: "particle"
   client!bi.a (I[B)Lclient!gl;:
-    owner: "Static10"
-    name: "method304"
+    owner: "SpriteLoader"
+    name: "createFont"
     arguments:
-      1: "arg0"
+      1: "bytes"
     locals:
-      27: "local27"
+      27: "font"
   client!bi.a (JI)V:
     owner: "Static10"
     name: "method308"
@@ -14092,8 +14092,8 @@ methods:
       8: "local8"
       12: "local12"
   client!bo.a (Z)I:
-    owner: "Static10"
-    name: "method393"
+    owner: "TitleScreen"
+    name: "getTotal"
     arguments: {}
     locals: {}
   client!bo.b ()V:
@@ -14169,13 +14169,13 @@ methods:
     locals:
       15: "texture"
   client!c.a (Lclient!fh;Lclient!fh;I)I:
-    owner: "Static10"
-    name: "method464"
+    owner: "Fonts"
+    name: "getReady"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      1: "spritesArchive"
+      0: "fontMetricsArchive"
     locals:
-      1: "local1"
+      1: "ready"
   client!c.a (Lclient!wf;I)V:
     owner: "Static10"
     name: "method467"
@@ -14337,11 +14337,11 @@ methods:
       28: "bytes"
       32: "newType"
   client!ca.a (Lclient!fh;III)[Lclient!ma;:
-    owner: "Static11"
-    name: "method495"
+    owner: "SpriteLoader"
+    name: "loadIndexedSprites"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "sprite"
+      1: "id"
     locals: {}
   client!ca.b (II)[[I:
     owner: "TextureOp11"
@@ -14622,12 +14622,12 @@ methods:
       31: "local31"
       38: "local38"
   client!cf.a (Lclient!fh;I)I:
-    owner: "Static11"
-    name: "method558"
+    owner: "Sprites"
+    name: "getReady"
     arguments:
-      0: "arg0"
+      0: "archive"
     locals:
-      5: "local5"
+      5: "ready"
   client!cf.a (ZIIZI)V:
     owner: "WorldList"
     name: "sort"
@@ -15018,11 +15018,11 @@ methods:
       10: "arg10"
     locals: {}
   client!ci.a (IILclient!fh;)Lclient!uj;:
-    owner: "Static11"
-    name: "method583"
+    owner: "SpriteLoader"
+    name: "loadSpriteAutoDetect"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "archive"
+      1: "id"
     locals: {}
   client!ci.a (Z)V:
     owner: "Keyboard"
@@ -15449,13 +15449,13 @@ methods:
       93: "i"
       355: "percentage"
       357: "i"
-      540: "local540"
-      543: "local543"
-      582: "local582"
-      585: "local585"
+      540: "ready"
+      543: "total"
+      582: "ready"
+      585: "total"
       647: "local647"
-      884: "local884"
-      887: "local887"
+      884: "ready"
+      887: "total"
       960: "local960"
       1066: "codec"
       1200: "reply"
@@ -16872,12 +16872,12 @@ methods:
       0: "referent"
     locals: {}
   client!ei.a (Lclient!fh;I)I:
-    owner: "Static14"
-    name: "method1046"
+    owner: "TitleScreen"
+    name: "getReady"
     arguments:
-      0: "arg0"
+      0: "archive"
     locals:
-      5: "local5"
+      5: "ready"
   client!ei.a (Z)Ljava/lang/Object;:
     owner: "HardReferenceNode"
     name: "get"
@@ -16981,15 +16981,15 @@ methods:
       161: "local161"
       217: "local217"
   client!ek.b (B)Lclient!uj;:
-    owner: "Static14"
-    name: "method1063"
+    owner: "SpriteLoader"
+    name: "createSprite"
     arguments: {}
     locals:
-      9: "local9"
-      22: "local22"
-      25: "local25"
-      27: "local27"
-      68: "local68"
+      9: "len"
+      22: "srcPixels"
+      25: "destPixels"
+      27: "i"
+      68: "sprite"
   client!el.a (I)V:
     owner: "Static14"
     name: "method1066"
@@ -17326,8 +17326,8 @@ methods:
     arguments: {}
     locals: {}
   client!en.d (I)I:
-    owner: "Static14"
-    name: "method1084"
+    owner: "Sprites"
+    name: "getTotal"
     arguments: {}
     locals: {}
   client!en.f (I)V:
@@ -17593,7 +17593,7 @@ methods:
     arguments:
       0: "objArchive"
       4: "modelsArchive"
-      1: "arg1"
+      1: "font"
     locals:
       11: "maxGroupId"
   client!f.a (Z)I:
@@ -18459,38 +18459,38 @@ methods:
     owner: "SoftwareIndexedSprite"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "width"
+      1: "height"
+      2: "paletteSize"
     locals: {}
   client!fe.<init> (IIIIII[B[I)V:
     owner: "SoftwareIndexedSprite"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
-      5: "arg5"
-      6: "arg6"
-      7: "arg7"
+      0: "innerWidth"
+      1: "innerHeight"
+      2: "xOffset"
+      3: "yOffset"
+      4: "width"
+      5: "height"
+      6: "pixels"
+      7: "palette"
     locals: {}
   client!fe.a ()V:
     owner: "SoftwareIndexedSprite"
-    name: "method1309"
+    name: "clear"
     arguments: {}
     locals:
-      1: "local1"
-      7: "local7"
-      14: "local14"
-      60: "local60"
+      1: "off"
+      7: "len"
+      14: "off2"
+      60: "len2"
   client!fe.a (II)V:
     owner: "SoftwareIndexedSprite"
-    name: "method2815"
+    name: "renderTransparent"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "x"
+      1: "y"
     locals:
       4: "local4"
       9: "local9"
@@ -18505,11 +18505,11 @@ methods:
       107: "local107"
   client!fe.a (III)V:
     owner: "SoftwareIndexedSprite"
-    name: "method2816"
+    name: "renderAlpha"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "x"
+      1: "y"
+      2: "alpha"
     locals:
       4: "local4"
       9: "local9"
@@ -18665,12 +18665,12 @@ methods:
       1575: "local1575"
   client!fe.a (II[I[I)V:
     owner: "SoftwareIndexedSprite"
-    name: "method1321"
+    name: "renderTransparentMasked"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
+      0: "x"
+      1: "y"
+      2: "maskXs"
+      3: "maskWidths"
     locals:
       14: "local14"
       19: "local19"
@@ -18695,7 +18695,7 @@ methods:
       234: "local234"
       245: "local245"
   client!fe.a ([I[B[IIIIIIII)V:
-    owner: "Static15"
+    owner: "SoftwareIndexedSprite"
     name: "method1310"
     arguments:
       0: "arg0"
@@ -18724,7 +18724,7 @@ methods:
       94: "local94"
       101: "local101"
   client!fe.a ([I[B[IIIIIIIIII)V:
-    owner: "Static15"
+    owner: "SoftwareIndexedSprite"
     name: "method1317"
     arguments:
       0: "arg0"
@@ -18746,7 +18746,7 @@ methods:
       15: "local15"
       25: "local25"
   client!fe.a ([I[B[IIIIIIIIIII)V:
-    owner: "Static15"
+    owner: "SoftwareIndexedSprite"
     name: "method1318"
     arguments:
       0: "arg0"
@@ -18800,7 +18800,7 @@ methods:
       59: "local59"
       63: "local63"
   client!fe.b ([I[B[IIIIIIII)V:
-    owner: "Static15"
+    owner: "SoftwareIndexedSprite"
     name: "method1319"
     arguments:
       0: "arg0"
@@ -19749,11 +19749,11 @@ methods:
       1067: "cursor"
       1096: "local1096"
   client!g.a (Lclient!fh;BII)[Lclient!fe;:
-    owner: "Static16"
-    name: "method1523"
+    owner: "SpriteLoader"
+    name: "loadSoftwareIndexedSprites"
     arguments:
-      0: "arg0"
-      3: "arg1"
+      0: "archive"
+      3: "id"
     locals: {}
   client!g.d (I)I:
     owner: "DelayedStateChange"
@@ -19807,12 +19807,12 @@ methods:
       9: "pickKey"
       45: "originalAngle"
   client!ga.a ([BB)Lclient!ke;:
-    owner: "Static16"
-    name: "method4658"
+    owner: "SpriteLoader"
+    name: "createSoftwareFont"
     arguments:
-      0: "arg0"
+      0: "bytes"
     locals:
-      24: "local24"
+      24: "font"
   client!ga.b (II)V:
     owner: "Js5ResourceProvider"
     name: "prefetchGroup"
@@ -20624,8 +20624,8 @@ methods:
     arguments: {}
     locals: {}
   client!gf.a (I)I:
-    owner: "Static16"
-    name: "method1565"
+    owner: "Fonts"
+    name: "getTotal"
     arguments: {}
     locals: {}
   client!gf.a (II)I:
@@ -21531,9 +21531,9 @@ methods:
       194: "local194"
   client!gl.a ([Lclient!ma;[I)V:
     owner: "Font"
-    name: "method2267"
+    name: "setNameIcons"
     arguments:
-      0: "arg0"
+      0: "nameIcons"
       1: "arg1"
     locals: {}
   client!gl.a ([[B[[B[I[I[III)I:
@@ -23503,11 +23503,11 @@ methods:
     arguments: {}
     locals: {}
   client!ik.a (IIBLclient!fh;)Lclient!uj;:
-    owner: "Static20"
-    name: "method1917"
+    owner: "SpriteLoader"
+    name: "loadSprite"
     arguments:
-      0: "arg0"
-      3: "arg1"
+      3: "archive"
+      0: "id"
     locals: {}
   client!ik.a (III)V:
     owner: "Static20"
@@ -24048,16 +24048,16 @@ methods:
     arguments: {}
     locals: {}
   client!jc.f (B)[Lclient!uj;:
-    owner: "Static21"
-    name: "method2000"
+    owner: "SpriteLoader"
+    name: "createSprites"
     arguments: {}
     locals:
-      4: "local4"
-      18: "local18"
-      29: "local29"
-      37: "local37"
-      40: "local40"
-      42: "local42"
+      4: "sprites"
+      18: "i"
+      29: "srcPixels"
+      37: "len"
+      40: "destPixels"
+      42: "j"
   client!jc.f (I)Z:
     owner: "ParamType"
     name: "isString"
@@ -24082,15 +24082,15 @@ methods:
       94: "local94"
       138: "local138"
   client!jd.a (I)Lclient!vn;:
-    owner: "Static21"
-    name: "method2002"
+    owner: "SpriteLoader"
+    name: "createSoftwareSprite"
     arguments: {}
     locals:
-      9: "local9"
-      28: "local28"
-      31: "local31"
-      33: "local33"
-      68: "local68"
+      9: "srcPixels"
+      28: "len"
+      31: "destPixels"
+      33: "i"
+      68: "sprite"
   client!jd.a (II)Lclient!li;:
     owner: "SpotAnimTypeList"
     name: "get"
@@ -24852,19 +24852,19 @@ methods:
       50: "local50"
       54: "local54"
   client!jk.c (B)[Lclient!uj;:
-    owner: "Static21"
-    name: "method2064"
+    owner: "SpriteLoader"
+    name: "createAlphaSprites"
     arguments: {}
     locals:
-      4: "local4"
-      16: "local16"
-      27: "local27"
-      31: "local31"
-      38: "local38"
-      40: "local40"
-      112: "local112"
-      115: "local115"
-      117: "local117"
+      4: "sprites"
+      16: "i"
+      27: "len"
+      31: "srcPixels"
+      38: "destPixels"
+      40: "j"
+      112: "alpha"
+      115: "destPixels"
+      117: "j"
   client!jl.a (II)V:
     owner: "Static21"
     name: "method2076"
@@ -25701,12 +25701,12 @@ methods:
       2410: "local2410"
       2429: "local2429"
   client!ka.a (ILclient!fh;ILclient!fh;I)Lclient!ke;:
-    owner: "Static22"
-    name: "method2194"
+    owner: "SpriteLoader"
+    name: "loadSoftwareFont"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      3: "arg2"
+      3: "spritesArchive"
+      1: "fontMetricsArchive"
+      2: "id"
     locals: {}
   client!ka.a (JB)V:
     owner: "Static22"
@@ -26860,8 +26860,8 @@ methods:
     arguments: {}
     locals: {}
   client!kn.c (I)V:
-    owner: "Static22"
-    name: "method2411"
+    owner: "TitleScreen"
+    name: "clear"
     arguments: {}
     locals: {}
   client!ko.a (II)V:
@@ -26990,12 +26990,12 @@ methods:
     arguments: {}
     locals: {}
   client!lb.a (I)[Lclient!ma;:
-    owner: "Static23"
-    name: "method2456"
+    owner: "SpriteLoader"
+    name: "createIndexedSprites"
     arguments: {}
     locals:
-      8: "local8"
-      10: "local10"
+      8: "sprites"
+      10: "i"
   client!lb.a (ILclient!r;)V:
     owner: "SecondaryParticleLinkedList"
     name: "addTail"
@@ -28920,12 +28920,12 @@ methods:
       214: "local214"
       271: "local271"
   client!ln.a (Lclient!fh;BII)Lclient!vn;:
-    owner: "Static24"
-    name: "method2654"
+    owner: "SpriteLoader"
+    name: "loadSoftwareSprite"
     arguments:
-      0: "arg0"
-      2: "arg1"
-      3: "arg2"
+      0: "archive"
+      2: "groupId"
+      3: "fileId"
     locals: {}
   client!ln.a (Lclient!kj;Lclient!fh;I)Z:
     owner: "Texture"
@@ -29098,19 +29098,19 @@ methods:
       1: "arg0"
     locals: {}
   client!m.a (ILclient!fh;)V:
-    owner: "Static24"
-    name: "method2675"
+    owner: "TitleScreen"
+    name: "load"
     arguments:
-      1: "arg0"
+      1: "archive"
     locals:
-      24: "local24"
-      30: "local30"
+      24: "height"
+      30: "width"
   client!m.a (Lclient!fh;IB)Lclient!vn;:
-    owner: "Static24"
-    name: "method2679"
+    owner: "SpriteLoader"
+    name: "loadSoftwareSpriteAutoDetect"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "archive"
+      1: "id"
     locals: {}
   client!m.c (I)I:
     owner: "IsaacRandom"
@@ -29150,18 +29150,18 @@ methods:
       490: "local490"
   client!ma.a (II)V:
     owner: "IndexedSprite"
-    name: "method2815"
+    name: "renderTransparent"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "x"
+      1: "y"
     locals: {}
   client!ma.a (III)V:
     owner: "IndexedSprite"
-    name: "method2816"
+    name: "renderAlpha"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "x"
+      1: "y"
+      2: "alpha"
     locals: {}
   client!mb.a (BIII)V:
     owner: "Static24"
@@ -29178,10 +29178,10 @@ methods:
     arguments: {}
     locals: {}
   client!mb.a (Lclient!fh;I)V:
-    owner: "Static24"
-    name: "method2946"
+    owner: "Sprites"
+    name: "init"
     arguments:
-      0: "arg0"
+      0: "archive"
     locals: {}
   client!mb.a (ZIIII)V:
     owner: "Static24"
@@ -29522,11 +29522,11 @@ methods:
       109: "i"
       117: "mode"
   client!mj.a (IIBLclient!fh;)[Lclient!vn;:
-    owner: "Static25"
-    name: "method2729"
+    owner: "SpriteLoader"
+    name: "loadSoftwareSprites"
     arguments:
-      1: "arg0"
-      3: "arg1"
+      3: "archive"
+      1: "id"
     locals: {}
   client!mj.a (IIIII[[[B[I[I[I[I[IIBII)V:
     owner: "Static25"
@@ -30405,85 +30405,85 @@ methods:
     owner: "GlIndexedSprite"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
-      5: "arg5"
-      6: "arg6"
-      7: "arg7"
+      0: "innerWidth"
+      1: "innerHeight"
+      2: "xOffset"
+      3: "yOffset"
+      4: "width"
+      5: "height"
+      6: "pixels"
+      7: "palette"
     locals: {}
   client!n.<init> (Lclient!fe;)V:
     owner: "GlIndexedSprite"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "sprite"
     locals: {}
   client!n.a ()V:
     owner: "GlIndexedSprite"
-    name: "method2817"
+    name: "createList"
     arguments: {}
     locals:
-      7: "local7"
-      15: "local15"
-      17: "local17"
+      7: "s"
+      15: "t"
+      17: "gl"
   client!n.a (I)V:
     owner: "GlIndexedSprite"
-    name: "method2818"
+    name: "setFilterMode"
     arguments: {}
     locals:
-      9: "local9"
+      9: "gl"
   client!n.a (II)V:
     owner: "GlIndexedSprite"
-    name: "method2815"
+    name: "renderTransparent"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "x"
+      1: "y"
     locals:
-      12: "local12"
+      12: "gl"
   client!n.a (III)V:
     owner: "GlIndexedSprite"
-    name: "method2816"
+    name: "renderAlpha"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "x"
+      1: "y"
+      2: "alpha"
     locals:
-      12: "local12"
+      12: "gl"
   client!n.a (IILclient!oa;)V:
     owner: "GlIndexedSprite"
-    name: "method2820"
+    name: "renderTransparentMasked"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "x"
+      1: "y"
+      2: "mask"
     locals:
-      11: "local11"
-      47: "local47"
-      56: "local56"
-      68: "local68"
-      80: "local80"
-      107: "local107"
-      115: "local115"
+      11: "gl"
+      47: "maskS0"
+      56: "maskT0"
+      68: "maskS1"
+      80: "maskT1"
+      107: "s"
+      115: "t"
   client!n.a ([B[I)V:
     owner: "GlIndexedSprite"
-    name: "method2819"
+    name: "setPixels"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "src"
+      1: "palette"
     locals:
-      20: "local20"
-      22: "local22"
-      24: "local24"
-      26: "local26"
-      32: "local32"
-      41: "local41"
-      47: "local47"
-      50: "local50"
-      93: "local93"
-      95: "local95"
-      102: "local102"
+      20: "dest"
+      22: "destOff"
+      24: "srcOff"
+      26: "y"
+      32: "x"
+      41: "index"
+      47: "color"
+      50: "destOff2"
+      93: "buffer"
+      95: "gl"
+      102: "temp"
   client!n.finalize ()V:
     owner: "GlIndexedSprite"
     name: "finalize"
@@ -32077,12 +32077,12 @@ methods:
     arguments: {}
     locals: {}
   client!ng.e (I)[Lclient!fe;:
-    owner: "Static26"
-    name: "method4358"
+    owner: "SpriteLoader"
+    name: "createSoftwareIndexedSprites"
     arguments: {}
     locals:
-      4: "local4"
-      12: "local12"
+      4: "sprites"
+      12: "i"
   client!nh.<init> (III)V:
     owner: "Tile"
     name: "<init>"
@@ -33192,11 +33192,11 @@ methods:
       30: "local30"
       43: "local43"
   client!of.a (Z)Lclient!fe;:
-    owner: "Static27"
-    name: "method3187"
+    owner: "SpriteLoader"
+    name: "createSoftwareIndexedSprite"
     arguments: {}
     locals:
-      21: "local21"
+      21: "sprite"
   client!of.c (II)[I:
     owner: "TextureOp8"
     name: "method3181"
@@ -33414,11 +33414,11 @@ methods:
       18: "type"
       38: "type"
   client!oi.a (Lclient!fh;BII)[Lclient!uj;:
-    owner: "Static27"
-    name: "method3225"
+    owner: "SpriteLoader"
+    name: "loadAlphaSprites"
     arguments:
-      0: "arg0"
-      3: "arg1"
+      0: "archive"
+      3: "id"
     locals: {}
   client!oi.a (Lclient!fh;I)V:
     owner: "FloTypeList"
@@ -34038,8 +34038,8 @@ methods:
       0: "arg0"
       1: "arg1"
     locals:
-      10: "local10"
-      16: "local16"
+      10: "height"
+      16: "width"
       70: "local70"
   client!pa.b (B)V:
     owner: "IdkTypeList"
@@ -36089,34 +36089,34 @@ methods:
       20: "node"
       30: "newNode"
   client!qe.a ([BI)V:
-    owner: "Static29"
-    name: "method3542"
+    owner: "SpriteLoader"
+    name: "decode"
     arguments:
-      0: "arg0"
+      0: "bytes"
     locals:
-      10: "local10"
-      68: "local68"
-      78: "local78"
-      96: "local96"
-      114: "local114"
-      132: "local132"
-      166: "local166"
-      195: "local195"
-      206: "local206"
-      210: "local210"
-      214: "local214"
-      217: "local217"
-      224: "local224"
-      226: "local226"
-      234: "local234"
-      243: "local243"
-      266: "local266"
-      277: "local277"
-      294: "local294"
-      303: "local303"
-      337: "local337"
-      346: "local346"
-      365: "local365"
+      10: "buffer"
+      68: "paletteSize"
+      78: "i"
+      96: "i"
+      114: "i"
+      132: "i"
+      166: "i"
+      195: "i"
+      206: "innerWidth"
+      210: "innerHeight"
+      214: "len"
+      217: "pixels"
+      224: "alpha"
+      226: "hasAlpha"
+      234: "flags"
+      243: "j"
+      266: "j"
+      277: "a"
+      294: "x"
+      303: "y"
+      337: "alphaX"
+      346: "y"
+      365: "a"
   client!qe.b (B)Lclient!ni;:
     owner: "HashTableIterator"
     name: "next"
@@ -37458,11 +37458,11 @@ methods:
       87: "local87"
       92: "local92"
   client!rg.a (Lclient!fh;IZI)Lclient!vn;:
-    owner: "Static31"
-    name: "method3691"
+    owner: "SpriteLoader"
+    name: "loadSoftwareAlphaSprite"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "archive"
+      1: "id"
     locals: {}
   client!rg.b (IIB)Z:
     owner: "TextureOp37"
@@ -38080,10 +38080,10 @@ methods:
       1: "arg1"
     locals: {}
   client!rn.a (ILclient!fh;)V:
-    owner: "Static31"
-    name: "method3154"
+    owner: "TitleScreen"
+    name: "init"
     arguments:
-      1: "arg0"
+      1: "archive"
     locals: {}
   client!rn.a (Lclient!qf;IIIIIIIZ)V:
     owner: "Static31"
@@ -39602,11 +39602,11 @@ methods:
       1: "id"
     locals: {}
   client!sa.a (ILclient!fh;I)Lclient!ma;:
-    owner: "Static32"
-    name: "method3878"
+    owner: "SpriteLoader"
+    name: "loadIndexedSpriteAutoDetect"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "archive"
+      2: "id"
     locals: {}
   client!sb.<init> (I[Lclient!ec;)V:
     owner: "GlCleanerProgram"
@@ -40770,13 +40770,13 @@ methods:
     locals:
       5: "code"
   client!td.a (Lclient!fh;II)Z:
-    owner: "Static33"
-    name: "method4131"
+    owner: "SpriteLoader"
+    name: "decode"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "archive"
+      2: "id"
     locals:
-      13: "local13"
+      13: "bytes"
   client!td.a (Lclient!qk;I)Lclient!na;:
     owner: "ObjType"
     name: "method4135"
@@ -41260,11 +41260,11 @@ methods:
     arguments: {}
     locals: {}
   client!tj.a (IILclient!fh;I)Lclient!fe;:
-    owner: "Static33"
-    name: "method3003"
+    owner: "SpriteLoader"
+    name: "loadSoftwareIndexedSprite"
     arguments:
-      2: "arg0"
-      3: "arg1"
+      2: "archive"
+      3: "id"
     locals: {}
   client!tj.a (IILclient!wf;II)V:
     owner: "Static33"
@@ -42141,11 +42141,11 @@ methods:
     locals:
       15: "type"
   client!tn.a (ILclient!fh;II)[Lclient!uj;:
-    owner: "Static34"
-    name: "method1548"
+    owner: "SpriteLoader"
+    name: "loadSprites"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      1: "archive"
+      0: "id"
     locals: {}
   client!tn.b (B)Z:
     owner: "AbstractWorld"
@@ -42164,18 +42164,18 @@ methods:
     arguments: {}
     locals: {}
   client!tn.d (B)Lclient!vn;:
-    owner: "Static34"
-    name: "method1546"
+    owner: "SpriteLoader"
+    name: "createSoftwareAlphaSprite"
     arguments: {}
     locals:
-      14: "local14"
-      22: "local22"
-      29: "local29"
-      31: "local31"
-      66: "local66"
-      71: "local71"
-      75: "local75"
-      77: "local77"
+      14: "srcPixels"
+      22: "len"
+      29: "destPixels"
+      31: "i"
+      66: "sprite"
+      71: "destPixels"
+      75: "alpha"
+      77: "i"
   client!to.<init> (IIIIIIIIIIIIIIIIIII)V:
     owner: "Class166"
     name: "<init>"
@@ -42731,16 +42731,16 @@ methods:
       77: "ex"
       87: "ex"
   client!ue.a (Lclient!fh;B)V:
-    owner: "Static35"
-    name: "method667"
+    owner: "Sprites"
+    name: "load"
     arguments:
-      0: "arg0"
+      0: "archive"
     locals:
-      94: "local94"
-      115: "local115"
-      134: "local134"
-      136: "local136"
-      168: "local168"
+      94: "i"
+      115: "compass"
+      134: "hintMapEdge"
+      136: "i"
+      168: "i"
   client!ue.a (Z)V:
     owner: "GameShell"
     name: "mainLoop"
@@ -45313,8 +45313,8 @@ methods:
       9: "request"
       25: "data"
   client!wb.c (Z)V:
-    owner: "Static37"
-    name: "method4670"
+    owner: "SpriteLoader"
+    name: "clear"
     arguments: {}
     locals: {}
   client!wb.d (I)V:
@@ -45602,7 +45602,7 @@ methods:
     owner: "Component"
     name: "method4734"
     arguments:
-      1: "arg0"
+      1: "nameIcons"
     locals:
       28: "local28"
       42: "local42"
@@ -46008,11 +46008,11 @@ methods:
       0: "arg0"
     locals: {}
   client!wj.a (Lclient!fh;IB)[Lclient!fe;:
-    owner: "Static38"
-    name: "method4790"
+    owner: "SpriteLoader"
+    name: "loadSoftwareIndexedSpritesAutoDetect"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "archive"
+      1: "id"
     locals: {}
   client!wj.a (Lclient!fh;ILclient!fh;Lclient!fh;Lclient!fh;)V:
     owner: "InterfaceList"
