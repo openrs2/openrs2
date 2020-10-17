@@ -108,7 +108,7 @@ classes:
   client!jagex3/jagmisc/jagmisc: "jagex3/jagmisc/jagmisc"
   client!jb: "GzipDecompressor"
   client!jc: "ParamType"
-  client!jd: "Class94"
+  client!jd: "HintArrow"
   client!jf: "Timer"
   client!jg: "SoftReferenceNodeFactory"
   client!jh: "Class96"
@@ -4362,11 +4362,11 @@ fields:
     owner: "Static3"
     name: "aBoolean176"
   client!jd.f I:
-    owner: "Class94"
-    name: "anInt2558"
+    owner: "HintArrow"
+    name: "x"
   client!jd.g I:
-    owner: "Class94"
-    name: "anInt2559"
+    owner: "HintArrow"
+    name: "headIcon"
   client!jd.h [J:
     owner: "Static3"
     name: "aLongArray16"
@@ -4374,29 +4374,29 @@ fields:
     owner: "LocalisedText"
     name: "CHATEFFECT1"
   client!jd.j I:
-    owner: "Class94"
-    name: "anInt2560"
+    owner: "HintArrow"
+    name: "target"
   client!jd.k I:
-    owner: "Class94"
-    name: "anInt2561"
+    owner: "HintArrow"
+    name: "type"
   client!jd.l I:
-    owner: "Class94"
-    name: "anInt2562"
+    owner: "HintArrow"
+    name: "radius"
   client!jd.m I:
-    owner: "Class94"
-    name: "anInt2563"
+    owner: "HintArrow"
+    name: "model"
   client!jd.n I:
-    owner: "Class94"
-    name: "anInt2564"
+    owner: "HintArrow"
+    name: "xOffset"
   client!jd.o I:
-    owner: "Class94"
-    name: "anInt2565"
+    owner: "HintArrow"
+    name: "z"
   client!jd.q I:
-    owner: "Class94"
-    name: "anInt2567"
+    owner: "HintArrow"
+    name: "yOffset"
   client!jd.r I:
-    owner: "Class94"
-    name: "anInt2568"
+    owner: "HintArrow"
+    name: "zOffset"
   client!je.c Lclient!cc;:
     owner: "VarpTypeList"
     name: "types"
@@ -11124,8 +11124,8 @@ fields:
     owner: "Static7"
     name: "anInt5803"
   client!wc.c [Lclient!jd;:
-    owner: "Static7"
-    name: "aClass94Array1"
+    owner: "HintArrowManager"
+    name: "HINT_ARROWS"
   client!wd.qb Z:
     owner: "LoginManager"
     name: "playerMember"
@@ -14158,9 +14158,9 @@ methods:
       5: "arg4"
       6: "arg5"
     locals:
-      7: "local7"
-      16: "local16"
-      24: "local24"
+      7: "hintArrows"
+      16: "i"
+      24: "hintArrow"
   client!c.a (IZ)Z:
     owner: "Js5GlTextureProvider"
     name: "isGlTextureReady"
@@ -24420,11 +24420,11 @@ methods:
       3870: "local3870"
       3886: "local3886"
       3906: "local3906"
-      3952: "local3952"
-      3956: "local3956"
-      3960: "local3960"
-      3976: "local3976"
-      4011: "local4011"
+      3952: "indexAndType"
+      3956: "index"
+      3960: "type"
+      3976: "hintArrow"
+      4011: "inboundBuffer"
       4162: "local4162"
       4166: "local4166"
       4170: "local4170"
