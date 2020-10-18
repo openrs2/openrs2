@@ -19085,7 +19085,7 @@ methods:
     locals: {}
   client!fh.b (Ljava/lang/String;I)Z:
     owner: "Js5"
-    name: "isFileReady"
+    name: "isGroupReady"
     arguments:
       0: "group"
     locals:
