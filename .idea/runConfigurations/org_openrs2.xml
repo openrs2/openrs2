@@ -3,7 +3,7 @@
     <useClassPathOnly />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="dev.openrs2.*" />
+        <option name="PATTERN" value="org.openrs2.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>
