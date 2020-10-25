@@ -28,6 +28,7 @@ include(
     "nonfree:signlink",
     "nonfree:unpack",
     "nonfree:unpackclass",
+    "protocol",
     "util",
     "yaml"
 )
