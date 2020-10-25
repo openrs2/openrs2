@@ -1,6 +1,7 @@
 package org.openrs2.protocol.js5
 
 import io.netty.buffer.ByteBuf
+import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.Unpooled
 import io.netty.channel.embedded.EmbeddedChannel
 import io.netty.handler.codec.DecoderException
@@ -40,7 +41,7 @@ object Js5ResponseDecoderTest {
         channel.writeInbound(wrappedBuffer(7, 'O'.toByte(), 'p'.toByte(), 'e'.toByte(), 'n'.toByte()))
         channel.writeInbound(wrappedBuffer('R'.toByte(), 'S'.toByte(), '2'.toByte()))
 
-        Unpooled.buffer().use { buf ->
+        ByteBufAllocator.DEFAULT.buffer().use { buf ->
             buf.writeByte(0)
             buf.writeInt(7)
             buf.writeCharSequence("OpenRS2", Charsets.UTF_8)
