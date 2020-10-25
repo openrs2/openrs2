@@ -13,10 +13,8 @@ public class StaticMethodUnscrambler(
     private val scrambledLibraries: Set<String>,
     private val nameMap: NameMap,
     private val inheritedMethodSets: DisjointSet<MemberRef>,
-    staticClassNameGenerator: NameGenerator
+    private val staticClassMapping: StaticClassMapping
 ) {
-    private val generator = StaticClassGenerator(staticClassNameGenerator, MAX_METHODS_PER_CLASS)
-
     public fun unscramble(): Map<DisjointSet.Partition<MemberRef>, String> {
         val owners = mutableMapOf<DisjointSet.Partition<MemberRef>, String>()
 
@@ -37,7 +35,7 @@ public class StaticMethodUnscrambler(
 
                     val member = MemberRef(clazz, method)
                     val partition = inheritedMethodSets[member]!!
-                    val owner = nameMap.mapMethodOwner(partition, generator.generate())
+                    val owner = nameMap.mapMethodOwner(partition, staticClassMapping[clazz.name])
                     owners[partition] = "${library.name}!$owner"
                 }
             }

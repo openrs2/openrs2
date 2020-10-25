@@ -19,10 +19,8 @@ public class StaticFieldUnscrambler(
     private val scrambledLibraries: Set<String>,
     private val nameMap: NameMap,
     private val inheritedFieldSets: DisjointSet<MemberRef>,
-    staticClassNameGenerator: NameGenerator
+    private val staticClassMapping: StaticClassMapping
 ) {
-    private val generator = StaticClassGenerator(staticClassNameGenerator, MAX_FIELDS_PER_CLASS)
-
     public fun unscramble(): Map<DisjointSet.Partition<MemberRef>, StaticField> {
         val fields = mutableMapOf<DisjointSet.Partition<MemberRef>, StaticField>()
 
@@ -50,7 +48,7 @@ public class StaticFieldUnscrambler(
 
                     val member = MemberRef(clazz, field)
                     val partition = inheritedFieldSets[member]!!
-                    val owner = nameMap.mapFieldOwner(partition, generator.generate())
+                    val owner = nameMap.mapFieldOwner(partition, staticClassMapping[clazz.name])
                     fields[partition] = StaticField("${library.name}!$owner", simpleInitializers[desc])
                 }
             }

@@ -5,10 +5,8 @@ import org.objectweb.asm.tree.AbstractInsnNode
 import org.openrs2.asm.MemberRef
 import org.openrs2.asm.classpath.ClassPath
 import org.openrs2.asm.classpath.ExtendedRemapper
-import org.openrs2.asm.filter.UnionMemberFilter
 import org.openrs2.deob.ArgRef
 import org.openrs2.deob.Profile
-import org.openrs2.deob.filter.BrowserControlFilter
 import org.openrs2.deob.util.map.NameMap
 import org.openrs2.util.collect.DisjointSet
 
@@ -98,24 +96,22 @@ public class TypedRemapper private constructor(
             verifyMemberMapping(fields, profile.maxObfuscatedNameLen)
             verifyMemberMapping(methods, profile.maxObfuscatedNameLen)
 
-            val browserControlFilter = BrowserControlFilter.create(classPath)
-
-            val staticClassNameGenerator = NameGenerator()
+            val staticClassMapping = StaticClassMapping()
             val staticFields = StaticFieldUnscrambler(
                 classPath,
-                UnionMemberFilter(profile.excludedFields, browserControlFilter),
+                profile.excludedFields,
                 profile.scrambledLibraries,
                 nameMap,
                 inheritedFieldSets,
-                staticClassNameGenerator
+                staticClassMapping
             ).unscramble()
             val staticMethods = StaticMethodUnscrambler(
                 classPath,
-                UnionMemberFilter(profile.excludedMethods, browserControlFilter),
+                profile.excludedMethods,
                 profile.scrambledLibraries,
                 nameMap,
                 inheritedMethodSets,
-                staticClassNameGenerator
+                staticClassMapping
             ).unscramble()
 
             return TypedRemapper(
