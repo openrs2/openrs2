@@ -370,6 +370,6 @@ public class CacheImporter @Inject constructor(
     }
 
     private companion object {
-        private val BATCH_SIZE = 1024
+        private const val BATCH_SIZE = 1024
     }
 }
