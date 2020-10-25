@@ -2,11 +2,11 @@ package org.openrs2.crypto
 
 import com.google.common.jimfs.Configuration
 import com.google.common.jimfs.Jimfs
-import io.netty.buffer.Unpooled
 import org.bouncycastle.crypto.params.RSAKeyParameters
 import org.bouncycastle.crypto.params.RSAPrivateCrtKeyParameters
 import org.bouncycastle.util.Properties
 import org.openrs2.buffer.use
+import org.openrs2.buffer.wrappedBuffer
 import org.openrs2.util.io.useTempFile
 import java.math.BigInteger
 import java.nio.file.Files
@@ -77,9 +77,9 @@ object RsaTest {
 
     @Test
     fun testEncryptByteBuf() {
-        Unpooled.wrappedBuffer(byteArrayOf(65)).use { plaintext ->
+        wrappedBuffer(65).use { plaintext ->
             plaintext.rsaEncrypt(PUBLIC_KEY).use { ciphertext ->
-                Unpooled.wrappedBuffer(byteArrayOf(10, 230.toByte())).use { expectedCiphertext ->
+                wrappedBuffer(10, 230.toByte()).use { expectedCiphertext ->
                     assertEquals(expectedCiphertext, ciphertext)
                 }
             }
@@ -88,9 +88,9 @@ object RsaTest {
 
     @Test
     fun testDecryptByteBuf() {
-        Unpooled.wrappedBuffer(byteArrayOf(10, 230.toByte())).use { ciphertext ->
+        wrappedBuffer(10, 230.toByte()).use { ciphertext ->
             ciphertext.rsaDecrypt(PRIVATE_KEY).use { plaintext ->
-                Unpooled.wrappedBuffer(byteArrayOf(65)).use { expectedPlaintext ->
+                wrappedBuffer(65).use { expectedPlaintext ->
                     assertEquals(expectedPlaintext, plaintext)
                 }
             }

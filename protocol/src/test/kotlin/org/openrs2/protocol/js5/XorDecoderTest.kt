@@ -2,8 +2,8 @@ package org.openrs2.protocol.js5
 
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.PooledByteBufAllocator
-import io.netty.buffer.Unpooled
 import io.netty.channel.embedded.EmbeddedChannel
+import org.openrs2.buffer.copiedBuffer
 import org.openrs2.buffer.use
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -24,15 +24,15 @@ object XorDecoderTest {
         val channel = EmbeddedChannel(decoder)
         if (direct) {
             PooledByteBufAllocator.DEFAULT.ioBuffer().use { buf ->
-                buf.writeBytes("OpenRS2".toByteArray())
+                buf.writeCharSequence("OpenRS2", Charsets.UTF_8)
                 channel.writeInbound(buf.retain())
             }
         } else {
-            channel.writeInbound(Unpooled.wrappedBuffer("OpenRS2".toByteArray()))
+            channel.writeInbound(copiedBuffer("OpenRS2"))
         }
 
         channel.readInbound<ByteBuf>().use { actual ->
-            Unpooled.wrappedBuffer(expected.toByteArray()).use { expected ->
+            copiedBuffer(expected).use { expected ->
                 assertEquals(expected, actual)
             }
         }

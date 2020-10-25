@@ -6,6 +6,7 @@ import io.netty.channel.embedded.EmbeddedChannel
 import io.netty.handler.codec.DecoderException
 import org.junit.jupiter.api.assertThrows
 import org.openrs2.buffer.use
+import org.openrs2.buffer.wrappedBuffer
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -35,19 +36,9 @@ object Js5ResponseDecoderTest {
     fun testDecodeFragmented() {
         val channel = EmbeddedChannel(Js5ResponseDecoder())
 
-        channel.writeInbound(Unpooled.wrappedBuffer(byteArrayOf(2, 0, 3, 0, 0, 0, 0)))
-        channel.writeInbound(
-            Unpooled.wrappedBuffer(
-                byteArrayOf(
-                    7,
-                    'O'.toByte(),
-                    'p'.toByte(),
-                    'e'.toByte(),
-                    'n'.toByte()
-                )
-            )
-        )
-        channel.writeInbound(Unpooled.wrappedBuffer(byteArrayOf('R'.toByte(), 'S'.toByte(), '2'.toByte())))
+        channel.writeInbound(wrappedBuffer(2, 0, 3, 0, 0, 0, 0))
+        channel.writeInbound(wrappedBuffer(7, 'O'.toByte(), 'p'.toByte(), 'e'.toByte(), 'n'.toByte()))
+        channel.writeInbound(wrappedBuffer('R'.toByte(), 'S'.toByte(), '2'.toByte()))
 
         Unpooled.buffer().use { buf ->
             buf.writeByte(0)
@@ -67,13 +58,7 @@ object Js5ResponseDecoderTest {
         val channel = EmbeddedChannel(Js5ResponseDecoder())
 
         assertThrows<DecoderException> {
-            channel.writeInbound(
-                Unpooled.wrappedBuffer(
-                    byteArrayOf(
-                        2, 0, 3, 0, 0xFF.toByte(), 0xFF.toByte(), 0xFF.toByte(), 0xFF.toByte()
-                    )
-                )
-            )
+            channel.writeInbound(wrappedBuffer(2, 0, 3, 0, 0xFF.toByte(), 0xFF.toByte(), 0xFF.toByte(), 0xFF.toByte()))
         }
     }
 
@@ -82,13 +67,7 @@ object Js5ResponseDecoderTest {
         val channel = EmbeddedChannel(Js5ResponseDecoder())
 
         assertThrows<DecoderException> {
-            channel.writeInbound(
-                Unpooled.wrappedBuffer(
-                    byteArrayOf(
-                        2, 0, 3, 0, 0x7F, 0xFF.toByte(), 0xFF.toByte(), 0xFB.toByte()
-                    )
-                )
-            )
+            channel.writeInbound(wrappedBuffer(2, 0, 3, 0, 0x7F, 0xFF.toByte(), 0xFF.toByte(), 0xFB.toByte()))
         }
     }
 
@@ -97,13 +76,7 @@ object Js5ResponseDecoderTest {
         val channel = EmbeddedChannel(Js5ResponseDecoder())
 
         assertThrows<DecoderException> {
-            channel.writeInbound(
-                Unpooled.wrappedBuffer(
-                    byteArrayOf(
-                        2, 0, 3, 1, 0x7F, 0xFF.toByte(), 0xFF.toByte(), 0xF7.toByte()
-                    )
-                )
-            )
+            channel.writeInbound(wrappedBuffer(2, 0, 3, 1, 0x7F, 0xFF.toByte(), 0xFF.toByte(), 0xF7.toByte()))
         }
     }
 

@@ -4,6 +4,7 @@ import com.google.common.jimfs.Configuration
 import com.google.common.jimfs.Jimfs
 import io.netty.buffer.Unpooled
 import org.junit.jupiter.api.assertThrows
+import org.openrs2.buffer.copiedBuffer
 import org.openrs2.buffer.use
 import org.openrs2.util.io.recursiveCopy
 import org.openrs2.util.io.recursiveEquals
@@ -208,7 +209,7 @@ object DiskStoreTest {
     @Test
     fun testReadSingleBlock() {
         readTest("single-block") { store ->
-            Unpooled.wrappedBuffer("OpenRS2".toByteArray()).use { expected ->
+            copiedBuffer("OpenRS2").use { expected ->
                 store.read(255, 1).use { actual ->
                     assertEquals(expected, actual)
                 }
@@ -219,7 +220,7 @@ object DiskStoreTest {
     @Test
     fun testReadSingleBlockExtended() {
         readTest("single-block-extended") { store ->
-            Unpooled.wrappedBuffer("OpenRS2".toByteArray()).use { expected ->
+            copiedBuffer("OpenRS2").use { expected ->
                 store.read(255, 65536).use { actual ->
                     assertEquals(expected, actual)
                 }
@@ -230,7 +231,7 @@ object DiskStoreTest {
     @Test
     fun testReadTwoBlocks() {
         readTest("two-blocks") { store ->
-            Unpooled.wrappedBuffer("OpenRS2".repeat(100).toByteArray()).use { expected ->
+            copiedBuffer("OpenRS2".repeat(100)).use { expected ->
                 store.read(255, 1).use { actual ->
                     assertEquals(expected, actual)
                 }
@@ -241,7 +242,7 @@ object DiskStoreTest {
     @Test
     fun testReadTwoBlocksExtended() {
         readTest("two-blocks-extended") { store ->
-            Unpooled.wrappedBuffer("OpenRS2".repeat(100).toByteArray()).use { expected ->
+            copiedBuffer("OpenRS2".repeat(100)).use { expected ->
                 store.read(255, 65536).use { actual ->
                     assertEquals(expected, actual)
                 }
@@ -252,7 +253,7 @@ object DiskStoreTest {
     @Test
     fun testReadMultipleBlocks() {
         readTest("multiple-blocks") { store ->
-            Unpooled.wrappedBuffer("OpenRS2".repeat(1000).toByteArray()).use { expected ->
+            copiedBuffer("OpenRS2".repeat(1000)).use { expected ->
                 store.read(255, 1).use { actual ->
                     assertEquals(expected, actual)
                 }
@@ -263,7 +264,7 @@ object DiskStoreTest {
     @Test
     fun testReadMultipleBlocksExtended() {
         readTest("multiple-blocks-extended") { store ->
-            Unpooled.wrappedBuffer("OpenRS2".repeat(1000).toByteArray()).use { expected ->
+            copiedBuffer("OpenRS2".repeat(1000)).use { expected ->
                 store.read(255, 65536).use { actual ->
                     assertEquals(expected, actual)
                 }
@@ -292,7 +293,7 @@ object DiskStoreTest {
     fun testReadOverwritten() {
         readTest("single-block-overwritten") { store ->
             store.read(255, 1).use { actual ->
-                Unpooled.wrappedBuffer("Hello".toByteArray()).use { expected ->
+                copiedBuffer("Hello").use { expected ->
                     assertEquals(expected, actual)
                 }
             }
@@ -300,7 +301,7 @@ object DiskStoreTest {
 
         readTest("two-blocks-overwritten") { store ->
             store.read(255, 1).use { actual ->
-                Unpooled.wrappedBuffer("Hello".toByteArray()).use { expected ->
+                copiedBuffer("Hello").use { expected ->
                     assertEquals(expected, actual)
                 }
             }
@@ -308,7 +309,7 @@ object DiskStoreTest {
 
         readTest("multiple-blocks-overwritten") { store ->
             store.read(255, 1).use { actual ->
-                Unpooled.wrappedBuffer("Hello".repeat(200).toByteArray()).use { expected ->
+                copiedBuffer("Hello".repeat(200)).use { expected ->
                     assertEquals(expected, actual)
                 }
             }
@@ -318,7 +319,7 @@ object DiskStoreTest {
     @Test
     fun testReadFragmented() {
         readTest("fragmented") { store ->
-            Unpooled.wrappedBuffer("OpenRS2".repeat(100).toByteArray()).use { expected ->
+            copiedBuffer("OpenRS2".repeat(100)).use { expected ->
                 for (j in 0 until 2) {
                     store.read(255, j).use { actual ->
                         assertEquals(expected, actual)
@@ -331,7 +332,7 @@ object DiskStoreTest {
     @Test
     fun testWriteSingleBlock() {
         writeTest("single-block") { store ->
-            Unpooled.wrappedBuffer("OpenRS2".toByteArray()).use { buf ->
+            copiedBuffer("OpenRS2").use { buf ->
                 store.write(255, 1, buf)
             }
         }
@@ -340,7 +341,7 @@ object DiskStoreTest {
     @Test
     fun testWriteSingleBlockExtended() {
         writeTest("single-block-extended") { store ->
-            Unpooled.wrappedBuffer("OpenRS2".toByteArray()).use { buf ->
+            copiedBuffer("OpenRS2").use { buf ->
                 store.write(255, 65536, buf)
             }
         }
@@ -349,7 +350,7 @@ object DiskStoreTest {
     @Test
     fun testWriteTwoBlocks() {
         writeTest("two-blocks") { store ->
-            Unpooled.wrappedBuffer("OpenRS2".repeat(100).toByteArray()).use { buf ->
+            copiedBuffer("OpenRS2".repeat(100)).use { buf ->
                 store.write(255, 1, buf)
             }
         }
@@ -358,7 +359,7 @@ object DiskStoreTest {
     @Test
     fun testWriteTwoBlocksExtended() {
         writeTest("two-blocks-extended") { store ->
-            Unpooled.wrappedBuffer("OpenRS2".repeat(100).toByteArray()).use { buf ->
+            copiedBuffer("OpenRS2".repeat(100)).use { buf ->
                 store.write(255, 65536, buf)
             }
         }
@@ -367,7 +368,7 @@ object DiskStoreTest {
     @Test
     fun testWriteMultipleBlocks() {
         writeTest("multiple-blocks") { store ->
-            Unpooled.wrappedBuffer("OpenRS2".repeat(1000).toByteArray()).use { buf ->
+            copiedBuffer("OpenRS2".repeat(1000)).use { buf ->
                 store.write(255, 1, buf)
             }
         }
@@ -376,7 +377,7 @@ object DiskStoreTest {
     @Test
     fun testWriteMultipleBlocksExtended() {
         writeTest("multiple-blocks-extended") { store ->
-            Unpooled.wrappedBuffer("OpenRS2".repeat(1000).toByteArray()).use { buf ->
+            copiedBuffer("OpenRS2".repeat(1000)).use { buf ->
                 store.write(255, 65536, buf)
             }
         }
@@ -386,7 +387,7 @@ object DiskStoreTest {
     fun testWriteFragmented() {
         writeTest("fragmented") { store ->
             for (i in 1..2) {
-                Unpooled.wrappedBuffer("OpenRS2".repeat(i * 50).toByteArray()).use { buf ->
+                copiedBuffer("OpenRS2".repeat(i * 50)).use { buf ->
                     for (j in 0 until 2) {
                         store.write(255, j, buf.slice())
                     }
@@ -398,19 +399,19 @@ object DiskStoreTest {
     @Test
     fun testOverwriteShorter() {
         overwriteTest("single-block", "single-block-overwritten") { store ->
-            Unpooled.wrappedBuffer("Hello".toByteArray()).use { buf ->
+            copiedBuffer("Hello").use { buf ->
                 store.write(255, 1, buf)
             }
         }
 
         overwriteTest("two-blocks", "two-blocks-overwritten") { store ->
-            Unpooled.wrappedBuffer("Hello".toByteArray()).use { buf ->
+            copiedBuffer("Hello").use { buf ->
                 store.write(255, 1, buf)
             }
         }
 
         overwriteTest("multiple-blocks", "multiple-blocks-overwritten") { store ->
-            Unpooled.wrappedBuffer("Hello".repeat(200).toByteArray()).use { buf ->
+            copiedBuffer("Hello".repeat(200)).use { buf ->
                 store.write(255, 1, buf)
             }
         }
@@ -419,19 +420,19 @@ object DiskStoreTest {
     @Test
     fun testOverwriteShorterExtended() {
         overwriteTest("single-block-extended", "single-block-extended-overwritten") { store ->
-            Unpooled.wrappedBuffer("Hello".toByteArray()).use { buf ->
+            copiedBuffer("Hello").use { buf ->
                 store.write(255, 65536, buf)
             }
         }
 
         overwriteTest("two-blocks-extended", "two-blocks-extended-overwritten") { store ->
-            Unpooled.wrappedBuffer("Hello".toByteArray()).use { buf ->
+            copiedBuffer("Hello").use { buf ->
                 store.write(255, 65536, buf)
             }
         }
 
         overwriteTest("multiple-blocks-extended", "multiple-blocks-extended-overwritten") { store ->
-            Unpooled.wrappedBuffer("Hello".repeat(200).toByteArray()).use { buf ->
+            copiedBuffer("Hello".repeat(200)).use { buf ->
                 store.write(255, 65536, buf)
             }
         }
@@ -440,19 +441,19 @@ object DiskStoreTest {
     @Test
     fun testOverwriteLonger() {
         overwriteTest("single-block", "two-blocks") { store ->
-            Unpooled.wrappedBuffer("OpenRS2".repeat(100).toByteArray()).use { buf ->
+            copiedBuffer("OpenRS2".repeat(100)).use { buf ->
                 store.write(255, 1, buf)
             }
         }
 
         overwriteTest("single-block", "multiple-blocks") { store ->
-            Unpooled.wrappedBuffer("OpenRS2".repeat(1000).toByteArray()).use { buf ->
+            copiedBuffer("OpenRS2".repeat(1000)).use { buf ->
                 store.write(255, 1, buf)
             }
         }
 
         overwriteTest("two-blocks", "multiple-blocks") { store ->
-            Unpooled.wrappedBuffer("OpenRS2".repeat(1000).toByteArray()).use { buf ->
+            copiedBuffer("OpenRS2".repeat(1000)).use { buf ->
                 store.write(255, 1, buf)
             }
         }
@@ -461,19 +462,19 @@ object DiskStoreTest {
     @Test
     fun testOverwriteLongerExtended() {
         overwriteTest("single-block-extended", "two-blocks-extended") { store ->
-            Unpooled.wrappedBuffer("OpenRS2".repeat(100).toByteArray()).use { buf ->
+            copiedBuffer("OpenRS2".repeat(100)).use { buf ->
                 store.write(255, 65536, buf)
             }
         }
 
         overwriteTest("single-block-extended", "multiple-blocks-extended") { store ->
-            Unpooled.wrappedBuffer("OpenRS2".repeat(1000).toByteArray()).use { buf ->
+            copiedBuffer("OpenRS2".repeat(1000)).use { buf ->
                 store.write(255, 65536, buf)
             }
         }
 
         overwriteTest("two-blocks-extended", "multiple-blocks-extended") { store ->
-            Unpooled.wrappedBuffer("OpenRS2".repeat(1000).toByteArray()).use { buf ->
+            copiedBuffer("OpenRS2".repeat(1000)).use { buf ->
                 store.write(255, 65536, buf)
             }
         }
@@ -566,49 +567,49 @@ object DiskStoreTest {
     @Test
     fun testOverwriteCorrupt() {
         overwriteTest("corrupt-eof-late", "corrupt-eof-late-overwritten") { store ->
-            Unpooled.wrappedBuffer("OpenRS2".repeat(1050).toByteArray()).use { buf ->
+            copiedBuffer("OpenRS2".repeat(1050)).use { buf ->
                 store.write(255, 1, buf)
             }
         }
 
         overwriteTest("corrupt-first-eof-early", "corrupt-first-eof-early-overwritten") { store ->
-            Unpooled.wrappedBuffer("Hello".repeat(300).toByteArray()).use { buf ->
+            copiedBuffer("Hello".repeat(300)).use { buf ->
                 store.write(255, 1, buf)
             }
         }
 
         overwriteTest("corrupt-first-invalid-archive", "corrupt-first-invalid-archive-overwritten") { store ->
-            Unpooled.wrappedBuffer("Hello".repeat(300).toByteArray()).use { buf ->
+            copiedBuffer("Hello".repeat(300)).use { buf ->
                 store.write(255, 1, buf)
             }
         }
 
         overwriteTest("corrupt-first-invalid-block-number", "corrupt-first-invalid-block-number-overwritten") { store ->
-            Unpooled.wrappedBuffer("Hello".repeat(300).toByteArray()).use { buf ->
+            copiedBuffer("Hello".repeat(300)).use { buf ->
                 store.write(255, 1, buf)
             }
         }
 
         overwriteTest("corrupt-first-invalid-group", "corrupt-first-invalid-group-overwritten") { store ->
-            Unpooled.wrappedBuffer("Hello".repeat(300).toByteArray()).use { buf ->
+            copiedBuffer("Hello".repeat(300)).use { buf ->
                 store.write(255, 1, buf)
             }
         }
 
         overwriteTest("corrupt-first-outside-data-file", "corrupt-first-outside-data-file-overwritten") { store ->
-            Unpooled.wrappedBuffer("Hello".repeat(300).toByteArray()).use { buf ->
+            copiedBuffer("Hello".repeat(300)).use { buf ->
                 store.write(255, 1, buf)
             }
         }
 
         overwriteTest("corrupt-second-eof-early", "corrupt-second-eof-early-overwritten") { store ->
-            Unpooled.wrappedBuffer("Hello".repeat(300).toByteArray()).use { buf ->
+            copiedBuffer("Hello".repeat(300)).use { buf ->
                 store.write(255, 1, buf)
             }
         }
 
         overwriteTest("corrupt-second-invalid-archive", "corrupt-second-invalid-archive-overwritten") { store ->
-            Unpooled.wrappedBuffer("Hello".repeat(300).toByteArray()).use { buf ->
+            copiedBuffer("Hello".repeat(300)).use { buf ->
                 store.write(255, 1, buf)
             }
         }
@@ -617,19 +618,19 @@ object DiskStoreTest {
             "corrupt-second-invalid-block-number",
             "corrupt-second-invalid-block-number-overwritten"
         ) { store ->
-            Unpooled.wrappedBuffer("Hello".repeat(300).toByteArray()).use { buf ->
+            copiedBuffer("Hello".repeat(300)).use { buf ->
                 store.write(255, 1, buf)
             }
         }
 
         overwriteTest("corrupt-second-invalid-group", "corrupt-second-invalid-group-overwritten") { store ->
-            Unpooled.wrappedBuffer("Hello".repeat(300).toByteArray()).use { buf ->
+            copiedBuffer("Hello".repeat(300)).use { buf ->
                 store.write(255, 1, buf)
             }
         }
 
         overwriteTest("corrupt-second-outside-data-file", "corrupt-second-outside-data-file-overwritten") { store ->
-            Unpooled.wrappedBuffer("Hello".repeat(300).toByteArray()).use { buf ->
+            copiedBuffer("Hello".repeat(300)).use { buf ->
                 store.write(255, 1, buf)
             }
         }
@@ -639,7 +640,7 @@ object DiskStoreTest {
     fun testReadOverwrittenCorrupt() {
         readTest("corrupt-eof-late-overwritten") { store ->
             store.read(255, 1).use { actual ->
-                Unpooled.wrappedBuffer("OpenRS2".repeat(1050).toByteArray()).use { expected ->
+                copiedBuffer("OpenRS2".repeat(1050)).use { expected ->
                     assertEquals(expected, actual)
                 }
             }
@@ -647,7 +648,7 @@ object DiskStoreTest {
 
         readTest("corrupt-first-eof-early-overwritten") { store ->
             store.read(255, 1).use { actual ->
-                Unpooled.wrappedBuffer("Hello".repeat(300).toByteArray()).use { expected ->
+                copiedBuffer("Hello".repeat(300)).use { expected ->
                     assertEquals(expected, actual)
                 }
             }
@@ -655,7 +656,7 @@ object DiskStoreTest {
 
         readTest("corrupt-first-invalid-archive-overwritten") { store ->
             store.read(255, 1).use { actual ->
-                Unpooled.wrappedBuffer("Hello".repeat(300).toByteArray()).use { expected ->
+                copiedBuffer("Hello".repeat(300)).use { expected ->
                     assertEquals(expected, actual)
                 }
             }
@@ -663,7 +664,7 @@ object DiskStoreTest {
 
         readTest("corrupt-first-invalid-block-number-overwritten") { store ->
             store.read(255, 1).use { actual ->
-                Unpooled.wrappedBuffer("Hello".repeat(300).toByteArray()).use { expected ->
+                copiedBuffer("Hello".repeat(300)).use { expected ->
                     assertEquals(expected, actual)
                 }
             }
@@ -671,7 +672,7 @@ object DiskStoreTest {
 
         readTest("corrupt-first-invalid-group-overwritten") { store ->
             store.read(255, 1).use { actual ->
-                Unpooled.wrappedBuffer("Hello".repeat(300).toByteArray()).use { expected ->
+                copiedBuffer("Hello".repeat(300)).use { expected ->
                     assertEquals(expected, actual)
                 }
             }
@@ -679,7 +680,7 @@ object DiskStoreTest {
 
         readTest("corrupt-first-outside-data-file-overwritten") { store ->
             store.read(255, 1).use { actual ->
-                Unpooled.wrappedBuffer("Hello".repeat(300).toByteArray()).use { expected ->
+                copiedBuffer("Hello".repeat(300)).use { expected ->
                     assertEquals(expected, actual)
                 }
             }
@@ -687,7 +688,7 @@ object DiskStoreTest {
 
         readTest("corrupt-second-eof-early-overwritten") { store ->
             store.read(255, 1).use { actual ->
-                Unpooled.wrappedBuffer("Hello".repeat(300).toByteArray()).use { expected ->
+                copiedBuffer("Hello".repeat(300)).use { expected ->
                     assertEquals(expected, actual)
                 }
             }
@@ -695,7 +696,7 @@ object DiskStoreTest {
 
         readTest("corrupt-second-invalid-archive-overwritten") { store ->
             store.read(255, 1).use { actual ->
-                Unpooled.wrappedBuffer("Hello".repeat(300).toByteArray()).use { expected ->
+                copiedBuffer("Hello".repeat(300)).use { expected ->
                     assertEquals(expected, actual)
                 }
             }
@@ -703,7 +704,7 @@ object DiskStoreTest {
 
         readTest("corrupt-second-invalid-block-number-overwritten") { store ->
             store.read(255, 1).use { actual ->
-                Unpooled.wrappedBuffer("Hello".repeat(300).toByteArray()).use { expected ->
+                copiedBuffer("Hello".repeat(300)).use { expected ->
                     assertEquals(expected, actual)
                 }
             }
@@ -711,7 +712,7 @@ object DiskStoreTest {
 
         readTest("corrupt-second-invalid-group-overwritten") { store ->
             store.read(255, 1).use { actual ->
-                Unpooled.wrappedBuffer("Hello".repeat(300).toByteArray()).use { expected ->
+                copiedBuffer("Hello".repeat(300)).use { expected ->
                     assertEquals(expected, actual)
                 }
             }
@@ -719,7 +720,7 @@ object DiskStoreTest {
 
         readTest("corrupt-second-outside-data-file-overwritten") { store ->
             store.read(255, 1).use { actual ->
-                Unpooled.wrappedBuffer("Hello".repeat(300).toByteArray()).use { expected ->
+                copiedBuffer("Hello".repeat(300)).use { expected ->
                     assertEquals(expected, actual)
                 }
             }

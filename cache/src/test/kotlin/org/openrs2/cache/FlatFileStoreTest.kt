@@ -5,6 +5,7 @@ import com.google.common.jimfs.Jimfs
 import io.netty.buffer.Unpooled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import org.openrs2.buffer.copiedBuffer
 import org.openrs2.buffer.use
 import org.openrs2.util.io.recursiveCopy
 import org.openrs2.util.io.recursiveEquals
@@ -181,7 +182,7 @@ object FlatFileStoreTest {
                 store.read(1, 0).release()
             }
 
-            Unpooled.wrappedBuffer("OpenRS2".toByteArray()).use { expected ->
+            copiedBuffer("OpenRS2").use { expected ->
                 store.read(255, 0).use { actual ->
                     assertEquals(expected, actual)
                 }
@@ -196,19 +197,19 @@ object FlatFileStoreTest {
     @Test
     fun testWrite() {
         writeTest("single-group") { store ->
-            Unpooled.wrappedBuffer("OpenRS2".toByteArray()).use { buf ->
+            copiedBuffer("OpenRS2").use { buf ->
                 store.write(255, 0, buf)
             }
         }
 
         overwriteTest("empty-archive", "single-group") { store ->
-            Unpooled.wrappedBuffer("OpenRS2".toByteArray()).use { buf ->
+            copiedBuffer("OpenRS2").use { buf ->
                 store.write(255, 0, buf)
             }
         }
 
         overwriteTest("single-group", "single-group-overwritten") { store ->
-            Unpooled.wrappedBuffer("Hello, world!".toByteArray()).use { buf ->
+            copiedBuffer("Hello, world!").use { buf ->
                 store.write(255, 0, buf)
             }
         }

@@ -3,7 +3,17 @@ package org.openrs2.buffer
 import com.google.common.base.Preconditions
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufUtil
+import io.netty.buffer.Unpooled
+import java.nio.charset.Charset
 import java.util.zip.CRC32
+
+public fun wrappedBuffer(vararg bytes: Byte): ByteBuf {
+    return Unpooled.wrappedBuffer(bytes)
+}
+
+public fun copiedBuffer(s: String, charset: Charset = Charsets.UTF_8): ByteBuf {
+    return Unpooled.copiedBuffer(s, charset)
+}
 
 public fun ByteBuf.readShortSmart(): Int {
     val peek = getUnsignedByte(readerIndex()).toInt()

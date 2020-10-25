@@ -3,6 +3,7 @@ package org.openrs2.cache
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.Unpooled
 import org.junit.jupiter.api.assertThrows
+import org.openrs2.buffer.copiedBuffer
 import org.openrs2.buffer.use
 import org.openrs2.crypto.XteaKey
 import java.io.IOException
@@ -19,7 +20,7 @@ object Js5CompressionTest {
     @Test
     fun testCompressNone() {
         read("none.dat").use { expected ->
-            Unpooled.wrappedBuffer("OpenRS2".toByteArray()).use { input ->
+            copiedBuffer("OpenRS2").use { input ->
                 Js5Compression.compress(input, Js5CompressionType.UNCOMPRESSED).use { actual ->
                     assertEquals(expected, actual)
                 }
@@ -29,7 +30,7 @@ object Js5CompressionTest {
 
     @Test
     fun testUncompressNone() {
-        Unpooled.wrappedBuffer("OpenRS2".toByteArray()).use { expected ->
+        copiedBuffer("OpenRS2").use { expected ->
             read("none.dat").use { input ->
                 Js5Compression.uncompress(input).use { actual ->
                     assertEquals(expected, actual)
@@ -40,7 +41,7 @@ object Js5CompressionTest {
 
     @Test
     fun testCompressGzip() {
-        Unpooled.wrappedBuffer("OpenRS2".toByteArray()).use { expected ->
+        copiedBuffer("OpenRS2").use { expected ->
             Js5Compression.compress(expected.slice(), Js5CompressionType.GZIP).use { compressed ->
                 Js5Compression.uncompress(compressed).use { actual ->
                     assertEquals(expected, actual)
@@ -51,7 +52,7 @@ object Js5CompressionTest {
 
     @Test
     fun testUncompressGzip() {
-        Unpooled.wrappedBuffer("OpenRS2".toByteArray()).use { expected ->
+        copiedBuffer("OpenRS2").use { expected ->
             read("gzip.dat").use { input ->
                 Js5Compression.uncompress(input).use { actual ->
                     assertEquals(expected, actual)
@@ -73,7 +74,7 @@ object Js5CompressionTest {
 
     @Test
     fun testCompressBzip2() {
-        Unpooled.wrappedBuffer("OpenRS2".toByteArray()).use { expected ->
+        copiedBuffer("OpenRS2").use { expected ->
             Js5Compression.compress(expected.slice(), Js5CompressionType.BZIP2).use { compressed ->
                 Js5Compression.uncompress(compressed).use { actual ->
                     assertEquals(expected, actual)
@@ -84,7 +85,7 @@ object Js5CompressionTest {
 
     @Test
     fun testUncompressBzip2() {
-        Unpooled.wrappedBuffer("OpenRS2".toByteArray()).use { expected ->
+        copiedBuffer("OpenRS2").use { expected ->
             read("bzip2.dat").use { input ->
                 Js5Compression.uncompress(input).use { actual ->
                     assertEquals(expected, actual)
@@ -95,7 +96,7 @@ object Js5CompressionTest {
 
     @Test
     fun testCompressLzma() {
-        Unpooled.wrappedBuffer("OpenRS2".toByteArray()).use { expected ->
+        copiedBuffer("OpenRS2").use { expected ->
             Js5Compression.compress(expected.slice(), Js5CompressionType.LZMA).use { compressed ->
                 Js5Compression.uncompress(compressed).use { actual ->
                     assertEquals(expected, actual)
@@ -106,7 +107,7 @@ object Js5CompressionTest {
 
     @Test
     fun testUncompressLzma() {
-        Unpooled.wrappedBuffer("OpenRS2".toByteArray()).use { expected ->
+        copiedBuffer("OpenRS2").use { expected ->
             read("lzma.dat").use { input ->
                 Js5Compression.uncompress(input).use { actual ->
                     assertEquals(expected, actual)
@@ -118,7 +119,7 @@ object Js5CompressionTest {
     @Test
     fun testCompressNoneEncrypted() {
         read("none-encrypted.dat").use { expected ->
-            Unpooled.wrappedBuffer("OpenRS2".repeat(3).toByteArray()).use { input ->
+            copiedBuffer("OpenRS2".repeat(3)).use { input ->
                 Js5Compression.compress(input, Js5CompressionType.UNCOMPRESSED, KEY).use { actual ->
                     assertEquals(expected, actual)
                 }
@@ -128,7 +129,7 @@ object Js5CompressionTest {
 
     @Test
     fun testUncompressNoneEncrypted() {
-        Unpooled.wrappedBuffer("OpenRS2".repeat(3).toByteArray()).use { expected ->
+        copiedBuffer("OpenRS2".repeat(3)).use { expected ->
             read("none-encrypted.dat").use { input ->
                 Js5Compression.uncompress(input, KEY).use { actual ->
                     assertEquals(expected, actual)
@@ -139,7 +140,7 @@ object Js5CompressionTest {
 
     @Test
     fun testCompressGzipEncrypted() {
-        Unpooled.wrappedBuffer("OpenRS2".toByteArray()).use { expected ->
+        copiedBuffer("OpenRS2").use { expected ->
             Js5Compression.compress(expected.slice(), Js5CompressionType.GZIP, KEY).use { compressed ->
                 Js5Compression.uncompress(compressed, KEY).use { actual ->
                     assertEquals(expected, actual)
@@ -150,7 +151,7 @@ object Js5CompressionTest {
 
     @Test
     fun testUncompressGzipEncrypted() {
-        Unpooled.wrappedBuffer("OpenRS2".toByteArray()).use { expected ->
+        copiedBuffer("OpenRS2").use { expected ->
             read("gzip-encrypted.dat").use { input ->
                 Js5Compression.uncompress(input, KEY).use { actual ->
                     assertEquals(expected, actual)
@@ -161,7 +162,7 @@ object Js5CompressionTest {
 
     @Test
     fun testCompressBzip2Encrypted() {
-        Unpooled.wrappedBuffer("OpenRS2".toByteArray()).use { expected ->
+        copiedBuffer("OpenRS2").use { expected ->
             Js5Compression.compress(expected.slice(), Js5CompressionType.BZIP2, KEY).use { compressed ->
                 Js5Compression.uncompress(compressed, KEY).use { actual ->
                     assertEquals(expected, actual)
@@ -172,7 +173,7 @@ object Js5CompressionTest {
 
     @Test
     fun testUncompressBzip2Encrypted() {
-        Unpooled.wrappedBuffer("OpenRS2".toByteArray()).use { expected ->
+        copiedBuffer("OpenRS2").use { expected ->
             read("bzip2-encrypted.dat").use { input ->
                 Js5Compression.uncompress(input, KEY).use { actual ->
                     assertEquals(expected, actual)
@@ -183,7 +184,7 @@ object Js5CompressionTest {
 
     @Test
     fun testCompressLzmaEncrypted() {
-        Unpooled.wrappedBuffer("OpenRS2".toByteArray()).use { expected ->
+        copiedBuffer("OpenRS2").use { expected ->
             Js5Compression.compress(expected.slice(), Js5CompressionType.LZMA, KEY).use { compressed ->
                 Js5Compression.uncompress(compressed, KEY).use { actual ->
                     assertEquals(expected, actual)
@@ -194,7 +195,7 @@ object Js5CompressionTest {
 
     @Test
     fun testUncompressLzmaEncrypted() {
-        Unpooled.wrappedBuffer("OpenRS2".toByteArray()).use { expected ->
+        copiedBuffer("OpenRS2").use { expected ->
             read("lzma-encrypted.dat").use { input ->
                 Js5Compression.uncompress(input, KEY).use { actual ->
                     assertEquals(expected, actual)
@@ -205,7 +206,7 @@ object Js5CompressionTest {
 
     @Test
     fun testCompressBest() {
-        Unpooled.wrappedBuffer("OpenRS2".repeat(100).toByteArray()).use { expected ->
+        copiedBuffer("OpenRS2".repeat(100)).use { expected ->
             val noneLen = Js5Compression.compress(expected.slice(), Js5CompressionType.UNCOMPRESSED).use { compressed ->
                 compressed.readableBytes()
             }
@@ -223,7 +224,7 @@ object Js5CompressionTest {
 
     @Test
     fun testCompressBestEncrypted() {
-        Unpooled.wrappedBuffer("OpenRS2".repeat(100).toByteArray()).use { expected ->
+        copiedBuffer("OpenRS2".repeat(100)).use { expected ->
             val noneLen = Js5Compression.compress(expected.slice(), Js5CompressionType.UNCOMPRESSED).use { compressed ->
                 compressed.readableBytes()
             }
@@ -241,7 +242,7 @@ object Js5CompressionTest {
 
     @Test
     fun testUncompressedEncryption() {
-        Unpooled.wrappedBuffer("OpenRS2".toByteArray()).use { buf ->
+        copiedBuffer("OpenRS2").use { buf ->
             Js5Compression.compressBest(buf.slice()).use { compressed ->
                 assertEquals(Js5CompressionType.UNCOMPRESSED.ordinal, compressed.getUnsignedByte(0).toInt())
             }

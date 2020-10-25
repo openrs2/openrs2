@@ -4,6 +4,7 @@ import io.netty.buffer.Unpooled
 import io.netty.channel.embedded.EmbeddedChannel
 import io.netty.handler.codec.DecoderException
 import org.junit.jupiter.api.assertThrows
+import org.openrs2.buffer.wrappedBuffer
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -22,8 +23,8 @@ object Js5RequestDecoderTest {
     @Test
     fun testFragmented() {
         val channel = EmbeddedChannel(Js5RequestDecoder())
-        channel.writeInbound(Unpooled.wrappedBuffer(byteArrayOf(0, 2)))
-        channel.writeInbound(Unpooled.wrappedBuffer(byteArrayOf(0, 3)))
+        channel.writeInbound(wrappedBuffer(0, 2))
+        channel.writeInbound(wrappedBuffer(0, 3))
         assertEquals(Js5Request.Group(true, 2, 3), channel.readInbound())
     }
 
@@ -32,7 +33,7 @@ object Js5RequestDecoderTest {
         val channel = EmbeddedChannel(Js5RequestDecoder())
 
         assertThrows<DecoderException> {
-            channel.writeInbound(Unpooled.wrappedBuffer(byteArrayOf(8, 0, 0, 0)))
+            channel.writeInbound(wrappedBuffer(8, 0, 0, 0))
         }
     }
 
