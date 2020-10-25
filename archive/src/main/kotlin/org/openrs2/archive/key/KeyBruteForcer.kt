@@ -38,7 +38,7 @@ public class KeyBruteForcer @Inject constructor(
      *     v |          |          |
      *       +----------+----------+
      *
-     * The shaded are represents combinations that have already been tried.
+     * The shaded area represents combinations that have already been tried.
      *
      * When a new container is inserted, we test it against every key in the
      * shaded area (quadrant A).
