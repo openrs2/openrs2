@@ -7,8 +7,6 @@ dependencies {
     api("io.netty:netty-codec:${Versions.netty}")
 
     implementation(project(":buffer"))
-
-    testImplementation(project(":buffer"))
 }
 
 publishing {
