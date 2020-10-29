@@ -10,7 +10,7 @@ object Versions {
     const val fernflower = "1.1.0"
     const val flyway = "7.1.0"
     const val guava = "30.0-jre"
-    const val guice = "4.2.3"
+    const val guice = "5.0.0-BETA-1"
     const val h2 = "1.4.200"
     const val inlineLogger = "1.0.2"
     const val jackson = "2.11.3"
