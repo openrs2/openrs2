@@ -48,7 +48,9 @@ object Js5ResponseEncoderTest {
         }
 
         read(encoded).use { expected ->
-            assertEquals(expected, channel.readOutbound())
+            channel.readOutbound<ByteBuf>().use { actual ->
+                assertEquals(expected, actual)
+            }
         }
     }
 
