@@ -78,6 +78,7 @@ public class Js5ResponseDecoder : ByteToMessageDecoder() {
                 data.writeBytes(input, blockLen)
 
                 if (!last && input.readUnsignedByte().toInt() != 0xFF) {
+                    reset()
                     throw DecoderException("Invalid block trailer")
                 }
             }
@@ -90,8 +91,19 @@ public class Js5ResponseDecoder : ByteToMessageDecoder() {
         }
     }
 
+    override fun channelInactive(ctx: ChannelHandlerContext) {
+        super.channelInactive(ctx)
+        reset()
+    }
+
     override fun handlerRemoved0(ctx: ChannelHandlerContext?) {
+        reset()
+    }
+
+    private fun reset() {
         data.release()
         data = Unpooled.EMPTY_BUFFER
+
+        state = State.READ_HEADER
     }
 }
