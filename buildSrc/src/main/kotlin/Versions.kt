@@ -6,7 +6,7 @@ object Versions {
     const val commonsCompress = "1.20"
     const val dependencyLicenseReport = "1.16"
     const val dokka = "1.4.10.2"
-    const val fastutil = "8.4.2"
+    const val fastutil = "8.4.3"
     const val fernflower = "1.1.0"
     const val flyway = "7.1.1"
     const val guava = "30.0-jre"
@@ -27,6 +27,6 @@ object Versions {
     const val openrs2Natives = "3.0.0"
     const val postgres = "42.2.18"
     const val shadowPlugin = "6.1.0"
-    const val versionsPlugin = "0.33.0"
+    const val versionsPlugin = "0.34.0"
     const val xz = "1.8"
 }
