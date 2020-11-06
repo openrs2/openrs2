@@ -24,7 +24,7 @@ import javax.inject.Singleton
 
 @Singleton
 public class Bundler @Inject constructor(
-    @BundlerQualifier private val transformers: Set<@JvmSuppressWildcards Transformer>,
+    @BundlerQualifier private val transformers: Set<Transformer>,
     private val config: Config
 ) {
     private val unsignedManifest = Manifest().apply {

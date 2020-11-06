@@ -16,7 +16,7 @@ import javax.inject.Singleton
 
 @Singleton
 public class Deobfuscator @Inject constructor(
-    @DeobfuscatorQualifier private val transformers: Set<@JvmSuppressWildcards Transformer>
+    @DeobfuscatorQualifier private val transformers: Set<Transformer>
 ) {
     public fun run(input: Path, output: Path) {
         // read input jars/packs

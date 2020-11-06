@@ -9,7 +9,7 @@ import javax.inject.Inject
 import javax.inject.Provider
 
 public class ObjectMapperProvider @Inject constructor(
-    private val modules: Set<@JvmSuppressWildcards Module>
+    private val modules: Set<Module>
 ) : Provider<ObjectMapper> {
     override fun get(): ObjectMapper {
         return ObjectMapper(YAMLFactory())
