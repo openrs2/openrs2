@@ -20,7 +20,7 @@ object Versions {
     const val jimfs = "1.1"
     const val junit = "5.7.0"
     const val kotlin = "1.4.10"
-    const val kotlinCoroutines = "1.4.0"
+    const val kotlinCoroutines = "1.4.1"
     const val kotlinter = "3.2.0"
     const val logback = "1.2.3"
     const val netty = "4.1.53.Final"
