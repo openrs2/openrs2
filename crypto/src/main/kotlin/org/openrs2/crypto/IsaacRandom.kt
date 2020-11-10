@@ -1,6 +1,6 @@
 package org.openrs2.crypto
 
-public class IsaacRandom {
+public class IsaacRandom : StreamCipher {
     private var count = 0
     private val rsl: IntArray
     private val mem = IntArray(SIZE)
@@ -257,7 +257,7 @@ public class IsaacRandom {
         this.a = a
     }
 
-    public fun nextInt(): Int {
+    public override fun nextInt(): Int {
         if (count-- == 0) {
             isaac()
             count = SIZE - 1
