@@ -77,6 +77,7 @@ distributions {
 
         contents {
             from("$buildDir/AUTHORS")
+            from("$rootDir/CONTRIBUTING.md")
             from("$rootDir/DCO")
             from("$rootDir/LICENSE")
             from("$rootDir/README.md")
