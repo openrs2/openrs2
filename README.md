@@ -120,6 +120,7 @@ OpenRS2 uses [Semantic Versioning][semver].
 ## Links
 
 * [Discord][discord]
+* [Issue tracker][issue-tracker]
 * [KDoc][kdoc]
 * [Website][www]
 
@@ -138,6 +139,7 @@ available in the `LICENSE` file.
 [idea]: https://www.jetbrains.com/idea/
 [isc-badge]: https://img.shields.io/badge/license-ISC-informational
 [isc]: https://opensource.org/licenses/ISC
+[issue-tracker]: https://git.openrs2.org/openrs2/openrs2/issues
 [jdk]: https://jdk.java.net/
 [kdoc]: https://docs.openrs2.org/
 [ktlint]: https://github.com/pinterest/ktlint#readme
