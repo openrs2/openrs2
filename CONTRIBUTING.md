@@ -60,9 +60,15 @@ The full text of the DCO is available in the `DCO` file.
 OpenRS2 does not distribute any of Jagex's intellectual property, and care
 should be taken to avoid inadvertently including any in contributions.
 
+## Gitea
+
+OpenRS2 only uses GitHub as a mirror. Issues and pull requests should be
+submitted to [OpenRS2's self-hosted Gitea instance][gitea].
+
 [commitmsg]: https://chris.beams.io/posts/git-commit/#seven-rules
 [dco]: https://developercertificate.org/
 [discord]: https://chat.openrs2.org/
+[gitea]: https://git.openrs2.org/openrs2/openrs2
 [idea]: https://www.jetbrains.com/idea/
 [ktlint]: https://github.com/pinterest/ktlint#readme
 [rewriting-history]: https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History
