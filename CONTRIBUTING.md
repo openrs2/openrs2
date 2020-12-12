@@ -1,4 +1,4 @@
-## Contributing to OpenRS2
+# Contributing to OpenRS2
 
 ## Introduction
 
