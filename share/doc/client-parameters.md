@@ -85,7 +85,7 @@ When `game1` is used, the following changes are made in the client:
 * A "Face here" action is added to every menu where there is a "Walk here"
   action.
 
-MechScape was never released so the cache is unavailable. As such, OpenRS2 only
+MechScape was never released, so the cache is unavailable. As such, OpenRS2 only
 supports `game0`.
 
 ## Languages
