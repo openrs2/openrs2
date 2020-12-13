@@ -8,7 +8,7 @@ import io.netty.handler.codec.MessageToByteEncoder
 import kotlin.math.min
 
 @ChannelHandler.Sharable
-public class Js5ResponseEncoder : MessageToByteEncoder<Js5Response>(Js5Response::class.java) {
+public object Js5ResponseEncoder : MessageToByteEncoder<Js5Response>(Js5Response::class.java) {
     override fun encode(ctx: ChannelHandlerContext, msg: Js5Response, out: ByteBuf) {
         out.writeByte(msg.archive)
         out.writeShort(msg.group)

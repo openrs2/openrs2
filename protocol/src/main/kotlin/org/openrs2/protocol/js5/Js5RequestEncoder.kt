@@ -6,7 +6,7 @@ import io.netty.channel.ChannelHandlerContext
 import io.netty.handler.codec.MessageToByteEncoder
 
 @ChannelHandler.Sharable
-public class Js5RequestEncoder : MessageToByteEncoder<Js5Request>(Js5Request::class.java) {
+public object Js5RequestEncoder : MessageToByteEncoder<Js5Request>(Js5Request::class.java) {
     override fun encode(ctx: ChannelHandlerContext, msg: Js5Request, out: ByteBuf) {
         when (msg) {
             is Js5Request.Group -> {

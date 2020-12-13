@@ -20,7 +20,7 @@ object Js5RequestEncoderTest {
     }
 
     private fun testEncode(request: Js5Request, expected: ByteArray) {
-        val channel = EmbeddedChannel(Js5RequestEncoder())
+        val channel = EmbeddedChannel(Js5RequestEncoder)
         channel.writeOutbound(request)
 
         channel.readOutbound<ByteBuf>().use { actual ->

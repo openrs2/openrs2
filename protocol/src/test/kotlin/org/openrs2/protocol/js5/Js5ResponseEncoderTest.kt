@@ -33,7 +33,7 @@ object Js5ResponseEncoderTest {
 
     @Test
     fun testEncodeEmpty() {
-        val channel = EmbeddedChannel(Js5ResponseEncoder())
+        val channel = EmbeddedChannel(Js5ResponseEncoder)
 
         assertThrows<EncoderException> {
             channel.writeOutbound(Js5Response(true, 2, 3, Unpooled.EMPTY_BUFFER))
@@ -41,7 +41,7 @@ object Js5ResponseEncoderTest {
     }
 
     private fun testEncode(container: String, encoded: String, prefetch: Boolean) {
-        val channel = EmbeddedChannel(Js5ResponseEncoder())
+        val channel = EmbeddedChannel(Js5ResponseEncoder)
 
         read(container).use { buf ->
             channel.writeOutbound(Js5Response(prefetch, 2, 3, buf.retain()))
