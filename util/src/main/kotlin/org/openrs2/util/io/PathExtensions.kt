@@ -107,13 +107,10 @@ public inline fun <T> Path.useTempFile(
 }
 
 public inline fun <T> Path.atomicWrite(f: (Path) -> T): T {
-    val tempFile = Files.createTempFile(parent, ".$fileName", ".tmp")
-    try {
+    parent.useTempFile(".$fileName", ".tmp") { tempFile ->
         val result = f(tempFile)
         Files.move(tempFile, this, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING)
         return result
-    } finally {
-        Files.deleteIfExists(tempFile)
     }
 }
 
