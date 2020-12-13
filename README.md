@@ -53,6 +53,13 @@ material from being accidentally included in the repository.
 Run `./gradlew` to download the dependencies, build the code, run the unit tests
 and package it.
 
+IDEA 2020.3's built-in build system breaks with a cryptic
+`java: java.lang.IllegalArgumentException` error message when compiling modules
+that use the `deob-annotations` processor. A workaround is to add
+`-Djps.track.ap.dependencies=false` to the 'Shared build process VM options' in
+File -> Settings -> Build, Execution and Deployment -> Compiler. See
+[IDEA-256707][idea-bug] for more information.
+
 ### Versioning
 
 OpenRS2 uses [Semantic Versioning][semver].
@@ -74,6 +81,7 @@ available in the `LICENSE` file.
 [discord]: https://chat.openrs2.org/
 [drone-badge]: https://build.openrs2.org/api/badges/openrs2/openrs2/status.svg
 [drone]: https://build.openrs2.org/openrs2/openrs2/
+[idea-bug]: https://youtrack.jetbrains.com/issue/IDEA-256707
 [isc-badge]: https://img.shields.io/badge/license-ISC-informational
 [isc]: https://opensource.org/licenses/ISC
 [issue-tracker]: https://git.openrs2.org/openrs2/openrs2/issues
