@@ -47,7 +47,6 @@ public class FlatFileStore private constructor(
             return stream.filter { Files.isDirectory(it) && ARCHIVE_NAME.matches(it.fileName.toString()) }
                 .map { Integer.parseInt(it.fileName.toString()) }
                 .sorted()
-                .toList()
         }
     }
 
@@ -61,7 +60,6 @@ public class FlatFileStore private constructor(
             return stream.filter { Files.isRegularFile(it) && GROUP_NAME.matches(it.fileName.toString()) }
                 .map { Integer.parseInt(it.fileName.toString().removeSuffix(GROUP_EXTENSION)) }
                 .sorted()
-                .toList()
         }
     }
 

@@ -45,11 +45,11 @@ public fun Path.recursiveEquals(
     filter: (Path) -> Boolean = { true }
 ): Boolean {
     val list1 = Files.newDirectoryStream(this).use { stream ->
-        stream.filter(filter).map { this.relativize(it).toString() }.sorted().toList()
+        stream.filter(filter).map { this.relativize(it).toString() }.sorted()
     }
 
     val list2 = Files.newDirectoryStream(other).use { stream ->
-        stream.filter(filter).map { other.relativize(it).toString() }.sorted().toList()
+        stream.filter(filter).map { other.relativize(it).toString() }.sorted()
     }
 
     if (list1 != list2) {
