@@ -128,7 +128,7 @@ public abstract class NamedEntryCollection<T : NamedEntry>(
         val nameHashTable = nameHashTable ?: return null
         val ids = nameHashTable.getOrDefault(nameHash, IntSortedSets.EMPTY_SET)
         return if (ids.isNotEmpty()) {
-            get(ids.firstInt()) ?: throw AssertionError()
+            get(ids.firstInt())!!
         } else {
             null
         }
