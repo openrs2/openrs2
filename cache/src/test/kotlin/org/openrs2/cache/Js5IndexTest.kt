@@ -367,19 +367,19 @@ object Js5IndexTest {
         val group = index.createOrGet(0)
         assertEquals(1, index.size)
         assertEquals(1, index.capacity)
-        assertTrue(index.contains(0))
+        assertTrue(0 in index)
         assertEquals(group, index[0])
 
         group.remove()
         assertEquals(0, index.size)
         assertEquals(0, index.capacity)
-        assertFalse(index.contains(0))
+        assertFalse(0 in index)
         assertNull(index[0])
 
         group.remove()
         assertEquals(0, index.size)
         assertEquals(0, index.capacity)
-        assertFalse(index.contains(0))
+        assertFalse(0 in index)
         assertNull(index[0])
     }
 
@@ -391,19 +391,19 @@ object Js5IndexTest {
         val file = group.createOrGet(0)
         assertEquals(1, group.size)
         assertEquals(1, group.capacity)
-        assertTrue(group.contains(0))
+        assertTrue(0 in group)
         assertEquals(file, group[0])
 
         file.remove()
         assertEquals(0, group.size)
         assertEquals(0, group.capacity)
-        assertFalse(group.contains(0))
+        assertFalse(0 in group)
         assertNull(group[0])
 
         file.remove()
         assertEquals(0, group.size)
         assertEquals(0, group.capacity)
-        assertFalse(group.contains(0))
+        assertFalse(0 in group)
         assertNull(group[0])
     }
 

@@ -78,7 +78,7 @@ public abstract class NamedEntryCollection<T : NamedEntry>(
             return entries.lastIntKey() + 1
         }
 
-    public fun contains(id: Int): Boolean {
+    public operator fun contains(id: Int): Boolean {
         require(id >= 0)
 
         val entry = singleEntry
@@ -101,7 +101,7 @@ public abstract class NamedEntryCollection<T : NamedEntry>(
         return nameHashTable?.containsKey(nameHash) ?: false
     }
 
-    public fun contains(name: String): Boolean {
+    public operator fun contains(name: String): Boolean {
         return containsNamed(name.krHashCode())
     }
 

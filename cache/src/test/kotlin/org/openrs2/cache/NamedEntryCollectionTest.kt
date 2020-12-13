@@ -34,7 +34,7 @@ object NamedEntryCollectionTest {
         val collection = TestCollection()
 
         assertThrows<IllegalArgumentException> {
-            collection.contains(-1)
+            -1 in collection
         }
 
         assertThrows<IllegalArgumentException> {
@@ -90,8 +90,8 @@ object NamedEntryCollectionTest {
         assertEquals(1, collection.size)
         assertEquals(1, collection.capacity)
 
-        assertTrue(collection.contains(0))
-        assertFalse(collection.contains(1))
+        assertTrue(0 in collection)
+        assertFalse(1 in collection)
 
         assertEquals(entry, collection[0])
         assertNull(collection[1])
@@ -120,9 +120,9 @@ object NamedEntryCollectionTest {
         assertEquals(2, collection.size)
         assertEquals(2, collection.capacity)
 
-        assertTrue(collection.contains(0))
-        assertTrue(collection.contains(1))
-        assertFalse(collection.contains(2))
+        assertTrue(0 in collection)
+        assertTrue(1 in collection)
+        assertFalse(2 in collection)
 
         assertEquals(entry0, collection[0])
         assertEquals(entry1, collection[1])
@@ -147,8 +147,8 @@ object NamedEntryCollectionTest {
         assertEquals(1, collection.size)
         assertEquals(1, collection.capacity)
 
-        assertTrue(collection.contains("hello"))
-        assertFalse(collection.contains("world"))
+        assertTrue("hello" in collection)
+        assertFalse("world" in collection)
 
         assertEquals(entry, collection["hello"])
         assertNull(collection["world"])
@@ -177,9 +177,9 @@ object NamedEntryCollectionTest {
         assertEquals(2, collection.size)
         assertEquals(2, collection.capacity)
 
-        assertTrue(collection.contains("hello"))
-        assertTrue(collection.contains("world"))
-        assertFalse(collection.contains("!"))
+        assertTrue("hello" in collection)
+        assertTrue("world" in collection)
+        assertFalse("!" in collection)
 
         assertEquals(entry0, collection["hello"])
         assertEquals(entry1, collection["world"])
@@ -196,16 +196,16 @@ object NamedEntryCollectionTest {
         assertEquals(0, entry.id)
         assertEquals("hello".krHashCode(), entry.nameHash)
 
-        assertTrue(collection.contains("hello"))
-        assertFalse(collection.contains("world"))
+        assertTrue("hello" in collection)
+        assertFalse("world" in collection)
 
         assertEquals(entry, collection["hello"])
         assertNull(collection["world"])
 
         entry.setName("world")
 
-        assertFalse(collection.contains("hello"))
-        assertTrue(collection.contains("world"))
+        assertFalse("hello" in collection)
+        assertTrue("world" in collection)
 
         assertNull(collection["hello"])
         assertEquals(entry, collection["world"])
@@ -219,13 +219,13 @@ object NamedEntryCollectionTest {
         assertEquals(0, entry.id)
         assertEquals(-1, entry.nameHash)
 
-        assertFalse(collection.contains("hello"))
+        assertFalse("hello" in collection)
         assertNull(collection["hello"])
 
         entry.setName("hello")
         assertEquals("hello".krHashCode(), entry.nameHash)
 
-        assertTrue(collection.contains("hello"))
+        assertTrue("hello" in collection)
         assertEquals(entry, collection["hello"])
     }
 
@@ -237,13 +237,13 @@ object NamedEntryCollectionTest {
         assertEquals(0, entry.id)
         assertEquals("hello".krHashCode(), entry.nameHash)
 
-        assertTrue(collection.contains("hello"))
+        assertTrue("hello" in collection)
         assertEquals(entry, collection["hello"])
 
         entry.nameHash = -1
         assertEquals(-1, entry.nameHash)
 
-        assertFalse(collection.contains("hello"))
+        assertFalse("hello" in collection)
         assertNull(collection["hello"])
     }
 
@@ -259,13 +259,13 @@ object NamedEntryCollectionTest {
         assertEquals(1, entry1.id)
         assertEquals(-1, entry1.nameHash)
 
-        assertFalse(collection.contains("hello"))
+        assertFalse("hello" in collection)
         assertNull(collection["hello"])
 
         entry0.setName("hello")
         assertEquals("hello".krHashCode(), entry0.nameHash)
 
-        assertTrue(collection.contains("hello"))
+        assertTrue("hello" in collection)
         assertEquals(entry0, collection["hello"])
     }
 
@@ -281,13 +281,13 @@ object NamedEntryCollectionTest {
         assertEquals(1, entry1.id)
         assertEquals(-1, entry1.nameHash)
 
-        assertTrue(collection.contains("hello"))
+        assertTrue("hello" in collection)
         assertEquals(entry0, collection["hello"])
 
         entry0.nameHash = -1
         assertEquals(-1, entry0.nameHash)
 
-        assertFalse(collection.contains("hello"))
+        assertFalse("hello" in collection)
         assertNull(collection["hello"])
     }
 
@@ -314,7 +314,7 @@ object NamedEntryCollectionTest {
         entry.setName("hello")
         assertEquals("hello".krHashCode(), entry.nameHash)
 
-        assertFalse(collection.contains("hello"))
+        assertFalse("hello" in collection)
         assertNull(collection["hello"])
 
         entry.remove()
@@ -344,7 +344,7 @@ object NamedEntryCollectionTest {
         entry.setName("hello")
         assertEquals("hello".krHashCode(), entry.nameHash)
 
-        assertFalse(collection.contains("hello"))
+        assertFalse("hello" in collection)
         assertNull(collection["hello"])
 
         collection.remove(0)
@@ -374,7 +374,7 @@ object NamedEntryCollectionTest {
         entry.setName("world")
         assertEquals("world".krHashCode(), entry.nameHash)
 
-        assertFalse(collection.contains("world"))
+        assertFalse("world" in collection)
         assertNull(collection["world"])
 
         collection.remove("hello")
@@ -410,7 +410,7 @@ object NamedEntryCollectionTest {
         entry0.setName("world")
         assertEquals("world".krHashCode(), entry0.nameHash)
 
-        assertFalse(collection.contains("world"))
+        assertFalse("world" in collection)
         assertNull(collection["world"])
 
         entry0.remove()
@@ -446,7 +446,7 @@ object NamedEntryCollectionTest {
         entry0.setName("world")
         assertEquals("world".krHashCode(), entry0.nameHash)
 
-        assertFalse(collection.contains("world"))
+        assertFalse("world" in collection)
         assertNull(collection["world"])
 
         collection.remove(0)
@@ -488,7 +488,7 @@ object NamedEntryCollectionTest {
         entry0.setName("!")
         assertEquals("!".krHashCode(), entry0.nameHash)
 
-        assertFalse(collection.contains("!"))
+        assertFalse("!" in collection)
         assertNull(collection["!"])
 
         collection.remove("hello")
