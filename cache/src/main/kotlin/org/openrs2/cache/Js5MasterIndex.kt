@@ -36,7 +36,7 @@ public inline class Js5MasterIndex(public val entries: MutableList<Entry> = muta
 
     public companion object {
         public fun read(buf: ByteBuf): Js5MasterIndex {
-            check(buf.readableBytes() % 8 == 0)
+            require(buf.readableBytes() % 8 == 0)
 
             val index = Js5MasterIndex()
             while (buf.isReadable) {
