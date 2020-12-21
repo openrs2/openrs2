@@ -241,7 +241,7 @@ click here.
 ### 4 (`BANNED`)
 
 **Message:** Your account has been disabled. Please <u>click here</u> to check
-your  Message Centre for details.
+your Message Centre for details.
 
 ### 5 (`DUPLICATE`)
 
