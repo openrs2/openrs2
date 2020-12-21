@@ -15,6 +15,16 @@
 |     23 |              4 | `REQUEST_WORLDLIST`         | Request world list                 |
 |     24 |  Variable byte | `CHECK_WORLD_SUITABILITY`   | Request most suitable world number |
 
+A curious oddity is that Old School RuneScape server processes upstream login
+packets in a loop, rather than only permitting a single login packet to be sent
+during the handshake process, which is how most current private servers are
+currently implemented.
+
+For example, it is possible to send an `INIT_GAME_CONNECTION` packet followed
+by an `INIT_JS5REMOTE_CONNECTION` packet. The connection will successfully
+switch to JS5 mode, even though this is not the normal sequence of packets sent
+by the client.
+
 ### 14 (`INIT_GAME_CONNECTION`)
 
 | Data type    | Description   |
