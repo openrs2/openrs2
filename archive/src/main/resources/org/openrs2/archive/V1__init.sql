@@ -66,6 +66,19 @@ CREATE TABLE index_files (
     FOREIGN KEY (container_id, group_id) REFERENCES index_groups (container_id, group_id)
 );
 
+CREATE TABLE master_indexes (
+    container_id BIGINT PRIMARY KEY NOT NULL REFERENCES containers (id)
+);
+
+CREATE TABLE master_index_entries (
+    container_id BIGINT NOT NULL REFERENCES master_indexes (container_id),
+    archive_id uint1 NOT NULL,
+    crc32 INTEGER NOT NULL,
+    whirlpool BYTEA NULL,
+    version INTEGER NOT NULL,
+    PRIMARY KEY (container_id, archive_id)
+);
+
 CREATE TABLE caches (
     id BIGSERIAL PRIMARY KEY NOT NULL,
     -- This doesn't correspond to a hash used by the client - it was just
