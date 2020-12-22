@@ -2,6 +2,8 @@
 
 | Jagex name    | RSPS community name(s) | Description                                                                 |
 |---------------|------------------------|-----------------------------------------------------------------------------|
+|               | V1                     | A middle-endian byte order used on [Honeywell Series 16][hs16] computers    |
+| Alt3          | V2                     | A middle-endian byte order used on [PDP-11][pdp11] computers                |
 | Ap            |                        | An op that trigers when you approach (rather than reach) the target         |
 | Area          |                        | A 104x104x4 group of tiles                                                  |
 | BAS           | Stance                 | Base animation set                                                          |
@@ -48,3 +50,6 @@
 |  1 | WallDecor   |
 |  2 | Scenery     |
 |  3 | GroundDecor |
+
+[hs16]: https://en.wikipedia.org/wiki/Endianness#Honeywell_Series_16
+[pdp11]: https://en.wikipedia.org/wiki/Endianness#PDP-endian
