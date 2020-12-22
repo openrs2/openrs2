@@ -268,7 +268,7 @@ methods:
       258: "ex"
   loader!loader.a (ZILsignlink!pm;Lloader!b;)[B:
     owner: "loader"
-    name: "method4839"
+    name: "getResource"
     arguments:
       0: "suppressSha"
       2: "signLink"
