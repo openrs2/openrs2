@@ -5,7 +5,7 @@ plugins {
 }
 
 application {
-    mainClassName = "org.openrs2.bundler.BundleCommandKt"
+    mainClass.set("org.openrs2.bundler.BundleCommandKt")
 }
 
 dependencies {

@@ -5,7 +5,7 @@ plugins {
 }
 
 application {
-    mainClassName = "org.openrs2.deob.ast.DeobfuscateAstCommandKt"
+    mainClass.set("org.openrs2.deob.ast.DeobfuscateAstCommandKt")
 }
 
 dependencies {

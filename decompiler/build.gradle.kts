@@ -5,7 +5,7 @@ plugins {
 }
 
 application {
-    mainClassName = "org.openrs2.decompiler.DecompileCommandKt"
+    mainClass.set("org.openrs2.decompiler.DecompileCommandKt")
     applicationDefaultJvmArgs = listOf("-Xmx3G")
 }
 

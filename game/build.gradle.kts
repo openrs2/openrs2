@@ -5,7 +5,7 @@ plugins {
 }
 
 application {
-    mainClassName = "org.openrs2.game.GameCommandKt"
+    mainClass.set("org.openrs2.game.GameCommandKt")
 }
 
 dependencies {
