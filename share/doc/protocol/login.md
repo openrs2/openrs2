@@ -331,6 +331,9 @@ main menu and exit fullscreen or use a members' account.
 **Message:** You have only just left another world. Your profile will be transferred in <n>
 seconds.
 
+The number of remaining seconds is calculated using the following formula:
+(hopTime * 60 + 180) / 50
+
 ### 22 (`INVALID_LOGIN_PACKET`)
 
 **Message:** Malformed login packet. Please try again.
