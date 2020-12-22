@@ -32,6 +32,7 @@
 | PathingEntity | Character, Entity, Mob | A player or NPC                                                             |
 | Seq           | Animation              | Sequence                                                                    |
 | Skill         | Skill                  | A type of skill                                                             |
+| Smart         |                        | A data type encoded as a shorter or longer type for bandwidth efficiency    |
 | SpotAnim      | Graphic                | Spot animation, a combination of a model and a sequence                     |
 | Stat          |                        | The player's base level, boosted level and experience in a particular skill |
 | StockMarket   |                        | Grand exchange                                                              |
