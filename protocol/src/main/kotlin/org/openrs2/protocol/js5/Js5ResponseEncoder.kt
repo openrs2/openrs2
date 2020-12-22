@@ -24,7 +24,7 @@ public object Js5ResponseEncoder : MessageToByteEncoder<Js5Response>(Js5Response
         }
         out.writeByte(compression)
 
-        out.writeBytes(msg.data, min(msg.data.readableBytes(), 507))
+        out.writeBytes(msg.data, min(msg.data.readableBytes(), 508))
 
         while (msg.data.isReadable) {
             out.writeByte(0xFF)
@@ -34,7 +34,7 @@ public object Js5ResponseEncoder : MessageToByteEncoder<Js5Response>(Js5Response
 
     override fun allocateBuffer(ctx: ChannelHandlerContext, msg: Js5Response, preferDirect: Boolean): ByteBuf {
         val dataLen = msg.data.readableBytes()
-        val len = 3 + dataLen + (3 + dataLen) / 511
+        val len = 3 + dataLen + (2 + dataLen) / 511
 
         return if (preferDirect) {
             ctx.alloc().ioBuffer(len, len)

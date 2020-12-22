@@ -12,23 +12,23 @@ import kotlin.test.assertEquals
 object Js5ResponseEncoderTest {
     @Test
     fun testEncode() {
-        testEncode("508.dat", "508-prefetch.dat", true)
-        testEncode("508.dat", "508-urgent.dat", false)
-
         testEncode("509.dat", "509-prefetch.dat", true)
         testEncode("509.dat", "509-urgent.dat", false)
 
-        testEncode("1019.dat", "1019-prefetch.dat", true)
-        testEncode("1019.dat", "1019-urgent.dat", false)
+        testEncode("510.dat", "510-prefetch.dat", true)
+        testEncode("510.dat", "510-urgent.dat", false)
 
         testEncode("1020.dat", "1020-prefetch.dat", true)
         testEncode("1020.dat", "1020-urgent.dat", false)
 
-        testEncode("1530.dat", "1530-prefetch.dat", true)
-        testEncode("1530.dat", "1530-urgent.dat", false)
+        testEncode("1021.dat", "1021-prefetch.dat", true)
+        testEncode("1021.dat", "1021-urgent.dat", false)
 
         testEncode("1531.dat", "1531-prefetch.dat", true)
         testEncode("1531.dat", "1531-urgent.dat", false)
+
+        testEncode("1532.dat", "1532-prefetch.dat", true)
+        testEncode("1532.dat", "1532-urgent.dat", false)
     }
 
     @Test

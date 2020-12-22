@@ -62,7 +62,7 @@ public class Js5ResponseDecoder : ByteToMessageDecoder() {
 
         if (state == State.READ_DATA) {
             while (data.isWritable) {
-                val blockLen = min(511 - ((data.readableBytes() + 3) % 511), data.writableBytes())
+                val blockLen = min(511 - ((data.readableBytes() + 2) % 511), data.writableBytes())
                 val last = data.writableBytes() <= blockLen
 
                 val blockLenIncludingTrailer = if (last) {
