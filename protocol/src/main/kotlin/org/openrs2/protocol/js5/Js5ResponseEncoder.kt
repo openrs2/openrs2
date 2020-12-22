@@ -20,7 +20,7 @@ public object Js5ResponseEncoder : MessageToByteEncoder<Js5Response>(Js5Response
 
         var compression = msg.data.readUnsignedByte().toInt()
         if (msg.prefetch) {
-            compression = compression xor 0x80
+            compression = compression or 0x80
         }
         out.writeByte(compression)
 
