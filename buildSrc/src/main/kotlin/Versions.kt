@@ -1,7 +1,7 @@
 object Versions {
     const val asm = "9.0"
-    const val bouncyCastlePkix = "1.67"
-    const val bouncyCastleProvider = "1.67"
+    const val bouncyCastlePkix = "1.68"
+    const val bouncyCastleProvider = "1.68"
     const val clikt = "3.1.0"
     const val commonsCompress = "1.20"
     const val dependencyLicenseReport = "1.16"
