@@ -15,7 +15,7 @@ CREATE TABLE keys (
 
 CREATE TABLE containers (
     id BIGSERIAL PRIMARY KEY NOT NULL,
-    crc32 INT NOT NULL,
+    crc32 INTEGER NOT NULL,
     whirlpool BYTEA UNIQUE NOT NULL,
     data BYTEA NOT NULL,
     encrypted BOOLEAN NOT NULL,
