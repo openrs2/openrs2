@@ -60,10 +60,6 @@ that use the `deob-annotations` processor. A workaround is to add
 File -> Settings -> Build, Execution and Deployment -> Compiler. See
 [IDEA-256707][idea-bug] for more information.
 
-### Versioning
-
-OpenRS2 uses [Semantic Versioning][semver].
-
 ## Links
 
 * [Discord][discord]
@@ -87,5 +83,4 @@ available in the `LICENSE` file.
 [issue-tracker]: https://git.openrs2.org/openrs2/openrs2/issues
 [jdk]: https://jdk.java.net/
 [kdoc]: https://docs.openrs2.org/
-[semver]: https://semver.org/
 [www]: https://www.openrs2.org/
