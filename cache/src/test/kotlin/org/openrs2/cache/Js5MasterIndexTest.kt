@@ -10,11 +10,13 @@ import kotlin.test.assertEquals
 object Js5MasterIndexTest {
     private val ROOT = Paths.get(FlatFileStoreTest::class.java.getResource("master-index").toURI())
     private val encoded = byteArrayOf(0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 2, 0, 0, 0, 5, 0, 0, 0, 4)
-    private val decoded = Js5MasterIndex(mutableListOf(
-        Js5MasterIndex.Entry(0, 1),
-        Js5MasterIndex.Entry(2, 3),
-        Js5MasterIndex.Entry(4, 5)
-    ))
+    private val decoded = Js5MasterIndex(
+        mutableListOf(
+            Js5MasterIndex.Entry(0, 1),
+            Js5MasterIndex.Entry(2, 3),
+            Js5MasterIndex.Entry(4, 5)
+        )
+    )
 
     @Test
     fun testCreate() {
@@ -22,15 +24,19 @@ object Js5MasterIndexTest {
             Js5MasterIndex.create(store)
         }
 
-        assertEquals(Js5MasterIndex(mutableListOf(
-            Js5MasterIndex.Entry(0, 379203374),
-            Js5MasterIndex.Entry(0x12345678, -717247318),
-            Js5MasterIndex.Entry(0, 0),
-            Js5MasterIndex.Entry(0x9ABCDEF0.toInt(), 895417101),
-            Js5MasterIndex.Entry(0, 0),
-            Js5MasterIndex.Entry(0, 0),
-            Js5MasterIndex.Entry(0xAA55AA55.toInt(), -627983571)
-        )), index)
+        assertEquals(
+            Js5MasterIndex(
+                mutableListOf(
+                    Js5MasterIndex.Entry(0, 379203374),
+                    Js5MasterIndex.Entry(0x12345678, -717247318),
+                    Js5MasterIndex.Entry(0, 0),
+                    Js5MasterIndex.Entry(0x9ABCDEF0.toInt(), 895417101),
+                    Js5MasterIndex.Entry(0, 0),
+                    Js5MasterIndex.Entry(0, 0),
+                    Js5MasterIndex.Entry(0xAA55AA55.toInt(), -627983571)
+                )
+            ), index
+        )
     }
 
     @Test

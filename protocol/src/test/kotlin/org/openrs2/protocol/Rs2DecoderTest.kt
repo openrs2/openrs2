@@ -70,14 +70,18 @@ object Rs2DecoderTest {
     }
 
     private fun testDecode(buf: ByteArray, expected: Packet) {
-        val channel = EmbeddedChannel(Rs2Decoder(Protocol(
-            FixedPacketCodec,
-            VariableBytePacketCodec,
-            VariableShortPacketCodec,
-            VariableByteOptimisedPacketCodec,
-            VariableShortOptimisedPacketCodec,
-            TestEmptyPacketCodec
-        )))
+        val channel = EmbeddedChannel(
+            Rs2Decoder(
+                Protocol(
+                    FixedPacketCodec,
+                    VariableBytePacketCodec,
+                    VariableShortPacketCodec,
+                    VariableByteOptimisedPacketCodec,
+                    VariableShortOptimisedPacketCodec,
+                    TestEmptyPacketCodec
+                )
+            )
+        )
         channel.writeInbound(Unpooled.wrappedBuffer(buf))
 
         val actual = channel.readInbound<Packet>()
@@ -85,13 +89,17 @@ object Rs2DecoderTest {
     }
 
     private fun testFragmented(buf: ByteArray, expected: Packet) {
-        val channel = EmbeddedChannel(Rs2Decoder(Protocol(
-            FixedPacketCodec,
-            VariableBytePacketCodec,
-            VariableShortPacketCodec,
-            VariableByteOptimisedPacketCodec,
-            VariableShortOptimisedPacketCodec
-        )))
+        val channel = EmbeddedChannel(
+            Rs2Decoder(
+                Protocol(
+                    FixedPacketCodec,
+                    VariableBytePacketCodec,
+                    VariableShortPacketCodec,
+                    VariableByteOptimisedPacketCodec,
+                    VariableShortOptimisedPacketCodec
+                )
+            )
+        )
 
         for (b in buf) {
             channel.writeInbound(wrappedBuffer(b))

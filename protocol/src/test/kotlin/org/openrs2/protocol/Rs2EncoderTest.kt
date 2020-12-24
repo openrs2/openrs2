@@ -21,10 +21,14 @@ object Rs2EncoderTest {
 
     @Test
     fun testTooLong() {
-        val channel = EmbeddedChannel(Rs2Encoder(Protocol(
-            VariableBytePacketCodec,
-            VariableShortPacketCodec
-        )))
+        val channel = EmbeddedChannel(
+            Rs2Encoder(
+                Protocol(
+                    VariableBytePacketCodec,
+                    VariableShortPacketCodec
+                )
+            )
+        )
 
         channel.writeOutbound(VariableShortPacket(ByteArray(255)))
         channel.readOutbound<ByteBuf>().release()
@@ -108,14 +112,18 @@ object Rs2EncoderTest {
     }
 
     private fun testEncode(packet: Packet, expected: ByteArray) {
-        val channel = EmbeddedChannel(Rs2Encoder(Protocol(
-            FixedPacketCodec,
-            VariableBytePacketCodec,
-            VariableShortPacketCodec,
-            VariableByteOptimisedPacketCodec,
-            VariableShortOptimisedPacketCodec,
-            TestEmptyPacketCodec
-        )))
+        val channel = EmbeddedChannel(
+            Rs2Encoder(
+                Protocol(
+                    FixedPacketCodec,
+                    VariableBytePacketCodec,
+                    VariableShortPacketCodec,
+                    VariableByteOptimisedPacketCodec,
+                    VariableShortOptimisedPacketCodec,
+                    TestEmptyPacketCodec
+                )
+            )
+        )
         channel.writeOutbound(packet)
 
         channel.readOutbound<ByteBuf>().use { actual ->
