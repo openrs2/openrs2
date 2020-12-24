@@ -20,10 +20,10 @@ packets in a loop, rather than only permitting a single login packet to be sent
 during the handshake process, which is how most current private servers are
 currently implemented.
 
-For example, it is possible to send an `INIT_GAME_CONNECTION` packet followed
-by an `INIT_JS5REMOTE_CONNECTION` packet. The connection will successfully
-switch to JS5 mode, even though this is not the normal sequence of packets sent
-by the client.
+For example, it is possible to send an `INIT_GAME_CONNECTION` packet followed by
+an `INIT_JS5REMOTE_CONNECTION` packet. The connection will successfully switch
+to JS5 mode, even though this is not the normal sequence of packets sent by the
+client.
 
 ### 14 (`INIT_GAME_CONNECTION`)
 
@@ -68,9 +68,9 @@ hash to load balance between login servers, but this has not been confirmed.
 | Byte\[n\]     | RSA-encrypted payload                        |
 
 The unknown byte hard-coded to `0` in a client script might represent the
-language. It is consistent with the ID for English. We can infer that there
-were language-specific versions of the cache, as the surviving copy does not
-contain translations.
+language. It is consistent with the ID for English. We can infer that there were
+language-specific versions of the cache, as the surviving copy does not contain
+translations.
 
 The structure of the plaintext payload is described below:
 
@@ -255,8 +255,8 @@ your Message Centre for details.
 
 ### 5 (`DUPLICATE`)
 
-**Message:** Your account has not logged out from its last session. Try again
-in a few minutes.
+**Message:** Your account has not logged out from its last session. Try again in
+a few minutes.
 
 ### 6 (`CLIENT_OUT_OF_DATE`)
 
@@ -294,29 +294,30 @@ subscribe or use a different world.
 
 ### 14 (`UPDATE_IN_PROGRESS`)
 
-**Message:** The server is being updated. Please wait a few minutes and try again.
+**Message:** The server is being updated. Please wait a few minutes and try
+again.
 
 ### 15 (`RECONNECT_OK`)
 
 ### 16 (`TOO_MANY_ATTEMPTS`)
 
-**Message:** Too many incorrect logins from your address. Please wait 5 minutes before
-trying again.
+**Message:** Too many incorrect logins from your address. Please wait 5 minutes
+before trying again.
 
 ### 17 (Account in members-only area)
 
-**Message:** You are standing in a members-only area. To play on this world, move to a free
-area first.
+**Message:** You are standing in a members-only area. To play on this world,
+move to a free area first.
 
 ### 18 (`LOCKED`)
 
-**Message:** Your account has been locked as we suspect it has been stolen. Click here to
-recover your account.
+**Message:** Your account has been locked as we suspect it has been stolen.
+Click here to recover your account.
 
 ### 19 (Fullscreen is members-only)
 
-**Message:** Fullscreen is currently a members-only feature. To log in, either return to the
-main menu and exit fullscreen or use a members' account.
+**Message:** Fullscreen is currently a members-only feature. To log in, either
+return to the main menu and exit fullscreen or use a members' account.
 
 ### 20 (Invalid login server requested)
 
@@ -328,8 +329,8 @@ main menu and exit fullscreen or use a members' account.
 |--------------|-------------------------|
 | UnsignedByte | Hop time                |
 
-**Message:** You have only just left another world. Your profile will be transferred in <n>
-seconds.
+**Message:** You have only just left another world. Your profile will be
+transferred in <n> seconds.
 
 The number of remaining seconds is calculated using the following formula:
 (hopTime * 60 + 180) / 50
@@ -348,11 +349,13 @@ The number of remaining seconds is calculated using the following formula:
 
 ### 25 (`UNKNOWN_REPLY_FROM_LOGINSERVER`)
 
-**Message:** Unexpected loginserver response. Please try using a different world.
+**Message:** Unexpected loginserver response. Please try using a different
+world.
 
 ### 26 (`IP_BLOCKED`)
 
-**Message:** This comptuer's address has been blocked as it was used to break our rules.
+**Message:** This comptuer's address has been blocked as it was used to break
+our rules.
 
 ### 27 (Service unavailable)
 

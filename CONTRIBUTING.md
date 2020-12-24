@@ -3,16 +3,16 @@
 ## Introduction
 
 OpenRS2 is still in the early stages of development. The current focus is on
-building underlying infrastructure, such as the deobfuscator, rather than
-game content. This approach will make it much quicker to build game content in
-the long run, but it does mean OpenRS2 won't be particularly useful in the short
+building underlying infrastructure, such as the deobfuscator, rather than game
+content. This approach will make it much quicker to build game content in the
+long run, but it does mean OpenRS2 won't be particularly useful in the short
 term.
 
-If you're interested in contributing new features, you should discuss your
-plans in our [Discord][discord] server first. I have rough plans in my head for
-the future development direction. Communicating beforehand will avoid the need
-for significant changes to be made at the code review stage and make it less
-likely for your contribution to be dropped entirely.
+If you're interested in contributing new features, you should discuss your plans
+in our [Discord][discord] server first. I have rough plans in my head for the
+future development direction. Communicating beforehand will avoid the need for
+significant changes to be made at the code review stage and make it less likely
+for your contribution to be dropped entirely.
 
 ## Code style
 
@@ -43,8 +43,8 @@ commit history is tidy.
 OpenRS2 uses version 1.1 of the [Developer Certificate of Origin][dco] (DCO) to
 certify that contributors agree to license their code under OpenRS2's license
 (see the License section below). To confirm that a contribution meets the
-requirements of the DCO, a `Signed-off-by:` line must be added to the Git
-commit message by passing `--signoff` to the `git commit` invocation.
+requirements of the DCO, a `Signed-off-by:` line must be added to the Git commit
+message by passing `--signoff` to the `git commit` invocation.
 
 If you intend to make a large number of contributions, run the following
 commands from the repository root to add `Signed-off-by:` line to all your

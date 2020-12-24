@@ -6,13 +6,13 @@
 combining its output with addition/subtraction, the client uses it as a stream
 cipher to encrypt the opcodes of packets.
 
-It was implemented to break packet injection bots, such as AutoRune. While
-using ISAAC in this manner only provides confidentiality, and not authenticity
-or integrity, if the opcodes are tampered with the packet lengths will no
-longer be in sync between the client and server. This causes one or both of the
-endpoints to read garbage opcodes, though the garbage opcodes may happen to
-match valid packets for a while. Eventually, one or both endpoints will detect
-an invalid packet and close the connection.
+It was implemented to break packet injection bots, such as AutoRune. While using
+ISAAC in this manner only provides confidentiality, and not authenticity or
+integrity, if the opcodes are tampered with the packet lengths will no longer be
+in sync between the client and server. This causes one or both of the endpoints
+to read garbage opcodes, though the garbage opcodes may happen to match valid
+packets for a while. Eventually, one or both endpoints will detect an invalid
+packet and close the connection.
 
 ## RSA
 
@@ -26,8 +26,8 @@ cache, ensuring that Jagex's code-signed applet could not be used to run
 arbitrary native code if an attacker tampers with the JS5 connection. This
 change was probably required by Jagex's certificate authority.
 
-Jagex used a 512-bit RSA key when build 550 was released, and due to the size
-of the output buffer in the client, the maximum key size is 1,008 bits. Both of
+Jagex used a 512-bit RSA key when build 550 was released, and due to the size of
+the output buffer in the client, the maximum key size is 1,008 bits. Both of
 these sizes are considered insecure by modern standards, and Jagex's 512-bit
 private key was factored in 2016.
 
@@ -61,8 +61,8 @@ directly by Jagex's 512-bit RSA key.
 
 ## Whirlpool
 
-[Whirlpool][whirlpool] is a cryptographic hash function. It is not used in
-build 550, however, it is included here for completeness as it is supported by
+[Whirlpool][whirlpool] is a cryptographic hash function. It is not used in build
+550, however, it is included here for completeness as it is supported by
 OpenRS2's cache library. It is used to verify the integrity of native libraries
 stored in the cache.
 

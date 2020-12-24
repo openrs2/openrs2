@@ -4,9 +4,9 @@
 
 ## Introduction
 
-OpenRS2 is an open-source multiplayer game server and suite of associated
-tools. It is compatible with build 550 of the RuneScape client, which was
-released in late 2009.
+OpenRS2 is an open-source multiplayer game server and suite of associated tools.
+It is compatible with build 550 of the RuneScape client, which was released in
+late 2009.
 
 ## Prerequisites
 
@@ -20,8 +20,8 @@ on JDK-only tools, such as `jarsigner`, at runtime.
 OpenRS2 requires the original RuneScape client code, data and location file
 encryption keys, which we cannot legally distribute.
 
-These files must be manually placed in the `nonfree` directory (directly
-beneath the root of the repository), in the following structure:
+These files must be manually placed in the `nonfree` directory (directly beneath
+the root of the repository), in the following structure:
 
 ```
 nonfree
@@ -69,9 +69,9 @@ File -> Settings -> Build, Execution and Deployment -> Compiler. See
 
 ## License
 
-OpenRS2 is available under the terms of the [ISC license][isc], which is
-similar to the 2-clause BSD license. The full copyright notice and terms are
-available in the `LICENSE` file.
+OpenRS2 is available under the terms of the [ISC license][isc], which is similar
+to the 2-clause BSD license. The full copyright notice and terms are available
+in the `LICENSE` file.
 
 [discord-badge]: https://img.shields.io/discord/684495254145335298
 [discord]: https://chat.openrs2.org/

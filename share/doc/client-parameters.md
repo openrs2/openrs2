@@ -63,8 +63,8 @@ applet. All other parameters are optional.
 | 0  | RuneScape              | `game0`           |
 | 1  | MechScape/Stellar Dawn | `game1`           |
 
-At the time 550 was released, MechScape used the same engine as RuneScape.
-While changing the parameter affects the client in a small number of ways, the
+At the time 550 was released, MechScape used the same engine as RuneScape. While
+changing the parameter affects the client in a small number of ways, the
 majority of differences between the two games is in the cache.
 
 When `game1` is used, the following changes are made in the client:

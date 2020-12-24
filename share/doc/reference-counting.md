@@ -1,7 +1,7 @@
 # Reference counting
 
-[Netty][netty] uses reference counting for some objects, such as `ByteBuf`s.
-The Netty documentation explains its
+[Netty][netty] uses reference counting for some objects, such as `ByteBuf`s. The
+Netty documentation explains its
 [use of reference counting][netty-ref-counting] in more detail.
 
 OpenRS2 has an extension method that automatically wraps a block of code in a
@@ -39,9 +39,9 @@ alloc.buffer().use { buf ->
 
 If any of the code prior to the `return` fails, the buffer is released.
 
-If the `return` is reached, no more exceptions can occur. The reference count
-is increased to counteract the `finally` block decreasing it, such that by the
-time the buffer reaches the caller its reference count is 1.
+If the `return` is reached, no more exceptions can occur. The reference count is
+increased to counteract the `finally` block decreasing it, such that by the time
+the buffer reaches the caller its reference count is 1.
 
 [netty]: https://netty.io/
 [netty-ref-counting]: https://netty.io/wiki/reference-counted-objects.html
