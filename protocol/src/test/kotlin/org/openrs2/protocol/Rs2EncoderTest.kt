@@ -4,11 +4,11 @@ import io.netty.buffer.ByteBuf
 import io.netty.buffer.Unpooled
 import io.netty.channel.embedded.EmbeddedChannel
 import io.netty.handler.codec.EncoderException
-import org.junit.jupiter.api.assertThrows
 import org.openrs2.buffer.use
 import org.openrs2.buffer.wrappedBuffer
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 
 object Rs2EncoderTest {
     @Test
@@ -36,11 +36,11 @@ object Rs2EncoderTest {
         channel.writeOutbound(VariableShortPacket(ByteArray(65535)))
         channel.readOutbound<ByteBuf>().release()
 
-        assertThrows<EncoderException> {
+        assertFailsWith<EncoderException> {
             channel.writeOutbound(VariableBytePacket(ByteArray(256)))
         }
 
-        assertThrows<EncoderException> {
+        assertFailsWith<EncoderException> {
             channel.writeOutbound(VariableShortPacket(ByteArray(65536)))
         }
     }
@@ -49,7 +49,7 @@ object Rs2EncoderTest {
     fun testUnsupported() {
         val channel = EmbeddedChannel(Rs2Encoder(Protocol()))
 
-        assertThrows<EncoderException> {
+        assertFailsWith<EncoderException> {
             channel.writeOutbound(FixedPacket(0x11223344))
         }
     }
@@ -58,7 +58,7 @@ object Rs2EncoderTest {
     fun testLengthMismatch() {
         val channel = EmbeddedChannel(Rs2Encoder(Protocol(LengthMismatchPacketCodec)))
 
-        assertThrows<EncoderException> {
+        assertFailsWith<EncoderException> {
             channel.writeOutbound(FixedPacket(0x11223344))
         }
     }
@@ -92,7 +92,7 @@ object Rs2EncoderTest {
         channel.writeOutbound(FixedPacket(0x11223344))
         channel.readOutbound<ByteBuf>().release()
 
-        assertThrows<EncoderException> {
+        assertFailsWith<EncoderException> {
             channel.writeOutbound(EmptyPacket)
         }
 
@@ -106,7 +106,7 @@ object Rs2EncoderTest {
             }
         }
 
-        assertThrows<EncoderException> {
+        assertFailsWith<EncoderException> {
             channel.writeOutbound(FixedPacket(0x11223344))
         }
     }

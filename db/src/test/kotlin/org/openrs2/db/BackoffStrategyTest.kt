@@ -1,8 +1,8 @@
 package org.openrs2.db
 
-import org.junit.jupiter.api.assertThrows
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 
 object BackoffStrategyTest {
     @Test
@@ -13,22 +13,22 @@ object BackoffStrategyTest {
         assertEquals(1000, strategy.getDelay(1))
         assertEquals(1000, strategy.getDelay(2))
 
-        assertThrows<IllegalArgumentException> {
+        assertFailsWith<IllegalArgumentException> {
             strategy.getDelay(-1)
         }
     }
 
     @Test
     fun testBinaryExponentialBackoff() {
-        assertThrows<IllegalArgumentException> {
+        assertFailsWith<IllegalArgumentException> {
             BinaryExponentialBackoffStrategy(0, 1)
         }
 
-        assertThrows<IllegalArgumentException> {
+        assertFailsWith<IllegalArgumentException> {
             BinaryExponentialBackoffStrategy(1, 0)
         }
 
-        assertThrows<IllegalArgumentException> {
+        assertFailsWith<IllegalArgumentException> {
             BinaryExponentialBackoffStrategy(1, 1).getDelay(-1)
         }
     }

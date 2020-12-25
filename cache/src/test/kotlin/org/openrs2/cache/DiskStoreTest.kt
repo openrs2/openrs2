@@ -3,7 +3,6 @@ package org.openrs2.cache
 import com.google.common.jimfs.Configuration
 import com.google.common.jimfs.Jimfs
 import io.netty.buffer.Unpooled
-import org.junit.jupiter.api.assertThrows
 import org.openrs2.buffer.copiedBuffer
 import org.openrs2.buffer.use
 import org.openrs2.util.io.recursiveCopy
@@ -12,6 +11,7 @@ import java.io.FileNotFoundException
 import java.nio.file.Paths
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
@@ -21,85 +21,85 @@ object DiskStoreTest {
     @Test
     fun testBounds() {
         readTest("empty") { store ->
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 store.exists(-1)
             }
 
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 store.exists(256)
             }
 
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 store.list(-1)
             }
 
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 store.list(256)
             }
 
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 store.exists(-1, 0)
             }
 
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 store.exists(256, 0)
             }
 
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 store.exists(0, -1)
             }
 
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 store.read(-1, 0).release()
             }
 
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 store.read(256, 0).release()
             }
 
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 store.read(0, -1).release()
             }
         }
 
         writeTest("empty") { store ->
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 store.create(-1)
             }
 
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 store.create(256)
             }
 
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 store.write(-1, 0, Unpooled.EMPTY_BUFFER)
             }
 
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 store.write(256, 0, Unpooled.EMPTY_BUFFER)
             }
 
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 store.write(0, -1, Unpooled.EMPTY_BUFFER)
             }
 
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 store.remove(-1)
             }
 
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 store.remove(256)
             }
 
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 store.remove(-1, 0)
             }
 
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 store.remove(256, 0)
             }
 
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 store.remove(0, -1)
             }
         }
@@ -200,7 +200,7 @@ object DiskStoreTest {
     @Test
     fun testListNonExistent() {
         readTest("empty") { store ->
-            assertThrows<FileNotFoundException> {
+            assertFailsWith<FileNotFoundException> {
                 store.list(0)
             }
         }
@@ -275,15 +275,15 @@ object DiskStoreTest {
     @Test
     fun testReadNonExistent() {
         readTest("single-block") { store ->
-            assertThrows<FileNotFoundException> {
+            assertFailsWith<FileNotFoundException> {
                 store.read(0, 0)
             }
 
-            assertThrows<FileNotFoundException> {
+            assertFailsWith<FileNotFoundException> {
                 store.read(255, 0)
             }
 
-            assertThrows<FileNotFoundException> {
+            assertFailsWith<FileNotFoundException> {
                 store.read(255, 2)
             }
         }
@@ -498,67 +498,67 @@ object DiskStoreTest {
     @Test
     fun testReadCorrupt() {
         readTest("corrupt-eof-late") { store ->
-            assertThrows<StoreCorruptException> {
+            assertFailsWith<StoreCorruptException> {
                 store.read(255, 1).release()
             }
         }
 
         readTest("corrupt-first-eof-early") { store ->
-            assertThrows<StoreCorruptException> {
+            assertFailsWith<StoreCorruptException> {
                 store.read(255, 1).release()
             }
         }
 
         readTest("corrupt-first-invalid-archive") { store ->
-            assertThrows<StoreCorruptException> {
+            assertFailsWith<StoreCorruptException> {
                 store.read(255, 1).release()
             }
         }
 
         readTest("corrupt-first-invalid-block-number") { store ->
-            assertThrows<StoreCorruptException> {
+            assertFailsWith<StoreCorruptException> {
                 store.read(255, 1).release()
             }
         }
 
         readTest("corrupt-first-invalid-group") { store ->
-            assertThrows<StoreCorruptException> {
+            assertFailsWith<StoreCorruptException> {
                 store.read(255, 1).release()
             }
         }
 
         readTest("corrupt-first-outside-data-file") { store ->
-            assertThrows<StoreCorruptException> {
+            assertFailsWith<StoreCorruptException> {
                 store.read(255, 1).release()
             }
         }
 
         readTest("corrupt-second-eof-early") { store ->
-            assertThrows<StoreCorruptException> {
+            assertFailsWith<StoreCorruptException> {
                 store.read(255, 1).release()
             }
         }
 
         readTest("corrupt-second-invalid-archive") { store ->
-            assertThrows<StoreCorruptException> {
+            assertFailsWith<StoreCorruptException> {
                 store.read(255, 1).release()
             }
         }
 
         readTest("corrupt-second-invalid-block-number") { store ->
-            assertThrows<StoreCorruptException> {
+            assertFailsWith<StoreCorruptException> {
                 store.read(255, 1).release()
             }
         }
 
         readTest("corrupt-second-invalid-group") { store ->
-            assertThrows<StoreCorruptException> {
+            assertFailsWith<StoreCorruptException> {
                 store.read(255, 1).release()
             }
         }
 
         readTest("corrupt-second-outside-data-file") { store ->
-            assertThrows<StoreCorruptException> {
+            assertFailsWith<StoreCorruptException> {
                 store.read(255, 1).release()
             }
         }

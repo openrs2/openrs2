@@ -4,12 +4,12 @@ import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.ByteBufUtil
 import io.netty.buffer.Unpooled
-import org.junit.jupiter.api.assertThrows
 import org.openrs2.buffer.use
 import org.openrs2.buffer.wrappedBuffer
 import org.openrs2.util.krHashCode
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
@@ -130,13 +130,13 @@ object Js5IndexTest {
     @Test
     fun testReadUnsupportedProtocol() {
         wrappedBuffer(4).use { buf ->
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 Js5Index.read(buf)
             }
         }
 
         wrappedBuffer(8).use { buf ->
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 Js5Index.read(buf)
             }
         }
@@ -228,7 +228,7 @@ object Js5IndexTest {
         index.createOrGet(65536)
 
         ByteBufAllocator.DEFAULT.buffer().use { buf ->
-            assertThrows<IllegalStateException> {
+            assertFailsWith<IllegalStateException> {
                 index.write(buf)
             }
         }

@@ -2,9 +2,9 @@ package org.openrs2.buffer
 
 import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.Unpooled
-import org.junit.jupiter.api.assertThrows
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 
 object ByteBufExtensionsTest {
@@ -119,13 +119,13 @@ object ByteBufExtensionsTest {
         }
 
         ByteBufAllocator.DEFAULT.buffer().use { buf ->
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 buf.writeShortSmart(-0x4001)
             }
         }
 
         ByteBufAllocator.DEFAULT.buffer().use { buf ->
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 buf.writeShortSmart(0x4000)
             }
         }
@@ -209,13 +209,13 @@ object ByteBufExtensionsTest {
         }
 
         ByteBufAllocator.DEFAULT.buffer().use { buf ->
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 buf.writeUnsignedShortSmart(-0x1)
             }
         }
 
         ByteBufAllocator.DEFAULT.buffer().use { buf ->
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 buf.writeUnsignedShortSmart(0x10000)
             }
         }
@@ -311,13 +311,13 @@ object ByteBufExtensionsTest {
         }
 
         ByteBufAllocator.DEFAULT.buffer().use { buf ->
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 buf.writeIntSmart(-0x40000001)
             }
         }
 
         ByteBufAllocator.DEFAULT.buffer().use { buf ->
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 buf.writeIntSmart(0x40000000)
             }
         }
@@ -401,7 +401,7 @@ object ByteBufExtensionsTest {
         }
 
         ByteBufAllocator.DEFAULT.buffer().use { buf ->
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 buf.writeUnsignedIntSmart(0x80000000.toInt())
             }
         }
@@ -450,19 +450,19 @@ object ByteBufExtensionsTest {
 
     @Test
     fun testCrc32Bounds() {
-        assertThrows<IndexOutOfBoundsException> {
+        assertFailsWith<IndexOutOfBoundsException> {
             Unpooled.EMPTY_BUFFER.crc32(-1, 0)
         }
 
-        assertThrows<IndexOutOfBoundsException> {
+        assertFailsWith<IndexOutOfBoundsException> {
             Unpooled.EMPTY_BUFFER.crc32(0, -1)
         }
 
-        assertThrows<IndexOutOfBoundsException> {
+        assertFailsWith<IndexOutOfBoundsException> {
             Unpooled.EMPTY_BUFFER.crc32(1, 0)
         }
 
-        assertThrows<IndexOutOfBoundsException> {
+        assertFailsWith<IndexOutOfBoundsException> {
             Unpooled.EMPTY_BUFFER.crc32(0, 1)
         }
     }

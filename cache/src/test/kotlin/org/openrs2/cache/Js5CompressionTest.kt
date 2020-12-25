@@ -2,13 +2,13 @@ package org.openrs2.cache
 
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.Unpooled
-import org.junit.jupiter.api.assertThrows
 import org.openrs2.buffer.copiedBuffer
 import org.openrs2.buffer.use
 import org.openrs2.crypto.XteaKey
 import java.io.IOException
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals
 import kotlin.test.assertTrue
@@ -264,11 +264,11 @@ object Js5CompressionTest {
     @Test
     fun testInvalidType() {
         read("invalid-type.dat").use { compressed ->
-            assertThrows<IOException> {
+            assertFailsWith<IOException> {
                 Js5Compression.uncompress(compressed.slice()).release()
             }
 
-            assertThrows<IOException> {
+            assertFailsWith<IOException> {
                 Js5Compression.isKeyValid(compressed.slice(), XteaKey.ZERO)
             }
         }
@@ -277,11 +277,11 @@ object Js5CompressionTest {
     @Test
     fun testInvalidLength() {
         read("invalid-length.dat").use { compressed ->
-            assertThrows<IOException> {
+            assertFailsWith<IOException> {
                 Js5Compression.uncompress(compressed.slice()).release()
             }
 
-            assertThrows<IOException> {
+            assertFailsWith<IOException> {
                 Js5Compression.isKeyValid(compressed.slice(), XteaKey.ZERO)
             }
         }
@@ -290,7 +290,7 @@ object Js5CompressionTest {
     @Test
     fun testInvalidUncompressedLength() {
         read("invalid-uncompressed-length.dat").use { compressed ->
-            assertThrows<IOException> {
+            assertFailsWith<IOException> {
                 Js5Compression.uncompress(compressed.slice()).release()
             }
 
@@ -301,7 +301,7 @@ object Js5CompressionTest {
     @Test
     fun testNoneEof() {
         read("none-eof.dat").use { compressed ->
-            assertThrows<IOException> {
+            assertFailsWith<IOException> {
                 Js5Compression.uncompress(compressed).release()
             }
         }
@@ -310,7 +310,7 @@ object Js5CompressionTest {
     @Test
     fun testBzip2Eof() {
         read("bzip2-eof.dat").use { compressed ->
-            assertThrows<IOException> {
+            assertFailsWith<IOException> {
                 Js5Compression.uncompress(compressed.slice()).release()
             }
 
@@ -321,7 +321,7 @@ object Js5CompressionTest {
     @Test
     fun testGzipEof() {
         read("gzip-eof.dat").use { compressed ->
-            assertThrows<IOException> {
+            assertFailsWith<IOException> {
                 Js5Compression.uncompress(compressed.slice()).release()
             }
 
@@ -332,7 +332,7 @@ object Js5CompressionTest {
     @Test
     fun testLzmaEof() {
         read("lzma-eof.dat").use { compressed ->
-            assertThrows<IOException> {
+            assertFailsWith<IOException> {
                 Js5Compression.uncompress(compressed.slice()).release()
             }
 
@@ -343,7 +343,7 @@ object Js5CompressionTest {
     @Test
     fun testBzip2Corrupt() {
         read("bzip2-corrupt.dat").use { compressed ->
-            assertThrows<IOException> {
+            assertFailsWith<IOException> {
                 Js5Compression.uncompress(compressed.slice()).release()
             }
 
@@ -354,7 +354,7 @@ object Js5CompressionTest {
     @Test
     fun testGzipCorrupt() {
         read("gzip-corrupt.dat").use { compressed ->
-            assertThrows<IOException> {
+            assertFailsWith<IOException> {
                 Js5Compression.uncompress(compressed.slice()).release()
             }
 
@@ -365,7 +365,7 @@ object Js5CompressionTest {
     @Test
     fun testLzmaCorrupt() {
         read("lzma-corrupt.dat").use { compressed ->
-            assertThrows<IOException> {
+            assertFailsWith<IOException> {
                 Js5Compression.uncompress(compressed.slice()).release()
             }
 
@@ -461,7 +461,7 @@ object Js5CompressionTest {
     @Test
     fun testKeyValidShorterThanTwoBlocks() {
         read("shorter-than-two-blocks.dat").use { compressed ->
-            assertThrows<IOException> {
+            assertFailsWith<IOException> {
                 Js5Compression.isKeyValid(compressed, XteaKey.ZERO)
             }
         }
@@ -470,11 +470,11 @@ object Js5CompressionTest {
     @Test
     fun testCompressedUnderflow() {
         read("compressed-underflow.dat").use { compressed ->
-            assertThrows<IOException> {
+            assertFailsWith<IOException> {
                 Js5Compression.uncompress(compressed.slice()).release()
             }
 
-            assertThrows<IOException> {
+            assertFailsWith<IOException> {
                 Js5Compression.isKeyValid(compressed.slice(), XteaKey.ZERO)
             }
         }
@@ -483,7 +483,7 @@ object Js5CompressionTest {
     @Test
     fun testUncompressedOverflow() {
         read("uncompressed-overflow.dat").use { compressed ->
-            assertThrows<IOException> {
+            assertFailsWith<IOException> {
                 Js5Compression.uncompress(compressed).release()
             }
         }
@@ -492,7 +492,7 @@ object Js5CompressionTest {
     @Test
     fun testUncompressedUnderflow() {
         read("uncompressed-underflow.dat").use { compressed ->
-            assertThrows<IOException> {
+            assertFailsWith<IOException> {
                 Js5Compression.uncompress(compressed).release()
             }
         }

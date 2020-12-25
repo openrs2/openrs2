@@ -3,10 +3,10 @@ package org.openrs2.db
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.h2.jdbcx.JdbcDataSource
-import org.junit.jupiter.api.assertThrows
 import java.sql.SQLException
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
 @ExperimentalCoroutinesApi
@@ -35,7 +35,7 @@ object DatabaseTest {
 
     @Test
     fun testBounds() {
-        assertThrows<IllegalArgumentException> {
+        assertFailsWith<IllegalArgumentException> {
             Database(dataSource, attempts = 0)
         }
     }
@@ -86,7 +86,7 @@ object DatabaseTest {
     fun testDeadlockFailure() {
         var attempts = 0
 
-        assertThrows<DeadlockException> {
+        assertFailsWith<DeadlockException> {
             runBlockingTest {
                 database.execute<Unit> {
                     attempts++
@@ -102,7 +102,7 @@ object DatabaseTest {
     fun testNonDeadlockFailure() {
         var attempts = 0
 
-        assertThrows<TestException> {
+        assertFailsWith<TestException> {
             runBlockingTest {
                 database.execute<Unit> {
                     attempts++
@@ -168,7 +168,7 @@ object DatabaseTest {
     fun testNonDeadlockNextChain() {
         var attempts = 0
 
-        assertThrows<NonDeadlockException> {
+        assertFailsWith<NonDeadlockException> {
             runBlockingTest {
                 database.execute<Unit> {
                     attempts++

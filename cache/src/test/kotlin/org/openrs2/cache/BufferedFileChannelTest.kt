@@ -4,7 +4,6 @@ import com.google.common.jimfs.Configuration
 import com.google.common.jimfs.Jimfs
 import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.Unpooled
-import org.junit.jupiter.api.assertThrows
 import org.openrs2.buffer.copiedBuffer
 import org.openrs2.buffer.use
 import org.openrs2.buffer.wrappedBuffer
@@ -16,6 +15,7 @@ import java.nio.file.StandardOpenOption.READ
 import java.nio.file.StandardOpenOption.WRITE
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 
 object BufferedFileChannelTest {
     @Test
@@ -197,7 +197,7 @@ object BufferedFileChannelTest {
 
             BufferedFileChannel(FileChannel.open(path, CREATE, READ, WRITE), 8, 8).use { channel ->
                 ByteBufAllocator.DEFAULT.buffer(1, 1).use { buf ->
-                    assertThrows<EOFException> {
+                    assertFailsWith<EOFException> {
                         channel.read(0, buf, buf.writableBytes())
                     }
                 }
@@ -213,7 +213,7 @@ object BufferedFileChannelTest {
 
             BufferedFileChannel(FileChannel.open(path, READ), 8, 8).use { channel ->
                 ByteBufAllocator.DEFAULT.buffer(15, 15).use { buf ->
-                    assertThrows<EOFException> {
+                    assertFailsWith<EOFException> {
                         channel.read(0, buf, buf.writableBytes())
                     }
                 }

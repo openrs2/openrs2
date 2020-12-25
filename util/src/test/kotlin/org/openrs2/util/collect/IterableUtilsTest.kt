@@ -1,8 +1,8 @@
 package org.openrs2.util.collect
 
-import org.junit.jupiter.api.assertThrows
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
@@ -20,7 +20,7 @@ object IterableUtilsTest {
         assertEquals(3, list.removeFirst())
         assertEquals(emptyList<Int>(), list)
 
-        assertThrows<NoSuchElementException> {
+        assertFailsWith<NoSuchElementException> {
             list.removeFirst()
         }
     }

@@ -3,10 +3,10 @@ package org.openrs2.protocol
 import io.netty.buffer.Unpooled
 import io.netty.channel.embedded.EmbeddedChannel
 import io.netty.handler.codec.DecoderException
-import org.junit.jupiter.api.assertThrows
 import org.openrs2.buffer.wrappedBuffer
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 
 object Rs2DecoderTest {
     @Test
@@ -28,7 +28,7 @@ object Rs2DecoderTest {
     fun testUnsupported() {
         val channel = EmbeddedChannel(Rs2Decoder(Protocol()))
 
-        assertThrows<DecoderException> {
+        assertFailsWith<DecoderException> {
             channel.writeInbound(wrappedBuffer(0))
         }
     }
@@ -53,7 +53,7 @@ object Rs2DecoderTest {
         channel.writeInbound(wrappedBuffer(0, 0x11, 0x22, 0x33, 0x44))
         channel.readInbound<Packet>()
 
-        assertThrows<DecoderException> {
+        assertFailsWith<DecoderException> {
             channel.writeInbound(wrappedBuffer(5))
         }
 
@@ -64,7 +64,7 @@ object Rs2DecoderTest {
         val actual = channel.readInbound<Packet>()
         assertEquals(EmptyPacket, actual)
 
-        assertThrows<DecoderException> {
+        assertFailsWith<DecoderException> {
             channel.writeInbound(wrappedBuffer(0, 0x11, 0x22, 0x33, 0x44))
         }
     }

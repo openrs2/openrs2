@@ -5,11 +5,11 @@ import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.Unpooled
 import io.netty.channel.embedded.EmbeddedChannel
 import io.netty.handler.codec.DecoderException
-import org.junit.jupiter.api.assertThrows
 import org.openrs2.buffer.use
 import org.openrs2.buffer.wrappedBuffer
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 
 object Js5ResponseDecoderTest {
     @Test
@@ -58,7 +58,7 @@ object Js5ResponseDecoderTest {
     fun testDecodeNegativeLength() {
         val channel = EmbeddedChannel(Js5ResponseDecoder())
 
-        assertThrows<DecoderException> {
+        assertFailsWith<DecoderException> {
             channel.writeInbound(wrappedBuffer(2, 0, 3, 0, 0xFF.toByte(), 0xFF.toByte(), 0xFF.toByte(), 0xFF.toByte()))
         }
     }
@@ -67,7 +67,7 @@ object Js5ResponseDecoderTest {
     fun testDecodeOverflowUncompressed() {
         val channel = EmbeddedChannel(Js5ResponseDecoder())
 
-        assertThrows<DecoderException> {
+        assertFailsWith<DecoderException> {
             channel.writeInbound(wrappedBuffer(2, 0, 3, 0, 0x7F, 0xFF.toByte(), 0xFF.toByte(), 0xFB.toByte()))
         }
     }
@@ -76,7 +76,7 @@ object Js5ResponseDecoderTest {
     fun testDecodeOverflowCompressed() {
         val channel = EmbeddedChannel(Js5ResponseDecoder())
 
-        assertThrows<DecoderException> {
+        assertFailsWith<DecoderException> {
             channel.writeInbound(wrappedBuffer(2, 0, 3, 1, 0x7F, 0xFF.toByte(), 0xFF.toByte(), 0xF7.toByte()))
         }
     }
@@ -85,7 +85,7 @@ object Js5ResponseDecoderTest {
     fun testDecodeInvalidBlockTrailer() {
         val channel = EmbeddedChannel(Js5ResponseDecoder())
 
-        assertThrows<DecoderException> {
+        assertFailsWith<DecoderException> {
             channel.writeInbound(read("invalid-block-trailer.dat"))
         }
     }

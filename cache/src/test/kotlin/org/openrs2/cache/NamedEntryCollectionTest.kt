@@ -1,9 +1,9 @@
 package org.openrs2.cache
 
-import org.junit.jupiter.api.assertThrows
 import org.openrs2.util.krHashCode
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
@@ -33,35 +33,35 @@ object NamedEntryCollectionTest {
     fun testBounds() {
         val collection = TestCollection()
 
-        assertThrows<IllegalArgumentException> {
+        assertFailsWith<IllegalArgumentException> {
             -1 in collection
         }
 
-        assertThrows<IllegalArgumentException> {
+        assertFailsWith<IllegalArgumentException> {
             collection.containsNamed(-1)
         }
 
-        assertThrows<IllegalArgumentException> {
+        assertFailsWith<IllegalArgumentException> {
             collection[-1]
         }
 
-        assertThrows<IllegalArgumentException> {
+        assertFailsWith<IllegalArgumentException> {
             collection.getNamed(-1)
         }
 
-        assertThrows<IllegalArgumentException> {
+        assertFailsWith<IllegalArgumentException> {
             collection.createOrGet(-1)
         }
 
-        assertThrows<IllegalArgumentException> {
+        assertFailsWith<IllegalArgumentException> {
             collection.createOrGetNamed(-1)
         }
 
-        assertThrows<IllegalArgumentException> {
+        assertFailsWith<IllegalArgumentException> {
             collection.remove(-1)
         }
 
-        assertThrows<IllegalArgumentException> {
+        assertFailsWith<IllegalArgumentException> {
             collection.removeNamed(-1)
         }
     }
@@ -590,17 +590,17 @@ object NamedEntryCollectionTest {
 
         val it = collection.iterator()
 
-        assertThrows<IllegalStateException> {
+        assertFailsWith<IllegalStateException> {
             it.remove()
         }
 
         assertFalse(it.hasNext())
 
-        assertThrows<NoSuchElementException> {
+        assertFailsWith<NoSuchElementException> {
             it.next()
         }
 
-        assertThrows<IllegalStateException> {
+        assertFailsWith<IllegalStateException> {
             it.remove()
         }
     }
@@ -615,7 +615,7 @@ object NamedEntryCollectionTest {
 
         val it = collection.iterator()
 
-        assertThrows<IllegalStateException> {
+        assertFailsWith<IllegalStateException> {
             it.remove()
         }
 
@@ -624,11 +624,11 @@ object NamedEntryCollectionTest {
 
         assertFalse(it.hasNext())
 
-        assertThrows<NoSuchElementException> {
+        assertFailsWith<NoSuchElementException> {
             it.next()
         }
 
-        assertThrows<IllegalStateException> {
+        assertFailsWith<IllegalStateException> {
             it.remove()
         }
     }
@@ -647,7 +647,7 @@ object NamedEntryCollectionTest {
 
         val it = collection.iterator()
 
-        assertThrows<IllegalStateException> {
+        assertFailsWith<IllegalStateException> {
             it.remove()
         }
 
@@ -659,11 +659,11 @@ object NamedEntryCollectionTest {
 
         assertFalse(it.hasNext())
 
-        assertThrows<NoSuchElementException> {
+        assertFailsWith<NoSuchElementException> {
             it.next()
         }
 
-        assertThrows<IllegalStateException> {
+        assertFailsWith<IllegalStateException> {
             it.remove()
         }
     }
@@ -683,7 +683,7 @@ object NamedEntryCollectionTest {
 
         it.remove()
 
-        assertThrows<IllegalStateException> {
+        assertFailsWith<IllegalStateException> {
             it.remove()
         }
 
@@ -713,7 +713,7 @@ object NamedEntryCollectionTest {
 
         it.remove()
 
-        assertThrows<IllegalStateException> {
+        assertFailsWith<IllegalStateException> {
             it.remove()
         }
 
@@ -722,7 +722,7 @@ object NamedEntryCollectionTest {
 
         it.remove()
 
-        assertThrows<IllegalStateException> {
+        assertFailsWith<IllegalStateException> {
             it.remove()
         }
 

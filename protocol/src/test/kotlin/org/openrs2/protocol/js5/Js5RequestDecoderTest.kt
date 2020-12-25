@@ -3,10 +3,10 @@ package org.openrs2.protocol.js5
 import io.netty.buffer.Unpooled
 import io.netty.channel.embedded.EmbeddedChannel
 import io.netty.handler.codec.DecoderException
-import org.junit.jupiter.api.assertThrows
 import org.openrs2.buffer.wrappedBuffer
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 
 object Js5RequestDecoderTest {
     @Test
@@ -32,7 +32,7 @@ object Js5RequestDecoderTest {
     fun testUnknownOpcode() {
         val channel = EmbeddedChannel(Js5RequestDecoder())
 
-        assertThrows<DecoderException> {
+        assertFailsWith<DecoderException> {
             channel.writeInbound(wrappedBuffer(8, 0, 0, 0))
         }
     }

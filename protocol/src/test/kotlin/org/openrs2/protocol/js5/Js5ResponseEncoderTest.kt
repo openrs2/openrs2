@@ -4,10 +4,10 @@ import io.netty.buffer.ByteBuf
 import io.netty.buffer.Unpooled
 import io.netty.channel.embedded.EmbeddedChannel
 import io.netty.handler.codec.EncoderException
-import org.junit.jupiter.api.assertThrows
 import org.openrs2.buffer.use
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 
 object Js5ResponseEncoderTest {
     @Test
@@ -35,7 +35,7 @@ object Js5ResponseEncoderTest {
     fun testEncodeEmpty() {
         val channel = EmbeddedChannel(Js5ResponseEncoder)
 
-        assertThrows<EncoderException> {
+        assertFailsWith<EncoderException> {
             channel.writeOutbound(Js5Response(true, 2, 3, Unpooled.EMPTY_BUFFER))
         }
     }
