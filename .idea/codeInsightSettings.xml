@@ -8,6 +8,20 @@
       <name>com.google.inject.Provider</name>
       <name>com.google.inject.ScopeAnnotation</name>
       <name>com.google.inject.Singleton</name>
+      <name>org.junit.jupiter.api.AfterEach</name>
+      <name>org.junit.jupiter.api.Assertions.assertEquals</name>
+      <name>org.junit.jupiter.api.Assertions.assertFalse</name>
+      <name>org.junit.jupiter.api.Assertions.assertNotEquals</name>
+      <name>org.junit.jupiter.api.Assertions.assertNotNull</name>
+      <name>org.junit.jupiter.api.Assertions.assertNotSame</name>
+      <name>org.junit.jupiter.api.Assertions.assertNull</name>
+      <name>org.junit.jupiter.api.Assertions.assertSame</name>
+      <name>org.junit.jupiter.api.Assertions.assertThrows</name>
+      <name>org.junit.jupiter.api.Assertions.assertTrue</name>
+      <name>org.junit.jupiter.api.Assertions.fail</name>
+      <name>org.junit.jupiter.api.BeforeEach</name>
+      <name>org.junit.jupiter.api.Disabled</name>
+      <name>org.junit.jupiter.api.Test</name>
     </excluded-names>
   </component>
 </project>
