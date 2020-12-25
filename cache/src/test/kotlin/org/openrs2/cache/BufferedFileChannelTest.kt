@@ -4,7 +4,6 @@ import com.google.common.jimfs.Configuration
 import com.google.common.jimfs.Jimfs
 import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.Unpooled
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.openrs2.buffer.copiedBuffer
 import org.openrs2.buffer.use
@@ -15,6 +14,7 @@ import java.nio.file.Files
 import java.nio.file.StandardOpenOption.CREATE
 import java.nio.file.StandardOpenOption.READ
 import java.nio.file.StandardOpenOption.WRITE
+import kotlin.test.Test
 import kotlin.test.assertEquals
 
 object BufferedFileChannelTest {

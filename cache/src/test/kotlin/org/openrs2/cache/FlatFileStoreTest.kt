@@ -3,7 +3,6 @@ package org.openrs2.cache
 import com.google.common.jimfs.Configuration
 import com.google.common.jimfs.Jimfs
 import io.netty.buffer.Unpooled
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.openrs2.buffer.copiedBuffer
 import org.openrs2.buffer.use
@@ -12,6 +11,7 @@ import org.openrs2.util.io.recursiveEquals
 import java.io.FileNotFoundException
 import java.nio.file.Path
 import java.nio.file.Paths
+import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
