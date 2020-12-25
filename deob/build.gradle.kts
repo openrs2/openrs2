@@ -11,9 +11,9 @@ application {
 dependencies {
     api("com.github.ajalt.clikt:clikt:${Versions.clikt}")
 
-    implementation(project(":bundler"))
     implementation(project(":deob-annotations"))
     implementation(project(":deob-util"))
+    implementation(project(":patcher"))
     implementation(project(":yaml"))
     implementation("com.google.guava:guava:${Versions.guava}")
     implementation("it.unimi.dsi:fastutil:${Versions.fastutil}")

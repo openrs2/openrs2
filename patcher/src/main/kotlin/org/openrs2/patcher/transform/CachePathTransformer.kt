@@ -1,4 +1,4 @@
-package org.openrs2.bundler.transform
+package org.openrs2.patcher.transform
 
 import com.github.michaelbull.logging.InlineLogger
 import org.objectweb.asm.tree.ClassNode

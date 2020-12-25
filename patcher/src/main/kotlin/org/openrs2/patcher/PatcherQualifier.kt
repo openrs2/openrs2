@@ -1,8 +1,8 @@
-package org.openrs2.bundler
+package org.openrs2.patcher
 
 import javax.inject.Qualifier
 
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.FIELD, AnnotationTarget.VALUE_PARAMETER, AnnotationTarget.FUNCTION)
-public annotation class BundlerQualifier
+public annotation class PatcherQualifier

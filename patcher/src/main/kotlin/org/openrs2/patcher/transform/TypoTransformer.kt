@@ -1,4 +1,4 @@
-package org.openrs2.bundler.transform
+package org.openrs2.patcher.transform
 
 import com.github.michaelbull.logging.InlineLogger
 import org.objectweb.asm.tree.ClassNode
@@ -7,18 +7,14 @@ import org.objectweb.asm.tree.MethodNode
 import org.openrs2.asm.classpath.ClassPath
 import org.openrs2.asm.classpath.Library
 import org.openrs2.asm.transform.Transformer
-import org.openrs2.conf.Config
-import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-public class NameTransformer @Inject constructor(
-    private val config: Config
-) : Transformer() {
-    private var names = 0
+public class TypoTransformer : Transformer() {
+    private var errorsFixed = 0
 
     override fun preTransform(classPath: ClassPath) {
-        names = 0
+        errorsFixed = 0
     }
 
     override fun transformCode(classPath: ClassPath, library: Library, clazz: ClassNode, method: MethodNode): Boolean {
@@ -27,15 +23,9 @@ public class NameTransformer @Inject constructor(
                 continue
             }
 
-            val cst = insn.cst
-            if (cst !is String) {
-                continue
-            }
-
-            insn.cst = cst.replace("RuneScape", config.game)
-                .replace("Jagex", config.operator)
-            if (insn.cst != cst) {
-                names++
+            if (insn.cst == "Carregando /secure/libs_v4s/RCras - ") {
+                insn.cst = "Carregando texturas - "
+                errorsFixed++
             }
         }
 
@@ -43,7 +33,7 @@ public class NameTransformer @Inject constructor(
     }
 
     override fun postTransform(classPath: ClassPath) {
-        logger.info { "Replaced $names operator and game names" }
+        logger.info { "Fixed $errorsFixed typographical errors" }
     }
 
     private companion object {

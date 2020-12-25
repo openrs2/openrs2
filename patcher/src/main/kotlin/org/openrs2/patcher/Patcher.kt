@@ -1,4 +1,4 @@
-package org.openrs2.bundler
+package org.openrs2.patcher
 
 import com.github.michaelbull.logging.InlineLogger
 import org.openrs2.asm.classpath.ClassPath
@@ -11,9 +11,9 @@ import org.openrs2.asm.io.Pack200LibraryWriter
 import org.openrs2.asm.io.PackClassLibraryWriter
 import org.openrs2.asm.io.SignedJarLibraryWriter
 import org.openrs2.asm.transform.Transformer
-import org.openrs2.bundler.transform.ResourceTransformer
 import org.openrs2.conf.Config
 import org.openrs2.crypto.Pkcs12KeyStore
+import org.openrs2.patcher.transform.ResourceTransformer
 import java.nio.file.Files
 import java.nio.file.Path
 import java.util.jar.Attributes
@@ -23,8 +23,8 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-public class Bundler @Inject constructor(
-    @BundlerQualifier private val transformers: Set<Transformer>,
+public class Patcher @Inject constructor(
+    @PatcherQualifier private val transformers: Set<Transformer>,
     private val config: Config
 ) {
     private val unsignedManifest = Manifest().apply {

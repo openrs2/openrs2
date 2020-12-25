@@ -1,4 +1,4 @@
-package org.openrs2.bundler
+package org.openrs2.patcher
 
 import com.github.michaelbull.logging.InlineLogger
 import org.openrs2.asm.classpath.ClassPath

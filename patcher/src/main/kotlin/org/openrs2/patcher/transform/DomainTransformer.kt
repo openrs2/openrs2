@@ -1,4 +1,4 @@
-package org.openrs2.bundler.transform
+package org.openrs2.patcher.transform
 
 import com.github.michaelbull.logging.InlineLogger
 import org.objectweb.asm.tree.ClassNode
@@ -7,14 +7,18 @@ import org.objectweb.asm.tree.MethodNode
 import org.openrs2.asm.classpath.ClassPath
 import org.openrs2.asm.classpath.Library
 import org.openrs2.asm.transform.Transformer
+import org.openrs2.conf.Config
+import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-public class TypoTransformer : Transformer() {
-    private var errorsFixed = 0
+public class DomainTransformer @Inject constructor(
+    private val config: Config
+) : Transformer() {
+    private var domains = 0
 
     override fun preTransform(classPath: ClassPath) {
-        errorsFixed = 0
+        domains = 0
     }
 
     override fun transformCode(classPath: ClassPath, library: Library, clazz: ClassNode, method: MethodNode): Boolean {
@@ -23,9 +27,14 @@ public class TypoTransformer : Transformer() {
                 continue
             }
 
-            if (insn.cst == "Carregando /secure/libs_v4s/RCras - ") {
-                insn.cst = "Carregando texturas - "
-                errorsFixed++
+            val cst = insn.cst
+            if (cst !is String) {
+                continue
+            }
+
+            insn.cst = cst.replace("runescape.com", config.domain)
+            if (insn.cst != cst) {
+                domains++
             }
         }
 
@@ -33,7 +42,7 @@ public class TypoTransformer : Transformer() {
     }
 
     override fun postTransform(classPath: ClassPath) {
-        logger.info { "Fixed $errorsFixed typographical errors" }
+        logger.info { "Replaced $domains domains" }
     }
 
     private companion object {

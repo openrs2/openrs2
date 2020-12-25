@@ -4,11 +4,8 @@ import com.google.inject.AbstractModule
 import com.google.inject.Scopes
 import com.google.inject.multibindings.Multibinder
 import org.openrs2.asm.transform.Transformer
-import org.openrs2.bundler.BundlerModule
-import org.openrs2.bundler.transform.ResourceTransformer
 import org.openrs2.deob.transform.BitShiftTransformer
 import org.openrs2.deob.transform.BitwiseOpTransformer
-import org.openrs2.deob.transform.BundlerTransformer
 import org.openrs2.deob.transform.CanvasTransformer
 import org.openrs2.deob.transform.ClassLiteralTransformer
 import org.openrs2.deob.transform.ConstantArgTransformer
@@ -28,6 +25,7 @@ import org.openrs2.deob.transform.OriginalNameTransformer
 import org.openrs2.deob.transform.OriginalPcRestoreTransformer
 import org.openrs2.deob.transform.OriginalPcSaveTransformer
 import org.openrs2.deob.transform.OverrideTransformer
+import org.openrs2.deob.transform.PatcherTransformer
 import org.openrs2.deob.transform.RedundantGotoTransformer
 import org.openrs2.deob.transform.RemapTransformer
 import org.openrs2.deob.transform.ResetTransformer
@@ -36,10 +34,12 @@ import org.openrs2.deob.transform.UnusedLocalTransformer
 import org.openrs2.deob.transform.UnusedMethodTransformer
 import org.openrs2.deob.transform.VisibilityTransformer
 import org.openrs2.deob.util.DeobfuscatorUtilModule
+import org.openrs2.patcher.PatcherModule
+import org.openrs2.patcher.transform.ResourceTransformer
 
 public object DeobfuscatorModule : AbstractModule() {
     override fun configure() {
-        install(BundlerModule)
+        install(PatcherModule)
         install(DeobfuscatorUtilModule)
 
         bind(Profile::class.java)
@@ -52,7 +52,7 @@ public object DeobfuscatorModule : AbstractModule() {
         binder.addBinding().to(ClassLiteralTransformer::class.java)
         binder.addBinding().to(InvokeSpecialTransformer::class.java)
         binder.addBinding().to(RemapTransformer::class.java)
-        binder.addBinding().to(BundlerTransformer::class.java)
+        binder.addBinding().to(PatcherTransformer::class.java)
         binder.addBinding().to(ResourceTransformer::class.java)
         binder.addBinding().to(OpaquePredicateTransformer::class.java)
         binder.addBinding().to(ExceptionTracingTransformer::class.java)

@@ -5,7 +5,6 @@ include(
     "archive",
     "asm",
     "buffer",
-    "bundler",
     "cache",
     "compress",
     "compress-cli",
@@ -28,6 +27,7 @@ include(
     "nonfree:signlink",
     "nonfree:unpack",
     "nonfree:unpackclass",
+    "patcher",
     "protocol",
     "util",
     "yaml"

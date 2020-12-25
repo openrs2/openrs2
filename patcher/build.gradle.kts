@@ -5,7 +5,7 @@ plugins {
 }
 
 application {
-    mainClass.set("org.openrs2.bundler.BundleCommandKt")
+    mainClass.set("org.openrs2.patcher.PatchCommandKt")
 }
 
 dependencies {
@@ -24,7 +24,7 @@ publishing {
 
         pom {
             packaging = "jar"
-            name.set("OpenRS2 Bundler")
+            name.set("OpenRS2 Patcher")
             description.set(
                 """
                 A tool for patching the RuneScape client to allow it to connect

@@ -1,4 +1,4 @@
-package org.openrs2.bundler.transform
+package org.openrs2.patcher.transform
 
 import com.github.michaelbull.logging.InlineLogger
 import org.objectweb.asm.Opcodes
@@ -15,7 +15,7 @@ import org.openrs2.asm.classpath.ClassPath
 import org.openrs2.asm.classpath.Library
 import org.openrs2.asm.toAbstractInsnNode
 import org.openrs2.asm.transform.Transformer
-import org.openrs2.bundler.Resource
+import org.openrs2.patcher.Resource
 
 public class ResourceTransformer(
     private val resources: List<Resource>? = null,

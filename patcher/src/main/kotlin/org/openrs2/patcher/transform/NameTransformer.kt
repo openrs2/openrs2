@@ -1,4 +1,4 @@
-package org.openrs2.bundler.transform
+package org.openrs2.patcher.transform
 
 import com.github.michaelbull.logging.InlineLogger
 import org.objectweb.asm.tree.ClassNode
@@ -12,13 +12,13 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-public class DomainTransformer @Inject constructor(
+public class NameTransformer @Inject constructor(
     private val config: Config
 ) : Transformer() {
-    private var domains = 0
+    private var names = 0
 
     override fun preTransform(classPath: ClassPath) {
-        domains = 0
+        names = 0
     }
 
     override fun transformCode(classPath: ClassPath, library: Library, clazz: ClassNode, method: MethodNode): Boolean {
@@ -32,9 +32,10 @@ public class DomainTransformer @Inject constructor(
                 continue
             }
 
-            insn.cst = cst.replace("runescape.com", config.domain)
+            insn.cst = cst.replace("RuneScape", config.game)
+                .replace("Jagex", config.operator)
             if (insn.cst != cst) {
-                domains++
+                names++
             }
         }
 
@@ -42,7 +43,7 @@ public class DomainTransformer @Inject constructor(
     }
 
     override fun postTransform(classPath: ClassPath) {
-        logger.info { "Replaced $domains domains" }
+        logger.info { "Replaced $names operator and game names" }
     }
 
     private companion object {

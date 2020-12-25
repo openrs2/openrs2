@@ -1,30 +1,30 @@
-package org.openrs2.bundler
+package org.openrs2.patcher
 
 import com.google.inject.AbstractModule
 import com.google.inject.multibindings.Multibinder
 import org.openrs2.asm.transform.Transformer
-import org.openrs2.bundler.transform.BufferSizeTransformer
-import org.openrs2.bundler.transform.CachePathTransformer
-import org.openrs2.bundler.transform.DomainTransformer
-import org.openrs2.bundler.transform.HighDpiTransformer
-import org.openrs2.bundler.transform.HostCheckTransformer
-import org.openrs2.bundler.transform.LoadLibraryTransformer
-import org.openrs2.bundler.transform.MacResizeTransformer
-import org.openrs2.bundler.transform.MemoryAllocationTransformer
-import org.openrs2.bundler.transform.NameTransformer
-import org.openrs2.bundler.transform.PlatformDetectionTransformer
-import org.openrs2.bundler.transform.PublicKeyTransformer
-import org.openrs2.bundler.transform.RightClickTransformer
-import org.openrs2.bundler.transform.TypoTransformer
 import org.openrs2.conf.ConfigModule
 import org.openrs2.crypto.CryptoModule
+import org.openrs2.patcher.transform.BufferSizeTransformer
+import org.openrs2.patcher.transform.CachePathTransformer
+import org.openrs2.patcher.transform.DomainTransformer
+import org.openrs2.patcher.transform.HighDpiTransformer
+import org.openrs2.patcher.transform.HostCheckTransformer
+import org.openrs2.patcher.transform.LoadLibraryTransformer
+import org.openrs2.patcher.transform.MacResizeTransformer
+import org.openrs2.patcher.transform.MemoryAllocationTransformer
+import org.openrs2.patcher.transform.NameTransformer
+import org.openrs2.patcher.transform.PlatformDetectionTransformer
+import org.openrs2.patcher.transform.PublicKeyTransformer
+import org.openrs2.patcher.transform.RightClickTransformer
+import org.openrs2.patcher.transform.TypoTransformer
 
-public object BundlerModule : AbstractModule() {
+public object PatcherModule : AbstractModule() {
     override fun configure() {
         install(ConfigModule)
         install(CryptoModule)
 
-        val binder = Multibinder.newSetBinder(binder(), Transformer::class.java, BundlerQualifier::class.java)
+        val binder = Multibinder.newSetBinder(binder(), Transformer::class.java, PatcherQualifier::class.java)
         binder.addBinding().to(BufferSizeTransformer::class.java)
         binder.addBinding().to(CachePathTransformer::class.java)
         binder.addBinding().to(HostCheckTransformer::class.java)
