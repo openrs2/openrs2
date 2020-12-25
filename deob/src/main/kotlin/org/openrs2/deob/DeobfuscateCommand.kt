@@ -10,6 +10,9 @@ public class DeobfuscateCommand : CliktCommand(name = "deob") {
     override fun run() {
         val injector = Guice.createInjector(DeobfuscatorModule)
         val deobfuscator = injector.getInstance(Deobfuscator::class.java)
-        deobfuscator.run(Paths.get("nonfree/lib"), Paths.get("nonfree/var/cache/deob"))
+        deobfuscator.run(
+            input = Paths.get("nonfree/share/client"),
+            output = Paths.get("nonfree/var/cache/deob")
+        )
     }
 }

@@ -10,6 +10,10 @@ public class PatchCommand : CliktCommand(name = "patch") {
     override fun run() {
         val injector = Guice.createInjector(PatcherModule)
         val patcher = injector.getInstance(Patcher::class.java)
-        patcher.run(Paths.get("nonfree/lib"), Paths.get("nonfree/var/cache/client"), Paths.get("etc/loader.p12"))
+        patcher.run(
+            input = Paths.get("nonfree/share/client"),
+            output = Paths.get("nonfree/var/cache/client"),
+            keyStorePath = Paths.get("etc/loader.p12")
+        )
     }
 }
