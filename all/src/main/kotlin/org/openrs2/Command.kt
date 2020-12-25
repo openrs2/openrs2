@@ -6,8 +6,8 @@ import org.openrs2.archive.ArchiveCommand
 import org.openrs2.compress.cli.CompressCommand
 import org.openrs2.crc32.Crc32Command
 import org.openrs2.decompiler.DecompileCommand
-import org.openrs2.deob.DeobfuscateCommand
 import org.openrs2.deob.ast.DeobfuscateAstCommand
+import org.openrs2.deob.bytecode.DeobfuscateBytecodeCommand
 import org.openrs2.game.GameCommand
 import org.openrs2.patcher.PatchCommand
 
@@ -20,8 +20,8 @@ public class Command : NoOpCliktCommand(name = "openrs2") {
             CompressCommand(),
             Crc32Command(),
             DecompileCommand(),
-            DeobfuscateCommand(),
             DeobfuscateAstCommand(),
+            DeobfuscateBytecodeCommand(),
             GameCommand(),
             PatchCommand()
         )
