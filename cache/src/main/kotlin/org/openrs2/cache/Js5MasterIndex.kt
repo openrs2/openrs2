@@ -31,8 +31,10 @@ public inline class Js5MasterIndex(public val entries: MutableList<Entry> = muta
 
                 val entry = store.read(Js5Archive.ARCHIVESET, archive).use { buf ->
                     val checksum = buf.crc32()
-                    val version = Js5Index.read(buf).version
-                    // TODO(gpe): should we throw an exception if there are trailing bytes here?
+                    val version = Js5Compression.uncompress(buf).use { uncompressed ->
+                        Js5Index.read(uncompressed).version
+                    }
+                    // TODO(gpe): should we throw an exception if there are trailing bytes here or in the block above?
                     Entry(version, checksum)
                 }
 

@@ -27,13 +27,13 @@ object Js5MasterIndexTest {
         assertEquals(
             Js5MasterIndex(
                 mutableListOf(
-                    Js5MasterIndex.Entry(0, 379203374),
-                    Js5MasterIndex.Entry(0x12345678, -717247318),
+                    Js5MasterIndex.Entry(0, 609698396),
+                    Js5MasterIndex.Entry(0x12345678, 78747481),
                     Js5MasterIndex.Entry(0, 0),
-                    Js5MasterIndex.Entry(0x9ABCDEF0.toInt(), 895417101),
+                    Js5MasterIndex.Entry(0x9ABCDEF0.toInt(), -456081154),
                     Js5MasterIndex.Entry(0, 0),
                     Js5MasterIndex.Entry(0, 0),
-                    Js5MasterIndex.Entry(0xAA55AA55.toInt(), -627983571)
+                    Js5MasterIndex.Entry(0xAA55AA55.toInt(), 186613982)
                 )
             ), index
         )
