@@ -79,25 +79,6 @@ CREATE TABLE master_index_entries (
     PRIMARY KEY (container_id, archive_id)
 );
 
-CREATE TABLE caches (
-    id BIGSERIAL PRIMARY KEY NOT NULL,
-    -- This doesn't correspond to a hash used by the client - it was just
-    -- convenient to re-use Whirlpool given we already use it elsewhere in the
-    -- codebase.
-    --
-    -- It is a hash over the whirlpool hashes of a cache's Js5Indexes, used to
-    -- make it easier to identify an individual cache row in a relational
-    -- database.
-    whirlpool BYTEA UNIQUE NOT NULL
-);
-
-CREATE TABLE cache_indexes (
-    cache_id BIGINT NOT NULL REFERENCES caches (id),
-    archive_id uint1 NOT NULL,
-    container_id BIGINT NOT NULL REFERENCES indexes (container_id),
-    PRIMARY KEY (cache_id, archive_id)
-);
-
 CREATE TABLE names (
     hash INTEGER NOT NULL,
     name TEXT PRIMARY KEY NOT NULL

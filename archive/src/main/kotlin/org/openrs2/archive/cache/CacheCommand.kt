@@ -7,6 +7,7 @@ public class CacheCommand : NoOpCliktCommand(name = "cache") {
     init {
         subcommands(
             ImportCommand(),
+            ImportMasterIndexCommand(),
             ExportCommand()
         )
     }

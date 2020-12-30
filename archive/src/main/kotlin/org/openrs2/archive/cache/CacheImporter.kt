@@ -2,16 +2,16 @@ package org.openrs2.archive.cache
 
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufAllocator
-import io.netty.buffer.ByteBufUtil
 import org.openrs2.archive.container.Container
 import org.openrs2.archive.container.ContainerImporter
 import org.openrs2.buffer.use
 import org.openrs2.cache.Js5Archive
 import org.openrs2.cache.Js5Compression
+import org.openrs2.cache.Js5CompressionType
 import org.openrs2.cache.Js5Index
+import org.openrs2.cache.Js5MasterIndex
 import org.openrs2.cache.Store
 import org.openrs2.cache.VersionTrailer
-import org.openrs2.crypto.Whirlpool
 import org.openrs2.db.Database
 import java.io.IOException
 import java.sql.Connection
@@ -24,8 +24,14 @@ public class CacheImporter @Inject constructor(
     private val database: Database,
     private val alloc: ByteBufAllocator
 ) {
+    private class MasterIndex(
+        val index: Js5MasterIndex,
+        data: ByteBuf
+    ) : Container(data) {
+        override val encrypted: Boolean = false
+    }
+
     private class Index(
-        val archive: Int,
         val index: Js5Index,
         data: ByteBuf
     ) : Container(data) {
@@ -44,6 +50,14 @@ public class CacheImporter @Inject constructor(
         database.execute { connection ->
             ContainerImporter.prepare(connection)
 
+            // import master index
+            val masterIndex = createMasterIndex(store)
+            try {
+                addMasterIndex(connection, masterIndex)
+            } finally {
+                masterIndex.release()
+            }
+
             // import indexes
             val indexes = mutableListOf<Index>()
             try {
@@ -51,10 +65,8 @@ public class CacheImporter @Inject constructor(
                     indexes += readIndex(store, archive)
                 }
 
-                val cacheId = addCache(connection, indexes)
-
                 for (index in indexes) {
-                    addIndex(connection, cacheId, index)
+                    addIndex(connection, index)
                 }
             } finally {
                 indexes.forEach(Index::release)
@@ -87,6 +99,64 @@ public class CacheImporter @Inject constructor(
             } finally {
                 groups.forEach(Group::release)
             }
+        }
+    }
+
+    public suspend fun importMasterIndex(buf: ByteBuf) {
+        Js5Compression.uncompress(buf.slice()).use { uncompressed ->
+            val masterIndex = MasterIndex(Js5MasterIndex.read(uncompressed.slice()), buf)
+
+            database.execute { connection ->
+                ContainerImporter.prepare(connection)
+                addMasterIndex(connection, masterIndex)
+            }
+        }
+    }
+
+    private fun createMasterIndex(store: Store): MasterIndex {
+        val index = Js5MasterIndex.create(store)
+
+        alloc.buffer().use { uncompressed ->
+            index.write(uncompressed)
+
+            Js5Compression.compress(uncompressed, Js5CompressionType.UNCOMPRESSED).use { buf ->
+                return MasterIndex(index, buf.retain())
+            }
+        }
+    }
+
+    // TODO(gpe): skip most of this function if we encounter a conflict?
+    private fun addMasterIndex(connection: Connection, masterIndex: MasterIndex) {
+        val containerId = ContainerImporter.addContainer(connection, masterIndex)
+
+        connection.prepareStatement(
+            """
+            INSERT INTO master_indexes (container_id)
+            VALUES (?)
+            ON CONFLICT DO NOTHING
+        """.trimIndent()
+        ).use { stmt ->
+            stmt.setLong(1, containerId)
+            stmt.execute()
+        }
+
+        connection.prepareStatement(
+            """
+            INSERT INTO master_index_entries (container_id, archive_id, crc32, version)
+            VALUES (?, ?, ?, ?)
+            ON CONFLICT DO NOTHING
+        """.trimIndent()
+        ).use { stmt ->
+            for ((i, entry) in masterIndex.index.entries.withIndex()) {
+                stmt.setLong(1, containerId)
+                stmt.setInt(2, i)
+                stmt.setInt(3, entry.checksum)
+                stmt.setInt(4, entry.version)
+
+                stmt.addBatch()
+            }
+
+            stmt.executeBatch()
         }
     }
 
@@ -127,73 +197,13 @@ public class CacheImporter @Inject constructor(
     private fun readIndex(store: Store, archive: Int): Index {
         return store.read(Js5Archive.ARCHIVESET, archive).use { buf ->
             Js5Compression.uncompress(buf.slice()).use { uncompressed ->
-                Index(archive, Js5Index.read(uncompressed), buf.retain())
-            }
-        }
-    }
-
-    private fun addCache(connection: Connection, indexes: List<Index>): Long {
-        val len = indexes.size * (1 + Whirlpool.DIGESTBYTES)
-        val whirlpool = alloc.buffer(len, len).use { buf ->
-            for (index in indexes) {
-                buf.writeByte(index.archive)
-                buf.writeBytes(index.whirlpool)
-            }
-
-            Whirlpool.whirlpool(ByteBufUtil.getBytes(buf, 0, buf.readableBytes(), false))
-        }
-
-        connection.prepareStatement(
-            """
-            SELECT id
-            FROM caches
-            WHERE whirlpool = ?
-        """.trimIndent()
-        ).use { stmt ->
-            stmt.setBytes(1, whirlpool)
-
-            stmt.executeQuery().use { rows ->
-                if (rows.next()) {
-                    return rows.getLong(1)
-                }
-            }
-        }
-
-        connection.prepareStatement(
-            """
-            INSERT INTO caches (whirlpool)
-            VALUES (?)
-            ON CONFLICT DO NOTHING
-            RETURNING id
-        """.trimIndent()
-        ).use { stmt ->
-            stmt.setBytes(1, whirlpool)
-
-            stmt.executeQuery().use { rows ->
-                if (rows.next()) {
-                    rows.getLong(1)
-                }
-            }
-        }
-
-        connection.prepareStatement(
-            """
-            SELECT id
-            FROM caches
-            WHERE whirlpool = ?
-        """.trimIndent()
-        ).use { stmt ->
-            stmt.setBytes(1, whirlpool)
-
-            stmt.executeQuery().use { rows ->
-                check(rows.next())
-                return rows.getLong(1)
+                Index(Js5Index.read(uncompressed), buf.retain())
             }
         }
     }
 
     // TODO(gpe): skip most of this function if we encounter a conflict?
-    private fun addIndex(connection: Connection, cacheId: Long, index: Index) {
+    private fun addIndex(connection: Connection, index: Index) {
         val containerId = ContainerImporter.addContainer(connection, index)
 
         connection.prepareStatement(
@@ -205,19 +215,6 @@ public class CacheImporter @Inject constructor(
         ).use { stmt ->
             stmt.setLong(1, containerId)
             stmt.setInt(2, index.index.version)
-            stmt.execute()
-        }
-
-        connection.prepareStatement(
-            """
-            INSERT INTO cache_indexes (cache_id, archive_id, container_id)
-            VALUES (?, ?, ?)
-            ON CONFLICT DO NOTHING
-        """.trimIndent()
-        ).use { stmt ->
-            stmt.setLong(1, cacheId)
-            stmt.setInt(2, index.archive)
-            stmt.setLong(3, containerId)
             stmt.execute()
         }
 

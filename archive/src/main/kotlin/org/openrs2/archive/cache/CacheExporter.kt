@@ -18,17 +18,22 @@ public class CacheExporter @Inject constructor(
         database.execute { connection ->
             connection.prepareStatement(
                 """
-                SELECT 255::uint1, ci.archive_id::INTEGER, c.data, NULL
-                FROM cache_indexes ci
-                JOIN containers c ON c.id = ci.container_id
-                WHERE ci.cache_id = ?
+                SELECT 255::uint1, e.archive_id::INTEGER, c.data, NULL
+                FROM master_index_entries e
+                JOIN master_indexes m ON m.container_id = e.container_id
+                JOIN containers c ON c.crc32 = e.crc32
+                JOIN indexes i ON i.container_id = c.id AND i.version = e.version
+                WHERE m.container_id = ?
                 UNION ALL
-                SELECT ci.archive_id, ig.group_id, c.data, g.truncated_version
-                FROM cache_indexes ci
-                JOIN index_groups ig ON ig.container_id = ci.container_id
-                JOIN groups g ON g.archive_id = ci.archive_id AND g.group_id = ig.group_id AND g.truncated_version = ig.version & 65535
+                SELECT e.archive_id, ig.group_id, c.data, g.truncated_version
+                FROM master_index_entries e
+                JOIN master_indexes m ON m.container_id = e.container_id
+                JOIN containers ic ON ic.crc32 = e.crc32
+                JOIN indexes i ON i.container_id = ic.id AND i.version = e.version
+                JOIN index_groups ig ON ig.container_id = i.container_id
+                JOIN groups g ON g.archive_id = e.archive_id AND g.group_id = ig.group_id AND g.truncated_version = ig.version & 65535
                 JOIN containers c ON c.id = g.container_id AND c.crc32 = ig.crc32
-                WHERE ci.cache_id = ?
+                WHERE m.container_id = ?
             """.trimIndent()
             ).use { stmt ->
                 stmt.fetchSize = BATCH_SIZE

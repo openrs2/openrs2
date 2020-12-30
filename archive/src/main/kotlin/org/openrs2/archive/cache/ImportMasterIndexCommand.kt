@@ -1,4 +1,4 @@
-package org.openrs2.archive.masterindex
+package org.openrs2.archive.cache
 
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.arguments.argument
@@ -10,7 +10,7 @@ import org.openrs2.archive.ArchiveModule
 import org.openrs2.buffer.use
 import java.nio.file.Files
 
-public class ImportCommand : CliktCommand(name = "import") {
+public class ImportMasterIndexCommand : CliktCommand(name = "import-master-index") {
     private val input by argument().path(
         mustExist = true,
         canBeDir = false,
@@ -19,10 +19,10 @@ public class ImportCommand : CliktCommand(name = "import") {
 
     override fun run(): Unit = runBlocking {
         val injector = Guice.createInjector(ArchiveModule)
-        val importer = injector.getInstance(MasterIndexImporter::class.java)
+        val importer = injector.getInstance(CacheImporter::class.java)
 
         Unpooled.wrappedBuffer(Files.readAllBytes(input)).use { buf ->
-            importer.import(buf)
+            importer.importMasterIndex(buf)
         }
     }
 }
