@@ -15,8 +15,10 @@ import org.openrs2.cache.Store
 import org.openrs2.cache.VersionTrailer
 import org.openrs2.crypto.Whirlpool
 import org.openrs2.db.Database
+import org.postgresql.util.PSQLState
 import java.io.IOException
 import java.sql.Connection
+import java.sql.SQLException
 import java.sql.Types
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -136,26 +138,33 @@ public class CacheImporter @Inject constructor(
         }
     }
 
-    // TODO(gpe): skip most of this function if we encounter a conflict?
     private fun addMasterIndex(connection: Connection, masterIndex: MasterIndex) {
         val containerId = addContainer(connection, masterIndex)
+        val savepoint = connection.setSavepoint()
 
         connection.prepareStatement(
             """
             INSERT INTO master_indexes (container_id)
             VALUES (?)
-            ON CONFLICT DO NOTHING
         """.trimIndent()
         ).use { stmt ->
             stmt.setLong(1, containerId)
-            stmt.execute()
+
+            try {
+                stmt.execute()
+            } catch (ex: SQLException) {
+                if (ex.sqlState == PSQLState.UNIQUE_VIOLATION.state) {
+                    connection.rollback(savepoint)
+                    return@addMasterIndex
+                }
+                throw ex
+            }
         }
 
         connection.prepareStatement(
             """
             INSERT INTO master_index_entries (container_id, archive_id, crc32, version)
             VALUES (?, ?, ?, ?)
-            ON CONFLICT DO NOTHING
         """.trimIndent()
         ).use { stmt ->
             for ((i, entry) in masterIndex.index.entries.withIndex()) {
@@ -213,27 +222,34 @@ public class CacheImporter @Inject constructor(
         }
     }
 
-    // TODO(gpe): skip most of this function if we encounter a conflict?
     private fun addIndex(connection: Connection, index: Index) {
         val containerId = addContainer(connection, index)
+        val savepoint = connection.setSavepoint()
 
         connection.prepareStatement(
             """
             INSERT INTO indexes (container_id, version)
             VALUES (?, ?)
-            ON CONFLICT DO NOTHING
         """.trimIndent()
         ).use { stmt ->
             stmt.setLong(1, containerId)
             stmt.setInt(2, index.index.version)
-            stmt.execute()
+
+            try {
+                stmt.execute()
+            } catch (ex: SQLException) {
+                if (ex.sqlState == PSQLState.UNIQUE_VIOLATION.state) {
+                    connection.rollback(savepoint)
+                    return@addIndex
+                }
+                throw ex
+            }
         }
 
         connection.prepareStatement(
             """
             INSERT INTO index_groups (container_id, group_id, crc32, whirlpool, version, name_hash)
             VALUES (?, ?, ?, ?, ?, ?)
-            ON CONFLICT DO NOTHING
         """.trimIndent()
         ).use { stmt ->
             for (group in index.index) {
@@ -259,7 +275,6 @@ public class CacheImporter @Inject constructor(
             """
             INSERT INTO index_files (container_id, group_id, file_id, name_hash)
             VALUES (?, ?, ?, ?)
-            ON CONFLICT DO NOTHING
         """.trimIndent()
         ).use { stmt ->
             for (group in index.index) {
