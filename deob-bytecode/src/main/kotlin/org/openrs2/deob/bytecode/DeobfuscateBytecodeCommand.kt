@@ -11,7 +11,7 @@ public class DeobfuscateBytecodeCommand : CliktCommand(name = "deob-bytecode") {
         val injector = Guice.createInjector(BytecodeDeobfuscatorModule)
         val deobfuscator = injector.getInstance(BytecodeDeobfuscator::class.java)
         deobfuscator.run(
-            input = Paths.get("nonfree/share/client"),
+            input = Paths.get("nonfree/lib"),
             output = Paths.get("nonfree/var/cache/deob")
         )
     }
