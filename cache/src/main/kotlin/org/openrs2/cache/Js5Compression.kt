@@ -82,8 +82,8 @@ public object Js5Compression {
              *
              * TODO(gpe): are there any clients with LZMA support _and_ the
              * decryption bug? Could the enableLzma flag be re-used for
-             * enableNoneWithKey? Or should LZMA also be disabled in clients
-             * with the decryption bug?
+             * enableUncompressedEncryption? Or should LZMA also be disabled in
+             * clients with the decryption bug?
              */
             types += Js5CompressionType.UNCOMPRESSED
         }
