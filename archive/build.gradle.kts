@@ -15,6 +15,8 @@ dependencies {
     implementation(project(":cache"))
     implementation(project(":db"))
     implementation(project(":json"))
+    implementation(project(":net"))
+    implementation(project(":protocol"))
     implementation(project(":util"))
     implementation("com.google.guava:guava:${Versions.guava}")
     implementation("org.flywaydb:flyway-core:${Versions.flyway}")

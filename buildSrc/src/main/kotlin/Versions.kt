@@ -24,6 +24,7 @@ object Versions {
     const val kotlinter = "3.3.0"
     const val logback = "1.2.3"
     const val netty = "4.1.56.Final"
+    const val nettyIoUring = "0.0.2.Final"
     const val openrs2Natives = "3.0.0"
     const val postgres = "42.2.18"
     const val shadowPlugin = "6.1.0"

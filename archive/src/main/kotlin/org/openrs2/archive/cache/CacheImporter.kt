@@ -4,6 +4,7 @@ import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.ByteBufUtil
 import io.netty.buffer.DefaultByteBufHolder
+import io.netty.buffer.Unpooled
 import org.openrs2.buffer.crc32
 import org.openrs2.buffer.use
 import org.openrs2.cache.Js5Archive
@@ -28,13 +29,13 @@ public class CacheImporter @Inject constructor(
     private val database: Database,
     private val alloc: ByteBufAllocator
 ) {
-    private abstract class Container(
+    public abstract class Container(
         data: ByteBuf
     ) : DefaultByteBufHolder(data) {
-        val bytes: ByteArray = ByteBufUtil.getBytes(data, data.readerIndex(), data.readableBytes(), false)
-        val crc32: Int = data.crc32()
-        val whirlpool: ByteArray = Whirlpool.whirlpool(bytes)
-        abstract val encrypted: Boolean
+        public val bytes: ByteArray = ByteBufUtil.getBytes(data, data.readerIndex(), data.readableBytes(), false)
+        public val crc32: Int = data.crc32()
+        public val whirlpool: ByteArray = Whirlpool.whirlpool(bytes)
+        public abstract val encrypted: Boolean
     }
 
     private class MasterIndex(
@@ -44,18 +45,18 @@ public class CacheImporter @Inject constructor(
         override val encrypted: Boolean = false
     }
 
-    private class Index(
-        val index: Js5Index,
+    public class Index(
+        public val index: Js5Index,
         data: ByteBuf
     ) : Container(data) {
         override val encrypted: Boolean = false
     }
 
-    private class Group(
-        val archive: Int,
-        val group: Int,
+    public class Group(
+        public val archive: Int,
+        public val group: Int,
         data: ByteBuf,
-        val version: Int,
+        public val version: Int,
         override val encrypted: Boolean
     ) : Container(data)
 
@@ -123,6 +124,141 @@ public class CacheImporter @Inject constructor(
                 prepare(connection)
                 addMasterIndex(connection, masterIndex)
             }
+        }
+    }
+
+    public suspend fun importMasterIndexAndGetIndexes(masterIndex: Js5MasterIndex, buf: ByteBuf): List<ByteBuf?> {
+        return database.execute { connection ->
+            prepare(connection)
+            addMasterIndex(connection, MasterIndex(masterIndex, buf))
+
+            connection.prepareStatement(
+                """
+                CREATE TEMPORARY TABLE tmp_indexes (
+                    archive_id uint1 NOT NULL,
+                    crc32 INTEGER NOT NULL,
+                    version INTEGER NOT NULL
+                ) ON COMMIT DROP
+            """.trimIndent()
+            ).use { stmt ->
+                stmt.execute()
+            }
+
+            connection.prepareStatement(
+                """
+                INSERT INTO tmp_indexes (archive_id, crc32, version)
+                VALUES (?, ?, ?)
+            """.trimIndent()
+            ).use { stmt ->
+                for ((i, entry) in masterIndex.entries.withIndex()) {
+                    stmt.setInt(1, i)
+                    stmt.setInt(2, entry.checksum)
+                    stmt.setInt(3, entry.version)
+
+                    stmt.addBatch()
+                }
+
+                stmt.executeBatch()
+            }
+
+            connection.prepareStatement(
+                """
+                SELECT c.data
+                FROM tmp_indexes t
+                LEFT JOIN containers c ON c.crc32 = t.crc32
+                LEFT JOIN indexes i ON i.version = t.version AND i.container_id = c.id
+                ORDER BY t.archive_id ASC
+            """.trimIndent()
+            ).use { stmt ->
+                stmt.executeQuery().use { rows ->
+                    val indexes = mutableListOf<ByteBuf?>()
+                    try {
+                        while (rows.next()) {
+                            val bytes = rows.getBytes(1)
+                            if (bytes != null) {
+                                indexes += Unpooled.wrappedBuffer(bytes)
+                            } else {
+                                indexes += null
+                            }
+                        }
+
+                        indexes.filterNotNull().forEach(ByteBuf::retain)
+                        return@execute indexes
+                    } finally {
+                        indexes.filterNotNull().forEach(ByteBuf::release)
+                    }
+                }
+            }
+        }
+    }
+
+    public suspend fun importIndexAndGetMissingGroups(archive: Int, index: Js5Index, buf: ByteBuf): List<Int> {
+        return database.execute { connection ->
+            prepare(connection)
+            addIndex(connection, Index(index, buf))
+
+            connection.prepareStatement(
+                """
+                CREATE TEMPORARY TABLE tmp_groups (
+                    group_id INTEGER NOT NULL,
+                    crc32 INTEGER NOT NULL,
+                    version INTEGER NOT NULL
+                ) ON COMMIT DROP
+            """.trimIndent()
+            ).use { stmt ->
+                stmt.execute()
+            }
+
+            connection.prepareStatement(
+                """
+                INSERT INTO tmp_groups (group_id, crc32, version)
+                VALUES (?, ?, ?)
+            """.trimIndent()
+            ).use { stmt ->
+                for (entry in index) {
+                    stmt.setInt(1, entry.id)
+                    stmt.setInt(2, entry.checksum)
+                    stmt.setInt(3, entry.version)
+
+                    stmt.addBatch()
+                }
+
+                stmt.executeBatch()
+            }
+
+            connection.prepareStatement(
+                """
+                SELECT t.group_id
+                FROM tmp_groups t
+                LEFT JOIN groups g ON g.archive_id = ? AND g.group_id = t.group_id AND g.truncated_version = t.version & 65535
+                LEFT JOIN containers c ON c.id = g.container_id AND c.crc32 = t.crc32
+                WHERE g.container_id IS NULL
+                ORDER BY t.group_id ASC
+            """.trimIndent()
+            ).use { stmt ->
+                stmt.setInt(1, archive)
+
+                stmt.executeQuery().use { rows ->
+                    val groups = mutableListOf<Int>()
+
+                    while (rows.next()) {
+                        groups += rows.getInt(1)
+                    }
+
+                    return@execute groups
+                }
+            }
+        }
+    }
+
+    public suspend fun importGroups(groups: List<Group>) {
+        if (groups.isEmpty()) {
+            return
+        }
+
+        database.execute { connection ->
+            prepare(connection)
+            addGroups(connection, groups)
         }
     }
 
@@ -386,7 +522,7 @@ public class CacheImporter @Inject constructor(
         return ids
     }
 
-    private companion object {
-        private const val BATCH_SIZE = 1024
+    public companion object {
+        public const val BATCH_SIZE: Int = 1024
     }
 }

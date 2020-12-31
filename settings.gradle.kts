@@ -20,6 +20,7 @@ include(
     "deob-util",
     "game",
     "json",
+    "net",
     "nonfree",
     "nonfree:client",
     "nonfree:gl",
