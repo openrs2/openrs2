@@ -109,7 +109,7 @@ public fun ByteBuf.crc32(index: Int, len: Int): Int {
             }
         }
         count == 1 -> crc.update(nioBuffer(index, len))
-        else -> crc.update(ByteBufUtil.getBytes(this, index, len))
+        else -> crc.update(ByteBufUtil.getBytes(this, index, len, false))
     }
 
     return crc.value.toInt()
