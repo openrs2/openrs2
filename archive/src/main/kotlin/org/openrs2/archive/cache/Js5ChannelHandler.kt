@@ -57,14 +57,20 @@ public class Js5ChannelHandler(
     }
 
     override fun channelReadComplete(ctx: ChannelHandlerContext) {
+        var flush = false
+
         while (inFlightRequests.size < maxInFlightRequests) {
             val request = pendingRequests.removeFirstOrNull() ?: break
             inFlightRequests += request
             ctx.write(request, ctx.voidPromise())
+
+            flush = true
         }
 
-        ctx.flush()
-        ctx.read()
+        if (flush) {
+            ctx.flush()
+            ctx.read()
+        }
     }
 
     override fun exceptionCaught(ctx: ChannelHandlerContext, cause: Throwable) {
