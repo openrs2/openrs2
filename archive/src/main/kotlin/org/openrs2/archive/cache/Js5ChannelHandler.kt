@@ -56,6 +56,17 @@ public class Js5ChannelHandler(
         }
     }
 
+    override fun channelReadComplete(ctx: ChannelHandlerContext) {
+        while (inFlightRequests.size < maxInFlightRequests) {
+            val request = pendingRequests.removeFirstOrNull() ?: break
+            inFlightRequests += request
+            ctx.write(request, ctx.voidPromise())
+        }
+
+        ctx.flush()
+        ctx.read()
+    }
+
     override fun exceptionCaught(ctx: ChannelHandlerContext, cause: Throwable) {
         releaseGroups()
         ctx.close()
@@ -75,7 +86,6 @@ public class Js5ChannelHandler(
 
         val request = Js5Request.Group(false, Js5Archive.ARCHIVESET, Js5Archive.ARCHIVESET)
         pendingRequests += request
-        flushRequests(ctx)
     }
 
     private fun handleClientOutOfDate(ctx: ChannelHandlerContext) {
@@ -118,8 +128,6 @@ public class Js5ChannelHandler(
         if (complete) {
             ctx.close()
             continuation.resume(Unit)
-        } else {
-            flushRequests(ctx)
         }
     }
 
@@ -156,17 +164,6 @@ public class Js5ChannelHandler(
         for (group in groups) {
             pendingRequests += Js5Request.Group(false, archive, group)
         }
-    }
-
-    private fun flushRequests(ctx: ChannelHandlerContext) {
-        while (inFlightRequests.size < maxInFlightRequests) {
-            val request = pendingRequests.removeFirstOrNull() ?: break
-            inFlightRequests += request
-            ctx.write(request, ctx.voidPromise())
-        }
-
-        ctx.flush()
-        ctx.read()
     }
 
     private fun releaseGroups() {
