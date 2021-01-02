@@ -119,6 +119,15 @@ configure(subprojects.filter { it.isFree }) {
         apply(plugin = "org.jmailen.kotlinter")
 
         dependencies {
+            val api by configurations
+            for (module in listOf("stdlib", "stdlib-common", "stdlib-jdk7", "stdlib-jdk8")) {
+                api("org.jetbrains.kotlin:kotlin-$module") {
+                    version {
+                        strictly(Versions.kotlin)
+                    }
+                }
+            }
+
             val implementation by configurations
             implementation(kotlin("reflect"))
             implementation("com.michael-bull.kotlin-inline-logger:kotlin-inline-logger:${Versions.inlineLogger}")
