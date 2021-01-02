@@ -1,7 +1,7 @@
 package org.openrs2.archive.cache
 
 import dev.openrs2.net.BootstrapFactory
-import dev.openrs2.net.suspend
+import dev.openrs2.net.awaitSuspend
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.coroutines.suspendCoroutine
@@ -22,7 +22,7 @@ public class CacheDownloader @Inject constructor(
                     .connect(hostname, port)
             }
         } finally {
-            group.shutdownGracefully().suspend()
+            group.shutdownGracefully().awaitSuspend()
         }
     }
 }

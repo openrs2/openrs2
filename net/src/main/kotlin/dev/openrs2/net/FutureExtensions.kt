@@ -5,7 +5,7 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-public suspend fun <V> Future<V>.suspend(): V {
+public suspend fun <V> Future<V>.awaitSuspend(): V {
     if (isDone) {
         if (isSuccess) {
             return now
