@@ -6,6 +6,7 @@ import io.netty.channel.ChannelHandler
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.SimpleChannelInboundHandler
 import kotlinx.coroutines.runBlocking
+import org.openrs2.buffer.crc32
 import org.openrs2.buffer.use
 import org.openrs2.cache.Js5Archive
 import org.openrs2.cache.Js5Compression
@@ -38,6 +39,7 @@ public class Js5ChannelHandler(
     private val maxVersion = version + maxVersionAttempts
     private val inFlightRequests = mutableSetOf<Js5Request.Group>()
     private val pendingRequests = ArrayDeque<Js5Request.Group>()
+    private var masterIndex: Js5MasterIndex? = null
     private lateinit var indexes: Array<Js5Index?>
     private val groups = mutableListOf<CacheImporter.Group>()
 
@@ -116,7 +118,13 @@ public class Js5ChannelHandler(
         } else if (response.archive == Js5Archive.ARCHIVESET) {
             processIndex(response.group, response.data)
         } else {
-            val version = indexes[response.archive]!![response.group]!!.version
+            val entry = indexes[response.archive]!![response.group]!!
+
+            if (response.data.crc32() != entry.checksum) {
+                throw Exception("Group checksum invalid")
+            }
+
+            val version = entry.version
             val encrypted = Js5Compression.isEncrypted(response.data.slice())
             groups += CacheImporter.Group(response.archive, response.group, response.data.retain(), version, encrypted)
         }
@@ -138,11 +146,11 @@ public class Js5ChannelHandler(
     }
 
     private fun processMasterIndex(buf: ByteBuf) {
-        val masterIndex = Js5Compression.uncompress(buf.slice()).use { uncompressed ->
+        masterIndex = Js5Compression.uncompress(buf.slice()).use { uncompressed ->
             Js5MasterIndex.read(uncompressed)
         }
 
-        val rawIndexes = runBlocking { importer.importMasterIndexAndGetIndexes(masterIndex, buf) }
+        val rawIndexes = runBlocking { importer.importMasterIndexAndGetIndexes(masterIndex!!, buf) }
         try {
             indexes = arrayOfNulls(rawIndexes.size)
 
@@ -159,10 +167,19 @@ public class Js5ChannelHandler(
     }
 
     private fun processIndex(archive: Int, buf: ByteBuf) {
+        val entry = masterIndex!!.entries[archive]
+        if (buf.crc32() != entry.checksum) {
+            throw Exception("Index checksum invalid")
+        }
+
         val index = Js5Compression.uncompress(buf.slice()).use { uncompressed ->
             Js5Index.read(uncompressed)
         }
         indexes[archive] = index
+
+        if (index.version != entry.version) {
+            throw Exception("Index version invalid")
+        }
 
         val groups = runBlocking {
             importer.importIndexAndGetMissingGroups(archive, index, buf)
