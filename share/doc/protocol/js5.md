@@ -1,5 +1,10 @@
 # JS5 protocol
 
+The JS5 remote protocol is used by the client to download groups of files from
+the server as they are required, as well as prefetching certain groups in
+advance. Groups contain the client's assets and scripts, and are stored in the
+cache.
+
 ## Upstream
 
 | Opcode | Description              |
@@ -73,5 +78,8 @@ If encryption is enabled, all downstream bytes are XORed with the encryption
 key. The client enables encryption if the checksum of a group does not match the
 expected checksum in the master index or index.
 
-After the first 512 bytes of a response, every subsequent block of 511 bytes is
-prefixed with a single `0xFF` byte.
+The encryption scheme is probably used to defend against middle boxes tampering
+with the plaintext traffic.
+
+After the first 512 bytes of a response (including the header), every subsequent
+block of 511 bytes is prefixed with a single `0xFF` byte.
