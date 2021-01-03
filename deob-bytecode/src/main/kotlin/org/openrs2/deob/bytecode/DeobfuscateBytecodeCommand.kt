@@ -6,7 +6,7 @@ import java.nio.file.Paths
 
 public fun main(args: Array<String>): Unit = DeobfuscateBytecodeCommand().main(args)
 
-public class DeobfuscateBytecodeCommand : CliktCommand(name = "deob-bytecode") {
+public class DeobfuscateBytecodeCommand : CliktCommand(name = "bytecode") {
     override fun run() {
         val injector = Guice.createInjector(BytecodeDeobfuscatorModule)
         val deobfuscator = injector.getInstance(BytecodeDeobfuscator::class.java)

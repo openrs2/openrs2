@@ -18,9 +18,7 @@ dependencies {
     implementation(project(":archive"))
     implementation(project(":compress-cli"))
     implementation(project(":crc32"))
-    implementation(project(":decompiler"))
-    implementation(project(":deob-ast"))
-    implementation(project(":deob-bytecode"))
+    implementation(project(":deob"))
     implementation(project(":game"))
     implementation(project(":patcher"))
 }

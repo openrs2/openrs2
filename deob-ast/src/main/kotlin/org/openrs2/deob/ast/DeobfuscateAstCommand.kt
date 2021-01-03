@@ -6,7 +6,7 @@ import org.openrs2.deob.util.Module
 
 public fun main(args: Array<String>): Unit = DeobfuscateAstCommand().main(args)
 
-public class DeobfuscateAstCommand : CliktCommand(name = "deob-ast") {
+public class DeobfuscateAstCommand : CliktCommand(name = "ast") {
     override fun run() {
         val injector = Guice.createInjector(AstDeobfuscatorModule)
         val deobfuscator = injector.getInstance(AstDeobfuscator::class.java)

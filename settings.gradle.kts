@@ -13,6 +13,7 @@ include(
     "crypto",
     "db",
     "decompiler",
+    "deob",
     "deob-annotations",
     "deob-ast",
     "deob-bytecode",
