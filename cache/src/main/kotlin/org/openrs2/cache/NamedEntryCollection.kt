@@ -249,7 +249,7 @@ public abstract class NamedEntryCollection<T : NamedEntry>(
             val set = nameHashTable[newNameHash]
             when {
                 set == null -> nameHashTable[newNameHash] = IntSortedSets.singleton(id)
-                set.size == 1 -> {
+                set is IntSortedSets.Singleton -> {
                     val newSet = IntAVLTreeSet()
                     newSet.add(set.firstInt())
                     newSet.add(id)
