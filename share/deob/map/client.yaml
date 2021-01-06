@@ -113,7 +113,7 @@ classes:
   client!jg: "SoftReferenceNodeFactory"
   client!jh: "Class96"
   client!jj: "TextureOp34"
-  client!jk: "Class98"
+  client!jk: "SoundBank"
   client!jl: "ClientScript"
   client!jm: "MouseRecorder"
   client!jn: "SoftwareAlphaSprite"
@@ -4506,16 +4506,16 @@ fields:
     owner: "TextureOp34"
     name: "anInt2631"
   client!jk.c Lclient!fh;:
-    owner: "Class98"
+    owner: "SoundBank"
     name: "vorbisArchive"
   client!jk.d Lclient!cc;:
     owner: "Static3"
     name: "aClass26_27"
   client!jk.l Lclient!fh;:
-    owner: "Class98"
+    owner: "SoundBank"
     name: "synthArchive"
   client!jk.m Lclient!ic;:
-    owner: "Class98"
+    owner: "SoundBank"
     name: "vorbisCache"
   client!jk.n Lclient!fh;:
     owner: "SpotAnimTypeList"
@@ -4542,7 +4542,7 @@ fields:
     owner: "AudioChannel"
     name: "thread"
   client!jk.x Lclient!ic;:
-    owner: "Class98"
+    owner: "SoundBank"
     name: "cache"
   client!jl.A [I:
     owner: "ClientScript"
@@ -24771,7 +24771,7 @@ methods:
       29: "local29"
       64: "local64"
   client!jk.<init> (Lclient!fh;Lclient!fh;)V:
-    owner: "Class98"
+    owner: "SoundBank"
     name: "<init>"
     arguments:
       0: "synthArchive"
@@ -24793,18 +24793,18 @@ methods:
     locals:
       14: "local14"
   client!jk.a (III[I)Lclient!pb;:
-    owner: "Class98"
-    name: "method2059"
+    owner: "SoundBank"
+    name: "getVorbisSound"
     arguments:
-      0: "arg0"
-      2: "arg1"
-      3: "arg2"
+      2: "group"
+      0: "file"
+      3: "samplingRates"
     locals:
-      15: "local15"
-      26: "local26"
-      33: "local33"
-      64: "local64"
-      87: "local87"
+      15: "key"
+      26: "key2"
+      33: "sound"
+      64: "vorbisSound"
+      87: "newSound"
   client!jk.a (IILjava/lang/String;)V:
     owner: "Static21"
     name: "method2060"
@@ -24813,31 +24813,31 @@ methods:
       2: "arg1"
     locals: {}
   client!jk.a (I[II)Lclient!pb;:
-    owner: "Class98"
-    name: "method2061"
+    owner: "SoundBank"
+    name: "getSynthSound"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "id"
+      1: "samplingRates"
     locals: {}
   client!jk.a (I[III)Lclient!pb;:
-    owner: "Class98"
-    name: "method2057"
+    owner: "SoundBank"
+    name: "getSynthSound"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "group"
+      2: "file"
+      1: "samplingRates"
     locals:
-      18: "local18"
-      31: "local31"
-      38: "local38"
-      57: "local57"
-      66: "local66"
+      18: "key"
+      31: "key2"
+      38: "sound"
+      57: "synthSound"
+      66: "newSound"
   client!jk.a ([III)Lclient!pb;:
-    owner: "Class98"
-    name: "method2058"
+    owner: "SoundBank"
+    name: "getVorbisSound"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      2: "id"
+      0: "samplingRates"
     locals: {}
   client!jk.b (B)V:
     owner: "Static21"
@@ -37069,8 +37069,8 @@ methods:
     name: "create"
     arguments:
       0: "archive"
-      1: "groupId"
-      2: "fileId"
+      1: "group"
+      2: "file"
     locals:
       16: "bytes"
   client!qn.a ([B)V:
