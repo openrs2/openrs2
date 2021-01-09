@@ -11,7 +11,7 @@ classes:
   client!am: "Class11_Sub1"
   client!ba: "BoundingBox"
   client!bb: "ProjAnimNode"
-  client!bc: "Class4_Sub4"
+  client!bc: "PostProcessor"
   client!bd: "WaterMaterial"
   client!be: "Class17"
   client!bf: "VorbisFloor"
@@ -40,7 +40,7 @@ classes:
   client!d: "BasType"
   client!da: "MonochromeImageCache"
   client!dc: "ParticleEffectorType"
-  client!dd: "Class4_Sub4_Sub1"
+  client!dd: "BloomPostProcessor"
   client!de: "Class11_Sub2"
   client!dh: "GlFont"
   client!dj: "LruHashTable"
@@ -77,7 +77,7 @@ classes:
   client!g: "DelayedStateChange"
   client!ga: "Js5ResourceProvider"
   client!gb: "World"
-  client!ge: "Class65"
+  client!ge: "PlayerSkillXpTable"
   client!gf: "IntHashTable"
   client!gg: "Class11_Sub3"
   client!gh: "ReferenceNodeFactory"
@@ -201,7 +201,7 @@ classes:
   client!qc: "PathingEntity"
   client!qd: "GlSolidColorTexture"
   client!qe: "HashTableIterator"
-  client!qf: "Class142"
+  client!qf: "PlainTile"
   client!qg: "MsiType"
   client!qh: "MidiInstrument"
   client!qi: "Js5TextureProvider"
@@ -250,7 +250,7 @@ classes:
   client!tj: "AudioChannel"
   client!tm: "ImageProducerFrameBuffer"
   client!tn: "AbstractWorld"
-  client!to: "Class166"
+  client!to: "ShapedTile"
   client!u: "ModelParticleEffector"
   client!ua: "NpcType"
   client!ub: "DisplayMode"
@@ -285,7 +285,7 @@ classes:
   client!wf: "Component"
   client!wg: "MapArea"
   client!wh: "QuickChatCatType"
-  client!wj: "Class187"
+  client!wj: "Environment"
   client!wl: "BufferedFile"
   client!wm: "Class4_Sub33"
   client!wn: "ParticleEffector"
@@ -432,7 +432,7 @@ fields:
     owner: "AnimBase"
     name: "anIntArrayArray1"
   client!af.C [[[Lclient!nh;:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "tiles"
   client!af.D [I:
     owner: "Static1"
@@ -603,17 +603,17 @@ fields:
     owner: "LocalisedText"
     name: "MAINLOAD30B"
   client!b.a [I:
-    owner: "Static1"
-    name: "anIntArray22"
+    owner: "GlFrameBufferAllocator"
+    name: "temp"
   client!b.b [I:
-    owner: "Static1"
-    name: "anIntArray23"
+    owner: "GlFrameBufferAllocator"
+    name: "viewport"
   client!b.c [I:
-    owner: "Static1"
-    name: "anIntArray24"
+    owner: "GlFrameBufferAllocator"
+    name: "frameBufferStack"
   client!b.d I:
-    owner: "Static1"
-    name: "anInt227"
+    owner: "GlFrameBufferAllocator"
+    name: "frameBufferStackPos"
   client!ba.a S:
     owner: "BoundingBox"
     name: "maxY"
@@ -663,8 +663,8 @@ fields:
     owner: "Static1"
     name: "aFloat24"
   client!bc.t Z:
-    owner: "Class4_Sub4"
-    name: "aBoolean54"
+    owner: "PostProcessor"
+    name: "enabled"
   client!bc.u I:
     owner: "Static1"
     name: "anInt925"
@@ -1122,7 +1122,7 @@ fields:
     owner: "Static1"
     name: "aBoolean35"
   client!cg.c [[[I:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "underwaterTileHeights"
   client!cg.e Ljava/lang/String;:
     owner: "LocalisedText"
@@ -1593,34 +1593,34 @@ fields:
     owner: "Sprites"
     name: "p11FullId"
   client!dd.E Lclient!pf;:
-    owner: "Class4_Sub4_Sub1"
+    owner: "BloomPostProcessor"
     name: "aClass134_1"
   client!dd.F I:
-    owner: "Class4_Sub4_Sub1"
+    owner: "BloomPostProcessor"
     name: "anInt933"
   client!dd.G I:
-    owner: "Class4_Sub4_Sub1"
+    owner: "BloomPostProcessor"
     name: "anInt934"
   client!dd.H Lclient!pf;:
-    owner: "Class4_Sub4_Sub1"
+    owner: "BloomPostProcessor"
     name: "aClass134_2"
   client!dd.I I:
-    owner: "Class4_Sub4_Sub1"
+    owner: "BloomPostProcessor"
     name: "anInt935"
   client!dd.K F:
     owner: "Static2"
     name: "aFloat25"
   client!dd.L I:
-    owner: "Class4_Sub4_Sub1"
+    owner: "BloomPostProcessor"
     name: "anInt936"
   client!dd.M Lclient!pf;:
-    owner: "Class4_Sub4_Sub1"
+    owner: "BloomPostProcessor"
     name: "aClass134_3"
   client!dd.N Lclient!pf;:
-    owner: "Class4_Sub4_Sub1"
+    owner: "BloomPostProcessor"
     name: "aClass134_4"
   client!dd.O [I:
-    owner: "Class4_Sub4_Sub1"
+    owner: "BloomPostProcessor"
     name: "anIntArray66"
   client!dd.P F:
     owner: "Static2"
@@ -1629,7 +1629,7 @@ fields:
     owner: "Static2"
     name: "aFloat27"
   client!dd.R I:
-    owner: "Class4_Sub4_Sub1"
+    owner: "BloomPostProcessor"
     name: "anInt937"
   client!de.m I:
     owner: "Static2"
@@ -1716,56 +1716,56 @@ fields:
     owner: "GlFont"
     name: "textureId"
   client!di.a I:
-    owner: "Static2"
-    name: "anInt1025"
+    owner: "PostProcessorManager"
+    name: "y"
   client!di.b I:
-    owner: "Static2"
-    name: "anInt1026"
+    owner: "PostProcessorManager"
+    name: "x"
   client!di.c I:
-    owner: "Static2"
-    name: "anInt1027"
+    owner: "PostProcessorManager"
+    name: "height"
   client!di.d I:
-    owner: "Static2"
-    name: "anInt1028"
+    owner: "PostProcessorManager"
+    name: "frameBuffer"
   client!di.e I:
-    owner: "Static2"
-    name: "anInt1029"
+    owner: "PostProcessorManager"
+    name: "width"
   client!di.f Lclient!ll;:
-    owner: "Static2"
-    name: "aClass112_5"
+    owner: "PostProcessorManager"
+    name: "processors"
   client!di.g Z:
-    owner: "Static2"
-    name: "aBoolean57"
+    owner: "PostProcessorManager"
+    name: "depthBufferChanged"
   client!di.h Z:
-    owner: "Static2"
-    name: "aBoolean58"
+    owner: "PostProcessorManager"
+    name: "frameBufferComplete"
   client!di.i Z:
-    owner: "Static2"
-    name: "aBoolean59"
+    owner: "PostProcessorManager"
+    name: "nextDepthTexture"
   client!di.j Z:
-    owner: "Static2"
-    name: "aBoolean60"
+    owner: "PostProcessorManager"
+    name: "colorBufferChanged"
   client!di.k I:
-    owner: "Static2"
-    name: "anInt1030"
+    owner: "PostProcessorManager"
+    name: "colorAttachments"
   client!di.l Z:
-    owner: "Static2"
-    name: "aBoolean61"
+    owner: "PostProcessorManager"
+    name: "depthTexture"
   client!di.m Z:
-    owner: "Static2"
-    name: "aBoolean62"
+    owner: "PostProcessorManager"
+    name: "attachmentsChanged"
   client!di.n [I:
-    owner: "Static2"
-    name: "anIntArray83"
+    owner: "PostProcessorManager"
+    name: "colorBuffers"
   client!di.o I:
-    owner: "Static2"
-    name: "anInt1031"
+    owner: "PostProcessorManager"
+    name: "colorBufferInternalFormat"
   client!di.p I:
-    owner: "Static2"
-    name: "anInt1032"
+    owner: "PostProcessorManager"
+    name: "depthBuffer"
   client!di.q Lclient!dd;:
-    owner: "Static2"
-    name: "aClass4_Sub4_Sub1_1"
+    owner: "PostProcessorManager"
+    name: "bloom"
   client!dj.f Lclient!lh;:
     owner: "LruHashTable"
     name: "aClass4_Sub3_18"
@@ -1773,7 +1773,7 @@ fields:
     owner: "Keyboard"
     name: "pressedKeys"
   client!dj.j [[I:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "anIntArrayArray10"
   client!dj.m I:
     owner: "Keyboard"
@@ -1986,7 +1986,7 @@ fields:
     owner: "Static2"
     name: "anInt1221"
   client!ef.c [Lclient!co;:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "aClass33Array1"
   client!ef.e [B:
     owner: "WorldList"
@@ -2364,7 +2364,7 @@ fields:
     owner: "BufferedSocket"
     name: "readPointer"
   client!eo.k [[[I:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "anIntArrayArrayArray3"
   client!eo.l I:
     owner: "Static2"
@@ -2538,7 +2538,7 @@ fields:
     owner: "SoftwareIndexedSprite"
     name: "pixels"
   client!ff.a I:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "anInt1742"
   client!ff.b Z:
     owner: "GlBuffer"
@@ -2850,8 +2850,8 @@ fields:
     owner: "EnumTypeList"
     name: "types"
   client!ge.b [I:
-    owner: "Class65"
-    name: "anIntArray165"
+    owner: "PlayerSkillXpTable"
+    name: "EXPERIENCE_FOR_LEVEL"
   client!ge.d [I:
     owner: "Static3"
     name: "anIntArray166"
@@ -3381,7 +3381,7 @@ fields:
     owner: "Static3"
     name: "anInt2165"
   client!he.t [[Lclient!ih;:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "aClass4_Sub12ArrayArray1"
   client!he.u I:
     owner: "ObjStack"
@@ -4410,7 +4410,7 @@ fields:
     owner: "LoginManager"
     name: "step"
   client!je.j [[[Lclient!nh;:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "surfaceTiles"
   client!je.k I:
     owner: "LoginManager"
@@ -4569,7 +4569,7 @@ fields:
     owner: "ClientScript"
     name: "stringLocals"
   client!jl.K I:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "sceneryLen"
   client!jl.L I:
     owner: "ClientScript"
@@ -5004,7 +5004,7 @@ fields:
     owner: "Static4"
     name: "anInt2989"
   client!l.r [[Z:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "aBooleanArrayArray4"
   client!l.s Ljava/lang/String;:
     owner: "LocalisedText"
@@ -5307,7 +5307,7 @@ fields:
     owner: "SpotAnimType"
     name: "anInt3134"
   client!li.h [[Z:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "aBooleanArrayArray5"
   client!li.i [S:
     owner: "SpotAnimType"
@@ -5454,7 +5454,7 @@ fields:
     owner: "Texture"
     name: "aClass4_Sub1_2"
   client!ln.K I:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "anInt3253"
   client!ln.L Lclient!cc;:
     owner: "Static4"
@@ -5670,7 +5670,7 @@ fields:
     owner: "LocalisedText"
     name: "CHOOSE_OPTION"
   client!mf.c [Lclient!co;:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "scenery"
   client!mf.d Z:
     owner: "Static4"
@@ -5781,7 +5781,7 @@ fields:
     owner: "Static4"
     name: "anInt3335"
   client!mi.c [[[B:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "aByteArrayArrayArray16"
   client!mi.d [[[B:
     owner: "Static4"
@@ -6649,7 +6649,7 @@ fields:
     name: "wallDecor"
   client!nh.L Lclient!to;:
     owner: "Tile"
-    name: "aClass166_1"
+    name: "shapedTile"
   client!nh.M [I:
     owner: "Tile"
     name: "interiorFlags"
@@ -6700,7 +6700,7 @@ fields:
     name: "scenery"
   client!nh.t Lclient!qf;:
     owner: "Tile"
-    name: "aClass142_1"
+    name: "plainTile"
   client!nh.u I:
     owner: "Static5"
     name: "anInt3546"
@@ -6756,7 +6756,7 @@ fields:
     owner: "Protocol"
     name: "inboundBuffer"
   client!nj.k [[Lclient!ih;:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "aClass4_Sub12ArrayArray2"
   client!nl.c [I:
     owner: "Static5"
@@ -7437,7 +7437,7 @@ fields:
     owner: "CursorType"
     name: "hotSpotY"
   client!pe.b I:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "anInt4112"
   client!pe.c Ljava/lang/String;:
     owner: "LocalisedText"
@@ -8040,28 +8040,28 @@ fields:
     owner: "Static5"
     name: "anInt4293"
   client!qf.a I:
-    owner: "Class142"
+    owner: "PlainTile"
     name: "anInt4294"
   client!qf.c I:
-    owner: "Class142"
+    owner: "PlainTile"
     name: "anInt4296"
   client!qf.d I:
-    owner: "Class142"
+    owner: "PlainTile"
     name: "anInt4297"
   client!qf.e I:
-    owner: "Class142"
+    owner: "PlainTile"
     name: "anInt4298"
   client!qf.f Lclient!cc;:
     owner: "SpotAnimTypeList"
     name: "types"
   client!qf.g I:
-    owner: "Class142"
+    owner: "PlainTile"
     name: "anInt4299"
   client!qf.i Z:
-    owner: "Class142"
+    owner: "PlainTile"
     name: "aBoolean302"
   client!qf.j I:
-    owner: "Class142"
+    owner: "PlainTile"
     name: "anInt4301"
   client!qf.k [Z:
     owner: "SpriteLoader"
@@ -8085,7 +8085,7 @@ fields:
     owner: "MsiType"
     name: "anInt4306"
   client!qg.g I:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "levels"
   client!qg.i Lclient!wf;:
     owner: "Static5"
@@ -8098,7 +8098,7 @@ fields:
     name: "aByteArray57"
   client!qh.B [I:
     owner: "MidiInstrument"
-    name: "anIntArray458"
+    name: "soundIds"
   client!qh.C Lclient!fh;:
     owner: "client"
     name: "js5Archive15"
@@ -8116,7 +8116,7 @@ fields:
     name: "disallowResult"
   client!qh.s [Lclient!pb;:
     owner: "MidiInstrument"
-    name: "aClass4_Sub8_Sub1Array1"
+    name: "sounds"
   client!qh.t I:
     owner: "MidiInstrument"
     name: "anInt4326"
@@ -8700,7 +8700,7 @@ fields:
     owner: "Static6"
     name: "anIntArray489"
   client!ri.ab [Lclient!we;:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "aClass184Array12"
   client!ri.n I:
     owner: "Loc"
@@ -8763,7 +8763,7 @@ fields:
     owner: "WorldList"
     name: "bufferLen"
   client!rl.s [[[I:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "tileHeights"
   client!rl.t I:
     owner: "WorldList"
@@ -9336,7 +9336,7 @@ fields:
     owner: "client"
     name: "js5Archive4"
   client!sn.T [[[I:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "surfaceTileHeights"
   client!sn.U I:
     owner: "TextureOp4"
@@ -9765,53 +9765,53 @@ fields:
     owner: "Song"
     name: "programs"
   client!th.a I:
-    owner: "Static6"
-    name: "anInt5133"
+    owner: "GlTextureAllocator"
+    name: "GL_TEXTURE_2D"
   client!th.b I:
-    owner: "Static6"
-    name: "anInt5134"
+    owner: "GlTextureAllocator"
+    name: "GL_TEXTURE_RECTANGLE"
   client!th.c I:
-    owner: "Static6"
-    name: "anInt5135"
+    owner: "GlTextureAllocator"
+    name: "GL_RGB"
   client!th.d I:
-    owner: "Static6"
-    name: "anInt5136"
+    owner: "GlTextureAllocator"
+    name: "GL_RGBA"
   client!th.e I:
-    owner: "Static6"
-    name: "anInt5137"
+    owner: "GlTextureAllocator"
+    name: "GL_BGRA"
   client!th.f I:
-    owner: "Static6"
-    name: "anInt5138"
+    owner: "GlTextureAllocator"
+    name: "GL_RGB16F"
   client!th.g I:
-    owner: "Static6"
-    name: "anInt5139"
+    owner: "GlTextureAllocator"
+    name: "GL_RGBA16F"
   client!th.h I:
-    owner: "Static6"
-    name: "anInt5140"
+    owner: "GlTextureAllocator"
+    name: "GL_RGB32F"
   client!th.i I:
-    owner: "Static6"
-    name: "anInt5141"
+    owner: "GlTextureAllocator"
+    name: "GL_RGBA32F"
   client!th.j I:
-    owner: "Static6"
-    name: "anInt5142"
+    owner: "GlTextureAllocator"
+    name: "GL_ALPHA"
   client!th.k I:
-    owner: "Static6"
-    name: "anInt5143"
+    owner: "GlTextureAllocator"
+    name: "GL_DEPTH_COMPONENT"
   client!th.l I:
-    owner: "Static6"
-    name: "anInt5144"
+    owner: "GlTextureAllocator"
+    name: "GL_LINEAR"
   client!th.m I:
-    owner: "Static6"
-    name: "anInt5145"
+    owner: "GlTextureAllocator"
+    name: "GL_NEAREST"
   client!th.n I:
-    owner: "Static6"
-    name: "anInt5146"
+    owner: "GlTextureAllocator"
+    name: "GL_FLOAT"
   client!th.o I:
-    owner: "Static6"
-    name: "anInt5147"
+    owner: "GlTextureAllocator"
+    name: "GL_UNSIGNED_BYTE"
   client!th.p [I:
-    owner: "Static6"
-    name: "anIntArray555"
+    owner: "GlTextureAllocator"
+    name: "temp"
   client!ti.S I:
     owner: "CreateManager"
     name: "reply"
@@ -9960,31 +9960,31 @@ fields:
     owner: "Static7"
     name: "aBoolean123"
   client!to.a [I:
-    owner: "Class166"
+    owner: "ShapedTile"
     name: "anIntArray572"
   client!to.b I:
-    owner: "Class166"
+    owner: "ShapedTile"
     name: "anInt5224"
   client!to.c [I:
     owner: "Static7"
     name: "anIntArray573"
   client!to.d [I:
-    owner: "Class166"
+    owner: "ShapedTile"
     name: "anIntArray574"
   client!to.e [I:
-    owner: "Class166"
+    owner: "ShapedTile"
     name: "anIntArray575"
   client!to.f I:
-    owner: "Class166"
+    owner: "ShapedTile"
     name: "anInt5225"
   client!to.g [I:
-    owner: "Class166"
+    owner: "ShapedTile"
     name: "anIntArray576"
   client!to.h I:
-    owner: "Class166"
+    owner: "ShapedTile"
     name: "anInt5226"
   client!to.i Z:
-    owner: "Class166"
+    owner: "ShapedTile"
     name: "aBoolean353"
   client!to.j [I:
     owner: "Static7"
@@ -9996,31 +9996,31 @@ fields:
     owner: "Static7"
     name: "anIntArray578"
   client!to.m [I:
-    owner: "Class166"
+    owner: "ShapedTile"
     name: "anIntArray579"
   client!to.n [I:
-    owner: "Class166"
+    owner: "ShapedTile"
     name: "anIntArray580"
   client!to.o [I:
-    owner: "Class166"
+    owner: "ShapedTile"
     name: "anIntArray581"
   client!to.p [I:
     owner: "Static7"
     name: "anIntArray582"
   client!to.q [I:
-    owner: "Class166"
+    owner: "ShapedTile"
     name: "anIntArray583"
   client!to.r I:
-    owner: "Class166"
+    owner: "ShapedTile"
     name: "anInt5227"
   client!to.s [I:
-    owner: "Class166"
+    owner: "ShapedTile"
     name: "anIntArray584"
   client!to.t [I:
     owner: "Static7"
     name: "anIntArray585"
   client!to.u [I:
-    owner: "Class166"
+    owner: "ShapedTile"
     name: "anIntArray586"
   client!to.v [[I:
     owner: "Static7"
@@ -10554,7 +10554,7 @@ fields:
     owner: "LocalisedText"
     name: "MAINLOAD130"
   client!v.q [[Lclient!ih;:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "aClass4_Sub12ArrayArray3"
   client!v.r I:
     owner: "IntNode"
@@ -10623,7 +10623,7 @@ fields:
     owner: "SeqTypeList"
     name: "animFramesets"
   client!vc.j [Lclient!we;:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "aClass184Array13"
   client!vc.l [I:
     owner: "Static7"
@@ -10935,7 +10935,7 @@ fields:
     owner: "TextureOp5"
     name: "anInt5587"
   client!vi.Y [[[Lclient!nh;:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "underwaterTiles"
   client!vi.Z I:
     owner: "Static7"
@@ -10944,7 +10944,7 @@ fields:
     owner: "Static7"
     name: "anIntArray637"
   client!vi.bb I:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "length"
   client!vi.cb [I:
     owner: "Static7"
@@ -10983,7 +10983,7 @@ fields:
     owner: "Static7"
     name: "aBoolean389"
   client!vl.o I:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "width"
   client!vl.p Lclient!vc;:
     owner: "WallDecor"
@@ -11787,58 +11787,58 @@ fields:
     owner: "Static7"
     name: "anInt6030"
   client!wi.e I:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "firstVisibleLevel"
   client!wj.a F:
-    owner: "Class187"
+    owner: "Environment"
     name: "aFloat148"
   client!wj.b Z:
     owner: "Preferences"
     name: "flickeringEffects"
   client!wj.c F:
-    owner: "Class187"
+    owner: "Environment"
     name: "aFloat149"
   client!wj.d Ljava/lang/String;:
     owner: "LocalisedText"
     name: "MAINLOAD30"
   client!wj.e F:
-    owner: "Class187"
+    owner: "Environment"
     name: "aFloat150"
   client!wj.g I:
-    owner: "Class187"
+    owner: "Environment"
     name: "anInt6033"
   client!wj.h F:
-    owner: "Class187"
+    owner: "Environment"
     name: "aFloat151"
   client!wj.i I:
-    owner: "Class187"
+    owner: "Environment"
     name: "anInt6034"
   client!wj.j I:
-    owner: "Class187"
+    owner: "Environment"
     name: "anInt6035"
   client!wj.k I:
-    owner: "Class187"
+    owner: "Environment"
     name: "anInt6036"
   client!wj.l I:
-    owner: "Class187"
+    owner: "Environment"
     name: "anInt6037"
   client!wj.m I:
     owner: "Mouse"
     name: "y"
   client!wj.o F:
-    owner: "Class187"
+    owner: "Environment"
     name: "aFloat152"
   client!wj.p I:
     owner: "Sprites"
     name: "p12FullId"
   client!wj.q F:
-    owner: "Class187"
+    owner: "Environment"
     name: "aFloat153"
   client!wj.t Lclient!ib;:
-    owner: "Class187"
+    owner: "Environment"
     name: "aClass4_Sub3_Sub10_7"
   client!wj.u I:
-    owner: "Class187"
+    owner: "Environment"
     name: "anInt6043"
   client!wj.x [I:
     owner: "Static7"
@@ -12039,7 +12039,7 @@ methods:
       3: "arg2"
     locals: {}
   client!ab.a (IIIIZ)V:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "init"
     arguments:
       3: "arg0"
@@ -12378,7 +12378,7 @@ methods:
     locals:
       5: "local5"
   client!ae.b (I)V:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "setFirstVisibleLevel"
     arguments:
       0: "y"
@@ -12802,7 +12802,7 @@ methods:
     locals:
       31: "sprite"
   client!ao.a (IIIILclient!vc;Lclient!vc;IIIIJ)V:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "setWallDecor"
     arguments:
       0: "y"
@@ -12847,76 +12847,76 @@ methods:
       140: "local140"
       243: "local243"
   client!b.a ()I:
-    owner: "Static9"
-    name: "method207"
+    owner: "GlFrameBufferAllocator"
+    name: "allocateRenderBuffer"
     arguments: {}
     locals: {}
   client!b.a (FFFFFFII)V:
-    owner: "Static9"
-    name: "method212"
+    owner: "GlFrameBufferAllocator"
+    name: "switchToOrthoCamera"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
-      5: "arg5"
-      6: "arg6"
-      7: "arg7"
+      0: "left"
+      1: "right"
+      2: "bottom"
+      3: "top"
+      4: "zNear"
+      5: "zFar"
+      6: "width"
+      7: "height"
     locals:
-      1: "local1"
+      1: "gl"
   client!b.a (FFFFII)V:
-    owner: "Static9"
-    name: "method213"
+    owner: "GlFrameBufferAllocator"
+    name: "switchToOrthoCamera"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
-      5: "arg5"
+      0: "left"
+      1: "right"
+      2: "bottom"
+      3: "top"
+      4: "width"
+      5: "height"
     locals: {}
   client!b.a (I)V:
-    owner: "Static9"
-    name: "method211"
+    owner: "GlFrameBufferAllocator"
+    name: "freeFrameBuffer"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!b.b (I)V:
-    owner: "Static9"
-    name: "method214"
+    owner: "GlFrameBufferAllocator"
+    name: "freeRenderBuffer"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!b.c ()V:
-    owner: "Static9"
-    name: "method209"
+    owner: "GlFrameBufferAllocator"
+    name: "restoreCamera"
     arguments: {}
     locals:
-      1: "local1"
+      1: "gl"
   client!b.c (I)V:
-    owner: "Static9"
-    name: "method216"
+    owner: "GlFrameBufferAllocator"
+    name: "pushFrameBuffer"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!b.d ()I:
-    owner: "Static9"
-    name: "method210"
+    owner: "GlFrameBufferAllocator"
+    name: "allocateFrameBuffer"
     arguments: {}
     locals: {}
   client!b.e ()V:
-    owner: "Static9"
-    name: "method215"
+    owner: "GlFrameBufferAllocator"
+    name: "popFrameBuffer"
     arguments: {}
     locals: {}
   client!b.f ()Z:
-    owner: "Static9"
-    name: "method217"
+    owner: "GlFrameBufferAllocator"
+    name: "isFrameBufferComplete"
     arguments: {}
     locals:
-      1: "local1"
-      5: "local5"
+      1: "gl"
+      5: "status"
   client!bb.<init> (Lclient!oc;)V:
     owner: "ProjAnimNode"
     name: "<init>"
@@ -12954,16 +12954,16 @@ methods:
       2: "values"
     locals: {}
   client!bc.a ()I:
-    owner: "Class4_Sub4"
-    name: "method754"
+    owner: "PostProcessor"
+    name: "getColorDepth"
     arguments: {}
     locals: {}
   client!bc.a (II)V:
-    owner: "Class4_Sub4"
-    name: "method765"
+    owner: "PostProcessor"
+    name: "setSize"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "width"
+      1: "height"
     locals: {}
   client!bc.a (IIIII)Z:
     owner: "Static9"
@@ -13011,54 +13011,54 @@ methods:
     arguments: {}
     locals: {}
   client!bc.b ()V:
-    owner: "Class4_Sub4"
-    name: "method760"
+    owner: "PostProcessor"
+    name: "quit"
     arguments: {}
     locals: {}
   client!bc.b (I)Z:
-    owner: "Class4_Sub4"
-    name: "method755"
+    owner: "PostProcessor"
+    name: "isEnabled"
     arguments: {}
     locals: {}
   client!bc.b (IIIII)V:
-    owner: "Class4_Sub4"
-    name: "method761"
+    owner: "PostProcessor"
+    name: "preProcess"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
+      0: "colorAttachment"
+      1: "width"
+      2: "height"
+      3: "colorBuffer"
+      4: "depthBuffer"
     locals: {}
   client!bc.c ()Z:
-    owner: "Class4_Sub4"
-    name: "method762"
+    owner: "PostProcessor"
+    name: "init"
     arguments: {}
     locals: {}
   client!bc.c (I)V:
-    owner: "Class4_Sub4"
-    name: "method756"
+    owner: "PostProcessor"
+    name: "postProcess"
     arguments:
-      0: "arg0"
+      0: "colorAttachment"
     locals: {}
   client!bc.d ()Z:
-    owner: "Class4_Sub4"
-    name: "method766"
+    owner: "PostProcessor"
+    name: "isInitialised"
     arguments: {}
     locals: {}
   client!bc.d (B)I:
-    owner: "Class4_Sub4"
-    name: "method753"
+    owner: "PostProcessor"
+    name: "getColorAttachments"
     arguments: {}
     locals: {}
   client!bc.e (B)Z:
-    owner: "Class4_Sub4"
-    name: "method767"
+    owner: "PostProcessor"
+    name: "hasDepthTexture"
     arguments: {}
     locals: {}
   client!bc.e (I)Z:
-    owner: "Class4_Sub4"
-    name: "method764"
+    owner: "PostProcessor"
+    name: "hasAlpha"
     arguments: {}
     locals: {}
   client!bd.<init> ()V:
@@ -13149,8 +13149,8 @@ methods:
       0: "lo"
       1: "hi"
     locals:
-      5: "pivot"
-      9: "pivotValue"
+      5: "mid"
+      9: "pivot"
       13: "tempY"
       17: "tempStep2Flag"
       21: "i"
@@ -13568,11 +13568,11 @@ methods:
       36: "local36"
   client!bi.a (ZI)Z:
     owner: "Static10"
-    name: "method300"
+    name: "setHdrEnabled"
     arguments:
-      0: "arg0"
+      0: "enabled"
     locals:
-      13: "local13"
+      13: "current"
   client!bi.b (I)Lclient!wg;:
     owner: "Static10"
     name: "method305"
@@ -13657,7 +13657,7 @@ methods:
       95: "local95"
       108: "local108"
   client!bk.a (IIIILclient!vc;Lclient!vc;IIJ)V:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "setWall"
     arguments:
       0: "y"
@@ -14184,7 +14184,7 @@ methods:
     locals:
       4: "local4"
   client!c.a (Z)Z:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "isAllLevelsVisible"
     arguments: {}
     locals: {}
@@ -14551,7 +14551,7 @@ methods:
       897: "local897"
       918: "local918"
   client!ce.a (III)Lclient!dm;:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "getGroundDecor"
     arguments:
       0: "y"
@@ -15002,7 +15002,7 @@ methods:
     arguments: {}
     locals: {}
   client!ci.a (IIIILclient!vc;IJIIII)Z:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "method584"
     arguments:
       0: "arg0"
@@ -15148,7 +15148,7 @@ methods:
       161: "local161"
       176: "local176"
   client!ck.a (IIIIILclient!vc;IJZ)Z:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "method637"
     arguments:
       0: "arg0"
@@ -15871,18 +15871,18 @@ methods:
       120: "formattedLine"
       136: "javaSuffixIndex"
   client!dd.a ()I:
-    owner: "Class4_Sub4_Sub1"
-    name: "method754"
+    owner: "BloomPostProcessor"
+    name: "getColorDepth"
     arguments: {}
     locals: {}
   client!dd.a (II)V:
-    owner: "Class4_Sub4_Sub1"
-    name: "method765"
+    owner: "BloomPostProcessor"
+    name: "setSize"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "width"
+      1: "height"
     locals:
-      1: "local1"
+      1: "gl"
       5: "local5"
       9: "local9"
       35: "local35"
@@ -15892,21 +15892,21 @@ methods:
       76: "local76"
       78: "local78"
   client!dd.b ()V:
-    owner: "Class4_Sub4_Sub1"
-    name: "method760"
+    owner: "BloomPostProcessor"
+    name: "quit"
     arguments: {}
     locals: {}
   client!dd.b (IIIII)V:
-    owner: "Class4_Sub4_Sub1"
-    name: "method761"
+    owner: "BloomPostProcessor"
+    name: "preProcess"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
+      0: "colorAttachment"
+      1: "width"
+      2: "height"
+      3: "colorBuffer"
+      4: "depthBuffer"
     locals:
-      1: "local1"
+      1: "gl"
       29: "local29"
       33: "local33"
       35: "local35"
@@ -15915,20 +15915,20 @@ methods:
       342: "local342"
       462: "local462"
   client!dd.c ()Z:
-    owner: "Class4_Sub4_Sub1"
-    name: "method762"
+    owner: "BloomPostProcessor"
+    name: "init"
     arguments: {}
     locals:
-      7: "local7"
+      7: "gl"
   client!dd.c (I)V:
-    owner: "Class4_Sub4_Sub1"
-    name: "method756"
+    owner: "BloomPostProcessor"
+    name: "postProcess"
     arguments:
-      0: "arg0"
+      0: "colorAttachment"
     locals: {}
   client!dd.d ()Z:
-    owner: "Class4_Sub4_Sub1"
-    name: "method766"
+    owner: "BloomPostProcessor"
+    name: "isInitialised"
     arguments: {}
     locals: {}
   client!de.<init> (IIIIII)V:
@@ -16085,95 +16085,95 @@ methods:
     locals:
       21: "i"
   client!di.a ()V:
-    owner: "Static12"
-    name: "method870"
+    owner: "PostProcessorManager"
+    name: "update"
     arguments: {}
     locals:
-      1: "local1"
-      3: "local3"
-      5: "local5"
-      7: "local7"
-      12: "local12"
-      17: "local17"
-      55: "local55"
-      86: "local86"
-      93: "local93"
+      1: "maxColorDepth"
+      3: "colorAttachments"
+      5: "alpha"
+      7: "depth"
+      12: "processor"
+      17: "colorDepth"
+      55: "format"
+      86: "prevColorAttachments"
+      93: "nextColorAttachments"
   client!di.a (IIII)Z:
-    owner: "Static13"
-    name: "method874"
+    owner: "PostProcessorManager"
+    name: "setViewport"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
+      0: "x"
+      1: "y"
+      2: "width"
+      3: "height"
     locals:
-      16: "local16"
-      30: "local30"
-      49: "local49"
+      16: "changed"
+      30: "processor"
+      49: "gl"
   client!di.a (Lclient!bc;)Z:
-    owner: "Static13"
-    name: "method875"
+    owner: "PostProcessorManager"
+    name: "enable"
     arguments:
-      0: "arg0"
+      0: "processor"
     locals: {}
   client!di.a (Lclient!bc;Z)V:
-    owner: "Static13"
-    name: "method876"
+    owner: "PostProcessorManager"
+    name: "disable"
     arguments:
-      0: "arg0"
+      0: "processor"
     locals: {}
   client!di.b ()Z:
-    owner: "Static12"
-    name: "method871"
+    owner: "PostProcessorManager"
+    name: "enableBloom"
     arguments: {}
     locals: {}
   client!di.c ()V:
-    owner: "Static12"
-    name: "method872"
+    owner: "PostProcessorManager"
+    name: "init"
     arguments: {}
     locals:
-      5: "local5"
-      8: "local8"
-      29: "local29"
-      34: "local34"
+      5: "gl"
+      8: "maxColorAttachments"
+      29: "node"
+      34: "processor"
   client!di.d ()V:
-    owner: "Static12"
-    name: "method873"
+    owner: "PostProcessorManager"
+    name: "disableBloom"
     arguments: {}
     locals: {}
   client!di.e ()Z:
-    owner: "Static13"
-    name: "method877"
+    owner: "PostProcessorManager"
+    name: "isBloomSupported"
     arguments: {}
     locals: {}
   client!di.g ()Z:
-    owner: "Static13"
-    name: "method879"
+    owner: "PostProcessorManager"
+    name: "isFrameBufferSupported"
     arguments: {}
     locals: {}
   client!di.h ()V:
-    owner: "Static13"
-    name: "method880"
+    owner: "PostProcessorManager"
+    name: "process"
     arguments: {}
     locals:
-      4: "local4"
-      15: "local15"
-      17: "local17"
-      22: "local22"
-      29: "local29"
-      33: "local33"
-      35: "local35"
+      4: "gl"
+      15: "colorBufferIndex"
+      17: "prevColorBufferIndex"
+      22: "current"
+      29: "next"
+      33: "colorAttachments"
+      35: "i"
   client!di.i ()Z:
-    owner: "Static13"
-    name: "method881"
+    owner: "PostProcessorManager"
+    name: "isBloomEnabled"
     arguments: {}
     locals: {}
   client!di.j ()V:
-    owner: "Static13"
-    name: "method882"
+    owner: "PostProcessorManager"
+    name: "quit"
     arguments: {}
     locals:
-      39: "local39"
+      39: "processor"
   client!dj.<init> (I)V:
     owner: "LruHashTable"
     name: "<init>"
@@ -16942,7 +16942,7 @@ methods:
       17: "local17"
   client!ej.b (I)V:
     owner: "Class4_Sub9"
-    name: "method1057"
+    name: "release"
     arguments: {}
     locals: {}
   client!ej.b (Ljava/lang/String;I)[B:
@@ -23452,7 +23452,7 @@ methods:
       103: "len"
       109: "i"
   client!ij.a (Lclient!co;)V:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "removeScenery"
     arguments:
       0: "scenery"
@@ -23784,7 +23784,7 @@ methods:
       26: "bytes"
       38: "newType"
   client!j.a (III)J:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "getSceneryPickKey"
     arguments:
       0: "y"
@@ -25427,13 +25427,13 @@ methods:
       8: "arg8"
     locals: {}
   client!jo.a (IIIIIIIIIIIIIIIIIIII)V:
-    owner: "Static22"
-    name: "method4698"
+    owner: "SceneGraph"
+    name: "setTile"
     arguments:
       0: "y"
       1: "x"
       2: "z"
-      3: "arg3"
+      3: "shape"
       4: "arg4"
       5: "arg5"
       6: "arg6"
@@ -25451,11 +25451,11 @@ methods:
       18: "arg18"
       19: "arg19"
     locals:
-      12: "local12"
+      12: "plainTile"
       14: "y0"
       74: "local74"
       76: "y0"
-      134: "local134"
+      134: "shapedTile"
       136: "y0"
   client!jo.a (ILclient!vh;III)V:
     owner: "Static22"
@@ -25609,7 +25609,7 @@ methods:
       26: "bytes"
       30: "newType"
   client!ka.a (IIIIIILclient!vc;IJ)Z:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "method2196"
     arguments:
       0: "y"
@@ -26574,7 +26574,7 @@ methods:
     arguments: {}
     locals: {}
   client!kl.a ()V:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "removeAllScenery"
     arguments: {}
     locals:
@@ -26846,7 +26846,7 @@ methods:
     locals:
       24: "local24"
   client!kn.a (III)J:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "getGroundDecorPickKey"
     arguments:
       0: "y"
@@ -26871,7 +26871,7 @@ methods:
       0: "arg0"
     locals: {}
   client!ko.a (III)Lclient!ve;:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "removeWall"
     arguments:
       0: "y"
@@ -26889,7 +26889,7 @@ methods:
     locals:
       9: "local9"
   client!l.a (IIIIIIIILclient!vc;IZJ)Z:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "addScenery"
     arguments:
       0: "y"
@@ -27148,7 +27148,7 @@ methods:
     arguments:
       2: "song"
       3: "archive"
-      4: "arg2"
+      4: "bank"
     locals:
       9: "valid"
       24: "samplingRates"
@@ -27446,7 +27446,7 @@ methods:
     name: "method2509"
     arguments: {}
     locals:
-      19: "local19"
+      19: "instrument"
   client!lf.<init> ()V:
     owner: "TextureOp14"
     name: "<init>"
@@ -28492,7 +28492,7 @@ methods:
       52: "local52"
       54: "local54"
   client!lj.c (III)Lclient!co;:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "method2593"
     arguments:
       0: "y"
@@ -28584,7 +28584,7 @@ methods:
     locals:
       7: "v2"
   client!ll.a (III)Lclient!ve;:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "getWall"
     arguments:
       0: "y"
@@ -29145,8 +29145,8 @@ methods:
       110: "local110"
       208: "local208"
       268: "graphics"
-      276: "local276"
-      299: "local299"
+      276: "ex"
+      299: "request"
       490: "local490"
   client!ma.a (II)V:
     owner: "IndexedSprite"
@@ -29498,7 +29498,7 @@ methods:
       25: "ex"
       29: "buffer"
   client!mi.a (III)J:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "getWallPickKey"
     arguments:
       0: "y"
@@ -31548,7 +31548,7 @@ methods:
       27: "bytes"
       31: "newType"
   client!nc.a (III)Lclient!dm;:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "removeGroundDecor"
     arguments:
       0: "y"
@@ -32536,7 +32536,7 @@ methods:
       227: "local227"
       237: "local237"
   client!o.b (III)Lclient!co;:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "getScenery"
     arguments:
       0: "y"
@@ -36125,7 +36125,7 @@ methods:
       25: "node"
       50: "node"
   client!qf.<init> (IIIIIIZ)V:
-    owner: "Class142"
+    owner: "PlainTile"
     name: "<init>"
     arguments:
       0: "arg0"
@@ -36532,7 +36532,7 @@ methods:
       674: "local674"
   client!qh.a (Z)V:
     owner: "MidiInstrument"
-    name: "method3570"
+    name: "release"
     arguments: {}
     locals: {}
   client!qh.a (ZLjava/lang/String;)Ljava/lang/String;:
@@ -36551,15 +36551,15 @@ methods:
     name: "method3566"
     arguments:
       0: "samplingRates"
-      1: "arg1"
+      1: "bank"
       3: "keys"
     locals:
       15: "valid"
-      17: "local17"
-      19: "local19"
+      17: "prevSoundId"
+      19: "sound"
       21: "i"
-      40: "local40"
-      51: "local51"
+      40: "soundId"
+      51: "soundId2"
   client!qi.<init> (Lclient!fh;Lclient!fh;Lclient!fh;)V:
     owner: "Js5TextureProvider"
     name: "<init>"
@@ -39583,7 +39583,7 @@ methods:
       0: "events"
     locals: {}
   client!sa.a (III)Lclient!vl;:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "removeWallDecor"
     arguments:
       0: "y"
@@ -40687,7 +40687,7 @@ methods:
     arguments: {}
     locals: {}
   client!td.a (III)Lclient!vl;:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "getWallDecor"
     arguments:
       0: "y"
@@ -41112,75 +41112,75 @@ methods:
     arguments: {}
     locals: {}
   client!th.a ()I:
-    owner: "Static33"
-    name: "method4172"
+    owner: "GlTextureAllocator"
+    name: "allocateTexture"
     arguments: {}
     locals: {}
   client!th.a (I)V:
-    owner: "Static33"
-    name: "method4169"
+    owner: "GlTextureAllocator"
+    name: "freeTexture"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!th.a (III)V:
-    owner: "Static33"
-    name: "method4167"
+    owner: "GlTextureAllocator"
+    name: "allocateTextureStorageRectangle"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "internalFormat"
+      1: "width"
+      2: "height"
     locals: {}
   client!th.a (IIIIIIII[B)I:
-    owner: "Static33"
-    name: "method4168"
+    owner: "GlTextureAllocator"
+    name: "allocateTextureAndStorage2d"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
-      5: "arg5"
-      6: "arg6"
-      7: "arg7"
-      8: "arg8"
+      0: "target"
+      1: "internalFormat"
+      2: "width"
+      3: "height"
+      4: "minFilter"
+      5: "magFilter"
+      6: "format"
+      7: "type"
+      8: "pixels"
     locals:
-      1: "local1"
-      3: "local3"
+      1: "gl"
+      3: "texture"
   client!th.a (IIIIII[B)V:
-    owner: "Static33"
-    name: "method4166"
+    owner: "GlTextureAllocator"
+    name: "allocateTextureStorage"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
-      5: "arg5"
-      6: "arg6"
+      0: "target"
+      1: "internalFormat"
+      2: "width"
+      3: "height"
+      4: "format"
+      5: "type"
+      6: "pixels"
     locals:
-      6: "local6"
+      6: "buffer"
   client!th.a (III[B)I:
-    owner: "Static33"
-    name: "method4173"
+    owner: "GlTextureAllocator"
+    name: "allocateTextureAndStorage2d"
     arguments:
-      0: "arg0"
-      3: "arg1"
+      0: "format"
+      3: "pixels"
     locals: {}
   client!th.b (III)V:
-    owner: "Static33"
-    name: "method4170"
+    owner: "GlTextureAllocator"
+    name: "allocateTextureStorage2d"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "internalFormat"
+      1: "width"
+      2: "height"
     locals: {}
   client!th.c (III)I:
-    owner: "Static33"
-    name: "method4171"
+    owner: "GlTextureAllocator"
+    name: "allocateTextureAndStorage2d"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "format"
+      1: "width"
+      2: "height"
     locals: {}
   client!ti.<init> ()V:
     owner: "TextureOp24"
@@ -42176,7 +42176,7 @@ methods:
       75: "alpha"
       77: "i"
   client!to.<init> (IIIIIIIIIIIIIIIIIII)V:
-    owner: "Class166"
+    owner: "ShapedTile"
     name: "<init>"
     arguments:
       0: "arg0"
@@ -42924,19 +42924,19 @@ methods:
       0: "event"
     locals: {}
   client!uf.a ()V:
-    owner: "Static35"
-    name: "method4310"
+    owner: "SceneGraph"
+    name: "clear"
     arguments: {}
     locals:
-      3: "local3"
-      9: "local9"
-      14: "local14"
-      38: "local38"
-      44: "local44"
-      49: "local49"
-      75: "local75"
-      88: "local88"
-      103: "local103"
+      3: "y"
+      9: "x"
+      14: "z"
+      38: "y"
+      44: "x"
+      49: "z"
+      75: "i"
+      88: "i"
+      103: "i"
   client!uf.a (B)V:
     owner: "LocalisedText"
     name: "switchToPortuguese"
@@ -43379,7 +43379,7 @@ methods:
     arguments: {}
     locals: {}
   client!um.a (Z)V:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "setUnderwater"
     arguments:
       0: "underwater"
@@ -45257,7 +45257,7 @@ methods:
       3: "arg2"
     locals: {}
   client!wb.a (IIIJ)Z:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "isPickKeyValid"
     arguments:
       0: "y"
@@ -45721,7 +45721,7 @@ methods:
       22: "bytes"
       26: "newType"
   client!wf.b (III)J:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "getWallDecorPickKey"
     arguments:
       0: "y"
@@ -45989,22 +45989,22 @@ methods:
       592: "local592"
       596: "local596"
   client!wj.<init> ()V:
-    owner: "Class187"
+    owner: "Environment"
     name: "<init>"
     arguments: {}
     locals: {}
   client!wj.<init> (Lclient!fd;)V:
-    owner: "Class187"
+    owner: "Environment"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals:
-      16: "local16"
+      16: "flags"
   client!wj.a (Lclient!fd;I)V:
-    owner: "Class187"
+    owner: "Environment"
     name: "method4786"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals: {}
   client!wj.a (Lclient!fh;IB)[Lclient!fe;:
     owner: "SpriteLoader"
@@ -46324,7 +46324,7 @@ methods:
       3: "arg2"
     locals: {}
   client!wn.a (IIIILclient!vc;JZ)V:
-    owner: "Terrain"
+    owner: "SceneGraph"
     name: "setGroundDecor"
     arguments:
       0: "y"
