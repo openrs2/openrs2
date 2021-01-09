@@ -5,6 +5,20 @@ the server as they are required, as well as prefetching certain groups in
 advance. Groups contain the client's assets and scripts, and are stored in the
 cache.
 
+The client opens a connection to the primary game server port and sends the
+`INIT_JS5REMOTE_CONNECTION` packet, which consists of a single byte opcode
+(`15`) followed by the client's build number as an integer.
+
+The server responds with a single `0` byte if the connection attempt is
+successful. It may also respond with `CLIENT_OUT_OF_DATE` (`6`), `SERVER_FULL`
+(`7`) or `IP_LIMIT` (`9`), after which the connection will be closed.
+
+After a successful connection attempt, the connection remains in JS5 mode for
+the rest of its life.
+
+JS5 is a request/response protocol with support for pipelining - the 550 client
+is capable of handling up to 20 prefetch and 20 urgent in-flight requests.
+
 ## Upstream
 
 | Opcode | Description              |
