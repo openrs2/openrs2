@@ -189,16 +189,20 @@ public abstract class NamedEntryCollection<T : NamedEntry>(
         return createOrGetNamed(name.krHashCode())
     }
 
-    public fun remove(id: Int) {
-        get(id)?.remove()
+    public fun remove(id: Int): T? {
+        val entry = get(id)
+        entry?.remove()
+        return entry
     }
 
-    public fun removeNamed(nameHash: Int) {
-        getNamed(nameHash)?.remove()
+    public fun removeNamed(nameHash: Int): T? {
+        val entry = getNamed(nameHash)
+        entry?.remove()
+        return entry
     }
 
-    public fun remove(name: String) {
-        removeNamed(name.krHashCode())
+    public fun remove(name: String): T? {
+        return removeNamed(name.krHashCode())
     }
 
     private fun allocateId(): Int {

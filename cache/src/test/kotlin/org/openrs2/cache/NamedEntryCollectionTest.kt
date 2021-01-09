@@ -334,7 +334,7 @@ object NamedEntryCollectionTest {
         assertEquals(entry, collection[0])
         assertEquals(listOf(entry), collection.toList())
 
-        collection.remove(0)
+        assertEquals(entry, collection.remove(0))
 
         assertEquals(0, collection.size)
         assertEquals(0, collection.capacity)
@@ -347,7 +347,7 @@ object NamedEntryCollectionTest {
         assertFalse("hello" in collection)
         assertNull(collection["hello"])
 
-        collection.remove(0)
+        assertNull(collection.remove(0))
         assertEquals(emptyList(), collection.toList())
     }
 
@@ -364,7 +364,7 @@ object NamedEntryCollectionTest {
         assertEquals(entry, collection[0])
         assertEquals(listOf(entry), collection.toList())
 
-        collection.remove("hello")
+        assertEquals(entry, collection.remove("hello"))
 
         assertEquals(0, collection.size)
         assertEquals(0, collection.capacity)
@@ -377,7 +377,7 @@ object NamedEntryCollectionTest {
         assertFalse("world" in collection)
         assertNull(collection["world"])
 
-        collection.remove("hello")
+        assertNull(collection.remove("hello"))
         assertEquals(emptyList(), collection.toList())
     }
 
@@ -435,7 +435,7 @@ object NamedEntryCollectionTest {
         assertEquals(entry1, collection[1])
         assertEquals(listOf(entry0, entry1), collection.toList())
 
-        collection.remove(0)
+        assertEquals(entry0, collection.remove(0))
 
         assertEquals(1, collection.size)
         assertEquals(2, collection.capacity)
@@ -449,7 +449,7 @@ object NamedEntryCollectionTest {
         assertFalse("world" in collection)
         assertNull(collection["world"])
 
-        collection.remove(0)
+        assertNull(collection.remove(0))
         assertEquals(listOf(entry1), collection.toList())
     }
 
@@ -476,7 +476,7 @@ object NamedEntryCollectionTest {
         assertEquals(entry2, collection["abc"])
         assertEquals(listOf(entry0, entry1, entry2), collection.toList())
 
-        collection.remove("hello")
+        assertEquals(entry0, collection.remove("hello"))
 
         assertEquals(2, collection.size)
         assertEquals(3, collection.capacity)
@@ -491,7 +491,7 @@ object NamedEntryCollectionTest {
         assertFalse("!" in collection)
         assertNull(collection["!"])
 
-        collection.remove("hello")
+        assertNull(collection.remove("hello"))
         assertEquals(listOf(entry1, entry2), collection.toList())
     }
 
