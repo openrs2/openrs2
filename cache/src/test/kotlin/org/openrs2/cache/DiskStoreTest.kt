@@ -734,8 +734,8 @@ object DiskStoreTest {
     }
 
     private fun writeTest(name: String, f: (Store) -> Unit) {
-        Jimfs.newFileSystem(Configuration.unix()).use { fs ->
-            val actual = fs.getPath("/cache")
+        Jimfs.newFileSystem(Configuration.forCurrentPlatform()).use { fs ->
+            val actual = fs.rootDirectories.first().resolve("cache")
             DiskStore.create(actual).use { store ->
                 f(store)
             }
@@ -746,8 +746,8 @@ object DiskStoreTest {
     }
 
     private fun overwriteTest(src: String, name: String, f: (Store) -> Unit) {
-        Jimfs.newFileSystem(Configuration.unix()).use { fs ->
-            val actual = fs.getPath("/cache")
+        Jimfs.newFileSystem(Configuration.forCurrentPlatform()).use { fs ->
+            val actual = fs.rootDirectories.first().resolve("cache")
             ROOT.resolve(src).recursiveCopy(actual)
 
             DiskStore.open(actual).use { store ->

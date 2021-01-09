@@ -250,8 +250,8 @@ object FlatFileStoreTest {
     }
 
     private fun writeTest(name: String, f: (Store) -> Unit) {
-        Jimfs.newFileSystem(Configuration.unix()).use { fs ->
-            val actual = fs.getPath("/cache")
+        Jimfs.newFileSystem(Configuration.forCurrentPlatform()).use { fs ->
+            val actual = fs.rootDirectories.first().resolve("cache")
             FlatFileStore.create(actual).use { store ->
                 f(store)
             }
@@ -262,8 +262,8 @@ object FlatFileStoreTest {
     }
 
     private fun overwriteTest(src: String, name: String, f: (Store) -> Unit) {
-        Jimfs.newFileSystem(Configuration.unix()).use { fs ->
-            val actual = fs.getPath("/cache")
+        Jimfs.newFileSystem(Configuration.forCurrentPlatform()).use { fs ->
+            val actual = fs.rootDirectories.first().resolve("cache")
             ROOT.resolve(src).recursiveCopy(actual)
 
             FlatFileStore.open(actual).use { store ->
