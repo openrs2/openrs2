@@ -58,15 +58,19 @@ public class HighDpiTransformer : Transformer() {
             return false
         }
 
-        if (clazz.name == gameShell) {
-            addCanvasScaleField(clazz)
-            newMembers++
-        } else if (clazz.name in GL_INTERFACES) {
-            addPixelZoomMethod(clazz, Opcodes.ACC_ABSTRACT)
-            newMembers++
-        } else if (clazz.name in GL_IMPLS) {
-            addPixelZoomMethod(clazz, Opcodes.ACC_FINAL or Opcodes.ACC_NATIVE)
-            newMembers++
+        when (clazz.name) {
+            gameShell -> {
+                addCanvasScaleField(clazz)
+                newMembers++
+            }
+            in GL_INTERFACES -> {
+                addPixelZoomMethod(clazz, Opcodes.ACC_ABSTRACT)
+                newMembers++
+            }
+            in GL_IMPLS -> {
+                addPixelZoomMethod(clazz, Opcodes.ACC_FINAL or Opcodes.ACC_NATIVE)
+                newMembers++
+            }
         }
 
         return false
