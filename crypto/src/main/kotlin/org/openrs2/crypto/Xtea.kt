@@ -49,15 +49,15 @@ public class XteaKey(
                 return null
             }
 
-            try {
+            return try {
                 val k0 = Integer.parseUnsignedInt(s, 0, 8, 16)
                 val k1 = Integer.parseUnsignedInt(s, 8, 16, 16)
                 val k2 = Integer.parseUnsignedInt(s, 16, 24, 16)
                 val k3 = Integer.parseUnsignedInt(s, 24, 32, 16)
 
-                return XteaKey(k0, k1, k2, k3)
+                XteaKey(k0, k1, k2, k3)
             } catch (ex: NumberFormatException) {
-                return null
+                null
             }
         }
     }
