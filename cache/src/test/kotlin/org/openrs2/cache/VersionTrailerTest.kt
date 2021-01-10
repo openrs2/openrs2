@@ -9,7 +9,7 @@ import kotlin.test.assertNull
 
 object VersionTrailerTest {
     @Test
-    public fun testStrip() {
+    fun testStrip() {
         assertNull(VersionTrailer.strip(Unpooled.EMPTY_BUFFER))
 
         wrappedBuffer(0).use { buf ->
