@@ -5,13 +5,8 @@ public data class Config(
     val operator: String,
     val domain: String
 ) {
-    val internalGame: String
-    val internalOperator: String
-
-    init {
-        internalGame = game.toInternalName()
-        internalOperator = operator.toInternalName()
-    }
+    val internalGame: String = game.toInternalName()
+    val internalOperator: String = operator.toInternalName()
 
     private companion object {
         private val INTERNAL_NAME_REGEX = Regex("(?i)[^a-z0-9]+")
