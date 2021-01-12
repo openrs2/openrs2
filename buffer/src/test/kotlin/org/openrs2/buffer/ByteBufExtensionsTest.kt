@@ -421,12 +421,9 @@ object ByteBufExtensionsTest {
         }
 
         // Tests the nioBufferCount() == 1 case.
-        copiedBuffer(s).use { buf ->
-            ByteBufAllocator.DEFAULT.directBuffer().use { directBuf ->
-                directBuf.writeBytes(buf)
-
-                assertEquals(0x414FA339, directBuf.crc32(2, directBuf.writerIndex() - 3))
-            }
+        ByteBufAllocator.DEFAULT.directBuffer().use { directBuf ->
+            directBuf.writeCharSequence(s, Charsets.UTF_8)
+            assertEquals(0x414FA339, directBuf.crc32(2, directBuf.writerIndex() - 3))
         }
 
         // Tests the nioBufferCount() > 1 case.
