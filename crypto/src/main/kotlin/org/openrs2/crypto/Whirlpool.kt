@@ -1,5 +1,23 @@
 package org.openrs2.crypto
 
+import com.google.common.base.Preconditions
+import io.netty.buffer.ByteBuf
+import io.netty.buffer.ByteBufUtil
+
+public fun ByteBuf.whirlpool(): ByteArray {
+    return whirlpool(readerIndex(), readableBytes())
+}
+
+public fun ByteBuf.whirlpool(index: Int, len: Int): ByteArray {
+    Preconditions.checkPositionIndexes(index, index + len, capacity())
+
+    return if (hasArray()) {
+        Whirlpool.whirlpool(array(), arrayOffset() + index, len)
+    } else {
+        Whirlpool.whirlpool(ByteBufUtil.getBytes(this, index, len, false))
+    }
+}
+
 public class Whirlpool {
     private val bitLength = ByteArray(32)
     private val buffer = ByteArray(64)

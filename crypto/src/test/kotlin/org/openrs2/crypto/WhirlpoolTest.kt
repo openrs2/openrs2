@@ -1,9 +1,14 @@
 package org.openrs2.crypto
 
+import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.ByteBufUtil
+import io.netty.buffer.Unpooled
 import org.junit.jupiter.api.Assertions.assertArrayEquals
+import org.openrs2.buffer.copiedBuffer
+import org.openrs2.buffer.use
 import kotlin.streams.toList
 import kotlin.test.Test
+import kotlin.test.assertFailsWith
 
 object WhirlpoolTest {
     private class IsoTestVector(input: String, expected: String) {
@@ -61,6 +66,10 @@ object WhirlpoolTest {
 
     private val NESSIE_ZERO_VECTORS = readVectors("nessie-zero-vectors.txt")
     private val NESSIE_ONE_VECTORS = readVectors("nessie-one-vectors.txt")
+    private val QUICK_BROWN_FOX = ByteBufUtil.decodeHexDump(
+        "B97DE512E91E3828B40D2B0FDCE9CEB3C4A71F9BEA8D88E75C4FA854DF36725F" +
+            "D2B52EB6544EDCACD6F8BEDDFEA403CB55AE31F03AD62A5EF54E42EE82C3FB35"
+    )
 
     private fun readVectors(file: String): List<ByteArray> {
         val input = WhirlpoolTest::class.java.getResourceAsStream("whirlpool/$file")
@@ -103,6 +112,55 @@ object WhirlpoolTest {
 
             val actual = Whirlpool.whirlpool(input)
             assertArrayEquals(vector, actual)
+        }
+    }
+
+    @Test
+    fun testByteBuf() {
+        val s = "AAThe quick brown fox jumps over the lazy dogA"
+
+        /*
+         * Tests the hasArray() case. The slicedBuf trickery is to allow us
+         * to test a non-zero arrayOffset().
+         */
+        copiedBuffer(s).use { buf ->
+            val slicedBuf = buf.slice(1, buf.readableBytes() - 1)
+            assertArrayEquals(QUICK_BROWN_FOX, slicedBuf.whirlpool(1, slicedBuf.writerIndex() - 2))
+        }
+
+        // Tests the !hasArray() case.
+        ByteBufAllocator.DEFAULT.directBuffer().use { directBuf ->
+            directBuf.writeCharSequence(s, Charsets.UTF_8)
+            assertArrayEquals(QUICK_BROWN_FOX, directBuf.whirlpool(2, directBuf.writerIndex() - 3))
+        }
+
+        /*
+         * Check the whirlpool() method (with no arguments) sets the
+         * index/length correctly.
+         */
+        copiedBuffer(s).use { buf ->
+            buf.readerIndex(2)
+            buf.writerIndex(buf.writerIndex() - 1)
+            assertArrayEquals(QUICK_BROWN_FOX, buf.whirlpool())
+        }
+    }
+
+    @Test
+    fun testByteBufBounds() {
+        assertFailsWith<IndexOutOfBoundsException> {
+            Unpooled.EMPTY_BUFFER.whirlpool(-1, 0)
+        }
+
+        assertFailsWith<IndexOutOfBoundsException> {
+            Unpooled.EMPTY_BUFFER.whirlpool(0, -1)
+        }
+
+        assertFailsWith<IndexOutOfBoundsException> {
+            Unpooled.EMPTY_BUFFER.whirlpool(1, 0)
+        }
+
+        assertFailsWith<IndexOutOfBoundsException> {
+            Unpooled.EMPTY_BUFFER.whirlpool(0, 1)
         }
     }
 }
