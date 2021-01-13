@@ -127,9 +127,28 @@ public class CacheImporter @Inject constructor(
         }
     }
 
-    public suspend fun importMasterIndexAndGetIndexes(masterIndex: Js5MasterIndex, buf: ByteBuf): List<ByteBuf?> {
+    public suspend fun importMasterIndexAndGetIndexes(
+        masterIndex: Js5MasterIndex,
+        buf: ByteBuf,
+        gameId: Int,
+        build: Int
+    ): List<ByteBuf?> {
         return database.execute { connection ->
             prepare(connection)
+
+            connection.prepareStatement(
+                """
+                UPDATE games
+                SET build = ?
+                WHERE id = ?
+            """.trimIndent()
+            ).use { stmt ->
+                stmt.setInt(1, build)
+                stmt.setInt(2, gameId)
+
+                stmt.execute()
+            }
+
             addMasterIndex(connection, MasterIndex(masterIndex, buf))
 
             connection.prepareStatement(

@@ -29,6 +29,7 @@ import kotlin.coroutines.resumeWithException
 @ChannelHandler.Sharable
 public class Js5ChannelHandler(
     private val bootstrap: Bootstrap,
+    private val gameId: Int,
     private val hostname: String,
     private val port: Int,
     private var version: Int,
@@ -155,7 +156,7 @@ public class Js5ChannelHandler(
             Js5MasterIndex.read(uncompressed)
         }
 
-        val rawIndexes = runBlocking { importer.importMasterIndexAndGetIndexes(masterIndex!!, buf) }
+        val rawIndexes = runBlocking { importer.importMasterIndexAndGetIndexes(masterIndex!!, buf, gameId, version) }
         try {
             indexes = arrayOfNulls(rawIndexes.size)
 

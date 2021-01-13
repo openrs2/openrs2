@@ -1,6 +1,19 @@
 -- @formatter:off
 CREATE EXTENSION uint;
 
+CREATE TABLE games (
+    id SERIAL PRIMARY KEY NOT NULL,
+    name TEXT UNIQUE NOT NULL,
+    hostname TEXT NULL,
+    port uint2 NULL,
+    build INTEGER NULL
+);
+
+INSERT INTO games (name, hostname, port, build)
+VALUES
+    ('runescape', NULL, NULL, NULL),
+    ('oldschool', 'oldschool1.runescape.com', 43594, 193);
+
 CREATE TYPE xtea_key AS (
     k0 INTEGER,
     k1 INTEGER,
