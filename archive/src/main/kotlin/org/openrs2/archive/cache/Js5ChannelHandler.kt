@@ -32,13 +32,13 @@ public class Js5ChannelHandler(
     private val gameId: Int,
     private val hostname: String,
     private val port: Int,
-    private var version: Int,
+    private var build: Int,
     private val continuation: Continuation<Unit>,
     private val importer: CacheImporter,
     private val maxInFlightRequests: Int = 200,
-    maxVersionAttempts: Int = 10
+    maxBuildAttempts: Int = 10
 ) : SimpleChannelInboundHandler<Any>(Object::class.java) {
-    private val maxVersion = version + maxVersionAttempts
+    private val maxBuild = build + maxBuildAttempts
     private val inFlightRequests = mutableSetOf<Js5Request.Group>()
     private val pendingRequests = ArrayDeque<Js5Request.Group>()
     private var masterIndex: Js5MasterIndex? = null
@@ -46,7 +46,7 @@ public class Js5ChannelHandler(
     private val groups = mutableListOf<CacheImporter.Group>()
 
     override fun channelActive(ctx: ChannelHandlerContext) {
-        ctx.writeAndFlush(LoginRequest.InitJs5RemoteConnection(version), ctx.voidPromise())
+        ctx.writeAndFlush(LoginRequest.InitJs5RemoteConnection(build), ctx.voidPromise())
         ctx.read()
     }
 
@@ -103,7 +103,7 @@ public class Js5ChannelHandler(
     }
 
     private fun handleClientOutOfDate(ctx: ChannelHandlerContext) {
-        if (++version > maxVersion) {
+        if (++build > maxBuild) {
             throw Exception("Failed to identify current version")
         }
 
@@ -156,7 +156,7 @@ public class Js5ChannelHandler(
             Js5MasterIndex.read(uncompressed)
         }
 
-        val rawIndexes = runBlocking { importer.importMasterIndexAndGetIndexes(masterIndex!!, buf, gameId, version) }
+        val rawIndexes = runBlocking { importer.importMasterIndexAndGetIndexes(masterIndex!!, buf, gameId, build) }
         try {
             indexes = arrayOfNulls(rawIndexes.size)
 

@@ -9,11 +9,11 @@ public object InitJs5RemoteConnectionCodec : PacketCodec<LoginRequest.InitJs5Rem
     length = 4
 ) {
     override fun decode(input: ByteBuf): LoginRequest.InitJs5RemoteConnection {
-        val version = input.readInt()
-        return LoginRequest.InitJs5RemoteConnection(version)
+        val build = input.readInt()
+        return LoginRequest.InitJs5RemoteConnection(build)
     }
 
     override fun encode(input: LoginRequest.InitJs5RemoteConnection, output: ByteBuf) {
-        output.writeInt(input.version)
+        output.writeInt(input.build)
     }
 }
