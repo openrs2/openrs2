@@ -1,5 +1,6 @@
 package org.openrs2.archive.cache
 
+import com.github.michaelbull.logging.InlineLogger
 import io.netty.bootstrap.Bootstrap
 import io.netty.buffer.ByteBuf
 import io.netty.channel.ChannelHandler
@@ -64,6 +65,8 @@ public class Js5ChannelHandler(
         while (inFlightRequests.size < maxInFlightRequests) {
             val request = pendingRequests.removeFirstOrNull() ?: break
             inFlightRequests += request
+
+            logger.info { "Requesting archive ${request.archive} group ${request.group}" }
             ctx.write(request, ctx.voidPromise())
 
             flush = true
@@ -198,5 +201,9 @@ public class Js5ChannelHandler(
     private fun releaseGroups() {
         groups.forEach(CacheImporter.Group::release)
         groups.clear()
+    }
+
+    private companion object {
+        private val logger = InlineLogger()
     }
 }
