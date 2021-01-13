@@ -71,6 +71,9 @@ public class Js5ChannelHandler(
 
         if (flush) {
             ctx.flush()
+        }
+
+        if (inFlightRequests.isNotEmpty()) {
             ctx.read()
         }
     }
