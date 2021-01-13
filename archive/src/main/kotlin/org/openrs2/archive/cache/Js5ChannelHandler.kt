@@ -95,8 +95,7 @@ public class Js5ChannelHandler(
             Js5ResponseDecoder()
         )
 
-        val request = Js5Request.Group(false, Js5Archive.ARCHIVESET, Js5Archive.ARCHIVESET)
-        pendingRequests += request
+        request(Js5Archive.ARCHIVESET, Js5Archive.ARCHIVESET)
     }
 
     private fun handleClientOutOfDate(ctx: ChannelHandlerContext) {
@@ -161,7 +160,7 @@ public class Js5ChannelHandler(
                 if (index != null) {
                     processIndex(archive, index)
                 } else {
-                    pendingRequests += Js5Request.Group(false, Js5Archive.ARCHIVESET, archive)
+                    request(Js5Archive.ARCHIVESET, archive)
                 }
             }
         } finally {
@@ -188,8 +187,12 @@ public class Js5ChannelHandler(
             importer.importIndexAndGetMissingGroups(archive, index, buf)
         }
         for (group in groups) {
-            pendingRequests += Js5Request.Group(false, archive, group)
+            request(archive, group)
         }
+    }
+
+    private fun request(archive: Int, group: Int) {
+        pendingRequests += Js5Request.Group(false, archive, group)
     }
 
     private fun releaseGroups() {
