@@ -21,6 +21,9 @@ import java.io.IOException
 import java.sql.Connection
 import java.sql.SQLException
 import java.sql.Types
+import java.time.Instant
+import java.time.OffsetDateTime
+import java.time.ZoneOffset
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -60,14 +63,16 @@ public class CacheImporter @Inject constructor(
         override val encrypted: Boolean
     ) : Container(data)
 
-    public suspend fun import(store: Store) {
+    public suspend fun import(store: Store, game: String, build: Int?, timestamp: Instant?) {
         database.execute { connection ->
             prepare(connection)
+
+            val gameId = getGameId(connection, game)
 
             // import master index
             val masterIndex = createMasterIndex(store)
             try {
-                addMasterIndex(connection, masterIndex)
+                addMasterIndex(connection, masterIndex, gameId, build, timestamp)
             } finally {
                 masterIndex.release()
             }
@@ -116,13 +121,15 @@ public class CacheImporter @Inject constructor(
         }
     }
 
-    public suspend fun importMasterIndex(buf: ByteBuf) {
+    public suspend fun importMasterIndex(buf: ByteBuf, game: String, build: Int?, timestamp: Instant?) {
         Js5Compression.uncompress(buf.slice()).use { uncompressed ->
             val masterIndex = MasterIndex(Js5MasterIndex.read(uncompressed.slice()), buf)
 
             database.execute { connection ->
                 prepare(connection)
-                addMasterIndex(connection, masterIndex)
+
+                val gameId = getGameId(connection, game)
+                addMasterIndex(connection, masterIndex, gameId, build, timestamp)
             }
         }
     }
@@ -131,7 +138,8 @@ public class CacheImporter @Inject constructor(
         masterIndex: Js5MasterIndex,
         buf: ByteBuf,
         gameId: Int,
-        build: Int
+        build: Int,
+        timestamp: Instant
     ): List<ByteBuf?> {
         return database.execute { connection ->
             prepare(connection)
@@ -149,7 +157,7 @@ public class CacheImporter @Inject constructor(
                 stmt.execute()
             }
 
-            addMasterIndex(connection, MasterIndex(masterIndex, buf))
+            addMasterIndex(connection, MasterIndex(masterIndex, buf), gameId, build, timestamp)
 
             connection.prepareStatement(
                 """
@@ -293,17 +301,33 @@ public class CacheImporter @Inject constructor(
         }
     }
 
-    private fun addMasterIndex(connection: Connection, masterIndex: MasterIndex) {
+    private fun addMasterIndex(
+        connection: Connection,
+        masterIndex: MasterIndex,
+        gameId: Int,
+        build: Int? = null,
+        timestamp: Instant? = null
+    ) {
         val containerId = addContainer(connection, masterIndex)
         val savepoint = connection.setSavepoint()
 
+        // TODO(gpe): override game_id/build/timestamp if they're null?
         connection.prepareStatement(
             """
-            INSERT INTO master_indexes (container_id)
-            VALUES (?)
+            INSERT INTO master_indexes (container_id, game_id, build, timestamp)
+            VALUES (?, ?, ?, ?)
         """.trimIndent()
         ).use { stmt ->
             stmt.setLong(1, containerId)
+            stmt.setObject(2, gameId, Types.INTEGER)
+            stmt.setObject(3, build, Types.INTEGER)
+
+            if (timestamp != null) {
+                val offsetDateTime = OffsetDateTime.ofInstant(timestamp, ZoneOffset.UTC)
+                stmt.setObject(4, offsetDateTime, Types.TIMESTAMP_WITH_TIMEZONE)
+            } else {
+                stmt.setNull(4, Types.TIMESTAMP_WITH_TIMEZONE)
+            }
 
             try {
                 stmt.execute()
@@ -539,6 +563,26 @@ public class CacheImporter @Inject constructor(
 
         check(ids.size == containers.size)
         return ids
+    }
+
+    private fun getGameId(connection: Connection, name: String): Int {
+        connection.prepareStatement(
+            """
+                SELECT id
+                FROM games
+                WHERE name = ?
+            """.trimIndent()
+        ).use { stmt ->
+            stmt.setString(1, name)
+
+            stmt.executeQuery().use { rows ->
+                if (!rows.next()) {
+                    throw Exception("Game not found")
+                }
+
+                return rows.getInt(1)
+            }
+        }
     }
 
     public companion object {

@@ -13,6 +13,7 @@ dependencies {
 
     implementation(project(":buffer"))
     implementation(project(":cache"))
+    implementation(project(":cli"))
     implementation(project(":db"))
     implementation(project(":json"))
     implementation(project(":net"))

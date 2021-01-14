@@ -22,6 +22,7 @@ import org.openrs2.protocol.js5.Js5ResponseDecoder
 import org.openrs2.protocol.js5.XorDecoder
 import org.openrs2.protocol.login.LoginRequest
 import org.openrs2.protocol.login.LoginResponse
+import java.time.Instant
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
@@ -156,7 +157,9 @@ public class Js5ChannelHandler(
             Js5MasterIndex.read(uncompressed)
         }
 
-        val rawIndexes = runBlocking { importer.importMasterIndexAndGetIndexes(masterIndex!!, buf, gameId, build) }
+        val rawIndexes = runBlocking {
+            importer.importMasterIndexAndGetIndexes(masterIndex!!, buf, gameId, build, Instant.now())
+        }
         try {
             indexes = arrayOfNulls(rawIndexes.size)
 
