@@ -1699,7 +1699,7 @@ fields:
     name: "anInt2247"
   client!dg.s I:
     owner: "Static2"
-    name: "anInt2248"
+    name: "runEnergy"
   client!dh.K I:
     owner: "GlFont"
     name: "contextId"
@@ -2869,7 +2869,7 @@ fields:
     name: "anInt2047"
   client!gf.f I:
     owner: "Static3"
-    name: "anInt2048"
+    name: "weight"
   client!gg.l Ljava/lang/String;:
     owner: "LocalisedText"
     name: "DROP"
@@ -6072,8 +6072,8 @@ fields:
     owner: "TracingException"
     name: "signLink"
   client!mo.db [I:
-    owner: "Static4"
-    name: "anIntArray336"
+    owner: "PlayerSkillXpTable"
+    name: "updatedSkills"
   client!mo.eb Z:
     owner: "LoginManager"
     name: "parentalAdvertConsent"
@@ -7638,8 +7638,8 @@ fields:
     owner: "LocalisedText"
     name: "FRIENDLOGIN"
   client!pl.y I:
-    owner: "Static5"
-    name: "anInt4210"
+    owner: "PlayerSkillXpTable"
+    name: "updatedSkillsWriterIndex"
   client!pn.a [I:
     owner: "ChatHistory"
     name: "types"
@@ -10287,8 +10287,8 @@ fields:
     owner: "Resampler"
     name: "anIntArrayArray47"
   client!ud.k [I:
-    owner: "Static7"
-    name: "anIntArray599"
+    owner: "PlayerSkillXpTable"
+    name: "baseLevels"
   client!ud.l Lclient!fh;:
     owner: "InterfaceList"
     name: "modelsArchive"
@@ -10320,8 +10320,8 @@ fields:
     owner: "Static7"
     name: "anInt742"
   client!uf.a [Z:
-    owner: "Static7"
-    name: "aBooleanArray25"
+    owner: "PlayerSkillXpTable"
+    name: "ENABLED_SKILLS"
   client!uf.c I:
     owner: "MaterialManager"
     name: "currentMaterialId"
@@ -10626,8 +10626,8 @@ fields:
     owner: "SceneGraph"
     name: "aClass184Array13"
   client!vc.l [I:
-    owner: "Static7"
-    name: "anIntArray501"
+    owner: "PlayerSkillXpTable"
+    name: "boostedLevels"
   client!vd.a Lclient!dj;:
     owner: "Static7"
     name: "aClass40_15"
@@ -10941,8 +10941,8 @@ fields:
     owner: "Static7"
     name: "anInt5589"
   client!vi.ab [I:
-    owner: "Static7"
-    name: "anIntArray637"
+    owner: "PlayerSkillXpTable"
+    name: "experience"
   client!vi.bb I:
     owner: "SceneGraph"
     name: "length"
@@ -44118,21 +44118,21 @@ methods:
       38: "nextAccumulatorMode"
       43: "opcode"
       45: "value"
-      114: "local114"
-      118: "local118"
-      129: "local129"
-      134: "local134"
-      147: "local147"
-      237: "local237"
-      261: "local261"
-      265: "local265"
-      276: "local276"
-      281: "local281"
-      295: "local295"
-      345: "local345"
-      348: "local348"
-      353: "local353"
-      375: "local375"
+      114: "pc2"
+      118: "componentId"
+      129: "otherComponent"
+      134: "objType"
+      147: "slot"
+      237: "skill"
+      261: "pc2"
+      265: "componentId"
+      276: "otherComponent"
+      281: "objType"
+      295: "slot"
+      345: "pc2"
+      348: "varpValue"
+      353: "bit"
+      375: "varbit"
       459: "ex"
   client!vh.a (II)Z:
     owner: "LocType"
