@@ -651,8 +651,8 @@ fields:
     owner: "ProjAnimNode"
     name: "value"
   client!bc.D [Ljava/lang/String;:
-    owner: "Static1"
-    name: "aStringArray4"
+    owner: "ChatHistory"
+    name: "clans"
   client!bc.o Lclient!fh;:
     owner: "client"
     name: "js5Archive21"
@@ -697,7 +697,7 @@ fields:
     name: "aClass26_3"
   client!be.b I:
     owner: "Static1"
-    name: "anInt268"
+    name: "rectDebug"
   client!be.f Z:
     owner: "Static1"
     name: "aBoolean17"
@@ -949,7 +949,7 @@ fields:
     name: "anInt403"
   client!bn.H Z:
     owner: "Static1"
-    name: "aBoolean26"
+    name: "qaOpTest"
   client!bn.I F:
     owner: "Static1"
     name: "aFloat15"
@@ -1140,8 +1140,8 @@ fields:
     owner: "Static1"
     name: "anInt593"
   client!cg.m I:
-    owner: "Static1"
-    name: "anInt595"
+    owner: "ChatHistory"
+    name: "uidsWriterIndex"
   client!ch.d I:
     owner: "CollisionMap"
     name: "length"
@@ -1363,7 +1363,7 @@ fields:
     name: "MAINLOAD60"
   client!d.K I:
     owner: "BasType"
-    name: "idleSeqId"
+    name: "readySeqId"
   client!d.L I:
     owner: "BasType"
     name: "anInt861"
@@ -1966,7 +1966,7 @@ fields:
     name: "anInt1216"
   client!ed.H Z:
     owner: "Static2"
-    name: "aBoolean68"
+    name: "shiftClick"
   client!ed.y Z:
     owner: "LoginManager"
     name: "mapQuickChat"
@@ -2032,7 +2032,7 @@ fields:
     name: "archive"
   client!eg.l Z:
     owner: "SeqType"
-    name: "aBoolean70"
+    name: "tween"
   client!eg.m I:
     owner: "Static2"
     name: "anInt1231"
@@ -3720,8 +3720,8 @@ fields:
     owner: "HashTable"
     name: "iteratorBucket"
   client!id.c [Ljava/lang/String;:
-    owner: "Static3"
-    name: "aStringArray16"
+    owner: "ChatHistory"
+    name: "names"
   client!id.d Lclient!fh;:
     owner: "SkyBoxTypeList"
     name: "archive"
@@ -4359,8 +4359,8 @@ fields:
     owner: "Static3"
     name: "anInt2554"
   client!jd.d Z:
-    owner: "Static3"
-    name: "aBoolean176"
+    owner: "client"
+    name: "displayFps"
   client!jd.f I:
     owner: "HintArrow"
     name: "x"
@@ -5040,8 +5040,8 @@ fields:
     owner: "LocalisedText"
     name: "HIDDEN"
   client!la.Z [J:
-    owner: "Static4"
-    name: "aLongArray24"
+    owner: "ChatHistory"
+    name: "uids"
   client!la.ab I:
     owner: "TextureOp20"
     name: "anInt3022"
@@ -6381,8 +6381,8 @@ fields:
     owner: "Class4_Sub17"
     name: "anInt3466"
   client!nb.H I:
-    owner: "Static5"
-    name: "anInt3469"
+    owner: "ChatHistory"
+    name: "size"
   client!nb.I Lclient!fg;:
     owner: "Class4_Sub17"
     name: "element"
@@ -6798,8 +6798,8 @@ fields:
     owner: "TextureOp33"
     name: "aBoolean263"
   client!no.U Lclient!fd;:
-    owner: "Static5"
-    name: "aClass4_Sub10_8"
+    owner: "Protocol"
+    name: "chatBuffer"
   client!no.X I:
     owner: "TextureOp33"
     name: "anInt3634"
@@ -7641,8 +7641,8 @@ fields:
     owner: "Static5"
     name: "anInt4210"
   client!pn.a [I:
-    owner: "Static5"
-    name: "anIntArray447"
+    owner: "ChatHistory"
+    name: "types"
   client!pn.b Ljava/lang/String;:
     owner: "LocalisedText"
     name: "CHATCOL11"
@@ -9486,8 +9486,8 @@ fields:
     owner: "Static6"
     name: "anIntArray541"
   client!t.o [Ljava/lang/String;:
-    owner: "Static6"
-    name: "aStringArray31"
+    owner: "ChatHistory"
+    name: "messages"
   client!ta.C I:
     owner: "Class4_Sub30"
     name: "angle"
@@ -9870,8 +9870,8 @@ fields:
     owner: "AudioChannel"
     name: "anInt3577"
   client!tj.h Z:
-    owner: "Static6"
-    name: "aBoolean258"
+    owner: "SeqType"
+    name: "forceTween"
   client!tj.o [I:
     owner: "AudioChannel"
     name: "samples"
@@ -10266,8 +10266,8 @@ fields:
     owner: "Static7"
     name: "underwaterMapBytes"
   client!uc.ab [I:
-    owner: "Static7"
-    name: "anIntArray598"
+    owner: "ChatHistory"
+    name: "phraseIds"
   client!uc.cb I:
     owner: "Keyboard"
     name: "prevTypedQueueWriterIndex"
@@ -14689,7 +14689,7 @@ methods:
     arguments: {}
     locals:
       45: "local45"
-      3667: "local3667"
+      3667: "i"
       3740: "i"
       3756: "i"
       3787: "level"
@@ -15417,13 +15417,13 @@ methods:
     name: "method683"
     arguments: {}
     locals:
-      56: "local56"
-      65: "local65"
+      56: "i"
+      65: "npc"
       71: "local71"
-      98: "local98"
-      106: "local106"
-      240: "local240"
-      256: "local256"
+      98: "dx"
+      106: "dz"
+      240: "x"
+      256: "z"
       389: "local389"
       395: "local395"
       406: "local406"
@@ -24343,14 +24343,14 @@ methods:
       2527: "local2527"
       2531: "local2531"
       2535: "local2535"
-      2559: "local2559"
+      2559: "ignore"
       2563: "username"
       2568: "local2568"
       2573: "local2573"
-      2579: "local2579"
+      2579: "uid"
       2583: "staffModLevel"
-      2585: "local2585"
-      2623: "local2623"
+      2585: "i"
+      2623: "j"
       2663: "message"
       2728: "local2728"
       2732: "local2732"
@@ -24359,15 +24359,15 @@ methods:
       2754: "local2754"
       2788: "local2788"
       2799: "local2799"
-      2830: "local2830"
-      2838: "local2838"
+      2830: "encodedUsername"
+      2838: "encodedClan"
       2843: "local2843"
       2848: "local2848"
-      2855: "local2855"
+      2855: "uid"
       2859: "staffModLevel"
-      2861: "local2861"
-      2863: "local2863"
-      2899: "local2899"
+      2861: "ignore"
+      2863: "i"
+      2899: "j"
       2939: "message"
       3016: "local3016"
       3020: "local3020"
@@ -24433,16 +24433,16 @@ methods:
       4226: "componentId"
       4232: "component"
       4234: "slot"
-      4270: "local4270"
-      4278: "local4278"
+      4270: "encodedUsername"
+      4278: "encodedClan"
       4283: "local4283"
       4288: "local4288"
-      4295: "local4295"
-      4299: "local4299"
+      4295: "uid"
+      4299: "staffModLevel"
       4303: "phraseId"
-      4305: "local4305"
-      4307: "local4307"
-      4333: "local4333"
+      4305: "ignore"
+      4307: "i"
+      4333: "j"
       4375: "message"
       4452: "local4452"
       4456: "local4456"
@@ -24487,15 +24487,15 @@ methods:
       5083: "id"
       5087: "local5087"
       5091: "value"
-      5111: "local5111"
+      5111: "encodedUsername"
       5116: "local5116"
       5121: "local5121"
-      5125: "local5125"
+      5125: "staffModLevel"
       5129: "phraseId"
-      5131: "local5131"
-      5137: "local5137"
-      5139: "local5139"
-      5167: "local5167"
+      5131: "ignore"
+      5137: "uid"
+      5139: "i"
+      5167: "j"
       5214: "message"
       5282: "local5282"
       5286: "local5286"
@@ -29132,16 +29132,16 @@ methods:
     locals: {}
   client!ma.a (BIIZIIZ)V:
     owner: "Static24"
-    name: "method2813"
+    name: "setWindowMode"
     arguments:
-      1: "arg0"
+      1: "width"
       2: "arg1"
-      3: "arg2"
-      4: "arg3"
-      5: "arg4"
+      3: "replaceCanvas"
+      4: "height"
+      5: "mode"
       6: "arg5"
     locals:
-      83: "local83"
+      83: "container"
       110: "local110"
       208: "local208"
       268: "graphics"
@@ -29171,7 +29171,7 @@ methods:
       2: "arg1"
       3: "arg2"
     locals:
-      32: "local32"
+      32: "command"
   client!mb.a (I)V:
     owner: "ParticleNode"
     name: "unlink"
@@ -31495,16 +31495,16 @@ methods:
       2: "arg1"
     locals: {}
   client!nb.a (Ljava/lang/String;ILjava/lang/String;ILjava/lang/String;I)V:
-    owner: "Static25"
-    name: "method2927"
+    owner: "ChatHistory"
+    name: "add"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
+      3: "type"
+      0: "name"
+      4: "message"
+      2: "clan"
+      1: "phraseId"
     locals:
-      7: "local7"
+      7: "i"
   client!nb.a (ZI)V:
     owner: "Static25"
     name: "method2929"
@@ -32038,12 +32038,12 @@ methods:
       1099: "local1099"
       1104: "local1104"
   client!ng.a (Ljava/lang/String;IZLjava/lang/String;)V:
-    owner: "Static26"
-    name: "method4357"
+    owner: "ChatHistory"
+    name: "add"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      3: "arg2"
+      1: "type"
+      0: "name"
+      3: "message"
     locals: {}
   client!ng.a (ZZ)V:
     owner: "Static26"
@@ -32101,12 +32101,12 @@ methods:
       26: "local26"
       34: "local34"
   client!nh.a (ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;I)V:
-    owner: "Static26"
-    name: "method2982"
+    owner: "ChatHistory"
+    name: "addClanMessage"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      3: "arg2"
+      1: "name"
+      3: "message"
+      2: "clan"
     locals: {}
   client!nh.a (Lclient!vc;III)V:
     owner: "Static26"
@@ -33168,19 +33168,19 @@ methods:
     locals:
       26: "local26"
   client!of.a (BLjava/lang/String;)V:
-    owner: "Static27"
-    name: "method3185"
+    owner: "Cheat"
+    name: "execute"
     arguments:
-      1: "arg0"
+      1: "command"
     locals:
-      20: "local20"
-      29: "local29"
-      38: "local38"
-      60: "local60"
-      69: "local69"
-      79: "local79"
-      99: "local99"
-      115: "local115"
+      20: "i"
+      29: "runtime"
+      38: "used"
+      60: "i"
+      69: "runtime"
+      79: "usedBefore"
+      99: "i"
+      115: "usedAfter"
   client!of.a (II)[I:
     owner: "TextureOp8"
     name: "method4694"
@@ -36513,13 +36513,13 @@ methods:
       128: "local128"
       135: "local135"
       232: "local232"
-      236: "local236"
+      236: "staffModelLevel"
       244: "local244"
-      248: "local248"
-      251: "local251"
-      264: "local264"
-      266: "local266"
-      284: "local284"
+      248: "len"
+      251: "off"
+      264: "encodedUsername"
+      266: "ignore"
+      284: "i"
       314: "phraseId"
       333: "message"
       343: "phrase"
@@ -43198,12 +43198,12 @@ methods:
     locals: {}
   client!uj.a (ZIIII)V:
     owner: "Static35"
-    name: "method4512"
+    name: "setWindowMode"
     arguments:
-      0: "arg0"
-      2: "arg1"
-      3: "arg2"
-      4: "arg3"
+      0: "replaceCanvas"
+      2: "mode"
+      3: "width"
+      4: "height"
     locals:
       5: "local5"
       15: "local15"
