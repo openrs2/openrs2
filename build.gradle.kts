@@ -19,21 +19,9 @@ plugins {
     id("org.jmailen.kotlinter") version Versions.kotlinter apply false
 }
 
-repositories {
-    jcenter()
-}
-
 allprojects {
     group = "org.openrs2"
     version = "0.1.0-SNAPSHOT"
-
-    repositories {
-        mavenCentral()
-        jcenter()
-        maven(url = "https://repo.openrs2.org/repository/openrs2")
-        mavenLocal()
-        maven(url = "https://repo.openrs2.org/repository/openrs2-snapshots")
-    }
 
     plugins.withType<BasePlugin> {
         configure<BasePluginConvention> {
