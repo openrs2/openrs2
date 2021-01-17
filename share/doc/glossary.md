@@ -36,6 +36,7 @@
 | Packet.Bit        |                        | Extends the underlying buffer type with ISAAC encryption and bit packing     |
 | Param             |                        | A key used to add a extra attributes to locs, NPCs, objs and structs         |
 | PathingEntity     | Character, Entity, Mob | A player or NPC                                                              |
+| ScriptVarType     |                        | An enum representing types that can be used in a client script               |
 | Seq               | Animation              | Sequence                                                                     |
 | Skill             | Skill                  | A type of skill                                                              |
 | Smart             |                        | A data type encoded as a shorter or longer type for bandwidth efficiency     |
