@@ -427,8 +427,11 @@ public class CacheImporter @Inject constructor(
 
         connection.prepareStatement(
             """
-            INSERT INTO index_groups (container_id, group_id, crc32, whirlpool, version, name_hash)
-            VALUES (?, ?, ?, ?, ?, ?)
+            INSERT INTO index_groups (
+                container_id, group_id, crc32, whirlpool, version, name_hash, length, uncompressed_length,
+                uncompressed_crc32
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         """.trimIndent()
         ).use { stmt ->
             for (group in index.index) {
@@ -442,6 +445,20 @@ public class CacheImporter @Inject constructor(
                     stmt.setInt(6, group.nameHash)
                 } else {
                     stmt.setNull(6, Types.INTEGER)
+                }
+
+                if (index.index.hasLengths) {
+                    stmt.setInt(7, group.length)
+                    stmt.setInt(8, group.uncompressedLength)
+                } else {
+                    stmt.setNull(7, Types.INTEGER)
+                    stmt.setNull(8, Types.INTEGER)
+                }
+
+                if (index.index.hasUncompressedChecksums) {
+                    stmt.setInt(9, group.uncompressedChecksum)
+                } else {
+                    stmt.setNull(9, Types.INTEGER)
                 }
 
                 stmt.addBatch()

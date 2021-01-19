@@ -67,6 +67,9 @@ CREATE TABLE index_groups (
     whirlpool BYTEA NULL,
     version INTEGER NOT NULL,
     name_hash INTEGER NULL,
+    length INTEGER NULL,
+    uncompressed_length INTEGER NULL,
+    uncompressed_crc32 INTEGER NULL,
     PRIMARY KEY (container_id, group_id)
 );
 
