@@ -3,7 +3,7 @@ package org.openrs2.deob.bytecode
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.openrs2.yaml.Yaml
 import java.nio.file.Files
-import java.nio.file.Paths
+import java.nio.file.Path
 import javax.inject.Inject
 import javax.inject.Provider
 
@@ -15,6 +15,6 @@ public class ProfileProvider @Inject constructor(@Yaml private val mapper: Objec
     }
 
     private companion object {
-        private val PATH = Paths.get("share/deob/profile.yaml")
+        private val PATH = Path.of("share/deob/profile.yaml")
     }
 }

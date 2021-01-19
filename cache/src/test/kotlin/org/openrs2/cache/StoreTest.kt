@@ -1,12 +1,12 @@
 package org.openrs2.cache
 
-import java.nio.file.Paths
+import java.nio.file.Path
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
 object StoreTest {
-    private val DISK_ROOT = Paths.get(StoreTest::class.java.getResource("disk-store/empty").toURI())
-    private val FLAT_FILE_ROOT = Paths.get(StoreTest::class.java.getResource("flat-file-store/empty").toURI())
+    private val DISK_ROOT = Path.of(StoreTest::class.java.getResource("disk-store/empty").toURI())
+    private val FLAT_FILE_ROOT = Path.of(StoreTest::class.java.getResource("flat-file-store/empty").toURI())
 
     @Test
     fun testOpen() {

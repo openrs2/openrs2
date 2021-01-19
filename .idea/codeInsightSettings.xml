@@ -8,6 +8,7 @@
       <name>com.google.inject.Provider</name>
       <name>com.google.inject.ScopeAnnotation</name>
       <name>com.google.inject.Singleton</name>
+      <name>java.nio.file.Paths.get</name>
       <name>org.junit.jupiter.api.AfterEach</name>
       <name>org.junit.jupiter.api.Assertions.assertEquals</name>
       <name>org.junit.jupiter.api.Assertions.assertFalse</name>

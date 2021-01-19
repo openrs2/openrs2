@@ -3,7 +3,7 @@ package org.openrs2.conf
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.openrs2.yaml.Yaml
 import java.nio.file.Files
-import java.nio.file.Paths
+import java.nio.file.Path
 import javax.inject.Inject
 import javax.inject.Provider
 
@@ -19,7 +19,7 @@ public class ConfigProvider @Inject constructor(@Yaml private val mapper: Object
     }
 
     private companion object {
-        private val CONFIG_PATH = Paths.get("etc/config.yaml")
-        private val EXAMPLE_CONFIG_PATH = Paths.get("etc/config.example.yaml")
+        private val CONFIG_PATH = Path.of("etc/config.yaml")
+        private val EXAMPLE_CONFIG_PATH = Path.of("etc/config.example.yaml")
     }
 }

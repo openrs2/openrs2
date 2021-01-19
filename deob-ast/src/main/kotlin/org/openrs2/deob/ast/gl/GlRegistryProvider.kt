@@ -1,7 +1,7 @@
 package org.openrs2.deob.ast.gl
 
 import java.nio.file.Files
-import java.nio.file.Paths
+import java.nio.file.Path
 import javax.inject.Provider
 
 public class GlRegistryProvider : Provider<GlRegistry> {
@@ -12,6 +12,6 @@ public class GlRegistryProvider : Provider<GlRegistry> {
     }
 
     private companion object {
-        private val PATH = Paths.get("share/deob/gl.xml")
+        private val PATH = Path.of("share/deob/gl.xml")
     }
 }

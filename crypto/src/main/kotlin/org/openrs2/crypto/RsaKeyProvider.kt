@@ -2,7 +2,7 @@ package org.openrs2.crypto
 
 import org.bouncycastle.crypto.params.RSAPrivateCrtKeyParameters
 import java.nio.file.Files
-import java.nio.file.Paths
+import java.nio.file.Path
 import javax.inject.Provider
 
 public class RsaKeyProvider : Provider<RSAPrivateCrtKeyParameters> {
@@ -17,6 +17,6 @@ public class RsaKeyProvider : Provider<RSAPrivateCrtKeyParameters> {
     }
 
     private companion object {
-        private val PATH = Paths.get("etc/game.key")
+        private val PATH = Path.of("etc/game.key")
     }
 }

@@ -8,7 +8,7 @@ import org.openrs2.buffer.use
 import org.openrs2.util.io.recursiveCopy
 import org.openrs2.util.io.recursiveEquals
 import java.io.FileNotFoundException
-import java.nio.file.Paths
+import java.nio.file.Path
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -16,7 +16,7 @@ import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 object DiskStoreTest {
-    private val ROOT = Paths.get(DiskStoreTest::class.java.getResource("disk-store").toURI())
+    private val ROOT = Path.of(DiskStoreTest::class.java.getResource("disk-store").toURI())
 
     @Test
     fun testBounds() {

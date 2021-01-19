@@ -9,7 +9,6 @@ import org.openrs2.util.io.recursiveCopy
 import org.openrs2.util.io.recursiveEquals
 import java.io.FileNotFoundException
 import java.nio.file.Path
-import java.nio.file.Paths
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -18,7 +17,7 @@ import kotlin.test.assertTrue
 
 object FlatFileStoreTest {
     private val IGNORE_GIT_EMPTY = { path: Path -> path.fileName.toString() != ".gitempty" }
-    private val ROOT = Paths.get(FlatFileStoreTest::class.java.getResource("flat-file-store").toURI())
+    private val ROOT = Path.of(FlatFileStoreTest::class.java.getResource("flat-file-store").toURI())
 
     @Test
     fun testBounds() {

@@ -16,7 +16,6 @@ import org.openrs2.util.io.useAtomicBufferedWriter
 import org.openrs2.yaml.Yaml
 import java.nio.file.Files
 import java.nio.file.Path
-import java.nio.file.Paths
 import java.util.TreeMap
 import javax.annotation.processing.AbstractProcessor
 import javax.annotation.processing.ProcessingEnvironment
@@ -58,7 +57,7 @@ public class NameMapProcessor : AbstractProcessor() {
 
     private fun getPath(): Path? {
         val map = processingEnv.options["map"] ?: return null
-        return Paths.get(map)
+        return Path.of(map)
     }
 
     override fun process(annotations: Set<TypeElement>, env: RoundEnvironment): Boolean {
