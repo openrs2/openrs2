@@ -103,11 +103,7 @@ public fun ByteBuf.crc32(index: Int, len: Int): Int {
 
     when {
         hasArray() -> crc.update(array(), arrayOffset() + index, len)
-        count > 1 -> {
-            for (b in nioBuffers(index, len)) {
-                crc.update(b)
-            }
-        }
+        count > 1 -> nioBuffers(index, len).forEach(crc::update)
         count == 1 -> crc.update(nioBuffer(index, len))
         else -> crc.update(ByteBufUtil.getBytes(this, index, len, false))
     }
