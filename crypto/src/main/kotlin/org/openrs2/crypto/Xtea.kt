@@ -2,7 +2,7 @@ package org.openrs2.crypto
 
 import io.netty.buffer.ByteBuf
 
-private const val GOLDEN_RATIO = 0x9e3779b9.toInt()
+private const val GOLDEN_RATIO = 0x9E3779B9.toInt()
 private const val ROUNDS = 32
 private const val BLOCK_SIZE = 8
 private const val BLOCK_SIZE_MASK = BLOCK_SIZE - 1
