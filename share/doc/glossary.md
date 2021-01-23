@@ -3,9 +3,10 @@
 | Jagex name        | RSPS community name(s) | Description                                                                  |
 |-------------------|------------------------|------------------------------------------------------------------------------|
 |                   | V1                     | A middle-endian byte order used on [Honeywell Series 16][hs16] computers     |
+|                   | Viewport               | A 1x32x32 group of tiles (inside which other players and NPcs are visible)   |
 | Alt3              | V2                     | A middle-endian byte order used on [PDP-11][pdp11] computers                 |
 | Ap                |                        | An op that trigers when you approach (rather than reach) the target          |
-| Area              |                        | A 104x104x4 group of tiles                                                   |
+| Area              |                        | A 104x104 group of tiles (held in memory by the client)                      |
 | BAS               | Stance                 | Base animation set                                                           |
 | CS1               |                        | Client script version 1                                                      |
 | CS2               |                        | Client script version 2                                                      |
@@ -23,7 +24,7 @@
 | JS5               |                        | Jagex store version 5?                                                       |
 | Loc               | Object                 |                                                                              |
 | MSI               |                        | Map scenery icon                                                             |
-| MapSquare         | Map                    | A 64x64x4 group of tiles                                                     |
+| MapSquare         | Map                    | A 4x64x64 group of tiles (the granularity of map files in the cache)         |
 | Mel               |                        | Map element                                                                  |
 | Modal             |                        | An interface that can be (manually or automatically) closed by the client    |
 | MultiLoc          |                        | Transforms a loc into another based on a varp or varbit                      |
@@ -37,6 +38,7 @@
 | Param             |                        | A key used to add a extra attributes to locs, NPCs, objs and structs         |
 | PathingEntity     | Character, Entity, Mob | A player or NPC                                                              |
 | ProjAnim          | Projectile             |                                                                              |
+| Region            | Instance               |                                                                              |
 | ScriptVarType     |                        | An enum representing types that can be used in a client script               |
 | Seq               | Animation              | Sequence                                                                     |
 | Skill             | Skill                  | A type of skill                                                              |
@@ -51,7 +53,7 @@
 | Varc              |                        | Client variable                                                              |
 | Varcstr           |                        | Client string variable                                                       |
 | Varp              | Config                 | Player variable                                                              |
-| Zone              | Region                 | An 8x8x1 group of tiles                                                      |
+| Zone              | Region, Chunk          | A 1x8x8 group of tiles (the granularity used by various packets)             |
 
 ## Loc layers
 
