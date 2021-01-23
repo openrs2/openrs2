@@ -72,7 +72,7 @@ public object Group {
 
         val first = files.values.first()
         if (files.size == 1) {
-            return first
+            return first.retain()
         }
 
         first.alloc().buffer().use { output ->
