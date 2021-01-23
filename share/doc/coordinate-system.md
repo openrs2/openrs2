@@ -4,7 +4,7 @@
 
 | Name                   | Levels | Width (tiles) | Height (tiles) |
 |------------------------|-------:|--------------:|---------------:|
-| World                  |      4 |         16384 |          16384 |
+| World                  |      4 |        16,384 |         16,384 |
 | Area                   | 1 or 4 |           104 |            104 |
 | MapSquare              |      4 |            64 |             64 |
 | MapSquare (underwater) |      1 |            64 |             64 |
@@ -14,11 +14,11 @@
 ## Introduction
 
 RuneScape is a three-dimensional tile-based world. The entire world is made up
-of 16384x16384 tiles on 4 levels of elevation (ranging from `0` to `3`
-inclusive), including the ground level. The X and Z axes range from `0` to
-`16383` inclusive.
+of 16,384x16,384 tiles on 4 levels of elevation (ranging from 0 to 3
+inclusive), including the ground level. The X and Z axes range from 0 to
+16,383 inclusive.
 
-The Y axis represents the level of elevation, with `0` representing ground
+The Y axis represents the level of elevation, with 0 representing ground
 level. The X and Z axes represent coordinates on the plane - when the world map
 or mini map is plotted in two dimensions, the X axis is the horizontal axis
 (with X increasing from left to right), and the Z axis is the vertical axis
@@ -40,7 +40,7 @@ Each map square has up to five files in the client's cache:
 | `ulX_Z`   | Underwater locs | Contains underwater equivalent of the locs file                       |
 | `nX_Z`    | NPC spawns      | Contains NPC spawns for the animated login screen                     |
 
-The underwater files contain a single virtual `-1` level used to represent the
+The underwater files contain a single virtual -1 level used to represent the
 tiles and locs that can be seen beneath translucent water tiles in HD mode. The
 server does not interact with this level, it purely exists for decorative
 purposes.
@@ -69,7 +69,7 @@ moving/rotating them.
 
 Dungeons are typically, but not always, 6400 Z units above the equivalent
 ground-level areas. 6400 was likely chosen as this corresponds to 100 map
-squares, meaning a single `1` digit needs to be added to or removed from the
+squares, meaning a single "1" digit needs to be added to or removed from the
 map's file name to switch between ground level and the corresponding dungeon.
 
 ## Area
