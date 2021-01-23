@@ -3,7 +3,6 @@ package org.openrs2.cache
 import io.netty.buffer.ByteBuf
 import it.unimi.dsi.fastutil.ints.Int2ObjectAVLTreeMap
 import it.unimi.dsi.fastutil.ints.Int2ObjectSortedMap
-import it.unimi.dsi.fastutil.ints.Int2ObjectSortedMaps
 import org.openrs2.buffer.use
 
 public object Group {
@@ -12,7 +11,9 @@ public object Group {
 
         val singleEntry = group.singleOrNull()
         if (singleEntry != null) {
-            return Int2ObjectSortedMaps.singleton(singleEntry.id, input.retain())
+            val files = Int2ObjectAVLTreeMap<ByteBuf>()
+            files[singleEntry.id] = input.retain()
+            return files
         }
 
         require(input.isReadable)
