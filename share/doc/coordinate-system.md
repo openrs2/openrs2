@@ -5,7 +5,7 @@
 | Name                   | Levels | Width (tiles) | Height (tiles) |
 |------------------------|-------:|--------------:|---------------:|
 | World                  |      4 |        16,384 |         16,384 |
-| Area                   | 1 or 4 |           104 |            104 |
+| BuildArea              | 1 or 4 |           104 |            104 |
 | MapSquare              |      4 |            64 |             64 |
 | MapSquare (underwater) |      1 |            64 |             64 |
 | Viewport (?)           |      1 |            32 |             32 |
@@ -72,16 +72,16 @@ ground-level areas. 6400 was likely chosen as this corresponds to 100 map
 squares, meaning a single "1" digit needs to be added to or removed from the
 map's file name to switch between ground level and the corresponding dungeon.
 
-## Area
+## Build area
 
-The area represents the 104x104 group of tiles (or 13x13 group of zones) held in
-the client's memory. Depending on its settings, the client only retains the
-player's current level or retains all four levels.
+The build area represents the 104x104 group of tiles (or 13x13 group of zones)
+held in the client's memory. Depending on its settings, the client only retains
+the player's current level or retains all four levels.
 
-The area is always zone-aligned. When the area is initially built, it is centred
-around the player's current zone.
+The build area is always zone-aligned. When the area is initially built, it is
+centred around the player's current zone.
 
-When the player is within 16 tiles of the edge of the current area, it is
+When the player is within 16 tiles of the edge of the current build area, it is
 rebuilt.
 
 ## Viewport
