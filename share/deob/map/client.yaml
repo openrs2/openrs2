@@ -8,7 +8,7 @@ classes:
   client!ai: "QuickChatCommandDecoder"
   client!ak: "SecondaryHashTable"
   client!al: "Js5CacheRequest"
-  client!am: "Class11_Sub1"
+  client!am: "TextureOp29SubOp3"
   client!ba: "BoundingBox"
   client!bb: "ProjAnimNode"
   client!bc: "PostProcessor"
@@ -41,7 +41,7 @@ classes:
   client!da: "MonochromeImageCache"
   client!dc: "ParticleEffectorType"
   client!dd: "BloomPostProcessor"
-  client!de: "Class11_Sub2"
+  client!de: "TextureOp29SubOp0"
   client!dh: "GlFont"
   client!dj: "LruHashTable"
   client!dk: "JavaMouseWheel"
@@ -79,7 +79,7 @@ classes:
   client!gb: "World"
   client!ge: "PlayerSkillXpTable"
   client!gf: "IntHashTable"
-  client!gg: "Class11_Sub3"
+  client!gg: "TextureOp29SubOp2"
   client!gh: "ReferenceNodeFactory"
   client!gk: "LiquidMaterial"
   client!gl: "Font"
@@ -101,7 +101,7 @@ classes:
   client!ij: "QuickChatPhraseType"
   client!ik: "ParticleEmitterType"
   client!im: "AudioThread"
-  client!in: "Class11_Sub4"
+  client!in: "TextureOp29SubOp1"
   client!io: "HookRequest"
   client!j: "ByteArrayNode"
   client!ja: "Js5CacheQueue"
@@ -132,7 +132,7 @@ classes:
   client!l: "ClanMember"
   client!la: "TextureOp20"
   client!lb: "SecondaryParticleLinkedList"
-  client!lc: "Class11"
+  client!lc: "TextureOp29SubOp"
   client!ld: "Class4_Sub6_Sub2"
   client!lf: "TextureOp14"
   client!lg: "MathUtils"
@@ -564,16 +564,16 @@ fields:
     owner: "AreaSoundManager"
     name: "locSounds"
   client!am.p I:
-    owner: "Class11_Sub1"
+    owner: "TextureOp29SubOp3"
     name: "anInt205"
   client!am.q I:
-    owner: "Class11_Sub1"
+    owner: "TextureOp29SubOp3"
     name: "anInt206"
   client!am.t I:
-    owner: "Class11_Sub1"
+    owner: "TextureOp29SubOp3"
     name: "anInt209"
   client!am.u I:
-    owner: "Class11_Sub1"
+    owner: "TextureOp29SubOp3"
     name: "anInt210"
   client!am.v [[B:
     owner: "Static1"
@@ -1644,19 +1644,19 @@ fields:
     owner: "GameShell"
     name: "timer"
   client!de.u I:
-    owner: "Class11_Sub2"
+    owner: "TextureOp29SubOp0"
     name: "anInt951"
   client!de.v I:
-    owner: "Class11_Sub2"
+    owner: "TextureOp29SubOp0"
     name: "anInt952"
   client!de.w I:
-    owner: "Class11_Sub2"
+    owner: "TextureOp29SubOp0"
     name: "anInt953"
   client!de.x I:
     owner: "client"
     name: "loop"
   client!de.y I:
-    owner: "Class11_Sub2"
+    owner: "TextureOp29SubOp0"
     name: "anInt955"
   client!df.a Lclient!cc;:
     owner: "ObjTypeList"
@@ -2877,13 +2877,13 @@ fields:
     owner: "SeqTypeList"
     name: "archive"
   client!gg.n I:
-    owner: "Class11_Sub3"
+    owner: "TextureOp29SubOp2"
     name: "anInt2059"
   client!gg.o I:
-    owner: "Class11_Sub3"
+    owner: "TextureOp29SubOp2"
     name: "anInt2060"
   client!gg.p I:
-    owner: "Class11_Sub3"
+    owner: "TextureOp29SubOp2"
     name: "anInt2061"
   client!gg.q Lclient!vn;:
     owner: "Static3"
@@ -2892,7 +2892,7 @@ fields:
     owner: "TitleScreen"
     name: "loaded"
   client!gg.w I:
-    owner: "Class11_Sub3"
+    owner: "TextureOp29SubOp2"
     name: "anInt2066"
   client!gh.a Lclient!fh;:
     owner: "Static3"
@@ -4182,13 +4182,13 @@ fields:
     owner: "VarcDomain"
     name: "updatedVarcstrs"
   client!in.l I:
-    owner: "Class11_Sub4"
+    owner: "TextureOp29SubOp1"
     name: "anInt2468"
   client!in.m I:
-    owner: "Class11_Sub4"
+    owner: "TextureOp29SubOp1"
     name: "anInt2469"
   client!in.n I:
-    owner: "Class11_Sub4"
+    owner: "TextureOp29SubOp1"
     name: "anInt2470"
   client!in.p [I:
     owner: "VarcDomain"
@@ -4197,22 +4197,22 @@ fields:
     owner: "FloTypeList"
     name: "archive"
   client!in.r I:
-    owner: "Class11_Sub4"
+    owner: "TextureOp29SubOp1"
     name: "anInt2472"
   client!in.s I:
-    owner: "Class11_Sub4"
+    owner: "TextureOp29SubOp1"
     name: "anInt2473"
   client!in.t I:
-    owner: "Class11_Sub4"
+    owner: "TextureOp29SubOp1"
     name: "anInt2474"
   client!in.u Lclient!fh;:
     owner: "InterfaceList"
     name: "archive"
   client!in.v I:
-    owner: "Class11_Sub4"
+    owner: "TextureOp29SubOp1"
     name: "anInt2475"
   client!in.w I:
-    owner: "Class11_Sub4"
+    owner: "TextureOp29SubOp1"
     name: "anInt2476"
   client!io.A I:
     owner: "HookRequest"
@@ -4951,7 +4951,7 @@ fields:
     name: "anInt2924"
   client!km.T [Lclient!lc;:
     owner: "TextureOp29"
-    name: "aClass11Array1"
+    name: "ops"
   client!km.Z Lclient!cc;:
     owner: "MelTypeList"
     name: "types"
@@ -5067,10 +5067,10 @@ fields:
     owner: "SecondaryParticleLinkedList"
     name: "cursor"
   client!lc.a I:
-    owner: "Class11"
+    owner: "TextureOp29SubOp"
     name: "anInt2461"
   client!lc.c I:
-    owner: "Class11"
+    owner: "TextureOp29SubOp"
     name: "anInt2463"
   client!lc.d I:
     owner: "Static4"
@@ -5082,7 +5082,7 @@ fields:
     owner: "Static4"
     name: "aString140"
   client!lc.h I:
-    owner: "Class11"
+    owner: "TextureOp29SubOp"
     name: "anInt2466"
   client!lc.i F:
     owner: "Static4"
@@ -12660,7 +12660,7 @@ methods:
     arguments: {}
     locals: {}
   client!am.<init> (IIIIIII)V:
-    owner: "Class11_Sub1"
+    owner: "TextureOp29SubOp3"
     name: "<init>"
     arguments:
       0: "arg0"
@@ -12677,7 +12677,7 @@ methods:
     arguments: {}
     locals: {}
   client!am.a (IIB)V:
-    owner: "Class11_Sub1"
+    owner: "TextureOp29SubOp3"
     name: "method1934"
     arguments:
       0: "arg0"
@@ -12688,7 +12688,7 @@ methods:
       28: "local28"
       35: "local35"
   client!am.a (III)V:
-    owner: "Class11_Sub1"
+    owner: "TextureOp29SubOp3"
     name: "method1935"
     arguments:
       1: "arg0"
@@ -12699,7 +12699,7 @@ methods:
       24: "local24"
       31: "local31"
   client!am.a (IIZ)V:
-    owner: "Class11_Sub1"
+    owner: "TextureOp29SubOp3"
     name: "method1938"
     arguments:
       0: "arg0"
@@ -15932,7 +15932,7 @@ methods:
     arguments: {}
     locals: {}
   client!de.<init> (IIIIII)V:
-    owner: "Class11_Sub2"
+    owner: "TextureOp29SubOp0"
     name: "<init>"
     arguments:
       0: "arg0"
@@ -15949,21 +15949,21 @@ methods:
       1: "arg0"
     locals: {}
   client!de.a (IIB)V:
-    owner: "Class11_Sub2"
+    owner: "TextureOp29SubOp0"
     name: "method1934"
     arguments:
       0: "arg0"
       1: "arg1"
     locals: {}
   client!de.a (III)V:
-    owner: "Class11_Sub2"
+    owner: "TextureOp29SubOp0"
     name: "method1935"
     arguments:
       1: "arg0"
       2: "arg1"
     locals: {}
   client!de.a (IIZ)V:
-    owner: "Class11_Sub2"
+    owner: "TextureOp29SubOp0"
     name: "method1938"
     arguments:
       0: "arg0"
@@ -20643,7 +20643,7 @@ methods:
     arguments: {}
     locals: {}
   client!gg.<init> (IIIIIII)V:
-    owner: "Class11_Sub3"
+    owner: "TextureOp29SubOp2"
     name: "<init>"
     arguments:
       0: "arg0"
@@ -20655,7 +20655,7 @@ methods:
       6: "arg6"
     locals: {}
   client!gg.a (IIB)V:
-    owner: "Class11_Sub3"
+    owner: "TextureOp29SubOp2"
     name: "method1934"
     arguments:
       0: "arg0"
@@ -20666,7 +20666,7 @@ methods:
       24: "local24"
       31: "local31"
   client!gg.a (III)V:
-    owner: "Class11_Sub3"
+    owner: "TextureOp29SubOp2"
     name: "method1935"
     arguments:
       1: "arg0"
@@ -20677,7 +20677,7 @@ methods:
       30: "local30"
       37: "local37"
   client!gg.a (IIZ)V:
-    owner: "Class11_Sub3"
+    owner: "TextureOp29SubOp2"
     name: "method1938"
     arguments:
       0: "arg0"
@@ -23656,7 +23656,7 @@ methods:
       23: "channel"
       48: "ex"
   client!in.<init> (IIIIIIIIII)V:
-    owner: "Class11_Sub4"
+    owner: "TextureOp29SubOp1"
     name: "<init>"
     arguments:
       0: "arg0"
@@ -23671,21 +23671,21 @@ methods:
       9: "arg9"
     locals: {}
   client!in.a (IIB)V:
-    owner: "Class11_Sub4"
+    owner: "TextureOp29SubOp1"
     name: "method1934"
     arguments:
       0: "arg0"
       1: "arg1"
     locals: {}
   client!in.a (III)V:
-    owner: "Class11_Sub4"
+    owner: "TextureOp29SubOp1"
     name: "method1935"
     arguments:
       1: "arg0"
       2: "arg1"
     locals: {}
   client!in.a (IIZ)V:
-    owner: "Class11_Sub4"
+    owner: "TextureOp29SubOp1"
     name: "method1938"
     arguments:
       0: "arg0"
@@ -26655,8 +26655,8 @@ methods:
       1: "buffer"
       2: "code"
     locals:
-      11: "local11"
-      24: "local24"
+      11: "i"
+      24: "op"
   client!km.a (B[[I)V:
     owner: "TextureOp29"
     name: "method2391"
@@ -26665,8 +26665,8 @@ methods:
     locals:
       15: "local15"
       17: "local17"
-      32: "local32"
-      46: "local46"
+      32: "i"
+      46: "op"
       49: "local49"
       52: "local52"
   client!km.a (II)[I:
@@ -27042,7 +27042,7 @@ methods:
     locals:
       2: "node"
   client!lc.<init> (III)V:
-    owner: "Class11"
+    owner: "TextureOp29SubOp"
     name: "<init>"
     arguments:
       0: "arg0"
@@ -27050,14 +27050,14 @@ methods:
       2: "arg2"
     locals: {}
   client!lc.a (IIB)V:
-    owner: "Class11"
+    owner: "TextureOp29SubOp"
     name: "method1934"
     arguments:
       0: "arg0"
       1: "arg1"
     locals: {}
   client!lc.a (III)V:
-    owner: "Class11"
+    owner: "TextureOp29SubOp"
     name: "method1935"
     arguments:
       1: "arg0"
@@ -27072,7 +27072,7 @@ methods:
       3: "arg2"
     locals: {}
   client!lc.a (IIZ)V:
-    owner: "Class11"
+    owner: "TextureOp29SubOp"
     name: "method1938"
     arguments:
       0: "arg0"
@@ -39655,10 +39655,10 @@ methods:
     locals:
       52: "local52"
   client!sc.a (Lclient!fd;I)Lclient!gg;:
-    owner: "Static32"
-    name: "method3921"
+    owner: "TextureOp29SubOp2"
+    name: "create"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals: {}
   client!sc.b (II)[[I:
     owner: "TextureOp30"
@@ -39676,10 +39676,10 @@ methods:
       47: "local47"
       49: "local49"
   client!sc.b (Lclient!fd;I)Lclient!de;:
-    owner: "Static32"
-    name: "method3922"
+    owner: "TextureOp29SubOp0"
+    name: "create"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals: {}
   client!sc.e (B)V:
     owner: "TextureOp30"
@@ -39768,10 +39768,10 @@ methods:
       56: "local56"
       58: "local58"
   client!se.a (ZLclient!fd;)Lclient!in;:
-    owner: "Static32"
-    name: "method3953"
+    owner: "TextureOp29SubOp1"
+    name: "create"
     arguments:
-      1: "arg0"
+      1: "buffer"
     locals: {}
   client!se.c (II)V:
     owner: "Static32"
@@ -45369,10 +45369,10 @@ methods:
       40: "local40"
       58: "local58"
   client!wc.a (Lclient!fd;Z)Lclient!am;:
-    owner: "Static37"
-    name: "method4674"
+    owner: "TextureOp29SubOp3"
+    name: "create"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals: {}
   client!wc.a (Z)V:
     owner: "Static37"
