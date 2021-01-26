@@ -94,7 +94,7 @@ classes:
   client!hl: "SpecularMaterial"
   client!ho: "MelType"
   client!ia: "BrokenInputStream"
-  client!ib: "Class4_Sub3_Sub10"
+  client!ib: "Skybox"
   client!ic: "HashTable"
   client!ie: "BrowserControl"
   client!ih: "Class4_Sub12"
@@ -3663,38 +3663,38 @@ fields:
     owner: "Static3"
     name: "aClass185_5"
   client!ib.A [I:
-    owner: "Static3"
+    owner: "Skybox"
     name: "anIntArray194"
   client!ib.B I:
-    owner: "Class4_Sub3_Sub10"
+    owner: "Skybox"
     name: "id"
   client!ib.C I:
-    owner: "Class4_Sub3_Sub10"
-    name: "size"
+    owner: "Skybox"
+    name: "bytes"
   client!ib.D [I:
-    owner: "Static3"
-    name: "anIntArray195"
+    owner: "Skybox"
+    name: "clip"
   client!ib.E I:
-    owner: "Static3"
+    owner: "Skybox"
     name: "anInt2322"
   client!ib.F I:
-    owner: "Class4_Sub3_Sub10"
-    name: "anInt2323"
+    owner: "Skybox"
+    name: "state"
   client!ib.G I:
-    owner: "Class4_Sub3_Sub10"
-    name: "anInt2324"
+    owner: "Skybox"
+    name: "size"
   client!ib.H [F:
-    owner: "Static3"
+    owner: "Skybox"
     name: "aFloatArray23"
   client!ib.I I:
-    owner: "Class4_Sub3_Sub10"
+    owner: "Skybox"
     name: "contextId"
   client!ib.y Lclient!dj;:
-    owner: "Static3"
-    name: "aClass40_11"
+    owner: "Skybox"
+    name: "cache"
   client!ib.z [I:
-    owner: "Class4_Sub3_Sub10"
-    name: "anIntArray193"
+    owner: "Skybox"
+    name: "textures"
   client!ic.g Z:
     owner: "Preferences"
     name: "groundDecoration"
@@ -11836,7 +11836,7 @@ fields:
     name: "aFloat153"
   client!wj.t Lclient!ib;:
     owner: "Environment"
-    name: "aClass4_Sub3_Sub10_7"
+    name: "skybox"
   client!wj.u I:
     owner: "Environment"
     name: "anInt6043"
@@ -22742,30 +22742,30 @@ methods:
     arguments: {}
     locals: {}
   client!ib.<init> ()V:
-    owner: "Class4_Sub3_Sub10"
+    owner: "Skybox"
     name: "<init>"
     arguments: {}
     locals: {}
   client!ib.<init> (IIIIII)V:
-    owner: "Class4_Sub3_Sub10"
+    owner: "Skybox"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
-      5: "arg5"
+      0: "texture0"
+      1: "texture1"
+      2: "texture2"
+      3: "texture3"
+      4: "texture4"
+      5: "texture5"
     locals: {}
   client!ib.a ()V:
-    owner: "Class4_Sub3_Sub10"
+    owner: "Skybox"
     name: "method1832"
     arguments: {}
     locals:
       8: "gl"
       11: "temp"
   client!ib.a (Lclient!ib;Lclient!ib;F)Lclient!ib;:
-    owner: "Class4_Sub3_Sub10"
+    owner: "Skybox"
     name: "method1835"
     arguments:
       0: "arg0"
@@ -22774,59 +22774,59 @@ methods:
     locals:
       1: "gl"
       10: "local10"
-      31: "local31"
-      63: "local63"
-      77: "local77"
-      203: "local203"
-      205: "local205"
-      212: "local212"
-      255: "local255"
+      31: "i"
+      63: "maxSize"
+      77: "i"
+      203: "frameBufferValid"
+      205: "i"
+      212: "textureTarget"
+      255: "status"
   client!ib.a (Lgl!javax/media/opengl/GL;IIII)Z:
-    owner: "Static19"
+    owner: "Skybox"
     name: "method1837"
     arguments:
       0: "gl"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
+      1: "srcTexture"
+      2: "srcTextureTarget"
+      3: "size"
+      4: "destTexture"
     locals:
-      15: "local15"
+      15: "status"
   client!ib.b (IIIIII)Lclient!ib;:
-    owner: "Static19"
-    name: "method1838"
+    owner: "Skybox"
+    name: "create"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
-      5: "arg5"
+      0: "texture0"
+      1: "texture1"
+      2: "texture2"
+      3: "texture3"
+      4: "texture4"
+      5: "texture5"
     locals:
-      29: "local29"
-      35: "local35"
-      49: "local49"
+      29: "key"
+      35: "skybox"
+      49: "newSkybox"
   client!ib.c ()V:
-    owner: "Class4_Sub3_Sub10"
+    owner: "Skybox"
     name: "method1834"
     arguments: {}
     locals:
       1: "gl"
-      20: "local20"
-      22: "local22"
-      30: "local30"
-      60: "local60"
-      93: "local93"
-      113: "local113"
-      127: "local127"
+      20: "size"
+      22: "i"
+      30: "texture"
+      60: "buffer"
+      93: "bytes"
+      113: "i"
+      127: "buffer"
   client!ib.d ()Z:
-    owner: "Class4_Sub3_Sub10"
-    name: "method1836"
+    owner: "Skybox"
+    name: "isReady"
     arguments: {}
     locals:
-      1: "local1"
+      1: "i"
   client!ib.finalize ()V:
-    owner: "Class4_Sub3_Sub10"
+    owner: "Skybox"
     name: "finalize"
     arguments: {}
     locals: {}
