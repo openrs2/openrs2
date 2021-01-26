@@ -294,7 +294,7 @@ fields:
     owner: "AnimFrame"
     name: "aShortArray1"
   client!a.b [S:
-    owner: "Static1"
+    owner: "AnimFrame"
     name: "aShortArray2"
   client!a.c [S:
     owner: "AnimFrame"
@@ -309,13 +309,13 @@ fields:
     owner: "AnimFrame"
     name: "aByteArray1"
   client!a.g [B:
-    owner: "Static1"
+    owner: "AnimFrame"
     name: "aByteArray2"
   client!a.h [S:
     owner: "AnimFrame"
     name: "aShortArray5"
   client!a.i [S:
-    owner: "Static1"
+    owner: "AnimFrame"
     name: "aShortArray6"
   client!a.j Z:
     owner: "AnimFrame"
@@ -324,13 +324,13 @@ fields:
     owner: "AnimFrame"
     name: "anInt1"
   client!a.l [S:
-    owner: "Static1"
+    owner: "AnimFrame"
     name: "aShortArray7"
   client!a.m [S:
-    owner: "Static1"
+    owner: "AnimFrame"
     name: "aShortArray8"
   client!a.n [S:
-    owner: "Static1"
+    owner: "AnimFrame"
     name: "aShortArray9"
   client!a.o [S:
     owner: "AnimFrame"
@@ -5884,7 +5884,7 @@ fields:
     name: "vertexNormals"
   client!ml.P [B:
     owner: "RawModel"
-    name: "aByteArray37"
+    name: "trianglePriorities"
   client!ml.Q [Lclient!mj;:
     owner: "RawModel"
     name: "triangleNormals"
@@ -5944,7 +5944,7 @@ fields:
     name: "triangleVertexC"
   client!ml.jb B:
     owner: "RawModel"
-    name: "aByte11"
+    name: "priority"
   client!ml.kb [S:
     owner: "RawModel"
     name: "aShortArray58"
@@ -6105,145 +6105,145 @@ fields:
     owner: "SoftwareModel"
     name: "anInt3437"
   client!na.Ab [I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArray367"
   client!na.B [I:
     owner: "SoftwareModel"
     name: "anIntArray342"
   client!na.Bb [I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArray368"
   client!na.C [B:
     owner: "SoftwareModel"
     name: "aByteArray43"
   client!na.Cb I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anInt3443"
   client!na.D S:
     owner: "SoftwareModel"
     name: "maxZ"
   client!na.Db [Z:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "aBooleanArray16"
   client!na.E S:
     owner: "SoftwareModel"
     name: "maxY"
   client!na.Eb [S:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "aShortArray67"
   client!na.F [I:
     owner: "SoftwareModel"
     name: "triangleVertexA"
   client!na.Fb [B:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "aByteArray46"
   client!na.G Z:
     owner: "SoftwareModel"
     name: "aBoolean245"
   client!na.Gb [I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArray369"
   client!na.H [I:
     owner: "SoftwareModel"
     name: "vertexY"
   client!na.Hb [I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArray370"
   client!na.I [Lclient!u;:
     owner: "SoftwareModel"
     name: "particleEffectors"
   client!na.Ib [I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArray371"
   client!na.J [S:
     owner: "SoftwareModel"
     name: "triangleColors"
   client!na.Jb [I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArray372"
   client!na.K S:
     owner: "SoftwareModel"
     name: "minX"
   client!na.Kb [I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArray373"
   client!na.L [I:
     owner: "SoftwareModel"
     name: "anIntArray345"
   client!na.Lb [Z:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "aBooleanArray17"
   client!na.M [I:
     owner: "SoftwareModel"
     name: "anIntArray346"
   client!na.Mb [I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArray374"
   client!na.N I:
     owner: "SoftwareModel"
     name: "anInt3438"
   client!na.Nb Z:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "aBoolean246"
   client!na.O [B:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "aByteArray44"
   client!na.Ob [I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArray375"
   client!na.P [S:
     owner: "SoftwareModel"
     name: "vertexSources"
   client!na.Pb Z:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "aBoolean247"
   client!na.Q [I:
     owner: "SoftwareModel"
     name: "vertexX"
   client!na.Qb [I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArray376"
   client!na.R S:
     owner: "SoftwareModel"
     name: "boundingSphereRadius"
   client!na.Rb [I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArray377"
   client!na.S [[I:
     owner: "SoftwareModel"
     name: "anIntArrayArray29"
   client!na.Sb [[I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArrayArray33"
   client!na.T [I:
     owner: "SoftwareModel"
     name: "triangleVertexB"
   client!na.Tb [I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArray378"
   client!na.U [Lclient!sk;:
     owner: "SoftwareModel"
     name: "particleEmitters"
   client!na.Ub [I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArray379"
   client!na.V [I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArray349"
   client!na.Vb I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anInt3444"
   client!na.W [I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArray350"
   client!na.Wb [I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArray380"
   client!na.X [I:
     owner: "SoftwareModel"
     name: "anIntArray351"
   client!na.Xb [I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArray381"
   client!na.Y I:
     owner: "SoftwareModel"
@@ -6258,115 +6258,115 @@ fields:
     owner: "SoftwareModel"
     name: "anIntArrayArray30"
   client!na.cb [I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArray352"
   client!na.db [I:
     owner: "SoftwareModel"
     name: "anIntArray353"
   client!na.eb [S:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "aShortArray65"
   client!na.fb Lclient!na;:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "aClass53_Sub4_Sub1_2"
   client!na.gb Lclient!na;:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "aClass53_Sub4_Sub1_3"
   client!na.hb [I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArray354"
   client!na.ib [S:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "aShortArray66"
   client!na.jb [B:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "aByteArray45"
   client!na.kb [I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArray355"
   client!na.lb [I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArray356"
   client!na.mb [I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArray357"
   client!na.n Z:
     owner: "SoftwareModel"
     name: "boundsValid"
   client!na.nb [I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArray358"
   client!na.o B:
     owner: "SoftwareModel"
-    name: "aByte12"
+    name: "priority"
   client!na.ob [I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArray359"
   client!na.p S:
     owner: "SoftwareModel"
     name: "minZ"
   client!na.pb [[I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArrayArray31"
   client!na.q [I:
     owner: "SoftwareModel"
     name: "triangleVertexC"
   client!na.qb [I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArray360"
   client!na.r S:
     owner: "SoftwareModel"
     name: "maxX"
   client!na.rb [I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArray361"
   client!na.s [S:
     owner: "SoftwareModel"
     name: "aShortArray61"
   client!na.sb [I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArray362"
   client!na.t [S:
     owner: "SoftwareModel"
     name: "triangleSources"
   client!na.tb [[I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArrayArray32"
   client!na.u [B:
     owner: "SoftwareModel"
-    name: "aByteArray41"
+    name: "trianglePriorities"
   client!na.ub I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anInt3441"
   client!na.v S:
     owner: "SoftwareModel"
     name: "boundingCylinderRadius"
   client!na.vb [I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArray363"
   client!na.w [I:
     owner: "SoftwareModel"
     name: "vertexZ"
   client!na.wb I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anInt3442"
   client!na.x [B:
     owner: "SoftwareModel"
     name: "triangleAlpha"
   client!na.xb [I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArray364"
   client!na.y [I:
     owner: "SoftwareModel"
     name: "anIntArray341"
   client!na.yb [I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArray365"
   client!na.z Lclient!na;:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "aClass53_Sub4_Sub1_1"
   client!na.zb [I:
-    owner: "Static4"
+    owner: "SoftwareModel"
     name: "anIntArray366"
   client!nb.B I:
     owner: "Class4_Sub17"
@@ -6624,8 +6624,8 @@ fields:
     owner: "Js5Request"
     name: "urgent"
   client!ng.z [Lclient!ml;:
-    owner: "Static5"
-    name: "aClass53_Sub3Array3"
+    owner: "LocType"
+    name: "tempModels"
   client!nh.A I:
     owner: "Tile"
     name: "anInt3549"
@@ -8838,7 +8838,7 @@ fields:
     owner: "GlModel"
     name: "triangleColors"
   client!s.Ab F:
-    owner: "Static6"
+    owner: "GlModel"
     name: "aFloat120"
   client!s.B [Lclient!u;:
     owner: "GlModel"
@@ -8916,7 +8916,7 @@ fields:
     owner: "GlModel"
     name: "vbo"
   client!s.cb [J:
-    owner: "Static6"
+    owner: "GlModel"
     name: "aLongArray43"
   client!s.db [B:
     owner: "GlModel"
@@ -8964,7 +8964,7 @@ fields:
     owner: "GlModel"
     name: "triangleSources"
   client!s.pb I:
-    owner: "Static6"
+    owner: "GlModel"
     name: "anInt4692"
   client!s.q Lclient!ff;:
     owner: "GlModel"
@@ -8976,19 +8976,19 @@ fields:
     owner: "GlModel"
     name: "normalBuffer"
   client!s.rb I:
-    owner: "Static6"
+    owner: "GlModel"
     name: "anInt4693"
   client!s.s [S:
     owner: "GlModel"
     name: "aShortArray89"
   client!s.sb F:
-    owner: "Static6"
+    owner: "GlModel"
     name: "aFloat115"
   client!s.t [I:
     owner: "GlModel"
     name: "anIntArray503"
   client!s.tb F:
-    owner: "Static6"
+    owner: "GlModel"
     name: "aFloat116"
   client!s.u S:
     owner: "GlModel"
@@ -9000,19 +9000,19 @@ fields:
     owner: "GlModel"
     name: "aShortArray90"
   client!s.vb F:
-    owner: "Static6"
+    owner: "GlModel"
     name: "aFloat117"
   client!s.w S:
     owner: "GlModel"
     name: "aShort44"
   client!s.wb F:
-    owner: "Static6"
+    owner: "GlModel"
     name: "aFloat118"
   client!s.x Lclient!ff;:
     owner: "GlModel"
     name: "texCoordBuffer"
   client!s.xb I:
-    owner: "Static6"
+    owner: "GlModel"
     name: "anInt4694"
   client!s.y [S:
     owner: "GlModel"
@@ -9024,7 +9024,7 @@ fields:
     owner: "GlModel"
     name: "vertexY"
   client!s.zb F:
-    owner: "Static6"
+    owner: "GlModel"
     name: "aFloat119"
   client!sa.b I:
     owner: "SkyBoxSphereType"
@@ -11957,7 +11957,7 @@ methods:
       56: "local56"
       64: "local64"
       77: "local77"
-      277: "local277"
+      277: "i"
   client!aa.a (I)V:
     owner: "MaterialManager"
     name: "quit"
@@ -12403,12 +12403,12 @@ methods:
       1: "bytes"
     locals:
       11: "buffer"
-      38: "local38"
-      54: "local54"
-      79: "local79"
-      99: "local99"
-      120: "local120"
-      126: "local126"
+      38: "i"
+      54: "i"
+      79: "i"
+      99: "i"
+      120: "i"
+      126: "j"
   client!af.a (II)Lclient!vh;:
     owner: "LocTypeList"
     name: "get"
@@ -19174,12 +19174,12 @@ methods:
       2: "arg2"
     locals: {}
   client!fi.a ([SB)[S:
-    owner: "Static15"
-    name: "method1396"
+    owner: "ArrayUtils"
+    name: "copyOfNullable"
     arguments:
-      0: "arg0"
+      0: "array"
     locals:
-      12: "local12"
+      12: "copy"
   client!fi.b (BI)Lclient!qg;:
     owner: "MsiTypeList"
     name: "get"
@@ -28392,7 +28392,7 @@ methods:
       9: "code"
   client!li.a ([II)[I:
     owner: "ArrayUtils"
-    name: "copyOf"
+    name: "copyOfNullable"
     arguments:
       0: "array"
     locals:
@@ -29599,7 +29599,7 @@ methods:
       1: "len"
     locals:
       18: "local18"
-      20: "local20"
+      20: "hasPriorities"
       22: "hasAlpha"
       24: "local24"
       26: "hasTextures"
@@ -29623,7 +29623,7 @@ methods:
       609: "local609"
       615: "i"
       622: "model"
-      627: "local627"
+      627: "source"
       631: "j"
       665: "j"
       680: "local680"
@@ -29856,15 +29856,15 @@ methods:
       1: "local1"
       3: "hasTextures"
       8: "buffer"
-      13: "local13"
-      18: "local18"
-      23: "local23"
-      28: "local28"
+      13: "buffer1"
+      18: "buffer2"
+      23: "buffer3"
+      28: "buffer4"
       38: "vertexCount"
       42: "triangleCount"
       46: "local46"
       50: "local50"
-      54: "local54"
+      54: "priority"
       58: "hasAlpha"
       62: "local62"
       66: "local66"
@@ -29872,15 +29872,15 @@ methods:
       74: "local74"
       78: "local78"
       82: "local82"
-      90: "local90"
-      96: "local96"
-      98: "local98"
+      90: "triangleTypesPosition"
+      96: "triangleVerticesPosition"
+      98: "trianglePrioritiesPosition"
       107: "local107"
       116: "local116"
       125: "local125"
-      134: "local134"
+      134: "triangleAlphaPosition"
       147: "local147"
-      149: "local149"
+      149: "triangleColorsPosition"
       157: "local157"
       165: "local165"
       171: "local171"
@@ -29964,7 +29964,7 @@ methods:
       3: "sine"
       7: "cosine"
       9: "i"
-      29: "local29"
+      29: "y"
   client!ml.b (III)V:
     owner: "RawModel"
     name: "translate"
@@ -29999,23 +29999,23 @@ methods:
     arguments:
       0: "bytes"
     locals:
-      4: "local4"
-      9: "local9"
-      14: "local14"
-      19: "local19"
-      24: "local24"
-      29: "local29"
-      34: "local34"
+      4: "buffer1"
+      9: "buffer2"
+      14: "buffer3"
+      19: "buffer4"
+      24: "buffer5"
+      29: "buffer6"
+      34: "buffer7"
       44: "vertexCount"
       48: "triangleCount"
       52: "local52"
       56: "local56"
       65: "local65"
       74: "local74"
-      78: "local78"
+      78: "priority"
       82: "hasAlpha"
       86: "local86"
-      90: "local90"
+      90: "hasTextures"
       94: "local94"
       98: "local98"
       102: "local102"
@@ -30027,17 +30027,17 @@ methods:
       120: "local120"
       131: "i"
       143: "local143"
-      167: "local167"
+      167: "triangleTypesPosition"
       169: "local169"
-      181: "local181"
-      183: "local183"
+      181: "triangleVerticesPosition"
+      183: "trianglePrioritiesPosition"
       192: "local192"
       201: "local201"
-      210: "local210"
+      210: "triangleAlphaPosition"
       223: "local223"
-      225: "local225"
-      240: "local240"
-      242: "local242"
+      225: "triangleTexturesPosition"
+      240: "particleEmittersAndEffectorsPosition"
+      242: "triangleColorsPosition"
       250: "local250"
       256: "local256"
       262: "local262"
@@ -30062,7 +30062,7 @@ methods:
       694: "prevVertex"
       696: "i"
       703: "type"
-      841: "local841"
+      841: "temp"
       903: "i"
       913: "local913"
       1180: "particleEmittersLen"
@@ -30076,8 +30076,8 @@ methods:
     name: "method2742"
     arguments: {}
     locals:
-      1: "local1"
-      10: "local10"
+      1: "i"
+      10: "x"
   client!ml.c (I)V:
     owner: "RawModel"
     name: "method2769"
@@ -30087,7 +30087,7 @@ methods:
       3: "sine"
       7: "cosine"
       9: "i"
-      29: "local29"
+      29: "x"
   client!ml.c (III)V:
     owner: "RawModel"
     name: "method2754"
@@ -30099,15 +30099,15 @@ methods:
       5: "sine"
       9: "cosine"
       11: "i"
-      31: "local31"
+      31: "x"
       63: "sine"
       67: "cosine"
       69: "i"
-      89: "local89"
+      89: "y"
       121: "sine"
       125: "cosine"
       127: "i"
-      147: "local147"
+      147: "x"
   client!ml.c (IIIII)Lclient!vg;:
     owner: "RawModel"
     name: "createModel"
@@ -30153,7 +30153,7 @@ methods:
     name: "method2745"
     arguments: {}
     locals:
-      1: "local1"
+      1: "i"
   client!ml.e (III)V:
     owner: "RawModel"
     name: "resize"
@@ -30168,16 +30168,16 @@ methods:
     name: "method2747"
     arguments: {}
     locals:
-      1: "local1"
-      10: "local10"
+      1: "i"
+      10: "z"
   client!ml.g ()V:
     owner: "RawModel"
     name: "method2748"
     arguments: {}
     locals:
-      1: "local1"
-      18: "local18"
-      27: "local27"
+      1: "i"
+      18: "i"
+      27: "a"
   client!ml.h ()Lclient!ml;:
     owner: "RawModel"
     name: "method2749"
@@ -30576,7 +30576,7 @@ methods:
       9: "local9"
       29: "local29"
   client!na.a (II)I:
-    owner: "Static25"
+    owner: "SoftwareModel"
     name: "method2912"
     arguments:
       0: "arg0"
@@ -30594,31 +30594,31 @@ methods:
     locals:
       3: "local3"
       11: "local11"
-      72: "local72"
-      78: "local78"
-      108: "local108"
-      114: "local114"
-      142: "local142"
-      146: "local146"
-      164: "local164"
-      196: "local196"
-      200: "local200"
-      218: "local218"
-      250: "local250"
-      254: "local254"
-      272: "local272"
-      300: "local300"
-      330: "local330"
-      336: "local336"
-      426: "local426"
-      441: "local441"
-      465: "local465"
-      476: "local476"
-      482: "local482"
-      488: "local488"
-      492: "local492"
-      502: "local502"
-      516: "local516"
+      72: "i"
+      78: "vertex"
+      108: "i"
+      114: "vertex"
+      142: "sine"
+      146: "cosine"
+      164: "x"
+      196: "sine"
+      200: "cosine"
+      218: "y"
+      250: "sine"
+      254: "cosine"
+      272: "x"
+      300: "vertex2"
+      330: "i"
+      336: "vertex"
+      426: "i"
+      441: "alpha"
+      465: "i"
+      476: "color"
+      482: "h"
+      488: "s"
+      492: "l"
+      502: "s2"
+      516: "l2"
   client!na.a (IIIIIIII)Z:
     owner: "SoftwareModel"
     name: "method2901"
@@ -31196,10 +31196,10 @@ methods:
       6: "arg6"
       7: "arg7"
     locals:
-      47: "local47"
-      92: "local92"
-      106: "local106"
-      153: "local153"
+      47: "i"
+      92: "i"
+      106: "i"
+      153: "i"
   client!na.a (ZZZ)Lclient!vg;:
     owner: "SoftwareModel"
     name: "method3831"
@@ -31225,11 +31225,11 @@ methods:
       29: "local29"
   client!na.b (III)V:
     owner: "SoftwareModel"
-    name: "method3823"
+    name: "translate"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "x"
+      1: "y"
+      2: "z"
     locals:
       1: "local1"
       7: "local7"
@@ -31292,11 +31292,11 @@ methods:
       29: "local29"
   client!na.c (III)V:
     owner: "SoftwareModel"
-    name: "method3824"
+    name: "resize"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "x"
+      1: "y"
+      2: "z"
     locals:
       1: "local1"
   client!na.c (ZZZ)Lclient!vg;:
@@ -31384,7 +31384,7 @@ methods:
     arguments: {}
     locals: {}
   client!na.f (I)I:
-    owner: "Static25"
+    owner: "SoftwareModel"
     name: "method2914"
     arguments:
       0: "arg0"
@@ -31428,7 +31428,7 @@ methods:
     arguments: {}
     locals: {}
   client!na.o ()V:
-    owner: "Static25"
+    owner: "SoftwareModel"
     name: "method2906"
     arguments: {}
     locals: {}
@@ -31462,7 +31462,7 @@ methods:
       38: "local38"
       63: "local63"
   client!na.r ()V:
-    owner: "Static25"
+    owner: "SoftwareModel"
     name: "method2915"
     arguments: {}
     locals: {}
@@ -38489,7 +38489,7 @@ methods:
       508: "local508"
       522: "local522"
   client!s.a (IIIIFFF)[F:
-    owner: "Static31"
+    owner: "GlModel"
     name: "method3864"
     arguments:
       0: "arg0"
@@ -38615,7 +38615,7 @@ methods:
     locals:
       5: "gl"
   client!s.a (IIIIIII[FIFFF)V:
-    owner: "Static31"
+    owner: "GlModel"
     name: "method3856"
     arguments:
       0: "arg0"
@@ -38639,7 +38639,7 @@ methods:
       177: "local177"
       198: "local198"
   client!s.a (IIIIII[FFIF)V:
-    owner: "Static31"
+    owner: "GlModel"
     name: "method3871"
     arguments:
       0: "arg0"
@@ -38661,7 +38661,7 @@ methods:
       104: "local104"
       125: "local125"
   client!s.a (IIIIII[FIF)V:
-    owner: "Static31"
+    owner: "GlModel"
     name: "method3874"
     arguments:
       0: "arg0"
@@ -38752,7 +38752,7 @@ methods:
       712: "local712"
       716: "local716"
   client!s.a (ISIB)I:
-    owner: "Static31"
+    owner: "GlModel"
     name: "method3863"
     arguments:
       0: "arg0"
@@ -39106,16 +39106,16 @@ methods:
       80: "local80"
       92: "local92"
       95: "local95"
-      105: "local105"
-      109: "local109"
-      113: "local113"
-      117: "local117"
-      121: "local121"
-      125: "local125"
-      127: "local127"
-      138: "local138"
-      152: "local152"
-      166: "local166"
+      105: "minY"
+      109: "maxY"
+      113: "minX"
+      117: "maxX"
+      121: "minZ"
+      125: "maxZ"
+      127: "i"
+      138: "y"
+      152: "x"
+      166: "z"
       175: "local175"
       180: "local180"
       187: "local187"
@@ -39302,20 +39302,20 @@ methods:
       29: "local29"
   client!s.b (III)V:
     owner: "GlModel"
-    name: "method3823"
+    name: "translate"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "x"
+      1: "y"
+      2: "z"
     locals:
       1: "i"
-      7: "local7"
+      7: "vertex"
   client!s.b (SS)V:
     owner: "GlModel"
-    name: "method3867"
+    name: "recolor"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "source"
+      1: "destination"
     locals:
       1: "i"
   client!s.b (ZZZ)Lclient!vg;:
@@ -39343,11 +39343,11 @@ methods:
       29: "local29"
   client!s.c (III)V:
     owner: "GlModel"
-    name: "method3824"
+    name: "resize"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "x"
+      1: "y"
+      2: "z"
     locals:
       1: "i"
   client!s.c (ZZZ)Lclient!vg;:
@@ -39423,7 +39423,7 @@ methods:
     arguments: {}
     locals:
       6: "i"
-      12: "local12"
+      12: "vertex"
   client!s.k ()I:
     owner: "GlModel"
     name: "getMaxX"
@@ -39513,7 +39513,7 @@ methods:
       9: "maxY"
       11: "maxZ"
       13: "maxCylinderRadiusSquared"
-      15: "maxSpheraRadiusSquared"
+      15: "maxSphereRadiusSquared"
       17: "i"
       26: "x"
       31: "y"
@@ -43830,12 +43830,12 @@ methods:
     owner: "Model"
     name: "method3844"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "frameset"
+      1: "frameId"
     locals:
-      12: "local12"
-      15: "local15"
-      17: "local17"
+      12: "frame"
+      15: "base"
+      17: "i"
       26: "local26"
   client!vg.a (Lclient!te;ILclient!te;IIIIZ[I)V:
     owner: "Model"
@@ -43902,7 +43902,7 @@ methods:
       2: "arg2"
     locals: {}
   client!vg.a ([[III)I:
-    owner: "Static36"
+    owner: "Model"
     name: "method3821"
     arguments:
       0: "arg0"
@@ -43959,11 +43959,11 @@ methods:
     locals: {}
   client!vg.b (III)V:
     owner: "Model"
-    name: "method3823"
+    name: "translate"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "x"
+      1: "y"
+      2: "z"
     locals: {}
   client!vg.b (ZZZ)Lclient!vg;:
     owner: "Model"
@@ -43986,11 +43986,11 @@ methods:
     locals: {}
   client!vg.c (III)V:
     owner: "Model"
-    name: "method3824"
+    name: "resize"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "x"
+      1: "y"
+      2: "z"
     locals: {}
   client!vg.c (ZZZ)Lclient!vg;:
     owner: "Model"
@@ -44211,28 +44211,28 @@ methods:
     owner: "LocType"
     name: "method4456"
     arguments:
-      0: "arg0"
+      0: "shape"
       1: "arg1"
-      2: "arg2"
+      2: "angle"
     locals:
       12: "local12"
       19: "local19"
-      38: "local38"
-      45: "local45"
-      47: "local47"
-      75: "local75"
-      80: "local80"
-      82: "local82"
-      142: "local142"
-      144: "local144"
-      173: "local173"
-      197: "local197"
+      38: "modelsLen"
+      45: "key"
+      47: "i"
+      75: "model"
+      80: "rawModel"
+      82: "i"
+      142: "modelIndex"
+      144: "i"
+      173: "key"
+      197: "rawModel"
       218: "local218"
       234: "local234"
       276: "local276"
       326: "local326"
-      386: "local386"
-      410: "local410"
+      386: "i"
+      410: "i"
   client!vh.a (I[[IIIIIZIII[[ILclient!eg;Lclient!fe;I)Lclient!jh;:
     owner: "LocType"
     name: "method4458"
