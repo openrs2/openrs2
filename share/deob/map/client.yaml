@@ -156,7 +156,7 @@ classes:
   client!mo: "TextureOp26"
   client!n: "GlIndexedSprite"
   client!na: "SoftwareModel"
-  client!nb: "Class4_Sub17"
+  client!nb: "MapElementBounds"
   client!nd: "Inv"
   client!ne: "ParticleSystem"
   client!nf: "Mouse"
@@ -2572,16 +2572,16 @@ fields:
     name: "level"
   client!fg.F I:
     owner: "MapElement"
-    name: "anInt1764"
+    name: "yOffset"
   client!fg.H Z:
     owner: "MapElement"
-    name: "aBoolean106"
+    name: "hidden"
   client!fg.J [[[B:
     owner: "Static2"
     name: "aByteArrayArrayArray4"
   client!fg.K I:
     owner: "MapElement"
-    name: "anInt1766"
+    name: "xOffset"
   client!fg.L I:
     owner: "Static2"
     name: "anInt1767"
@@ -6369,22 +6369,22 @@ fields:
     owner: "SoftwareModel"
     name: "anIntArray366"
   client!nb.B I:
-    owner: "Class4_Sub17"
-    name: "anInt3464"
+    owner: "MapElementBounds"
+    name: "textMinY"
   client!nb.C I:
-    owner: "Class4_Sub17"
-    name: "anInt3465"
+    owner: "MapElementBounds"
+    name: "textMaxY"
   client!nb.D [I:
     owner: "Static5"
     name: "anIntArray383"
   client!nb.E I:
-    owner: "Class4_Sub17"
-    name: "anInt3466"
+    owner: "MapElementBounds"
+    name: "textMaxX"
   client!nb.H I:
     owner: "Chat"
     name: "size"
   client!nb.I Lclient!fg;:
-    owner: "Class4_Sub17"
+    owner: "MapElementBounds"
     name: "element"
   client!nb.r [Ljava/lang/String;:
     owner: "FriendsList"
@@ -6393,20 +6393,20 @@ fields:
     owner: "Static4"
     name: "anInt3455"
   client!nb.t I:
-    owner: "Class4_Sub17"
-    name: "anInt3456"
+    owner: "MapElementBounds"
+    name: "textMinX"
   client!nb.u I:
-    owner: "Class4_Sub17"
-    name: "anInt3457"
+    owner: "MapElementBounds"
+    name: "iconMinX"
   client!nb.w I:
-    owner: "Class4_Sub17"
-    name: "anInt3459"
+    owner: "MapElementBounds"
+    name: "iconMinY"
   client!nb.y I:
-    owner: "Class4_Sub17"
-    name: "anInt3461"
+    owner: "MapElementBounds"
+    name: "iconMaxY"
   client!nb.z I:
-    owner: "Class4_Sub17"
-    name: "anInt3462"
+    owner: "MapElementBounds"
+    name: "iconMaxX"
   client!nc.b I:
     owner: "BufferPool"
     name: "mediumBufferCount"
@@ -12736,8 +12736,8 @@ methods:
       1: "arg1"
       3: "arg2"
     locals:
-      23: "local23"
-      30: "local30"
+      23: "element"
+      30: "type"
   client!am.b (II)I:
     owner: "VarbitTypeList"
     name: "getGroupId"
@@ -22625,8 +22625,8 @@ methods:
     name: "method1808"
     arguments: {}
     locals:
-      22: "local22"
-      41: "local41"
+      22: "sprite"
+      41: "newSprite"
   client!ho.a (B[I[J)V:
     owner: "Static19"
     name: "method1805"
@@ -22668,13 +22668,13 @@ methods:
     owner: "MelType"
     name: "method1811"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "hover"
+      2: "forceSoftware"
     locals:
-      17: "local17"
-      30: "local30"
-      49: "local49"
-      55: "local55"
+      17: "spriteId"
+      30: "sprite"
+      49: "softwareSprite"
+      55: "newSprite"
   client!i.a (IB)Lclient!jc;:
     owner: "ParamTypeList"
     name: "get"
@@ -23222,12 +23222,12 @@ methods:
     owner: "Static20"
     name: "method2404"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "element"
+      1: "x"
+      2: "y"
     locals:
-      32: "local32"
-      42: "local42"
+      32: "type"
+      42: "sprite"
   client!ii.a (Lclient!fh;)V:
     owner: "MapList"
     name: "init"
@@ -30243,8 +30243,8 @@ methods:
     locals:
       64: "local64"
       69: "local69"
-      153: "local153"
-      161: "local161"
+      153: "bounds"
+      161: "type"
   client!mn.a ()F:
     owner: "Static25"
     name: "method2773"
@@ -31467,7 +31467,7 @@ methods:
     arguments: {}
     locals: {}
   client!nb.<init> (Lclient!fg;)V:
-    owner: "Class4_Sub17"
+    owner: "MapElementBounds"
     name: "<init>"
     arguments:
       0: "element"
@@ -31488,11 +31488,11 @@ methods:
     locals:
       12: "rank"
   client!nb.a (III)Z:
-    owner: "Class4_Sub17"
-    name: "method2923"
+    owner: "MapElementBounds"
+    name: "isHovering"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "x"
+      2: "y"
     locals: {}
   client!nb.a (Ljava/lang/String;ILjava/lang/String;ILjava/lang/String;I)V:
     owner: "Chat"
@@ -43117,19 +43117,19 @@ methods:
     owner: "Static35"
     name: "method4329"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "element"
+      2: "type"
     locals:
-      5: "local5"
-      16: "local16"
+      5: "sprite"
+      16: "size"
       27: "local27"
       30: "local30"
-      32: "local32"
-      34: "local34"
-      36: "local36"
-      49: "local49"
-      56: "local56"
-      77: "local77"
+      32: "textLines"
+      34: "textWidth"
+      36: "textHeight"
+      49: "i"
+      56: "line"
+      77: "lineWidth"
       105: "local105"
       167: "local167"
       218: "local218"
@@ -43138,8 +43138,8 @@ methods:
       226: "local226"
       250: "local250"
       252: "local252"
-      353: "local353"
-      364: "local364"
+      353: "i"
+      364: "line"
   client!ui.a (Z)Ljava/lang/String;:
     owner: "Static35"
     name: "method4328"
@@ -43588,10 +43588,10 @@ methods:
     owner: "Static36"
     name: "method3811"
     arguments:
-      0: "arg0"
-      2: "arg1"
-      3: "arg2"
-      4: "arg3"
+      0: "x"
+      2: "element"
+      3: "y"
+      4: "type"
     locals:
       10: "local10"
       15: "local15"
@@ -43601,8 +43601,8 @@ methods:
       71: "local71"
       95: "local95"
       134: "local134"
-      222: "local222"
-      224: "local224"
+      222: "bounds"
+      224: "sprite"
       290: "local290"
   client!vc.a (Lclient!fh;I)V:
     owner: "FluTypeList"
