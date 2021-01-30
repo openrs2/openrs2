@@ -447,16 +447,16 @@ public class DiskStore private constructor(
     }
 
     public companion object {
-        private const val INDEX_ENTRY_SIZE = 6
+        internal const val INDEX_ENTRY_SIZE = 6
 
         private const val BLOCK_HEADER_SIZE = 8
-        private const val BLOCK_DATA_SIZE = 512
-        private const val BLOCK_SIZE = BLOCK_HEADER_SIZE + BLOCK_DATA_SIZE
+        internal const val BLOCK_DATA_SIZE = 512
+        internal const val BLOCK_SIZE = BLOCK_HEADER_SIZE + BLOCK_DATA_SIZE
 
-        private const val EXTENDED_BLOCK_HEADER_SIZE = 10
-        private const val EXTENDED_BLOCK_DATA_SIZE = 510
+        internal const val EXTENDED_BLOCK_HEADER_SIZE = 10
+        internal const val EXTENDED_BLOCK_DATA_SIZE = 510
 
-        private const val MAX_BLOCK = (1 shl 24) - 1
+        internal const val MAX_BLOCK = (1 shl 24) - 1
 
         private val TEMP_BUFFER_SIZE = max(INDEX_ENTRY_SIZE, max(BLOCK_HEADER_SIZE, EXTENDED_BLOCK_HEADER_SIZE))
         private const val INDEX_BUFFER_SIZE = INDEX_ENTRY_SIZE * 1000
