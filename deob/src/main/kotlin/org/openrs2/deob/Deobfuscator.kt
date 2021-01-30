@@ -5,7 +5,7 @@ import org.openrs2.decompiler.Decompiler
 import org.openrs2.deob.ast.AstDeobfuscator
 import org.openrs2.deob.bytecode.BytecodeDeobfuscator
 import org.openrs2.deob.util.Module
-import java.nio.file.Paths
+import java.nio.file.Path
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -18,8 +18,8 @@ public class Deobfuscator @Inject constructor(
     public fun run() {
         logger.info { "Deobfuscating bytecode" }
         bytecodeDeobfuscator.run(
-            input = Paths.get("nonfree/lib"),
-            output = Paths.get("nonfree/var/cache/deob")
+            input = Path.of("nonfree/lib"),
+            output = Path.of("nonfree/var/cache/deob")
         )
 
         logger.info { "Decompiling" }
