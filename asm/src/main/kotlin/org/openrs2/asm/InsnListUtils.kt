@@ -2,6 +2,7 @@ package org.openrs2.asm
 
 import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.InsnList
+import org.objectweb.asm.tree.LabelNode
 
 private val ANY_INSN = { _: AbstractInsnNode -> true }
 
@@ -50,4 +51,12 @@ public fun InsnList.deleteExpression(
     expr.forEach(this::remove)
     remove(last)
     return true
+}
+
+public fun InsnList.clone(labels: Map<LabelNode, LabelNode>): InsnList {
+    val copy = InsnList()
+    for (insn in this) {
+        copy.add(insn.clone(labels))
+    }
+    return copy
 }
