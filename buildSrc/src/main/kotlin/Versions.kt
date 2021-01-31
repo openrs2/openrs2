@@ -25,7 +25,7 @@ object Versions {
     const val logback = "1.2.3"
     const val netty = "4.1.58.Final"
     const val nettyIoUring = "0.0.3.Final"
-    const val openrs2Natives = "3.1.0"
+    const val openrs2Natives = "3.2.0"
     const val postgres = "42.2.18"
     const val shadowPlugin = "6.1.0"
     const val versionsPlugin = "0.36.0"
