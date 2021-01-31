@@ -85,43 +85,43 @@ public class Resource(
             return compress(source, destination, uncompressed)
         }
 
-        public fun compressGlNatives(): List<List<Resource>> = listOf(
-            // Windows i386
-            listOf(
-                compressNative("jaggl_0_0.lib", "jaggl.dll", "windows-i386/jaggl.dll")
-            ),
+        public fun compressGlNatives(): List<List<Resource>> {
+            val platforms = mutableListOf<List<Resource>>()
+            var i = 0
 
-            // Windows amd64
-            listOf(
-                compressNative("jaggl_1_0.lib", "jaggl.dll", "windows-amd64/jaggl.dll")
-            ),
+            for (os in OperatingSystem.values()) {
+                for (arch in os.architectures) {
+                    val resources = mutableListOf<Resource>()
 
-            // macOS i386
-            listOf(
-                compressNative("jaggl_2_0.lib", "libjaggl.dylib", "mac-i386/libjaggl.dylib")
-            ),
+                    for ((j, library) in os.glLibraries.withIndex()) {
+                        resources += compressNative(
+                            source = "jaggl_${i}_$j.lib",
+                            destination = library,
+                            resource = "${os.id}-${arch.id}/$library"
+                        )
+                    }
 
-            // macOS amd64
-            listOf(
-                compressNative("jaggl_3_0.lib", "libjaggl.dylib", "mac-amd64/libjaggl.dylib")
-            ),
+                    platforms += resources
+                    i++
+                }
+            }
 
-            // Linux i386
-            listOf(
-                compressNative("jaggl_4_0.lib", "libjaggl.so", "linux-i386/libjaggl.so"),
-                compressNative("jaggl_4_1.lib", "libjaggl_dri.so", "linux-i386/libjaggl_dri.so")
-            ),
+            return platforms
+        }
 
-            // Linux amd64
-            listOf(
-                compressNative("jaggl_5_0.lib", "libjaggl.so", "linux-amd64/libjaggl.so"),
-                compressNative("jaggl_5_1.lib", "libjaggl_dri.so", "linux-amd64/libjaggl_dri.so")
-            )
-        )
+        public fun compressMiscNatives(): List<Resource> {
+            val os = OperatingSystem.WINDOWS
+            val resources = mutableListOf<Resource>()
 
-        public fun compressMiscNatives(): List<Resource> = listOf(
-            compressNative("jagmisc_0.lib", "jagmisc.dll", "windows-i386/jagmisc.dll"),
-            compressNative("jagmisc_1.lib", "jagmisc.dll", "windows-amd64/jagmisc.dll")
-        )
+            for ((i, arch) in os.architectures.withIndex()) {
+                resources += compressNative(
+                    source = "jagmisc_$i.lib",
+                    destination = "jagmisc.dll",
+                    resource = "${os.id}-${arch.id}/jagmisc.dll"
+                )
+            }
+
+            return resources
+        }
     }
 }

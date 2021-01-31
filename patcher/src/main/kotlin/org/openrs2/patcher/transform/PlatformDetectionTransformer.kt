@@ -5,7 +5,6 @@ import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.InsnList
-import org.objectweb.asm.tree.InsnNode
 import org.objectweb.asm.tree.JumpInsnNode
 import org.objectweb.asm.tree.LabelNode
 import org.objectweb.asm.tree.LdcInsnNode
@@ -16,9 +15,9 @@ import org.openrs2.asm.InsnMatcher
 import org.openrs2.asm.MemberRef
 import org.openrs2.asm.classpath.ClassPath
 import org.openrs2.asm.classpath.Library
-import org.openrs2.asm.intConstant
 import org.openrs2.asm.toAbstractInsnNode
 import org.openrs2.asm.transform.Transformer
+import org.openrs2.patcher.OperatingSystem
 import javax.inject.Singleton
 
 @Singleton
@@ -32,7 +31,7 @@ public class PlatformDetectionTransformer : Transformer() {
     }
 
     override fun transformCode(classPath: ClassPath, library: Library, clazz: ClassNode, method: MethodNode): Boolean {
-        val match = GL_PLATFORM_DETECTION_MATCHER.match(method).singleOrNull()
+        var match = GL_PLATFORM_DETECTION_MATCHER.match(method).singleOrNull()
         if (match != null) {
             // find os.name, os.arch and platform ID variables
             val nameStore = match[3] as VarInsnNode
@@ -50,14 +49,13 @@ public class PlatformDetectionTransformer : Transformer() {
             // generate our own platform detection code
             val list = InsnList()
             val end = LabelNode()
+            var platform = 0
 
-            for ((index, os) in OS_NAMES.withIndex()) {
-                val next = LabelNode()
-                val amd64 = LabelNode()
-                val i386 = LabelNode()
+            for (os in OperatingSystem.values()) {
+                val nextOs = LabelNode()
 
                 list.add(VarInsnNode(Opcodes.ALOAD, nameVar))
-                list.add(LdcInsnNode(os))
+                list.add(LdcInsnNode(os.needle))
                 list.add(
                     MethodInsnNode(
                         Opcodes.INVOKEVIRTUAL,
@@ -66,43 +64,42 @@ public class PlatformDetectionTransformer : Transformer() {
                         STARTS_WITH.desc
                     )
                 )
-                list.add(JumpInsnNode(Opcodes.IFEQ, next))
+                list.add(JumpInsnNode(Opcodes.IFEQ, nextOs))
 
-                list.add(VarInsnNode(Opcodes.ALOAD, archVar))
-                list.add(LdcInsnNode("amd64"))
-                list.add(
-                    MethodInsnNode(
-                        Opcodes.INVOKEVIRTUAL,
-                        STARTS_WITH.owner,
-                        STARTS_WITH.name,
-                        STARTS_WITH.desc
-                    )
-                )
-                list.add(JumpInsnNode(Opcodes.IFNE, amd64))
+                for ((i, arch) in os.architectures.withIndex()) {
+                    val matchingArch = LabelNode()
+                    val nextArch = LabelNode()
 
-                list.add(VarInsnNode(Opcodes.ALOAD, archVar))
-                list.add(LdcInsnNode("x86_64"))
-                list.add(
-                    MethodInsnNode(
-                        Opcodes.INVOKEVIRTUAL,
-                        STARTS_WITH.owner,
-                        STARTS_WITH.name,
-                        STARTS_WITH.desc
-                    )
-                )
-                list.add(JumpInsnNode(Opcodes.IFEQ, i386))
+                    if (i != os.architectures.size - 1) {
+                        for ((j, needle) in arch.needles.withIndex()) {
+                            list.add(VarInsnNode(Opcodes.ALOAD, archVar))
+                            list.add(LdcInsnNode(needle))
+                            list.add(
+                                MethodInsnNode(
+                                    Opcodes.INVOKEVIRTUAL,
+                                    STARTS_WITH.owner,
+                                    STARTS_WITH.name,
+                                    STARTS_WITH.desc
+                                )
+                            )
 
-                list.add(amd64)
-                list.add((index * 2 + 1).toAbstractInsnNode())
-                list.add(VarInsnNode(Opcodes.ISTORE, platformVar))
-                list.add(JumpInsnNode(Opcodes.GOTO, end))
+                            if (j != arch.needles.size - 1) {
+                                list.add(JumpInsnNode(Opcodes.IFNE, matchingArch))
+                            } else {
+                                list.add(JumpInsnNode(Opcodes.IFEQ, nextArch))
+                            }
+                        }
+                    }
 
-                list.add(i386)
-                list.add((index * 2).toAbstractInsnNode())
-                list.add(VarInsnNode(Opcodes.ISTORE, platformVar))
-                list.add(JumpInsnNode(Opcodes.GOTO, end))
+                    list.add(matchingArch)
+                    list.add((platform++).toAbstractInsnNode())
+                    list.add(VarInsnNode(Opcodes.ISTORE, platformVar))
+                    list.add(JumpInsnNode(Opcodes.GOTO, end))
 
-                list.add(next)
+                    list.add(nextArch)
+                }
+
+                list.add(nextOs)
             }
 
             list.add(unknownOs)
@@ -119,28 +116,62 @@ public class PlatformDetectionTransformer : Transformer() {
         }
 
         // adjust jagmisc platform IDs to account for the removal of MSJVM support
-        val miscMatch = MISC_PLATFORM_DETECTION_MATCHER.match(method).filter {
-            val const1 = it[0].intConstant
-            if (const1 != 0 && const1 != 2) {
-                return@filter false
+        match = MISC_PLATFORM_DETECTION_MATCHER.match(method).singleOrNull()
+        if (match != null) {
+            // find os.arch and platform ID variables
+            val archStore = match[12] as VarInsnNode
+            val archVar = archStore.`var`
+
+            val platformStore = match[match.size - 5] as VarInsnNode
+            val platformVar = platformStore.`var`
+
+            // generate our own platform detection code
+            val list = InsnList()
+            val end = LabelNode()
+            val os = OperatingSystem.WINDOWS
+
+            for ((i, arch) in os.architectures.withIndex()) {
+                val matchingArch = LabelNode()
+                val nextArch = LabelNode()
+
+                if (i != os.architectures.size - 1) {
+                    for ((j, needle) in arch.needles.withIndex()) {
+                        list.add(VarInsnNode(Opcodes.ALOAD, archVar))
+                        list.add(LdcInsnNode(needle))
+                        list.add(
+                            MethodInsnNode(
+                                Opcodes.INVOKEVIRTUAL,
+                                STARTS_WITH.owner,
+                                STARTS_WITH.name,
+                                STARTS_WITH.desc
+                            )
+                        )
+
+                        if (j != arch.needles.size - 1) {
+                            list.add(JumpInsnNode(Opcodes.IFNE, matchingArch))
+                        } else {
+                            list.add(JumpInsnNode(Opcodes.IFEQ, nextArch))
+                        }
+                    }
+                }
+
+                list.add(matchingArch)
+                list.add(i.toAbstractInsnNode())
+                list.add(VarInsnNode(Opcodes.ISTORE, platformVar))
+                list.add(JumpInsnNode(Opcodes.GOTO, end))
+
+                list.add(nextArch)
             }
 
-            val const2 = it[it.size - 2].intConstant
-            if (const2 != 0 && const2 != 2) {
-                return@filter false
+            list.add(end)
+
+            // replace existing platform detection code with our own
+            for (i in (13 until match.size - 4)) {
+                method.instructions.remove(match[i])
             }
 
-            if (const1 == const2) {
-                return@filter false
-            }
+            method.instructions.insert(match[12], list)
 
-            val store1 = it[1] as VarInsnNode
-            val store2 = it[it.size - 1] as VarInsnNode
-            return@filter store1.`var` == store2.`var`
-        }.singleOrNull()
-        if (miscMatch != null) {
-            val iconst = miscMatch.single { it.intConstant == 2 }
-            method.instructions.set(iconst, InsnNode(Opcodes.ICONST_1))
             miscBlocks++
         }
 
@@ -161,9 +192,14 @@ public class PlatformDetectionTransformer : Transformer() {
             ICONST ISTORE ILOAD GETSTATIC ILOAD AALOAD ARRAYLENGTH
             """
         )
-        private val MISC_PLATFORM_DETECTION_MATCHER =
-            InsnMatcher.compile("ICONST ISTORE ((GETSTATIC | ILOAD) IFEQ | GOTO) ICONST ISTORE")
-        private val OS_NAMES = listOf("win", "mac", "linux")
+        private val MISC_PLATFORM_DETECTION_MATCHER = InsnMatcher.compile(
+            """
+            LDC INVOKESTATIC INVOKEVIRTUAL ASTORE ALOAD LDC INVOKEVIRTUAL IFNE GOTO
+            LDC INVOKESTATIC INVOKEVIRTUAL ASTORE
+            .*
+            ICONST ISTORE ALOAD ALOAD LDC INVOKEVIRTUAL
+        """
+        )
         private val STARTS_WITH = MemberRef("java/lang/String", "startsWith", "(Ljava/lang/String;)Z")
 
         private fun findUnknownOs(match: List<AbstractInsnNode>): InsnList {
