@@ -339,7 +339,7 @@ public class CacheImporter @Inject constructor(
 
         connection.prepareStatement(
             """
-            INSERT INTO master_index_entries (container_id, archive_id, crc32, version)
+            INSERT INTO master_index_archives (container_id, archive_id, crc32, version)
             VALUES (?, ?, ?, ?)
         """.trimIndent()
         ).use { stmt ->

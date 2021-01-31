@@ -89,7 +89,7 @@ CREATE TABLE master_indexes (
     timestamp TIMESTAMPTZ NULL
 );
 
-CREATE TABLE master_index_entries (
+CREATE TABLE master_index_archives (
     container_id BIGINT NOT NULL REFERENCES master_indexes (container_id),
     archive_id uint1 NOT NULL,
     crc32 INTEGER NOT NULL,

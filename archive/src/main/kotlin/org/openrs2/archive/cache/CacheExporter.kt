@@ -20,12 +20,12 @@ public class CacheExporter @Inject constructor(
             connection.prepareStatement(
                 """
                 WITH t AS (
-                    SELECT e.archive_id, c.data, g.container_id
+                    SELECT a.archive_id, c.data, g.container_id
                     FROM master_indexes m
-                    JOIN master_index_entries e ON e.container_id = m.container_id
-                    JOIN groups g ON g.archive_id = 255 AND g.group_id = e.archive_id::INTEGER AND g.truncated_version = e.version & 65535
-                    JOIN containers c ON c.id = g.container_id AND c.crc32 = e.crc32
-                    JOIN indexes i ON i.container_id = g.container_id AND i.version = e.version
+                    JOIN master_index_archives a ON a.container_id = m.container_id
+                    JOIN groups g ON g.archive_id = 255 AND g.group_id = a.archive_id::INTEGER AND g.truncated_version = a.version & 65535
+                    JOIN containers c ON c.id = g.container_id AND c.crc32 = a.crc32
+                    JOIN indexes i ON i.container_id = g.container_id AND i.version = a.version
                     WHERE m.container_id = ?
                 )
                 SELECT 255::uint1, t.archive_id::INTEGER, t.data, NULL
