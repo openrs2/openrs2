@@ -33,35 +33,31 @@ public class CacheImporter @Inject constructor(
     private val alloc: ByteBufAllocator
 ) {
     public abstract class Container(
-        data: ByteBuf
+        data: ByteBuf,
+        public val encrypted: Boolean
     ) : DefaultByteBufHolder(data) {
         public val bytes: ByteArray = ByteBufUtil.getBytes(data, data.readerIndex(), data.readableBytes(), false)
         public val crc32: Int = data.crc32()
         public val whirlpool: ByteArray = Whirlpool.whirlpool(bytes)
-        public abstract val encrypted: Boolean
     }
 
     private class MasterIndex(
         val index: Js5MasterIndex,
-        data: ByteBuf
-    ) : Container(data) {
-        override val encrypted: Boolean = false
-    }
+        data: ByteBuf,
+    ) : Container(data, false)
 
     public class Index(
         public val index: Js5Index,
-        data: ByteBuf
-    ) : Container(data) {
-        override val encrypted: Boolean = false
-    }
+        data: ByteBuf,
+    ) : Container(data, false)
 
     public class Group(
         public val archive: Int,
         public val group: Int,
         data: ByteBuf,
         public val version: Int,
-        override val encrypted: Boolean
-    ) : Container(data)
+        encrypted: Boolean
+    ) : Container(data, encrypted)
 
     public suspend fun import(store: Store, game: String, build: Int?, timestamp: Instant?) {
         database.execute { connection ->
