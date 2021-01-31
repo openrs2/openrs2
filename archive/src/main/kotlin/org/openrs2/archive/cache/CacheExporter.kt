@@ -3,6 +3,7 @@ package org.openrs2.archive.cache
 import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.Unpooled
 import org.openrs2.buffer.use
+import org.openrs2.cache.Js5Archive
 import org.openrs2.cache.Store
 import org.openrs2.db.Database
 import javax.inject.Inject
@@ -56,6 +57,11 @@ public class CacheExporter @Inject constructor(
 
                             Unpooled.wrappedBuffer(Unpooled.wrappedBuffer(bytes), versionBuf.retain()).use { buf ->
                                 store.write(archive, group, buf)
+
+                                // ensure the .idx file exists even if it is empty
+                                if (archive == Js5Archive.ARCHIVESET) {
+                                    store.create(group)
+                                }
                             }
                         }
                     }
