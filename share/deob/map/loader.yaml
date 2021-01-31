@@ -336,7 +336,6 @@ methods:
       360: "bytes"
       376: "miscOsName"
       385: "miscOsArch"
-      395: "miscPlatform"
       413: "bytes"
       420: "clazz"
       430: "signLinkClass"
