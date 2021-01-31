@@ -47,11 +47,12 @@ public class CacheImporter @Inject constructor(
     ) : Container(data, false)
 
     public class Index(
+        archive: Int,
         public val index: Js5Index,
         data: ByteBuf,
-    ) : Container(data, false)
+    ) : Group(Js5Archive.ARCHIVESET, archive, data, index.version, false)
 
-    public class Group(
+    public open class Group(
         public val archive: Int,
         public val group: Int,
         data: ByteBuf,
@@ -218,7 +219,7 @@ public class CacheImporter @Inject constructor(
     public suspend fun importIndexAndGetMissingGroups(archive: Int, index: Js5Index, buf: ByteBuf): List<Int> {
         return database.execute { connection ->
             prepare(connection)
-            addIndex(connection, Index(index, buf))
+            addIndex(connection, Index(archive, index, buf))
 
             connection.prepareStatement(
                 """
@@ -367,7 +368,7 @@ public class CacheImporter @Inject constructor(
         }
     }
 
-    private fun addGroups(connection: Connection, groups: List<Group>) {
+    private fun addGroups(connection: Connection, groups: List<Group>): List<Long> {
         val containerIds = addContainers(connection, groups)
 
         connection.prepareStatement(
@@ -387,18 +388,24 @@ public class CacheImporter @Inject constructor(
 
             stmt.executeBatch()
         }
+
+        return containerIds
+    }
+
+    private fun addGroup(connection: Connection, group: Group): Long {
+        return addGroups(connection, listOf(group)).single()
     }
 
     private fun readIndex(store: Store, archive: Int): Index {
         return store.read(Js5Archive.ARCHIVESET, archive).use { buf ->
             Js5Compression.uncompress(buf.slice()).use { uncompressed ->
-                Index(Js5Index.read(uncompressed), buf.retain())
+                Index(archive, Js5Index.read(uncompressed), buf.retain())
             }
         }
     }
 
     private fun addIndex(connection: Connection, index: Index) {
-        val containerId = addContainer(connection, index)
+        val containerId = addGroup(connection, index)
         val savepoint = connection.setSavepoint()
 
         connection.prepareStatement(

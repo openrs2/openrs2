@@ -21,18 +21,20 @@ public class CacheExporter @Inject constructor(
                 SELECT 255::uint1, e.archive_id::INTEGER, c.data, NULL
                 FROM master_index_entries e
                 JOIN master_indexes m ON m.container_id = e.container_id
-                JOIN containers c ON c.crc32 = e.crc32
-                JOIN indexes i ON i.container_id = c.id AND i.version = e.version
+                JOIN groups g ON g.archive_id = 255 AND g.group_id = e.archive_id::INTEGER AND g.truncated_version = e.version & 65535
+                JOIN containers c ON c.id = g.container_id AND c.crc32 = e.crc32
+                JOIN indexes i ON i.container_id = g.container_id AND i.version = e.version
                 WHERE m.container_id = ?
                 UNION ALL
-                SELECT e.archive_id, ig.group_id, c.data, g.truncated_version
+                SELECT e.archive_id, ie.group_id, c.data, g.truncated_version
                 FROM master_index_entries e
                 JOIN master_indexes m ON m.container_id = e.container_id
-                JOIN containers ic ON ic.crc32 = e.crc32
-                JOIN indexes i ON i.container_id = ic.id AND i.version = e.version
-                JOIN index_groups ig ON ig.container_id = i.container_id
-                JOIN groups g ON g.archive_id = e.archive_id AND g.group_id = ig.group_id AND g.truncated_version = ig.version & 65535
-                JOIN containers c ON c.id = g.container_id AND c.crc32 = ig.crc32
+                JOIN groups ig ON ig.archive_id = 255 AND ig.group_id = e.archive_id::INTEGER AND ig.truncated_version = e.version & 65535
+                JOIN containers ic ON ic.id = ig.container_id AND ic.crc32 = e.crc32
+                JOIN indexes i ON i.container_id = ig.container_id AND i.version = e.version
+                JOIN index_groups ie ON ie.container_id = ig.container_id
+                JOIN groups g ON g.archive_id = e.archive_id AND g.group_id = ie.group_id AND g.truncated_version = ie.version & 65535
+                JOIN containers c ON c.id = g.container_id AND c.crc32 = ie.crc32
                 WHERE m.container_id = ?
             """.trimIndent()
             ).use { stmt ->
