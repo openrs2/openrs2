@@ -6,6 +6,7 @@ import org.openrs2.buffer.use
 import org.openrs2.cache.Js5Archive
 import org.openrs2.cache.Store
 import org.openrs2.db.Database
+import java.time.Instant
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -14,6 +15,49 @@ public class CacheExporter @Inject constructor(
     private val database: Database,
     private val alloc: ByteBufAllocator
 ) {
+    public data class Cache(
+        val id: Long,
+        val whirlpool: ByteArray,
+        val game: String,
+        val build: Int?,
+        val timestamp: Instant?
+    )
+
+    public suspend fun list(): List<Cache> {
+        return database.execute { connection ->
+            connection.prepareStatement(
+                """
+                SELECT c.id, c.whirlpool, g.name, m.build, m.timestamp
+                FROM master_indexes m
+                JOIN games g ON g.id = m.game_id
+                JOIN containers c ON c.id = m.container_id
+                ORDER BY g.name ASC, m.build ASC, m.timestamp ASC
+            """.trimIndent()
+            ).use { stmt ->
+                stmt.executeQuery().use { rows ->
+                    val caches = mutableListOf<Cache>()
+
+                    while (rows.next()) {
+                        val id = rows.getLong(1)
+                        val whirlpool = rows.getBytes(2)
+                        val game = rows.getString(3)
+
+                        var build: Int? = rows.getInt(4)
+                        if (rows.wasNull()) {
+                            build = null
+                        }
+
+                        val timestamp = rows.getTimestamp(5)?.toInstant()
+
+                        caches += Cache(id, whirlpool, game, build, timestamp)
+                    }
+
+                    caches
+                }
+            }
+        }
+    }
+
     public suspend fun export(id: Long, store: Store) {
         // TODO(gpe): think about what to do if there is a collision
         database.execute { connection ->

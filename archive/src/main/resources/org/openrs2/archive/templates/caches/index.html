@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+	<body>
+		<table>
+			<thead>
+				<tr>
+					<th>Master Index Digest</th>
+					<th>Game</th>
+					<th>Build</th>
+					<th>Timestamp</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<!--/*@thymesVar id="caches" type="java.util.List<org.openrs2.archive.cache.CacheExporter.Cache>"*/-->
+				<tr th:each="cache : ${caches}">
+					<td th:text="${@io.netty.buffer.ByteBufUtil@hexDump(cache.whirlpool).substring(0, 8)}">00000000</td>
+					<td th:text="${cache.game}">runescape</td>
+					<td th:text="${cache.build}">550</td>
+					<td th:text="${#temporals.formatISO(cache.timestamp)}"></td>
+					<td>
+						<a th:href="${'/caches/' + cache.id + '.zip'}">Download</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</body>
+</html>
+

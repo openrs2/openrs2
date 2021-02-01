@@ -20,9 +20,13 @@ dependencies {
     implementation(project(":protocol"))
     implementation(project(":util"))
     implementation("com.google.guava:guava:${Versions.guava}")
+    implementation("io.ktor:ktor-server-netty:${Versions.ktor}")
+    implementation("io.ktor:ktor-thymeleaf:${Versions.ktor}")
     implementation("org.flywaydb:flyway-core:${Versions.flyway}")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinCoroutines}")
     implementation("org.postgresql:postgresql:${Versions.postgres}")
+    implementation("org.thymeleaf:thymeleaf:${Versions.thymeleaf}")
+    implementation("org.thymeleaf.extras:thymeleaf-extras-java8time:${Versions.thymeleafJava8Time}")
 }
 
 publishing {
