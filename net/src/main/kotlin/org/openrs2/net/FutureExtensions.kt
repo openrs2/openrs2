@@ -1,4 +1,4 @@
-package dev.openrs2.net
+package org.openrs2.net
 
 import io.netty.util.concurrent.Future
 import kotlin.coroutines.resume

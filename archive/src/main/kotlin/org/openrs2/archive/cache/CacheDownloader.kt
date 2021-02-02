@@ -1,8 +1,8 @@
 package org.openrs2.archive.cache
 
-import dev.openrs2.net.BootstrapFactory
-import dev.openrs2.net.awaitSuspend
 import org.openrs2.archive.game.GameDatabase
+import org.openrs2.net.BootstrapFactory
+import org.openrs2.net.awaitSuspend
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.coroutines.suspendCoroutine

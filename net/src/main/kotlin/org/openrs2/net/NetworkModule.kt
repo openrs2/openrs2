@@ -1,4 +1,4 @@
-package dev.openrs2.net
+package org.openrs2.net
 
 import com.google.inject.AbstractModule
 import org.openrs2.buffer.BufferModule
