@@ -158,7 +158,8 @@ public class Js5ChannelHandler(
         }
 
         val rawIndexes = runBlocking {
-            importer.importMasterIndexAndGetIndexes(masterIndex!!, buf, gameId, build, Instant.now())
+            val name = "Downloaded from $hostname:$port"
+            importer.importMasterIndexAndGetIndexes(masterIndex!!, buf, gameId, build, Instant.now(), name)
         }
         try {
             indexes = arrayOfNulls(rawIndexes.size)

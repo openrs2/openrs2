@@ -20,14 +20,15 @@ public class CacheExporter @Inject constructor(
         val whirlpool: ByteArray,
         val game: String,
         val build: Int?,
-        val timestamp: Instant?
+        val timestamp: Instant?,
+        val name: String?
     )
 
     public suspend fun list(): List<Cache> {
         return database.execute { connection ->
             connection.prepareStatement(
                 """
-                SELECT c.id, c.whirlpool, g.name, m.build, m.timestamp
+                SELECT c.id, c.whirlpool, g.name, m.build, m.timestamp, m.name
                 FROM master_indexes m
                 JOIN games g ON g.id = m.game_id
                 JOIN containers c ON c.id = m.container_id
@@ -48,8 +49,9 @@ public class CacheExporter @Inject constructor(
                         }
 
                         val timestamp = rows.getTimestamp(5)?.toInstant()
+                        val name = rows.getString(6)
 
-                        caches += Cache(id, whirlpool, game, build, timestamp)
+                        caches += Cache(id, whirlpool, game, build, timestamp, name)
                     }
 
                     caches

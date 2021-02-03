@@ -14,6 +14,8 @@ import org.openrs2.cli.instant
 public class ImportCommand : CliktCommand(name = "import") {
     private val build by option().int()
     private val timestamp by option().instant()
+    private val name by option()
+    private val description by option()
 
     private val game by argument()
     private val input by argument().path(
@@ -27,7 +29,7 @@ public class ImportCommand : CliktCommand(name = "import") {
         val importer = injector.getInstance(CacheImporter::class.java)
 
         Store.open(input).use { store ->
-            importer.import(store, game, build, timestamp)
+            importer.import(store, game, build, timestamp, name, description)
         }
     }
 }

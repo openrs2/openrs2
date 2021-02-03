@@ -16,6 +16,8 @@ import java.nio.file.Files
 public class ImportMasterIndexCommand : CliktCommand(name = "import-master-index") {
     private val build by option().int()
     private val timestamp by option().instant()
+    private val name by option()
+    private val description by option()
 
     private val game by argument()
     private val input by argument().path(
@@ -29,7 +31,7 @@ public class ImportMasterIndexCommand : CliktCommand(name = "import-master-index
         val importer = injector.getInstance(CacheImporter::class.java)
 
         Unpooled.wrappedBuffer(Files.readAllBytes(input)).use { buf ->
-            importer.importMasterIndex(buf, game, build, timestamp)
+            importer.importMasterIndex(buf, game, build, timestamp, name, description)
         }
     }
 }

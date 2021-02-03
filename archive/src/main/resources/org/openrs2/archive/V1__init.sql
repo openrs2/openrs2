@@ -86,7 +86,9 @@ CREATE TABLE master_indexes (
     container_id BIGINT PRIMARY KEY NOT NULL REFERENCES containers (id),
     game_id INTEGER NOT NULL REFERENCES games (id),
     build INTEGER NULL,
-    timestamp TIMESTAMPTZ NULL
+    timestamp TIMESTAMPTZ NULL,
+    name TEXT NULL,
+    description TEXT NULL
 );
 
 CREATE TABLE master_index_archives (

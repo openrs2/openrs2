@@ -60,7 +60,14 @@ public class CacheImporter @Inject constructor(
         encrypted: Boolean
     ) : Container(data, encrypted)
 
-    public suspend fun import(store: Store, game: String, build: Int?, timestamp: Instant?) {
+    public suspend fun import(
+        store: Store,
+        game: String,
+        build: Int?,
+        timestamp: Instant?,
+        name: String?,
+        description: String?
+    ) {
         database.execute { connection ->
             prepare(connection)
 
@@ -69,7 +76,7 @@ public class CacheImporter @Inject constructor(
             // import master index
             val masterIndex = createMasterIndex(store)
             try {
-                addMasterIndex(connection, masterIndex, gameId, build, timestamp)
+                addMasterIndex(connection, masterIndex, gameId, build, timestamp, name, description)
             } finally {
                 masterIndex.release()
             }
@@ -118,7 +125,14 @@ public class CacheImporter @Inject constructor(
         }
     }
 
-    public suspend fun importMasterIndex(buf: ByteBuf, game: String, build: Int?, timestamp: Instant?) {
+    public suspend fun importMasterIndex(
+        buf: ByteBuf,
+        game: String,
+        build: Int?,
+        timestamp: Instant?,
+        name: String?,
+        description: String?
+    ) {
         Js5Compression.uncompress(buf.slice()).use { uncompressed ->
             val masterIndex = MasterIndex(Js5MasterIndex.read(uncompressed.slice()), buf)
 
@@ -126,7 +140,7 @@ public class CacheImporter @Inject constructor(
                 prepare(connection)
 
                 val gameId = getGameId(connection, game)
-                addMasterIndex(connection, masterIndex, gameId, build, timestamp)
+                addMasterIndex(connection, masterIndex, gameId, build, timestamp, name, description)
             }
         }
     }
@@ -136,7 +150,8 @@ public class CacheImporter @Inject constructor(
         buf: ByteBuf,
         gameId: Int,
         build: Int,
-        timestamp: Instant
+        timestamp: Instant,
+        name: String,
     ): List<ByteBuf?> {
         return database.execute { connection ->
             prepare(connection)
@@ -154,7 +169,7 @@ public class CacheImporter @Inject constructor(
                 stmt.execute()
             }
 
-            addMasterIndex(connection, MasterIndex(masterIndex, buf), gameId, build, timestamp)
+            addMasterIndex(connection, MasterIndex(masterIndex, buf), gameId, build, timestamp, name, null)
 
             connection.prepareStatement(
                 """
@@ -302,21 +317,32 @@ public class CacheImporter @Inject constructor(
         connection: Connection,
         masterIndex: MasterIndex,
         gameId: Int,
-        build: Int? = null,
-        timestamp: Instant? = null
+        build: Int?,
+        timestamp: Instant?,
+        name: String?,
+        description: String?
     ) {
         val containerId = addContainer(connection, masterIndex)
-        val savepoint = connection.setSavepoint()
 
-        // TODO(gpe): override game_id/build/timestamp if they're null?
+        // TODO(gpe): combine name/description instead of overwriting one with the other?
+        // or a mechanism to control priority?
         connection.prepareStatement(
             """
-            INSERT INTO master_indexes (container_id, game_id, build, timestamp)
-            VALUES (?, ?, ?, ?)
+            INSERT INTO master_indexes (container_id, game_id, build, timestamp, name, description)
+            VALUES (?, ?, ?, ?, ?, ?)
+            ON CONFLICT (container_id) DO UPDATE SET
+                build = COALESCE(EXCLUDED.build, master_indexes.build),
+                timestamp = COALESCE(
+                    LEAST(EXCLUDED.timestamp, master_indexes.timestamp),
+                    EXCLUDED.timestamp,
+                    master_indexes.timestamp
+                ),
+                name = COALESCE(EXCLUDED.name, master_indexes.name),
+                description = COALESCE(EXCLUDED.description, master_indexes.description)
         """.trimIndent()
         ).use { stmt ->
             stmt.setLong(1, containerId)
-            stmt.setObject(2, gameId, Types.INTEGER)
+            stmt.setInt(2, gameId)
             stmt.setObject(3, build, Types.INTEGER)
 
             if (timestamp != null) {
@@ -326,21 +352,17 @@ public class CacheImporter @Inject constructor(
                 stmt.setNull(4, Types.TIMESTAMP_WITH_TIMEZONE)
             }
 
-            try {
-                stmt.execute()
-            } catch (ex: SQLException) {
-                if (ex.sqlState == PSQLState.UNIQUE_VIOLATION.state) {
-                    connection.rollback(savepoint)
-                    return@addMasterIndex
-                }
-                throw ex
-            }
+            stmt.setString(5, name)
+            stmt.setString(6, description)
+
+            stmt.execute()
         }
 
         connection.prepareStatement(
             """
             INSERT INTO master_index_archives (container_id, archive_id, crc32, version)
             VALUES (?, ?, ?, ?)
+            ON CONFLICT DO NOTHING
         """.trimIndent()
         ).use { stmt ->
             for ((i, entry) in masterIndex.index.entries.withIndex()) {

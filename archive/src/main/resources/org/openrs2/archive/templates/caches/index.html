@@ -8,6 +8,7 @@
 					<th>Game</th>
 					<th>Build</th>
 					<th>Timestamp</th>
+					<th>Name</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -18,6 +19,7 @@
 					<td th:text="${cache.game}">runescape</td>
 					<td th:text="${cache.build}">550</td>
 					<td th:text="${#temporals.formatISO(cache.timestamp)}"></td>
+					<td th:text="${cache.name}"></td>
 					<td>
 						<a th:href="${'/caches/' + cache.id + '.zip'}">Download</a>
 					</td>
