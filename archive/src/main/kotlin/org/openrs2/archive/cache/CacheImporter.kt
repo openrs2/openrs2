@@ -76,7 +76,7 @@ public class CacheImporter @Inject constructor(
             // import master index
             val masterIndex = createMasterIndex(store)
             try {
-                addMasterIndex(connection, masterIndex, gameId, build, timestamp, name, description)
+                addMasterIndex(connection, masterIndex, gameId, build, timestamp, name, description, false)
             } finally {
                 masterIndex.release()
             }
@@ -140,7 +140,7 @@ public class CacheImporter @Inject constructor(
                 prepare(connection)
 
                 val gameId = getGameId(connection, game)
-                addMasterIndex(connection, masterIndex, gameId, build, timestamp, name, description)
+                addMasterIndex(connection, masterIndex, gameId, build, timestamp, name, description, false)
             }
         }
     }
@@ -169,7 +169,7 @@ public class CacheImporter @Inject constructor(
                 stmt.execute()
             }
 
-            addMasterIndex(connection, MasterIndex(masterIndex, buf), gameId, build, timestamp, name, null)
+            addMasterIndex(connection, MasterIndex(masterIndex, buf), gameId, build, timestamp, name, null, true)
 
             connection.prepareStatement(
                 """
@@ -320,49 +320,126 @@ public class CacheImporter @Inject constructor(
         build: Int?,
         timestamp: Instant?,
         name: String?,
-        description: String?
+        description: String?,
+        overwrite: Boolean
     ) {
         val containerId = addContainer(connection, masterIndex)
+        var exists: Boolean
 
-        // TODO(gpe): combine name/description instead of overwriting one with the other?
-        // or a mechanism to control priority?
+        var newBuild: Int?
+        var newTimestamp: Instant?
+        var newName: String?
+        var newDescription: String?
+
+        connection.prepareStatement(
+            """
+            SELECT game_id, build, timestamp, name, description
+            FROM master_indexes
+            WHERE container_id = ?
+            FOR UPDATE
+        """.trimIndent()
+        ).use { stmt ->
+            stmt.setLong(1, containerId)
+
+            stmt.executeQuery().use { rows ->
+                exists = rows.next()
+
+                if (exists && !overwrite) {
+                    val oldGameId = rows.getInt(1)
+
+                    var oldBuild: Int? = rows.getInt(2)
+                    if (rows.wasNull()) {
+                        oldBuild = null
+                    }
+
+                    val oldTimestamp: Instant? = rows.getTimestamp(3)?.toInstant()
+                    val oldName: String? = rows.getString(4)
+                    val oldDescription: String? = rows.getString(5)
+
+                    check(oldGameId == gameId)
+
+                    if (oldBuild != null && build != null) {
+                        check(oldBuild == build)
+                        newBuild = oldBuild
+                    } else if (oldBuild != null) {
+                        newBuild = oldBuild
+                    } else {
+                        newBuild = build
+                    }
+
+                    if (oldTimestamp != null && timestamp != null) {
+                        newTimestamp = if (oldTimestamp.isBefore(timestamp)) {
+                            oldTimestamp
+                        } else {
+                            timestamp
+                        }
+                    } else if (oldTimestamp != null) {
+                        newTimestamp = oldTimestamp
+                    } else {
+                        newTimestamp = timestamp
+                    }
+
+                    if (oldName != null && name != null) {
+                        newName = "$oldName/$name"
+                    } else if (oldName != null) {
+                        newName = oldName
+                    } else {
+                        newName = name
+                    }
+
+                    if (oldDescription != null && description != null) {
+                        newDescription = "$oldDescription\n\n$description"
+                    } else if (oldDescription != null) {
+                        newDescription = oldDescription
+                    } else {
+                        newDescription = description
+                    }
+                } else {
+                    newBuild = build
+                    newTimestamp = timestamp
+                    newName = name
+                    newDescription = description
+                }
+            }
+        }
+
         connection.prepareStatement(
             """
             INSERT INTO master_indexes (container_id, game_id, build, timestamp, name, description)
             VALUES (?, ?, ?, ?, ?, ?)
             ON CONFLICT (container_id) DO UPDATE SET
-                build = COALESCE(EXCLUDED.build, master_indexes.build),
-                timestamp = COALESCE(
-                    LEAST(EXCLUDED.timestamp, master_indexes.timestamp),
-                    EXCLUDED.timestamp,
-                    master_indexes.timestamp
-                ),
-                name = COALESCE(EXCLUDED.name, master_indexes.name),
-                description = COALESCE(EXCLUDED.description, master_indexes.description)
+                game_id = EXCLUDED.game_id,
+                build = EXCLUDED.build,
+                timestamp = EXCLUDED.timestamp,
+                name = EXCLUDED.name,
+                description = EXCLUDED.description
         """.trimIndent()
         ).use { stmt ->
             stmt.setLong(1, containerId)
             stmt.setInt(2, gameId)
-            stmt.setObject(3, build, Types.INTEGER)
+            stmt.setObject(3, newBuild, Types.INTEGER)
 
-            if (timestamp != null) {
-                val offsetDateTime = OffsetDateTime.ofInstant(timestamp, ZoneOffset.UTC)
+            if (newTimestamp != null) {
+                val offsetDateTime = OffsetDateTime.ofInstant(newTimestamp, ZoneOffset.UTC)
                 stmt.setObject(4, offsetDateTime, Types.TIMESTAMP_WITH_TIMEZONE)
             } else {
                 stmt.setNull(4, Types.TIMESTAMP_WITH_TIMEZONE)
             }
 
-            stmt.setString(5, name)
-            stmt.setString(6, description)
+            stmt.setString(5, newName)
+            stmt.setString(6, newDescription)
 
             stmt.execute()
+        }
+
+        if (exists) {
+            return
         }
 
         connection.prepareStatement(
             """
             INSERT INTO master_index_archives (container_id, archive_id, crc32, version)
             VALUES (?, ?, ?, ?)
-            ON CONFLICT DO NOTHING
         """.trimIndent()
         ).use { stmt ->
             for ((i, entry) in masterIndex.index.entries.withIndex()) {
