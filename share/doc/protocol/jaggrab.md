@@ -49,6 +49,7 @@ Note that OpenRS2's client patcher changes the list of supported platforms:
 * MSJVM support is removed.
 * PowerPC support is removed.
 * amd64 support is added to macOS and Linux.
+* AArch64 supported is added to macOS.
 
 This causes some differences to the list of supported files.
 
