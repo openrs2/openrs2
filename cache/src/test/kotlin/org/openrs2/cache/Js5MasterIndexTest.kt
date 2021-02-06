@@ -2,11 +2,11 @@ package org.openrs2.cache
 
 import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.Unpooled
-import org.junit.jupiter.api.assertThrows
 import org.openrs2.buffer.use
 import java.nio.file.Path
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 
 object Js5MasterIndexTest {
     private val ROOT = Path.of(FlatFileStoreTest::class.java.getResource("master-index").toURI())
@@ -63,7 +63,7 @@ object Js5MasterIndexTest {
             assertEquals(decodedOriginal, index)
         }
 
-        assertThrows<IllegalArgumentException> {
+        assertFailsWith<IllegalArgumentException> {
             Unpooled.wrappedBuffer(byteArrayOf(0)).use { buf ->
                 Js5MasterIndex.read(buf, MasterIndexFormat.ORIGINAL)
             }
@@ -88,7 +88,7 @@ object Js5MasterIndexTest {
             assertEquals(decodedVersioned, index)
         }
 
-        assertThrows<IllegalArgumentException> {
+        assertFailsWith<IllegalArgumentException> {
             Unpooled.wrappedBuffer(byteArrayOf(0, 0, 0, 0)).use { buf ->
                 Js5MasterIndex.read(buf, MasterIndexFormat.VERSIONED)
             }

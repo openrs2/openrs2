@@ -3,7 +3,6 @@ package org.openrs2.cache
 import com.google.common.jimfs.Configuration
 import com.google.common.jimfs.Jimfs
 import io.netty.buffer.Unpooled
-import org.junit.jupiter.api.assertThrows
 import org.openrs2.buffer.copiedBuffer
 import org.openrs2.buffer.use
 import org.openrs2.util.io.recursiveEquals
@@ -12,6 +11,7 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.util.zip.ZipOutputStream
 import kotlin.test.Test
+import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
 object DiskStoreZipWriterTest {
@@ -21,7 +21,7 @@ object DiskStoreZipWriterTest {
     fun testBounds() {
         DiskStoreZipWriter(ZipOutputStream(OutputStream.nullOutputStream())).use { store ->
             // create
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 store.create(-1)
             }
 
@@ -30,12 +30,12 @@ object DiskStoreZipWriterTest {
             store.create(254)
             store.create(255)
 
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 store.create(256)
             }
 
             // write archive
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 store.write(-1, 0, Unpooled.EMPTY_BUFFER)
             }
 
@@ -44,12 +44,12 @@ object DiskStoreZipWriterTest {
             store.write(254, 0, Unpooled.EMPTY_BUFFER)
             store.write(255, 0, Unpooled.EMPTY_BUFFER)
 
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 store.write(256, 0, Unpooled.EMPTY_BUFFER)
             }
 
             // write group
-            assertThrows<IllegalArgumentException> {
+            assertFailsWith<IllegalArgumentException> {
                 store.write(0, -1, Unpooled.EMPTY_BUFFER)
             }
 
@@ -61,31 +61,31 @@ object DiskStoreZipWriterTest {
     @Test
     fun testUnsupported() {
         DiskStoreZipWriter(ZipOutputStream(OutputStream.nullOutputStream())).use { store ->
-            assertThrows<UnsupportedOperationException> {
+            assertFailsWith<UnsupportedOperationException> {
                 store.exists(0)
             }
 
-            assertThrows<UnsupportedOperationException> {
+            assertFailsWith<UnsupportedOperationException> {
                 store.exists(0, 0)
             }
 
-            assertThrows<UnsupportedOperationException> {
+            assertFailsWith<UnsupportedOperationException> {
                 store.list()
             }
 
-            assertThrows<UnsupportedOperationException> {
+            assertFailsWith<UnsupportedOperationException> {
                 store.list(0)
             }
 
-            assertThrows<UnsupportedOperationException> {
+            assertFailsWith<UnsupportedOperationException> {
                 store.read(0, 0)
             }
 
-            assertThrows<UnsupportedOperationException> {
+            assertFailsWith<UnsupportedOperationException> {
                 store.remove(0)
             }
 
-            assertThrows<UnsupportedOperationException> {
+            assertFailsWith<UnsupportedOperationException> {
                 store.remove(0, 0)
             }
         }
