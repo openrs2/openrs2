@@ -5,6 +5,7 @@ plugins {
 
 dependencies {
     api(project(":crypto"))
+    api("com.google.inject:guice:${Versions.guice}")
     api("io.netty:netty-buffer:${Versions.netty}")
 
     implementation(project(":buffer"))
