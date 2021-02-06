@@ -1,7 +1,9 @@
 package org.openrs2.archive.web
 
 import io.ktor.application.ApplicationCall
+import io.ktor.http.ContentDisposition
 import io.ktor.http.ContentType
+import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.response.header
 import io.ktor.response.respond
@@ -31,7 +33,13 @@ public class CachesController @Inject constructor(
             return
         }
 
-        call.response.header("Content-Disposition", "attachment; filename=\"cache.zip\"")
+        call.response.header(
+            HttpHeaders.ContentDisposition,
+            ContentDisposition.Attachment
+                .withParameter(ContentDisposition.Parameters.FileName, "cache.zip")
+                .toString()
+        )
+
         call.respondOutputStream(contentType = ContentType.Application.Zip) {
             DiskStoreZipWriter(ZipOutputStream(this), alloc = alloc).use { store ->
                 exporter.export(id, store)
