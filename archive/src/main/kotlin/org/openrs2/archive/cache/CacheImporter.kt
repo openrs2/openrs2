@@ -12,6 +12,7 @@ import org.openrs2.cache.Js5Compression
 import org.openrs2.cache.Js5CompressionType
 import org.openrs2.cache.Js5Index
 import org.openrs2.cache.Js5MasterIndex
+import org.openrs2.cache.MasterIndexFormat
 import org.openrs2.cache.Store
 import org.openrs2.cache.VersionTrailer
 import org.openrs2.crypto.Whirlpool
@@ -63,6 +64,7 @@ public class CacheImporter @Inject constructor(
 
     public suspend fun import(
         store: Store,
+        masterIndexFormat: MasterIndexFormat?,
         game: String,
         build: Int?,
         timestamp: Instant?,
@@ -75,7 +77,7 @@ public class CacheImporter @Inject constructor(
             val gameId = getGameId(connection, game)
 
             // import master index
-            val masterIndex = createMasterIndex(store)
+            val masterIndex = createMasterIndex(store, masterIndexFormat)
             try {
                 addMasterIndex(connection, masterIndex, gameId, build, timestamp, name, description, false)
             } finally {
@@ -133,6 +135,7 @@ public class CacheImporter @Inject constructor(
 
     public suspend fun importMasterIndex(
         buf: ByteBuf,
+        format: MasterIndexFormat,
         game: String,
         build: Int?,
         timestamp: Instant?,
@@ -140,7 +143,7 @@ public class CacheImporter @Inject constructor(
         description: String?
     ) {
         Js5Compression.uncompress(buf.slice()).use { uncompressed ->
-            val masterIndex = MasterIndex(Js5MasterIndex.read(uncompressed.slice()), buf)
+            val masterIndex = MasterIndex(Js5MasterIndex.read(uncompressed.slice(), format), buf)
 
             database.execute { connection ->
                 prepare(connection)
@@ -311,11 +314,11 @@ public class CacheImporter @Inject constructor(
         }
     }
 
-    private fun createMasterIndex(store: Store): MasterIndex {
+    private fun createMasterIndex(store: Store, format: MasterIndexFormat?): MasterIndex {
         val index = Js5MasterIndex.create(store)
 
         alloc.buffer().use { uncompressed ->
-            index.write(uncompressed)
+            index.write(uncompressed, format ?: index.minimumFormat)
 
             Js5Compression.compress(uncompressed, Js5CompressionType.UNCOMPRESSED).use { buf ->
                 return MasterIndex(index, buf.retain())

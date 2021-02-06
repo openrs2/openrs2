@@ -13,6 +13,7 @@ import org.openrs2.cache.Js5Archive
 import org.openrs2.cache.Js5Compression
 import org.openrs2.cache.Js5Index
 import org.openrs2.cache.Js5MasterIndex
+import org.openrs2.cache.MasterIndexFormat
 import org.openrs2.protocol.Rs2Decoder
 import org.openrs2.protocol.Rs2Encoder
 import org.openrs2.protocol.js5.Js5Request
@@ -36,6 +37,7 @@ public class Js5ChannelHandler(
     private var build: Int,
     private val continuation: Continuation<Unit>,
     private val importer: CacheImporter,
+    private val masterIndexFormat: MasterIndexFormat = MasterIndexFormat.VERSIONED,
     private val maxInFlightRequests: Int = 200,
     maxBuildAttempts: Int = 10
 ) : SimpleChannelInboundHandler<Any>(Object::class.java) {
@@ -159,7 +161,7 @@ public class Js5ChannelHandler(
 
     private fun processMasterIndex(buf: ByteBuf) {
         masterIndex = Js5Compression.uncompress(buf.slice()).use { uncompressed ->
-            Js5MasterIndex.read(uncompressed)
+            Js5MasterIndex.read(uncompressed, masterIndexFormat)
         }
 
         val rawIndexes = runBlocking {

@@ -7,10 +7,24 @@ import org.openrs2.buffer.use
 public inline class Js5MasterIndex(public val entries: MutableList<Entry> = mutableListOf()) {
     public data class Entry(public var version: Int, public var checksum: Int)
 
-    public fun write(buf: ByteBuf) {
+    public val minimumFormat: MasterIndexFormat
+        get() {
+            for (entry in entries) {
+                if (entry.version != 0) {
+                    return MasterIndexFormat.VERSIONED
+                }
+            }
+
+            return MasterIndexFormat.ORIGINAL
+        }
+
+    public fun write(buf: ByteBuf, format: MasterIndexFormat) {
         for (entry in entries) {
             buf.writeInt(entry.checksum)
-            buf.writeInt(entry.version)
+
+            if (format >= MasterIndexFormat.VERSIONED) {
+                buf.writeInt(entry.version)
+            }
         }
     }
 
@@ -45,13 +59,24 @@ public inline class Js5MasterIndex(public val entries: MutableList<Entry> = muta
             return index
         }
 
-        public fun read(buf: ByteBuf): Js5MasterIndex {
-            require(buf.readableBytes() % 8 == 0)
+        public fun read(buf: ByteBuf, format: MasterIndexFormat): Js5MasterIndex {
+            when (format) {
+                MasterIndexFormat.ORIGINAL -> {
+                    require(buf.readableBytes() % 4 == 0)
+                }
+                MasterIndexFormat.VERSIONED -> {
+                    require(buf.readableBytes() % 8 == 0)
+                }
+            }
 
             val index = Js5MasterIndex()
             while (buf.isReadable) {
                 val checksum = buf.readInt()
-                val version = buf.readInt()
+                val version = if (format >= MasterIndexFormat.VERSIONED) {
+                    buf.readInt()
+                } else {
+                    0
+                }
                 index.entries += Entry(version, checksum)
             }
             return index

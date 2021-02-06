@@ -9,14 +9,30 @@ import kotlin.test.assertEquals
 
 object Js5MasterIndexTest {
     private val ROOT = Path.of(FlatFileStoreTest::class.java.getResource("master-index").toURI())
-    private val encoded = byteArrayOf(0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 2, 0, 0, 0, 5, 0, 0, 0, 4)
-    private val decoded = Js5MasterIndex(
+
+    private val encodedOriginal = byteArrayOf(0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0, 5)
+    private val decodedOriginal = Js5MasterIndex(
+        mutableListOf(
+            Js5MasterIndex.Entry(0, 1),
+            Js5MasterIndex.Entry(0, 3),
+            Js5MasterIndex.Entry(0, 5)
+        )
+    )
+
+    private val encodedVersioned = byteArrayOf(0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 2, 0, 0, 0, 5, 0, 0, 0, 4)
+    private val decodedVersioned = Js5MasterIndex(
         mutableListOf(
             Js5MasterIndex.Entry(0, 1),
             Js5MasterIndex.Entry(2, 3),
             Js5MasterIndex.Entry(4, 5)
         )
     )
+
+    @Test
+    fun testMinimumFormat() {
+        assertEquals(MasterIndexFormat.ORIGINAL, decodedOriginal.minimumFormat)
+        assertEquals(MasterIndexFormat.VERSIONED, decodedVersioned.minimumFormat)
+    }
 
     @Test
     fun testCreate() {
@@ -40,19 +56,38 @@ object Js5MasterIndexTest {
     }
 
     @Test
-    fun testRead() {
-        Unpooled.wrappedBuffer(encoded).use { buf ->
-            val index = Js5MasterIndex.read(buf)
-            assertEquals(decoded, index)
+    fun testReadOriginal() {
+        Unpooled.wrappedBuffer(encodedOriginal).use { buf ->
+            val index = Js5MasterIndex.read(buf, MasterIndexFormat.ORIGINAL)
+            assertEquals(decodedOriginal, index)
         }
     }
 
     @Test
-    fun testWrite() {
+    fun testWriteOriginal() {
         ByteBufAllocator.DEFAULT.buffer().use { actual ->
-            decoded.write(actual)
+            decodedOriginal.write(actual, MasterIndexFormat.ORIGINAL)
 
-            Unpooled.wrappedBuffer(encoded).use { expected ->
+            Unpooled.wrappedBuffer(encodedOriginal).use { expected ->
+                assertEquals(expected, actual)
+            }
+        }
+    }
+
+    @Test
+    fun testReadVersioned() {
+        Unpooled.wrappedBuffer(encodedVersioned).use { buf ->
+            val index = Js5MasterIndex.read(buf, MasterIndexFormat.VERSIONED)
+            assertEquals(decodedVersioned, index)
+        }
+    }
+
+    @Test
+    fun testWriteVersioned() {
+        ByteBufAllocator.DEFAULT.buffer().use { actual ->
+            decodedVersioned.write(actual, MasterIndexFormat.VERSIONED)
+
+            Unpooled.wrappedBuffer(encodedVersioned).use { expected ->
                 assertEquals(expected, actual)
             }
         }
