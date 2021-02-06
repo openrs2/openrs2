@@ -51,13 +51,13 @@ CREATE TABLE groups (
     archive_id uint1 NOT NULL,
     group_id INTEGER NOT NULL,
     container_id BIGINT NOT NULL REFERENCES containers (id),
-    truncated_version uint2 NOT NULL,
-    PRIMARY KEY (archive_id, group_id, container_id, truncated_version)
+    version INTEGER NOT NULL,
+    version_truncated BOOLEAN NOT NULL,
+    PRIMARY KEY (archive_id, group_id, container_id, version, version_truncated)
 );
 
 CREATE TABLE indexes (
-    container_id BIGINT PRIMARY KEY NOT NULL REFERENCES containers (id),
-    version INTEGER NOT NULL
+    container_id BIGINT PRIMARY KEY NOT NULL REFERENCES containers (id)
 );
 
 CREATE TABLE index_groups (

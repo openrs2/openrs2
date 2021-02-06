@@ -131,9 +131,14 @@ public class Js5ChannelHandler(
                 throw Exception("Group checksum invalid")
             }
 
-            val version = entry.version
-            val encrypted = Js5Compression.isEncrypted(response.data.slice())
-            groups += CacheImporter.Group(response.archive, response.group, response.data.retain(), version, encrypted)
+            groups += CacheImporter.Group(
+                response.archive,
+                response.group,
+                response.data.retain(),
+                entry.version,
+                versionTruncated = false,
+                Js5Compression.isEncrypted(response.data.slice())
+            )
         }
 
         val complete = pendingRequests.isEmpty() && inFlightRequests.isEmpty()

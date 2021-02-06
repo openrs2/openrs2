@@ -50,13 +50,14 @@ public class CacheImporter @Inject constructor(
         archive: Int,
         public val index: Js5Index,
         data: ByteBuf,
-    ) : Group(Js5Archive.ARCHIVESET, archive, data, index.version, false)
+    ) : Group(Js5Archive.ARCHIVESET, archive, data, index.version, false, false)
 
     public open class Group(
         public val archive: Int,
         public val group: Int,
         data: ByteBuf,
         public val version: Int,
+        public val versionTruncated: Boolean,
         encrypted: Boolean
     ) : Container(data, encrypted)
 
@@ -82,17 +83,20 @@ public class CacheImporter @Inject constructor(
             }
 
             // import indexes
-            val indexes = mutableListOf<Index>()
+            val indexes = arrayOfNulls<Js5Index>(Js5Archive.ARCHIVESET)
+            val indexGroups = mutableListOf<Index>()
             try {
                 for (archive in store.list(Js5Archive.ARCHIVESET)) {
-                    indexes += readIndex(store, archive)
+                    val indexGroup = readIndex(store, archive)
+                    indexes[archive] = indexGroup.index
+                    indexGroups += indexGroup
                 }
 
-                for (index in indexes) {
+                for (index in indexGroups) {
                     addIndex(connection, index)
                 }
             } finally {
-                indexes.forEach(Index::release)
+                indexGroups.forEach(Index::release)
             }
 
             // import groups
@@ -103,8 +107,10 @@ public class CacheImporter @Inject constructor(
                         continue
                     }
 
+                    val index = indexes[archive]
+
                     for (id in store.list(archive)) {
-                        val group = readGroup(store, archive, id) ?: continue
+                        val group = readGroup(store, archive, index, id) ?: continue
                         groups += group
 
                         if (groups.size >= BATCH_SIZE) {
@@ -265,11 +271,15 @@ public class CacheImporter @Inject constructor(
                 stmt.executeBatch()
             }
 
+            // we deliberately ignore groups with truncated versions here and
+            // re-download them, just in case there's a (crc32, truncated version)
+            // collision
             connection.prepareStatement(
                 """
                 SELECT t.group_id
                 FROM tmp_groups t
-                LEFT JOIN groups g ON g.archive_id = ? AND g.group_id = t.group_id AND g.truncated_version = t.version & 65535
+                LEFT JOIN groups g ON g.archive_id = ? AND g.group_id = t.group_id AND g.version = t.version AND
+                    NOT g.version_truncated
                 LEFT JOIN containers c ON c.id = g.container_id AND c.crc32 = t.crc32
                 WHERE g.container_id IS NULL
                 ORDER BY t.group_id ASC
@@ -455,12 +465,24 @@ public class CacheImporter @Inject constructor(
         }
     }
 
-    private fun readGroup(store: Store, archive: Int, group: Int): Group? {
+    private fun readGroup(store: Store, archive: Int, index: Js5Index?, group: Int): Group? {
         try {
             store.read(archive, group).use { buf ->
-                val version = VersionTrailer.strip(buf) ?: return null
+                var version = VersionTrailer.strip(buf) ?: return null
+                var versionTruncated = true
                 val encrypted = Js5Compression.isEncrypted(buf.slice())
-                return Group(archive, group, buf.retain(), version, encrypted)
+
+                // grab the non-truncated version from the Js5Index if we can
+                // confirm the group on disk matches the group in the index
+                if (index != null) {
+                    val entry = index[group]
+                    if (entry != null && entry.checksum == buf.crc32() && (entry.version and 0xFFFF) == version) {
+                        version = entry.version
+                        versionTruncated = false
+                    }
+                }
+
+                return Group(archive, group, buf.retain(), version, versionTruncated, encrypted)
             }
         } catch (ex: IOException) {
             return null
@@ -472,8 +494,8 @@ public class CacheImporter @Inject constructor(
 
         connection.prepareStatement(
             """
-            INSERT INTO groups (archive_id, group_id, container_id, truncated_version)
-            VALUES (?, ?, ?, ?)
+            INSERT INTO groups (archive_id, group_id, container_id, version, version_truncated)
+            VALUES (?, ?, ?, ?, ?)
             ON CONFLICT DO NOTHING
         """.trimIndent()
         ).use { stmt ->
@@ -482,6 +504,7 @@ public class CacheImporter @Inject constructor(
                 stmt.setInt(2, group.group)
                 stmt.setLong(3, containerIds[i])
                 stmt.setInt(4, group.version)
+                stmt.setBoolean(5, group.versionTruncated)
                 stmt.addBatch()
             }
 
@@ -509,12 +532,11 @@ public class CacheImporter @Inject constructor(
 
         connection.prepareStatement(
             """
-            INSERT INTO indexes (container_id, version)
-            VALUES (?, ?)
+            INSERT INTO indexes (container_id)
+            VALUES (?)
         """.trimIndent()
         ).use { stmt ->
             stmt.setLong(1, containerId)
-            stmt.setInt(2, index.index.version)
 
             try {
                 stmt.execute()

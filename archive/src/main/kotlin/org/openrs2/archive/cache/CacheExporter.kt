@@ -80,18 +80,22 @@ public class CacheExporter @Inject constructor(
                     SELECT a.archive_id, c.data, g.container_id
                     FROM master_indexes m
                     JOIN master_index_archives a ON a.container_id = m.container_id
-                    JOIN groups g ON g.archive_id = 255 AND g.group_id = a.archive_id::INTEGER AND g.truncated_version = a.version & 65535
+                    JOIN groups g ON g.archive_id = 255 AND g.group_id = a.archive_id::INTEGER
+                        AND g.version = a.version AND NOT g.version_truncated
                     JOIN containers c ON c.id = g.container_id AND c.crc32 = a.crc32
-                    JOIN indexes i ON i.container_id = g.container_id AND i.version = a.version
+                    JOIN indexes i ON i.container_id = g.container_id
                     WHERE m.container_id = ?
                 )
                 SELECT 255::uint1, t.archive_id::INTEGER, t.data, NULL
                 FROM t
                 UNION ALL
-                SELECT t.archive_id, ig.group_id, c.data, g.truncated_version
+                SELECT t.archive_id, ig.group_id, c.data, g.version
                 FROM t
                 JOIN index_groups ig ON ig.container_id = t.container_id
-                JOIN groups g ON g.archive_id = t.archive_id::INTEGER AND g.group_id = ig.group_id AND g.truncated_version = ig.version & 65535
+                JOIN groups g ON g.archive_id = t.archive_id::INTEGER AND g.group_id = ig.group_id AND (
+                    (g.version = ig.version AND NOT g.version_truncated) OR
+                    (g.version = ig.version & 65535 AND g.version_truncated)
+                )
                 JOIN containers c ON c.id = g.container_id AND c.crc32 = ig.crc32
             """.trimIndent()
             ).use { stmt ->
@@ -135,15 +139,19 @@ public class CacheExporter @Inject constructor(
                     SELECT a.archive_id, c.data, g.container_id
                     FROM master_indexes m
                     JOIN master_index_archives a ON a.container_id = m.container_id
-                    JOIN groups g ON g.archive_id = 255 AND g.group_id = a.archive_id::INTEGER AND g.truncated_version = a.version & 65535
+                    JOIN groups g ON g.archive_id = 255 AND g.group_id = a.archive_id::INTEGER
+                        AND g.version = a.version AND NOT g.version_truncated
                     JOIN containers c ON c.id = g.container_id AND c.crc32 = a.crc32
-                    JOIN indexes i ON i.container_id = g.container_id AND i.version = a.version
+                    JOIN indexes i ON i.container_id = g.container_id
                     WHERE m.container_id = ?
                 )
                 SELECT t.archive_id, ig.group_id, ig.name_hash, n.name, (k.key).k0, (k.key).k1, (k.key).k2, (k.key).k3
                 FROM t
                 JOIN index_groups ig ON ig.container_id = t.container_id
-                JOIN groups g ON g.archive_id = t.archive_id::INTEGER AND g.group_id = ig.group_id AND g.truncated_version = ig.version & 65535
+                JOIN groups g ON g.archive_id = t.archive_id::INTEGER AND g.group_id = ig.group_id AND (
+                    (g.version = ig.version AND NOT g.version_truncated) OR
+                    (g.version = ig.version & 65535 AND g.version_truncated)
+                )
                 JOIN containers c ON c.id = g.container_id AND c.crc32 = ig.crc32
                 JOIN keys k ON k.id = c.key_id
                 LEFT JOIN names n ON n.hash = ig.name_hash AND n.name ~ '^l(?:[0-9]|[1-9][0-9])_(?:[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$'
