@@ -73,6 +73,12 @@ public object Rsa {
     // 1 in 2^80
     private const val CERTAINTY = 80
 
+    /*
+     * The magic number prepended as a byte to the plaintext before it is
+     * encrypted by the server.
+     */
+    public const val MAGIC: Int = 10
+
     public fun generateKeyPair(length: Int): Pair<RSAKeyParameters, RSAPrivateCrtKeyParameters> {
         val generator = RSAKeyPairGenerator()
         generator.init(RSAKeyGenerationParameters(F4, secureRandom, length, CERTAINTY))
