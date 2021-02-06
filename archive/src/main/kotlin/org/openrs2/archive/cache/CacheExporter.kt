@@ -1,5 +1,6 @@
 package org.openrs2.archive.cache
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.Unpooled
 import org.openrs2.buffer.use
@@ -30,6 +31,7 @@ public class CacheExporter @Inject constructor(
         val group: Int,
         val nameHash: Int?,
         val name: String?,
+        @JsonProperty("mapsquare") val mapSquare: Int?,
         val key: XteaKey
     )
 
@@ -166,7 +168,8 @@ public class CacheExporter @Inject constructor(
                         val k2 = rows.getInt(7)
                         val k3 = rows.getInt(8)
 
-                        keys += GroupKey(archive, group, nameHash, name, XteaKey(k0, k1, k2, k3))
+                        val mapSquare = getMapSquare(name)
+                        keys += GroupKey(archive, group, nameHash, name, mapSquare, XteaKey(k0, k1, k2, k3))
                     }
 
                     keys
@@ -177,5 +180,17 @@ public class CacheExporter @Inject constructor(
 
     private companion object {
         private const val BATCH_SIZE = 1024
+        private val LOC_NAME_REGEX = Regex("l(\\d+)_(\\d+)")
+
+        private fun getMapSquare(name: String?): Int? {
+            if (name == null) {
+                return null
+            }
+
+            val match = LOC_NAME_REGEX.matchEntire(name) ?: return null
+            val x = match.groupValues[1].toInt()
+            val z = match.groupValues[2].toInt()
+            return (x shl 8) or z
+        }
     }
 }
