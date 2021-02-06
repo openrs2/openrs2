@@ -38,4 +38,14 @@ public class CachesController @Inject constructor(
             }
         }
     }
+
+    public suspend fun exportKeys(call: ApplicationCall) {
+        val id = call.parameters["id"]?.toLongOrNull()
+        if (id == null) {
+            call.respond(HttpStatusCode.NotFound)
+            return
+        }
+
+        call.respond(exporter.exportKeys(id))
+    }
 }

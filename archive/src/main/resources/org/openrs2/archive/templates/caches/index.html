@@ -21,7 +21,8 @@
 					<td th:text="${#temporals.formatISO(cache.timestamp)}"></td>
 					<td th:text="${cache.name}"></td>
 					<td>
-						<a th:href="${'/caches/' + cache.id + '.zip'}">Download</a>
+						<a th:href="${'/caches/' + cache.id + '.zip'}">Cache</a>
+						<a th:href="${'/caches/' + cache.id + '.json'}">Keys</a>
 					</td>
 				</tr>
 			</tbody>
