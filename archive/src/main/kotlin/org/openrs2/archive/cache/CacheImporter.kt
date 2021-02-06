@@ -274,9 +274,11 @@ public class CacheImporter @Inject constructor(
                 stmt.executeBatch()
             }
 
-            // we deliberately ignore groups with truncated versions here and
-            // re-download them, just in case there's a (crc32, truncated version)
-            // collision
+            /*
+             * We deliberately ignore groups with truncated versions here and
+             * re-download them, just in case there's a (crc32, truncated version)
+             * collision.
+             */
             connection.prepareStatement(
                 """
                 SELECT t.group_id
@@ -475,8 +477,10 @@ public class CacheImporter @Inject constructor(
                 var versionTruncated = true
                 val encrypted = Js5Compression.isEncrypted(buf.slice())
 
-                // grab the non-truncated version from the Js5Index if we can
-                // confirm the group on disk matches the group in the index
+                /*
+                 * Grab the non-truncated version from the Js5Index if we can
+                 * confirm the group on disk matches the group in the index.
+                 */
                 if (index != null) {
                     val entry = index[group]
                     if (entry != null && entry.checksum == buf.crc32() && (entry.version and 0xFFFF) == version) {

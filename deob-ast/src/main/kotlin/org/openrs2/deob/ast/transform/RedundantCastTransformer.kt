@@ -89,8 +89,10 @@ public class RedundantCastTransformer : Transformer() {
             }
         }
 
-        // replace casts with widening/narrowing conversions
-        // see https://docs.oracle.com/javase/specs/jls/se11/html/jls-5.html
+        /*
+         * replace casts with widening/narrowing conversions
+         * see https://docs.oracle.com/javase/specs/jls/se11/html/jls-5.html
+         */
         unit.walk { expr: CastExpr ->
             expr.parentNode.ifPresent { parent ->
                 if (parent !is AssignExpr && parent !is CastExpr) {

@@ -65,8 +65,10 @@ public object Group {
         }
     }
 
-    // TODO(gpe): support multiple stripes (tricky, as the best sizes are
-    // probably specific to the format we're packing...)
+    /*
+     * TODO(gpe): support multiple stripes (tricky, as the best sizes are
+     * probably specific to the format we're packing...)
+     */
     public fun pack(files: Int2ObjectSortedMap<ByteBuf>): ByteBuf {
         require(files.isNotEmpty())
 
