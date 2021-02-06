@@ -4,6 +4,7 @@ plugins {
 }
 
 dependencies {
+    api("com.fasterxml.jackson.core:jackson-databind:${Versions.jackson}")
     api("com.google.inject:guice:${Versions.guice}")
     api("io.netty:netty-buffer:${Versions.netty}")
     api("org.bouncycastle:bcpkix-jdk15on:${Versions.bouncyCastlePkix}")
