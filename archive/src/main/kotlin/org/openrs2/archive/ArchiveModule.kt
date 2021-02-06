@@ -10,8 +10,8 @@ import org.openrs2.net.NetworkModule
 public object ArchiveModule : AbstractModule() {
     override fun configure() {
         install(BufferModule)
-        install(NetworkModule)
         install(JsonModule)
+        install(NetworkModule)
 
         bind(Database::class.java)
             .toProvider(DatabaseProvider::class.java)
