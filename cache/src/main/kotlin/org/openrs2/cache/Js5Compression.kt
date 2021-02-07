@@ -290,9 +290,7 @@ public object Js5Compression {
         // Run the entire decompression algorithm to confirm the key is valid.
         decrypt(input, lenWithUncompressedLen, key).use { plaintext ->
             val uncompressedLen = plaintext.readInt()
-            if (uncompressedLen < 0) {
-                throw AssertionError()
-            }
+            check(uncompressedLen >= 0)
 
             try {
                 OutputStream.nullOutputStream().use { output ->
