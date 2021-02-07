@@ -57,7 +57,13 @@ CREATE TABLE groups (
 );
 
 CREATE TABLE indexes (
-    container_id BIGINT PRIMARY KEY NOT NULL REFERENCES containers (id)
+    container_id BIGINT PRIMARY KEY NOT NULL REFERENCES containers (id),
+    protocol uint1 NOT NULL,
+    version INTEGER NOT NULL,
+    has_names BOOLEAN NOT NULL,
+    has_digests BOOLEAN NOT NULL,
+    has_lengths BOOLEAN NOT NULL,
+    has_uncompressed_checksums BOOLEAN NOT NULL
 );
 
 CREATE TABLE index_groups (

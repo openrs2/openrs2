@@ -563,11 +563,19 @@ public class CacheImporter @Inject constructor(
 
         connection.prepareStatement(
             """
-            INSERT INTO indexes (container_id)
-            VALUES (?)
+            INSERT INTO indexes (
+                container_id, protocol, version, has_names, has_digests, has_lengths, has_uncompressed_checksums
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?)
         """.trimIndent()
         ).use { stmt ->
             stmt.setLong(1, containerId)
+            stmt.setInt(2, index.index.protocol.id)
+            stmt.setInt(3, index.index.version)
+            stmt.setBoolean(4, index.index.hasNames)
+            stmt.setBoolean(5, index.index.hasDigests)
+            stmt.setBoolean(6, index.index.hasLengths)
+            stmt.setBoolean(7, index.index.hasUncompressedChecksums)
 
             try {
                 stmt.execute()
