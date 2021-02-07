@@ -64,7 +64,6 @@ public class CacheImporter @Inject constructor(
 
     public suspend fun import(
         store: Store,
-        masterIndexFormat: MasterIndexFormat?,
         game: String,
         build: Int?,
         timestamp: Instant?,
@@ -77,7 +76,7 @@ public class CacheImporter @Inject constructor(
             val gameId = getGameId(connection, game)
 
             // import master index
-            val masterIndex = createMasterIndex(store, masterIndexFormat)
+            val masterIndex = createMasterIndex(store)
             try {
                 addMasterIndex(connection, masterIndex, gameId, build, timestamp, name, description, false)
             } finally {
@@ -316,11 +315,11 @@ public class CacheImporter @Inject constructor(
         }
     }
 
-    private fun createMasterIndex(store: Store, format: MasterIndexFormat?): MasterIndex {
+    private fun createMasterIndex(store: Store): MasterIndex {
         val index = Js5MasterIndex.create(store)
 
         alloc.buffer().use { uncompressed ->
-            index.write(uncompressed, format ?: index.minimumFormat)
+            index.write(uncompressed)
 
             Js5Compression.compress(uncompressed, Js5CompressionType.UNCOMPRESSED).use { buf ->
                 return MasterIndex(index, buf.retain())
