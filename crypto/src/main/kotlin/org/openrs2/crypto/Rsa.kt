@@ -88,7 +88,6 @@ public object Rsa {
     }
 
     public fun encrypt(plaintext: BigInteger, key: RSAKeyParameters): BigInteger {
-        require(!key.isPrivate)
         return plaintext.modPow(key.exponent, key.modulus)
     }
 
@@ -107,8 +106,6 @@ public object Rsa {
     }
 
     public fun decrypt(ciphertext: BigInteger, key: RSAKeyParameters): BigInteger {
-        require(key.isPrivate)
-
         if (key is RSAPrivateCrtKeyParameters) {
             // blind the input
             val e = key.publicExponent
