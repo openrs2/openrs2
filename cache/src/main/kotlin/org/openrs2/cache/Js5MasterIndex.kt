@@ -7,8 +7,7 @@ import org.openrs2.buffer.crc32
 import org.openrs2.buffer.use
 import org.openrs2.crypto.Rsa
 import org.openrs2.crypto.Whirlpool
-import org.openrs2.crypto.rsaDecrypt
-import org.openrs2.crypto.rsaEncrypt
+import org.openrs2.crypto.rsaCrypt
 import org.openrs2.crypto.whirlpool
 
 public data class Js5MasterIndex(
@@ -92,7 +91,7 @@ public data class Js5MasterIndex(
                     plaintext.writeByte(Rsa.MAGIC)
                     plaintext.writeBytes(digest)
 
-                    plaintext.rsaEncrypt(key).use { ciphertext ->
+                    plaintext.rsaCrypt(key).use { ciphertext ->
                         buf.writeBytes(ciphertext)
                     }
                 }
@@ -218,7 +217,7 @@ public data class Js5MasterIndex(
 
         private fun decrypt(buf: ByteBuf, key: RSAKeyParameters?): ByteBuf {
             return if (key != null) {
-                buf.rsaDecrypt(key)
+                buf.rsaCrypt(key)
             } else {
                 buf.retain()
             }

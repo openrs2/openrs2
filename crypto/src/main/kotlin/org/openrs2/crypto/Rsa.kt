@@ -40,12 +40,8 @@ private fun BigInteger.toByteBuf(): ByteBuf {
     return Unpooled.wrappedBuffer(toByteArray())
 }
 
-public fun ByteBuf.rsaEncrypt(key: RSAKeyParameters): ByteBuf {
-    return Rsa.encrypt(toBigInteger(), key).toByteBuf()
-}
-
-public fun ByteBuf.rsaDecrypt(key: RSAKeyParameters): ByteBuf {
-    return Rsa.decrypt(toBigInteger(), key).toByteBuf()
+public fun ByteBuf.rsaCrypt(key: RSAKeyParameters): ByteBuf {
+    return Rsa.crypt(toBigInteger(), key).toByteBuf()
 }
 
 public fun RSAPrivateCrtKeyParameters.toKeySpec(): KeySpec {
@@ -87,10 +83,6 @@ public object Rsa {
         return Pair(keyPair.public as RSAKeyParameters, keyPair.private as RSAPrivateCrtKeyParameters)
     }
 
-    public fun encrypt(plaintext: BigInteger, key: RSAKeyParameters): BigInteger {
-        return plaintext.modPow(key.exponent, key.modulus)
-    }
-
     private fun generateBlindingFactor(m: BigInteger): Pair<BigInteger, BigInteger> {
         val max = m - BigInteger.ONE
 
@@ -105,7 +97,7 @@ public object Rsa {
         }
     }
 
-    public fun decrypt(ciphertext: BigInteger, key: RSAKeyParameters): BigInteger {
+    public fun crypt(ciphertext: BigInteger, key: RSAKeyParameters): BigInteger {
         if (key is RSAPrivateCrtKeyParameters) {
             // blind the input
             val e = key.publicExponent
