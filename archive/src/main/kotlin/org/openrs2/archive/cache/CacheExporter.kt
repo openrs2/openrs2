@@ -19,7 +19,6 @@ public class CacheExporter @Inject constructor(
 ) {
     public data class Cache(
         val id: Long,
-        val whirlpool: ByteArray,
         val game: String,
         val build: Int?,
         val timestamp: Instant?,
@@ -39,7 +38,7 @@ public class CacheExporter @Inject constructor(
         return database.execute { connection ->
             connection.prepareStatement(
                 """
-                SELECT m.id, c.whirlpool, g.name, m.build, m.timestamp, m.name
+                SELECT m.id, g.name, m.build, m.timestamp, m.name
                 FROM master_indexes m
                 JOIN games g ON g.id = m.game_id
                 JOIN containers c ON c.id = m.container_id
@@ -51,18 +50,17 @@ public class CacheExporter @Inject constructor(
 
                     while (rows.next()) {
                         val id = rows.getLong(1)
-                        val whirlpool = rows.getBytes(2)
-                        val game = rows.getString(3)
+                        val game = rows.getString(2)
 
-                        var build: Int? = rows.getInt(4)
+                        var build: Int? = rows.getInt(3)
                         if (rows.wasNull()) {
                             build = null
                         }
 
-                        val timestamp = rows.getTimestamp(5)?.toInstant()
-                        val name = rows.getString(6)
+                        val timestamp = rows.getTimestamp(4)?.toInstant()
+                        val name = rows.getString(5)
 
-                        caches += Cache(id, whirlpool, game, build, timestamp, name)
+                        caches += Cache(id, game, build, timestamp, name)
                     }
 
                     caches

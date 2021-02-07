@@ -4,7 +4,6 @@
 		<table>
 			<thead>
 				<tr>
-					<th>Master index digest</th>
 					<th>Game</th>
 					<th>Build</th>
 					<th>Timestamp</th>
@@ -15,7 +14,6 @@
 			<tbody>
 				<!--/*@thymesVar id="caches" type="java.util.List<org.openrs2.archive.cache.CacheExporter.Cache>"*/-->
 				<tr th:each="cache : ${caches}">
-					<td th:text="${@io.netty.buffer.ByteBufUtil@hexDump(cache.whirlpool).substring(0, 8)}">00000000</td>
 					<td th:text="${cache.game}">runescape</td>
 					<td th:text="${cache.build}">550</td>
 					<td th:text="${#temporals.formatISO(cache.timestamp)}"></td>
