@@ -39,7 +39,7 @@ public class CacheExporter @Inject constructor(
         return database.execute { connection ->
             connection.prepareStatement(
                 """
-                SELECT c.id, c.whirlpool, g.name, m.build, m.timestamp, m.name
+                SELECT m.id, c.whirlpool, g.name, m.build, m.timestamp, m.name
                 FROM master_indexes m
                 JOIN games g ON g.id = m.game_id
                 JOIN containers c ON c.id = m.container_id
@@ -79,12 +79,12 @@ public class CacheExporter @Inject constructor(
                 WITH t AS (
                     SELECT a.archive_id, c.data, g.container_id
                     FROM master_indexes m
-                    JOIN master_index_archives a ON a.container_id = m.container_id
+                    JOIN master_index_archives a ON a.master_index_id = m.id
                     JOIN groups g ON g.archive_id = 255 AND g.group_id = a.archive_id::INTEGER
                         AND g.version = a.version AND NOT g.version_truncated
                     JOIN containers c ON c.id = g.container_id AND c.crc32 = a.crc32
                     JOIN indexes i ON i.container_id = g.container_id
-                    WHERE m.container_id = ?
+                    WHERE m.id = ?
                 )
                 SELECT 255::uint1, t.archive_id::INTEGER, t.data, NULL
                 FROM t
@@ -138,12 +138,12 @@ public class CacheExporter @Inject constructor(
                 WITH t AS (
                     SELECT a.archive_id, c.data, g.container_id
                     FROM master_indexes m
-                    JOIN master_index_archives a ON a.container_id = m.container_id
+                    JOIN master_index_archives a ON a.master_index_id = m.id
                     JOIN groups g ON g.archive_id = 255 AND g.group_id = a.archive_id::INTEGER
                         AND g.version = a.version AND NOT g.version_truncated
                     JOIN containers c ON c.id = g.container_id AND c.crc32 = a.crc32
                     JOIN indexes i ON i.container_id = g.container_id
-                    WHERE m.container_id = ?
+                    WHERE m.id = ?
                 )
                 SELECT t.archive_id, ig.group_id, ig.name_hash, n.name, (k.key).k0, (k.key).k1, (k.key).k2, (k.key).k3
                 FROM t

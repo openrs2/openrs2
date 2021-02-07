@@ -338,7 +338,7 @@ public class CacheImporter @Inject constructor(
         overwrite: Boolean
     ) {
         val containerId = addContainer(connection, masterIndex)
-        var exists: Boolean
+        var masterIndexId: Int? = null
 
         var newBuild: Int?
         var newTimestamp: Instant?
@@ -347,28 +347,31 @@ public class CacheImporter @Inject constructor(
 
         connection.prepareStatement(
             """
-            SELECT game_id, build, timestamp, name, description
+            SELECT id, game_id, build, timestamp, name, description
             FROM master_indexes
-            WHERE container_id = ?
+            WHERE container_id = ? AND format = ?::master_index_format
             FOR UPDATE
         """.trimIndent()
         ).use { stmt ->
             stmt.setLong(1, containerId)
+            stmt.setString(2, masterIndex.index.format.name.toLowerCase())
 
             stmt.executeQuery().use { rows ->
-                exists = rows.next()
+                if (rows.next()) {
+                    masterIndexId = rows.getInt(1)
+                }
 
-                if (exists && !overwrite) {
-                    val oldGameId = rows.getInt(1)
+                if (masterIndexId != null && !overwrite) {
+                    val oldGameId = rows.getInt(2)
 
-                    var oldBuild: Int? = rows.getInt(2)
+                    var oldBuild: Int? = rows.getInt(3)
                     if (rows.wasNull()) {
                         oldBuild = null
                     }
 
-                    val oldTimestamp: Instant? = rows.getTimestamp(3)?.toInstant()
-                    val oldName: String? = rows.getString(4)
-                    val oldDescription: String? = rows.getString(5)
+                    val oldTimestamp: Instant? = rows.getTimestamp(4)?.toInstant()
+                    val oldName: String? = rows.getString(5)
+                    val oldDescription: String? = rows.getString(6)
 
                     check(oldGameId == gameId)
 
@@ -417,47 +420,69 @@ public class CacheImporter @Inject constructor(
             }
         }
 
+        if (masterIndexId != null) {
+            connection.prepareStatement(
+                """
+                UPDATE master_indexes
+                SET build = ?, timestamp = ?, name = ?, description = ?
+                WHERE id = ?
+            """.trimIndent()
+            ).use { stmt ->
+                stmt.setObject(1, newBuild, Types.INTEGER)
+
+                if (newTimestamp != null) {
+                    val offsetDateTime = OffsetDateTime.ofInstant(newTimestamp, ZoneOffset.UTC)
+                    stmt.setObject(2, offsetDateTime, Types.TIMESTAMP_WITH_TIMEZONE)
+                } else {
+                    stmt.setNull(2, Types.TIMESTAMP_WITH_TIMEZONE)
+                }
+
+                stmt.setString(3, newName)
+                stmt.setString(4, newDescription)
+                stmt.setInt(5, masterIndexId!!)
+
+                stmt.execute()
+
+                return@addMasterIndex
+            }
+        }
+
         connection.prepareStatement(
             """
-            INSERT INTO master_indexes (container_id, game_id, build, timestamp, name, description)
-            VALUES (?, ?, ?, ?, ?, ?)
-            ON CONFLICT (container_id) DO UPDATE SET
-                game_id = EXCLUDED.game_id,
-                build = EXCLUDED.build,
-                timestamp = EXCLUDED.timestamp,
-                name = EXCLUDED.name,
-                description = EXCLUDED.description
+            INSERT INTO master_indexes (container_id, format, game_id, build, timestamp, name, description)
+            VALUES (?, ?::master_index_format, ?, ?, ?, ?, ?)
+            RETURNING id
         """.trimIndent()
         ).use { stmt ->
             stmt.setLong(1, containerId)
-            stmt.setInt(2, gameId)
-            stmt.setObject(3, newBuild, Types.INTEGER)
+            stmt.setString(2, masterIndex.index.format.name.toLowerCase())
+            stmt.setInt(3, gameId)
+            stmt.setObject(4, newBuild, Types.INTEGER)
 
             if (newTimestamp != null) {
                 val offsetDateTime = OffsetDateTime.ofInstant(newTimestamp, ZoneOffset.UTC)
-                stmt.setObject(4, offsetDateTime, Types.TIMESTAMP_WITH_TIMEZONE)
+                stmt.setObject(5, offsetDateTime, Types.TIMESTAMP_WITH_TIMEZONE)
             } else {
-                stmt.setNull(4, Types.TIMESTAMP_WITH_TIMEZONE)
+                stmt.setNull(5, Types.TIMESTAMP_WITH_TIMEZONE)
             }
 
-            stmt.setString(5, newName)
-            stmt.setString(6, newDescription)
+            stmt.setString(6, newName)
+            stmt.setString(7, newDescription)
 
-            stmt.execute()
-        }
-
-        if (exists) {
-            return
+            stmt.executeQuery().use { rows ->
+                check(rows.next())
+                masterIndexId = rows.getInt(1)
+            }
         }
 
         connection.prepareStatement(
             """
-            INSERT INTO master_index_archives (container_id, archive_id, crc32, version)
+            INSERT INTO master_index_archives (master_index_id, archive_id, crc32, version)
             VALUES (?, ?, ?, ?)
         """.trimIndent()
         ).use { stmt ->
             for ((i, entry) in masterIndex.index.entries.withIndex()) {
-                stmt.setLong(1, containerId)
+                stmt.setInt(1, masterIndexId!!)
                 stmt.setInt(2, i)
                 stmt.setInt(3, entry.checksum)
                 stmt.setInt(4, entry.version)

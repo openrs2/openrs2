@@ -82,22 +82,31 @@ CREATE TABLE index_files (
     FOREIGN KEY (container_id, group_id) REFERENCES index_groups (container_id, group_id)
 );
 
+CREATE TYPE master_index_format AS ENUM (
+    'original',
+    'versioned',
+    'whirlpool'
+);
+
 CREATE TABLE master_indexes (
-    container_id BIGINT PRIMARY KEY NOT NULL REFERENCES containers (id),
+    id SERIAL PRIMARY KEY NOT NULL,
+    container_id BIGINT NOT NULL REFERENCES containers (id),
+    format master_index_format NOT NULL,
     game_id INTEGER NOT NULL REFERENCES games (id),
     build INTEGER NULL,
     timestamp TIMESTAMPTZ NULL,
     name TEXT NULL,
-    description TEXT NULL
+    description TEXT NULL,
+    UNIQUE (container_id, format)
 );
 
 CREATE TABLE master_index_archives (
-    container_id BIGINT NOT NULL REFERENCES master_indexes (container_id),
+    master_index_id INTEGER NOT NULL REFERENCES master_indexes (id),
     archive_id uint1 NOT NULL,
     crc32 INTEGER NOT NULL,
     whirlpool BYTEA NULL,
     version INTEGER NOT NULL,
-    PRIMARY KEY (container_id, archive_id)
+    PRIMARY KEY (master_index_id, archive_id)
 );
 
 CREATE TABLE names (
