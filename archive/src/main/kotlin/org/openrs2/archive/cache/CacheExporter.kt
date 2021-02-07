@@ -83,7 +83,7 @@ public class CacheExporter @Inject constructor(
                     JOIN groups g ON g.archive_id = 255 AND g.group_id = a.archive_id::INTEGER
                         AND g.version = a.version AND NOT g.version_truncated
                     JOIN containers c ON c.id = g.container_id AND c.crc32 = a.crc32
-                    JOIN indexes i ON i.container_id = g.container_id
+                    JOIN indexes i ON i.container_id = g.container_id AND i.version = a.version
                     WHERE m.id = ?
                 )
                 SELECT 255::uint1, t.archive_id::INTEGER, t.data, NULL
@@ -142,7 +142,7 @@ public class CacheExporter @Inject constructor(
                     JOIN groups g ON g.archive_id = 255 AND g.group_id = a.archive_id::INTEGER
                         AND g.version = a.version AND NOT g.version_truncated
                     JOIN containers c ON c.id = g.container_id AND c.crc32 = a.crc32
-                    JOIN indexes i ON i.container_id = g.container_id
+                    JOIN indexes i ON i.container_id = g.container_id AND i.version = a.version
                     WHERE m.id = ?
                 )
                 SELECT t.archive_id, ig.group_id, ig.name_hash, n.name, (k.key).k0, (k.key).k1, (k.key).k2, (k.key).k3
