@@ -1,5 +1,5 @@
 object Versions {
-    const val asm = "9.0"
+    const val asm = "9.1"
     const val bouncyCastlePkix = "1.68"
     const val bouncyCastleProvider = "1.68"
     const val clikt = "3.1.0"
