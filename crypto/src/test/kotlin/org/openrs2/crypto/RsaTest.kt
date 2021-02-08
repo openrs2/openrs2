@@ -51,34 +51,34 @@ object RsaTest {
         val (public, private) = Rsa.generateKeyPair(Rsa.CLIENT_KEY_LENGTH)
 
         val expectedPlaintext = BigInteger("1337")
-        val ciphertext = Rsa.crypt(expectedPlaintext, public)
-        val actualPlaintext = Rsa.crypt(ciphertext, private)
+        val ciphertext = Rsa.apply(expectedPlaintext, public)
+        val actualPlaintext = Rsa.apply(ciphertext, private)
 
         assertEquals(expectedPlaintext, actualPlaintext)
     }
 
     @Test
     fun testEncrypt() {
-        val ciphertext = Rsa.crypt(BigInteger("65"), PUBLIC_KEY)
+        val ciphertext = Rsa.apply(BigInteger("65"), PUBLIC_KEY)
         assertEquals(BigInteger("2790"), ciphertext)
     }
 
     @Test
     fun testDecrypt() {
-        val ciphertext = Rsa.crypt(BigInteger("2790"), PRIVATE_KEY)
+        val ciphertext = Rsa.apply(BigInteger("2790"), PRIVATE_KEY)
         assertEquals(BigInteger("65"), ciphertext)
     }
 
     @Test
     fun testDecryptCrt() {
-        val ciphertext = Rsa.crypt(BigInteger("2790"), PRIVATE_KEY_CRT)
+        val ciphertext = Rsa.apply(BigInteger("2790"), PRIVATE_KEY_CRT)
         assertEquals(BigInteger("65"), ciphertext)
     }
 
     @Test
     fun testEncryptByteBuf() {
         wrappedBuffer(65).use { plaintext ->
-            plaintext.rsaCrypt(PUBLIC_KEY).use { ciphertext ->
+            plaintext.rsa(PUBLIC_KEY).use { ciphertext ->
                 wrappedBuffer(10, 230.toByte()).use { expectedCiphertext ->
                     assertEquals(expectedCiphertext, ciphertext)
                 }
@@ -89,7 +89,7 @@ object RsaTest {
     @Test
     fun testDecryptByteBuf() {
         wrappedBuffer(10, 230.toByte()).use { ciphertext ->
-            ciphertext.rsaCrypt(PRIVATE_KEY).use { plaintext ->
+            ciphertext.rsa(PRIVATE_KEY).use { plaintext ->
                 wrappedBuffer(65).use { expectedPlaintext ->
                     assertEquals(expectedPlaintext, plaintext)
                 }

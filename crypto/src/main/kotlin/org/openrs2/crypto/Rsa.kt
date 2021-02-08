@@ -40,8 +40,8 @@ private fun BigInteger.toByteBuf(): ByteBuf {
     return Unpooled.wrappedBuffer(toByteArray())
 }
 
-public fun ByteBuf.rsaCrypt(key: RSAKeyParameters): ByteBuf {
-    return Rsa.crypt(toBigInteger(), key).toByteBuf()
+public fun ByteBuf.rsa(key: RSAKeyParameters): ByteBuf {
+    return Rsa.apply(toBigInteger(), key).toByteBuf()
 }
 
 public fun RSAPrivateCrtKeyParameters.toKeySpec(): KeySpec {
@@ -97,7 +97,7 @@ public object Rsa {
         }
     }
 
-    public fun crypt(ciphertext: BigInteger, key: RSAKeyParameters): BigInteger {
+    public fun apply(ciphertext: BigInteger, key: RSAKeyParameters): BigInteger {
         if (key is RSAPrivateCrtKeyParameters) {
             // blind the input
             val e = key.publicExponent
