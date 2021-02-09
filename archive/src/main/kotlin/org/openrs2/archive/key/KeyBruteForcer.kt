@@ -112,22 +112,7 @@ public class KeyBruteForcer @Inject constructor(
                         val k3 = rows.getInt(5)
                         val key = XteaKey(k0, k1, k2, k3)
 
-                        val valid = Unpooled.wrappedBuffer(data).use { buf ->
-                            Js5Compression.isKeyValid(buf, key)
-                        }
-
-                        if (valid) {
-                            connection.prepareStatement(
-                                """
-                                UPDATE containers
-                                SET key_id = ?
-                                WHERE id = ?
-                            """.trimIndent()
-                            ).use { stmt ->
-                                stmt.setLong(1, keyId)
-                                stmt.setLong(2, containerId)
-                                stmt.execute()
-                            }
+                        if (validateKey(connection, data, key, keyId, containerId)) {
                             break
                         }
                     }
@@ -217,22 +202,8 @@ public class KeyBruteForcer @Inject constructor(
                         val containerId = rows.getLong(1)
                         val data = rows.getBytes(2)
 
-                        val valid = Unpooled.wrappedBuffer(data).use { buf ->
-                            Js5Compression.isKeyValid(buf, key)
-                        }
-
-                        if (valid) {
-                            connection.prepareStatement(
-                                """
-                                UPDATE containers
-                                SET key_id = ?
-                                WHERE id = ?
-                            """.trimIndent()
-                            ).use { stmt ->
-                                stmt.setLong(1, keyId)
-                                stmt.setLong(2, containerId)
-                                stmt.execute()
-                            }
+                        if (validateKey(connection, data, key, keyId, containerId)) {
+                            break
                         }
                     }
                 }
@@ -280,6 +251,36 @@ public class KeyBruteForcer @Inject constructor(
                 return Pair(keyId, key)
             }
         }
+    }
+
+    private fun validateKey(
+        connection: Connection,
+        data: ByteArray,
+        key: XteaKey,
+        keyId: Long,
+        containerId: Long
+    ): Boolean {
+        val valid = Unpooled.wrappedBuffer(data).use { buf ->
+            Js5Compression.isKeyValid(buf, key)
+        }
+
+        if (!valid) {
+            return false
+        }
+
+        connection.prepareStatement(
+            """
+            UPDATE containers
+            SET key_id = ?
+            WHERE id = ?
+        """.trimIndent()
+        ).use { stmt ->
+            stmt.setLong(1, keyId)
+            stmt.setLong(2, containerId)
+            stmt.execute()
+        }
+
+        return true
     }
 
     private companion object {
