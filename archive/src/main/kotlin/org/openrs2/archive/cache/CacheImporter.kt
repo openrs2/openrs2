@@ -3,7 +3,6 @@ package org.openrs2.archive.cache
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.ByteBufUtil
-import io.netty.buffer.DefaultByteBufHolder
 import io.netty.buffer.Unpooled
 import org.openrs2.buffer.crc32
 import org.openrs2.buffer.use
@@ -34,33 +33,44 @@ public class CacheImporter @Inject constructor(
     private val alloc: ByteBufAllocator
 ) {
     public abstract class Container(
-        data: ByteBuf,
-        public val encrypted: Boolean
-    ) : DefaultByteBufHolder(data) {
-        public val bytes: ByteArray = ByteBufUtil.getBytes(data, data.readerIndex(), data.readableBytes(), false)
-        public val crc32: Int = data.crc32()
+        private val compressed: ByteBuf,
+        private val uncompressed: ByteBuf?
+    ) {
+        public val bytes: ByteArray =
+            ByteBufUtil.getBytes(compressed, compressed.readerIndex(), compressed.readableBytes(), false)
+        public val crc32: Int = compressed.crc32()
         public val whirlpool: ByteArray = Whirlpool.whirlpool(bytes)
+        public val encrypted: Boolean = uncompressed == null
+        public val uncompressedLen: Int? = uncompressed?.readableBytes()
+        public val uncompressedCrc32: Int? = uncompressed?.crc32()
+
+        public fun release() {
+            compressed.release()
+            uncompressed?.release()
+        }
     }
 
     private class MasterIndex(
         val index: Js5MasterIndex,
-        data: ByteBuf,
-    ) : Container(data, false)
+        compressed: ByteBuf,
+        uncompressed: ByteBuf
+    ) : Container(compressed, uncompressed)
 
     public class Index(
         archive: Int,
         public val index: Js5Index,
-        data: ByteBuf,
-    ) : Group(Js5Archive.ARCHIVESET, archive, data, index.version, false, false)
+        compressed: ByteBuf,
+        uncompressed: ByteBuf
+    ) : Group(Js5Archive.ARCHIVESET, archive, compressed, uncompressed, index.version, false)
 
     public open class Group(
         public val archive: Int,
         public val group: Int,
-        data: ByteBuf,
+        compressed: ByteBuf,
+        uncompressed: ByteBuf?,
         public val version: Int,
-        public val versionTruncated: Boolean,
-        encrypted: Boolean
-    ) : Container(data, encrypted)
+        public val versionTruncated: Boolean
+    ) : Container(compressed, uncompressed)
 
     public suspend fun import(
         store: Store,
@@ -78,7 +88,7 @@ public class CacheImporter @Inject constructor(
             // import master index
             val masterIndex = createMasterIndex(store)
             try {
-                addMasterIndex(connection, masterIndex, gameId, build, timestamp, name, description, false)
+                addMasterIndex(connection, masterIndex, gameId, build, timestamp, name, description, overwrite = false)
             } finally {
                 masterIndex.release()
             }
@@ -142,13 +152,13 @@ public class CacheImporter @Inject constructor(
         description: String?
     ) {
         Js5Compression.uncompress(buf.slice()).use { uncompressed ->
-            val masterIndex = MasterIndex(Js5MasterIndex.read(uncompressed.slice(), format), buf)
+            val masterIndex = MasterIndex(Js5MasterIndex.read(uncompressed.slice(), format), buf, uncompressed)
 
             database.execute { connection ->
                 prepare(connection)
 
                 val gameId = getGameId(connection, game)
-                addMasterIndex(connection, masterIndex, gameId, build, timestamp, name, description, false)
+                addMasterIndex(connection, masterIndex, gameId, build, timestamp, name, description, overwrite = false)
             }
         }
     }
@@ -156,6 +166,7 @@ public class CacheImporter @Inject constructor(
     public suspend fun importMasterIndexAndGetIndexes(
         masterIndex: Js5MasterIndex,
         buf: ByteBuf,
+        uncompressed: ByteBuf,
         gameId: Int,
         build: Int,
         timestamp: Instant,
@@ -177,7 +188,16 @@ public class CacheImporter @Inject constructor(
                 stmt.execute()
             }
 
-            addMasterIndex(connection, MasterIndex(masterIndex, buf), gameId, build, timestamp, name, null, true)
+            addMasterIndex(
+                connection,
+                MasterIndex(masterIndex, buf, uncompressed),
+                gameId,
+                build,
+                timestamp,
+                name,
+                description = null,
+                overwrite = true
+            )
 
             connection.prepareStatement(
                 """
@@ -239,10 +259,15 @@ public class CacheImporter @Inject constructor(
         }
     }
 
-    public suspend fun importIndexAndGetMissingGroups(archive: Int, index: Js5Index, buf: ByteBuf): List<Int> {
+    public suspend fun importIndexAndGetMissingGroups(
+        archive: Int,
+        index: Js5Index,
+        buf: ByteBuf,
+        uncompressed: ByteBuf
+    ): List<Int> {
         return database.execute { connection ->
             prepare(connection)
-            addIndex(connection, Index(archive, index, buf))
+            addIndex(connection, Index(archive, index, buf, uncompressed))
 
             connection.prepareStatement(
                 """
@@ -321,8 +346,8 @@ public class CacheImporter @Inject constructor(
         alloc.buffer().use { uncompressed ->
             index.write(uncompressed)
 
-            Js5Compression.compress(uncompressed, Js5CompressionType.UNCOMPRESSED).use { buf ->
-                return MasterIndex(index, buf.retain())
+            Js5Compression.compress(uncompressed.slice(), Js5CompressionType.UNCOMPRESSED).use { buf ->
+                return MasterIndex(index, buf.retain(), uncompressed.retain())
             }
         }
     }
@@ -499,7 +524,6 @@ public class CacheImporter @Inject constructor(
             store.read(archive, group).use { buf ->
                 var version = VersionTrailer.strip(buf) ?: return null
                 var versionTruncated = true
-                val encrypted = Js5Compression.isEncrypted(buf.slice())
 
                 /*
                  * Grab the non-truncated version from the Js5Index if we can
@@ -513,7 +537,14 @@ public class CacheImporter @Inject constructor(
                     }
                 }
 
-                return Group(archive, group, buf.retain(), version, versionTruncated, encrypted)
+                // TODO(gpe): avoid uncompressing twice (we do it in isEncrypted and uncompress)
+                val uncompressed = if (Js5Compression.isEncrypted(buf.slice())) {
+                    null
+                } else {
+                    Js5Compression.uncompress(buf.slice())
+                }
+
+                return Group(archive, group, buf.retain(), uncompressed, version, versionTruncated)
             }
         } catch (ex: IOException) {
             return null
@@ -552,7 +583,7 @@ public class CacheImporter @Inject constructor(
     private fun readIndex(store: Store, archive: Int): Index {
         return store.read(Js5Archive.ARCHIVESET, archive).use { buf ->
             Js5Compression.uncompress(buf.slice()).use { uncompressed ->
-                Index(archive, Js5Index.read(uncompressed), buf.retain())
+                Index(archive, Js5Index.read(uncompressed.slice()), buf.retain(), uncompressed.retain())
             }
         }
     }
@@ -671,6 +702,8 @@ public class CacheImporter @Inject constructor(
                 index INTEGER NOT NULL,
                 crc32 INTEGER NOT NULL,
                 whirlpool BYTEA NOT NULL,
+                uncompressed_length INTEGER NULL,
+                uncompressed_crc32 INTEGER NULL,
                 data BYTEA NOT NULL,
                 encrypted BOOLEAN NOT NULL
             ) ON COMMIT DROP
@@ -695,8 +728,8 @@ public class CacheImporter @Inject constructor(
 
         connection.prepareStatement(
             """
-            INSERT INTO tmp_containers (index, crc32, whirlpool, data, encrypted)
-            VALUES (?, ?, ?, ?, ?)
+            INSERT INTO tmp_containers (index, crc32, whirlpool, data, uncompressed_length, uncompressed_crc32, encrypted)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
         """.trimIndent()
         ).use { stmt ->
             for ((i, container) in containers.withIndex()) {
@@ -704,7 +737,9 @@ public class CacheImporter @Inject constructor(
                 stmt.setInt(2, container.crc32)
                 stmt.setBytes(3, container.whirlpool)
                 stmt.setBytes(4, container.bytes)
-                stmt.setBoolean(5, container.encrypted)
+                stmt.setObject(5, container.uncompressedLen, Types.INTEGER)
+                stmt.setObject(6, container.uncompressedCrc32, Types.INTEGER)
+                stmt.setBoolean(7, container.encrypted)
                 stmt.addBatch()
             }
 
@@ -713,8 +748,8 @@ public class CacheImporter @Inject constructor(
 
         connection.prepareStatement(
             """
-            INSERT INTO containers (crc32, whirlpool, data, encrypted)
-            SELECT t.crc32, t.whirlpool, t.data, t.encrypted
+            INSERT INTO containers (crc32, whirlpool, data, uncompressed_length, uncompressed_crc32, encrypted)
+            SELECT t.crc32, t.whirlpool, t.data, t.uncompressed_length, t.uncompressed_crc32, t.encrypted
             FROM tmp_containers t
             LEFT JOIN containers c ON c.whirlpool = t.whirlpool
             WHERE c.whirlpool IS NULL

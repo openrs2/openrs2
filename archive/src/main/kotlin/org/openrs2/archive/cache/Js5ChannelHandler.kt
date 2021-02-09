@@ -133,13 +133,20 @@ public class Js5ChannelHandler(
                 throw Exception("Group checksum invalid")
             }
 
+            // TODO(gpe): avoid uncompressing twice (we do it in isEncrypted and uncompress)
+            val uncompressed = if (Js5Compression.isEncrypted(response.data.slice())) {
+                null
+            } else {
+                Js5Compression.uncompress(response.data.slice())
+            }
+
             groups += CacheImporter.Group(
                 response.archive,
                 response.group,
                 response.data.retain(),
+                uncompressed,
                 entry.version,
-                versionTruncated = false,
-                Js5Compression.isEncrypted(response.data.slice())
+                versionTruncated = false
             )
         }
 
@@ -160,26 +167,34 @@ public class Js5ChannelHandler(
     }
 
     private fun processMasterIndex(buf: ByteBuf) {
-        masterIndex = Js5Compression.uncompress(buf.slice()).use { uncompressed ->
-            Js5MasterIndex.read(uncompressed, masterIndexFormat)
-        }
+        Js5Compression.uncompress(buf.slice()).use { uncompressed ->
+            masterIndex = Js5MasterIndex.read(uncompressed.slice(), masterIndexFormat)
 
-        val rawIndexes = runBlocking {
-            val name = "Downloaded from $hostname:$port"
-            importer.importMasterIndexAndGetIndexes(masterIndex!!, buf, gameId, build, Instant.now(), name)
-        }
-        try {
-            indexes = arrayOfNulls(rawIndexes.size)
-
-            for ((archive, index) in rawIndexes.withIndex()) {
-                if (index != null) {
-                    processIndex(archive, index)
-                } else {
-                    request(Js5Archive.ARCHIVESET, archive)
-                }
+            val rawIndexes = runBlocking {
+                val name = "Downloaded from $hostname:$port"
+                importer.importMasterIndexAndGetIndexes(
+                    masterIndex!!,
+                    buf,
+                    uncompressed,
+                    gameId,
+                    build,
+                    timestamp = Instant.now(),
+                    name
+                )
             }
-        } finally {
-            rawIndexes.filterNotNull().forEach(ByteBuf::release)
+            try {
+                indexes = arrayOfNulls(rawIndexes.size)
+
+                for ((archive, index) in rawIndexes.withIndex()) {
+                    if (index != null) {
+                        processIndex(archive, index)
+                    } else {
+                        request(Js5Archive.ARCHIVESET, archive)
+                    }
+                }
+            } finally {
+                rawIndexes.filterNotNull().forEach(ByteBuf::release)
+            }
         }
     }
 
@@ -189,20 +204,20 @@ public class Js5ChannelHandler(
             throw Exception("Index checksum invalid")
         }
 
-        val index = Js5Compression.uncompress(buf.slice()).use { uncompressed ->
-            Js5Index.read(uncompressed)
-        }
-        indexes[archive] = index
+        Js5Compression.uncompress(buf.slice()).use { uncompressed ->
+            val index = Js5Index.read(uncompressed.slice())
+            indexes[archive] = index
 
-        if (index.version != entry.version) {
-            throw Exception("Index version invalid")
-        }
+            if (index.version != entry.version) {
+                throw Exception("Index version invalid")
+            }
 
-        val groups = runBlocking {
-            importer.importIndexAndGetMissingGroups(archive, index, buf)
-        }
-        for (group in groups) {
-            request(archive, group)
+            val groups = runBlocking {
+                importer.importIndexAndGetMissingGroups(archive, index, buf, uncompressed)
+            }
+            for (group in groups) {
+                request(archive, group)
+            }
         }
     }
 

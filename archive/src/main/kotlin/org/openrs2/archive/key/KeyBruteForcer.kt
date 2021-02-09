@@ -1,6 +1,7 @@
 package org.openrs2.archive.key
 
 import io.netty.buffer.Unpooled
+import org.openrs2.buffer.crc32
 import org.openrs2.buffer.use
 import org.openrs2.cache.Js5Compression
 import org.openrs2.crypto.XteaKey
@@ -202,9 +203,7 @@ public class KeyBruteForcer @Inject constructor(
                         val containerId = rows.getLong(1)
                         val data = rows.getBytes(2)
 
-                        if (validateKey(connection, data, key, keyId, containerId)) {
-                            break
-                        }
+                        validateKey(connection, data, key, keyId, containerId)
                     }
                 }
             }
@@ -268,15 +267,28 @@ public class KeyBruteForcer @Inject constructor(
             return false
         }
 
+        // TODO(gpe): avoid uncompressing twice (we do it here and in isKeyValid)
+        var len = 0
+        var crc32 = 0
+
+        Unpooled.wrappedBuffer(data).use { buf ->
+            Js5Compression.uncompress(buf, key).use { uncompressed ->
+                len = uncompressed.readableBytes()
+                crc32 = uncompressed.crc32()
+            }
+        }
+
         connection.prepareStatement(
             """
             UPDATE containers
-            SET key_id = ?
+            SET key_id = ?, uncompressed_length = ?, uncompressed_crc32 = ?
             WHERE id = ?
         """.trimIndent()
         ).use { stmt ->
             stmt.setLong(1, keyId)
-            stmt.setLong(2, containerId)
+            stmt.setInt(2, len)
+            stmt.setInt(3, crc32)
+            stmt.setLong(4, containerId)
             stmt.execute()
         }
 

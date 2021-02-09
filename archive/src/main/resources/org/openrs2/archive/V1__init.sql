@@ -31,6 +31,8 @@ CREATE TABLE containers (
     crc32 INTEGER NOT NULL,
     whirlpool BYTEA UNIQUE NOT NULL,
     data BYTEA NOT NULL,
+    uncompressed_length INTEGER NULL,
+    uncompressed_crc32 INTEGER NULL,
     encrypted BOOLEAN NOT NULL,
     key_id BIGINT NULL REFERENCES keys (id)
 );
