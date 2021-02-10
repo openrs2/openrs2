@@ -133,13 +133,7 @@ public class Js5ChannelHandler(
                 throw Exception("Group checksum invalid")
             }
 
-            // TODO(gpe): avoid uncompressing twice (we do it in isEncrypted and uncompress)
-            val uncompressed = if (Js5Compression.isEncrypted(response.data.slice())) {
-                null
-            } else {
-                Js5Compression.uncompress(response.data.slice())
-            }
-
+            val uncompressed = Js5Compression.uncompressUnlessEncrypted(response.data.slice())
             groups += CacheImporter.Group(
                 response.archive,
                 response.group,

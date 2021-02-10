@@ -537,13 +537,7 @@ public class CacheImporter @Inject constructor(
                     }
                 }
 
-                // TODO(gpe): avoid uncompressing twice (we do it in isEncrypted and uncompress)
-                val uncompressed = if (Js5Compression.isEncrypted(buf.slice())) {
-                    null
-                } else {
-                    Js5Compression.uncompress(buf.slice())
-                }
-
+                val uncompressed = Js5Compression.uncompressUnlessEncrypted(buf.slice())
                 return Group(archive, group, buf.retain(), uncompressed, version, versionTruncated)
             }
         } catch (ex: IOException) {

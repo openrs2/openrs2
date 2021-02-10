@@ -8,7 +8,6 @@ import org.openrs2.crypto.XteaKey
 import org.openrs2.crypto.xteaDecrypt
 import org.openrs2.crypto.xteaEncrypt
 import java.io.IOException
-import java.io.OutputStream
 
 public object Js5Compression {
     private val BZIP2_MAGIC = byteArrayOf(0x31, 0x41, 0x59, 0x26, 0x53, 0x59)
@@ -163,11 +162,11 @@ public object Js5Compression {
         }
     }
 
-    public fun isEncrypted(input: ByteBuf): Boolean {
-        return !isKeyValid(input, XteaKey.ZERO)
+    public fun uncompressUnlessEncrypted(input: ByteBuf): ByteBuf? {
+        return uncompressIfKeyValid(input, XteaKey.ZERO)
     }
 
-    public fun isKeyValid(input: ByteBuf, key: XteaKey): Boolean {
+    public fun uncompressIfKeyValid(input: ByteBuf, key: XteaKey): ByteBuf? {
         val typeId = input.readUnsignedByte().toInt()
         val type = Js5CompressionType.fromOrdinal(typeId)
             ?: throw IOException("Invalid compression type: $typeId")
@@ -178,6 +177,10 @@ public object Js5Compression {
         }
 
         if (type == Js5CompressionType.UNCOMPRESSED) {
+            if (input.readableBytes() < len) {
+                throw IOException("Data truncated")
+            }
+
             /*
              * There is no easy way for us to be sure whether an uncompressed
              * group's key is valid or not, as we'd need specific validation
@@ -191,7 +194,11 @@ public object Js5Compression {
              *
              * We therefore assume all uncompressed groups are unencrypted.
              */
-            return key.isZero
+            if (!key.isZero) {
+                return null
+            }
+
+            return input.readBytes(len)
         }
 
         val lenWithUncompressedLen = len + 4
@@ -223,7 +230,7 @@ public object Js5Compression {
         decrypt(input.slice(), 16, key).use { plaintext ->
             val uncompressedLen = plaintext.readInt()
             if (uncompressedLen < 0) {
-                return false
+                return null
             }
 
             when (type) {
@@ -232,19 +239,19 @@ public object Js5Compression {
                     val magic = ByteArray(BZIP2_MAGIC.size)
                     plaintext.readBytes(magic)
                     if (!magic.contentEquals(BZIP2_MAGIC)) {
-                        return false
+                        return null
                     }
                 }
                 Js5CompressionType.GZIP -> {
                     val magic = plaintext.readUnsignedShort()
                     if (magic != GZIP_MAGIC) {
-                        return false
+                        return null
                     }
 
                     // Jagex's implementation only supports DEFLATE.
                     val compressionMethod = plaintext.readUnsignedByte().toInt()
                     if (compressionMethod != GZIP_COMPRESSION_METHOD_DEFLATE) {
-                        return false
+                        return null
                     }
                 }
                 Js5CompressionType.LZMA -> {
@@ -257,7 +264,7 @@ public object Js5Compression {
 
                     val pb = properties / 45
                     if (pb > LZMA_PB_MAX) {
-                        return false
+                        return null
                     }
 
                     /*
@@ -279,9 +286,9 @@ public object Js5Compression {
                      */
                     val dictSize = plaintext.readIntLE()
                     if (dictSize < 0) {
-                        return false
+                        return null
                     } else if (dictSize > LZMA_PRESET_DICT_SIZE_MAX) {
-                        return false
+                        return null
                     }
                 }
             }
@@ -292,20 +299,43 @@ public object Js5Compression {
             val uncompressedLen = plaintext.readInt()
             check(uncompressedLen >= 0)
 
-            try {
-                OutputStream.nullOutputStream().use { output ->
+            /**
+             * We don't pass uncompressedLen to the buffer here: in some cases,
+             * an incorrect key can produce a valid header (particularly for
+             * LZMA, which has no magic number). If we're unlucky,
+             * uncompressedLen will be a huge number (e.g. 1 or 2 gigabytes),
+             * which might OOM some environments if allocated up front.
+             *
+             * However, if the key is incorrect it's likely that actually
+             * attempting to uncompress the data will quickly produce an error,
+             * long before we need to actually read 1 or 2 gigabytes of data.
+             * We therefore allow the buffer to grow dynamically.
+             */
+            plaintext.alloc().buffer().use { output ->
+                try {
                     type.createInputStream(ByteBufInputStream(plaintext, len), uncompressedLen).use { inputStream ->
-                        if (inputStream.transferTo(output) != uncompressedLen.toLong()) {
-                            return false
+                        var remaining = uncompressedLen
+                        while (remaining > 0) {
+                            val n = output.writeBytes(inputStream, remaining)
+                            if (n == -1) {
+                                // uncompressed data truncated
+                                return null
+                            }
+                            remaining -= n
+                        }
+
+                        if (inputStream.read() != -1) {
+                            // uncompressed data overflow
+                            return null
                         }
                     }
+                } catch (ex: IOException) {
+                    return null
                 }
-            } catch (ex: IOException) {
-                return false
+
+                return output.retain()
             }
         }
-
-        return true
     }
 
     private fun decrypt(buf: ByteBuf, len: Int, key: XteaKey): ByteBuf {

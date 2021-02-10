@@ -259,40 +259,29 @@ public class KeyBruteForcer @Inject constructor(
         keyId: Long,
         containerId: Long
     ): Boolean {
-        val valid = Unpooled.wrappedBuffer(data).use { buf ->
-            Js5Compression.isKeyValid(buf, key)
-        }
-
-        if (!valid) {
-            return false
-        }
-
-        // TODO(gpe): avoid uncompressing twice (we do it here and in isKeyValid)
-        var len = 0
-        var crc32 = 0
-
         Unpooled.wrappedBuffer(data).use { buf ->
-            Js5Compression.uncompress(buf, key).use { uncompressed ->
-                len = uncompressed.readableBytes()
-                crc32 = uncompressed.crc32()
+            Js5Compression.uncompressIfKeyValid(buf, key).use { uncompressed ->
+                if (uncompressed == null) {
+                    return false
+                }
+
+                connection.prepareStatement(
+                    """
+                    UPDATE containers
+                    SET key_id = ?, uncompressed_length = ?, uncompressed_crc32 = ?
+                    WHERE id = ?
+                """.trimIndent()
+                ).use { stmt ->
+                    stmt.setLong(1, keyId)
+                    stmt.setInt(2, uncompressed.readableBytes())
+                    stmt.setInt(3, uncompressed.crc32())
+                    stmt.setLong(4, containerId)
+                    stmt.execute()
+                }
+
+                return true
             }
         }
-
-        connection.prepareStatement(
-            """
-            UPDATE containers
-            SET key_id = ?, uncompressed_length = ?, uncompressed_crc32 = ?
-            WHERE id = ?
-        """.trimIndent()
-        ).use { stmt ->
-            stmt.setLong(1, keyId)
-            stmt.setInt(2, len)
-            stmt.setInt(3, crc32)
-            stmt.setLong(4, containerId)
-            stmt.execute()
-        }
-
-        return true
     }
 
     private companion object {

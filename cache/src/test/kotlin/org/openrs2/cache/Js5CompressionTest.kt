@@ -9,9 +9,8 @@ import java.io.IOException
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
-import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals
-import kotlin.test.assertTrue
+import kotlin.test.assertNull
 
 class Js5CompressionTest {
     @Test
@@ -266,7 +265,7 @@ class Js5CompressionTest {
             }
 
             assertFailsWith<IOException> {
-                Js5Compression.isKeyValid(compressed.slice(), XteaKey.ZERO)
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO)?.release()
             }
         }
     }
@@ -279,7 +278,7 @@ class Js5CompressionTest {
             }
 
             assertFailsWith<IOException> {
-                Js5Compression.isKeyValid(compressed.slice(), XteaKey.ZERO)
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO)?.release()
             }
         }
     }
@@ -291,7 +290,9 @@ class Js5CompressionTest {
                 Js5Compression.uncompress(compressed.slice()).release()
             }
 
-            assertFalse(Js5Compression.isKeyValid(compressed.slice(), XteaKey.ZERO))
+            Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { uncompressed ->
+                assertNull(uncompressed)
+            }
         }
     }
 
@@ -311,7 +312,9 @@ class Js5CompressionTest {
                 Js5Compression.uncompress(compressed.slice()).release()
             }
 
-            assertFalse(Js5Compression.isKeyValid(compressed.slice(), XteaKey.ZERO))
+            Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { uncompressed ->
+                assertNull(uncompressed)
+            }
         }
     }
 
@@ -322,7 +325,9 @@ class Js5CompressionTest {
                 Js5Compression.uncompress(compressed.slice()).release()
             }
 
-            assertFalse(Js5Compression.isKeyValid(compressed.slice(), XteaKey.ZERO))
+            Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { uncompressed ->
+                assertNull(uncompressed)
+            }
         }
     }
 
@@ -333,7 +338,9 @@ class Js5CompressionTest {
                 Js5Compression.uncompress(compressed.slice()).release()
             }
 
-            assertFalse(Js5Compression.isKeyValid(compressed.slice(), XteaKey.ZERO))
+            Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { uncompressed ->
+                assertNull(uncompressed)
+            }
         }
     }
 
@@ -344,7 +351,9 @@ class Js5CompressionTest {
                 Js5Compression.uncompress(compressed.slice()).release()
             }
 
-            assertFalse(Js5Compression.isKeyValid(compressed.slice(), XteaKey.ZERO))
+            Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { uncompressed ->
+                assertNull(uncompressed)
+            }
         }
     }
 
@@ -355,7 +364,9 @@ class Js5CompressionTest {
                 Js5Compression.uncompress(compressed.slice()).release()
             }
 
-            assertFalse(Js5Compression.isKeyValid(compressed.slice(), XteaKey.ZERO))
+            Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { uncompressed ->
+                assertNull(uncompressed)
+            }
         }
     }
 
@@ -366,92 +377,191 @@ class Js5CompressionTest {
                 Js5Compression.uncompress(compressed.slice()).release()
             }
 
-            assertFalse(Js5Compression.isKeyValid(compressed.slice(), XteaKey.ZERO))
+            Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { uncompressed ->
+                assertNull(uncompressed)
+            }
         }
     }
 
     @Test
     fun testNoneKeyValid() {
-        read("none.dat").use { compressed ->
-            assertFalse(Js5Compression.isEncrypted(compressed.slice()))
-            assertTrue(Js5Compression.isKeyValid(compressed.slice(), XteaKey.ZERO))
-            assertFalse(Js5Compression.isKeyValid(compressed.slice(), KEY))
-            assertFalse(Js5Compression.isKeyValid(compressed.slice(), INVALID_KEY))
+        copiedBuffer("OpenRS2").use { expected ->
+            read("none.dat").use { compressed ->
+                Js5Compression.uncompressUnlessEncrypted(compressed.slice()).use { actual ->
+                    assertEquals(expected, actual)
+                }
+
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { actual ->
+                    assertEquals(expected, actual)
+                }
+
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), KEY).use { actual ->
+                    assertNull(actual)
+                }
+
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), INVALID_KEY).use { actual ->
+                    assertNull(actual)
+                }
+            }
         }
     }
 
     @Test
     fun testBzip2KeyValid() {
-        read("bzip2.dat").use { compressed ->
-            assertFalse(Js5Compression.isEncrypted(compressed.slice()))
-            assertTrue(Js5Compression.isKeyValid(compressed.slice(), XteaKey.ZERO))
-            assertFalse(Js5Compression.isKeyValid(compressed.slice(), KEY))
-            assertFalse(Js5Compression.isKeyValid(compressed.slice(), INVALID_KEY))
-        }
+        copiedBuffer("OpenRS2").use { expected ->
+            read("bzip2.dat").use { compressed ->
+                Js5Compression.uncompressUnlessEncrypted(compressed.slice()).use { actual ->
+                    assertEquals(expected, actual)
+                }
 
-        read("bzip2-encrypted.dat").use { compressed ->
-            assertTrue(Js5Compression.isEncrypted(compressed.slice()))
-            assertFalse(Js5Compression.isKeyValid(compressed.slice(), XteaKey.ZERO))
-            assertTrue(Js5Compression.isKeyValid(compressed.slice(), KEY))
-            assertFalse(Js5Compression.isKeyValid(compressed.slice(), INVALID_KEY))
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { actual ->
+                    assertEquals(expected, actual)
+                }
+
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), KEY).use { actual ->
+                    assertNull(actual)
+                }
+
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), INVALID_KEY).use { actual ->
+                    assertNull(actual)
+                }
+            }
+
+            read("bzip2-encrypted.dat").use { compressed ->
+                Js5Compression.uncompressUnlessEncrypted(compressed.slice()).use { actual ->
+                    assertNull(actual)
+                }
+
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { actual ->
+                    assertNull(actual)
+                }
+
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), KEY).use { actual ->
+                    assertEquals(expected, actual)
+                }
+
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), INVALID_KEY).use { actual ->
+                    assertNull(actual)
+                }
+            }
         }
 
         read("bzip2-invalid-magic.dat").use { compressed ->
-            assertFalse(Js5Compression.isKeyValid(compressed, XteaKey.ZERO))
+            Js5Compression.uncompressIfKeyValid(compressed, XteaKey.ZERO).use { actual ->
+                assertNull(actual)
+            }
         }
     }
 
     @Test
     fun testGzipKeyValid() {
-        read("gzip.dat").use { compressed ->
-            assertFalse(Js5Compression.isEncrypted(compressed.slice()))
-            assertTrue(Js5Compression.isKeyValid(compressed.slice(), XteaKey.ZERO))
-            assertFalse(Js5Compression.isKeyValid(compressed.slice(), KEY))
-            assertFalse(Js5Compression.isKeyValid(compressed.slice(), INVALID_KEY))
-        }
+        copiedBuffer("OpenRS2").use { expected ->
+            read("gzip.dat").use { compressed ->
+                Js5Compression.uncompressUnlessEncrypted(compressed.slice()).use { actual ->
+                    assertEquals(expected, actual)
+                }
 
-        read("gzip-encrypted.dat").use { compressed ->
-            assertTrue(Js5Compression.isEncrypted(compressed.slice()))
-            assertFalse(Js5Compression.isKeyValid(compressed.slice(), XteaKey.ZERO))
-            assertTrue(Js5Compression.isKeyValid(compressed.slice(), KEY))
-            assertFalse(Js5Compression.isKeyValid(compressed.slice(), INVALID_KEY))
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { actual ->
+                    assertEquals(expected, actual)
+                }
+
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), KEY).use { actual ->
+                    assertNull(actual)
+                }
+
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), INVALID_KEY).use { actual ->
+                    assertNull(actual)
+                }
+            }
+
+            read("gzip-encrypted.dat").use { compressed ->
+                Js5Compression.uncompressUnlessEncrypted(compressed.slice()).use { actual ->
+                    assertNull(actual)
+                }
+
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { actual ->
+                    assertNull(actual)
+                }
+
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), KEY).use { actual ->
+                    assertEquals(expected, actual)
+                }
+
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), INVALID_KEY).use { actual ->
+                    assertNull(actual)
+                }
+            }
         }
 
         read("gzip-invalid-magic.dat").use { compressed ->
-            assertFalse(Js5Compression.isKeyValid(compressed, XteaKey.ZERO))
+            Js5Compression.uncompressIfKeyValid(compressed, XteaKey.ZERO).use { actual ->
+                assertNull(actual)
+            }
         }
 
         read("gzip-invalid-method.dat").use { compressed ->
-            assertFalse(Js5Compression.isKeyValid(compressed, XteaKey.ZERO))
+            Js5Compression.uncompressIfKeyValid(compressed, XteaKey.ZERO).use { actual ->
+                assertNull(actual)
+            }
         }
     }
 
     @Test
     fun testLzmaKeyValid() {
-        read("lzma.dat").use { compressed ->
-            assertFalse(Js5Compression.isEncrypted(compressed.slice()))
-            assertTrue(Js5Compression.isKeyValid(compressed.slice(), XteaKey.ZERO))
-            assertFalse(Js5Compression.isKeyValid(compressed.slice(), KEY))
-            assertFalse(Js5Compression.isKeyValid(compressed.slice(), INVALID_KEY))
-        }
+        copiedBuffer("OpenRS2").use { expected ->
+            read("lzma.dat").use { compressed ->
+                Js5Compression.uncompressUnlessEncrypted(compressed.slice()).use { actual ->
+                    assertEquals(expected, actual)
+                }
 
-        read("lzma-encrypted.dat").use { compressed ->
-            assertTrue(Js5Compression.isEncrypted(compressed.slice()))
-            assertFalse(Js5Compression.isKeyValid(compressed.slice(), XteaKey.ZERO))
-            assertTrue(Js5Compression.isKeyValid(compressed.slice(), KEY))
-            assertFalse(Js5Compression.isKeyValid(compressed.slice(), INVALID_KEY))
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { actual ->
+                    assertEquals(expected, actual)
+                }
+
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), KEY).use { actual ->
+                    assertNull(actual)
+                }
+
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), INVALID_KEY).use { actual ->
+                    assertNull(actual)
+                }
+            }
+
+            read("lzma-encrypted.dat").use { compressed ->
+                Js5Compression.uncompressUnlessEncrypted(compressed.slice()).use { actual ->
+                    assertNull(actual)
+                }
+
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { actual ->
+                    assertNull(actual)
+                }
+
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), KEY).use { actual ->
+                    assertEquals(expected, actual)
+                }
+
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), INVALID_KEY).use { actual ->
+                    assertNull(actual)
+                }
+            }
         }
 
         read("lzma-dict-size-negative.dat").use { compressed ->
-            assertFalse(Js5Compression.isKeyValid(compressed, XteaKey.ZERO))
+            Js5Compression.uncompressIfKeyValid(compressed, XteaKey.ZERO).use { actual ->
+                assertNull(actual)
+            }
         }
 
         read("lzma-dict-size-larger-than-preset.dat").use { compressed ->
-            assertFalse(Js5Compression.isKeyValid(compressed, XteaKey.ZERO))
+            Js5Compression.uncompressIfKeyValid(compressed, XteaKey.ZERO).use { actual ->
+                assertNull(actual)
+            }
         }
 
         read("lzma-invalid-pb.dat").use { compressed ->
-            assertFalse(Js5Compression.isKeyValid(compressed, XteaKey.ZERO))
+            Js5Compression.uncompressIfKeyValid(compressed, XteaKey.ZERO).use { actual ->
+                assertNull(actual)
+            }
         }
     }
 
@@ -459,7 +569,7 @@ class Js5CompressionTest {
     fun testKeyValidShorterThanTwoBlocks() {
         read("shorter-than-two-blocks.dat").use { compressed ->
             assertFailsWith<IOException> {
-                Js5Compression.isKeyValid(compressed, XteaKey.ZERO)
+                Js5Compression.uncompressIfKeyValid(compressed, XteaKey.ZERO)?.release()
             }
         }
     }
@@ -472,7 +582,7 @@ class Js5CompressionTest {
             }
 
             assertFailsWith<IOException> {
-                Js5Compression.isKeyValid(compressed.slice(), XteaKey.ZERO)
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO)?.release()
             }
         }
     }
