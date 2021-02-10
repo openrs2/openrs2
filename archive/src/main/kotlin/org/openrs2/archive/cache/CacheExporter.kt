@@ -25,7 +25,7 @@ public class CacheExporter @Inject constructor(
         val name: String?
     )
 
-    public data class GroupKey(
+    public data class Key(
         val archive: Int,
         val group: Int,
         val nameHash: Int?,
@@ -129,7 +129,7 @@ public class CacheExporter @Inject constructor(
         }
     }
 
-    public suspend fun exportKeys(id: Long): List<GroupKey> {
+    public suspend fun exportKeys(id: Long): List<Key> {
         return database.execute { connection ->
             connection.prepareStatement(
                 """
@@ -158,7 +158,7 @@ public class CacheExporter @Inject constructor(
                 stmt.setLong(1, id)
 
                 stmt.executeQuery().use { rows ->
-                    val keys = mutableListOf<GroupKey>()
+                    val keys = mutableListOf<Key>()
 
                     while (rows.next()) {
                         val archive = rows.getInt(1)
@@ -175,7 +175,7 @@ public class CacheExporter @Inject constructor(
                         val k3 = rows.getInt(8)
 
                         val mapSquare = getMapSquare(name)
-                        keys += GroupKey(archive, group, nameHash, name, mapSquare, XteaKey(k0, k1, k2, k3))
+                        keys += Key(archive, group, nameHash, name, mapSquare, XteaKey(k0, k1, k2, k3))
                     }
 
                     keys
