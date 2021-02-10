@@ -128,6 +128,9 @@ configure(subprojects.filter { it.isFree }) {
                     strictly(Versions.junit)
                 }
             }
+
+            val testRuntimeOnly by configurations
+            testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${Versions.junit}")
         }
     }
 
@@ -216,13 +219,6 @@ configure(subprojects.filter { it.isFree }) {
                     }
                 }
             }
-        }
-    }
-
-    plugins.withType<JavaPlugin> {
-        dependencies {
-            val testRuntimeOnly by configurations
-            testRuntimeOnly("org.junit.jupiter:junit-jupiter:${Versions.junit}")
         }
     }
 
