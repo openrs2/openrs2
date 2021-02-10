@@ -6,7 +6,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
-object JaggrabRequestDecoderTest {
+class JaggrabRequestDecoderTest {
     @Test
     fun testDecode() {
         val channel = EmbeddedChannel(JaggrabRequestDecoder)

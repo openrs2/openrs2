@@ -9,7 +9,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
-object Js5ResponseEncoderTest {
+class Js5ResponseEncoderTest {
     @Test
     fun testEncode() {
         testEncode("509.dat", "509-prefetch.dat", true)

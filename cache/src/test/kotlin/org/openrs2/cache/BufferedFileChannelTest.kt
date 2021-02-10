@@ -17,7 +17,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
-object BufferedFileChannelTest {
+class BufferedFileChannelTest {
     @Test
     fun testEmpty() {
         Jimfs.newFileSystem(Configuration.unix()).use { fs ->

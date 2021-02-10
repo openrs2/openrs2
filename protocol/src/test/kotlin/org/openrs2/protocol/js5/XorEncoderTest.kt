@@ -8,7 +8,7 @@ import org.openrs2.buffer.use
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-object XorEncoderTest {
+class XorEncoderTest {
     @Test
     fun testEncode() {
         testEncode(0, "OpenRS2", false)

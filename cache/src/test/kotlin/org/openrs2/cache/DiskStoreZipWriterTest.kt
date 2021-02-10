@@ -14,9 +14,7 @@ import kotlin.test.Test
 import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
-object DiskStoreZipWriterTest {
-    private val ROOT = Path.of(DiskStoreZipWriterTest::class.java.getResource("zip").toURI())
-
+class DiskStoreZipWriterTest {
     @Test
     fun testBounds() {
         DiskStoreZipWriter(ZipOutputStream(OutputStream.nullOutputStream())).use { store ->
@@ -117,5 +115,9 @@ object DiskStoreZipWriterTest {
 
             assertTrue(ROOT.recursiveEquals(actual))
         }
+    }
+
+    private companion object {
+        private val ROOT = Path.of(DiskStoreZipWriterTest::class.java.getResource("zip").toURI())
     }
 }

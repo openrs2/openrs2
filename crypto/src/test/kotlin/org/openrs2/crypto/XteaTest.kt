@@ -6,31 +6,12 @@ import org.openrs2.buffer.use
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-object XteaTest {
+class XteaTest {
     private class TestVector(key: String, plaintext: String, ciphertext: String) {
         val key = XteaKey.fromHex(key)
         val plaintext: ByteArray = ByteBufUtil.decodeHexDump(plaintext)
         val ciphertext: ByteArray = ByteBufUtil.decodeHexDump(ciphertext)
     }
-
-    private val TEST_VECTORS = listOf(
-        // empty
-        TestVector("00000000000000000000000000000000", "", ""),
-
-        // standard single block test vectors
-        TestVector("000102030405060708090a0b0c0d0e0f", "4142434445464748", "497df3d072612cb5"),
-        TestVector("000102030405060708090a0b0c0d0e0f", "4141414141414141", "e78f2d13744341d8"),
-        TestVector("000102030405060708090a0b0c0d0e0f", "5a5b6e278948d77f", "4141414141414141"),
-        TestVector("00000000000000000000000000000000", "4142434445464748", "a0390589f8b8efa5"),
-        TestVector("00000000000000000000000000000000", "4141414141414141", "ed23375a821a8c2d"),
-        TestVector("00000000000000000000000000000000", "70e1225d6e4e7655", "4141414141414141"),
-
-        // two blocks
-        TestVector(
-            "00000000000000000000000000000000", "70e1225d6e4e76554141414141414141",
-            "4141414141414141ed23375a821a8c2d"
-        )
-    )
 
     @Test
     fun testEncrypt() {
@@ -70,5 +51,26 @@ object XteaTest {
                 }
             }
         }
+    }
+
+    private companion object {
+        private val TEST_VECTORS = listOf(
+            // empty
+            TestVector("00000000000000000000000000000000", "", ""),
+
+            // standard single block test vectors
+            TestVector("000102030405060708090a0b0c0d0e0f", "4142434445464748", "497df3d072612cb5"),
+            TestVector("000102030405060708090a0b0c0d0e0f", "4141414141414141", "e78f2d13744341d8"),
+            TestVector("000102030405060708090a0b0c0d0e0f", "5a5b6e278948d77f", "4141414141414141"),
+            TestVector("00000000000000000000000000000000", "4142434445464748", "a0390589f8b8efa5"),
+            TestVector("00000000000000000000000000000000", "4141414141414141", "ed23375a821a8c2d"),
+            TestVector("00000000000000000000000000000000", "70e1225d6e4e7655", "4141414141414141"),
+
+            // two blocks
+            TestVector(
+                "00000000000000000000000000000000", "70e1225d6e4e76554141414141414141",
+                "4141414141414141ed23375a821a8c2d"
+            )
+        )
     }
 }

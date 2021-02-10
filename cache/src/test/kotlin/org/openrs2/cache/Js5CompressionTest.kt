@@ -13,10 +13,7 @@ import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals
 import kotlin.test.assertTrue
 
-object Js5CompressionTest {
-    private val KEY = XteaKey.fromHex("00112233445566778899AABBCCDDEEFF")
-    private val INVALID_KEY = XteaKey.fromHex("0123456789ABCDEF0123456789ABCDEF")
-
+class Js5CompressionTest {
     @Test
     fun testCompressNone() {
         read("none.dat").use { expected ->
@@ -502,5 +499,10 @@ object Js5CompressionTest {
         Js5CompressionTest::class.java.getResourceAsStream("compression/$name").use { input ->
             return Unpooled.wrappedBuffer(input.readAllBytes())
         }
+    }
+
+    private companion object {
+        private val KEY = XteaKey.fromHex("00112233445566778899AABBCCDDEEFF")
+        private val INVALID_KEY = XteaKey.fromHex("0123456789ABCDEF0123456789ABCDEF")
     }
 }

@@ -15,10 +15,7 @@ import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
-object FlatFileStoreTest {
-    private val IGNORE_GIT_EMPTY = { path: Path -> path.fileName.toString() != ".gitempty" }
-    private val ROOT = Path.of(FlatFileStoreTest::class.java.getResource("flat-file-store").toURI())
-
+class FlatFileStoreTest {
     @Test
     fun testBounds() {
         readTest("empty") { store ->
@@ -272,5 +269,10 @@ object FlatFileStoreTest {
             val expected = ROOT.resolve(name)
             assertTrue(expected.recursiveEquals(actual, filter = IGNORE_GIT_EMPTY))
         }
+    }
+
+    private companion object {
+        private val IGNORE_GIT_EMPTY = { path: Path -> path.fileName.toString() != ".gitempty" }
+        private val ROOT = Path.of(FlatFileStoreTest::class.java.getResource("flat-file-store").toURI())
     }
 }

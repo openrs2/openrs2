@@ -4,7 +4,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
-object StringUtilsTest {
+class StringUtilsTest {
     @Test
     fun testIndefiniteArticle() {
         assertEquals("a", "book".indefiniteArticle())

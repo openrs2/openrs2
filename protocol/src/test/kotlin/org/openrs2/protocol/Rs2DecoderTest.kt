@@ -8,7 +8,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
-object Rs2DecoderTest {
+class Rs2DecoderTest {
     @Test
     fun testDecode() {
         testDecode(byteArrayOf(0, 0x11, 0x22, 0x33, 0x44), FixedPacket(0x11223344))

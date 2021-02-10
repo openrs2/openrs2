@@ -4,7 +4,7 @@ import io.netty.channel.embedded.EmbeddedChannel
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-object JaggrabRequestEncoderTest {
+class JaggrabRequestEncoderTest {
     @Test
     fun testEncode() {
         val channel = EmbeddedChannel(JaggrabRequestEncoder)

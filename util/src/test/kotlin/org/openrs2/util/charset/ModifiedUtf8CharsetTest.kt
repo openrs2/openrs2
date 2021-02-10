@@ -5,7 +5,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-object ModifiedUtf8CharsetTest {
+class ModifiedUtf8CharsetTest {
     @Test
     fun testEncode() {
         assertArrayEquals(byteArrayOf(0xC0.toByte(), 0x80.toByte()), "\u0000".toByteArray(ModifiedUtf8Charset))

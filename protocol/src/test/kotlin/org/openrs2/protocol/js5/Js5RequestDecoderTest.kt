@@ -8,7 +8,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
-object Js5RequestDecoderTest {
+class Js5RequestDecoderTest {
     @Test
     fun testDecode() {
         testDecode(byteArrayOf(0, 2, 0, 3), Js5Request.Group(true, 2, 3))

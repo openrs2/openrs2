@@ -15,9 +15,7 @@ import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
-object DiskStoreTest {
-    private val ROOT = Path.of(DiskStoreTest::class.java.getResource("disk-store").toURI())
-
+class DiskStoreTest {
     @Test
     fun testBounds() {
         readTest("empty") { store ->
@@ -757,5 +755,9 @@ object DiskStoreTest {
             val expected = ROOT.resolve(name)
             assertTrue(expected.recursiveEquals(actual))
         }
+    }
+
+    private companion object {
+        private val ROOT = Path.of(DiskStoreTest::class.java.getResource("disk-store").toURI())
     }
 }

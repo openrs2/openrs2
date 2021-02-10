@@ -8,7 +8,7 @@ import kotlin.test.assertFalse
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
-object NamedEntryCollectionTest {
+class NamedEntryCollectionTest {
     private class TestEntry(
         parent: NamedEntryCollection<TestEntry>,
         override val id: Int

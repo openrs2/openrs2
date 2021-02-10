@@ -7,7 +7,7 @@ import java.io.OutputStream
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
-object SkipOutputStreamTest {
+class SkipOutputStreamTest {
     @Test
     fun testSkipBytes() {
         for (n in 0..5) {

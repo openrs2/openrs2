@@ -6,7 +6,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
-object Cp1252CharsetTest {
+class Cp1252CharsetTest {
     @Test
     fun testEncodeChar() {
         // edge cases

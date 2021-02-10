@@ -4,10 +4,7 @@ import java.nio.file.Path
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
-object StoreTest {
-    private val DISK_ROOT = Path.of(StoreTest::class.java.getResource("disk-store/empty").toURI())
-    private val FLAT_FILE_ROOT = Path.of(StoreTest::class.java.getResource("flat-file-store/empty").toURI())
-
+class StoreTest {
     @Test
     fun testOpen() {
         Store.open(DISK_ROOT).use { store ->
@@ -17,5 +14,10 @@ object StoreTest {
         Store.open(FLAT_FILE_ROOT).use { store ->
             assertTrue(store is FlatFileStore)
         }
+    }
+
+    private companion object {
+        private val DISK_ROOT = Path.of(StoreTest::class.java.getResource("disk-store/empty").toURI())
+        private val FLAT_FILE_ROOT = Path.of(StoreTest::class.java.getResource("flat-file-store/empty").toURI())
     }
 }

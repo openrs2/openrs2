@@ -5,7 +5,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
 import kotlin.test.assertNull
 
-object ForestDisjointSetTest {
+class ForestDisjointSetTest {
     @Test
     fun testAdd() {
         val set = ForestDisjointSet<Int>()

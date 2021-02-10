@@ -4,7 +4,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
-object BackoffStrategyTest {
+class BackoffStrategyTest {
     @Test
     fun testFixedBackoff() {
         val strategy = FixedBackoffStrategy(1000)

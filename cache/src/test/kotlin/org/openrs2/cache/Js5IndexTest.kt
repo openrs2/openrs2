@@ -14,99 +14,7 @@ import kotlin.test.assertFalse
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
-object Js5IndexTest {
-    private val emptyIndex = Js5Index(Js5Protocol.ORIGINAL)
-
-    private val versionedIndex = Js5Index(Js5Protocol.VERSIONED, version = 0x12345678)
-
-    private val noFlagsIndex = Js5Index(Js5Protocol.ORIGINAL).apply {
-        val group0 = createOrGet(0)
-        group0.checksum = 0x01234567
-        group0.version = 0
-        group0.createOrGet(0)
-
-        val group1 = createOrGet(1)
-        group1.checksum = 0x89ABCDEF.toInt()
-        group1.version = 10
-
-        val group2 = createOrGet(3)
-        group2.checksum = 0xAAAA5555.toInt()
-        group2.version = 20
-        group2.createOrGet(1)
-        group2.createOrGet(3)
-    }
-
-    private val namedIndex = Js5Index(Js5Protocol.ORIGINAL, hasNames = true).apply {
-        val group0 = createOrGet("hello")
-        group0.checksum = 0x01234567
-        group0.version = 0x89ABCDEF.toInt()
-        group0.createOrGet("world")
-    }
-
-    private val smartIndex = Js5Index(Js5Protocol.SMART).apply {
-        val group0 = createOrGet(0)
-        group0.checksum = 0x01234567
-        group0.version = 0x89ABCDEF.toInt()
-        group0.createOrGet(0)
-        group0.createOrGet(100000)
-
-        val group1 = createOrGet(100000)
-        group1.checksum = 0xAAAA5555.toInt()
-        group1.version = 0x5555AAAA
-    }
-
-    private val digestIndex = Js5Index(Js5Protocol.ORIGINAL, hasDigests = true).apply {
-        val group = createOrGet(0)
-        group.checksum = 0x01234567
-        group.version = 0x89ABCDEF.toInt()
-        group.digest = ByteBufUtil.decodeHexDump(
-            "19FA61D75522A4669B44E39C1D2E1726C530232130D407F89AFEE0964997F7A7" +
-                "3E83BE698B288FEBCF88E3E03C4F0757EA8964E59B63D93708B138CC42A66EB3"
-        )
-    }
-
-    private val nullDigestIndex = Js5Index(Js5Protocol.ORIGINAL, hasDigests = true).apply {
-        val group = createOrGet(0)
-        group.checksum = 0x01234567
-        group.version = 0x89ABCDEF.toInt()
-        group.digest = null
-    }
-
-    private val lengthsIndex = Js5Index(Js5Protocol.ORIGINAL, hasLengths = true).apply {
-        val group = createOrGet(0)
-        group.checksum = 0x01234567
-        group.version = 0x89ABCDEF.toInt()
-        group.length = 1000
-        group.uncompressedLength = 2000
-    }
-
-    private val uncompressedChecksumIndex = Js5Index(Js5Protocol.ORIGINAL, hasUncompressedChecksums = true).apply {
-        val group = createOrGet(0)
-        group.checksum = 0x01234567
-        group.version = 0x89ABCDEF.toInt()
-        group.uncompressedChecksum = 0xAAAA5555.toInt()
-    }
-
-    private val allFlagsIndex = Js5Index(
-        Js5Protocol.ORIGINAL,
-        hasNames = true,
-        hasDigests = true,
-        hasLengths = true,
-        hasUncompressedChecksums = true
-    ).apply {
-        val group = createOrGet("hello")
-        group.checksum = 0x01234567
-        group.version = 0x89ABCDEF.toInt()
-        group.digest = ByteBufUtil.decodeHexDump(
-            "19FA61D75522A4669B44E39C1D2E1726C530232130D407F89AFEE0964997F7A7" +
-                "3E83BE698B288FEBCF88E3E03C4F0757EA8964E59B63D93708B138CC42A66EB3"
-        )
-        group.length = 1000
-        group.uncompressedLength = 2000
-        group.uncompressedChecksum = 0xAAAA5555.toInt()
-        group.createOrGet("world")
-    }
-
+class Js5IndexTest {
     @Test
     fun testReadEmpty() {
         read("empty.dat").use { buf ->
@@ -410,6 +318,100 @@ object Js5IndexTest {
     private fun read(name: String): ByteBuf {
         Js5IndexTest::class.java.getResourceAsStream("index/$name").use { input ->
             return Unpooled.wrappedBuffer(input.readAllBytes())
+        }
+    }
+
+    private companion object {
+        private val emptyIndex = Js5Index(Js5Protocol.ORIGINAL)
+
+        private val versionedIndex = Js5Index(Js5Protocol.VERSIONED, version = 0x12345678)
+
+        private val noFlagsIndex = Js5Index(Js5Protocol.ORIGINAL).apply {
+            val group0 = createOrGet(0)
+            group0.checksum = 0x01234567
+            group0.version = 0
+            group0.createOrGet(0)
+
+            val group1 = createOrGet(1)
+            group1.checksum = 0x89ABCDEF.toInt()
+            group1.version = 10
+
+            val group2 = createOrGet(3)
+            group2.checksum = 0xAAAA5555.toInt()
+            group2.version = 20
+            group2.createOrGet(1)
+            group2.createOrGet(3)
+        }
+
+        private val namedIndex = Js5Index(Js5Protocol.ORIGINAL, hasNames = true).apply {
+            val group0 = createOrGet("hello")
+            group0.checksum = 0x01234567
+            group0.version = 0x89ABCDEF.toInt()
+            group0.createOrGet("world")
+        }
+
+        private val smartIndex = Js5Index(Js5Protocol.SMART).apply {
+            val group0 = createOrGet(0)
+            group0.checksum = 0x01234567
+            group0.version = 0x89ABCDEF.toInt()
+            group0.createOrGet(0)
+            group0.createOrGet(100000)
+
+            val group1 = createOrGet(100000)
+            group1.checksum = 0xAAAA5555.toInt()
+            group1.version = 0x5555AAAA
+        }
+
+        private val digestIndex = Js5Index(Js5Protocol.ORIGINAL, hasDigests = true).apply {
+            val group = createOrGet(0)
+            group.checksum = 0x01234567
+            group.version = 0x89ABCDEF.toInt()
+            group.digest = ByteBufUtil.decodeHexDump(
+                "19FA61D75522A4669B44E39C1D2E1726C530232130D407F89AFEE0964997F7A7" +
+                    "3E83BE698B288FEBCF88E3E03C4F0757EA8964E59B63D93708B138CC42A66EB3"
+            )
+        }
+
+        private val nullDigestIndex = Js5Index(Js5Protocol.ORIGINAL, hasDigests = true).apply {
+            val group = createOrGet(0)
+            group.checksum = 0x01234567
+            group.version = 0x89ABCDEF.toInt()
+            group.digest = null
+        }
+
+        private val lengthsIndex = Js5Index(Js5Protocol.ORIGINAL, hasLengths = true).apply {
+            val group = createOrGet(0)
+            group.checksum = 0x01234567
+            group.version = 0x89ABCDEF.toInt()
+            group.length = 1000
+            group.uncompressedLength = 2000
+        }
+
+        private val uncompressedChecksumIndex = Js5Index(Js5Protocol.ORIGINAL, hasUncompressedChecksums = true).apply {
+            val group = createOrGet(0)
+            group.checksum = 0x01234567
+            group.version = 0x89ABCDEF.toInt()
+            group.uncompressedChecksum = 0xAAAA5555.toInt()
+        }
+
+        private val allFlagsIndex = Js5Index(
+            Js5Protocol.ORIGINAL,
+            hasNames = true,
+            hasDigests = true,
+            hasLengths = true,
+            hasUncompressedChecksums = true
+        ).apply {
+            val group = createOrGet("hello")
+            group.checksum = 0x01234567
+            group.version = 0x89ABCDEF.toInt()
+            group.digest = ByteBufUtil.decodeHexDump(
+                "19FA61D75522A4669B44E39C1D2E1726C530232130D407F89AFEE0964997F7A7" +
+                    "3E83BE698B288FEBCF88E3E03C4F0757EA8964E59B63D93708B138CC42A66EB3"
+            )
+            group.length = 1000
+            group.uncompressedLength = 2000
+            group.uncompressedChecksum = 0xAAAA5555.toInt()
+            group.createOrGet("world")
         }
     }
 }

@@ -7,7 +7,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 
-object ByteBufExtensionsTest {
+class ByteBufExtensionsTest {
     @Test
     fun testWrappedBuffer() {
         wrappedBuffer(1, 2, 3).use { actual ->

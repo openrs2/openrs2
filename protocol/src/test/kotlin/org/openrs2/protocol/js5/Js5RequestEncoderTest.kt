@@ -7,7 +7,7 @@ import org.openrs2.buffer.use
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-object Js5RequestEncoderTest {
+class Js5RequestEncoderTest {
     @Test
     fun testEncode() {
         testEncode(Js5Request.Group(true, 2, 3), byteArrayOf(0, 2, 0, 3))

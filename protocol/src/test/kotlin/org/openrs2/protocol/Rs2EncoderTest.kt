@@ -10,7 +10,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
-object Rs2EncoderTest {
+class Rs2EncoderTest {
     @Test
     fun testEncode() {
         testEncode(FixedPacket(0x11223344), byteArrayOf(0, 0x11, 0x22, 0x33, 0x44))

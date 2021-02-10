@@ -10,18 +10,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
-object GroupTest {
-    private val index = Js5Index(Js5Protocol.ORIGINAL)
-    private val zeroFiles = index.createOrGet(0)
-    private val oneFile = index.createOrGet(1).apply {
-        createOrGet(1)
-    }
-    private val multipleFiles = index.createOrGet(2).apply {
-        createOrGet(0)
-        createOrGet(1)
-        createOrGet(3)
-    }
-
+class GroupTest {
     @Test
     fun testPackEmpty() {
         assertFailsWith<IllegalArgumentException> {
@@ -175,6 +164,19 @@ object GroupTest {
             }
         } finally {
             expected.values.forEach(ByteBuf::release)
+        }
+    }
+
+    private companion object {
+        private val index = Js5Index(Js5Protocol.ORIGINAL)
+        private val zeroFiles = index.createOrGet(0)
+        private val oneFile = index.createOrGet(1).apply {
+            createOrGet(1)
+        }
+        private val multipleFiles = index.createOrGet(2).apply {
+            createOrGet(0)
+            createOrGet(1)
+            createOrGet(3)
         }
     }
 }

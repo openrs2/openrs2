@@ -11,7 +11,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
-object Js5ResponseDecoderTest {
+class Js5ResponseDecoderTest {
     @Test
     fun testDecode() {
         testDecode("509.dat", "509-prefetch.dat", true)

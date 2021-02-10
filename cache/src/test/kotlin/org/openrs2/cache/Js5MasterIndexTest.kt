@@ -10,86 +10,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
-object Js5MasterIndexTest {
-    private val ROOT = Path.of(FlatFileStoreTest::class.java.getResource("master-index").toURI())
-    private val PRIVATE_KEY = Rsa.readPrivateKey(ROOT.resolve("private.key"))
-    private val PUBLIC_KEY = Rsa.readPublicKey(ROOT.resolve("public.key"))
-
-    private val encodedOriginal = ByteBufUtil.decodeHexDump("000000010000000300000005")
-    private val decodedOriginal = Js5MasterIndex(
-        MasterIndexFormat.ORIGINAL,
-        mutableListOf(
-            Js5MasterIndex.Entry(0, 1, null),
-            Js5MasterIndex.Entry(0, 3, null),
-            Js5MasterIndex.Entry(0, 5, null)
-        )
-    )
-
-    private val encodedVersioned = ByteBufUtil.decodeHexDump("000000010000000000000003000000020000000500000004")
-    private val decodedVersioned = Js5MasterIndex(
-        MasterIndexFormat.VERSIONED,
-        mutableListOf(
-            Js5MasterIndex.Entry(0, 1, null),
-            Js5MasterIndex.Entry(2, 3, null),
-            Js5MasterIndex.Entry(4, 5, null)
-        )
-    )
-
-    private val encodedWhirlpool = ByteBufUtil.decodeHexDump(
-        "01" +
-            "89abcdef" +
-            "01234567" +
-            "0e1a2b93c80a41c7ad2a985dff707a6a8ff82e229cbc468f04191198920955a1" +
-            "4b3d7eab77a17faf99208dee5b44afb789962ad79f230b3b59106a0af892219c" +
-            "0a" +
-            "ee8f66a2ce0b07de4d2b792eed26ae7a6c307b763891d085c63ea55b4c003bc0" +
-            "b3ecb77cc1a8f9ccd53c405b3264e598820b4940f630ff079a9feb950f639671"
-    )
-    private val decodedWhirlpool = Js5MasterIndex(
-        MasterIndexFormat.WHIRLPOOL,
-        mutableListOf(
-            Js5MasterIndex.Entry(
-                0x01234567, 0x89ABCDEF.toInt(), ByteBufUtil.decodeHexDump(
-                    "0e1a2b93c80a41c7ad2a985dff707a6a8ff82e229cbc468f04191198920955a1" +
-                        "4b3d7eab77a17faf99208dee5b44afb789962ad79f230b3b59106a0af892219c"
-                )
-            )
-        )
-    )
-
-    private val encodedWhirlpoolNullDigest = ByteBufUtil.decodeHexDump(
-        "01" +
-            "89abcdef" +
-            "01234567" +
-            "0000000000000000000000000000000000000000000000000000000000000000" +
-            "0000000000000000000000000000000000000000000000000000000000000000" +
-            "0a" +
-            "4a0e22540fb0a9bc06fe84bfb35f9281ba9fbd30288c3375c508ad741c4d4491" +
-            "8a65765bc2dce9d67029be79bd544f96055a41d725c080bc5b85a48b5aae6e4d"
-    )
-    private val decodedWhirlpoolNullDigest = Js5MasterIndex(
-        MasterIndexFormat.WHIRLPOOL,
-        mutableListOf(
-            Js5MasterIndex.Entry(0x01234567, 0x89ABCDEF.toInt(), null)
-        )
-    )
-
-    private val encodedSigned = ByteBufUtil.decodeHexDump(
-        "01" +
-            "89abcdef" +
-            "01234567" +
-            "0e1a2b93c80a41c7ad2a985dff707a6a8ff82e229cbc468f04191198920955a1" +
-            "4b3d7eab77a17faf99208dee5b44afb789962ad79f230b3b59106a0af892219c" +
-            "2134b1e637d4c9f3b7bdd446ad40cedb6d824cfb48f937ae0d6e2ba3977881ea" +
-            "ed02adae179ed89cea56e98772186bb569bb24a4951e441716df0d5d7199c088" +
-            "28974d43c3644e74bf29ec1435e425f6cb05aca14a84163c5b46b6e6a9362f22" +
-            "4f69f4a5888b3fe7aec0141da25b17c7f65069eed59f3be134fa1ade4e191b41" +
-            "d561447446cd1cc4d11e6499c49e00066173908491d8d2ff282aefa86e6c6b15" +
-            "dceb437d0436b6195ef60d4128e1e0184bf6929b73abd1a8aa2a047e3cb90d03" +
-            "57707ce3f4f5a7af8471eda5c0c0748454a9cbb48c25ebe4e7fd94e3881b6461" +
-            "d06e2bce128dc96decb537b8e9611591d445d7dfd3701d25ac05f8d091581aef"
-    )
-
+class Js5MasterIndexTest {
     @Test
     fun testCreateOriginal() {
         val index = Store.open(ROOT.resolve("original")).use { store ->
@@ -319,5 +240,86 @@ object Js5MasterIndexTest {
                 assertEquals(expected, actual)
             }
         }
+    }
+
+    private companion object {
+        private val ROOT = Path.of(FlatFileStoreTest::class.java.getResource("master-index").toURI())
+        private val PRIVATE_KEY = Rsa.readPrivateKey(ROOT.resolve("private.key"))
+        private val PUBLIC_KEY = Rsa.readPublicKey(ROOT.resolve("public.key"))
+
+        private val encodedOriginal = ByteBufUtil.decodeHexDump("000000010000000300000005")
+        private val decodedOriginal = Js5MasterIndex(
+            MasterIndexFormat.ORIGINAL,
+            mutableListOf(
+                Js5MasterIndex.Entry(0, 1, null),
+                Js5MasterIndex.Entry(0, 3, null),
+                Js5MasterIndex.Entry(0, 5, null)
+            )
+        )
+
+        private val encodedVersioned = ByteBufUtil.decodeHexDump("000000010000000000000003000000020000000500000004")
+        private val decodedVersioned = Js5MasterIndex(
+            MasterIndexFormat.VERSIONED,
+            mutableListOf(
+                Js5MasterIndex.Entry(0, 1, null),
+                Js5MasterIndex.Entry(2, 3, null),
+                Js5MasterIndex.Entry(4, 5, null)
+            )
+        )
+
+        private val encodedWhirlpool = ByteBufUtil.decodeHexDump(
+            "01" +
+                "89abcdef" +
+                "01234567" +
+                "0e1a2b93c80a41c7ad2a985dff707a6a8ff82e229cbc468f04191198920955a1" +
+                "4b3d7eab77a17faf99208dee5b44afb789962ad79f230b3b59106a0af892219c" +
+                "0a" +
+                "ee8f66a2ce0b07de4d2b792eed26ae7a6c307b763891d085c63ea55b4c003bc0" +
+                "b3ecb77cc1a8f9ccd53c405b3264e598820b4940f630ff079a9feb950f639671"
+        )
+        private val decodedWhirlpool = Js5MasterIndex(
+            MasterIndexFormat.WHIRLPOOL,
+            mutableListOf(
+                Js5MasterIndex.Entry(
+                    0x01234567, 0x89ABCDEF.toInt(), ByteBufUtil.decodeHexDump(
+                        "0e1a2b93c80a41c7ad2a985dff707a6a8ff82e229cbc468f04191198920955a1" +
+                            "4b3d7eab77a17faf99208dee5b44afb789962ad79f230b3b59106a0af892219c"
+                    )
+                )
+            )
+        )
+
+        private val encodedWhirlpoolNullDigest = ByteBufUtil.decodeHexDump(
+            "01" +
+                "89abcdef" +
+                "01234567" +
+                "0000000000000000000000000000000000000000000000000000000000000000" +
+                "0000000000000000000000000000000000000000000000000000000000000000" +
+                "0a" +
+                "4a0e22540fb0a9bc06fe84bfb35f9281ba9fbd30288c3375c508ad741c4d4491" +
+                "8a65765bc2dce9d67029be79bd544f96055a41d725c080bc5b85a48b5aae6e4d"
+        )
+        private val decodedWhirlpoolNullDigest = Js5MasterIndex(
+            MasterIndexFormat.WHIRLPOOL,
+            mutableListOf(
+                Js5MasterIndex.Entry(0x01234567, 0x89ABCDEF.toInt(), null)
+            )
+        )
+
+        private val encodedSigned = ByteBufUtil.decodeHexDump(
+            "01" +
+                "89abcdef" +
+                "01234567" +
+                "0e1a2b93c80a41c7ad2a985dff707a6a8ff82e229cbc468f04191198920955a1" +
+                "4b3d7eab77a17faf99208dee5b44afb789962ad79f230b3b59106a0af892219c" +
+                "2134b1e637d4c9f3b7bdd446ad40cedb6d824cfb48f937ae0d6e2ba3977881ea" +
+                "ed02adae179ed89cea56e98772186bb569bb24a4951e441716df0d5d7199c088" +
+                "28974d43c3644e74bf29ec1435e425f6cb05aca14a84163c5b46b6e6a9362f22" +
+                "4f69f4a5888b3fe7aec0141da25b17c7f65069eed59f3be134fa1ade4e191b41" +
+                "d561447446cd1cc4d11e6499c49e00066173908491d8d2ff282aefa86e6c6b15" +
+                "dceb437d0436b6195ef60d4128e1e0184bf6929b73abd1a8aa2a047e3cb90d03" +
+                "57707ce3f4f5a7af8471eda5c0c0748454a9cbb48c25ebe4e7fd94e3881b6461" +
+                "d06e2bce128dc96decb537b8e9611591d445d7dfd3701d25ac05f8d091581aef"
+        )
     }
 }

@@ -12,9 +12,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
-object DeterministicJarOutputStreamTest {
-    private val UNIX_EPOCH = FileTime.fromMillis(0)
-    private val Y2K = FileTime.fromMillis(946684800)
+class DeterministicJarOutputStreamTest {
     private val manifest = Manifest().apply {
         mainAttributes[Attributes.Name.MANIFEST_VERSION] = "1.0"
         mainAttributes[Attributes.Name.MAIN_CLASS] = "Hello"
@@ -59,5 +57,10 @@ object DeterministicJarOutputStreamTest {
                 assertEquals(manifest, jar.manifest)
             }
         }
+    }
+
+    private companion object {
+        private val UNIX_EPOCH = FileTime.fromMillis(0)
+        private val Y2K = FileTime.fromMillis(946684800)
     }
 }

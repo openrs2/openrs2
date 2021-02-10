@@ -7,7 +7,7 @@ import kotlin.test.assertFalse
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
-object IterableUtilsTest {
+class IterableUtilsTest {
     @Test
     fun testRemoveFirst() {
         val list = mutableListOf(1, 2, 3)

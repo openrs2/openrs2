@@ -7,7 +7,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
-object VersionTrailerTest {
+class VersionTrailerTest {
     @Test
     fun testStrip() {
         assertNull(VersionTrailer.strip(Unpooled.EMPTY_BUFFER))

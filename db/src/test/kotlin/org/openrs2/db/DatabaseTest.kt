@@ -10,7 +10,7 @@ import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
 @ExperimentalCoroutinesApi
-object DatabaseTest {
+class DatabaseTest {
     private class TestException : Exception {
         constructor() : super()
         constructor(cause: Throwable) : super(cause)
@@ -18,20 +18,6 @@ object DatabaseTest {
 
     private class DeadlockException : SQLException(null, null, 40001)
     private class NonDeadlockException : SQLException()
-
-    private const val DELAY = 10L
-    private const val ATTEMPTS = 5
-
-    private val dataSource = JdbcDataSource().apply {
-        setUrl("jdbc:h2:mem:")
-    }
-
-    private val database = Database(
-        dataSource,
-        deadlockDetector = H2DeadlockDetector,
-        backoffStrategy = FixedBackoffStrategy(DELAY),
-        attempts = ATTEMPTS
-    )
 
     @Test
     fun testBounds() {
@@ -181,5 +167,21 @@ object DatabaseTest {
         }
 
         assertEquals(1, attempts)
+    }
+
+    private companion object {
+        private const val DELAY = 10L
+        private const val ATTEMPTS = 5
+
+        private val dataSource = JdbcDataSource().apply {
+            setUrl("jdbc:h2:mem:")
+        }
+
+        private val database = Database(
+            dataSource,
+            deadlockDetector = H2DeadlockDetector,
+            backoffStrategy = FixedBackoffStrategy(DELAY),
+            attempts = ATTEMPTS
+        )
     }
 }
