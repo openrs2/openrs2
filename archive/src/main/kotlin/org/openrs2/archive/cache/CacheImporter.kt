@@ -188,7 +188,7 @@ public class CacheImporter @Inject constructor(
                 stmt.execute()
             }
 
-            addMasterIndex(
+            val id = addMasterIndex(
                 connection,
                 MasterIndex(masterIndex, buf, uncompressed),
                 gameId,
@@ -201,42 +201,16 @@ public class CacheImporter @Inject constructor(
 
             connection.prepareStatement(
                 """
-                CREATE TEMPORARY TABLE tmp_indexes (
-                    archive_id uint1 NOT NULL,
-                    crc32 INTEGER NOT NULL,
-                    version INTEGER NOT NULL
-                ) ON COMMIT DROP
-            """.trimIndent()
-            ).use { stmt ->
-                stmt.execute()
-            }
-
-            connection.prepareStatement(
-                """
-                INSERT INTO tmp_indexes (archive_id, crc32, version)
-                VALUES (?, ?, ?)
-            """.trimIndent()
-            ).use { stmt ->
-                for ((i, entry) in masterIndex.entries.withIndex()) {
-                    stmt.setInt(1, i)
-                    stmt.setInt(2, entry.checksum)
-                    stmt.setInt(3, entry.version)
-
-                    stmt.addBatch()
-                }
-
-                stmt.executeBatch()
-            }
-
-            connection.prepareStatement(
-                """
                 SELECT c.data
-                FROM tmp_indexes t
-                LEFT JOIN containers c ON c.crc32 = t.crc32
-                LEFT JOIN indexes i ON i.version = t.version AND i.container_id = c.id
-                ORDER BY t.archive_id ASC
+                FROM master_index_archives a
+                LEFT JOIN containers c ON c.crc32 = a.crc32
+                LEFT JOIN indexes i ON i.version = a.version AND i.container_id = c.id
+                WHERE a.master_index_id = ?
+                ORDER BY a.archive_id ASC
             """.trimIndent()
             ).use { stmt ->
+                stmt.setInt(1, id)
+
                 stmt.executeQuery().use { rows ->
                     val indexes = mutableListOf<ByteBuf?>()
                     try {
@@ -361,7 +335,7 @@ public class CacheImporter @Inject constructor(
         name: String?,
         description: String?,
         overwrite: Boolean
-    ) {
+    ): Int {
         val containerId = addContainer(connection, masterIndex)
         var masterIndexId: Int? = null
 
@@ -468,7 +442,7 @@ public class CacheImporter @Inject constructor(
 
                 stmt.execute()
 
-                return@addMasterIndex
+                return@addMasterIndex masterIndexId!!
             }
         }
 
@@ -517,6 +491,8 @@ public class CacheImporter @Inject constructor(
 
             stmt.executeBatch()
         }
+
+        return masterIndexId!!
     }
 
     private fun readGroup(store: Store, archive: Int, index: Js5Index?, group: Int): Group? {
