@@ -123,4 +123,31 @@ CREATE TABLE names (
 );
 
 CREATE UNIQUE INDEX ON names (hash, name);
+
+CREATE VIEW master_index_valid_indexes AS
+SELECT m.id AS master_index_id, a.archive_id, c.data, g.container_id
+FROM master_indexes m
+JOIN master_index_archives a ON a.master_index_id = m.id
+JOIN groups g ON g.archive_id = 255 AND g.group_id = a.archive_id::INTEGER AND
+    g.version = a.version AND NOT g.version_truncated
+JOIN containers c ON c.id = g.container_id AND c.crc32 = a.crc32
+JOIN indexes i ON i.container_id = g.container_id AND i.version = a.version;
+
+-- TODO(gpe): think about what to do if there is a collision
+CREATE VIEW master_index_valid_groups (master_index_id, archive_id, group_id, name_hash, version, data, key_id) AS
+WITH i AS NOT MATERIALIZED (
+    SELECT master_index_id, archive_id, data, container_id
+    FROM master_index_valid_indexes
+)
+SELECT i.master_index_id, 255::uint1, i.archive_id::INTEGER, NULL, NULL, i.data, NULL
+FROM i
+UNION ALL
+SELECT i.master_index_id, i.archive_id, ig.group_id, ig.name_hash, ig.version, c.data, c.key_id
+FROM i
+JOIN index_groups ig ON ig.container_id = i.container_id
+JOIN groups g ON g.archive_id = i.archive_id::INTEGER AND g.group_id = ig.group_id AND (
+    (g.version = ig.version AND NOT g.version_truncated) OR
+    (g.version = ig.version & 65535 AND g.version_truncated)
+)
+JOIN containers c ON c.id = g.container_id AND c.crc32 = ig.crc32;
 -- @formatter:on

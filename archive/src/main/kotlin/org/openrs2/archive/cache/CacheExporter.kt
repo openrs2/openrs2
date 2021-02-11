@@ -70,31 +70,12 @@ public class CacheExporter @Inject constructor(
     }
 
     public suspend fun export(id: Long, store: Store) {
-        // TODO(gpe): think about what to do if there is a collision
         database.execute { connection ->
             connection.prepareStatement(
                 """
-                WITH t AS (
-                    SELECT a.archive_id, c.data, g.container_id
-                    FROM master_indexes m
-                    JOIN master_index_archives a ON a.master_index_id = m.id
-                    JOIN groups g ON g.archive_id = 255 AND g.group_id = a.archive_id::INTEGER
-                        AND g.version = a.version AND NOT g.version_truncated
-                    JOIN containers c ON c.id = g.container_id AND c.crc32 = a.crc32
-                    JOIN indexes i ON i.container_id = g.container_id AND i.version = a.version
-                    WHERE m.id = ?
-                )
-                SELECT 255::uint1, t.archive_id::INTEGER, t.data, NULL
-                FROM t
-                UNION ALL
-                SELECT t.archive_id, ig.group_id, c.data, g.version
-                FROM t
-                JOIN index_groups ig ON ig.container_id = t.container_id
-                JOIN groups g ON g.archive_id = t.archive_id::INTEGER AND g.group_id = ig.group_id AND (
-                    (g.version = ig.version AND NOT g.version_truncated) OR
-                    (g.version = ig.version & 65535 AND g.version_truncated)
-                )
-                JOIN containers c ON c.id = g.container_id AND c.crc32 = ig.crc32
+                SELECT archive_id, group_id, data, version
+                FROM master_index_valid_groups
+                WHERE master_index_id = ?
             """.trimIndent()
             ).use { stmt ->
                 stmt.fetchSize = BATCH_SIZE
@@ -133,26 +114,11 @@ public class CacheExporter @Inject constructor(
         return database.execute { connection ->
             connection.prepareStatement(
                 """
-                WITH t AS (
-                    SELECT a.archive_id, c.data, g.container_id
-                    FROM master_indexes m
-                    JOIN master_index_archives a ON a.master_index_id = m.id
-                    JOIN groups g ON g.archive_id = 255 AND g.group_id = a.archive_id::INTEGER
-                        AND g.version = a.version AND NOT g.version_truncated
-                    JOIN containers c ON c.id = g.container_id AND c.crc32 = a.crc32
-                    JOIN indexes i ON i.container_id = g.container_id AND i.version = a.version
-                    WHERE m.id = ?
-                )
-                SELECT t.archive_id, ig.group_id, ig.name_hash, n.name, (k.key).k0, (k.key).k1, (k.key).k2, (k.key).k3
-                FROM t
-                JOIN index_groups ig ON ig.container_id = t.container_id
-                JOIN groups g ON g.archive_id = t.archive_id::INTEGER AND g.group_id = ig.group_id AND (
-                    (g.version = ig.version AND NOT g.version_truncated) OR
-                    (g.version = ig.version & 65535 AND g.version_truncated)
-                )
-                JOIN containers c ON c.id = g.container_id AND c.crc32 = ig.crc32
-                JOIN keys k ON k.id = c.key_id
-                LEFT JOIN names n ON n.hash = ig.name_hash AND n.name ~ '^l(?:[0-9]|[1-9][0-9])_(?:[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$'
+                SELECT v.archive_id, v.group_id, v.name_hash, n.name, (k.key).k0, (k.key).k1, (k.key).k2, (k.key).k3
+                FROM master_index_valid_groups v
+                JOIN keys k ON k.id = v.key_id
+                LEFT JOIN names n ON n.hash = v.name_hash AND n.name ~ '^l(?:[0-9]|[1-9][0-9])_(?:[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$'
+                WHERE v.master_index_id = ?
             """.trimIndent()
             ).use { stmt ->
                 stmt.setLong(1, id)
