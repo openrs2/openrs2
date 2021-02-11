@@ -18,7 +18,7 @@ public class CacheExporter @Inject constructor(
     private val alloc: ByteBufAllocator
 ) {
     public data class Cache(
-        val id: Long,
+        val id: Int,
         val game: String,
         val build: Int?,
         val timestamp: Instant?,
@@ -49,7 +49,7 @@ public class CacheExporter @Inject constructor(
                     val caches = mutableListOf<Cache>()
 
                     while (rows.next()) {
-                        val id = rows.getLong(1)
+                        val id = rows.getInt(1)
                         val game = rows.getString(2)
 
                         var build: Int? = rows.getInt(3)
@@ -69,7 +69,7 @@ public class CacheExporter @Inject constructor(
         }
     }
 
-    public suspend fun export(id: Long, store: Store) {
+    public suspend fun export(id: Int, store: Store) {
         database.execute { connection ->
             connection.prepareStatement(
                 """
@@ -79,7 +79,7 @@ public class CacheExporter @Inject constructor(
             """.trimIndent()
             ).use { stmt ->
                 stmt.fetchSize = BATCH_SIZE
-                stmt.setLong(1, id)
+                stmt.setInt(1, id)
 
                 stmt.executeQuery().use { rows ->
                     alloc.buffer(2, 2).use { versionBuf ->
@@ -110,7 +110,7 @@ public class CacheExporter @Inject constructor(
         }
     }
 
-    public suspend fun exportKeys(id: Long): List<Key> {
+    public suspend fun exportKeys(id: Int): List<Key> {
         return database.execute { connection ->
             connection.prepareStatement(
                 """
@@ -121,7 +121,7 @@ public class CacheExporter @Inject constructor(
                 WHERE v.master_index_id = ?
             """.trimIndent()
             ).use { stmt ->
-                stmt.setLong(1, id)
+                stmt.setInt(1, id)
 
                 stmt.executeQuery().use { rows ->
                     val keys = mutableListOf<Key>()

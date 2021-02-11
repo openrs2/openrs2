@@ -27,7 +27,7 @@ public class CachesController @Inject constructor(
     }
 
     public suspend fun export(call: ApplicationCall) {
-        val id = call.parameters["id"]?.toLongOrNull()
+        val id = call.parameters["id"]?.toIntOrNull()
         if (id == null) {
             call.respond(HttpStatusCode.NotFound)
             return
@@ -48,7 +48,7 @@ public class CachesController @Inject constructor(
     }
 
     public suspend fun exportKeys(call: ApplicationCall) {
-        val id = call.parameters["id"]?.toLongOrNull()
+        val id = call.parameters["id"]?.toIntOrNull()
         if (id == null) {
             call.respond(HttpStatusCode.NotFound)
             return
