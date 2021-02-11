@@ -24,7 +24,16 @@ public class CacheDownloader @Inject constructor(
         try {
             suspendCoroutine<Unit> { continuation ->
                 val bootstrap = bootstrapFactory.createBootstrap(group)
-                val handler = Js5ChannelHandler(bootstrap, game.id, hostname, port, build, continuation, importer)
+                val handler = Js5ChannelHandler(
+                    bootstrap,
+                    game.id,
+                    hostname,
+                    port,
+                    build,
+                    game.previousMasterIndexId,
+                    continuation,
+                    importer
+                )
 
                 bootstrap.handler(Js5ChannelInitializer(handler))
                     .connect(hostname, port)

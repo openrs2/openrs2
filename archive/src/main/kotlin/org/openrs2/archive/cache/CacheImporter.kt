@@ -169,9 +169,10 @@ public class CacheImporter @Inject constructor(
         uncompressed: ByteBuf,
         gameId: Int,
         build: Int,
+        previousId: Int?,
         timestamp: Instant,
         name: String,
-    ): List<ByteBuf?> {
+    ): Pair<Int, List<ByteBuf?>> {
         return database.execute { connection ->
             prepare(connection)
 
@@ -199,17 +200,28 @@ public class CacheImporter @Inject constructor(
                 overwrite = true
             )
 
+            /*
+             * In order to defend against (crc32, version) collisions, we only
+             * use a cached index if its checksum/version haven't changed
+             * between the previously downloaded version of the cache and the
+             * current version. This emulates the behaviour of a client always
+             * using the latest version of the cache - so if there is a
+             * collision, real players of the game would experience problems.
+             */
             connection.prepareStatement(
                 """
                 SELECT c.data
                 FROM master_index_archives a
-                LEFT JOIN containers c ON c.crc32 = a.crc32
-                LEFT JOIN indexes i ON i.version = a.version AND i.container_id = c.id
+                LEFT JOIN master_index_archives a2 ON a2.master_index_id = ? AND a2.archive_id = a.archive_id AND
+                    a2.crc32 = a.crc32 AND a2.version = a.version
+                LEFT JOIN containers c ON c.crc32 = a2.crc32
+                LEFT JOIN indexes i ON i.version = a2.version AND i.container_id = c.id
                 WHERE a.master_index_id = ?
                 ORDER BY a.archive_id ASC
             """.trimIndent()
             ).use { stmt ->
-                stmt.setInt(1, id)
+                stmt.setObject(1, previousId, Types.INTEGER)
+                stmt.setInt(2, id)
 
                 stmt.executeQuery().use { rows ->
                     val indexes = mutableListOf<ByteBuf?>()
@@ -224,7 +236,7 @@ public class CacheImporter @Inject constructor(
                         }
 
                         indexes.filterNotNull().forEach(ByteBuf::retain)
-                        return@execute indexes
+                        return@execute Pair(id, indexes)
                     } finally {
                         indexes.filterNotNull().forEach(ByteBuf::release)
                     }
@@ -237,7 +249,8 @@ public class CacheImporter @Inject constructor(
         archive: Int,
         index: Js5Index,
         buf: ByteBuf,
-        uncompressed: ByteBuf
+        uncompressed: ByteBuf,
+        previousMasterIndexId: Int?
     ): List<Int> {
         return database.execute { connection ->
             prepare(connection)
@@ -273,22 +286,33 @@ public class CacheImporter @Inject constructor(
             }
 
             /*
-             * We deliberately ignore groups with truncated versions here and
-             * re-download them, just in case there's a (crc32, truncated version)
-             * collision.
+             * In order to defend against (crc32, version) collisions, we only
+             * use a cached group if its checksum/version haven't changed
+             * between the previously downloaded version of the cache and the
+             * current version. This emulates the behaviour of a client always
+             * using the latest version of the cache - so if there is a
+             * collision, real players of the game would experience problems.
+             *
+             * We never use cached groups with a truncated version, as these
+             * are even more likely to be prone to collisions.
              */
             connection.prepareStatement(
                 """
                 SELECT t.group_id
                 FROM tmp_groups t
-                LEFT JOIN groups g ON g.archive_id = ? AND g.group_id = t.group_id AND g.version = t.version AND
-                    NOT g.version_truncated
-                LEFT JOIN containers c ON c.id = g.container_id AND c.crc32 = t.crc32
+                LEFT JOIN master_index_valid_indexes i ON i.master_index_id = ? AND
+                    i.archive_id = ?
+                LEFT JOIN index_groups ig ON ig.container_id = i.container_id AND ig.group_id = t.group_id AND
+                    ig.crc32 = t.crc32 AND ig.version = t.version
+                LEFT JOIN groups g ON g.archive_id = i.archive_id AND g.group_id = ig.group_id AND
+                    g.version = ig.version AND NOT g.version_truncated
+                LEFT JOIN containers c ON c.id = g.container_id AND c.crc32 = ig.crc32
                 WHERE g.container_id IS NULL
                 ORDER BY t.group_id ASC
             """.trimIndent()
             ).use { stmt ->
-                stmt.setInt(1, archive)
+                stmt.setObject(1, previousMasterIndexId, Types.INTEGER)
+                stmt.setInt(2, archive)
 
                 stmt.executeQuery().use { rows ->
                     val groups = mutableListOf<Int>()
@@ -766,6 +790,21 @@ public class CacheImporter @Inject constructor(
                 }
 
                 return rows.getInt(1)
+            }
+        }
+    }
+
+    public suspend fun setMasterIndexId(gameId: Int, masterIndexId: Int) {
+        database.execute { connection ->
+            connection.prepareStatement(
+                """
+                UPDATE games SET master_index_id = ? WHERE id = ?
+            """.trimIndent()
+            ).use { stmt ->
+                stmt.setInt(1, masterIndexId)
+                stmt.setInt(2, gameId)
+
+                stmt.execute()
             }
         }
     }

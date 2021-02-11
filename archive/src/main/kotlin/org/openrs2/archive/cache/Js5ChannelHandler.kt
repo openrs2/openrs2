@@ -35,6 +35,7 @@ public class Js5ChannelHandler(
     private val hostname: String,
     private val port: Int,
     private var build: Int,
+    private val previousMasterIndexId: Int?,
     private val continuation: Continuation<Unit>,
     private val importer: CacheImporter,
     private val masterIndexFormat: MasterIndexFormat = MasterIndexFormat.VERSIONED,
@@ -44,6 +45,7 @@ public class Js5ChannelHandler(
     private val maxBuild = build + maxBuildAttempts
     private val inFlightRequests = mutableSetOf<Js5Request.Group>()
     private val pendingRequests = ArrayDeque<Js5Request.Group>()
+    private var currentMasterIndexId: Int = 0
     private var masterIndex: Js5MasterIndex? = null
     private lateinit var indexes: Array<Js5Index?>
     private val groups = mutableListOf<CacheImporter.Group>()
@@ -155,6 +157,10 @@ public class Js5ChannelHandler(
         }
 
         if (complete) {
+            runBlocking {
+                importer.setMasterIndexId(gameId, currentMasterIndexId)
+            }
+
             ctx.close()
             continuation.resume(Unit)
         }
@@ -164,14 +170,15 @@ public class Js5ChannelHandler(
         Js5Compression.uncompress(buf.slice()).use { uncompressed ->
             masterIndex = Js5MasterIndex.read(uncompressed.slice(), masterIndexFormat)
 
-            val rawIndexes = runBlocking {
-                val name = "Downloaded from $hostname:$port"
+            val name = "Downloaded from $hostname:$port"
+            val (id, rawIndexes) = runBlocking {
                 importer.importMasterIndexAndGetIndexes(
                     masterIndex!!,
                     buf,
                     uncompressed,
                     gameId,
                     build,
+                    previousMasterIndexId,
                     timestamp = Instant.now(),
                     name
                 )
@@ -189,6 +196,8 @@ public class Js5ChannelHandler(
             } finally {
                 rawIndexes.filterNotNull().forEach(ByteBuf::release)
             }
+
+            currentMasterIndexId = id
         }
     }
 
@@ -207,7 +216,7 @@ public class Js5ChannelHandler(
             }
 
             val groups = runBlocking {
-                importer.importIndexAndGetMissingGroups(archive, index, buf, uncompressed)
+                importer.importIndexAndGetMissingGroups(archive, index, buf, uncompressed, previousMasterIndexId)
             }
             for (group in groups) {
                 request(archive, group)

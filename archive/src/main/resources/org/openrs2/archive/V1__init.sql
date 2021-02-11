@@ -108,6 +108,8 @@ CREATE TABLE master_indexes (
     UNIQUE (container_id, format)
 );
 
+ALTER TABLE games ADD COLUMN master_index_id INT NULL REFERENCES master_indexes (id);
+
 CREATE TABLE master_index_archives (
     master_index_id INTEGER NOT NULL REFERENCES master_indexes (id),
     archive_id uint1 NOT NULL,
