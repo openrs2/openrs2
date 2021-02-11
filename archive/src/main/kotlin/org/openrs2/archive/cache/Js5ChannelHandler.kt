@@ -129,21 +129,7 @@ public class Js5ChannelHandler(
         } else if (response.archive == Js5Archive.ARCHIVESET) {
             processIndex(response.group, response.data)
         } else {
-            val entry = indexes[response.archive]!![response.group]!!
-
-            if (response.data.crc32() != entry.checksum) {
-                throw Exception("Group checksum invalid")
-            }
-
-            val uncompressed = Js5Compression.uncompressUnlessEncrypted(response.data.slice())
-            groups += CacheImporter.Group(
-                response.archive,
-                response.group,
-                response.data.retain(),
-                uncompressed,
-                entry.version,
-                versionTruncated = false
-            )
+            processGroup(response.archive, response.group, response.data)
         }
 
         val complete = pendingRequests.isEmpty() && inFlightRequests.isEmpty()
@@ -222,6 +208,24 @@ public class Js5ChannelHandler(
                 request(archive, group)
             }
         }
+    }
+
+    private fun processGroup(archive: Int, group: Int, buf: ByteBuf) {
+        val entry = indexes[archive]!![group]!!
+
+        if (buf.crc32() != entry.checksum) {
+            throw Exception("Group checksum invalid")
+        }
+
+        val uncompressed = Js5Compression.uncompressUnlessEncrypted(buf.slice())
+        groups += CacheImporter.Group(
+            archive,
+            group,
+            buf.retain(),
+            uncompressed,
+            entry.version,
+            versionTruncated = false
+        )
     }
 
     private fun request(archive: Int, group: Int) {
