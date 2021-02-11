@@ -254,36 +254,7 @@ public class CacheImporter @Inject constructor(
     ): List<Int> {
         return database.execute { connection ->
             prepare(connection)
-            addIndex(connection, Index(archive, index, buf, uncompressed))
-
-            connection.prepareStatement(
-                """
-                CREATE TEMPORARY TABLE tmp_groups (
-                    group_id INTEGER NOT NULL,
-                    crc32 INTEGER NOT NULL,
-                    version INTEGER NOT NULL
-                ) ON COMMIT DROP
-            """.trimIndent()
-            ).use { stmt ->
-                stmt.execute()
-            }
-
-            connection.prepareStatement(
-                """
-                INSERT INTO tmp_groups (group_id, crc32, version)
-                VALUES (?, ?, ?)
-            """.trimIndent()
-            ).use { stmt ->
-                for (entry in index) {
-                    stmt.setInt(1, entry.id)
-                    stmt.setInt(2, entry.checksum)
-                    stmt.setInt(3, entry.version)
-
-                    stmt.addBatch()
-                }
-
-                stmt.executeBatch()
-            }
+            val id = addIndex(connection, Index(archive, index, buf, uncompressed))
 
             /*
              * In order to defend against (crc32, version) collisions, we only
@@ -298,21 +269,22 @@ public class CacheImporter @Inject constructor(
              */
             connection.prepareStatement(
                 """
-                SELECT t.group_id
-                FROM tmp_groups t
+                SELECT ig.group_id
+                FROM index_groups ig
                 LEFT JOIN master_index_valid_indexes i ON i.master_index_id = ? AND
                     i.archive_id = ?
-                LEFT JOIN index_groups ig ON ig.container_id = i.container_id AND ig.group_id = t.group_id AND
-                    ig.crc32 = t.crc32 AND ig.version = t.version
-                LEFT JOIN groups g ON g.archive_id = i.archive_id AND g.group_id = ig.group_id AND
-                    g.version = ig.version AND NOT g.version_truncated
-                LEFT JOIN containers c ON c.id = g.container_id AND c.crc32 = ig.crc32
-                WHERE g.container_id IS NULL
-                ORDER BY t.group_id ASC
+                LEFT JOIN index_groups ig2 ON ig2.container_id = i.container_id AND ig2.group_id = ig.group_id AND
+                    ig2.crc32 = ig.crc32 AND ig2.version = ig.version
+                LEFT JOIN groups g ON g.archive_id = i.archive_id AND g.group_id = ig2.group_id AND
+                    g.version = ig2.version AND NOT g.version_truncated
+                LEFT JOIN containers c ON c.id = g.container_id AND c.crc32 = ig2.crc32
+                WHERE ig.container_id = ? AND g.container_id IS NULL
+                ORDER BY ig.group_id ASC
             """.trimIndent()
             ).use { stmt ->
                 stmt.setObject(1, previousMasterIndexId, Types.INTEGER)
                 stmt.setInt(2, archive)
+                stmt.setLong(3, id)
 
                 stmt.executeQuery().use { rows ->
                     val groups = mutableListOf<Int>()
@@ -582,7 +554,7 @@ public class CacheImporter @Inject constructor(
         }
     }
 
-    private fun addIndex(connection: Connection, index: Index) {
+    private fun addIndex(connection: Connection, index: Index): Long {
         val containerId = addGroup(connection, index)
         val savepoint = connection.setSavepoint()
 
@@ -607,7 +579,7 @@ public class CacheImporter @Inject constructor(
             } catch (ex: SQLException) {
                 if (ex.sqlState == PSQLState.UNIQUE_VIOLATION.state) {
                     connection.rollback(savepoint)
-                    return@addIndex
+                    return@addIndex containerId
                 }
                 throw ex
             }
@@ -679,6 +651,8 @@ public class CacheImporter @Inject constructor(
 
             stmt.executeBatch()
         }
+
+        return containerId
     }
 
     private fun prepare(connection: Connection) {
