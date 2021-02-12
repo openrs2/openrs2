@@ -42,6 +42,13 @@ public class Js5ChannelHandler(
     private val maxInFlightRequests: Int = 200,
     maxBuildAttempts: Int = 10
 ) : SimpleChannelInboundHandler<Any>(Object::class.java) {
+    private enum class State {
+        ACTIVE,
+        CLIENT_OUT_OF_DATE,
+        RESUMING_CONTINUATION
+    }
+
+    private var state = State.ACTIVE
     private val maxBuild = build + maxBuildAttempts
     private val inFlightRequests = mutableSetOf<Js5Request.Group>()
     private val pendingRequests = ArrayDeque<Js5Request.Group>()
@@ -87,8 +94,19 @@ public class Js5ChannelHandler(
         }
     }
 
+    override fun channelInactive(ctx: ChannelHandlerContext) {
+        if (state == State.CLIENT_OUT_OF_DATE) {
+            state = State.ACTIVE
+            bootstrap.connect(hostname, port)
+        } else if (state != State.RESUMING_CONTINUATION) {
+            throw Exception("Connection closed unexpectedly")
+        }
+    }
+
     override fun exceptionCaught(ctx: ChannelHandlerContext, cause: Throwable) {
         releaseGroups()
+
+        state = State.RESUMING_CONTINUATION
         ctx.close()
         continuation.resumeWithException(cause)
     }
@@ -112,8 +130,8 @@ public class Js5ChannelHandler(
             throw Exception("Failed to identify current version")
         }
 
+        state = State.CLIENT_OUT_OF_DATE
         ctx.close()
-        bootstrap.connect(hostname, port)
     }
 
     private fun handleResponse(ctx: ChannelHandlerContext, response: Js5Response) {
@@ -147,6 +165,7 @@ public class Js5ChannelHandler(
                 importer.setLastMasterIndexId(gameId, masterIndexId)
             }
 
+            state = State.RESUMING_CONTINUATION
             ctx.close()
             continuation.resume(Unit)
         }
