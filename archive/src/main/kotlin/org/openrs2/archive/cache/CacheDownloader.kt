@@ -30,7 +30,7 @@ public class CacheDownloader @Inject constructor(
                     hostname,
                     port,
                     build,
-                    game.previousMasterIndexId,
+                    game.lastMasterIndexId,
                     continuation,
                     importer
                 )

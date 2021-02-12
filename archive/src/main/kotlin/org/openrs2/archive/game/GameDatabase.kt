@@ -12,7 +12,7 @@ public class GameDatabase @Inject constructor(
         return database.execute { connection ->
             connection.prepareStatement(
                 """
-                SELECT id, hostname, port, build, master_index_id
+                SELECT id, hostname, port, build, last_master_index_id
                 FROM games
                 WHERE name = ?
             """.trimIndent()
@@ -37,12 +37,12 @@ public class GameDatabase @Inject constructor(
                         build = null
                     }
 
-                    var masterIndexId: Int? = rows.getInt(5)
+                    var lastMasterIndexId: Int? = rows.getInt(5)
                     if (rows.wasNull()) {
-                        masterIndexId = null
+                        lastMasterIndexId = null
                     }
 
-                    return@execute Game(id, hostname, port, build, masterIndexId)
+                    return@execute Game(id, hostname, port, build, lastMasterIndexId)
                 }
             }
         }

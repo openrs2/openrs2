@@ -5,5 +5,5 @@ public data class Game(
     public val hostname: String?,
     public val port: Int?,
     public val build: Int?,
-    public val previousMasterIndexId: Int?
+    public val lastMasterIndexId: Int?
 )

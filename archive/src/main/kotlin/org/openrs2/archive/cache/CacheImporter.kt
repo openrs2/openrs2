@@ -169,7 +169,7 @@ public class CacheImporter @Inject constructor(
         uncompressed: ByteBuf,
         gameId: Int,
         build: Int,
-        previousId: Int?,
+        lastId: Int?,
         timestamp: Instant,
         name: String,
     ): Pair<Int, List<ByteBuf?>> {
@@ -222,7 +222,7 @@ public class CacheImporter @Inject constructor(
                 ORDER BY a.archive_id ASC
             """.trimIndent()
             ).use { stmt ->
-                stmt.setObject(1, previousId, Types.INTEGER)
+                stmt.setObject(1, lastId, Types.INTEGER)
                 stmt.setInt(2, id)
 
                 stmt.executeQuery().use { rows ->
@@ -252,7 +252,7 @@ public class CacheImporter @Inject constructor(
         index: Js5Index,
         buf: ByteBuf,
         uncompressed: ByteBuf,
-        previousMasterIndexId: Int?
+        lastMasterIndexId: Int?
     ): List<Int> {
         return database.execute { connection ->
             prepare(connection)
@@ -284,7 +284,7 @@ public class CacheImporter @Inject constructor(
                 ORDER BY ig.group_id ASC
             """.trimIndent()
             ).use { stmt ->
-                stmt.setObject(1, previousMasterIndexId, Types.INTEGER)
+                stmt.setObject(1, lastMasterIndexId, Types.INTEGER)
                 stmt.setInt(2, archive)
                 stmt.setLong(3, id)
 
@@ -770,11 +770,11 @@ public class CacheImporter @Inject constructor(
         }
     }
 
-    public suspend fun setMasterIndexId(gameId: Int, masterIndexId: Int) {
+    public suspend fun setLastMasterIndexId(gameId: Int, masterIndexId: Int) {
         database.execute { connection ->
             connection.prepareStatement(
                 """
-                UPDATE games SET master_index_id = ? WHERE id = ?
+                UPDATE games SET last_master_index_id = ? WHERE id = ?
             """.trimIndent()
             ).use { stmt ->
                 stmt.setInt(1, masterIndexId)
