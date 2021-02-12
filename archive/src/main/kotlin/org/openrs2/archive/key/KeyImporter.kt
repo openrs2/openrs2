@@ -35,7 +35,7 @@ public class KeyImporter @Inject constructor(
 
         keys -= XteaKey.ZERO
 
-        return import(keys)
+        import(keys)
     }
 
     public suspend fun import(keys: Iterable<XteaKey>) {
