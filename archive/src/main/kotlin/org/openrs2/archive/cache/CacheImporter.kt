@@ -214,8 +214,10 @@ public class CacheImporter @Inject constructor(
                 FROM master_index_archives a
                 LEFT JOIN master_index_archives a2 ON a2.master_index_id = ? AND a2.archive_id = a.archive_id AND
                     a2.crc32 = a.crc32 AND a2.version = a.version
-                LEFT JOIN containers c ON c.crc32 = a2.crc32
-                LEFT JOIN indexes i ON i.version = a2.version AND i.container_id = c.id
+                LEFT JOIN groups g ON g.archive_id = 255 AND g.group_id = a2.archive_id::INTEGER AND
+                    g.version = a2.version AND NOT g.version_truncated
+                LEFT JOIN containers c ON c.id = g.container_id AND c.crc32 = a2.crc32
+                LEFT JOIN indexes i ON i.container_id = g.container_id AND i.version = a2.version
                 WHERE a.master_index_id = ?
                 ORDER BY a.archive_id ASC
             """.trimIndent()
