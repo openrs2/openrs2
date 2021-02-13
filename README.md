@@ -53,13 +53,6 @@ material from being accidentally included in the repository.
 Run `./gradlew` to download the dependencies, build the code, run the unit tests
 and package it.
 
-IDEA 2020.3's built-in build system breaks with a cryptic
-`java: java.lang.IllegalArgumentException` error message when compiling modules
-that use the `deob-annotations` processor. A workaround is to add
-`-Djps.track.ap.dependencies=false` to the 'Shared build process VM options' in
-File -> Settings -> Build, Execution and Deployment -> Compiler. See
-[IDEA-256707][idea-bug] for more information.
-
 ## Links
 
 * [Discord][discord]

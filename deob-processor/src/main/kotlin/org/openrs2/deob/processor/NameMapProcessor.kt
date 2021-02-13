@@ -14,6 +14,7 @@ import org.openrs2.deob.util.map.Method
 import org.openrs2.deob.util.map.NameMap
 import org.openrs2.util.io.useAtomicBufferedWriter
 import org.openrs2.yaml.Yaml
+import java.lang.reflect.Proxy
 import java.nio.file.Files
 import java.nio.file.Path
 import java.util.TreeMap
@@ -51,8 +52,20 @@ public class NameMapProcessor : AbstractProcessor() {
 
     override fun init(env: ProcessingEnvironment) {
         super.init(env)
-        trees = Trees.instance(env)
+        trees = Trees.instance(unwrap(env))
         localScanner = LocalVariableScanner(trees)
+    }
+
+    // see https://youtrack.jetbrains.com/issue/IDEA-256707
+    private fun unwrap(env: ProcessingEnvironment): ProcessingEnvironment {
+        if (!Proxy.isProxyClass(env.javaClass)) {
+            return env
+        }
+
+        val invocationHandler = Proxy.getInvocationHandler(env)
+        val field = invocationHandler.javaClass.getDeclaredField("val\$delegateTo")
+        field.isAccessible = true
+        return field.get(invocationHandler) as ProcessingEnvironment
     }
 
     private fun getPath(): Path? {
