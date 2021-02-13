@@ -17,6 +17,8 @@ public data class Js5MasterIndex(
     public class Entry(
         public var version: Int,
         public var checksum: Int,
+        public var groups: Int,
+        public var totalUncompressedLength: Int,
         digest: ByteArray?
     ) {
         public var digest: ByteArray? = digest
@@ -33,6 +35,8 @@ public data class Js5MasterIndex(
 
             if (version != other.version) return false
             if (checksum != other.checksum) return false
+            if (groups != other.groups) return false
+            if (totalUncompressedLength != other.totalUncompressedLength) return false
             if (digest != null) {
                 if (other.digest == null) return false
                 if (!digest.contentEquals(other.digest)) return false
@@ -44,6 +48,8 @@ public data class Js5MasterIndex(
         override fun hashCode(): Int {
             var result = version
             result = 31 * result + checksum
+            result = 31 * result + groups
+            result = 31 * result + totalUncompressedLength
             result = 31 * result + (digest?.contentHashCode() ?: 0)
             return result
         }
@@ -55,7 +61,8 @@ public data class Js5MasterIndex(
             } else {
                 "null"
             }
-            return "Entry(version=$version, checksum=$checksum, digest=$hex)"
+            return "Entry(version=$version, checksum=$checksum, groups=$groups, " +
+                "totalUncompressedLength=$totalUncompressedLength, digest=$hex)"
         }
     }
 
@@ -71,6 +78,11 @@ public data class Js5MasterIndex(
 
             if (format >= MasterIndexFormat.VERSIONED) {
                 buf.writeInt(entry.version)
+            }
+
+            if (format >= MasterIndexFormat.LENGTHS) {
+                buf.writeInt(entry.groups)
+                buf.writeInt(entry.totalUncompressedLength)
             }
 
             if (format >= MasterIndexFormat.WHIRLPOOL) {
@@ -116,27 +128,31 @@ public data class Js5MasterIndex(
                  * entries with a zero CRC are probably invalid.
                  */
                 for (i in nextArchive until archive) {
-                    masterIndex.entries += Entry(0, 0, null)
+                    masterIndex.entries += Entry(0, 0, 0, 0, null)
                 }
 
                 val entry = store.read(Js5Archive.ARCHIVESET, archive).use { buf ->
                     val checksum = buf.crc32()
                     val digest = buf.whirlpool()
 
-                    val version = Js5Compression.uncompress(buf).use { uncompressed ->
+                    Js5Compression.uncompress(buf).use { uncompressed ->
                         val index = Js5Index.read(uncompressed)
 
-                        if (index.hasDigests) {
+                        if (index.hasLengths) {
+                            masterIndex.format = maxOf(masterIndex.format, MasterIndexFormat.LENGTHS)
+                        } else if (index.hasDigests) {
                             masterIndex.format = maxOf(masterIndex.format, MasterIndexFormat.WHIRLPOOL)
                         } else if (index.protocol >= Js5Protocol.VERSIONED) {
                             masterIndex.format = maxOf(masterIndex.format, MasterIndexFormat.VERSIONED)
                         }
 
-                        index.version
-                    }
+                        val version = index.version
+                        val groups = index.size
+                        val totalUncompressedLength = index.sumBy(Js5Index.Group::uncompressedLength)
 
-                    // TODO(gpe): should we throw an exception if there are trailing bytes here or in the block above?
-                    Entry(version, checksum, digest)
+                        // TODO(gpe): should we throw an exception if there are trailing bytes here or in the block above?
+                        Entry(version, checksum, groups, totalUncompressedLength, digest)
+                    }
                 }
 
                 masterIndex.entries += entry
@@ -165,7 +181,7 @@ public data class Js5MasterIndex(
                     }
                     len / 8
                 }
-                MasterIndexFormat.WHIRLPOOL -> {
+                else -> {
                     buf.readUnsignedByte().toInt()
                 }
             }
@@ -179,6 +195,16 @@ public data class Js5MasterIndex(
                     0
                 }
 
+                val groups: Int
+                val totalUncompressedLength: Int
+                if (format >= MasterIndexFormat.LENGTHS) {
+                    groups = buf.readInt()
+                    totalUncompressedLength = buf.readInt()
+                } else {
+                    groups = 0
+                    totalUncompressedLength = 0
+                }
+
                 val digest = if (format >= MasterIndexFormat.WHIRLPOOL) {
                     val bytes = ByteArray(Whirlpool.DIGESTBYTES)
                     buf.readBytes(bytes)
@@ -187,7 +213,7 @@ public data class Js5MasterIndex(
                     null
                 }
 
-                index.entries += Entry(version, checksum, digest)
+                index.entries += Entry(version, checksum, groups, totalUncompressedLength, digest)
             }
 
             val end = buf.readerIndex()

@@ -5,6 +5,7 @@ import io.netty.buffer.ByteBufUtil
 import io.netty.buffer.Unpooled
 import org.openrs2.buffer.use
 import org.openrs2.crypto.Rsa
+import org.openrs2.crypto.Whirlpool
 import java.nio.file.Path
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -22,7 +23,7 @@ class Js5MasterIndexTest {
                 MasterIndexFormat.ORIGINAL,
                 mutableListOf(
                     Js5MasterIndex.Entry(
-                        0, 609698396, ByteBufUtil.decodeHexDump(
+                        0, 609698396, 0, 0, ByteBufUtil.decodeHexDump(
                             "0e1a2b93c80a41c7ad2a985dff707a6a8ff82e229cbc468f04191198920955a1" +
                                 "4b3d7eab77a17faf99208dee5b44afb789962ad79f230b3b59106a0af892219c"
                         )
@@ -43,28 +44,28 @@ class Js5MasterIndexTest {
                 MasterIndexFormat.VERSIONED,
                 mutableListOf(
                     Js5MasterIndex.Entry(
-                        0, 609698396, ByteBufUtil.decodeHexDump(
+                        0, 609698396, 0, 0, ByteBufUtil.decodeHexDump(
                             "0e1a2b93c80a41c7ad2a985dff707a6a8ff82e229cbc468f04191198920955a1" +
                                 "4b3d7eab77a17faf99208dee5b44afb789962ad79f230b3b59106a0af892219c"
                         )
                     ),
                     Js5MasterIndex.Entry(
-                        0x12345678, 78747481, ByteBufUtil.decodeHexDump(
+                        0x12345678, 78747481, 0, 0, ByteBufUtil.decodeHexDump(
                             "180ff4ad371f56d4a90d81e0b69b23836cd9b101b828f18b7e6d232c4d302539" +
                                 "638eb2e9259957645aae294f09b2d669c93dbbfc0d8359f1b232ae468f678ca1"
                         )
                     ),
-                    Js5MasterIndex.Entry(0, 0, null),
+                    Js5MasterIndex.Entry(0, 0, 0, 0, null),
                     Js5MasterIndex.Entry(
-                        0x9ABCDEF0.toInt(), -456081154, ByteBufUtil.decodeHexDump(
+                        0x9ABCDEF0.toInt(), -456081154, 0, 0, ByteBufUtil.decodeHexDump(
                             "972003261b7628525346e0052567662e5695147ad710f877b63b9ab53b3f6650" +
                                 "ca003035fde4398b2ef73a60e4b13798aa597a30c1bf0a13c0cd412394af5f96"
                         )
                     ),
-                    Js5MasterIndex.Entry(0, 0, null),
-                    Js5MasterIndex.Entry(0, 0, null),
+                    Js5MasterIndex.Entry(0, 0, 0, 0, null),
+                    Js5MasterIndex.Entry(0, 0, 0, 0, null),
                     Js5MasterIndex.Entry(
-                        0xAA55AA55.toInt(), 186613982, ByteBufUtil.decodeHexDump(
+                        0xAA55AA55.toInt(), 186613982, 0, 0, ByteBufUtil.decodeHexDump(
                             "d50a6e9abd3b5269606304dc2769cbc8618e1ae6ff705291c0dfcc374e450dd2" +
                                 "5f1be5f1d5459651d22d3e87ef0a1c69be7807f661cd001be24a6609f6d57916"
                         )
@@ -85,15 +86,36 @@ class Js5MasterIndexTest {
                 MasterIndexFormat.WHIRLPOOL,
                 mutableListOf(
                     Js5MasterIndex.Entry(
-                        0, 668177970, ByteBufUtil.decodeHexDump(
+                        0, 668177970, 0, 0, ByteBufUtil.decodeHexDump(
                             "2faa83116e1d1719d5db15f128eb57f62afbf0207c47bced3f558ec17645d138" +
                                 "72f4fb9b0e36a5f6f5d30e1295b3fa49556dfd0819cb5137f3b69f64155f3fb7"
                         )
                     ),
                     Js5MasterIndex.Entry(
-                        0, 1925442845, ByteBufUtil.decodeHexDump(
+                        0, 1925442845, 0, 0, ByteBufUtil.decodeHexDump(
                             "fcc45b0ab6d0067889e44de0004bcbb6cc538aff8f80edf1b49b583cedd73fea" +
                                 "937ae6990235257fe8aa35c44d35450c13e670711337ee5116957cd98cc27985"
+                        )
+                    )
+                )
+            ), index
+        )
+    }
+
+    @Test
+    fun testCreateLengths() {
+        val index = Store.open(ROOT.resolve("lengths")).use { store ->
+            Js5MasterIndex.create(store)
+        }
+
+        assertEquals(
+            Js5MasterIndex(
+                MasterIndexFormat.LENGTHS,
+                mutableListOf(
+                    Js5MasterIndex.Entry(
+                        0x12345678, -1080883457, 3, 123, ByteBufUtil.decodeHexDump(
+                            "0bf30b80b7213154ada5c3797be15a8fbb6a96a80432e2093e10617bcb4e67de" +
+                                "9a858211cabe844c6fa3a1fbfe3164a3e4e1918983c69597dff3fc3c53096884"
                         )
                     )
                 )
@@ -242,6 +264,25 @@ class Js5MasterIndexTest {
         }
     }
 
+    @Test
+    fun testReadLengths() {
+        Unpooled.wrappedBuffer(encodedLengths).use { buf ->
+            val index = Js5MasterIndex.read(buf, MasterIndexFormat.LENGTHS)
+            assertEquals(decodedLengths, index)
+        }
+    }
+
+    @Test
+    fun testWriteLengths() {
+        ByteBufAllocator.DEFAULT.buffer().use { actual ->
+            decodedLengths.write(actual)
+
+            Unpooled.wrappedBuffer(encodedLengths).use { expected ->
+                assertEquals(expected, actual)
+            }
+        }
+    }
+
     private companion object {
         private val ROOT = Path.of(FlatFileStoreTest::class.java.getResource("master-index").toURI())
         private val PRIVATE_KEY = Rsa.readPrivateKey(ROOT.resolve("private.key"))
@@ -251,9 +292,9 @@ class Js5MasterIndexTest {
         private val decodedOriginal = Js5MasterIndex(
             MasterIndexFormat.ORIGINAL,
             mutableListOf(
-                Js5MasterIndex.Entry(0, 1, null),
-                Js5MasterIndex.Entry(0, 3, null),
-                Js5MasterIndex.Entry(0, 5, null)
+                Js5MasterIndex.Entry(0, 1, 0, 0, null),
+                Js5MasterIndex.Entry(0, 3, 0, 0, null),
+                Js5MasterIndex.Entry(0, 5, 0, 0, null)
             )
         )
 
@@ -261,9 +302,9 @@ class Js5MasterIndexTest {
         private val decodedVersioned = Js5MasterIndex(
             MasterIndexFormat.VERSIONED,
             mutableListOf(
-                Js5MasterIndex.Entry(0, 1, null),
-                Js5MasterIndex.Entry(2, 3, null),
-                Js5MasterIndex.Entry(4, 5, null)
+                Js5MasterIndex.Entry(0, 1, 0, 0, null),
+                Js5MasterIndex.Entry(2, 3, 0, 0, null),
+                Js5MasterIndex.Entry(4, 5, 0, 0, null)
             )
         )
 
@@ -281,7 +322,7 @@ class Js5MasterIndexTest {
             MasterIndexFormat.WHIRLPOOL,
             mutableListOf(
                 Js5MasterIndex.Entry(
-                    0x01234567, 0x89ABCDEF.toInt(), ByteBufUtil.decodeHexDump(
+                    0x01234567, 0x89ABCDEF.toInt(), 0, 0, ByteBufUtil.decodeHexDump(
                         "0e1a2b93c80a41c7ad2a985dff707a6a8ff82e229cbc468f04191198920955a1" +
                             "4b3d7eab77a17faf99208dee5b44afb789962ad79f230b3b59106a0af892219c"
                     )
@@ -302,7 +343,7 @@ class Js5MasterIndexTest {
         private val decodedWhirlpoolNullDigest = Js5MasterIndex(
             MasterIndexFormat.WHIRLPOOL,
             mutableListOf(
-                Js5MasterIndex.Entry(0x01234567, 0x89ABCDEF.toInt(), null)
+                Js5MasterIndex.Entry(0x01234567, 0x89ABCDEF.toInt(), 0, 0, null)
             )
         )
 
@@ -320,6 +361,25 @@ class Js5MasterIndexTest {
                 "dceb437d0436b6195ef60d4128e1e0184bf6929b73abd1a8aa2a047e3cb90d03" +
                 "57707ce3f4f5a7af8471eda5c0c0748454a9cbb48c25ebe4e7fd94e3881b6461" +
                 "d06e2bce128dc96decb537b8e9611591d445d7dfd3701d25ac05f8d091581aef"
+        )
+
+        private val decodedLengths = Js5MasterIndex(
+            MasterIndexFormat.LENGTHS,
+            mutableListOf(
+                Js5MasterIndex.Entry(0x012345678, 0x89ABCDEF.toInt(), 3, 123, ByteArray(Whirlpool.DIGESTBYTES))
+            )
+        )
+        private val encodedLengths = ByteBufUtil.decodeHexDump(
+            "01" +
+                "89abcdef" +
+                "12345678" +
+                "00000003" +
+                "0000007b" +
+                "0000000000000000000000000000000000000000000000000000000000000000" +
+                "0000000000000000000000000000000000000000000000000000000000000000" +
+                "0a" +
+                "3d9f704a2b2e1b6f4e7b3a9b558baed7ccb10787a754b6fd36acb77ba3491726" +
+                "fef29e470218a98693bfc1b98a611f15e0b35a11bd181830ff4912377653a87a"
         )
     }
 }
