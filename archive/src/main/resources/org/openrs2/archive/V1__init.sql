@@ -93,7 +93,7 @@ CREATE TABLE index_files (
 CREATE TYPE master_index_format AS ENUM (
     'original',
     'versioned',
-    'whirlpool',
+    'digests',
     'lengths'
 );
 

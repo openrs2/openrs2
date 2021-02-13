@@ -69,7 +69,7 @@ public data class Js5MasterIndex(
     public fun write(buf: ByteBuf, key: RSAKeyParameters? = null) {
         val start = buf.writerIndex()
 
-        if (format >= MasterIndexFormat.WHIRLPOOL) {
+        if (format >= MasterIndexFormat.DIGESTS) {
             buf.writeByte(entries.size)
         }
 
@@ -85,7 +85,7 @@ public data class Js5MasterIndex(
                 buf.writeInt(entry.totalUncompressedLength)
             }
 
-            if (format >= MasterIndexFormat.WHIRLPOOL) {
+            if (format >= MasterIndexFormat.DIGESTS) {
                 val digest = entry.digest
                 if (digest != null) {
                     buf.writeBytes(digest)
@@ -95,7 +95,7 @@ public data class Js5MasterIndex(
             }
         }
 
-        if (format >= MasterIndexFormat.WHIRLPOOL) {
+        if (format >= MasterIndexFormat.DIGESTS) {
             val digest = buf.whirlpool(start, buf.writerIndex() - start)
 
             if (key != null) {
@@ -141,7 +141,7 @@ public data class Js5MasterIndex(
                         if (index.hasLengths) {
                             masterIndex.format = maxOf(masterIndex.format, MasterIndexFormat.LENGTHS)
                         } else if (index.hasDigests) {
-                            masterIndex.format = maxOf(masterIndex.format, MasterIndexFormat.WHIRLPOOL)
+                            masterIndex.format = maxOf(masterIndex.format, MasterIndexFormat.DIGESTS)
                         } else if (index.protocol >= Js5Protocol.VERSIONED) {
                             masterIndex.format = maxOf(masterIndex.format, MasterIndexFormat.VERSIONED)
                         }
@@ -205,7 +205,7 @@ public data class Js5MasterIndex(
                     totalUncompressedLength = 0
                 }
 
-                val digest = if (format >= MasterIndexFormat.WHIRLPOOL) {
+                val digest = if (format >= MasterIndexFormat.DIGESTS) {
                     val bytes = ByteArray(Whirlpool.DIGESTBYTES)
                     buf.readBytes(bytes)
                     bytes
@@ -218,7 +218,7 @@ public data class Js5MasterIndex(
 
             val end = buf.readerIndex()
 
-            if (format >= MasterIndexFormat.WHIRLPOOL) {
+            if (format >= MasterIndexFormat.DIGESTS) {
                 val ciphertext = buf.readSlice(buf.readableBytes())
                 decrypt(ciphertext, key).use { plaintext ->
                     require(plaintext.readableBytes() == SIGNATURE_LENGTH) {

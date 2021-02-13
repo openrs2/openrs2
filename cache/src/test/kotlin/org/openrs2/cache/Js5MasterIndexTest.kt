@@ -83,7 +83,7 @@ class Js5MasterIndexTest {
 
         assertEquals(
             Js5MasterIndex(
-                MasterIndexFormat.WHIRLPOOL,
+                MasterIndexFormat.DIGESTS,
                 mutableListOf(
                     Js5MasterIndex.Entry(
                         0, 668177970, 0, 0, ByteBufUtil.decodeHexDump(
@@ -176,7 +176,7 @@ class Js5MasterIndexTest {
     @Test
     fun testReadWhirlpool() {
         Unpooled.wrappedBuffer(encodedWhirlpool).use { buf ->
-            val index = Js5MasterIndex.read(buf, MasterIndexFormat.WHIRLPOOL)
+            val index = Js5MasterIndex.read(buf, MasterIndexFormat.DIGESTS)
             assertEquals(decodedWhirlpool, index)
         }
     }
@@ -188,7 +188,7 @@ class Js5MasterIndexTest {
             buf.setByte(lastIndex, buf.getByte(lastIndex).toInt().inv())
 
             assertFailsWith<IllegalArgumentException> {
-                Js5MasterIndex.read(buf, MasterIndexFormat.WHIRLPOOL)
+                Js5MasterIndex.read(buf, MasterIndexFormat.DIGESTS)
             }
         }
     }
@@ -197,7 +197,7 @@ class Js5MasterIndexTest {
     fun testReadWhirlpoolInvalidSignatureLength() {
         Unpooled.wrappedBuffer(encodedWhirlpool, 0, encodedWhirlpool.size - 1).use { buf ->
             assertFailsWith<IllegalArgumentException> {
-                Js5MasterIndex.read(buf, MasterIndexFormat.WHIRLPOOL)
+                Js5MasterIndex.read(buf, MasterIndexFormat.DIGESTS)
             }
         }
     }
@@ -227,7 +227,7 @@ class Js5MasterIndexTest {
     @Test
     fun testReadSigned() {
         Unpooled.wrappedBuffer(encodedSigned).use { buf ->
-            val index = Js5MasterIndex.read(buf, MasterIndexFormat.WHIRLPOOL, PUBLIC_KEY)
+            val index = Js5MasterIndex.read(buf, MasterIndexFormat.DIGESTS, PUBLIC_KEY)
             assertEquals(decodedWhirlpool, index)
         }
     }
@@ -239,7 +239,7 @@ class Js5MasterIndexTest {
             buf.setByte(lastIndex, buf.getByte(lastIndex).toInt().inv())
 
             assertFailsWith<IllegalArgumentException> {
-                Js5MasterIndex.read(buf, MasterIndexFormat.WHIRLPOOL, PUBLIC_KEY)
+                Js5MasterIndex.read(buf, MasterIndexFormat.DIGESTS, PUBLIC_KEY)
             }
         }
     }
@@ -248,7 +248,7 @@ class Js5MasterIndexTest {
     fun testReadSignedInvalidSignatureLength() {
         Unpooled.wrappedBuffer(encodedSigned, 0, encodedSigned.size - 1).use { buf ->
             assertFailsWith<IllegalArgumentException> {
-                Js5MasterIndex.read(buf, MasterIndexFormat.WHIRLPOOL, PUBLIC_KEY)
+                Js5MasterIndex.read(buf, MasterIndexFormat.DIGESTS, PUBLIC_KEY)
             }
         }
     }
@@ -319,7 +319,7 @@ class Js5MasterIndexTest {
                 "b3ecb77cc1a8f9ccd53c405b3264e598820b4940f630ff079a9feb950f639671"
         )
         private val decodedWhirlpool = Js5MasterIndex(
-            MasterIndexFormat.WHIRLPOOL,
+            MasterIndexFormat.DIGESTS,
             mutableListOf(
                 Js5MasterIndex.Entry(
                     0x01234567, 0x89ABCDEF.toInt(), 0, 0, ByteBufUtil.decodeHexDump(
@@ -341,7 +341,7 @@ class Js5MasterIndexTest {
                 "8a65765bc2dce9d67029be79bd544f96055a41d725c080bc5b85a48b5aae6e4d"
         )
         private val decodedWhirlpoolNullDigest = Js5MasterIndex(
-            MasterIndexFormat.WHIRLPOOL,
+            MasterIndexFormat.DIGESTS,
             mutableListOf(
                 Js5MasterIndex.Entry(0x01234567, 0x89ABCDEF.toInt(), 0, 0, null)
             )
