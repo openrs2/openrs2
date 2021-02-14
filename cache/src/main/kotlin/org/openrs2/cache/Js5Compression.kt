@@ -195,6 +195,7 @@ public object Js5Compression {
              * We therefore assume all uncompressed groups are unencrypted.
              */
             if (!key.isZero) {
+                input.skipBytes(len)
                 return null
             }
 
@@ -230,6 +231,7 @@ public object Js5Compression {
         decrypt(input.slice(), 16, key).use { plaintext ->
             val uncompressedLen = plaintext.readInt()
             if (uncompressedLen < 0) {
+                input.skipBytes(lenWithUncompressedLen)
                 return null
             }
 
@@ -239,18 +241,21 @@ public object Js5Compression {
                     val magic = ByteArray(BZIP2_MAGIC.size)
                     plaintext.readBytes(magic)
                     if (!magic.contentEquals(BZIP2_MAGIC)) {
+                        input.skipBytes(lenWithUncompressedLen)
                         return null
                     }
                 }
                 Js5CompressionType.GZIP -> {
                     val magic = plaintext.readUnsignedShort()
                     if (magic != GZIP_MAGIC) {
+                        input.skipBytes(lenWithUncompressedLen)
                         return null
                     }
 
                     // Jagex's implementation only supports DEFLATE.
                     val compressionMethod = plaintext.readUnsignedByte().toInt()
                     if (compressionMethod != GZIP_COMPRESSION_METHOD_DEFLATE) {
+                        input.skipBytes(lenWithUncompressedLen)
                         return null
                     }
                 }
@@ -264,6 +269,7 @@ public object Js5Compression {
 
                     val pb = properties / 45
                     if (pb > LZMA_PB_MAX) {
+                        input.skipBytes(lenWithUncompressedLen)
                         return null
                     }
 
@@ -286,8 +292,10 @@ public object Js5Compression {
                      */
                     val dictSize = plaintext.readIntLE()
                     if (dictSize < 0) {
+                        input.skipBytes(lenWithUncompressedLen)
                         return null
                     } else if (dictSize > LZMA_PRESET_DICT_SIZE_MAX) {
+                        input.skipBytes(lenWithUncompressedLen)
                         return null
                     }
                 }
