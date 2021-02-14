@@ -474,15 +474,36 @@ public class CacheImporter @Inject constructor(
 
         connection.prepareStatement(
             """
-            INSERT INTO master_index_archives (master_index_id, archive_id, crc32, version)
-            VALUES (?, ?, ?, ?)
+            INSERT INTO master_index_archives (
+                master_index_id, archive_id, crc32, version, whirlpool, groups, total_uncompressed_length
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?)
         """.trimIndent()
         ).use { stmt ->
             for ((i, entry) in masterIndex.index.entries.withIndex()) {
                 stmt.setInt(1, masterIndexId!!)
                 stmt.setInt(2, i)
                 stmt.setInt(3, entry.checksum)
-                stmt.setInt(4, entry.version)
+
+                if (masterIndex.index.format >= MasterIndexFormat.VERSIONED) {
+                    stmt.setInt(4, entry.version)
+                } else {
+                    stmt.setInt(4, 0)
+                }
+
+                if (masterIndex.index.format >= MasterIndexFormat.DIGESTS) {
+                    stmt.setBytes(5, entry.digest ?: ByteArray(Whirlpool.DIGESTBYTES))
+                } else {
+                    stmt.setNull(5, Types.BINARY)
+                }
+
+                if (masterIndex.index.format >= MasterIndexFormat.LENGTHS) {
+                    stmt.setInt(6, entry.groups)
+                    stmt.setInt(7, entry.totalUncompressedLength)
+                } else {
+                    stmt.setNull(6, Types.INTEGER)
+                    stmt.setNull(7, Types.INTEGER)
+                }
 
                 stmt.addBatch()
             }

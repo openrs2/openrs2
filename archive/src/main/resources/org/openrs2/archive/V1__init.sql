@@ -117,6 +117,8 @@ CREATE TABLE master_index_archives (
     crc32 INTEGER NOT NULL,
     whirlpool BYTEA NULL,
     version INTEGER NOT NULL,
+    groups INTEGER NULL,
+    total_uncompressed_length INTEGER NULL,
     PRIMARY KEY (master_index_id, archive_id)
 );
 
