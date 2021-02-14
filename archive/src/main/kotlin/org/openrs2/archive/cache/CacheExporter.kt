@@ -19,15 +19,27 @@ public class CacheExporter @Inject constructor(
 ) {
     public data class ArchiveStats(val indexes: Long, val validIndexes: Long) {
         public val allIndexesValid: Boolean = indexes == validIndexes
-        public val validIndexesFraction: Double = validIndexes.toDouble() / indexes
+        public val validIndexesFraction: Double = if (indexes == 0L) {
+            1.0
+        } else {
+            validIndexes.toDouble() / indexes
+        }
     }
 
     public data class GroupStats(val groups: Long, val validGroups: Long, val keys: Long, val validKeys: Long) {
         public val allGroupsValid: Boolean = groups == validGroups
-        public val validGroupsFraction: Double = validGroups.toDouble() / groups
+        public val validGroupsFraction: Double = if (groups == 0L) {
+            1.0
+        } else {
+            validGroups.toDouble() / groups
+        }
 
         public val allKeysValid: Boolean = keys == validKeys
-        public val validKeysFraction: Double = validKeys.toDouble() / keys
+        public val validKeysFraction: Double = if (keys == 0L) {
+            1.0
+        } else {
+            validKeys.toDouble() / keys
+        }
     }
 
     public data class Cache(
