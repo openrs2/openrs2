@@ -17,12 +17,17 @@ public class CacheExporter @Inject constructor(
     private val database: Database,
     private val alloc: ByteBufAllocator
 ) {
+    public data class ArchiveStats(val indexes: Long, val validIndexes: Long)
+    public data class GroupStats(val groups: Long, val validGroups: Long, val keys: Long, val validKeys: Long)
+
     public data class Cache(
         val id: Int,
         val game: String,
         val build: Int?,
         val timestamp: Instant?,
-        val name: String?
+        val name: String?,
+        val archiveStats: ArchiveStats?,
+        val groupStats: GroupStats?
     )
 
     public data class Key(
@@ -38,10 +43,14 @@ public class CacheExporter @Inject constructor(
         return database.execute { connection ->
             connection.prepareStatement(
                 """
-                SELECT m.id, g.name, m.build, m.timestamp, m.name
+                SELECT
+                    m.id, g.name, m.build, m.timestamp, m.name,
+                    a.indexes, a.valid_indexes, gs.groups, gs.valid_groups, gs.keys, gs.valid_keys
                 FROM master_indexes m
                 JOIN games g ON g.id = m.game_id
                 JOIN containers c ON c.id = m.container_id
+                LEFT JOIN master_index_archive_stats a ON a.master_index_id = m.id
+                LEFT JOIN master_index_group_stats gs ON gs.master_index_id = m.id
                 ORDER BY g.name ASC, m.build ASC, m.timestamp ASC
             """.trimIndent()
             ).use { stmt ->
@@ -60,7 +69,25 @@ public class CacheExporter @Inject constructor(
                         val timestamp = rows.getTimestamp(4)?.toInstant()
                         val name = rows.getString(5)
 
-                        caches += Cache(id, game, build, timestamp, name)
+                        val indexes = rows.getLong(6)
+                        val archiveStats = if (!rows.wasNull()) {
+                            val validIndexes = rows.getLong(7)
+                            ArchiveStats(indexes, validIndexes)
+                        } else {
+                            null
+                        }
+
+                        val groups = rows.getLong(8)
+                        val groupStats = if (!rows.wasNull()) {
+                            val validGroups = rows.getLong(9)
+                            val keys = rows.getLong(10)
+                            val validKeys = rows.getLong(11)
+                            GroupStats(groups, validGroups, keys, validKeys)
+                        } else {
+                            null
+                        }
+
+                        caches += Cache(id, game, build, timestamp, name, archiveStats, groupStats)
                     }
 
                     caches

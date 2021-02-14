@@ -8,6 +8,9 @@
 					<th>Build</th>
 					<th>Timestamp</th>
 					<th>Name</th>
+					<th>Indexes</th>
+					<th>Groups</th>
+					<th>Keys</th>
 					<th>Download</th>
 				</tr>
 			</thead>
@@ -18,6 +21,9 @@
 					<td th:text="${cache.build}">550</td>
 					<td th:text="${#temporals.formatISO(cache.timestamp)}"></td>
 					<td th:text="${cache.name}"></td>
+					<td th:text="${cache.archiveStats}? ${cache.archiveStats.validIndexes} + ' / ' + ${cache.archiveStats.indexes} : 'Calculating...'">Calculating...</td>
+					<td th:text="${cache.groupStats}? ${cache.groupStats.validGroups} + ' / ' + ${cache.groupStats.groups} : 'Calculating...'">Calculating...</td>
+					<td th:text="${cache.groupStats}? ${cache.groupStats.validKeys} + ' / ' + ${cache.groupStats.keys} : 'Calculating...'">Calculating...</td>
 					<td>
 						<a th:href="${'/caches/' + cache.id + '.zip'}">Cache</a>
 						<a th:href="${'/caches/' + cache.id + '.json'}">Keys</a>
