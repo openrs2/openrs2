@@ -148,7 +148,7 @@ UNION ALL
 SELECT i.master_index_id, i.archive_id, ig.group_id, ig.name_hash, ig.version, c.data, c.key_id
 FROM i
 JOIN index_groups ig ON ig.container_id = i.container_id
-JOIN groups g ON g.archive_id = i.archive_id::INTEGER AND g.group_id = ig.group_id AND (
+JOIN groups g ON g.archive_id = i.archive_id AND g.group_id = ig.group_id AND (
     (g.version = ig.version AND NOT g.version_truncated) OR
     (g.version = ig.version & 65535 AND g.version_truncated)
 )
