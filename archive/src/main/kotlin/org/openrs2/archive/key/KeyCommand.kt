@@ -7,6 +7,7 @@ public class KeyCommand : NoOpCliktCommand(name = "key") {
     init {
         subcommands(
             BruteForceCommand(),
+            DownloadCommand(),
             ImportCommand()
         )
     }

@@ -10,7 +10,8 @@ import javax.inject.Singleton
 @Singleton
 public class KeyImporter @Inject constructor(
     private val database: Database,
-    private val jsonKeyReader: JsonKeyReader
+    private val jsonKeyReader: JsonKeyReader,
+    private val downloaders: Set<KeyDownloader>
 ) {
     public suspend fun import(path: Path) {
         val keys = mutableSetOf<XteaKey>()
@@ -33,6 +34,16 @@ public class KeyImporter @Inject constructor(
             }
         }
 
+        keys -= XteaKey.ZERO
+
+        import(keys)
+    }
+
+    public suspend fun download() {
+        val keys = mutableSetOf<XteaKey>()
+        for (downloader in downloaders) {
+            keys += downloader.download()
+        }
         keys -= XteaKey.ZERO
 
         import(keys)
