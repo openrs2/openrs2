@@ -181,7 +181,7 @@ LEFT JOIN groups g ON g.archive_id = v.archive_id AND g.group_id = ig.group_id A
     (g.version = ig.version AND NOT g.version_truncated) OR
     (g.version = ig.version & 65535 AND g.version_truncated)
 )
-LEFT JOIN containers c on c.id = g.container_id AND c.crc32 = ig.crc32
+LEFT JOIN containers c ON c.id = g.container_id AND c.crc32 = ig.crc32
 LEFT JOIN keys k ON k.id = c.key_id
 GROUP BY v.master_index_id;
 
