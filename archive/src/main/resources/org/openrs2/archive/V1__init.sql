@@ -161,8 +161,9 @@ CREATE MATERIALIZED VIEW master_index_archive_stats (master_index_id, indexes, v
 SELECT a.master_index_id, COUNT(*), COUNT(i.container_id)
 FROM master_index_archives a
 LEFT JOIN groups g ON g.archive_id = 255 AND g.group_id = a.archive_id::INTEGER AND
-    g.version = a.version AND NOT g.version_truncated
-LEFT JOIN containers c ON c.id = g.container_id AND c.crc32 = a.crc32
+    g.version = a.version AND NOT g.version_truncated AND
+    g.container_id IN (SELECT id FROM containers WHERE crc32 = a.crc32)
+LEFT JOIN containers c ON c.id = g.container_id
 LEFT JOIN indexes i ON i.container_id = g.container_id AND i.version = a.version
 GROUP BY a.master_index_id;
 
@@ -172,7 +173,7 @@ CREATE MATERIALIZED VIEW master_index_group_stats (master_index_id, groups, vali
 SELECT
    v.master_index_id,
    COUNT(*),
-   COUNT(c.id),
+   COUNT(g.container_id),
    COUNT(*) FILTER (WHERE c.encrypted),
    COUNT(*) FILTER (WHERE c.key_id IS NOT NULL OR (c.empty_loc IS NOT NULL AND c.empty_loc))
 FROM master_index_valid_indexes v
@@ -180,8 +181,8 @@ JOIN index_groups ig ON ig.container_id = v.container_id
 LEFT JOIN groups g ON g.archive_id = v.archive_id AND g.group_id = ig.group_id AND (
     (g.version = ig.version AND NOT g.version_truncated) OR
     (g.version = ig.version & 65535 AND g.version_truncated)
-)
-LEFT JOIN containers c ON c.id = g.container_id AND c.crc32 = ig.crc32
+) AND g.container_id IN (SELECT id FROM containers WHERE crc32 = ig.crc32)
+LEFT JOIN containers c ON c.id = g.container_id
 LEFT JOIN keys k ON k.id = c.key_id
 GROUP BY v.master_index_id;
 
