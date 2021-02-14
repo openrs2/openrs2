@@ -35,7 +35,7 @@
 						<tr th:each="cache : ${caches}">
 							<td th:text="${cache.game}">runescape</td>
 							<td th:text="${cache.build}" class="text-right">550</td>
-							<td th:text="${#temporals.formatISO(cache.timestamp)}"></td>
+							<td th:text="${#temporals.format(cache.timestamp, 'yyyy-MM-dd HH:mm:ss')}"></td>
 							<td th:text="${cache.name}"></td>
 							<td
 								th:class="${cache.archiveStats}? (${cache.archiveStats.allIndexesValid}? 'table-success' : 'table-danger') + ' text-right'"
