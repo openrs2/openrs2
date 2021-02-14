@@ -20,6 +20,7 @@ public class CacheExporter @Inject constructor(
     public data class ArchiveStats(val indexes: Long, val validIndexes: Long) {
         public val allIndexesValid: Boolean = indexes == validIndexes
     }
+
     public data class GroupStats(val groups: Long, val validGroups: Long, val keys: Long, val validKeys: Long) {
         public val allGroupsValid: Boolean = groups == validGroups
         public val allKeysValid: Boolean = keys == validKeys
