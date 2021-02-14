@@ -533,8 +533,14 @@ public class CacheImporter @Inject constructor(
                     }
                 }
 
-                val uncompressed = Js5Compression.uncompressUnlessEncrypted(buf.slice())
-                return Group(archive, group, buf.retain(), uncompressed, version, versionTruncated)
+                val slice = buf.slice()
+                Js5Compression.uncompressUnlessEncrypted(slice).use { uncompressed ->
+                    if (slice.isReadable) {
+                        throw IOException("Trailing bytes after compressed data")
+                    }
+
+                    return Group(archive, group, buf.retain(), uncompressed?.retain(), version, versionTruncated)
+                }
             }
         } catch (ex: IOException) {
             return null
