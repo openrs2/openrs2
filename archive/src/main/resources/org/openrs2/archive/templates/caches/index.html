@@ -27,8 +27,8 @@
 						<td th:text="${#temporals.formatISO(cache.timestamp)}"></td>
 						<td th:text="${cache.name}"></td>
 						<td th:text="${cache.archiveStats}? ${cache.archiveStats.validIndexes} + ' / ' + ${cache.archiveStats.indexes} : 'Calculating...'">Calculating...</td>
-						<td th:text="${cache.groupStats}? ${cache.groupStats.validGroups} + ' / ' + ${cache.groupStats.groups} : 'Calculating...'">Calculating...</td>
-						<td th:text="${cache.groupStats}? ${cache.groupStats.validKeys} + ' / ' + ${cache.groupStats.keys} : 'Calculating...'">Calculating...</td>
+						<td th:text="${cache.groupStats}? ${#numbers.formatInteger(cache.groupStats.validGroups, 1, 'COMMA')} + ' / ' + ${#numbers.formatInteger(cache.groupStats.groups, 1, 'COMMA')} : 'Calculating...'">Calculating...</td>
+						<td th:text="${cache.groupStats}? ${#numbers.formatInteger(cache.groupStats.validKeys, 1, 'COMMA')} + ' / ' + ${#numbers.formatInteger(cache.groupStats.keys, 1, 'COMMA')} : 'Calculating...'">Calculating...</td>
 						<td>
 							<a th:href="${'/caches/' + cache.id + '.zip'}" class="btn btn-primary btn-sm">Cache</a>
 							<a th:href="${'/caches/' + cache.id + '.json'}" class="btn btn-primary btn-sm">Keys</a>
