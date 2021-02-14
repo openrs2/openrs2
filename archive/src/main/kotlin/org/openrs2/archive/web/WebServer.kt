@@ -11,6 +11,7 @@ import io.ktor.routing.routing
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import io.ktor.thymeleaf.Thymeleaf
+import io.ktor.webjars.Webjars
 import org.openrs2.json.Json
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect
 import org.thymeleaf.templatemode.TemplateMode
@@ -37,6 +38,8 @@ public class WebServer @Inject constructor(
                     templateMode = TemplateMode.HTML
                 })
             }
+
+            install(Webjars)
 
             routing {
                 get("/caches") { cachesController.index(call) }
