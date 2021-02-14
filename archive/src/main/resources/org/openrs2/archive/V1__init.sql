@@ -187,4 +187,11 @@ LEFT JOIN keys k ON k.id = c.key_id
 GROUP BY v.master_index_id;
 
 CREATE UNIQUE INDEX ON master_index_group_stats (master_index_id);
+
+CREATE VIEW collisions (archive_id, group_id, crc32, truncated_version, containers) AS
+SELECT g.archive_id, g.group_id, c.crc32, g.version & 65535 AS truncated_version, COUNT(DISTINCT c.id)
+FROM groups g
+JOIN containers c ON c.id = g.container_id
+GROUP BY g.archive_id, g.group_id, c.crc32, truncated_version
+HAVING COUNT(DISTINCT c.id) > 1;
 -- @formatter:on
