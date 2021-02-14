@@ -34,6 +34,7 @@ CREATE TABLE containers (
     uncompressed_length INTEGER NULL,
     uncompressed_crc32 INTEGER NULL,
     encrypted BOOLEAN NOT NULL,
+    empty_loc BOOLEAN NULL,
     key_id BIGINT NULL REFERENCES keys (id)
 );
 
@@ -168,7 +169,12 @@ GROUP BY a.master_index_id;
 CREATE UNIQUE INDEX ON master_index_archive_stats (master_index_id);
 
 CREATE MATERIALIZED VIEW master_index_group_stats (master_index_id, groups, valid_groups, keys, valid_keys) AS
-SELECT v.master_index_id, COUNT(*), COUNT(c.id), COUNT(*) FILTER (WHERE c.encrypted), COUNT(k.id)
+SELECT
+   v.master_index_id,
+   COUNT(*),
+   COUNT(c.id),
+   COUNT(*) FILTER (WHERE c.encrypted),
+   COUNT(*) FILTER (WHERE c.key_id IS NOT NULL OR (c.empty_loc IS NOT NULL AND c.empty_loc))
 FROM master_index_valid_indexes v
 JOIN index_groups ig ON ig.container_id = v.container_id
 LEFT JOIN groups g ON g.archive_id = v.archive_id AND g.group_id = ig.group_id AND (

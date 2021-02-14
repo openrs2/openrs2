@@ -348,4 +348,42 @@ public object Js5Compression {
             return output.retain()
         }
     }
+
+    public fun isEmptyLoc(buf: ByteBuf): Boolean {
+        val typeId = buf.readUnsignedByte().toInt()
+        val type = Js5CompressionType.fromOrdinal(typeId)
+            ?: throw IOException("Invalid compression type: $typeId")
+
+        val len = buf.readInt()
+        if (len < 0) {
+            throw IOException("Length is negative: $len")
+        }
+
+        if (type == Js5CompressionType.UNCOMPRESSED) {
+            if (buf.readableBytes() < len) {
+                throw IOException("Data truncated")
+            }
+            buf.skipBytes(len)
+
+            // an empty loc group has a single byte
+            return len == 1
+        }
+
+        val lenWithUncompressedLen = len + 4
+        if (buf.readableBytes() < lenWithUncompressedLen) {
+            throw IOException("Compressed data truncated")
+        }
+        buf.skipBytes(lenWithUncompressedLen)
+
+        return when (type) {
+            Js5CompressionType.UNCOMPRESSED -> throw AssertionError()
+            Js5CompressionType.BZIP2 -> len == 33
+            /*
+             * A single byte gzip compresses to 21 bytes with levels 1 to 9,
+             * and 24 bytes with level 0.
+             */
+            Js5CompressionType.GZIP -> len == 21 || len == 24
+            Js5CompressionType.LZMA -> len == 11
+        }
+    }
 }

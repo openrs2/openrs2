@@ -43,6 +43,7 @@ public class CacheImporter @Inject constructor(
         public val encrypted: Boolean = uncompressed == null
         public val uncompressedLen: Int? = uncompressed?.readableBytes()
         public val uncompressedCrc32: Int? = uncompressed?.crc32()
+        public val emptyLoc: Boolean = Js5Compression.isEmptyLoc(compressed.slice())
 
         public fun release() {
             compressed.release()
@@ -696,7 +697,8 @@ public class CacheImporter @Inject constructor(
                 uncompressed_length INTEGER NULL,
                 uncompressed_crc32 INTEGER NULL,
                 data BYTEA NOT NULL,
-                encrypted BOOLEAN NOT NULL
+                encrypted BOOLEAN NOT NULL,
+                empty_loc BOOLEAN NULL
             ) ON COMMIT DROP
         """.trimIndent()
         ).use { stmt ->
@@ -719,8 +721,8 @@ public class CacheImporter @Inject constructor(
 
         connection.prepareStatement(
             """
-            INSERT INTO tmp_containers (index, crc32, whirlpool, data, uncompressed_length, uncompressed_crc32, encrypted)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO tmp_containers (index, crc32, whirlpool, data, uncompressed_length, uncompressed_crc32, encrypted, empty_loc)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         """.trimIndent()
         ).use { stmt ->
             for ((i, container) in containers.withIndex()) {
@@ -731,6 +733,13 @@ public class CacheImporter @Inject constructor(
                 stmt.setObject(5, container.uncompressedLen, Types.INTEGER)
                 stmt.setObject(6, container.uncompressedCrc32, Types.INTEGER)
                 stmt.setBoolean(7, container.encrypted)
+
+                if (container.encrypted) {
+                    stmt.setBoolean(8, container.emptyLoc)
+                } else {
+                    stmt.setNull(8, Types.BOOLEAN)
+                }
+
                 stmt.addBatch()
             }
 
@@ -739,8 +748,8 @@ public class CacheImporter @Inject constructor(
 
         connection.prepareStatement(
             """
-            INSERT INTO containers (crc32, whirlpool, data, uncompressed_length, uncompressed_crc32, encrypted)
-            SELECT t.crc32, t.whirlpool, t.data, t.uncompressed_length, t.uncompressed_crc32, t.encrypted
+            INSERT INTO containers (crc32, whirlpool, data, uncompressed_length, uncompressed_crc32, encrypted, empty_loc)
+            SELECT t.crc32, t.whirlpool, t.data, t.uncompressed_length, t.uncompressed_crc32, t.encrypted, t.empty_loc
             FROM tmp_containers t
             LEFT JOIN containers c ON c.whirlpool = t.whirlpool
             WHERE c.whirlpool IS NULL

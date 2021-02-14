@@ -9,8 +9,10 @@ import java.io.IOException
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals
 import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 class Js5CompressionTest {
     @Test
@@ -601,6 +603,81 @@ class Js5CompressionTest {
         read("uncompressed-underflow.dat").use { compressed ->
             assertFailsWith<IOException> {
                 Js5Compression.uncompress(compressed).release()
+            }
+        }
+    }
+
+    @Test
+    fun testEmptyLocNone() {
+        read("empty-loc-none.dat").use { compressed ->
+            assertTrue(Js5Compression.isEmptyLoc(compressed))
+        }
+
+        read("none.dat").use { compressed ->
+            assertFalse(Js5Compression.isEmptyLoc(compressed))
+        }
+    }
+
+    @Test
+    fun testEmptyLocGzip() {
+        read("empty-loc-gzip.dat").use { compressed ->
+            assertTrue(Js5Compression.isEmptyLoc(compressed))
+        }
+
+        read("empty-loc-gzip-stored.dat").use { compressed ->
+            assertTrue(Js5Compression.isEmptyLoc(compressed))
+        }
+
+        read("gzip.dat").use { compressed ->
+            assertFalse(Js5Compression.isEmptyLoc(compressed))
+        }
+    }
+
+    @Test
+    fun testEmptyLocBzip2() {
+        read("empty-loc-bzip2.dat").use { compressed ->
+            assertTrue(Js5Compression.isEmptyLoc(compressed))
+        }
+
+        read("bzip2.dat").use { compressed ->
+            assertFalse(Js5Compression.isEmptyLoc(compressed))
+        }
+    }
+
+    @Test
+    fun testEmptyLocLzma() {
+        read("empty-loc-lzma.dat").use { compressed ->
+            assertTrue(Js5Compression.isEmptyLoc(compressed))
+        }
+
+        read("lzma.dat").use { compressed ->
+            assertFalse(Js5Compression.isEmptyLoc(compressed))
+        }
+    }
+
+    @Test
+    fun testEmptyLocInvalid() {
+        read("invalid-type.dat").use { compressed ->
+            assertFailsWith<IOException> {
+                Js5Compression.isEmptyLoc(compressed)
+            }
+        }
+
+        read("invalid-length.dat").use { compressed ->
+            assertFailsWith<IOException> {
+                Js5Compression.isEmptyLoc(compressed)
+            }
+        }
+
+        read("none-eof.dat").use { compressed ->
+            assertFailsWith<IOException> {
+                Js5Compression.isEmptyLoc(compressed)
+            }
+        }
+
+        read("compressed-underflow.dat").use { compressed ->
+            assertFailsWith<IOException> {
+                Js5Compression.isEmptyLoc(compressed)
             }
         }
     }
