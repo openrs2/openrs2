@@ -1,5 +1,6 @@
 package org.openrs2.archive.cache
 
+import com.github.michaelbull.logging.InlineLogger
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.ByteBufUtil
@@ -543,6 +544,7 @@ public class CacheImporter @Inject constructor(
                 }
             }
         } catch (ex: IOException) {
+            logger.warn(ex) { "Skipping corrupt group (archive $archive, group $group)" }
             return null
         }
     }
@@ -822,6 +824,8 @@ public class CacheImporter @Inject constructor(
     }
 
     public companion object {
+        private val logger = InlineLogger()
+
         public const val BATCH_SIZE: Int = 1024
     }
 }
