@@ -196,10 +196,6 @@ public class DiskStore private constructor(
                     num++
                 } while (buf.isWritable)
 
-                if (block != 0) {
-                    throw StoreCorruptException("Group longer than expected")
-                }
-
                 return buf.retain()
             }
         }

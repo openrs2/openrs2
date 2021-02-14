@@ -495,12 +495,6 @@ class DiskStoreTest {
 
     @Test
     fun testReadCorrupt() {
-        readTest("corrupt-eof-late") { store ->
-            assertFailsWith<StoreCorruptException> {
-                store.read(255, 1).release()
-            }
-        }
-
         readTest("corrupt-first-eof-early") { store ->
             assertFailsWith<StoreCorruptException> {
                 store.read(255, 1).release()
@@ -558,6 +552,17 @@ class DiskStoreTest {
         readTest("corrupt-second-outside-data-file") { store ->
             assertFailsWith<StoreCorruptException> {
                 store.read(255, 1).release()
+            }
+        }
+    }
+
+    @Test
+    fun testReadCorruptEofLate() {
+        readTest("corrupt-eof-late") { store ->
+            copiedBuffer("OpenRS2".repeat(1000)).use { expected ->
+                store.read(255, 1).use { actual ->
+                    assertEquals(expected, actual)
+                }
             }
         }
     }
