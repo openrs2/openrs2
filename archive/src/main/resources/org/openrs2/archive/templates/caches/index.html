@@ -37,25 +37,24 @@
 							<td th:text="${cache.build}" class="text-right">550</td>
 							<td th:text="${#temporals.format(cache.timestamp, 'yyyy-MM-dd HH:mm:ss')}"></td>
 							<td th:text="${cache.name}"></td>
-							<td
-								th:class="${cache.archiveStats}? (${cache.archiveStats.allIndexesValid}? 'table-success' : 'table-danger') + ' text-right'"
-								th:text="${cache.archiveStats}? ${cache.archiveStats.validIndexes} + ' / ' + ${cache.archiveStats.indexes} + ' (' + ${#numbers.formatPercent(cache.archiveStats.validIndexesFraction, 1, 2)} + ')' : 'Calculating...'"
-							>Calculating...
+							<td th:class="${cache.archiveStats}? (${cache.archiveStats.allIndexesValid}? 'table-success' : 'table-danger') + ' text-right'"
+							    th:text="${cache.archiveStats}? ${cache.archiveStats.validIndexes} + ' / ' + ${cache.archiveStats.indexes} + ' (' + ${#numbers.formatPercent(cache.archiveStats.validIndexesFraction, 1, 2)} + ')' : 'Calculating...'">
+								Calculating...
 							</td>
-							<td
-								th:class="${cache.groupStats}? (${cache.groupStats.allGroupsValid}? 'table-success' : 'table-warning') + ' text-right'"
-								th:text="${cache.groupStats}? ${#numbers.formatInteger(cache.groupStats.validGroups, 1, 'COMMA')} + ' / ' + ${#numbers.formatInteger(cache.groupStats.groups, 1, 'COMMA')} + ' (' + ${#numbers.formatPercent(cache.groupStats.validGroupsFraction, 1, 2)} + ')' : 'Calculating...'"
-							>Calculating...
+							<td th:class="${cache.groupStats}? (${cache.groupStats.allGroupsValid}? 'table-success' : 'table-warning') + ' text-right'"
+							    th:text="${cache.groupStats}? ${#numbers.formatInteger(cache.groupStats.validGroups, 1, 'COMMA')} + ' / ' + ${#numbers.formatInteger(cache.groupStats.groups, 1, 'COMMA')} + ' (' + ${#numbers.formatPercent(cache.groupStats.validGroupsFraction, 1, 2)} + ')' : 'Calculating...'">
+								Calculating...
 							</td>
-							<td
-								th:class="${cache.groupStats}? (${cache.groupStats.allKeysValid}? 'table-success' : 'table-warning') + ' text-right'"
-								th:text="${cache.groupStats}? ${#numbers.formatInteger(cache.groupStats.validKeys, 1, 'COMMA')} + ' / ' + ${#numbers.formatInteger(cache.groupStats.keys, 1, 'COMMA')} + ' (' + ${#numbers.formatPercent(cache.groupStats.validKeysFraction, 1, 2)} + ')' : 'Calculating...'"
-							>Calculating...
+							<td th:class="${cache.groupStats}? (${cache.groupStats.allKeysValid}? 'table-success' : 'table-warning') + ' text-right'"
+							    th:text="${cache.groupStats}? ${#numbers.formatInteger(cache.groupStats.validKeys, 1, 'COMMA')} + ' / ' + ${#numbers.formatInteger(cache.groupStats.keys, 1, 'COMMA')} + ' (' + ${#numbers.formatPercent(cache.groupStats.validKeysFraction, 1, 2)} + ')' : 'Calculating...'">
+								Calculating...
 							</td>
 							<td>
 								<div class="btn-group">
-									<a th:href="${'/caches/' + cache.id + '.zip'}" class="btn btn-primary btn-sm">Cache</a>
-									<a th:href="${'/caches/' + cache.id + '.json'}" class="btn btn-primary btn-sm">Keys</a>
+									<a th:href="${'/caches/' + cache.id + '.zip'}"
+									   class="btn btn-primary btn-sm">Cache</a>
+									<a th:href="${'/caches/' + cache.id + '.json'}"
+									   class="btn btn-primary btn-sm">Keys</a>
 								</div>
 							</td>
 						</tr>
