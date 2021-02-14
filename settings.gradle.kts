@@ -31,6 +31,7 @@ include(
     "deob-processor",
     "deob-util",
     "game",
+    "http",
     "json",
     "net",
     "nonfree",
