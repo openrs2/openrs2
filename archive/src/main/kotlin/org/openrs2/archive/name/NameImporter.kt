@@ -7,8 +7,17 @@ import javax.inject.Singleton
 
 @Singleton
 public class NameImporter @Inject constructor(
-    private val database: Database
+    private val database: Database,
+    private val downloaders: Set<NameDownloader>
 ) {
+    public suspend fun download() {
+        val names = mutableSetOf<String>()
+        for (downloader in downloaders) {
+            names += downloader.download()
+        }
+        import(names)
+    }
+
     public suspend fun import(names: Iterable<String>) {
         database.execute { connection ->
             connection.prepareStatement(

@@ -6,6 +6,7 @@ import com.github.ajalt.clikt.core.subcommands
 public class NameCommand : NoOpCliktCommand(name = "name") {
     init {
         subcommands(
+            DownloadCommand(),
             GenerateCommand(),
             ImportCommand()
         )
