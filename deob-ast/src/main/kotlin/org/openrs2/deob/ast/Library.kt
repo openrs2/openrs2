@@ -2,8 +2,14 @@ package org.openrs2.deob.ast
 
 import com.github.javaparser.ParserConfiguration
 import com.github.javaparser.ast.CompilationUnit
-import com.github.javaparser.printer.PrettyPrinter
-import com.github.javaparser.printer.PrettyPrinterConfiguration
+import com.github.javaparser.printer.DefaultPrettyPrinter
+import com.github.javaparser.printer.configuration.DefaultConfigurationOption
+import com.github.javaparser.printer.configuration.DefaultPrinterConfiguration
+import com.github.javaparser.printer.configuration.DefaultPrinterConfiguration.ConfigOption.INDENTATION
+import com.github.javaparser.printer.configuration.DefaultPrinterConfiguration.ConfigOption.INDENT_CASE_IN_SWITCH
+import com.github.javaparser.printer.configuration.DefaultPrinterConfiguration.ConfigOption.ORDER_IMPORTS
+import com.github.javaparser.printer.configuration.Indentation
+import com.github.javaparser.printer.configuration.Indentation.IndentType.TABS_WITH_SPACE_ALIGN
 import com.github.javaparser.symbolsolver.JavaSymbolSolver
 import com.github.javaparser.symbolsolver.resolution.typesolvers.ClassLoaderTypeSolver
 import com.github.javaparser.symbolsolver.resolution.typesolvers.CombinedTypeSolver
@@ -45,12 +51,11 @@ public class Library(
         private val PC_ANNOTATION_REGEX = Regex("@Pc\\(([0-9]+)\\)\\s+")
 
         private val printer = Function<CompilationUnit, String>(
-            PrettyPrinter(
-                PrettyPrinterConfiguration()
-                    .setIndentType(PrettyPrinterConfiguration.IndentType.TABS_WITH_SPACE_ALIGN)
-                    .setIndentSize(1)
-                    .setIndentCaseInSwitch(false)
-                    .setOrderImports(true)
+            DefaultPrettyPrinter(
+                DefaultPrinterConfiguration()
+                    .addOption(DefaultConfigurationOption(INDENTATION, Indentation(TABS_WITH_SPACE_ALIGN, 1)))
+                    .addOption(DefaultConfigurationOption(INDENT_CASE_IN_SWITCH, false))
+                    .addOption(DefaultConfigurationOption(ORDER_IMPORTS, true))
             )::print
         ).andThen(::stripNewlineAfterPcAnnotation)
 
