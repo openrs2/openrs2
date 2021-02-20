@@ -15,7 +15,7 @@ public class DataSourceProvider : Provider<DataSource> {
 
         Flyway.configure()
             .dataSource(dataSource)
-            .locations("classpath:/org/openrs2/archive")
+            .locations("classpath:/org/openrs2/archive/migrations")
             .load()
             .migrate()
 
