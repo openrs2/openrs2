@@ -22,6 +22,7 @@ dependencies {
     implementation(project(":protocol"))
     implementation(project(":util"))
     implementation("com.google.guava:guava:${Versions.guava}")
+    implementation("com.zaxxer:HikariCP:${Versions.hikaricp}")
     implementation("io.ktor:ktor-jackson:${Versions.ktor}")
     implementation("io.ktor:ktor-server-netty:${Versions.ktor}")
     implementation("io.ktor:ktor-thymeleaf:${Versions.ktor}")

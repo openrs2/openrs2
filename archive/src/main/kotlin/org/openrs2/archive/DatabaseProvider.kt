@@ -1,25 +1,15 @@
 package org.openrs2.archive
 
-import org.flywaydb.core.Flyway
 import org.openrs2.db.Database
 import org.openrs2.db.PostgresDeadlockDetector
-import org.postgresql.ds.PGSimpleDataSource
+import javax.inject.Inject
 import javax.inject.Provider
+import javax.sql.DataSource
 
-public class DatabaseProvider : Provider<Database> {
+public class DatabaseProvider @Inject constructor(
+    private val dataSource: DataSource
+) : Provider<Database> {
     override fun get(): Database {
-        val dataSource = PGSimpleDataSource()
-        // TODO(gpe): make the URL configurable
-        dataSource.setUrl("jdbc:postgresql://localhost/runearchive?user=gpe&password=gpe")
-
-        Flyway.configure()
-            .dataSource(dataSource)
-            .locations("classpath:/org/openrs2/archive")
-            .load()
-            .migrate()
-
-        // TODO(gpe): wrap dataSource with HikariCP? how do we close the pool?
-
         return Database(dataSource, deadlockDetector = PostgresDeadlockDetector)
     }
 }

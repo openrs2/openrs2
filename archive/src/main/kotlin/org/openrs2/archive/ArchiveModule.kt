@@ -14,6 +14,7 @@ import org.openrs2.db.Database
 import org.openrs2.http.HttpModule
 import org.openrs2.json.JsonModule
 import org.openrs2.net.NetworkModule
+import javax.sql.DataSource
 
 public object ArchiveModule : AbstractModule() {
     override fun configure() {
@@ -22,6 +23,10 @@ public object ArchiveModule : AbstractModule() {
         install(HttpModule)
         install(JsonModule)
         install(NetworkModule)
+
+        bind(DataSource::class.java)
+            .toProvider(DataSourceProvider::class.java)
+            .`in`(Scopes.SINGLETON)
 
         bind(Database::class.java)
             .toProvider(DatabaseProvider::class.java)

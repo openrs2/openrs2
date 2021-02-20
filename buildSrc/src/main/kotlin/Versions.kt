@@ -13,6 +13,7 @@ object Versions {
     const val guava = "30.1-jre"
     const val guice = "5.0.0-BETA-1"
     const val h2 = "1.4.200"
+    const val hikaricp = "4.0.2"
     const val inlineLogger = "1.0.3"
     const val jackson = "2.12.1"
     const val javaParser = "3.19.0"
