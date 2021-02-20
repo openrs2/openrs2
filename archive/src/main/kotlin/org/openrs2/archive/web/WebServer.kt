@@ -43,6 +43,7 @@ public class WebServer @Inject constructor(
 
             routing {
                 get("/caches") { cachesController.index(call) }
+                get("/caches/{id}") { cachesController.show(call) }
                 get("/caches/{id}.zip") { cachesController.export(call) }
                 get("/caches/{id}.json") { cachesController.exportKeys(call) }
             }

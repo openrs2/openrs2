@@ -26,6 +26,22 @@ public class CachesController @Inject constructor(
         call.respond(ThymeleafContent("caches/index.html", mapOf("caches" to caches)))
     }
 
+    public suspend fun show(call: ApplicationCall) {
+        val id = call.parameters["id"]?.toIntOrNull()
+        if (id == null) {
+            call.respond(HttpStatusCode.NotFound)
+            return
+        }
+
+        val cache = exporter.get(id)
+        if (cache == null) {
+            call.respond(HttpStatusCode.NotFound)
+            return
+        }
+
+        call.respond(ThymeleafContent("caches/show.html", mapOf("cache" to cache)))
+    }
+
     public suspend fun export(call: ApplicationCall) {
         val id = call.parameters["id"]?.toIntOrNull()
         if (id == null) {

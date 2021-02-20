@@ -48,6 +48,7 @@ public class CacheExporter @Inject constructor(
         val build: Int?,
         val timestamp: Instant?,
         val name: String?,
+        val description: String?,
         val archiveStats: ArchiveStats?,
         val groupStats: GroupStats?
     )
@@ -109,10 +110,67 @@ public class CacheExporter @Inject constructor(
                             null
                         }
 
-                        caches += Cache(id, game, build, timestamp, name, archiveStats, groupStats)
+                        caches += Cache(id, game, build, timestamp, name, description = null, archiveStats, groupStats)
                     }
 
                     caches
+                }
+            }
+        }
+    }
+
+    public suspend fun get(id: Int): Cache? {
+        return database.execute { connection ->
+            connection.prepareStatement(
+                """
+                SELECT
+                    g.name, m.build, m.timestamp, m.name, m.description,
+                    a.indexes, a.valid_indexes, gs.groups, gs.valid_groups, gs.keys, gs.valid_keys
+                FROM master_indexes m
+                JOIN games g ON g.id = m.game_id
+                JOIN containers c ON c.id = m.container_id
+                LEFT JOIN master_index_archive_stats a ON a.master_index_id = m.id
+                LEFT JOIN master_index_group_stats gs ON gs.master_index_id = m.id
+                WHERE m.id = ?
+            """.trimIndent()
+            ).use { stmt ->
+                stmt.setInt(1, id)
+
+                stmt.executeQuery().use { rows ->
+                    if (!rows.next()) {
+                        return@execute null
+                    }
+
+                    val game = rows.getString(1)
+
+                    var build: Int? = rows.getInt(2)
+                    if (rows.wasNull()) {
+                        build = null
+                    }
+
+                    val timestamp = rows.getTimestamp(3)?.toInstant()
+                    val name = rows.getString(4)
+                    val description = rows.getString(5)
+
+                    val indexes = rows.getLong(6)
+                    val archiveStats = if (!rows.wasNull()) {
+                        val validIndexes = rows.getLong(7)
+                        ArchiveStats(indexes, validIndexes)
+                    } else {
+                        null
+                    }
+
+                    val groups = rows.getLong(8)
+                    val groupStats = if (!rows.wasNull()) {
+                        val validGroups = rows.getLong(9)
+                        val keys = rows.getLong(10)
+                        val validKeys = rows.getLong(11)
+                        GroupStats(groups, validGroups, keys, validKeys)
+                    } else {
+                        null
+                    }
+
+                    return@execute Cache(id, game, build, timestamp, name, description, archiveStats, groupStats)
                 }
             }
         }

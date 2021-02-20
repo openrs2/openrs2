@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+	<head th:fragment="head">
+		<!--/*@thymesVar id="title" type="java.lang.String"*/-->
+		<title th:text="${title}? ${title} + ' - OpenRS2 Archive' : 'OpenRS2 Archive'">OpenRS2 Archive</title>
+		<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+	</head>
+	<body>
+		<nav class="navbar navbar-dark bg-dark mb-4" th:fragment="nav">
+			<div class="container">
+				<a class="navbar-brand" href="/">OpenRS2 Archive</a>
+				<ul class="navbar-nav mr-auto">
+					<!--/*@thymesVar id="active" type="java.lang.String"*/-->
+					<li class="nav-item" th:classappend="${active == 'caches'}? 'active'">
+						<a class="nav-link" href="/caches">Caches</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<main class="container">
+		</main>
+	</body>
+</html>

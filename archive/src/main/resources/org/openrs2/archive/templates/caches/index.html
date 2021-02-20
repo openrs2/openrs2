@@ -1,21 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-	<head>
-		<title>OpenRS2 Archive</title>
+	<head th:replace="layout.html :: head(title='Caches')">
+		<title>Caches - OpenRS2 Archive</title>
 		<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 	</head>
 	<body>
-		<nav class="navbar navbar-dark bg-dark mb-4">
-			<div class="container">
-				<a class="navbar-brand" href="/">OpenRS2 Archive</a>
-				<ul class="navbar-nav mr-auto">
-					<li class="nav-item">
-						<a class="nav-link active" href="/caches">Caches</a>
-					</li>
-				</ul>
-			</div>
-		</nav>
+		<nav th:replace="layout.html :: nav(active='caches')"></nav>
 		<main class="container">
+			<h1>Caches</h1>
 			<div class="table-responsive">
 				<table class="table table-striped table-bordered table-hover">
 					<thead class="thead-dark">
@@ -27,7 +19,7 @@
 							<th>Indexes</th>
 							<th>Groups</th>
 							<th>Keys<sup><a href="#empty-locs">1</a></sup></th>
-							<th>Download</th>
+							<th>Links</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -62,6 +54,8 @@
 									   class="btn btn-primary btn-sm">Cache</a>
 									<a th:href="${'/caches/' + cache.id + '.json'}"
 									   class="btn btn-primary btn-sm">Keys</a>
+									<a th:href="${'/caches/' + cache.id}"
+									   class="btn btn-secondary btn-sm">More</a>
 								</div>
 							</td>
 						</tr>
