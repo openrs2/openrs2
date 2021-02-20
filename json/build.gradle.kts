@@ -19,7 +19,7 @@ publishing {
             name.set("OpenRS2 JSON")
             description.set(
                 """
-                Guava module for creating a JSON ObjectMapper.
+                Guice module for creating a JSON ObjectMapper.
             """.trimIndent()
             )
         }

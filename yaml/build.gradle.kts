@@ -20,7 +20,7 @@ publishing {
             name.set("OpenRS2 YAML")
             description.set(
                 """
-                Guava module for creating a YAML ObjectMapper.
+                Guice module for creating a YAML ObjectMapper.
             """.trimIndent()
             )
         }
