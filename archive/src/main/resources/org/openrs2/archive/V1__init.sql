@@ -175,7 +175,7 @@ SELECT
    COUNT(*),
    COUNT(g.container_id),
    COUNT(*) FILTER (WHERE c.encrypted),
-   COUNT(*) FILTER (WHERE c.key_id IS NOT NULL OR (c.empty_loc IS NOT NULL AND c.empty_loc))
+   COUNT(*) FILTER (WHERE c.key_id IS NOT NULL)
 FROM master_index_valid_indexes v
 JOIN index_groups ig ON ig.container_id = v.container_id
 LEFT JOIN groups g ON g.archive_id = v.archive_id AND g.group_id = ig.group_id AND (
