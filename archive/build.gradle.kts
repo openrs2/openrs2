@@ -17,7 +17,6 @@ dependencies {
     implementation(project(":db"))
     implementation(project(":http"))
     implementation(project(":json"))
-    implementation(project(":json"))
     implementation(project(":net"))
     implementation(project(":protocol"))
     implementation(project(":util"))
