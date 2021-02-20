@@ -139,7 +139,14 @@ public class Js5ChannelHandler(
 
         val removed = inFlightRequests.remove(request)
         if (!removed) {
-            throw Exception("Received response for request not in-flight")
+            val type = if (response.prefetch) {
+                "prefetch"
+            } else {
+                "urgent"
+            }
+            val archive = response.archive
+            val group = response.group
+            throw Exception("Received response for $type request (archive $archive group $group) not in-flight")
         }
 
         if (response.archive == Js5Archive.ARCHIVESET && response.group == Js5Archive.ARCHIVESET) {
@@ -207,9 +214,10 @@ public class Js5ChannelHandler(
     }
 
     private fun processIndex(archive: Int, buf: ByteBuf) {
+        val checksum = buf.crc32()
         val entry = masterIndex!!.entries[archive]
-        if (buf.crc32() != entry.checksum) {
-            throw Exception("Index checksum invalid")
+        if (checksum != entry.checksum) {
+            throw Exception("Index $archive checksum invalid (expected ${entry.checksum}, actual $checksum)")
         }
 
         Js5Compression.uncompress(buf.slice()).use { uncompressed ->
@@ -217,7 +225,7 @@ public class Js5ChannelHandler(
             indexes[archive] = index
 
             if (index.version != entry.version) {
-                throw Exception("Index version invalid")
+                throw Exception("Index $archive version invalid (expected ${entry.version}, actual ${index.version})")
             }
 
             val groups = runBlocking {
@@ -230,10 +238,11 @@ public class Js5ChannelHandler(
     }
 
     private fun processGroup(archive: Int, group: Int, buf: ByteBuf) {
+        val checksum = buf.crc32()
         val entry = indexes[archive]!![group]!!
-
-        if (buf.crc32() != entry.checksum) {
-            throw Exception("Group checksum invalid")
+        if (checksum != entry.checksum) {
+            val expected = entry.checksum
+            throw Exception("Archive $archive group $group checksum invalid (expected $expected, actual $checksum)")
         }
 
         val uncompressed = Js5Compression.uncompressUnlessEncrypted(buf.slice())
