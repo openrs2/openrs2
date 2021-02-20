@@ -4,23 +4,25 @@ import com.github.ajalt.clikt.core.CliktCommand
 import com.google.inject.Guice
 import kotlinx.coroutines.runBlocking
 import org.openrs2.archive.ArchiveModule
+import org.openrs2.inject.CloseableInjector
 
 public class GenerateCommand : CliktCommand(name = "generate") {
     override fun run(): Unit = runBlocking {
-        val injector = Guice.createInjector(ArchiveModule)
-        val importer = injector.getInstance(NameImporter::class.java)
+        CloseableInjector(Guice.createInjector(ArchiveModule)).use { injector ->
+            val importer = injector.getInstance(NameImporter::class.java)
 
-        val names = mutableSetOf<String>()
+            val names = mutableSetOf<String>()
 
-        for (x in 0..99) {
-            for (z in 0..255) {
-                for (prefix in PREFIXES) {
-                    names += "$prefix${x}_$z"
+            for (x in 0..99) {
+                for (z in 0..255) {
+                    for (prefix in PREFIXES) {
+                        names += "$prefix${x}_$z"
+                    }
                 }
             }
-        }
 
-        importer.import(names)
+            importer.import(names)
+        }
     }
 
     private companion object {

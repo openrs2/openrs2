@@ -6,6 +6,7 @@ plugins {
 dependencies {
     implementation(project(":deob-annotations"))
     implementation(project(":deob-util"))
+    implementation(project(":inject"))
     implementation(project(":yaml"))
 }
 

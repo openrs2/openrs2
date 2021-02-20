@@ -13,6 +13,7 @@ dependencies {
     api("com.github.ajalt.clikt:clikt:${Versions.clikt}")
     api("com.google.inject:guice:${Versions.guice}")
 
+    implementation(project(":inject"))
     implementation(project(":util"))
     implementation("com.github.javaparser:javaparser-symbol-solver-core:${Versions.javaParser}")
     implementation("com.google.guava:guava:${Versions.guava}")

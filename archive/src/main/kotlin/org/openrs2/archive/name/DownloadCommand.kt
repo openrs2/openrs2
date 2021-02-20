@@ -4,11 +4,13 @@ import com.github.ajalt.clikt.core.CliktCommand
 import com.google.inject.Guice
 import kotlinx.coroutines.runBlocking
 import org.openrs2.archive.ArchiveModule
+import org.openrs2.inject.CloseableInjector
 
 public class DownloadCommand : CliktCommand(name = "download") {
     override fun run(): Unit = runBlocking {
-        val injector = Guice.createInjector(ArchiveModule)
-        val importer = injector.getInstance(NameImporter::class.java)
-        importer.download()
+        CloseableInjector(Guice.createInjector(ArchiveModule)).use { injector ->
+            val importer = injector.getInstance(NameImporter::class.java)
+            importer.download()
+        }
     }
 }

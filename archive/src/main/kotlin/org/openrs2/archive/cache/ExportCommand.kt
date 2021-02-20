@@ -8,6 +8,7 @@ import com.google.inject.Guice
 import kotlinx.coroutines.runBlocking
 import org.openrs2.archive.ArchiveModule
 import org.openrs2.cache.DiskStore
+import org.openrs2.inject.CloseableInjector
 
 public class ExportCommand : CliktCommand(name = "export") {
     private val id by argument().int()
@@ -19,11 +20,12 @@ public class ExportCommand : CliktCommand(name = "export") {
     )
 
     override fun run(): Unit = runBlocking {
-        val injector = Guice.createInjector(ArchiveModule)
-        val exporter = injector.getInstance(CacheExporter::class.java)
+        CloseableInjector(Guice.createInjector(ArchiveModule)).use { injector ->
+            val exporter = injector.getInstance(CacheExporter::class.java)
 
-        DiskStore.create(output).use { store ->
-            exporter.export(id, store)
+            DiskStore.create(output).use { store ->
+                exporter.export(id, store)
+            }
         }
     }
 }

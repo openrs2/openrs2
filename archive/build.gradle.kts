@@ -16,6 +16,7 @@ dependencies {
     implementation(project(":cli"))
     implementation(project(":db"))
     implementation(project(":http"))
+    implementation(project(":inject"))
     implementation(project(":json"))
     implementation(project(":net"))
     implementation(project(":protocol"))

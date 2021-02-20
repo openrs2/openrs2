@@ -7,16 +7,18 @@ import com.github.ajalt.clikt.parameters.types.inputStream
 import com.google.inject.Guice
 import kotlinx.coroutines.runBlocking
 import org.openrs2.archive.ArchiveModule
+import org.openrs2.inject.CloseableInjector
 
 public class ImportCommand : CliktCommand(name = "import") {
     private val input by option().inputStream().defaultStdin()
 
     override fun run(): Unit = runBlocking {
-        val injector = Guice.createInjector(ArchiveModule)
-        val importer = injector.getInstance(NameImporter::class.java)
+        CloseableInjector(Guice.createInjector(ArchiveModule)).use { injector ->
+            val importer = injector.getInstance(NameImporter::class.java)
 
-        input.bufferedReader().useLines { lines ->
-            importer.import(lines.toSet())
+            input.bufferedReader().useLines { lines ->
+                importer.import(lines.toSet())
+            }
         }
     }
 }

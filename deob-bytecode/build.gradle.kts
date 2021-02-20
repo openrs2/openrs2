@@ -14,6 +14,7 @@ dependencies {
 
     implementation(project(":deob-annotations"))
     implementation(project(":deob-util"))
+    implementation(project(":inject"))
     implementation(project(":patcher"))
     implementation(project(":yaml"))
     implementation("com.google.guava:guava:${Versions.guava}")

@@ -15,6 +15,7 @@ dependencies {
     implementation(project(":decompiler"))
     implementation(project(":deob-ast"))
     implementation(project(":deob-bytecode"))
+    implementation(project(":inject"))
 }
 
 publishing {

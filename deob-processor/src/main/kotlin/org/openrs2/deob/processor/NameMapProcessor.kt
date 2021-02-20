@@ -12,6 +12,7 @@ import org.openrs2.deob.annotation.OriginalMember
 import org.openrs2.deob.util.map.Field
 import org.openrs2.deob.util.map.Method
 import org.openrs2.deob.util.map.NameMap
+import org.openrs2.inject.CloseableInjector
 import org.openrs2.util.io.useAtomicBufferedWriter
 import org.openrs2.yaml.Yaml
 import java.lang.reflect.Proxy
@@ -40,15 +41,11 @@ import javax.lang.model.element.VariableElement
     "map"
 )
 public class NameMapProcessor : AbstractProcessor() {
+    private val injector = CloseableInjector(Guice.createInjector(DeobfuscatorProcessorModule))
     private val map = NameMap()
-    private val mapper: ObjectMapper
+    private val mapper = injector.getInstance(Key.get(ObjectMapper::class.java, Yaml::class.java))
     private lateinit var trees: Trees
     private lateinit var localScanner: LocalVariableScanner
-
-    init {
-        val injector = Guice.createInjector(DeobfuscatorProcessorModule)
-        mapper = injector.getInstance(Key.get(ObjectMapper::class.java, Yaml::class.java))
-    }
 
     override fun init(env: ProcessingEnvironment) {
         super.init(env)
@@ -124,6 +121,8 @@ public class NameMapProcessor : AbstractProcessor() {
             mapPath.useAtomicBufferedWriter { writer ->
                 mapper.writeValue(writer, combinedMap)
             }
+
+            injector.close()
         }
 
         return true

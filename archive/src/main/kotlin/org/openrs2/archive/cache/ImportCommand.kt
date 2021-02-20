@@ -10,6 +10,7 @@ import kotlinx.coroutines.runBlocking
 import org.openrs2.archive.ArchiveModule
 import org.openrs2.cache.Store
 import org.openrs2.cli.instant
+import org.openrs2.inject.CloseableInjector
 
 public class ImportCommand : CliktCommand(name = "import") {
     private val build by option().int()
@@ -25,11 +26,12 @@ public class ImportCommand : CliktCommand(name = "import") {
     )
 
     override fun run(): Unit = runBlocking {
-        val injector = Guice.createInjector(ArchiveModule)
-        val importer = injector.getInstance(CacheImporter::class.java)
+        CloseableInjector(Guice.createInjector(ArchiveModule)).use { injector ->
+            val importer = injector.getInstance(CacheImporter::class.java)
 
-        Store.open(input).use { store ->
-            importer.import(store, game, build, timestamp, name, description)
+            Store.open(input).use { store ->
+                importer.import(store, game, build, timestamp, name, description)
+            }
         }
     }
 }

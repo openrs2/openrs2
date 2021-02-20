@@ -13,6 +13,7 @@ import org.openrs2.archive.ArchiveModule
 import org.openrs2.buffer.use
 import org.openrs2.cache.MasterIndexFormat
 import org.openrs2.cli.instant
+import org.openrs2.inject.CloseableInjector
 import java.nio.file.Files
 
 public class ImportMasterIndexCommand : CliktCommand(name = "import-master-index") {
@@ -30,11 +31,12 @@ public class ImportMasterIndexCommand : CliktCommand(name = "import-master-index
     )
 
     override fun run(): Unit = runBlocking {
-        val injector = Guice.createInjector(ArchiveModule)
-        val importer = injector.getInstance(CacheImporter::class.java)
+        CloseableInjector(Guice.createInjector(ArchiveModule)).use { injector ->
+            val importer = injector.getInstance(CacheImporter::class.java)
 
-        Unpooled.wrappedBuffer(Files.readAllBytes(input)).use { buf ->
-            importer.importMasterIndex(buf, format, game, build, timestamp, name, description)
+            Unpooled.wrappedBuffer(Files.readAllBytes(input)).use { buf ->
+                importer.importMasterIndex(buf, format, game, build, timestamp, name, description)
+            }
         }
     }
 }

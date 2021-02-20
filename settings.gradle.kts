@@ -32,6 +32,7 @@ include(
     "deob-util",
     "game",
     "http",
+    "inject",
     "json",
     "net",
     "nonfree",
