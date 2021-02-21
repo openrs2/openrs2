@@ -5,6 +5,7 @@ import com.google.inject.Scopes
 import com.google.inject.multibindings.Multibinder
 import org.openrs2.archive.key.KeyDownloader
 import org.openrs2.archive.key.OpenOsrsKeyDownloader
+import org.openrs2.archive.key.PolarKeyDownloader
 import org.openrs2.archive.key.RuneLiteKeyDownloader
 import org.openrs2.archive.name.NameDownloader
 import org.openrs2.archive.name.RuneStarNameDownloader
@@ -34,6 +35,7 @@ public object ArchiveModule : AbstractModule() {
 
         val keyBinder = Multibinder.newSetBinder(binder(), KeyDownloader::class.java)
         keyBinder.addBinding().to(OpenOsrsKeyDownloader::class.java)
+        keyBinder.addBinding().to(PolarKeyDownloader::class.java)
         keyBinder.addBinding().to(RuneLiteKeyDownloader::class.java)
 
         val nameBinder = Multibinder.newSetBinder(binder(), NameDownloader::class.java)

@@ -20,6 +20,7 @@ object Versions {
     const val jdom = "2.0.6"
     const val jgrapht = "1.5.0"
     const val jimfs = "1.2"
+    const val jsoup = "1.13.1"
     const val junit = "5.7.1"
     const val kotlin = "1.4.30"
     const val kotlinCoroutines = "1.4.2"

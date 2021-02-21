@@ -4,6 +4,7 @@ import org.openrs2.crypto.XteaKey
 import org.openrs2.db.Database
 import java.nio.file.Files
 import java.nio.file.Path
+import java.sql.Connection
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -40,68 +41,109 @@ public class KeyImporter @Inject constructor(
     }
 
     public suspend fun download() {
-        val keys = mutableSetOf<XteaKey>()
-        for (downloader in downloaders) {
-            keys += downloader.download()
+        val seenUrls = database.execute { connection ->
+            connection.prepareStatement(
+                """
+                SELECT url FROM keysets
+            """.trimIndent()
+            ).use { stmt ->
+                stmt.executeQuery().use { rows ->
+                    val urls = mutableSetOf<String>()
+                    while (rows.next()) {
+                        urls += rows.getString(1)
+                    }
+                    return@execute urls
+                }
+            }
         }
-        keys -= XteaKey.ZERO
 
-        import(keys)
-    }
+        val keys = mutableSetOf<XteaKey>()
+        val urls = mutableSetOf<String>()
 
-    public suspend fun import(keys: Iterable<XteaKey>) {
+        for (downloader in downloaders) {
+            for (url in downloader.getMissingUrls(seenUrls)) {
+                keys += downloader.download(url)
+                urls += url
+            }
+        }
+
         database.execute { connection ->
             connection.prepareStatement(
                 """
-                LOCK TABLE keys IN EXCLUSIVE MODE
+                INSERT INTO keysets (url)
+                VALUES (?)
+                ON CONFLICT DO NOTHING
             """.trimIndent()
             ).use { stmt ->
-                stmt.execute()
-            }
-
-            connection.prepareStatement(
-                """
-                CREATE TEMPORARY TABLE tmp_keys (
-                    key xtea_key NOT NULL
-                ) ON COMMIT DROP
-            """.trimIndent()
-            ).use { stmt ->
-                stmt.execute()
-            }
-
-            connection.prepareStatement(
-                """
-                INSERT INTO tmp_keys (key)
-                VALUES (ROW(?, ?, ?, ?))
-            """.trimIndent()
-            ).use { stmt ->
-                for (key in keys) {
-                    if (key.isZero) {
-                        continue
-                    }
-
-                    stmt.setInt(1, key.k0)
-                    stmt.setInt(2, key.k1)
-                    stmt.setInt(3, key.k2)
-                    stmt.setInt(4, key.k3)
+                for (url in urls) {
+                    stmt.setString(1, url)
                     stmt.addBatch()
                 }
 
                 stmt.executeBatch()
             }
 
-            connection.prepareStatement(
-                """
-                INSERT INTO keys (key)
-                SELECT t.key
-                FROM tmp_keys t
-                LEFT JOIN keys k ON k.key = t.key
-                WHERE k.key IS NULL
-                ON CONFLICT DO NOTHING
-            """.trimIndent()
-            ).use { stmt ->
-                stmt.execute()
+            import(connection, keys)
+        }
+    }
+
+    public suspend fun import(keys: Iterable<XteaKey>) {
+        database.execute { connection ->
+            import(connection, keys)
+        }
+    }
+
+    private fun import(connection: Connection, keys: Iterable<XteaKey>) {
+        connection.prepareStatement(
+            """
+            LOCK TABLE keys IN EXCLUSIVE MODE
+        """.trimIndent()
+        ).use { stmt ->
+            stmt.execute()
+        }
+
+        connection.prepareStatement(
+            """
+            CREATE TEMPORARY TABLE tmp_keys (
+                key xtea_key NOT NULL
+            ) ON COMMIT DROP
+        """.trimIndent()
+        ).use { stmt ->
+            stmt.execute()
+        }
+
+        connection.prepareStatement(
+            """
+            INSERT INTO tmp_keys (key)
+            VALUES (ROW(?, ?, ?, ?))
+        """.trimIndent()
+        ).use { stmt ->
+            for (key in keys) {
+                if (key.isZero) {
+                    continue
+                }
+
+                stmt.setInt(1, key.k0)
+                stmt.setInt(2, key.k1)
+                stmt.setInt(3, key.k2)
+                stmt.setInt(4, key.k3)
+                stmt.addBatch()
             }
+
+            stmt.executeBatch()
+        }
+
+        connection.prepareStatement(
+            """
+            INSERT INTO keys (key)
+            SELECT t.key
+            FROM tmp_keys t
+            LEFT JOIN keys k ON k.key = t.key
+            WHERE k.key IS NULL
+            ON CONFLICT DO NOTHING
+        """.trimIndent()
+        ).use { stmt ->
+            stmt.execute()
         }
     }
 }

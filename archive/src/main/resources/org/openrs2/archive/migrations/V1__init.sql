@@ -26,6 +26,10 @@ CREATE TABLE keys (
     key xtea_key UNIQUE NOT NULL CHECK ((key).k0 <> 0 OR (key).k1 <> 0 OR (key).k2 <> 0 OR (key).k3 <> 0)
 );
 
+CREATE TABLE keysets (
+    url TEXT PRIMARY KEY NOT NULL
+);
+
 CREATE TABLE containers (
     id BIGSERIAL PRIMARY KEY NOT NULL,
     crc32 INTEGER NOT NULL,

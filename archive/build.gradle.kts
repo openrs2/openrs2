@@ -30,6 +30,7 @@ dependencies {
     implementation("org.flywaydb:flyway-core:${Versions.flyway}")
     implementation("org.jdom:jdom2:${Versions.jdom}")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinCoroutines}")
+    implementation("org.jsoup:jsoup:${Versions.jsoup}")
     implementation("org.postgresql:postgresql:${Versions.postgres}")
     implementation("org.thymeleaf:thymeleaf:${Versions.thymeleaf}")
     implementation("org.thymeleaf.extras:thymeleaf-extras-java8time:${Versions.thymeleafJava8Time}")
