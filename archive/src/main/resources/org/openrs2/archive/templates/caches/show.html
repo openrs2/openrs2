@@ -33,22 +33,22 @@
 				</tr>
 				<tr class="thead-dark">
 					<th>Indexes</th>
-					<td th:class="${cache.archiveStats}? (${cache.archiveStats.allIndexesValid}? 'table-success' : 'table-danger')"
-					    th:text="${cache.archiveStats}? ${cache.archiveStats.validIndexes} + ' / ' + ${cache.archiveStats.indexes} + ' (' + ${#numbers.formatPercent(cache.archiveStats.validIndexesFraction, 1, 2)} + ')' : 'Calculating...'">
+					<td th:class="${cache.stats}? (${cache.stats.allIndexesValid}? 'table-success' : 'table-danger')"
+					    th:text="${cache.stats}? ${cache.stats.validIndexes} + ' / ' + ${cache.stats.indexes} + ' (' + ${#numbers.formatPercent(cache.stats.validIndexesFraction, 1, 2)} + ')' : 'Calculating...'">
 						Calculating...
 					</td>
 				</tr>
 				<tr class="thead-dark">
 					<th>Groups</th>
-					<td th:class="${cache.groupStats}? (${cache.groupStats.allGroupsValid}? 'table-success' : 'table-warning')"
-					    th:text="${cache.groupStats}? ${#numbers.formatInteger(cache.groupStats.validGroups, 1, 'COMMA')} + ' / ' + ${#numbers.formatInteger(cache.groupStats.groups, 1, 'COMMA')} + ' (' + ${#numbers.formatPercent(cache.groupStats.validGroupsFraction, 1, 2)} + ')' : 'Calculating...'">
+					<td th:class="${cache.stats}? (${cache.stats.allGroupsValid}? 'table-success' : 'table-warning')"
+					    th:text="${cache.stats}? ${#numbers.formatInteger(cache.stats.validGroups, 1, 'COMMA')} + ' / ' + ${#numbers.formatInteger(cache.stats.groups, 1, 'COMMA')} + ' (' + ${#numbers.formatPercent(cache.stats.validGroupsFraction, 1, 2)} + ')' : 'Calculating...'">
 						Calculating...
 					</td>
 				</tr>
 				<tr class="thead-dark">
 					<th>Keys</th>
-					<td th:class="${cache.groupStats}? (${cache.groupStats.allKeysValid}? 'table-success' : 'table-warning')"
-					    th:text="${cache.groupStats}? ${#numbers.formatInteger(cache.groupStats.validKeys, 1, 'COMMA')} + ' / ' + ${#numbers.formatInteger(cache.groupStats.keys, 1, 'COMMA')} + ' (' + ${#numbers.formatPercent(cache.groupStats.validKeysFraction, 1, 2)} + ')' : 'Calculating...'">
+					<td th:class="${cache.stats}? (${cache.stats.allKeysValid}? 'table-success' : 'table-warning')"
+					    th:text="${cache.stats}? ${#numbers.formatInteger(cache.stats.validKeys, 1, 'COMMA')} + ' / ' + ${#numbers.formatInteger(cache.stats.keys, 1, 'COMMA')} + ' (' + ${#numbers.formatPercent(cache.stats.validKeysFraction, 1, 2)} + ')' : 'Calculating...'">
 						Calculating...
 					</td>
 				</tr>

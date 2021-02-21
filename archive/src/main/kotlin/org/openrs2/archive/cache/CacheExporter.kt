@@ -17,16 +17,21 @@ public class CacheExporter @Inject constructor(
     private val database: Database,
     private val alloc: ByteBufAllocator
 ) {
-    public data class ArchiveStats(val indexes: Long, val validIndexes: Long) {
+    public data class Stats(
+        val validIndexes: Long,
+        val indexes: Long,
+        val validGroups: Long,
+        val groups: Long,
+        val validKeys: Long,
+        val keys: Long
+    ) {
         public val allIndexesValid: Boolean = indexes == validIndexes
         public val validIndexesFraction: Double = if (indexes == 0L) {
             1.0
         } else {
             validIndexes.toDouble() / indexes
         }
-    }
 
-    public data class GroupStats(val groups: Long, val validGroups: Long, val keys: Long, val validKeys: Long) {
         public val allGroupsValid: Boolean = groups == validGroups
         public val validGroupsFraction: Double = if (groups == 0L) {
             1.0
@@ -49,8 +54,7 @@ public class CacheExporter @Inject constructor(
         val timestamp: Instant?,
         val name: String?,
         val description: String?,
-        val archiveStats: ArchiveStats?,
-        val groupStats: GroupStats?
+        val stats: Stats?
     )
 
     public data class Key(
@@ -68,12 +72,11 @@ public class CacheExporter @Inject constructor(
                 """
                 SELECT
                     m.id, g.name, m.build, m.timestamp, m.name,
-                    a.indexes, a.valid_indexes, gs.groups, gs.valid_groups, gs.keys, gs.valid_keys
+                    s.valid_indexes, s.indexes, s.valid_groups, s.groups, s.valid_keys, s.keys
                 FROM master_indexes m
                 JOIN games g ON g.id = m.game_id
                 JOIN containers c ON c.id = m.container_id
-                LEFT JOIN master_index_archive_stats a ON a.master_index_id = m.id
-                LEFT JOIN master_index_group_stats gs ON gs.master_index_id = m.id
+                LEFT JOIN master_index_stats s ON s.master_index_id = m.id
                 ORDER BY g.name ASC, m.build ASC, m.timestamp ASC
             """.trimIndent()
             ).use { stmt ->
@@ -92,25 +95,19 @@ public class CacheExporter @Inject constructor(
                         val timestamp = rows.getTimestamp(4)?.toInstant()
                         val name = rows.getString(5)
 
-                        val indexes = rows.getLong(6)
-                        val archiveStats = if (!rows.wasNull()) {
-                            val validIndexes = rows.getLong(7)
-                            ArchiveStats(indexes, validIndexes)
+                        val validIndexes = rows.getLong(6)
+                        val stats = if (!rows.wasNull()) {
+                            val indexes = rows.getLong(7)
+                            val validGroups = rows.getLong(8)
+                            val groups = rows.getLong(9)
+                            val validKeys = rows.getLong(10)
+                            val keys = rows.getLong(11)
+                            Stats(validIndexes, indexes, validGroups, groups, validKeys, keys)
                         } else {
                             null
                         }
 
-                        val groups = rows.getLong(8)
-                        val groupStats = if (!rows.wasNull()) {
-                            val validGroups = rows.getLong(9)
-                            val keys = rows.getLong(10)
-                            val validKeys = rows.getLong(11)
-                            GroupStats(groups, validGroups, keys, validKeys)
-                        } else {
-                            null
-                        }
-
-                        caches += Cache(id, game, build, timestamp, name, description = null, archiveStats, groupStats)
+                        caches += Cache(id, game, build, timestamp, name, description = null, stats)
                     }
 
                     caches
@@ -125,12 +122,11 @@ public class CacheExporter @Inject constructor(
                 """
                 SELECT
                     g.name, m.build, m.timestamp, m.name, m.description,
-                    a.indexes, a.valid_indexes, gs.groups, gs.valid_groups, gs.keys, gs.valid_keys
+                    s.valid_indexes, s.indexes, s.valid_groups, s.groups, s.valid_keys, s.keys
                 FROM master_indexes m
                 JOIN games g ON g.id = m.game_id
                 JOIN containers c ON c.id = m.container_id
-                LEFT JOIN master_index_archive_stats a ON a.master_index_id = m.id
-                LEFT JOIN master_index_group_stats gs ON gs.master_index_id = m.id
+                LEFT JOIN master_index_stats s ON s.master_index_id = m.id
                 WHERE m.id = ?
             """.trimIndent()
             ).use { stmt ->
@@ -152,25 +148,19 @@ public class CacheExporter @Inject constructor(
                     val name = rows.getString(4)
                     val description = rows.getString(5)
 
-                    val indexes = rows.getLong(6)
-                    val archiveStats = if (!rows.wasNull()) {
-                        val validIndexes = rows.getLong(7)
-                        ArchiveStats(indexes, validIndexes)
+                    val validIndexes = rows.getLong(6)
+                    val stats = if (!rows.wasNull()) {
+                        val indexes = rows.getLong(7)
+                        val validGroups = rows.getLong(8)
+                        val groups = rows.getLong(9)
+                        val validKeys = rows.getLong(10)
+                        val keys = rows.getLong(11)
+                        Stats(validIndexes, indexes, validGroups, groups, validKeys, keys)
                     } else {
                         null
                     }
 
-                    val groups = rows.getLong(8)
-                    val groupStats = if (!rows.wasNull()) {
-                        val validGroups = rows.getLong(9)
-                        val keys = rows.getLong(10)
-                        val validKeys = rows.getLong(11)
-                        GroupStats(groups, validGroups, keys, validKeys)
-                    } else {
-                        null
-                    }
-
-                    return@execute Cache(id, game, build, timestamp, name, description, archiveStats, groupStats)
+                    return@execute Cache(id, game, build, timestamp, name, description, stats)
                 }
             }
         }

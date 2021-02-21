@@ -160,37 +160,58 @@ JOIN groups g ON g.archive_id = i.archive_id AND g.group_id = ig.group_id AND (
 )
 JOIN containers c ON c.id = g.container_id AND c.crc32 = ig.crc32;
 
-CREATE MATERIALIZED VIEW master_index_archive_stats (master_index_id, indexes, valid_indexes) AS
-SELECT a.master_index_id, COUNT(*), COUNT(i.container_id)
-FROM master_index_archives a
-LEFT JOIN groups g ON g.archive_id = 255 AND g.group_id = a.archive_id::INTEGER AND
-    g.version = a.version AND NOT g.version_truncated AND
-    g.container_id IN (SELECT id FROM containers WHERE crc32 = a.crc32)
-LEFT JOIN containers c ON c.id = g.container_id
-LEFT JOIN indexes i ON i.container_id = g.container_id AND i.version = a.version
-GROUP BY a.master_index_id;
-
-CREATE UNIQUE INDEX ON master_index_archive_stats (master_index_id);
-
-CREATE MATERIALIZED VIEW master_index_group_stats (master_index_id, groups, valid_groups, keys, valid_keys, size) AS
+CREATE MATERIALIZED VIEW master_index_stats (
+    master_index_id,
+    valid_indexes,
+    indexes,
+    valid_groups,
+    groups,
+    valid_keys,
+    keys,
+    size
+) AS
 SELECT
-    i.master_index_id,
-    COUNT(*),
-    COUNT(g.container_id),
-    COUNT(*) FILTER (WHERE c.encrypted),
-    COUNT(*) FILTER (WHERE c.key_id IS NOT NULL),
-    SUM(length(c.data))
-FROM resolved_indexes i
-JOIN index_groups ig ON ig.container_id = i.container_id
-LEFT JOIN groups g ON g.archive_id = i.archive_id AND g.group_id = ig.group_id AND (
-    (g.version = ig.version AND NOT g.version_truncated) OR
-    (g.version = ig.version & 65535 AND g.version_truncated)
-) AND g.container_id IN (SELECT id FROM containers WHERE crc32 = ig.crc32)
-LEFT JOIN containers c ON c.id = g.container_id
-LEFT JOIN keys k ON k.id = c.key_id
-GROUP BY i.master_index_id;
+    a.master_index_id,
+    a.valid_indexes,
+    a.indexes,
+    COALESCE(g.valid_groups, 0),
+    COALESCE(g.groups, 0),
+    COALESCE(g.valid_keys, 0),
+    COALESCE(g.keys, 0),
+    COALESCE(g.size, 0)
+FROM (
+    SELECT
+        a.master_index_id,
+        COUNT(i.container_id) AS valid_indexes,
+        COUNT(*) AS indexes
+    FROM master_index_archives a
+    LEFT JOIN groups g ON g.archive_id = 255 AND g.group_id = a.archive_id::INTEGER AND
+        g.version = a.version AND NOT g.version_truncated AND
+        g.container_id IN (SELECT id FROM containers WHERE crc32 = a.crc32)
+    LEFT JOIN containers c ON c.id = g.container_id
+    LEFT JOIN indexes i ON i.container_id = g.container_id AND i.version = a.version
+    GROUP BY a.master_index_id
+) a
+LEFT JOIN (
+    SELECT
+        i.master_index_id,
+        COUNT(g.container_id) AS valid_groups,
+        COUNT(*) AS groups,
+        COUNT(*) FILTER (WHERE c.key_id IS NOT NULL) AS valid_keys,
+        COUNT(*) FILTER (WHERE c.encrypted) AS keys,
+        SUM(length(c.data)) AS size
+    FROM resolved_indexes i
+    JOIN index_groups ig ON ig.container_id = i.container_id
+    LEFT JOIN groups g ON g.archive_id = i.archive_id AND g.group_id = ig.group_id AND (
+        (g.version = ig.version AND NOT g.version_truncated) OR
+        (g.version = ig.version & 65535 AND g.version_truncated)
+    ) AND g.container_id IN (SELECT id FROM containers WHERE crc32 = ig.crc32)
+    LEFT JOIN containers c ON c.id = g.container_id
+    LEFT JOIN keys k ON k.id = c.key_id
+    GROUP BY i.master_index_id
+) g ON g.master_index_id = a.master_index_id;
 
-CREATE UNIQUE INDEX ON master_index_group_stats (master_index_id);
+CREATE UNIQUE INDEX ON master_index_stats (master_index_id);
 
 CREATE VIEW collisions (archive_id, group_id, crc32, truncated_version, containers) AS
 SELECT g.archive_id, g.group_id, c.crc32, g.version & 65535 AS truncated_version, COUNT(DISTINCT c.id)
