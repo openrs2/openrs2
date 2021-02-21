@@ -143,7 +143,6 @@ JOIN groups g ON g.archive_id = 255 AND g.group_id = a.archive_id::INTEGER AND
 JOIN containers c ON c.id = g.container_id AND c.crc32 = a.crc32
 JOIN indexes i ON i.container_id = g.container_id AND i.version = a.version;
 
--- TODO(gpe): think about what to do if there is a collision
 CREATE VIEW master_index_valid_groups (master_index_id, archive_id, group_id, name_hash, version, data, key_id) AS
 WITH i AS NOT MATERIALIZED (
     SELECT master_index_id, archive_id, data, container_id
