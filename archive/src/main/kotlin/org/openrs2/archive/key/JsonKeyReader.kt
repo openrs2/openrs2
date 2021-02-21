@@ -14,7 +14,7 @@ public class JsonKeyReader @Inject constructor(
     @Json private val mapper: ObjectMapper
 ) : KeyReader {
     override fun read(input: InputStream): Sequence<XteaKey> {
-        val keys = mutableListOf<XteaKey>()
+        val keys = mutableSetOf<XteaKey>()
         val root = mapper.readTree(input)
 
         when {
