@@ -134,7 +134,7 @@ CREATE TABLE names (
 
 CREATE UNIQUE INDEX ON names (hash, name);
 
-CREATE VIEW master_index_valid_indexes AS
+CREATE VIEW resolved_indexes AS
 SELECT m.id AS master_index_id, a.archive_id, c.data, g.container_id
 FROM master_indexes m
 JOIN master_index_archives a ON a.master_index_id = m.id
@@ -143,10 +143,10 @@ JOIN groups g ON g.archive_id = 255 AND g.group_id = a.archive_id::INTEGER AND
 JOIN containers c ON c.id = g.container_id AND c.crc32 = a.crc32
 JOIN indexes i ON i.container_id = g.container_id AND i.version = a.version;
 
-CREATE VIEW master_index_valid_groups (master_index_id, archive_id, group_id, name_hash, version, data, key_id) AS
+CREATE VIEW resolved_groups (master_index_id, archive_id, group_id, name_hash, version, data, key_id) AS
 WITH i AS NOT MATERIALIZED (
     SELECT master_index_id, archive_id, data, container_id
-    FROM master_index_valid_indexes
+    FROM resolved_indexes
 )
 SELECT i.master_index_id, 255::uint1, i.archive_id::INTEGER, NULL, NULL, i.data, NULL
 FROM i
@@ -174,20 +174,20 @@ CREATE UNIQUE INDEX ON master_index_archive_stats (master_index_id);
 
 CREATE MATERIALIZED VIEW master_index_group_stats (master_index_id, groups, valid_groups, keys, valid_keys) AS
 SELECT
-   v.master_index_id,
+   i.master_index_id,
    COUNT(*),
    COUNT(g.container_id),
    COUNT(*) FILTER (WHERE c.encrypted),
    COUNT(*) FILTER (WHERE c.key_id IS NOT NULL)
-FROM master_index_valid_indexes v
-JOIN index_groups ig ON ig.container_id = v.container_id
-LEFT JOIN groups g ON g.archive_id = v.archive_id AND g.group_id = ig.group_id AND (
+FROM resolved_indexes i
+JOIN index_groups ig ON ig.container_id = i.container_id
+LEFT JOIN groups g ON g.archive_id = i.archive_id AND g.group_id = ig.group_id AND (
     (g.version = ig.version AND NOT g.version_truncated) OR
     (g.version = ig.version & 65535 AND g.version_truncated)
 ) AND g.container_id IN (SELECT id FROM containers WHERE crc32 = ig.crc32)
 LEFT JOIN containers c ON c.id = g.container_id
 LEFT JOIN keys k ON k.id = c.key_id
-GROUP BY v.master_index_id;
+GROUP BY i.master_index_id;
 
 CREATE UNIQUE INDEX ON master_index_group_stats (master_index_id);
 

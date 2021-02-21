@@ -276,7 +276,7 @@ public class CacheImporter @Inject constructor(
                 """
                 SELECT ig.group_id
                 FROM index_groups ig
-                LEFT JOIN master_index_valid_indexes i ON i.master_index_id = ? AND
+                LEFT JOIN resolved_indexes i ON i.master_index_id = ? AND
                     i.archive_id = ?
                 LEFT JOIN index_groups ig2 ON ig2.container_id = i.container_id AND ig2.group_id = ig.group_id AND
                     ig2.crc32 = ig.crc32 AND ig2.version = ig.version

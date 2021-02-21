@@ -181,7 +181,7 @@ public class CacheExporter @Inject constructor(
             connection.prepareStatement(
                 """
                 SELECT archive_id, group_id, data, version
-                FROM master_index_valid_groups
+                FROM resolved_groups
                 WHERE master_index_id = ?
             """.trimIndent()
             ).use { stmt ->
@@ -221,11 +221,11 @@ public class CacheExporter @Inject constructor(
         return database.execute { connection ->
             connection.prepareStatement(
                 """
-                SELECT v.archive_id, v.group_id, v.name_hash, n.name, (k.key).k0, (k.key).k1, (k.key).k2, (k.key).k3
-                FROM master_index_valid_groups v
-                JOIN keys k ON k.id = v.key_id
-                LEFT JOIN names n ON n.hash = v.name_hash AND n.name ~ '^l(?:[0-9]|[1-9][0-9])_(?:[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$'
-                WHERE v.master_index_id = ?
+                SELECT g.archive_id, g.group_id, g.name_hash, n.name, (k.key).k0, (k.key).k1, (k.key).k2, (k.key).k3
+                FROM resolved_groups g
+                JOIN keys k ON k.id = g.key_id
+                LEFT JOIN names n ON n.hash = g.name_hash AND n.name ~ '^l(?:[0-9]|[1-9][0-9])_(?:[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$'
+                WHERE g.master_index_id = ?
             """.trimIndent()
             ).use { stmt ->
                 stmt.setInt(1, id)
