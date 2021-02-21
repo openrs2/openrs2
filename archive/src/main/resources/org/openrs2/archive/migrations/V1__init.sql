@@ -174,11 +174,11 @@ CREATE UNIQUE INDEX ON master_index_archive_stats (master_index_id);
 
 CREATE MATERIALIZED VIEW master_index_group_stats (master_index_id, groups, valid_groups, keys, valid_keys) AS
 SELECT
-   i.master_index_id,
-   COUNT(*),
-   COUNT(g.container_id),
-   COUNT(*) FILTER (WHERE c.encrypted),
-   COUNT(*) FILTER (WHERE c.key_id IS NOT NULL)
+    i.master_index_id,
+    COUNT(*),
+    COUNT(g.container_id),
+    COUNT(*) FILTER (WHERE c.encrypted),
+    COUNT(*) FILTER (WHERE c.key_id IS NOT NULL)
 FROM resolved_indexes i
 JOIN index_groups ig ON ig.container_id = i.container_id
 LEFT JOIN groups g ON g.archive_id = i.archive_id AND g.group_id = ig.group_id AND (
