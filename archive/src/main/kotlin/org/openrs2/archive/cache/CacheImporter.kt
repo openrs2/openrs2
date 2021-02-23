@@ -824,6 +824,18 @@ public class CacheImporter @Inject constructor(
         }
     }
 
+    public suspend fun refreshViews() {
+        database.execute { connection ->
+            connection.prepareStatement(
+                """
+                REFRESH MATERIALIZED VIEW CONCURRENTLY master_index_stats
+            """.trimIndent()
+            ).use { stmt ->
+                stmt.execute()
+            }
+        }
+    }
+
     public companion object {
         private val logger = InlineLogger()
 
