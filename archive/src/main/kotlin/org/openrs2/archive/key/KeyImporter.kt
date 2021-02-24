@@ -105,7 +105,7 @@ public class KeyImporter @Inject constructor(
         connection.prepareStatement(
             """
             CREATE TEMPORARY TABLE tmp_keys (
-                key xtea_key NOT NULL
+                key xtea_key PRIMARY KEY NOT NULL
             ) ON COMMIT DROP
         """.trimIndent()
         ).use { stmt ->
