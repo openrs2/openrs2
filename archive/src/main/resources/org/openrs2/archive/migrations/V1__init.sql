@@ -1,5 +1,5 @@
 -- @formatter:off
-CREATE EXTENSION uint;
+CREATE EXTENSION IF NOT EXISTS uint;
 
 CREATE TABLE games (
     id SERIAL PRIMARY KEY NOT NULL,
