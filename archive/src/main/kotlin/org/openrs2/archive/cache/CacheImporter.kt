@@ -27,6 +27,7 @@ import java.time.OffsetDateTime
 import java.time.ZoneOffset
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlin.math.min
 
 @Singleton
 public class CacheImporter @Inject constructor(
@@ -376,8 +377,7 @@ public class CacheImporter @Inject constructor(
                     check(oldGameId == gameId)
 
                     if (oldBuild != null && build != null) {
-                        check(oldBuild == build)
-                        newBuild = oldBuild
+                        newBuild = min(oldBuild, build)
                     } else if (oldBuild != null) {
                         newBuild = oldBuild
                     } else {
