@@ -24,8 +24,8 @@ public class WebServer @Inject constructor(
     private val cachesController: CachesController,
     @Json private val mapper: ObjectMapper
 ) {
-    public fun start() {
-        embeddedServer(Netty, port = 8000) {
+    public fun start(address: String, port: Int) {
+        embeddedServer(Netty, host = address, port = port) {
             install(ContentNegotiation) {
                 register(ContentType.Application.Json, JacksonConverter(mapper))
             }
