@@ -15,6 +15,7 @@ import org.openrs2.db.Database
 import org.openrs2.http.HttpModule
 import org.openrs2.json.JsonModule
 import org.openrs2.net.NetworkModule
+import org.openrs2.yaml.YamlModule
 import javax.sql.DataSource
 
 public object ArchiveModule : AbstractModule() {
@@ -24,6 +25,11 @@ public object ArchiveModule : AbstractModule() {
         install(HttpModule)
         install(JsonModule)
         install(NetworkModule)
+        install(YamlModule)
+
+        bind(ArchiveConfig::class.java)
+            .toProvider(ArchiveConfigProvider::class.java)
+            .`in`(Scopes.SINGLETON)
 
         bind(DataSource::class.java)
             .toProvider(DataSourceProvider::class.java)

@@ -21,6 +21,7 @@ dependencies {
     implementation(project(":net"))
     implementation(project(":protocol"))
     implementation(project(":util"))
+    implementation(project(":yaml"))
     implementation("com.google.guava:guava:${Versions.guava}")
     implementation("com.zaxxer:HikariCP:${Versions.hikaricp}")
     implementation("io.ktor:ktor-jackson:${Versions.ktor}")

@@ -1,0 +1,2 @@
+---
+database_url: jdbc:postgresql://localhost/openrs2_archive?user=openrs2&password=openrs2
