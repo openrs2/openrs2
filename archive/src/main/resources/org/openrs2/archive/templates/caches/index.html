@@ -36,26 +36,26 @@
 							<td th:classappend="${cache.stats}? (${cache.stats.allIndexesValid}? 'table-success' : 'table-danger')"
 							    class="text-right">
 								<span
-									th:text="${cache.stats}? ${cache.stats.validIndexes} + '&nbsp;/&nbsp;' + ${cache.stats.indexes}"></span>
+									th:text="${cache.stats}? ${cache.stats.validIndexes} + '&nbsp;/&nbsp;' + ${cache.stats.indexes} : 'Calculating...'"></span>
 								<br />
 								<span
-									th:text="${cache.stats}? '(' + ${#numbers.formatPercent(cache.stats.validIndexesFraction, 1, 2)} + ')' : 'Calculating...'"></span>
+									th:text="${cache.stats}? '(' + ${#numbers.formatPercent(cache.stats.validIndexesFraction, 1, 2)} + ')'"></span>
 							</td>
 							<td th:classappend="${cache.stats}? (${cache.stats.allGroupsValid}? 'table-success' : 'table-warning')"
 							    class="text-right">
 								<span
-									th:text="${cache.stats}? ${#numbers.formatInteger(cache.stats.validGroups, 1, 'COMMA')} + '&nbsp;/&nbsp;' + ${#numbers.formatInteger(cache.stats.groups, 1, 'COMMA')}"></span>
+									th:text="${cache.stats}? ${#numbers.formatInteger(cache.stats.validGroups, 1, 'COMMA')} + '&nbsp;/&nbsp;' + ${#numbers.formatInteger(cache.stats.groups, 1, 'COMMA')} : 'Calculating...'"></span>
 								<br />
 								<span
-									th:text="${cache.stats}? '(' + ${#numbers.formatPercent(cache.stats.validGroupsFraction, 1, 2)} + ')' : 'Calculating...'"></span>
+									th:text="${cache.stats}? '(' + ${#numbers.formatPercent(cache.stats.validGroupsFraction, 1, 2)} + ')'"></span>
 							</td>
 							<td th:classappend="${cache.stats}? (${cache.stats.allKeysValid}? 'table-success' : 'table-warning')"
 							    class="text-right">
 								<span
-									th:text="${cache.stats}? ${#numbers.formatInteger(cache.stats.validKeys, 1, 'COMMA')} + '&nbsp;/&nbsp;' + ${#numbers.formatInteger(cache.stats.keys, 1, 'COMMA')}"></span>
+									th:text="${cache.stats}? ${#numbers.formatInteger(cache.stats.validKeys, 1, 'COMMA')} + '&nbsp;/&nbsp;' + ${#numbers.formatInteger(cache.stats.keys, 1, 'COMMA')} : 'Calculating...'"></span>
 								<br />
 								<span
-									th:text="${cache.stats}? '(' + ${#numbers.formatPercent(cache.stats.validKeysFraction, 1, 2)} + ')' : 'Calculating...'"></span>
+									th:text="${cache.stats}? '(' + ${#numbers.formatPercent(cache.stats.validKeysFraction, 1, 2)} + ')'"></span>
 							</td>
 							<td>
 								<div class="btn-group">
