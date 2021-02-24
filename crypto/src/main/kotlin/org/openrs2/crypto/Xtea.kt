@@ -7,7 +7,7 @@ private const val ROUNDS = 32
 private const val BLOCK_SIZE = 8
 private const val BLOCK_SIZE_MASK = BLOCK_SIZE - 1
 
-public class XteaKey(
+public data class XteaKey(
     public val k0: Int,
     public val k1: Int,
     public val k2: Int,
