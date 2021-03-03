@@ -42255,13 +42255,13 @@ methods:
       10: "value"
       60: "defaultMultiNpc"
   client!ua.a (III)I:
-    owner: "Static34"
-    name: "method4257"
+    owner: "IntUtils"
+    name: "pow"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "a"
+      1: "b"
     locals:
-      12: "local12"
+      12: "result"
   client!ua.a (IIILclient!eg;Lclient!eg;I[Lclient!re;III)Lclient!vg;:
     owner: "NpcType"
     name: "method4268"
