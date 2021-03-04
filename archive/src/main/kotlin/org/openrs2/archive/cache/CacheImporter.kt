@@ -362,7 +362,7 @@ public class CacheImporter @Inject constructor(
                     masterIndexId = rows.getInt(1)
                 }
 
-                if (masterIndexId != null && !overwrite) {
+                if (masterIndexId != null) {
                     val oldGameId = rows.getInt(2)
 
                     var oldBuild: Int? = rows.getInt(3)
@@ -396,7 +396,9 @@ public class CacheImporter @Inject constructor(
                         newTimestamp = timestamp
                     }
 
-                    if (oldName != null && name != null) {
+                    if (overwrite) {
+                        newName = name
+                    } else if (oldName != null && name != null) {
                         newName = "$oldName/$name"
                     } else if (oldName != null) {
                         newName = oldName
@@ -404,7 +406,9 @@ public class CacheImporter @Inject constructor(
                         newName = name
                     }
 
-                    if (oldDescription != null && description != null) {
+                    if (overwrite) {
+                        newDescription = description
+                    } else if (oldDescription != null && description != null) {
                         newDescription = "$oldDescription\n\n$description"
                     } else if (oldDescription != null) {
                         newDescription = oldDescription
