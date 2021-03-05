@@ -27,7 +27,6 @@ import java.time.OffsetDateTime
 import java.time.ZoneOffset
 import javax.inject.Inject
 import javax.inject.Singleton
-import kotlin.math.min
 
 @Singleton
 public class CacheImporter @Inject constructor(
@@ -341,14 +340,13 @@ public class CacheImporter @Inject constructor(
         val containerId = addContainer(connection, masterIndex)
         var masterIndexId: Int? = null
 
-        var newBuild: Int?
         var newTimestamp: Instant?
         var newName: String?
         var newDescription: String?
 
         connection.prepareStatement(
             """
-            SELECT id, game_id, build, timestamp, name, description
+            SELECT id, game_id, timestamp, name, description
             FROM master_indexes
             WHERE container_id = ? AND format = ?::master_index_format
             FOR UPDATE
@@ -365,24 +363,11 @@ public class CacheImporter @Inject constructor(
                 if (masterIndexId != null) {
                     val oldGameId = rows.getInt(2)
 
-                    var oldBuild: Int? = rows.getInt(3)
-                    if (rows.wasNull()) {
-                        oldBuild = null
-                    }
-
-                    val oldTimestamp: Instant? = rows.getTimestamp(4)?.toInstant()
-                    val oldName: String? = rows.getString(5)
-                    val oldDescription: String? = rows.getString(6)
+                    val oldTimestamp: Instant? = rows.getTimestamp(3)?.toInstant()
+                    val oldName: String? = rows.getString(4)
+                    val oldDescription: String? = rows.getString(5)
 
                     check(oldGameId == gameId)
-
-                    if (oldBuild != null && build != null) {
-                        newBuild = min(oldBuild, build)
-                    } else if (oldBuild != null) {
-                        newBuild = oldBuild
-                    } else {
-                        newBuild = build
-                    }
 
                     if (oldTimestamp != null && timestamp != null) {
                         newTimestamp = if (oldTimestamp.isBefore(timestamp)) {
@@ -416,7 +401,6 @@ public class CacheImporter @Inject constructor(
                         newDescription = description
                     }
                 } else {
-                    newBuild = build
                     newTimestamp = timestamp
                     newName = name
                     newDescription = description
@@ -428,94 +412,103 @@ public class CacheImporter @Inject constructor(
             connection.prepareStatement(
                 """
                 UPDATE master_indexes
-                SET build = ?, timestamp = ?, name = ?, description = ?
+                SET timestamp = ?, name = ?, description = ?
                 WHERE id = ?
             """.trimIndent()
             ).use { stmt ->
-                stmt.setObject(1, newBuild, Types.INTEGER)
+                if (newTimestamp != null) {
+                    val offsetDateTime = OffsetDateTime.ofInstant(newTimestamp, ZoneOffset.UTC)
+                    stmt.setObject(1, offsetDateTime, Types.TIMESTAMP_WITH_TIMEZONE)
+                } else {
+                    stmt.setNull(1, Types.TIMESTAMP_WITH_TIMEZONE)
+                }
+
+                stmt.setString(2, newName)
+                stmt.setString(3, newDescription)
+                stmt.setInt(4, masterIndexId!!)
+
+                stmt.execute()
+            }
+        } else {
+            connection.prepareStatement(
+                """
+                INSERT INTO master_indexes (container_id, format, game_id, timestamp, name, description)
+                VALUES (?, ?::master_index_format, ?, ?, ?, ?)
+                RETURNING id
+            """.trimIndent()
+            ).use { stmt ->
+                stmt.setLong(1, containerId)
+                stmt.setString(2, masterIndex.index.format.name.toLowerCase())
+                stmt.setInt(3, gameId)
 
                 if (newTimestamp != null) {
                     val offsetDateTime = OffsetDateTime.ofInstant(newTimestamp, ZoneOffset.UTC)
-                    stmt.setObject(2, offsetDateTime, Types.TIMESTAMP_WITH_TIMEZONE)
+                    stmt.setObject(4, offsetDateTime, Types.TIMESTAMP_WITH_TIMEZONE)
                 } else {
-                    stmt.setNull(2, Types.TIMESTAMP_WITH_TIMEZONE)
+                    stmt.setNull(4, Types.TIMESTAMP_WITH_TIMEZONE)
                 }
 
-                stmt.setString(3, newName)
-                stmt.setString(4, newDescription)
-                stmt.setInt(5, masterIndexId!!)
+                stmt.setString(5, newName)
+                stmt.setString(6, newDescription)
 
-                stmt.execute()
+                stmt.executeQuery().use { rows ->
+                    check(rows.next())
+                    masterIndexId = rows.getInt(1)
+                }
+            }
 
-                return@addMasterIndex masterIndexId!!
+            connection.prepareStatement(
+                """
+                INSERT INTO master_index_archives (
+                    master_index_id, archive_id, crc32, version, whirlpool, groups, total_uncompressed_length
+                )
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+            """.trimIndent()
+            ).use { stmt ->
+                for ((i, entry) in masterIndex.index.entries.withIndex()) {
+                    stmt.setInt(1, masterIndexId!!)
+                    stmt.setInt(2, i)
+                    stmt.setInt(3, entry.checksum)
+
+                    if (masterIndex.index.format >= MasterIndexFormat.VERSIONED) {
+                        stmt.setInt(4, entry.version)
+                    } else {
+                        stmt.setInt(4, 0)
+                    }
+
+                    if (masterIndex.index.format >= MasterIndexFormat.DIGESTS) {
+                        stmt.setBytes(5, entry.digest ?: ByteArray(Whirlpool.DIGESTBYTES))
+                    } else {
+                        stmt.setNull(5, Types.BINARY)
+                    }
+
+                    if (masterIndex.index.format >= MasterIndexFormat.LENGTHS) {
+                        stmt.setInt(6, entry.groups)
+                        stmt.setInt(7, entry.totalUncompressedLength)
+                    } else {
+                        stmt.setNull(6, Types.INTEGER)
+                        stmt.setNull(7, Types.INTEGER)
+                    }
+
+                    stmt.addBatch()
+                }
+
+                stmt.executeBatch()
             }
         }
 
-        connection.prepareStatement(
-            """
-            INSERT INTO master_indexes (container_id, format, game_id, build, timestamp, name, description)
-            VALUES (?, ?::master_index_format, ?, ?, ?, ?, ?)
-            RETURNING id
-        """.trimIndent()
-        ).use { stmt ->
-            stmt.setLong(1, containerId)
-            stmt.setString(2, masterIndex.index.format.name.toLowerCase())
-            stmt.setInt(3, gameId)
-            stmt.setObject(4, newBuild, Types.INTEGER)
-
-            if (newTimestamp != null) {
-                val offsetDateTime = OffsetDateTime.ofInstant(newTimestamp, ZoneOffset.UTC)
-                stmt.setObject(5, offsetDateTime, Types.TIMESTAMP_WITH_TIMEZONE)
-            } else {
-                stmt.setNull(5, Types.TIMESTAMP_WITH_TIMEZONE)
-            }
-
-            stmt.setString(6, newName)
-            stmt.setString(7, newDescription)
-
-            stmt.executeQuery().use { rows ->
-                check(rows.next())
-                masterIndexId = rows.getInt(1)
-            }
-        }
-
-        connection.prepareStatement(
-            """
-            INSERT INTO master_index_archives (
-                master_index_id, archive_id, crc32, version, whirlpool, groups, total_uncompressed_length
-            )
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-        """.trimIndent()
-        ).use { stmt ->
-            for ((i, entry) in masterIndex.index.entries.withIndex()) {
+        if (build != null) {
+            connection.prepareStatement(
+                """
+                INSERT INTO master_index_builds (master_index_id, build)
+                VALUES (?, ?)
+                ON CONFLICT DO NOTHING
+            """.trimIndent()
+            ).use { stmt ->
                 stmt.setInt(1, masterIndexId!!)
-                stmt.setInt(2, i)
-                stmt.setInt(3, entry.checksum)
-
-                if (masterIndex.index.format >= MasterIndexFormat.VERSIONED) {
-                    stmt.setInt(4, entry.version)
-                } else {
-                    stmt.setInt(4, 0)
-                }
-
-                if (masterIndex.index.format >= MasterIndexFormat.DIGESTS) {
-                    stmt.setBytes(5, entry.digest ?: ByteArray(Whirlpool.DIGESTBYTES))
-                } else {
-                    stmt.setNull(5, Types.BINARY)
-                }
-
-                if (masterIndex.index.format >= MasterIndexFormat.LENGTHS) {
-                    stmt.setInt(6, entry.groups)
-                    stmt.setInt(7, entry.totalUncompressedLength)
-                } else {
-                    stmt.setNull(6, Types.INTEGER)
-                    stmt.setNull(7, Types.INTEGER)
-                }
-
-                stmt.addBatch()
+                stmt.setInt(2, build)
+                stmt.execute()
             }
-
-            stmt.executeBatch()
         }
 
         return masterIndexId!!

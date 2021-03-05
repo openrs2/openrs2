@@ -13,7 +13,7 @@
 					<thead class="thead-dark">
 						<tr>
 							<th>Game</th>
-							<th>Build</th>
+							<th>Build(s)</th>
 							<th>Timestamp</th>
 							<th>Name</th>
 							<th>Indexes</th>
@@ -26,7 +26,12 @@
 						<!--/*@thymesVar id="caches" type="java.util.List<org.openrs2.archive.cache.CacheExporter.Cache>"*/-->
 						<tr th:each="cache : ${caches}">
 							<td th:text="${cache.game}">runescape</td>
-							<td th:text="${cache.build}" class="text-right">550</td>
+							<td class="text-right">
+								<span th:each="build, it : ${cache.builds}" th:remove="tag">
+									<span th:text="${build}">550</span>
+									<br th:remove="${it.last}? 'all' : 'none'" />
+								</span>
+							</td>
 							<td>
 								<span th:text="${#temporals.format(cache.timestamp, 'yyyy-MM-dd')}"></span>
 								<br />

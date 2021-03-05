@@ -107,7 +107,6 @@ CREATE TABLE master_indexes (
     container_id BIGINT NOT NULL REFERENCES containers (id),
     format master_index_format NOT NULL,
     game_id INTEGER NOT NULL REFERENCES games (id),
-    build INTEGER NULL,
     timestamp TIMESTAMPTZ NULL,
     name TEXT NULL,
     description TEXT NULL,
@@ -115,6 +114,12 @@ CREATE TABLE master_indexes (
 );
 
 ALTER TABLE games ADD COLUMN last_master_index_id INT NULL REFERENCES master_indexes (id);
+
+CREATE TABLE master_index_builds (
+    master_index_id INTEGER NOT NULL REFERENCES master_indexes (id),
+    build INTEGER NOT NULL,
+    PRIMARY KEY (master_index_id, build)
+);
 
 CREATE TABLE master_index_archives (
     master_index_id INTEGER NOT NULL REFERENCES master_indexes (id),

@@ -9,6 +9,7 @@ import org.openrs2.cache.Store
 import org.openrs2.crypto.XteaKey
 import org.openrs2.db.Database
 import java.time.Instant
+import java.util.SortedSet
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -50,7 +51,7 @@ public class CacheExporter @Inject constructor(
     public data class Cache(
         val id: Int,
         val game: String,
-        val build: Int?,
+        val builds: SortedSet<Int>,
         val timestamp: Instant?,
         val name: String?,
         val description: String?,
@@ -71,13 +72,15 @@ public class CacheExporter @Inject constructor(
             connection.prepareStatement(
                 """
                 SELECT
-                    m.id, g.name, m.build, m.timestamp, m.name,
+                    m.id, g.name, array_remove(array_agg(b.build ORDER BY b.build ASC), NULL), m.timestamp, m.name,
                     s.valid_indexes, s.indexes, s.valid_groups, s.groups, s.valid_keys, s.keys
                 FROM master_indexes m
                 JOIN games g ON g.id = m.game_id
                 JOIN containers c ON c.id = m.container_id
+                LEFT JOIN master_index_builds b ON b.master_index_id = m.id
                 LEFT JOIN master_index_stats s ON s.master_index_id = m.id
-                ORDER BY g.name ASC, m.build ASC, m.timestamp ASC
+                GROUP BY m.id, g.name, s.valid_indexes, s.indexes, s.valid_groups, s.groups, s.valid_keys, s.keys
+                ORDER BY g.name ASC, MIN(b.build) ASC, m.timestamp ASC
             """.trimIndent()
             ).use { stmt ->
                 stmt.executeQuery().use { rows ->
@@ -86,12 +89,7 @@ public class CacheExporter @Inject constructor(
                     while (rows.next()) {
                         val id = rows.getInt(1)
                         val game = rows.getString(2)
-
-                        var build: Int? = rows.getInt(3)
-                        if (rows.wasNull()) {
-                            build = null
-                        }
-
+                        val builds = rows.getArray(3).array as Array<Int>
                         val timestamp = rows.getTimestamp(4)?.toInstant()
                         val name = rows.getString(5)
 
@@ -107,7 +105,7 @@ public class CacheExporter @Inject constructor(
                             null
                         }
 
-                        caches += Cache(id, game, build, timestamp, name, description = null, stats)
+                        caches += Cache(id, game, builds.toSortedSet(), timestamp, name, description = null, stats)
                     }
 
                     caches
@@ -121,13 +119,15 @@ public class CacheExporter @Inject constructor(
             connection.prepareStatement(
                 """
                 SELECT
-                    g.name, m.build, m.timestamp, m.name, m.description,
-                    s.valid_indexes, s.indexes, s.valid_groups, s.groups, s.valid_keys, s.keys
+                    g.name, array_remove(array_agg(b.build ORDER BY b.build ASC), NULL), m.timestamp, m.name,
+                    m.description, s.valid_indexes, s.indexes, s.valid_groups, s.groups, s.valid_keys, s.keys
                 FROM master_indexes m
                 JOIN games g ON g.id = m.game_id
                 JOIN containers c ON c.id = m.container_id
+                LEFT JOIN master_index_builds b ON b.master_index_id = m.id
                 LEFT JOIN master_index_stats s ON s.master_index_id = m.id
                 WHERE m.id = ?
+                GROUP BY m.id, g.name, s.valid_indexes, s.indexes, s.valid_groups, s.groups, s.valid_keys, s.keys
             """.trimIndent()
             ).use { stmt ->
                 stmt.setInt(1, id)
@@ -138,12 +138,7 @@ public class CacheExporter @Inject constructor(
                     }
 
                     val game = rows.getString(1)
-
-                    var build: Int? = rows.getInt(2)
-                    if (rows.wasNull()) {
-                        build = null
-                    }
-
+                    val builds = rows.getArray(2).array as Array<Int>
                     val timestamp = rows.getTimestamp(3)?.toInstant()
                     val name = rows.getString(4)
                     val description = rows.getString(5)
@@ -160,7 +155,7 @@ public class CacheExporter @Inject constructor(
                         null
                     }
 
-                    return@execute Cache(id, game, build, timestamp, name, description, stats)
+                    return@execute Cache(id, game, builds.toSortedSet(), timestamp, name, description, stats)
                 }
             }
         }

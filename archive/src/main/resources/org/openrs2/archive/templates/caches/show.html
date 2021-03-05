@@ -16,8 +16,8 @@
 					<td th:text="${cache.game}">runescape</td>
 				</tr>
 				<tr class="thead-dark">
-					<th>Build</th>
-					<td th:text="${cache.build}">550</td>
+					<th>Build(s)</th>
+					<td th:text="${#strings.setJoin(cache.builds, ', ')}">550</td>
 				</tr>
 				<tr class="thead-dark">
 					<th>Timestamp</th>
