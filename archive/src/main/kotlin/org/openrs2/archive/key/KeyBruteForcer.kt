@@ -15,6 +15,13 @@ import javax.inject.Singleton
 public class KeyBruteForcer @Inject constructor(
     private val database: Database
 ) {
+    private data class ValidatedKey(
+        val keyId: Long,
+        val containerId: Long,
+        val uncompressedLength: Int,
+        val uncompressedChecksum: Int
+    )
+
     /*
      * The code for writing to the containers and keys tables ensures that the
      * row IDs are allocated monotonically (by forbidding any other
@@ -94,6 +101,7 @@ public class KeyBruteForcer @Inject constructor(
         while (true) {
             val pair = nextContainer(connection, lastContainerId) ?: break
             val (containerId, data) = pair
+            var validatedKey: ValidatedKey? = null
 
             connection.prepareStatement(
                 """
@@ -113,10 +121,15 @@ public class KeyBruteForcer @Inject constructor(
                         val k3 = rows.getInt(5)
                         val key = XteaKey(k0, k1, k2, k3)
 
-                        if (validateKey(connection, data, key, keyId, containerId)) {
+                        validatedKey = validateKey(data, key, keyId, containerId)
+                        if (validatedKey != null) {
                             break
                         }
                     }
+                }
+
+                if (validatedKey != null) {
+                    updateContainers(connection, listOf(validatedKey!!))
                 }
 
                 lastContainerId = containerId
@@ -187,6 +200,7 @@ public class KeyBruteForcer @Inject constructor(
         while (true) {
             val pair = nextKey(connection, lastKeyId) ?: break
             val (keyId, key) = pair
+            val validatedKeys = mutableListOf<ValidatedKey>()
 
             connection.prepareStatement(
                 """
@@ -203,10 +217,15 @@ public class KeyBruteForcer @Inject constructor(
                         val containerId = rows.getLong(1)
                         val data = rows.getBytes(2)
 
-                        validateKey(connection, data, key, keyId, containerId)
+                        val validatedKey = validateKey(data, key, keyId, containerId)
+                        if (validatedKey != null) {
+                            validatedKeys += validatedKey
+                        }
                     }
                 }
             }
+
+            updateContainers(connection, validatedKeys)
 
             lastKeyId = keyId
         }
@@ -253,34 +272,42 @@ public class KeyBruteForcer @Inject constructor(
     }
 
     private fun validateKey(
-        connection: Connection,
         data: ByteArray,
         key: XteaKey,
         keyId: Long,
         containerId: Long
-    ): Boolean {
+    ): ValidatedKey? {
         Unpooled.wrappedBuffer(data).use { buf ->
             Js5Compression.uncompressIfKeyValid(buf, key).use { uncompressed ->
-                if (uncompressed == null) {
-                    return false
+                return if (uncompressed != null) {
+                    ValidatedKey(keyId, containerId, uncompressed.readableBytes(), uncompressed.crc32())
+                } else {
+                    null
                 }
-
-                connection.prepareStatement(
-                    """
-                    UPDATE containers
-                    SET key_id = ?, uncompressed_length = ?, uncompressed_crc32 = ?
-                    WHERE id = ?
-                """.trimIndent()
-                ).use { stmt ->
-                    stmt.setLong(1, keyId)
-                    stmt.setInt(2, uncompressed.readableBytes())
-                    stmt.setInt(3, uncompressed.crc32())
-                    stmt.setLong(4, containerId)
-                    stmt.execute()
-                }
-
-                return true
             }
+        }
+    }
+
+    private fun updateContainers(connection: Connection, keys: List<ValidatedKey>) {
+        if (keys.isEmpty()) {
+            return
+        }
+
+        connection.prepareStatement(
+            """
+            UPDATE containers
+            SET key_id = ?, uncompressed_length = ?, uncompressed_crc32 = ?
+            WHERE id = ?""".trimIndent()
+        ).use { stmt ->
+            for (key in keys) {
+                stmt.setLong(1, key.keyId)
+                stmt.setInt(2, key.uncompressedLength)
+                stmt.setInt(3, key.uncompressedChecksum)
+                stmt.setLong(4, key.containerId)
+                stmt.addBatch()
+            }
+
+            stmt.executeBatch()
         }
     }
 
