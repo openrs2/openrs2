@@ -182,7 +182,6 @@ public class Js5ChannelHandler(
         Js5Compression.uncompress(buf.slice()).use { uncompressed ->
             masterIndex = Js5MasterIndex.read(uncompressed.slice(), masterIndexFormat)
 
-            val name = "Downloaded from $hostname:$port"
             val (id, rawIndexes) = runBlocking {
                 importer.importMasterIndexAndGetIndexes(
                     masterIndex!!,
@@ -192,7 +191,7 @@ public class Js5ChannelHandler(
                     build,
                     lastMasterIndexId,
                     timestamp = Instant.now(),
-                    name
+                    name = "Original"
                 )
             }
             try {
