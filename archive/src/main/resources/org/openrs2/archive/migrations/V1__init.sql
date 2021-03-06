@@ -172,8 +172,7 @@ CREATE MATERIALIZED VIEW master_index_stats (
     valid_groups,
     groups,
     valid_keys,
-    keys,
-    size
+    keys
 ) AS
 SELECT
     a.master_index_id,
@@ -182,13 +181,12 @@ SELECT
     COALESCE(g.valid_groups, 0),
     COALESCE(g.groups, 0),
     COALESCE(g.valid_keys, 0),
-    COALESCE(g.keys, 0),
-    COALESCE(g.size, 0)
+    COALESCE(g.keys, 0)
 FROM (
     SELECT
         a.master_index_id,
-        COUNT(i.container_id) AS valid_indexes,
-        COUNT(*) AS indexes
+        COUNT(DISTINCT a.archive_id) FILTER (WHERE i.container_id IS NOT NULL) AS valid_indexes,
+        COUNT(DISTINCT a.archive_id) AS indexes
     FROM master_index_archives a
     LEFT JOIN groups g ON g.archive_id = 255 AND g.group_id = a.archive_id::INTEGER AND
         g.version = a.version AND NOT g.version_truncated AND
@@ -200,11 +198,10 @@ FROM (
 LEFT JOIN (
     SELECT
         i.master_index_id,
-        COUNT(g.container_id) AS valid_groups,
-        COUNT(*) AS groups,
-        COUNT(*) FILTER (WHERE c.key_id IS NOT NULL) AS valid_keys,
-        COUNT(*) FILTER (WHERE c.encrypted) AS keys,
-        SUM(length(c.data)) AS size
+        COUNT(DISTINCT (i.archive_id, ig.group_id)) FILTER (WHERE c.id IS NOT NULL) AS valid_groups,
+        COUNT(DISTINCT (i.archive_id, ig.group_id)) AS groups,
+        COUNT(DISTINCT (i.archive_id, ig.group_id)) FILTER (WHERE c.key_id IS NOT NULL) AS valid_keys,
+        COUNT(DISTINCT (i.archive_id, ig.group_id)) FILTER (WHERE c.encrypted) AS keys
     FROM resolved_indexes i
     JOIN index_groups ig ON ig.container_id = i.container_id
     LEFT JOIN groups g ON g.archive_id = i.archive_id AND g.group_id = ig.group_id AND (
