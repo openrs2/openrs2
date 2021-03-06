@@ -383,7 +383,7 @@ public class CacheImporter @Inject constructor(
 
                     if (overwrite) {
                         newName = name
-                    } else if (oldName != null && name != null) {
+                    } else if (oldName != null && name != null && oldName != name) {
                         newName = "$oldName/$name"
                     } else if (oldName != null) {
                         newName = oldName
@@ -393,7 +393,7 @@ public class CacheImporter @Inject constructor(
 
                     if (overwrite) {
                         newDescription = description
-                    } else if (oldDescription != null && description != null) {
+                    } else if (oldDescription != null && description != null && oldDescription != description) {
                         newDescription = "$oldDescription\n\n$description"
                     } else if (oldDescription != null) {
                         newDescription = oldDescription
