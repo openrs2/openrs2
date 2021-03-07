@@ -216,7 +216,7 @@ LEFT JOIN (
 CREATE UNIQUE INDEX ON master_index_stats (master_index_id);
 
 CREATE VIEW collisions (archive_id, group_id, crc32, truncated_version, containers) AS
-SELECT g.archive_id, g.group_id, c.crc32, g.version & 65535 AS truncated_version, COUNT(DISTINCT c.id)
+SELECT g.archive_id, g.group_id, c.crc32, g.version & 65535 AS truncated_version, array_agg(DISTINCT c.id ORDER BY c.id ASC)
 FROM groups g
 JOIN containers c ON c.id = g.container_id
 GROUP BY g.archive_id, g.group_id, c.crc32, truncated_version
