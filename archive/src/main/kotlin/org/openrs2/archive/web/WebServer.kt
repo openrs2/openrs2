@@ -5,6 +5,8 @@ import io.ktor.application.call
 import io.ktor.application.install
 import io.ktor.features.ContentNegotiation
 import io.ktor.http.ContentType
+import io.ktor.http.content.resources
+import io.ktor.http.content.static
 import io.ktor.jackson.JacksonConverter
 import io.ktor.response.respond
 import io.ktor.routing.get
@@ -49,6 +51,7 @@ public class WebServer @Inject constructor(
                 get("/caches/{id}") { cachesController.show(call) }
                 get("/caches/{id}.zip") { cachesController.export(call) }
                 get("/caches/{id}.json") { cachesController.exportKeys(call) }
+                static("/static") { resources("/org/openrs2/archive/static") }
             }
         }.start(wait = true)
     }
