@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+	<head th:replace="layout.html :: head">
+		<title>OpenRS2 Archive</title>
+		<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+	</head>
+	<body>
+		<nav th:replace="layout.html :: nav"></nav>
+		<main class="container">
+			<div class="jumbotron">
+				<h1>Welcome to the OpenRS2 Archive</h1>
+				<p class="lead">
+					The OpenRS2 Archive is a collection of caches and XTEA keys
+					for all versions of RuneScape that use JS5 to manage assets
+					(mainline RuneScape builds 402 and greater, and all builds
+					of Old School RuneScape).
+				</p>
+				<p>
+					The archive uses content-addressable storage, converting
+					caches to the client's native
+					<code>.dat2</code>/<code>.idx</code> format on-demand. This
+					provides several benefits: the disk space required to store
+					all available caches is reduced, and groups or XTEA keys
+					missing from one copy of the cache can be sourced
+					automatically from other copies - provided the checksums and
+					version numbers match.
+				</p>
+				<p>
+					The archive is highly automated: OSRS cache updates are
+					downloaded automatically (with RuneScape 3 support
+					planned), and XTEA keys are pulled from various sources and
+					verified automatically. However, third-party contributions
+					must be imported manually to verify the data's provenance
+					(see the "Contributing" section below).
+				</p>
+				<p>
+					Support for archiving clients/gamepacks, loaders and native
+					libraries is also planned for a future update.
+				</p>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<h2>Sources</h2>
+					<p>
+						A significant amount of data in the archive was, or is,
+						obtained from the following projects, which we'd like
+						to thank:
+					</p>
+					<ul>
+						<li><a href="https://displee.com/archive/">Displee's archive</a></li>
+						<li><a href="https://gregs.world/archive/">Greg's archive</a></li>
+						<li><a href="https://openosrs.com/">OpenOSRS</a></li>
+						<li><a href="https://archive.runestats.com/">Polar's archive</a></li>
+						<!-- We don't use Moparisthebest's or RS-Hacking's -->
+						<!-- data yet, but we will once we start archiving clients. -->
+						<!-- <li><a href="https://www.moparisthebest.com/rs/">Moparisthebest's archive</a></li> -->
+						<!-- <li><a href="https://rs-hacking.com/">RS-Hacking</a></li> -->
+						<li><a href="https://runearchive.org/">RuneArchive</a></li>
+						<li><a href="https://runelite.net/">RuneLite</a></li>
+						<li><a href="http://runestar.org/">RuneStar</a></li>
+					</ul>
+				</div>
+				<div class="col-md-4">
+					<h2>Contributing</h2>
+					<p>
+						Please contact Graham#5361 in
+						<a href="https://chat.openrs2.org/">OpenRS2's Discord server</a>
+						if you have data (old clients/gamepacks, loaders, native
+						libraries, caches and XTEA keys - ideally original or
+						only lightly modified copies) to contribute.
+					</p>
+					<p>
+						Contributing data is important even if the cache or
+						keyset already exists in the archive. Older copies of
+						the cache are often incomplete, and your copy may have
+						data missing from the archive.
+					</p>
+					<p>
+						By pooling all the community's data together in a
+						single location, the whole community will benefit from
+						access to more complete caches and keysets.
+					</p>
+				</div>
+				<div class="col-md-4">
+					<h2>Mirroring</h2>
+					<p>
+						An rsync server is available at
+						<code>rsync://archive.openrs2.org/pub</code>. Daily
+						Postgres dumps are available in the <code>db</code>
+						subdirectory in the custom dump format.
+					</p>
+					<p>
+						A public-facing Postgres instance, for complex queries
+						and replication, may be made available in the future.
+					</p>
+					<p>
+						The
+						<a href="https://git.openrs2.org/openrs2/openrs2/src/branch/master/archive/src/main/kotlin/org/openrs2/archive">software</a>
+						used to import and export data is open-source. Combined
+						with the database dumps, this ensures the longevity of
+						the archive if the main instance ever disappears.
+					</p>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>
