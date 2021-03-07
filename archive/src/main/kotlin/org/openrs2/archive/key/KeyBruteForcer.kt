@@ -153,6 +153,7 @@ public class KeyBruteForcer @Inject constructor(
             SELECT id, data
             FROM containers
             WHERE (? IS NULL OR id > ?) AND encrypted AND key_id IS NULL
+            ORDER BY id ASC
             LIMIT 1
         """.trimIndent()
         ).use { stmt ->
@@ -247,6 +248,7 @@ public class KeyBruteForcer @Inject constructor(
             SELECT id, (key).k0, (key).k1, (key).k2, (key).k3
             FROM keys
             WHERE ? IS NULL OR id > ?
+            ORDER BY id ASC
             LIMIT 1
         """.trimIndent()
         ).use { stmt ->
