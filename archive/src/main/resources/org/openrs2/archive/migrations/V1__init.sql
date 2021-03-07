@@ -185,7 +185,7 @@ SELECT
 FROM (
     SELECT
         a.master_index_id,
-        COUNT(DISTINCT a.archive_id) FILTER (WHERE i.container_id IS NOT NULL) AS valid_indexes,
+        COUNT(DISTINCT a.archive_id) FILTER (WHERE i.container_id IS NOT NULL OR (a.version = 0 AND a.crc32 = 0)) AS valid_indexes,
         COUNT(DISTINCT a.archive_id) AS indexes
     FROM master_index_archives a
     LEFT JOIN groups g ON g.archive_id = 255 AND g.group_id = a.archive_id::INTEGER AND
