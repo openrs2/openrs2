@@ -552,7 +552,7 @@ public class CacheImporter @Inject constructor(
 
         connection.prepareStatement(
             """
-            INSERT INTO groups (archive_id, group_id, container_id, version, version_truncated)
+            INSERT INTO groups (archive_id, group_id, version, version_truncated, container_id)
             VALUES (?, ?, ?, ?, ?)
             ON CONFLICT DO NOTHING
         """.trimIndent()
@@ -560,9 +560,9 @@ public class CacheImporter @Inject constructor(
             for ((i, group) in groups.withIndex()) {
                 stmt.setInt(1, group.archive)
                 stmt.setInt(2, group.group)
-                stmt.setLong(3, containerIds[i])
-                stmt.setInt(4, group.version)
-                stmt.setBoolean(5, group.versionTruncated)
+                stmt.setInt(3, group.version)
+                stmt.setBoolean(4, group.versionTruncated)
+                stmt.setLong(5, containerIds[i])
                 stmt.addBatch()
             }
 

@@ -58,10 +58,10 @@ VALUES (NULL, NULL);
 CREATE TABLE groups (
     archive_id uint1 NOT NULL,
     group_id INTEGER NOT NULL,
-    container_id BIGINT NOT NULL REFERENCES containers (id),
     version INTEGER NOT NULL,
     version_truncated BOOLEAN NOT NULL,
-    PRIMARY KEY (archive_id, group_id, container_id, version, version_truncated)
+    container_id BIGINT NOT NULL REFERENCES containers (id),
+    PRIMARY KEY (archive_id, group_id, version, version_truncated, container_id)
 );
 
 CREATE TABLE indexes (
