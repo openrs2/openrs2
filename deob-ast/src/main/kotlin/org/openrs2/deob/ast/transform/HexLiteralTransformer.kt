@@ -1,6 +1,7 @@
 package org.openrs2.deob.ast.transform
 
 import com.github.javaparser.ast.CompilationUnit
+import com.github.javaparser.ast.expr.AssignExpr
 import com.github.javaparser.ast.expr.BinaryExpr
 import com.github.javaparser.ast.expr.Expression
 import com.github.javaparser.ast.expr.IntegerLiteralExpr
@@ -26,6 +27,12 @@ public class HexLiteralTransformer : Transformer() {
                 convertToHex(expr.right)
             }
         }
+
+        unit.walk { expr: AssignExpr ->
+            if (expr.operator in ASSIGN_OPS) {
+                convertToHex(expr.value)
+            }
+        }
     }
 
     private fun convertToHex(expr: Expression) {
@@ -45,6 +52,14 @@ public class HexLiteralTransformer : Transformer() {
             BinaryExpr.Operator.BINARY_AND,
             BinaryExpr.Operator.BINARY_OR,
             BinaryExpr.Operator.XOR
+        )
+        private val ASSIGN_OPS = setOf(
+            AssignExpr.Operator.BINARY_AND,
+            AssignExpr.Operator.BINARY_OR,
+            AssignExpr.Operator.LEFT_SHIFT,
+            AssignExpr.Operator.SIGNED_RIGHT_SHIFT,
+            AssignExpr.Operator.UNSIGNED_RIGHT_SHIFT,
+            AssignExpr.Operator.XOR
         )
     }
 }
