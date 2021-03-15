@@ -24607,7 +24607,7 @@ methods:
     locals: {}
   client!ji.a (CLjava/lang/StringBuffer;IZ)Ljava/lang/StringBuffer;:
     owner: "StringUtils"
-    name: "clearBuffer"
+    name: "fillBuffer"
     arguments:
       1: "buffer"
     locals:
