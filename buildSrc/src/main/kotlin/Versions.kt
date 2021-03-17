@@ -6,7 +6,7 @@ object Versions {
     const val clikt = "3.1.0"
     const val commonsCompress = "1.20"
     const val dependencyLicenseReport = "1.16"
-    const val dokka = "1.4.20"
+    const val dokka = "1.4.30"
     const val fastutil = "8.5.2"
     const val fernflower = "1.1.0"
     const val flyway = "7.7.0"
