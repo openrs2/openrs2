@@ -107,20 +107,10 @@ CREATE TABLE master_indexes (
     id SERIAL PRIMARY KEY NOT NULL,
     container_id BIGINT NOT NULL REFERENCES containers (id),
     format master_index_format NOT NULL,
-    game_id INTEGER NOT NULL REFERENCES games (id),
-    timestamp TIMESTAMPTZ NULL,
-    name TEXT NULL,
-    description TEXT NULL,
     UNIQUE (container_id, format)
 );
 
 ALTER TABLE games ADD COLUMN last_master_index_id INT NULL REFERENCES master_indexes (id);
-
-CREATE TABLE master_index_builds (
-    master_index_id INTEGER NOT NULL REFERENCES master_indexes (id),
-    build INTEGER NOT NULL,
-    PRIMARY KEY (master_index_id, build)
-);
 
 CREATE TABLE master_index_archives (
     master_index_id INTEGER NOT NULL REFERENCES master_indexes (id),
@@ -132,6 +122,38 @@ CREATE TABLE master_index_archives (
     total_uncompressed_length INTEGER NULL,
     PRIMARY KEY (master_index_id, archive_id)
 );
+
+CREATE TYPE source_type AS ENUM (
+    'disk',
+    'js5remote'
+);
+
+CREATE TABLE sources (
+    id SERIAL PRIMARY KEY NOT NULL,
+    type source_type NOT NULL,
+    master_index_id INTEGER NOT NULL REFERENCES master_indexes (id),
+    game_id INTEGER NOT NULL REFERENCES games (id),
+    build INTEGER NULL,
+    timestamp TIMESTAMPTZ NULL,
+    name TEXT NULL,
+    description TEXT NULL,
+    url TEXT NULL
+);
+
+CREATE INDEX ON sources (master_index_id);
+CREATE UNIQUE INDEX ON sources (master_index_id, game_id, build) WHERE type = 'js5remote';
+
+CREATE TABLE source_groups (
+    source_id INTEGER NOT NULL REFERENCES sources (id),
+    archive_id uint1 NOT NULL,
+    group_id INTEGER NOT NULL,
+    version INTEGER NOT NULL,
+    version_truncated BOOLEAN NOT NULL,
+    container_id BIGINT NOT NULL REFERENCES containers (id),
+    PRIMARY KEY (source_id, archive_id, group_id)
+);
+
+CREATE INDEX ON source_groups (archive_id, group_id, version, version_truncated, container_id);
 
 CREATE TABLE names (
     hash INTEGER NOT NULL,

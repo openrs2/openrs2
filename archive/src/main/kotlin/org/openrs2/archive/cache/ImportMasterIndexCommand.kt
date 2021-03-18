@@ -21,6 +21,7 @@ public class ImportMasterIndexCommand : CliktCommand(name = "import-master-index
     private val timestamp by option().instant()
     private val name by option()
     private val description by option()
+    private val url by option()
 
     private val game by argument()
     private val format by argument().enum<MasterIndexFormat>()
@@ -35,7 +36,7 @@ public class ImportMasterIndexCommand : CliktCommand(name = "import-master-index
             val importer = injector.getInstance(CacheImporter::class.java)
 
             Unpooled.wrappedBuffer(Files.readAllBytes(input)).use { buf ->
-                importer.importMasterIndex(buf, format, game, build, timestamp, name, description)
+                importer.importMasterIndex(buf, format, game, build, timestamp, name, description, url)
             }
         }
     }

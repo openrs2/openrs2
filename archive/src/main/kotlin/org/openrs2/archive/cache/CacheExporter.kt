@@ -9,6 +9,7 @@ import org.openrs2.cache.Store
 import org.openrs2.crypto.XteaKey
 import org.openrs2.db.Database
 import java.time.Instant
+import java.util.Collections
 import java.util.SortedSet
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -50,13 +51,16 @@ public class CacheExporter @Inject constructor(
 
     public data class Cache(
         val id: Int,
-        val game: String,
+        val games: SortedSet<String>,
         val builds: SortedSet<Int>,
         val timestamp: Instant?,
-        val name: String?,
-        val description: String?,
+        val names: SortedSet<String>,
+        val descriptions: List<String>,
+        val urls: SortedSet<String>,
         val stats: Stats?
-    )
+    ) {
+        val game: String = games.single()
+    }
 
     public data class Key(
         val archive: Int,
@@ -72,15 +76,23 @@ public class CacheExporter @Inject constructor(
             connection.prepareStatement(
                 """
                 SELECT
-                    m.id, g.name, array_remove(array_agg(b.build ORDER BY b.build ASC), NULL), m.timestamp, m.name,
-                    s.valid_indexes, s.indexes, s.valid_groups, s.groups, s.valid_keys, s.keys
+                    m.id,
+                    g.name,
+                    array_remove(array_agg(DISTINCT s.build ORDER BY s.build ASC), NULL),
+                    MIN(s.timestamp),
+                    array_remove(array_agg(DISTINCT s.name ORDER BY s.name ASC), NULL),
+                    ms.valid_indexes,
+                    ms.indexes,
+                    ms.valid_groups,
+                    ms.groups,
+                    ms.valid_keys,
+                    ms.keys
                 FROM master_indexes m
-                JOIN games g ON g.id = m.game_id
-                JOIN containers c ON c.id = m.container_id
-                LEFT JOIN master_index_builds b ON b.master_index_id = m.id
-                LEFT JOIN master_index_stats s ON s.master_index_id = m.id
-                GROUP BY m.id, g.name, s.valid_indexes, s.indexes, s.valid_groups, s.groups, s.valid_keys, s.keys
-                ORDER BY g.name ASC, MIN(b.build) ASC, m.timestamp ASC
+                LEFT JOIN sources s ON s.master_index_id = m.id
+                LEFT JOIN games g ON g.id = s.game_id
+                LEFT JOIN master_index_stats ms ON s.master_index_id = m.id
+                GROUP BY m.id, g.name, ms.valid_indexes, ms.indexes, ms.valid_groups, ms.groups, ms.valid_keys, ms.keys
+                ORDER BY g.name ASC, MIN(s.build) ASC, MIN(s.timestamp) ASC
             """.trimIndent()
             ).use { stmt ->
                 stmt.executeQuery().use { rows ->
@@ -91,7 +103,7 @@ public class CacheExporter @Inject constructor(
                         val game = rows.getString(2)
                         val builds = rows.getArray(3).array as Array<Int>
                         val timestamp = rows.getTimestamp(4)?.toInstant()
-                        val name = rows.getString(5)
+                        val names = rows.getArray(5).array as Array<String>
 
                         val validIndexes = rows.getLong(6)
                         val stats = if (!rows.wasNull()) {
@@ -105,7 +117,16 @@ public class CacheExporter @Inject constructor(
                             null
                         }
 
-                        caches += Cache(id, game, builds.toSortedSet(), timestamp, name, description = null, stats)
+                        caches += Cache(
+                            id,
+                            sortedSetOf(game),
+                            builds.toSortedSet(),
+                            timestamp,
+                            names.toSortedSet(),
+                            emptyList(),
+                            Collections.emptySortedSet(),
+                            stats
+                        )
                     }
 
                     caches
@@ -119,15 +140,24 @@ public class CacheExporter @Inject constructor(
             connection.prepareStatement(
                 """
                 SELECT
-                    g.name, array_remove(array_agg(b.build ORDER BY b.build ASC), NULL), m.timestamp, m.name,
-                    m.description, s.valid_indexes, s.indexes, s.valid_groups, s.groups, s.valid_keys, s.keys
+                    array_remove(array_agg(DISTINCT g.name ORDER BY g.name ASC), NULL),
+                    array_remove(array_agg(DISTINCT s.build ORDER BY s.build ASC), NULL),
+                    MIN(s.timestamp),
+                    array_remove(array_agg(DISTINCT s.name ORDER BY s.name ASC), NULL),
+                    array_remove(array_agg(s.description), NULL),
+                    array_remove(array_agg(DISTINCT s.url ORDER BY s.url ASC), NULL),
+                    ms.valid_indexes,
+                    ms.indexes,
+                    ms.valid_groups,
+                    ms.groups,
+                    ms.valid_keys,
+                    ms.keys
                 FROM master_indexes m
-                JOIN games g ON g.id = m.game_id
-                JOIN containers c ON c.id = m.container_id
-                LEFT JOIN master_index_builds b ON b.master_index_id = m.id
-                LEFT JOIN master_index_stats s ON s.master_index_id = m.id
+                LEFT JOIN sources s ON s.master_index_id = m.id
+                LEFT JOIN games g ON g.id = s.game_id
+                LEFT JOIN master_index_stats ms ON s.master_index_id = m.id
                 WHERE m.id = ?
-                GROUP BY m.id, g.name, s.valid_indexes, s.indexes, s.valid_groups, s.groups, s.valid_keys, s.keys
+                GROUP BY m.id, ms.valid_indexes, ms.indexes, ms.valid_groups, ms.groups, ms.valid_keys, ms.keys
             """.trimIndent()
             ).use { stmt ->
                 stmt.setInt(1, id)
@@ -137,25 +167,35 @@ public class CacheExporter @Inject constructor(
                         return@execute null
                     }
 
-                    val game = rows.getString(1)
+                    val games = rows.getArray(1).array as Array<String>
                     val builds = rows.getArray(2).array as Array<Int>
                     val timestamp = rows.getTimestamp(3)?.toInstant()
-                    val name = rows.getString(4)
-                    val description = rows.getString(5)
+                    val names = rows.getArray(4).array as Array<String>
+                    val descriptions = rows.getArray(5).array as Array<String>
+                    val urls = rows.getArray(6).array as Array<String>
 
-                    val validIndexes = rows.getLong(6)
+                    val validIndexes = rows.getLong(7)
                     val stats = if (!rows.wasNull()) {
-                        val indexes = rows.getLong(7)
-                        val validGroups = rows.getLong(8)
-                        val groups = rows.getLong(9)
-                        val validKeys = rows.getLong(10)
-                        val keys = rows.getLong(11)
+                        val indexes = rows.getLong(8)
+                        val validGroups = rows.getLong(9)
+                        val groups = rows.getLong(10)
+                        val validKeys = rows.getLong(11)
+                        val keys = rows.getLong(12)
                         Stats(validIndexes, indexes, validGroups, groups, validKeys, keys)
                     } else {
                         null
                     }
 
-                    return@execute Cache(id, game, builds.toSortedSet(), timestamp, name, description, stats)
+                    return@execute Cache(
+                        id,
+                        games.toSortedSet(),
+                        builds.toSortedSet(),
+                        timestamp,
+                        names.toSortedSet(),
+                        descriptions.toList(),
+                        urls.toSortedSet(),
+                        stats
+                    )
                 }
             }
         }

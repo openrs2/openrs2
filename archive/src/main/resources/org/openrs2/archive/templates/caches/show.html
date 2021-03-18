@@ -14,7 +14,7 @@
 			<table class="table table-striped table-bordered table-hover">
 				<tr class="thead-dark">
 					<th>Game</th>
-					<td th:text="${cache.game}">runescape</td>
+					<td th:text="${#strings.setJoin(cache.games, ', ')}">runescape</td>
 				</tr>
 				<tr class="thead-dark">
 					<th>Build(s)</th>
@@ -26,11 +26,21 @@
 				</tr>
 				<tr class="thead-dark">
 					<th>Name</th>
-					<td th:text="${cache.name}"></td>
+					<td th:text="${#strings.setJoin(cache.names, '/')}"></td>
 				</tr>
 				<tr class="thead-dark">
 					<th>Description</th>
-					<td th:text="${cache.description}"></td>
+					<td th:text="${#strings.listJoin(cache.descriptions, ' ')}"></td>
+				</tr>
+				<tr class="thead-dark">
+					<th>URL(s)</th>
+					<td>
+						<ul>
+							<li th:each="url : ${cache.urls}">
+								<a th:href="${url}">${url}</a>
+							</li>
+						</ul>
+					</td>
 				</tr>
 				<tr class="thead-dark">
 					<th>Indexes</th>

@@ -53,6 +53,7 @@ public class Js5ChannelHandler(
     private val inFlightRequests = mutableSetOf<Js5Request.Group>()
     private val pendingRequests = ArrayDeque<Js5Request.Group>()
     private var masterIndexId: Int = 0
+    private var sourceId: Int = 0
     private var masterIndex: Js5MasterIndex? = null
     private lateinit var indexes: Array<Js5Index?>
     private val groups = mutableListOf<CacheImporter.Group>()
@@ -161,7 +162,7 @@ public class Js5ChannelHandler(
 
         if (groups.size >= CacheImporter.BATCH_SIZE || complete) {
             runBlocking {
-                importer.importGroups(groups)
+                importer.importGroups(sourceId, groups)
             }
 
             releaseGroups()
@@ -182,7 +183,7 @@ public class Js5ChannelHandler(
         Js5Compression.uncompress(buf.slice()).use { uncompressed ->
             masterIndex = Js5MasterIndex.read(uncompressed.slice(), masterIndexFormat)
 
-            val (id, rawIndexes) = runBlocking {
+            val (masterIndexId, sourceId, rawIndexes) = runBlocking {
                 importer.importMasterIndexAndGetIndexes(
                     masterIndex!!,
                     buf,
@@ -190,10 +191,13 @@ public class Js5ChannelHandler(
                     gameId,
                     build,
                     lastMasterIndexId,
-                    timestamp = Instant.now(),
-                    name = "Original"
+                    timestamp = Instant.now()
                 )
             }
+
+            this.masterIndexId = masterIndexId
+            this.sourceId = sourceId
+
             try {
                 indexes = arrayOfNulls(rawIndexes.size)
 
@@ -207,8 +211,6 @@ public class Js5ChannelHandler(
             } finally {
                 rawIndexes.filterNotNull().forEach(ByteBuf::release)
             }
-
-            masterIndexId = id
         }
     }
 
@@ -228,7 +230,7 @@ public class Js5ChannelHandler(
             }
 
             val groups = runBlocking {
-                importer.importIndexAndGetMissingGroups(archive, index, buf, uncompressed, lastMasterIndexId)
+                importer.importIndexAndGetMissingGroups(sourceId, archive, index, buf, uncompressed, lastMasterIndexId)
             }
             for (group in groups) {
                 request(archive, group)
