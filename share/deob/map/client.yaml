@@ -408,8 +408,8 @@ fields:
     owner: "Class6"
     name: "aBoolean7"
   client!ae.c [S:
-    owner: "Static1"
-    name: "aShortArray11"
+    owner: "PlayerAppearance"
+    name: "GAME0_SOURCE_SKIN_COLORS"
   client!ae.d Ljava/lang/String;:
     owner: "LocalisedText"
     name: "CLOSE"
@@ -595,7 +595,7 @@ fields:
     name: "aClass58_7"
   client!ao.f Lclient!cc;:
     owner: "NpcTypeList"
-    name: "models"
+    name: "bodyModels"
   client!ao.g Ljava/lang/String;:
     owner: "LocalisedText"
     name: "EXAMINE"
@@ -960,8 +960,8 @@ fields:
     owner: "Preferences"
     name: "groundTextures"
   client!bn.v [[S:
-    owner: "Static1"
-    name: "aShortArrayArray1"
+    owner: "PlayerAppearance"
+    name: "destinationSkinColors"
   client!bn.y Lclient!ll;:
     owner: "Class4_Sub6_Sub1"
     name: "aClass112_3"
@@ -1021,7 +1021,7 @@ fields:
     name: "anInt497"
   client!ca.V [I:
     owner: "PlayerAppearance"
-    name: "anIntArray46"
+    name: "BASE_PART_MAP"
   client!ca.X I:
     owner: "TextureOp11"
     name: "anInt501"
@@ -2208,8 +2208,8 @@ fields:
     owner: "Protocol"
     name: "removedIds"
   client!el.f Lclient!cc;:
-    owner: "Static2"
-    name: "aClass26_12"
+    owner: "PlayerAppearance"
+    name: "bodyModels"
   client!el.m I:
     owner: "Static2"
     name: "anInt1317"
@@ -3376,7 +3376,7 @@ fields:
     name: "types"
   client!he.q I:
     owner: "ObjStack"
-    name: "anInt2163"
+    name: "minY"
   client!he.s I:
     owner: "Static3"
     name: "anInt2165"
@@ -3453,8 +3453,8 @@ fields:
     owner: "ParticleEmitterTypeList"
     name: "archive"
   client!hi.b [S:
-    owner: "Static3"
-    name: "aShortArray32"
+    owner: "PlayerAppearance"
+    name: "GAME1_SOURCE_SKIN_COLORS"
   client!hi.f I:
     owner: "VarpType"
     name: "clientCode"
@@ -4287,8 +4287,8 @@ fields:
     owner: "ByteArrayNode"
     name: "value"
   client!j.x [S:
-    owner: "Static3"
-    name: "aShortArray35"
+    owner: "PlayerAppearance"
+    name: "GAME1_SOURCE_BODY_COLORS"
   client!ja.b I:
     owner: "PlayerList"
     name: "size"
@@ -4509,8 +4509,8 @@ fields:
     owner: "SoundBank"
     name: "vorbisArchive"
   client!jk.d Lclient!cc;:
-    owner: "Static3"
-    name: "aClass26_27"
+    owner: "PlayerAppearance"
+    name: "headModels"
   client!jk.l Lclient!fh;:
     owner: "SoundBank"
     name: "synthArchive"
@@ -5313,8 +5313,8 @@ fields:
     owner: "SpotAnimType"
     name: "recolorDestination"
   client!li.k [S:
-    owner: "Static4"
-    name: "aShortArray46"
+    owner: "PlayerAppearance"
+    name: "sourceSkinColors"
   client!li.l I:
     owner: "SpotAnimType"
     name: "anInt3136"
@@ -6417,8 +6417,8 @@ fields:
     owner: "PlayerList"
     name: "players"
   client!nc.f [[S:
-    owner: "Static5"
-    name: "aShortArrayArray2"
+    owner: "PlayerAppearance"
+    name: "GAME1_DESTINATION_BODY_COLORS"
   client!nc.h Ljava/lang/String;:
     owner: "Text"
     name: "CHATCOL5"
@@ -6820,7 +6820,7 @@ fields:
     name: "aBoolean264"
   client!o.D I:
     owner: "SpotAnim"
-    name: "anInt3662"
+    name: "minY"
   client!o.E Lclient!ne;:
     owner: "SpotAnim"
     name: "aClass20_Sub3_4"
@@ -7012,7 +7012,7 @@ fields:
     name: "anInt3728"
   client!oc.Y I:
     owner: "ProjAnim"
-    name: "anInt3730"
+    name: "minY"
   client!oc.Z D:
     owner: "ProjAnim"
     name: "aDouble10"
@@ -7329,8 +7329,8 @@ fields:
     owner: "FluType"
     name: "aBoolean286"
   client!pa.i [[S:
-    owner: "Static5"
-    name: "aShortArrayArray5"
+    owner: "PlayerAppearance"
+    name: "GAME1_DESTINATION_SKIN_COLORS"
   client!pa.k I:
     owner: "FluType"
     name: "anInt4064"
@@ -7696,16 +7696,16 @@ fields:
     name: "retextureDestination"
   client!qa.o [I:
     owner: "IdkType"
-    name: "anIntArray449"
+    name: "bodyModels"
   client!qa.q I:
     owner: "Static5"
     name: "anInt4230"
   client!qa.r [I:
     owner: "IdkType"
-    name: "anIntArray450"
+    name: "headModels"
   client!qa.s I:
     owner: "IdkType"
-    name: "anInt4231"
+    name: "feature"
   client!qa.t [[Lclient!wj;:
     owner: "Static5"
     name: "aClass187ArrayArray1"
@@ -7756,7 +7756,7 @@ fields:
     name: "aClass150Array3"
   client!qc.Gb I:
     owner: "PathingEntity"
-    name: "anInt4016"
+    name: "minY"
   client!qc.H [B:
     owner: "PathingEntity"
     name: "movementQueueSpeed"
@@ -8212,7 +8212,7 @@ fields:
     name: "font11"
   client!qk.u J:
     owner: "PlayerAppearance"
-    name: "aLong154"
+    name: "prevChecksum"
   client!qk.w I:
     owner: "PlayerAppearance"
     name: "npcId"
@@ -8623,7 +8623,7 @@ fields:
     name: "aBoolean317"
   client!rh.jb [I:
     owner: "PlayerAppearance"
-    name: "anIntArray487"
+    name: "FEMALE_FEATURES"
   client!rh.kb I:
     owner: "Static6"
     name: "anInt4555"
@@ -8719,7 +8719,7 @@ fields:
     name: "anInt4574"
   client!ri.u I:
     owner: "Loc"
-    name: "anInt4575"
+    name: "minY"
   client!ri.v Z:
     owner: "Loc"
     name: "aBoolean318"
@@ -9330,8 +9330,8 @@ fields:
     owner: "Static6"
     name: "anInt4907"
   client!sm.g [[S:
-    owner: "Static6"
-    name: "aShortArrayArray6"
+    owner: "PlayerAppearance"
+    name: "destinationBodyColors"
   client!sm.i Lclient!fh;:
     owner: "client"
     name: "js5Archive4"
@@ -9574,10 +9574,10 @@ fields:
     name: "recolorDestination"
   client!td.G I:
     owner: "ObjType"
-    name: "anInt5070"
+    name: "womanWear1"
   client!td.H I:
     owner: "ObjType"
-    name: "anInt5071"
+    name: "manWear3"
   client!td.I C:
     owner: "Keyboard"
     name: "keyChar"
@@ -9610,7 +9610,7 @@ fields:
     name: "xAngle2d"
   client!td.V I:
     owner: "ObjType"
-    name: "anInt5081"
+    name: "manWear1"
   client!td.W I:
     owner: "ObjType"
     name: "womanHead"
@@ -9637,13 +9637,13 @@ fields:
     name: "anInt5088"
   client!td.d I:
     owner: "ObjType"
-    name: "anInt5049"
+    name: "manWear2"
   client!td.db I:
     owner: "ObjType"
     name: "certificateTemplate"
   client!td.eb I:
     owner: "ObjType"
-    name: "anInt5090"
+    name: "womanWear2"
   client!td.f I:
     owner: "ObjType"
     name: "contrast"
@@ -9682,10 +9682,10 @@ fields:
     name: "dummyItem"
   client!td.n [I:
     owner: "PlayerAppearance"
-    name: "anIntArray550"
+    name: "MALE_FEATURES"
   client!td.nb I:
     owner: "ObjType"
-    name: "anInt5097"
+    name: "womanWear3"
   client!td.o I:
     owner: "ObjType"
     name: "zoom2d"
@@ -9721,7 +9721,7 @@ fields:
     name: "cost"
   client!td.v I:
     owner: "ObjType"
-    name: "anInt5062"
+    name: "zAngle2d"
   client!td.w I:
     owner: "ObjType"
     name: "womanWearZOff"
@@ -9825,8 +9825,8 @@ fields:
     owner: "Static6"
     name: "anInt5182"
   client!ti.db [[S:
-    owner: "Static6"
-    name: "aShortArrayArray7"
+    owner: "PlayerAppearance"
+    name: "GAME0_DESTINATION_BODY_COLORS"
   client!tj.A I:
     owner: "AudioChannel"
     name: "anInt3593"
@@ -10443,8 +10443,8 @@ fields:
     owner: "GoSubFrame"
     name: "pc"
   client!ui.g [[S:
-    owner: "Static7"
-    name: "aShortArrayArray8"
+    owner: "PlayerAppearance"
+    name: "GAME0_DESTINATION_SKIN_COLORS"
   client!ui.h [I:
     owner: "GoSubFrame"
     name: "intLocals"
@@ -10602,8 +10602,8 @@ fields:
     owner: "TextureOp12"
     name: "anInt5471"
   client!vb.X [S:
-    owner: "Static7"
-    name: "aShortArray113"
+    owner: "PlayerAppearance"
+    name: "sourceBodyColors"
   client!vb.Z [S:
     owner: "Find"
     name: "results"
@@ -10689,8 +10689,8 @@ fields:
     owner: "ObjStackEntity"
     name: "xFine"
   client!vf.b [S:
-    owner: "Static7"
-    name: "aShortArray115"
+    owner: "PlayerAppearance"
+    name: "GAME0_SOURCE_BODY_COLORS"
   client!vf.c I:
     owner: "FriendsList"
     name: "state"
@@ -13443,8 +13443,8 @@ methods:
       0: "component"
     locals: {}
   client!bh.b (I)V:
-    owner: "Static10"
-    name: "method898"
+    owner: "PlayerAppearance"
+    name: "clear"
     arguments: {}
     locals: {}
   client!bi.<init> (Lclient!sk;Lclient!ne;J)V:
@@ -17623,8 +17623,8 @@ methods:
     arguments: {}
     locals: {}
   client!f.f (I)V:
-    owner: "Static14"
-    name: "method1172"
+    owner: "PlayerAppearance"
+    name: "removeSoft"
     arguments: {}
     locals: {}
   client!f.finalize ()V:
@@ -18011,8 +18011,8 @@ methods:
       37: "i"
       69: "i"
   client!fc.b (B)I:
-    owner: "Static15"
-    name: "method1228"
+    owner: "PlayerAppearance"
+    name: "getModelCacheSize"
     arguments: {}
     locals: {}
   client!fd.<init> (I)V:
@@ -20508,8 +20508,8 @@ methods:
       14466: "isp2"
       14470: "component"
       14557: "component"
-      14650: "local14650"
-      14656: "local14656"
+      14650: "feature"
+      14656: "identikit"
       14658: "i"
       14684: "i"
       14722: "i"
@@ -35544,7 +35544,7 @@ methods:
     locals: {}
   client!qa.a (B)Lclient!ml;:
     owner: "IdkType"
-    name: "method3490"
+    name: "getBodyModel"
     arguments: {}
     locals:
       16: "models"
@@ -35579,12 +35579,12 @@ methods:
       1: "buffer"
       0: "code"
     locals:
-      22: "local22"
-      28: "local28"
-      55: "local55"
+      22: "len"
+      28: "i"
+      55: "len"
       65: "local65"
-      124: "local124"
-      134: "local134"
+      124: "len"
+      134: "i"
   client!qa.a (IZLjava/lang/Object;)[B:
     owner: "ByteArray"
     name: "unwrap"
@@ -35760,14 +35760,14 @@ methods:
       272: "local272"
   client!qa.b (B)Z:
     owner: "IdkType"
-    name: "method3494"
+    name: "isBodyModelReady"
     arguments: {}
     locals:
-      13: "local13"
-      22: "local22"
+      13: "ready"
+      22: "i"
   client!qa.b (I)Lclient!ml;:
     owner: "IdkType"
-    name: "method3489"
+    name: "getHeadModel"
     arguments: {}
     locals:
       8: "models"
@@ -35778,11 +35778,11 @@ methods:
       81: "i"
   client!qa.c (I)Z:
     owner: "IdkType"
-    name: "method3497"
+    name: "isHeadModelReady"
     arguments: {}
     locals:
-      16: "local16"
-      18: "local18"
+      16: "ready"
+      18: "i"
   client!qb.<init> ()V:
     owner: "TextureOp0"
     name: "<init>"
@@ -36775,12 +36775,12 @@ methods:
     locals: {}
   client!qk.a (BII)V:
     owner: "PlayerAppearance"
-    name: "method3604"
+    name: "setIdentikit"
     arguments:
-      1: "arg0"
-      2: "id"
+      1: "i"
+      2: "identikit"
     locals:
-      7: "local7"
+      7: "part"
   client!qk.a (I)V:
     owner: "BasTypeList"
     name: "clear"
@@ -36824,21 +36824,21 @@ methods:
     name: "method3612"
     arguments:
       0: "arg0"
-      1: "arg1"
+      1: "seqType"
       2: "arg2"
       4: "arg3"
     locals:
-      28: "local28"
-      33: "local33"
-      35: "local35"
-      43: "local43"
-      93: "local93"
-      95: "local95"
-      97: "local97"
-      105: "local105"
-      122: "local122"
-      145: "local145"
-      162: "local162"
+      28: "model"
+      33: "incomplete"
+      35: "i"
+      43: "id"
+      93: "models"
+      95: "len"
+      97: "i"
+      105: "id"
+      122: "m"
+      145: "m"
+      162: "newModel"
       164: "i"
   client!qk.a (ILclient!eg;IIIIII)Lclient!vg;:
     owner: "PlayerAppearance"
@@ -36852,14 +36852,14 @@ methods:
       6: "arg5"
       7: "arg6"
     locals:
-      14: "local14"
-      24: "local24"
-      30: "local30"
-      33: "local33"
+      14: "key"
+      24: "model"
+      30: "len"
+      33: "models"
       65: "local65"
       78: "local78"
       92: "local92"
-      105: "local105"
+      105: "newModel"
       107: "i"
   client!qk.a (ZI)V:
     owner: "PlayerAppearance"
@@ -36869,7 +36869,7 @@ methods:
     locals: {}
   client!qk.a ([Lclient!re;IIILclient!eg;IIZILclient!eg;ZI)Lclient!vg;:
     owner: "PlayerAppearance"
-    name: "method3608"
+    name: "getBodyModel"
     arguments:
       0: "arg0"
       1: "arg1"
@@ -36880,22 +36880,22 @@ methods:
       7: "arg6"
       8: "arg7"
       9: "arg8"
-      10: "arg9"
+      10: "cache"
       11: "arg10"
     locals:
-      51: "local51"
-      54: "local54"
-      75: "local75"
-      169: "local169"
-      174: "local174"
-      176: "local176"
-      185: "local185"
-      250: "local250"
-      252: "local252"
-      259: "local259"
-      273: "local273"
-      294: "local294"
-      306: "local306"
+      51: "identikit"
+      54: "checksum"
+      75: "i"
+      169: "model"
+      174: "incomplete"
+      176: "i"
+      185: "id"
+      250: "models"
+      252: "i"
+      259: "id"
+      273: "m"
+      294: "m"
+      306: "basType"
       326: "local326"
       351: "local351"
       358: "local358"
@@ -36912,7 +36912,7 @@ methods:
       489: "local489"
       495: "local495"
       503: "local503"
-      753: "local753"
+      753: "newModel"
       755: "i"
       846: "local846"
       848: "local848"
@@ -39774,8 +39774,8 @@ methods:
       1: "buffer"
     locals: {}
   client!se.c (II)V:
-    owner: "Static32"
-    name: "method3951"
+    owner: "PlayerAppearance"
+    name: "clean"
     arguments: {}
     locals: {}
   client!se.c (III)I:
@@ -40675,7 +40675,7 @@ methods:
     owner: "ObjType"
     name: "method4128"
     arguments:
-      1: "arg0"
+      1: "female"
     locals:
       7: "local7"
       10: "local10"
@@ -40750,15 +40750,15 @@ methods:
       20: "node"
   client!td.a (IZ)Lclient!ml;:
     owner: "ObjType"
-    name: "method4125"
+    name: "getHeadModel"
     arguments:
-      1: "arg0"
+      1: "female"
     locals:
-      14: "local14"
-      17: "local17"
-      36: "local36"
-      47: "local47"
-      58: "local58"
+      14: "head2"
+      17: "head"
+      36: "model"
+      47: "model2"
+      58: "models"
       69: "i"
       96: "i"
   client!td.a (Lclient!fd;B)V:
@@ -40804,18 +40804,18 @@ methods:
       23: "local23"
   client!td.a (ZZ)Lclient!ml;:
     owner: "ObjType"
-    name: "method4121"
+    name: "getBodyModel"
     arguments:
-      0: "arg0"
+      0: "female"
     locals:
-      4: "local4"
-      11: "local11"
-      28: "local28"
-      51: "local51"
-      59: "local59"
-      73: "local73"
-      86: "local86"
-      101: "local101"
+      4: "wear1"
+      11: "wear2"
+      28: "wear3"
+      51: "model"
+      59: "model2"
+      73: "models"
+      86: "model3"
+      101: "models"
       167: "i"
       191: "i"
   client!td.b (III)I:
@@ -40834,13 +40834,13 @@ methods:
     locals: {}
   client!td.c (ZI)Z:
     owner: "ObjType"
-    name: "method4134"
+    name: "isHeadModelReady"
     arguments:
-      0: "arg0"
+      0: "female"
     locals:
-      2: "local2"
-      9: "local9"
-      25: "local25"
+      2: "head"
+      9: "head2"
+      25: "ready"
   client!te.<init> (Lclient!fh;Lclient!fh;IZ)V:
     owner: "AnimFrameset"
     name: "<init>"
@@ -42264,7 +42264,7 @@ methods:
       12: "result"
   client!ua.a (IIILclient!eg;Lclient!eg;I[Lclient!re;III)Lclient!vg;:
     owner: "NpcType"
-    name: "method4268"
+    name: "getBodyModel"
     arguments:
       0: "arg0"
       1: "arg1"
@@ -42346,16 +42346,16 @@ methods:
       23: "node"
   client!ua.a (ILclient!eg;BII)Lclient!vg;:
     owner: "NpcType"
-    name: "method4266"
+    name: "getHeadModel"
     arguments:
       0: "arg0"
       1: "arg1"
       3: "arg2"
       4: "arg3"
     locals:
-      13: "local13"
+      13: "type"
       40: "local40"
-      52: "local52"
+      52: "incomplete"
       54: "local54"
       87: "local87"
       89: "local89"
@@ -43630,8 +43630,8 @@ methods:
     name: "method4436"
     arguments: {}
     locals:
-      5: "local5"
-      12: "local12"
+      5: "hostname"
+      12: "settings"
   client!vd.a (IILclient!fd;B)V:
     owner: "LightType"
     name: "decode"
