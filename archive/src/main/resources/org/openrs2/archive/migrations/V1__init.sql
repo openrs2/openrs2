@@ -150,7 +150,8 @@ CREATE TABLE source_groups (
     version INTEGER NOT NULL,
     version_truncated BOOLEAN NOT NULL,
     container_id BIGINT NOT NULL REFERENCES containers (id),
-    PRIMARY KEY (source_id, archive_id, group_id)
+    PRIMARY KEY (source_id, archive_id, group_id),
+    FOREIGN KEY (archive_id, group_id, version, version_truncated, container_id) REFERENCES groups (archive_id, group_id, version, version_truncated, container_id)
 );
 
 CREATE INDEX ON source_groups (archive_id, group_id, version, version_truncated, container_id);
