@@ -27,7 +27,7 @@ public class CacheExporter @Inject constructor(
         val validKeys: Long,
         val keys: Long
     ) {
-        public val allIndexesValid: Boolean = indexes == validIndexes
+        public val allIndexesValid: Boolean = indexes == validIndexes && indexes != 0L
         public val validIndexesFraction: Double = if (indexes == 0L) {
             1.0
         } else {
