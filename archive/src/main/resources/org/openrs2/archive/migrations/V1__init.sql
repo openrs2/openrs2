@@ -199,14 +199,15 @@ CREATE MATERIALIZED VIEW master_index_stats (
     keys
 ) AS
 SELECT
-    a.master_index_id,
-    a.valid_indexes,
-    a.indexes,
+    m.id,
+    COALESCE(a.valid_indexes, 0),
+    COALESCE(a.indexes, 0),
     COALESCE(g.valid_groups, 0),
     COALESCE(g.groups, 0),
     COALESCE(g.valid_keys, 0),
     COALESCE(g.keys, 0)
-FROM (
+FROM master_indexes m
+LEFT JOIN (
     SELECT
         a.master_index_id,
         COUNT(DISTINCT a.archive_id) FILTER (WHERE i.container_id IS NOT NULL OR (a.version = 0 AND a.crc32 = 0)) AS valid_indexes,
@@ -218,7 +219,7 @@ FROM (
     LEFT JOIN containers c ON c.id = g.container_id
     LEFT JOIN indexes i ON i.container_id = g.container_id AND i.version = a.version
     GROUP BY a.master_index_id
-) a
+) a ON a.master_index_id = m.id
 LEFT JOIN (
     SELECT
         i.master_index_id,
@@ -235,7 +236,7 @@ LEFT JOIN (
     LEFT JOIN containers c ON c.id = g.container_id
     LEFT JOIN keys k ON k.id = c.key_id
     GROUP BY i.master_index_id
-) g ON g.master_index_id = a.master_index_id;
+) g ON g.master_index_id = m.id;
 
 CREATE UNIQUE INDEX ON master_index_stats (master_index_id);
 
