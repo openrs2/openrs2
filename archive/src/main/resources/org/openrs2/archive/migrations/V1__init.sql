@@ -163,14 +163,61 @@ CREATE TABLE names (
 
 CREATE UNIQUE INDEX ON names (hash, name);
 
+CREATE FUNCTION resolve_index(archive_id uint1, crc32 INTEGER, version INTEGER) RETURNS containers AS $$
+#variable_conflict use_variable
+DECLARE
+    resolved containers%ROWTYPE;
+BEGIN
+    SELECT c.*
+    INTO resolved
+    FROM groups g
+    JOIN containers c ON c.id = g.container_id
+    JOIN indexes i ON i.container_id = c.id
+    WHERE g.archive_id = 255 AND g.group_id = archive_id::INTEGER AND c.crc32 = crc32 AND g.version = version AND
+        NOT g.version_truncated AND i.version = version
+    ORDER BY c.id ASC
+    LIMIT 1;
+
+    RETURN resolved;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE FUNCTION resolve_group(archive_id uint1, group_id INTEGER, crc32 INTEGER, version INTEGER) RETURNS containers AS $$
+#variable_conflict use_variable
+DECLARE
+    resolved containers%ROWTYPE;
+BEGIN
+    SELECT c.*
+    INTO resolved
+    FROM groups g
+    JOIN containers c ON c.id = g.container_id
+    WHERE g.archive_id = archive_id AND g.group_id = group_id AND c.crc32 = crc32 AND g.version = version AND
+        NOT g.version_truncated
+    ORDER BY c.id ASC
+    LIMIT 1;
+
+    IF FOUND THEN
+        RETURN resolved;
+    END IF;
+
+    SELECT c.*
+    INTO resolved
+    FROM groups g
+    JOIN containers c ON c.id = g.container_id
+    WHERE g.archive_id = archive_id AND g.group_id = group_id AND c.crc32 = crc32 AND g.version = version & 65535 AND
+        g.version_truncated
+    ORDER BY c.id ASC
+    LIMIT 1;
+
+    RETURN resolved;
+END;
+$$ LANGUAGE plpgsql;
+
 CREATE VIEW resolved_indexes AS
-SELECT m.id AS master_index_id, a.archive_id, c.data, g.container_id
+SELECT m.id AS master_index_id, a.archive_id, c.data, c.id AS container_id
 FROM master_indexes m
 JOIN master_index_archives a ON a.master_index_id = m.id
-JOIN groups g ON g.archive_id = 255 AND g.group_id = a.archive_id::INTEGER AND
-    g.version = a.version AND NOT g.version_truncated
-JOIN containers c ON c.id = g.container_id AND c.crc32 = a.crc32
-JOIN indexes i ON i.container_id = g.container_id AND i.version = a.version;
+JOIN LATERAL resolve_index(a.archive_id, a.crc32, a.version) c ON TRUE;
 
 CREATE VIEW resolved_groups (master_index_id, archive_id, group_id, name_hash, version, data, key_id) AS
 WITH i AS NOT MATERIALIZED (
@@ -183,11 +230,7 @@ UNION ALL
 SELECT i.master_index_id, i.archive_id, ig.group_id, ig.name_hash, ig.version, c.data, c.key_id
 FROM i
 JOIN index_groups ig ON ig.container_id = i.container_id
-JOIN groups g ON g.archive_id = i.archive_id AND g.group_id = ig.group_id AND (
-    (g.version = ig.version AND NOT g.version_truncated) OR
-    (g.version = ig.version & 65535 AND g.version_truncated)
-)
-JOIN containers c ON c.id = g.container_id AND c.crc32 = ig.crc32;
+JOIN LATERAL resolve_group(i.archive_id, ig.group_id, ig.crc32, ig.version) c ON TRUE;
 
 CREATE MATERIALIZED VIEW master_index_stats (
     master_index_id,
@@ -210,14 +253,10 @@ FROM master_indexes m
 LEFT JOIN (
     SELECT
         a.master_index_id,
-        COUNT(DISTINCT a.archive_id) FILTER (WHERE i.container_id IS NOT NULL OR (a.version = 0 AND a.crc32 = 0)) AS valid_indexes,
+        COUNT(DISTINCT a.archive_id) FILTER (WHERE c.id IS NOT NULL OR (a.version = 0 AND a.crc32 = 0)) AS valid_indexes,
         COUNT(DISTINCT a.archive_id) AS indexes
     FROM master_index_archives a
-    LEFT JOIN groups g ON g.archive_id = 255 AND g.group_id = a.archive_id::INTEGER AND
-        g.version = a.version AND NOT g.version_truncated AND
-        g.container_id IN (SELECT id FROM containers WHERE crc32 = a.crc32)
-    LEFT JOIN containers c ON c.id = g.container_id
-    LEFT JOIN indexes i ON i.container_id = g.container_id AND i.version = a.version
+    LEFT JOIN LATERAL resolve_index(a.archive_id, a.crc32, a.version) c ON TRUE
     GROUP BY a.master_index_id
 ) a ON a.master_index_id = m.id
 LEFT JOIN (
@@ -229,11 +268,7 @@ LEFT JOIN (
         COUNT(DISTINCT (i.archive_id, ig.group_id)) FILTER (WHERE c.encrypted) AS keys
     FROM resolved_indexes i
     JOIN index_groups ig ON ig.container_id = i.container_id
-    LEFT JOIN groups g ON g.archive_id = i.archive_id AND g.group_id = ig.group_id AND (
-        (g.version = ig.version AND NOT g.version_truncated) OR
-        (g.version = ig.version & 65535 AND g.version_truncated)
-    ) AND g.container_id IN (SELECT id FROM containers WHERE crc32 = ig.crc32)
-    LEFT JOIN containers c ON c.id = g.container_id
+    LEFT JOIN LATERAL resolve_group(i.archive_id, ig.group_id, ig.crc32, ig.version) c ON TRUE
     LEFT JOIN keys k ON k.id = c.key_id
     GROUP BY i.master_index_id
 ) g ON g.master_index_id = m.id;

@@ -247,11 +247,7 @@ public class CacheImporter @Inject constructor(
                 FROM master_index_archives a
                 LEFT JOIN master_index_archives a2 ON a2.master_index_id = ? AND a2.archive_id = a.archive_id AND
                     a2.crc32 = a.crc32 AND a2.version = a.version
-                LEFT JOIN groups g ON g.archive_id = 255 AND g.group_id = a2.archive_id::INTEGER AND
-                    g.version = a2.version AND NOT g.version_truncated AND
-                    g.container_id IN (SELECT id FROM containers WHERE crc32 = a2.crc32)
-                LEFT JOIN containers c ON c.id = g.container_id
-                LEFT JOIN indexes i ON i.container_id = g.container_id AND i.version = a2.version
+                LEFT JOIN LATERAL resolve_index(a2.archive_id, a2.crc32, a2.version) c ON TRUE
                 WHERE a.master_index_id = ?
                 ORDER BY a.archive_id ASC
             """.trimIndent()
@@ -312,10 +308,8 @@ public class CacheImporter @Inject constructor(
                     i.archive_id = ?
                 LEFT JOIN index_groups ig2 ON ig2.container_id = i.container_id AND ig2.group_id = ig.group_id AND
                     ig2.crc32 = ig.crc32 AND ig2.version = ig.version
-                LEFT JOIN groups g ON g.archive_id = i.archive_id AND g.group_id = ig2.group_id AND
-                    g.version = ig2.version AND NOT g.version_truncated AND
-                    g.container_id IN (SELECT id FROM containers WHERE crc32 = ig2.crc32)
-                WHERE ig.container_id = ? AND g.container_id IS NULL
+                LEFT JOIN LATERAL resolve_group(i.archive_id, ig2.group_id, ig2.crc32, ig2.version) c ON TRUE
+                WHERE ig.container_id = ? AND c.id IS NULL
                 ORDER BY ig.group_id ASC
             """.trimIndent()
             ).use { stmt ->
