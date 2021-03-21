@@ -253,8 +253,8 @@ FROM master_indexes m
 LEFT JOIN (
     SELECT
         a.master_index_id,
-        COUNT(DISTINCT a.archive_id) FILTER (WHERE c.id IS NOT NULL OR (a.version = 0 AND a.crc32 = 0)) AS valid_indexes,
-        COUNT(DISTINCT a.archive_id) AS indexes
+        COUNT(*) FILTER (WHERE c.id IS NOT NULL OR (a.version = 0 AND a.crc32 = 0)) AS valid_indexes,
+        COUNT(*) AS indexes
     FROM master_index_archives a
     LEFT JOIN LATERAL resolve_index(a.archive_id, a.crc32, a.version) c ON TRUE
     GROUP BY a.master_index_id
@@ -262,10 +262,10 @@ LEFT JOIN (
 LEFT JOIN (
     SELECT
         i.master_index_id,
-        COUNT(DISTINCT (i.archive_id, ig.group_id)) FILTER (WHERE c.id IS NOT NULL) AS valid_groups,
-        COUNT(DISTINCT (i.archive_id, ig.group_id)) AS groups,
-        COUNT(DISTINCT (i.archive_id, ig.group_id)) FILTER (WHERE c.key_id IS NOT NULL) AS valid_keys,
-        COUNT(DISTINCT (i.archive_id, ig.group_id)) FILTER (WHERE c.encrypted) AS keys
+        COUNT(*) FILTER (WHERE c.id IS NOT NULL) AS valid_groups,
+        COUNT(*) AS groups,
+        COUNT(*) FILTER (WHERE c.key_id IS NOT NULL) AS valid_keys,
+        COUNT(*) FILTER (WHERE c.encrypted) AS keys
     FROM resolved_indexes i
     JOIN index_groups ig ON ig.container_id = i.container_id
     LEFT JOIN LATERAL resolve_group(i.archive_id, ig.group_id, ig.crc32, ig.version) c ON TRUE
