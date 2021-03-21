@@ -37,7 +37,7 @@
 					<td>
 						<ul>
 							<li th:each="url : ${cache.urls}">
-								<a th:href="${url}">${url}</a>
+								<a th:href="${url}" th:text="${url}">https://www.example.com/</a>
 							</li>
 						</ul>
 					</td>
