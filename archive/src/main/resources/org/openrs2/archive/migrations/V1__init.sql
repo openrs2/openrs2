@@ -180,7 +180,7 @@ BEGIN
 
     RETURN resolved;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql STABLE STRICT PARALLEL SAFE;
 
 CREATE FUNCTION resolve_group(archive_id uint1, group_id INTEGER, crc32 INTEGER, version INTEGER) RETURNS containers AS $$
 #variable_conflict use_variable
@@ -211,7 +211,7 @@ BEGIN
 
     RETURN resolved;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql STABLE STRICT PARALLEL SAFE;
 
 CREATE VIEW resolved_indexes AS
 SELECT m.id AS master_index_id, a.archive_id, c.data, c.id AS container_id
