@@ -90,7 +90,7 @@ public class CacheExporter @Inject constructor(
                 FROM master_indexes m
                 JOIN sources s ON s.master_index_id = m.id
                 JOIN games g ON g.id = s.game_id
-                LEFT JOIN master_index_stats ms ON s.master_index_id = m.id
+                LEFT JOIN master_index_stats ms ON ms.master_index_id = m.id
                 GROUP BY m.id, g.name, ms.valid_indexes, ms.indexes, ms.valid_groups, ms.groups, ms.valid_keys, ms.keys
                 ORDER BY g.name ASC, MIN(s.build) ASC, MIN(s.timestamp) ASC
             """.trimIndent()
@@ -155,7 +155,7 @@ public class CacheExporter @Inject constructor(
                 FROM master_indexes m
                 JOIN sources s ON s.master_index_id = m.id
                 JOIN games g ON g.id = s.game_id
-                LEFT JOIN master_index_stats ms ON s.master_index_id = m.id
+                LEFT JOIN master_index_stats ms ON ms.master_index_id = m.id
                 WHERE m.id = ?
                 GROUP BY m.id, ms.valid_indexes, ms.indexes, ms.valid_groups, ms.groups, ms.valid_keys, ms.keys
             """.trimIndent()
