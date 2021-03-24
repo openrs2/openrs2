@@ -247,7 +247,7 @@ public class CacheImporter @Inject constructor(
                 FROM master_index_archives a
                 LEFT JOIN master_index_archives a2 ON a2.master_index_id = ? AND a2.archive_id = a.archive_id AND
                     a2.crc32 = a.crc32 AND a2.version = a.version
-                LEFT JOIN LATERAL resolve_index(a2.archive_id, a2.crc32, a2.version) c ON TRUE
+                LEFT JOIN LATERAL resolve_index(a2.master_index_id, a2.archive_id, a2.crc32, a2.version) c ON TRUE
                 WHERE a.master_index_id = ?
                 ORDER BY a.archive_id ASC
             """.trimIndent()
@@ -308,7 +308,7 @@ public class CacheImporter @Inject constructor(
                     i.archive_id = ?
                 LEFT JOIN index_groups ig2 ON ig2.container_id = i.container_id AND ig2.group_id = ig.group_id AND
                     ig2.crc32 = ig.crc32 AND ig2.version = ig.version
-                LEFT JOIN LATERAL resolve_group(i.archive_id, ig2.group_id, ig2.crc32, ig2.version) c ON TRUE
+                LEFT JOIN LATERAL resolve_group(i.master_index_id, i.archive_id, ig2.group_id, ig2.crc32, ig2.version) c ON TRUE
                 WHERE ig.container_id = ? AND c.id IS NULL
                 ORDER BY ig.group_id ASC
             """.trimIndent()
