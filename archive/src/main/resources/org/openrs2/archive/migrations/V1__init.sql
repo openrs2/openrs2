@@ -170,21 +170,6 @@ DECLARE
 BEGIN
     SELECT c.*
     INTO resolved
-    FROM source_groups g
-    JOIN containers c ON c.id = g.container_id
-    JOIN indexes i ON i.container_id = c.id
-    JOIN sources s ON s.id = g.source_id
-    WHERE g.archive_id = 255 AND g.group_id = archive_id::INTEGER AND c.crc32 = crc32 AND g.version = version AND
-        NOT g.version_truncated AND i.version = version AND s.master_index_id = master_index_id
-    ORDER BY c.id ASC
-    LIMIT 1;
-
-    IF FOUND THEN
-        RETURN resolved;
-    END IF;
-
-    SELECT c.*
-    INTO resolved
     FROM groups g
     JOIN containers c ON c.id = g.container_id
     JOIN indexes i ON i.container_id = c.id
@@ -202,20 +187,6 @@ CREATE FUNCTION resolve_group(master_index_id INTEGER, archive_id uint1, group_i
 DECLARE
     resolved containers%ROWTYPE;
 BEGIN
-    SELECT c.*
-    INTO resolved
-    FROM source_groups g
-    JOIN containers c ON c.id = g.container_id
-    JOIN sources s ON s.id = g.source_id
-    WHERE g.archive_id = archive_id AND g.group_id = group_id AND c.crc32 = crc32 AND g.version = version AND
-        NOT g.version_truncated AND s.master_index_id = master_index_id
-    ORDER BY c.id ASC
-    LIMIT 1;
-
-    IF FOUND THEN
-        RETURN resolved;
-    END IF;
-
     SELECT c.*
     INTO resolved
     FROM groups g
