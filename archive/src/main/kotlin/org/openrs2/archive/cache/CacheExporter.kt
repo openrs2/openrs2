@@ -144,7 +144,7 @@ public class CacheExporter @Inject constructor(
                     array_remove(array_agg(DISTINCT s.build ORDER BY s.build ASC), NULL),
                     MIN(s.timestamp),
                     array_remove(array_agg(DISTINCT s.name ORDER BY s.name ASC), NULL),
-                    array_remove(array_agg(s.description), NULL),
+                    array_remove(array_agg(DISTINCT s.description), NULL),
                     array_remove(array_agg(DISTINCT s.url ORDER BY s.url ASC), NULL),
                     ms.valid_indexes,
                     ms.indexes,
