@@ -217,7 +217,7 @@ CREATE VIEW resolved_indexes AS
 SELECT m.id AS master_index_id, a.archive_id, c.data, c.id AS container_id
 FROM master_indexes m
 JOIN master_index_archives a ON a.master_index_id = m.id
-JOIN LATERAL resolve_index(m.id, a.archive_id, a.crc32, a.version) c ON TRUE;
+JOIN resolve_index(m.id, a.archive_id, a.crc32, a.version) c ON TRUE;
 
 CREATE VIEW resolved_groups (master_index_id, archive_id, group_id, name_hash, version, data, key_id) AS
 WITH i AS NOT MATERIALIZED (
@@ -230,7 +230,7 @@ UNION ALL
 SELECT i.master_index_id, i.archive_id, ig.group_id, ig.name_hash, ig.version, c.data, c.key_id
 FROM i
 JOIN index_groups ig ON ig.container_id = i.container_id
-JOIN LATERAL resolve_group(i.master_index_id, i.archive_id, ig.group_id, ig.crc32, ig.version) c ON TRUE;
+JOIN resolve_group(i.master_index_id, i.archive_id, ig.group_id, ig.crc32, ig.version) c ON TRUE;
 
 CREATE MATERIALIZED VIEW master_index_stats (
     master_index_id,
@@ -256,7 +256,7 @@ LEFT JOIN (
         COUNT(*) FILTER (WHERE c.id IS NOT NULL OR (a.version = 0 AND a.crc32 = 0)) AS valid_indexes,
         COUNT(*) AS indexes
     FROM master_index_archives a
-    LEFT JOIN LATERAL resolve_index(a.master_index_id, a.archive_id, a.crc32, a.version) c ON TRUE
+    LEFT JOIN resolve_index(a.master_index_id, a.archive_id, a.crc32, a.version) c ON TRUE
     GROUP BY a.master_index_id
 ) a ON a.master_index_id = m.id
 LEFT JOIN (
@@ -268,7 +268,7 @@ LEFT JOIN (
         COUNT(*) FILTER (WHERE c.encrypted) AS keys
     FROM resolved_indexes i
     JOIN index_groups ig ON ig.container_id = i.container_id
-    LEFT JOIN LATERAL resolve_group(i.master_index_id, i.archive_id, ig.group_id, ig.crc32, ig.version) c ON TRUE
+    LEFT JOIN resolve_group(i.master_index_id, i.archive_id, ig.group_id, ig.crc32, ig.version) c ON TRUE
     LEFT JOIN keys k ON k.id = c.key_id
     GROUP BY i.master_index_id
 ) g ON g.master_index_id = m.id;
