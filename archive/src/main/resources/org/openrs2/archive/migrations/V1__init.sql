@@ -44,6 +44,7 @@ CREATE TABLE containers (
 
 CREATE INDEX ON containers USING HASH (crc32);
 CREATE INDEX ON containers (id) WHERE encrypted AND key_id IS NULL;
+CREATE INDEX ON containers (key_id) WHERE key_id IS NOT NULL;
 
 CREATE TABLE brute_force_iterator (
     last_container_id BIGINT NULL,
