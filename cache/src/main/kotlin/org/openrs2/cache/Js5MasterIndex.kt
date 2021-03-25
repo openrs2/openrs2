@@ -122,6 +122,47 @@ public data class Js5MasterIndex(
 
             var nextArchive = 0
             for (archive in store.list(Js5Archive.ARCHIVESET)) {
+                val entry = try {
+                    store.read(Js5Archive.ARCHIVESET, archive).use { buf ->
+                        val checksum = buf.crc32()
+                        val digest = buf.whirlpool()
+
+                        Js5Compression.uncompress(buf).use { uncompressed ->
+                            val index = Js5Index.read(uncompressed)
+
+                            if (index.hasLengths) {
+                                masterIndex.format = maxOf(masterIndex.format, MasterIndexFormat.LENGTHS)
+                            } else if (index.hasDigests) {
+                                masterIndex.format = maxOf(masterIndex.format, MasterIndexFormat.DIGESTS)
+                            } else if (index.protocol >= Js5Protocol.VERSIONED) {
+                                masterIndex.format = maxOf(masterIndex.format, MasterIndexFormat.VERSIONED)
+                            }
+
+                            val version = index.version
+                            val groups = index.size
+                            val totalUncompressedLength = index.sumBy(Js5Index.Group::uncompressedLength)
+
+                            // TODO(gpe): should we throw an exception if there are trailing bytes here or in the block above?
+                            Entry(version, checksum, groups, totalUncompressedLength, digest)
+                        }
+                    }
+                } catch (ex: StoreCorruptException) {
+                    /**
+                     * Unused indexes are never removed from the .idx255 file
+                     * by the client. If the .dat2 file reaches its maximum
+                     * size, it is truncated and all block numbers in the
+                     * .idx255 file will be invalid.
+                     *
+                     * Any in-use indexes will be overwritten, but unused
+                     * indexes will remain in the .idx255 file with invalid
+                     * block numbers.
+                     *
+                     * We therefore expect to see corrupt indexes sometimes. We
+                     * ignore these as if they didn't exist.
+                     */
+                    continue
+                }
+
                 /*
                  * Fill in gaps with zeroes. I think this is consistent with
                  * the official implementation: the TFU client warns that
@@ -129,30 +170,6 @@ public data class Js5MasterIndex(
                  */
                 for (i in nextArchive until archive) {
                     masterIndex.entries += Entry(0, 0, 0, 0, null)
-                }
-
-                val entry = store.read(Js5Archive.ARCHIVESET, archive).use { buf ->
-                    val checksum = buf.crc32()
-                    val digest = buf.whirlpool()
-
-                    Js5Compression.uncompress(buf).use { uncompressed ->
-                        val index = Js5Index.read(uncompressed)
-
-                        if (index.hasLengths) {
-                            masterIndex.format = maxOf(masterIndex.format, MasterIndexFormat.LENGTHS)
-                        } else if (index.hasDigests) {
-                            masterIndex.format = maxOf(masterIndex.format, MasterIndexFormat.DIGESTS)
-                        } else if (index.protocol >= Js5Protocol.VERSIONED) {
-                            masterIndex.format = maxOf(masterIndex.format, MasterIndexFormat.VERSIONED)
-                        }
-
-                        val version = index.version
-                        val groups = index.size
-                        val totalUncompressedLength = index.sumBy(Js5Index.Group::uncompressedLength)
-
-                        // TODO(gpe): should we throw an exception if there are trailing bytes here or in the block above?
-                        Entry(version, checksum, groups, totalUncompressedLength, digest)
-                    }
                 }
 
                 masterIndex.entries += entry

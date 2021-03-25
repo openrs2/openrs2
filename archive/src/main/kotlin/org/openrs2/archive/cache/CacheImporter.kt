@@ -14,6 +14,7 @@ import org.openrs2.cache.Js5Index
 import org.openrs2.cache.Js5MasterIndex
 import org.openrs2.cache.MasterIndexFormat
 import org.openrs2.cache.Store
+import org.openrs2.cache.StoreCorruptException
 import org.openrs2.cache.VersionTrailer
 import org.openrs2.crypto.Whirlpool
 import org.openrs2.db.Database
@@ -124,9 +125,14 @@ public class CacheImporter @Inject constructor(
             val indexGroups = mutableListOf<Index>()
             try {
                 for (archive in store.list(Js5Archive.ARCHIVESET)) {
-                    val indexGroup = readIndex(store, archive)
-                    indexes[archive] = indexGroup.index
-                    indexGroups += indexGroup
+                    try {
+                        val indexGroup = readIndex(store, archive)
+                        indexes[archive] = indexGroup.index
+                        indexGroups += indexGroup
+                    } catch (ex: StoreCorruptException) {
+                        // see the comment in Js5MasterIndex::create
+                        logger.warn(ex) { "Skipping corrupt index (archive $archive)" }
+                    }
                 }
 
                 for (index in indexGroups) {
