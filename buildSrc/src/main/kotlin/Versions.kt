@@ -9,7 +9,7 @@ object Versions {
     const val dokka = "1.4.30"
     const val fastutil = "8.5.2"
     const val fernflower = "1.1.0"
-    const val flyway = "7.7.0"
+    const val flyway = "7.7.1"
     const val guava = "30.1.1-jre"
     const val guice = "5.0.1"
     const val h2 = "1.4.200"
