@@ -59,7 +59,8 @@ public class CacheExporter @Inject constructor(
         val urls: SortedSet<String>,
         val stats: Stats?
     ) {
-        val game: String = games.single()
+        val game: String
+            get() = games.single()
     }
 
     public data class Key(
