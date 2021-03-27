@@ -12,6 +12,8 @@ import io.ktor.thymeleaf.ThymeleafContent
 import io.netty.buffer.ByteBufAllocator
 import org.openrs2.archive.cache.CacheExporter
 import org.openrs2.cache.DiskStoreZipWriter
+import java.nio.file.attribute.FileTime
+import java.time.Instant
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 import javax.inject.Inject
@@ -91,12 +93,19 @@ public class CachesController @Inject constructor(
         call.respondOutputStream(contentType = ContentType.Application.Zip) {
             ZipOutputStream(this).use { output ->
                 output.bufferedWriter().use { writer ->
+                    val timestamp = FileTime.from(Instant.EPOCH)
+
                     for (key in exporter.exportKeys(id)) {
                         if (key.mapSquare == null) {
                             continue
                         }
 
-                        output.putNextEntry(ZipEntry("keys/${key.mapSquare}.txt"))
+                        val entry = ZipEntry("keys/${key.mapSquare}.txt")
+                        entry.creationTime = timestamp
+                        entry.lastAccessTime = timestamp
+                        entry.lastModifiedTime = timestamp
+
+                        output.putNextEntry(entry)
 
                         writer.write(key.key.k0.toString())
                         writer.write('\n'.toInt())
