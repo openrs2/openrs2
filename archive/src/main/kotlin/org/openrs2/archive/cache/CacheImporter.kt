@@ -101,6 +101,10 @@ public class CacheImporter @Inject constructor(
 
             // import master index
             val masterIndex = createMasterIndex(store)
+            if (masterIndex.index.entries.isEmpty()) {
+                throw IOException("Master index empty, cache probably corrupt")
+            }
+
             val masterIndexId = try {
                 addMasterIndex(connection, masterIndex)
             } finally {
