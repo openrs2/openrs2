@@ -12,6 +12,7 @@ import io.ktor.thymeleaf.ThymeleafContent
 import io.netty.buffer.ByteBufAllocator
 import org.openrs2.archive.cache.CacheExporter
 import org.openrs2.cache.DiskStoreZipWriter
+import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -63,7 +64,7 @@ public class CachesController @Inject constructor(
         }
     }
 
-    public suspend fun exportKeys(call: ApplicationCall) {
+    public suspend fun exportKeysJson(call: ApplicationCall) {
         val id = call.parameters["id"]?.toIntOrNull()
         if (id == null) {
             call.respond(HttpStatusCode.NotFound)
@@ -71,5 +72,48 @@ public class CachesController @Inject constructor(
         }
 
         call.respond(exporter.exportKeys(id))
+    }
+
+    public suspend fun exportKeysZip(call: ApplicationCall) {
+        val id = call.parameters["id"]?.toIntOrNull()
+        if (id == null) {
+            call.respond(HttpStatusCode.NotFound)
+            return
+        }
+
+        call.response.header(
+            HttpHeaders.ContentDisposition,
+            ContentDisposition.Attachment
+                .withParameter(ContentDisposition.Parameters.FileName, "keys.zip")
+                .toString()
+        )
+
+        call.respondOutputStream(contentType = ContentType.Application.Zip) {
+            ZipOutputStream(this).use { output ->
+                output.bufferedWriter().use { writer ->
+                    for (key in exporter.exportKeys(id)) {
+                        if (key.mapSquare == null) {
+                            continue
+                        }
+
+                        output.putNextEntry(ZipEntry("keys/${key.mapSquare}.txt"))
+
+                        writer.write(key.key.k0.toString())
+                        writer.write('\n'.toInt())
+
+                        writer.write(key.key.k1.toString())
+                        writer.write('\n'.toInt())
+
+                        writer.write(key.key.k2.toString())
+                        writer.write('\n'.toInt())
+
+                        writer.write(key.key.k3.toString())
+                        writer.write('\n'.toInt())
+
+                        writer.flush()
+                    }
+                }
+            }
+        }
     }
 }

@@ -5,10 +5,12 @@ import io.ktor.application.call
 import io.ktor.application.install
 import io.ktor.features.ContentNegotiation
 import io.ktor.http.ContentType
+import io.ktor.http.HttpStatusCode
 import io.ktor.http.content.resources
 import io.ktor.http.content.static
 import io.ktor.jackson.JacksonConverter
 import io.ktor.response.respond
+import io.ktor.response.respondRedirect
 import io.ktor.routing.get
 import io.ktor.routing.routing
 import io.ktor.server.engine.embeddedServer
@@ -50,7 +52,19 @@ public class WebServer @Inject constructor(
                 get("/caches") { cachesController.index(call) }
                 get("/caches/{id}") { cachesController.show(call) }
                 get("/caches/{id}.zip") { cachesController.export(call) }
-                get("/caches/{id}.json") { cachesController.exportKeys(call) }
+                get("/caches/{id}.json") {
+                    val id = call.parameters["id"]
+                    if (id == null) {
+                        call.respond(HttpStatusCode.NotFound)
+                        return@get
+                    }
+
+                    call.respondRedirect(permanent = true) {
+                        path("caches", id, "keys.json")
+                    }
+                }
+                get("/caches/{id}/keys.json") { cachesController.exportKeysJson(call) }
+                get("/caches/{id}/keys.zip") { cachesController.exportKeysZip(call) }
                 static("/static") { resources("/org/openrs2/archive/static") }
             }
         }.start(wait = true)
