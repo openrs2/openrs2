@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import io.ktor.application.call
 import io.ktor.application.install
 import io.ktor.features.ContentNegotiation
+import io.ktor.features.XForwardedHeaderSupport
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.content.resources
@@ -45,6 +46,7 @@ public class WebServer @Inject constructor(
                 })
             }
 
+            install(XForwardedHeaderSupport)
             install(Webjars)
 
             routing {
