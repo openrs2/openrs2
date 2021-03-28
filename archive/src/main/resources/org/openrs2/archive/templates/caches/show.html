@@ -4,6 +4,8 @@
 		<title>Cache - OpenRS2 Archive</title>
 		<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="/static/css/openrs2.css" />
+		<script src="/webjars/jquery/jquery.min.js" defer></script>
+		<script src="/webjars/bootstrap/js/bootstrap.bundle.min.js" defer></script>
 	</head>
 	<body>
 		<nav th:replace="layout.html :: nav"></nav>
@@ -70,7 +72,9 @@
 							<a th:href="${'/caches/' + cache.id + '.zip'}"
 							   class="btn btn-primary btn-sm">Cache</a>
 							<a th:href="${'/caches/' + cache.id + '/keys.json'}"
-							   class="btn btn-primary btn-sm">Keys</a>
+							   class="btn btn-primary btn-sm">Keys (JSON)</a>
+							<a th:href="${'/caches/' + cache.id + '/keys.zip'}"
+							   class="btn btn-primary btn-sm">Keys (Text)</a>
 						</div>
 					</td>
 				</tr>

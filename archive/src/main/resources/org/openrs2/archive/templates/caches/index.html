@@ -4,6 +4,8 @@
 		<title>Caches - OpenRS2 Archive</title>
 		<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="/static/css/openrs2.css" />
+		<script src="/webjars/jquery/jquery.min.js" defer></script>
+		<script src="/webjars/bootstrap/js/bootstrap.bundle.min.js" defer></script>
 	</head>
 	<body>
 		<nav th:replace="layout.html :: nav(active='caches')"></nav>
@@ -65,10 +67,24 @@
 							</td>
 							<td>
 								<div class="btn-group">
-									<a th:href="${'/caches/' + cache.id + '.zip'}"
-									   class="btn btn-primary btn-sm">Cache</a>
-									<a th:href="${'/caches/' + cache.id + '/keys.json'}"
-									   class="btn btn-primary btn-sm">Keys</a>
+									<div class="btn-group">
+										<button type="button"
+										        class="btn btn-primary btn-sm dropdown-toggle"
+										        data-toggle="dropdown">
+											Download
+										</button>
+										<ul class="dropdown-menu">
+											<li><a th:href="${'/caches/' + cache.id + '.zip'}"
+											       class="dropdown-item">Cache</a></li>
+											<li>
+												<hr class="dropdown-divider" />
+											</li>
+											<li><a th:href="${'/caches/' + cache.id + '/keys.json'}"
+											       class="dropdown-item">Keys (JSON)</a></li>
+											<li><a th:href="${'/caches/' + cache.id + '/keys.zip'}"
+											       class="dropdown-item">Keys (Text)</a></li>
+										</ul>
+									</div>
 									<a th:href="${'/caches/' + cache.id}"
 									   class="btn btn-secondary btn-sm">More</a>
 								</div>
