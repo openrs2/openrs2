@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+	<head th:replace="layout.html :: head(title='Keys')">
+		<title>Keys - OpenRS2 Archive</title>
+		<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/static/css/openrs2.css" />
+		<script src="/webjars/jquery/jquery.min.js" defer></script>
+		<script src="/webjars/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+	</head>
+	<body>
+		<nav th:replace="layout.html :: nav(active='keys')"></nav>
+		<main class="container">
+			<h1>Keys</h1>
+			<p>
+				There are <strong th:text="${#numbers.formatInteger(all, 1, 'COMMA')}">0</strong> candidate keys in
+				the database, of which <strong th:text="${#numbers.formatInteger(valid, 1, 'COMMA')}">0</strong> have
+				been validated against at least one encrypted group.
+			</p>
+			<h2>Download</h2>
+			<p>
+				This page allows all raw keys in the database to be exported in
+				bulk. It doesn't include the archive/group IDs or versions each
+				key is valid for. To export the keys for a particular build of
+				the cache, use the download link on the
+				<a href="/caches">caches</a> page instead.
+			</p>
+			<div class="btn-group">
+				<a href="/keys/all.json"
+				   class="btn btn-primary btn-sm">All candidate keys (JSON)</a>
+				<a href="/keys/valid.json"
+				   class="btn btn-primary btn-sm">Validated keys (JSON)</a>
+			</div>
+		</main>
+	</body>
+</html>

@@ -29,6 +29,7 @@ import javax.inject.Singleton
 @Singleton
 public class WebServer @Inject constructor(
     private val cachesController: CachesController,
+    private val keysController: KeysController,
     @Json private val mapper: ObjectMapper
 ) {
     public fun start(address: String, port: Int) {
@@ -68,6 +69,9 @@ public class WebServer @Inject constructor(
                 get("/caches/{id}/keys.json") { cachesController.exportKeysJson(call) }
                 get("/caches/{id}/keys.zip") { cachesController.exportKeysZip(call) }
                 get("/caches/{id}/map.png") { cachesController.renderMap(call) }
+                get("/keys") { keysController.index(call) }
+                get("/keys/all.json") { keysController.exportAll(call) }
+                get("/keys/valid.json") { keysController.exportValid(call) }
                 static("/static") { resources("/org/openrs2/archive/static") }
             }
         }.start(wait = true)

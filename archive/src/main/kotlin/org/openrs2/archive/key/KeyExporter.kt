@@ -9,16 +9,45 @@ import javax.inject.Singleton
 public class KeyExporter @Inject constructor(
     private val database: Database
 ) {
-    public suspend fun exportValid(): List<XteaKey> {
+    public suspend fun count(): Pair<Long, Long> {
         return database.execute { connection ->
             connection.prepareStatement(
                 """
-                SELECT (k.key).k0, (k.key).k1, (k.key).k2, (k.key).k3
+                SELECT
+                    COUNT(DISTINCT k.id),
+                    COUNT(DISTINCT k.id) FILTER (WHERE c.key_id IS NOT NULL)
                 FROM keys k
-                JOIN containers c ON c.key_id = k.id
-                ORDER BY k.id ASC
+                LEFT JOIN containers c ON c.key_id = k.id
             """.trimIndent()
             ).use { stmt ->
+                stmt.executeQuery().use { rows ->
+                    check(rows.next())
+
+                    val all = rows.getLong(1)
+                    val valid = rows.getLong(2)
+                    Pair(all, valid)
+                }
+            }
+        }
+    }
+
+    public suspend fun exportAll(): List<XteaKey> {
+        return export(validOnly = false)
+    }
+
+    public suspend fun exportValid(): List<XteaKey> {
+        return export(validOnly = true)
+    }
+
+    private suspend fun export(validOnly: Boolean): List<XteaKey> {
+        return database.execute { connection ->
+            val query = if (validOnly) {
+                EXPORT_VALID_QUERY
+            } else {
+                EXPORT_ALL_QUERY
+            }
+
+            connection.prepareStatement(query).use { stmt ->
                 stmt.executeQuery().use { rows ->
                     val keys = mutableListOf<XteaKey>()
 
@@ -34,5 +63,20 @@ public class KeyExporter @Inject constructor(
                 }
             }
         }
+    }
+
+    private companion object {
+        private val EXPORT_ALL_QUERY = """
+            SELECT (k.key).k0, (k.key).k1, (k.key).k2, (k.key).k3
+            FROM keys k
+            ORDER BY k.id ASC
+        """.trimIndent()
+
+        private val EXPORT_VALID_QUERY = """
+            SELECT (k.key).k0, (k.key).k1, (k.key).k2, (k.key).k3
+            FROM keys k
+            JOIN containers c ON c.key_id = k.id
+            ORDER BY k.id ASC
+        """.trimIndent()
     }
 }
