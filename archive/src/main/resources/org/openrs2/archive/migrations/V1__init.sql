@@ -190,15 +190,15 @@ FROM master_indexes m
 JOIN master_index_archives a ON a.master_index_id = m.id
 JOIN resolve_index(a.archive_id, a.crc32, a.version) c ON TRUE;
 
-CREATE VIEW resolved_groups (master_index_id, archive_id, group_id, name_hash, version, data, key_id) AS
+CREATE VIEW resolved_groups (master_index_id, archive_id, group_id, name_hash, version, data, encrypted, empty_loc, key_id) AS
 WITH i AS NOT MATERIALIZED (
     SELECT master_index_id, archive_id, data, container_id
     FROM resolved_indexes
 )
-SELECT i.master_index_id, 255::uint1, i.archive_id::INTEGER, NULL, NULL, i.data, NULL
+SELECT i.master_index_id, 255::uint1, i.archive_id::INTEGER, NULL, NULL, i.data, FALSE, FALSE, NULL
 FROM i
 UNION ALL
-SELECT i.master_index_id, i.archive_id, ig.group_id, ig.name_hash, ig.version, c.data, c.key_id
+SELECT i.master_index_id, i.archive_id, ig.group_id, ig.name_hash, ig.version, c.data, c.encrypted, c.empty_loc, c.key_id
 FROM i
 JOIN index_groups ig ON ig.container_id = i.container_id
 JOIN resolve_group(i.archive_id, ig.group_id, ig.crc32, ig.version) c ON TRUE;

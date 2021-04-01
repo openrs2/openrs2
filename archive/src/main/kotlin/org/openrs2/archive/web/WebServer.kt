@@ -67,6 +67,7 @@ public class WebServer @Inject constructor(
                 }
                 get("/caches/{id}/keys.json") { cachesController.exportKeysJson(call) }
                 get("/caches/{id}/keys.zip") { cachesController.exportKeysZip(call) }
+                get("/caches/{id}/map.png") { cachesController.renderMap(call) }
                 static("/static") { resources("/org/openrs2/archive/static") }
             }
         }.start(wait = true)
