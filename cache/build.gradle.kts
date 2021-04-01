@@ -7,11 +7,11 @@ dependencies {
     api(project(":crypto"))
     api("com.google.inject:guice:${Versions.guice}")
     api("io.netty:netty-buffer:${Versions.netty}")
+    api("it.unimi.dsi:fastutil:${Versions.fastutil}")
 
     implementation(project(":buffer"))
     implementation(project(":compress"))
     implementation(project(":util"))
-    implementation("it.unimi.dsi:fastutil:${Versions.fastutil}")
 
     testImplementation("com.google.jimfs:jimfs:${Versions.jimfs}")
 }
