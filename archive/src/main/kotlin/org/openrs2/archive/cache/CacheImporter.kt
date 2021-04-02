@@ -238,7 +238,7 @@ public class CacheImporter @Inject constructor(
                 gameId,
                 build,
                 timestamp,
-                name = "Original",
+                name = "Jagex",
                 description = null,
                 url = null
             )
