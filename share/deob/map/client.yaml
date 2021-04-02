@@ -490,7 +490,7 @@ fields:
     name: "LENT_ITEM_RETURN"
   client!aj.c [[[B:
     owner: "Static1"
-    name: "aByteArrayArrayArray1"
+    name: "tileAngles"
   client!ak.b I:
     owner: "client"
     name: "language"
@@ -1858,7 +1858,7 @@ fields:
     name: "sourceMaxX"
   client!e.F [[[B:
     owner: "Static2"
-    name: "aByteArrayArrayArray3"
+    name: "tileUnderlays"
   client!e.o I:
     owner: "MapChunk"
     name: "displayMinZ"
@@ -2503,7 +2503,7 @@ fields:
     name: "javaScript"
   client!fd.Cb [I:
     owner: "Static2"
-    name: "anIntArray649"
+    name: "rowChroma"
   client!fd.I [B:
     owner: "Buffer"
     name: "bytes"
@@ -2578,7 +2578,7 @@ fields:
     name: "hidden"
   client!fg.J [[[B:
     owner: "Static2"
-    name: "aByteArrayArrayArray4"
+    name: "tileShapes"
   client!fg.K I:
     owner: "MapElement"
     name: "xOffset"
@@ -3853,7 +3853,7 @@ fields:
     name: "anInt2972"
   client!ii.B [I:
     owner: "Static3"
-    name: "anIntArray266"
+    name: "overlayColors"
   client!ii.C I:
     owner: "Static3"
     name: "anInt2973"
@@ -4978,7 +4978,7 @@ fields:
     name: "worldNames"
   client!ko.a [[[B:
     owner: "Static4"
-    name: "aByteArrayArrayArray15"
+    name: "tileOverlays"
   client!ko.b Z:
     owner: "Static4"
     name: "newTab"
@@ -5818,7 +5818,7 @@ fields:
     name: "aByte10"
   client!mi.q S:
     owner: "TextureMeta"
-    name: "aShort26"
+    name: "averageColor"
   client!mi.r Z:
     owner: "TextureMeta"
     name: "aBoolean236"
@@ -7183,7 +7183,7 @@ fields:
     name: "anInt3876"
   client!oh.p I:
     owner: "FloType"
-    name: "anInt3877"
+    name: "texture"
   client!oi.c Lclient!gh;:
     owner: "ReferenceNodeFactory"
     name: "SOFT_REFERENCE_NODE_FACTORY"
@@ -7321,7 +7321,7 @@ fields:
     name: "aByteArrayArrayArray18"
   client!pa.b I:
     owner: "FluType"
-    name: "anInt4058"
+    name: "weightedHue"
   client!pa.c Lclient!dj;:
     owner: "ClientScriptList"
     name: "scripts"
@@ -7333,19 +7333,19 @@ fields:
     name: "GAME1_DESTINATION_SKIN_COLORS"
   client!pa.k I:
     owner: "FluType"
-    name: "anInt4064"
+    name: "saturation"
   client!pa.m I:
     owner: "Static5"
     name: "anInt4066"
   client!pa.n I:
     owner: "FluType"
-    name: "anInt4067"
+    name: "color"
   client!pa.o I:
     owner: "FluType"
     name: "anInt4068"
   client!pa.r I:
     owner: "FluType"
-    name: "anInt4071"
+    name: "chroma"
   client!pa.u I:
     owner: "FluType"
     name: "anInt4074"
@@ -7354,7 +7354,7 @@ fields:
     name: "parentalChatConsent"
   client!pa.w I:
     owner: "FluType"
-    name: "anInt4075"
+    name: "lightness"
   client!pb.p [B:
     owner: "PcmSound"
     name: "samples"
@@ -7708,7 +7708,7 @@ fields:
     name: "feature"
   client!qa.t [[Lclient!wj;:
     owner: "Static5"
-    name: "aClass187ArrayArray1"
+    name: "environments"
   client!qb.S Lclient!fh;:
     owner: "client"
     name: "js5Archive23"
@@ -8740,7 +8740,7 @@ fields:
     name: "aShortArray85"
   client!rk.r [I:
     owner: "Static6"
-    name: "anIntArray491"
+    name: "rowWeightedHue"
   client!rk.s Z:
     owner: "Static6"
     name: "aBoolean321"
@@ -9187,7 +9187,7 @@ fields:
     name: "privateFilter"
   client!sh.db [I:
     owner: "Static6"
-    name: "anIntArray523"
+    name: "rowLightness"
   client!sh.eb I:
     owner: "Static6"
     name: "anInt4838"
@@ -9559,7 +9559,7 @@ fields:
     name: "titleBg"
   client!tc.V [I:
     owner: "Static6"
-    name: "anIntArray549"
+    name: "rowCount"
   client!td.A I:
     owner: "ObjType"
     name: "lentLink"
@@ -11041,7 +11041,7 @@ fields:
     name: "cipher"
   client!wa.Ub [I:
     owner: "Static7"
-    name: "anIntArray650"
+    name: "rowSaturation"
   client!wa.Yb I:
     owner: "Packet"
     name: "bitPosition"
@@ -12760,23 +12760,23 @@ methods:
       9: "bytes"
   client!an.a (Lclient!fd;ZZZIIIIIIII)V:
     owner: "Static9"
-    name: "method195"
+    name: "readTile"
     arguments:
-      0: "arg0"
+      0: "buffer"
       2: "arg1"
       3: "arg2"
-      4: "arg3"
+      4: "level"
       5: "arg4"
       6: "arg5"
-      7: "arg6"
-      8: "arg7"
+      7: "z"
+      8: "angle"
       9: "arg8"
       10: "arg9"
-      11: "arg10"
+      11: "x"
     locals:
-      37: "local37"
-      132: "local132"
-      315: "local315"
+      37: "code"
+      132: "height"
+      315: "code"
   client!an.b (I)V:
     owner: "Static9"
     name: "method199"
@@ -14269,7 +14269,7 @@ methods:
     locals: {}
   client!c.e (II)I:
     owner: "Js5GlTextureProvider"
-    name: "method446"
+    name: "getAverageColor"
     arguments:
       0: "id"
     locals: {}
@@ -18852,12 +18852,12 @@ methods:
     locals:
       25: "local25"
   client!fg.a (BIII)I:
-    owner: "Static15"
-    name: "method1339"
+    owner: "ColorUtils"
+    name: "compressHsl"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      3: "arg2"
+      1: "hue"
+      2: "saturation"
+      3: "lightness"
     locals: {}
   client!fg.a (IIIZIIIIBII)V:
     owner: "PathFinder"
@@ -23387,18 +23387,18 @@ methods:
       1: "local1"
   client!ii.c (II)V:
     owner: "Static20"
-    name: "method2408"
+    name: "loadOverlayColors"
     arguments:
       0: "arg0"
       1: "arg1"
     locals:
-      1: "local1"
-      8: "local8"
-      14: "local14"
+      1: "id"
+      8: "type"
+      14: "texture"
       29: "local29"
       35: "local35"
       57: "local57"
-      64: "local64"
+      64: "color"
       88: "local88"
       94: "local94"
       116: "local116"
@@ -25569,11 +25569,11 @@ methods:
       171: "x"
   client!k.a (IIII)I:
     owner: "Static22"
-    name: "method2188"
+    name: "rotateZFine"
     arguments:
-      0: "arg0"
-      2: "arg1"
-      3: "arg2"
+      0: "z"
+      2: "x"
+      3: "angle"
     locals: {}
   client!k.a (IIIIIBII)V:
     owner: "Static22"
@@ -25964,13 +25964,13 @@ methods:
       86: "stride"
       99: "x0"
   client!kf.a (BII)I:
-    owner: "Static22"
-    name: "method2286"
+    owner: "ColorUtils"
+    name: "multiplyLightnessGrayscale"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "hsl"
+      2: "factor"
     locals:
-      45: "local45"
+      45: "l"
   client!kf.a (I)I:
     owner: "WorldList"
     name: "fetch"
@@ -28594,11 +28594,11 @@ methods:
       7: "tile"
   client!ll.a (IIII)I:
     owner: "Static24"
-    name: "method2614"
+    name: "rotateZ"
     arguments:
-      0: "arg0"
-      2: "arg1"
-      3: "arg2"
+      0: "angle"
+      2: "x"
+      3: "z"
     locals: {}
   client!ll.a (Lclient!ni;B)V:
     owner: "LinkedList"
@@ -31561,7 +31561,7 @@ methods:
     owner: "Static26"
     name: "method2934"
     arguments:
-      1: "arg0"
+      1: "buffer"
     locals:
       7: "local7"
       11: "local11"
@@ -31587,11 +31587,11 @@ methods:
       231: "local231"
       242: "local242"
       253: "local253"
-      265: "local265"
+      265: "type"
       301: "local301"
       308: "local308"
       322: "local322"
-      334: "local334"
+      334: "type"
       370: "local370"
       383: "local383"
       389: "local389"
@@ -31970,17 +31970,17 @@ methods:
       8: "local8"
   client!ng.a (I[Lclient!ch;[BIIIIIIZI)[I:
     owner: "Static26"
-    name: "method4355"
+    name: "readZone"
     arguments:
       0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      1: "collisionMaps"
+      2: "bytes"
       3: "arg3"
       4: "arg4"
       5: "arg5"
-      6: "arg6"
+      6: "angle"
       8: "arg7"
-      9: "arg8"
+      9: "underwater"
       10: "arg9"
     locals:
       7: "local7"
@@ -31989,8 +31989,8 @@ methods:
       23: "local23"
       38: "local38"
       50: "local50"
-      101: "local101"
-      109: "local109"
+      101: "buffer"
+      109: "levels"
       119: "local119"
       121: "local121"
       127: "local127"
@@ -32021,12 +32021,12 @@ methods:
       729: "local729"
       766: "local766"
       778: "local778"
-      840: "local840"
-      854: "local854"
-      893: "local893"
-      897: "local897"
-      905: "local905"
-      916: "local916"
+      840: "environment"
+      854: "code"
+      893: "lights"
+      897: "i"
+      905: "light"
+      916: "type"
       932: "local932"
       937: "local937"
       987: "local987"
@@ -32283,9 +32283,9 @@ methods:
     locals: {}
   client!nk.e (II)I:
     owner: "GlTextureProvider"
-    name: "method446"
+    name: "getAverageColor"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!nk.f (II)V:
     owner: "GlTextureProvider"
@@ -33769,7 +33769,7 @@ methods:
       68: "s"
       73: "il"
       173: "is"
-      199: "h2"
+      199: "hPrime"
       204: "ih"
   client!on.c (II)V:
     owner: "LocTypeList"
@@ -33946,19 +33946,19 @@ methods:
     locals: {}
   client!pa.a (BI)V:
     owner: "FluType"
-    name: "method3330"
+    name: "rgbToHsl"
     arguments:
-      1: "arg0"
+      1: "rgb"
     locals:
-      14: "local14"
-      23: "local23"
-      30: "local30"
-      32: "local32"
-      48: "local48"
-      56: "local56"
-      65: "local65"
-      71: "local71"
-      224: "local224"
+      14: "r"
+      23: "g"
+      30: "b"
+      32: "xMin"
+      48: "xMax"
+      56: "h"
+      65: "s"
+      71: "l"
+      224: "hPrime"
   client!pa.a (I)V:
     owner: "Static28"
     name: "method3322"
@@ -37864,20 +37864,20 @@ methods:
     owner: "Static31"
     name: "method3778"
     arguments:
-      0: "arg0"
+      0: "collisionMaps"
       2: "arg1"
-      3: "arg2"
+      3: "underwater"
     locals:
-      9: "local9"
-      18: "local18"
-      25: "local25"
-      32: "local32"
+      9: "levels"
+      18: "level"
+      25: "x"
+      32: "z"
       48: "local48"
       140: "local140"
-      144: "local144"
+      144: "underlayColors"
       148: "local148"
       152: "local152"
-      154: "local154"
+      154: "level"
       161: "local161"
       167: "local167"
       174: "local174"
@@ -37909,31 +37909,31 @@ methods:
       551: "local551"
       567: "local567"
       616: "local616"
-      633: "local633"
-      663: "local663"
-      670: "local670"
-      679: "local679"
-      694: "local694"
-      706: "local706"
-      707: "local707"
+      633: "z"
+      663: "x"
+      670: "z"
+      679: "x1"
+      694: "underlay"
+      706: "type"
+      707: "temp"
       742: "local742"
-      749: "local749"
-      765: "local765"
-      774: "local774"
-      775: "local775"
+      749: "x0"
+      765: "underlay"
+      774: "type"
+      775: "temp"
       810: "local810"
-      824: "local824"
-      826: "local826"
-      828: "local828"
-      830: "local830"
-      832: "local832"
-      834: "local834"
-      843: "local843"
-      883: "local883"
-      955: "local955"
-      962: "local962"
-      1019: "local1019"
-      1029: "local1029"
+      824: "weightedHue"
+      826: "lightness"
+      828: "chroma"
+      830: "count"
+      832: "saturation"
+      834: "z"
+      843: "z1"
+      883: "z0"
+      955: "x"
+      962: "z"
+      1019: "underlay"
+      1029: "overlay"
       1047: "local1047"
       1057: "local1057"
       1069: "local1069"
@@ -37951,9 +37951,9 @@ methods:
       1369: "local1369"
       1417: "local1417"
       1428: "local1428"
-      1474: "local1474"
+      1474: "shape"
       1482: "local1482"
-      1488: "local1488"
+      1488: "type"
       1516: "local1516"
       1529: "local1529"
       1580: "local1580"
@@ -38165,11 +38165,11 @@ methods:
       19: "node"
   client!ro.a (IIIB)I:
     owner: "Static31"
-    name: "method3802"
+    name: "rotateXFine"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "x"
+      1: "angle"
+      2: "z"
     locals: {}
   client!ro.a (III[[[BIBII)V:
     owner: "Static31"
@@ -38265,7 +38265,7 @@ methods:
     arguments:
       0: "arg0"
     locals:
-      13: "local13"
+      13: "levels"
   client!ro.e (B)V:
     owner: "Static31"
     name: "method3798"
@@ -42025,22 +42025,22 @@ methods:
       61: "local61"
   client!tm.a (Z[Lclient!ch;IIIII[B)[I:
     owner: "Static34"
-    name: "method4248"
+    name: "readMap"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "underwater"
+      1: "collisionMaps"
       3: "arg2"
       4: "arg3"
       5: "arg4"
       6: "arg5"
-      7: "arg6"
+      7: "bytes"
     locals:
       9: "local9"
       18: "local18"
       25: "local25"
       32: "local32"
       103: "local103"
-      108: "local108"
+      108: "buffer"
       112: "local112"
       114: "local114"
       129: "local129"
@@ -42063,12 +42063,12 @@ methods:
       409: "local409"
       426: "local426"
       430: "local430"
-      539: "local539"
+      539: "environment"
       549: "local549"
-      585: "local585"
-      590: "local590"
-      598: "local598"
-      608: "local608"
+      585: "lights"
+      590: "i"
+      598: "light"
+      608: "type"
       640: "local640"
       645: "local645"
       704: "local704"
@@ -43091,9 +43091,9 @@ methods:
     owner: "Static35"
     name: "method4327"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      3: "arg2"
+      1: "level"
+      3: "x"
+      0: "z"
     locals: {}
   client!ui.a (IIII)I:
     owner: "PerlinNoise"
@@ -43251,11 +43251,11 @@ methods:
       5: "node"
   client!uk.a (IIII)I:
     owner: "Static35"
-    name: "method4338"
+    name: "rotateX"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "z"
+      1: "angle"
+      2: "x"
     locals: {}
   client!uk.a (ILclient!lh;)V:
     owner: "SecondaryLinkedList"
@@ -43385,13 +43385,13 @@ methods:
       0: "underwater"
     locals: {}
   client!um.a (ZII)I:
-    owner: "Static35"
-    name: "method4367"
+    owner: "ColorUtils"
+    name: "multiplyLightness"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "hsl"
+      2: "factor"
     locals:
-      18: "local18"
+      18: "l"
   client!un.a (BI)Z:
     owner: "Static35"
     name: "method4381"
