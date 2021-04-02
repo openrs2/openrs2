@@ -18,7 +18,7 @@
 							<th>Game</th>
 							<th>Build(s)</th>
 							<th>Timestamp</th>
-							<th>Name</th>
+							<th>Source(s)</th>
 							<th>Indexes</th>
 							<th>Groups</th>
 							<th>Keys</th>
@@ -40,7 +40,7 @@
 								<br />
 								<span th:text="${#temporals.format(cache.timestamp, 'HH:mm:ss')}"></span>
 							</td>
-							<td th:text="${#strings.setJoin(cache.names, '/')}"></td>
+							<td th:text="${#strings.setJoin(cache.names, ', ')}"></td>
 							<td th:classappend="${cache.stats}? (${cache.stats.allIndexesValid}? 'table-success' : 'table-danger')"
 							    class="text-right">
 								<span
