@@ -27,7 +27,11 @@
 				<strong
 					th:text="${#numbers.formatInteger(stats.validGroups, 1, 'COMMA')} + ' (' + ${#numbers.formatPercent(stats.validGroupsFraction, 1, 2)} + ')'">0</strong>
 				have a validated key. This is equal to the total number of
-				validated keys if and only if keys are not re-used.
+				validated keys if and only if keys are not re-used. A further
+				<strong
+					th:text="${#numbers.formatInteger(stats.emptyGroups, 1, 'COMMA')} + ' (' + ${#numbers.formatPercent(stats.emptyGroupsFraction, 1, 2)} + ')'">0</strong>
+				groups do not have a validated key, but are empty and can be
+				replaced with an unencrypted equivalent with a cache editor.
 			</p>
 
 			<h2>Download</h2>

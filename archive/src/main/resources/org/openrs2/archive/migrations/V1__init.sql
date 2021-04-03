@@ -238,7 +238,7 @@ LEFT JOIN (
         i.master_index_id,
         COUNT(*) FILTER (WHERE c.id IS NOT NULL) AS valid_groups,
         COUNT(*) AS groups,
-        COUNT(*) FILTER (WHERE c.key_id IS NOT NULL) AS valid_keys,
+        COUNT(*) FILTER (WHERE c.encrypted AND (c.key_id IS NOT NULL OR c.empty_loc)) AS valid_keys,
         COUNT(*) FILTER (WHERE c.encrypted) AS keys,
         SUM(length(c.data)) FILTER (WHERE c.id IS NOT NULL) AS size
     FROM resolved_indexes i

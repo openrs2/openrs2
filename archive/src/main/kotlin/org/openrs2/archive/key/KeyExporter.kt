@@ -15,17 +15,25 @@ public class KeyExporter @Inject constructor(
         val allKeys: Long,
         val validKeys: Long,
         val encryptedGroups: Long,
-        val validGroups: Long
+        val validGroups: Long,
+        val emptyGroups: Long
     ) {
         val validKeysFraction: Double = if (allKeys == 0L) {
             1.0
         } else {
             validKeys.toDouble() / allKeys
         }
+
         val validGroupsFraction: Double = if (encryptedGroups == 0L) {
             1.0
         } else {
             validGroups.toDouble() / encryptedGroups
+        }
+
+        val emptyGroupsFraction: Double = if (encryptedGroups == 0L) {
+            1.0
+        } else {
+            emptyGroups.toDouble() / encryptedGroups
         }
     }
 
@@ -33,12 +41,14 @@ public class KeyExporter @Inject constructor(
         return database.execute { connection ->
             val encryptedGroups: Long
             val validGroups: Long
+            val emptyGroups: Long
 
             connection.prepareStatement(
                 """
                 SELECT
                     COUNT(*),
-                    COUNT(*) FILTER (WHERE c.key_id IS NOT NULL)
+                    COUNT(*) FILTER (WHERE c.key_id IS NOT NULL),
+                    COUNT(*) FILTER (WHERE c.key_id IS NULL AND c.empty_loc)
                 FROM containers c
                 WHERE c.encrypted
             """.trimIndent()
@@ -48,6 +58,7 @@ public class KeyExporter @Inject constructor(
 
                     encryptedGroups = rows.getLong(1)
                     validGroups = rows.getLong(2)
+                    emptyGroups = rows.getLong(3)
                 }
             }
 
@@ -65,7 +76,7 @@ public class KeyExporter @Inject constructor(
 
                     val allKeys = rows.getLong(1)
                     val validKeys = rows.getLong(2)
-                    Stats(allKeys, validKeys, encryptedGroups, validGroups)
+                    Stats(allKeys, validKeys, encryptedGroups, validGroups, emptyGroups)
                 }
             }
         }
