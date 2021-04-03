@@ -27,8 +27,6 @@ tasks.shadowJar {
     archiveFileName.set("openrs2.jar")
 
     minimize {
-        // currently only invoked with reflection in Thymeleaf templates
-        exclude(dependency("com.jakewharton.byteunits:byteunits"))
         exclude(dependency("org.jetbrains.kotlin:kotlin-reflect"))
     }
 }

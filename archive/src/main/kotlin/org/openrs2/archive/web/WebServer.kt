@@ -39,6 +39,7 @@ public class WebServer @Inject constructor(
             }
 
             install(Thymeleaf) {
+                addDialect(ByteUnitsDialect)
                 addDialect(Java8TimeDialect())
 
                 setTemplateResolver(ClassLoaderTemplateResolver().apply {

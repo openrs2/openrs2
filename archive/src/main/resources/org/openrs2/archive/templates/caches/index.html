@@ -66,7 +66,8 @@
 								<span
 									th:text="${cache.stats}? '(' + ${#numbers.formatPercent(cache.stats.validKeysFraction, 1, 2)} + ')'"></span>
 							</td>
-							<td th:text="${cache.stats}? ${@com.jakewharton.byteunits.BinaryByteUnit@format(cache.stats.size)} : 'Calculating...'"
+							<!--/*@thymesVar id="#byteunits" type="org.openrs2.archive.web.ByteUnits"*/-->
+							<td th:text="${cache.stats}? ${#byteunits.format(cache.stats.size)} : 'Calculating...'"
 							    class="text-right">Calculating...
 							</td>
 							<td>

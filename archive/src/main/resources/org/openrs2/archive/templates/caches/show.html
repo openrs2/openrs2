@@ -67,7 +67,8 @@
 				</tr>
 				<tr class="thead-dark">
 					<th>Size<sup><a href="/caches#size">2</a></sup></th>
-					<td th:text="${cache.stats}? ${@com.jakewharton.byteunits.BinaryByteUnit@format(cache.stats.size)} : 'Calculating...'">
+					<!--/*@thymesVar id="#byteunits" type="org.openrs2.archive.web.ByteUnits"*/-->
+					<td th:text="${cache.stats}? ${#byteunits.format(cache.stats.size)} : 'Calculating...'">
 						Calculating...
 					</td>
 				</tr>
