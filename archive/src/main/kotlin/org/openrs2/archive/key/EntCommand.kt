@@ -27,6 +27,11 @@ public class EntCommand : CliktCommand(name = "ent") {
                     out.writeInt(key.k3)
                 }
             }
+
+            val status = process.waitFor()
+            if (status != 0) {
+                throw Exception("ent failed: $status")
+            }
         }
     }
 }
