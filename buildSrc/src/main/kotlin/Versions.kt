@@ -25,7 +25,7 @@ object Versions {
     const val kotlin = "1.4.32"
     const val kotlinCoroutines = "1.4.3"
     const val kotlinter = "3.4.0"
-    const val ktor = "1.5.2"
+    const val ktor = "1.5.3"
     const val logback = "1.2.3"
     const val netty = "4.1.63.Final"
     const val nettyIoUring = "0.0.5.Final"
