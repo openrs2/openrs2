@@ -3,6 +3,7 @@ object Versions {
     const val bootstrap = "4.6.0-1"
     const val bouncyCastlePkix = "1.68"
     const val bouncyCastleProvider = "1.68"
+    const val byteUnits = "0.9.1"
     const val clikt = "3.1.0"
     const val commonsCompress = "1.20"
     const val dependencyLicenseReport = "1.16"

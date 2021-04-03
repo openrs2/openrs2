@@ -66,6 +66,12 @@
 					</td>
 				</tr>
 				<tr class="thead-dark">
+					<th>Size<sup><a href="/caches#size">2</a></sup></th>
+					<td th:text="${cache.stats}? ${@com.jakewharton.byteunits.BinaryByteUnit@format(cache.stats.size)} : 'Calculating...'">
+						Calculating...
+					</td>
+				</tr>
+				<tr class="thead-dark">
 					<th>Download</th>
 					<td>
 						<div class="btn-group">

@@ -25,7 +25,8 @@ public class CacheExporter @Inject constructor(
         val validGroups: Long,
         val groups: Long,
         val validKeys: Long,
-        val keys: Long
+        val keys: Long,
+        val size: Long
     ) {
         public val allIndexesValid: Boolean = indexes == validIndexes && indexes != 0L
         public val validIndexesFraction: Double = if (indexes == 0L) {
@@ -87,12 +88,14 @@ public class CacheExporter @Inject constructor(
                     ms.valid_groups,
                     ms.groups,
                     ms.valid_keys,
-                    ms.keys
+                    ms.keys,
+                    ms.size
                 FROM master_indexes m
                 JOIN sources s ON s.master_index_id = m.id
                 JOIN games g ON g.id = s.game_id
                 LEFT JOIN master_index_stats ms ON ms.master_index_id = m.id
-                GROUP BY m.id, g.name, ms.valid_indexes, ms.indexes, ms.valid_groups, ms.groups, ms.valid_keys, ms.keys
+                GROUP BY m.id, g.name, ms.valid_indexes, ms.indexes, ms.valid_groups, ms.groups, ms.valid_keys, ms.keys,
+                    ms.size
                 ORDER BY g.name ASC, MIN(s.build) ASC, MIN(s.timestamp) ASC
             """.trimIndent()
             ).use { stmt ->
@@ -113,7 +116,8 @@ public class CacheExporter @Inject constructor(
                             val groups = rows.getLong(9)
                             val validKeys = rows.getLong(10)
                             val keys = rows.getLong(11)
-                            Stats(validIndexes, indexes, validGroups, groups, validKeys, keys)
+                            val size = rows.getLong(12)
+                            Stats(validIndexes, indexes, validGroups, groups, validKeys, keys, size)
                         } else {
                             null
                         }
@@ -152,13 +156,14 @@ public class CacheExporter @Inject constructor(
                     ms.valid_groups,
                     ms.groups,
                     ms.valid_keys,
-                    ms.keys
+                    ms.keys,
+                    ms.size
                 FROM master_indexes m
                 JOIN sources s ON s.master_index_id = m.id
                 JOIN games g ON g.id = s.game_id
                 LEFT JOIN master_index_stats ms ON ms.master_index_id = m.id
                 WHERE m.id = ?
-                GROUP BY m.id, ms.valid_indexes, ms.indexes, ms.valid_groups, ms.groups, ms.valid_keys, ms.keys
+                GROUP BY m.id, ms.valid_indexes, ms.indexes, ms.valid_groups, ms.groups, ms.valid_keys, ms.keys, ms.size
             """.trimIndent()
             ).use { stmt ->
                 stmt.setInt(1, id)
@@ -182,7 +187,8 @@ public class CacheExporter @Inject constructor(
                         val groups = rows.getLong(10)
                         val validKeys = rows.getLong(11)
                         val keys = rows.getLong(12)
-                        Stats(validIndexes, indexes, validGroups, groups, validKeys, keys)
+                        val size = rows.getLong(13)
+                        Stats(validIndexes, indexes, validGroups, groups, validKeys, keys, size)
                     } else {
                         null
                     }

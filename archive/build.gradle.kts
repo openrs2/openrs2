@@ -23,6 +23,7 @@ dependencies {
     implementation(project(":util"))
     implementation(project(":yaml"))
     implementation("com.google.guava:guava:${Versions.guava}")
+    implementation("com.jakewharton.byteunits:byteunits:${Versions.byteUnits}")
     implementation("com.zaxxer:HikariCP:${Versions.hikaricp}")
     implementation("io.ktor:ktor-jackson:${Versions.ktor}")
     implementation("io.ktor:ktor-server-netty:${Versions.ktor}")
