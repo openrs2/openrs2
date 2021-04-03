@@ -10,6 +10,7 @@ import org.openrs2.patcher.transform.CachePathTransformer
 import org.openrs2.patcher.transform.DomainTransformer
 import org.openrs2.patcher.transform.HighDpiTransformer
 import org.openrs2.patcher.transform.HostCheckTransformer
+import org.openrs2.patcher.transform.InvalidKeyTransformer
 import org.openrs2.patcher.transform.LoadLibraryTransformer
 import org.openrs2.patcher.transform.MacResizeTransformer
 import org.openrs2.patcher.transform.MemoryAllocationTransformer
@@ -38,5 +39,6 @@ public object PatcherModule : AbstractModule() {
         binder.addBinding().to(RightClickTransformer::class.java)
         binder.addBinding().to(TypoTransformer::class.java)
         binder.addBinding().to(HighDpiTransformer::class.java)
+        binder.addBinding().to(InvalidKeyTransformer::class.java)
     }
 }
