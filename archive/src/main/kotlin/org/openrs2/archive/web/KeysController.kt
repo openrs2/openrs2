@@ -13,7 +13,8 @@ public class KeysController @Inject constructor(
 ) {
     public suspend fun index(call: ApplicationCall) {
         val stats = exporter.count()
-        call.respond(ThymeleafContent("keys/index.html", mapOf("stats" to stats)))
+        val analysis = exporter.analyse()
+        call.respond(ThymeleafContent("keys/index.html", mapOf("stats" to stats, "analysis" to analysis)))
     }
 
     public suspend fun exportAll(call: ApplicationCall) {

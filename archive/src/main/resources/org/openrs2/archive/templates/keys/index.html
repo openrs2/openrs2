@@ -29,6 +29,7 @@
 				have a validated key. This is equal to the total number of
 				validated keys if and only if keys are not re-used.
 			</p>
+
 			<h2>Download</h2>
 			<p>
 				This page allows all raw keys in the database to be exported in
@@ -37,12 +38,26 @@
 				the cache, use the download link on the
 				<a href="/caches">caches</a> page instead.
 			</p>
-			<div class="btn-group">
+			<p class="btn-group">
 				<a href="/keys/all.json"
 				   class="btn btn-primary btn-sm">All candidate keys (JSON)</a>
 				<a href="/keys/valid.json"
 				   class="btn btn-primary btn-sm">Validated keys (JSON)</a>
-			</div>
+			</p>
+
+			<h2>Analysis</h2>
+			<p>
+				The output of piping all validated keys in binary format into
+				<a href="https://www.fourmilab.ch/random/"><code>ent</code></a>
+				is:
+			</p>
+			<!--/*@thymesVar id="analysis" type="java.lang.String"*/-->
+			<pre><code th:text="${analysis}"></code></pre>
+			<p>
+				The keys are sorted in import order, which does not match the
+				order they were generated in. This could influence portions of
+				<code>ent</code>'s output.
+			</p>
 		</main>
 	</body>
 </html>

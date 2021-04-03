@@ -2,6 +2,8 @@ package org.openrs2.archive.key
 
 import org.openrs2.crypto.XteaKey
 import org.openrs2.db.Database
+import java.io.BufferedOutputStream
+import java.io.DataOutputStream
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -75,6 +77,32 @@ public class KeyExporter @Inject constructor(
 
     public suspend fun exportValid(): List<XteaKey> {
         return export(validOnly = true)
+    }
+
+    public suspend fun analyse(): String {
+        val keys = exportValid()
+
+        val process = ProcessBuilder("ent")
+            .redirectError(ProcessBuilder.Redirect.INHERIT)
+            .start()
+
+        DataOutputStream(BufferedOutputStream(process.outputStream)).use { out ->
+            for (key in keys) {
+                out.writeInt(key.k0)
+                out.writeInt(key.k1)
+                out.writeInt(key.k2)
+                out.writeInt(key.k3)
+            }
+        }
+
+        val analysis = process.inputStream.readAllBytes().toString(Charsets.UTF_8)
+
+        val status = process.waitFor()
+        if (status != 0) {
+            throw Exception("ent failed: $status")
+        }
+
+        return analysis
     }
 
     private suspend fun export(validOnly: Boolean): List<XteaKey> {
