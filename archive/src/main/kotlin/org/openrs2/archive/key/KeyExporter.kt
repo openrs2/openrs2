@@ -9,8 +9,35 @@ import javax.inject.Singleton
 public class KeyExporter @Inject constructor(
     private val database: Database
 ) {
-    public suspend fun count(): Pair<Long, Long> {
+    public data class Stats(
+        val allKeys: Long,
+        val validKeys: Long,
+        val encryptedGroups: Long,
+        val validGroups: Long
+    )
+
+    public suspend fun count(): Stats {
         return database.execute { connection ->
+            val encryptedGroups: Long
+            val validGroups: Long
+
+            connection.prepareStatement(
+                """
+                SELECT
+                    COUNT(*),
+                    COUNT(*) FILTER (WHERE c.key_id IS NOT NULL)
+                FROM containers c
+                WHERE c.encrypted
+            """.trimIndent()
+            ).use { stmt ->
+                stmt.executeQuery().use { rows ->
+                    check(rows.next())
+
+                    encryptedGroups = rows.getLong(1)
+                    validGroups = rows.getLong(2)
+                }
+            }
+
             connection.prepareStatement(
                 """
                 SELECT
@@ -23,9 +50,9 @@ public class KeyExporter @Inject constructor(
                 stmt.executeQuery().use { rows ->
                     check(rows.next())
 
-                    val all = rows.getLong(1)
-                    val valid = rows.getLong(2)
-                    Pair(all, valid)
+                    val allKeys = rows.getLong(1)
+                    val validKeys = rows.getLong(2)
+                    Stats(allKeys, validKeys, encryptedGroups, validGroups)
                 }
             }
         }

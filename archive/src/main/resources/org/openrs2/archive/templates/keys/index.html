@@ -11,10 +11,21 @@
 		<nav th:replace="layout.html :: nav(active='keys')"></nav>
 		<main class="container">
 			<h1>Keys</h1>
+			<!--/*@thymesVar id="stats" type="org.openrs2.archive.key.KeyExporter.Stats"*/-->
 			<p>
-				There are <strong th:text="${#numbers.formatInteger(all, 1, 'COMMA')}">0</strong> candidate keys in
-				the database, of which <strong th:text="${#numbers.formatInteger(valid, 1, 'COMMA')}">0</strong> have
-				been validated against at least one encrypted group.
+				There are
+				<strong th:text="${#numbers.formatInteger(stats.allKeys, 1, 'COMMA')}">0</strong>
+				candidate keys in the database, of which
+				<strong th:text="${#numbers.formatInteger(stats.validKeys, 1, 'COMMA')}">0</strong>
+				have been validated against at least one encrypted group.
+			</p>
+			<p>
+				There are
+				<strong th:text="${#numbers.formatInteger(stats.encryptedGroups, 1, 'COMMA')}">0</strong>
+				encrypted groups in the database, of which
+				<strong th:text="${#numbers.formatInteger(stats.validGroups, 1, 'COMMA')}">0</strong>
+				have a validated key. This is equal to the total number of
+				validated keys if and only if keys are not re-used.
 			</p>
 			<h2>Download</h2>
 			<p>
