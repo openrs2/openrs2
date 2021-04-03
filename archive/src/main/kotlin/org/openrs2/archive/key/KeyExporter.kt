@@ -14,7 +14,18 @@ public class KeyExporter @Inject constructor(
         val validKeys: Long,
         val encryptedGroups: Long,
         val validGroups: Long
-    )
+    ) {
+        val validKeysFraction: Double = if (allKeys == 0L) {
+            1.0
+        } else {
+            validKeys.toDouble() / allKeys
+        }
+        val validGroupsFraction: Double = if (encryptedGroups == 0L) {
+            1.0
+        } else {
+            validGroups.toDouble() / encryptedGroups
+        }
+    }
 
     public suspend fun count(): Stats {
         return database.execute { connection ->

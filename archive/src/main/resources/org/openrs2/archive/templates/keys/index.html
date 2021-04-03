@@ -16,14 +16,16 @@
 				There are
 				<strong th:text="${#numbers.formatInteger(stats.allKeys, 1, 'COMMA')}">0</strong>
 				candidate keys in the database, of which
-				<strong th:text="${#numbers.formatInteger(stats.validKeys, 1, 'COMMA')}">0</strong>
+				<strong
+					th:text="${#numbers.formatInteger(stats.validKeys, 1, 'COMMA')} + ' (' + ${#numbers.formatPercent(stats.validKeysFraction, 1, 2)} + ')'">0</strong>
 				have been validated against at least one encrypted group.
 			</p>
 			<p>
 				There are
 				<strong th:text="${#numbers.formatInteger(stats.encryptedGroups, 1, 'COMMA')}">0</strong>
 				encrypted groups in the database, of which
-				<strong th:text="${#numbers.formatInteger(stats.validGroups, 1, 'COMMA')}">0</strong>
+				<strong
+					th:text="${#numbers.formatInteger(stats.validGroups, 1, 'COMMA')} + ' (' + ${#numbers.formatPercent(stats.validGroupsFraction, 1, 2)} + ')'">0</strong>
 				have a validated key. This is equal to the total number of
 				validated keys if and only if keys are not re-used.
 			</p>
