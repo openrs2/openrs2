@@ -97,7 +97,20 @@ public class MapRenderer @Inject constructor(
                         }
                     }
 
-                    metadata.skipBytes(ids.size * 7)
+                    // the number of booleans to skip varies in different builds
+                    outer@ while (true) {
+                        val start = metadata.readerIndex()
+
+                        for (i in 0 until ids.size) {
+                            if (metadata.getUnsignedByte(start + i) > 1) {
+                                break@outer
+                            }
+                        }
+
+                        metadata.skipBytes(ids.size)
+                    }
+
+                    metadata.skipBytes(ids.size * 4)
 
                     for (id in ids) {
                         textures[id] = metadata.readUnsignedShort()
