@@ -5,11 +5,13 @@ import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.Unpooled
 import org.openrs2.buffer.use
 import org.openrs2.cache.Js5Archive
+import org.openrs2.cache.Js5Compression
+import org.openrs2.cache.Js5MasterIndex
+import org.openrs2.cache.MasterIndexFormat
 import org.openrs2.cache.Store
 import org.openrs2.crypto.XteaKey
 import org.openrs2.db.Database
 import java.time.Instant
-import java.util.Collections
 import java.util.SortedSet
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -50,19 +52,30 @@ public class CacheExporter @Inject constructor(
         }
     }
 
-    public data class Cache(
+    public data class CacheSummary(
         val id: Int,
-        val games: SortedSet<String>,
+        val game: String,
         val builds: SortedSet<Int>,
         val timestamp: Instant?,
         val names: SortedSet<String>,
-        val descriptions: List<String>,
-        val urls: SortedSet<String>,
         val stats: Stats?
-    ) {
-        val game: String
-            get() = games.single()
-    }
+    )
+
+    public data class Cache(
+        val id: Int,
+        val sources: List<Source>,
+        val stats: Stats?,
+        val masterIndex: Js5MasterIndex
+    )
+
+    public data class Source(
+        val game: String,
+        val build: Int?,
+        val timestamp: Instant?,
+        val name: String?,
+        val description: String?,
+        val url: String?
+    )
 
     public data class Key(
         val archive: Int,
@@ -73,7 +86,7 @@ public class CacheExporter @Inject constructor(
         val key: XteaKey
     )
 
-    public suspend fun list(): List<Cache> {
+    public suspend fun list(): List<CacheSummary> {
         return database.execute { connection ->
             connection.prepareStatement(
                 """
@@ -100,7 +113,7 @@ public class CacheExporter @Inject constructor(
             """.trimIndent()
             ).use { stmt ->
                 stmt.executeQuery().use { rows ->
-                    val caches = mutableListOf<Cache>()
+                    val caches = mutableListOf<CacheSummary>()
 
                     while (rows.next()) {
                         val id = rows.getInt(1)
@@ -122,14 +135,12 @@ public class CacheExporter @Inject constructor(
                             null
                         }
 
-                        caches += Cache(
+                        caches += CacheSummary(
                             id,
-                            sortedSetOf(game),
+                            game,
                             builds.toSortedSet(),
                             timestamp,
                             names.toSortedSet(),
-                            emptyList(),
-                            Collections.emptySortedSet(),
                             stats
                         )
                     }
@@ -142,15 +153,14 @@ public class CacheExporter @Inject constructor(
 
     public suspend fun get(id: Int): Cache? {
         return database.execute { connection ->
+            val masterIndex: Js5MasterIndex
+            val stats: Stats?
+
             connection.prepareStatement(
                 """
                 SELECT
-                    array_remove(array_agg(DISTINCT g.name ORDER BY g.name ASC), NULL),
-                    array_remove(array_agg(DISTINCT s.build ORDER BY s.build ASC), NULL),
-                    MIN(s.timestamp),
-                    array_remove(array_agg(DISTINCT s.name ORDER BY s.name ASC), NULL),
-                    array_remove(array_agg(DISTINCT s.description), NULL),
-                    array_remove(array_agg(DISTINCT s.url ORDER BY s.url ASC), NULL),
+                    m.format,
+                    c.data,
                     ms.valid_indexes,
                     ms.indexes,
                     ms.valid_groups,
@@ -159,11 +169,9 @@ public class CacheExporter @Inject constructor(
                     ms.keys,
                     ms.size
                 FROM master_indexes m
-                JOIN sources s ON s.master_index_id = m.id
-                JOIN games g ON g.id = s.game_id
+                JOIN containers c ON c.id = m.container_id
                 LEFT JOIN master_index_stats ms ON ms.master_index_id = m.id
                 WHERE m.id = ?
-                GROUP BY m.id, ms.valid_indexes, ms.indexes, ms.valid_groups, ms.groups, ms.valid_keys, ms.keys, ms.size
             """.trimIndent()
             ).use { stmt ->
                 stmt.setInt(1, id)
@@ -173,38 +181,62 @@ public class CacheExporter @Inject constructor(
                         return@execute null
                     }
 
-                    val games = rows.getArray(1).array as Array<String>
-                    val builds = rows.getArray(2).array as Array<Int>
-                    val timestamp = rows.getTimestamp(3)?.toInstant()
-                    val names = rows.getArray(4).array as Array<String>
-                    val descriptions = rows.getArray(5).array as Array<String>
-                    val urls = rows.getArray(6).array as Array<String>
+                    val format = MasterIndexFormat.valueOf(rows.getString(1).toUpperCase())
 
-                    val validIndexes = rows.getLong(7)
-                    val stats = if (!rows.wasNull()) {
-                        val indexes = rows.getLong(8)
-                        val validGroups = rows.getLong(9)
-                        val groups = rows.getLong(10)
-                        val validKeys = rows.getLong(11)
-                        val keys = rows.getLong(12)
-                        val size = rows.getLong(13)
-                        Stats(validIndexes, indexes, validGroups, groups, validKeys, keys, size)
-                    } else {
-                        null
+                    masterIndex = Unpooled.wrappedBuffer(rows.getBytes(2)).use { compressed ->
+                        Js5Compression.uncompress(compressed).use { uncompressed ->
+                            Js5MasterIndex.read(uncompressed, format)
+                        }
                     }
 
-                    return@execute Cache(
-                        id,
-                        games.toSortedSet(),
-                        builds.toSortedSet(),
-                        timestamp,
-                        names.toSortedSet(),
-                        descriptions.toList(),
-                        urls.toSortedSet(),
-                        stats
-                    )
+                    val validIndexes = rows.getLong(3)
+                    stats = if (rows.wasNull()) {
+                        null
+                    } else {
+                        val indexes = rows.getLong(4)
+                        val validGroups = rows.getLong(5)
+                        val groups = rows.getLong(6)
+                        val validKeys = rows.getLong(7)
+                        val keys = rows.getLong(8)
+                        val size = rows.getLong(9)
+                        Stats(validIndexes, indexes, validGroups, groups, validKeys, keys, size)
+                    }
                 }
             }
+
+            val sources = mutableListOf<Source>()
+
+            connection.prepareStatement(
+                """
+                SELECT g.name, s.build, s.timestamp, s.name, s.description, s.url
+                FROM sources s
+                JOIN games g ON g.id = s.game_id
+                WHERE s.master_index_id = ?
+                ORDER BY s.name ASC
+            """.trimIndent()
+            ).use { stmt ->
+                stmt.setInt(1, id)
+
+                stmt.executeQuery().use { rows ->
+                    while (rows.next()) {
+                        val game = rows.getString(1)
+
+                        var build: Int? = rows.getInt(2)
+                        if (rows.wasNull()) {
+                            build = null
+                        }
+
+                        val timestamp = rows.getTimestamp(3)?.toInstant()
+                        val name = rows.getString(4)
+                        val description = rows.getString(5)
+                        val url = rows.getString(6)
+
+                        sources += Source(game, build, timestamp, name, description, url)
+                    }
+                }
+            }
+
+            Cache(id, sources, stats, masterIndex)
         }
     }
 
