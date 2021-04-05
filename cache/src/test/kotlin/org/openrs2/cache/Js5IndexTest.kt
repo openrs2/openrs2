@@ -317,7 +317,7 @@ class Js5IndexTest {
 
     private fun read(name: String): ByteBuf {
         Js5IndexTest::class.java.getResourceAsStream("index/$name").use { input ->
-            return Unpooled.wrappedBuffer(input.readAllBytes())
+            return Unpooled.wrappedBuffer(input.readBytes())
         }
     }
 
