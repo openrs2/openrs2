@@ -14,10 +14,10 @@ import kotlin.test.Test
 import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
-class DiskStoreZipWriterTest {
+public class FlatFileStoreZipWriterTest {
     @Test
     fun testBounds() {
-        DiskStoreZipWriter(ZipOutputStream(OutputStream.nullOutputStream())).use { store ->
+        FlatFileStoreZipWriter(ZipOutputStream(OutputStream.nullOutputStream())).use { store ->
             // create
             assertFailsWith<IllegalArgumentException> {
                 store.create(-1)
@@ -51,14 +51,14 @@ class DiskStoreZipWriterTest {
                 store.write(0, -1, Unpooled.EMPTY_BUFFER)
             }
 
-            store.write(0, 0, Unpooled.EMPTY_BUFFER)
-            store.write(0, 1, Unpooled.EMPTY_BUFFER)
+            store.write(2, 0, Unpooled.EMPTY_BUFFER)
+            store.write(2, 1, Unpooled.EMPTY_BUFFER)
         }
     }
 
     @Test
     fun testUnsupported() {
-        DiskStoreZipWriter(ZipOutputStream(OutputStream.nullOutputStream())).use { store ->
+        FlatFileStoreZipWriter(ZipOutputStream(OutputStream.nullOutputStream())).use { store ->
             assertFailsWith<UnsupportedOperationException> {
                 store.exists(0)
             }
@@ -96,7 +96,7 @@ class DiskStoreZipWriterTest {
             Files.createDirectories(actual)
 
             Files.newOutputStream(actual.resolve("cache.zip")).use { out ->
-                DiskStoreZipWriter(ZipOutputStream(out)).use { store ->
+                FlatFileStoreZipWriter(ZipOutputStream(out)).use { store ->
                     store.create(0)
 
                     copiedBuffer("OpenRS2").use { buf ->
@@ -118,6 +118,8 @@ class DiskStoreZipWriterTest {
     }
 
     private companion object {
-        private val ROOT = Path.of(DiskStoreZipWriterTest::class.java.getResource("disk-store-zip").toURI())
+        private val ROOT = Path.of(
+            FlatFileStoreZipWriterTest::class.java.getResource("flat-file-store-zip").toURI()
+        )
     }
 }
