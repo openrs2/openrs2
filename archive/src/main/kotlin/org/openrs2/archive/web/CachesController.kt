@@ -15,6 +15,7 @@ import kotlinx.coroutines.sync.withPermit
 import org.openrs2.archive.cache.CacheExporter
 import org.openrs2.archive.map.MapRenderer
 import org.openrs2.cache.DiskStoreZipWriter
+import org.openrs2.cache.FlatFileStoreZipWriter
 import java.nio.file.attribute.FileTime
 import java.time.Instant
 import java.util.zip.Deflater
@@ -53,7 +54,7 @@ public class CachesController @Inject constructor(
         call.respond(ThymeleafContent("caches/show.html", mapOf("cache" to cache)))
     }
 
-    public suspend fun export(call: ApplicationCall) {
+    public suspend fun exportDisk(call: ApplicationCall) {
         val id = call.parameters["id"]?.toIntOrNull()
         if (id == null) {
             call.respond(HttpStatusCode.NotFound)
@@ -69,6 +70,27 @@ public class CachesController @Inject constructor(
 
         call.respondOutputStream(contentType = ContentType.Application.Zip) {
             DiskStoreZipWriter(ZipOutputStream(this), alloc = alloc).use { store ->
+                exporter.export(id, store)
+            }
+        }
+    }
+
+    public suspend fun exportFlatFile(call: ApplicationCall) {
+        val id = call.parameters["id"]?.toIntOrNull()
+        if (id == null) {
+            call.respond(HttpStatusCode.NotFound)
+            return
+        }
+
+        call.response.header(
+            HttpHeaders.ContentDisposition,
+            ContentDisposition.Attachment
+                .withParameter(ContentDisposition.Parameters.FileName, "cache.zip")
+                .toString()
+        )
+
+        call.respondOutputStream(contentType = ContentType.Application.Zip) {
+            FlatFileStoreZipWriter(ZipOutputStream(this)).use { store ->
                 exporter.export(id, store)
             }
         }

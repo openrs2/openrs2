@@ -79,8 +79,10 @@
 											Download
 										</button>
 										<ul class="dropdown-menu">
-											<li><a th:href="${'/caches/' + cache.id + '.zip'}"
-											       class="dropdown-item">Cache</a></li>
+											<li><a th:href="${'/caches/' + cache.id + '/disk.zip'}"
+											       class="dropdown-item">Cache (.dat2/.idx)</a></li>
+											<li><a th:href="${'/caches/' + cache.id + '/flat-file.zip'}"
+											       class="dropdown-item">Cache (Flat file)</a></li>
 											<li>
 												<hr class="dropdown-divider" />
 											</li>
@@ -88,6 +90,9 @@
 											       class="dropdown-item">Keys (JSON)</a></li>
 											<li><a th:href="${'/caches/' + cache.id + '/keys.zip'}"
 											       class="dropdown-item">Keys (Text)</a></li>
+											<li>
+												<hr class="dropdown-divider" />
+											</li>
 											<li><a th:href="${'/caches/' + cache.id + '/map.png'}"
 											       class="dropdown-item">Map</a></li>
 										</ul>

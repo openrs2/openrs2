@@ -49,15 +49,23 @@
 				<tr class="thead-dark">
 					<th>Download</th>
 					<td>
-						<div class="btn-group">
-							<a th:href="${'/caches/' + cache.id + '.zip'}"
-							   class="btn btn-primary btn-sm">Cache</a>
-							<a th:href="${'/caches/' + cache.id + '/keys.json'}"
-							   class="btn btn-primary btn-sm">Keys (JSON)</a>
-							<a th:href="${'/caches/' + cache.id + '/keys.zip'}"
-							   class="btn btn-primary btn-sm">Keys (Text)</a>
-							<a th:href="${'/caches/' + cache.id + '/map.png'}"
-							   class="btn btn-primary btn-sm">Map</a>
+						<div class="btn-toolbar">
+							<div class="btn-group mr-2">
+								<a th:href="${'/caches/' + cache.id + '/disk.zip'}"
+								   class="btn btn-primary btn-sm">Cache (.dat2/.idx)</a>
+								<a th:href="${'/caches/' + cache.id + '/flat-file.zip'}"
+								   class="btn btn-primary btn-sm">Cache (Flat file)</a>
+							</div>
+							<div class="btn-group mr-2">
+								<a th:href="${'/caches/' + cache.id + '/keys.json'}"
+								   class="btn btn-primary btn-sm">Keys (JSON)</a>
+								<a th:href="${'/caches/' + cache.id + '/keys.zip'}"
+								   class="btn btn-primary btn-sm">Keys (Text)</a>
+							</div>
+							<div class="btn-group">
+								<a th:href="${'/caches/' + cache.id + '/map.png'}"
+								   class="btn btn-primary btn-sm">Map</a>
+							</div>
 						</div>
 					</td>
 				</tr>

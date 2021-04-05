@@ -55,7 +55,17 @@ public class WebServer @Inject constructor(
                 get("/") { call.respond(ThymeleafContent("index.html", emptyMap())) }
                 get("/caches") { cachesController.index(call) }
                 get("/caches/{id}") { cachesController.show(call) }
-                get("/caches/{id}.zip") { cachesController.export(call) }
+                get("/caches/{id}.zip") {
+                    val id = call.parameters["id"]
+                    if (id == null) {
+                        call.respond(HttpStatusCode.NotFound)
+                        return@get
+                    }
+
+                    call.respondRedirect(permanent = true) {
+                        path("caches", id, "disk.zip")
+                    }
+                }
                 get("/caches/{id}.json") {
                     val id = call.parameters["id"]
                     if (id == null) {
@@ -67,6 +77,8 @@ public class WebServer @Inject constructor(
                         path("caches", id, "keys.json")
                     }
                 }
+                get("/caches/{id}/disk.zip") { cachesController.exportDisk(call) }
+                get("/caches/{id}/flat-file.zip") { cachesController.exportFlatFile(call) }
                 get("/caches/{id}/keys.json") { cachesController.exportKeysJson(call) }
                 get("/caches/{id}/keys.zip") { cachesController.exportKeysZip(call) }
                 get("/caches/{id}/map.png") { cachesController.renderMap(call) }
