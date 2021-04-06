@@ -24,9 +24,12 @@ public class KeyImporter @Inject constructor(
 
             val name = file.fileName.toString()
             val reader = when {
+                name.endsWith(".bin") -> BinaryKeyReader
+                name.endsWith(".dat") -> BinaryKeyReader
                 name.endsWith(".hex") -> HexKeyReader
-                name.endsWith(".txt") -> TextKeyReader
                 name.endsWith(".json") -> jsonKeyReader
+                name.endsWith(".mcx") -> BinaryKeyReader
+                name.endsWith(".txt") -> TextKeyReader
                 else -> continue
             }
 
