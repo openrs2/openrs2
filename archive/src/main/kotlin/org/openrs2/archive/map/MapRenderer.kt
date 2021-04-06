@@ -236,8 +236,9 @@ public class MapRenderer @Inject constructor(
                 for (z in z0..z1) {
                     val mapSquare = getMapSquare(x, z)
                     val state = states[mapSquare] ?: continue
+                    val label = "${x}_$z"
 
-                    renderStateOverlay(image, graphics, x - x0, z - z0, state)
+                    renderStateOverlay(image, graphics, x - x0, z - z0, state, label)
                 }
             }
 
@@ -375,7 +376,8 @@ public class MapRenderer @Inject constructor(
         graphics: Graphics2D,
         mapX: Int,
         mapZ: Int,
-        state: MapSquareState
+        state: MapSquareState,
+        label: String
     ) {
         val x = mapX * MAP_SIZE
         val y = image.height - (mapZ + 1) * MAP_SIZE
@@ -397,8 +399,6 @@ public class MapRenderer @Inject constructor(
             MAP_SIZE - 1,
             MAP_SIZE - 1
         )
-
-        val label = "${mapX}_$mapZ"
 
         val labelWidth = graphics.fontMetrics.stringWidth(label)
         val labelHeight = graphics.fontMetrics.height
