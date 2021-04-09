@@ -10,6 +10,7 @@ import java.nio.file.Path
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertNull
 
 class Js5MasterIndexTest {
     @Test
@@ -120,6 +121,35 @@ class Js5MasterIndexTest {
                     )
                 )
             ), index
+        )
+    }
+
+    @Test
+    fun testCreateCorruptIndex() {
+        val index = Store.open(ROOT.resolve("corrupt")).use { store ->
+            Js5MasterIndex.create(store)
+        }
+
+        assertEquals(
+            Js5MasterIndex(
+                MasterIndexFormat.ORIGINAL,
+                mutableListOf(
+                    Js5MasterIndex.Entry(
+                        0, 609698396, 0, 0, ByteBufUtil.decodeHexDump(
+                            "0e1a2b93c80a41c7ad2a985dff707a6a8ff82e229cbc468f04191198920955a1" +
+                                "4b3d7eab77a17faf99208dee5b44afb789962ad79f230b3b59106a0af892219c"
+                        )
+                    ),
+                    Js5MasterIndex.Entry(0, 0, 0, 0, null),
+                    Js5MasterIndex.Entry(
+                        0, 609698396, 0, 0, ByteBufUtil.decodeHexDump(
+                            "0e1a2b93c80a41c7ad2a985dff707a6a8ff82e229cbc468f04191198920955a1" +
+                                "4b3d7eab77a17faf99208dee5b44afb789962ad79f230b3b59106a0af892219c"
+                        )
+                    )
+                )
+            ),
+            index
         )
     }
 
@@ -280,6 +310,26 @@ class Js5MasterIndexTest {
             Unpooled.wrappedBuffer(encodedLengths).use { expected ->
                 assertEquals(expected, actual)
             }
+        }
+    }
+
+    @Test
+    fun testSetDigest() {
+        val entry = Js5MasterIndex.Entry(0, 0, 0, 0, null)
+
+        val digest = ByteArray(Whirlpool.DIGESTBYTES) { it.toByte() }
+        entry.digest = digest
+        assertEquals(digest, entry.digest)
+
+        entry.digest = null
+        assertNull(entry.digest)
+
+        assertFailsWith<IllegalArgumentException> {
+            entry.digest = ByteArray(Whirlpool.DIGESTBYTES - 1)
+        }
+
+        assertFailsWith<IllegalArgumentException> {
+            entry.digest = ByteArray(Whirlpool.DIGESTBYTES + 1)
         }
     }
 
