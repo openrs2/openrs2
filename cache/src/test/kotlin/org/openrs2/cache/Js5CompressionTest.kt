@@ -217,6 +217,15 @@ class Js5CompressionTest {
                     assertEquals(expected, actual)
                 }
             }
+
+            Js5Compression.compressBest(expected.slice(), enableLzma = true).use { compressed ->
+                assertNotEquals(Js5CompressionType.UNCOMPRESSED.ordinal, compressed.getUnsignedByte(0).toInt())
+                assert(compressed.readableBytes() < noneLen)
+
+                Js5Compression.uncompress(compressed).use { actual ->
+                    assertEquals(expected, actual)
+                }
+            }
         }
     }
 
@@ -302,7 +311,11 @@ class Js5CompressionTest {
     fun testNoneEof() {
         read("none-eof.dat").use { compressed ->
             assertFailsWith<IOException> {
-                Js5Compression.uncompress(compressed).release()
+                Js5Compression.uncompress(compressed.slice()).release()
+            }
+
+            assertFailsWith<IOException> {
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO)?.release()
             }
         }
     }
@@ -593,7 +606,11 @@ class Js5CompressionTest {
     fun testUncompressedOverflow() {
         read("uncompressed-overflow.dat").use { compressed ->
             assertFailsWith<IOException> {
-                Js5Compression.uncompress(compressed).release()
+                Js5Compression.uncompress(compressed.slice()).release()
+            }
+
+            Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { actual ->
+                assertNull(actual)
             }
         }
     }
@@ -602,7 +619,11 @@ class Js5CompressionTest {
     fun testUncompressedUnderflow() {
         read("uncompressed-underflow.dat").use { compressed ->
             assertFailsWith<IOException> {
-                Js5Compression.uncompress(compressed).release()
+                Js5Compression.uncompress(compressed.slice()).release()
+            }
+
+            Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { actual ->
+                assertNull(actual)
             }
         }
     }
