@@ -10,13 +10,13 @@ application {
 
 dependencies {
     api(project(":asm"))
-    api("com.github.ajalt.clikt:clikt:${Versions.clikt}")
-    api("com.google.inject:guice:${Versions.guice}")
+    api(libs.clikt)
+    api(libs.guice)
 
     implementation(project(":conf"))
     implementation(project(":crypto"))
     implementation(project(":inject"))
-    implementation("org.openrs2:openrs2-natives-all:${Versions.openrs2Natives}")
+    implementation(libs.openrs2.natives)
 }
 
 publishing {

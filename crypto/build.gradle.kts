@@ -4,16 +4,15 @@ plugins {
 }
 
 dependencies {
-    api("com.fasterxml.jackson.core:jackson-databind:${Versions.jackson}")
-    api("com.google.inject:guice:${Versions.guice}")
-    api("io.netty:netty-buffer:${Versions.netty}")
-    api("org.bouncycastle:bcpkix-jdk15on:${Versions.bouncyCastlePkix}")
-    api("org.bouncycastle:bcprov-jdk15on:${Versions.bouncyCastleProvider}")
+    api(libs.bundles.bouncyCastle)
+    api(libs.guice)
+    api(libs.jackson.databind)
+    api(libs.netty.buffer)
 
     implementation(project(":util"))
 
     testImplementation(project(":buffer"))
-    testImplementation("com.google.jimfs:jimfs:${Versions.jimfs}")
+    testImplementation(libs.jimfs)
 }
 
 publishing {

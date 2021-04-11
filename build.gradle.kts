@@ -119,18 +119,14 @@ configure(subprojects.filter { it.isFree }) {
 
             val implementation by configurations
             implementation(kotlin("reflect"))
-            implementation("com.michael-bull.kotlin-inline-logger:kotlin-inline-logger:${Versions.inlineLogger}")
+            implementation(libs.inlineLogger)
 
             val testImplementation by configurations
             testImplementation(kotlin("test-junit5"))
-            testImplementation("org.junit.jupiter:junit-jupiter-api") {
-                version {
-                    strictly(Versions.junit)
-                }
-            }
+            testImplementation(libs.junit.api)
 
             val testRuntimeOnly by configurations
-            testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${Versions.junit}")
+            testRuntimeOnly(libs.junit.engine)
         }
     }
 
@@ -167,18 +163,18 @@ configure(subprojects.filter { it.isFree }) {
                     }
 
                     externalDocumentationLink {
-                        url.set(URL("https://commons.apache.org/proper/commons-compress/javadocs/api-${Versions.commonsCompress}/"))
+                        url.set(URL("https://commons.apache.org/proper/commons-compress/javadocs/api-${libs.versions.commons.compress.get()}/"))
                     }
 
                     externalDocumentationLink {
-                        url.set(URL("https://guava.dev/releases/${Versions.guava}/api/docs/"))
+                        url.set(URL("https://guava.dev/releases/${libs.versions.guava.get()}/api/docs/"))
                     }
 
                     externalDocumentationLink {
-                        url.set(URL("https://google.github.io/guice/api-docs/${Versions.guice}/javadoc/"))
+                        url.set(URL("https://google.github.io/guice/api-docs/${libs.versions.guice.get()}/javadoc/"))
                     }
 
-                    val jacksonVersion = Versions.jackson.split(".")
+                    val jacksonVersion = libs.versions.jackson.get().split(".")
                         .take(2)
                         .joinToString(".")
 
@@ -203,15 +199,15 @@ configure(subprojects.filter { it.isFree }) {
                     }
 
                     externalDocumentationLink {
-                        url.set(URL("https://google.github.io/jimfs/releases/${Versions.jimfs}/api/docs/"))
+                        url.set(URL("https://google.github.io/jimfs/releases/${libs.versions.jimfs.get()}/api/docs/"))
                     }
 
                     externalDocumentationLink {
-                        url.set(URL("https://junit.org/junit5/docs/${Versions.junit}/api/"))
+                        url.set(URL("https://junit.org/junit5/docs/${libs.versions.junit.get()}/api/"))
                     }
 
                     externalDocumentationLink {
-                        val version = Versions.netty.split(".")
+                        val version = libs.versions.netty.get().split(".")
                             .take(2)
                             .joinToString(".")
 
@@ -225,7 +221,7 @@ configure(subprojects.filter { it.isFree }) {
     plugins.withType<ApplicationPlugin> {
         dependencies {
             val runtimeOnly by configurations
-            runtimeOnly("ch.qos.logback:logback-classic:${Versions.logback}")
+            runtimeOnly(libs.logback)
         }
     }
 

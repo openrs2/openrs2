@@ -4,11 +4,11 @@ plugins {
 }
 
 dependencies {
-    api("org.tukaani:xz:${Versions.xz}")
+    api(libs.xz)
 
     implementation(project(":util"))
-    implementation("com.google.guava:guava:${Versions.guava}")
-    implementation("org.apache.commons:commons-compress:${Versions.commonsCompress}")
+    api(libs.commons.compress)
+    api(libs.guava)
 }
 
 publishing {

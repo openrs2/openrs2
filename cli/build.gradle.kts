@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-    api("com.github.ajalt.clikt:clikt:${Versions.clikt}")
+    api(libs.clikt)
 }
 
 publishing {

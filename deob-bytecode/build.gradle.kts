@@ -9,17 +9,17 @@ application {
 }
 
 dependencies {
-    api("com.github.ajalt.clikt:clikt:${Versions.clikt}")
-    api("com.google.inject:guice:${Versions.guice}")
+    api(libs.clikt)
+    api(libs.guice)
 
     implementation(project(":deob-annotations"))
     implementation(project(":deob-util"))
     implementation(project(":inject"))
     implementation(project(":patcher"))
     implementation(project(":yaml"))
-    implementation("com.google.guava:guava:${Versions.guava}")
-    implementation("it.unimi.dsi:fastutil:${Versions.fastutil}")
-    implementation("org.jgrapht:jgrapht-core:${Versions.jgrapht}")
+    implementation(libs.fastutil)
+    implementation(libs.guava)
+    implementation(libs.jgrapht)
 }
 
 publishing {

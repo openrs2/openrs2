@@ -10,7 +10,7 @@ application {
 }
 
 dependencies {
-    api("com.github.ajalt.clikt:clikt:${Versions.clikt}")
+    api(libs.clikt)
 
     implementation(project(":decompiler"))
     implementation(project(":deob-ast"))

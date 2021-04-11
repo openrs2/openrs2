@@ -10,6 +10,8 @@ dependencyResolutionManagement {
     }
 }
 
+enableFeaturePreview("VERSION_CATALOGS")
+
 include(
     "all",
     "archive",

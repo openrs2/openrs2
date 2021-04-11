@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-    api("com.google.inject:guice:${Versions.guice}")
+    api(libs.guice)
 }
 
 publishing {

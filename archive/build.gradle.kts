@@ -9,7 +9,7 @@ application {
 }
 
 dependencies {
-    api("com.github.ajalt.clikt:clikt:${Versions.clikt}")
+    api(libs.clikt)
 
     implementation(project(":buffer"))
     implementation(project(":cache"))
@@ -22,21 +22,17 @@ dependencies {
     implementation(project(":protocol"))
     implementation(project(":util"))
     implementation(project(":yaml"))
-    implementation("com.google.guava:guava:${Versions.guava}")
-    implementation("com.jakewharton.byteunits:byteunits:${Versions.byteUnits}")
-    implementation("com.zaxxer:HikariCP:${Versions.hikaricp}")
-    implementation("io.ktor:ktor-jackson:${Versions.ktor}")
-    implementation("io.ktor:ktor-server-netty:${Versions.ktor}")
-    implementation("io.ktor:ktor-thymeleaf:${Versions.ktor}")
-    implementation("io.ktor:ktor-webjars:${Versions.ktor}")
-    implementation("org.flywaydb:flyway-core:${Versions.flyway}")
-    implementation("org.jdom:jdom2:${Versions.jdom}")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinCoroutines}")
-    implementation("org.jsoup:jsoup:${Versions.jsoup}")
-    implementation("org.postgresql:postgresql:${Versions.postgres}")
-    implementation("org.thymeleaf:thymeleaf:${Versions.thymeleaf}")
-    implementation("org.thymeleaf.extras:thymeleaf-extras-java8time:${Versions.thymeleafJava8Time}")
-    implementation("org.webjars:bootstrap:${Versions.bootstrap}")
+    implementation(libs.bootstrap)
+    implementation(libs.bundles.ktor)
+    implementation(libs.bundles.thymeleaf)
+    implementation(libs.byteUnits)
+    implementation(libs.flyway)
+    implementation(libs.guava)
+    implementation(libs.hikaricp)
+    implementation(libs.jdom)
+    implementation(libs.jsoup)
+    implementation(libs.kotlin.coroutines.core)
+    implementation(libs.postgres)
 }
 
 publishing {

@@ -4,10 +4,10 @@ plugins {
 }
 
 dependencies {
-    api("com.google.inject:guice:${Versions.guice}")
-    api("io.netty:netty-buffer:${Versions.netty}")
+    api(libs.guice)
+    api(libs.netty.buffer)
 
-    implementation("com.google.guava:guava:${Versions.guava}")
+    implementation(libs.guava)
 }
 
 publishing {

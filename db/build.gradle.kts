@@ -4,12 +4,12 @@ plugins {
 }
 
 dependencies {
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinCoroutines}")
+    api(libs.kotlin.coroutines.core)
 
-    implementation("com.google.guava:guava:${Versions.guava}")
+    implementation(libs.guava)
 
-    testImplementation("com.h2database:h2:${Versions.h2}")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.kotlinCoroutines}")
+    testImplementation(libs.h2)
+    testImplementation(libs.kotlin.coroutines.test)
 }
 
 publishing {

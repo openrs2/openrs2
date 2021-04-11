@@ -5,12 +5,9 @@ plugins {
 
 dependencies {
     api(project(":util"))
-    api("com.fasterxml.jackson.core:jackson-databind:${Versions.jackson}")
-    api("com.google.inject:guice:${Versions.guice}")
-    api("org.ow2.asm:asm:${Versions.asm}")
-    api("org.ow2.asm:asm-commons:${Versions.asm}")
-    api("org.ow2.asm:asm-tree:${Versions.asm}")
-    api("org.ow2.asm:asm-util:${Versions.asm}")
+    api(libs.bundles.asm)
+    api(libs.guice)
+    api(libs.jackson.databind)
 
     implementation(project(":compress"))
     implementation(project(":crypto"))

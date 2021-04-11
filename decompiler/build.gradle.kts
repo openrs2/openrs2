@@ -11,11 +11,11 @@ application {
 
 dependencies {
     api(project(":deob-util"))
-    api("com.github.ajalt.clikt:clikt:${Versions.clikt}")
-    api("com.google.inject:guice:${Versions.guice}")
+    api(libs.clikt)
+    api(libs.guice)
 
     implementation(project(":util"))
-    implementation("org.openrs2:fernflower:${Versions.fernflower}")
+    implementation(libs.fernflower)
 }
 
 publishing {

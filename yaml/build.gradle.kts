@@ -4,11 +4,11 @@ plugins {
 }
 
 dependencies {
-    api("com.fasterxml.jackson.core:jackson-databind:${Versions.jackson}")
-    api("com.google.inject:guice:${Versions.guice}")
+    api(libs.guice)
+    api(libs.jackson.databind)
 
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${Versions.jackson}")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${Versions.jackson}")
+    implementation(libs.jackson.kotlin)
+    implementation(libs.jackson.yaml)
 }
 
 publishing {

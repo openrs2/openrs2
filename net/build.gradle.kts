@@ -4,15 +4,16 @@ plugins {
 }
 
 dependencies {
-    api("com.google.inject:guice:${Versions.guice}")
-    api("io.netty:netty-transport:${Versions.netty}")
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinCoroutines}")
+    api(libs.guice)
+    api(libs.kotlin.coroutines.core)
+    api(libs.netty.transport)
 
     implementation(project(":buffer"))
-    implementation("io.netty:netty-transport-native-epoll:${Versions.netty}:linux-aarch_64")
-    implementation("io.netty:netty-transport-native-epoll:${Versions.netty}:linux-x86_64")
-    implementation("io.netty:netty-transport-native-kqueue:${Versions.netty}:osx-x86_64")
-    implementation("io.netty.incubator:netty-incubator-transport-native-io_uring:${Versions.nettyIoUring}:linux-x86_64")
+    implementation("io.netty.incubator:netty-incubator-transport-native-io_uring:${libs.versions.nettyIoUring.get()}:linux-aarch_64")
+    implementation("io.netty.incubator:netty-incubator-transport-native-io_uring:${libs.versions.nettyIoUring.get()}:linux-x86_64")
+    implementation("io.netty:netty-transport-native-epoll:${libs.versions.netty.get()}:linux-aarch_64")
+    implementation("io.netty:netty-transport-native-epoll:${libs.versions.netty.get()}:linux-x86_64")
+    implementation("io.netty:netty-transport-native-kqueue:${libs.versions.netty.get()}:osx-x86_64")
 }
 
 publishing {

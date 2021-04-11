@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-    testImplementation("com.google.jimfs:jimfs:${Versions.jimfs}")
+    testImplementation(libs.jimfs)
 }
 
 publishing {

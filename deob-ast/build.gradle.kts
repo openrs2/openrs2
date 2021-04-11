@@ -10,15 +10,14 @@ application {
 
 dependencies {
     api(project(":deob-util"))
-    api("com.github.ajalt.clikt:clikt:${Versions.clikt}")
-    api("com.google.inject:guice:${Versions.guice}")
+    api(libs.clikt)
+    api(libs.guice)
 
     implementation(project(":inject"))
     implementation(project(":util"))
-    implementation("com.github.javaparser:javaparser-symbol-solver-core:${Versions.javaParser}")
-    implementation("com.google.guava:guava:${Versions.guava}")
-    implementation("com.google.inject:guice:${Versions.guice}")
-    implementation("org.jdom:jdom2:${Versions.jdom}")
+    implementation(libs.guava)
+    implementation(libs.javaParser)
+    implementation(libs.jdom)
 }
 
 publishing {

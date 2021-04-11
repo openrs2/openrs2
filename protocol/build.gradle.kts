@@ -5,7 +5,7 @@ plugins {
 
 dependencies {
     api(project(":crypto"))
-    api("io.netty:netty-codec:${Versions.netty}")
+    api(libs.netty.codec)
 
     implementation(project(":buffer"))
 }

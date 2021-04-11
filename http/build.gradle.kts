@@ -4,10 +4,10 @@ plugins {
 }
 
 dependencies {
-    api("com.google.inject:guice:${Versions.guice}")
+    api(libs.guice)
 
-    implementation("com.google.guava:guava:${Versions.guava}")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinCoroutines}")
+    implementation(libs.guava)
+    implementation(libs.kotlin.coroutines.core)
 }
 
 publishing {

@@ -5,15 +5,15 @@ plugins {
 
 dependencies {
     api(project(":crypto"))
-    api("com.google.inject:guice:${Versions.guice}")
-    api("io.netty:netty-buffer:${Versions.netty}")
-    api("it.unimi.dsi:fastutil:${Versions.fastutil}")
+    api(libs.fastutil)
+    api(libs.guice)
+    api(libs.netty.buffer)
 
     implementation(project(":buffer"))
     implementation(project(":compress"))
     implementation(project(":util"))
 
-    testImplementation("com.google.jimfs:jimfs:${Versions.jimfs}")
+    testImplementation(libs.jimfs)
 }
 
 publishing {
