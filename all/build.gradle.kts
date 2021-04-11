@@ -15,12 +15,12 @@ application {
 }
 
 dependencies {
-    implementation(project(":archive"))
-    implementation(project(":compress-cli"))
-    implementation(project(":crc32"))
-    implementation(project(":deob"))
-    implementation(project(":game"))
-    implementation(project(":patcher"))
+    implementation(projects.archive)
+    implementation(projects.compressCli)
+    implementation(projects.crc32)
+    implementation(projects.deob)
+    implementation(projects.game)
+    implementation(projects.patcher)
 }
 
 tasks.shadowJar {

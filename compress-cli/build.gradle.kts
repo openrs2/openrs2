@@ -11,7 +11,7 @@ application {
 dependencies {
     api(libs.clikt)
 
-    implementation(project(":compress"))
+    implementation(projects.compress)
 }
 
 publishing {

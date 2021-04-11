@@ -6,7 +6,7 @@ plugins {
 dependencies {
     api(libs.xz)
 
-    implementation(project(":util"))
+    implementation(projects.util)
     api(libs.commons.compress)
     api(libs.guava)
 }

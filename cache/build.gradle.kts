@@ -4,14 +4,14 @@ plugins {
 }
 
 dependencies {
-    api(project(":crypto"))
+    api(projects.crypto)
     api(libs.fastutil)
     api(libs.guice)
     api(libs.netty.buffer)
 
-    implementation(project(":buffer"))
-    implementation(project(":compress"))
-    implementation(project(":util"))
+    implementation(projects.buffer)
+    implementation(projects.compress)
+    implementation(projects.util)
 
     testImplementation(libs.jimfs)
 }

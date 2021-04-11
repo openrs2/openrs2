@@ -9,13 +9,13 @@ application {
 }
 
 dependencies {
-    api(project(":asm"))
+    api(projects.asm)
     api(libs.clikt)
     api(libs.guice)
 
-    implementation(project(":conf"))
-    implementation(project(":crypto"))
-    implementation(project(":inject"))
+    implementation(projects.conf)
+    implementation(projects.crypto)
+    implementation(projects.inject)
     implementation(libs.openrs2.natives)
 }
 

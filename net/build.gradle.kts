@@ -8,7 +8,7 @@ dependencies {
     api(libs.kotlin.coroutines.core)
     api(libs.netty.transport)
 
-    implementation(project(":buffer"))
+    implementation(projects.buffer)
     implementation("io.netty.incubator:netty-incubator-transport-native-io_uring:${libs.versions.nettyIoUring.get()}:linux-aarch_64")
     implementation("io.netty.incubator:netty-incubator-transport-native-io_uring:${libs.versions.nettyIoUring.get()}:linux-x86_64")
     implementation("io.netty:netty-transport-native-epoll:${libs.versions.netty.get()}:linux-aarch_64")

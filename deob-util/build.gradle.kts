@@ -4,8 +4,8 @@ plugins {
 }
 
 dependencies {
-    api(project(":asm"))
-    api(project(":yaml"))
+    api(projects.asm)
+    api(projects.yaml)
 }
 
 publishing {

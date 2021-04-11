@@ -9,9 +9,9 @@ dependencies {
     api(libs.jackson.databind)
     api(libs.netty.buffer)
 
-    implementation(project(":util"))
+    implementation(projects.util)
 
-    testImplementation(project(":buffer"))
+    testImplementation(projects.buffer)
     testImplementation(libs.jimfs)
 }
 

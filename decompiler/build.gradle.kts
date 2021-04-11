@@ -10,11 +10,11 @@ application {
 }
 
 dependencies {
-    api(project(":deob-util"))
+    api(projects.deobUtil)
     api(libs.clikt)
     api(libs.guice)
 
-    implementation(project(":util"))
+    implementation(projects.util)
     implementation(libs.fernflower)
 }
 

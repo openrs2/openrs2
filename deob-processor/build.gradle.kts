@@ -4,10 +4,10 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":deob-annotations"))
-    implementation(project(":deob-util"))
-    implementation(project(":inject"))
-    implementation(project(":yaml"))
+    implementation(projects.deobAnnotations)
+    implementation(projects.deobUtil)
+    implementation(projects.inject)
+    implementation(projects.yaml)
 }
 
 publishing {

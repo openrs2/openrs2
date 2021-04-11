@@ -12,10 +12,10 @@ application {
 dependencies {
     api(libs.clikt)
 
-    implementation(project(":decompiler"))
-    implementation(project(":deob-ast"))
-    implementation(project(":deob-bytecode"))
-    implementation(project(":inject"))
+    implementation(projects.decompiler)
+    implementation(projects.deobAst)
+    implementation(projects.deobBytecode)
+    implementation(projects.inject)
 }
 
 publishing {

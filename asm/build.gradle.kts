@@ -4,13 +4,13 @@ plugins {
 }
 
 dependencies {
-    api(project(":util"))
+    api(projects.util)
     api(libs.bundles.asm)
     api(libs.guice)
     api(libs.jackson.databind)
 
-    implementation(project(":compress"))
-    implementation(project(":crypto"))
+    implementation(projects.compress)
+    implementation(projects.crypto)
 }
 
 publishing {

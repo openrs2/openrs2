@@ -4,10 +4,10 @@ plugins {
 }
 
 dependencies {
-    api(project(":crypto"))
+    api(projects.crypto)
     api(libs.netty.codec)
 
-    implementation(project(":buffer"))
+    implementation(projects.buffer)
 }
 
 publishing {

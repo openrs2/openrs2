@@ -11,7 +11,7 @@ application {
 dependencies {
     api(libs.clikt)
 
-    implementation(project(":inject"))
+    implementation(projects.inject)
 }
 
 publishing {

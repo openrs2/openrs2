@@ -9,12 +9,12 @@ application {
 }
 
 dependencies {
-    api(project(":deob-util"))
+    api(projects.deobUtil)
     api(libs.clikt)
     api(libs.guice)
 
-    implementation(project(":inject"))
-    implementation(project(":util"))
+    implementation(projects.inject)
+    implementation(projects.util)
     implementation(libs.guava)
     implementation(libs.javaParser)
     implementation(libs.jdom)

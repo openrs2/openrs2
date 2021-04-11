@@ -6,7 +6,7 @@ plugins {
 dependencies {
     api(libs.guice)
 
-    implementation(project(":yaml"))
+    implementation(projects.yaml)
 }
 
 publishing {
