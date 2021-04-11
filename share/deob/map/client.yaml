@@ -2,7 +2,7 @@
 classes:
   client!a: "AnimFrame"
   client!ac: "TextureOp28"
-  client!ae: "Class6"
+  client!ae: "Material7"
   client!af: "AnimBase"
   client!ag: "SynthSound"
   client!ai: "QuickChatCommandDecoder"
@@ -405,7 +405,7 @@ fields:
     owner: "LocalisedText"
     name: "MAINLOAD41B"
   client!ae.b Z:
-    owner: "Class6"
+    owner: "Material7"
     name: "aBoolean7"
   client!ae.c [S:
     owner: "PlayerAppearance"
@@ -417,7 +417,7 @@ fields:
     owner: "Static1"
     name: "anInt91"
   client!ae.j I:
-    owner: "Class6"
+    owner: "Material7"
     name: "anInt96"
   client!ae.k I:
     owner: "MsiTypeList"
@@ -12336,19 +12336,19 @@ methods:
       121: "destOff2"
       124: "srcOff2"
   client!ae.<init> ()V:
-    owner: "Class6"
+    owner: "Material7"
     name: "<init>"
     arguments: {}
     locals:
       11: "gl"
   client!ae.a ()V:
-    owner: "Class6"
+    owner: "Material7"
     name: "unbind"
     arguments: {}
     locals:
       5: "gl"
   client!ae.a (I)V:
-    owner: "Class6"
+    owner: "Material7"
     name: "setArgument"
     arguments:
       0: "arg"
@@ -12372,7 +12372,7 @@ methods:
       110: "stack"
       155: "key"
   client!ae.b ()V:
-    owner: "Class6"
+    owner: "Material7"
     name: "bind"
     arguments: {}
     locals:
@@ -12386,7 +12386,7 @@ methods:
       3: "x"
       8: "z"
   client!ae.c ()I:
-    owner: "Class6"
+    owner: "Material7"
     name: "getFlags"
     arguments: {}
     locals: {}
