@@ -3,7 +3,7 @@ rootProject.name = "openrs2"
 dependencyResolutionManagement {
     repositories {
         mavenCentral()
-        jcenter()
+        gradlePluginPortal()
         maven(url = "https://repo.openrs2.org/repository/openrs2")
         mavenLocal()
         maven(url = "https://repo.openrs2.org/repository/openrs2-snapshots")
