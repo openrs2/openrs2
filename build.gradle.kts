@@ -10,13 +10,11 @@ defaultTasks("build")
 
 plugins {
     base
-    id("com.github.ben-manes.versions") version Versions.versionsPlugin
-    id("org.jetbrains.dokka") version Versions.dokka
-    kotlin("jvm") version Versions.kotlin
+    id("com.github.ben-manes.versions")
+    id("org.jetbrains.dokka")
+    kotlin("jvm")
 
-    id("com.github.jk1.dependency-license-report") version Versions.dependencyLicenseReport apply false
-    id("com.github.johnrengelman.shadow") version Versions.shadowPlugin apply false
-    id("org.jmailen.kotlinter") version Versions.kotlinter apply false
+    id("org.jmailen.kotlinter") apply false
 }
 
 allprojects {
@@ -112,7 +110,7 @@ configure(subprojects.filter { it.isFree }) {
             for (module in listOf("stdlib", "stdlib-common", "stdlib-jdk7", "stdlib-jdk8")) {
                 api("org.jetbrains.kotlin:kotlin-$module") {
                     version {
-                        strictly(Versions.kotlin)
+                        strictly(kotlinPluginVersion)
                     }
                 }
             }

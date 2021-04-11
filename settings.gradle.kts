@@ -10,6 +10,17 @@ dependencyResolutionManagement {
     }
 }
 
+pluginManagement {
+    plugins {
+        id("com.github.ben-manes.versions") version "0.38.0"
+        id("com.github.jk1.dependency-license-report") version "1.16"
+        id("com.github.johnrengelman.shadow") version "6.1.0"
+        id("org.jetbrains.dokka") version "1.4.30"
+        id("org.jmailen.kotlinter") version "3.4.0"
+        kotlin("jvm") version "1.4.32"
+    }
+}
+
 enableFeaturePreview("VERSION_CATALOGS")
 
 include(
