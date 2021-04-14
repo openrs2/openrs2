@@ -21,7 +21,7 @@ classes:
   client!bj: "UnderwaterMaterial"
   client!bk: "TracingException"
   client!bl: "TextureOp25"
-  client!bn: "Class4_Sub6_Sub1"
+  client!bn: "MidiNoteStream"
   client!bo: "WaterfallMaterial"
   client!c: "Js5GlTextureProvider"
   client!ca: "TextureOp11"
@@ -56,7 +56,7 @@ classes:
   client!eg: "SeqType"
   client!eh: "Class47"
   client!ei: "HardReferenceNode"
-  client!ej: "Class4_Sub9"
+  client!ej: "MidiNote"
   client!em: "Light"
   client!en: "Js5NetQueue"
   client!eo: "BufferedSocket"
@@ -133,7 +133,7 @@ classes:
   client!la: "TextureOp20"
   client!lb: "SecondaryParticleLinkedList"
   client!lc: "TextureOp29SubOp"
-  client!ld: "Class4_Sub6_Sub2"
+  client!ld: "MidiPcmStream"
   client!lf: "TextureOp14"
   client!lg: "MathUtils"
   client!lh: "SecondaryNode"
@@ -143,7 +143,7 @@ classes:
   client!ll: "LinkedList"
   client!lm: "Particle"
   client!ln: "Texture"
-  client!lo: "Class4_Sub6_Sub3"
+  client!lo: "MixerPcmStream"
   client!m: "IsaacRandom"
   client!ma: "IndexedSprite"
   client!mb: "ParticleNode"
@@ -185,7 +185,7 @@ classes:
   client!p: "Npc"
   client!pa: "FluType"
   client!pb: "PcmSound"
-  client!pc: "Class4_Sub6_Sub4"
+  client!pc: "SoundPcmStream"
   client!pd: "VorbisCodebook"
   client!pe: "CursorType"
   client!pf: "GlProgram"
@@ -244,7 +244,7 @@ classes:
   client!tc: "TextureOp22"
   client!td: "ObjType"
   client!te: "AnimFrameset"
-  client!tf: "Class4_Sub6"
+  client!tf: "PcmStream"
   client!tg: "Song"
   client!ti: "TextureOp24"
   client!tj: "AudioChannel"
@@ -287,7 +287,7 @@ classes:
   client!wh: "QuickChatCatType"
   client!wj: "Environment"
   client!wl: "BufferedFile"
-  client!wm: "Class4_Sub33"
+  client!wm: "MixerListener"
   client!wn: "ParticleEffector"
 fields:
   client!a.a [S:
@@ -954,8 +954,8 @@ fields:
     owner: "Static1"
     name: "aFloat15"
   client!bn.K Lclient!lo;:
-    owner: "Class4_Sub6_Sub1"
-    name: "aClass4_Sub6_Sub3_1"
+    owner: "MidiNoteStream"
+    name: "mixer"
   client!bn.L Z:
     owner: "Preferences"
     name: "groundTextures"
@@ -963,11 +963,11 @@ fields:
     owner: "PlayerAppearance"
     name: "destinationSkinColors"
   client!bn.y Lclient!ll;:
-    owner: "Class4_Sub6_Sub1"
-    name: "aClass112_3"
+    owner: "MidiNoteStream"
+    name: "notes"
   client!bn.z Lclient!ld;:
-    owner: "Class4_Sub6_Sub1"
-    name: "aClass4_Sub6_Sub2_1"
+    owner: "MidiNoteStream"
+    name: "parent"
   client!bo.b J:
     owner: "LoginManager"
     name: "encodedUsername"
@@ -1041,8 +1041,8 @@ fields:
     owner: "Static1"
     name: "anInt525"
   client!cb.m Lclient!ld;:
-    owner: "Static1"
-    name: "aClass4_Sub6_Sub2_2"
+    owner: "client"
+    name: "musicStream"
   client!cb.n Ljava/lang/String;:
     owner: "LocalisedText"
     name: "CHATCOL0"
@@ -1188,8 +1188,8 @@ fields:
     owner: "Static1"
     name: "anInt626"
   client!ci.n Lclient!jk;:
-    owner: "Static1"
-    name: "aClass98_1"
+    owner: "MidiPlayer"
+    name: "soundBank"
   client!cj.B I:
     owner: "EnumType"
     name: "defaultInt"
@@ -1479,8 +1479,8 @@ fields:
     owner: "MsiTypeList"
     name: "archive"
   client!da.m Lclient!ld;:
-    owner: "Static1"
-    name: "aClass4_Sub6_Sub2_3"
+    owner: "MidiPlayer"
+    name: "stream"
   client!da.n I:
     owner: "MonochromeImageCache"
     name: "singleRow"
@@ -2013,8 +2013,8 @@ fields:
     owner: "SeqType"
     name: "anInt1243"
   client!eg.H I:
-    owner: "Static2"
-    name: "anInt1244"
+    owner: "MidiPlayer"
+    name: "songFileId"
   client!eg.a I:
     owner: "SeqType"
     name: "id"
@@ -2118,52 +2118,52 @@ fields:
     owner: "Static2"
     name: "anInt1273"
   client!ej.A I:
-    owner: "Class4_Sub9"
+    owner: "MidiNote"
     name: "anInt1287"
   client!ej.B I:
-    owner: "Class4_Sub9"
+    owner: "MidiNote"
     name: "anInt1288"
   client!ej.C I:
-    owner: "Class4_Sub9"
+    owner: "MidiNote"
     name: "anInt1289"
   client!ej.D I:
-    owner: "Class4_Sub9"
+    owner: "MidiNote"
     name: "anInt1290"
   client!ej.E I:
-    owner: "Class4_Sub9"
-    name: "anInt1291"
+    owner: "MidiNote"
+    name: "pan"
   client!ej.G I:
-    owner: "Class4_Sub9"
+    owner: "MidiNote"
     name: "anInt1293"
   client!ej.H I:
-    owner: "Class4_Sub9"
+    owner: "MidiNote"
     name: "anInt1294"
   client!ej.J Lclient!qh;:
-    owner: "Class4_Sub9"
-    name: "aClass4_Sub23_1"
+    owner: "MidiNote"
+    name: "instrument"
   client!ej.K I:
-    owner: "Class4_Sub9"
-    name: "anInt1296"
+    owner: "MidiNote"
+    name: "midiKey"
   client!ej.L I:
-    owner: "Class4_Sub9"
+    owner: "MidiNote"
     name: "anInt1297"
   client!ej.N Lclient!si;:
-    owner: "Class4_Sub9"
+    owner: "MidiNote"
     name: "aClass157_1"
   client!ej.O I:
-    owner: "Class4_Sub9"
+    owner: "MidiNote"
     name: "anInt1299"
   client!ej.P I:
-    owner: "Class4_Sub9"
+    owner: "MidiNote"
     name: "anInt1300"
   client!ej.Q I:
-    owner: "Class4_Sub9"
-    name: "anInt1301"
+    owner: "MidiNote"
+    name: "channel"
   client!ej.S I:
-    owner: "Class4_Sub9"
+    owner: "MidiNote"
     name: "anInt1303"
   client!ej.T I:
-    owner: "Class4_Sub9"
+    owner: "MidiNote"
     name: "anInt1304"
   client!ej.p Lclient!cc;:
     owner: "SkyBoxTypeList"
@@ -2172,25 +2172,25 @@ fields:
     owner: "LocalisedText"
     name: "MAINLOAD135B"
   client!ej.s I:
-    owner: "Class4_Sub9"
+    owner: "MidiNote"
     name: "anInt1283"
   client!ej.t Lclient!pc;:
-    owner: "Class4_Sub9"
-    name: "aClass4_Sub6_Sub4_1"
+    owner: "MidiNote"
+    name: "stream"
   client!ej.u Lclient!pb;:
-    owner: "Class4_Sub9"
-    name: "aClass4_Sub8_Sub1_1"
+    owner: "MidiNote"
+    name: "sound"
   client!ej.v Z:
     owner: "Preferences"
     name: "characterShadows"
   client!ej.w I:
-    owner: "Class4_Sub9"
+    owner: "MidiNote"
     name: "anInt1284"
   client!ej.x Lclient!fh;:
     owner: "LocTypeList"
     name: "locsArchive"
   client!ej.y I:
-    owner: "Class4_Sub9"
+    owner: "MidiNote"
     name: "anInt1285"
   client!ek.b I:
     owner: "Mouse"
@@ -2727,8 +2727,8 @@ fields:
     owner: "Js5Index"
     name: "fileIds"
   client!fo.e Lclient!fh;:
-    owner: "Static2"
-    name: "aClass58_41"
+    owner: "MidiPlayer"
+    name: "vorbisArchive"
   client!fo.f [I:
     owner: "Js5Index"
     name: "groupChecksums"
@@ -2748,8 +2748,8 @@ fields:
     owner: "Js5Index"
     name: "groupSizes"
   client!fo.n Lclient!fh;:
-    owner: "Static2"
-    name: "aClass58_42"
+    owner: "MidiPlayer"
+    name: "songArchive"
   client!fo.o I:
     owner: "Sprites"
     name: "headIconsPrayerId"
@@ -2895,8 +2895,8 @@ fields:
     owner: "TextureOp29SubOp2"
     name: "anInt2066"
   client!gh.a Lclient!fh;:
-    owner: "Static3"
-    name: "aClass58_59"
+    owner: "MidiPlayer"
+    name: "instrumentsArchive"
   client!gh.d I:
     owner: "Static3"
     name: "anInt2579"
@@ -3190,7 +3190,7 @@ fields:
     name: "TRADEREQ"
   client!gn.B Lclient!pc;:
     owner: "AreaSound"
-    name: "aClass4_Sub6_Sub4_3"
+    name: "primaryStream"
   client!gn.C I:
     owner: "AreaSound"
     name: "minInterval"
@@ -3226,7 +3226,7 @@ fields:
     name: "volume"
   client!gn.o Lclient!pc;:
     owner: "AreaSound"
-    name: "aClass4_Sub6_Sub4_2"
+    name: "secondaryStream"
   client!gn.q Lclient!fh;:
     owner: "client"
     name: "js5Archive0"
@@ -3268,7 +3268,7 @@ fields:
     name: "times"
   client!go.e J:
     owner: "MidiDecoder"
-    name: "aLong69"
+    name: "startMillis"
   client!go.f [I:
     owner: "MidiDecoder"
     name: "positions"
@@ -3435,8 +3435,8 @@ fields:
     owner: "Static3"
     name: "anInt2186"
   client!hh.a I:
-    owner: "Static3"
-    name: "anInt5397"
+    owner: "MidiPlayer"
+    name: "volumeFadeRate"
   client!hh.b Z:
     owner: "Static3"
     name: "aBoolean366"
@@ -5046,8 +5046,8 @@ fields:
     owner: "TextureOp20"
     name: "anInt3022"
   client!la.cb Z:
-    owner: "Static4"
-    name: "aBoolean210"
+    owner: "MusicPlayer"
+    name: "jingle"
   client!la.db I:
     owner: "Static4"
     name: "anInt3024"
@@ -5091,7 +5091,7 @@ fields:
     owner: "LightTypeList"
     name: "archive"
   client!ld.Bb I:
-    owner: "Class4_Sub6_Sub2"
+    owner: "MidiPcmStream"
     name: "anInt3085"
   client!ld.C Ljava/lang/String;:
     owner: "LocalisedText"
@@ -5100,97 +5100,97 @@ fields:
     owner: "Static4"
     name: "anInt3086"
   client!ld.E [I:
-    owner: "Class4_Sub6_Sub2"
-    name: "anIntArray276"
+    owner: "MidiPcmStream"
+    name: "channelBank"
   client!ld.Fb [[Lclient!ej;:
-    owner: "Class4_Sub6_Sub2"
-    name: "aClass4_Sub9ArrayArray2"
+    owner: "MidiPcmStream"
+    name: "notes"
   client!ld.Gb Lclient!go;:
-    owner: "Class4_Sub6_Sub2"
+    owner: "MidiPcmStream"
     name: "decoder"
   client!ld.Hb J:
-    owner: "Class4_Sub6_Sub2"
+    owner: "MidiPcmStream"
     name: "aLong110"
   client!ld.Ib J:
-    owner: "Class4_Sub6_Sub2"
-    name: "aLong111"
+    owner: "MidiPcmStream"
+    name: "timeMillis"
   client!ld.Jb I:
-    owner: "Class4_Sub6_Sub2"
-    name: "anInt3089"
+    owner: "MidiPcmStream"
+    name: "track"
   client!ld.Kb Z:
-    owner: "Class4_Sub6_Sub2"
+    owner: "MidiPcmStream"
     name: "aBoolean212"
   client!ld.Lb I:
-    owner: "Class4_Sub6_Sub2"
-    name: "anInt3090"
+    owner: "MidiPcmStream"
+    name: "time"
   client!ld.M [I:
-    owner: "Class4_Sub6_Sub2"
-    name: "anIntArray277"
+    owner: "MidiPcmStream"
+    name: "channelPortamento"
   client!ld.Mb Lclient!bn;:
-    owner: "Class4_Sub6_Sub2"
-    name: "aClass4_Sub6_Sub1_1"
+    owner: "MidiPcmStream"
+    name: "noteStream"
   client!ld.N [I:
-    owner: "Class4_Sub6_Sub2"
+    owner: "MidiPcmStream"
     name: "anIntArray278"
   client!ld.Nb Lclient!tg;:
-    owner: "Class4_Sub6_Sub2"
+    owner: "MidiPcmStream"
     name: "song"
   client!ld.Ob I:
-    owner: "Class4_Sub6_Sub2"
+    owner: "MidiPcmStream"
     name: "anInt3091"
   client!ld.Pb Z:
-    owner: "Class4_Sub6_Sub2"
+    owner: "MidiPcmStream"
     name: "aBoolean213"
   client!ld.T [I:
-    owner: "Class4_Sub6_Sub2"
+    owner: "MidiPcmStream"
     name: "anIntArray279"
   client!ld.V [I:
-    owner: "Class4_Sub6_Sub2"
-    name: "anIntArray280"
+    owner: "MidiPcmStream"
+    name: "channelExpression"
   client!ld.Y [[Lclient!ej;:
-    owner: "Class4_Sub6_Sub2"
+    owner: "MidiPcmStream"
     name: "aClass4_Sub9ArrayArray1"
   client!ld.Z I:
-    owner: "Class4_Sub6_Sub2"
-    name: "anInt3067"
+    owner: "MidiPcmStream"
+    name: "volume"
   client!ld.ab [I:
-    owner: "Class4_Sub6_Sub2"
-    name: "anIntArray281"
+    owner: "MidiPcmStream"
+    name: "channelModulation"
   client!ld.bb I:
     owner: "Static4"
     name: "anInt3068"
   client!ld.db [I:
-    owner: "Class4_Sub6_Sub2"
-    name: "anIntArray282"
+    owner: "MidiPcmStream"
+    name: "channelPan"
   client!ld.gb [I:
-    owner: "Class4_Sub6_Sub2"
-    name: "anIntArray283"
+    owner: "MidiPcmStream"
+    name: "defaultChannelProgram"
   client!ld.hb [I:
-    owner: "Class4_Sub6_Sub2"
-    name: "anIntArray284"
+    owner: "MidiPcmStream"
+    name: "channelProgram"
   client!ld.ib [I:
-    owner: "Class4_Sub6_Sub2"
-    name: "anIntArray285"
+    owner: "MidiPcmStream"
+    name: "channelFlags"
   client!ld.kb [I:
-    owner: "Class4_Sub6_Sub2"
-    name: "anIntArray286"
+    owner: "MidiPcmStream"
+    name: "channelParameter"
   client!ld.lb [I:
-    owner: "Class4_Sub6_Sub2"
-    name: "anIntArray287"
+    owner: "MidiPcmStream"
+    name: "channelVolume"
   client!ld.ob Lclient!ic;:
-    owner: "Class4_Sub6_Sub2"
+    owner: "MidiPcmStream"
     name: "instruments"
   client!ld.qb [I:
-    owner: "Class4_Sub6_Sub2"
-    name: "anIntArray288"
+    owner: "MidiPcmStream"
+    name: "channelPitch"
   client!ld.s [I:
-    owner: "Class4_Sub6_Sub2"
+    owner: "MidiPcmStream"
     name: "anIntArray274"
   client!ld.yb [I:
-    owner: "Class4_Sub6_Sub2"
+    owner: "MidiPcmStream"
     name: "anIntArray289"
   client!ld.z [I:
-    owner: "Class4_Sub6_Sub2"
+    owner: "MidiPcmStream"
     name: "anIntArray275"
   client!lf.U S:
     owner: "Static4"
@@ -5487,17 +5487,17 @@ fields:
     owner: "Texture"
     name: "aClass4_Sub1_1"
   client!lo.s Lclient!ll;:
-    owner: "Class4_Sub6_Sub3"
-    name: "aClass112_15"
+    owner: "MixerPcmStream"
+    name: "subStreams"
   client!lo.t Lclient!ll;:
-    owner: "Class4_Sub6_Sub3"
-    name: "aClass112_16"
+    owner: "MixerPcmStream"
+    name: "listeners"
   client!lo.u I:
-    owner: "Class4_Sub6_Sub3"
-    name: "anInt3269"
+    owner: "MixerPcmStream"
+    name: "position"
   client!lo.v I:
-    owner: "Class4_Sub6_Sub3"
-    name: "anInt3270"
+    owner: "MixerPcmStream"
+    name: "remaining"
   client!m.b I:
     owner: "IsaacRandom"
     name: "count"
@@ -7371,49 +7371,49 @@ fields:
     owner: "PcmSound"
     name: "end"
   client!pc.A I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "anInt4102"
   client!pc.B I:
-    owner: "Class4_Sub6_Sub4"
-    name: "anInt4103"
+    owner: "SoundPcmStream"
+    name: "pan"
   client!pc.C I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "anInt4104"
   client!pc.D I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "anInt4105"
   client!pc.E I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "start"
   client!pc.F I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "end"
   client!pc.G I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "anInt4108"
   client!pc.s I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "anInt4095"
   client!pc.t I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "anInt4096"
   client!pc.u I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "anInt4097"
   client!pc.v I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "anInt4098"
   client!pc.w I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "anInt4099"
   client!pc.x I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "anInt4100"
   client!pc.y Z:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "aBoolean290"
   client!pc.z I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "volume"
   client!pd.a I:
     owner: "VorbisCodebook"
@@ -7506,8 +7506,8 @@ fields:
     owner: "Class41"
     name: "aShortArray72"
   client!ph.X Lclient!lo;:
-    owner: "Static5"
-    name: "aClass4_Sub6_Sub3_2"
+    owner: "client"
+    name: "soundStream"
   client!ph.Y I:
     owner: "TextureOp19"
     name: "anInt4154"
@@ -8095,7 +8095,7 @@ fields:
     name: "spriteId"
   client!qh.A [B:
     owner: "MidiInstrument"
-    name: "aByteArray57"
+    name: "keyPan"
   client!qh.B [I:
     owner: "MidiInstrument"
     name: "soundIds"
@@ -8148,8 +8148,8 @@ fields:
     owner: "Js5TextureProvider"
     name: "textures"
   client!qj.S I:
-    owner: "Static5"
-    name: "anInt4357"
+    owner: "MidiPlayer"
+    name: "state"
   client!qj.U I:
     owner: "TextureOp16"
     name: "anInt4359"
@@ -8742,7 +8742,7 @@ fields:
     owner: "Static6"
     name: "rowWeightedHue"
   client!rk.s Z:
-    owner: "Static6"
+    owner: "MidiPlayer"
     name: "aBoolean321"
   client!rk.t [I:
     owner: "Static6"
@@ -9213,8 +9213,8 @@ fields:
     owner: "MaterialManager"
     name: "materials"
   client!si.i I:
-    owner: "Static6"
-    name: "anInt4844"
+    owner: "MusicPlayer"
+    name: "groupId"
   client!si.j I:
     owner: "Class157"
     name: "anInt4845"
@@ -9525,8 +9525,8 @@ fields:
     owner: "Static6"
     name: "anIntArray543"
   client!ta.u Lclient!fh;:
-    owner: "Static6"
-    name: "aClass58_93"
+    owner: "MidiPlayer"
+    name: "synthArchive"
   client!ta.v I:
     owner: "Class4_Sub30"
     name: "anInt4997"
@@ -9747,17 +9747,17 @@ fields:
     owner: "Static6"
     name: "anInt5120"
   client!tf.o I:
-    owner: "Class4_Sub6"
+    owner: "PcmStream"
     name: "anInt4094"
   client!tf.p Lclient!eb;:
-    owner: "Class4_Sub6"
+    owner: "PcmStream"
     name: "sound"
   client!tf.q Lclient!tf;:
-    owner: "Class4_Sub6"
+    owner: "PcmStream"
     name: "aClass4_Sub6_8"
   client!tf.r Z:
-    owner: "Class4_Sub6"
-    name: "aBoolean289"
+    owner: "PcmStream"
+    name: "active"
   client!tg.o [B:
     owner: "Song"
     name: "midiBytes"
@@ -9862,7 +9862,7 @@ fields:
     name: "aBoolean260"
   client!tj.b Lclient!tf;:
     owner: "AudioChannel"
-    name: "aClass4_Sub6_7"
+    name: "stream"
   client!tj.e J:
     owner: "AudioChannel"
     name: "aLong126"
@@ -9880,7 +9880,7 @@ fields:
     name: "serverKey"
   client!tj.r Z:
     owner: "AudioChannel"
-    name: "aBoolean259"
+    name: "stop"
   client!tj.s I:
     owner: "Static6"
     name: "anInt3585"
@@ -10470,7 +10470,7 @@ fields:
     owner: "Static7"
     name: "buildArea"
   client!uj.I I:
-    owner: "Static7"
+    owner: "MusicPlayer"
     name: "titleSong"
   client!uj.J I:
     owner: "Sprite"
@@ -10506,11 +10506,11 @@ fields:
     owner: "Js5NetRequest"
     name: "data"
   client!ul.U I:
-    owner: "Static7"
-    name: "anInt5391"
+    owner: "MidiPlayer"
+    name: "volume"
   client!ul.V Lclient!tg;:
-    owner: "Static7"
-    name: "aClass4_Sub31_2"
+    owner: "MidiPlayer"
+    name: "song"
   client!um.a I:
     owner: "Static7"
     name: "sampleRate"
@@ -11757,8 +11757,8 @@ fields:
     owner: "Map"
     name: "origin"
   client!wh.B I:
-    owner: "Static7"
-    name: "anInt6022"
+    owner: "MidiPlayer"
+    name: "songGroupId"
   client!wh.C Ljava/lang/String;:
     owner: "QuickChatCatType"
     name: "description"
@@ -11901,8 +11901,8 @@ fields:
     owner: "Static7"
     name: "aFloat154"
   client!wm.o I:
-    owner: "Class4_Sub33"
-    name: "anInt6071"
+    owner: "MixerListener"
+    name: "remaining"
   client!wn.A I:
     owner: "ParticleEffector"
     name: "anInt6085"
@@ -13902,13 +13902,13 @@ methods:
       191: "cNblockUsed2"
       215: "totalOutLo32Old"
   client!bn.<init> (Lclient!ld;)V:
-    owner: "Class4_Sub6_Sub1"
+    owner: "MidiNoteStream"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "parent"
     locals: {}
   client!bn.a ()I:
-    owner: "Class4_Sub6_Sub1"
+    owner: "MidiNoteStream"
     name: "method3346"
     arguments: {}
     locals: {}
@@ -13964,23 +13964,23 @@ methods:
       358: "local358"
       371: "local371"
   client!bn.a (IILclient!ej;)V:
-    owner: "Class4_Sub6_Sub1"
-    name: "method386"
+    owner: "MidiNoteStream"
+    name: "skip"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "instrument"
+      1: "len"
     locals:
       28: "local28"
       38: "local38"
   client!bn.a (ILclient!ej;I[IIB)V:
-    owner: "Class4_Sub6_Sub1"
-    name: "method385"
+    owner: "MidiNoteStream"
+    name: "read"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
+      1: "note"
+      3: "samples"
+      2: "off"
       4: "arg4"
+      0: "arg0"
     locals:
       28: "local28"
       39: "local39"
@@ -14001,36 +14001,36 @@ methods:
       0: "arg0"
     locals: {}
   client!bn.a ([III)V:
-    owner: "Class4_Sub6_Sub1"
-    name: "method3348"
+    owner: "MidiNoteStream"
+    name: "read"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "samples"
+      1: "off"
+      2: "len"
     locals:
-      17: "local17"
-      28: "local28"
-      30: "local30"
+      17: "note"
+      28: "off2"
+      30: "len2"
   client!bn.b (I)V:
-    owner: "Class4_Sub6_Sub1"
-    name: "method3345"
+    owner: "MidiNoteStream"
+    name: "skip"
     arguments:
-      0: "arg0"
+      0: "len"
     locals:
-      15: "local15"
-      28: "local28"
+      15: "note"
+      28: "len2"
   client!bn.c ()Lclient!tf;:
-    owner: "Class4_Sub6_Sub1"
-    name: "method3349"
+    owner: "MidiNoteStream"
+    name: "nextSubStream"
     arguments: {}
     locals:
-      9: "local9"
+      9: "note"
   client!bn.d ()Lclient!tf;:
-    owner: "Class4_Sub6_Sub1"
-    name: "method3350"
+    owner: "MidiNoteStream"
+    name: "firstSubStream"
     arguments: {}
     locals:
-      9: "local9"
+      9: "note"
   client!bo.<init> ()V:
     owner: "WaterfallMaterial"
     name: "<init>"
@@ -15198,11 +15198,11 @@ methods:
     arguments: {}
     locals: {}
   client!ck.g (B)Z:
-    owner: "Static12"
+    owner: "MidiPlayer"
     name: "method639"
     arguments: {}
     locals:
-      61: "local61"
+      61: "ex"
   client!ck.h (B)V:
     owner: "TextureOp32"
     name: "method642"
@@ -15708,11 +15708,11 @@ methods:
       164: "volume2"
       186: "synthSound"
       195: "pcmSound"
-      200: "local200"
+      200: "stream"
       234: "index"
       242: "synthSound"
       249: "pcmSound"
-      254: "local254"
+      254: "stream"
   client!db.a (I)V:
     owner: "Protocol"
     name: "readNewNpcInfo"
@@ -16415,7 +16415,7 @@ methods:
       23: "local23"
       27: "local27"
   client!dn.d (II)V:
-    owner: "Static13"
+    owner: "MidiPlayer"
     name: "method971"
     arguments: {}
     locals: {}
@@ -16941,7 +16941,7 @@ methods:
     locals:
       17: "local17"
   client!ej.b (I)V:
-    owner: "Class4_Sub9"
+    owner: "MidiNote"
     name: "release"
     arguments: {}
     locals: {}
@@ -18845,12 +18845,12 @@ methods:
     arguments: {}
     locals: {}
   client!ff.a (Lclient!tf;B)V:
-    owner: "Static15"
-    name: "method1324"
+    owner: "PcmStream"
+    name: "setInactive"
     arguments:
-      0: "arg0"
+      0: "stream"
     locals:
-      25: "local25"
+      25: "subStream"
   client!fg.a (BIII)I:
     owner: "ColorUtils"
     name: "compressHsl"
@@ -20542,8 +20542,8 @@ methods:
     arguments: {}
     locals: {}
   client!gb.e (I)Z:
-    owner: "Static16"
-    name: "method1550"
+    owner: "MidiPlayer"
+    name: "isPlaying"
     arguments: {}
     locals: {}
   client!gd.a (B[B)Z:
@@ -21696,13 +21696,13 @@ methods:
     locals: {}
   client!go.a (I)J:
     owner: "MidiDecoder"
-    name: "method1657"
+    name: "getTimeMillis"
     arguments:
-      0: "arg0"
+      0: "time"
     locals: {}
   client!go.a (II)I:
     owner: "MidiDecoder"
-    name: "getNextEvent"
+    name: "getNextMessage"
     arguments:
       0: "track"
       1: "status"
@@ -21716,12 +21716,12 @@ methods:
       56: "buffer"
       65: "buffer"
       78: "len"
-      80: "event"
+      80: "message"
   client!go.a (J)V:
     owner: "MidiDecoder"
-    name: "method1662"
+    name: "setStartMillis"
     arguments:
-      0: "arg0"
+      0: "millis"
     locals:
       6: "tracks"
       8: "i"
@@ -21770,7 +21770,7 @@ methods:
       5: "i"
   client!go.d (I)I:
     owner: "MidiDecoder"
-    name: "getNextEventInternal"
+    name: "getNextMessageInternal"
     arguments:
       0: "track"
     locals:
@@ -21796,7 +21796,7 @@ methods:
     locals: {}
   client!go.f (I)I:
     owner: "MidiDecoder"
-    name: "getNextEvent"
+    name: "getNextMessage"
     arguments:
       0: "track"
     locals: {}
@@ -24320,8 +24320,8 @@ methods:
       2157: "loc"
       2208: "id"
       2212: "value"
-      2227: "local2227"
-      2239: "local2239"
+      2227: "groupId"
+      2239: "volume"
       2256: "local2256"
       2262: "local2262"
       2271: "local2271"
@@ -27064,12 +27064,12 @@ methods:
       2: "arg1"
     locals: {}
   client!lc.a (IIII)V:
-    owner: "Static23"
-    name: "method1933"
+    owner: "MusicPlayer"
+    name: "playJingle"
     arguments:
-      1: "arg0"
+      3: "groupId"
+      1: "volume"
       2: "arg1"
-      3: "arg2"
     locals: {}
   client!lc.a (IIZ)V:
     owner: "TextureOp29SubOp"
@@ -27098,116 +27098,116 @@ methods:
       23: "mask"
       40: "shiftedMask"
   client!ld.<init> ()V:
-    owner: "Class4_Sub6_Sub2"
+    owner: "MidiPcmStream"
     name: "<init>"
     arguments: {}
     locals: {}
   client!ld.a ()I:
-    owner: "Class4_Sub6_Sub2"
+    owner: "MidiPcmStream"
     name: "method3346"
     arguments: {}
     locals: {}
   client!ld.a (IB)V:
-    owner: "Class4_Sub6_Sub2"
+    owner: "MidiPcmStream"
     name: "method2482"
     arguments:
-      0: "arg0"
+      0: "channel"
     locals:
-      26: "local26"
+      26: "note"
   client!ld.a (IBI)V:
-    owner: "Class4_Sub6_Sub2"
-    name: "method2496"
+    owner: "MidiPcmStream"
+    name: "setPitch"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      2: "channel"
+      0: "pitch"
     locals: {}
   client!ld.a (II)V:
-    owner: "Class4_Sub6_Sub2"
-    name: "method2479"
+    owner: "MidiPcmStream"
+    name: "setVolume"
     arguments:
-      1: "arg0"
+      1: "volume"
     locals: {}
   client!ld.a (III)V:
-    owner: "Class4_Sub6_Sub2"
-    name: "method2475"
+    owner: "MidiPcmStream"
+    name: "setDefaultProgram"
     arguments: {}
     locals: {}
   client!ld.a (IIII)V:
-    owner: "Class4_Sub6_Sub2"
-    name: "method2486"
+    owner: "MidiPcmStream"
+    name: "noteOff"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      3: "arg2"
+      3: "channel"
+      2: "key"
+      1: "velocity"
     locals:
-      12: "local12"
-      47: "local47"
+      12: "note"
+      47: "other"
   client!ld.a (IILclient!tg;Lclient!fh;Lclient!jk;)Z:
-    owner: "Class4_Sub6_Sub2"
-    name: "method2511"
+    owner: "MidiPcmStream"
+    name: "isSongReady"
     arguments:
-      2: "song"
       3: "archive"
       4: "bank"
+      2: "song"
     locals:
-      9: "valid"
+      9: "ready"
       24: "samplingRates"
       36: "node"
       43: "program"
       53: "instrument"
   client!ld.a (ILclient!ej;)Z:
-    owner: "Class4_Sub6_Sub2"
+    owner: "MidiPcmStream"
     name: "method2491"
     arguments:
-      1: "arg0"
+      1: "note"
     locals: {}
   client!ld.a (IZ)V:
-    owner: "Class4_Sub6_Sub2"
-    name: "method2492"
+    owner: "MidiPcmStream"
+    name: "processMessage"
     arguments:
-      0: "arg0"
+      0: "message"
     locals:
-      9: "local9"
-      21: "local21"
-      27: "local27"
-      31: "local31"
-      49: "local49"
-      55: "local55"
-      59: "local59"
-      89: "local89"
-      95: "local95"
-      101: "local101"
-      125: "local125"
-      129: "local129"
-      135: "local135"
-      524: "local524"
-      553: "local553"
-      684: "local684"
-      690: "local690"
-      708: "local708"
-      714: "local714"
-      736: "local736"
-      740: "local740"
-      750: "local750"
+      9: "type"
+      21: "key"
+      27: "velocity"
+      31: "channel"
+      49: "velocity"
+      55: "key"
+      59: "channel"
+      89: "channel"
+      95: "key"
+      101: "pressure"
+      125: "controller"
+      129: "channel"
+      135: "value"
+      524: "parameter"
+      553: "parameter"
+      684: "channel"
+      690: "program"
+      708: "channel"
+      714: "pressure"
+      736: "pitch"
+      740: "channel"
+      750: "status"
   client!ld.a (IZII)V:
-    owner: "Class4_Sub6_Sub2"
-    name: "method2485"
+    owner: "MidiPcmStream"
+    name: "noteOn"
     arguments:
-      0: "arg0"
-      2: "arg1"
-      3: "arg2"
+      2: "channel"
+      3: "key"
+      0: "velocity"
     locals:
-      26: "local26"
+      26: "note"
       66: "local66"
-      112: "local112"
-      121: "local121"
-      130: "local130"
+      112: "instrument"
+      121: "sound"
+      130: "note"
       286: "local286"
   client!ld.a (Lclient!ej;BZ)V:
-    owner: "Class4_Sub6_Sub2"
+    owner: "MidiPcmStream"
     name: "method2502"
     arguments:
-      0: "arg0"
+      0: "note"
       2: "arg1"
     locals:
       8: "local8"
@@ -27215,14 +27215,14 @@ methods:
       35: "local35"
       39: "local39"
   client!ld.a (Lclient!ej;I)I:
-    owner: "Class4_Sub6_Sub2"
-    name: "method2476"
+    owner: "MidiPcmStream"
+    name: "getVolume"
     arguments:
-      0: "arg0"
+      0: "note"
     locals:
-      30: "local30"
+      30: "volume"
       41: "local41"
-      71: "local71"
+      71: "volume2"
       106: "local106"
       109: "local109"
       131: "local131"
@@ -27232,13 +27232,13 @@ methods:
       218: "local218"
       230: "local230"
   client!ld.a (Lclient!ej;III[I)Z:
-    owner: "Class4_Sub6_Sub2"
+    owner: "MidiPcmStream"
     name: "method2506"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      4: "arg3"
+      0: "note"
+      4: "samples"
+      1: "off"
+      2: "len"
     locals:
       58: "local58"
       60: "local60"
@@ -27252,72 +27252,72 @@ methods:
       0: "archive"
     locals: {}
   client!ld.a (Z)I:
-    owner: "Class4_Sub6_Sub2"
-    name: "method2488"
+    owner: "MidiPcmStream"
+    name: "getVolume"
     arguments: {}
     locals: {}
   client!ld.a (ZIII)V:
-    owner: "Class4_Sub6_Sub2"
-    name: "method2490"
+    owner: "MidiPcmStream"
+    name: "setKeyPressure"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      3: "arg2"
+      3: "key"
+      2: "channel"
+      1: "pressure"
     locals: {}
   client!ld.a (ZILclient!tg;Z)V:
-    owner: "Class4_Sub6_Sub2"
+    owner: "MidiPcmStream"
     name: "method2483"
     arguments:
-      0: "arg0"
       2: "song"
-      3: "arg2"
+      0: "arg0"
+      3: "allSoundOff"
     locals:
       24: "tracks"
       26: "i"
   client!ld.a (ZLclient!tg;B)V:
-    owner: "Class4_Sub6_Sub2"
+    owner: "MidiPcmStream"
     name: "method2504"
     arguments:
+      1: "song"
       0: "arg0"
-      1: "arg1"
     locals: {}
   client!ld.a ([III)V:
-    owner: "Class4_Sub6_Sub2"
-    name: "method3348"
+    owner: "MidiPcmStream"
+    name: "read"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "samples"
+      1: "off"
+      2: "len"
     locals:
       18: "local18"
       27: "local27"
       59: "local59"
   client!ld.b (BI)V:
-    owner: "Class4_Sub6_Sub2"
+    owner: "MidiPcmStream"
     name: "method2481"
     arguments:
-      1: "arg0"
+      1: "channel"
     locals:
-      19: "local19"
+      19: "note"
   client!ld.b (I)V:
-    owner: "Class4_Sub6_Sub2"
-    name: "method3345"
+    owner: "MidiPcmStream"
+    name: "skip"
     arguments:
-      0: "arg0"
+      0: "len"
     locals:
       18: "local18"
       27: "local27"
       58: "local58"
   client!ld.b (IB)V:
-    owner: "Class4_Sub6_Sub2"
-    name: "method2500"
+    owner: "MidiPcmStream"
+    name: "resetAllControllers"
     arguments:
-      0: "arg0"
+      0: "channel"
     locals:
-      18: "local18"
+      18: "i"
   client!ld.b (IBI)V:
-    owner: "Class4_Sub6_Sub2"
-    name: "method2505"
+    owner: "MidiPcmStream"
+    name: "init"
     arguments: {}
     locals: {}
   client!ld.b (II)Lclient!eg;:
@@ -27330,17 +27330,17 @@ methods:
       25: "bytes"
       29: "newType"
   client!ld.b (III)V:
-    owner: "Class4_Sub6_Sub2"
-    name: "method2477"
+    owner: "MidiPcmStream"
+    name: "setChannelPressure"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "channel"
+      2: "pressure"
     locals: {}
   client!ld.b (ILclient!ej;)I:
-    owner: "Class4_Sub6_Sub2"
+    owner: "MidiPcmStream"
     name: "method2503"
     arguments:
-      1: "arg0"
+      1: "note"
     locals:
       10: "local10"
       13: "local13"
@@ -27351,99 +27351,99 @@ methods:
       97: "local97"
       132: "local132"
   client!ld.b (IZ)V:
-    owner: "Class4_Sub6_Sub2"
-    name: "method2499"
+    owner: "MidiPcmStream"
+    name: "reset"
     arguments:
-      1: "arg0"
+      1: "allSoundOff"
     locals:
-      23: "local23"
-      39: "local39"
+      23: "i"
+      39: "i"
   client!ld.b (Lclient!ej;I)I:
-    owner: "Class4_Sub6_Sub2"
-    name: "method2480"
+    owner: "MidiPcmStream"
+    name: "getPan"
     arguments:
-      0: "arg0"
+      0: "note"
     locals:
-      12: "local12"
+      12: "pan"
   client!ld.c ()Lclient!tf;:
-    owner: "Class4_Sub6_Sub2"
-    name: "method3349"
+    owner: "MidiPcmStream"
+    name: "nextSubStream"
     arguments: {}
     locals: {}
   client!ld.c (BI)V:
-    owner: "Class4_Sub6_Sub2"
-    name: "method2489"
+    owner: "MidiPcmStream"
+    name: "allSoundOff"
     arguments:
-      1: "arg0"
+      1: "channel"
     locals:
-      12: "local12"
+      12: "note"
   client!ld.c (I)V:
-    owner: "Class4_Sub6_Sub2"
+    owner: "MidiPcmStream"
     name: "method2501"
     arguments: {}
     locals: {}
   client!ld.c (II)V:
-    owner: "Class4_Sub6_Sub2"
-    name: "method2495"
+    owner: "MidiPcmStream"
+    name: "allNotesOff"
     arguments:
-      1: "arg0"
+      1: "channel"
     locals:
-      8: "local8"
+      8: "note"
   client!ld.c (III)V:
-    owner: "Class4_Sub6_Sub2"
+    owner: "MidiPcmStream"
     name: "method2478"
     arguments: {}
     locals:
-      8: "local8"
+      8: "i"
   client!ld.c (IZ)V:
-    owner: "Class4_Sub6_Sub2"
+    owner: "MidiPcmStream"
     name: "method2510"
     arguments:
-      1: "arg0"
+      1: "allSoundOff"
     locals: {}
   client!ld.d ()Lclient!tf;:
-    owner: "Class4_Sub6_Sub2"
-    name: "method3350"
+    owner: "MidiPcmStream"
+    name: "firstSubStream"
     arguments: {}
     locals: {}
   client!ld.d (B)V:
-    owner: "Class4_Sub6_Sub2"
-    name: "method2484"
+    owner: "MidiPcmStream"
+    name: "clearInstruments"
     arguments: {}
     locals:
       7: "instrument"
   client!ld.d (III)V:
-    owner: "Class4_Sub6_Sub2"
+    owner: "MidiPcmStream"
     name: "method2487"
     arguments:
       1: "arg0"
       2: "arg1"
     locals: {}
   client!ld.e (B)Z:
-    owner: "Class4_Sub6_Sub2"
-    name: "method2497"
+    owner: "MidiPcmStream"
+    name: "isValid"
     arguments: {}
     locals: {}
   client!ld.e (III)V:
-    owner: "Class4_Sub6_Sub2"
-    name: "method2493"
+    owner: "MidiPcmStream"
+    name: "setProgram"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "channel"
+      2: "program"
     locals:
-      29: "local29"
+      29: "key"
   client!ld.f (B)V:
-    owner: "Class4_Sub6_Sub2"
+    owner: "MidiPcmStream"
     name: "method2498"
     arguments: {}
     locals:
-      8: "local8"
-      11: "local11"
-      14: "local14"
-      71: "local71"
+      8: "track"
+      11: "time"
+      14: "timeMillis"
+      71: "message"
   client!ld.g (B)V:
-    owner: "Class4_Sub6_Sub2"
-    name: "method2509"
+    owner: "MidiPcmStream"
+    name: "releaseInstruments"
     arguments: {}
     locals:
       19: "instrument"
@@ -28953,88 +28953,88 @@ methods:
       0: "message"
     locals: {}
   client!lo.a ()I:
-    owner: "Class4_Sub6_Sub3"
+    owner: "MixerPcmStream"
     name: "method3346"
     arguments: {}
     locals: {}
   client!lo.a (Lclient!ni;Lclient!wm;)V:
-    owner: "Class4_Sub6_Sub3"
-    name: "method2672"
+    owner: "MixerPcmStream"
+    name: "addListener"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      1: "listener"
+      0: "node"
     locals: {}
   client!lo.a (Lclient!tf;)V:
-    owner: "Class4_Sub6_Sub3"
-    name: "method2670"
+    owner: "MixerPcmStream"
+    name: "removeSubStream"
     arguments:
-      0: "arg0"
+      0: "stream"
     locals: {}
   client!lo.a (Lclient!wm;)V:
-    owner: "Class4_Sub6_Sub3"
-    name: "method2668"
+    owner: "MixerPcmStream"
+    name: "removeListener"
     arguments:
-      0: "arg0"
+      0: "listener"
     locals:
-      9: "local9"
+      9: "node"
   client!lo.a ([III)V:
-    owner: "Class4_Sub6_Sub3"
-    name: "method3348"
+    owner: "MixerPcmStream"
+    name: "read"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "samples"
+      1: "off"
+      2: "len"
     locals:
-      33: "local33"
-      60: "local60"
-      68: "local68"
+      33: "n"
+      60: "listener"
+      68: "remaining"
   client!lo.b (I)V:
-    owner: "Class4_Sub6_Sub3"
-    name: "method3345"
+    owner: "MixerPcmStream"
+    name: "skip"
     arguments:
-      0: "arg0"
+      0: "len"
     locals:
-      29: "local29"
-      50: "local50"
-      58: "local58"
+      29: "n"
+      50: "listener"
+      58: "remaining"
   client!lo.b (Lclient!tf;)V:
-    owner: "Class4_Sub6_Sub3"
-    name: "method2674"
+    owner: "MixerPcmStream"
+    name: "addSubStream"
     arguments:
-      0: "arg0"
+      0: "stream"
     locals: {}
   client!lo.c ()Lclient!tf;:
-    owner: "Class4_Sub6_Sub3"
-    name: "method3349"
+    owner: "MixerPcmStream"
+    name: "nextSubStream"
     arguments: {}
     locals: {}
   client!lo.c (I)V:
-    owner: "Class4_Sub6_Sub3"
-    name: "method2671"
+    owner: "MixerPcmStream"
+    name: "skipSubStreams"
     arguments:
-      0: "arg0"
+      0: "len"
     locals:
-      5: "local5"
+      5: "stream"
   client!lo.c ([III)V:
-    owner: "Class4_Sub6_Sub3"
-    name: "method2673"
+    owner: "MixerPcmStream"
+    name: "readSubStreams"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "samples"
+      1: "off"
+      2: "len"
     locals:
-      5: "local5"
+      5: "stream"
   client!lo.d ()Lclient!tf;:
-    owner: "Class4_Sub6_Sub3"
-    name: "method3350"
+    owner: "MixerPcmStream"
+    name: "firstSubStream"
     arguments: {}
     locals: {}
   client!lo.e ()V:
-    owner: "Class4_Sub6_Sub3"
-    name: "method2669"
+    owner: "MixerPcmStream"
+    name: "normalise"
     arguments: {}
     locals:
-      8: "local8"
+      8: "listener"
   client!m.<init> ([I)V:
     owner: "IsaacRandom"
     name: "<init>"
@@ -29206,12 +29206,12 @@ methods:
       0: "id"
     locals: {}
   client!mc.a (ILclient!fh;IBIIZ)V:
-    owner: "Static24"
-    name: "method2692"
+    owner: "MidiPlayer"
+    name: "playFadeOut"
     arguments:
-      1: "arg0"
-      4: "arg1"
-      5: "arg2"
+      1: "archive"
+      5: "groupId"
+      4: "volume"
     locals: {}
   client!mc.b (BI)V:
     owner: "InterfaceList"
@@ -33661,12 +33661,12 @@ methods:
       40: "i"
       49: "scenery"
   client!om.a (IIIIZLclient!fh;)V:
-    owner: "Static28"
-    name: "method3251"
+    owner: "MidiPlayer"
+    name: "playImmediate"
     arguments:
-      0: "arg0"
-      3: "arg1"
-      5: "arg2"
+      5: "archive"
+      3: "groupId"
+      0: "volume"
     locals: {}
   client!om.a (ILclient!uk;)V:
     owner: "SecondaryLinkedListIterator"
@@ -34072,7 +34072,7 @@ methods:
       0: "resampler"
     locals: {}
   client!pc.<init> (Lclient!pb;II)V:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "<init>"
     arguments:
       0: "sound"
@@ -34080,39 +34080,39 @@ methods:
       2: "volume"
     locals: {}
   client!pc.<init> (Lclient!pb;III)V:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "<init>"
     arguments:
       0: "sound"
       1: "arg1"
       2: "volume"
-      3: "arg3"
+      3: "pan"
     locals: {}
   client!pc.a ()I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3346"
     arguments: {}
     locals: {}
   client!pc.a (II)I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3355"
     arguments:
       0: "arg0"
       1: "arg1"
     locals: {}
   client!pc.a (III)V:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3352"
     arguments:
       0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      1: "volume"
+      2: "pan"
     locals:
       10: "local10"
       14: "local14"
       31: "local31"
   client!pc.a (II[B[IIIIIIIIIILclient!pc;II)I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3366"
     arguments:
       2: "arg0"
@@ -34141,7 +34141,7 @@ methods:
       147: "local147"
       149: "local149"
   client!pc.a (II[B[IIIIIIIILclient!pc;II)I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3356"
     arguments:
       2: "arg0"
@@ -34167,7 +34167,7 @@ methods:
       126: "local126"
       128: "local128"
   client!pc.a (II[B[IIIIIIILclient!pc;II)I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3373"
     arguments:
       2: "arg0"
@@ -34188,7 +34188,7 @@ methods:
       90: "local90"
       92: "local92"
   client!pc.a (I[B[IIIIIIIIIILclient!pc;)I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3362"
     arguments:
       1: "arg0"
@@ -34214,7 +34214,7 @@ methods:
       191: "local191"
       199: "local199"
   client!pc.a (I[B[IIIIIIIILclient!pc;)I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3375"
     arguments:
       1: "arg0"
@@ -34236,28 +34236,28 @@ methods:
       140: "local140"
       148: "local148"
   client!pc.a (Lclient!pb;II)Lclient!pc;:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "create"
     arguments:
       0: "sound"
       2: "volume"
     locals: {}
   client!pc.a (Lclient!pb;III)Lclient!pc;:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "create"
     arguments:
       0: "sound"
       1: "arg1"
       2: "volume"
-      3: "arg3"
+      3: "pan"
     locals: {}
   client!pc.a (Z)V:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3364"
     arguments: {}
     locals: {}
   client!pc.a ([B[IIIIIIIILclient!pc;)I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3378"
     arguments:
       0: "arg0"
@@ -34280,7 +34280,7 @@ methods:
       122: "local122"
       127: "local127"
   client!pc.a ([B[IIIIIIILclient!pc;)I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3361"
     arguments:
       0: "arg0"
@@ -34301,12 +34301,12 @@ methods:
       80: "local80"
       85: "local85"
   client!pc.a ([III)V:
-    owner: "Class4_Sub6_Sub4"
-    name: "method3348"
+    owner: "SoundPcmStream"
+    name: "read"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "samples"
+      1: "off"
+      2: "len"
     locals:
       13: "local13"
       18: "local18"
@@ -34318,7 +34318,7 @@ methods:
       417: "local417"
       473: "local473"
   client!pc.a ([IIIII)I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3358"
     arguments:
       0: "arg0"
@@ -34329,17 +34329,17 @@ methods:
     locals:
       7: "local7"
   client!pc.b ()I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3347"
     arguments: {}
     locals:
       6: "local6"
       16: "local16"
   client!pc.b (I)V:
-    owner: "Class4_Sub6_Sub4"
-    name: "method3345"
+    owner: "SoundPcmStream"
+    name: "skip"
     arguments:
-      0: "arg0"
+      0: "len"
     locals:
       71: "local71"
       76: "local76"
@@ -34349,14 +34349,14 @@ methods:
       362: "local362"
       406: "local406"
   client!pc.b (II)I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3374"
     arguments:
       0: "arg0"
       1: "arg1"
     locals: {}
   client!pc.b (II[B[IIIIIIIIIILclient!pc;II)I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3370"
     arguments:
       2: "arg0"
@@ -34384,7 +34384,7 @@ methods:
       143: "local143"
       145: "local145"
   client!pc.b (II[B[IIIIIIIILclient!pc;II)I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3357"
     arguments:
       2: "arg0"
@@ -34411,7 +34411,7 @@ methods:
       130: "local130"
       132: "local132"
   client!pc.b (II[B[IIIIIIILclient!pc;II)I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3391"
     arguments:
       2: "arg0"
@@ -34431,7 +34431,7 @@ methods:
       33: "local33"
       86: "local86"
   client!pc.b (I[B[IIIIIIIIIILclient!pc;)I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3376"
     arguments:
       1: "arg0"
@@ -34457,7 +34457,7 @@ methods:
       193: "local193"
       201: "local201"
   client!pc.b (I[B[IIIIIIIILclient!pc;)I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3387"
     arguments:
       1: "arg0"
@@ -34479,7 +34479,7 @@ methods:
       142: "local142"
       150: "local150"
   client!pc.b ([B[IIIIIIIILclient!pc;)I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3389"
     arguments:
       0: "arg0"
@@ -34502,7 +34502,7 @@ methods:
       124: "local124"
       129: "local129"
   client!pc.b ([B[IIIIIIILclient!pc;)I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3380"
     arguments:
       0: "arg0"
@@ -34523,7 +34523,7 @@ methods:
       82: "local82"
       87: "local87"
   client!pc.b ([IIIII)I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3383"
     arguments:
       0: "arg0"
@@ -34534,25 +34534,25 @@ methods:
     locals:
       7: "local7"
   client!pc.c ()Lclient!tf;:
-    owner: "Class4_Sub6_Sub4"
-    name: "method3349"
+    owner: "SoundPcmStream"
+    name: "nextSubStream"
     arguments: {}
     locals: {}
   client!pc.c (I)V:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3353"
     arguments:
       0: "arg0"
     locals: {}
   client!pc.c (II)V:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3379"
     arguments:
       0: "arg0"
       1: "arg1"
     locals: {}
   client!pc.c (II[B[IIIIIIIILclient!pc;II)I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3363"
     arguments:
       2: "arg0"
@@ -34574,25 +34574,25 @@ methods:
       112: "local112"
       114: "local114"
   client!pc.d ()Lclient!tf;:
-    owner: "Class4_Sub6_Sub4"
-    name: "method3350"
+    owner: "SoundPcmStream"
+    name: "firstSubStream"
     arguments: {}
     locals: {}
   client!pc.d (I)V:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3359"
     arguments:
       0: "arg0"
     locals: {}
   client!pc.d (II)V:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3386"
     arguments:
       0: "volume"
-      1: "arg1"
+      1: "pan"
     locals: {}
   client!pc.d (II[B[IIIIIIIILclient!pc;II)I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3390"
     arguments:
       2: "arg0"
@@ -34613,31 +34613,31 @@ methods:
       51: "local51"
       108: "local108"
   client!pc.e ()V:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3354"
     arguments: {}
     locals: {}
   client!pc.e (I)V:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3360"
     arguments:
       0: "arg0"
     locals:
       31: "local31"
   client!pc.f ()Z:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3365"
     arguments: {}
     locals: {}
   client!pc.f (I)V:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3369"
     arguments:
       0: "arg0"
     locals:
       7: "local7"
   client!pc.g ()Z:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3367"
     arguments: {}
     locals:
@@ -34645,39 +34645,39 @@ methods:
       8: "local8"
       10: "local10"
   client!pc.g (I)V:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "setVolume"
     arguments:
       0: "volume"
     locals: {}
   client!pc.h ()I:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3368"
     arguments: {}
     locals: {}
   client!pc.h (I)V:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3382"
     arguments: {}
     locals: {}
   client!pc.i ()V:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3371"
     arguments: {}
     locals: {}
   client!pc.j ()Z:
-    owner: "Class4_Sub6_Sub4"
+    owner: "SoundPcmStream"
     name: "method3372"
     arguments: {}
     locals: {}
   client!pc.k ()I:
-    owner: "Class4_Sub6_Sub4"
-    name: "method3381"
+    owner: "SoundPcmStream"
+    name: "getVolume"
     arguments: {}
     locals: {}
   client!pc.l ()I:
-    owner: "Class4_Sub6_Sub4"
-    name: "method3388"
+    owner: "SoundPcmStream"
+    name: "getPan"
     arguments: {}
     locals: {}
   client!pd.<init> ()V:
@@ -36065,10 +36065,10 @@ methods:
     arguments: {}
     locals: {}
   client!qe.a (II)V:
-    owner: "Static29"
-    name: "method3541"
+    owner: "MidiPlayer"
+    name: "setVolume"
     arguments:
-      0: "arg0"
+      0: "volume"
     locals: {}
   client!qe.a (ILclient!fd;)V:
     owner: "WorldList"
@@ -36155,12 +36155,12 @@ methods:
       28: "i"
       35: "code"
   client!qg.a (I)V:
-    owner: "Static30"
-    name: "method3551"
+    owner: "MidiPlayer"
+    name: "loop"
     arguments: {}
     locals:
-      19: "local19"
-      31: "local31"
+      19: "volume"
+      31: "volume2"
       62: "ex"
   client!qg.a (IIBI[Lclient!wf;IIIII)V:
     owner: "Static30"
@@ -36548,13 +36548,13 @@ methods:
       27: "c"
   client!qh.a ([ILclient!jk;I[B)Z:
     owner: "MidiInstrument"
-    name: "method3566"
+    name: "isReady"
     arguments:
-      0: "samplingRates"
       1: "bank"
+      0: "samplingRates"
       3: "keys"
     locals:
-      15: "valid"
+      15: "ready"
       17: "prevSoundId"
       19: "sound"
       21: "i"
@@ -40950,45 +40950,45 @@ methods:
       1: "frame"
     locals: {}
   client!tf.a ()I:
-    owner: "Class4_Sub6"
+    owner: "PcmStream"
     name: "method3346"
     arguments: {}
     locals: {}
   client!tf.a ([III)V:
-    owner: "Class4_Sub6"
-    name: "method3348"
+    owner: "PcmStream"
+    name: "read"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "samples"
+      1: "off"
+      2: "len"
     locals: {}
   client!tf.b ()I:
-    owner: "Class4_Sub6"
+    owner: "PcmStream"
     name: "method3347"
     arguments: {}
     locals: {}
   client!tf.b (I)V:
-    owner: "Class4_Sub6"
-    name: "method3345"
+    owner: "PcmStream"
+    name: "skip"
     arguments:
-      0: "arg0"
+      0: "len"
     locals: {}
   client!tf.b ([III)V:
-    owner: "Class4_Sub6"
-    name: "method3351"
+    owner: "PcmStream"
+    name: "readIfActive"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "samples"
+      1: "off"
+      2: "len"
     locals: {}
   client!tf.c ()Lclient!tf;:
-    owner: "Class4_Sub6"
-    name: "method3349"
+    owner: "PcmStream"
+    name: "nextSubStream"
     arguments: {}
     locals: {}
   client!tf.d ()Lclient!tf;:
-    owner: "Class4_Sub6"
-    name: "method3350"
+    owner: "PcmStream"
+    name: "firstSubStream"
     arguments: {}
     locals: {}
   client!tg.<init> (Lclient!fd;)V:
@@ -41240,7 +41240,7 @@ methods:
     locals: {}
   client!tj.a (B)V:
     owner: "AudioChannel"
-    name: "method2998"
+    name: "loop"
     arguments: {}
     locals:
       18: "now"
@@ -41340,9 +41340,9 @@ methods:
       8: "local8"
   client!tj.a (Lclient!tf;I)V:
     owner: "AudioChannel"
-    name: "method3008"
+    name: "setStream"
     arguments:
-      0: "arg0"
+      0: "stream"
     locals: {}
   client!tj.a (Ljava/awt/Component;)V:
     owner: "AudioChannel"
@@ -41352,11 +41352,11 @@ methods:
     locals: {}
   client!tj.a ([II)V:
     owner: "AudioChannel"
-    name: "method3012"
+    name: "read"
     arguments:
-      0: "arg0"
+      0: "samples"
     locals:
-      1: "local1"
+      1: "len"
       45: "local45"
       47: "local47"
       49: "local49"
@@ -43688,11 +43688,11 @@ methods:
       63: "message"
       65: "i"
   client!vf.a (BII)V:
-    owner: "Static36"
-    name: "method4444"
+    owner: "MusicPlayer"
+    name: "playSong"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "groupId"
+      1: "volume"
     locals: {}
   client!vf.a ([BI)[B:
     owner: "ByteArray"
@@ -44476,13 +44476,13 @@ methods:
       0: "arg0"
     locals: {}
   client!vm.a (Lclient!ld;Lclient!fh;Lclient!fh;ZLclient!fh;)Z:
-    owner: "Static36"
-    name: "method4551"
+    owner: "MidiPlayer"
+    name: "init"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      4: "arg3"
+      0: "stream"
+      1: "instrumentsArchive"
+      2: "vorbisArchive"
+      4: "synthArchive"
     locals: {}
   client!vm.b (II)[[I:
     owner: "TextureOp10"
@@ -45514,7 +45514,7 @@ methods:
       130: "url"
       140: "ex"
   client!we.a (I)V:
-    owner: "Static37"
+    owner: "MidiPlayer"
     name: "method4718"
     arguments: {}
     locals: {}
@@ -46290,15 +46290,15 @@ methods:
       129: "end"
       203: "copyLen"
   client!wm.a ()V:
-    owner: "Class4_Sub33"
-    name: "method4810"
+    owner: "MixerListener"
+    name: "onUnlink"
     arguments: {}
     locals: {}
   client!wm.a (Lclient!lo;)I:
-    owner: "Class4_Sub33"
-    name: "method4811"
+    owner: "MixerListener"
+    name: "execute"
     arguments:
-      0: "arg0"
+      0: "stream"
     locals: {}
   client!wn.<init> (Lclient!u;Lclient!ne;)V:
     owner: "ParticleEffector"
