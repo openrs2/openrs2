@@ -21702,7 +21702,7 @@ methods:
     locals: {}
   client!go.a (II)I:
     owner: "MidiDecoder"
-    name: "getNextMessage"
+    name: "getNextEvent"
     arguments:
       0: "track"
       1: "status"
@@ -21716,7 +21716,7 @@ methods:
       56: "buffer"
       65: "buffer"
       78: "len"
-      80: "message"
+      80: "event"
   client!go.a (J)V:
     owner: "MidiDecoder"
     name: "setStartMillis"
@@ -21770,7 +21770,7 @@ methods:
       5: "i"
   client!go.d (I)I:
     owner: "MidiDecoder"
-    name: "getNextMessageInternal"
+    name: "getNextEventInternal"
     arguments:
       0: "track"
     locals:
@@ -21796,7 +21796,7 @@ methods:
     locals: {}
   client!go.f (I)I:
     owner: "MidiDecoder"
-    name: "getNextMessage"
+    name: "getNextEvent"
     arguments:
       0: "track"
     locals: {}
@@ -27440,7 +27440,7 @@ methods:
       8: "track"
       11: "time"
       14: "timeMillis"
-      71: "message"
+      71: "event"
   client!ld.g (B)V:
     owner: "MidiPcmStream"
     name: "releaseInstruments"
@@ -41086,7 +41086,7 @@ methods:
       51: "track"
       56: "time"
       69: "event"
-      85: "status"
+      85: "type"
       92: "channel"
       98: "controller"
       104: "value"
