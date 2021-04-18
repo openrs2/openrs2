@@ -528,14 +528,14 @@ fields:
     owner: "Static1"
     name: "anInt134"
   client!al.K [I:
-    owner: "Static1"
-    name: "anIntArray21"
+    owner: "SoundPlayer"
+    name: "volumes"
   client!al.N I:
     owner: "Js5CacheRequest"
     name: "type"
   client!al.P Lclient!ll;:
     owner: "Static1"
-    name: "aClass112_1"
+    name: "projAnims"
   client!al.R Lclient!kk;:
     owner: "WorldMap"
     name: "font19"
@@ -693,8 +693,8 @@ fields:
     owner: "WaterMaterial"
     name: "aFloatArray6"
   client!be.a Lclient!cc;:
-    owner: "Static1"
-    name: "aClass26_3"
+    owner: "FontMetricsList"
+    name: "fontMetrics"
   client!be.b I:
     owner: "Static1"
     name: "rectDebug"
@@ -930,8 +930,8 @@ fields:
     owner: "Component"
     name: "fonts"
   client!bl.db Lclient!cc;:
-    owner: "Static1"
-    name: "aClass26_5"
+    owner: "HitBarList"
+    name: "hitBars"
   client!bl.eb I:
     owner: "Static1"
     name: "anInt379"
@@ -1260,8 +1260,8 @@ fields:
     owner: "Static1"
     name: "anInt772"
   client!client.W B:
-    owner: "Static1"
-    name: "aByte1"
+    owner: "MiniMap"
+    name: "sequenceNumber"
   client!client.ab Z:
     owner: "GameShell"
     name: "shutdown"
@@ -1464,8 +1464,8 @@ fields:
     owner: "MonochromeImageCache"
     name: "size"
   client!da.h Z:
-    owner: "Static1"
-    name: "aBoolean50"
+    owner: "Protocol"
+    name: "verifyIdChanged"
   client!da.i [[I:
     owner: "MonochromeImageCache"
     name: "pixels"
@@ -1798,7 +1798,7 @@ fields:
     name: "wheelRotation"
   client!dl.O [B:
     owner: "Class41_Sub1_Sub1"
-    name: "aByteArray9"
+    name: "bytes"
   client!dm.a I:
     owner: "Static2"
     name: "anInt1125"
@@ -1843,7 +1843,7 @@ fields:
     name: "largeBufferCount"
   client!dn.ab Lclient!wg;:
     owner: "Static2"
-    name: "aClass4_Sub3_Sub22_1"
+    name: "map"
   client!dn.db I:
     owner: "TextureOp31"
     name: "anInt1164"
@@ -1879,7 +1879,7 @@ fields:
     name: "displayLevel"
   client!e.v Lclient!ll;:
     owner: "Static2"
-    name: "aClass112_6"
+    name: "highPriorityRequests"
   client!e.w I:
     owner: "MapChunk"
     name: "sourceMaxZ"
@@ -1963,7 +1963,7 @@ fields:
     name: "temporary"
   client!ed.G I:
     owner: "Static2"
-    name: "anInt1216"
+    name: "visibleLevel"
   client!ed.H Z:
     owner: "Static2"
     name: "shiftClick"
@@ -2008,7 +2008,7 @@ fields:
     name: "anInt1242"
   client!eg.F [[I:
     owner: "SeqType"
-    name: "anIntArrayArray11"
+    name: "sounds"
   client!eg.G I:
     owner: "SeqType"
     name: "anInt1243"
@@ -2034,8 +2034,8 @@ fields:
     owner: "SeqType"
     name: "tween"
   client!eg.m I:
-    owner: "Static2"
-    name: "anInt1231"
+    owner: "Protocol"
+    name: "opcode3"
   client!eg.n I:
     owner: "SeqType"
     name: "anInt1232"
@@ -2214,7 +2214,7 @@ fields:
     owner: "Static2"
     name: "anInt1317"
   client!em.A [I:
-    owner: "Static2"
+    owner: "Flames"
     name: "anIntArray100"
   client!em.B I:
     owner: "Static2"
@@ -2272,10 +2272,10 @@ fields:
     name: "types"
   client!em.q I:
     owner: "Light"
-    name: "anInt1326"
+    name: "level"
   client!em.s Z:
     owner: "Light"
-    name: "aBoolean80"
+    name: "linkBelow"
   client!em.t I:
     owner: "Light"
     name: "anInt1328"
@@ -2385,8 +2385,8 @@ fields:
     owner: "BufferedSocket"
     name: "error"
   client!eo.v [Lclient!fe;:
-    owner: "Static2"
-    name: "aClass56_Sub1Array1"
+    owner: "Flames"
+    name: "runes"
   client!eo.x Lsignlink!pm;:
     owner: "BufferedSocket"
     name: "signLink"
@@ -2452,7 +2452,7 @@ fields:
     name: "crawlSound"
   client!fa.S Lclient!ll;:
     owner: "Static2"
-    name: "aClass112_8"
+    name: "spotAnims"
   client!fa.U I:
     owner: "Static2"
     name: "anInt1626"
@@ -2466,7 +2466,7 @@ fields:
     owner: "Static2"
     name: "aBoolean101"
   client!fa.cb [I:
-    owner: "Static2"
+    owner: "MiniMenu"
     name: "anIntArray117"
   client!fa.db I:
     owner: "Static2"
@@ -2526,8 +2526,8 @@ fields:
     owner: "ScriptRunner"
     name: "fp"
   client!fd.t [Ljava/lang/String;:
-    owner: "Static2"
-    name: "aStringArray40"
+    owner: "Player"
+    name: "ops"
   client!fd.wb [Ljava/lang/String;:
     owner: "Language"
     name: "ISO_CODES"
@@ -2686,7 +2686,7 @@ fields:
     name: "anInt1940"
   client!fm.f Lclient!ll;:
     owner: "Static2"
-    name: "aClass112_10"
+    name: "mediumPriorityRequests"
   client!fm.g I:
     owner: "Static2"
     name: "anInt1941"
@@ -2694,7 +2694,7 @@ fields:
     owner: "Static2"
     name: "aClass46Array1"
   client!fm.j I:
-    owner: "Static2"
+    owner: "Flames"
     name: "anInt1943"
   client!fm.l F:
     owner: "Static2"
@@ -2778,14 +2778,14 @@ fields:
     owner: "DelayedStateChange"
     name: "intArg1"
   client!g.B [I:
-    owner: "Static2"
+    owner: "Flames"
     name: "anIntArray159"
   client!g.C I:
     owner: "DelayedStateChange"
     name: "intArg3"
   client!g.D J:
     owner: "Static2"
-    name: "aLong66"
+    name: "firstGc"
   client!g.G [[I:
     owner: "Static2"
     name: "anIntArrayArray16"
@@ -2796,8 +2796,8 @@ fields:
     owner: "Static2"
     name: "anInt1997"
   client!g.L [I:
-    owner: "Static2"
-    name: "anIntArray160"
+    owner: "MiniMenu"
+    name: "cursors"
   client!g.O I:
     owner: "DelayedStateChange"
     name: "intArg2"
@@ -3184,7 +3184,7 @@ fields:
     name: "allLevelsVisible"
   client!gm.f J:
     owner: "Static3"
-    name: "aLong67"
+    name: "prevGc"
   client!gm.g Ljava/lang/String;:
     owner: "LocalisedText"
     name: "TRADEREQ"
@@ -3318,8 +3318,8 @@ fields:
     owner: "LocalisedText"
     name: "ATTACK"
   client!hb.b I:
-    owner: "Static3"
-    name: "anInt2140"
+    owner: "MiniMap"
+    name: "flagY"
   client!hb.d I:
     owner: "Static3"
     name: "anInt2142"
@@ -3360,7 +3360,7 @@ fields:
     owner: "GlRaster"
     name: "clipY"
   client!he.B Z:
-    owner: "Static3"
+    owner: "MiniMap"
     name: "aBoolean147"
   client!he.C Ljava/lang/String;:
     owner: "LocalisedText"
@@ -3609,8 +3609,8 @@ fields:
     owner: "MelType"
     name: "anIntArray188"
   client!ho.n I:
-    owner: "Static3"
-    name: "anInt2273"
+    owner: "Protocol"
+    name: "opcode2"
   client!ho.o I:
     owner: "MelType"
     name: "fillColor"
@@ -3645,7 +3645,7 @@ fields:
     owner: "LoginManager"
     name: "username"
   client!i.b I:
-    owner: "Static3"
+    owner: "Flames"
     name: "anInt2297"
   client!i.c I:
     owner: "Preferences"
@@ -3726,7 +3726,7 @@ fields:
     owner: "SkyBoxTypeList"
     name: "archive"
   client!id.e [I:
-    owner: "Static3"
+    owner: "Flames"
     name: "anIntArray196"
   client!id.f [I:
     owner: "Static3"
@@ -4152,8 +4152,8 @@ fields:
     owner: "Sprites"
     name: "nameIconsId"
   client!il.f [I:
-    owner: "Static3"
-    name: "anIntArray217"
+    owner: "SoundPlayer"
+    name: "delays"
   client!im.c Z:
     owner: "AudioThread"
     name: "stop"
@@ -4233,8 +4233,8 @@ fields:
     owner: "Static3"
     name: "anInt2497"
   client!io.G [Z:
-    owner: "Static3"
-    name: "aBooleanArray11"
+    owner: "Player"
+    name: "opLowPriority"
   client!io.H Ljava/lang/String;:
     owner: "Text"
     name: "CHATEFFECT5"
@@ -4438,7 +4438,7 @@ fields:
     name: "aBoolean177"
   client!jh.e Lclient!ll;:
     owner: "Static3"
-    name: "aClass112_14"
+    name: "lowPriorityRequests"
   client!jh.g Lclient!fe;:
     owner: "Class96"
     name: "aClass56_Sub1_3"
@@ -4584,7 +4584,7 @@ fields:
     owner: "ClientScript"
     name: "stringArgs"
   client!jm.b I:
-    owner: "Static4"
+    owner: "Flames"
     name: "anInt2665"
   client!jm.d Ljava/lang/String;:
     owner: "LocalisedText"
@@ -4620,7 +4620,7 @@ fields:
     owner: "TextureOp"
     name: "aClass4_Sub1Array42"
   client!jo.E [J:
-    owner: "Static4"
+    owner: "MiniMenu"
     name: "aLongArray56"
   client!jo.F Lclient!da;:
     owner: "TextureOp"
@@ -4656,7 +4656,7 @@ fields:
     owner: "TextureOp"
     name: "colorImageCache"
   client!k.b Lclient!vn;:
-    owner: "Static4"
+    owner: "Flames"
     name: "aClass4_Sub3_Sub14_Sub1_4"
   client!k.c Lclient!kk;:
     owner: "WorldMap"
@@ -5208,8 +5208,8 @@ fields:
     owner: "Base37"
     name: "BASE37_TABLE"
   client!lf.db [I:
-    owner: "Static4"
-    name: "anIntArray294"
+    owner: "SoundPlayer"
+    name: "ids"
   client!lf.eb I:
     owner: "TextureOp14"
     name: "anInt3124"
@@ -5448,8 +5448,8 @@ fields:
     owner: "Texture"
     name: "anIntArray306"
   client!ln.F I:
-    owner: "Static4"
-    name: "anInt3250"
+    owner: "Flames"
+    name: "runesId"
   client!ln.J Lclient!jo;:
     owner: "Texture"
     name: "aClass4_Sub1_2"
@@ -5457,8 +5457,8 @@ fields:
     owner: "SceneGraph"
     name: "anInt3253"
   client!ln.L Lclient!cc;:
-    owner: "Static4"
-    name: "aClass26_30"
+    owner: "HintArrowManager"
+    name: "models"
   client!ln.O [Lclient!jo;:
     owner: "Texture"
     name: "aClass4_Sub1Array19"
@@ -5577,7 +5577,7 @@ fields:
     owner: "Find"
     name: "index"
   client!mc.A [I:
-    owner: "Static4"
+    owner: "Flames"
     name: "anIntArray314"
   client!mc.D F:
     owner: "Static4"
@@ -5640,8 +5640,8 @@ fields:
     owner: "LocalisedText"
     name: "CONTINUE"
   client!md.o [Lclient!ag;:
-    owner: "Static4"
-    name: "aClass7Array1"
+    owner: "SoundPlayer"
+    name: "sounds"
   client!md.q I:
     owner: "ColorImageCache"
     name: "capacity"
@@ -5778,8 +5778,8 @@ fields:
     owner: "GlCleaner"
     name: "ids"
   client!mi.b I:
-    owner: "Static4"
-    name: "anInt3335"
+    owner: "Protocol"
+    name: "opcode1"
   client!mi.c [[[B:
     owner: "SceneGraph"
     name: "aByteArrayArrayArray16"
@@ -6618,8 +6618,8 @@ fields:
     owner: "Js5Request"
     name: "orphan"
   client!ng.J [I:
-    owner: "Static5"
-    name: "anIntArray615"
+    owner: "Player"
+    name: "opCursors"
   client!ng.y Z:
     owner: "Js5Request"
     name: "urgent"
@@ -6661,7 +6661,7 @@ fields:
     name: "aClass84_16"
   client!nh.P Lclient!nh;:
     owner: "Tile"
-    name: "aClass4_Sub19_1"
+    name: "linkedTile"
   client!nh.Q Lclient!lb;:
     owner: "Tile"
     name: "particles"
@@ -6945,8 +6945,8 @@ fields:
     owner: "Static5"
     name: "anInt5205"
   client!ob.y I:
-    owner: "Static5"
-    name: "anInt5206"
+    owner: "MiniMap"
+    name: "state"
   client!ob.z Ljava/lang/String;:
     owner: "LocalisedText"
     name: "USE"
@@ -7102,7 +7102,7 @@ fields:
     name: "tempPosition"
   client!oe.B [B:
     owner: "Class41_Sub2_Sub1"
-    name: "aByteArray49"
+    name: "bytes"
   client!of.U [[I:
     owner: "TextureOp8"
     name: "anIntArrayArray34"
@@ -7230,7 +7230,7 @@ fields:
     owner: "Static5"
     name: "aClass4_Sub3_Sub19Array3"
   client!ok.j I:
-    owner: "Static5"
+    owner: "Flames"
     name: "anInt3897"
   client!ol.o Ljava/lang/String;:
     owner: "LocalisedText"
@@ -7311,8 +7311,8 @@ fields:
     owner: "Npc"
     name: "type"
   client!p.pc Ljava/lang/String;:
-    owner: "Static5"
-    name: "aString236"
+    owner: "MiniMenu"
+    name: "walkHereOp"
   client!p.yc Lclient!fh;:
     owner: "client"
     name: "js5Archive28"
@@ -7489,7 +7489,7 @@ fields:
     name: "aShortArray71"
   client!pg.k I:
     owner: "Class41"
-    name: "anInt3771"
+    name: "seed"
   client!pg.l Lclient!cc;:
     owner: "MsiTypeList"
     name: "sprites"
@@ -7585,7 +7585,7 @@ fields:
     name: "anInt4165"
   client!pj.g I:
     owner: "Static5"
-    name: "anInt4166"
+    name: "renderPriority"
   client!pj.h Z:
     owner: "Static5"
     name: "dynamicArea"
@@ -8496,8 +8496,8 @@ fields:
     owner: "Class150"
     name: "anInt4456"
   client!re.c I:
-    owner: "Static6"
-    name: "anInt4457"
+    owner: "SoundPlayer"
+    name: "size"
   client!re.d I:
     owner: "LoginManager"
     name: "loops"
@@ -8556,8 +8556,8 @@ fields:
     owner: "Static6"
     name: "aBoolean313"
   client!rg.ab I:
-    owner: "Static6"
-    name: "anInt4506"
+    owner: "MiniMap"
+    name: "flagX"
   client!rg.bb Z:
     owner: "GameShell"
     name: "fullRedraw"
@@ -9054,8 +9054,8 @@ fields:
     owner: "SkyBoxSphereType"
     name: "anInt4707"
   client!sa.q I:
-    owner: "Static6"
-    name: "anInt4709"
+    owner: "Player"
+    name: "previousLevel"
   client!sb.o [Lclient!ec;:
     owner: "GlCleanerProgram"
     name: "shaders"
@@ -9084,14 +9084,14 @@ fields:
     owner: "TextureOp30"
     name: "anInt4756"
   client!sc.jb [Ljava/lang/String;:
-    owner: "Static6"
-    name: "aStringArray27"
+    owner: "MiniMenu"
+    name: "opBases"
   client!sd.a [Lclient!dc;:
     owner: "ParticleEffectorTypeList"
     name: "aClass37Array1"
   client!sd.b Lclient!cc;:
-    owner: "Static6"
-    name: "aClass26_50"
+    owner: "ShadowModelList"
+    name: "models"
   client!sd.c Z:
     owner: "Static6"
     name: "aBoolean330"
@@ -9354,8 +9354,8 @@ fields:
     owner: "client"
     name: "affiliate"
   client!sn.ab [Ljava/lang/String;:
-    owner: "Static6"
-    name: "aStringArray30"
+    owner: "MiniMenu"
+    name: "ops"
   client!sn.cb [[I:
     owner: "TextureOp4"
     name: "anIntArrayArray41"
@@ -9483,7 +9483,7 @@ fields:
     owner: "StockMarketOffer"
     name: "item"
   client!t.n [I:
-    owner: "Static6"
+    owner: "Flames"
     name: "anIntArray541"
   client!t.o [Ljava/lang/String;:
     owner: "Chat"
@@ -9495,8 +9495,8 @@ fields:
     owner: "Class4_Sub30"
     name: "locId"
   client!ta.E [S:
-    owner: "Static6"
-    name: "aShortArray100"
+    owner: "MiniMenu"
+    name: "actions"
   client!ta.H I:
     owner: "Class4_Sub30"
     name: "anInt5007"
@@ -9522,7 +9522,7 @@ fields:
     owner: "Static6"
     name: "anInt4996"
   client!ta.t [I:
-    owner: "Static6"
+    owner: "MiniMenu"
     name: "anIntArray543"
   client!ta.u Lclient!fh;:
     owner: "MidiPlayer"
@@ -9540,7 +9540,7 @@ fields:
     owner: "Static6"
     name: "anInt5001"
   client!tb.c [I:
-    owner: "Static6"
+    owner: "Flames"
     name: "anIntArray544"
   client!tb.e Lclient!cc;:
     owner: "SeqTypeList"
@@ -10096,7 +10096,7 @@ fields:
     name: "recolorDestination"
   client!ua.S I:
     owner: "NpcType"
-    name: "anInt5258"
+    name: "cursor2"
   client!ua.T I:
     owner: "NpcType"
     name: "anInt5259"
@@ -10111,7 +10111,7 @@ fields:
     name: "aByte19"
   client!ua.Z I:
     owner: "NpcType"
-    name: "anInt5264"
+    name: "cursor1"
   client!ua.a B:
     owner: "NpcType"
     name: "aByte18"
@@ -10120,7 +10120,7 @@ fields:
     name: "anInt5265"
   client!ua.b Z:
     owner: "NpcType"
-    name: "aBoolean354"
+    name: "shadow"
   client!ua.bb I:
     owner: "NpcType"
     name: "multiNpcVarp"
@@ -10132,7 +10132,7 @@ fields:
     name: "anInt5267"
   client!ua.d I:
     owner: "NpcType"
-    name: "anInt5233"
+    name: "cursor2Op"
   client!ua.db B:
     owner: "NpcType"
     name: "aByte20"
@@ -10186,7 +10186,7 @@ fields:
     name: "anInt5239"
   client!ua.o I:
     owner: "NpcType"
-    name: "anInt5240"
+    name: "hitBarId"
   client!ua.ob Z:
     owner: "NpcType"
     name: "aBoolean359"
@@ -10210,10 +10210,10 @@ fields:
     name: "anInt5243"
   client!ua.x I:
     owner: "NpcType"
-    name: "anInt5245"
+    name: "cursor1Op"
   client!ua.y I:
     owner: "NpcType"
-    name: "anInt5246"
+    name: "combatLevel"
   client!ua.z I:
     owner: "NpcType"
     name: "anInt5247"
@@ -10317,8 +10317,8 @@ fields:
     owner: "Static7"
     name: "aShort11"
   client!ue.n I:
-    owner: "Static7"
-    name: "anInt742"
+    owner: "InterfaceList"
+    name: "loginScreenId"
   client!uf.a [Z:
     owner: "PlayerSkillXpTable"
     name: "ENABLED_SKILLS"
@@ -10344,8 +10344,8 @@ fields:
     owner: "Static7"
     name: "anIntArray600"
   client!ug.e [I:
-    owner: "Static7"
-    name: "anIntArray601"
+    owner: "SoundPlayer"
+    name: "positions"
   client!ug.f Lclient!mb;:
     owner: "ParticleLinkedList"
     name: "sentinel"
@@ -10539,8 +10539,8 @@ fields:
     owner: "Static7"
     name: "aShortArray111"
   client!uo.A I:
-    owner: "Static7"
-    name: "anInt5426"
+    owner: "Protocol"
+    name: "verifyId"
   client!uo.y [B:
     owner: "ByteArraySecondaryNode"
     name: "value"
@@ -10618,7 +10618,7 @@ fields:
     name: "anInt5476"
   client!vc.a Lclient!po;:
     owner: "Static7"
-    name: "aClass138_14"
+    name: "mapElements"
   client!vc.f Lclient!cc;:
     owner: "SeqTypeList"
     name: "animFramesets"
@@ -10731,8 +10731,8 @@ fields:
     owner: "LocType"
     name: "aBoolean383"
   client!vh.B [I:
-    owner: "Static7"
-    name: "anIntArray629"
+    owner: "SoundPlayer"
+    name: "loops"
   client!vh.Bb I:
     owner: "LocType"
     name: "id"
@@ -11001,8 +11001,8 @@ fields:
     owner: "WallDecor"
     name: "anInt5633"
   client!vl.u I:
-    owner: "Static7"
-    name: "anInt5634"
+    owner: "MiniMenu"
+    name: "size"
   client!vm.V [I:
     owner: "SpriteLoader"
     name: "innerHeights"
@@ -11368,7 +11368,7 @@ fields:
     name: "anInt5929"
   client!wf.T I:
     owner: "Component"
-    name: "anInt5901"
+    name: "modelRotationSpeed"
   client!wf.Tb B:
     owner: "Component"
     name: "yMode"
@@ -11841,7 +11841,7 @@ fields:
     owner: "Environment"
     name: "anInt6043"
   client!wj.x [I:
-    owner: "Static7"
+    owner: "Flames"
     name: "anIntArray679"
   client!wk.a I:
     owner: "QuickChatPhraseTypeList"
@@ -11895,8 +11895,8 @@ fields:
     owner: "BufferedFile"
     name: "CRC64_TABLE"
   client!wl.x Z:
-    owner: "Static7"
-    name: "aBoolean422"
+    owner: "client"
+    name: "clean"
   client!wl.y F:
     owner: "Static7"
     name: "aFloat154"
@@ -12494,7 +12494,7 @@ methods:
       2: "samples"
   client!ah.a (II)V:
     owner: "DelayedStateChange"
-    name: "method111"
+    name: "setComponentScrollPositionClient"
     arguments:
       0: "id"
     locals:
@@ -12809,13 +12809,13 @@ methods:
       1: "x"
       2: "z"
       3: "arg3"
-      4: "arg4"
-      5: "arg5"
+      4: "primary"
+      5: "secondary"
       6: "arg6"
       7: "arg7"
       8: "arg8"
       9: "arg9"
-      10: "arg10"
+      10: "key"
     locals:
       6: "wallDecor"
       46: "level0"
@@ -13309,7 +13309,7 @@ methods:
       176: "local176"
   client!bg.a (IILclient!fd;)V:
     owner: "client"
-    name: "setUid"
+    name: "readUid"
     arguments:
       2: "buffer"
       1: "off"
@@ -13456,8 +13456,8 @@ methods:
       2: "arg2"
     locals: {}
   client!bi.a (B)V:
-    owner: "Static10"
-    name: "method301"
+    owner: "HintArrowManager"
+    name: "clear"
     arguments: {}
     locals: {}
   client!bi.a (II)I:
@@ -13664,8 +13664,8 @@ methods:
       1: "x"
       2: "z"
       3: "arg3"
-      4: "arg4"
-      5: "arg5"
+      4: "primary"
+      5: "secondary"
       6: "arg6"
       7: "arg7"
       8: "key"
@@ -14078,10 +14078,10 @@ methods:
     locals:
       8: "change"
   client!bo.a (ILclient!fh;)Z:
-    owner: "Static10"
-    name: "method398"
+    owner: "Flames"
+    name: "isReady"
     arguments:
-      1: "arg0"
+      1: "archive"
     locals: {}
   client!bo.a (Lclient!f;B)I:
     owner: "Player"
@@ -14565,7 +14565,7 @@ methods:
     arguments:
       0: "seqId"
       1: "npc"
-      3: "arg2"
+      3: "delay"
     locals:
       19: "local19"
       22: "local22"
@@ -14688,7 +14688,7 @@ methods:
     name: "method559"
     arguments: {}
     locals:
-      45: "local45"
+      45: "i"
       3667: "i"
       3740: "i"
       3756: "i"
@@ -14696,11 +14696,11 @@ methods:
       3794: "x"
       3801: "z"
       3857: "i"
-      3886: "local3886"
+      3886: "subInterface"
       3945: "local3945"
-      3969: "local3969"
+      3969: "i"
       3987: "i"
-      4001: "local4001"
+      4001: "i"
   client!cg.a (IIIIZ)I:
     owner: "PerlinNoise"
     name: "interpolate"
@@ -15079,7 +15079,7 @@ methods:
     arguments:
       0: "arg0"
     locals:
-      15: "local15"
+      15: "subInterface"
   client!cj.a (ZLclient!fd;)V:
     owner: "EnumType"
     name: "decode"
@@ -15373,7 +15373,7 @@ methods:
     owner: "Static12"
     name: "method692"
     arguments:
-      0: "arg0"
+      0: "component"
     locals: {}
   client!client.d (B)V:
     owner: "client"
@@ -15443,9 +15443,9 @@ methods:
     name: "mainLoad"
     arguments: {}
     locals:
-      32: "local32"
-      41: "local41"
-      44: "local44"
+      32: "runtime"
+      41: "usedMemory"
+      44: "now"
       93: "i"
       355: "percentage"
       357: "i"
@@ -15453,10 +15453,10 @@ methods:
       543: "total"
       582: "ready"
       585: "total"
-      647: "local647"
+      647: "complete"
       884: "ready"
       887: "total"
-      960: "local960"
+      960: "textureProvider"
       1066: "codec"
       1200: "reply"
   client!client.init ()V:
@@ -15563,11 +15563,11 @@ methods:
     arguments: {}
     locals: {}
   client!co.a (Ljava/util/Random;II)I:
-    owner: "Static12"
-    name: "method716"
+    owner: "RandomUtils"
+    name: "nextInt"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "random"
+      1: "bound"
     locals:
       45: "local45"
       48: "local48"
@@ -15593,17 +15593,17 @@ methods:
       0: "values"
     locals: {}
   client!co.b (I)V:
-    owner: "Static12"
-    name: "method719"
+    owner: "ReflectionCheck"
+    name: "clear"
     arguments: {}
     locals: {}
   client!d.a (BIII)V:
     owner: "DelayedStateChange"
-    name: "method726"
+    name: "setComponentPositionServer"
     arguments:
       1: "id"
-      2: "arg1"
-      3: "arg2"
+      2: "x"
+      3: "y"
     locals:
       12: "change"
   client!d.a (I)[F:
@@ -15632,10 +15632,10 @@ methods:
       26: "end"
   client!d.a (III)V:
     owner: "DelayedStateChange"
-    name: "method722"
+    name: "setComponentScrollPositionServer"
     arguments:
       0: "id"
-      1: "arg1"
+      1: "scrollY"
     locals:
       8: "change"
   client!d.a (IILclient!fd;)V:
@@ -15769,8 +15769,8 @@ methods:
     arguments: {}
     locals: {}
   client!dc.a (IILclient!eg;IIILclient!vg;IIIZIII)Lclient!vg;:
-    owner: "Static12"
-    name: "method745"
+    owner: "ShadowModelList"
+    name: "get"
     arguments:
       0: "arg0"
       2: "arg1"
@@ -15786,8 +15786,8 @@ methods:
       12: "arg11"
       13: "arg12"
     locals:
-      23: "local23"
-      33: "local33"
+      23: "key"
+      33: "model"
       41: "local41"
       83: "local83"
       89: "local89"
@@ -15993,7 +15993,7 @@ methods:
     locals: {}
   client!df.a (II)V:
     owner: "DelayedStateChange"
-    name: "method779"
+    name: "setComponentModelClient"
     arguments:
       1: "id"
     locals:
@@ -16274,12 +16274,12 @@ methods:
     locals: {}
   client!dl.a (IB)V:
     owner: "Class41_Sub1_Sub1"
-    name: "method934"
+    name: "setPixel"
     arguments:
-      0: "arg0"
+      0: "index"
       1: "arg1"
     locals:
-      3: "local3"
+      3: "index2"
       7: "local7"
   client!dl.a (III)[B:
     owner: "Class41_Sub1_Sub1"
@@ -16511,7 +16511,7 @@ methods:
     locals: {}
   client!ea.a (IB)V:
     owner: "Class41_Sub1"
-    name: "method934"
+    name: "setPixel"
     arguments:
       0: "arg0"
       1: "arg1"
@@ -16690,12 +16690,12 @@ methods:
     locals: {}
   client!eg.a (IIIIB)V:
     owner: "DelayedStateChange"
-    name: "method1019"
+    name: "setComponentModelAngleServer"
     arguments:
       3: "id"
-      2: "arg2"
-      0: "arg0"
-      1: "arg1"
+      2: "xAngle"
+      0: "yAngle"
+      1: "zoom"
     locals:
       10: "change"
   client!eg.a (IIIIILclient!vg;)Lclient!vg;:
@@ -16837,7 +16837,7 @@ methods:
     owner: "Static13"
     name: "method1028"
     arguments:
-      0: "arg0"
+      0: "archive"
     locals: {}
   client!eh.b ()V:
     owner: "Static13"
@@ -16956,7 +16956,7 @@ methods:
       19: "i"
       30: "c"
   client!ej.c (I)V:
-    owner: "Static14"
+    owner: "Flames"
     name: "method1059"
     arguments: {}
     locals: {}
@@ -16991,8 +16991,8 @@ methods:
       27: "i"
       68: "sprite"
   client!el.a (I)V:
-    owner: "Static14"
-    name: "method1066"
+    owner: "HintArrowManager"
+    name: "removeSoft"
     arguments: {}
     locals: {}
   client!el.a (II)Lclient!cm;:
@@ -17511,14 +17511,14 @@ methods:
       241: "local241"
       243: "local243"
       275: "local275"
-      282: "local282"
-      315: "local315"
+      282: "hintArrow"
+      315: "npc"
       329: "local329"
       339: "local339"
       378: "local378"
       393: "local393"
       398: "local398"
-      442: "local442"
+      442: "player"
       455: "local455"
       466: "local466"
       494: "local494"
@@ -17960,13 +17960,13 @@ methods:
       81: "local81"
       118: "local118"
   client!fc.a (BIIII)V:
-    owner: "Static15"
-    name: "method1227"
+    owner: "SoundPlayer"
+    name: "play"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      3: "arg2"
-      4: "arg3"
+      1: "delay"
+      2: "id"
+      3: "loops"
+      4: "volume"
     locals: {}
   client!fc.a (IBI)I:
     owner: "Inv"
@@ -17980,7 +17980,7 @@ methods:
       37: "i"
   client!fc.a (II)V:
     owner: "DelayedStateChange"
-    name: "method1224"
+    name: "setComponentModelOffsetClient"
     arguments:
       0: "id"
     locals:
@@ -19263,10 +19263,10 @@ methods:
       2: "arg1"
     locals: {}
   client!fj.a (Lclient!wf;III)V:
-    owner: "Static15"
-    name: "method1427"
+    owner: "MiniMenu"
+    name: "addComponentEntries"
     arguments:
-      0: "arg0"
+      0: "component"
       2: "arg1"
       3: "arg2"
     locals:
@@ -19276,9 +19276,9 @@ methods:
       172: "local172"
       187: "local187"
       195: "local195"
-      257: "local257"
-      266: "local266"
-      290: "local290"
+      257: "properties"
+      266: "objType"
+      290: "param"
       340: "local340"
       353: "local353"
       373: "local373"
@@ -19564,16 +19564,16 @@ methods:
     locals:
       8: "code"
   client!fn.a (JIILjava/lang/String;Ljava/lang/String;SIB)V:
-    owner: "Static16"
-    name: "method1497"
+    owner: "MiniMenu"
+    name: "add"
     arguments:
       0: "arg0"
       1: "arg1"
       2: "arg2"
-      3: "arg3"
-      4: "arg4"
-      5: "arg5"
-      6: "arg6"
+      3: "opBase"
+      4: "op"
+      5: "action"
+      6: "cursor"
     locals: {}
   client!fn.a (Lclient!fd;II)V:
     owner: "InvType"
@@ -19687,8 +19687,8 @@ methods:
       2: "textDecoder"
     locals: {}
   client!g.a (IIIIIII)V:
-    owner: "Static16"
-    name: "method1518"
+    owner: "MiniMenu"
+    name: "addEntries"
     arguments:
       0: "arg0"
       1: "arg1"
@@ -19715,7 +19715,7 @@ methods:
       215: "param"
       267: "ops"
       278: "j"
-      294: "local294"
+      294: "action"
       327: "cursor"
       394: "npc"
       450: "local450"
@@ -19747,7 +19747,7 @@ methods:
       1043: "ops"
       1052: "j"
       1067: "cursor"
-      1096: "local1096"
+      1096: "action"
   client!g.a (Lclient!fh;BII)[Lclient!fe;:
     owner: "SpriteLoader"
     name: "loadSoftwareIndexedSprites"
@@ -22118,8 +22118,8 @@ methods:
     arguments: {}
     locals: {}
   client!he.b (B)V:
-    owner: "Static18"
-    name: "method1713"
+    owner: "ShadowModelList"
+    name: "removeSoft"
     arguments: {}
     locals: {}
   client!hf.<init> ()V:
@@ -22311,12 +22311,12 @@ methods:
       349: "arrows"
       351: "j"
       363: "arrow"
-      525: "local525"
-      529: "local529"
+      525: "hitBar0"
+      529: "hitBar1"
       536: "local536"
-      541: "local541"
-      551: "local551"
-      593: "local593"
+      541: "npc"
+      551: "hitBar"
+      593: "type"
       635: "local635"
       641: "local641"
       653: "local653"
@@ -22430,10 +22430,10 @@ methods:
     locals: {}
   client!hk.a (IZI)V:
     owner: "DelayedStateChange"
-    name: "method1773"
+    name: "setComponentColorServer"
     arguments:
       2: "id"
-      0: "arg0"
+      0: "color"
     locals:
       14: "change"
   client!hk.a (Lclient!em;[I[[FIILclient!pi;[[FI[[FI[[I)V:
@@ -23510,11 +23510,11 @@ methods:
       0: "id"
     locals: {}
   client!ik.a (III)V:
-    owner: "Static20"
-    name: "method1916"
+    owner: "Flames"
+    name: "render"
     arguments:
-      1: "y"
       2: "x"
+      1: "y"
     locals:
       15: "local15"
       23: "local23"
@@ -23564,12 +23564,12 @@ methods:
       364: "local364"
   client!il.a (IBI)Ljava/lang/String;:
     owner: "Static20"
-    name: "method1921"
+    name: "getCombatLevelColor"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "selfLevel"
+      2: "otherLevel"
     locals:
-      8: "local8"
+      8: "delta"
   client!il.a (II)V:
     owner: "ObjTypeList"
     name: "clean"
@@ -23973,7 +23973,7 @@ methods:
     locals: {}
   client!jc.a (II)V:
     owner: "DelayedStateChange"
-    name: "method1994"
+    name: "setComponentModelAngleClient"
     arguments:
       1: "id"
     locals:
@@ -24064,10 +24064,10 @@ methods:
     arguments: {}
     locals: {}
   client!jd.a (BLclient!fh;)V:
-    owner: "Static21"
+    owner: "Flames"
     name: "method2005"
     arguments:
-      1: "arg0"
+      1: "archive"
     locals:
       15: "local15"
       27: "local27"
@@ -24203,11 +24203,11 @@ methods:
       213: "count"
       217: "slot"
       221: "id"
-      356: "local356"
+      356: "verifyId"
       360: "id"
       364: "value"
       401: "type"
-      405: "local405"
+      405: "verifyId"
       409: "componentId"
       413: "id"
       425: "subInterface"
@@ -24248,58 +24248,58 @@ methods:
       920: "i"
       967: "events"
       973: "componentId"
-      977: "local977"
-      981: "local981"
-      996: "local996"
+      977: "lastCreatedComponentId"
+      981: "firstCreatedComponentId"
+      996: "verifyId"
       1003: "i"
       1015: "key"
       1021: "oldProperties"
       1037: "newProperties"
-      1079: "local1079"
-      1085: "local1085"
-      1089: "local1089"
-      1114: "local1114"
-      1118: "local1118"
-      1122: "local1122"
-      1144: "local1144"
-      1148: "local1148"
-      1152: "local1152"
+      1079: "verifyId"
+      1085: "text"
+      1089: "id"
+      1114: "verifyId"
+      1118: "id"
+      1122: "color"
+      1144: "id"
+      1148: "value"
+      1152: "verifyId"
       1190: "boostedLevel"
       1194: "experience"
       1198: "skill"
       1212: "baseLevel"
-      1285: "local1285"
+      1285: "verifyId"
       1289: "local1289"
-      1300: "local1300"
+      1300: "id"
       1336: "id"
       1340: "value"
-      1403: "local1403"
-      1407: "local1407"
-      1411: "local1411"
-      1415: "local1415"
+      1403: "op"
+      1407: "highPriority"
+      1411: "cursor"
+      1415: "i"
       1486: "componentId"
       1490: "targetParam"
-      1494: "local1494"
-      1498: "local1498"
-      1502: "local1502"
+      1494: "verifyId"
+      1498: "lastCreatedComponentId"
+      1502: "firstCreatedComponentId"
       1520: "i"
       1535: "key"
       1541: "oldProperties"
       1556: "newProperties"
       1598: "key"
       1602: "world"
-      1604: "local1604"
+      1604: "delete"
       1619: "rank"
       1625: "worldName"
       1629: "member"
       1653: "i"
       1663: "compare"
       1720: "j"
-      1779: "local1779"
-      1781: "local1781"
+      1779: "key2"
+      1781: "i"
       1858: "username"
       1865: "message"
-      1885: "local1885"
+      1885: "verifyId"
       1889: "descriptor"
       1895: "arguments"
       1900: "i"
@@ -24309,7 +24309,7 @@ methods:
       1986: "shape"
       1990: "layer"
       1994: "angle"
-      1998: "local1998"
+      1998: "position"
       2004: "level"
       2010: "x"
       2014: "z"
@@ -24322,80 +24322,80 @@ methods:
       2212: "value"
       2227: "groupId"
       2239: "volume"
-      2256: "local2256"
-      2262: "local2262"
+      2256: "volume"
+      2262: "groupId"
       2271: "local2271"
-      2312: "local2312"
-      2316: "local2316"
-      2322: "local2322"
+      2312: "x"
+      2316: "y"
+      2322: "sequenceNumber"
       2367: "componentId"
       2373: "objId"
-      2382: "local2382"
+      2382: "verifyId"
       2386: "local2386"
       2395: "component"
       2409: "objType"
       2443: "objType"
-      2482: "local2482"
-      2488: "local2488"
-      2494: "local2494"
-      2498: "local2498"
-      2523: "local2523"
-      2527: "local2527"
-      2531: "local2531"
-      2535: "local2535"
+      2482: "id"
+      2488: "verifyId"
+      2494: "x"
+      2498: "y"
+      2523: "verifyId"
+      2527: "xSpeed"
+      2531: "ySpeed"
+      2535: "id"
       2559: "ignore"
       2563: "username"
-      2568: "local2568"
-      2573: "local2573"
+      2568: "world"
+      2573: "counter"
       2579: "uid"
       2583: "staffModLevel"
       2585: "i"
       2623: "j"
       2663: "message"
-      2728: "local2728"
-      2732: "local2732"
-      2736: "local2736"
-      2747: "local2747"
-      2754: "local2754"
-      2788: "local2788"
-      2799: "local2799"
+      2728: "verifyId"
+      2732: "sourceComponentId"
+      2736: "destComponentId"
+      2747: "sourceSubInterface"
+      2754: "destSubInterface"
+      2788: "sourceComponent"
+      2799: "destComponent"
       2830: "encodedUsername"
       2838: "encodedClan"
-      2843: "local2843"
-      2848: "local2848"
+      2843: "world"
+      2848: "counter"
       2855: "uid"
       2859: "staffModLevel"
       2861: "ignore"
       2863: "i"
       2899: "j"
       2939: "message"
-      3016: "local3016"
-      3020: "local3020"
-      3024: "local3024"
-      3028: "local3028"
-      3032: "local3032"
+      3016: "zoom"
+      3020: "yAngle"
+      3024: "verifyId"
+      3028: "xAngle"
+      3032: "id"
       3053: "x"
       3057: "z"
       3061: "levelAndClearMovementQueue"
-      3091: "local3091"
-      3095: "local3095"
-      3101: "local3101"
+      3091: "id"
+      3095: "seqId"
+      3101: "verifyId"
       3127: "ip"
-      3144: "local3144"
-      3148: "local3148"
-      3168: "local3168"
-      3188: "local3188"
-      3204: "local3204"
+      3144: "renderPriority"
+      3148: "verifyId"
+      3168: "owner"
+      3188: "name"
+      3204: "size"
       3217: "clanMembers"
       3219: "i"
-      3291: "local3291"
-      3297: "local3297"
-      3299: "local3299"
-      3321: "local3321"
+      3291: "i"
+      3297: "sorted"
+      3299: "j"
+      3321: "member"
       3435: "local3435"
-      3441: "local3441"
+      3441: "id"
       3447: "local3447"
-      3451: "local3451"
+      3451: "verifyId"
       3455: "local3455"
       3481: "encodedUsername"
       3485: "world"
@@ -24404,20 +24404,20 @@ methods:
       3504: "worldName"
       3518: "username"
       3520: "i"
-      3644: "local3644"
-      3651: "local3651"
-      3654: "local3654"
-      3691: "local3691"
-      3709: "local3709"
-      3727: "local3727"
-      3745: "local3745"
-      3763: "local3763"
-      3781: "local3781"
+      3644: "i"
+      3651: "sorted"
+      3654: "j"
+      3691: "tempWorld"
+      3709: "tempWorldName"
+      3727: "tempUsername"
+      3745: "tempEncodedUsername"
+      3763: "tempRank"
+      3781: "tempSameGame"
       3813: "id"
-      3817: "local3817"
-      3821: "local3821"
+      3817: "verifyId"
+      3821: "type"
       3846: "i"
-      3870: "local3870"
+      3870: "verifyId"
       3886: "i"
       3906: "i"
       3952: "indexAndType"
@@ -24425,7 +24425,7 @@ methods:
       3960: "type"
       3976: "hintArrow"
       4011: "inboundBuffer"
-      4162: "local4162"
+      4162: "verifyId"
       4166: "value"
       4170: "id"
       4190: "id"
@@ -24435,8 +24435,8 @@ methods:
       4234: "slot"
       4270: "encodedUsername"
       4278: "encodedClan"
-      4283: "local4283"
-      4288: "local4288"
+      4283: "world"
+      4288: "counter"
       4295: "uid"
       4299: "staffModLevel"
       4303: "phraseId"
@@ -24444,18 +24444,18 @@ methods:
       4307: "i"
       4333: "j"
       4375: "message"
-      4452: "local4452"
-      4456: "local4456"
-      4460: "local4460"
-      4466: "local4466"
+      4452: "spotAnimId"
+      4456: "delay"
+      4460: "y"
+      4466: "index"
       4479: "local4479"
       4488: "local4488"
       4495: "local4495"
       4515: "local4515"
       4521: "local4521"
       4539: "local4539"
-      4564: "local4564"
-      4569: "local4569"
+      4564: "playerIndex"
+      4569: "player"
       4586: "local4586"
       4605: "local4605"
       4610: "local4610"
@@ -24466,8 +24466,8 @@ methods:
       4666: "local4666"
       4768: "local4768"
       4778: "local4778"
-      4805: "local4805"
-      4809: "local4809"
+      4805: "npcIndex"
+      4809: "npc"
       4822: "local4822"
       4840: "local4840"
       4855: "local4855"
@@ -24478,18 +24478,18 @@ methods:
       4940: "local4940"
       5003: "local5003"
       5010: "local5010"
-      5037: "local5037"
+      5037: "verifyId"
       5041: "local5041"
       5045: "local5045"
       5049: "local5049"
       5053: "local5053"
       5057: "local5057"
       5083: "id"
-      5087: "local5087"
+      5087: "verifyId"
       5091: "value"
       5111: "encodedUsername"
-      5116: "local5116"
-      5121: "local5121"
+      5116: "world"
+      5121: "counter"
       5125: "staffModLevel"
       5129: "phraseId"
       5131: "ignore"
@@ -24497,24 +24497,24 @@ methods:
       5139: "i"
       5167: "j"
       5214: "message"
-      5282: "local5282"
+      5282: "verifyId"
       5286: "local5286"
       5290: "local5290"
       5294: "local5294"
       5298: "local5298"
       5302: "local5302"
-      5340: "local5340"
-      5349: "local5349"
-      5353: "local5353"
-      5357: "local5357"
-      5375: "local5375"
+      5340: "id"
+      5349: "loops"
+      5353: "delay"
+      5357: "volume"
+      5375: "verifyId"
       5379: "componentId"
       5392: "subInterface"
-      5419: "local5419"
-      5423: "local5423"
-      5427: "local5427"
+      5419: "id"
+      5423: "verifyId"
+      5427: "hidden"
       5469: "invId"
-      5498: "local5498"
+      5498: "verifyId"
       5517: "value"
       5521: "id"
       5536: "componentId"
@@ -24527,31 +24527,31 @@ methods:
       5612: "count"
       5687: "seqId"
       5691: "npcIndex"
-      5695: "local5695"
+      5695: "delay"
       5699: "npc"
-      5721: "local5721"
+      5721: "verifyId"
       5725: "local5725"
       5729: "local5729"
       5733: "local5733"
       5737: "local5737"
       5741: "local5741"
       5763: "buffer"
-      5797: "local5797"
+      5797: "verifyId"
       5801: "local5801"
       5805: "local5805"
       5828: "local5828"
-      5837: "local5837"
-      5841: "local5841"
+      5837: "verifyId"
+      5841: "id"
       5867: "i"
       5909: "username"
       5913: "phraseId"
       5920: "message"
-      5941: "local5941"
-      5945: "local5945"
+      5941: "id"
+      5945: "verifyId"
       5951: "local5951"
-      5979: "local5979"
-      5985: "local5985"
-      5989: "local5989"
+      5979: "scrollY"
+      5985: "id"
+      5989: "verifyId"
       6012: "slot"
   client!jf.b (III)I:
     owner: "Inv"
@@ -24600,10 +24600,10 @@ methods:
       173: "scenery"
       238: "groundDecor"
   client!jh.a (ZLclient!io;)V:
-    owner: "Static21"
+    owner: "ScriptRunner"
     name: "method2019"
     arguments:
-      1: "arg0"
+      1: "request"
     locals: {}
   client!ji.a (CLjava/lang/StringBuffer;IZ)Ljava/lang/StringBuffer;:
     owner: "StringUtils"
@@ -24615,10 +24615,10 @@ methods:
       19: "i"
   client!ji.a (IIB)V:
     owner: "DelayedStateChange"
-    name: "method2021"
+    name: "setComponentModelRotationSpeedServer"
     arguments:
       1: "id"
-      0: "arg0"
+      0: "rotationSpeed"
     locals:
       8: "change"
   client!ji.a (I[F)[F:
@@ -24752,16 +24752,16 @@ methods:
     arguments: {}
     locals: {}
   client!jj.f (I)V:
-    owner: "Static21"
-    name: "method2054"
+    owner: "MiniMenu"
+    name: "sort"
     arguments: {}
     locals:
-      11: "local11"
-      17: "local17"
-      43: "local43"
-      61: "local61"
-      79: "local79"
-      133: "local133"
+      11: "sorted"
+      17: "i"
+      43: "opBase"
+      61: "op"
+      79: "tempInt"
+      133: "action"
       151: "local151"
   client!jj.g (B)V:
     owner: "TextureOp34"
@@ -24901,10 +24901,10 @@ methods:
       15: "local15"
   client!jm.a (IILjava/lang/String;)V:
     owner: "DelayedStateChange"
-    name: "method2079"
+    name: "setComponentTextServer"
     arguments:
       1: "id"
-      2: "arg1"
+      2: "text"
     locals:
       13: "change"
   client!jm.run ()V:
@@ -25984,10 +25984,10 @@ methods:
       249: "world"
       278: "ex"
   client!kf.a (ILclient!fe;)V:
-    owner: "Static22"
-    name: "method2284"
+    owner: "Flames"
+    name: "setRune"
     arguments:
-      1: "arg0"
+      1: "sprite"
     locals:
       7: "local7"
       22: "local22"
@@ -26841,10 +26841,10 @@ methods:
       32: "newType"
   client!km.f (I)V:
     owner: "Static22"
-    name: "method2387"
+    name: "topBannerRefresh"
     arguments: {}
     locals:
-      24: "local24"
+      24: "ex"
   client!kn.a (III)J:
     owner: "SceneGraph"
     name: "getGroundDecorKey"
@@ -27849,9 +27849,9 @@ methods:
       2080: "local2080"
   client!lg.a (Lclient!nk;)V:
     owner: "Static23"
-    name: "method2551"
+    name: "setTextureProvider"
     arguments:
-      0: "arg0"
+      0: "textureProvider"
     locals: {}
   client!lg.a ([BIIII)V:
     owner: "Static23"
@@ -29286,12 +29286,12 @@ methods:
       118: "names"
       122: "i"
   client!mf.a (II)V:
-    owner: "Static24"
+    owner: "Flames"
     name: "method2702"
     arguments:
       0: "arg0"
     locals:
-      41: "local41"
+      41: "id"
       48: "local48"
       52: "local52"
       59: "local59"
@@ -29364,10 +29364,10 @@ methods:
       49: "x"
       51: "y"
   client!mg.a (Lclient!fh;I)V:
-    owner: "Static24"
-    name: "method2711"
+    owner: "Flames"
+    name: "init"
     arguments:
-      0: "arg0"
+      0: "archive"
     locals: {}
   client!mg.a (Lclient!fm;BLclient!fm;ZI)Lclient!wb;:
     owner: "Js5MasterIndex"
@@ -31506,10 +31506,10 @@ methods:
     locals:
       7: "i"
   client!nb.a (ZI)V:
-    owner: "Static25"
-    name: "method2929"
+    owner: "MiniMenu"
+    name: "remove"
     arguments:
-      1: "arg0"
+      1: "i"
     locals: {}
   client!nb.b (I)V:
     owner: "MelTypeList"
@@ -33051,21 +33051,21 @@ methods:
     arguments:
       0: "arg0"
       1: "arg1"
-      2: "arg2"
+      2: "tiles"
     locals:
       4: "gl"
       56: "i"
       63: "light"
-      66: "local66"
+      66: "level"
       76: "local76"
-      84: "local84"
-      92: "local92"
-      112: "local112"
+      84: "z0"
+      92: "z1"
+      112: "z"
       121: "local121"
-      133: "local133"
-      141: "local141"
-      155: "local155"
-      160: "local160"
+      133: "x0"
+      141: "x1"
+      155: "x"
+      160: "tile"
   client!od.a (ILclient!em;III)V:
     owner: "LightingManager"
     name: "enableLight"
@@ -33143,12 +33143,12 @@ methods:
     locals: {}
   client!oe.a (IB)V:
     owner: "Class41_Sub2_Sub1"
-    name: "method3151"
+    name: "setPixel"
     arguments:
-      0: "arg0"
+      0: "index"
       1: "arg1"
     locals:
-      3: "local3"
+      3: "index2"
   client!oe.a (III)[B:
     owner: "Class41_Sub2_Sub1"
     name: "method3156"
@@ -33331,24 +33331,24 @@ methods:
     arguments: {}
     locals: {}
   client!og.f (B)V:
-    owner: "Static27"
-    name: "method4704"
+    owner: "SoundPlayer"
+    name: "loop"
     arguments: {}
     locals:
-      3: "local3"
+      3: "i"
       10: "local10"
-      24: "local24"
-      89: "local89"
-      104: "local104"
-      137: "local137"
-      145: "local145"
-      155: "local155"
-      171: "local171"
-      181: "local181"
-      192: "local192"
-      223: "local223"
-      240: "local240"
-      245: "local245"
+      24: "j"
+      89: "sound"
+      104: "delays"
+      137: "minDistance"
+      145: "x"
+      155: "xFine"
+      171: "z"
+      181: "zFine"
+      192: "distance"
+      223: "volume"
+      240: "pcmSound"
+      245: "stream"
   client!og.f (I)Z:
     owner: "TextureOp39"
     name: "method4702"
@@ -33371,8 +33371,8 @@ methods:
     arguments: {}
     locals: {}
   client!oh.a (II)V:
-    owner: "Static27"
-    name: "method3219"
+    owner: "ShadowModelList"
+    name: "clean"
     arguments: {}
     locals: {}
   client!oh.a (IIILclient!fd;)V:
@@ -33650,12 +33650,12 @@ methods:
       72: "node"
   client!om.a (II)V:
     owner: "SceneGraph"
-    name: "method3253"
+    name: "link"
     arguments:
       0: "x"
       1: "z"
     locals:
-      7: "local7"
+      7: "linkedTile"
       9: "level"
       30: "tile"
       40: "i"
@@ -34791,7 +34791,7 @@ methods:
     arguments: {}
     locals:
       22: "local22"
-      47: "local47"
+      47: "action"
       99: "local99"
       105: "local105"
       109: "local109"
@@ -34928,7 +34928,7 @@ methods:
     name: "method3143"
     arguments: {}
     locals:
-      15: "local15"
+      15: "random"
       21: "local21"
       35: "local35"
       45: "local45"
@@ -35143,18 +35143,18 @@ methods:
       87: "local87"
       93: "local93"
   client!ph.a (ILclient!vg;IIBII)Lclient!vg;:
-    owner: "Static29"
-    name: "method3427"
+    owner: "HintArrowManager"
+    name: "getModel"
     arguments:
       0: "arg0"
       1: "arg1"
       2: "arg2"
-      3: "arg3"
+      3: "id"
       5: "arg4"
       6: "arg5"
     locals:
-      18: "local18"
-      24: "local24"
+      18: "key"
+      24: "model"
       32: "local32"
       53: "local53"
       56: "local56"
@@ -35315,22 +35315,22 @@ methods:
       166: "local166"
       174: "local174"
   client!pk.a (Lclient!eg;IIIZZ)V:
-    owner: "Static29"
-    name: "method3461"
+    owner: "SoundPlayer"
+    name: "playSeqSound"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
+      0: "seqType"
+      1: "zFine"
+      2: "xFine"
+      3: "index"
       4: "arg4"
     locals:
-      34: "local34"
-      38: "local38"
-      44: "local44"
-      52: "local52"
-      69: "local69"
-      113: "local113"
-      131: "local131"
+      34: "sound"
+      38: "id"
+      44: "loops"
+      52: "minDistance"
+      69: "alternativeIdIndex"
+      113: "z"
+      131: "x"
   client!pk.a (Ljava/lang/String;Z)Ljava/lang/String;:
     owner: "Base37"
     name: "toTitleCase"
@@ -35354,11 +35354,11 @@ methods:
     locals: {}
   client!pl.a (IIIIB)V:
     owner: "DelayedStateChange"
-    name: "method3471"
+    name: "setComponentModelServer"
     arguments:
       2: "id"
-      0: "arg0"
-      3: "arg3"
+      0: "type"
+      3: "modelId"
       1: "arg1"
     locals:
       18: "change"
@@ -35403,27 +35403,27 @@ methods:
       683: "change"
       689: "type"
       693: "id"
-      732: "local732"
-      735: "local735"
-      738: "local738"
+      732: "component"
+      735: "modelType"
+      738: "modelId"
       741: "local741"
-      790: "local790"
-      800: "local800"
-      825: "local825"
-      905: "local905"
+      790: "component"
+      800: "hidden"
+      825: "component"
+      905: "component"
       948: "component"
-      986: "local986"
-      996: "local996"
-      999: "local999"
-      1044: "local1044"
-      1084: "local1084"
-      1090: "local1090"
-      1094: "local1094"
-      1100: "local1100"
-      1104: "local1104"
-      1117: "local1117"
-      1137: "local1137"
-      1175: "local1175"
+      986: "component"
+      996: "component"
+      999: "scrollY"
+      1044: "component"
+      1084: "color16"
+      1090: "green"
+      1094: "component"
+      1100: "red"
+      1104: "blue"
+      1117: "color24"
+      1137: "component"
+      1175: "component"
       1306: "component"
       1312: "local1312"
       1343: "destSlot"
@@ -35553,12 +35553,12 @@ methods:
       72: "i"
       96: "i"
   client!qa.a (IIILclient!f;I)V:
-    owner: "Static29"
-    name: "method3488"
+    owner: "MiniMenu"
+    name: "addPlayerEntries"
     arguments:
       1: "arg0"
       2: "arg1"
-      3: "arg2"
+      3: "player"
       4: "arg3"
     locals:
       29: "local29"
@@ -35569,7 +35569,7 @@ methods:
       110: "local110"
       144: "local144"
       269: "local269"
-      277: "local277"
+      277: "priority"
       336: "local336"
       367: "local367"
   client!qa.a (ILclient!fd;Z)V:
@@ -35747,17 +35747,17 @@ methods:
     owner: "Static29"
     name: "method3495"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      0: "components"
+      2: "layer"
     locals:
-      7: "local7"
-      19: "local19"
-      79: "local79"
-      108: "local108"
-      113: "local113"
-      129: "local129"
-      261: "local261"
-      272: "local272"
+      7: "i"
+      19: "component"
+      79: "subInterface"
+      108: "isTrue"
+      113: "seqId"
+      129: "type"
+      261: "x"
+      272: "y"
   client!qa.b (B)Z:
     owner: "IdkType"
     name: "isBodyModelReady"
@@ -36002,11 +36002,11 @@ methods:
       58: "bytes"
       61: "buffer"
   client!qd.a (III)I:
-    owner: "Static29"
+    owner: "RandomUtils"
     name: "method3538"
     arguments:
       0: "arg0"
-      2: "arg1"
+      2: "bound"
     locals:
       7: "local7"
   client!qd.a (ZILclient!fd;)Ljava/lang/String;:
@@ -36598,8 +36598,8 @@ methods:
       29: "table"
       37: "c"
   client!qi.a (I)V:
-    owner: "Static30"
-    name: "method420"
+    owner: "ShadowModelList"
+    name: "clear"
     arguments: {}
     locals: {}
   client!qi.a (IB)Lclient!mi;:
@@ -37321,14 +37321,14 @@ methods:
     arguments: {}
     locals: {}
   client!rc.a (II)Lclient!ke;:
-    owner: "Static31"
-    name: "method3656"
+    owner: "FontMetricsList"
+    name: "get"
     arguments:
-      1: "arg0"
+      1: "id"
     locals:
-      6: "local6"
-      22: "local22"
-      35: "local35"
+      6: "font"
+      22: "bytes"
+      35: "newFont"
   client!rc.a (Lclient!fd;Ljava/lang/String;I)I:
     owner: "WordPack"
     name: "writeString"
@@ -37536,11 +37536,11 @@ methods:
       390: "local390"
   client!rh.a (IIII)V:
     owner: "DelayedStateChange"
-    name: "method3716"
+    name: "setComponentObjServer"
     arguments:
       1: "id"
-      3: "arg2"
-      0: "arg0"
+      3: "objId"
+      0: "count"
     locals:
       12: "change"
   client!rh.e (B)V:
@@ -37981,8 +37981,8 @@ methods:
       2107: "local2107"
       2109: "local2109"
       2124: "local2124"
-      2203: "local2203"
-      2210: "local2210"
+      2203: "x"
+      2210: "z"
       2237: "local2237"
       2242: "local2242"
       2247: "local2247"
@@ -38067,7 +38067,7 @@ methods:
     locals: {}
   client!rn.a (IB)V:
     owner: "Class41_Sub2"
-    name: "method3151"
+    name: "setPixel"
     arguments:
       0: "arg0"
       1: "arg1"
@@ -38263,12 +38263,12 @@ methods:
     owner: "Static31"
     name: "method3803"
     arguments:
-      0: "arg0"
+      0: "underwater"
     locals:
       13: "levels"
   client!ro.e (B)V:
     owner: "Static31"
-    name: "method3798"
+    name: "clean"
     arguments: {}
     locals: {}
   client!s.<init> ()V:
@@ -39758,15 +39758,15 @@ methods:
       93: "local93"
       97: "local97"
   client!se.a (Lclient!fd;I)V:
-    owner: "Static32"
-    name: "method3949"
+    owner: "client"
+    name: "writeUid"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals:
-      8: "local8"
-      32: "local32"
-      56: "local56"
-      58: "local58"
+      8: "bytes"
+      32: "i"
+      56: "ex"
+      58: "i"
   client!se.a (ZLclient!fd;)Lclient!in;:
     owner: "TextureOp29SubOp1"
     name: "create"
@@ -40150,7 +40150,7 @@ methods:
       117: "local117"
   client!sl.d (II)V:
     owner: "DelayedStateChange"
-    name: "method4026"
+    name: "setComponentHiddenClient"
     arguments:
       0: "id"
     locals:
@@ -40231,8 +40231,8 @@ methods:
       4: "arg3"
     locals: {}
   client!sm.b (II)V:
-    owner: "Static32"
-    name: "method4030"
+    owner: "HintArrowManager"
+    name: "clean"
     arguments: {}
     locals: {}
   client!sn.<init> ()V:
@@ -40548,7 +40548,7 @@ methods:
       536: "mapSquare"
   client!ta.b (ZI)V:
     owner: "DelayedStateChange"
-    name: "method4092"
+    name: "setComponentColorClient"
     arguments:
       1: "id"
     locals:
@@ -40912,24 +40912,24 @@ methods:
       1: "name"
     locals: {}
   client!te.a (Lclient!ua;IIII)V:
-    owner: "Static33"
-    name: "method4152"
+    owner: "MiniMenu"
+    name: "addNpcEntries"
     arguments:
-      0: "arg0"
-      2: "arg1"
-      3: "arg2"
-      4: "arg3"
+      3: "id"
+      0: "type"
+      4: "x"
+      2: "z"
     locals:
-      38: "local38"
-      51: "local51"
-      88: "local88"
-      134: "local134"
-      145: "local145"
-      167: "local167"
-      169: "local169"
-      249: "local249"
-      271: "local271"
-      281: "local281"
+      38: "nameWithLevel"
+      51: "levelPrefix"
+      88: "param"
+      134: "ops"
+      145: "i"
+      167: "action"
+      169: "cursor"
+      249: "i"
+      271: "priority"
+      281: "action"
   client!te.a (Lsignlink!pm;I)V:
     owner: "Preferences"
     name: "read"
@@ -41323,10 +41323,10 @@ methods:
       917: "local917"
   client!tj.a (IIZ)V:
     owner: "DelayedStateChange"
-    name: "method2997"
+    name: "setComponentHiddenServer"
     arguments:
       0: "id"
-      1: "arg1"
+      1: "hidden"
     locals:
       4: "change"
   client!tj.a (ILclient!tf;B)V:
@@ -42632,44 +42632,44 @@ methods:
     arguments: {}
     locals: {}
   client!ue.a (BI)V:
-    owner: "Static35"
-    name: "method664"
+    owner: "MiniMenu"
+    name: "doAction"
     arguments:
-      1: "arg0"
+      1: "i"
     locals:
       15: "local15"
       19: "local19"
       24: "local24"
-      28: "local28"
+      28: "action"
       32: "local32"
-      46: "local46"
-      146: "local146"
-      346: "local346"
+      46: "player"
+      146: "npc"
+      346: "player"
       582: "local582"
-      649: "local649"
-      744: "local744"
-      969: "local969"
-      1044: "local1044"
-      1170: "local1170"
-      1354: "local1354"
-      1434: "local1434"
+      649: "player"
+      744: "npc"
+      969: "npc"
+      1044: "player"
+      1170: "npc"
+      1354: "player"
+      1434: "component"
       1452: "local1452"
-      1545: "local1545"
-      1660: "local1660"
+      1545: "npc"
+      1660: "component"
       1662: "local1662"
-      1728: "local1728"
-      1913: "local1913"
-      2053: "local2053"
-      2187: "local2187"
+      1728: "player"
+      1913: "component"
+      2053: "player"
+      2187: "component"
       2195: "local2195"
-      2321: "local2321"
-      2423: "local2423"
-      2659: "local2659"
-      2665: "local2665"
-      3012: "local3012"
-      3080: "local3080"
-      3148: "local3148"
-      3216: "local3216"
+      2321: "npc"
+      2423: "player"
+      2659: "npc"
+      2665: "type"
+      3012: "player"
+      3080: "player"
+      3148: "component"
+      3216: "component"
       3240: "local3240"
   client!ue.a (BLjava/lang/String;)V:
     owner: "GameShell"
@@ -42694,7 +42694,7 @@ methods:
       10: "previous"
   client!ue.a (II)V:
     owner: "DelayedStateChange"
-    name: "method676"
+    name: "setComponentObjClient"
     arguments:
       0: "id"
     locals:
@@ -42752,7 +42752,7 @@ methods:
     locals: {}
   client!ue.b (IZ)V:
     owner: "DelayedStateChange"
-    name: "method680"
+    name: "setComponentModelAnimClient"
     arguments:
       0: "id"
     locals:
@@ -43089,7 +43089,7 @@ methods:
       116: "amplitude"
   client!ui.a (IIBI)I:
     owner: "Static35"
-    name: "method4327"
+    name: "getVisibleLevel"
     arguments:
       1: "level"
       3: "x"
@@ -43393,10 +43393,10 @@ methods:
     locals:
       18: "l"
   client!un.a (BI)Z:
-    owner: "Static35"
-    name: "method4381"
+    owner: "Protocol"
+    name: "setVerifyId"
     arguments:
-      1: "arg0"
+      1: "verifyId"
     locals: {}
   client!un.c (B)V:
     owner: "CreateManager"
@@ -43442,7 +43442,7 @@ methods:
     locals: {}
   client!va.a (II)V:
     owner: "DelayedStateChange"
-    name: "method4405"
+    name: "setComponentPositionClient"
     arguments:
       0: "id"
     locals:
@@ -43486,12 +43486,12 @@ methods:
     locals: {}
   client!vb.a (BIIII)V:
     owner: "DelayedStateChange"
-    name: "method4433"
+    name: "setComponentModelOffsetServer"
     arguments:
       4: "id"
-      3: "arg2"
-      1: "arg0"
-      2: "arg1"
+      3: "xOffset2d"
+      1: "yOffset2d"
+      2: "zAngle2d"
     locals:
       6: "change"
   client!vb.a (BLclient!fd;I)V:
@@ -45110,8 +45110,8 @@ methods:
       7: "arg6"
     locals: {}
   client!w.e (I)V:
-    owner: "Static36"
-    name: "method4567"
+    owner: "Protocol"
+    name: "transmitVerifyId"
     arguments: {}
     locals: {}
   client!wa.<init> (I)V:
@@ -45299,8 +45299,8 @@ methods:
     arguments: {}
     locals: {}
   client!wb.c (I)I:
-    owner: "Static37"
-    name: "method4663"
+    owner: "MiniMenu"
+    name: "getCursor"
     arguments: {}
     locals: {}
   client!wb.c (II)[B:
@@ -45348,7 +45348,7 @@ methods:
       335: "request"
   client!wc.a (II)V:
     owner: "DelayedStateChange"
-    name: "method4678"
+    name: "setComponentTextClient"
     arguments:
       0: "id"
     locals:
@@ -46118,8 +46118,8 @@ methods:
       733: "local733"
       737: "local737"
       741: "local741"
-      765: "local765"
-      771: "local771"
+      765: "zFine"
+      771: "xFine"
       789: "spotAnim"
       804: "local804"
       814: "shapeAndAngle"
@@ -46179,13 +46179,13 @@ methods:
       1403: "position"
       1410: "z"
       1419: "x"
-      1423: "local1423"
-      1433: "local1433"
-      1439: "local1439"
-      1443: "local1443"
-      1447: "local1447"
-      1451: "local1451"
-      1474: "local1474"
+      1423: "id"
+      1433: "minDistanceAndLoops"
+      1439: "minDistance"
+      1443: "loops"
+      1447: "delay"
+      1451: "volume"
+      1474: "minDistanceP1"
       1577: "type"
       1581: "playerId"
       1585: "count"
@@ -46309,10 +46309,10 @@ methods:
     locals: {}
   client!wn.a (III)V:
     owner: "DelayedStateChange"
-    name: "method4824"
+    name: "setComponentModelAnimServer"
     arguments:
       1: "id"
-      2: "arg1"
+      2: "seqId"
     locals:
       4: "change"
   client!wn.a (IIII)V:
@@ -46331,7 +46331,7 @@ methods:
       1: "x"
       2: "z"
       3: "arg3"
-      4: "arg4"
+      4: "entity"
       5: "key"
       6: "arg6"
     locals:
