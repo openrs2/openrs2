@@ -7,6 +7,7 @@ import org.openrs2.compress.cli.bzip2.Bzip2Command
 import org.openrs2.compress.cli.deflate.DeflateCommand
 import org.openrs2.compress.cli.deflate.InflateCommand
 import org.openrs2.compress.cli.gzip.GunzipCommand
+import org.openrs2.compress.cli.gzip.GunzipLaxCommand
 import org.openrs2.compress.cli.gzip.GzipCommand
 import org.openrs2.compress.cli.lzma.LzmaCommand
 import org.openrs2.compress.cli.lzma.UnlzmaCommand
@@ -22,6 +23,7 @@ public class CompressCommand : NoOpCliktCommand(name = "compress") {
             InflateCommand(),
             GzipCommand(),
             GunzipCommand(),
+            GunzipLaxCommand(),
             LzmaCommand(),
             UnlzmaCommand()
         )
