@@ -207,7 +207,7 @@ public class KeyBruteForcer @Inject constructor(
                 """
                 SELECT id, data
                 FROM containers
-                WHERE encrypted AND key_id IS NULL AND id < ?
+                WHERE encrypted AND key_id IS NULL AND id <= ?
             """.trimIndent()
             ).use { stmt ->
                 stmt.fetchSize = BATCH_SIZE
