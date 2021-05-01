@@ -29,6 +29,7 @@ include(
     "archive",
     "asm",
     "buffer",
+    "buffer-generator",
     "cache",
     "cli",
     "compress",
