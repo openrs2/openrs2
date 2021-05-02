@@ -16,7 +16,7 @@ pluginManagement {
         id("com.github.jk1.dependency-license-report") version "1.16"
         id("com.github.johnrengelman.shadow") version "7.0.0"
         id("org.jetbrains.dokka") version "1.4.32"
-        id("org.jmailen.kotlinter") version "3.4.2"
+        id("org.jmailen.kotlinter") version "3.4.0"
         kotlin("jvm") version "1.4.32"
     }
 }
