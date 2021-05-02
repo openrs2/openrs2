@@ -179,6 +179,7 @@ public class ByteBufExtensionGenerator {
         builder.receiver(ByteBuf::class)
         builder.addParameter("index", Int::class)
         builder.addParameter("value", type.writeType)
+        builder.returns(ByteBuf::class)
 
         for (i in 0 until type.width) {
             val shift = order.getShift(i, type.width)
@@ -196,6 +197,8 @@ public class ByteBufExtensionGenerator {
             builder.addStatement("setByte(index + %L, $pre(value shr %L)$post)", i, shift)
         }
 
+        builder.addStatement("return this")
+
         return builder.build()
     }
 
@@ -205,11 +208,13 @@ public class ByteBufExtensionGenerator {
         val builder = FunSpec.builder("write$name")
         builder.receiver(ByteBuf::class)
         builder.addParameter("value", type.writeType)
+        builder.returns(ByteBuf::class)
 
         builder.addStatement("val index = writerIndex()")
         builder.addStatement("ensureWritable(%L)", type.width)
         builder.addStatement("%N(index, value)", "set$name")
         builder.addStatement("writerIndex(index + %L)", type.width)
+        builder.addStatement("return this")
 
         return builder.build()
     }
@@ -240,12 +245,15 @@ public class ByteBufExtensionGenerator {
         builder.receiver(ByteBuf::class)
         builder.addParameter("index", Int::class)
         builder.addParameter("value", Boolean::class)
+        builder.returns(ByteBuf::class)
 
         builder.beginControlFlow("if (value)")
         builder.addStatement("%N(index, 1)", "setByte$transformation")
         builder.nextControlFlow("else")
         builder.addStatement("%N(index, 0)", "setByte$transformation")
         builder.endControlFlow()
+
+        builder.addStatement("return this")
 
         return builder.build()
     }
@@ -254,12 +262,15 @@ public class ByteBufExtensionGenerator {
         val builder = FunSpec.builder("writeBoolean$transformation")
         builder.receiver(ByteBuf::class)
         builder.addParameter("value", Boolean::class)
+        builder.returns(ByteBuf::class)
 
         builder.beginControlFlow("if (value)")
         builder.addStatement("%N(1)", "writeByte$transformation")
         builder.nextControlFlow("else")
         builder.addStatement("%N(0)", "writeByte$transformation")
         builder.endControlFlow()
+
+        builder.addStatement("return this")
 
         return builder.build()
     }
@@ -269,8 +280,10 @@ public class ByteBufExtensionGenerator {
         builder.receiver(ByteBuf::class)
         builder.addParameter("index", Int::class)
         builder.addParameter("dst", ByteArray::class)
+        builder.returns(ByteBuf::class)
 
         builder.addStatement("%N(index, dst, 0, dst.size)", "getBytes${order.suffix}${transformation.suffix}")
+        builder.addStatement("return this")
 
         return builder.build()
     }
@@ -282,6 +295,7 @@ public class ByteBufExtensionGenerator {
         builder.addParameter("dst", ByteArray::class)
         builder.addParameter("dstIndex", Int::class)
         builder.addParameter("len", Int::class)
+        builder.returns(ByteBuf::class)
 
         builder.addStatement("getBytes(index, dst, dstIndex, len)")
         builder.beginControlFlow("for (i in 0 until len)")
@@ -295,6 +309,8 @@ public class ByteBufExtensionGenerator {
             builder.addStatement("dst.reverse(dstIndex, dstIndex + len)")
         }
 
+        builder.addStatement("return this")
+
         return builder.build()
     }
 
@@ -303,12 +319,14 @@ public class ByteBufExtensionGenerator {
         builder.receiver(ByteBuf::class)
         builder.addParameter("index", Int::class)
         builder.addParameter("dst", ByteBuf::class)
+        builder.returns(ByteBuf::class)
 
         builder.addStatement("val dstIndex = dst.writerIndex()")
         builder.addStatement("val len = dst.writableBytes()")
         builder.addStatement("dst.ensureWritable(len)")
         builder.addStatement("%N(index, dst, dstIndex, len)", "getBytes${order.suffix}${transformation.suffix}")
         builder.addStatement("dst.writerIndex(dstIndex + len)")
+        builder.addStatement("return this")
 
         return builder.build()
     }
@@ -319,11 +337,13 @@ public class ByteBufExtensionGenerator {
         builder.addParameter("index", Int::class)
         builder.addParameter("dst", ByteBuf::class)
         builder.addParameter("len", Int::class)
+        builder.returns(ByteBuf::class)
 
         builder.addStatement("val dstIndex = dst.writerIndex()")
         builder.addStatement("dst.ensureWritable(len)")
         builder.addStatement("%N(index, dst, dstIndex, len)", "getBytes${order.suffix}${transformation.suffix}")
         builder.addStatement("dst.writerIndex(dstIndex + len)")
+        builder.addStatement("return this")
 
         return builder.build()
     }
@@ -335,6 +355,7 @@ public class ByteBufExtensionGenerator {
         builder.addParameter("dst", ByteBuf::class)
         builder.addParameter("dstIndex", Int::class)
         builder.addParameter("len", Int::class)
+        builder.returns(ByteBuf::class)
 
         val srcIndex = if (order == ArrayOrder.FORWARD) {
             "i"
@@ -348,6 +369,8 @@ public class ByteBufExtensionGenerator {
             "getByte${transformation.suffix}"
         )
         builder.endControlFlow()
+
+        builder.addStatement("return this")
 
         return builder.build()
     }
@@ -374,8 +397,10 @@ public class ByteBufExtensionGenerator {
         val builder = FunSpec.builder("readBytes${order.suffix}${transformation.suffix}")
         builder.receiver(ByteBuf::class)
         builder.addParameter("dst", ByteArray::class)
+        builder.returns(ByteBuf::class)
 
         builder.addStatement("%N(dst, 0, dst.size)", "readBytes${order.suffix}${transformation.suffix}")
+        builder.addStatement("return this")
 
         return builder.build()
     }
@@ -386,10 +411,12 @@ public class ByteBufExtensionGenerator {
         builder.addParameter("dst", ByteArray::class)
         builder.addParameter("dstIndex", Int::class)
         builder.addParameter("len", Int::class)
+        builder.returns(ByteBuf::class)
 
         builder.addStatement("val index = readerIndex()")
         builder.addStatement("%N(index, dst, dstIndex, len)", "getBytes${order.suffix}${transformation.suffix}")
         builder.addStatement("readerIndex(index + len)")
+        builder.addStatement("return this")
 
         return builder.build()
     }
@@ -398,12 +425,14 @@ public class ByteBufExtensionGenerator {
         val builder = FunSpec.builder("readBytes${order.suffix}${transformation.suffix}")
         builder.receiver(ByteBuf::class)
         builder.addParameter("dst", ByteBuf::class)
+        builder.returns(ByteBuf::class)
 
         builder.addStatement("val dstIndex = dst.writerIndex()")
         builder.addStatement("val len = dst.writableBytes()")
         builder.addStatement("dst.ensureWritable(len)")
         builder.addStatement("%N(dst, dstIndex, len)", "readBytes${order.suffix}${transformation.suffix}")
         builder.addStatement("dst.writerIndex(dstIndex + len)")
+        builder.addStatement("return this")
 
         return builder.build()
     }
@@ -413,11 +442,13 @@ public class ByteBufExtensionGenerator {
         builder.receiver(ByteBuf::class)
         builder.addParameter("dst", ByteBuf::class)
         builder.addParameter("len", Int::class)
+        builder.returns(ByteBuf::class)
 
         builder.addStatement("val dstIndex = dst.writerIndex()")
         builder.addStatement("dst.ensureWritable(len)")
         builder.addStatement("%N(dst, dstIndex, len)", "readBytes${order.suffix}${transformation.suffix}")
         builder.addStatement("dst.writerIndex(dstIndex + len)")
+        builder.addStatement("return this")
 
         return builder.build()
     }
@@ -428,10 +459,12 @@ public class ByteBufExtensionGenerator {
         builder.addParameter("dst", ByteBuf::class)
         builder.addParameter("dstIndex", Int::class)
         builder.addParameter("len", Int::class)
+        builder.returns(ByteBuf::class)
 
         builder.addStatement("val index = readerIndex()")
         builder.addStatement("%N(index, dst, dstIndex, len)", "getBytes${order.suffix}${transformation.suffix}")
         builder.addStatement("readerIndex(index + len)")
+        builder.addStatement("return this")
 
         return builder.build()
     }
@@ -441,8 +474,10 @@ public class ByteBufExtensionGenerator {
         builder.receiver(ByteBuf::class)
         builder.addParameter("index", Int::class)
         builder.addParameter("src", ByteArray::class)
+        builder.returns(ByteBuf::class)
 
         builder.addStatement("%N(index, src, 0, src.size)", "setBytes${order.suffix}${transformation.suffix}")
+        builder.addStatement("return this")
 
         return builder.build()
     }
@@ -454,10 +489,13 @@ public class ByteBufExtensionGenerator {
         builder.addParameter("src", ByteArray::class)
         builder.addParameter("srcIndex", Int::class)
         builder.addParameter("len", Int::class)
+        builder.returns(ByteBuf::class)
 
         builder.beginControlFlow("%T.wrappedBuffer(src).use { buf ->", Unpooled::class)
         builder.addStatement("%N(index, buf, srcIndex, len)", "setBytes${order.suffix}${transformation.suffix}")
         builder.endControlFlow()
+
+        builder.addStatement("return this")
 
         return builder.build()
     }
@@ -467,11 +505,13 @@ public class ByteBufExtensionGenerator {
         builder.receiver(ByteBuf::class)
         builder.addParameter("index", Int::class)
         builder.addParameter("src", ByteBuf::class)
+        builder.returns(ByteBuf::class)
 
         builder.addStatement("val srcIndex = src.readerIndex()")
         builder.addStatement("val len = src.readableBytes()")
         builder.addStatement("%N(index, src, srcIndex, len)", "setBytes${order.suffix}${transformation.suffix}")
         builder.addStatement("src.readerIndex(srcIndex + len)")
+        builder.addStatement("return this")
 
         return builder.build()
     }
@@ -482,10 +522,12 @@ public class ByteBufExtensionGenerator {
         builder.addParameter("index", Int::class)
         builder.addParameter("src", ByteBuf::class)
         builder.addParameter("len", Int::class)
+        builder.returns(ByteBuf::class)
 
         builder.addStatement("val srcIndex = src.readerIndex()")
         builder.addStatement("%N(index, src, srcIndex, len)", "setBytes${order.suffix}${transformation.suffix}")
         builder.addStatement("src.readerIndex(srcIndex + len)")
+        builder.addStatement("return this")
 
         return builder.build()
     }
@@ -497,6 +539,7 @@ public class ByteBufExtensionGenerator {
         builder.addParameter("src", ByteBuf::class)
         builder.addParameter("srcIndex", Int::class)
         builder.addParameter("len", Int::class)
+        builder.returns(ByteBuf::class)
 
         val srcIndex = if (order == ArrayOrder.FORWARD) {
             "i"
@@ -511,6 +554,8 @@ public class ByteBufExtensionGenerator {
         )
         builder.endControlFlow()
 
+        builder.addStatement("return this")
+
         return builder.build()
     }
 
@@ -518,8 +563,10 @@ public class ByteBufExtensionGenerator {
         val builder = FunSpec.builder("writeBytes${order.suffix}${transformation.suffix}")
         builder.receiver(ByteBuf::class)
         builder.addParameter("src", ByteArray::class)
+        builder.returns(ByteBuf::class)
 
         builder.addStatement("%N(src, 0, src.size)", "writeBytes${order.suffix}${transformation.suffix}")
+        builder.addStatement("return this")
 
         return builder.build()
     }
@@ -530,11 +577,13 @@ public class ByteBufExtensionGenerator {
         builder.addParameter("src", ByteArray::class)
         builder.addParameter("srcIndex", Int::class)
         builder.addParameter("len", Int::class)
+        builder.returns(ByteBuf::class)
 
         builder.addStatement("val index = writerIndex()")
         builder.addStatement("ensureWritable(len)")
         builder.addStatement("%N(index, src, srcIndex, len)", "setBytes${order.suffix}${transformation.suffix}")
         builder.addStatement("writerIndex(index + len)")
+        builder.addStatement("return this")
 
         return builder.build()
     }
@@ -543,11 +592,13 @@ public class ByteBufExtensionGenerator {
         val builder = FunSpec.builder("writeBytes${order.suffix}${transformation.suffix}")
         builder.receiver(ByteBuf::class)
         builder.addParameter("src", ByteBuf::class)
+        builder.returns(ByteBuf::class)
 
         builder.addStatement("val srcIndex = src.readerIndex()")
         builder.addStatement("val len = src.readableBytes()")
         builder.addStatement("%N(src, srcIndex, len)", "writeBytes${order.suffix}${transformation.suffix}")
         builder.addStatement("src.readerIndex(srcIndex + len)")
+        builder.addStatement("return this")
 
         return builder.build()
     }
@@ -557,10 +608,12 @@ public class ByteBufExtensionGenerator {
         builder.receiver(ByteBuf::class)
         builder.addParameter("src", ByteBuf::class)
         builder.addParameter("len", Int::class)
+        builder.returns(ByteBuf::class)
 
         builder.addStatement("val srcIndex = src.readerIndex()")
         builder.addStatement("%N(src, srcIndex, len)", "writeBytes${order.suffix}${transformation.suffix}")
         builder.addStatement("src.readerIndex(srcIndex + len)")
+        builder.addStatement("return this")
 
         return builder.build()
     }
@@ -571,11 +624,13 @@ public class ByteBufExtensionGenerator {
         builder.addParameter("src", ByteBuf::class)
         builder.addParameter("srcIndex", Int::class)
         builder.addParameter("len", Int::class)
+        builder.returns(ByteBuf::class)
 
         builder.addStatement("val index = writerIndex()")
         builder.addStatement("ensureWritable(len)")
         builder.addStatement("%N(index, src, srcIndex, len)", "setBytes${order.suffix}${transformation.suffix}")
         builder.addStatement("writerIndex(index + len)")
+        builder.addStatement("return this")
 
         return builder.build()
     }
