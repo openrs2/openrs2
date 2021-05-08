@@ -20,4 +20,11 @@ class StringUtilsTest {
         assertEquals(99162322, "hello".krHashCode())
         assertEquals(92340183, "h€llo".krHashCode())
     }
+
+    @Test
+    fun testCapitalize() {
+        assertEquals("Hello", "hello".capitalize())
+        assertEquals("Hello", "Hello".capitalize())
+        assertEquals("HELLO", "HELLO".capitalize())
+    }
 }

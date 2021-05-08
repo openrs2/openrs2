@@ -5,6 +5,7 @@ import org.openrs2.asm.MemberRef
 import org.openrs2.asm.classpath.ClassPath
 import org.openrs2.asm.filter.MemberFilter
 import org.openrs2.deob.util.map.NameMap
+import org.openrs2.util.capitalize
 import org.openrs2.util.collect.DisjointSet
 import org.openrs2.util.indefiniteArticle
 

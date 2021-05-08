@@ -1,5 +1,6 @@
 package org.openrs2.buffer.generator
 
+import org.openrs2.util.capitalize
 import kotlin.reflect.KClass
 
 public enum class IntType(

@@ -18,3 +18,7 @@ public fun CharSequence.krHashCode(): Int {
     }
     return hash
 }
+
+public fun String.capitalize(): String {
+    return replaceFirstChar { it.titlecase() }
+}

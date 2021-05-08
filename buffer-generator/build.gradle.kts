@@ -11,6 +11,7 @@ application {
 dependencies {
     api(libs.clikt)
 
+    implementation(projects.util)
     implementation(libs.kotlinPoet)
     implementation(libs.netty.buffer)
 }
