@@ -21,7 +21,7 @@ public fun IntegerLiteralExpr.checkedAsInt(): Int {
 }
 
 public fun Int.toHexLiteralExpr(): IntegerLiteralExpr {
-    return IntegerLiteralExpr("0x${Integer.toUnsignedString(this, 16).toUpperCase()}")
+    return IntegerLiteralExpr("0x${Integer.toUnsignedString(this, 16).uppercase()}")
 }
 
 public fun LongLiteralExpr.checkedAsLong(): Long {
@@ -33,7 +33,7 @@ public fun LongLiteralExpr.checkedAsLong(): Long {
 }
 
 public fun Long.toHexLiteralExpr(): LongLiteralExpr {
-    return LongLiteralExpr("0x${java.lang.Long.toUnsignedString(this, 16).toUpperCase()}L")
+    return LongLiteralExpr("0x${java.lang.Long.toUnsignedString(this, 16).uppercase()}L")
 }
 
 public fun Expression.isIntegerOrLongLiteral(): Boolean {

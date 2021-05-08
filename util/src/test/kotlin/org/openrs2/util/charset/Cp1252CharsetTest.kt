@@ -10,14 +10,14 @@ class Cp1252CharsetTest {
     @Test
     fun testEncodeChar() {
         // edge cases
-        assertEquals(Cp1252Charset.encode('\u0000'), '?'.toByte())
+        assertEquals(Cp1252Charset.encode('\u0000'), '?'.code.toByte())
         assertEquals(Cp1252Charset.encode('\u0001'), 1.toByte())
         assertEquals(Cp1252Charset.encode('\u007F'), 127.toByte())
         assertEquals(Cp1252Charset.encode('€'), 128.toByte())
         assertEquals(Cp1252Charset.encode('Ÿ'), 159.toByte())
         assertEquals(Cp1252Charset.encode('\u00A0'), 160.toByte())
         assertEquals(Cp1252Charset.encode('ÿ'), 255.toByte())
-        assertEquals(Cp1252Charset.encode('\u0100'), '?'.toByte())
+        assertEquals(Cp1252Charset.encode('\u0100'), '?'.code.toByte())
 
         // 7-bit ASCII char
         assertEquals(Cp1252Charset.encode('A'), 65.toByte())
@@ -61,14 +61,14 @@ class Cp1252CharsetTest {
     fun testEncode() {
         assertArrayEquals(
             byteArrayOf(
-                '?'.toByte(),
+                '?'.code.toByte(),
                 1.toByte(),
                 127.toByte(),
                 128.toByte(),
                 159.toByte(),
                 160.toByte(),
                 255.toByte(),
-                '?'.toByte(),
+                '?'.code.toByte(),
                 65.toByte(),
                 138.toByte(),
                 214.toByte()

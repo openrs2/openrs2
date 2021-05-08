@@ -12,7 +12,7 @@ public data class Config(
         private val INTERNAL_NAME_REGEX = Regex("(?i)[^a-z0-9]+")
 
         private fun String.toInternalName(): String {
-            return replace(INTERNAL_NAME_REGEX, "_").trim('_').toLowerCase()
+            return replace(INTERNAL_NAME_REGEX, "_").trim('_').lowercase()
         }
     }
 }

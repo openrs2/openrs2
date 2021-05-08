@@ -377,7 +377,7 @@ public class CacheImporter @Inject constructor(
         """.trimIndent()
         ).use { stmt ->
             stmt.setLong(1, containerId)
-            stmt.setString(2, masterIndex.index.format.name.toLowerCase())
+            stmt.setString(2, masterIndex.index.format.name.lowercase())
 
             stmt.executeQuery().use { rows ->
                 if (rows.next()) {
@@ -396,7 +396,7 @@ public class CacheImporter @Inject constructor(
         """.trimIndent()
         ).use { stmt ->
             stmt.setLong(1, containerId)
-            stmt.setString(2, masterIndex.index.format.name.toLowerCase())
+            stmt.setString(2, masterIndex.index.format.name.lowercase())
 
             stmt.executeQuery().use { rows ->
                 check(rows.next())
@@ -484,7 +484,7 @@ public class CacheImporter @Inject constructor(
             RETURNING id
         """.trimIndent()
         ).use { stmt ->
-            stmt.setString(1, type.toString().toLowerCase())
+            stmt.setString(1, type.toString().lowercase())
             stmt.setInt(2, masterIndexId)
             stmt.setInt(3, gameId)
             stmt.setObject(4, build, Types.INTEGER)

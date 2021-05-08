@@ -18,7 +18,7 @@ class IterableUtilsTest {
         assertEquals(listOf(3), list)
 
         assertEquals(3, list.removeFirst())
-        assertEquals(emptyList<Int>(), list)
+        assertEquals(emptyList(), list)
 
         assertFailsWith<NoSuchElementException> {
             list.removeFirst()
@@ -35,7 +35,7 @@ class IterableUtilsTest {
         assertEquals(listOf(3), list)
 
         assertEquals(3, list.removeFirstOrNull())
-        assertEquals(emptyList<Int>(), list)
+        assertEquals(emptyList(), list)
 
         assertNull(list.removeFirstOrNull())
     }

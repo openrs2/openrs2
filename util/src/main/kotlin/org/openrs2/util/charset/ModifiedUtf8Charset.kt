@@ -32,15 +32,15 @@ public object ModifiedUtf8Charset : Charset("ModifiedUtf8", null) {
                     }
 
                     when (len) {
-                        1 -> output.put(char.toByte())
+                        1 -> output.put(char.code.toByte())
                         2 -> {
-                            output.put((0xC0 or ((char.toInt() shr 6) and 0x1F)).toByte())
-                            output.put((0x80 or (char.toInt() and 0x3F)).toByte())
+                            output.put((0xC0 or ((char.code shr 6) and 0x1F)).toByte())
+                            output.put((0x80 or (char.code and 0x3F)).toByte())
                         }
                         else -> {
-                            output.put((0xE0 or ((char.toInt() shr 12) and 0x1F)).toByte())
-                            output.put((0x80 or ((char.toInt() shr 6) and 0x1F)).toByte())
-                            output.put((0x80 or (char.toInt() and 0x3F)).toByte())
+                            output.put((0xE0 or ((char.code shr 12) and 0x1F)).toByte())
+                            output.put((0x80 or ((char.code shr 6) and 0x1F)).toByte())
+                            output.put((0x80 or (char.code and 0x3F)).toByte())
                         }
                     }
                 }

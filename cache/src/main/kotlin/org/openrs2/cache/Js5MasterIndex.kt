@@ -140,7 +140,7 @@ public data class Js5MasterIndex(
 
                             val version = index.version
                             val groups = index.size
-                            val totalUncompressedLength = index.sumBy(Js5Index.Group::uncompressedLength)
+                            val totalUncompressedLength = index.sumOf(Js5Index.Group::uncompressedLength)
 
                             // TODO(gpe): should we throw an exception if there are trailing bytes here or in the block above?
                             Entry(version, checksum, groups, totalUncompressedLength, digest)

@@ -140,16 +140,16 @@ public class CachesController @Inject constructor(
                         output.putNextEntry(entry)
 
                         writer.write(key.key.k0.toString())
-                        writer.write('\n'.toInt())
+                        writer.write('\n'.code)
 
                         writer.write(key.key.k1.toString())
-                        writer.write('\n'.toInt())
+                        writer.write('\n'.code)
 
                         writer.write(key.key.k2.toString())
-                        writer.write('\n'.toInt())
+                        writer.write('\n'.code)
 
                         writer.write(key.key.k3.toString())
-                        writer.write('\n'.toInt())
+                        writer.write('\n'.code)
 
                         writer.flush()
                     }

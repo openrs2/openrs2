@@ -14,5 +14,5 @@ public enum class OperatingSystem(
     MAC("mac", listOf(AARCH64, AMD64, I386), listOf("libjaggl.dylib")),
     LINUX("linux", listOf(AMD64, I386), listOf("libjaggl.so", "libjaggl_dri.so"));
 
-    public val id: String = name.toLowerCase()
+    public val id: String = name.lowercase()
 }

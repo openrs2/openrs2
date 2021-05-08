@@ -7,5 +7,5 @@ public enum class Architecture(
     AMD64(listOf("amd64", "x86_64")),
     AARCH64(listOf("aarch64"));
 
-    public val id: String = name.toLowerCase()
+    public val id: String = name.lowercase()
 }

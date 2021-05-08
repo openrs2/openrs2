@@ -55,7 +55,7 @@ public class IntInterpreter(private val args: Array<IntValueSet>) : Interpreter<
                 insn.opcode == Opcodes.INEG -> -v
                 insn is IincInsnNode -> v + insn.incr
                 insn.opcode == Opcodes.I2B -> v.toByte().toInt()
-                insn.opcode == Opcodes.I2C -> v.toChar().toInt()
+                insn.opcode == Opcodes.I2C -> v.toChar().code
                 insn.opcode == Opcodes.I2S -> v.toShort().toInt()
                 else -> return IntValue(basicValue)
             }

@@ -5,7 +5,7 @@ import org.openrs2.util.charset.Cp1252Charset
 public fun CharSequence.indefiniteArticle(): String {
     require(isNotEmpty())
 
-    return when (first().toLowerCase()) {
+    return when (first().lowercaseChar()) {
         'a', 'e', 'i', 'o', 'u' -> "an"
         else -> "a"
     }

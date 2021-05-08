@@ -38,8 +38,16 @@ class Js5ResponseDecoderTest {
         val channel = EmbeddedChannel(Js5ResponseDecoder())
 
         channel.writeInbound(wrappedBuffer(2, 0, 3, 0, 0, 0, 0))
-        channel.writeInbound(wrappedBuffer(7, 'O'.toByte(), 'p'.toByte(), 'e'.toByte(), 'n'.toByte()))
-        channel.writeInbound(wrappedBuffer('R'.toByte(), 'S'.toByte(), '2'.toByte()))
+        channel.writeInbound(
+            wrappedBuffer(
+                7,
+                'O'.code.toByte(),
+                'p'.code.toByte(),
+                'e'.code.toByte(),
+                'n'.code.toByte()
+            )
+        )
+        channel.writeInbound(wrappedBuffer('R'.code.toByte(), 'S'.code.toByte(), '2'.code.toByte()))
 
         ByteBufAllocator.DEFAULT.buffer().use { buf ->
             buf.writeByte(0)

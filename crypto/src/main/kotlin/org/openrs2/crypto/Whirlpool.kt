@@ -219,9 +219,9 @@ public class Whirlpool {
                 val c = sbox[x / 2]
 
                 val v1 = if ((x and 1) == 0) {
-                    c.toLong() ushr 8
+                    c.code.toLong() ushr 8
                 } else {
-                    c.toLong() and 0xFF
+                    c.code.toLong() and 0xFF
                 }
 
                 var v2 = v1 shl 1

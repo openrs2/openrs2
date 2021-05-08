@@ -10,7 +10,12 @@ import java.io.SequenceInputStream
 
 public object Bzip2 {
     private const val BLOCK_SIZE = 1
-    private val HEADER = byteArrayOf('B'.toByte(), 'Z'.toByte(), 'h'.toByte(), ('0' + BLOCK_SIZE).toByte())
+    private val HEADER = byteArrayOf(
+        'B'.code.toByte(),
+        'Z'.code.toByte(),
+        'h'.code.toByte(),
+        ('0' + BLOCK_SIZE).code.toByte()
+    )
 
     public fun createHeaderlessInputStream(input: InputStream): InputStream {
         return BZip2CompressorInputStream(SequenceInputStream(ByteArrayInputStream(HEADER), input))

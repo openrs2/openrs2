@@ -181,7 +181,7 @@ public class CacheExporter @Inject constructor(
                         return@execute null
                     }
 
-                    val format = MasterIndexFormat.valueOf(rows.getString(1).toUpperCase())
+                    val format = MasterIndexFormat.valueOf(rows.getString(1).uppercase())
 
                     masterIndex = Unpooled.wrappedBuffer(rows.getBytes(2)).use { compressed ->
                         Js5Compression.uncompress(compressed).use { uncompressed ->

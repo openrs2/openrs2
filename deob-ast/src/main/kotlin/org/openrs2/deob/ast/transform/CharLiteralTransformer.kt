@@ -72,7 +72,7 @@ public class CharLiteralTransformer : Transformer() {
             else -> {
                 val type = Character.getType(c).toByte()
                 if (type in UNPRINTABLE_TYPES) {
-                    "\\u" + Integer.toHexString(c.toInt()).padStart(4, '0')
+                    "\\u" + Integer.toHexString(c.code).padStart(4, '0')
                 } else {
                     c.toString()
                 }

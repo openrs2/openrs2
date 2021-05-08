@@ -17,7 +17,7 @@ public object Cp1252Charset : Charset("Cp1252", null) {
     private val ENCODE_TABLE = ByteArray(65536)
     private val DECODE_TABLE = CharArray(256)
     private const val REPLACEMENT_CHAR = '\uFFFD'
-    private const val REPLACEMENT_BYTE = '?'.toByte()
+    private const val REPLACEMENT_BYTE = '?'.code.toByte()
 
     init {
         for (b in 0 until 256) {
@@ -28,7 +28,7 @@ public object Cp1252Charset : Charset("Cp1252", null) {
             }
 
             if (c != '\u0000') {
-                ENCODE_TABLE[c.toInt()] = b.toByte()
+                ENCODE_TABLE[c.code] = b.toByte()
                 DECODE_TABLE[b] = c
             }
         }
@@ -44,7 +44,7 @@ public object Cp1252Charset : Charset("Cp1252", null) {
     }
 
     public fun encode(char: Char): Byte {
-        val byte = ENCODE_TABLE[char.toInt()]
+        val byte = ENCODE_TABLE[char.code]
         return if (byte.toInt() == 0) {
             REPLACEMENT_BYTE
         } else {
@@ -65,7 +65,7 @@ public object Cp1252Charset : Charset("Cp1252", null) {
                     }
 
                     val char = input.get()
-                    val byte = ENCODE_TABLE[char.toInt()]
+                    val byte = ENCODE_TABLE[char.code]
 
                     if (byte.toInt() == 0) {
                         input.position(input.position() - 1)

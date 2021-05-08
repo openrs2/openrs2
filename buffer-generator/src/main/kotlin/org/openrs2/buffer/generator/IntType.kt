@@ -12,7 +12,7 @@ public enum class IntType(
     SHORT(2, Short::class, Int::class, Int::class),
     INT(4, Int::class, Long::class, Int::class);
 
-    public val prettyName: String = name.toLowerCase().capitalize()
+    public val prettyName: String = name.lowercase().capitalize()
 
     public fun getReadType(signedness: Signedness): KClass<*> {
         return if (signedness == Signedness.SIGNED) {

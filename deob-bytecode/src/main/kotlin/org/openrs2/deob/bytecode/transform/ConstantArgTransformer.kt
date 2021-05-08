@@ -130,7 +130,7 @@ public class ConstantArgTransformer @Inject constructor(private val profile: Pro
 
     private fun getArgs(ref: MemberRef): Array<IntValueSet> {
         val partition = inheritedMethodSets[ref]!!
-        val size = Type.getArgumentTypes(ref.desc).sumBy { it.size }
+        val size = Type.getArgumentTypes(ref.desc).sumOf { it.size }
         return Array(size) { i -> argValues[ArgPartition(partition, i)] ?: IntValueSet.Unknown }
     }
 
