@@ -101,6 +101,14 @@ val Project.isFree: Boolean
 configure(subprojects.filter { it.isFree }) {
     apply(plugin = "jacoco")
 
+    configure<JacocoPluginExtension> {
+        /*
+         * Temporarily override bundled Jacoco for compatibility with Kotlin
+         * 1.5.
+         */
+        toolVersion = "0.8.7"
+    }
+
     plugins.withType<KotlinPluginWrapper> {
         apply(plugin = "org.jetbrains.dokka")
         apply(plugin = "org.jmailen.kotlinter")
