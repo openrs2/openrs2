@@ -13,17 +13,25 @@ public class Js5Index(
     public var hasDigests: Boolean = false,
     public var hasLengths: Boolean = false,
     public var hasUncompressedChecksums: Boolean = false
-) : NamedEntryCollection<Js5Index.Group>(::Group) {
-    public class Group internal constructor(
-        parent: NamedEntryCollection<Group>,
+) : MutableNamedEntryCollection<Js5Index.MutableGroup>(::MutableGroup) {
+    public interface Group<out T : File> : NamedEntryCollection<T>, NamedEntry {
+        public val version: Int
+        public val checksum: Int
+        public val uncompressedChecksum: Int
+        public val length: Int
+        public val uncompressedLength: Int
+    }
+
+    public class MutableGroup internal constructor(
+        parent: MutableNamedEntryCollection<MutableGroup>,
         override val id: Int
-    ) : NamedEntryCollection<File>(::File), NamedEntry {
-        private var parent: NamedEntryCollection<Group>? = parent
-        public var version: Int = 0
-        public var checksum: Int = 0
-        public var uncompressedChecksum: Int = 0
-        public var length: Int = 0
-        public var uncompressedLength: Int = 0
+    ) : MutableNamedEntryCollection<MutableFile>(::MutableFile), MutableNamedEntry, Group<MutableFile> {
+        private var parent: MutableNamedEntryCollection<MutableGroup>? = parent
+        public override var version: Int = 0
+        public override var checksum: Int = 0
+        public override var uncompressedChecksum: Int = 0
+        public override var length: Int = 0
+        public override var uncompressedLength: Int = 0
 
         public override var nameHash: Int = -1
             set(value) {
@@ -47,7 +55,7 @@ public class Js5Index(
             if (javaClass != other?.javaClass) return false
             if (!super.equals(other)) return false
 
-            other as Group
+            other as MutableGroup
 
             if (id != other.id) return false
             if (version != other.version) return false
@@ -90,11 +98,13 @@ public class Js5Index(
         }
     }
 
-    public class File internal constructor(
-        parent: NamedEntryCollection<File>,
+    public interface File : NamedEntry
+
+    public class MutableFile internal constructor(
+        parent: MutableNamedEntryCollection<MutableFile>,
         override val id: Int,
-    ) : NamedEntry {
-        private var parent: NamedEntryCollection<File>? = parent
+    ) : MutableNamedEntry, File {
+        private var parent: MutableNamedEntryCollection<MutableFile>? = parent
 
         public override var nameHash: Int = -1
             set(value) {
@@ -111,7 +121,7 @@ public class Js5Index(
             if (this === other) return true
             if (javaClass != other?.javaClass) return false
 
-            other as File
+            other as MutableFile
 
             if (id != other.id) return false
             if (nameHash != other.nameHash) return false

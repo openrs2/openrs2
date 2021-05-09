@@ -10,10 +10,10 @@ import kotlin.test.assertTrue
 
 class NamedEntryCollectionTest {
     private class TestEntry(
-        parent: NamedEntryCollection<TestEntry>,
+        parent: MutableNamedEntryCollection<TestEntry>,
         override val id: Int
-    ) : NamedEntry {
-        private var parent: NamedEntryCollection<TestEntry>? = parent
+    ) : MutableNamedEntry {
+        private var parent: MutableNamedEntryCollection<TestEntry>? = parent
 
         override var nameHash: Int = -1
             set(value) {
@@ -27,7 +27,7 @@ class NamedEntryCollectionTest {
         }
     }
 
-    private class TestCollection : NamedEntryCollection<TestEntry>(::TestEntry)
+    private class TestCollection : MutableNamedEntryCollection<TestEntry>(::TestEntry)
 
     @Test
     fun testBounds() {

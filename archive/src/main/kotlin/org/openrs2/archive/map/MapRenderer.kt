@@ -277,7 +277,7 @@ public class MapRenderer @Inject constructor(
         connection: Connection,
         masterIndexId: Int,
         archiveId: Int,
-        group: Js5Index.Group
+        group: Js5Index.Group<*>
     ): Int2ObjectSortedMap<ByteBuf>? {
         connection.prepareStatement(
             """

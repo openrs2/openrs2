@@ -6,7 +6,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectSortedMap
 import org.openrs2.buffer.use
 
 public object Group {
-    public fun unpack(input: ByteBuf, group: Js5Index.Group): Int2ObjectSortedMap<ByteBuf> {
+    public fun unpack(input: ByteBuf, group: Js5Index.Group<*>): Int2ObjectSortedMap<ByteBuf> {
         require(group.size >= 1)
 
         val singleEntry = group.singleOrNull()
