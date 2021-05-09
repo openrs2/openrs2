@@ -12,13 +12,13 @@
 		<nav class="navbar navbar-dark navbar-expand bg-dark mb-4" th:fragment="nav">
 			<div class="container">
 				<a class="navbar-brand" href="/">OpenRS2 Archive</a>
-				<ul class="navbar-nav mr-auto">
+				<ul class="navbar-nav me-auto">
 					<!--/*@thymesVar id="active" type="java.lang.String"*/-->
-					<li class="nav-item" th:classappend="${active == 'caches'}? 'active'">
-						<a class="nav-link" href="/caches">Caches</a>
+					<li class="nav-item">
+						<a class="nav-link" th:classappend="${active == 'caches'}? 'active'" href="/caches">Caches</a>
 					</li>
-					<li class="nav-item" th:classappend="${active == 'keys'}? 'active'">
-						<a class="nav-link" href="/keys">Keys</a>
+					<li class="nav-item">
+						<a class="nav-link" th:classappend="${active == 'keys'}? 'active'" href="/keys">Keys</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="/pub">Other</a>

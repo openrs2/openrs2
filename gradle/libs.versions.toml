@@ -17,7 +17,7 @@ asm-commons = { module = "org.ow2.asm:asm-commons", version.ref = "asm" }
 asm-core = { module = "org.ow2.asm:asm", version.ref = "asm" }
 asm-tree = { module = "org.ow2.asm:asm-tree", version.ref = "asm" }
 asm-util = { module = "org.ow2.asm:asm-util", version.ref = "asm" }
-bootstrap = { module = "org.webjars:bootstrap", version = "4.6.0-1" }
+bootstrap = { module = "org.webjars:bootstrap", version = "5.0.0" }
 bouncyCastle-pkix = { module = "org.bouncycastle:bcpkix-jdk15on", version = "1.68" }
 bouncyCastle-provider = { module = "org.bouncycastle:bcprov-jdk15on", version = "1.68" }
 byteUnits = { module = "com.jakewharton.byteunits:byteunits", version = "0.9.1" }
@@ -38,6 +38,7 @@ javaParser = { module = "com.github.javaparser:javaparser-symbol-solver-core", v
 jdom = { module = "org.jdom:jdom2", version = "2.0.6" }
 jgrapht = { module = "org.jgrapht:jgrapht-core", version = "1.5.1" }
 jimfs = { module = "com.google.jimfs:jimfs", version.ref = "jimfs" }
+jquery = { module = "org.webjars:jquery", version = "3.6.0" }
 jsoup = { module = "org.jsoup:jsoup", version = "1.13.1" }
 junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version = { strictly = "5.7.1" } }
 junit-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }

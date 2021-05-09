@@ -14,49 +14,49 @@
 
 			<!--/*@thymesVar id="cache" type="org.openrs2.archive.cache.CacheExporter.Cache"*/-->
 			<table class="table table-striped table-bordered table-hover">
-				<tr class="thead-dark">
-					<th>Format</th>
+				<tr>
+					<th class="table-dark">Format</th>
 					<td th:text="${cache.masterIndex.format}">VERSIONED</td>
 				</tr>
-				<tr class="thead-dark">
-					<th>Indexes</th>
+				<tr>
+					<th class="table-dark">Indexes</th>
 					<td th:class="${cache.stats}? (${cache.stats.allIndexesValid}? 'table-success' : 'table-danger')"
 					    th:text="${cache.stats}? ${cache.stats.validIndexes} + ' / ' + ${cache.stats.indexes} + ' (' + ${#numbers.formatPercent(cache.stats.validIndexesFraction, 1, 2)} + ')' : 'Calculating...'">
 						Calculating...
 					</td>
 				</tr>
-				<tr class="thead-dark">
-					<th>Groups</th>
+				<tr>
+					<th class="table-dark">Groups</th>
 					<td th:class="${cache.stats}? (${cache.stats.allGroupsValid}? 'table-success' : 'table-warning')"
 					    th:text="${cache.stats}? ${#numbers.formatInteger(cache.stats.validGroups, 1, 'COMMA')} + ' / ' + ${#numbers.formatInteger(cache.stats.groups, 1, 'COMMA')} + ' (' + ${#numbers.formatPercent(cache.stats.validGroupsFraction, 1, 2)} + ')' : 'Calculating...'">
 						Calculating...
 					</td>
 				</tr>
-				<tr class="thead-dark">
-					<th>Keys<sup><a href="/caches#empty-locs">1</a></sup></th>
+				<tr>
+					<th class="table-dark">Keys<sup><a href="/caches#empty-locs">1</a></sup></th>
 					<td th:class="${cache.stats}? (${cache.stats.allKeysValid}? 'table-success' : 'table-warning')"
 					    th:text="${cache.stats}? ${#numbers.formatInteger(cache.stats.validKeys, 1, 'COMMA')} + ' / ' + ${#numbers.formatInteger(cache.stats.keys, 1, 'COMMA')} + ' (' + ${#numbers.formatPercent(cache.stats.validKeysFraction, 1, 2)} + ')' : 'Calculating...'">
 						Calculating...
 					</td>
 				</tr>
-				<tr class="thead-dark">
-					<th>Size<sup><a href="/caches#size">2</a></sup></th>
+				<tr>
+					<th class="table-dark">Size<sup><a href="/caches#size">2</a></sup></th>
 					<!--/*@thymesVar id="#byteunits" type="org.openrs2.archive.web.ByteUnits"*/-->
 					<td th:text="${cache.stats}? ${#byteunits.format(cache.stats.size)} : 'Calculating...'">
 						Calculating...
 					</td>
 				</tr>
-				<tr class="thead-dark">
-					<th>Download</th>
+				<tr>
+					<th class="table-dark">Download</th>
 					<td>
 						<div class="btn-toolbar">
-							<div class="btn-group mr-2">
+							<div class="btn-group me-2">
 								<a th:href="${'/caches/' + cache.id + '/disk.zip'}"
 								   class="btn btn-primary btn-sm">Cache (.dat2/.idx)</a>
 								<a th:href="${'/caches/' + cache.id + '/flat-file.zip'}"
 								   class="btn btn-primary btn-sm">Cache (Flat file)</a>
 							</div>
-							<div class="btn-group mr-2">
+							<div class="btn-group me-2">
 								<a th:href="${'/caches/' + cache.id + '/keys.json'}"
 								   class="btn btn-primary btn-sm">Keys (JSON)</a>
 								<a th:href="${'/caches/' + cache.id + '/keys.zip'}"
@@ -75,7 +75,7 @@
 
 			<div class="table-responsive">
 				<table class="table table-striped table-bordered table-hover">
-					<thead class="thead-dark">
+					<thead class="table-dark">
 						<tr>
 							<th>Game</th>
 							<th>Build</th>
@@ -104,7 +104,7 @@
 
 			<div class="table-responsive">
 				<table class="table table-striped table-bordered table-hover">
-					<thead class="thead-dark">
+					<thead class="table-dark">
 						<tr>
 							<th>Archive</th>
 							<th>Version</th>

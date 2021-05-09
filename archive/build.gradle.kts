@@ -30,6 +30,7 @@ dependencies {
     implementation(libs.guava)
     implementation(libs.hikaricp)
     implementation(libs.jdom)
+    implementation(libs.jquery)
     implementation(libs.jsoup)
     implementation(libs.kotlin.coroutines.core)
     implementation(libs.postgres)
