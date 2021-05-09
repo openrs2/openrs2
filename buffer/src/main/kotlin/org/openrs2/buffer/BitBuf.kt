@@ -7,16 +7,16 @@ import kotlin.math.min
 public class BitBuf(
     private val buf: ByteBuf
 ) : AutoCloseable {
-    private var readerIndex: Long = buf.readerIndex().toLong() shl 3
+    private var readerIndex: Long = buf.readerIndex().toLong() shl LOG_BITS_PER_BYTE
         private set(value) {
             field = value
-            buf.readerIndex((readerIndex shr 3).toInt())
+            buf.readerIndex((readerIndex shr LOG_BITS_PER_BYTE).toInt())
         }
 
-    private var writerIndex: Long = buf.writerIndex().toLong() shl 3
+    private var writerIndex: Long = buf.writerIndex().toLong() shl LOG_BITS_PER_BYTE
         private set(value) {
             field = value
-            buf.writerIndex((writerIndex shr 3).toInt())
+            buf.writerIndex((writerIndex shr LOG_BITS_PER_BYTE).toInt())
         }
 
     public fun getBoolean(index: Long): Boolean {
@@ -28,7 +28,7 @@ public class BitBuf(
     }
 
     public fun getBits(index: Long, len: Int): Int {
-        Preconditions.checkArgument(len in 1..32)
+        Preconditions.checkArgument(len in 1..BITS_PER_INT)
 
         if (index < 0 || (index + len) > capacity()) {
             throw IndexOutOfBoundsException()
@@ -37,12 +37,12 @@ public class BitBuf(
         var value = 0
 
         var remaining = len
-        var byteIndex = (index shr 3).toInt()
-        var bitIndex = (index and 7).toInt()
+        var byteIndex = (index shr LOG_BITS_PER_BYTE).toInt()
+        var bitIndex = (index and MASK_BITS_PER_BYTE.toLong()).toInt()
 
         while (remaining > 0) {
-            val n = min(8 - bitIndex, remaining)
-            val shift = (8 - (bitIndex + n)) and 7
+            val n = min(BITS_PER_BYTE - bitIndex, remaining)
+            val shift = (BITS_PER_BYTE - (bitIndex + n)) and MASK_BITS_PER_BYTE
             val mask = (1 shl n) - 1
 
             val v = buf.getUnsignedByte(byteIndex).toInt()
@@ -97,19 +97,19 @@ public class BitBuf(
     }
 
     public fun setBits(index: Long, len: Int, value: Int): BitBuf {
-        Preconditions.checkArgument(len in 1..32)
+        Preconditions.checkArgument(len in 1..BITS_PER_INT)
 
         if (index < 0 || (index + len) > capacity()) {
             throw IndexOutOfBoundsException()
         }
 
         var remaining = len
-        var byteIndex = (index shr 3).toInt()
-        var bitIndex = (index and 7).toInt()
+        var byteIndex = (index shr LOG_BITS_PER_BYTE).toInt()
+        var bitIndex = (index and MASK_BITS_PER_BYTE.toLong()).toInt()
 
         while (remaining > 0) {
-            val n = min(8 - bitIndex, remaining)
-            val shift = (8 - (bitIndex + n)) and 7
+            val n = min(BITS_PER_BYTE - bitIndex, remaining)
+            val shift = (BITS_PER_BYTE - (bitIndex + n)) and MASK_BITS_PER_BYTE
             val mask = (1 shl n) - 1
 
             var v = buf.getUnsignedByte(byteIndex).toInt()
@@ -171,8 +171,8 @@ public class BitBuf(
             throw IndexOutOfBoundsException()
         }
 
-        val currentByteIndex = writerIndex shr 3
-        val nextByteIndex = (writerIndex + len + 7) shr 3
+        val currentByteIndex = writerIndex shr LOG_BITS_PER_BYTE
+        val nextByteIndex = (writerIndex + len + MASK_BITS_PER_BYTE) shr LOG_BITS_PER_BYTE
 
         buf.ensureWritable((nextByteIndex - currentByteIndex).toInt())
 
@@ -192,16 +192,16 @@ public class BitBuf(
     }
 
     public fun capacity(): Long {
-        return buf.capacity().toLong() shl 3
+        return buf.capacity().toLong() shl LOG_BITS_PER_BYTE
     }
 
     public fun capacity(len: Long): BitBuf {
-        buf.capacity((len shr 3).toInt())
+        buf.capacity((len shr LOG_BITS_PER_BYTE).toInt())
         return this
     }
 
     public fun maxCapacity(): Long {
-        return buf.maxCapacity().toLong() shl 3
+        return buf.maxCapacity().toLong() shl LOG_BITS_PER_BYTE
     }
 
     public fun isReadable(): Boolean {
@@ -255,11 +255,18 @@ public class BitBuf(
     }
 
     override fun close() {
-        val bits = (((writerIndex + 7) and 7.toLong().inv()) - writerIndex).toInt()
+        val bits = (((writerIndex + MASK_BITS_PER_BYTE) and MASK_BITS_PER_BYTE.toLong().inv()) - writerIndex).toInt()
         if (bits != 0) {
             writeZero(bits)
         }
 
-        readerIndex = (readerIndex + 7) and 7.toLong().inv()
+        readerIndex = (readerIndex + MASK_BITS_PER_BYTE) and MASK_BITS_PER_BYTE.toLong().inv()
+    }
+
+    private companion object {
+        private const val LOG_BITS_PER_BYTE = 3
+        private const val BITS_PER_BYTE = 1 shl LOG_BITS_PER_BYTE
+        private const val MASK_BITS_PER_BYTE = BITS_PER_BYTE - 1
+        private const val BITS_PER_INT = 32
     }
 }
