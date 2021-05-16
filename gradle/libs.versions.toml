@@ -51,7 +51,8 @@ ktor-thymeleaf = { module = "io.ktor:ktor-thymeleaf", version.ref = "ktor" }
 ktor-webjars = { module = "io.ktor:ktor-webjars", version.ref = "ktor" }
 logback = { module = "ch.qos.logback:logback-classic", version = "1.2.3" }
 netty-buffer = { module = "io.netty:netty-buffer", version.ref = "netty" }
-netty-codec = { module = "io.netty:netty-codec", version.ref = "netty" }
+netty-codec-core = { module = "io.netty:netty-codec", version.ref = "netty" }
+netty-codec-http = { module = "io.netty:netty-codec-http", version.ref = "netty" }
 netty-transport = { module = "io.netty:netty-transport", version.ref = "netty" }
 openrs2-natives = { module = "org.openrs2:openrs2-natives-all", version = "3.2.0" }
 postgres = { module = "org.postgresql:postgresql", version = "42.2.20" }

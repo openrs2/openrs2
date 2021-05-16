@@ -11,7 +11,15 @@ application {
 dependencies {
     api(libs.clikt)
 
+    implementation(projects.buffer)
+    implementation(projects.cache)
+    implementation(projects.conf)
     implementation(projects.inject)
+    implementation(projects.net)
+    implementation(projects.protocol)
+    implementation(projects.util)
+    implementation(libs.guava)
+    implementation(libs.netty.codec.http)
 }
 
 publishing {

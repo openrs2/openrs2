@@ -1,9 +1,24 @@
 package org.openrs2.game
 
+import com.google.common.util.concurrent.Service
 import com.google.inject.AbstractModule
+import com.google.inject.multibindings.Multibinder
+import org.openrs2.buffer.BufferModule
+import org.openrs2.cache.CacheModule
+import org.openrs2.conf.ConfigModule
+import org.openrs2.game.net.NetworkService
+import org.openrs2.game.net.js5.Js5Service
+import org.openrs2.net.NetworkModule
 
 public object GameModule : AbstractModule() {
     override fun configure() {
-        // empty
+        install(BufferModule)
+        install(CacheModule)
+        install(ConfigModule)
+        install(NetworkModule)
+
+        val binder = Multibinder.newSetBinder(binder(), Service::class.java)
+        binder.addBinding().to(Js5Service::class.java)
+        binder.addBinding().to(NetworkService::class.java)
     }
 }

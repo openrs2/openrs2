@@ -5,7 +5,7 @@ plugins {
 
 dependencies {
     api(projects.crypto)
-    api(libs.netty.codec)
+    api(libs.netty.codec.core)
 
     implementation(projects.buffer)
 }
