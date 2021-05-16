@@ -66,7 +66,6 @@ public class BootstrapFactory @Inject constructor(
             .group(group)
             .channel(channel)
             .option(ChannelOption.ALLOCATOR, alloc)
-            .option(ChannelOption.AUTO_READ, false)
             .childOption(ChannelOption.ALLOCATOR, alloc)
             .childOption(ChannelOption.AUTO_READ, false)
             .childOption(ChannelOption.TCP_NODELAY, true)
