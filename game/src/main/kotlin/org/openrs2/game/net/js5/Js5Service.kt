@@ -12,6 +12,7 @@ import org.openrs2.cache.VersionTrailer
 import org.openrs2.protocol.js5.Js5Request
 import org.openrs2.protocol.js5.Js5Response
 import org.openrs2.util.collect.UniqueQueue
+import java.io.FileNotFoundException
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -66,12 +67,17 @@ public class Js5Service @Inject constructor(
                 }
             }
         } else {
-            store.read(request.archive, request.group).use { buf ->
-                if (request.archive != Js5Archive.ARCHIVESET) {
-                    VersionTrailer.strip(buf)
-                }
+            try {
+                store.read(request.archive, request.group).use { buf ->
+                    if (request.archive != Js5Archive.ARCHIVESET) {
+                        VersionTrailer.strip(buf)
+                    }
 
-                buf.retain()
+                    buf.retain()
+                }
+            } catch (ex: FileNotFoundException) {
+                ctx.close()
+                return
             }
         }
 
