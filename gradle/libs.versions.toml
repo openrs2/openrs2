@@ -5,9 +5,9 @@ guava = "30.1.1-jre"
 guice = "5.0.1"
 jackson = "2.12.3"
 jimfs = "1.2"
-junit = "5.7.1"
+junit = "5.7.2"
 kotlin = "1.5.0"
-kotlinCoroutines = "1.4.3"
+kotlinCoroutines = "1.5.0"
 ktor = "1.5.4"
 netty = "4.1.63.Final"
 nettyIoUring = "0.0.5.Final"
@@ -17,15 +17,15 @@ asm-commons = { module = "org.ow2.asm:asm-commons", version.ref = "asm" }
 asm-core = { module = "org.ow2.asm:asm", version.ref = "asm" }
 asm-tree = { module = "org.ow2.asm:asm-tree", version.ref = "asm" }
 asm-util = { module = "org.ow2.asm:asm-util", version.ref = "asm" }
-bootstrap = { module = "org.webjars:bootstrap", version = "5.0.0" }
+bootstrap = { module = "org.webjars:bootstrap", version = "5.0.1" }
 bouncyCastle-pkix = { module = "org.bouncycastle:bcpkix-jdk15on", version = "1.68" }
 bouncyCastle-provider = { module = "org.bouncycastle:bcprov-jdk15on", version = "1.68" }
 byteUnits = { module = "com.jakewharton.byteunits:byteunits", version = "0.9.1" }
-clikt = { module = "com.github.ajalt.clikt:clikt", version = "3.1.0" }
+clikt = { module = "com.github.ajalt.clikt:clikt", version = "3.2.0" }
 commons-compress = { module = "org.apache.commons:commons-compress", version.ref = "commons-compress" }
 fastutil = { module = "it.unimi.dsi:fastutil", version = "8.5.4" }
 fernflower = { module = "org.openrs2:fernflower", version = "1.1.0" }
-flyway = { module = "org.flywaydb:flyway-core", version = "7.8.2" }
+flyway = { module = "org.flywaydb:flyway-core", version = "7.9.0" }
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
 guice = { module = "com.google.inject:guice", version.ref = "guice" }
 h2 = { module = "com.h2database:h2", version = "1.4.200" }
@@ -34,13 +34,13 @@ inlineLogger = { module = "com.michael-bull.kotlin-inline-logger:kotlin-inline-l
 jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jackson" }
 jackson-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin", version.ref = "jackson" }
 jackson-yaml = { module = "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml", version.ref = "jackson" }
-javaParser = { module = "com.github.javaparser:javaparser-symbol-solver-core", version = "3.20.2" }
+javaParser = { module = "com.github.javaparser:javaparser-symbol-solver-core", version = "3.22.1" }
 jdom = { module = "org.jdom:jdom2", version = "2.0.6" }
 jgrapht = { module = "org.jgrapht:jgrapht-core", version = "1.5.1" }
 jimfs = { module = "com.google.jimfs:jimfs", version.ref = "jimfs" }
 jquery = { module = "org.webjars:jquery", version = "3.6.0" }
 jsoup = { module = "org.jsoup:jsoup", version = "1.13.1" }
-junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version = { strictly = "5.7.1" } }
+junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version = { strictly = "5.7.2" } }
 junit-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
 kotlin-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinCoroutines" }
 kotlin-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinCoroutines" }
