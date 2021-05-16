@@ -13,7 +13,7 @@ public class GameServer @Inject constructor(
     private val serviceManager = ServiceManager(services)
 
     public fun run(start: Long) {
-        val shutdownHook = Thread(::stop)
+        val shutdownHook = Thread(::stop, "ShutdownHook")
 
         serviceManager.startAsync()
         runtime.addShutdownHook(shutdownHook)
