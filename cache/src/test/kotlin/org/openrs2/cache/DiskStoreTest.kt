@@ -730,6 +730,36 @@ class DiskStoreTest {
         }
     }
 
+    @Test
+    fun testDat2mRead() {
+        readTest("dat2m") { store ->
+            store.read(0, 0).use { actual ->
+                copiedBuffer("Open").use { expected ->
+                    assertEquals(expected, actual)
+                }
+            }
+
+            store.read(40, 0).use { actual ->
+                copiedBuffer("RS2").use { expected ->
+                    assertEquals(expected, actual)
+                }
+            }
+        }
+    }
+
+    @Test
+    fun testDat2mWrite() {
+        overwriteTest("dat2m-empty", "dat2m") { store ->
+            copiedBuffer("Open").use { buf ->
+                store.write(0, 0, buf)
+            }
+
+            copiedBuffer("RS2").use { buf ->
+                store.write(40, 0, buf)
+            }
+        }
+    }
+
     private fun readTest(name: String, f: (Store) -> Unit) {
         DiskStore.open(ROOT.resolve(name)).use { store ->
             f(store)

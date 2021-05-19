@@ -17,11 +17,17 @@ import kotlin.math.min
  * A [Store] implementation compatible with the native `main_file_cache.dat2`
  * and `main_file_cache.idx*` format used by the client.
  *
+ * It supports opening existing caches with a `main_file_cache.dat2m` file for
+ * compatibility purposes. It does not support creating new caches with a
+ * `.dat2m` file, as [FlatFileStore] is a much better choice for storing large
+ * caches.
+ *
  * This class is not thread safe.
  */
 public class DiskStore private constructor(
     private val root: Path,
     private val data: BufferedFileChannel,
+    private val musicData: BufferedFileChannel?,
     private val indexes: Array<BufferedFileChannel?>,
     private val alloc: ByteBufAllocator
 ) : Store {
@@ -134,6 +140,14 @@ public class DiskStore private constructor(
         createOrGetIndex(archive)
     }
 
+    private fun getData(archive: Int): BufferedFileChannel {
+        return if (musicData != null && archive == MUSIC_ARCHIVE) {
+            musicData
+        } else {
+            data
+        }
+    }
+
     override fun read(archive: Int, group: Int): ByteBuf {
         alloc.buffer(TEMP_BUFFER_SIZE, TEMP_BUFFER_SIZE).use { tempBuf ->
             val entry = readIndexEntry(archive, group, tempBuf) ?: throw FileNotFoundException()
@@ -142,6 +156,8 @@ public class DiskStore private constructor(
             }
 
             alloc.buffer(entry.size, entry.size).use { buf ->
+                val data = getData(archive)
+
                 val extended = group >= 65536
                 val headerSize = if (extended) {
                     EXTENDED_BLOCK_HEADER_SIZE
@@ -201,7 +217,7 @@ public class DiskStore private constructor(
         }
     }
 
-    private fun allocateBlock(): Int {
+    private fun allocateBlock(data: BufferedFileChannel): Int {
         var block = (data.size() + BLOCK_SIZE - 1) / BLOCK_SIZE
 
         if (block == 0L) {
@@ -254,6 +270,8 @@ public class DiskStore private constructor(
         val index = createOrGetIndex(archive)
 
         alloc.buffer(TEMP_BUFFER_SIZE, TEMP_BUFFER_SIZE).use { tempBuf ->
+            val data = getData(archive)
+
             // read existing index entry, if it exists
             val indexPos = group.toLong() * INDEX_ENTRY_SIZE
 
@@ -309,7 +327,7 @@ public class DiskStore private constructor(
             // allocate a new block if necessary
             var overwrite: Boolean
             if (block == 0) {
-                block = allocateBlock()
+                block = allocateBlock(data)
                 overwrite = false
             } else {
                 overwrite = true
@@ -362,7 +380,7 @@ public class DiskStore private constructor(
 
                         // allocate a new block if necessary
                         if (nextBlock == 0) {
-                            nextBlock = allocateBlock()
+                            nextBlock = allocateBlock(data)
                             overwrite = false
                         }
                     } else {
@@ -428,6 +446,7 @@ public class DiskStore private constructor(
 
     override fun flush() {
         data.flush()
+        musicData?.close()
 
         for (index in indexes) {
             index?.flush()
@@ -436,6 +455,7 @@ public class DiskStore private constructor(
 
     override fun close() {
         data.close()
+        musicData?.close()
 
         for (index in indexes) {
             index?.close()
@@ -458,8 +478,14 @@ public class DiskStore private constructor(
         private const val INDEX_BUFFER_SIZE = INDEX_ENTRY_SIZE * 1000
         private const val DATA_BUFFER_SIZE = BLOCK_SIZE * 10
 
+        private const val MUSIC_ARCHIVE = 40
+
         internal fun dataPath(root: Path): Path {
             return root.resolve("main_file_cache.dat2")
+        }
+
+        private fun musicDataPath(root: Path): Path {
+            return root.resolve("main_file_cache.dat2m")
         }
 
         private fun indexPath(root: Path, archive: Int): Path {
@@ -473,6 +499,18 @@ public class DiskStore private constructor(
                 DATA_BUFFER_SIZE,
                 alloc
             )
+
+            val path = musicDataPath(root)
+            val musicData = if (Files.exists(path)) {
+                BufferedFileChannel(
+                    FileChannel.open(musicDataPath(root), READ, WRITE),
+                    DATA_BUFFER_SIZE,
+                    DATA_BUFFER_SIZE,
+                    alloc
+                )
+            } else {
+                null
+            }
 
             val archives = Array(Store.MAX_ARCHIVE + 1) { archive ->
                 val path = indexPath(root, archive)
@@ -488,7 +526,7 @@ public class DiskStore private constructor(
                 }
             }
 
-            return DiskStore(root, data, archives, alloc)
+            return DiskStore(root, data, musicData, archives, alloc)
         }
 
         public fun create(root: Path, alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT): Store {
@@ -503,7 +541,7 @@ public class DiskStore private constructor(
 
             val archives = Array<BufferedFileChannel?>(Store.MAX_ARCHIVE + 1) { null }
 
-            return DiskStore(root, data, archives, alloc)
+            return DiskStore(root, data, null, archives, alloc)
         }
     }
 }
