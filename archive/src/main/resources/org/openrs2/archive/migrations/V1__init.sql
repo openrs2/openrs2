@@ -179,7 +179,10 @@ CREATE FUNCTION resolve_group(_archive_id uint1, _group_id INTEGER, _crc32 INTEG
     SELECT c.*
     FROM groups g
     JOIN containers c ON c.id = g.container_id
-    WHERE g.archive_id = _archive_id AND g.group_id = _group_id AND c.crc32 = _crc32 AND g.version = _version & 65535
+    WHERE g.archive_id = _archive_id AND g.group_id = _group_id AND c.crc32 = _crc32 AND (
+        (g.version = _version AND NOT g.version_truncated) OR
+        (g.version = _version & 65535 AND g.version_truncated)
+    )
     ORDER BY g.version_truncated ASC, c.id ASC
     LIMIT 1;
 $$ LANGUAGE SQL STABLE PARALLEL SAFE ROWS 1;
