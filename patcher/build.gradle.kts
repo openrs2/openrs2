@@ -14,7 +14,6 @@ dependencies {
     api(libs.guice)
 
     implementation(projects.conf)
-    implementation(projects.crypto)
     implementation(projects.inject)
     implementation(libs.openrs2.natives)
 }
