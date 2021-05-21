@@ -20553,7 +20553,7 @@ methods:
       1: "bytes"
     locals:
       8: "buffer"
-      12: "updated"
+      12: "version"
       38: "worldsUpdated"
   client!gd.a (I)V:
     owner: "Static16"
