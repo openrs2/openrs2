@@ -7,6 +7,7 @@ dependencies {
     api(libs.guice)
     api(libs.netty.buffer)
 
+    implementation(projects.util)
     implementation(libs.guava)
 }
 

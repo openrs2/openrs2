@@ -4,8 +4,12 @@ import com.google.common.base.Preconditions
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufUtil
 import io.netty.buffer.Unpooled
+import io.netty.util.ByteProcessor
+import org.openrs2.util.charset.Cp1252Charset
 import java.nio.charset.Charset
 import java.util.zip.CRC32
+
+private const val STRING_VERSION = 0
 
 public fun wrappedBuffer(vararg bytes: Byte): ByteBuf {
     return Unpooled.wrappedBuffer(bytes)
@@ -88,6 +92,39 @@ public fun ByteBuf.writeUnsignedIntSmart(v: Int): ByteBuf {
         else -> throw IllegalArgumentException()
     }
 
+    return this
+}
+
+public fun ByteBuf.readString(): String {
+    val start = readerIndex()
+
+    val end = forEachByte(ByteProcessor.FIND_NUL)
+    require(end != -1) {
+        "Unterminated string"
+    }
+
+    val s = toString(start, end - start, Cp1252Charset)
+    readerIndex(end + 1)
+    return s
+}
+
+public fun ByteBuf.writeString(s: CharSequence): ByteBuf {
+    writeCharSequence(s, Cp1252Charset)
+    writeByte(0)
+    return this
+}
+
+public fun ByteBuf.readVersionedString(): String {
+    val version = readUnsignedByte().toInt()
+    require(version == STRING_VERSION) {
+        "Unsupported version number $version"
+    }
+    return readString()
+}
+
+public fun ByteBuf.writeVersionedString(s: CharSequence): ByteBuf {
+    writeByte(STRING_VERSION)
+    writeString(s)
     return this
 }
 

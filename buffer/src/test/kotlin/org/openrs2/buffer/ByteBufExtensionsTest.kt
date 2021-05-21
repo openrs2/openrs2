@@ -408,6 +408,128 @@ class ByteBufExtensionsTest {
     }
 
     @Test
+    fun testReadString() {
+        wrappedBuffer(0).use { buf ->
+            assertEquals("", buf.readString())
+            assertFalse(buf.isReadable)
+        }
+
+        wrappedBuffer(
+            214.toByte(),
+            'p'.code.toByte(),
+            'e'.code.toByte(),
+            'n'.code.toByte(),
+            'R'.code.toByte(),
+            'S'.code.toByte(),
+            '2'.code.toByte(),
+            0
+        ).use { buf ->
+            assertEquals("ÖpenRS2", buf.readString())
+            assertFalse(buf.isReadable)
+        }
+
+        assertFailsWith<IllegalArgumentException> {
+            Unpooled.EMPTY_BUFFER.readString()
+        }
+    }
+
+    @Test
+    fun testWriteString() {
+        ByteBufAllocator.DEFAULT.buffer().use { actual ->
+            actual.writeString("")
+
+            wrappedBuffer(0).use { expected ->
+                assertEquals(expected, actual)
+            }
+        }
+
+        ByteBufAllocator.DEFAULT.buffer().use { actual ->
+            actual.writeString("ÖpenRS2")
+
+            wrappedBuffer(
+                214.toByte(),
+                'p'.code.toByte(),
+                'e'.code.toByte(),
+                'n'.code.toByte(),
+                'R'.code.toByte(),
+                'S'.code.toByte(),
+                '2'.code.toByte(),
+                0
+            ).use { expected ->
+                assertEquals(expected, actual)
+            }
+        }
+    }
+
+    @Test
+    fun testReadVersionedString() {
+        wrappedBuffer(0, 0).use { buf ->
+            assertEquals("", buf.readVersionedString())
+            assertFalse(buf.isReadable)
+        }
+
+        wrappedBuffer(
+            0,
+            214.toByte(),
+            'p'.code.toByte(),
+            'e'.code.toByte(),
+            'n'.code.toByte(),
+            'R'.code.toByte(),
+            'S'.code.toByte(),
+            '2'.code.toByte(),
+            0
+        ).use { buf ->
+            assertEquals("ÖpenRS2", buf.readVersionedString())
+            assertFalse(buf.isReadable)
+        }
+
+        assertFailsWith<IndexOutOfBoundsException> {
+            Unpooled.EMPTY_BUFFER.readVersionedString()
+        }
+
+        wrappedBuffer(0).use { buf ->
+            assertFailsWith<IllegalArgumentException> {
+                buf.readVersionedString()
+            }
+        }
+
+        wrappedBuffer(1, 0).use { buf ->
+            assertFailsWith<IllegalArgumentException> {
+                buf.readVersionedString()
+            }
+        }
+    }
+
+    @Test
+    fun testWriteVersionedString() {
+        ByteBufAllocator.DEFAULT.buffer().use { actual ->
+            actual.writeVersionedString("")
+
+            wrappedBuffer(0, 0).use { expected ->
+                assertEquals(expected, actual)
+            }
+        }
+
+        ByteBufAllocator.DEFAULT.buffer().use { actual ->
+            actual.writeVersionedString("ÖpenRS2")
+
+            wrappedBuffer(
+                0,
+                214.toByte(),
+                'p'.code.toByte(),
+                'e'.code.toByte(),
+                'n'.code.toByte(),
+                'R'.code.toByte(),
+                'S'.code.toByte(),
+                '2'.code.toByte(),
+                0
+            ).use { expected ->
+                assertEquals(expected, actual)
+            }
+        }
+    }
+
+    @Test
     fun testCrc32() {
         val s = "AAThe quick brown fox jumps over the lazy dogA"
 
