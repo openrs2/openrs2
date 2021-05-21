@@ -5,6 +5,7 @@ import org.openrs2.protocol.login.InitJaggrabConnectionCodec
 import org.openrs2.protocol.login.InitJs5RemoteConnectionCodec
 import org.openrs2.protocol.login.IpLimitCodec
 import org.openrs2.protocol.login.Js5OkCodec
+import org.openrs2.protocol.login.RequestWorldListCodec
 import org.openrs2.protocol.login.ServerFullCodec
 
 public class Protocol(vararg codecs: PacketCodec<*>) {
@@ -30,7 +31,8 @@ public class Protocol(vararg codecs: PacketCodec<*>) {
     public companion object {
         public val LOGIN_UPSTREAM: Protocol = Protocol(
             InitJs5RemoteConnectionCodec,
-            InitJaggrabConnectionCodec
+            InitJaggrabConnectionCodec,
+            RequestWorldListCodec
         )
         public val LOGIN_DOWNSTREAM: Protocol = Protocol(
             Js5OkCodec,
