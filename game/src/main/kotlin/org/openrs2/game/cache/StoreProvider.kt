@@ -1,6 +1,7 @@
-package org.openrs2.cache
+package org.openrs2.game.cache
 
 import io.netty.buffer.ByteBufAllocator
+import org.openrs2.cache.Store
 import java.nio.file.Path
 import javax.inject.Inject
 import javax.inject.Provider

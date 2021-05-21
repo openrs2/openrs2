@@ -1,5 +1,8 @@
-package org.openrs2.cache
+package org.openrs2.game.cache
 
+import org.openrs2.cache.Js5MasterIndex
+import org.openrs2.cache.MasterIndexFormat
+import org.openrs2.cache.Store
 import javax.inject.Inject
 import javax.inject.Provider
 
