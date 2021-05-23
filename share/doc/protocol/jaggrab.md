@@ -10,7 +10,7 @@ contains a single opcode byte: `17`.
 
 The loader then writes the following string:
 
-    JAGGRAB /<file name>
+    JAGGRAB <file name>
 
 where `<file name>` is replaced with the name of the file to fetch. The string
 is followed by two line feed characters.

@@ -10,11 +10,7 @@ import javax.inject.Singleton
 @Singleton
 public class FileProvider {
     public fun get(uri: String): FileRegion? {
-        if (!uri.startsWith("/")) {
-            return null
-        }
-
-        var path = ROOT.resolve(uri.substring(1)).toAbsolutePath().normalize()
+        var path = ROOT.resolve(uri).toAbsolutePath().normalize()
         if (!path.startsWith(ROOT)) {
             return null
         }

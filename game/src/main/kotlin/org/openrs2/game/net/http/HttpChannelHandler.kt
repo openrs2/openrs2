@@ -25,7 +25,13 @@ public class HttpChannelHandler @Inject constructor(
     }
 
     override fun channelRead0(ctx: ChannelHandlerContext, msg: HttpRequest) {
-        val file = fileProvider.get(msg.uri())
+        val uri = msg.uri()
+        if (!uri.startsWith("/")) {
+            ctx.write(createResponse(HttpResponseStatus.BAD_REQUEST)).addListener(ChannelFutureListener.CLOSE)
+            return
+        }
+
+        val file = fileProvider.get(uri.substring(1))
         if (file == null) {
             ctx.write(createResponse(HttpResponseStatus.NOT_FOUND)).addListener(ChannelFutureListener.CLOSE)
             return
