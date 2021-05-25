@@ -25,7 +25,8 @@ import javax.inject.Singleton
 @Singleton
 public class Patcher @Inject constructor(
     @PatcherQualifier private val transformers: Set<Transformer>,
-    private val config: Config
+    private val config: Config,
+    private val packClassLibraryWriter: PackClassLibraryWriter
 ) {
     private val unsignedManifest = Manifest().apply {
         mainAttributes[MANIFEST_VERSION] = "1.0"
@@ -85,19 +86,19 @@ public class Patcher @Inject constructor(
             "runescape.pack200", "main_file_cache.dat0", classPath, client, Pack200LibraryWriter
         )
         val clientJs5 = Resource.compressLibrary(
-            "runescape.js5", "main_file_cache.dat1", classPath, client, PackClassLibraryWriter
+            "runescape.js5", "main_file_cache.dat1", classPath, client, packClassLibraryWriter
         )
         val glClientPack = Resource.compressLibrary(
             "runescape_gl.pack200", "main_file_cache.dat3", glClassPath, glClient, Pack200LibraryWriter
         )
         val glClientJs5 = Resource.compressLibrary(
-            "runescape_gl.js5", "main_file_cache.dat4", glClassPath, glClient, PackClassLibraryWriter
+            "runescape_gl.js5", "main_file_cache.dat4", glClassPath, glClient, packClassLibraryWriter
         )
         val glPack = Resource.compressLibrary(
             "jaggl.pack200", "main_file_cache.dat5", glClassPath, gl, Pack200LibraryWriter
         )
         val glJs5 = Resource.compressLibrary(
-            "jaggl.js5", "main_file_cache.dat6", glClassPath, gl, PackClassLibraryWriter
+            "jaggl.js5", "main_file_cache.dat6", glClassPath, gl, packClassLibraryWriter
         )
 
         val glNatives = Resource.compressGlNatives()

@@ -9,6 +9,8 @@ dependencies {
     api(libs.guice)
     api(libs.jackson.databind)
 
+    implementation(projects.buffer)
+    implementation(projects.cache)
     implementation(projects.compress)
     implementation(projects.crypto)
 }

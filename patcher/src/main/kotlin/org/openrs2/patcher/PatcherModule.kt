@@ -2,6 +2,7 @@ package org.openrs2.patcher
 
 import com.google.inject.AbstractModule
 import com.google.inject.multibindings.Multibinder
+import org.openrs2.asm.AsmModule
 import org.openrs2.asm.transform.Transformer
 import org.openrs2.conf.ConfigModule
 import org.openrs2.crypto.CryptoModule
@@ -22,6 +23,7 @@ import org.openrs2.patcher.transform.TypoTransformer
 
 public object PatcherModule : AbstractModule() {
     override fun configure() {
+        install(AsmModule)
         install(ConfigModule)
         install(CryptoModule)
 
