@@ -95,7 +95,7 @@ public fun ByteBuf.writeUnsignedIntSmart(v: Int): ByteBuf {
     return this
 }
 
-public fun ByteBuf.readString(): String {
+public fun ByteBuf.readString(charset: Charset = Cp1252Charset): String {
     val start = readerIndex()
 
     val end = forEachByte(ByteProcessor.FIND_NUL)
@@ -103,13 +103,13 @@ public fun ByteBuf.readString(): String {
         "Unterminated string"
     }
 
-    val s = toString(start, end - start, Cp1252Charset)
+    val s = toString(start, end - start, charset)
     readerIndex(end + 1)
     return s
 }
 
-public fun ByteBuf.writeString(s: CharSequence): ByteBuf {
-    writeCharSequence(s, Cp1252Charset)
+public fun ByteBuf.writeString(s: CharSequence, charset: Charset = Cp1252Charset): ByteBuf {
+    writeCharSequence(s, charset)
     writeByte(0)
     return this
 }

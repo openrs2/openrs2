@@ -2,6 +2,7 @@ package org.openrs2.buffer
 
 import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.Unpooled
+import org.openrs2.util.charset.ModifiedUtf8Charset
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -434,6 +435,33 @@ class ByteBufExtensionsTest {
     }
 
     @Test
+    fun testReadStringCharset() {
+        wrappedBuffer(0).use { buf ->
+            assertEquals("", buf.readString(ModifiedUtf8Charset))
+            assertFalse(buf.isReadable)
+        }
+
+        wrappedBuffer(
+            0xC3.toByte(),
+            0x96.toByte(),
+            'p'.code.toByte(),
+            'e'.code.toByte(),
+            'n'.code.toByte(),
+            'R'.code.toByte(),
+            'S'.code.toByte(),
+            '2'.code.toByte(),
+            0
+        ).use { buf ->
+            assertEquals("ÖpenRS2", buf.readString(ModifiedUtf8Charset))
+            assertFalse(buf.isReadable)
+        }
+
+        assertFailsWith<IllegalArgumentException> {
+            Unpooled.EMPTY_BUFFER.readString(ModifiedUtf8Charset)
+        }
+    }
+
+    @Test
     fun testWriteString() {
         ByteBufAllocator.DEFAULT.buffer().use { actual ->
             actual.writeString("")
@@ -448,6 +476,35 @@ class ByteBufExtensionsTest {
 
             wrappedBuffer(
                 214.toByte(),
+                'p'.code.toByte(),
+                'e'.code.toByte(),
+                'n'.code.toByte(),
+                'R'.code.toByte(),
+                'S'.code.toByte(),
+                '2'.code.toByte(),
+                0
+            ).use { expected ->
+                assertEquals(expected, actual)
+            }
+        }
+    }
+
+    @Test
+    fun testWriteStringCharset() {
+        ByteBufAllocator.DEFAULT.buffer().use { actual ->
+            actual.writeString("", ModifiedUtf8Charset)
+
+            wrappedBuffer(0).use { expected ->
+                assertEquals(expected, actual)
+            }
+        }
+
+        ByteBufAllocator.DEFAULT.buffer().use { actual ->
+            actual.writeString("ÖpenRS2", ModifiedUtf8Charset)
+
+            wrappedBuffer(
+                0xC3.toByte(),
+                0x96.toByte(),
                 'p'.code.toByte(),
                 'e'.code.toByte(),
                 'n'.code.toByte(),
