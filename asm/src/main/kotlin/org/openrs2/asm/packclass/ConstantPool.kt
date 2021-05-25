@@ -43,6 +43,12 @@ public class ConstantPool private constructor(
     }
 
     public class Builder {
+        /*
+         * Sorting the entries provides two benefits: (1) the constant pool
+         * will compress better, as related entries are more likely to fit in
+         * the window, and (2) we can use binary search to speed up searching
+         * for an entry's index.
+         */
         private val strings = ObjectAVLTreeSet<String>()
         private val fieldNamesAndTypes = ObjectAVLTreeSet<NameAndType>()
         private val methodNamesAndTypes = ObjectAVLTreeSet<NameAndType>()
