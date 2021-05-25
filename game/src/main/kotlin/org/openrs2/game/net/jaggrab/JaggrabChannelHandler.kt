@@ -4,6 +4,7 @@ import io.netty.channel.ChannelFutureListener
 import io.netty.channel.ChannelHandler
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.SimpleChannelInboundHandler
+import org.openrs2.buffer.use
 import org.openrs2.game.net.FileProvider
 import org.openrs2.protocol.jaggrab.JaggrabRequest
 import javax.inject.Inject
@@ -19,13 +20,14 @@ public class JaggrabChannelHandler @Inject constructor(
     }
 
     override fun channelRead0(ctx: ChannelHandlerContext, msg: JaggrabRequest) {
-        val file = fileProvider.get(msg.path)
-        if (file == null) {
-            ctx.close()
-            return
-        }
+        fileProvider.get(msg.path).use { file ->
+            if (file == null) {
+                ctx.close()
+                return
+            }
 
-        ctx.write(file).addListener(ChannelFutureListener.CLOSE)
+            ctx.write(file.retain()).addListener(ChannelFutureListener.CLOSE)
+        }
     }
 
     override fun channelReadComplete(ctx: ChannelHandlerContext) {
