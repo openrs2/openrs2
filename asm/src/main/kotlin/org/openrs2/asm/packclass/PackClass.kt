@@ -182,7 +182,7 @@ public object PackClass {
         0, // AASTORE
         0, // BASTORE
         0, // CASTORE
-        0, // SASTORE*/
+        0, // SASTORE
         0, // POP
         0, // POP2
         0, // DUP
