@@ -148,14 +148,14 @@ public class ConstantPool private constructor(
             strings.remove(LINE_NUMBER_TABLE)
 
             val it = strings.iterator()
-            val stringArray = Array(6 + strings.size) { i ->
+            val stringArray = Array(BUILTIN_STRINGS + strings.size) { i ->
                 when (i) {
-                    0 -> CODE
-                    1 -> EXCEPTIONS
-                    2 -> SYNTHETIC
-                    3 -> CONSTANT_VALUE
-                    4 -> SOURCE_FILE
-                    5 -> LINE_NUMBER_TABLE
+                    CODE_INDEX -> CODE
+                    EXCEPTIONS_INDEX -> EXCEPTIONS
+                    SYNTHETIC_INDEX -> SYNTHETIC
+                    CONSTANT_VALUE_INDEX -> CONSTANT_VALUE
+                    SOURCE_FILE_INDEX -> SOURCE_FILE
+                    LINE_NUMBER_TABLE_INDEX -> LINE_NUMBER_TABLE
                     else -> it.next()
                 }
             }
@@ -184,13 +184,13 @@ public class ConstantPool private constructor(
 
     private fun getStringIndex(value: String): Int {
         return when (value) {
-            CODE -> 0
-            EXCEPTIONS -> 1
-            SYNTHETIC -> 2
-            CONSTANT_VALUE -> 3
-            SOURCE_FILE -> 4
-            LINE_NUMBER_TABLE -> 5
-            else -> strings.binarySearch(value, 6)
+            CODE -> CODE_INDEX
+            EXCEPTIONS -> EXCEPTIONS_INDEX
+            SYNTHETIC -> SYNTHETIC_INDEX
+            CONSTANT_VALUE -> CONSTANT_VALUE_INDEX
+            SOURCE_FILE -> SOURCE_FILE_INDEX
+            LINE_NUMBER_TABLE -> LINE_NUMBER_TABLE_INDEX
+            else -> strings.binarySearch(value, BUILTIN_STRINGS)
         }
     }
 
@@ -329,7 +329,7 @@ public class ConstantPool private constructor(
     }
 
     private fun writeStrings(buf: ByteBuf) {
-        for (i in 6 until strings.size) {
+        for (i in BUILTIN_STRINGS until strings.size) {
             buf.writeString(strings[i], ModifiedUtf8Charset)
         }
     }
@@ -404,6 +404,15 @@ public class ConstantPool private constructor(
         public const val SOURCE_FILE: String = "SourceFile"
         public const val LINE_NUMBER_TABLE: String = "LineNumberTable"
 
+        public const val CODE_INDEX: Int = 0
+        public const val EXCEPTIONS_INDEX: Int = 1
+        public const val SYNTHETIC_INDEX: Int = 2
+        public const val CONSTANT_VALUE_INDEX: Int = 3
+        public const val SOURCE_FILE_INDEX: Int = 4
+        public const val LINE_NUMBER_TABLE_INDEX: Int = 5
+
+        public const val BUILTIN_STRINGS: Int = 6
+
         private const val TRAILER_LEN = 20
 
         public fun read(buf: ByteBuf): ConstantPool {
@@ -477,16 +486,16 @@ public class ConstantPool private constructor(
         }
 
         private fun readStrings(buf: ByteBuf, size: Int): Array<String> {
-            require(size >= 6)
+            require(size >= BUILTIN_STRINGS)
 
             return Array(size) { i ->
                 when (i) {
-                    0 -> CODE
-                    1 -> EXCEPTIONS
-                    2 -> SYNTHETIC
-                    3 -> CONSTANT_VALUE
-                    4 -> SOURCE_FILE
-                    5 -> LINE_NUMBER_TABLE
+                    CODE_INDEX -> CODE
+                    EXCEPTIONS_INDEX -> EXCEPTIONS
+                    SYNTHETIC_INDEX -> SYNTHETIC
+                    CONSTANT_VALUE_INDEX -> CONSTANT_VALUE
+                    SOURCE_FILE_INDEX -> SOURCE_FILE
+                    LINE_NUMBER_TABLE_INDEX -> LINE_NUMBER_TABLE
                     else -> buf.readString(ModifiedUtf8Charset)
                 }
             }
