@@ -1,6 +1,7 @@
 package org.openrs2.protocol
 
 import org.openrs2.protocol.login.ClientOutOfDateCodec
+import org.openrs2.protocol.login.InitCrossDomainConnectionCodec
 import org.openrs2.protocol.login.InitJaggrabConnectionCodec
 import org.openrs2.protocol.login.InitJs5RemoteConnectionCodec
 import org.openrs2.protocol.login.IpLimitCodec
@@ -32,7 +33,8 @@ public class Protocol(vararg codecs: PacketCodec<*>) {
         public val LOGIN_UPSTREAM: Protocol = Protocol(
             InitJs5RemoteConnectionCodec,
             InitJaggrabConnectionCodec,
-            RequestWorldListCodec
+            RequestWorldListCodec,
+            InitCrossDomainConnectionCodec
         )
         public val LOGIN_DOWNSTREAM: Protocol = Protocol(
             Js5OkCodec,

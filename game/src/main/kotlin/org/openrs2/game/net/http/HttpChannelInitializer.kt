@@ -16,12 +16,8 @@ public class HttpChannelInitializer @Inject constructor(
         ch.pipeline().addLast(
             HttpRequestDecoder(),
             HttpResponseEncoder(),
-            HttpObjectAggregator(MAX_CONTENT_LENGTH),
+            HttpObjectAggregator(Http.MAX_CONTENT_LENGTH),
             handler
         )
-    }
-
-    private companion object {
-        private const val MAX_CONTENT_LENGTH = 65536
     }
 }

@@ -5,8 +5,13 @@ import io.netty.channel.ChannelFutureListener
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.SimpleChannelInboundHandler
 import io.netty.handler.codec.DelimiterBasedFrameDecoder
+import io.netty.handler.codec.http.HttpObjectAggregator
+import io.netty.handler.codec.http.HttpRequestDecoder
+import io.netty.handler.codec.http.HttpResponseEncoder
 import io.netty.handler.codec.string.StringDecoder
 import org.openrs2.buffer.copiedBuffer
+import org.openrs2.game.net.crossdomain.CrossDomainChannelHandler
+import org.openrs2.game.net.http.Http
 import org.openrs2.game.net.jaggrab.JaggrabChannelHandler
 import org.openrs2.game.net.js5.Js5ChannelHandler
 import org.openrs2.protocol.Rs2Decoder
@@ -32,6 +37,7 @@ public class LoginChannelHandler @Inject constructor(
         when (msg) {
             is LoginRequest.InitJs5RemoteConnection -> handleInitJs5RemoteConnection(ctx, msg)
             is LoginRequest.InitJaggrabConnection -> handleInitJaggrabConnection(ctx)
+            is LoginRequest.InitCrossDomainConnection -> handleInitCrossDomainConnection(ctx)
         }
     }
 
@@ -67,6 +73,21 @@ public class LoginChannelHandler @Inject constructor(
         ctx.pipeline().remove(this)
     }
 
+    private fun handleInitCrossDomainConnection(ctx: ChannelHandlerContext) {
+        ctx.pipeline().addLast(
+            HttpRequestDecoder(),
+            HttpResponseEncoder(),
+            HttpObjectAggregator(Http.MAX_CONTENT_LENGTH),
+            CrossDomainChannelHandler
+        )
+
+        ctx.fireChannelRead(Unpooled.wrappedBuffer(G))
+
+        ctx.pipeline().remove(Rs2Decoder::class.java)
+        ctx.pipeline().remove(Rs2Encoder::class.java)
+        ctx.pipeline().remove(this)
+    }
+
     override fun channelReadComplete(ctx: ChannelHandlerContext) {
         ctx.flush()
     }
@@ -75,5 +96,6 @@ public class LoginChannelHandler @Inject constructor(
         private const val BUILD = 550
         private const val JAGGRAB_MAX_FRAME_LENGTH = 4096
         private val JAGGRAB_DELIMITER = Unpooled.unreleasableBuffer(copiedBuffer("\n\n"))
+        private val G = byteArrayOf('G'.code.toByte())
     }
 }
