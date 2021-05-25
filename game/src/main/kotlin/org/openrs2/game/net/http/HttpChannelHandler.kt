@@ -6,6 +6,7 @@ import io.netty.channel.SimpleChannelInboundHandler
 import io.netty.handler.codec.http.HttpHeaderValues
 import io.netty.handler.codec.http.HttpRequest
 import io.netty.handler.codec.http.HttpResponseStatus
+import io.netty.handler.timeout.IdleStateEvent
 import org.openrs2.buffer.use
 import org.openrs2.game.net.FileProvider
 import javax.inject.Inject
@@ -39,5 +40,21 @@ public class HttpChannelHandler @Inject constructor(
 
     override fun channelReadComplete(ctx: ChannelHandlerContext) {
         ctx.flush()
+
+        if (ctx.channel().isWritable) {
+            ctx.read()
+        }
+    }
+
+    override fun channelWritabilityChanged(ctx: ChannelHandlerContext) {
+        if (ctx.channel().isWritable) {
+            ctx.read()
+        }
+    }
+
+    override fun userEventTriggered(ctx: ChannelHandlerContext, evt: Any) {
+        if (evt is IdleStateEvent) {
+            ctx.close()
+        }
     }
 }

@@ -9,6 +9,7 @@ import io.netty.handler.codec.http.HttpObjectAggregator
 import io.netty.handler.codec.http.HttpRequestDecoder
 import io.netty.handler.codec.http.HttpResponseEncoder
 import io.netty.handler.codec.string.StringDecoder
+import io.netty.handler.timeout.IdleStateHandler
 import org.openrs2.buffer.copiedBuffer
 import org.openrs2.game.net.crossdomain.CrossDomainChannelHandler
 import org.openrs2.game.net.http.Http
@@ -22,6 +23,7 @@ import org.openrs2.protocol.js5.Js5ResponseEncoder
 import org.openrs2.protocol.js5.XorDecoder
 import org.openrs2.protocol.login.LoginRequest
 import org.openrs2.protocol.login.LoginResponse
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Provider
 
@@ -75,6 +77,7 @@ public class LoginChannelHandler @Inject constructor(
 
     private fun handleInitCrossDomainConnection(ctx: ChannelHandlerContext) {
         ctx.pipeline().addLast(
+            IdleStateHandler(true, Http.TIMEOUT_SECS, Http.TIMEOUT_SECS, Http.TIMEOUT_SECS, TimeUnit.SECONDS),
             HttpRequestDecoder(),
             HttpResponseEncoder(),
             HttpObjectAggregator(Http.MAX_CONTENT_LENGTH),

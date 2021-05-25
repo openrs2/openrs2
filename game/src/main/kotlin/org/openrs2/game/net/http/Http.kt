@@ -11,14 +11,21 @@ import io.netty.handler.codec.http.HttpMethod
 import io.netty.handler.codec.http.HttpRequest
 import io.netty.handler.codec.http.HttpResponseStatus
 import io.netty.handler.codec.http.HttpVersion
+import io.netty.handler.codec.http.LastHttpContent
 import io.netty.util.ReferenceCounted
 import org.openrs2.buffer.copiedBuffer
 import org.openrs2.buffer.use
 
 public object Http {
+    public const val TIMEOUT_SECS: Long = 30
     public const val MAX_CONTENT_LENGTH: Int = 65536
     public const val TEXT_X_CROSS_DOMAIN_POLICY: String = "text/x-cross-domain-policy"
     private const val BANNER = "OpenRS2"
+
+    private fun isKeepAlive(request: HttpRequest, version: HttpVersion): Boolean {
+        val connection = request.headers().get(HttpHeaderNames.CONNECTION) ?: return version.isKeepAliveDefault
+        return HttpHeaderValues.KEEP_ALIVE.contentEquals(connection)
+    }
 
     private fun writeResponse(
         ctx: ChannelHandlerContext,
@@ -34,17 +41,32 @@ public object Http {
             HttpVersion.HTTP_1_1
         }
 
+        val keepAlive = isKeepAlive(request, version)
+
         val response = DefaultHttpResponse(version, status)
-        response.headers().add(HttpHeaderNames.CONNECTION, HttpHeaderValues.CLOSE)
+        response.headers().add(HttpHeaderNames.CONNECTION, if (keepAlive) {
+            HttpHeaderValues.KEEP_ALIVE
+        } else {
+            HttpHeaderValues.CLOSE
+        })
         response.headers().add(HttpHeaderNames.SERVER, BANNER)
         response.headers().add(HttpHeaderNames.CONTENT_TYPE, contentType)
         response.headers().add(HttpHeaderNames.CONTENT_LENGTH, contentLength)
 
-        if (request.method() == HttpMethod.HEAD) {
-            ctx.write(response).addListener(ChannelFutureListener.CLOSE)
+        ctx.write(response, ctx.voidPromise())
+
+        if (request.method() != HttpMethod.HEAD) {
+            ctx.write(content.retain(), ctx.voidPromise())
+        }
+
+        writeLastChunk(ctx, keepAlive)
+    }
+
+    private fun writeLastChunk(ctx: ChannelHandlerContext, keepAlive: Boolean) {
+        if (keepAlive) {
+            ctx.write(LastHttpContent.EMPTY_LAST_CONTENT, ctx.voidPromise())
         } else {
-            ctx.write(response, ctx.voidPromise())
-            ctx.write(content.retain()).addListener(ChannelFutureListener.CLOSE)
+            ctx.write(LastHttpContent.EMPTY_LAST_CONTENT).addListener(ChannelFutureListener.CLOSE)
         }
     }
 
