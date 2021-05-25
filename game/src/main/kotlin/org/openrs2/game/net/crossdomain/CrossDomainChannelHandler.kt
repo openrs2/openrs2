@@ -1,14 +1,13 @@
 package org.openrs2.game.net.crossdomain
 
 import io.netty.buffer.Unpooled
-import io.netty.channel.ChannelFutureListener
 import io.netty.channel.ChannelHandler
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.SimpleChannelInboundHandler
-import io.netty.handler.codec.http.HttpHeaderNames
 import io.netty.handler.codec.http.HttpMethod
 import io.netty.handler.codec.http.HttpRequest
 import io.netty.handler.codec.http.HttpResponseStatus
+import org.openrs2.buffer.use
 import org.openrs2.game.net.http.Http
 
 @ChannelHandler.Sharable
@@ -29,15 +28,13 @@ public object CrossDomainChannelHandler : SimpleChannelInboundHandler<HttpReques
 
     override fun channelRead0(ctx: ChannelHandlerContext, msg: HttpRequest) {
         if (msg.method() != HttpMethod.GET || msg.uri() != ENDPOINT) {
-            ctx.write(Http.createResponse(HttpResponseStatus.BAD_REQUEST)).addListener(ChannelFutureListener.CLOSE)
+            Http.writeResponse(ctx, msg, HttpResponseStatus.BAD_REQUEST)
             return
         }
 
-        val response = Http.createResponse(HttpResponseStatus.OK)
-        response.headers().add(HttpHeaderNames.CONTENT_TYPE, Http.TEXT_X_CROSS_DOMAIN_POLICY)
-        response.headers().add(HttpHeaderNames.CONTENT_LENGTH, POLICY.size)
-        ctx.write(response, ctx.voidPromise())
-        ctx.write(Unpooled.wrappedBuffer(POLICY)).addListener(ChannelFutureListener.CLOSE)
+        Unpooled.wrappedBuffer(POLICY).use { buf ->
+            Http.writeResponse(ctx, msg, buf, Http.TEXT_X_CROSS_DOMAIN_POLICY)
+        }
     }
 
     override fun channelReadComplete(ctx: ChannelHandlerContext) {
