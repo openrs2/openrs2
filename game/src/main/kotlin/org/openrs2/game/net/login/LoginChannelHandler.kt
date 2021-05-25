@@ -29,7 +29,7 @@ import javax.inject.Provider
 public class LoginChannelHandler @Inject constructor(
     private val js5HandlerProvider: Provider<Js5ChannelHandler>,
     private val jaggrabHandler: JaggrabChannelHandler
-) : SimpleChannelInboundHandler<LoginRequest>() {
+) : SimpleChannelInboundHandler<LoginRequest>(LoginRequest::class.java) {
     override fun channelActive(ctx: ChannelHandlerContext) {
         ctx.read()
     }

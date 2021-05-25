@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 public class Js5ChannelHandler @Inject constructor(
     private val service: Js5Service
-) : SimpleChannelInboundHandler<Js5Request>() {
+) : SimpleChannelInboundHandler<Js5Request>(Js5Request::class.java) {
     private lateinit var client: Js5Client
 
     override fun handlerAdded(ctx: ChannelHandlerContext) {

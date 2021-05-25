@@ -16,7 +16,7 @@ import javax.inject.Singleton
 @ChannelHandler.Sharable
 public class HttpChannelHandler @Inject constructor(
     private val fileProvider: FileProvider
-) : SimpleChannelInboundHandler<HttpRequest>() {
+) : SimpleChannelInboundHandler<HttpRequest>(HttpRequest::class.java) {
     override fun channelActive(ctx: ChannelHandlerContext) {
         ctx.read()
     }

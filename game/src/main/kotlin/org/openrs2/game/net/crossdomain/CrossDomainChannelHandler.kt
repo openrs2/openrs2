@@ -12,7 +12,7 @@ import org.openrs2.buffer.use
 import org.openrs2.game.net.http.Http
 
 @ChannelHandler.Sharable
-public object CrossDomainChannelHandler : SimpleChannelInboundHandler<HttpRequest>() {
+public object CrossDomainChannelHandler : SimpleChannelInboundHandler<HttpRequest>(HttpRequest::class.java) {
     private const val ENDPOINT = "/crossdomain.xml"
     private val POLICY = """
         <?xml version="1.0"?>

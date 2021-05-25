@@ -15,7 +15,7 @@ import javax.inject.Singleton
 @ChannelHandler.Sharable
 public class JaggrabChannelHandler @Inject constructor(
     private val fileProvider: FileProvider
-) : SimpleChannelInboundHandler<JaggrabRequest>() {
+) : SimpleChannelInboundHandler<JaggrabRequest>(JaggrabRequest::class.java) {
     override fun handlerAdded(ctx: ChannelHandlerContext) {
         ctx.read()
     }
