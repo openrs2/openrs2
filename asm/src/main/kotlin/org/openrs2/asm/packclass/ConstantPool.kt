@@ -160,6 +160,8 @@ public class ConstantPool private constructor(
                 }
             }
 
+            check(!it.hasNext())
+
             return ConstantPool(
                 stringArray,
                 fieldNamesAndTypes.toTypedArray(),
