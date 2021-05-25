@@ -10,10 +10,10 @@ class JaggrabRequestDecoderTest {
     @Test
     fun testDecode() {
         val channel = EmbeddedChannel(JaggrabRequestDecoder)
-        channel.writeInbound("JAGGRAB /runescape.pack200")
+        channel.writeInbound("JAGGRAB runescape.pack200")
 
         val actual = channel.readInbound<JaggrabRequest>()
-        assertEquals(JaggrabRequest("/runescape.pack200"), actual)
+        assertEquals(JaggrabRequest("runescape.pack200"), actual)
     }
 
     @Test
