@@ -29,6 +29,19 @@ public class ConstantPool private constructor(
     private val floats: FloatArray,
     private val doubles: DoubleArray
 ) {
+    init {
+        require(strings.size <= 65534) // must leave a spare slot for readOptionalString
+        require(fieldNamesAndTypes.size <= 65535)
+        require(methodNamesAndTypes.size <= 65535)
+        require(fieldRefs.size <= 65535)
+        require(methodRefs.size <= 65535)
+        require(interfaceMethodRefs.size <= 65535)
+        require(ints.size <= 65535)
+        require(longs.size <= 65535)
+        require(floats.size <= 65535)
+        require(doubles.size <= 65535)
+    }
+
     public class Builder {
         private val strings = ObjectAVLTreeSet<String>()
         private val fieldNamesAndTypes = ObjectAVLTreeSet<NameAndType>()
