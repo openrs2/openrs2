@@ -34,7 +34,21 @@ public class HttpChannelHandler @Inject constructor(
                 return
             }
 
-            Http.writeResponse(ctx, msg, file, HttpHeaderValues.APPLICATION_OCTET_STREAM)
+            Http.writeResponse(ctx, msg, file, getContentType(uri))
+        }
+    }
+
+    private fun getContentType(uri: String): CharSequence {
+        /*
+         * It doesn't make sense to return a MIME type for some of the files:
+         *
+         * - The .pack200 files are missing two bytes in the header.
+         * - The .lib and .pack files are probably compressed with DEFLATE in
+         *   nowrap mode.
+         */
+        return when {
+            uri.endsWith(".jar") -> Http.APPLICATION_JAVA_ARCHIVE
+            else -> HttpHeaderValues.APPLICATION_OCTET_STREAM
         }
     }
 
