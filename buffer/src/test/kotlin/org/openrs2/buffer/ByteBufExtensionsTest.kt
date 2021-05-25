@@ -587,6 +587,108 @@ class ByteBufExtensionsTest {
     }
 
     @Test
+    fun testReadVarInt() {
+        wrappedBuffer(0x7F).use { buf ->
+            assertEquals(0x7F, buf.readVarInt())
+        }
+
+        wrappedBuffer(0x81.toByte(), 0x00).use { buf ->
+            assertEquals(0x80, buf.readVarInt())
+        }
+
+        wrappedBuffer(0xFF.toByte(), 0x7F).use { buf ->
+            assertEquals(0x3FFF, buf.readVarInt())
+        }
+
+        wrappedBuffer(0x81.toByte(), 0x80.toByte(), 0x00).use { buf ->
+            assertEquals(0x4000, buf.readVarInt())
+        }
+
+        wrappedBuffer(0xFF.toByte(), 0xFF.toByte(), 0x7F.toByte()).use { buf ->
+            assertEquals(0x1FFFFF, buf.readVarInt())
+        }
+
+        wrappedBuffer(0x81.toByte(), 0x80.toByte(), 0x80.toByte(), 0x00).use { buf ->
+            assertEquals(0x200000, buf.readVarInt())
+        }
+
+        wrappedBuffer(0xFF.toByte(), 0xFF.toByte(), 0xFF.toByte(), 0x7F).use { buf ->
+            assertEquals(0xFFFFFFF, buf.readVarInt())
+        }
+
+        wrappedBuffer(0x81.toByte(), 0x80.toByte(), 0x80.toByte(), 0x80.toByte(), 0x00).use { buf ->
+            assertEquals(0x10000000, buf.readVarInt())
+        }
+    }
+
+    @Test
+    fun testWriteVarInt() {
+        ByteBufAllocator.DEFAULT.buffer().use { actual ->
+            actual.writeVarInt(0x7F)
+
+            wrappedBuffer(0x7F).use { expected ->
+                assertEquals(expected, actual)
+            }
+        }
+
+        ByteBufAllocator.DEFAULT.buffer().use { actual ->
+            actual.writeVarInt(0x80)
+
+            wrappedBuffer(0x81.toByte(), 0x00).use { expected ->
+                assertEquals(expected, actual)
+            }
+        }
+
+        ByteBufAllocator.DEFAULT.buffer().use { actual ->
+            actual.writeVarInt(0x3FFF)
+
+            wrappedBuffer(0xFF.toByte(), 0x7F).use { expected ->
+                assertEquals(expected, actual)
+            }
+        }
+
+        ByteBufAllocator.DEFAULT.buffer().use { actual ->
+            actual.writeVarInt(0x4000)
+
+            wrappedBuffer(0x81.toByte(), 0x80.toByte(), 0x00).use { expected ->
+                assertEquals(expected, actual)
+            }
+        }
+
+        ByteBufAllocator.DEFAULT.buffer().use { actual ->
+            actual.writeVarInt(0x1FFFFF)
+
+            wrappedBuffer(0xFF.toByte(), 0xFF.toByte(), 0x7F).use { expected ->
+                assertEquals(expected, actual)
+            }
+        }
+
+        ByteBufAllocator.DEFAULT.buffer().use { actual ->
+            actual.writeVarInt(0x200000)
+
+            wrappedBuffer(0x81.toByte(), 0x80.toByte(), 0x80.toByte(), 0x00).use { expected ->
+                assertEquals(expected, actual)
+            }
+        }
+
+        ByteBufAllocator.DEFAULT.buffer().use { actual ->
+            actual.writeVarInt(0xFFFFFFF)
+
+            wrappedBuffer(0xFF.toByte(), 0xFF.toByte(), 0xFF.toByte(), 0x7F).use { expected ->
+                assertEquals(expected, actual)
+            }
+        }
+
+        ByteBufAllocator.DEFAULT.buffer().use { actual ->
+            actual.writeVarInt(0x10000000)
+
+            wrappedBuffer(0x81.toByte(), 0x80.toByte(), 0x80.toByte(), 0x80.toByte(), 0x00).use { expected ->
+                assertEquals(expected, actual)
+            }
+        }
+    }
+
+    @Test
     fun testCrc32() {
         val s = "AAThe quick brown fox jumps over the lazy dogA"
 

@@ -128,6 +128,40 @@ public fun ByteBuf.writeVersionedString(s: CharSequence): ByteBuf {
     return this
 }
 
+public fun ByteBuf.readVarInt(): Int {
+    var value = 0
+
+    var byte: Int
+    do {
+        byte = readUnsignedByte().toInt()
+        value = (value shl 7) or (byte and 0x7F)
+    } while ((byte and 0x80) != 0)
+
+    return value
+}
+
+public fun ByteBuf.writeVarInt(v: Int): ByteBuf {
+    if ((v and 0x7F.inv()) != 0) {
+        if ((v and 0x3FFF.inv()) != 0) {
+            if ((v and 0x1FFFFF.inv()) != 0) {
+                if ((v and 0xFFFFFFF.inv()) != 0) {
+                    writeByte(((v ushr 28) and 0x7F) or 0x80)
+                }
+
+                writeByte(((v ushr 21) and 0x7F) or 0x80)
+            }
+
+            writeByte(((v ushr 14) and 0x7F) or 0x80)
+        }
+
+        writeByte(((v ushr 7) and 0x7F) or 0x80)
+    }
+
+    writeByte(v and 0x7F)
+
+    return this
+}
+
 public fun ByteBuf.crc32(): Int {
     return crc32(readerIndex(), readableBytes())
 }
