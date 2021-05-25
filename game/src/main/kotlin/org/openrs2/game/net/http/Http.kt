@@ -17,7 +17,6 @@ import org.openrs2.buffer.copiedBuffer
 import org.openrs2.buffer.use
 
 public object Http {
-    public const val TIMEOUT_SECS: Long = 30
     public const val MAX_CONTENT_LENGTH: Int = 65536
     public const val TEXT_X_CROSS_DOMAIN_POLICY: String = "text/x-cross-domain-policy"
     private const val BANNER = "OpenRS2"

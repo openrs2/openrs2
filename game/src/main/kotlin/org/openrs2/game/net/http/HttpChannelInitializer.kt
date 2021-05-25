@@ -16,11 +16,15 @@ public class HttpChannelInitializer @Inject constructor(
 ) : ChannelInitializer<Channel>() {
     override fun initChannel(ch: Channel) {
         ch.pipeline().addLast(
-            IdleStateHandler(true, Http.TIMEOUT_SECS, Http.TIMEOUT_SECS, Http.TIMEOUT_SECS, TimeUnit.SECONDS),
+            IdleStateHandler(true, TIMEOUT_SECS, TIMEOUT_SECS, TIMEOUT_SECS, TimeUnit.SECONDS),
             HttpRequestDecoder(),
             HttpResponseEncoder(),
             HttpObjectAggregator(Http.MAX_CONTENT_LENGTH),
             handler
         )
+    }
+
+    private companion object {
+        private const val TIMEOUT_SECS: Long = 30
     }
 }

@@ -4,6 +4,7 @@ import io.netty.channel.ChannelFutureListener
 import io.netty.channel.ChannelHandler
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.SimpleChannelInboundHandler
+import io.netty.handler.timeout.IdleStateEvent
 import org.openrs2.buffer.use
 import org.openrs2.game.net.FileProvider
 import org.openrs2.protocol.jaggrab.JaggrabRequest
@@ -32,5 +33,11 @@ public class JaggrabChannelHandler @Inject constructor(
 
     override fun channelReadComplete(ctx: ChannelHandlerContext) {
         ctx.flush()
+    }
+
+    override fun userEventTriggered(ctx: ChannelHandlerContext, evt: Any) {
+        if (evt is IdleStateEvent) {
+            ctx.close()
+        }
     }
 }

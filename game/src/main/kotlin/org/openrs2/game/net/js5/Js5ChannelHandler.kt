@@ -2,6 +2,7 @@ package org.openrs2.game.net.js5
 
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.SimpleChannelInboundHandler
+import io.netty.handler.timeout.IdleStateEvent
 import org.openrs2.protocol.js5.Js5Request
 import org.openrs2.protocol.js5.XorEncoder
 import javax.inject.Inject
@@ -35,6 +36,12 @@ public class Js5ChannelHandler @Inject constructor(
     override fun channelWritabilityChanged(ctx: ChannelHandlerContext) {
         if (ctx.channel().isWritable) {
             service.notifyIfNotEmpty(client)
+        }
+    }
+
+    override fun userEventTriggered(ctx: ChannelHandlerContext, evt: Any) {
+        if (evt is IdleStateEvent) {
+            ctx.close()
         }
     }
 }
