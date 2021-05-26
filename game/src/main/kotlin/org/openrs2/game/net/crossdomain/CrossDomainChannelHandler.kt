@@ -4,6 +4,8 @@ import io.netty.buffer.Unpooled
 import io.netty.channel.ChannelHandler
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.SimpleChannelInboundHandler
+import io.netty.handler.codec.http.HttpHeaderNames
+import io.netty.handler.codec.http.HttpHeaderValues
 import io.netty.handler.codec.http.HttpMethod
 import io.netty.handler.codec.http.HttpRequest
 import io.netty.handler.codec.http.HttpResponseStatus
@@ -28,6 +30,9 @@ public object CrossDomainChannelHandler : SimpleChannelInboundHandler<HttpReques
     }
 
     override fun channelRead0(ctx: ChannelHandlerContext, msg: HttpRequest) {
+        // forcibly close the connection as we only expect a single request
+        msg.headers().set(HttpHeaderNames.CONNECTION, HttpHeaderValues.CLOSE)
+
         if (msg.method() != HttpMethod.GET || msg.uri() != ENDPOINT) {
             Http.writeResponse(ctx, msg, HttpResponseStatus.BAD_REQUEST)
             return
@@ -40,16 +45,6 @@ public object CrossDomainChannelHandler : SimpleChannelInboundHandler<HttpReques
 
     override fun channelReadComplete(ctx: ChannelHandlerContext) {
         ctx.flush()
-
-        if (ctx.channel().isWritable) {
-            ctx.read()
-        }
-    }
-
-    override fun channelWritabilityChanged(ctx: ChannelHandlerContext) {
-        if (ctx.channel().isWritable) {
-            ctx.read()
-        }
     }
 
     override fun userEventTriggered(ctx: ChannelHandlerContext, evt: Any) {
