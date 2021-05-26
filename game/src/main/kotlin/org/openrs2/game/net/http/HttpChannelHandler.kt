@@ -4,6 +4,7 @@ import io.netty.channel.ChannelHandler
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.SimpleChannelInboundHandler
 import io.netty.handler.codec.http.HttpHeaderValues
+import io.netty.handler.codec.http.HttpMethod
 import io.netty.handler.codec.http.HttpRequest
 import io.netty.handler.codec.http.HttpResponseStatus
 import io.netty.handler.timeout.IdleStateEvent
@@ -25,6 +26,11 @@ public class HttpChannelHandler @Inject constructor(
         val uri = msg.uri()
         if (!uri.startsWith("/")) {
             Http.writeResponse(ctx, msg, HttpResponseStatus.BAD_REQUEST)
+            return
+        }
+
+        if (msg.method() != HttpMethod.HEAD && msg.method() != HttpMethod.GET) {
+            Http.writeResponse(ctx, msg, HttpResponseStatus.METHOD_NOT_ALLOWED)
             return
         }
 
