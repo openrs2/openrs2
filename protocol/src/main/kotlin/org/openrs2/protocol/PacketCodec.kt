@@ -2,6 +2,7 @@ package org.openrs2.protocol
 
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufAllocator
+import org.openrs2.crypto.StreamCipher
 
 public abstract class PacketCodec<T : Packet>(
     public val type: Class<T>,
@@ -13,8 +14,8 @@ public abstract class PacketCodec<T : Packet>(
         require(length >= PacketLength.VARIABLE_SHORT)
     }
 
-    public abstract fun decode(input: ByteBuf): T
-    public abstract fun encode(input: T, output: ByteBuf)
+    public abstract fun decode(input: ByteBuf, cipher: StreamCipher): T
+    public abstract fun encode(input: T, output: ByteBuf, cipher: StreamCipher)
 
     public open fun getLength(input: T): Int {
         return length

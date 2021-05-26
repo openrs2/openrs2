@@ -1,19 +1,20 @@
 package org.openrs2.protocol
 
 import io.netty.buffer.ByteBuf
+import org.openrs2.crypto.StreamCipher
 
 internal object VariableByteOptimisedPacketCodec : PacketCodec<VariableByteOptimisedPacket>(
     type = VariableByteOptimisedPacket::class.java,
     opcode = 3,
     length = PacketLength.VARIABLE_BYTE
 ) {
-    override fun decode(input: ByteBuf): VariableByteOptimisedPacket {
+    override fun decode(input: ByteBuf, cipher: StreamCipher): VariableByteOptimisedPacket {
         val value = ByteArray(input.readableBytes())
         input.readBytes(value)
         return VariableByteOptimisedPacket(value)
     }
 
-    override fun encode(input: VariableByteOptimisedPacket, output: ByteBuf) {
+    override fun encode(input: VariableByteOptimisedPacket, output: ByteBuf, cipher: StreamCipher) {
         output.writeBytes(input.value)
     }
 

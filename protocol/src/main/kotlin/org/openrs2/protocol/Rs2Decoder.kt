@@ -65,7 +65,7 @@ public class Rs2Decoder(public var protocol: Protocol) : ByteToMessageDecoder() 
 
             val payload = input.readSlice(length)
             out += try {
-                decoder.decode(payload)
+                decoder.decode(payload, cipher)
             } catch (ex: NotImplementedError) {
                 // TODO(gpe): remove this catch block when every packet is implemented
                 logger.warn { "Skipping unimplemented packet: ${decoder.javaClass}" }

@@ -24,7 +24,7 @@ public class Rs2Encoder(public var protocol: Protocol) : MessageToByteEncoder<Pa
         }
 
         val payloadIndex = out.writerIndex()
-        encoder.encode(msg, out)
+        encoder.encode(msg, out, cipher)
 
         val written = out.writerIndex() - payloadIndex
 
