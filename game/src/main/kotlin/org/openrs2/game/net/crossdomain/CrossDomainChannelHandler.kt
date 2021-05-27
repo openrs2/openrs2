@@ -33,8 +33,11 @@ public object CrossDomainChannelHandler : SimpleChannelInboundHandler<HttpReques
         // forcibly close the connection as we only expect a single request
         msg.headers().set(HttpHeaderNames.CONNECTION, HttpHeaderValues.CLOSE)
 
-        if (msg.method() != HttpMethod.GET || msg.uri() != ENDPOINT) {
-            Http.writeResponse(ctx, msg, HttpResponseStatus.BAD_REQUEST)
+        if (msg.method() != HttpMethod.GET) {
+            Http.writeResponse(ctx, msg, HttpResponseStatus.METHOD_NOT_ALLOWED)
+            return
+        } else if (msg.uri() != ENDPOINT) {
+            Http.writeResponse(ctx, msg, HttpResponseStatus.NOT_FOUND)
             return
         }
 
