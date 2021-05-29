@@ -17,7 +17,13 @@ public class GameServer @Inject constructor(
 
         serviceManager.startAsync()
         runtime.addShutdownHook(shutdownHook)
-        serviceManager.awaitHealthy()
+        try {
+            serviceManager.awaitHealthy()
+        } catch (ex: Throwable) {
+            serviceManager.stopAsync().awaitStopped()
+            runtime.removeShutdownHook(shutdownHook)
+            throw ex
+        }
 
         val elapsed = System.nanoTime() - start
         logger.info { "Started OpenRS2 in ${elapsed / NANOS_PER_MILLI} milliseconds" }

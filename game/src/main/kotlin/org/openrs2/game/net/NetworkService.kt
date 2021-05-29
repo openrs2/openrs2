@@ -36,6 +36,7 @@ public class NetworkService @Inject constructor(
 
         CompletableFuture.allOf(httpFuture, rs2PrimaryFuture, rs2SecondaryFuture).handle { _, ex ->
             if (ex != null) {
+                group.shutdownGracefully()
                 notifyFailed(ex)
             } else {
                 notifyStarted()
