@@ -14641,13 +14641,13 @@ typedef unsigned int GLhandleARB;
         <command>
             <proto>void <name>glCopyTexImage2D</name></proto>
             <param group="TextureTarget"><ptype>GLenum</ptype> <name>target</name></param>
-            <param group="CheckedInt32"><ptype>GLint</ptype> <name>level</name></param>
+            <param><ptype>GLint</ptype> <name>level</name></param>
             <param group="InternalFormat"><ptype>GLenum</ptype> <name>internalformat</name></param>
             <param group="WinCoord"><ptype>GLint</ptype> <name>x</name></param>
             <param group="WinCoord"><ptype>GLint</ptype> <name>y</name></param>
             <param><ptype>GLsizei</ptype> <name>width</name></param>
             <param><ptype>GLsizei</ptype> <name>height</name></param>
-            <param group="CheckedInt32"><ptype>GLint</ptype> <name>border</name></param>
+            <param><ptype>GLint</ptype> <name>border</name></param>
             <glx type="render" opcode="4120"/>
         </command>
         <command>
@@ -28934,10 +28934,10 @@ typedef unsigned int GLhandleARB;
         <command>
             <proto>void <name>glTexImage1D</name></proto>
             <param group="TextureTarget"><ptype>GLenum</ptype> <name>target</name></param>
-            <param group="CheckedInt32"><ptype>GLint</ptype> <name>level</name></param>
+            <param><ptype>GLint</ptype> <name>level</name></param>
             <param group="InternalFormat"><ptype>GLint</ptype> <name>internalformat</name></param>
             <param><ptype>GLsizei</ptype> <name>width</name></param>
-            <param group="CheckedInt32"><ptype>GLint</ptype> <name>border</name></param>
+            <param><ptype>GLint</ptype> <name>border</name></param>
             <param group="PixelFormat"><ptype>GLenum</ptype> <name>format</name></param>
             <param group="PixelType"><ptype>GLenum</ptype> <name>type</name></param>
             <param len="COMPSIZE(format,type,width)">const void *<name>pixels</name></param>
@@ -28947,11 +28947,11 @@ typedef unsigned int GLhandleARB;
         <command>
             <proto>void <name>glTexImage2D</name></proto>
             <param group="TextureTarget"><ptype>GLenum</ptype> <name>target</name></param>
-            <param group="CheckedInt32"><ptype>GLint</ptype> <name>level</name></param>
+            <param><ptype>GLint</ptype> <name>level</name></param>
             <param group="InternalFormat"><ptype>GLint</ptype> <name>internalformat</name></param>
             <param><ptype>GLsizei</ptype> <name>width</name></param>
             <param><ptype>GLsizei</ptype> <name>height</name></param>
-            <param group="CheckedInt32"><ptype>GLint</ptype> <name>border</name></param>
+            <param><ptype>GLint</ptype> <name>border</name></param>
             <param group="PixelFormat"><ptype>GLenum</ptype> <name>format</name></param>
             <param group="PixelType"><ptype>GLenum</ptype> <name>type</name></param>
             <param len="COMPSIZE(format,type,width,height)">const void *<name>pixels</name></param>
@@ -28980,12 +28980,12 @@ typedef unsigned int GLhandleARB;
         <command>
             <proto>void <name>glTexImage3D</name></proto>
             <param group="TextureTarget"><ptype>GLenum</ptype> <name>target</name></param>
-            <param group="CheckedInt32"><ptype>GLint</ptype> <name>level</name></param>
+            <param><ptype>GLint</ptype> <name>level</name></param>
             <param group="InternalFormat"><ptype>GLint</ptype> <name>internalformat</name></param>
             <param><ptype>GLsizei</ptype> <name>width</name></param>
             <param><ptype>GLsizei</ptype> <name>height</name></param>
             <param><ptype>GLsizei</ptype> <name>depth</name></param>
-            <param group="CheckedInt32"><ptype>GLint</ptype> <name>border</name></param>
+            <param><ptype>GLint</ptype> <name>border</name></param>
             <param group="PixelFormat"><ptype>GLenum</ptype> <name>format</name></param>
             <param group="PixelType"><ptype>GLenum</ptype> <name>type</name></param>
             <param len="COMPSIZE(format,type,width,height,depth)">const void *<name>pixels</name></param>
