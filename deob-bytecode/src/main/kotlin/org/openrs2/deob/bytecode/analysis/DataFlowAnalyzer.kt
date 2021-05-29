@@ -5,7 +5,7 @@ import org.jgrapht.graph.DefaultEdge
 import org.jgrapht.graph.EdgeReversedGraph
 import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.MethodNode
-import org.openrs2.util.collect.removeFirstOrNull
+import org.openrs2.util.collect.UniqueQueue
 
 public abstract class DataFlowAnalyzer<T>(owner: String, private val method: MethodNode, backwards: Boolean = false) {
     private val graph: Graph<Int, DefaultEdge>
@@ -46,11 +46,11 @@ public abstract class DataFlowAnalyzer<T>(owner: String, private val method: Met
         val entrySet = createEntrySet()
         val initialSet = createInitialSet()
 
-        val workList = LinkedHashSet<Int>()
+        val workList = UniqueQueue<Int>()
         workList += graph.vertexSet().filter { vertex -> graph.inDegreeOf(vertex) == 0 }
 
         while (true) {
-            val node = workList.removeFirstOrNull() ?: break
+            val node = workList.poll() ?: break
 
             val predecessors = graph.incomingEdgesOf(node).map { edge ->
                 outSets[graph.getEdgeSource(edge)] ?: initialSet

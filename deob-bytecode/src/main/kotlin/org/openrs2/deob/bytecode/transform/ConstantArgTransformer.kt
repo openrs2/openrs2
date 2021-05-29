@@ -46,13 +46,13 @@ import org.openrs2.deob.bytecode.analysis.IntValueSet
 import org.openrs2.deob.bytecode.filter.ReflectedConstructorFilter
 import org.openrs2.deob.bytecode.remap.MethodMappingGenerator
 import org.openrs2.util.collect.DisjointSet
-import org.openrs2.util.collect.removeFirstOrNull
+import org.openrs2.util.collect.UniqueQueue
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 public class ConstantArgTransformer @Inject constructor(private val profile: Profile) : Transformer() {
-    private val pendingMethods = LinkedHashSet<MemberRef>()
+    private val pendingMethods = UniqueQueue<MemberRef>()
     private val arglessMethods = mutableSetOf<DisjointSet.Partition<MemberRef>>()
     private val argValues = mutableMapOf<ArgPartition, IntValueSet>()
     private lateinit var inheritedMethodSets: DisjointSet<MemberRef>
@@ -72,7 +72,7 @@ public class ConstantArgTransformer @Inject constructor(private val profile: Pro
         queueEntryPoints(classPath)
 
         while (true) {
-            val method = pendingMethods.removeFirstOrNull() ?: break
+            val method = pendingMethods.poll() ?: break
             analyzeMethod(classPath, method)
         }
     }
