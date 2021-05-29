@@ -116,6 +116,22 @@ public abstract class Archive internal constructor(
 
     // TODO(gpe): rename/move, reindex, rekey, method to go from name->id
 
+    public val capacity: Int = index.capacity
+
+    public fun capacity(group: Int): Int {
+        val entry = index[group] ?: throw FileNotFoundException()
+        return entry.capacity
+    }
+
+    public fun capacityNamed(groupNameHash: Int): Int {
+        val entry = index.getNamed(groupNameHash) ?: throw FileNotFoundException()
+        return entry.capacity
+    }
+
+    public fun capacity(group: String): Int {
+        return capacityNamed(group.krHashCode())
+    }
+
     public fun exists(group: Int): Boolean {
         require(group >= 0)
         return index.contains(group)

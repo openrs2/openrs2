@@ -54,6 +54,25 @@ public class Cache private constructor(
         createOrGetArchive(archive)
     }
 
+    public fun capacity(archive: Int): Int {
+        checkArchive(archive)
+        return archives[archive]?.capacity ?: throw FileNotFoundException()
+    }
+
+    public fun capacity(archive: Int, group: Int): Int {
+        checkArchive(archive)
+        return archives[archive]?.capacity(group) ?: throw FileNotFoundException()
+    }
+
+    public fun capacityNamed(archive: Int, groupNameHash: Int): Int {
+        checkArchive(archive)
+        return archives[archive]?.capacityNamed(groupNameHash) ?: throw FileNotFoundException()
+    }
+
+    public fun capacity(archive: Int, group: String): Int {
+        return capacityNamed(archive, group.krHashCode())
+    }
+
     public fun exists(archive: Int): Boolean {
         checkArchive(archive)
         return archives[archive] != null
