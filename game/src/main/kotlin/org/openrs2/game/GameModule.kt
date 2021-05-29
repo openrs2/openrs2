@@ -23,6 +23,7 @@ public object GameModule : AbstractModule() {
         install(NetworkModule)
 
         val binder = Multibinder.newSetBinder(binder(), Service::class.java)
+        binder.addBinding().to(GameService::class.java)
         binder.addBinding().to(Js5Service::class.java)
         binder.addBinding().to(NetworkService::class.java)
 
