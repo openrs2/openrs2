@@ -25,13 +25,23 @@ the root of the repository), in the following structure:
 
 ```
 nonfree
-└── lib
-    ├── jaggl.pack200
-    ├── loader_gl.jar
-    ├── loader.jar
-    ├── runescape_gl.pack200
-    ├── runescape.jar
-    └── unpackclass.pack
+├── lib
+│   ├── jaggl.pack200
+│   ├── loader_gl.jar
+│   ├── loader.jar
+│   ├── runescape_gl.pack200
+│   ├── runescape.jar
+│   └── unpackclass.pack
+└── share
+    ├── cache
+    │   ├── 0
+    │   │   ├── 0.dat
+    │   │   └── ...
+    │   ├── ...
+    │   └── 255
+    │       ├── ...
+    │       └── 28.dat
+    └── keys.json
 ```
 
 The CRC-32 checksums and SHA-256 digests of the correct files are:
