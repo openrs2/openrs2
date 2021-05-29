@@ -1,41 +1,79 @@
 package org.openrs2.deob.bytecode.transform
 
 import com.github.michaelbull.logging.InlineLogger
-import com.google.common.collect.HashMultimap
-import com.google.common.collect.Multimap
 import org.objectweb.asm.Opcodes
-import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.MethodInsnNode
-import org.objectweb.asm.tree.MethodNode
 import org.openrs2.asm.MemberRef
 import org.openrs2.asm.classpath.ClassPath
-import org.openrs2.asm.classpath.Library
 import org.openrs2.asm.filter.MemberFilter
 import org.openrs2.asm.filter.UnionMemberFilter
+import org.openrs2.asm.hasCode
+import org.openrs2.asm.removeDeadCode
 import org.openrs2.asm.transform.Transformer
 import org.openrs2.deob.bytecode.Profile
 import org.openrs2.deob.bytecode.filter.ReflectedConstructorFilter
 import org.openrs2.util.collect.DisjointSet
-import org.openrs2.util.collect.removeFirst
+import org.openrs2.util.collect.UniqueQueue
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 public class UnusedMethodTransformer @Inject constructor(private val profile: Profile) : Transformer() {
     private lateinit var inheritedMethodSets: DisjointSet<MemberRef>
-    private lateinit var excludedMethods: MemberFilter
-    private val methodReferences = HashMultimap.create<DisjointSet.Partition<MemberRef>, MemberRef>()
+    private lateinit var entryPoints: MemberFilter
+    private val pendingMethods = UniqueQueue<MemberRef>()
+    private val usedMethods = mutableSetOf<DisjointSet.Partition<MemberRef>>()
 
     override fun preTransform(classPath: ClassPath) {
         inheritedMethodSets = classPath.createInheritedMethodSets()
-        excludedMethods = UnionMemberFilter(profile.entryPoints, ReflectedConstructorFilter.create(classPath))
-        methodReferences.clear()
+        entryPoints = UnionMemberFilter(profile.entryPoints, ReflectedConstructorFilter.create(classPath))
+
+        queueEntryPoints(classPath)
+
+        while (true) {
+            val method = pendingMethods.poll() ?: break
+            analyzeMethod(classPath, method)
+        }
     }
 
-    override fun transformCode(classPath: ClassPath, library: Library, clazz: ClassNode, method: MethodNode): Boolean {
+    private fun analyzeMethod(classPath: ClassPath, ref: MemberRef) {
+        // find ClassNode/MethodNode
+        val owner = classPath.getClassNode(ref.owner) ?: return
+        val method = owner.methods.singleOrNull { it.name == ref.name && it.desc == ref.desc } ?: return
+        if (!method.hasCode) {
+            return
+        }
+
+        // iterate over non-dead call instructions
+        method.removeDeadCode(owner.name)
+
         for (insn in method.instructions) {
-            if (insn is MethodInsnNode) {
-                addReference(methodReferences, inheritedMethodSets, MemberRef(insn), MemberRef(clazz, method))
+            if (insn !is MethodInsnNode) {
+                continue
+            }
+
+            val invokedRef = MemberRef(insn.owner, insn.name, insn.desc)
+            val partition = inheritedMethodSets[invokedRef] ?: continue
+            if (usedMethods.add(partition)) {
+                pendingMethods += partition
+            }
+        }
+    }
+
+    private fun queueEntryPoints(classPath: ClassPath) {
+        for (partition in inheritedMethodSets) {
+            if (isEntryPoint(classPath, partition)) {
+                pendingMethods.addAll(partition)
+            }
+        }
+    }
+
+    private fun isEntryPoint(classPath: ClassPath, partition: DisjointSet.Partition<MemberRef>): Boolean {
+        for (method in partition) {
+            val clazz = classPath[method.owner]!!
+
+            if (entryPoints.matches(method) || clazz.dependency) {
+                return true
             }
         }
 
@@ -47,12 +85,13 @@ public class UnusedMethodTransformer @Inject constructor(private val profile: Pr
 
         for (library in classPath.libraries) {
             for (clazz in library) {
-                val methods = clazz.methods.iterator()
+                val it = clazz.methods.iterator()
 
-                for (method in methods) {
+                while (it.hasNext()) {
+                    val method = it.next()
                     if (method.access and Opcodes.ACC_NATIVE != 0) {
                         continue
-                    } else if (excludedMethods.matches(clazz.name, method.name, method.desc)) {
+                    } else if (entryPoints.matches(clazz.name, method.name, method.desc)) {
                         continue
                     }
 
@@ -61,18 +100,12 @@ public class UnusedMethodTransformer @Inject constructor(private val profile: Pr
 
                     if (partition.any { classPath[it.owner]!!.dependency }) {
                         continue
+                    } else if (usedMethods.contains(partition)) {
+                        continue
                     }
 
-                    val references = methodReferences[partition]
-                    if (references.isEmpty() || references.size == 1 && references.first() == member) {
-                        methods.remove()
-                        methodsRemoved++
-
-                        for (ref in partition) {
-                            val owner = library[ref.owner]!!
-                            owner.methods.removeFirst { it.name == ref.name && it.desc == ref.desc }
-                        }
-                    }
+                    it.remove()
+                    methodsRemoved++
                 }
             }
         }
@@ -82,15 +115,5 @@ public class UnusedMethodTransformer @Inject constructor(private val profile: Pr
 
     private companion object {
         private val logger = InlineLogger()
-
-        private fun addReference(
-            references: Multimap<DisjointSet.Partition<MemberRef>, MemberRef>,
-            disjointSet: DisjointSet<MemberRef>,
-            member: MemberRef,
-            className: MemberRef
-        ) {
-            val partition = disjointSet[member] ?: return
-            references.put(partition, className)
-        }
     }
 }
