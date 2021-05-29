@@ -23,8 +23,8 @@ public class Cache private constructor(
     private val unpackedCache = UnpackedCache(unpackedCacheSize)
 
     private fun init() {
-        for (archive in store.list(Js5Archive.ARCHIVESET)) {
-            val index = store.read(Js5Archive.ARCHIVESET, archive).use { compressed ->
+        for (archive in store.list(Store.ARCHIVESET)) {
+            val index = store.read(Store.ARCHIVESET, archive).use { compressed ->
                 Js5Compression.uncompress(compressed).use { buf ->
                     Js5Index.read(buf)
                 }
@@ -178,7 +178,7 @@ public class Cache private constructor(
         unpackedCache.remove(archive)
 
         store.remove(archive)
-        store.remove(Js5Archive.ARCHIVESET, archive)
+        store.remove(Store.ARCHIVESET, archive)
     }
 
     public fun remove(archive: Int, group: Int) {

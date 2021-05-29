@@ -26,7 +26,7 @@ public class CacheArchive internal constructor(
     }
 
     override fun writePackedIndex(buf: ByteBuf) {
-        store.write(Js5Archive.ARCHIVESET, archive, buf)
+        store.write(Store.ARCHIVESET, archive, buf)
     }
 
     override fun removePacked(group: Int) {

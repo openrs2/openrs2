@@ -12,7 +12,7 @@ dependencies {
     api(libs.clikt)
 
     implementation(projects.buffer)
-    implementation(projects.cache)
+    implementation(projects.cache550)
     implementation(projects.cli)
     implementation(projects.db)
     implementation(projects.http)

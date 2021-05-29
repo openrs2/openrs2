@@ -121,9 +121,9 @@ public data class Js5MasterIndex(
             val masterIndex = Js5MasterIndex(MasterIndexFormat.ORIGINAL)
 
             var nextArchive = 0
-            for (archive in store.list(Js5Archive.ARCHIVESET)) {
+            for (archive in store.list(Store.ARCHIVESET)) {
                 val entry = try {
-                    store.read(Js5Archive.ARCHIVESET, archive).use { buf ->
+                    store.read(Store.ARCHIVESET, archive).use { buf ->
                         val checksum = buf.crc32()
                         val digest = buf.whirlpool()
 

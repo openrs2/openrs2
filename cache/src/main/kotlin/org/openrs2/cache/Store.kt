@@ -123,6 +123,11 @@ public interface Store : Flushable, Closeable {
         public const val MAX_GROUP_SIZE: Int = (1 shl 24) - 1
 
         /**
+         * The ID of the ARCHIVESET archive.
+         */
+        public const val ARCHIVESET: Int = 255
+
+        /**
          * Opens a [Store], automatically detecting the type based on the
          * presence or absence of the `main_file_cache.dat2` file.
          * @param root the store's root directory.

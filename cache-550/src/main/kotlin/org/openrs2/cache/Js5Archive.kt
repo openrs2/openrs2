@@ -30,5 +30,5 @@ public object Js5Archive {
     public const val MATERIALS: Int = 26
     public const val CONFIG_PARTICLE: Int = 27
     public const val DEFAULTS: Int = 28
-    public const val ARCHIVESET: Int = 255
+    public const val ARCHIVESET: Int = Store.ARCHIVESET
 }
