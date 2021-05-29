@@ -13,6 +13,20 @@ public class UniqueQueue<T> {
         return false
     }
 
+    public operator fun plusAssign(v: T) {
+        add(v)
+    }
+
+    public fun addAll(vs: Iterable<T>) {
+        for (v in vs) {
+            add(v)
+        }
+    }
+
+    public operator fun plusAssign(vs: Iterable<T>) {
+        addAll(vs)
+    }
+
     public fun poll(): T? {
         val v = queue.removeFirstOrNull()
         if (v != null) {
@@ -21,5 +35,10 @@ public class UniqueQueue<T> {
         }
 
         return null
+    }
+
+    public fun clear() {
+        queue.clear()
+        set.clear()
     }
 }

@@ -18,4 +18,24 @@ class UniqueQueueTest {
         assertEquals("b", queue.poll())
         assertNull(queue.poll())
     }
+
+    @Test
+    fun testAddAll() {
+        val queue = UniqueQueue<String>()
+        queue.addAll(listOf("a", "b", "a"))
+
+        assertEquals("a", queue.poll())
+        assertEquals("b", queue.poll())
+        assertNull(queue.poll())
+    }
+
+    @Test
+    fun testClear() {
+        val queue = UniqueQueue<String>()
+        assertTrue(queue.add("a"))
+
+        queue.clear()
+
+        assertNull(queue.poll())
+    }
 }
