@@ -27,7 +27,7 @@ public class UniqueQueue<T> {
         addAll(vs)
     }
 
-    public fun poll(): T? {
+    public fun removeFirstOrNull(): T? {
         val v = queue.removeFirstOrNull()
         if (v != null) {
             set.remove(v)

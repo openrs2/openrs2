@@ -50,7 +50,7 @@ public abstract class DataFlowAnalyzer<T>(owner: String, private val method: Met
         workList += graph.vertexSet().filter { vertex -> graph.inDegreeOf(vertex) == 0 }
 
         while (true) {
-            val node = workList.poll() ?: break
+            val node = workList.removeFirstOrNull() ?: break
 
             val predecessors = graph.incomingEdgesOf(node).map { edge ->
                 outSets[graph.getEdgeSource(edge)] ?: initialSet

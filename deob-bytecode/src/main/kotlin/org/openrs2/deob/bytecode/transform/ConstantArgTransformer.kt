@@ -72,7 +72,7 @@ public class ConstantArgTransformer @Inject constructor(private val profile: Pro
         queueEntryPoints(classPath)
 
         while (true) {
-            val method = pendingMethods.poll() ?: break
+            val method = pendingMethods.removeFirstOrNull() ?: break
             analyzeMethod(classPath, method)
         }
     }

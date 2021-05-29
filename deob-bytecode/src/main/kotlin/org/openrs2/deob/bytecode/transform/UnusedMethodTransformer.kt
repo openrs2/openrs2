@@ -31,7 +31,7 @@ public class UnusedMethodTransformer @Inject constructor(private val profile: Pr
         queueEntryPoints(classPath)
 
         while (true) {
-            val method = pendingMethods.poll() ?: break
+            val method = pendingMethods.removeFirstOrNull() ?: break
             analyzeMethod(classPath, method)
         }
     }

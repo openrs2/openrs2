@@ -8,15 +8,15 @@ import kotlin.test.assertTrue
 
 class UniqueQueueTest {
     @Test
-    fun testAddPoll() {
+    fun testAddRemove() {
         val queue = UniqueQueue<String>()
         assertTrue(queue.add("a"))
         assertTrue(queue.add("b"))
         assertFalse(queue.add("a"))
 
-        assertEquals("a", queue.poll())
-        assertEquals("b", queue.poll())
-        assertNull(queue.poll())
+        assertEquals("a", queue.removeFirstOrNull())
+        assertEquals("b", queue.removeFirstOrNull())
+        assertNull(queue.removeFirstOrNull())
     }
 
     @Test
@@ -24,9 +24,9 @@ class UniqueQueueTest {
         val queue = UniqueQueue<String>()
         queue.addAll(listOf("a", "b", "a"))
 
-        assertEquals("a", queue.poll())
-        assertEquals("b", queue.poll())
-        assertNull(queue.poll())
+        assertEquals("a", queue.removeFirstOrNull())
+        assertEquals("b", queue.removeFirstOrNull())
+        assertNull(queue.removeFirstOrNull())
     }
 
     @Test
@@ -36,6 +36,6 @@ class UniqueQueueTest {
 
         queue.clear()
 
-        assertNull(queue.poll())
+        assertNull(queue.removeFirstOrNull())
     }
 }

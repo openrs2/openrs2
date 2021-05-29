@@ -36,7 +36,7 @@ public class Js5Service @Inject constructor(
                         return
                     }
 
-                    val next = clients.poll()
+                    val next = clients.removeFirstOrNull()
                     if (next == null) {
                         lock.wait()
                         continue
