@@ -5,6 +5,7 @@ plugins {
 
 dependencies {
     api(projects.cache)
+    api(libs.guice)
 
     implementation(projects.buffer)
     implementation(projects.util)
