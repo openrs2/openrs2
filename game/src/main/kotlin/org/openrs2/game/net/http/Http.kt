@@ -46,11 +46,13 @@ public object Http {
         val keepAlive = isKeepAlive(request, version)
 
         val response = DefaultHttpResponse(version, status)
-        response.headers().add(HttpHeaderNames.CONNECTION, if (keepAlive) {
-            HttpHeaderValues.KEEP_ALIVE
-        } else {
-            HttpHeaderValues.CLOSE
-        })
+        response.headers().add(
+            HttpHeaderNames.CONNECTION, if (keepAlive) {
+                HttpHeaderValues.KEEP_ALIVE
+            } else {
+                HttpHeaderValues.CLOSE
+            }
+        )
         response.headers().add(HttpHeaderNames.SERVER, BANNER)
         response.headers().add(HttpHeaderNames.CONTENT_TYPE, contentType)
         response.headers().add(HttpHeaderNames.CONTENT_LENGTH, contentLength)
