@@ -21,7 +21,7 @@ disabled_rules = indent, parameter-list-wrapping
 max_line_length = 80
 
 # @formatter:off
-[*.{xml,yaml,yml}]
+[*.{json,xml,yaml,yml}]
 # @formatter:on
 indent_style = space
 indent_size = 2
