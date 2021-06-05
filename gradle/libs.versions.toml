@@ -25,7 +25,7 @@ clikt = { module = "com.github.ajalt.clikt:clikt", version = "3.2.0" }
 commons-compress = { module = "org.apache.commons:commons-compress", version.ref = "commons-compress" }
 fastutil = { module = "it.unimi.dsi:fastutil", version = "8.5.4" }
 fernflower = { module = "org.openrs2:fernflower", version = "1.1.1" }
-flyway = { module = "org.flywaydb:flyway-core", version = "7.9.1" }
+flyway = { module = "org.flywaydb:flyway-core", version = "7.9.2" }
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
 guice = { module = "com.google.inject:guice", version.ref = "guice" }
 h2 = { module = "com.h2database:h2", version = "1.4.200" }
