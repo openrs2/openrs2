@@ -33,17 +33,17 @@ The following fields are always present:
 
 #### Country
 
-| Data type          | Description    |
-|--------------------|----------------|
-| UnsignedShortSmart | Flag sprite ID |
-| VersionedString    | Name           |
+| Data type          | Description |
+|--------------------|-------------|
+| UnsignedShortSmart | ID          |
+| VersionedString    | Name        |
 
 #### World
 
 | Data type          | Description                                  |
 |--------------------|----------------------------------------------|
 | UnsignedShortSmart | Offset (world ID minus the minimum world ID) |
-| UnsignedByte       | Country ID (from the list in the packet)     |
+| UnsignedByte       | Country index (in the list in the packet)    |
 | Int                | Flags (see below)                            |
 | VersionedString    | Activity                                     |
 | VersionedString    | Hostname                                     |
