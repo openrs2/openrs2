@@ -36064,7 +36064,7 @@ methods:
       1: "buffer"
     locals:
       3: "i"
-      14: "id"
+      14: "offset"
       18: "players"
   client!qe.a (ZII)V:
     owner: "VarpDomain"
