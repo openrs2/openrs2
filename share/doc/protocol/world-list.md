@@ -2,16 +2,16 @@
 
 ## Downstream
 
-| Opcode | Length         | Jagex name                  | Description                        |
-|-------:|---------------:|-----------------------------|------------------------------------|
-|      0 | Variable short | Unknown                     | World list                         |
+| Opcode | Length         | Jagex name | Description |
+|-------:|---------------:|------------|-------------|
+|      0 | Variable short | Unknown    | World list  |
 
 ### 0 (World list)
 
-| Data type    | Description             |
-|--------------|-------------------------|
-| UnsignedByte | Version, must be 1      |
-| Boolean      | Worlds updated          |
+| Data type    | Description        |
+|--------------|--------------------|
+| UnsignedByte | Version, must be 1 |
+| Boolean      | Worlds updated     |
 
 The following fields are only present if the worlds updated flag is set:
 
