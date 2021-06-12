@@ -16,7 +16,6 @@ import io.netty.channel.kqueue.KQueueSocketChannel
 import io.netty.channel.nio.NioEventLoopGroup
 import io.netty.channel.socket.nio.NioServerSocketChannel
 import io.netty.channel.socket.nio.NioSocketChannel
-import io.netty.incubator.channel.uring.IOUring
 import io.netty.incubator.channel.uring.IOUringEventLoopGroup
 import io.netty.incubator.channel.uring.IOUringServerSocketChannel
 import io.netty.incubator.channel.uring.IOUringSocketChannel
@@ -29,7 +28,11 @@ public class BootstrapFactory @Inject constructor(
 ) {
     public fun createEventLoopGroup(): EventLoopGroup {
         return when {
-            IOUring.isAvailable() -> IOUringEventLoopGroup()
+            /*
+             * XXX(gpe): disable io_uring for now, it's incompatible with
+             * FileRegion.
+             */
+            // IOUring.isAvailable() -> IOUringEventLoopGroup()
             Epoll.isAvailable() -> EpollEventLoopGroup()
             KQueue.isAvailable() -> KQueueEventLoopGroup()
             else -> NioEventLoopGroup()
