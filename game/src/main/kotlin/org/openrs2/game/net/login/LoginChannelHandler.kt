@@ -82,7 +82,15 @@ public class LoginChannelHandler @Inject constructor(
     private fun handleRequestWorldList(ctx: ChannelHandlerContext, msg: LoginRequest.RequestWorldList) {
         val (worlds, players) = cluster.getWorldList()
 
-        val checksum = worlds.hashCode()
+        var checksum = worlds.hashCode()
+
+        /*
+         * Fix a 1 in 2^32 chance that we'll fail to fetch the original world
+         * list on startup.
+         */
+        if (checksum == 0) {
+            checksum = 1
+        }
 
         val worldList = if (checksum != msg.checksum) {
             WorldListResponse.WorldList(worlds, checksum)
