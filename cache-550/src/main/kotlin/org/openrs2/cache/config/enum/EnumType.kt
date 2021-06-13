@@ -97,4 +97,14 @@ public class EnumType(id: Int) : ConfigType(id) {
 
         buf.writeByte(0)
     }
+
+    public fun getString(key: Int): String {
+        val strings = strings ?: return defaultString
+        return strings.getOrDefault(key, defaultString)
+    }
+
+    public fun getInt(key: Int): Int {
+        val ints = ints ?: return defaultInt
+        return ints.getOrDefault(key, defaultInt)
+    }
 }
