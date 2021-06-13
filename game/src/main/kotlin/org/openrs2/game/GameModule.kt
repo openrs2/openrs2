@@ -5,10 +5,12 @@ import com.google.inject.AbstractModule
 import com.google.inject.Scopes
 import com.google.inject.multibindings.Multibinder
 import org.openrs2.buffer.BufferModule
+import org.openrs2.cache.Cache
 import org.openrs2.cache.CacheModule
 import org.openrs2.cache.Js5MasterIndex
 import org.openrs2.cache.Store
 import org.openrs2.conf.ConfigModule
+import org.openrs2.game.cache.CacheProvider
 import org.openrs2.game.cache.Js5MasterIndexProvider
 import org.openrs2.game.cache.StoreProvider
 import org.openrs2.game.net.NetworkService
@@ -33,6 +35,10 @@ public object GameModule : AbstractModule() {
 
         bind(Js5MasterIndex::class.java)
             .toProvider(Js5MasterIndexProvider::class.java)
+            .`in`(Scopes.SINGLETON)
+
+        bind(Cache::class.java)
+            .toProvider(CacheProvider::class.java)
             .`in`(Scopes.SINGLETON)
     }
 }
