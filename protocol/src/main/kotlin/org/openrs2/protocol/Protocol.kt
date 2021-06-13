@@ -8,6 +8,7 @@ import org.openrs2.protocol.login.IpLimitCodec
 import org.openrs2.protocol.login.Js5OkCodec
 import org.openrs2.protocol.login.RequestWorldListCodec
 import org.openrs2.protocol.login.ServerFullCodec
+import org.openrs2.protocol.world.WorldListResponseCodec
 
 public class Protocol(vararg codecs: PacketCodec<*>) {
     private val decoders = arrayOfNulls<PacketCodec<*>>(256)
@@ -41,6 +42,9 @@ public class Protocol(vararg codecs: PacketCodec<*>) {
             ClientOutOfDateCodec,
             ServerFullCodec,
             IpLimitCodec
+        )
+        public val WORLD_LIST_DOWNSTREAM: Protocol = Protocol(
+            WorldListResponseCodec
         )
     }
 }

@@ -3,7 +3,15 @@ package org.openrs2.conf
 public data class Config(
     val game: String,
     val operator: String,
-    val domain: String
+    val domain: String,
+    val world: Int,
+    val hostname: String,
+    val country: CountryCode,
+    val activity: String,
+    val members: Boolean,
+    val quickChat: Boolean,
+    val pvp: Boolean,
+    val lootShare: Boolean
 ) {
     val internalGame: String = game.toInternalName()
     val internalOperator: String = operator.toInternalName()

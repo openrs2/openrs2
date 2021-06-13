@@ -11,10 +11,12 @@ import io.netty.handler.codec.http.HttpResponseEncoder
 import io.netty.handler.codec.string.StringDecoder
 import io.netty.handler.timeout.IdleStateEvent
 import org.openrs2.buffer.copiedBuffer
+import org.openrs2.game.cluster.Cluster
 import org.openrs2.game.net.crossdomain.CrossDomainChannelHandler
 import org.openrs2.game.net.http.Http
 import org.openrs2.game.net.jaggrab.JaggrabChannelHandler
 import org.openrs2.game.net.js5.Js5ChannelHandler
+import org.openrs2.protocol.Protocol
 import org.openrs2.protocol.Rs2Decoder
 import org.openrs2.protocol.Rs2Encoder
 import org.openrs2.protocol.jaggrab.JaggrabRequestDecoder
@@ -23,10 +25,12 @@ import org.openrs2.protocol.js5.Js5ResponseEncoder
 import org.openrs2.protocol.js5.XorDecoder
 import org.openrs2.protocol.login.LoginRequest
 import org.openrs2.protocol.login.LoginResponse
+import org.openrs2.protocol.world.WorldListResponse
 import javax.inject.Inject
 import javax.inject.Provider
 
 public class LoginChannelHandler @Inject constructor(
+    private val cluster: Cluster,
     private val js5HandlerProvider: Provider<Js5ChannelHandler>,
     private val jaggrabHandler: JaggrabChannelHandler
 ) : SimpleChannelInboundHandler<LoginRequest>(LoginRequest::class.java) {
@@ -38,6 +42,7 @@ public class LoginChannelHandler @Inject constructor(
         when (msg) {
             is LoginRequest.InitJs5RemoteConnection -> handleInitJs5RemoteConnection(ctx, msg)
             is LoginRequest.InitJaggrabConnection -> handleInitJaggrabConnection(ctx)
+            is LoginRequest.RequestWorldList -> handleRequestWorldList(ctx, msg)
             is LoginRequest.InitCrossDomainConnection -> handleInitCrossDomainConnection(ctx)
         }
     }
@@ -72,6 +77,23 @@ public class LoginChannelHandler @Inject constructor(
         ctx.pipeline().remove(Rs2Decoder::class.java)
         ctx.pipeline().remove(Rs2Encoder::class.java)
         ctx.pipeline().remove(this)
+    }
+
+    private fun handleRequestWorldList(ctx: ChannelHandlerContext, msg: LoginRequest.RequestWorldList) {
+        val (worlds, players) = cluster.getWorldList()
+
+        val checksum = worlds.hashCode()
+
+        val worldList = if (checksum != msg.checksum) {
+            WorldListResponse.WorldList(worlds, checksum)
+        } else {
+            null
+        }
+
+        val encoder = ctx.pipeline().get(Rs2Encoder::class.java)
+        encoder.protocol = Protocol.WORLD_LIST_DOWNSTREAM
+
+        ctx.write(WorldListResponse(worldList, players)).addListener(ChannelFutureListener.CLOSE)
     }
 
     private fun handleInitCrossDomainConnection(ctx: ChannelHandlerContext) {

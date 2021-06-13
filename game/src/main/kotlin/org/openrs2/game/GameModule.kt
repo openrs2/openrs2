@@ -13,6 +13,8 @@ import org.openrs2.conf.ConfigModule
 import org.openrs2.game.cache.CacheProvider
 import org.openrs2.game.cache.Js5MasterIndexProvider
 import org.openrs2.game.cache.StoreProvider
+import org.openrs2.game.cluster.Cluster
+import org.openrs2.game.cluster.SingleWorldCluster
 import org.openrs2.game.net.NetworkService
 import org.openrs2.game.net.js5.Js5Service
 import org.openrs2.net.NetworkModule
@@ -40,5 +42,8 @@ public object GameModule : AbstractModule() {
         bind(Cache::class.java)
             .toProvider(CacheProvider::class.java)
             .`in`(Scopes.SINGLETON)
+
+        bind(Cluster::class.java)
+            .to(SingleWorldCluster::class.java)
     }
 }

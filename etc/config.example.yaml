@@ -10,3 +10,30 @@ operator: "OpenRS2"
 # The game's domain name. All references to "runescape.com" are replaced with
 # this string. It should, at a minimum, have `www` and `www-wtqa` hostnames.
 domain: "openrs2.org"
+
+# The world number.
+world: 1
+
+# The world server's hostname. A suggested naming scheme is
+# `world<world>.<domain>` - for example, `world1.openrs2.org`. The default of
+# `localhost` is only suitable for local testing.
+hostname: "localhost"
+
+# The world's ISO 3166-1 alpha-2 country code.
+country: "GB"
+
+# The world's activity. If the world does not have a special purpose, use a
+# single hyphen.
+activity: "-"
+
+# Set to true to indicate this is a members world.
+members: true
+
+# Set to true to enforce the use of quick chat.
+quick_chat: false
+
+# Set to true to indicate this is a PvP world.
+pvp: false
+
+# Set to true to enable loot share.
+loot_share: false
