@@ -150,7 +150,7 @@ classes:
   client!mc: "ColorImageCacheEntry"
   client!md: "ColorImageCache"
   client!mg: "Js5MasterIndex"
-  client!mi: "TextureMeta"
+  client!mi: "Material"
   client!mj: "TriangleNormal"
   client!ml: "RawModel"
   client!mo: "TextureOp26"
@@ -5787,7 +5787,7 @@ fields:
     owner: "Static4"
     name: "tileFlags"
   client!mi.e Z:
-    owner: "TextureMeta"
+    owner: "Material"
     name: "aBoolean233"
   client!mi.f Lclient!fh;:
     owner: "client"
@@ -5799,31 +5799,31 @@ fields:
     owner: "Static4"
     name: "anInt3336"
   client!mi.i Z:
-    owner: "TextureMeta"
+    owner: "Material"
     name: "lowDetail"
   client!mi.j Z:
-    owner: "TextureMeta"
+    owner: "Material"
     name: "aBoolean235"
   client!mi.l B:
-    owner: "TextureMeta"
+    owner: "Material"
     name: "aByte7"
   client!mi.m B:
-    owner: "TextureMeta"
+    owner: "Material"
     name: "materialId"
   client!mi.n B:
-    owner: "TextureMeta"
+    owner: "Material"
     name: "materialArg"
   client!mi.p B:
-    owner: "TextureMeta"
+    owner: "Material"
     name: "aByte10"
   client!mi.q S:
-    owner: "TextureMeta"
+    owner: "Material"
     name: "averageColor"
   client!mi.r Z:
-    owner: "TextureMeta"
+    owner: "Material"
     name: "aBoolean236"
   client!mi.s Z:
-    owner: "TextureMeta"
+    owner: "Material"
     name: "aBoolean237"
   client!mj.a I:
     owner: "TriangleNormal"
@@ -8137,7 +8137,7 @@ fields:
     name: "lastCanvasReplace"
   client!qi.l [Lclient!mi;:
     owner: "Js5TextureProvider"
-    name: "metadata"
+    name: "materials"
   client!qi.m Lclient!fh;:
     owner: "Js5TextureProvider"
     name: "spritesArchive"
@@ -26388,7 +26388,7 @@ methods:
     locals: {}
   client!kj.a (IB)Lclient!mi;:
     owner: "TextureProvider"
-    name: "getMetadata"
+    name: "getMaterial"
     arguments:
       0: "id"
     locals: {}
@@ -36591,7 +36591,7 @@ methods:
     locals: {}
   client!qi.a (IB)Lclient!mi;:
     owner: "Js5TextureProvider"
-    name: "getMetadata"
+    name: "getMaterial"
     arguments:
       0: "id"
     locals: {}
