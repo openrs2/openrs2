@@ -2,7 +2,7 @@
 classes:
   client!a: "AnimFrame"
   client!ac: "TextureOp28"
-  client!ae: "Material7"
+  client!ae: "MaterialRenderer7"
   client!af: "AnimBase"
   client!ag: "SynthSound"
   client!ai: "QuickChatCommandDecoder"
@@ -12,17 +12,17 @@ classes:
   client!ba: "BoundingBox"
   client!bb: "ProjAnimNode"
   client!bc: "PostProcessor"
-  client!bd: "WaterMaterial"
+  client!bd: "WaterMaterialRenderer"
   client!be: "Class17"
   client!bf: "VorbisFloor"
   client!bg: "LongNode"
   client!bh: "MouseWheel"
   client!bi: "ParticleEmitter"
-  client!bj: "UnderwaterMaterial"
+  client!bj: "UnderwaterMaterialRenderer"
   client!bk: "TracingException"
   client!bl: "TextureOp25"
   client!bn: "MidiNoteStream"
-  client!bo: "WaterfallMaterial"
+  client!bo: "WaterfallMaterialRenderer"
   client!c: "Js5GlTextureProvider"
   client!ca: "TextureOp11"
   client!cc: "SoftLruHashTable"
@@ -32,7 +32,7 @@ classes:
   client!ci: "VertexNormal"
   client!cj: "EnumType"
   client!ck: "TextureOp32"
-  client!cl: "Material"
+  client!cl: "MaterialRenderer"
   client!client: "client"
   client!cm: "VarbitType"
   client!cn: "ReferenceNode"
@@ -81,7 +81,7 @@ classes:
   client!gf: "IntHashTable"
   client!gg: "TextureOp29SubOp2"
   client!gh: "ReferenceNodeFactory"
-  client!gk: "LiquidMaterial"
+  client!gk: "LiquidMaterialRenderer"
   client!gl: "Font"
   client!gn: "AreaSound"
   client!go: "MidiDecoder"
@@ -91,7 +91,7 @@ classes:
   client!hf: "NanoTimer"
   client!hi: "VarpType"
   client!hk: "TextureOp1"
-  client!hl: "SpecularMaterial"
+  client!hl: "SpecularMaterialRenderer"
   client!ho: "MelType"
   client!ia: "BrokenInputStream"
   client!ib: "Skybox"
@@ -195,7 +195,7 @@ classes:
   client!pk: "TextureOp2"
   client!pl: "EnumStringEntry"
   client!po: "MapElementList"
-  client!q: "UnlitMaterial"
+  client!q: "UnlitMaterialRenderer"
   client!qa: "IdkType"
   client!qb: "TextureOp0"
   client!qc: "PathingEntity"
@@ -405,7 +405,7 @@ fields:
     owner: "LocalisedText"
     name: "MAINLOAD41B"
   client!ae.b Z:
-    owner: "Material7"
+    owner: "MaterialRenderer7"
     name: "aBoolean7"
   client!ae.c [S:
     owner: "PlayerAppearance"
@@ -417,7 +417,7 @@ fields:
     owner: "Static1"
     name: "anInt91"
   client!ae.j I:
-    owner: "Material7"
+    owner: "MaterialRenderer7"
     name: "anInt96"
   client!ae.k I:
     owner: "MsiTypeList"
@@ -678,19 +678,19 @@ fields:
     owner: "Static1"
     name: "anInt929"
   client!bd.a I:
-    owner: "WaterMaterial"
+    owner: "WaterMaterialRenderer"
     name: "anInt265"
   client!bd.b I:
-    owner: "WaterMaterial"
+    owner: "WaterMaterialRenderer"
     name: "anInt266"
   client!bd.c I:
-    owner: "WaterMaterial"
+    owner: "WaterMaterialRenderer"
     name: "anInt267"
   client!bd.d [F:
     owner: "Static1"
     name: "aFloatArray5"
   client!bd.e [F:
-    owner: "WaterMaterial"
+    owner: "WaterMaterialRenderer"
     name: "aFloatArray6"
   client!be.a Lclient!cc;:
     owner: "FontMetricsList"
@@ -879,16 +879,16 @@ fields:
     owner: "ParticleEmitter"
     name: "anInt320"
   client!bj.a I:
-    owner: "UnderwaterMaterial"
+    owner: "UnderwaterMaterialRenderer"
     name: "listId"
   client!bj.b Z:
     owner: "Static1"
     name: "aBoolean21"
   client!bj.c I:
-    owner: "UnderwaterMaterial"
+    owner: "UnderwaterMaterialRenderer"
     name: "textureId"
   client!bj.d [F:
-    owner: "UnderwaterMaterial"
+    owner: "UnderwaterMaterialRenderer"
     name: "tempVertex"
   client!bk.a [[B:
     owner: "Static1"
@@ -975,13 +975,13 @@ fields:
     owner: "client"
     name: "js5Archive22"
   client!bo.n [F:
-    owner: "WaterfallMaterial"
+    owner: "WaterfallMaterialRenderer"
     name: "aFloatArray9"
   client!bo.o Ljava/awt/FontMetrics;:
     owner: "Static1"
     name: "aFontMetrics1"
   client!bo.p I:
-    owner: "WaterfallMaterial"
+    owner: "WaterfallMaterialRenderer"
     name: "anInt419"
   client!bo.q J:
     owner: "Static1"
@@ -3084,19 +3084,19 @@ fields:
     owner: "Static3"
     name: "anInt2098"
   client!gk.a I:
-    owner: "LiquidMaterial"
+    owner: "LiquidMaterialRenderer"
     name: "anInt2099"
   client!gk.b I:
-    owner: "LiquidMaterial"
+    owner: "LiquidMaterialRenderer"
     name: "anInt2100"
   client!gk.c Ljava/nio/FloatBuffer;:
-    owner: "LiquidMaterial"
+    owner: "LiquidMaterialRenderer"
     name: "aFloatBuffer1"
   client!gk.d [F:
     owner: "Static3"
     name: "aFloatArray21"
   client!gk.e I:
-    owner: "LiquidMaterial"
+    owner: "LiquidMaterialRenderer"
     name: "anInt2101"
   client!gl.A [I:
     owner: "Font"
@@ -3510,13 +3510,13 @@ fields:
     owner: "Static3"
     name: "aShort13"
   client!hl.a I:
-    owner: "SpecularMaterial"
+    owner: "SpecularMaterialRenderer"
     name: "anInt2236"
   client!hl.b Z:
-    owner: "SpecularMaterial"
+    owner: "SpecularMaterialRenderer"
     name: "aBoolean150"
   client!hl.c [I:
-    owner: "SpecularMaterial"
+    owner: "SpecularMaterialRenderer"
     name: "anIntArray186"
   client!hm.u Ljava/lang/String;:
     owner: "LocalisedText"
@@ -9211,7 +9211,7 @@ fields:
     name: "anInt4842"
   client!si.h [Lclient!cl;:
     owner: "MaterialManager"
-    name: "materials"
+    name: "renderers"
   client!si.i I:
     owner: "MusicPlayer"
     name: "groupId"
@@ -12336,19 +12336,19 @@ methods:
       121: "destOff2"
       124: "srcOff2"
   client!ae.<init> ()V:
-    owner: "Material7"
+    owner: "MaterialRenderer7"
     name: "<init>"
     arguments: {}
     locals:
       11: "gl"
   client!ae.a ()V:
-    owner: "Material7"
+    owner: "MaterialRenderer7"
     name: "unbind"
     arguments: {}
     locals:
       5: "gl"
   client!ae.a (I)V:
-    owner: "Material7"
+    owner: "MaterialRenderer7"
     name: "setArgument"
     arguments:
       0: "arg"
@@ -12372,7 +12372,7 @@ methods:
       110: "stack"
       155: "key"
   client!ae.b ()V:
-    owner: "Material7"
+    owner: "MaterialRenderer7"
     name: "bind"
     arguments: {}
     locals:
@@ -12386,7 +12386,7 @@ methods:
       3: "x"
       8: "z"
   client!ae.c ()I:
-    owner: "Material7"
+    owner: "MaterialRenderer7"
     name: "getFlags"
     arguments: {}
     locals: {}
@@ -13062,24 +13062,24 @@ methods:
     arguments: {}
     locals: {}
   client!bd.<init> ()V:
-    owner: "WaterMaterial"
+    owner: "WaterMaterialRenderer"
     name: "<init>"
     arguments: {}
     locals: {}
   client!bd.a ()V:
-    owner: "WaterMaterial"
+    owner: "WaterMaterialRenderer"
     name: "unbind"
     arguments: {}
     locals: {}
   client!bd.a (I)V:
-    owner: "WaterMaterial"
+    owner: "WaterMaterialRenderer"
     name: "setArgument"
     arguments:
       0: "arg"
     locals:
       1: "gl"
   client!bd.b ()V:
-    owner: "WaterMaterial"
+    owner: "WaterMaterialRenderer"
     name: "bind"
     arguments: {}
     locals:
@@ -13087,18 +13087,18 @@ methods:
       12: "local12"
       21: "local21"
   client!bd.c ()I:
-    owner: "WaterMaterial"
+    owner: "WaterMaterialRenderer"
     name: "getFlags"
     arguments: {}
     locals: {}
   client!bd.d ()V:
-    owner: "WaterMaterial"
+    owner: "WaterMaterialRenderer"
     name: "method259"
     arguments: {}
     locals:
       1: "gl"
   client!bd.e ()V:
-    owner: "WaterMaterial"
+    owner: "WaterMaterialRenderer"
     name: "method260"
     arguments: {}
     locals:
@@ -13579,7 +13579,7 @@ methods:
     arguments: {}
     locals: {}
   client!bj.<init> ()V:
-    owner: "UnderwaterMaterial"
+    owner: "UnderwaterMaterialRenderer"
     name: "<init>"
     arguments: {}
     locals:
@@ -13588,26 +13588,26 @@ methods:
       22: "i"
       40: "gl"
   client!bj.a ()V:
-    owner: "UnderwaterMaterial"
+    owner: "UnderwaterMaterialRenderer"
     name: "unbind"
     arguments: {}
     locals:
       1: "gl"
   client!bj.a (I)V:
-    owner: "UnderwaterMaterial"
+    owner: "UnderwaterMaterialRenderer"
     name: "setArgument"
     arguments:
       0: "arg"
     locals:
       1: "gl"
   client!bj.b ()V:
-    owner: "UnderwaterMaterial"
+    owner: "UnderwaterMaterialRenderer"
     name: "bind"
     arguments: {}
     locals:
       1: "gl"
   client!bj.c ()I:
-    owner: "UnderwaterMaterial"
+    owner: "UnderwaterMaterialRenderer"
     name: "getFlags"
     arguments: {}
     locals: {}
@@ -13629,7 +13629,7 @@ methods:
     locals:
       1: "gl"
   client!bj.g ()V:
-    owner: "UnderwaterMaterial"
+    owner: "UnderwaterMaterialRenderer"
     name: "createLists"
     arguments: {}
     locals:
@@ -14032,12 +14032,12 @@ methods:
     locals:
       9: "note"
   client!bo.<init> ()V:
-    owner: "WaterfallMaterial"
+    owner: "WaterfallMaterialRenderer"
     name: "<init>"
     arguments: {}
     locals: {}
   client!bo.a ()V:
-    owner: "WaterfallMaterial"
+    owner: "WaterfallMaterialRenderer"
     name: "unbind"
     arguments: {}
     locals:
@@ -14052,7 +14052,7 @@ methods:
       33: "sound"
       37: "baseType"
   client!bo.a (I)V:
-    owner: "WaterfallMaterial"
+    owner: "WaterfallMaterialRenderer"
     name: "setArgument"
     arguments:
       0: "arg"
@@ -14097,19 +14097,19 @@ methods:
     arguments: {}
     locals: {}
   client!bo.b ()V:
-    owner: "WaterfallMaterial"
+    owner: "WaterfallMaterialRenderer"
     name: "bind"
     arguments: {}
     locals:
       5: "gl"
   client!bo.b (Z)V:
-    owner: "WaterfallMaterial"
+    owner: "WaterfallMaterialRenderer"
     name: "method399"
     arguments: {}
     locals:
       7: "gl"
   client!bo.c ()I:
-    owner: "WaterfallMaterial"
+    owner: "WaterfallMaterialRenderer"
     name: "getFlags"
     arguments: {}
     locals: {}
@@ -15214,23 +15214,23 @@ methods:
       93: "local93"
       106: "local106"
   client!cl.a ()V:
-    owner: "Material"
+    owner: "MaterialRenderer"
     name: "unbind"
     arguments: {}
     locals: {}
   client!cl.a (I)V:
-    owner: "Material"
+    owner: "MaterialRenderer"
     name: "setArgument"
     arguments:
       0: "arg"
     locals: {}
   client!cl.b ()V:
-    owner: "Material"
+    owner: "MaterialRenderer"
     name: "bind"
     arguments: {}
     locals: {}
   client!cl.c ()I:
-    owner: "Material"
+    owner: "MaterialRenderer"
     name: "getFlags"
     arguments: {}
     locals: {}
@@ -21176,7 +21176,7 @@ methods:
     arguments: {}
     locals: {}
   client!gk.<init> ()V:
-    owner: "LiquidMaterial"
+    owner: "LiquidMaterialRenderer"
     name: "<init>"
     arguments: {}
     locals:
@@ -21191,13 +21191,13 @@ methods:
       73: "local73"
       141: "local141"
   client!gk.a ()V:
-    owner: "LiquidMaterial"
+    owner: "LiquidMaterialRenderer"
     name: "unbind"
     arguments: {}
     locals:
       5: "gl"
   client!gk.a (I)V:
-    owner: "LiquidMaterial"
+    owner: "LiquidMaterialRenderer"
     name: "setArgument"
     arguments:
       0: "arg"
@@ -21205,7 +21205,7 @@ methods:
       5: "gl"
       58: "local58"
   client!gk.b ()V:
-    owner: "LiquidMaterial"
+    owner: "LiquidMaterialRenderer"
     name: "bind"
     arguments: {}
     locals:
@@ -21213,18 +21213,18 @@ methods:
       85: "local85"
       87: "local87"
   client!gk.c ()I:
-    owner: "LiquidMaterial"
+    owner: "LiquidMaterialRenderer"
     name: "getFlags"
     arguments: {}
     locals: {}
   client!gk.e ()V:
-    owner: "LiquidMaterial"
+    owner: "LiquidMaterialRenderer"
     name: "method1642"
     arguments: {}
     locals:
       1: "gl"
   client!gk.f ()V:
-    owner: "LiquidMaterial"
+    owner: "LiquidMaterialRenderer"
     name: "method1643"
     arguments: {}
     locals:
@@ -22494,43 +22494,43 @@ methods:
     arguments: {}
     locals: {}
   client!hl.<init> ()V:
-    owner: "SpecularMaterial"
+    owner: "SpecularMaterialRenderer"
     name: "<init>"
     arguments: {}
     locals:
       19: "gl"
   client!hl.a ()V:
-    owner: "SpecularMaterial"
+    owner: "SpecularMaterialRenderer"
     name: "unbind"
     arguments: {}
     locals:
       1: "gl"
   client!hl.a (I)V:
-    owner: "SpecularMaterial"
+    owner: "SpecularMaterialRenderer"
     name: "setArgument"
     arguments:
       0: "arg"
     locals:
       1: "gl"
   client!hl.b ()V:
-    owner: "SpecularMaterial"
+    owner: "SpecularMaterialRenderer"
     name: "bind"
     arguments: {}
     locals:
       1: "gl"
   client!hl.c ()I:
-    owner: "SpecularMaterial"
+    owner: "SpecularMaterialRenderer"
     name: "getFlags"
     arguments: {}
     locals: {}
   client!hl.d ()V:
-    owner: "SpecularMaterial"
+    owner: "SpecularMaterialRenderer"
     name: "method1783"
     arguments: {}
     locals:
       1: "gl"
   client!hl.e ()V:
-    owner: "SpecularMaterial"
+    owner: "SpecularMaterialRenderer"
     name: "method1784"
     arguments: {}
     locals:
@@ -28888,7 +28888,7 @@ methods:
       0: "materialId"
       1: "arg"
     locals:
-      42: "material"
+      42: "renderer"
   client!ln.a (ILclient!kj;Lclient!fh;IDIZ)Lclient!jn;:
     owner: "Texture"
     name: "getAlphaSprite"
@@ -35509,23 +35509,23 @@ methods:
       94: "local94"
       123: "hookRequest"
   client!q.a ()V:
-    owner: "UnlitMaterial"
+    owner: "UnlitMaterialRenderer"
     name: "unbind"
     arguments: {}
     locals: {}
   client!q.a (I)V:
-    owner: "UnlitMaterial"
+    owner: "UnlitMaterialRenderer"
     name: "setArgument"
     arguments:
       0: "arg"
     locals: {}
   client!q.b ()V:
-    owner: "UnlitMaterial"
+    owner: "UnlitMaterialRenderer"
     name: "bind"
     arguments: {}
     locals: {}
   client!q.c ()I:
-    owner: "UnlitMaterial"
+    owner: "UnlitMaterialRenderer"
     name: "getFlags"
     arguments: {}
     locals: {}
