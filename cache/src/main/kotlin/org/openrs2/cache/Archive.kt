@@ -101,7 +101,7 @@ public abstract class Archive internal constructor(
                         entry.digest = compressed.whirlpool()
                     }
 
-                    appendVersion(buf, ++entry.version)
+                    appendVersion(compressed, ++entry.version)
                     writePacked(entry.id, compressed)
                 }
             }
