@@ -26,6 +26,6 @@ public class GenerateCommand : CliktCommand(name = "generate") {
     }
 
     private companion object {
-        private val PREFIXES = setOf("m", "um", "l", "ul", "n")
+        private val PREFIXES = setOf("m", "um", "l", "ul", "n", "e")
     }
 }
