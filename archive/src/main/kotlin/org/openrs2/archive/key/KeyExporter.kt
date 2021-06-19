@@ -150,7 +150,7 @@ public class KeyExporter @Inject constructor(
         """.trimIndent()
 
         private val EXPORT_VALID_QUERY = """
-            SELECT DISTINCT (k.key).k0, (k.key).k1, (k.key).k2, (k.key).k3
+            SELECT DISTINCT (k.key).k0, (k.key).k1, (k.key).k2, (k.key).k3, k.id
             FROM keys k
             JOIN containers c ON c.key_id = k.id
             ORDER BY k.id ASC
