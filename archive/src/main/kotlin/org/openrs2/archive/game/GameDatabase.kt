@@ -12,7 +12,7 @@ public class GameDatabase @Inject constructor(
         return database.execute { connection ->
             connection.prepareStatement(
                 """
-                SELECT id, hostname, port, build, last_master_index_id
+                SELECT id, url, build, last_master_index_id
                 FROM games
                 WHERE name = ?
             """.trimIndent()
@@ -25,24 +25,19 @@ public class GameDatabase @Inject constructor(
                     }
 
                     val id = rows.getInt(1)
-                    val hostname: String? = rows.getString(2)
+                    val url: String? = rows.getString(2)
 
-                    var port: Int? = rows.getInt(3)
-                    if (rows.wasNull()) {
-                        port = null
-                    }
-
-                    var build: Int? = rows.getInt(4)
+                    var build: Int? = rows.getInt(3)
                     if (rows.wasNull()) {
                         build = null
                     }
 
-                    var lastMasterIndexId: Int? = rows.getInt(5)
+                    var lastMasterIndexId: Int? = rows.getInt(4)
                     if (rows.wasNull()) {
                         lastMasterIndexId = null
                     }
 
-                    return@execute Game(id, hostname, port, build, lastMasterIndexId)
+                    return@execute Game(id, url, build, lastMasterIndexId)
                 }
             }
         }
