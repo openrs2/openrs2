@@ -30,7 +30,8 @@ public class ConstantPool private constructor(
     private val doubles: DoubleArray
 ) {
     init {
-        require(strings.size <= 65534) // must leave a spare slot for readOptionalString
+        // must leave spare slots for readOptionalString and the built-in strings:
+        require(strings.size <= (65535 - BUILTIN_STRINGS - 1))
         require(fieldNamesAndTypes.size <= 65535)
         require(methodNamesAndTypes.size <= 65535)
         require(fieldRefs.size <= 65535)
