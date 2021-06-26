@@ -24,7 +24,7 @@ public class ByteBufBodyHandler @Inject constructor(
                 subscription.request(Long.MAX_VALUE)
             }
 
-            override fun onNext(item: MutableList<ByteBuffer>) {
+            override fun onNext(item: List<ByteBuffer>) {
                 for (b in item) {
                     buf.addComponent(Unpooled.wrappedBuffer(b))
                 }
