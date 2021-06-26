@@ -6,7 +6,7 @@ guice = "5.0.1"
 jackson = "2.12.3"
 jimfs = "1.2"
 junit = "5.7.2"
-kotlin = "1.5.10"
+kotlin = "1.5.20"
 kotlinCoroutines = "1.5.0"
 ktor = "1.6.0"
 netty = "4.1.65.Final"
@@ -44,7 +44,7 @@ junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version = { strict
 junit-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
 kotlin-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinCoroutines" }
 kotlin-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinCoroutines" }
-kotlinPoet = { module = "com.squareup:kotlinpoet", version = "1.8.0" }
+kotlinPoet = { module = "com.squareup:kotlinpoet", version = "1.9.0" }
 ktor-jackson = { module = "io.ktor:ktor-jackson", version.ref = "ktor" }
 ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor" }
 ktor-thymeleaf = { module = "io.ktor:ktor-thymeleaf", version.ref = "ktor" }
