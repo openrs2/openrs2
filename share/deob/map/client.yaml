@@ -239,7 +239,7 @@ classes:
   client!sn: "TextureOp4"
   client!so: "GlTexture"
   client!t: "StockMarketOffer"
-  client!ta: "Class4_Sub30"
+  client!ta: "AttachLocRequest"
   client!tb: "Keyboard"
   client!tc: "TextureOp22"
   client!td: "ObjType"
@@ -1294,7 +1294,7 @@ fields:
     name: "anInt811"
   client!co.d I:
     owner: "Scenery"
-    name: "anInt814"
+    name: "angle"
   client!co.e I:
     owner: "Scenery"
     name: "anInt815"
@@ -1315,7 +1315,7 @@ fields:
     name: "centerXFine"
   client!co.n I:
     owner: "Scenery"
-    name: "anInt823"
+    name: "y"
   client!co.o I:
     owner: "Scenery"
     name: "xMin"
@@ -5302,10 +5302,10 @@ fields:
     name: "aBoolean221"
   client!li.f I:
     owner: "SpotAnimType"
-    name: "anInt3133"
+    name: "resizeXZ"
   client!li.g I:
     owner: "SpotAnimType"
-    name: "anInt3134"
+    name: "seqId"
   client!li.h [[Z:
     owner: "SceneGraph"
     name: "aBooleanArrayArray5"
@@ -5317,10 +5317,10 @@ fields:
     name: "sourceSkinColors"
   client!li.l I:
     owner: "SpotAnimType"
-    name: "anInt3136"
+    name: "modelId"
   client!li.m I:
     owner: "SpotAnimType"
-    name: "anInt3137"
+    name: "angle"
   client!li.n I:
     owner: "SpotAnimType"
     name: "id"
@@ -5329,7 +5329,7 @@ fields:
     name: "aBoolean222"
   client!li.u I:
     owner: "SpotAnimType"
-    name: "anInt3144"
+    name: "resizeY"
   client!li.v [S:
     owner: "SpotAnimType"
     name: "retextureSource"
@@ -7723,10 +7723,10 @@ fields:
     name: "anInt3973"
   client!qc.Ab I:
     owner: "PathingEntity"
-    name: "anInt4010"
+    name: "attachmentResetAt"
   client!qc.B [I:
     owner: "PathingEntity"
-    name: "anIntArray423"
+    name: "hitDamages"
   client!qc.Bb I:
     owner: "PathingEntity"
     name: "anInt4011"
@@ -7738,7 +7738,7 @@ fields:
     name: "anInt4012"
   client!qc.D I:
     owner: "PathingEntity"
-    name: "anInt3975"
+    name: "attachmentY"
   client!qc.Db I:
     owner: "PathingEntity"
     name: "anInt4013"
@@ -7747,7 +7747,7 @@ fields:
     name: "anInt3976"
   client!qc.Eb I:
     owner: "PathingEntity"
-    name: "anInt4014"
+    name: "faceX"
   client!qc.Fb I:
     owner: "PathingEntity"
     name: "anInt4015"
@@ -7768,7 +7768,7 @@ fields:
     name: "anInt3978"
   client!qc.Ib I:
     owner: "PathingEntity"
-    name: "anInt4018"
+    name: "attachmentZ0"
   client!qc.Jb I:
     owner: "PathingEntity"
     name: "anInt4019"
@@ -7783,7 +7783,7 @@ fields:
     name: "chatColor"
   client!qc.Mb I:
     owner: "PathingEntity"
-    name: "anInt4022"
+    name: "hitpointsBar"
   client!qc.N I:
     owner: "PathingEntity"
     name: "size"
@@ -7795,7 +7795,7 @@ fields:
     name: "originX"
   client!qc.P I:
     owner: "PathingEntity"
-    name: "anInt3984"
+    name: "spotAnimStart"
   client!qc.Pb I:
     owner: "PathingEntity"
     name: "anInt4025"
@@ -7807,10 +7807,10 @@ fields:
     name: "anInt4026"
   client!qc.R I:
     owner: "PathingEntity"
-    name: "anInt3985"
+    name: "faceEntity"
   client!qc.Rb I:
     owner: "PathingEntity"
-    name: "anInt4027"
+    name: "attachmentZFine"
   client!qc.S I:
     owner: "PathingEntity"
     name: "basId"
@@ -7837,7 +7837,7 @@ fields:
     name: "lastSeenLoop"
   client!qc.Wb I:
     owner: "PathingEntity"
-    name: "anInt4032"
+    name: "attachmentXFine"
   client!qc.X Z:
     owner: "PathingEntity"
     name: "aBoolean281"
@@ -7858,7 +7858,7 @@ fields:
     name: "anInt4036"
   client!qc.bb I:
     owner: "PathingEntity"
-    name: "anInt3993"
+    name: "hitpointsBarVisibleUntil"
   client!qc.bc I:
     owner: "PathingEntity"
     name: "movementBlockedLoops"
@@ -7867,10 +7867,10 @@ fields:
     name: "anInt3994"
   client!qc.cc I:
     owner: "PathingEntity"
-    name: "anInt4038"
+    name: "attachmentZ1"
   client!qc.db [I:
     owner: "PathingEntity"
-    name: "anIntArray424"
+    name: "hitTypes"
   client!qc.dc I:
     owner: "PathingEntity"
     name: "anInt4039"
@@ -7882,22 +7882,22 @@ fields:
     name: "movementQueueZ"
   client!qc.gb I:
     owner: "PathingEntity"
-    name: "anInt3996"
+    name: "seqDelay"
   client!qc.gc I:
     owner: "PathingEntity"
-    name: "anInt4041"
+    name: "attachmentX1"
   client!qc.hb I:
     owner: "PathingEntity"
     name: "anInt3997"
   client!qc.hc I:
     owner: "PathingEntity"
-    name: "anInt4042"
+    name: "attachmentSetAt"
   client!qc.ib I:
     owner: "PathingEntity"
     name: "chatEffect"
   client!qc.ic I:
     owner: "PathingEntity"
-    name: "anInt4043"
+    name: "attachmentX0"
   client!qc.jb I:
     owner: "PathingEntity"
     name: "anInt3999"
@@ -7924,10 +7924,10 @@ fields:
     name: "anInt4001"
   client!qc.mc Ljava/lang/Object;:
     owner: "PathingEntity"
-    name: "anObject5"
+    name: "attachment"
   client!qc.nb [I:
     owner: "PathingEntity"
-    name: "anIntArray425"
+    name: "hitVisibleUntil"
   client!qc.o I:
     owner: "MsiTypeList"
     name: "blueDelta"
@@ -7942,7 +7942,7 @@ fields:
     name: "aBoolean284"
   client!qc.qb I:
     owner: "PathingEntity"
-    name: "anInt4003"
+    name: "faceY"
   client!qc.r Z:
     owner: "PathingEntity"
     name: "aBoolean279"
@@ -7957,7 +7957,7 @@ fields:
     name: "anInt3966"
   client!qc.tb I:
     owner: "PathingEntity"
-    name: "anInt4006"
+    name: "y"
   client!qc.u I:
     owner: "PathingEntity"
     name: "anInt3967"
@@ -7981,7 +7981,7 @@ fields:
     name: "anIntArrayArray36"
   client!qc.y I:
     owner: "PathingEntity"
-    name: "anInt3971"
+    name: "spotAnimY"
   client!qc.yb I:
     owner: "PathingEntity"
     name: "anInt4009"
@@ -8007,8 +8007,8 @@ fields:
     owner: "Sprites"
     name: "headIconsPkId"
   client!qd.J Lclient!ll;:
-    owner: "Static5"
-    name: "aClass112_27"
+    owner: "AttachLocRequest"
+    name: "queue"
   client!qd.L Ljava/lang/String;:
     owner: "client"
     name: "mainLoadPrimaryText"
@@ -8494,7 +8494,7 @@ fields:
     name: "heightFractions"
   client!re.b I:
     owner: "Class150"
-    name: "anInt4456"
+    name: "seqId"
   client!re.c I:
     owner: "SoundPlayer"
     name: "size"
@@ -8506,7 +8506,7 @@ fields:
     name: "anInt4460"
   client!re.g I:
     owner: "Class150"
-    name: "anInt4461"
+    name: "delay"
   client!re.h [I:
     owner: "PathFinder"
     name: "queueX"
@@ -9489,35 +9489,35 @@ fields:
     owner: "Chat"
     name: "messages"
   client!ta.C I:
-    owner: "Class4_Sub30"
+    owner: "AttachLocRequest"
     name: "angle"
   client!ta.D I:
-    owner: "Class4_Sub30"
+    owner: "AttachLocRequest"
     name: "locId"
   client!ta.E [S:
     owner: "MiniMenu"
     name: "actions"
   client!ta.H I:
-    owner: "Class4_Sub30"
-    name: "anInt5007"
+    owner: "AttachLocRequest"
+    name: "x1Delta"
   client!ta.I I:
-    owner: "Class4_Sub30"
-    name: "anInt5008"
+    owner: "AttachLocRequest"
+    name: "z1Delta"
   client!ta.K I:
-    owner: "Class4_Sub30"
+    owner: "AttachLocRequest"
     name: "x"
   client!ta.o I:
-    owner: "Class4_Sub30"
+    owner: "AttachLocRequest"
     name: "entityId"
   client!ta.p I:
-    owner: "Class4_Sub30"
+    owner: "AttachLocRequest"
     name: "z"
   client!ta.q I:
-    owner: "Class4_Sub30"
-    name: "anInt4994"
+    owner: "AttachLocRequest"
+    name: "z0Delta"
   client!ta.r I:
-    owner: "Class4_Sub30"
-    name: "anInt4995"
+    owner: "AttachLocRequest"
+    name: "x0Delta"
   client!ta.s I:
     owner: "Static6"
     name: "anInt4996"
@@ -9528,14 +9528,14 @@ fields:
     owner: "MidiPlayer"
     name: "synthArchive"
   client!ta.v I:
-    owner: "Class4_Sub30"
-    name: "anInt4997"
+    owner: "AttachLocRequest"
+    name: "setLoops"
   client!ta.w I:
-    owner: "Class4_Sub30"
+    owner: "AttachLocRequest"
     name: "shape"
   client!ta.x I:
-    owner: "Class4_Sub30"
-    name: "anInt4999"
+    owner: "AttachLocRequest"
+    name: "resetLoops"
   client!ta.z I:
     owner: "Texture"
     name: "heightMask"
@@ -14490,7 +14490,7 @@ methods:
       58: "y"
   client!cd.a (IZII)I:
     owner: "SceneGraph"
-    name: "method522"
+    name: "getTileHeight"
     arguments:
       3: "level"
       2: "xFine"
@@ -14499,10 +14499,10 @@ methods:
       12: "x"
       16: "z"
       38: "virtualLevel"
-      61: "local61"
-      70: "local70"
-      98: "local98"
-      128: "local128"
+      61: "zFine2"
+      70: "xFine2"
+      98: "heightZ0"
+      128: "heightZ1"
   client!cd.a ([[FIBIII[[FIBBLclient!ih;Z[[F[[III)V:
     owner: "Static11"
     name: "method521"
@@ -14560,14 +14560,14 @@ methods:
     locals:
       7: "tile"
   client!ce.a (ILclient!p;BI)V:
-    owner: "Static11"
-    name: "method529"
+    owner: "Npc"
+    name: "animate"
     arguments:
-      0: "seqId"
       1: "npc"
+      0: "seqId"
       3: "delay"
     locals:
-      19: "local19"
+      19: "seqType"
       22: "local22"
   client!ce.a (ILclient!wf;IIIILclient!uj;)V:
     owner: "Static11"
@@ -14638,20 +14638,20 @@ methods:
       3: "secondaryDesc"
     locals: {}
   client!cf.a ([ILclient!p;[II[I)V:
-    owner: "Static11"
+    owner: "Npc"
     name: "method555"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      4: "arg3"
+      1: "npc"
+      0: "seqIds"
+      4: "delays"
+      2: "slotMasks"
     locals:
-      7: "local7"
-      19: "local19"
-      23: "local23"
-      27: "local27"
-      29: "local29"
-      53: "local53"
+      7: "i"
+      19: "seqId"
+      23: "slotMask"
+      27: "delay"
+      29: "j"
+      53: "seqType"
       56: "local56"
       61: "local61"
       155: "local155"
@@ -15005,17 +15005,17 @@ methods:
     owner: "SceneGraph"
     name: "method584"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
-      5: "arg5"
-      6: "arg6"
-      7: "arg7"
-      8: "arg8"
-      9: "arg9"
-      10: "arg10"
+      0: "level"
+      1: "centerXFine"
+      2: "centerZFine"
+      3: "y"
+      4: "entity"
+      5: "angle"
+      6: "key"
+      7: "x0"
+      8: "z0"
+      9: "x1"
+      10: "z1"
     locals: {}
   client!ci.a (IILclient!fh;)Lclient!uj;:
     owner: "SpriteLoader"
@@ -16287,20 +16287,20 @@ methods:
     arguments: {}
     locals: {}
   client!dm.a (ILclient!qc;)V:
-    owner: "Static13"
+    owner: "PathingEntity"
     name: "method939"
     arguments:
-      1: "arg0"
+      1: "entity"
     locals:
-      19: "local19"
-      149: "local149"
-      152: "local152"
-      166: "local166"
-      458: "local458"
-      538: "local538"
-      746: "local746"
+      19: "seqType"
+      149: "spotAnimType"
+      152: "seqId"
+      166: "seqType"
+      458: "seqType"
+      538: "seqType"
+      746: "i"
       760: "local760"
-      782: "local782"
+      782: "seqType"
   client!dm.b (I)V:
     owner: "SkyBoxTypeList"
     name: "clear"
@@ -16334,23 +16334,23 @@ methods:
       70: "local70"
       76: "local76"
   client!dn.a (IIIIIIIIIIIII)V:
-    owner: "Static13"
-    name: "method967"
+    owner: "AttachLocRequest"
+    name: "push"
     arguments:
-      0: "arg0"
+      0: "x0Delta"
       1: "entityId"
-      2: "arg2"
-      3: "arg3"
+      2: "resetLoops"
+      3: "setLoops"
       4: "shape"
-      5: "arg5"
-      6: "arg6"
+      5: "z1Delta"
+      6: "z0Delta"
       8: "locId"
       9: "angle"
       10: "z"
-      11: "arg10"
+      11: "x1Delta"
       12: "x"
     locals:
-      3: "local3"
+      3: "request"
   client!dn.a (IZIZLclient!qk;IIIZ)Lclient!uj;:
     owner: "Static13"
     name: "method965"
@@ -26797,12 +26797,12 @@ methods:
     owner: "Static22"
     name: "method2388"
     arguments:
-      0: "arg0"
+      0: "sizeFilter"
     locals:
-      7: "local7"
-      14: "local14"
-      32: "local32"
-      46: "local46"
+      7: "playerListSize"
+      14: "i"
+      32: "player"
+      46: "size"
       111: "local111"
       120: "local120"
       126: "local126"
@@ -26813,10 +26813,10 @@ methods:
       211: "local211"
       216: "local216"
       238: "local238"
-      246: "local246"
-      253: "local253"
-      255: "local255"
-      280: "local280"
+      246: "i"
+      253: "key"
+      255: "player"
+      280: "size"
       340: "local340"
       345: "local345"
       377: "local377"
@@ -26899,9 +26899,9 @@ methods:
       4: "length"
       5: "centerXFine"
       6: "centerZFine"
-      7: "arg7"
+      7: "y"
       8: "entity"
-      9: "arg9"
+      9: "angle"
       10: "arg10"
       11: "key"
     locals:
@@ -28361,10 +28361,10 @@ methods:
       2: "arg2"
     locals:
       9: "model"
-      22: "local22"
+      22: "rawModel"
       34: "i"
       57: "i"
-      113: "local113"
+      113: "model2"
   client!li.a (IILclient!fd;)V:
     owner: "SpotAnimType"
     name: "decode"
@@ -28372,10 +28372,10 @@ methods:
       2: "buffer"
       0: "code"
     locals:
-      93: "local93"
-      103: "local103"
-      141: "local141"
-      151: "local151"
+      93: "len"
+      103: "i"
+      141: "len"
+      151: "i"
   client!li.a (ILjava/lang/String;)Z:
     owner: "FriendsList"
     name: "contains"
@@ -35306,10 +35306,10 @@ methods:
     name: "playSeqSound"
     arguments:
       0: "seqType"
-      1: "zFine"
       2: "xFine"
+      1: "zFine"
       3: "index"
-      4: "arg4"
+      4: "self"
     locals:
       34: "sound"
       38: "id"
@@ -35829,13 +35829,13 @@ methods:
     locals: {}
   client!qc.a (IIII)V:
     owner: "PathingEntity"
-    name: "method3304"
+    name: "addHit"
     arguments:
-      0: "arg0"
-      2: "arg1"
-      3: "arg2"
+      0: "loop"
+      2: "type"
+      3: "damage"
     locals:
-      7: "local7"
+      7: "i"
   client!qc.a (ILclient!vg;)V:
     owner: "PathingEntity"
     name: "method3305"
@@ -36486,19 +36486,19 @@ methods:
       0: "id"
       1: "flags"
     locals:
-      14: "local14"
-      18: "local18"
-      43: "local43"
-      53: "local53"
+      14: "damage"
+      18: "type"
+      43: "seqId"
+      53: "delay"
       68: "len"
       71: "bytes"
       76: "buffer"
-      117: "local117"
-      120: "local120"
-      123: "local123"
-      126: "local126"
-      128: "local128"
-      135: "local135"
+      117: "len"
+      120: "seqIds"
+      123: "delays"
+      126: "slotMasks"
+      128: "i"
+      135: "seqId"
       232: "chatFlags"
       236: "staffModelLevel"
       244: "quickChat"
@@ -36510,13 +36510,13 @@ methods:
       314: "phraseId"
       333: "message"
       343: "phrase"
-      450: "local450"
-      454: "local454"
+      450: "spotAnimId"
+      454: "yAndDelay"
       456: "local456"
       553: "local553"
       562: "local562"
-      670: "local670"
-      674: "local674"
+      670: "damage"
+      674: "type"
   client!qh.a (Z)V:
     owner: "MidiInstrument"
     name: "release"
@@ -36905,9 +36905,9 @@ methods:
       848: "local848"
       850: "local850"
       852: "local852"
-      860: "local860"
-      862: "local862"
-      881: "local881"
+      860: "len"
+      862: "i"
+      881: "seqType"
       896: "local896"
       901: "local901"
       906: "local906"
@@ -36930,10 +36930,10 @@ methods:
       1200: "local1200"
       1260: "local1260"
       1264: "local1264"
-      1318: "local1318"
+      1318: "model2"
       1320: "local1320"
       1322: "local1322"
-      1434: "local1434"
+      1434: "i"
   client!qk.b (IBI)V:
     owner: "PlayerAppearance"
     name: "setColor"
@@ -40017,7 +40017,7 @@ methods:
       304: "angleDelta"
       361: "local361"
       363: "local363"
-      373: "local373"
+      373: "movementSpeed"
       654: "local654"
       666: "local666"
       683: "dz"
@@ -40025,20 +40025,20 @@ methods:
       712: "local712"
       719: "local719"
   client!sl.a ([ILclient!f;I[I[I)V:
-    owner: "Static32"
+    owner: "Player"
     name: "method4023"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      3: "arg2"
-      4: "arg3"
+      1: "player"
+      4: "seqIds"
+      3: "delays"
+      0: "slotMasks"
     locals:
-      11: "local11"
-      23: "local23"
-      27: "local27"
-      31: "local31"
-      33: "local33"
-      61: "local61"
+      11: "i"
+      23: "seqId"
+      27: "delay"
+      31: "slotMask"
+      33: "j"
+      61: "seqType"
       66: "local66"
       69: "local69"
       166: "local166"
@@ -42516,20 +42516,20 @@ methods:
       10: "id"
       14: "npc"
       18: "flags"
-      43: "local43"
-      49: "local49"
-      74: "local74"
-      77: "local77"
-      80: "local80"
-      83: "local83"
-      85: "local85"
-      96: "local96"
-      141: "local141"
-      145: "local145"
-      238: "local238"
-      250: "local250"
+      43: "damage"
+      49: "type"
+      74: "len"
+      77: "delays"
+      80: "slotMasks"
+      83: "seqIds"
+      85: "j"
+      96: "seqId"
+      141: "damage"
+      145: "type"
+      238: "seqId"
+      250: "delay"
       266: "spotAnimId"
-      270: "local270"
+      270: "yAndDelay"
       272: "local272"
       358: "local358"
       365: "type"
@@ -45454,35 +45454,35 @@ methods:
       48: "local48"
       66: "local66"
   client!wd.i (I)V:
-    owner: "Static37"
-    name: "method4713"
+    owner: "AttachLocRequest"
+    name: "loop"
     arguments: {}
     locals:
-      16: "local16"
+      16: "request"
       33: "playerId"
       42: "entity"
       55: "npcId"
       69: "type"
       85: "length"
       88: "width"
-      105: "local105"
-      112: "local112"
-      120: "local120"
-      130: "local130"
-      134: "local134"
-      161: "local161"
-      163: "local163"
+      105: "centerX1"
+      112: "centerX0"
+      120: "centerZ0"
+      130: "centerZ1"
+      134: "tileHeights"
+      161: "y"
+      163: "attachment"
       168: "layer"
       192: "groundDecor"
       205: "scenery"
       219: "wallDecor"
       234: "wall"
-      274: "local274"
-      277: "local277"
-      300: "local300"
-      315: "local315"
-      335: "local335"
-      341: "local341"
+      274: "z0Delta"
+      277: "x0Delta"
+      300: "x1Delta"
+      315: "temp"
+      335: "z1Delta"
+      341: "temp"
   client!wd.j (I)V:
     owner: "ChangeLocRequest"
     name: "flush"
@@ -46054,20 +46054,20 @@ methods:
       247: "objStacks"
       256: "node"
       262: "objStack"
-      306: "local306"
+      306: "entityId"
       310: "position"
       316: "z"
       324: "x"
-      328: "local328"
-      332: "local332"
-      336: "local336"
-      340: "local340"
-      344: "local344"
-      348: "local348"
-      352: "local352"
-      356: "local356"
-      360: "local360"
-      364: "local364"
+      328: "resetLoops"
+      332: "shapeAndAngle"
+      336: "shape"
+      340: "x0Delta"
+      344: "angle"
+      348: "z1Delta"
+      352: "z0Delta"
+      356: "x1Delta"
+      360: "setLoops"
+      364: "locId"
       390: "position"
       400: "x"
       408: "z"
@@ -46186,14 +46186,14 @@ methods:
     arguments: {}
     locals: {}
   client!wk.a (Lclient!f;III)V:
-    owner: "Static38"
-    name: "method4793"
+    owner: "Player"
+    name: "animate"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "player"
+      1: "seqId"
+      2: "delay"
     locals:
-      89: "local89"
+      89: "seqType"
       92: "local92"
   client!wl.<init> (Lsignlink!kd;II)V:
     owner: "BufferedFile"
