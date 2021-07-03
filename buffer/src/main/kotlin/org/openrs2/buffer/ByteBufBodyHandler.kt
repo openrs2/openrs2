@@ -13,7 +13,7 @@ import javax.inject.Singleton
 
 @Singleton
 public class ByteBufBodyHandler @Inject constructor(
-    private val alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT
+    private val alloc: ByteBufAllocator
 ) : HttpResponse.BodyHandler<ByteBuf> {
     override fun apply(responseInfo: HttpResponse.ResponseInfo): HttpResponse.BodySubscriber<ByteBuf> {
         return object : HttpResponse.BodySubscriber<ByteBuf> {
