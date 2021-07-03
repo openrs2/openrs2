@@ -57,8 +57,9 @@ git config commit.template .git/commit-template
 
 The full text of the DCO is available in the `DCO` file.
 
-OpenRS2 does not distribute any of Jagex's intellectual property, and care
-should be taken to avoid inadvertently including any in contributions.
+OpenRS2 does not distribute any of Jagex's intellectual property in this
+repository, and care should be taken to avoid inadvertently including any in
+contributions.
 
 ## Versioning
 
