@@ -859,11 +859,12 @@ public object PackClass {
     ): Array<IntArray?> {
         require(attributes.size == pcs.size)
 
+        var line = 0
+
         return Array(attributes.size) { i ->
             if (attributes[i].contains(ConstantPool.CODE)) {
-                var line = 0
                 IntArray(pcs[i]!!.size) {
-                    line += buf.readUnsignedShortSmart()
+                    line += buf.readUnsignedShort()
                     line and 0xFFFF
                 }
             } else {
@@ -1442,12 +1443,12 @@ public object PackClass {
     }
 
     private fun writeLineNumbers(buf: ByteBuf, clazz: ClassNode) {
+        var prevLine = 0
+
         for (method in clazz.methods) {
             if (method.instructions.size() == 0) {
                 continue
             }
-
-            var prevLine = 0
 
             for (insn in method.instructions) {
                 if (insn !is LineNumberNode) {
@@ -1455,7 +1456,7 @@ public object PackClass {
                 }
 
                 val line = insn.line
-                buf.writeUnsignedShortSmart(line - prevLine)
+                buf.writeShort(line - prevLine)
                 prevLine = line
             }
         }
