@@ -8,6 +8,7 @@ dependencies {
     api(libs.bundles.asm)
     api(libs.guice)
     api(libs.jackson.databind)
+    api(libs.netty.buffer)
 
     implementation(projects.buffer)
     implementation(projects.cache)

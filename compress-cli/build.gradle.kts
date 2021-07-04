@@ -11,7 +11,9 @@ application {
 dependencies {
     api(libs.clikt)
 
+    implementation(projects.asm)
     implementation(projects.compress)
+    implementation(projects.util)
 }
 
 publishing {
@@ -24,7 +26,7 @@ publishing {
             description.set(
                 """
                 Tools for compressing and uncompressing headerless bzip2,
-                DEFLATE, gzip and LZMA files.
+                DEFLATE, gzip, LZMA, Pack200 and PackClass files.
             """.trimIndent()
             )
         }
