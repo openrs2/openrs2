@@ -22,6 +22,7 @@ import org.bouncycastle.util.io.pem.PemReader
 import org.bouncycastle.util.io.pem.PemWriter
 import org.openrs2.util.io.useAtomicBufferedWriter
 import java.io.IOException
+import java.io.Reader
 import java.math.BigInteger
 import java.nio.file.Files
 import java.nio.file.Path
@@ -133,7 +134,13 @@ public object Rsa {
     }
 
     public fun readPublicKey(path: Path): RSAKeyParameters {
-        val der = readSinglePemObject(path, PUBLIC_KEY)
+        Files.newBufferedReader(path).use { reader ->
+            return readPublicKey(reader)
+        }
+    }
+
+    public fun readPublicKey(reader: Reader): RSAKeyParameters {
+        val der = readSinglePemObject(reader, PUBLIC_KEY)
 
         val spki = SubjectPublicKeyInfo.getInstance(der)
         validateAlgorithm(spki.algorithm)
@@ -148,7 +155,13 @@ public object Rsa {
     }
 
     public fun readPrivateKey(path: Path): RSAPrivateCrtKeyParameters {
-        val der = readSinglePemObject(path, PRIVATE_KEY)
+        Files.newBufferedReader(path).use { reader ->
+            return readPrivateKey(reader)
+        }
+    }
+
+    public fun readPrivateKey(reader: Reader): RSAPrivateCrtKeyParameters {
+        val der = readSinglePemObject(reader, PRIVATE_KEY)
 
         val pki = PrivateKeyInfo.getInstance(der)
         validateAlgorithm(pki.privateKeyAlgorithm)
@@ -181,19 +194,19 @@ public object Rsa {
         }
     }
 
-    private fun readSinglePemObject(path: Path, type: String): ByteArray {
-        PemReader(Files.newBufferedReader(path)).use {
-            val obj = it.readPemObject()
-            if (obj == null || obj.type != type || it.readPemObject() != null) {
-                throw IOException("Expecting single $type PEM object")
-            }
+    private fun readSinglePemObject(reader: Reader, type: String): ByteArray {
+        val pemReader = PemReader(reader)
 
-            if (obj.headers.isNotEmpty()) {
-                throw IOException("PEM headers unsupported")
-            }
-
-            return obj.content
+        val obj = pemReader.readPemObject()
+        if (obj == null || obj.type != type || pemReader.readPemObject() != null) {
+            throw IOException("Expecting single $type PEM object")
         }
+
+        if (obj.headers.isNotEmpty()) {
+            throw IOException("PEM headers unsupported")
+        }
+
+        return obj.content
     }
 
     private fun writeSinglePemObject(path: Path, type: String, content: ByteArray) {
