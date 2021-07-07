@@ -180,6 +180,19 @@ public data class Js5MasterIndex(
         }
 
         public fun read(buf: ByteBuf, format: MasterIndexFormat, key: RSAKeyParameters? = null): Js5MasterIndex {
+            return read(buf, format, key, true)
+        }
+
+        public fun readUnverified(buf: ByteBuf, format: MasterIndexFormat): Js5MasterIndex {
+            return read(buf, format, null, false)
+        }
+
+        private fun read(
+            buf: ByteBuf,
+            format: MasterIndexFormat,
+            key: RSAKeyParameters?,
+            verify: Boolean
+        ): Js5MasterIndex {
             val index = Js5MasterIndex(format)
 
             val start = buf.readerIndex()
@@ -233,24 +246,26 @@ public data class Js5MasterIndex(
                 index.entries += Entry(version, checksum, groups, totalUncompressedLength, digest)
             }
 
-            val end = buf.readerIndex()
+            if (verify) {
+                val end = buf.readerIndex()
 
-            if (format >= MasterIndexFormat.DIGESTS) {
-                val ciphertext = buf.readSlice(buf.readableBytes())
-                decrypt(ciphertext, key).use { plaintext ->
-                    require(plaintext.readableBytes() == SIGNATURE_LENGTH) {
-                        "Invalid signature length"
-                    }
+                if (format >= MasterIndexFormat.DIGESTS) {
+                    val ciphertext = buf.readSlice(buf.readableBytes())
+                    decrypt(ciphertext, key).use { plaintext ->
+                        require(plaintext.readableBytes() == SIGNATURE_LENGTH) {
+                            "Invalid signature length"
+                        }
 
-                    // the client doesn't verify what I presume is the RSA magic byte
-                    plaintext.skipBytes(1)
+                        // the client doesn't verify what I presume is the RSA magic byte
+                        plaintext.skipBytes(1)
 
-                    val expected = ByteArray(Whirlpool.DIGESTBYTES)
-                    plaintext.readBytes(expected)
+                        val expected = ByteArray(Whirlpool.DIGESTBYTES)
+                        plaintext.readBytes(expected)
 
-                    val actual = buf.whirlpool(start, end - start)
-                    require(expected.contentEquals(actual)) {
-                        "Invalid signature"
+                        val actual = buf.whirlpool(start, end - start)
+                        require(expected.contentEquals(actual)) {
+                            "Invalid signature"
+                        }
                     }
                 }
             }

@@ -13,7 +13,8 @@ import org.openrs2.cli.instant
 import org.openrs2.inject.CloseableInjector
 
 public class ImportCommand : CliktCommand(name = "import") {
-    private val build by option().int()
+    private val buildMajor by option().int()
+    private val buildMinor by option().int()
     private val timestamp by option().instant()
     private val name by option()
     private val description by option()
@@ -31,7 +32,7 @@ public class ImportCommand : CliktCommand(name = "import") {
             val importer = injector.getInstance(CacheImporter::class.java)
 
             Store.open(input).use { store ->
-                importer.import(store, game, build, timestamp, name, description, url)
+                importer.import(store, game, buildMajor, buildMinor, timestamp, name, description, url)
             }
         }
     }

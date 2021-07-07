@@ -88,7 +88,8 @@ public class CacheImporter @Inject constructor(
     public suspend fun import(
         store: Store,
         game: String,
-        build: Int?,
+        buildMajor: Int?,
+        buildMinor: Int?,
         timestamp: Instant?,
         name: String?,
         description: String?,
@@ -117,7 +118,8 @@ public class CacheImporter @Inject constructor(
                 SourceType.DISK,
                 masterIndexId,
                 gameId,
-                build,
+                buildMajor,
+                buildMinor,
                 timestamp,
                 name,
                 description,
@@ -182,21 +184,38 @@ public class CacheImporter @Inject constructor(
         buf: ByteBuf,
         format: MasterIndexFormat,
         game: String,
-        build: Int?,
+        buildMajor: Int?,
+        buildMinor: Int?,
         timestamp: Instant?,
         name: String?,
         description: String?,
         url: String?
     ) {
         Js5Compression.uncompress(buf.slice()).use { uncompressed ->
-            val masterIndex = MasterIndex(Js5MasterIndex.read(uncompressed.slice(), format), buf, uncompressed)
+            val masterIndex = MasterIndex(
+                Js5MasterIndex.readUnverified(uncompressed.slice(), format),
+                buf,
+                uncompressed
+            )
 
             database.execute { connection ->
                 prepare(connection)
 
                 val gameId = getGameId(connection, game)
                 val masterIndexId = addMasterIndex(connection, masterIndex)
-                addSource(connection, SourceType.DISK, masterIndexId, gameId, build, timestamp, name, description, url)
+
+                addSource(
+                    connection,
+                    SourceType.DISK,
+                    masterIndexId,
+                    gameId,
+                    buildMajor,
+                    buildMinor,
+                    timestamp,
+                    name,
+                    description,
+                    url
+                )
             }
         }
     }
@@ -206,7 +225,8 @@ public class CacheImporter @Inject constructor(
         buf: ByteBuf,
         uncompressed: ByteBuf,
         gameId: Int,
-        build: Int,
+        buildMajor: Int,
+        buildMinor: Int?,
         lastId: Int?,
         timestamp: Instant
     ): MasterIndexResult {
@@ -216,12 +236,13 @@ public class CacheImporter @Inject constructor(
             connection.prepareStatement(
                 """
                 UPDATE games
-                SET build = ?
+                SET build_major = ?, build_minor = ?
                 WHERE id = ?
             """.trimIndent()
             ).use { stmt ->
-                stmt.setInt(1, build)
-                stmt.setInt(2, gameId)
+                stmt.setInt(1, buildMajor)
+                stmt.setObject(2, buildMinor, Types.INTEGER)
+                stmt.setInt(3, gameId)
 
                 stmt.execute()
             }
@@ -236,7 +257,8 @@ public class CacheImporter @Inject constructor(
                 SourceType.JS5REMOTE,
                 masterIndexId,
                 gameId,
-                build,
+                buildMajor,
+                buildMinor,
                 timestamp,
                 name = "Jagex",
                 description = null,
@@ -451,23 +473,25 @@ public class CacheImporter @Inject constructor(
         type: SourceType,
         masterIndexId: Int,
         gameId: Int,
-        build: Int?,
+        buildMajor: Int?,
+        buildMinor: Int?,
         timestamp: Instant?,
         name: String?,
         description: String?,
         url: String?
     ): Int {
-        if (type == SourceType.JS5REMOTE && build != null) {
+        if (type == SourceType.JS5REMOTE && buildMajor != null) {
             connection.prepareStatement(
                 """
                 SELECT id
                 FROM sources
-                WHERE type = 'js5remote' AND master_index_id = ? AND game_id = ? AND build = ?
+                WHERE type = 'js5remote' AND master_index_id = ? AND game_id = ? AND build_major = ? AND build_minor IS NOT DISTINCT FROM ?
             """.trimIndent()
             ).use { stmt ->
                 stmt.setInt(1, masterIndexId)
                 stmt.setInt(2, gameId)
-                stmt.setInt(3, build)
+                stmt.setInt(3, buildMajor)
+                stmt.setObject(4, buildMinor, Types.INTEGER)
 
                 stmt.executeQuery().use { rows ->
                     if (rows.next()) {
@@ -479,25 +503,26 @@ public class CacheImporter @Inject constructor(
 
         connection.prepareStatement(
             """
-            INSERT INTO sources (type, master_index_id, game_id, build, timestamp, name, description, url)
-            VALUES (?::source_type, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO sources (type, master_index_id, game_id, build_major, build_minor, timestamp, name, description, url)
+            VALUES (?::source_type, ?, ?, ?, ?, ?, ?, ?, ?)
             RETURNING id
         """.trimIndent()
         ).use { stmt ->
             stmt.setString(1, type.toString().lowercase())
             stmt.setInt(2, masterIndexId)
             stmt.setInt(3, gameId)
-            stmt.setObject(4, build, Types.INTEGER)
+            stmt.setObject(4, buildMajor, Types.INTEGER)
+            stmt.setObject(5, buildMinor, Types.INTEGER)
 
             if (timestamp != null) {
-                stmt.setObject(5, timestamp.atOffset(ZoneOffset.UTC), Types.TIMESTAMP_WITH_TIMEZONE)
+                stmt.setObject(6, timestamp.atOffset(ZoneOffset.UTC), Types.TIMESTAMP_WITH_TIMEZONE)
             } else {
-                stmt.setNull(5, Types.TIMESTAMP_WITH_TIMEZONE)
+                stmt.setNull(6, Types.TIMESTAMP_WITH_TIMEZONE)
             }
 
-            stmt.setString(6, name)
-            stmt.setString(7, description)
-            stmt.setString(8, url)
+            stmt.setString(7, name)
+            stmt.setString(8, description)
+            stmt.setString(9, url)
 
             stmt.executeQuery().use { rows ->
                 check(rows.next())

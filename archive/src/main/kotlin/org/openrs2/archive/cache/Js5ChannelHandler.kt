@@ -5,8 +5,10 @@ import io.netty.bootstrap.Bootstrap
 import io.netty.buffer.ByteBuf
 import io.netty.channel.ChannelHandler
 import io.netty.channel.ChannelHandlerContext
+import io.netty.channel.ChannelPipeline
 import io.netty.channel.SimpleChannelInboundHandler
 import kotlinx.coroutines.runBlocking
+import org.bouncycastle.crypto.params.RSAKeyParameters
 import org.openrs2.buffer.crc32
 import org.openrs2.buffer.use
 import org.openrs2.cache.Js5Archive
@@ -14,34 +16,36 @@ import org.openrs2.cache.Js5Compression
 import org.openrs2.cache.Js5Index
 import org.openrs2.cache.Js5MasterIndex
 import org.openrs2.cache.MasterIndexFormat
-import org.openrs2.protocol.Rs2Decoder
-import org.openrs2.protocol.Rs2Encoder
-import org.openrs2.protocol.js5.Js5Request
-import org.openrs2.protocol.js5.Js5RequestEncoder
-import org.openrs2.protocol.js5.Js5Response
-import org.openrs2.protocol.js5.Js5ResponseDecoder
-import org.openrs2.protocol.js5.XorDecoder
-import org.openrs2.protocol.login.LoginRequest
-import org.openrs2.protocol.login.LoginResponse
 import java.time.Instant
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
 @ChannelHandler.Sharable
-public class Js5ChannelHandler(
+public abstract class Js5ChannelHandler(
     private val bootstrap: Bootstrap,
     private val gameId: Int,
     private val hostname: String,
     private val port: Int,
-    private var build: Int,
+    protected var buildMajor: Int,
+    protected var buildMinor: Int?,
     private val lastMasterIndexId: Int?,
     private val continuation: Continuation<Unit>,
     private val importer: CacheImporter,
-    private val masterIndexFormat: MasterIndexFormat = MasterIndexFormat.VERSIONED,
-    private val maxInFlightRequests: Int = 200,
-    maxBuildAttempts: Int = 10
+    private val key: RSAKeyParameters?,
+    private val masterIndexFormat: MasterIndexFormat,
+    private val maxInFlightRequests: Int,
+    private val maxBuildAttempts: Int = 10
 ) : SimpleChannelInboundHandler<Any>(Object::class.java) {
+    protected data class InFlightRequest(val prefetch: Boolean, val archive: Int, val group: Int)
+    protected data class PendingRequest(
+        val prefetch: Boolean,
+        val archive: Int,
+        val group: Int,
+        val version: Int,
+        val checksum: Int
+    )
+
     private enum class State {
         ACTIVE,
         CLIENT_OUT_OF_DATE,
@@ -49,28 +53,24 @@ public class Js5ChannelHandler(
     }
 
     private var state = State.ACTIVE
-    private val maxBuild = build + maxBuildAttempts
-    private val inFlightRequests = mutableSetOf<Js5Request.Group>()
-    private val pendingRequests = ArrayDeque<Js5Request.Group>()
+    private var buildAttempts = 0
+    private val inFlightRequests = mutableSetOf<InFlightRequest>()
+    private val pendingRequests = ArrayDeque<PendingRequest>()
     private var masterIndexId: Int = 0
     private var sourceId: Int = 0
     private var masterIndex: Js5MasterIndex? = null
     private lateinit var indexes: Array<Js5Index?>
     private val groups = mutableListOf<CacheImporter.Group>()
 
-    override fun channelActive(ctx: ChannelHandlerContext) {
-        ctx.writeAndFlush(LoginRequest.InitJs5RemoteConnection(build), ctx.voidPromise())
-        ctx.read()
-    }
+    protected abstract fun createInitMessage(): Any
+    protected abstract fun createRequestMessage(prefetch: Boolean, archive: Int, group: Int): Any
+    protected abstract fun createConnectedMessage(): Any?
+    protected abstract fun configurePipeline(pipeline: ChannelPipeline)
+    protected abstract fun incrementVersion()
 
-    override fun channelRead0(ctx: ChannelHandlerContext, msg: Any) {
-        when (msg) {
-            is LoginResponse.Js5Ok -> handleOk(ctx)
-            is LoginResponse.ClientOutOfDate -> handleClientOutOfDate(ctx)
-            is LoginResponse -> throw Exception("Invalid response: $msg")
-            is Js5Response -> handleResponse(ctx, msg)
-            else -> throw Exception("Unknown message type: ${msg.javaClass.name}")
-        }
+    override fun channelActive(ctx: ChannelHandlerContext) {
+        ctx.writeAndFlush(createInitMessage(), ctx.voidPromise())
+        ctx.read()
     }
 
     override fun channelReadComplete(ctx: ChannelHandlerContext) {
@@ -78,10 +78,10 @@ public class Js5ChannelHandler(
 
         while (inFlightRequests.size < maxInFlightRequests) {
             val request = pendingRequests.removeFirstOrNull() ?: break
-            inFlightRequests += request
+            inFlightRequests += InFlightRequest(request.prefetch, request.archive, request.group)
 
             logger.info { "Requesting archive ${request.archive} group ${request.group}" }
-            ctx.write(request, ctx.voidPromise())
+            ctx.write(createRequestMessage(request.prefetch, request.archive, request.group), ctx.voidPromise())
 
             flush = true
         }
@@ -112,53 +112,60 @@ public class Js5ChannelHandler(
         continuation.resumeWithException(cause)
     }
 
-    private fun handleOk(ctx: ChannelHandlerContext) {
-        val pipeline = ctx.pipeline()
+    protected fun handleOk(ctx: ChannelHandlerContext) {
+        configurePipeline(ctx.pipeline())
 
-        pipeline.remove(Rs2Encoder::class.java)
-        pipeline.remove(Rs2Decoder::class.java)
-        pipeline.addFirst(
-            Js5RequestEncoder,
-            XorDecoder(),
-            Js5ResponseDecoder()
-        )
+        val msg = createConnectedMessage()
+        if (msg != null) {
+            ctx.write(msg, ctx.voidPromise())
+        }
 
-        request(Js5Archive.ARCHIVESET, Js5Archive.ARCHIVESET)
+        request(ctx, Js5Archive.ARCHIVESET, Js5Archive.ARCHIVESET, 0, 0)
     }
 
-    private fun handleClientOutOfDate(ctx: ChannelHandlerContext) {
-        if (++build > maxBuild) {
+    protected fun handleClientOutOfDate(ctx: ChannelHandlerContext) {
+        if (++buildAttempts > maxBuildAttempts) {
             throw Exception("Failed to identify current version")
         }
 
         state = State.CLIENT_OUT_OF_DATE
+        incrementVersion()
+
         ctx.close()
     }
 
-    private fun handleResponse(ctx: ChannelHandlerContext, response: Js5Response) {
-        val request = Js5Request.Group(response.prefetch, response.archive, response.group)
+    protected fun handleResponse(
+        ctx: ChannelHandlerContext,
+        prefetch: Boolean,
+        archive: Int,
+        group: Int,
+        data: ByteBuf
+    ) {
+        val request = InFlightRequest(prefetch, archive, group)
 
         val removed = inFlightRequests.remove(request)
         if (!removed) {
-            val type = if (response.prefetch) {
+            val type = if (prefetch) {
                 "prefetch"
             } else {
                 "urgent"
             }
-            val archive = response.archive
-            val group = response.group
             throw Exception("Received response for $type request (archive $archive group $group) not in-flight")
         }
 
-        if (response.archive == Js5Archive.ARCHIVESET && response.group == Js5Archive.ARCHIVESET) {
-            processMasterIndex(response.data)
-        } else if (response.archive == Js5Archive.ARCHIVESET) {
-            processIndex(response.group, response.data)
+        processResponse(ctx, archive, group, data)
+    }
+
+    protected fun processResponse(ctx: ChannelHandlerContext, archive: Int, group: Int, data: ByteBuf) {
+        if (archive == Js5Archive.ARCHIVESET && group == Js5Archive.ARCHIVESET) {
+            processMasterIndex(ctx, data)
+        } else if (archive == Js5Archive.ARCHIVESET) {
+            processIndex(ctx, group, data)
         } else {
-            processGroup(response.archive, response.group, response.data)
+            processGroup(archive, group, data)
         }
 
-        val complete = pendingRequests.isEmpty() && inFlightRequests.isEmpty()
+        val complete = isComplete()
 
         if (groups.size >= CacheImporter.BATCH_SIZE || complete) {
             runBlocking {
@@ -179,9 +186,13 @@ public class Js5ChannelHandler(
         }
     }
 
-    private fun processMasterIndex(buf: ByteBuf) {
+    protected open fun isComplete(): Boolean {
+        return pendingRequests.isEmpty() && inFlightRequests.isEmpty()
+    }
+
+    private fun processMasterIndex(ctx: ChannelHandlerContext, buf: ByteBuf) {
         Js5Compression.uncompress(buf.slice()).use { uncompressed ->
-            masterIndex = Js5MasterIndex.read(uncompressed.slice(), masterIndexFormat)
+            masterIndex = Js5MasterIndex.read(uncompressed.slice(), masterIndexFormat, key)
 
             val (masterIndexId, sourceId, rawIndexes) = runBlocking {
                 importer.importMasterIndexAndGetIndexes(
@@ -189,7 +200,8 @@ public class Js5ChannelHandler(
                     buf,
                     uncompressed,
                     gameId,
-                    build,
+                    buildMajor,
+                    buildMinor,
                     lastMasterIndexId,
                     timestamp = Instant.now()
                 )
@@ -202,10 +214,15 @@ public class Js5ChannelHandler(
                 indexes = arrayOfNulls(rawIndexes.size)
 
                 for ((archive, index) in rawIndexes.withIndex()) {
+                    val entry = masterIndex!!.entries[archive]
+                    if (entry.version == 0 && entry.checksum == 0) {
+                        continue
+                    }
+
                     if (index != null) {
-                        processIndex(archive, index)
+                        processIndex(ctx, archive, index)
                     } else {
-                        request(Js5Archive.ARCHIVESET, archive)
+                        request(ctx, Js5Archive.ARCHIVESET, archive, entry.version, entry.checksum)
                     }
                 }
             } finally {
@@ -214,7 +231,7 @@ public class Js5ChannelHandler(
         }
     }
 
-    private fun processIndex(archive: Int, buf: ByteBuf) {
+    private fun processIndex(ctx: ChannelHandlerContext, archive: Int, buf: ByteBuf) {
         val checksum = buf.crc32()
         val entry = masterIndex!!.entries[archive]
         if (checksum != entry.checksum) {
@@ -233,7 +250,8 @@ public class Js5ChannelHandler(
                 importer.importIndexAndGetMissingGroups(sourceId, archive, index, buf, uncompressed, lastMasterIndexId)
             }
             for (group in groups) {
-                request(archive, group)
+                val groupEntry = index[group]!!
+                request(ctx, archive, group, groupEntry.version, groupEntry.checksum)
             }
         }
     }
@@ -257,8 +275,8 @@ public class Js5ChannelHandler(
         )
     }
 
-    private fun request(archive: Int, group: Int) {
-        pendingRequests += Js5Request.Group(false, archive, group)
+    protected open fun request(ctx: ChannelHandlerContext, archive: Int, group: Int, version: Int, checksum: Int) {
+        pendingRequests += PendingRequest(false, archive, group, version, checksum)
     }
 
     private fun releaseGroups() {

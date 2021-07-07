@@ -11,6 +11,7 @@ import org.openrs2.cache.MasterIndexFormat
 import org.openrs2.cache.Store
 import org.openrs2.crypto.XteaKey
 import org.openrs2.db.Database
+import org.postgresql.util.PGobject
 import java.time.Instant
 import java.util.SortedSet
 import javax.inject.Inject
@@ -52,10 +53,43 @@ public class CacheExporter @Inject constructor(
         }
     }
 
+    public data class Build(val major: Int, val minor: Int?) : Comparable<Build> {
+        override fun compareTo(other: Build): Int {
+            return compareValuesBy(this, other, Build::major, Build::minor)
+        }
+
+        override fun toString(): String {
+            return if (minor != null) {
+                "$major.$minor"
+            } else {
+                major.toString()
+            }
+        }
+
+        internal companion object {
+            internal fun fromPgObject(o: PGobject): Build? {
+                val value = o.value!!
+                require(value.length >= 2)
+
+                val parts = value.substring(1, value.length - 1).split(",")
+                require(parts.size == 2)
+
+                val major = parts[0]
+                val minor = parts[1]
+
+                if (major.isEmpty()) {
+                    return null
+                }
+
+                return Build(major.toInt(), if (minor.isEmpty()) null else minor.toInt())
+            }
+        }
+    }
+
     public data class CacheSummary(
         val id: Int,
         val game: String,
-        val builds: SortedSet<Int>,
+        val builds: SortedSet<Build>,
         val timestamp: Instant?,
         val names: SortedSet<String>,
         val stats: Stats?
@@ -70,7 +104,7 @@ public class CacheExporter @Inject constructor(
 
     public data class Source(
         val game: String,
-        val build: Int?,
+        val build: Build?,
         val timestamp: Instant?,
         val name: String?,
         val description: String?,
@@ -90,26 +124,29 @@ public class CacheExporter @Inject constructor(
         return database.execute { connection ->
             connection.prepareStatement(
                 """
-                SELECT
-                    m.id,
-                    g.name,
-                    array_remove(array_agg(DISTINCT s.build ORDER BY s.build ASC), NULL),
-                    MIN(s.timestamp),
-                    array_remove(array_agg(DISTINCT s.name ORDER BY s.name ASC), NULL),
-                    ms.valid_indexes,
-                    ms.indexes,
-                    ms.valid_groups,
-                    ms.groups,
-                    ms.valid_keys,
-                    ms.keys,
-                    ms.size
-                FROM master_indexes m
-                JOIN sources s ON s.master_index_id = m.id
-                JOIN games g ON g.id = s.game_id
-                LEFT JOIN master_index_stats ms ON ms.master_index_id = m.id
-                GROUP BY m.id, g.name, ms.valid_indexes, ms.indexes, ms.valid_groups, ms.groups, ms.valid_keys, ms.keys,
-                    ms.size
-                ORDER BY g.name ASC, MIN(s.build) ASC, MIN(s.timestamp) ASC
+                SELECT *
+                FROM (
+                    SELECT
+                        m.id,
+                        g.name,
+                        array_remove(array_agg(DISTINCT ROW(s.build_major, s.build_minor)::build ORDER BY ROW(s.build_major, s.build_minor)::build ASC), NULL) builds,
+                        MIN(s.timestamp) AS timestamp,
+                        array_remove(array_agg(DISTINCT s.name ORDER BY s.name ASC), NULL) sources,
+                        ms.valid_indexes,
+                        ms.indexes,
+                        ms.valid_groups,
+                        ms.groups,
+                        ms.valid_keys,
+                        ms.keys,
+                        ms.size
+                    FROM master_indexes m
+                    JOIN sources s ON s.master_index_id = m.id
+                    JOIN games g ON g.id = s.game_id
+                    LEFT JOIN master_index_stats ms ON ms.master_index_id = m.id
+                    GROUP BY m.id, g.name, ms.valid_indexes, ms.indexes, ms.valid_groups, ms.groups, ms.valid_keys, ms.keys,
+                        ms.size
+                ) t
+                ORDER BY t.name ASC, t.builds[1] ASC, t.timestamp ASC
             """.trimIndent()
             ).use { stmt ->
                 stmt.executeQuery().use { rows ->
@@ -118,7 +155,7 @@ public class CacheExporter @Inject constructor(
                     while (rows.next()) {
                         val id = rows.getInt(1)
                         val game = rows.getString(2)
-                        val builds = rows.getArray(3).array as Array<Int>
+                        val builds = rows.getArray(3).array as Array<Any>
                         val timestamp = rows.getTimestamp(4)?.toInstant()
                         val names = rows.getArray(5).array as Array<String>
 
@@ -138,7 +175,7 @@ public class CacheExporter @Inject constructor(
                         caches += CacheSummary(
                             id,
                             game,
-                            builds.toSortedSet(),
+                            builds.mapNotNull { o -> Build.fromPgObject(o as PGobject) }.toSortedSet(),
                             timestamp,
                             names.toSortedSet(),
                             stats
@@ -185,7 +222,7 @@ public class CacheExporter @Inject constructor(
 
                     masterIndex = Unpooled.wrappedBuffer(rows.getBytes(2)).use { compressed ->
                         Js5Compression.uncompress(compressed).use { uncompressed ->
-                            Js5MasterIndex.read(uncompressed, format)
+                            Js5MasterIndex.readUnverified(uncompressed, format)
                         }
                     }
 
@@ -208,7 +245,7 @@ public class CacheExporter @Inject constructor(
 
             connection.prepareStatement(
                 """
-                SELECT g.name, s.build, s.timestamp, s.name, s.description, s.url
+                SELECT g.name, s.build_major, s.build_minor, s.timestamp, s.name, s.description, s.url
                 FROM sources s
                 JOIN games g ON g.id = s.game_id
                 WHERE s.master_index_id = ?
@@ -221,15 +258,26 @@ public class CacheExporter @Inject constructor(
                     while (rows.next()) {
                         val game = rows.getString(1)
 
-                        var build: Int? = rows.getInt(2)
+                        var buildMajor: Int? = rows.getInt(2)
                         if (rows.wasNull()) {
-                            build = null
+                            buildMajor = null
                         }
 
-                        val timestamp = rows.getTimestamp(3)?.toInstant()
-                        val name = rows.getString(4)
-                        val description = rows.getString(5)
-                        val url = rows.getString(6)
+                        var buildMinor: Int? = rows.getInt(3)
+                        if (rows.wasNull()) {
+                            buildMinor = null
+                        }
+
+                        val build = if (buildMajor != null) {
+                            Build(buildMajor, buildMinor)
+                        } else {
+                            null
+                        }
+
+                        val timestamp = rows.getTimestamp(4)?.toInstant()
+                        val name = rows.getString(5)
+                        val description = rows.getString(6)
+                        val url = rows.getString(7)
 
                         sources += Source(game, build, timestamp, name, description, url)
                     }

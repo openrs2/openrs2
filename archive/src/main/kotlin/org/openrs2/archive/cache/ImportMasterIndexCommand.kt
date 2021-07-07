@@ -17,7 +17,8 @@ import org.openrs2.inject.CloseableInjector
 import java.nio.file.Files
 
 public class ImportMasterIndexCommand : CliktCommand(name = "import-master-index") {
-    private val build by option().int()
+    private val buildMajor by option().int()
+    private val buildMinor by option().int()
     private val timestamp by option().instant()
     private val name by option()
     private val description by option()
@@ -36,7 +37,7 @@ public class ImportMasterIndexCommand : CliktCommand(name = "import-master-index
             val importer = injector.getInstance(CacheImporter::class.java)
 
             Unpooled.wrappedBuffer(Files.readAllBytes(input)).use { buf ->
-                importer.importMasterIndex(buf, format, game, build, timestamp, name, description, url)
+                importer.importMasterIndex(buf, format, game, buildMajor, buildMinor, timestamp, name, description, url)
             }
         }
     }

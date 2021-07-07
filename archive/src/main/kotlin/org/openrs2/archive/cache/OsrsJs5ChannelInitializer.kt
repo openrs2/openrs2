@@ -7,13 +7,13 @@ import org.openrs2.protocol.Protocol
 import org.openrs2.protocol.Rs2Decoder
 import org.openrs2.protocol.Rs2Encoder
 
-public class Js5ChannelInitializer(private val handler: Js5ChannelHandler) : ChannelInitializer<Channel>() {
+public class OsrsJs5ChannelInitializer(private val handler: OsrsJs5ChannelHandler) : ChannelInitializer<Channel>() {
     override fun initChannel(ch: Channel) {
         ch.pipeline().addLast(
             ReadTimeoutHandler(30),
             Rs2Encoder(Protocol.LOGIN_UPSTREAM),
-            Rs2Decoder(Protocol.LOGIN_DOWNSTREAM),
-            handler
+            Rs2Decoder(Protocol.LOGIN_DOWNSTREAM)
         )
+        ch.pipeline().addLast("handler", handler)
     }
 }
