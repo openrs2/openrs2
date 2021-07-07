@@ -3,14 +3,14 @@ asm = "9.2"
 commons-compress = "1.20"
 guava = "30.1.1-jre"
 guice = "5.0.1"
-jackson = "2.12.3"
+jackson = "2.12.4"
 jimfs = "1.2"
 junit = "5.7.2"
 kotlin = "1.5.20"
 kotlinCoroutines = "1.5.0"
 ktor = "1.6.1"
 netty = "4.1.65.Final"
-nettyIoUring = "0.0.7.Final"
+nettyIoUring = "0.0.8.Final"
 
 [libraries]
 asm-commons = { module = "org.ow2.asm:asm-commons", version.ref = "asm" }
@@ -55,7 +55,7 @@ netty-codec-core = { module = "io.netty:netty-codec", version.ref = "netty" }
 netty-codec-http = { module = "io.netty:netty-codec-http", version.ref = "netty" }
 netty-transport = { module = "io.netty:netty-transport", version.ref = "netty" }
 openrs2-natives = { module = "org.openrs2:openrs2-natives-all", version = "3.2.0" }
-postgres = { module = "org.postgresql:postgresql", version = "42.2.22" }
+postgres = { module = "org.postgresql:postgresql", version = "42.2.23" }
 thymeleaf-core = { module = "org.thymeleaf:thymeleaf", version = "3.0.12.RELEASE" }
 thymeleaf-java8time = { module = "org.thymeleaf.extras:thymeleaf-extras-java8time", version = "3.0.4.RELEASE" }
 xz = { module = "org.tukaani:xz", version = "1.9" }
