@@ -69,6 +69,15 @@
 						</div>
 					</td>
 				</tr>
+				<tr>
+					<th class="table-dark">Update(s)</th>
+					<td>
+						<span th:each="update, it : ${cache.updates}" th:remove="tag">
+							<a th:href="${update}" th:text="${update}">https://www.example.com/</a>
+							<br th:remove="${it.last}? 'all' : 'none'" />
+						</span>
+					</td>
+				</tr>
 			</table>
 
 			<h2>Sources</h2>

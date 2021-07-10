@@ -98,6 +98,7 @@ public class CacheExporter @Inject constructor(
     public data class Cache(
         val id: Int,
         val sources: List<Source>,
+        val updates: List<String>,
         val stats: Stats?,
         val masterIndex: Js5MasterIndex
     )
@@ -284,7 +285,25 @@ public class CacheExporter @Inject constructor(
                 }
             }
 
-            Cache(id, sources, stats, masterIndex)
+            val updates = mutableListOf<String>()
+
+            connection.prepareStatement(
+                """
+                SELECT url
+                FROM updates
+                WHERE master_index_id = ?
+            """.trimIndent()
+            ).use { stmt ->
+                stmt.setInt(1, id)
+
+                stmt.executeQuery().use { rows ->
+                    while (rows.next()) {
+                        updates += rows.getString(1)
+                    }
+                }
+            }
+
+            Cache(id, sources, updates, stats, masterIndex)
         }
     }
 
