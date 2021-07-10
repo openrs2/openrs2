@@ -23,10 +23,14 @@ public class ResourceTransformer(
     private val glResources: List<List<Resource>> = Resource.compressGlNatives(),
     private val miscResources: List<Resource> = Resource.compressMiscNatives()
 ) : Transformer() {
+    private var blocks = 0
+    private var checksums = 0
     private var glBlocks = 0
     private var miscBlocks = 0
 
     override fun preTransform(classPath: ClassPath) {
+        blocks = 0
+        checksums = 0
         glBlocks = 0
         miscBlocks = 0
     }
@@ -52,6 +56,8 @@ public class ResourceTransformer(
                 for ((j, byte) in resource.digest.withIndex()) {
                     method.instructions.set(match[28 + 4 * j], byte.toInt().toAbstractInsnNode())
                 }
+
+                blocks++
             }
 
             val checksumMatch = CLIENT_CHECKSUM_MATCHER.match(method).filter { m ->
@@ -63,6 +69,8 @@ public class ResourceTransformer(
             if (checksumMatch != null) {
                 val client = resources.single { it.source == "runescape.js5" || it.source == "runescape_gl.js5" }
                 method.instructions.set(checksumMatch[1], client.checksum.toAbstractInsnNode())
+
+                checksums++
             }
         }
 
@@ -191,6 +199,7 @@ public class ResourceTransformer(
     }
 
     override fun postTransform(classPath: ClassPath) {
+        logger.info { "Replaced $blocks resource constructor blocks and $checksums tracing exception checksums" }
         logger.info { "Replaced $glBlocks jaggl and $miscBlocks jagmisc resource constructor blocks" }
     }
 
