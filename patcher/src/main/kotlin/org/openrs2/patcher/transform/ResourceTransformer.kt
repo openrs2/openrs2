@@ -10,6 +10,7 @@ import org.objectweb.asm.tree.LdcInsnNode
 import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.TypeInsnNode
+import org.objectweb.asm.tree.VarInsnNode
 import org.openrs2.asm.InsnMatcher
 import org.openrs2.asm.classpath.ClassPath
 import org.openrs2.asm.classpath.Library
@@ -51,6 +52,17 @@ public class ResourceTransformer(
                 for ((j, byte) in resource.digest.withIndex()) {
                     method.instructions.set(match[28 + 4 * j], byte.toInt().toAbstractInsnNode())
                 }
+            }
+
+            val checksumMatch = CLIENT_CHECKSUM_MATCHER.match(method).filter { m ->
+                val astore = m[0] as VarInsnNode
+                val aload = m[3] as VarInsnNode
+                val instanceof = m[4] as TypeInsnNode
+                astore.`var` == aload.`var` && instanceof.desc == "java/lang/reflect/InvocationTargetException"
+            }.singleOrNull()
+            if (checksumMatch != null) {
+                val client = resources.single { it.source == "runescape.js5" || it.source == "runescape_gl.js5" }
+                method.instructions.set(checksumMatch[1], client.checksum.toAbstractInsnNode())
             }
         }
 
@@ -212,6 +224,9 @@ public class ResourceTransformer(
             """
         )
         private val MISC_RESOURCES_MATCHER = InsnMatcher.compile("$RESOURCE_ARRAY_CONSTRUCTOR PUTSTATIC")
+        private val CLIENT_CHECKSUM_MATCHER = InsnMatcher.compile(
+            "ASTORE (ICONST | BIPUSH | SIPUSH | LDC) PUTSTATIC ALOAD INSTANCEOF"
+        )
 
         private val GL_LOADING_MESSAGES = listOf(
             "Loading 3D library",
