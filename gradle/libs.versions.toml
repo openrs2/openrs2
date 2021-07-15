@@ -1,12 +1,12 @@
 [versions]
 asm = "9.2"
-commons-compress = "1.20"
+commons-compress = "1.21"
 guava = "30.1.1-jre"
 guice = "5.0.1"
 jackson = "2.12.4"
 jimfs = "1.2"
 junit = "5.7.2"
-kotlin = "1.5.20"
+kotlin = "1.5.21"
 kotlinCoroutines = "1.5.1"
 ktor = "1.6.1"
 netty = "4.1.65.Final"
@@ -25,11 +25,11 @@ clikt = { module = "com.github.ajalt.clikt:clikt", version = "3.2.0" }
 commons-compress = { module = "org.apache.commons:commons-compress", version.ref = "commons-compress" }
 fastutil = { module = "it.unimi.dsi:fastutil", version = "8.5.4" }
 fernflower = { module = "org.openrs2:fernflower", version = "1.1.1" }
-flyway = { module = "org.flywaydb:flyway-core", version = "7.11.1" }
+flyway = { module = "org.flywaydb:flyway-core", version = "7.11.2" }
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
 guice = { module = "com.google.inject:guice", version.ref = "guice" }
 h2 = { module = "com.h2database:h2", version = "1.4.200" }
-hikaricp = { module = "com.zaxxer:HikariCP", version = "4.0.3" }
+hikaricp = { module = "com.zaxxer:HikariCP", version = "5.0.0" }
 inlineLogger = { module = "com.michael-bull.kotlin-inline-logger:kotlin-inline-logger", version = "1.0.3" }
 jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jackson" }
 jackson-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin", version.ref = "jackson" }
@@ -39,7 +39,7 @@ jdom = { module = "org.jdom:jdom2", version = "2.0.6" }
 jgrapht = { module = "org.jgrapht:jgrapht-core", version = "1.5.1" }
 jimfs = { module = "com.google.jimfs:jimfs", version.ref = "jimfs" }
 jquery = { module = "org.webjars:jquery", version = "3.6.0" }
-jsoup = { module = "org.jsoup:jsoup", version = "1.13.1" }
+jsoup = { module = "org.jsoup:jsoup", version = "1.14.1" }
 junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version = { strictly = "5.7.2" } }
 junit-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
 kotlin-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinCoroutines" }
