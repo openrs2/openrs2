@@ -292,49 +292,49 @@ classes:
 fields:
   client!a.a [S:
     owner: "AnimFrame"
-    name: "aShortArray1"
+    name: "y"
   client!a.b [S:
     owner: "AnimFrame"
-    name: "aShortArray2"
+    name: "tempY"
   client!a.c [S:
     owner: "AnimFrame"
-    name: "aShortArray3"
+    name: "indices"
   client!a.d [S:
     owner: "AnimFrame"
-    name: "aShortArray4"
+    name: "z"
   client!a.e Z:
     owner: "AnimFrame"
-    name: "aBoolean1"
+    name: "transformsAlpha"
   client!a.f [B:
     owner: "AnimFrame"
-    name: "aByteArray1"
+    name: "flags"
   client!a.g [B:
     owner: "AnimFrame"
-    name: "aByteArray2"
+    name: "tempFlags"
   client!a.h [S:
     owner: "AnimFrame"
-    name: "aShortArray5"
+    name: "prevOriginIndices"
   client!a.i [S:
     owner: "AnimFrame"
-    name: "aShortArray6"
+    name: "tempZ"
   client!a.j Z:
     owner: "AnimFrame"
-    name: "aBoolean2"
+    name: "transformsColor"
   client!a.k I:
     owner: "AnimFrame"
-    name: "anInt1"
+    name: "transforms"
   client!a.l [S:
     owner: "AnimFrame"
-    name: "aShortArray7"
+    name: "tempPrevOriginIndices"
   client!a.m [S:
     owner: "AnimFrame"
-    name: "aShortArray8"
+    name: "tempX"
   client!a.n [S:
     owner: "AnimFrame"
-    name: "aShortArray9"
+    name: "tempIndices"
   client!a.o [S:
     owner: "AnimFrame"
-    name: "aShortArray10"
+    name: "x"
   client!a.p Lclient!af;:
     owner: "AnimFrame"
     name: "base"
@@ -430,7 +430,7 @@ fields:
     name: "anIntArray13"
   client!af.B [[I:
     owner: "AnimBase"
-    name: "anIntArrayArray1"
+    name: "bones"
   client!af.C [[[Lclient!nh;:
     owner: "SceneGraph"
     name: "tiles"
@@ -445,22 +445,22 @@ fields:
     name: "anInt113"
   client!af.o [I:
     owner: "AnimBase"
-    name: "anIntArray11"
+    name: "types"
   client!af.q Lsignlink!vk;:
     owner: "Static1"
     name: "reverseDnsRequest"
   client!af.r I:
     owner: "AnimBase"
-    name: "anInt107"
+    name: "transforms"
   client!af.t [I:
     owner: "AnimBase"
-    name: "anIntArray12"
+    name: "parts"
   client!af.v Lclient!cc;:
     owner: "Component"
     name: "models"
   client!af.x [Z:
     owner: "AnimBase"
-    name: "aBooleanArray1"
+    name: "shadow"
   client!af.z I:
     owner: "AnimBase"
     name: "id"
@@ -2062,7 +2062,7 @@ fields:
     name: "aBoolean72"
   client!eg.z [I:
     owner: "SeqType"
-    name: "anIntArray95"
+    name: "frames"
   client!eh.a I:
     owner: "Class47"
     name: "anInt1245"
@@ -5863,7 +5863,7 @@ fields:
     name: "particleEmitters"
   client!ml.I [I:
     owner: "RawModel"
-    name: "anIntArray325"
+    name: "triangleBones"
   client!ml.J [S:
     owner: "RawModel"
     name: "aShortArray55"
@@ -5899,7 +5899,7 @@ fields:
     name: "anIntArray328"
   client!ml.U [[I:
     owner: "RawModel"
-    name: "anIntArrayArray27"
+    name: "boneVertices"
   client!ml.V [B:
     owner: "RawModel"
     name: "aByteArray38"
@@ -5989,7 +5989,7 @@ fields:
     name: "aByteArray32"
   client!ml.w [I:
     owner: "RawModel"
-    name: "anIntArray323"
+    name: "vertexBones"
   client!ml.x [I:
     owner: "RawModel"
     name: "vertexY"
@@ -5998,7 +5998,7 @@ fields:
     name: "anInt3354"
   client!ml.z [[I:
     owner: "RawModel"
-    name: "anIntArrayArray26"
+    name: "boneTriangles"
   client!mm.a I:
     owner: "client"
     name: "js5PrevErrors"
@@ -6118,7 +6118,7 @@ fields:
     name: "aByteArray43"
   client!na.Cb I:
     owner: "SoftwareModel"
-    name: "anInt3443"
+    name: "originX"
   client!na.D S:
     owner: "SoftwareModel"
     name: "maxZ"
@@ -6211,7 +6211,7 @@ fields:
     name: "anIntArray377"
   client!na.S [[I:
     owner: "SoftwareModel"
-    name: "anIntArrayArray29"
+    name: "boneVertices"
   client!na.Sb [[I:
     owner: "SoftwareModel"
     name: "anIntArrayArray33"
@@ -6232,7 +6232,7 @@ fields:
     name: "anIntArray349"
   client!na.Vb I:
     owner: "SoftwareModel"
-    name: "anInt3444"
+    name: "originY"
   client!na.W [I:
     owner: "SoftwareModel"
     name: "anIntArray350"
@@ -6256,7 +6256,7 @@ fields:
     name: "minY"
   client!na.bb [[I:
     owner: "SoftwareModel"
-    name: "anIntArrayArray30"
+    name: "boneTriangles"
   client!na.cb [I:
     owner: "SoftwareModel"
     name: "anIntArray352"
@@ -6349,7 +6349,7 @@ fields:
     name: "vertexZ"
   client!na.wb I:
     owner: "SoftwareModel"
-    name: "anInt3442"
+    name: "originZ"
   client!na.x [B:
     owner: "SoftwareModel"
     name: "triangleAlpha"
@@ -8848,7 +8848,7 @@ fields:
     name: "aClass152_1"
   client!s.D B:
     owner: "GlModel"
-    name: "aByte15"
+    name: "shareFlags"
   client!s.E I:
     owner: "GlModel"
     name: "anInt4688"
@@ -8869,7 +8869,7 @@ fields:
     name: "aShortArray94"
   client!s.M I:
     owner: "GlModel"
-    name: "anInt4690"
+    name: "triangleCount"
   client!s.N [F:
     owner: "GlModel"
     name: "vertexT"
@@ -8884,7 +8884,7 @@ fields:
     name: "tempBuffer"
   client!s.R [B:
     owner: "GlModel"
-    name: "aByteArray62"
+    name: "triangleBones"
   client!s.S [S:
     owner: "GlModel"
     name: "aShortArray95"
@@ -8911,7 +8911,7 @@ fields:
     name: "aBoolean325"
   client!s.ab [[I:
     owner: "GlModel"
-    name: "anIntArrayArray39"
+    name: "boneVertices"
   client!s.bb Lclient!lk;:
     owner: "GlModel"
     name: "vbo"
@@ -8926,7 +8926,7 @@ fields:
     name: "aClass53_Sub4_Sub2_1"
   client!s.fb [[I:
     owner: "GlModel"
-    name: "anIntArrayArray40"
+    name: "boneTriangles"
   client!s.gb Ljava/nio/ByteBuffer;:
     owner: "GlModel"
     name: "tempDirectBuffer"
@@ -8965,7 +8965,7 @@ fields:
     name: "triangleSources"
   client!s.pb I:
     owner: "GlModel"
-    name: "anInt4692"
+    name: "originX"
   client!s.q Lclient!ff;:
     owner: "GlModel"
     name: "vertexBuffer"
@@ -8977,7 +8977,7 @@ fields:
     name: "normalBuffer"
   client!s.rb I:
     owner: "GlModel"
-    name: "anInt4693"
+    name: "originY"
   client!s.s [S:
     owner: "GlModel"
     name: "aShortArray89"
@@ -8986,7 +8986,7 @@ fields:
     name: "aFloat115"
   client!s.t [I:
     owner: "GlModel"
-    name: "anIntArray503"
+    name: "vertexBones"
   client!s.tb F:
     owner: "GlModel"
     name: "aFloat116"
@@ -9013,7 +9013,7 @@ fields:
     name: "texCoordBuffer"
   client!s.xb I:
     owner: "GlModel"
-    name: "anInt4694"
+    name: "originZ"
   client!s.y [S:
     owner: "GlModel"
     name: "triangleTextures"
@@ -11947,16 +11947,16 @@ methods:
       0: "bytes"
       1: "base"
     locals:
-      21: "local21"
-      26: "local26"
-      33: "local33"
-      35: "local35"
-      37: "local37"
-      39: "local39"
-      47: "local47"
-      56: "local56"
-      64: "local64"
-      77: "local77"
+      21: "headerBuffer"
+      26: "buffer"
+      33: "headerLen"
+      35: "len"
+      37: "prevOriginIndex"
+      39: "prevUsedOriginIndex"
+      47: "i"
+      56: "type"
+      64: "attributes"
+      77: "defaultValue"
       277: "i"
   client!aa.a (I)V:
     owner: "MaterialManager"
@@ -15773,12 +15773,12 @@ methods:
     name: "get"
     arguments:
       0: "arg0"
-      2: "arg1"
+      2: "seq"
       3: "arg2"
       4: "arg3"
       5: "arg4"
       6: "arg5"
-      7: "arg6"
+      7: "frame"
       8: "arg7"
       9: "arg8"
       10: "arg9"
@@ -15815,7 +15815,7 @@ methods:
       435: "local435"
       438: "local438"
       457: "local457"
-      475: "local475"
+      475: "frameset"
       500: "local500"
       591: "local591"
       615: "local615"
@@ -16727,31 +16727,31 @@ methods:
       102: "local102"
   client!eg.a (Lclient!fd;II)V:
     owner: "SeqType"
-    name: "method1020"
+    name: "decode"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "buffer"
+      1: "code"
     locals:
-      8: "local8"
-      14: "local14"
-      33: "local33"
-      52: "local52"
+      8: "len"
+      14: "i"
+      33: "i"
+      52: "i"
       181: "local181"
-      187: "local187"
+      187: "i"
       198: "local198"
-      221: "local221"
+      221: "j"
       249: "local249"
-      255: "local255"
-      270: "local270"
+      255: "i"
+      270: "i"
       335: "local335"
-      337: "local337"
+      337: "i"
   client!eg.a (Lclient!fd;Z)V:
     owner: "SeqType"
     name: "decode"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals:
-      14: "local14"
+      14: "code"
   client!eg.a (ZIIII)V:
     owner: "Static13"
     name: "method1015"
@@ -16778,8 +16778,8 @@ methods:
       75: "local75"
       77: "local77"
       79: "local79"
-      152: "local152"
-      161: "local161"
+      152: "shareAlpha"
+      161: "shareColors"
       246: "local246"
   client!eg.a (ZIILclient!vg;II)Lclient!vg;:
     owner: "SeqType"
@@ -29600,7 +29600,7 @@ methods:
       18: "local18"
       20: "hasPriorities"
       22: "hasAlpha"
-      24: "local24"
+      24: "hasTriangleBones"
       26: "hasTextures"
       28: "local28"
       39: "particleEmittersLen"
@@ -29865,8 +29865,8 @@ methods:
       50: "local50"
       54: "priority"
       58: "hasAlpha"
-      62: "local62"
-      66: "local66"
+      62: "hasTriangleBones"
+      66: "hasVertexBones"
       70: "local70"
       74: "local74"
       78: "local78"
@@ -29874,15 +29874,15 @@ methods:
       90: "triangleTypesPosition"
       96: "triangleVerticesPosition"
       98: "trianglePrioritiesPosition"
-      107: "local107"
+      107: "triangleBonesPosition"
       116: "local116"
-      125: "local125"
+      125: "vertexBonesPosition"
       134: "triangleAlphaPosition"
-      147: "local147"
+      147: "vertexDzPosition"
       149: "triangleColorsPosition"
       157: "local157"
-      165: "local165"
-      171: "local171"
+      165: "vertexDxPosition"
+      171: "vertexDyPosition"
       301: "prevVertexX"
       303: "prevVertexY"
       305: "prevVertexZ"
@@ -30013,9 +30013,9 @@ methods:
       74: "local74"
       78: "priority"
       82: "hasAlpha"
-      86: "local86"
+      86: "hasTriangleBones"
       90: "hasTextures"
-      94: "local94"
+      94: "hasVertexBones"
       98: "local98"
       102: "local102"
       106: "local106"
@@ -30030,7 +30030,7 @@ methods:
       169: "local169"
       181: "triangleVerticesPosition"
       183: "trianglePrioritiesPosition"
-      192: "local192"
+      192: "triangleBonesPosition"
       201: "local201"
       210: "triangleAlphaPosition"
       223: "local223"
@@ -30120,25 +30120,25 @@ methods:
       9: "model"
   client!ml.d ()V:
     owner: "RawModel"
-    name: "method2744"
+    name: "createBones"
     arguments: {}
     locals:
-      5: "local5"
-      7: "local7"
-      9: "local9"
-      18: "local18"
+      5: "boneLens"
+      7: "maxBone"
+      9: "i"
+      18: "bone"
       22: "local22"
-      40: "local40"
-      59: "local59"
-      68: "local68"
-      93: "local93"
-      95: "local95"
-      97: "local97"
-      106: "local106"
+      40: "i"
+      59: "i"
+      68: "bone"
+      93: "boneLens"
+      95: "maxBone"
+      97: "i"
+      106: "bone"
       110: "local110"
-      128: "local128"
-      147: "local147"
-      156: "local156"
+      128: "i"
+      147: "i"
+      156: "bone"
   client!ml.d (III)I:
     owner: "RawModel"
     name: "addVertex"
@@ -30584,28 +30584,28 @@ methods:
       7: "local7"
   client!na.a (IIII)V:
     owner: "SoftwareModel"
-    name: "method3834"
+    name: "transform"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
+      0: "type"
+      1: "x"
+      2: "y"
+      3: "z"
     locals:
-      3: "local3"
-      11: "local11"
+      3: "count"
+      11: "i"
       72: "i"
       78: "vertex"
       108: "i"
       114: "vertex"
       142: "sine"
       146: "cosine"
-      164: "x"
+      164: "rotatedX"
       196: "sine"
       200: "cosine"
-      218: "y"
+      218: "rotatedY"
       250: "sine"
       254: "cosine"
-      272: "x"
+      272: "rotatedX"
       300: "vertex2"
       330: "i"
       336: "vertex"
@@ -30856,17 +30856,17 @@ methods:
       1493: "local1493"
   client!na.a (I[IIIIZ)V:
     owner: "SoftwareModel"
-    name: "method3843"
+    name: "transform"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
+      0: "type"
+      1: "bone"
+      2: "x"
+      3: "y"
+      4: "z"
       5: "arg5"
     locals:
       2: "local2"
-      6: "local6"
+      6: "count"
       14: "local14"
       21: "local21"
       31: "local31"
@@ -30919,32 +30919,32 @@ methods:
       676: "local676"
   client!na.a (I[IIIIZI[I)V:
     owner: "SoftwareModel"
-    name: "method3837"
+    name: "transform"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
+      0: "type"
+      1: "bones"
+      2: "x"
+      3: "y"
+      4: "z"
       5: "arg5"
-      6: "arg6"
+      6: "parts"
       7: "arg7"
     locals:
-      2: "local2"
-      6: "local6"
-      14: "local14"
-      21: "local21"
-      31: "local31"
-      33: "local33"
-      41: "local41"
+      2: "bonesLen"
+      6: "count"
+      14: "i"
+      21: "bone"
+      31: "vertices"
+      33: "j"
+      41: "vertex"
       135: "local135"
       157: "local157"
       179: "local179"
-      187: "local187"
-      194: "local194"
-      204: "local204"
-      206: "local206"
-      214: "local214"
+      187: "i"
+      194: "bone"
+      204: "vertices"
+      206: "j"
+      214: "vertex"
       227: "local227"
       263: "local263"
       267: "local267"
@@ -31186,8 +31186,8 @@ methods:
     owner: "SoftwareModel"
     name: "method2908"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "shareAlpha"
+      1: "shareColors"
       2: "arg2"
       3: "arg3"
       4: "arg4"
@@ -31203,9 +31203,9 @@ methods:
     owner: "SoftwareModel"
     name: "method3831"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "shareAlpha"
+      1: "shareColors"
+      2: "shareNormals"
     locals: {}
   client!na.b ()I:
     owner: "SoftwareModel"
@@ -31270,9 +31270,9 @@ methods:
     owner: "SoftwareModel"
     name: "method3833"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "shareAlpha"
+      1: "shareColors"
+      2: "shareNormals"
     locals: {}
   client!na.c ()I:
     owner: "SoftwareModel"
@@ -31302,9 +31302,9 @@ methods:
     owner: "SoftwareModel"
     name: "method3836"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "shareAlpha"
+      1: "shareColors"
+      2: "shareNormals"
     locals: {}
   client!na.d ()V:
     owner: "SoftwareModel"
@@ -36902,9 +36902,9 @@ methods:
       753: "newModel"
       755: "i"
       846: "local846"
-      848: "local848"
-      850: "local850"
-      852: "local852"
+      848: "alphaTransformed"
+      850: "colorTransformed"
+      852: "normalsTransformed"
       860: "len"
       862: "i"
       881: "seqType"
@@ -36932,7 +36932,7 @@ methods:
       1264: "local1264"
       1318: "model2"
       1320: "local1320"
-      1322: "local1322"
+      1322: "part"
       1434: "i"
   client!qk.b (IBI)V:
     owner: "PlayerAppearance"
@@ -38441,15 +38441,15 @@ methods:
     locals: {}
   client!s.a (IIII)V:
     owner: "GlModel"
-    name: "method3834"
+    name: "transform"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
+      0: "type"
+      1: "x"
+      2: "y"
+      3: "z"
     locals:
       3: "local3"
-      11: "local11"
+      11: "i"
       72: "local72"
       78: "local78"
       108: "local108"
@@ -38758,13 +38758,13 @@ methods:
       116: "local116"
   client!s.a (I[IIIIZ)V:
     owner: "GlModel"
-    name: "method3843"
+    name: "transform"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
+      0: "type"
+      1: "bone"
+      2: "x"
+      3: "y"
+      4: "z"
       5: "arg5"
     locals:
       2: "local2"
@@ -38839,15 +38839,15 @@ methods:
       952: "local952"
   client!s.a (I[IIIIZI[I)V:
     owner: "GlModel"
-    name: "method3837"
+    name: "transform"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
+      0: "type"
+      1: "bone"
+      2: "x"
+      3: "y"
+      4: "z"
       5: "arg5"
-      6: "arg6"
+      6: "parts"
       7: "arg7"
     locals:
       2: "local2"
@@ -39145,24 +39145,24 @@ methods:
     owner: "GlModel"
     name: "method3831"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "shareAlpha"
+      1: "shareColors"
+      2: "shareNormals"
     locals: {}
   client!s.a (ZZZLclient!s;Lclient!s;)Lclient!vg;:
     owner: "GlModel"
     name: "method3873"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "shareAlpha"
+      1: "shareColors"
+      2: "shareNormals"
       3: "model"
       4: "arg4"
     locals:
-      73: "local73"
-      156: "local156"
-      199: "local199"
-      319: "local319"
+      73: "i"
+      156: "i"
+      199: "i"
+      319: "i"
   client!s.a (ZZZZZ)V:
     owner: "GlModel"
     name: "method3870"
@@ -39309,9 +39309,9 @@ methods:
     owner: "GlModel"
     name: "method3833"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "shareAlpha"
+      1: "shareColors"
+      2: "shareNormals"
     locals: {}
   client!s.c ()I:
     owner: "GlModel"
@@ -39341,9 +39341,9 @@ methods:
     owner: "GlModel"
     name: "method3836"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "shareAlpha"
+      1: "shareColors"
+      2: "shareNormals"
     locals: {}
   client!s.d ()V:
     owner: "GlModel"
@@ -39509,25 +39509,25 @@ methods:
       91: "sphereRadiusSquared"
   client!s.w ()V:
     owner: "GlModel"
-    name: "method3866"
+    name: "createBones"
     arguments: {}
     locals:
-      5: "local5"
-      7: "local7"
-      9: "local9"
-      20: "local20"
+      5: "boneLens"
+      7: "maxBone"
+      9: "i"
+      20: "bone"
       24: "local24"
-      42: "local42"
-      61: "local61"
-      72: "local72"
-      97: "local97"
-      99: "local99"
-      101: "local101"
-      112: "local112"
+      42: "i"
+      61: "i"
+      72: "bone"
+      97: "boneLens"
+      99: "maxBone"
+      101: "i"
+      112: "bone"
       116: "local116"
-      134: "local134"
-      153: "local153"
-      164: "local164"
+      134: "i"
+      153: "i"
+      164: "bone"
   client!s.x ()I:
     owner: "GlModel"
     name: "method3869"
@@ -40848,7 +40848,7 @@ methods:
       95: "baseBytes"
   client!te.a (II)Z:
     owner: "AnimFrameset"
-    name: "method4151"
+    name: "isColorTransformed"
     arguments:
       1: "frame"
     locals: {}
@@ -40932,7 +40932,7 @@ methods:
       160: "ex"
   client!te.b (BI)Z:
     owner: "AnimFrameset"
-    name: "method4150"
+    name: "isAlphaTransformed"
     arguments:
       1: "frame"
     locals: {}
@@ -42290,9 +42290,9 @@ methods:
       610: "i"
       665: "i"
       718: "local718"
-      720: "local720"
-      722: "local722"
-      724: "local724"
+      720: "alphaTransformed"
+      722: "colorTransformed"
+      724: "normalsTransformed"
       731: "local731"
       733: "local733"
       752: "local752"
@@ -42320,7 +42320,7 @@ methods:
       1158: "local1158"
       1162: "local1162"
       1218: "local1218"
-      1220: "local1220"
+      1220: "part"
       1228: "local1228"
       1342: "local1342"
   client!ua.a (IILjava/lang/String;)Ljava/lang/String;:
@@ -43697,12 +43697,12 @@ methods:
     locals: {}
   client!vg.a (IIII)V:
     owner: "Model"
-    name: "method3834"
+    name: "transform"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
+      0: "type"
+      1: "x"
+      2: "y"
+      3: "z"
     locals: {}
   client!vg.a (IIIII)V:
     owner: "Model"
@@ -43744,33 +43744,33 @@ methods:
     locals: {}
   client!vg.a (I[IIIIZ)V:
     owner: "Model"
-    name: "method3843"
+    name: "transform"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
+      0: "type"
+      1: "bone"
+      2: "x"
+      3: "y"
+      4: "z"
       5: "arg5"
     locals: {}
   client!vg.a (I[IIIIZI[I)V:
     owner: "Model"
-    name: "method3837"
+    name: "transform"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
+      0: "type"
+      1: "bone"
+      2: "x"
+      3: "y"
+      4: "z"
       5: "arg5"
-      6: "arg6"
+      6: "parts"
       7: "arg7"
     locals: {}
   client!vg.a (Lclient!af;Lclient!a;Lclient!a;II[ZZZI[I)V:
     owner: "Model"
     name: "method3825"
     arguments:
-      0: "arg0"
+      0: "base"
       1: "arg1"
       2: "arg2"
       3: "arg3"
@@ -43778,14 +43778,14 @@ methods:
       5: "arg5"
       6: "arg6"
       7: "arg7"
-      8: "arg8"
+      8: "parts"
       9: "arg9"
     locals:
-      5: "local5"
-      14: "local14"
-      32: "local32"
-      42: "local42"
-      77: "local77"
+      5: "i"
+      14: "index"
+      32: "prevOriginIndex"
+      42: "parts2"
+      77: "parts2"
       134: "local134"
       136: "local136"
       138: "local138"
@@ -43815,7 +43815,7 @@ methods:
       521: "local521"
   client!vg.a (Lclient!te;I)V:
     owner: "Model"
-    name: "method3844"
+    name: "animateShadow"
     arguments:
       0: "frameset"
       1: "frameId"
@@ -43823,7 +43823,7 @@ methods:
       12: "frame"
       15: "base"
       17: "i"
-      26: "local26"
+      26: "index"
   client!vg.a (Lclient!te;ILclient!te;IIIIZ[I)V:
     owner: "Model"
     name: "method3839"
@@ -43834,7 +43834,7 @@ methods:
       3: "arg3"
       4: "arg4"
       5: "arg5"
-      6: "arg6"
+      6: "parts"
       7: "arg7"
       8: "arg8"
     locals:
@@ -43878,15 +43878,15 @@ methods:
       6: "arg6"
     locals:
       12: "local12"
-      15: "local15"
+      15: "base"
       17: "local17"
   client!vg.a (ZZZ)Lclient!vg;:
     owner: "Model"
     name: "method3831"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "shareAlpha"
+      1: "shareColors"
+      2: "shareNormals"
     locals: {}
   client!vg.a ([[III)I:
     owner: "Model"
@@ -43956,9 +43956,9 @@ methods:
     owner: "Model"
     name: "method3833"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "shareAlpha"
+      1: "shareColors"
+      2: "shareNormals"
     locals: {}
   client!vg.c ()I:
     owner: "Model"
@@ -43983,9 +43983,9 @@ methods:
     owner: "Model"
     name: "method3836"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "shareAlpha"
+      1: "shareColors"
+      2: "shareNormals"
     locals: {}
   client!vg.d ()V:
     owner: "Model"
