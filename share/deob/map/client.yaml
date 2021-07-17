@@ -27,7 +27,7 @@ classes:
   client!ca: "TextureOp11"
   client!cc: "SoftLruHashTable"
   client!cd: "QuickChatPhrase"
-  client!cf: "TextureOp6"
+  client!cf: "TextureOpClamp"
   client!ch: "CollisionMap"
   client!ci: "VertexNormal"
   client!cj: "EnumType"
@@ -61,16 +61,16 @@ classes:
   client!en: "Js5NetQueue"
   client!eo: "BufferedSocket"
   client!f: "Player"
-  client!fa: "TextureOp3"
+  client!fa: "TextureOpVerticalGradient"
   client!fd: "Buffer"
   client!fe: "SoftwareIndexedSprite"
   client!ff: "GlBuffer"
   client!fg: "MapElement"
   client!fh: "Js5"
-  client!fi: "TextureOp36"
-  client!fj: "TextureOp9"
+  client!fi: "TextureOpTexture"
+  client!fj: "TextureOpFlip"
   client!fk: "BufferedImageFrameBuffer"
-  client!fl: "TextureOp21"
+  client!fl: "TextureOpInterpolate"
   client!fm: "Cache"
   client!fn: "InvType"
   client!fo: "Js5Index"
@@ -90,7 +90,7 @@ classes:
   client!he: "ObjStack"
   client!hf: "NanoTimer"
   client!hi: "VarpType"
-  client!hk: "TextureOp1"
+  client!hk: "TextureOpColorFill"
   client!hl: "SpecularMaterialRenderer"
   client!ho: "MelType"
   client!ia: "BrokenInputStream"
@@ -130,7 +130,7 @@ classes:
   client!kl: "TextureOp38"
   client!km: "TextureOp29"
   client!l: "ClanMember"
-  client!la: "TextureOp20"
+  client!la: "TextureOpTile"
   client!lb: "SecondaryParticleLinkedList"
   client!lc: "TextureOp29SubOp"
   client!ld: "MidiPcmStream"
@@ -153,7 +153,7 @@ classes:
   client!mi: "Material"
   client!mj: "TriangleNormal"
   client!ml: "RawModel"
-  client!mo: "TextureOp26"
+  client!mo: "TextureOpBinary"
   client!n: "GlIndexedSprite"
   client!na: "SoftwareModel"
   client!nb: "MapElementBounds"
@@ -172,8 +172,8 @@ classes:
   client!ob: "FrameBuffer"
   client!oc: "ProjAnim"
   client!oe: "Class41_Sub2_Sub1"
-  client!of: "TextureOp8"
-  client!og: "TextureOp39"
+  client!of: "TextureOpCurve"
+  client!og: "TextureOpSprite"
   client!oh: "FloType"
   client!oi: "Js5QuickChatCommandDecoder"
   client!oj: "HuffmanCodec"
@@ -192,12 +192,12 @@ classes:
   client!pg: "Class41"
   client!ph: "TextureOp19"
   client!pi: "Class135"
-  client!pk: "TextureOp2"
+  client!pk: "TextureOpHorizontalGradient"
   client!pl: "EnumStringEntry"
   client!po: "MapElementList"
   client!q: "UnlitMaterialRenderer"
   client!qa: "IdkType"
-  client!qb: "TextureOp0"
+  client!qb: "TextureOpMonochromeFill"
   client!qc: "PathingEntity"
   client!qd: "GlSolidColorTexture"
   client!qe: "HashTableIterator"
@@ -228,25 +228,25 @@ classes:
   client!s: "GlModel"
   client!sa: "SkyBoxSphereType"
   client!sb: "GlCleanerProgram"
-  client!sc: "TextureOp30"
-  client!se: "TextureOp13"
+  client!sc: "TextureOpRange"
+  client!se: "TextureOpNoise"
   client!sf: "VorbisResidue"
   client!sh: "TextureOp35"
   client!si: "Class157"
   client!sj: "ReflectionCheck"
   client!sk: "ModelParticleEmitter"
-  client!sl: "TextureOp7"
+  client!sl: "TextureOpCombine"
   client!sn: "TextureOp4"
   client!so: "GlTexture"
   client!t: "StockMarketOffer"
   client!ta: "AttachLocRequest"
   client!tb: "Keyboard"
-  client!tc: "TextureOp22"
+  client!tc: "TextureOpInvert"
   client!td: "ObjType"
   client!te: "AnimFrameset"
   client!tf: "PcmStream"
   client!tg: "Song"
-  client!ti: "TextureOp24"
+  client!ti: "TextureOpMonochrome"
   client!tj: "AudioChannel"
   client!tm: "ImageProducerFrameBuffer"
   client!tn: "AbstractWorld"
@@ -275,12 +275,12 @@ classes:
   client!vi: "TextureOp5"
   client!vj: "GlAlphaSprite"
   client!vl: "WallDecor"
-  client!vm: "TextureOp10"
+  client!vm: "TextureOpColorGradient"
   client!vn: "SoftwareSprite"
   client!w: "ObjStackNode"
   client!wa: "Packet"
   client!wb: "Js5CachedResourceProvider"
-  client!wd: "TextureOp18"
+  client!wd: "TextureOpTiledSprite"
   client!we: "Class184"
   client!wf: "Component"
   client!wg: "Map"
@@ -1104,8 +1104,8 @@ fields:
     owner: "Static1"
     name: "aFloat20"
   client!cf.V I:
-    owner: "TextureOp6"
-    name: "anInt581"
+    owner: "TextureOpClamp"
+    name: "minValue"
   client!cf.W Lclient!wf;:
     owner: "Static1"
     name: "aClass185_1"
@@ -1116,8 +1116,8 @@ fields:
     owner: "client"
     name: "js5ConnectTime"
   client!cf.fb I:
-    owner: "TextureOp6"
-    name: "anInt588"
+    owner: "TextureOpClamp"
+    name: "maxValue"
   client!cg.a Z:
     owner: "Static1"
     name: "aBoolean35"
@@ -2616,26 +2616,26 @@ fields:
     owner: "Js5"
     name: "unpacked"
   client!fi.U I:
-    owner: "TextureOp36"
-    name: "anInt1831"
+    owner: "TextureOpTexture"
+    name: "width"
   client!fi.V [I:
     owner: "Keyboard"
     name: "typedCodeQueue"
   client!fi.cb I:
-    owner: "TextureOp36"
-    name: "anInt1838"
+    owner: "TextureOpTexture"
+    name: "height"
   client!fi.fb [I:
-    owner: "TextureOp36"
-    name: "anIntArray126"
+    owner: "TextureOpTexture"
+    name: "pixels"
   client!fi.hb [I:
     owner: "Static2"
     name: "anIntArray127"
   client!fi.ib I:
-    owner: "TextureOp36"
-    name: "anInt1842"
+    owner: "TextureOpTexture"
+    name: "textureId"
   client!fj.T Z:
-    owner: "TextureOp9"
-    name: "aBoolean113"
+    owner: "TextureOpFlip"
+    name: "flipVertical"
   client!fj.V I:
     owner: "Static2"
     name: "anInt1871"
@@ -2649,8 +2649,8 @@ fields:
     owner: "SkyBoxSphereTypeList"
     name: "types"
   client!fj.bb Z:
-    owner: "TextureOp9"
-    name: "aBoolean114"
+    owner: "TextureOpFlip"
+    name: "flipHorizontal"
   client!fj.eb I:
     owner: "LoginManager"
     name: "playerModLevel"
@@ -3480,17 +3480,17 @@ fields:
     owner: "SpriteLoader"
     name: "innerWidths"
   client!hk.W I:
-    owner: "TextureOp1"
-    name: "anInt2225"
+    owner: "TextureOpColorFill"
+    name: "blue"
   client!hk.Y I:
-    owner: "TextureOp1"
-    name: "anInt2227"
+    owner: "TextureOpColorFill"
+    name: "green"
   client!hk.ab Lclient!wa;:
     owner: "Protocol"
     name: "outboundBuffer"
   client!hk.bb I:
-    owner: "TextureOp1"
-    name: "anInt2229"
+    owner: "TextureOpColorFill"
+    name: "red"
   client!hk.eb I:
     owner: "Static3"
     name: "anInt2232"
@@ -4293,8 +4293,8 @@ fields:
     owner: "PlayerList"
     name: "size"
   client!ja.g [I:
-    owner: "Static3"
-    name: "anIntArray222"
+    owner: "TextureOp"
+    name: "COSINE"
   client!ja.h Lclient!uk;:
     owner: "Js5CacheQueue"
     name: "queue"
@@ -4326,8 +4326,8 @@ fields:
     owner: "LocalisedText"
     name: "MAINLOAD130B"
   client!jb.j [I:
-    owner: "Static3"
-    name: "anIntArray223"
+    owner: "TextureOp"
+    name: "SINE"
   client!jb.l [Ljava/lang/String;:
     owner: "IgnoreList"
     name: "usernames"
@@ -4959,7 +4959,7 @@ fields:
     owner: "Bzip2DState"
     name: "tt"
   client!km.db I:
-    owner: "Static4"
+    owner: "TextureOp23"
     name: "anInt2959"
   client!kn.D [Ljava/lang/String;:
     owner: "ScriptRunner"
@@ -5043,8 +5043,8 @@ fields:
     owner: "Chat"
     name: "uids"
   client!la.ab I:
-    owner: "TextureOp20"
-    name: "anInt3022"
+    owner: "TextureOpTile"
+    name: "horizontalTiles"
   client!la.cb Z:
     owner: "MusicPlayer"
     name: "jingle"
@@ -5052,8 +5052,8 @@ fields:
     owner: "Static4"
     name: "anInt3024"
   client!la.fb I:
-    owner: "TextureOp20"
-    name: "anInt3026"
+    owner: "TextureOpTile"
+    name: "verticalTiles"
   client!lb.e Lclient!r;:
     owner: "SecondaryParticleLinkedList"
     name: "sentinel"
@@ -5809,10 +5809,10 @@ fields:
     name: "aByte7"
   client!mi.m B:
     owner: "Material"
-    name: "materialId"
+    name: "type"
   client!mi.n B:
     owner: "Material"
-    name: "materialArg"
+    name: "arg"
   client!mi.p B:
     owner: "Material"
     name: "aByte10"
@@ -5821,7 +5821,7 @@ fields:
     name: "averageColor"
   client!mi.r Z:
     owner: "Material"
-    name: "aBoolean236"
+    name: "columnMajor"
   client!mi.s Z:
     owner: "Material"
     name: "aBoolean237"
@@ -6060,11 +6060,11 @@ fields:
     owner: "Static4"
     name: "anInt3367"
   client!mo.T I:
-    owner: "TextureOp26"
-    name: "anInt3394"
+    owner: "TextureOpBinary"
+    name: "minValue"
   client!mo.V I:
-    owner: "TextureOp26"
-    name: "anInt3396"
+    owner: "TextureOpBinary"
+    name: "maxValue"
   client!mo.X Ljava/lang/String;:
     owner: "LocalisedText"
     name: "GAME0_LOADING"
@@ -7104,35 +7104,35 @@ fields:
     owner: "Class41_Sub2_Sub1"
     name: "bytes"
   client!of.U [[I:
-    owner: "TextureOp8"
-    name: "anIntArrayArray34"
+    owner: "TextureOpCurve"
+    name: "markers"
   client!of.W I:
     owner: "Static5"
     name: "anInt3815"
   client!of.X [I:
-    owner: "TextureOp8"
-    name: "anIntArray410"
+    owner: "TextureOpCurve"
+    name: "firstMarker"
   client!of.Z Lclient!gl;:
     owner: "Fonts"
     name: "p12Full"
   client!of.cb [S:
-    owner: "TextureOp8"
+    owner: "TextureOpCurve"
     name: "aShortArray73"
   client!of.db I:
-    owner: "TextureOp8"
+    owner: "TextureOpCurve"
     name: "anInt3819"
   client!of.hb [I:
-    owner: "TextureOp8"
-    name: "anIntArray411"
+    owner: "TextureOpCurve"
+    name: "lastMarker"
   client!og.T I:
-    owner: "TextureOp39"
-    name: "anInt5834"
+    owner: "TextureOpSprite"
+    name: "height"
   client!og.Z I:
     owner: "Static5"
     name: "anInt5840"
   client!og.cb I:
-    owner: "TextureOp39"
-    name: "anInt5843"
+    owner: "TextureOpSprite"
+    name: "width"
   client!og.db F:
     owner: "Static5"
     name: "aFloat147"
@@ -7140,11 +7140,11 @@ fields:
     owner: "Static5"
     name: "keys"
   client!og.ib I:
-    owner: "TextureOp39"
-    name: "anInt5847"
+    owner: "TextureOpSprite"
+    name: "spriteId"
   client!og.jb [I:
-    owner: "TextureOp39"
-    name: "anIntArray655"
+    owner: "TextureOpSprite"
+    name: "pixels"
   client!og.kb Lclient!ib;:
     owner: "Static5"
     name: "aClass4_Sub3_Sub10_6"
@@ -7713,8 +7713,8 @@ fields:
     owner: "client"
     name: "js5Archive23"
   client!qb.V I:
-    owner: "TextureOp0"
-    name: "anInt4259"
+    owner: "TextureOpMonochromeFill"
+    name: "value"
   client!qb.W I:
     owner: "Static5"
     name: "anInt4260"
@@ -8532,7 +8532,7 @@ fields:
     owner: "Static6"
     name: "aBoolean310"
   client!rf.d I:
-    owner: "Static6"
+    owner: "TextureOp23"
     name: "anInt4471"
   client!rf.e Ljava/lang/String;:
     owner: "Static6"
@@ -9069,11 +9069,11 @@ fields:
     owner: "ObjTypeList"
     name: "defaultInventoryOps"
   client!sc.W I:
-    owner: "TextureOp30"
-    name: "anInt4746"
+    owner: "TextureOpRange"
+    name: "minValue"
   client!sc.Y I:
-    owner: "TextureOp30"
-    name: "anInt4748"
+    owner: "TextureOpRange"
+    name: "range"
   client!sc.fb Lclient!tj;:
     owner: "client"
     name: "soundChannel"
@@ -9081,8 +9081,8 @@ fields:
     owner: "client"
     name: "js5Archive18"
   client!sc.ib I:
-    owner: "TextureOp30"
-    name: "anInt4756"
+    owner: "TextureOpRange"
+    name: "maxValue"
   client!sc.jb [Ljava/lang/String;:
     owner: "MiniMenu"
     name: "opBases"
@@ -9315,8 +9315,8 @@ fields:
     owner: "Cp1252Charset"
     name: "CP1252_TABLE"
   client!sl.W I:
-    owner: "TextureOp7"
-    name: "anInt4898"
+    owner: "TextureOpCombine"
+    name: "function"
   client!sl.Y [Ljava/lang/String;:
     owner: "ObjTypeList"
     name: "defaultOps"
@@ -9400,7 +9400,7 @@ fields:
     name: "anInt4954"
   client!so.A [I:
     owner: "GlTexture"
-    name: "anIntArray538"
+    name: "pixels"
   client!so.B I:
     owner: "GlTexture"
     name: "combineRgbMode"
@@ -9412,7 +9412,7 @@ fields:
     name: "anIntArray539"
   client!so.E I:
     owner: "GlTexture"
-    name: "anInt4969"
+    name: "mipMapMode"
   client!so.F Z:
     owner: "GlTexture"
     name: "wrapT"
@@ -9421,7 +9421,7 @@ fields:
     name: "anInt4970"
   client!so.H I:
     owner: "GlTexture"
-    name: "anInt4971"
+    name: "size"
   client!so.I I:
     owner: "GlTexture"
     name: "contextId"
@@ -9442,13 +9442,13 @@ fields:
     name: "aBoolean345"
   client!so.O F:
     owner: "GlTexture"
-    name: "aFloat131"
+    name: "brightness"
   client!so.P Z:
     owner: "GlTexture"
     name: "wrapS"
   client!so.y Z:
     owner: "GlTexture"
-    name: "aBoolean341"
+    name: "columnMajor"
   client!so.z I:
     owner: "GlTexture"
     name: "textureId"
@@ -10324,7 +10324,7 @@ fields:
     name: "ENABLED_SKILLS"
   client!uf.c I:
     owner: "MaterialManager"
-    name: "currentMaterialId"
+    name: "currentType"
   client!uf.d Lclient!uj;:
     owner: "Static7"
     name: "aClass4_Sub3_Sub14_9"
@@ -11007,14 +11007,14 @@ fields:
     owner: "SpriteLoader"
     name: "innerHeights"
   client!vm.W [[I:
-    owner: "TextureOp10"
-    name: "anIntArrayArray49"
+    owner: "TextureOpColorGradient"
+    name: "samples"
   client!vm.Y F:
     owner: "Static7"
     name: "aFloat144"
   client!vm.bb [I:
-    owner: "TextureOp10"
-    name: "anIntArray644"
+    owner: "TextureOpColorGradient"
+    name: "colors"
   client!vn.M [I:
     owner: "SoftwareSprite"
     name: "pixels"
@@ -12086,9 +12086,9 @@ methods:
     arguments:
       1: "y"
     locals:
-      7: "local7"
+      7: "dest"
       23: "local23"
-      28: "local28"
+      28: "pixels"
       30: "local30"
       32: "local32"
       34: "local34"
@@ -12102,7 +12102,7 @@ methods:
       65: "local65"
       72: "local72"
       99: "local99"
-      106: "local106"
+      106: "random"
       110: "local110"
       114: "local114"
       125: "local125"
@@ -13708,15 +13708,15 @@ methods:
     arguments:
       0: "y"
     locals:
-      12: "local12"
-      23: "local23"
-      27: "local27"
-      31: "local31"
-      35: "local35"
-      39: "local39"
-      43: "local43"
-      47: "local47"
-      49: "local49"
+      12: "dest"
+      23: "src"
+      27: "srcRed"
+      31: "srcGreen"
+      35: "srcBlue"
+      39: "destGreen"
+      43: "destRed"
+      47: "destBlue"
+      49: "x"
       56: "local56"
       64: "local64"
       98: "local98"
@@ -14127,14 +14127,14 @@ methods:
     owner: "Js5GlTextureProvider"
     name: "method447"
     arguments:
-      1: "arg0"
+      1: "id"
     locals: {}
   client!c.a (BII)V:
     owner: "Js5GlTextureProvider"
     name: "method454"
     arguments:
       2: "id"
-      1: "arg0"
+      1: "size"
     locals:
       29: "local29"
       34: "texture"
@@ -14144,7 +14144,7 @@ methods:
     name: "method445"
     arguments:
       2: "id"
-      0: "arg0"
+      0: "brightness"
     locals:
       4: "texture"
   client!c.a (IIIIIII)V:
@@ -14237,7 +14237,7 @@ methods:
     locals: {}
   client!c.c (IB)[I:
     owner: "Js5GlTextureProvider"
-    name: "method449"
+    name: "getPixels"
     arguments:
       0: "id"
     locals:
@@ -14254,7 +14254,7 @@ methods:
     arguments:
       0: "id"
     locals:
-      14: "local14"
+      14: "texture"
   client!c.d (IB)V:
     owner: "Js5GlTextureProvider"
     name: "resize"
@@ -14263,7 +14263,7 @@ methods:
     locals: {}
   client!c.d (II)I:
     owner: "Js5GlTextureProvider"
-    name: "method444"
+    name: "getMaterialType"
     arguments:
       0: "id"
     locals: {}
@@ -14287,7 +14287,7 @@ methods:
     locals: {}
   client!c.h (II)I:
     owner: "Js5GlTextureProvider"
-    name: "method455"
+    name: "getMaterialArg"
     arguments:
       0: "id"
     locals: {}
@@ -14349,18 +14349,18 @@ methods:
     arguments:
       0: "y"
     locals:
-      18: "local18"
-      28: "local28"
-      32: "local32"
-      36: "local36"
-      40: "local40"
-      44: "local44"
-      48: "local48"
-      52: "local52"
-      54: "local54"
-      61: "local61"
-      65: "local65"
-      69: "local69"
+      18: "dest"
+      28: "src"
+      32: "srcGreen"
+      36: "srcRed"
+      40: "destRed"
+      44: "destGreen"
+      48: "srcBlue"
+      52: "destBlue"
+      54: "x"
+      61: "red"
+      65: "blue"
+      69: "green"
   client!ca.d (II)I:
     owner: "IntUtils"
     name: "bitCountFast"
@@ -14600,27 +14600,27 @@ methods:
       108: "prevWidth"
       298: "request"
   client!cf.<init> ()V:
-    owner: "TextureOp6"
+    owner: "TextureOpClamp"
     name: "<init>"
     arguments: {}
     locals: {}
   client!cf.a (BLclient!fd;I)V:
-    owner: "TextureOp6"
+    owner: "TextureOpClamp"
     name: "decode"
     arguments:
       1: "buffer"
       2: "code"
     locals: {}
   client!cf.a (II)[I:
-    owner: "TextureOp6"
+    owner: "TextureOpClamp"
     name: "getMonochromeOutput"
     arguments:
       1: "y"
     locals:
-      19: "local19"
-      29: "local29"
-      31: "local31"
-      38: "local38"
+      19: "dest"
+      29: "src"
+      31: "x"
+      38: "value"
   client!cf.a (Lclient!fh;I)I:
     owner: "Sprites"
     name: "getReady"
@@ -14656,23 +14656,23 @@ methods:
       61: "local61"
       155: "local155"
   client!cf.b (II)[[I:
-    owner: "TextureOp6"
+    owner: "TextureOpClamp"
     name: "getColorOutput"
     arguments:
       0: "y"
     locals:
-      7: "local7"
-      22: "local22"
-      26: "local26"
-      30: "local30"
-      34: "local34"
-      38: "local38"
-      42: "local42"
-      46: "local46"
-      48: "local48"
-      59: "local59"
-      63: "local63"
-      67: "local67"
+      7: "dest"
+      22: "src"
+      26: "srcRed"
+      30: "srcGreen"
+      34: "destRed"
+      38: "srcBlue"
+      42: "destGreen"
+      46: "destBlue"
+      48: "x"
+      59: "green"
+      63: "red"
+      67: "blue"
   client!cf.f (B)V:
     owner: "ObjTypeList"
     name: "removeSoft"
@@ -15133,12 +15133,12 @@ methods:
     arguments:
       1: "y"
     locals:
-      7: "local7"
+      7: "dest"
       24: "local24"
       36: "local36"
       44: "local44"
       56: "local56"
-      58: "local58"
+      58: "x"
       82: "local82"
       86: "local86"
       99: "local99"
@@ -16324,8 +16324,8 @@ methods:
     arguments:
       1: "y"
     locals:
-      7: "local7"
-      23: "local23"
+      7: "dest"
+      23: "x"
       42: "local42"
       54: "local54"
       58: "local58"
@@ -17633,17 +17633,17 @@ methods:
     arguments: {}
     locals: {}
   client!fa.<init> ()V:
-    owner: "TextureOp3"
+    owner: "TextureOpVerticalGradient"
     name: "<init>"
     arguments: {}
     locals: {}
   client!fa.a (II)[I:
-    owner: "TextureOp3"
+    owner: "TextureOpVerticalGradient"
     name: "getMonochromeOutput"
     arguments:
       1: "y"
     locals:
-      15: "local15"
+      15: "dest"
   client!fa.a (IIIIIII)V:
     owner: "Static14"
     name: "method1200"
@@ -19147,12 +19147,12 @@ methods:
       0: "group"
     locals: {}
   client!fi.<init> ()V:
-    owner: "TextureOp36"
+    owner: "TextureOpTexture"
     name: "<init>"
     arguments: {}
     locals: {}
   client!fi.a (BLclient!fd;I)V:
-    owner: "TextureOp36"
+    owner: "TextureOpTexture"
     name: "decode"
     arguments:
       1: "buffer"
@@ -19190,21 +19190,21 @@ methods:
       28: "bytes"
       32: "newType"
   client!fi.b (II)[[I:
-    owner: "TextureOp36"
+    owner: "TextureOpTexture"
     name: "getColorOutput"
     arguments:
       0: "y"
     locals:
-      11: "local11"
-      39: "local39"
-      43: "local43"
-      47: "local47"
-      51: "local51"
-      61: "local61"
-      74: "local74"
-      105: "local105"
-      115: "local115"
-      122: "local122"
+      11: "dest"
+      39: "index"
+      43: "destRed"
+      47: "destBlue"
+      51: "destGreen"
+      61: "x"
+      74: "color"
+      105: "x"
+      115: "srcX"
+      122: "color"
   client!fi.c (II)I:
     owner: "SeqTypeList"
     name: "getGroupId"
@@ -19212,49 +19212,49 @@ methods:
       0: "id"
     locals: {}
   client!fi.d (B)I:
-    owner: "TextureOp36"
+    owner: "TextureOpTexture"
     name: "getTextureId"
     arguments: {}
     locals: {}
   client!fi.e (I)V:
-    owner: "TextureOp36"
+    owner: "TextureOpTexture"
     name: "clearImageCache"
     arguments: {}
     locals: {}
   client!fi.g (I)Z:
-    owner: "TextureOp36"
-    name: "method1399"
+    owner: "TextureOpTexture"
+    name: "loadTexture"
     arguments: {}
     locals:
-      21: "local21"
-      23: "local23"
-      34: "local34"
+      21: "prevHeight"
+      23: "prevWidth"
+      34: "size"
   client!fi.h (I)V:
     owner: "Keyboard"
     name: "init"
     arguments: {}
     locals: {}
   client!fj.<init> ()V:
-    owner: "TextureOp9"
+    owner: "TextureOpFlip"
     name: "<init>"
     arguments: {}
     locals: {}
   client!fj.a (BLclient!fd;I)V:
-    owner: "TextureOp9"
+    owner: "TextureOpFlip"
     name: "decode"
     arguments:
       1: "buffer"
       2: "code"
     locals: {}
   client!fj.a (II)[I:
-    owner: "TextureOp9"
+    owner: "TextureOpFlip"
     name: "getMonochromeOutput"
     arguments:
       1: "y"
     locals:
-      15: "local15"
-      34: "local34"
-      47: "local47"
+      15: "dest"
+      34: "src"
+      47: "x"
   client!fj.a (IILclient!qc;)V:
     owner: "Static15"
     name: "method1428"
@@ -19293,21 +19293,21 @@ methods:
       767: "local767"
       774: "local774"
   client!fj.b (II)[[I:
-    owner: "TextureOp9"
+    owner: "TextureOpFlip"
     name: "getColorOutput"
     arguments:
       0: "y"
     locals:
-      18: "local18"
-      36: "local36"
-      40: "local40"
-      44: "local44"
-      48: "local48"
-      52: "local52"
-      56: "local56"
-      60: "local60"
-      65: "local65"
-      101: "local101"
+      18: "dest"
+      36: "src"
+      40: "srcRed"
+      44: "srcGreen"
+      48: "destRed"
+      52: "srcBlue"
+      56: "destGreen"
+      60: "destBlue"
+      65: "x"
+      101: "x"
   client!fk.a (ILjava/awt/Graphics;BI)V:
     owner: "BufferedImageFrameBuffer"
     name: "draw"
@@ -19337,29 +19337,29 @@ methods:
     locals:
       6: "clip"
   client!fl.<init> ()V:
-    owner: "TextureOp21"
+    owner: "TextureOpInterpolate"
     name: "<init>"
     arguments: {}
     locals: {}
   client!fl.a (BLclient!fd;I)V:
-    owner: "TextureOp21"
+    owner: "TextureOpInterpolate"
     name: "decode"
     arguments:
       1: "buffer"
       2: "code"
     locals: {}
   client!fl.a (II)[I:
-    owner: "TextureOp21"
+    owner: "TextureOpInterpolate"
     name: "getMonochromeOutput"
     arguments:
       1: "y"
     locals:
-      16: "local16"
-      26: "local26"
-      32: "local32"
-      38: "local38"
-      40: "local40"
-      47: "local47"
+      16: "dest"
+      26: "src0"
+      32: "src1"
+      38: "src2"
+      40: "x"
+      47: "alpha"
   client!fl.a (II[Lclient!ch;[BIIIIZII)V:
     owner: "Static15"
     name: "readZoneLocs"
@@ -19399,26 +19399,26 @@ methods:
       2: "globalArchive"
     locals: {}
   client!fl.b (II)[[I:
-    owner: "TextureOp21"
+    owner: "TextureOpInterpolate"
     name: "getColorOutput"
     arguments:
       0: "y"
     locals:
-      16: "local16"
-      29: "local29"
-      35: "local35"
-      41: "local41"
-      45: "local45"
-      49: "local49"
-      53: "local53"
-      57: "local57"
-      61: "local61"
-      65: "local65"
-      69: "local69"
-      73: "local73"
-      77: "local77"
-      79: "local79"
-      86: "local86"
+      16: "dest"
+      29: "src2"
+      35: "src0"
+      41: "src1"
+      45: "destRed"
+      49: "destGreen"
+      53: "destBlue"
+      57: "src0Green"
+      61: "src0Red"
+      65: "src1Green"
+      69: "src1Red"
+      73: "src0Blue"
+      77: "src1Blue"
+      79: "x"
+      86: "alpha"
       141: "local141"
   client!fm.<init> (ILclient!wl;Lclient!wl;I)V:
     owner: "Cache"
@@ -22405,18 +22405,18 @@ methods:
       59: "uncompressedLen"
       84: "out"
   client!hk.<init> ()V:
-    owner: "TextureOp1"
+    owner: "TextureOpColorFill"
     name: "<init>"
     arguments: {}
     locals: {}
   client!hk.<init> (I)V:
-    owner: "TextureOp1"
+    owner: "TextureOpColorFill"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "color"
     locals: {}
   client!hk.a (BLclient!fd;I)V:
-    owner: "TextureOp1"
+    owner: "TextureOpColorFill"
     name: "decode"
     arguments:
       1: "buffer"
@@ -22472,21 +22472,21 @@ methods:
       407: "local407"
       415: "local415"
   client!hk.b (II)[[I:
-    owner: "TextureOp1"
+    owner: "TextureOpColorFill"
     name: "getColorOutput"
     arguments:
       0: "y"
     locals:
-      16: "local16"
-      24: "local24"
-      28: "local28"
-      32: "local32"
-      34: "local34"
+      16: "dest"
+      24: "green"
+      28: "red"
+      32: "blue"
+      34: "x"
   client!hk.c (II)V:
-    owner: "TextureOp1"
-    name: "method1774"
+    owner: "TextureOpColorFill"
+    name: "setColor"
     arguments:
-      1: "arg0"
+      1: "color"
     locals: {}
   client!hk.g (I)Lclient!gb;:
     owner: "WorldList"
@@ -24648,7 +24648,7 @@ methods:
     arguments:
       1: "y"
     locals:
-      15: "local15"
+      15: "dest"
   client!jj.a (IIIIIII)I:
     owner: "TextureOp34"
     name: "method2051"
@@ -24689,8 +24689,8 @@ methods:
     owner: "TextureOp34"
     name: "method2053"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "dest"
+      1: "y"
     locals:
       20: "local20"
       31: "local31"
@@ -25397,13 +25397,13 @@ methods:
     locals: {}
   client!jo.a (IIB)[[I:
     owner: "TextureOp"
-    name: "method4686"
+    name: "getChildColorOutput"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "index"
+      1: "y"
     locals:
-      27: "local27"
-      35: "local35"
+      27: "colorRow"
+      35: "monochromeRow"
   client!jo.a (III)V:
     owner: "TextureOp"
     name: "createImageCache"
@@ -25504,10 +25504,10 @@ methods:
     locals: {}
   client!jo.b (III)[I:
     owner: "TextureOp"
-    name: "method4699"
+    name: "getChildMonochromeOutput"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "index"
+      1: "y"
     locals: {}
   client!jo.b (IIIIII)V:
     owner: "Static22"
@@ -26394,12 +26394,12 @@ methods:
     locals: {}
   client!kj.a (IFIIIZ)[I:
     owner: "TextureProvider"
-    name: "method415"
+    name: "getPixels"
     arguments:
       2: "id"
-      0: "arg0"
-      1: "arg1"
-      3: "arg3"
+      3: "width"
+      0: "height"
+      1: "brightness"
     locals: {}
   client!kj.a (II)Z:
     owner: "TextureProvider"
@@ -26593,10 +26593,10 @@ methods:
     arguments:
       1: "y"
     locals:
-      7: "local7"
+      7: "dest"
       16: "local16"
-      21: "local21"
-      28: "local28"
+      21: "pixels"
+      28: "random"
       30: "local30"
       60: "local60"
       73: "local73"
@@ -26661,10 +26661,10 @@ methods:
     owner: "TextureOp29"
     name: "method2391"
     arguments:
-      1: "arg0"
+      1: "pixels"
     locals:
-      15: "local15"
-      17: "local17"
+      15: "width"
+      17: "height"
       32: "i"
       46: "op"
       49: "local49"
@@ -26675,7 +26675,7 @@ methods:
     arguments:
       1: "y"
     locals:
-      9: "local9"
+      9: "dest"
   client!km.a ([[[I[[B[[F[[I[[I[[F[[B[[I[[BI[[F[[I[[[B[[BZ[[I)[Lclient!ih;:
     owner: "Static22"
     name: "method2389"
@@ -26780,18 +26780,18 @@ methods:
     arguments:
       0: "y"
     locals:
-      15: "local15"
-      26: "local26"
-      28: "local28"
+      15: "dest"
+      26: "width"
+      28: "height"
       32: "local32"
       37: "local37"
-      43: "local43"
+      43: "y0"
       50: "local50"
       54: "local54"
       58: "local58"
       62: "local62"
       66: "local66"
-      68: "local68"
+      68: "x"
       79: "local79"
   client!km.c (II)V:
     owner: "Static22"
@@ -26927,30 +26927,30 @@ methods:
     locals:
       7: "out"
   client!la.<init> ()V:
-    owner: "TextureOp20"
+    owner: "TextureOpTile"
     name: "<init>"
     arguments: {}
     locals: {}
   client!la.a (BLclient!fd;I)V:
-    owner: "TextureOp20"
+    owner: "TextureOpTile"
     name: "decode"
     arguments:
       1: "buffer"
       2: "code"
     locals: {}
   client!la.a (II)[I:
-    owner: "TextureOp20"
+    owner: "TextureOpTile"
     name: "getMonochromeOutput"
     arguments:
       1: "y"
     locals:
-      19: "local19"
-      29: "local29"
-      34: "local34"
-      43: "local43"
-      53: "local53"
-      63: "local63"
-      73: "local73"
+      19: "dest"
+      29: "tileWidth"
+      34: "tileHeight"
+      43: "srcY"
+      53: "src"
+      63: "x"
+      73: "srcX"
   client!la.a (Lclient!lh;BLclient!lh;)V:
     owner: "SecondaryLinkedList"
     name: "insertAfter"
@@ -26965,25 +26965,25 @@ methods:
       0: "allowMembers"
     locals: {}
   client!la.b (II)[[I:
-    owner: "TextureOp20"
+    owner: "TextureOpTile"
     name: "getColorOutput"
     arguments:
       0: "y"
     locals:
-      20: "local20"
-      29: "local29"
-      34: "local34"
-      43: "local43"
-      53: "local53"
-      65: "local65"
-      69: "local69"
-      73: "local73"
-      77: "local77"
-      81: "local81"
-      85: "local85"
-      87: "local87"
-      101: "local101"
-      107: "local107"
+      20: "dest"
+      29: "tileWidth"
+      34: "tileHeight"
+      43: "srcY"
+      53: "src"
+      65: "srcRed"
+      69: "srcGreen"
+      73: "srcBlue"
+      77: "destRed"
+      81: "destGreen"
+      85: "destBlue"
+      87: "x"
+      101: "index"
+      107: "srcX"
   client!lb.<init> ()V:
     owner: "SecondaryParticleLinkedList"
     name: "<init>"
@@ -27465,9 +27465,9 @@ methods:
     arguments:
       1: "y"
     locals:
-      18: "local18"
+      18: "dest"
       27: "local27"
-      29: "local29"
+      29: "x"
       40: "local40"
       78: "local78"
       127: "local127"
@@ -28453,9 +28453,9 @@ methods:
     owner: "TextureOp17"
     name: "method2596"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      3: "arg2"
+      3: "r"
+      1: "g"
+      0: "b"
     locals:
       8: "local8"
       34: "local34"
@@ -28482,15 +28482,15 @@ methods:
     arguments:
       0: "y"
     locals:
-      18: "local18"
-      28: "local28"
-      32: "local32"
-      36: "local36"
-      40: "local40"
-      44: "local44"
-      48: "local48"
-      52: "local52"
-      54: "local54"
+      18: "dest"
+      28: "src"
+      32: "srcRed"
+      36: "srcGreen"
+      40: "destRed"
+      44: "srcBlue"
+      48: "destGreen"
+      52: "destBlue"
+      54: "x"
   client!lj.c (III)Lclient!co;:
     owner: "SceneGraph"
     name: "removeScenery"
@@ -28770,11 +28770,11 @@ methods:
     owner: "Texture"
     name: "getSprite"
     arguments:
-      0: "brightness"
       2: "width"
+      5: "height"
+      0: "brightness"
       3: "provider"
       4: "spritesArchive"
-      5: "height"
     locals:
       27: "sprite"
       29: "i"
@@ -28797,13 +28797,13 @@ methods:
     owner: "Texture"
     name: "getPixels"
     arguments:
-      0: "brightness"
-      1: "arg1"
-      3: "spritesArchive"
-      4: "provider"
-      5: "height"
-      6: "arg5"
       7: "width"
+      5: "height"
+      0: "brightness"
+      4: "provider"
+      3: "spritesArchive"
+      1: "columnMajor"
+      6: "flipHorizontal"
     locals:
       21: "pixels"
       23: "i"
@@ -28831,10 +28831,10 @@ methods:
     arguments:
       0: "width"
       2: "height"
-      3: "spritesArchive"
       4: "brightness"
       5: "provider"
-      6: "arg5"
+      3: "spritesArchive"
+      6: "columnMajor"
     locals:
       12: "pixels"
       25: "i"
@@ -28859,11 +28859,11 @@ methods:
     owner: "Texture"
     name: "getBloomPixels"
     arguments:
+      5: "width"
       0: "height"
-      2: "arg1"
       3: "provider"
       4: "spritesArchive"
-      5: "width"
+      2: "columnMajor"
     locals:
       29: "pixels"
       37: "i"
@@ -28885,7 +28885,7 @@ methods:
     owner: "MaterialManager"
     name: "setMaterial"
     arguments:
-      0: "materialId"
+      0: "type"
       1: "arg"
     locals:
       42: "renderer"
@@ -28893,11 +28893,11 @@ methods:
     owner: "Texture"
     name: "getAlphaSprite"
     arguments:
+      5: "width"
       0: "height"
+      4: "brightness"
       1: "provider"
       2: "spritesArchive"
-      4: "brightness"
-      5: "width"
     locals:
       30: "sprite"
       32: "i"
@@ -30320,27 +30320,27 @@ methods:
       27: "local27"
       55: "local55"
   client!mo.<init> ()V:
-    owner: "TextureOp26"
+    owner: "TextureOpBinary"
     name: "<init>"
     arguments: {}
     locals: {}
   client!mo.a (BLclient!fd;I)V:
-    owner: "TextureOp26"
+    owner: "TextureOpBinary"
     name: "decode"
     arguments:
       1: "buffer"
       2: "code"
     locals: {}
   client!mo.a (II)[I:
-    owner: "TextureOp26"
+    owner: "TextureOpBinary"
     name: "getMonochromeOutput"
     arguments:
       1: "y"
     locals:
-      17: "local17"
-      27: "local27"
-      29: "local29"
-      40: "local40"
+      17: "dest"
+      27: "src"
+      29: "x"
+      40: "value"
   client!mo.a (Ljava/awt/Component;BILsignlink!pm;I)Lclient!tj;:
     owner: "AudioChannel"
     name: "create"
@@ -32213,7 +32213,7 @@ methods:
     owner: "GlTextureProvider"
     name: "method447"
     arguments:
-      1: "arg0"
+      1: "id"
     locals: {}
   client!nk.a (BII)V:
     owner: "GlTextureProvider"
@@ -32227,7 +32227,7 @@ methods:
     name: "method445"
     arguments:
       2: "id"
-      0: "arg0"
+      0: "brightness"
     locals: {}
   client!nk.a (IZ)Z:
     owner: "GlTextureProvider"
@@ -32248,37 +32248,37 @@ methods:
     owner: "GlTextureProvider"
     name: "method442"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!nk.b (II)Z:
     owner: "GlTextureProvider"
     name: "method441"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!nk.b (IZ)I:
     owner: "GlTextureProvider"
     name: "method450"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!nk.c (IB)[I:
     owner: "GlTextureProvider"
-    name: "method449"
+    name: "getPixels"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!nk.c (II)Z:
     owner: "GlTextureProvider"
     name: "method443"
     arguments:
-      1: "arg0"
+      1: "id"
     locals: {}
   client!nk.d (II)I:
     owner: "GlTextureProvider"
-    name: "method444"
+    name: "getMaterialType"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!nk.e (II)I:
     owner: "GlTextureProvider"
@@ -32290,7 +32290,7 @@ methods:
     owner: "GlTextureProvider"
     name: "method451"
     arguments:
-      1: "arg0"
+      1: "id"
     locals: {}
   client!nk.g (II)Z:
     owner: "GlTextureProvider"
@@ -32300,9 +32300,9 @@ methods:
     locals: {}
   client!nk.h (II)I:
     owner: "GlTextureProvider"
-    name: "method455"
+    name: "getMaterialArg"
     arguments:
-      0: "arg0"
+      0: "id"
     locals: {}
   client!nl.a (BI)Ljava/lang/String;:
     owner: "Static26"
@@ -32414,14 +32414,14 @@ methods:
     arguments:
       0: "y"
     locals:
-      16: "local16"
+      16: "dest"
       33: "local33"
       39: "local39"
       51: "local51"
-      55: "local55"
-      59: "local59"
-      63: "local63"
-      65: "local65"
+      55: "destRed"
+      59: "destGreen"
+      63: "destBlue"
+      65: "x"
       84: "local84"
       103: "local103"
       107: "local107"
@@ -33142,18 +33142,18 @@ methods:
     arguments: {}
     locals: {}
   client!of.<init> ()V:
-    owner: "TextureOp8"
+    owner: "TextureOpCurve"
     name: "<init>"
     arguments: {}
     locals: {}
   client!of.a (BLclient!fd;I)V:
-    owner: "TextureOp8"
+    owner: "TextureOpCurve"
     name: "decode"
     arguments:
       1: "buffer"
       2: "code"
     locals:
-      26: "local26"
+      26: "i"
   client!of.a (BLjava/lang/String;)V:
     owner: "Cheat"
     name: "execute"
@@ -33169,14 +33169,14 @@ methods:
       99: "i"
       115: "usedAfter"
   client!of.a (II)[I:
-    owner: "TextureOp8"
+    owner: "TextureOpCurve"
     name: "getMonochromeOutput"
     arguments:
       1: "y"
     locals:
-      11: "local11"
-      28: "local28"
-      30: "local30"
+      11: "dest"
+      28: "src"
+      30: "x"
       43: "local43"
   client!of.a (Z)Lclient!fe;:
     owner: "SpriteLoader"
@@ -33185,10 +33185,10 @@ methods:
     locals:
       21: "sprite"
   client!of.c (II)[I:
-    owner: "TextureOp8"
-    name: "method3181"
+    owner: "TextureOpCurve"
+    name: "getMarker"
     arguments:
-      0: "arg0"
+      0: "index"
     locals: {}
   client!of.c (III)V:
     owner: "Static27"
@@ -33199,7 +33199,7 @@ methods:
       2: "arg2"
     locals: {}
   client!of.e (B)V:
-    owner: "TextureOp8"
+    owner: "TextureOpCurve"
     name: "postDecode"
     arguments: {}
     locals: {}
@@ -33209,7 +33209,7 @@ methods:
     arguments: {}
     locals: {}
   client!of.f (I)V:
-    owner: "TextureOp8"
+    owner: "TextureOpCurve"
     name: "method3182"
     arguments: {}
     locals:
@@ -33250,7 +33250,7 @@ methods:
       389: "local389"
       403: "local403"
   client!of.g (I)V:
-    owner: "TextureOp8"
+    owner: "TextureOpCurve"
     name: "method3183"
     arguments: {}
     locals:
@@ -33259,35 +33259,35 @@ methods:
       22: "local22"
       31: "local31"
   client!og.<init> ()V:
-    owner: "TextureOp39"
+    owner: "TextureOpSprite"
     name: "<init>"
     arguments: {}
     locals: {}
   client!og.a (BLclient!fd;I)V:
-    owner: "TextureOp39"
+    owner: "TextureOpSprite"
     name: "decode"
     arguments:
       1: "buffer"
       2: "code"
     locals: {}
   client!og.b (II)[[I:
-    owner: "TextureOp39"
+    owner: "TextureOpSprite"
     name: "getColorOutput"
     arguments:
       0: "y"
     locals:
-      16: "local16"
-      32: "local32"
-      36: "local36"
-      40: "local40"
-      60: "local60"
-      70: "local70"
-      79: "local79"
-      110: "local110"
-      120: "local120"
-      127: "local127"
+      16: "dest"
+      32: "destRed"
+      36: "destGreen"
+      40: "destBlue"
+      60: "index"
+      70: "x"
+      79: "color"
+      110: "x"
+      120: "srcX"
+      127: "color"
   client!og.c (I)I:
-    owner: "TextureOp39"
+    owner: "TextureOpSprite"
     name: "getSpriteId"
     arguments: {}
     locals: {}
@@ -33313,7 +33313,7 @@ methods:
       31: "local31"
       42: "local42"
   client!og.e (I)V:
-    owner: "TextureOp39"
+    owner: "TextureOpSprite"
     name: "clearImageCache"
     arguments: {}
     locals: {}
@@ -33337,11 +33337,11 @@ methods:
       240: "pcmSound"
       245: "stream"
   client!og.f (I)Z:
-    owner: "TextureOp39"
-    name: "method4702"
+    owner: "TextureOpSprite"
+    name: "loadSprite"
     arguments: {}
     locals:
-      38: "local38"
+      38: "sprite"
   client!og.g (B)V:
     owner: "NpcTypeList"
     name: "removeSoft"
@@ -33962,12 +33962,12 @@ methods:
     owner: "Static28"
     name: "method3321"
     arguments:
-      0: "arg0"
+      0: "seed"
     locals:
       18: "local18"
       24: "local24"
-      30: "local30"
-      32: "local32"
+      30: "random"
+      32: "i"
       45: "local45"
       55: "local55"
       60: "local60"
@@ -35118,17 +35118,17 @@ methods:
     arguments:
       1: "y"
     locals:
-      13: "local13"
-      23: "local23"
-      29: "local29"
-      31: "local31"
+      13: "dest"
+      23: "src1"
+      29: "src2"
+      31: "x"
       46: "local46"
       55: "local55"
       63: "local63"
       71: "local71"
       79: "local79"
       87: "local87"
-      93: "local93"
+      93: "src0"
   client!ph.a (ILclient!vg;IIBII)Lclient!vg;:
     owner: "HintArrowManager"
     name: "getModel"
@@ -35160,20 +35160,20 @@ methods:
     arguments:
       0: "y"
     locals:
-      7: "local7"
-      17: "local17"
-      23: "local23"
+      7: "dest"
+      17: "src1"
+      23: "src2"
       27: "local27"
       31: "local31"
       35: "local35"
-      37: "local37"
+      37: "x"
       53: "local53"
-      63: "local63"
+      63: "angle"
       71: "local71"
       79: "local79"
       87: "local87"
       95: "local95"
-      101: "local101"
+      101: "src0"
   client!ph.c (IIIIII)V:
     owner: "Static29"
     name: "method3429"
@@ -35268,12 +35268,12 @@ methods:
       1: "v"
     locals: {}
   client!pk.<init> ()V:
-    owner: "TextureOp2"
+    owner: "TextureOpHorizontalGradient"
     name: "<init>"
     arguments: {}
     locals: {}
   client!pk.a (II)[I:
-    owner: "TextureOp2"
+    owner: "TextureOpHorizontalGradient"
     name: "getMonochromeOutput"
     arguments:
       1: "y"
@@ -35771,30 +35771,30 @@ methods:
       16: "ready"
       18: "i"
   client!qb.<init> ()V:
-    owner: "TextureOp0"
+    owner: "TextureOpMonochromeFill"
     name: "<init>"
     arguments: {}
     locals: {}
   client!qb.<init> (I)V:
-    owner: "TextureOp0"
+    owner: "TextureOpMonochromeFill"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "value"
     locals: {}
   client!qb.a (BLclient!fd;I)V:
-    owner: "TextureOp0"
+    owner: "TextureOpMonochromeFill"
     name: "decode"
     arguments:
       1: "buffer"
       2: "code"
     locals: {}
   client!qb.a (II)[I:
-    owner: "TextureOp0"
+    owner: "TextureOpMonochromeFill"
     name: "getMonochromeOutput"
     arguments:
       1: "y"
     locals:
-      15: "local15"
+      15: "dest"
   client!qb.a (ZB)C:
     owner: "Cp1252Charset"
     name: "decodeChar"
@@ -36597,12 +36597,12 @@ methods:
     locals: {}
   client!qi.a (IFIIIZ)[I:
     owner: "Js5TextureProvider"
-    name: "method415"
+    name: "getPixels"
     arguments:
       2: "id"
-      0: "arg0"
-      1: "arg1"
-      3: "arg3"
+      3: "width"
+      0: "height"
+      1: "brightness"
     locals: {}
   client!qi.a (II)Z:
     owner: "Js5TextureProvider"
@@ -36700,8 +36700,8 @@ methods:
     arguments:
       1: "y"
     locals:
-      16: "local16"
-      22: "local22"
+      16: "dest"
+      22: "x"
       33: "local33"
       40: "local40"
       44: "local44"
@@ -37436,9 +37436,9 @@ methods:
     arguments:
       1: "y"
     locals:
-      12: "local12"
+      12: "dest"
       22: "local22"
-      24: "local24"
+      24: "x"
       33: "local33"
       38: "local38"
       53: "local53"
@@ -37497,11 +37497,11 @@ methods:
     arguments:
       1: "y"
     locals:
-      17: "local17"
+      17: "dest"
       30: "local30"
       34: "local34"
       38: "local38"
-      40: "local40"
+      40: "x"
       65: "local65"
       69: "local69"
       73: "local73"
@@ -37540,7 +37540,7 @@ methods:
     name: "method3715"
     arguments: {}
     locals:
-      16: "local16"
+      16: "random"
       27: "local27"
   client!ri.<init> (IIIIIIIZLclient!vc;)V:
     owner: "Loc"
@@ -37788,9 +37788,9 @@ methods:
     arguments:
       1: "y"
     locals:
-      11: "local11"
+      11: "dest"
       26: "local26"
-      31: "local31"
+      31: "x"
       40: "local40"
       42: "local42"
       46: "local46"
@@ -39602,12 +39602,12 @@ methods:
       1: "shaders"
     locals: {}
   client!sc.<init> ()V:
-    owner: "TextureOp30"
+    owner: "TextureOpRange"
     name: "<init>"
     arguments: {}
     locals: {}
   client!sc.a (BLclient!fd;I)V:
-    owner: "TextureOp30"
+    owner: "TextureOpRange"
     name: "decode"
     arguments:
       1: "buffer"
@@ -39626,14 +39626,14 @@ methods:
       0: "arg0"
     locals: {}
   client!sc.a (II)[I:
-    owner: "TextureOp30"
+    owner: "TextureOpRange"
     name: "getMonochromeOutput"
     arguments:
       1: "y"
     locals:
-      7: "local7"
-      20: "local20"
-      22: "local22"
+      7: "dest"
+      20: "src"
+      22: "x"
   client!sc.a (IZ)V:
     owner: "Static32"
     name: "method3917"
@@ -39648,20 +39648,20 @@ methods:
       0: "buffer"
     locals: {}
   client!sc.b (II)[[I:
-    owner: "TextureOp30"
+    owner: "TextureOpRange"
     name: "getColorOutput"
     arguments:
       0: "y"
     locals:
-      13: "local13"
-      23: "local23"
-      27: "local27"
-      31: "local31"
-      35: "local35"
-      39: "local39"
-      43: "local43"
-      47: "local47"
-      49: "local49"
+      13: "dest"
+      23: "src"
+      27: "srcRed"
+      31: "srcGreen"
+      35: "destRed"
+      39: "destBlue"
+      43: "destGreen"
+      47: "srcBlue"
+      49: "x"
   client!sc.b (Lclient!fd;I)Lclient!de;:
     owner: "TextureOp29SubOp0"
     name: "create"
@@ -39669,7 +39669,7 @@ methods:
       0: "buffer"
     locals: {}
   client!sc.e (B)V:
-    owner: "TextureOp30"
+    owner: "TextureOpRange"
     name: "postDecode"
     arguments: {}
     locals: {}
@@ -39708,19 +39708,19 @@ methods:
       27: "i"
       59: "i"
   client!se.<init> ()V:
-    owner: "TextureOp13"
+    owner: "TextureOpNoise"
     name: "<init>"
     arguments: {}
     locals: {}
   client!se.a (II)[I:
-    owner: "TextureOp13"
+    owner: "TextureOpNoise"
     name: "getMonochromeOutput"
     arguments:
       1: "y"
     locals:
-      9: "local9"
-      21: "local21"
-      23: "local23"
+      9: "dest"
+      21: "heightFraction"
+      23: "x"
   client!se.a (IIIIIIII)V:
     owner: "Static32"
     name: "method3954"
@@ -39766,13 +39766,13 @@ methods:
     arguments: {}
     locals: {}
   client!se.c (III)I:
-    owner: "TextureOp13"
-    name: "method3950"
+    owner: "TextureOpNoise"
+    name: "noise"
     arguments:
-      0: "arg0"
-      2: "arg1"
+      2: "x"
+      0: "y"
     locals:
-      10: "local10"
+      10: "noise"
   client!sf.<init> ()V:
     owner: "VorbisResidue"
     name: "<init>"
@@ -39836,11 +39836,11 @@ methods:
     arguments:
       1: "y"
     locals:
-      16: "local16"
+      16: "dest"
       30: "local30"
       36: "local36"
       46: "local46"
-      48: "local48"
+      48: "x"
       63: "local63"
       83: "local83"
       87: "local87"
@@ -39860,7 +39860,7 @@ methods:
     owner: "MaterialManager"
     name: "resetArgument"
     arguments:
-      1: "materialId"
+      1: "type"
     locals:
       16: "id"
   client!sh.c (II)Lclient!ik;:
@@ -39954,51 +39954,51 @@ methods:
       5: "arg5"
     locals: {}
   client!sl.<init> ()V:
-    owner: "TextureOp7"
+    owner: "TextureOpCombine"
     name: "<init>"
     arguments: {}
     locals: {}
   client!sl.a (BLclient!fd;I)V:
-    owner: "TextureOp7"
+    owner: "TextureOpCombine"
     name: "decode"
     arguments:
       1: "buffer"
       2: "code"
     locals: {}
   client!sl.a (II)[I:
-    owner: "TextureOp7"
+    owner: "TextureOpCombine"
     name: "getMonochromeOutput"
     arguments:
       1: "y"
     locals:
-      11: "local11"
-      22: "local22"
-      28: "local28"
-      31: "local31"
-      93: "local93"
-      117: "local117"
-      138: "local138"
-      164: "local164"
-      171: "local171"
-      192: "local192"
-      227: "local227"
-      234: "local234"
-      271: "local271"
-      278: "local278"
-      303: "local303"
-      310: "local310"
-      338: "local338"
-      349: "local349"
-      353: "local353"
-      373: "local373"
-      380: "local380"
-      384: "local384"
-      404: "local404"
-      411: "local411"
-      415: "local415"
-      441: "local441"
-      452: "local452"
-      456: "local456"
+      11: "dest"
+      22: "src0"
+      28: "src1"
+      31: "function"
+      93: "x"
+      117: "x"
+      138: "x"
+      164: "x"
+      171: "value1"
+      192: "x"
+      227: "x"
+      234: "value1"
+      271: "x"
+      278: "value0"
+      303: "x"
+      310: "value"
+      338: "x"
+      349: "value0"
+      353: "value1"
+      373: "x"
+      380: "value0"
+      384: "value1"
+      404: "x"
+      411: "value1"
+      415: "value0"
+      441: "x"
+      452: "value0"
+      456: "value1"
   client!sl.a (Lclient!qc;B)V:
     owner: "Static32"
     name: "method4024"
@@ -40043,72 +40043,72 @@ methods:
       69: "local69"
       166: "local166"
   client!sl.b (II)[[I:
-    owner: "TextureOp7"
+    owner: "TextureOpCombine"
     name: "getColorOutput"
     arguments:
       0: "y"
     locals:
-      18: "local18"
-      29: "local29"
-      35: "local35"
-      39: "local39"
-      43: "local43"
-      47: "local47"
-      51: "local51"
-      55: "local55"
-      59: "local59"
-      63: "local63"
-      67: "local67"
-      71: "local71"
-      74: "local74"
-      131: "local131"
-      176: "local176"
-      218: "local218"
-      268: "local268"
-      275: "local275"
-      279: "local279"
-      283: "local283"
-      339: "local339"
-      413: "local413"
-      420: "local420"
-      424: "local424"
-      428: "local428"
-      524: "local524"
-      535: "local535"
-      539: "local539"
-      543: "local543"
-      610: "local610"
-      621: "local621"
-      625: "local625"
-      629: "local629"
-      701: "local701"
-      708: "local708"
-      712: "local712"
-      716: "local716"
-      720: "local720"
-      724: "local724"
-      728: "local728"
-      766: "local766"
-      777: "local777"
-      781: "local781"
-      785: "local785"
-      789: "local789"
-      793: "local793"
-      797: "local797"
-      835: "local835"
-      846: "local846"
-      850: "local850"
-      854: "local854"
-      858: "local858"
-      862: "local862"
-      866: "local866"
-      917: "local917"
-      928: "local928"
-      932: "local932"
-      936: "local936"
-      940: "local940"
-      944: "local944"
-      948: "local948"
+      18: "dest"
+      29: "src0"
+      35: "src1"
+      39: "destRed"
+      43: "destGreen"
+      47: "src0Red"
+      51: "destBlue"
+      55: "src0Green"
+      59: "src1Blue"
+      63: "src0Blue"
+      67: "src1Green"
+      71: "src1Red"
+      74: "function"
+      131: "x"
+      176: "x"
+      218: "x"
+      268: "x"
+      275: "green1"
+      279: "red1"
+      283: "blue1"
+      339: "x"
+      413: "x"
+      420: "green1"
+      424: "red1"
+      428: "blue1"
+      524: "x"
+      535: "blue0"
+      539: "green0"
+      543: "red0"
+      610: "x"
+      621: "green0"
+      625: "blue0"
+      629: "red0"
+      701: "x"
+      708: "blue0"
+      712: "blue1"
+      716: "green1"
+      720: "red1"
+      724: "red0"
+      728: "green0"
+      766: "x"
+      777: "red0"
+      781: "blue0"
+      785: "blue1"
+      789: "red1"
+      793: "green1"
+      797: "green0"
+      835: "x"
+      846: "red1"
+      850: "green1"
+      854: "blue0"
+      858: "blue1"
+      862: "red0"
+      866: "green0"
+      917: "x"
+      928: "green0"
+      932: "blue0"
+      936: "red1"
+      940: "blue1"
+      944: "red0"
+      948: "green1"
   client!sl.c (II)V:
     owner: "InterfaceList"
     name: "discard"
@@ -40240,14 +40240,14 @@ methods:
     arguments:
       1: "y"
     locals:
-      13: "local13"
+      13: "dest"
       19: "local19"
       26: "local26"
       64: "local64"
       69: "local69"
       80: "local80"
       87: "local87"
-      107: "local107"
+      107: "x"
       123: "local123"
       135: "local135"
       137: "local137"
@@ -40270,7 +40270,7 @@ methods:
     name: "method4057"
     arguments: {}
     locals:
-      12: "local12"
+      12: "random"
       57: "local57"
       68: "local68"
       74: "local74"
@@ -40364,15 +40364,15 @@ methods:
     owner: "GlTexture"
     name: "method4073"
     arguments:
-      0: "arg0"
+      0: "textureProvider"
       1: "spritesArchive"
-      2: "arg2"
+      2: "brightness"
       3: "lowDetail"
     locals:
-      50: "local50"
-      54: "local54"
-      58: "local58"
-      65: "local65"
+      50: "reds"
+      54: "greens"
+      58: "blues"
+      65: "pixels"
       68: "local68"
       71: "local71"
       75: "local75"
@@ -40382,19 +40382,19 @@ methods:
       89: "local89"
       91: "local91"
       95: "local95"
-      103: "local103"
+      103: "color"
       144: "local144"
       146: "local146"
       150: "local150"
       152: "local152"
-      155: "local155"
-      157: "local157"
-      158: "local158"
+      155: "green"
+      157: "blue"
+      158: "red"
       160: "local160"
       189: "local189"
-      197: "local197"
-      201: "local201"
-      205: "local205"
+      197: "averageRed"
+      201: "averageGreen"
+      205: "averageBlue"
       260: "local260"
       268: "local268"
       274: "local274"
@@ -40404,26 +40404,26 @@ methods:
     arguments:
       0: "provider"
       1: "spritesArchive"
-      2: "arg2"
+      2: "size"
     locals:
       10: "gl"
       13: "flags"
       32: "temp"
       64: "pixels"
-      148: "local148"
+      148: "type"
       160: "pixels"
-      209: "local209"
+      209: "level"
       367: "y"
       377: "x"
   client!so.a (Lclient!kj;Lclient!fh;Z)[I:
     owner: "GlTexture"
-    name: "method4071"
+    name: "getPixels"
     arguments:
-      0: "arg0"
+      0: "textureProvider"
       1: "spritesArchive"
       2: "lowDetail"
     locals:
-      14: "local14"
+      14: "size"
   client!so.d (I)V:
     owner: "GlTexture"
     name: "method4074"
@@ -40579,26 +40579,26 @@ methods:
       9: "c"
       27: "index"
   client!tc.<init> ()V:
-    owner: "TextureOp22"
+    owner: "TextureOpInvert"
     name: "<init>"
     arguments: {}
     locals: {}
   client!tc.a (BLclient!fd;I)V:
-    owner: "TextureOp22"
+    owner: "TextureOpInvert"
     name: "decode"
     arguments:
       1: "buffer"
       2: "code"
     locals: {}
   client!tc.a (II)[I:
-    owner: "TextureOp22"
+    owner: "TextureOpInvert"
     name: "getMonochromeOutput"
     arguments:
       1: "y"
     locals:
-      11: "local11"
-      24: "local24"
-      26: "local26"
+      11: "dest"
+      24: "src"
+      26: "x"
   client!tc.a (Lclient!wf;B)V:
     owner: "Static33"
     name: "method4118"
@@ -40609,20 +40609,20 @@ methods:
       12: "local12"
       15: "local15"
   client!tc.b (II)[[I:
-    owner: "TextureOp22"
+    owner: "TextureOpInvert"
     name: "getColorOutput"
     arguments:
       0: "y"
     locals:
-      13: "local13"
-      23: "local23"
-      27: "local27"
-      31: "local31"
-      35: "local35"
-      39: "local39"
-      43: "local43"
-      47: "local47"
-      49: "local49"
+      13: "dest"
+      23: "src"
+      27: "srcRed"
+      31: "srcBlue"
+      35: "destRed"
+      39: "srcGreen"
+      43: "destGreen"
+      47: "destBlue"
+      49: "x"
   client!tc.c (III)Z:
     owner: "Static33"
     name: "method4119"
@@ -41170,22 +41170,22 @@ methods:
       2: "height"
     locals: {}
   client!ti.<init> ()V:
-    owner: "TextureOp24"
+    owner: "TextureOpMonochrome"
     name: "<init>"
     arguments: {}
     locals: {}
   client!ti.a (II)[I:
-    owner: "TextureOp24"
+    owner: "TextureOpMonochrome"
     name: "getMonochromeOutput"
     arguments:
       1: "y"
     locals:
-      7: "local7"
-      18: "local18"
-      22: "local22"
-      26: "local26"
-      30: "local30"
-      32: "local32"
+      7: "dest"
+      18: "src"
+      22: "srcBlue"
+      26: "srcGreen"
+      30: "srcRed"
+      32: "x"
   client!ti.a (Lclient!fh;B)V:
     owner: "VarbitTypeList"
     name: "init"
@@ -42454,8 +42454,8 @@ methods:
     owner: "TextureOp23"
     name: "method4301"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "x"
+      1: "y"
     locals:
       9: "local9"
       13: "local13"
@@ -42473,9 +42473,9 @@ methods:
     arguments:
       1: "y"
     locals:
-      20: "local20"
-      26: "local26"
-      44: "local44"
+      20: "dest"
+      26: "x"
+      44: "src"
   client!uc.a (I[Ljava/lang/String;)[Ljava/lang/String;:
     owner: "Static35"
     name: "method4300"
@@ -42496,12 +42496,12 @@ methods:
     arguments:
       0: "y"
     locals:
-      7: "local7"
-      15: "local15"
-      19: "local19"
-      23: "local23"
-      25: "local25"
-      43: "local43"
+      7: "dest"
+      15: "destRed"
+      19: "destGreen"
+      23: "destBlue"
+      25: "x"
+      43: "src"
   client!uc.f (B)V:
     owner: "LightTypeList"
     name: "removeSoft"
@@ -43494,10 +43494,10 @@ methods:
     arguments:
       1: "y"
     locals:
-      17: "local17"
+      17: "dest"
       26: "local26"
       32: "local32"
-      34: "local34"
+      34: "x"
       41: "local41"
       47: "local47"
       60: "local60"
@@ -44311,14 +44311,14 @@ methods:
     arguments:
       1: "y"
     locals:
-      19: "local19"
+      19: "dest"
       33: "local33"
       37: "local37"
       45: "local45"
       49: "local49"
       52: "local52"
       58: "local58"
-      75: "local75"
+      75: "src"
       78: "local78"
       80: "local80"
       84: "local84"
@@ -44333,21 +44333,21 @@ methods:
     arguments:
       0: "y"
     locals:
-      11: "local11"
+      11: "dest"
       32: "local32"
       36: "local36"
       44: "local44"
       48: "local48"
       51: "local51"
       57: "local57"
-      76: "local76"
+      76: "src"
       80: "local80"
       82: "local82"
       84: "local84"
-      88: "local88"
+      88: "srcRed"
       90: "local90"
-      94: "local94"
-      98: "local98"
+      94: "srcBlue"
+      98: "srcGreen"
       102: "local102"
       114: "local114"
       139: "local139"
@@ -44358,9 +44358,9 @@ methods:
       190: "local190"
       196: "local196"
       203: "local203"
-      249: "local249"
-      253: "local253"
-      257: "local257"
+      249: "destGreen"
+      253: "destBlue"
+      257: "destRed"
       259: "local259"
       264: "local264"
       266: "local266"
@@ -44443,24 +44443,24 @@ methods:
       1: "modelsArchive"
     locals: {}
   client!vm.<init> ()V:
-    owner: "TextureOp10"
+    owner: "TextureOpColorGradient"
     name: "<init>"
     arguments: {}
     locals: {}
   client!vm.a (BLclient!fd;I)V:
-    owner: "TextureOp10"
+    owner: "TextureOpColorGradient"
     name: "decode"
     arguments:
       1: "buffer"
       2: "code"
     locals:
-      13: "local13"
-      31: "local31"
+      13: "preset"
+      31: "i"
   client!vm.a (IB)V:
-    owner: "TextureOp10"
-    name: "method4549"
+    owner: "TextureOpColorGradient"
+    name: "setPreset"
     arguments:
-      0: "arg0"
+      0: "preset"
     locals: {}
   client!vm.a (Lclient!ld;Lclient!fh;Lclient!fh;ZLclient!fh;)Z:
     owner: "MidiPlayer"
@@ -44472,19 +44472,19 @@ methods:
       4: "synthArchive"
     locals: {}
   client!vm.b (II)[[I:
-    owner: "TextureOp10"
+    owner: "TextureOpColorGradient"
     name: "getColorOutput"
     arguments:
       0: "y"
     locals:
-      15: "local15"
-      26: "local26"
-      30: "local30"
-      34: "local34"
-      38: "local38"
-      40: "local40"
-      49: "local49"
-      69: "local69"
+      15: "dest"
+      26: "src"
+      30: "green"
+      34: "blue"
+      38: "red"
+      40: "x"
+      49: "value"
+      69: "color"
   client!vm.c (II)V:
     owner: "Mouse"
     name: "setIdleLoops"
@@ -44492,31 +44492,31 @@ methods:
       1: "idleLoops"
     locals: {}
   client!vm.e (B)V:
-    owner: "TextureOp10"
+    owner: "TextureOpColorGradient"
     name: "postDecode"
     arguments: {}
     locals: {}
   client!vm.f (I)V:
-    owner: "TextureOp10"
-    name: "method4550"
+    owner: "TextureOpColorGradient"
+    name: "interpolate"
     arguments: {}
     locals:
-      9: "local9"
-      18: "local18"
-      23: "local23"
-      27: "local27"
-      29: "local29"
-      68: "local68"
-      72: "local72"
-      76: "local76"
-      80: "local80"
-      86: "local86"
-      112: "local112"
-      129: "local129"
-      134: "local134"
-      181: "local181"
-      199: "local199"
-      203: "local203"
+      9: "samplesLen"
+      18: "i"
+      23: "sample"
+      27: "position"
+      29: "j"
+      68: "lastSample"
+      72: "blue"
+      76: "red"
+      80: "green"
+      86: "nextSample"
+      112: "prevSample"
+      129: "nextWeight"
+      134: "prevWeight"
+      181: "green2"
+      199: "blue2"
+      203: "red2"
   client!vn.<init> (II)V:
     owner: "SoftwareSprite"
     name: "<init>"
@@ -45170,12 +45170,12 @@ methods:
       26: "value"
       77: "value2"
   client!wa.p (B)V:
-    owner: "Static37"
-    name: "method4645"
+    owner: "TextureOp"
+    name: "createTrigonometryTables"
     arguments: {}
     locals:
-      14: "local14"
-      24: "local24"
+      14: "i"
+      24: "radians"
   client!wa.q (I)V:
     owner: "Packet"
     name: "startBitAccess"
@@ -45441,18 +45441,18 @@ methods:
       67: "i"
       78: "s"
   client!wd.b (II)[[I:
-    owner: "TextureOp18"
+    owner: "TextureOpTiledSprite"
     name: "getColorOutput"
     arguments:
       0: "y"
     locals:
-      17: "local17"
-      30: "local30"
-      34: "local34"
-      42: "local42"
-      46: "local46"
-      48: "local48"
-      66: "local66"
+      17: "dest"
+      30: "destGreen"
+      34: "destBlue"
+      42: "srcY"
+      46: "destRed"
+      48: "x"
+      66: "color"
   client!wd.i (I)V:
     owner: "AttachLocRequest"
     name: "loop"
