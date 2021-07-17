@@ -2457,8 +2457,8 @@ fields:
     owner: "Texture"
     name: "width"
   client!fa.X I:
-    owner: "Static2"
-    name: "anInt1629"
+    owner: "Cross"
+    name: "milliseconds"
   client!fa.ab I:
     owner: "Sprites"
     name: "floorShadowsId"
@@ -2467,7 +2467,7 @@ fields:
     name: "aBoolean101"
   client!fa.cb [I:
     owner: "MiniMenu"
-    name: "anIntArray117"
+    name: "intArgs1"
   client!fa.db I:
     owner: "Static2"
     name: "anInt1633"
@@ -4621,7 +4621,7 @@ fields:
     name: "childOps"
   client!jo.E [J:
     owner: "MiniMenu"
-    name: "aLongArray56"
+    name: "keys"
   client!jo.F Lclient!da;:
     owner: "TextureOp"
     name: "monochromeImageCache"
@@ -5508,8 +5508,8 @@ fields:
     owner: "IsaacRandom"
     name: "c"
   client!m.f I:
-    owner: "Static4"
-    name: "anInt3275"
+    owner: "Cross"
+    name: "y"
   client!m.g I:
     owner: "IsaacRandom"
     name: "b"
@@ -6606,8 +6606,8 @@ fields:
     owner: "ClanChat"
     name: "rank"
   client!nf.l Z:
-    owner: "Static5"
-    name: "aBoolean254"
+    owner: "MiniMenu"
+    name: "debug"
   client!ng.B Ljava/lang/String;:
     owner: "LocalisedText"
     name: "CHATCOL4"
@@ -9523,7 +9523,7 @@ fields:
     name: "anInt4996"
   client!ta.t [I:
     owner: "MiniMenu"
-    name: "anIntArray543"
+    name: "intArgs2"
   client!ta.u Lclient!fh;:
     owner: "MidiPlayer"
     name: "synthArchive"
@@ -9819,8 +9819,8 @@ fields:
     owner: "LightTypeList"
     name: "types"
   client!ti.X I:
-    owner: "Static6"
-    name: "anInt5177"
+    owner: "Cross"
+    name: "x"
   client!ti.cb I:
     owner: "Static6"
     name: "anInt5182"
@@ -10819,7 +10819,7 @@ fields:
     name: "recolorDestination"
   client!vh.ab I:
     owner: "LocType"
-    name: "anInt5538"
+    name: "blockedSides"
   client!vh.c I:
     owner: "LocType"
     name: "anInt5505"
@@ -11628,8 +11628,8 @@ fields:
     owner: "Component"
     name: "onClickRepeat"
   client!wf.sc [S:
-    owner: "Static7"
-    name: "aShortArray122"
+    owner: "MiniMenu"
+    name: "PLAYER_OP_ACTIONS"
   client!wf.t [Ljava/lang/Object;:
     owner: "Component"
     name: "onChatTransmit"
@@ -11745,8 +11745,8 @@ fields:
     owner: "Map"
     name: "group"
   client!wg.V I:
-    owner: "Static7"
-    name: "anInt6008"
+    owner: "Cross"
+    name: "type"
   client!wg.X Ljava/lang/String;:
     owner: "Map"
     name: "name"
@@ -15989,7 +15989,7 @@ methods:
     owner: "Static12"
     name: "method780"
     arguments:
-      1: "arg0"
+      1: "component"
     locals: {}
   client!df.a (II)V:
     owner: "DelayedStateChange"
@@ -16579,27 +16579,27 @@ methods:
       0: "value"
     locals: {}
   client!ed.a (II)Z:
-    owner: "Static13"
+    owner: "MiniMenu"
     name: "method1005"
     arguments:
-      1: "arg0"
+      1: "i"
     locals:
-      12: "local12"
+      12: "action"
   client!ed.a (IJII)Z:
-    owner: "Static13"
-    name: "method1004"
+    owner: "PathFinder"
+    name: "findPathToLoc"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      3: "arg2"
+      1: "key"
+      3: "x"
+      0: "z"
     locals:
-      12: "local12"
-      23: "local23"
-      30: "local30"
-      49: "local49"
-      52: "local52"
-      63: "local63"
-      66: "local66"
+      12: "angle"
+      23: "shape"
+      30: "id"
+      49: "type"
+      52: "blockedSides"
+      63: "width"
+      66: "length"
   client!ee.a (II)Z:
     owner: "Static13"
     name: "method1009"
@@ -16650,8 +16650,8 @@ methods:
     owner: "Static13"
     name: "method1007"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "action"
+      1: "arg1"
       3: "arg2"
     locals: {}
   client!ee.a (IIIIIIBIII)V:
@@ -19279,19 +19279,19 @@ methods:
       257: "properties"
       266: "objType"
       290: "param"
-      340: "local340"
-      353: "local353"
-      373: "local373"
-      444: "local444"
-      455: "local455"
+      340: "inventoryOps"
+      353: "i"
+      373: "action"
+      444: "i"
+      455: "action"
       505: "local505"
-      517: "local517"
-      533: "local533"
-      704: "local704"
-      712: "local712"
+      517: "i"
+      533: "action"
+      704: "i"
+      712: "op"
       745: "local745"
-      767: "local767"
-      774: "local774"
+      767: "i"
+      774: "op"
   client!fj.b (II)[[I:
     owner: "TextureOpFlip"
     name: "getColorOutput"
@@ -19567,9 +19567,9 @@ methods:
     owner: "MiniMenu"
     name: "add"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "key"
+      1: "intArg1"
+      2: "intArg2"
       3: "opBase"
       4: "op"
       5: "action"
@@ -23563,7 +23563,7 @@ methods:
       358: "local358"
       364: "local364"
   client!il.a (IBI)Ljava/lang/String;:
-    owner: "Static20"
+    owner: "MiniMenu"
     name: "getCombatLevelColor"
     arguments:
       0: "selfLevel"
@@ -24762,7 +24762,7 @@ methods:
       61: "op"
       79: "tempInt"
       133: "action"
-      151: "local151"
+      151: "tempKey"
   client!jj.g (B)V:
     owner: "TextureOp34"
     name: "method2049"
@@ -28464,11 +28464,11 @@ methods:
       90: "local90"
       98: "local98"
   client!lj.a (ILclient!wf;B)Ljava/lang/String;:
-    owner: "Static24"
-    name: "method2597"
+    owner: "InterfaceList"
+    name: "getOp"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      1: "component"
+      0: "index"
     locals: {}
   client!lj.a (Lclient!fh;B)V:
     owner: "SkyBoxSphereTypeList"
@@ -29163,12 +29163,12 @@ methods:
       2: "alpha"
     locals: {}
   client!mb.a (BIII)V:
-    owner: "Static24"
-    name: "method2945"
+    owner: "Cheat"
+    name: "teleport"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      3: "arg2"
+      3: "level"
+      1: "x"
+      2: "z"
     locals:
       32: "command"
   client!mb.a (I)V:
@@ -35555,9 +35555,9 @@ methods:
       86: "local86"
       110: "local110"
       144: "local144"
-      269: "local269"
+      269: "i"
       277: "priority"
-      336: "local336"
+      336: "action"
       367: "local367"
   client!qa.a (ILclient!fd;Z)V:
     owner: "IdkType"
@@ -42477,13 +42477,13 @@ methods:
       26: "x"
       44: "src"
   client!uc.a (I[Ljava/lang/String;)[Ljava/lang/String;:
-    owner: "Static35"
-    name: "method4300"
+    owner: "MiniMenu"
+    name: "annotateOps"
     arguments:
-      1: "arg0"
+      1: "ops"
     locals:
-      13: "local13"
-      15: "local15"
+      13: "annotatedOps"
+      15: "i"
   client!uc.a (ZI)I:
     owner: "SeqTypeList"
     name: "getFileId"
@@ -42624,15 +42624,15 @@ methods:
     arguments:
       1: "i"
     locals:
-      15: "local15"
-      19: "local19"
-      24: "local24"
+      15: "intArg1"
+      19: "intArg2"
+      24: "id"
       28: "action"
-      32: "local32"
+      32: "key"
       46: "player"
       146: "npc"
       346: "player"
-      582: "local582"
+      582: "npc"
       649: "player"
       744: "npc"
       969: "npc"
@@ -42640,7 +42640,7 @@ methods:
       1170: "npc"
       1354: "player"
       1434: "component"
-      1452: "local1452"
+      1452: "varp"
       1545: "npc"
       1660: "component"
       1662: "local1662"
@@ -43414,7 +43414,7 @@ methods:
     owner: "Static36"
     name: "method4402"
     arguments:
-      1: "arg0"
+      1: "component"
     locals: {}
   client!v.b (I)V:
     owner: "LocTypeList"
