@@ -22709,13 +22709,13 @@ methods:
       0: "component"
       2: "text"
     locals:
-      21: "local21"
-      54: "local54"
-      90: "local90"
-      126: "local126"
-      162: "local162"
-      194: "local194"
-      200: "local200"
+      21: "index1"
+      54: "index2"
+      90: "index3"
+      126: "index4"
+      162: "index5"
+      194: "dnsIndex"
+      200: "reverseDns"
   client!ia.a (Ljava/lang/String;Z)I:
     owner: "Language"
     name: "fromIsoCode"
@@ -33385,8 +33385,8 @@ methods:
       1: "v"
     locals: {}
   client!oi.a (BI)Ljava/lang/String;:
-    owner: "Static27"
-    name: "method3226"
+    owner: "StringUtils"
+    name: "ipToString"
     arguments:
       1: "ip"
     locals: {}
