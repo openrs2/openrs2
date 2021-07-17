@@ -1,5 +1,6 @@
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
+import org.jetbrains.kotlin.gradle.plugin.getKotlinPluginVersion
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jmailen.gradle.kotlinter.KotlinterExtension
 import org.jmailen.gradle.kotlinter.KotlinterPlugin
@@ -22,8 +23,8 @@ allprojects {
     version = "0.1.0-SNAPSHOT"
 
     plugins.withType<BasePlugin> {
-        configure<BasePluginConvention> {
-            archivesBaseName = "${rootProject.name}-$name"
+        configure<BasePluginExtension> {
+            archivesName.set("${rootProject.name}-$name")
         }
     }
 
@@ -75,8 +76,8 @@ allprojects {
 
     tasks.withType<Test> {
         reports {
-            html.isEnabled = false
-            junitXml.isEnabled = true
+            html.required.set(false)
+            junitXml.required.set(true)
         }
     }
 
@@ -84,9 +85,9 @@ allprojects {
         dependsOn("test")
 
         reports {
-            csv.isEnabled = false
-            html.isEnabled = false
-            xml.isEnabled = false
+            csv.required.set(false)
+            html.required.set(false)
+            xml.required.set(false)
         }
 
         tasks.named("check") {
@@ -118,7 +119,7 @@ configure(subprojects.filter { it.isFree }) {
             for (module in listOf("stdlib", "stdlib-common", "stdlib-jdk7", "stdlib-jdk8")) {
                 api("org.jetbrains.kotlin:kotlin-$module") {
                     version {
-                        strictly(kotlinPluginVersion)
+                        strictly(project.getKotlinPluginVersion())
                     }
                 }
             }
@@ -348,8 +349,8 @@ project(":nonfree") {
 project(":nonfree:client") {
     apply(plugin = "application")
 
-    configure<ApplicationPluginConvention> {
-        mainClassName = "client"
+    configure<JavaApplication> {
+        mainClass.set("client")
     }
 
     tasks.named<JavaExec>("run") {
