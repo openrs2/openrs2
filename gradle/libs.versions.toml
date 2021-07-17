@@ -9,7 +9,7 @@ junit = "5.7.2"
 kotlin = "1.5.21"
 kotlinCoroutines = "1.5.1"
 ktor = "1.6.1"
-netty = "4.1.65.Final"
+netty = "4.1.66.Final"
 nettyIoUring = "0.0.8.Final"
 
 [libraries]
