@@ -50,7 +50,6 @@ public class CacheDownloader @Inject constructor(
                                 game.lastMasterIndexId,
                                 continuation,
                                 importer,
-                                game.key
                             )
                         )
                     }
@@ -75,7 +74,6 @@ public class CacheDownloader @Inject constructor(
                                 game.lastMasterIndexId,
                                 continuation,
                                 importer,
-                                game.key,
                                 token,
                                 musicStreamClient
                             )

@@ -3,7 +3,6 @@ package org.openrs2.archive.cache
 import io.netty.bootstrap.Bootstrap
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelPipeline
-import org.bouncycastle.crypto.params.RSAKeyParameters
 import org.openrs2.cache.MasterIndexFormat
 import org.openrs2.protocol.Rs2Decoder
 import org.openrs2.protocol.Rs2Encoder
@@ -25,7 +24,6 @@ public class OsrsJs5ChannelHandler(
     lastMasterIndexId: Int?,
     continuation: Continuation<Unit>,
     importer: CacheImporter,
-    key: RSAKeyParameters?
 ) : Js5ChannelHandler(
     bootstrap,
     gameId,
@@ -36,7 +34,6 @@ public class OsrsJs5ChannelHandler(
     lastMasterIndexId,
     continuation,
     importer,
-    key,
     MasterIndexFormat.VERSIONED,
     maxInFlightRequests = 200
 ) {

@@ -8,7 +8,6 @@ import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelPipeline
 import io.netty.channel.SimpleChannelInboundHandler
 import kotlinx.coroutines.runBlocking
-import org.bouncycastle.crypto.params.RSAKeyParameters
 import org.openrs2.buffer.crc32
 import org.openrs2.buffer.use
 import org.openrs2.cache.Js5Archive
@@ -32,7 +31,6 @@ public abstract class Js5ChannelHandler(
     private val lastMasterIndexId: Int?,
     private val continuation: Continuation<Unit>,
     private val importer: CacheImporter,
-    private val key: RSAKeyParameters?,
     private val masterIndexFormat: MasterIndexFormat,
     private val maxInFlightRequests: Int,
     private val maxBuildAttempts: Int = 10
@@ -192,7 +190,7 @@ public abstract class Js5ChannelHandler(
 
     private fun processMasterIndex(ctx: ChannelHandlerContext, buf: ByteBuf) {
         Js5Compression.uncompress(buf.slice()).use { uncompressed ->
-            masterIndex = Js5MasterIndex.read(uncompressed.slice(), masterIndexFormat, key)
+            masterIndex = Js5MasterIndex.readUnverified(uncompressed.slice(), masterIndexFormat)
 
             val (masterIndexId, sourceId, rawIndexes) = runBlocking {
                 importer.importMasterIndexAndGetIndexes(

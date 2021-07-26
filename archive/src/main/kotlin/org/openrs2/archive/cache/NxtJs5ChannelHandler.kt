@@ -8,7 +8,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
-import org.bouncycastle.crypto.params.RSAKeyParameters
 import org.openrs2.archive.cache.nxt.InitJs5RemoteConnection
 import org.openrs2.archive.cache.nxt.Js5Request
 import org.openrs2.archive.cache.nxt.Js5RequestEncoder
@@ -33,7 +32,6 @@ public class NxtJs5ChannelHandler(
     lastMasterIndexId: Int?,
     continuation: Continuation<Unit>,
     importer: CacheImporter,
-    key: RSAKeyParameters?,
     private val token: String,
     private val musicStreamClient: MusicStreamClient,
     private val maxMinorBuildAttempts: Int = 5
@@ -47,7 +45,6 @@ public class NxtJs5ChannelHandler(
     lastMasterIndexId,
     continuation,
     importer,
-    key,
     MasterIndexFormat.LENGTHS,
     maxInFlightRequests = 500
 ) {

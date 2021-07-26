@@ -1,8 +1,6 @@
 package org.openrs2.archive.game
 
-import org.openrs2.crypto.Rsa
 import org.openrs2.db.Database
-import java.io.StringReader
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -14,7 +12,7 @@ public class GameDatabase @Inject constructor(
         return database.execute { connection ->
             connection.prepareStatement(
                 """
-                SELECT id, url, build_major, build_minor, last_master_index_id, key
+                SELECT id, url, build_major, build_minor, last_master_index_id
                 FROM games
                 WHERE name = ?
             """.trimIndent()
@@ -44,16 +42,7 @@ public class GameDatabase @Inject constructor(
                         lastMasterIndexId = null
                     }
 
-                    val pem = rows.getString(6)
-                    val key = if (rows.wasNull()) {
-                        null
-                    } else {
-                        StringReader(pem).use { reader ->
-                            Rsa.readPublicKey(reader)
-                        }
-                    }
-
-                    return@execute Game(id, url, buildMajor, buildMinor, lastMasterIndexId, key)
+                    return@execute Game(id, url, buildMajor, buildMinor, lastMasterIndexId)
                 }
             }
         }
