@@ -94,7 +94,7 @@ classes:
   client!hl: "SpecularMaterialRenderer"
   client!ho: "MelType"
   client!ia: "BrokenInputStream"
-  client!ib: "Skybox"
+  client!ib: "SkyBox"
   client!ic: "HashTable"
   client!ie: "BrowserControl"
   client!ih: "Class4_Sub12"
@@ -3663,37 +3663,37 @@ fields:
     owner: "Static3"
     name: "aClass185_5"
   client!ib.A [I:
-    owner: "Skybox"
+    owner: "SkyBox"
     name: "anIntArray194"
   client!ib.B I:
-    owner: "Skybox"
+    owner: "SkyBox"
     name: "id"
   client!ib.C I:
-    owner: "Skybox"
+    owner: "SkyBox"
     name: "bytes"
   client!ib.D [I:
-    owner: "Skybox"
+    owner: "SkyBox"
     name: "clip"
   client!ib.E I:
-    owner: "Skybox"
+    owner: "SkyBox"
     name: "anInt2322"
   client!ib.F I:
-    owner: "Skybox"
+    owner: "SkyBox"
     name: "state"
   client!ib.G I:
-    owner: "Skybox"
+    owner: "SkyBox"
     name: "size"
   client!ib.H [F:
-    owner: "Skybox"
+    owner: "SkyBox"
     name: "aFloatArray23"
   client!ib.I I:
-    owner: "Skybox"
+    owner: "SkyBox"
     name: "contextId"
   client!ib.y Lclient!dj;:
-    owner: "Skybox"
+    owner: "SkyBox"
     name: "cache"
   client!ib.z [I:
-    owner: "Skybox"
+    owner: "SkyBox"
     name: "textures"
   client!ic.g Z:
     owner: "Preferences"
@@ -22742,12 +22742,12 @@ methods:
     arguments: {}
     locals: {}
   client!ib.<init> ()V:
-    owner: "Skybox"
+    owner: "SkyBox"
     name: "<init>"
     arguments: {}
     locals: {}
   client!ib.<init> (IIIIII)V:
-    owner: "Skybox"
+    owner: "SkyBox"
     name: "<init>"
     arguments:
       0: "texture0"
@@ -22758,14 +22758,14 @@ methods:
       5: "texture5"
     locals: {}
   client!ib.a ()V:
-    owner: "Skybox"
+    owner: "SkyBox"
     name: "method1832"
     arguments: {}
     locals:
       8: "gl"
       11: "temp"
   client!ib.a (Lclient!ib;Lclient!ib;F)Lclient!ib;:
-    owner: "Skybox"
+    owner: "SkyBox"
     name: "method1835"
     arguments:
       0: "arg0"
@@ -22782,7 +22782,7 @@ methods:
       212: "textureTarget"
       255: "status"
   client!ib.a (Lgl!javax/media/opengl/GL;IIII)Z:
-    owner: "Skybox"
+    owner: "SkyBox"
     name: "method1837"
     arguments:
       0: "gl"
@@ -22793,7 +22793,7 @@ methods:
     locals:
       15: "status"
   client!ib.b (IIIIII)Lclient!ib;:
-    owner: "Skybox"
+    owner: "SkyBox"
     name: "create"
     arguments:
       0: "texture0"
@@ -22804,10 +22804,10 @@ methods:
       5: "texture5"
     locals:
       29: "key"
-      35: "skybox"
-      49: "newSkybox"
+      35: "skyBox"
+      49: "newSkyBox"
   client!ib.c ()V:
-    owner: "Skybox"
+    owner: "SkyBox"
     name: "method1834"
     arguments: {}
     locals:
@@ -22820,13 +22820,13 @@ methods:
       113: "i"
       127: "buffer"
   client!ib.d ()Z:
-    owner: "Skybox"
+    owner: "SkyBox"
     name: "isReady"
     arguments: {}
     locals:
       1: "i"
   client!ib.finalize ()V:
-    owner: "Skybox"
+    owner: "SkyBox"
     name: "finalize"
     arguments: {}
     locals: {}
