@@ -283,7 +283,7 @@ methods:
     name: "open"
     arguments:
       2: "channel"
-      0: "bufferSize"
+      0: "bufferCapacity"
     locals: {}
   signlink!le.a (II)V:
     owner: "AudioSource"
@@ -314,7 +314,7 @@ methods:
     locals: {}
   signlink!le.c (II)I:
     owner: "AudioSource"
-    name: "getBufferedSampleCount"
+    name: "getBufferSize"
     arguments:
       0: "channel"
     locals: {}

@@ -5092,7 +5092,7 @@ fields:
     name: "archive"
   client!ld.Bb I:
     owner: "MidiPcmStream"
-    name: "anInt3085"
+    name: "microsecondsPerSecond"
   client!ld.C Ljava/lang/String;:
     owner: "LocalisedText"
     name: "LOADING"
@@ -7390,7 +7390,7 @@ fields:
     name: "end"
   client!pc.G I:
     owner: "SoundPcmStream"
-    name: "anInt4108"
+    name: "loops"
   client!pc.s I:
     owner: "SoundPcmStream"
     name: "anInt4095"
@@ -9832,7 +9832,7 @@ fields:
     name: "anInt3593"
   client!tj.B I:
     owner: "AudioChannel"
-    name: "anInt3594"
+    name: "prevBufferSize"
   client!tj.C I:
     owner: "AudioChannel"
     name: "sampleRate"
@@ -9841,7 +9841,7 @@ fields:
     name: "aClass4_Sub6Array5"
   client!tj.E I:
     owner: "AudioChannel"
-    name: "bufferSize"
+    name: "bufferCapacity"
   client!tj.F [Lclient!tf;:
     owner: "AudioChannel"
     name: "aClass4_Sub6Array6"
@@ -9850,22 +9850,22 @@ fields:
     name: "anInt3597"
   client!tj.H I:
     owner: "AudioChannel"
-    name: "anInt3598"
+    name: "consumedSamples"
   client!tj.I J:
     owner: "AudioChannel"
-    name: "aLong128"
+    name: "calculateConsumptionAt"
   client!tj.K J:
     owner: "AudioChannel"
     name: "closeUntil"
   client!tj.L Z:
     owner: "AudioChannel"
-    name: "aBoolean260"
+    name: "skipConsumptionCheck"
   client!tj.b Lclient!tf;:
     owner: "AudioChannel"
     name: "stream"
   client!tj.e J:
     owner: "AudioChannel"
-    name: "aLong126"
+    name: "time"
   client!tj.g I:
     owner: "AudioChannel"
     name: "anInt3577"
@@ -9886,7 +9886,7 @@ fields:
     name: "anInt3585"
   client!tj.z I:
     owner: "AudioChannel"
-    name: "anInt3592"
+    name: "prevConsumedSamples"
   client!tk.a I:
     owner: "SoftwareRaster"
     name: "clipY"
@@ -25749,7 +25749,7 @@ methods:
       930: "distance"
   client!kb.a ()I:
     owner: "JavaAudioChannel"
-    name: "getBufferedSampleCount"
+    name: "getBufferSize"
     arguments: {}
     locals: {}
   client!kb.a (Ljava/awt/Component;)V:
@@ -25771,7 +25771,7 @@ methods:
     owner: "JavaAudioChannel"
     name: "open"
     arguments:
-      0: "bufferSize"
+      0: "bufferCapacity"
     locals:
       20: "info"
       36: "ex"
@@ -32333,7 +32333,7 @@ methods:
     locals: {}
   client!nm.a ()I:
     owner: "SignLinkAudioChannel"
-    name: "getBufferedSampleCount"
+    name: "getBufferSize"
     arguments: {}
     locals: {}
   client!nm.a (Ljava/awt/Component;)V:
@@ -32351,7 +32351,7 @@ methods:
     owner: "SignLinkAudioChannel"
     name: "open"
     arguments:
-      0: "bufferSize"
+      0: "bufferCapacity"
     locals: {}
   client!nm.c ()V:
     owner: "SignLinkAudioChannel"
@@ -34567,9 +34567,9 @@ methods:
     locals: {}
   client!pc.d (I)V:
     owner: "SoundPcmStream"
-    name: "method3359"
+    name: "setLoops"
     arguments:
-      0: "arg0"
+      0: "loops"
     locals: {}
   client!pc.d (II)V:
     owner: "SoundPcmStream"
@@ -41222,7 +41222,7 @@ methods:
     locals: {}
   client!tj.a ()I:
     owner: "AudioChannel"
-    name: "getBufferedSampleCount"
+    name: "getBufferSize"
     arguments: {}
     locals: {}
   client!tj.a (B)V:
@@ -41232,12 +41232,12 @@ methods:
     locals:
       18: "now"
       58: "ex"
-      96: "bufferedSamples"
-      117: "local117"
+      96: "bufferSize"
+      117: "targetBufferSize"
       262: "ex"
   client!tj.a (BI)V:
     owner: "AudioChannel"
-    name: "method2995"
+    name: "skip"
     arguments: {}
     locals: {}
   client!tj.a (I)V:
@@ -41375,7 +41375,7 @@ methods:
     owner: "AudioChannel"
     name: "open"
     arguments:
-      0: "bufferSize"
+      0: "bufferCapacity"
     locals: {}
   client!tj.c ()V:
     owner: "AudioChannel"
