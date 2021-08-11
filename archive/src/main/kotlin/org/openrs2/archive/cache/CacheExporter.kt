@@ -389,7 +389,7 @@ public class CacheExporter @Inject constructor(
     }
 
     private companion object {
-        private const val BATCH_SIZE = 1024
+        private const val BATCH_SIZE = 256
         private val LOC_NAME_REGEX = Regex("l(\\d+)_(\\d+)")
 
         private fun getMapSquare(name: String?): Int? {
