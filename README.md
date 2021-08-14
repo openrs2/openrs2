@@ -80,7 +80,6 @@ in the `LICENSE` file.
 [discord]: https://chat.openrs2.org/
 [drone-badge]: https://build.openrs2.org/api/badges/openrs2/openrs2/status.svg
 [drone]: https://build.openrs2.org/openrs2/openrs2/
-[idea-bug]: https://youtrack.jetbrains.com/issue/IDEA-256707
 [isc-badge]: https://img.shields.io/badge/license-ISC-informational
 [isc]: https://opensource.org/licenses/ISC
 [issue-tracker]: https://git.openrs2.org/openrs2/openrs2/issues
