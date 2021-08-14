@@ -13,6 +13,7 @@ dependencies {
 
     implementation(projects.asm)
     implementation(projects.compress)
+    implementation(projects.log)
     implementation(projects.util)
 }
 

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns="http://ch.qos.logback/xml/ns/logback" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ch.qos.logback/xml/ns/logback https://raw.githubusercontent.com/enricopulatzo/logback-XSD/master/src/main/xsd/logback.xsd">
+  <appender name="STDERR" class="ch.qos.logback.core.ConsoleAppender">
+    <target>System.err</target>
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <root level="DEBUG">
+    <appender-ref ref="STDERR" />
+  </root>
+
+  <logger name="com.zaxxer.hikari" level="WARN">
+    <appender-ref ref="STDERR" />
+  </logger>
+
+  <logger name="io.netty" level="INFO">
+    <appender-ref ref="STDERR" />
+  </logger>
+
+  <logger name="org.flywaydb" level="WARN">
+    <appender-ref ref="STDERR" />
+  </logger>
+</configuration>

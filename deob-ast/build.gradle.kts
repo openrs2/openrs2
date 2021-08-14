@@ -14,6 +14,7 @@ dependencies {
     api(libs.guice)
 
     implementation(projects.inject)
+    implementation(projects.log)
     implementation(projects.util)
     implementation(libs.guava)
     implementation(libs.javaParser)

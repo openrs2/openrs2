@@ -21,6 +21,7 @@ dependencies {
     implementation(projects.crc32)
     implementation(projects.deob)
     implementation(projects.game)
+    implementation(projects.log)
     implementation(projects.patcher)
 }
 

@@ -15,6 +15,7 @@ dependencies {
     implementation(projects.cache550)
     implementation(projects.conf)
     implementation(projects.inject)
+    implementation(projects.log)
     implementation(projects.net)
     implementation(projects.protocol)
     implementation(projects.util)

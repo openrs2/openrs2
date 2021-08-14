@@ -16,6 +16,7 @@ dependencies {
     implementation(projects.deobAst)
     implementation(projects.deobBytecode)
     implementation(projects.inject)
+    implementation(projects.log)
 }
 
 publishing {

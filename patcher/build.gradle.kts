@@ -15,6 +15,7 @@ dependencies {
 
     implementation(projects.conf)
     implementation(projects.inject)
+    implementation(projects.log)
     implementation(libs.openrs2.natives)
 }
 

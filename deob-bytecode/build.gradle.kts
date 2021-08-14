@@ -15,6 +15,7 @@ dependencies {
     implementation(projects.deobAnnotations)
     implementation(projects.deobUtil)
     implementation(projects.inject)
+    implementation(projects.log)
     implementation(projects.patcher)
     implementation(projects.yaml)
     implementation(libs.fastutil)

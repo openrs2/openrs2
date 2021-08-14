@@ -14,6 +14,7 @@ dependencies {
     api(libs.clikt)
     api(libs.guice)
 
+    implementation(projects.log)
     implementation(projects.util)
     implementation(libs.fernflower)
 }

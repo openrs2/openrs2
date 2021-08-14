@@ -50,6 +50,7 @@ include(
     "http",
     "inject",
     "json",
+    "log",
     "net",
     "nonfree",
     "nonfree:client",

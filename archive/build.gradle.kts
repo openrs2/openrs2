@@ -18,6 +18,7 @@ dependencies {
     implementation(projects.http)
     implementation(projects.inject)
     implementation(projects.json)
+    implementation(projects.log)
     implementation(projects.net)
     implementation(projects.protocol)
     implementation(projects.util)
