@@ -39,7 +39,7 @@ jdom = { module = "org.jdom:jdom2", version = "2.0.6" }
 jgrapht = { module = "org.jgrapht:jgrapht-core", version = "1.5.1" }
 jimfs = { module = "com.google.jimfs:jimfs", version.ref = "jimfs" }
 jquery = { module = "org.webjars:jquery", version = "3.6.0" }
-jsoup = { module = "org.jsoup:jsoup", version = "1.14.1" }
+jsoup = { module = "org.jsoup:jsoup", version = "1.14.2" }
 junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version = { strictly = "5.7.2" } }
 junit-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
 kotlin-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinCoroutines" }
