@@ -1,5 +1,6 @@
 package org.openrs2.archive.key
 
+import com.github.michaelbull.logging.InlineLogger
 import org.openrs2.crypto.XteaKey
 import org.openrs2.db.Database
 import java.nio.file.Files
@@ -39,6 +40,8 @@ public class KeyImporter @Inject constructor(
         }
 
         keys -= XteaKey.ZERO
+
+        logger.info { "Importing ${keys.size} keys" }
 
         import(keys)
     }
@@ -148,5 +151,9 @@ public class KeyImporter @Inject constructor(
         ).use { stmt ->
             stmt.execute()
         }
+    }
+
+    private companion object {
+        private val logger = InlineLogger()
     }
 }
