@@ -46,13 +46,14 @@ kotlin-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-co
 kotlin-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinCoroutines" }
 kotlinPoet = { module = "com.squareup:kotlinpoet", version = "1.9.0" }
 ktor-jackson = { module = "io.ktor:ktor-jackson", version.ref = "ktor" }
-ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor" }
+ktor-server-cio = { module = "io.ktor:ktor-server-cio", version.ref = "ktor" }
 ktor-thymeleaf = { module = "io.ktor:ktor-thymeleaf", version.ref = "ktor" }
 ktor-webjars = { module = "io.ktor:ktor-webjars", version.ref = "ktor" }
 logback = { module = "ch.qos.logback:logback-classic", version = "1.2.5" }
 netty-buffer = { module = "io.netty:netty-buffer", version.ref = "netty" }
 netty-codec-core = { module = "io.netty:netty-codec", version.ref = "netty" }
 netty-codec-http = { module = "io.netty:netty-codec-http", version.ref = "netty" }
+netty-handler = { module = "io.netty:netty-handler", version.ref = "netty" }
 netty-transport = { module = "io.netty:netty-transport", version.ref = "netty" }
 openrs2-natives = { module = "org.openrs2:openrs2-natives-all", version = "3.2.0" }
 postgres = { module = "org.postgresql:postgresql", version = "42.2.23" }
@@ -63,5 +64,5 @@ xz = { module = "org.tukaani:xz", version = "1.9" }
 [bundles]
 asm = ["asm-core", "asm-commons", "asm-tree", "asm-util"]
 bouncyCastle = ["bouncyCastle-pkix", "bouncyCastle-provider"]
-ktor = ["ktor-jackson", "ktor-server-netty", "ktor-thymeleaf", "ktor-webjars"]
+ktor = ["ktor-jackson", "ktor-server-cio", "ktor-thymeleaf", "ktor-webjars"]
 thymeleaf = ["thymeleaf-core", "thymeleaf-java8time"]

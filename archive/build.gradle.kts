@@ -34,6 +34,7 @@ dependencies {
     implementation(libs.jquery)
     implementation(libs.jsoup)
     implementation(libs.kotlin.coroutines.core)
+    implementation(libs.netty.handler)
     implementation(libs.postgres)
 }
 

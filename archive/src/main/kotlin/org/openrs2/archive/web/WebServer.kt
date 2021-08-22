@@ -14,8 +14,8 @@ import io.ktor.response.respond
 import io.ktor.response.respondRedirect
 import io.ktor.routing.get
 import io.ktor.routing.routing
+import io.ktor.server.cio.CIO
 import io.ktor.server.engine.embeddedServer
-import io.ktor.server.netty.Netty
 import io.ktor.thymeleaf.Thymeleaf
 import io.ktor.thymeleaf.ThymeleafContent
 import io.ktor.webjars.Webjars
@@ -33,7 +33,7 @@ public class WebServer @Inject constructor(
     @Json private val mapper: ObjectMapper
 ) {
     public fun start(address: String, port: Int) {
-        embeddedServer(Netty, host = address, port = port) {
+        embeddedServer(CIO, host = address, port = port) {
             install(ContentNegotiation) {
                 register(ContentType.Application.Json, JacksonConverter(mapper))
             }
