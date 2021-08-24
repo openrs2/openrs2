@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.Unpooled
 import org.openrs2.buffer.use
+import org.openrs2.cache.DiskStore
 import org.openrs2.cache.Js5Archive
 import org.openrs2.cache.Js5Compression
 import org.openrs2.cache.Js5MasterIndex
@@ -29,7 +30,8 @@ public class CacheExporter @Inject constructor(
         val groups: Long,
         val validKeys: Long,
         val keys: Long,
-        val size: Long
+        val size: Long,
+        val blocks: Long
     ) {
         public val allIndexesValid: Boolean = indexes == validIndexes && indexes != 0L
         public val validIndexesFraction: Double = if (indexes == 0L) {
@@ -51,6 +53,12 @@ public class CacheExporter @Inject constructor(
         } else {
             validKeys.toDouble() / keys
         }
+
+        /*
+         * The max block ID is conveniently also the max number of blocks, as
+         * zero is reserved.
+         */
+        public val diskStoreValid: Boolean = blocks <= DiskStore.MAX_BLOCK
     }
 
     public data class Build(val major: Int, val minor: Int?) : Comparable<Build> {
@@ -139,13 +147,14 @@ public class CacheExporter @Inject constructor(
                         ms.groups,
                         ms.valid_keys,
                         ms.keys,
-                        ms.size
+                        ms.size,
+                        ms.blocks
                     FROM master_indexes m
                     JOIN sources s ON s.master_index_id = m.id
                     JOIN games g ON g.id = s.game_id
                     LEFT JOIN master_index_stats ms ON ms.master_index_id = m.id
                     GROUP BY m.id, g.name, ms.valid_indexes, ms.indexes, ms.valid_groups, ms.groups, ms.valid_keys, ms.keys,
-                        ms.size
+                        ms.size, ms.blocks
                 ) t
                 ORDER BY t.name ASC, t.builds[1] ASC, t.timestamp ASC
             """.trimIndent()
@@ -168,7 +177,8 @@ public class CacheExporter @Inject constructor(
                             val validKeys = rows.getLong(10)
                             val keys = rows.getLong(11)
                             val size = rows.getLong(12)
-                            Stats(validIndexes, indexes, validGroups, groups, validKeys, keys, size)
+                            val blocks = rows.getLong(13)
+                            Stats(validIndexes, indexes, validGroups, groups, validKeys, keys, size, blocks)
                         } else {
                             null
                         }
@@ -205,7 +215,8 @@ public class CacheExporter @Inject constructor(
                     ms.groups,
                     ms.valid_keys,
                     ms.keys,
-                    ms.size
+                    ms.size,
+                    ms.blocks
                 FROM master_indexes m
                 JOIN containers c ON c.id = m.container_id
                 LEFT JOIN master_index_stats ms ON ms.master_index_id = m.id
@@ -237,7 +248,8 @@ public class CacheExporter @Inject constructor(
                         val validKeys = rows.getLong(7)
                         val keys = rows.getLong(8)
                         val size = rows.getLong(9)
-                        Stats(validIndexes, indexes, validGroups, groups, validKeys, keys, size)
+                        val blocks = rows.getLong(10)
+                        Stats(validIndexes, indexes, validGroups, groups, validKeys, keys, size, blocks)
                     }
                 }
             }

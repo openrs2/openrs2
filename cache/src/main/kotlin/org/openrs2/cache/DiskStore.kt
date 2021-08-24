@@ -472,7 +472,7 @@ public class DiskStore private constructor(
         internal const val EXTENDED_BLOCK_HEADER_SIZE = 10
         internal const val EXTENDED_BLOCK_DATA_SIZE = 510
 
-        internal const val MAX_BLOCK = (1 shl 24) - 1
+        public const val MAX_BLOCK: Int = (1 shl 24) - 1
 
         private val TEMP_BUFFER_SIZE = max(INDEX_ENTRY_SIZE, max(BLOCK_HEADER_SIZE, EXTENDED_BLOCK_HEADER_SIZE))
         private const val INDEX_BUFFER_SIZE = INDEX_ENTRY_SIZE * 1000
