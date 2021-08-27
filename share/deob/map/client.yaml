@@ -14697,7 +14697,7 @@ methods:
       3801: "z"
       3857: "i"
       3886: "subInterface"
-      3945: "local3945"
+      3945: "i"
       3969: "i"
       3987: "i"
       4001: "i"
@@ -14712,11 +14712,11 @@ methods:
     locals:
       21: "cosine"
   client!cg.a (I[J[Ljava/lang/Object;)V:
-    owner: "Static11"
-    name: "method563"
+    owner: "ArrayUtils"
+    name: "sort"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "keys"
+      2: "values"
     locals: {}
   client!cg.b (B)I:
     owner: "Static11"
@@ -38117,21 +38117,21 @@ methods:
       475: "local475"
       608: "local608"
   client!rn.a ([JBII[Ljava/lang/Object;)V:
-    owner: "Static31"
-    name: "method3152"
+    owner: "ArrayUtils"
+    name: "sort"
     arguments:
-      0: "arg0"
-      2: "arg1"
-      3: "arg2"
-      4: "arg3"
+      0: "keys"
+      4: "values"
+      3: "lo"
+      2: "hi"
     locals:
-      22: "local22"
-      24: "local24"
-      28: "local28"
-      42: "local42"
-      54: "local54"
-      77: "local77"
-      91: "local91"
+      22: "mid"
+      24: "i"
+      28: "pivotKey"
+      42: "pivotValue"
+      54: "j"
+      77: "key"
+      91: "value"
   client!rn.b (B)V:
     owner: "MiniMap"
     name: "clear"
