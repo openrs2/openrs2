@@ -3,12 +3,12 @@ asm = "9.2"
 commons-compress = "1.21"
 guava = "30.1.1-jre"
 guice = "5.0.1"
-jackson = "2.12.4"
+jackson = "2.12.5"
 jimfs = "1.2"
 junit = "5.7.2"
 kotlin = "1.5.30"
 kotlinCoroutines = "1.5.1"
-ktor = "1.6.2"
+ktor = "1.6.3"
 netty = "4.1.67.Final"
 nettyIoUring = "0.0.8.Final"
 
@@ -34,7 +34,7 @@ inlineLogger = { module = "com.michael-bull.kotlin-inline-logger:kotlin-inline-l
 jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jackson" }
 jackson-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin", version.ref = "jackson" }
 jackson-yaml = { module = "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml", version.ref = "jackson" }
-javaParser = { module = "com.github.javaparser:javaparser-symbol-solver-core", version = "3.22.1" }
+javaParser = { module = "com.github.javaparser:javaparser-symbol-solver-core", version = "3.23.0" }
 jdom = { module = "org.jdom:jdom2", version = "2.0.6" }
 jgrapht = { module = "org.jgrapht:jgrapht-core", version = "1.5.1" }
 jimfs = { module = "com.google.jimfs:jimfs", version.ref = "jimfs" }
