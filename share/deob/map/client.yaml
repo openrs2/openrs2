@@ -1176,8 +1176,8 @@ fields:
     owner: "QuickChatPhraseTypeList"
     name: "types"
   client!ci.f Lclient!qk;:
-    owner: "Static1"
-    name: "aClass144_1"
+    owner: "PlayerAppearance"
+    name: "DEFAULT"
   client!ci.i I:
     owner: "VertexNormal"
     name: "z"
