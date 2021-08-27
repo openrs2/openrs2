@@ -12031,12 +12031,12 @@ methods:
       2: "noise"
       16: "op"
   client!ab.a (IIII)I:
-    owner: "Static8"
-    name: "method9"
+    owner: "IntUtils"
+    name: "clamp"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      3: "arg2"
+      1: "value"
+      0: "min"
+      3: "max"
     locals: {}
   client!ab.a (IIIIZ)V:
     owner: "SceneGraph"
