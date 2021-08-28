@@ -24621,14 +24621,6 @@ methods:
       0: "rotationSpeed"
     locals:
       8: "change"
-  client!ji.a (I[F)[F:
-    owner: "Static21"
-    name: "method2023"
-    arguments:
-      0: "arg0"
-      1: "arg1"
-    locals:
-      20: "local20"
   client!jj.<init> ()V:
     owner: "TextureOp34"
     name: "<init>"
@@ -33486,14 +33478,6 @@ methods:
       53: "c"
       76: "digit"
       126: "nextValue"
-  client!oj.a (I[B)[B:
-    owner: "Static27"
-    name: "method3230"
-    arguments:
-      0: "arg0"
-      1: "arg1"
-    locals:
-      13: "local13"
   client!oj.a (ZBZIZ)Lclient!fh;:
     owner: "client"
     name: "createJs5"
