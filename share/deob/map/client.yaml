@@ -675,7 +675,7 @@ fields:
     owner: "Static1"
     name: "anInt927"
   client!bc.z I:
-    owner: "Static1"
+    owner: "WorldMap"
     name: "anInt929"
   client!bd.a I:
     owner: "WaterMaterialRenderer"
@@ -807,7 +807,7 @@ fields:
     owner: "ParticleEmitter"
     name: "anInt330"
   client!bi.M I:
-    owner: "Static1"
+    owner: "WorldMap"
     name: "anInt331"
   client!bi.N Lclient!ug;:
     owner: "ParticleEmitter"
@@ -978,8 +978,8 @@ fields:
     owner: "WaterfallMaterialRenderer"
     name: "aFloatArray9"
   client!bo.o Ljava/awt/FontMetrics;:
-    owner: "Static1"
-    name: "aFontMetrics1"
+    owner: "LoadingBarAwt"
+    name: "fontMetrics"
   client!bo.p I:
     owner: "WaterfallMaterialRenderer"
     name: "anInt419"
@@ -1077,8 +1077,8 @@ fields:
     owner: "QuickChatPhrase"
     name: "id"
   client!cd.f Lclient!om;:
-    owner: "Static1"
-    name: "aClass130_1"
+    owner: "WorldMap"
+    name: "mapElementsIterator"
   client!cd.g Lclient!cc;:
     owner: "FluTypeList"
     name: "types"
@@ -1089,8 +1089,8 @@ fields:
     owner: "Static1"
     name: "anInt547"
   client!ce.b Ljava/awt/Font;:
-    owner: "Static1"
-    name: "aFont1"
+    owner: "LoadingBarAwt"
+    name: "font"
   client!ce.c I:
     owner: "Static1"
     name: "anInt548"
@@ -1899,8 +1899,8 @@ fields:
     owner: "Class41_Sub1"
     name: "aByteArray8"
   client!ea.E Ljava/awt/Image;:
-    owner: "Static2"
-    name: "anImage2"
+    owner: "LoadingBarAwt"
+    name: "loadingBar"
   client!ea.F I:
     owner: "Class41_Sub1"
     name: "anInt1119"
@@ -2217,7 +2217,7 @@ fields:
     owner: "Flames"
     name: "anIntArray100"
   client!em.B I:
-    owner: "Static2"
+    owner: "MiniMenu"
     name: "anInt1334"
   client!em.D F:
     owner: "Light"
@@ -2226,7 +2226,7 @@ fields:
     owner: "Light"
     name: "x"
   client!em.a Ljava/lang/String;:
-    owner: "Static2"
+    owner: "MiniMenu"
     name: "aString81"
   client!em.b I:
     owner: "Light"
@@ -2376,7 +2376,7 @@ fields:
     owner: "BufferedSocket"
     name: "socket"
   client!eo.q Z:
-    owner: "Static2"
+    owner: "WorldMap"
     name: "aBoolean82"
   client!eo.r Ljava/io/InputStream;:
     owner: "BufferedSocket"
@@ -2643,7 +2643,7 @@ fields:
     owner: "FriendsList"
     name: "sameGame"
   client!fj.Z I:
-    owner: "Static2"
+    owner: "WorldMap"
     name: "anInt1874"
   client!fj.ab Lclient!cc;:
     owner: "SkyBoxSphereTypeList"
@@ -2886,7 +2886,7 @@ fields:
     owner: "TextureOp29SubOp2"
     name: "anInt2061"
   client!gg.q Lclient!vn;:
-    owner: "Static3"
+    owner: "WorldMap"
     name: "aClass4_Sub3_Sub14_Sub1_2"
   client!gg.v Z:
     owner: "TitleScreen"
@@ -3537,7 +3537,7 @@ fields:
     owner: "MelType"
     name: "category"
   client!ho.D Lclient!ll;:
-    owner: "Static3"
+    owner: "WorldMap"
     name: "aClass112_13"
   client!ho.E I:
     owner: "MelType"
@@ -3852,7 +3852,7 @@ fields:
     owner: "Static3"
     name: "anInt2972"
   client!ii.B [I:
-    owner: "Static3"
+    owner: "WorldMap"
     name: "overlayColors"
   client!ii.C I:
     owner: "Static3"
@@ -3864,46 +3864,46 @@ fields:
     owner: "MapList"
     name: "archive"
   client!ii.c Lclient!uk;:
-    owner: "Static3"
-    name: "aClass175_12"
+    owner: "WorldMap"
+    name: "mapElements"
   client!ii.d Lclient!wg;:
     owner: "WorldMap"
     name: "currentMap"
   client!ii.e I:
-    owner: "Static3"
-    name: "anInt2960"
+    owner: "WorldMap"
+    name: "length"
   client!ii.f Lclient!po;:
-    owner: "Static3"
-    name: "aClass138_6"
+    owner: "WorldMap"
+    name: "labels"
   client!ii.g I:
-    owner: "Static3"
-    name: "anInt2961"
+    owner: "WorldMap"
+    name: "originZ"
   client!ii.h I:
-    owner: "Static3"
-    name: "anInt2962"
+    owner: "WorldMap"
+    name: "originX"
   client!ii.i F:
-    owner: "Static3"
-    name: "aFloat68"
+    owner: "WorldMap"
+    name: "zoom"
   client!ii.j I:
     owner: "Static3"
     name: "anInt2963"
   client!ii.k F:
     owner: "WorldMap"
-    name: "zoom"
+    name: "targetZoom"
   client!ii.l I:
     owner: "Static3"
     name: "anInt2964"
   client!ii.m I:
-    owner: "Static3"
-    name: "anInt2965"
+    owner: "WorldMap"
+    name: "width"
   client!ii.n I:
     owner: "Static3"
     name: "anInt2966"
   client!ii.o [[[I:
-    owner: "Static3"
-    name: "anIntArrayArrayArray6"
+    owner: "WorldMap"
+    name: "scenery"
   client!ii.p [[[B:
-    owner: "Static3"
+    owner: "WorldMap"
     name: "aByteArrayArrayArray10"
   client!ii.q I:
     owner: "Static3"
@@ -3912,10 +3912,10 @@ fields:
     owner: "Static3"
     name: "anInt2968"
   client!ii.s [[[B:
-    owner: "Static3"
+    owner: "WorldMap"
     name: "aByteArrayArrayArray11"
   client!ii.t [[[B:
-    owner: "Static3"
+    owner: "WorldMap"
     name: "aByteArrayArrayArray12"
   client!ii.u I:
     owner: "Static3"
@@ -3924,17 +3924,17 @@ fields:
     owner: "Static3"
     name: "anInt2970"
   client!ii.w [[[B:
-    owner: "Static3"
+    owner: "WorldMap"
     name: "aByteArrayArrayArray13"
   client!ii.x [[[B:
-    owner: "Static3"
+    owner: "WorldMap"
     name: "aByteArrayArrayArray14"
   client!ii.y I:
     owner: "Static3"
     name: "anInt2971"
   client!ii.z [[[I:
-    owner: "Static3"
-    name: "anIntArrayArrayArray7"
+    owner: "WorldMap"
+    name: "underlayColors"
   client!ij.A [[I:
     owner: "QuickChatPhraseType"
     name: "dynamicCommandParams"
@@ -3969,7 +3969,7 @@ fields:
     owner: "ParticleEmitterType"
     name: "anInt2419"
   client!ik.B Z:
-    owner: "Static3"
+    owner: "WorldMap"
     name: "aBoolean166"
   client!ik.C [I:
     owner: "ParticleEmitterType"
@@ -4146,8 +4146,8 @@ fields:
     owner: "ParticleEmitterType"
     name: "anInt2418"
   client!il.b Lclient!ic;:
-    owner: "Static3"
-    name: "aClass84_9"
+    owner: "WorldMap"
+    name: "visibleMapElementCategories"
   client!il.e I:
     owner: "Sprites"
     name: "nameIconsId"
@@ -4332,7 +4332,7 @@ fields:
     owner: "IgnoreList"
     name: "usernames"
   client!jc.A I:
-    owner: "Static3"
+    owner: "WorldMap"
     name: "anInt2542"
   client!jc.B Ljava/lang/String;:
     owner: "ParamType"
@@ -4356,7 +4356,7 @@ fields:
     owner: "MaterialManager"
     name: "renderingUnderwater"
   client!jd.a I:
-    owner: "Static3"
+    owner: "WorldMap"
     name: "anInt2554"
   client!jd.d Z:
     owner: "client"
@@ -4404,7 +4404,7 @@ fields:
     owner: "WorldList"
     name: "sorted"
   client!je.e I:
-    owner: "Static3"
+    owner: "WorldMap"
     name: "anInt2571"
   client!je.h I:
     owner: "LoginManager"
@@ -4419,8 +4419,8 @@ fields:
     owner: "client"
     name: "cacheMasterIndex"
   client!je.m Lclient!ic;:
-    owner: "Static3"
-    name: "aClass84_10"
+    owner: "WorldMap"
+    name: "visibleMapElementIds"
   client!jf.a Lclient!ll;:
     owner: "Static3"
     name: "aClass112_26"
@@ -4764,7 +4764,7 @@ fields:
     owner: "Bzip2DState"
     name: "bsLive"
   client!kf.P I:
-    owner: "Static4"
+    owner: "WorldMap"
     name: "anInt2853"
   client!kf.a I:
     owner: "GameShell"
@@ -6003,7 +6003,7 @@ fields:
     owner: "client"
     name: "js5PrevErrors"
   client!mm.b Lclient!uj;:
-    owner: "Static4"
+    owner: "WorldMap"
     name: "aClass4_Sub3_Sub14_3"
   client!mm.c I:
     owner: "client"
@@ -6702,7 +6702,7 @@ fields:
     owner: "Tile"
     name: "plainTile"
   client!nh.u I:
-    owner: "Static5"
+    owner: "WorldMap"
     name: "anInt3546"
   client!nh.v Lclient!ve;:
     owner: "Tile"
@@ -7188,8 +7188,8 @@ fields:
     owner: "ReferenceNodeFactory"
     name: "SOFT_REFERENCE_NODE_FACTORY"
   client!oi.g [Ljava/lang/String;:
-    owner: "Static5"
-    name: "aStringArray24"
+    owner: "WorldMap"
+    name: "lines"
   client!oi.h F:
     owner: "Static5"
     name: "aFloat96"
@@ -7263,7 +7263,7 @@ fields:
     owner: "Static5"
     name: "aShortArray74"
   client!om.m I:
-    owner: "Static5"
+    owner: "WorldMap"
     name: "anInt3920"
   client!om.n Lclient!lh;:
     owner: "SecondaryLinkedListIterator"
@@ -7659,7 +7659,7 @@ fields:
     owner: "Mouse"
     name: "idleLoops"
   client!pn.h I:
-    owner: "Static5"
+    owner: "WorldMap"
     name: "anInt4215"
   client!po.a [I:
     owner: "MapElementList"
@@ -8088,8 +8088,8 @@ fields:
     owner: "SceneGraph"
     name: "levels"
   client!qg.i Lclient!wf;:
-    owner: "Static5"
-    name: "aClass185_12"
+    owner: "WorldMap"
+    name: "component"
   client!qg.k I:
     owner: "MsiType"
     name: "spriteId"
@@ -8226,7 +8226,7 @@ fields:
     owner: "Texture"
     name: "provider"
   client!ql.e I:
-    owner: "Static6"
+    owner: "WorldMap"
     name: "anInt4393"
   client!ql.f [I:
     owner: "Static6"
@@ -8619,7 +8619,7 @@ fields:
     owner: "TextureOp15"
     name: "aByteArray61"
   client!rh.ib Z:
-    owner: "Static6"
+    owner: "WorldMap"
     name: "aBoolean317"
   client!rh.jb [I:
     owner: "PlayerAppearance"
@@ -9393,7 +9393,7 @@ fields:
     owner: "client"
     name: "js5ConnectState"
   client!sn.rb I:
-    owner: "Static6"
+    owner: "WorldMap"
     name: "anInt4953"
   client!sn.sb I:
     owner: "TextureOp4"
@@ -10035,7 +10035,7 @@ fields:
     owner: "Keyboard"
     name: "instance"
   client!u.e I:
-    owner: "Static7"
+    owner: "WorldMap"
     name: "anInt5231"
   client!u.f I:
     owner: "ModelParticleEffector"
@@ -10329,7 +10329,7 @@ fields:
     owner: "Static7"
     name: "aClass4_Sub3_Sub14_9"
   client!uf.e I:
-    owner: "Static7"
+    owner: "WorldMap"
     name: "anInt5331"
   client!uf.f I:
     owner: "Sprites"
@@ -10356,8 +10356,8 @@ fields:
     owner: "ParticleLinkedList"
     name: "cursor"
   client!ug.m I:
-    owner: "Static7"
-    name: "anInt5345"
+    owner: "Cursor"
+    name: "currentId"
   client!uh.a Lclient!h;:
     owner: "SynthInstrument"
     name: "gateOpenPhaseEnvelope"
@@ -11019,7 +11019,7 @@ fields:
     owner: "SoftwareSprite"
     name: "pixels"
   client!w.A I:
-    owner: "Static7"
+    owner: "WorldMap"
     name: "anInt5680"
   client!w.B [I:
     owner: "Static7"
@@ -11856,7 +11856,7 @@ fields:
     owner: "Static7"
     name: "anInt6050"
   client!wk.g Ljava/lang/String;:
-    owner: "Static7"
+    owner: "MiniMenu"
     name: "aString365"
   client!wl.a [B:
     owner: "BufferedFile"
@@ -12591,8 +12591,8 @@ methods:
       3: "id"
     locals: {}
   client!ak.a (Lclient!ho;I)Z:
-    owner: "Static8"
-    name: "method120"
+    owner: "WorldMap"
+    name: "isMapElementTypeVisible"
     arguments:
       0: "type"
     locals: {}
@@ -12729,7 +12729,7 @@ methods:
       85: "local85"
       96: "local96"
   client!am.a (Lclient!ll;III)V:
-    owner: "Static9"
+    owner: "WorldMap"
     name: "method193"
     arguments:
       0: "arg0"
@@ -12832,20 +12832,20 @@ methods:
       31: "local31"
       58: "local58"
   client!ao.a (Ljava/awt/Color;ZZILjava/lang/String;)V:
-    owner: "Static9"
-    name: "method202"
+    owner: "LoadingBarAwt"
+    name: "render"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      3: "arg2"
-      4: "arg3"
+      0: "color"
+      1: "redraw"
+      3: "percentage"
+      4: "text"
     locals:
-      2: "local2"
-      48: "local48"
-      128: "local128"
-      134: "local134"
-      140: "local140"
-      243: "local243"
+      2: "graphics"
+      48: "loadingBarGraphics"
+      128: "ex"
+      134: "x"
+      140: "y"
+      243: "ex"
   client!b.a ()I:
     owner: "GlFrameBufferAllocator"
     name: "allocateRenderBuffer"
@@ -12932,14 +12932,14 @@ methods:
       28: "local28"
       114: "local114"
   client!bb.a (II)V:
-    owner: "Static9"
+    owner: "InterfaceList"
     name: "method230"
     arguments:
-      1: "arg0"
+      1: "componentId"
     locals:
-      22: "local22"
-      24: "local24"
-      36: "local36"
+      22: "components"
+      24: "i"
+      36: "component"
   client!bb.a (Lclient!fh;I)V:
     owner: "ParamTypeList"
     name: "init"
@@ -13007,7 +13007,7 @@ methods:
       86: "local86"
   client!bc.a (Z)V:
     owner: "Static9"
-    name: "method763"
+    name: "audioLoop"
     arguments: {}
     locals: {}
   client!bc.b ()V:
@@ -13320,9 +13320,9 @@ methods:
     name: "method279"
     arguments:
       0: "arg0"
-      1: "arg1"
+      1: "x"
       3: "arg2"
-      4: "arg3"
+      4: "z"
       5: "arg4"
     locals:
       14: "local14"
@@ -13461,13 +13461,13 @@ methods:
     arguments: {}
     locals: {}
   client!bi.a (II)I:
-    owner: "Static10"
-    name: "method302"
+    owner: "ColorUtils"
+    name: "multiplyLightness"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "hsl"
+      1: "factor"
     locals:
-      7: "local7"
+      7: "l"
   client!bi.a (III)I:
     owner: "PerlinNoise"
     name: "noise"
@@ -13612,18 +13612,18 @@ methods:
     arguments: {}
     locals: {}
   client!bj.d ()V:
-    owner: "Static10"
+    owner: "UnderwaterMaterialRenderer"
     name: "method314"
     arguments: {}
     locals:
       1: "gl"
   client!bj.e ()I:
-    owner: "Static10"
+    owner: "UnderwaterMaterialRenderer"
     name: "method315"
     arguments: {}
     locals: {}
   client!bj.f ()V:
-    owner: "Static10"
+    owner: "UnderwaterMaterialRenderer"
     name: "method316"
     arguments: {}
     locals:
@@ -13995,8 +13995,8 @@ methods:
     locals:
       20: "areaSound"
   client!bn.a (ZB)V:
-    owner: "Static10"
-    name: "method384"
+    owner: "WorldMap"
+    name: "clear"
     arguments:
       0: "arg0"
     locals: {}
@@ -14180,7 +14180,7 @@ methods:
     owner: "Static10"
     name: "method467"
     arguments:
-      0: "arg0"
+      0: "component"
     locals:
       4: "local4"
   client!c.a (Z)Z:
@@ -14368,12 +14368,12 @@ methods:
       1: "v"
     locals: {}
   client!ca.f (B)Lclient!fg;:
-    owner: "Static11"
-    name: "method492"
+    owner: "WorldMap"
+    name: "headMapElement"
     arguments: {}
     locals:
-      24: "local24"
-      29: "local29"
+      24: "element"
+      29: "type"
   client!cb.a (III)Z:
     owner: "Static11"
     name: "method508"
@@ -14866,21 +14866,21 @@ methods:
       3: "blockRoutes"
     locals: {}
   client!ch.a (II[JI[I)V:
-    owner: "Static11"
-    name: "method572"
+    owner: "ArrayUtils"
+    name: "sort"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      3: "arg2"
-      4: "arg3"
+      2: "keys"
+      4: "values"
+      3: "lo"
+      1: "hi"
     locals:
-      15: "local15"
-      17: "local17"
-      21: "local21"
-      35: "local35"
-      47: "local47"
-      70: "local70"
-      84: "local84"
+      15: "mid"
+      17: "i"
+      21: "pivotKey"
+      35: "pivotValue"
+      47: "j"
+      70: "key"
+      84: "value"
   client!ch.a (IZIII)V:
     owner: "Static11"
     name: "method565"
@@ -14937,28 +14937,28 @@ methods:
       54: "z0"
   client!ch.a (Z[BIII[Lclient!ch;)V:
     owner: "Static11"
-    name: "method576"
+    name: "readMapLocs"
     arguments:
       0: "arg0"
-      1: "arg1"
+      1: "bytes"
       3: "arg2"
       4: "arg3"
       5: "arg4"
     locals:
-      10: "local10"
-      20: "local20"
-      24: "local24"
-      37: "local37"
-      41: "local41"
-      56: "local56"
-      62: "local62"
-      66: "local66"
-      70: "local70"
-      74: "local74"
+      10: "buffer"
+      20: "id"
+      24: "idDelta"
+      37: "position"
+      41: "positionDelta"
+      56: "z"
+      62: "x"
+      66: "shapeAndAngle"
+      70: "angle"
+      74: "shape"
       79: "local79"
       84: "local84"
-      88: "local88"
-      104: "local104"
+      88: "level"
+      104: "collisionMap"
       108: "local108"
   client!ch.b (I)V:
     owner: "CollisionMap"
@@ -15401,7 +15401,7 @@ methods:
       95: "local95"
       99: "local99"
       106: "local106"
-      173: "local173"
+      173: "redraw"
       188: "local188"
       267: "local267"
       305: "local305"
@@ -15506,7 +15506,7 @@ methods:
       33: "ex"
       39: "ex"
   client!cm.a (ZI)V:
-    owner: "Static12"
+    owner: "WorldMap"
     name: "method694"
     arguments:
       1: "arg0"
@@ -15987,7 +15987,7 @@ methods:
       18: "type"
   client!df.a (BLclient!wf;)Ljava/lang/String;:
     owner: "Static12"
-    name: "method780"
+    name: "getTargetVerb"
     arguments:
       1: "component"
     locals: {}
@@ -16407,13 +16407,13 @@ methods:
       175: "local175"
       188: "local188"
   client!dn.c (II)V:
-    owner: "Static13"
-    name: "method966"
+    owner: "Cursor"
+    name: "setCursor"
     arguments:
-      0: "arg0"
+      0: "id"
     locals:
-      23: "local23"
-      27: "local27"
+      23: "type"
+      27: "sprite"
   client!dn.d (II)V:
     owner: "MidiPlayer"
     name: "method971"
@@ -16962,10 +16962,10 @@ methods:
     locals: {}
   client!ek.a (B)V:
     owner: "Static14"
-    name: "method1062"
+    name: "readNpcSpawns"
     arguments: {}
     locals:
-      14: "local14"
+      14: "len"
       16: "i"
       32: "local32"
       34: "j"
@@ -19389,7 +19389,7 @@ methods:
       108: "type"
       125: "rotatedX"
       145: "rotatedZ"
-      162: "local162"
+      162: "collisionMap"
       166: "local166"
   client!fl.a (Lclient!fh;ILclient!fh;)V:
     owner: "QuickChatCatTypeList"
@@ -20203,7 +20203,7 @@ methods:
       9968: "isp2"
       9980: "isp2"
       10003: "local10003"
-      10007: "local10007"
+      10007: "mapId"
       10031: "isp2"
       10034: "local10034"
       10039: "map"
@@ -20218,23 +20218,23 @@ methods:
       10136: "isp3"
       10152: "isp3"
       10164: "isp3"
-      10196: "local10196"
+      10196: "mapId"
       10202: "local10202"
       10262: "local10262"
-      10276: "local10276"
-      10289: "local10289"
-      10299: "local10299"
-      10313: "local10313"
-      10331: "local10331"
-      10334: "local10334"
-      10350: "local10350"
-      10369: "local10369"
-      10380: "local10380"
-      10389: "local10389"
-      10403: "local10403"
-      10425: "local10425"
-      10428: "local10428"
-      10444: "local10444"
+      10276: "category"
+      10289: "visible"
+      10299: "node"
+      10313: "newNode"
+      10331: "isp2"
+      10334: "category"
+      10350: "node"
+      10369: "id"
+      10380: "visible"
+      10389: "node"
+      10403: "newNode"
+      10425: "isp2"
+      10428: "id"
+      10444: "node"
       10481: "structId"
       10487: "paramId"
       10491: "param"
@@ -20556,8 +20556,8 @@ methods:
       12: "version"
       38: "worldsUpdated"
   client!gd.a (I)V:
-    owner: "Static16"
-    name: "method1556"
+    owner: "Sprites"
+    name: "clear"
     arguments: {}
     locals: {}
   client!gd.a (IIIII)V:
@@ -20692,9 +20692,9 @@ methods:
     name: "method1576"
     arguments: {}
     locals:
-      7: "local7"
-      20: "local20"
-      30: "local30"
+      7: "i"
+      20: "id"
+      30: "player"
   client!gh.a (III)V:
     owner: "Static16"
     name: "method2016"
@@ -21642,16 +21642,16 @@ methods:
       4: "shadowColor"
     locals: {}
   client!gn.a (B[IIII)V:
-    owner: "Static18"
-    name: "method1656"
+    owner: "ArrayUtils"
+    name: "fillRange"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      3: "arg2"
-      4: "arg3"
+      1: "dest"
+      3: "start"
+      4: "end"
+      2: "value"
     locals:
-      10: "local10"
-      16: "local16"
+      10: "end2"
+      16: "start2"
   client!gn.a (IBI)V:
     owner: "Static17"
     name: "method1654"
@@ -22628,11 +22628,11 @@ methods:
       22: "sprite"
       41: "newSprite"
   client!ho.a (B[I[J)V:
-    owner: "Static19"
-    name: "method1805"
+    owner: "ArrayUtils"
+    name: "sort"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      2: "keys"
+      1: "values"
     locals: {}
   client!ho.a (I)Z:
     owner: "MelType"
@@ -23059,7 +23059,7 @@ methods:
     arguments: {}
     locals: {}
   client!ii.a ()Lclient!ll;:
-    owner: "Static19"
+    owner: "WorldMap"
     name: "method2397"
     arguments: {}
     locals:
@@ -23082,7 +23082,7 @@ methods:
     locals:
       4: "map"
   client!ii.a (IIII)V:
-    owner: "Static19"
+    owner: "WorldMap"
     name: "method2396"
     arguments:
       0: "arg0"
@@ -23093,33 +23093,33 @@ methods:
       17: "local17"
       28: "local28"
       38: "local38"
-      42: "local42"
+      42: "width"
       50: "local50"
-      62: "local62"
+      62: "x"
       68: "local68"
-      81: "local81"
-      93: "local93"
-      97: "local97"
-      104: "local104"
+      81: "y"
+      93: "y1"
+      97: "height"
+      104: "color"
       142: "local142"
       146: "local146"
       150: "local150"
       154: "local154"
       158: "local158"
       162: "local162"
-      166: "local166"
+      166: "x"
       170: "local170"
       172: "local172"
       183: "local183"
       193: "local193"
-      197: "local197"
-      203: "local203"
+      197: "height"
+      203: "y"
       207: "local207"
       213: "local213"
       219: "local219"
       225: "local225"
       231: "local231"
-      250: "local250"
+      250: "color"
       316: "local316"
       332: "local332"
       362: "local362"
@@ -23127,11 +23127,11 @@ methods:
       409: "local409"
       413: "local413"
       459: "local459"
-      467: "local467"
-      477: "local477"
-      484: "local484"
-      644: "local644"
-      664: "local664"
+      467: "x1"
+      477: "y1"
+      484: "wallColor"
+      644: "i"
+      664: "i"
       684: "local684"
       697: "local697"
       707: "local707"
@@ -23150,7 +23150,7 @@ methods:
       823: "mapSceneId"
       832: "type"
       838: "angle"
-      849: "local849"
+      849: "flipVertical"
       855: "sprite"
       864: "local864"
       871: "local871"
@@ -23171,10 +23171,10 @@ methods:
       7: "arg7"
     locals: {}
   client!ii.a (Lclient!fd;)V:
-    owner: "Static19"
-    name: "method2398"
+    owner: "WorldMap"
+    name: "readOverlay"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals:
       7: "local7"
       9: "local9"
@@ -23192,11 +23192,11 @@ methods:
       180: "local180"
       191: "local191"
   client!ii.a (Lclient!fd;Z)V:
-    owner: "Static20"
-    name: "method2407"
+    owner: "WorldMap"
+    name: "readLocs"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "buffer"
+      1: "allowMembers"
     locals:
       7: "local7"
       9: "local9"
@@ -23205,21 +23205,21 @@ methods:
       34: "local34"
       40: "local40"
       50: "local50"
-      68: "local68"
-      72: "local72"
-      74: "local74"
-      79: "local79"
-      113: "local113"
+      68: "mapX"
+      72: "mapZ"
+      74: "x"
+      79: "z"
+      113: "flags"
       125: "local125"
-      162: "local162"
-      198: "local198"
-      202: "local202"
-      207: "local207"
-      236: "local236"
+      162: "mapScene"
+      198: "id"
+      202: "level"
+      207: "type"
+      236: "element"
       270: "local270"
-      281: "local281"
+      281: "flags"
   client!ii.a (Lclient!fg;IIII)V:
-    owner: "Static20"
+    owner: "WorldMap"
     name: "method2404"
     arguments:
       0: "element"
@@ -23346,23 +23346,23 @@ methods:
       3: "maps"
       8: "map"
   client!ii.b (IIII)Lclient!ll;:
-    owner: "Static20"
+    owner: "WorldMap"
     name: "method2410"
     arguments:
       0: "arg0"
       1: "arg1"
     locals:
       3: "local3"
-      8: "local8"
-      29: "local29"
-      31: "local31"
-      40: "local40"
-      67: "local67"
+      8: "element"
+      29: "position"
+      31: "i"
+      40: "element"
+      67: "success"
   client!ii.b (Lclient!fd;)V:
-    owner: "Static20"
-    name: "method2406"
+    owner: "WorldMap"
+    name: "readOverlay2"
     arguments:
-      0: "arg0"
+      0: "buffer"
     locals:
       7: "local7"
       9: "local9"
@@ -23380,13 +23380,13 @@ methods:
       180: "local180"
       191: "local191"
   client!ii.c ()V:
-    owner: "Static19"
+    owner: "WorldMap"
     name: "method2400"
     arguments: {}
     locals:
-      1: "local1"
+      1: "i"
   client!ii.c (II)V:
-    owner: "Static20"
+    owner: "WorldMap"
     name: "loadOverlayColors"
     arguments:
       0: "arg0"
@@ -23403,7 +23403,7 @@ methods:
       94: "local94"
       116: "local116"
   client!ii.d ()V:
-    owner: "Static20"
+    owner: "WorldMap"
     name: "method2403"
     arguments: {}
     locals:
@@ -23553,13 +23553,13 @@ methods:
     name: "load"
     arguments: {}
     locals:
-      70: "local70"
-      84: "local84"
-      86: "local86"
+      70: "position"
+      84: "z"
+      86: "x"
       153: "local153"
       164: "local164"
-      309: "local309"
-      318: "local318"
+      309: "width"
+      318: "length"
       358: "local358"
       364: "local364"
   client!il.a (IBI)Ljava/lang/String;:
@@ -23597,13 +23597,13 @@ methods:
     arguments: {}
     locals: {}
   client!im.a (IBIII)V:
-    owner: "Static20"
-    name: "method1928"
+    owner: "WorldMap"
+    name: "render"
     arguments:
-      0: "arg0"
-      2: "arg1"
-      3: "arg2"
-      4: "arg3"
+      3: "x"
+      2: "y"
+      4: "width"
+      0: "height"
     locals:
       47: "local47"
       59: "local59"
@@ -23614,10 +23614,10 @@ methods:
       218: "local218"
       268: "local268"
       310: "local310"
-      312: "local312"
+      312: "color"
       318: "local318"
       334: "local334"
-      344: "local344"
+      344: "memoryUsage"
       368: "local368"
   client!im.a (IIIIZ)V:
     owner: "Static20"
@@ -23641,12 +23641,12 @@ methods:
     name: "method1932"
     arguments: {}
     locals:
-      46: "local46"
-      53: "local53"
-      79: "local79"
-      92: "local92"
-      103: "local103"
-      112: "local112"
+      46: "x"
+      53: "z"
+      79: "i"
+      92: "player"
+      103: "i"
+      112: "npc"
   client!im.run ()V:
     owner: "AudioThread"
     name: "run"
@@ -23765,8 +23765,8 @@ methods:
     name: "method1949"
     arguments: {}
     locals:
-      9: "local9"
-      35: "local35"
+      9: "container"
+      35: "insets"
       104: "local104"
   client!j.<init> ([B)V:
     owner: "ByteArrayNode"
@@ -23843,7 +23843,7 @@ methods:
     locals:
       15: "request"
   client!ja.a (IBI)V:
-    owner: "Static20"
+    owner: "WorldMap"
     name: "method1970"
     arguments:
       0: "arg0"
@@ -23932,11 +23932,11 @@ methods:
     name: "method1976"
     arguments: {}
     locals:
-      16: "local16"
-      22: "local22"
-      61: "local61"
+      16: "node"
+      22: "projAnim"
+      61: "npc"
       113: "local113"
-      118: "local118"
+      118: "player"
   client!jb.a (I)V:
     owner: "Component"
     name: "removeSoft"
@@ -24044,7 +24044,7 @@ methods:
     locals: {}
   client!jc.e (B)I:
     owner: "WorldMap"
-    name: "getZoom"
+    name: "getTargetZoom"
     arguments: {}
     locals: {}
   client!jc.f (B)[Lclient!uj;:
@@ -24867,9 +24867,9 @@ methods:
       117: "j"
   client!jl.a (II)V:
     owner: "WorldMap"
-    name: "setZoom"
+    name: "setTargetZoom"
     arguments:
-      0: "zoom"
+      0: "targetZoom"
     locals: {}
   client!jm.a (II)V:
     owner: "IdkTypeList"
@@ -24897,8 +24897,8 @@ methods:
       4: "arg4"
       5: "arg5"
     locals:
-      4: "local4"
-      15: "local15"
+      4: "component"
+      15: "hookRequest"
   client!jm.a (IILjava/lang/String;)V:
     owner: "DelayedStateChange"
     name: "setComponentTextServer"
@@ -27003,21 +27003,21 @@ methods:
       1: "node"
     locals: {}
   client!lb.a (I[I[III)V:
-    owner: "Static23"
-    name: "method2459"
+    owner: "ArrayUtils"
+    name: "sort"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      4: "arg3"
+      2: "keys"
+      1: "values"
+      4: "lo"
+      0: "hi"
     locals:
-      25: "local25"
-      31: "local31"
-      35: "local35"
-      49: "local49"
-      61: "local61"
-      81: "local81"
-      95: "local95"
+      25: "i"
+      31: "mid"
+      35: "pivotKey"
+      49: "pivotValue"
+      61: "j"
+      81: "key"
+      95: "value"
   client!lb.b (B)V:
     owner: "Static23"
     name: "method2455"
@@ -27541,13 +27541,13 @@ methods:
       0: "brightness"
     locals: {}
   client!lg.a (II)I:
-    owner: "Static23"
-    name: "method2540"
+    owner: "ColorUtils"
+    name: "multiplyLightness2"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "hsl"
+      1: "factor"
     locals:
-      7: "local7"
+      7: "l"
   client!lg.a (III)V:
     owner: "Static23"
     name: "method2542"
@@ -29183,13 +29183,13 @@ methods:
       0: "archive"
     locals: {}
   client!mb.a (ZIIII)V:
-    owner: "Static24"
+    owner: "WorldMap"
     name: "method2947"
     arguments:
       0: "arg0"
       1: "arg1"
       2: "arg2"
-      3: "arg3"
+      3: "mapId"
     locals: {}
   client!mc.<init> (II)V:
     owner: "ColorImageCacheEntry"
@@ -29252,7 +29252,7 @@ methods:
     name: "method2697"
     arguments: {}
     locals:
-      54: "local54"
+      54: "i"
   client!me.a (II)I:
     owner: "IntUtils"
     name: "bitCount"
@@ -29321,10 +29321,10 @@ methods:
       2: "s"
     locals: {}
   client!mf.a (Lclient!qc;I)V:
-    owner: "Static24"
+    owner: "PathingEntity"
     name: "method2705"
     arguments:
-      0: "arg0"
+      0: "entity"
     locals:
       41: "local41"
       46: "local46"
@@ -29345,12 +29345,12 @@ methods:
     arguments: {}
     locals: {}
   client!mg.a (I)Lclient!fg;:
-    owner: "Static24"
-    name: "method2713"
+    owner: "WorldMap"
+    name: "nextMapElement"
     arguments: {}
     locals:
-      22: "local22"
-      29: "local29"
+      22: "element"
+      29: "type"
   client!mg.a (IIII)V:
     owner: "ScriptRunner"
     name: "method2710"
@@ -30236,8 +30236,8 @@ methods:
       34: "y"
       39: "z"
   client!mm.a (B)V:
-    owner: "Static25"
-    name: "method2770"
+    owner: "WorldMap"
+    name: "loop"
     arguments: {}
     locals:
       64: "local64"
@@ -31557,14 +31557,14 @@ methods:
       7: "tile"
       14: "groundDecor"
   client!nc.a (ILclient!fd;)V:
-    owner: "Static26"
-    name: "method2934"
+    owner: "WorldMap"
+    name: "readUnderlay"
     arguments:
       1: "buffer"
     locals:
-      7: "local7"
-      11: "local11"
-      15: "local15"
+      7: "hueDelta"
+      11: "lightnessDelta"
+      15: "underlays"
       23: "local23"
       25: "local25"
       27: "local27"
@@ -31575,36 +31575,36 @@ methods:
       114: "local114"
       124: "local124"
       126: "local126"
-      194: "local194"
-      196: "local196"
-      199: "local199"
-      202: "local202"
-      205: "local205"
-      208: "local208"
-      211: "local211"
-      213: "local213"
-      231: "local231"
-      242: "local242"
-      253: "local253"
+      194: "width"
+      196: "length"
+      199: "rowWeightedHue"
+      202: "rowSaturation"
+      205: "rowLightness"
+      208: "rowChroma"
+      211: "rowCount"
+      213: "x"
+      231: "z"
+      242: "x1"
+      253: "underlay"
       265: "type"
       301: "local301"
-      308: "local308"
-      322: "local322"
+      308: "x0"
+      322: "underlay"
       334: "type"
       370: "local370"
-      383: "local383"
-      389: "local389"
-      391: "local391"
-      393: "local393"
-      395: "local395"
-      397: "local397"
-      399: "local399"
-      410: "local410"
-      448: "local448"
-      500: "local500"
-      521: "local521"
-      562: "local562"
-      591: "local591"
+      383: "weightedHue"
+      389: "underlayColorsMapRow"
+      391: "saturation"
+      393: "count"
+      395: "chroma"
+      397: "lightness"
+      399: "z"
+      410: "z1"
+      448: "z0"
+      500: "underlayColors"
+      521: "hsl"
+      562: "l"
+      591: "hsl2"
   client!nd.a (ILclient!wf;)Lclient!wf;:
     owner: "InterfaceList"
     name: "method2942"
@@ -32305,10 +32305,10 @@ methods:
       0: "id"
     locals: {}
   client!nl.a (BI)Ljava/lang/String;:
-    owner: "Static26"
-    name: "method2992"
+    owner: "MiniMenu"
+    name: "getOp"
     arguments:
-      1: "arg0"
+      1: "i"
     locals: {}
   client!nl.a (IZ)Lclient!ij;:
     owner: "QuickChatPhraseTypeList"
@@ -32783,8 +32783,8 @@ methods:
     arguments: {}
     locals: {}
   client!ob.a (I)V:
-    owner: "Static27"
-    name: "method4239"
+    owner: "MiniMap"
+    name: "reset"
     arguments: {}
     locals: {}
   client!ob.a (IBIIII)V:
@@ -33569,7 +33569,7 @@ methods:
       129: "i"
       161: "opcode"
   client!ol.a (Lclient!fg;IIIZILclient!nb;Lclient!ho;)V:
-    owner: "Static28"
+    owner: "WorldMap"
     name: "method3244"
     arguments:
       0: "element"
@@ -33612,7 +33612,7 @@ methods:
       77: "local77"
       86: "local86"
   client!om.a (B)V:
-    owner: "Static28"
+    owner: "WorldMap"
     name: "method3249"
     arguments: {}
     locals: {}
@@ -33838,7 +33838,7 @@ methods:
       1: "type"
     locals: {}
   client!p.a (IIIIB)V:
-    owner: "Static28"
+    owner: "WorldMap"
     name: "method3319"
     arguments:
       0: "arg0"
@@ -34019,11 +34019,11 @@ methods:
     locals:
       13: "code"
   client!pa.a (ZLclient!gl;Z)V:
-    owner: "Static28"
-    name: "method3331"
+    owner: "LoadingBar"
+    name: "render"
     arguments:
-      0: "arg0"
-      1: "arg1"
+      0: "renderBackground"
+      1: "font"
     locals:
       10: "height"
       16: "width"
@@ -36734,7 +36734,7 @@ methods:
     name: "method3597"
     arguments: {}
     locals:
-      12: "local12"
+      12: "i"
   client!qj.g (B)V:
     owner: "LoginManager"
     name: "loop"
@@ -37362,7 +37362,7 @@ methods:
     locals:
       10: "request"
   client!rf.a (BI)V:
-    owner: "Static31"
+    owner: "WorldMap"
     name: "method3661"
     arguments:
       1: "arg0"
@@ -38138,8 +38138,8 @@ methods:
     arguments: {}
     locals: {}
   client!rn.c (B)V:
-    owner: "Static31"
-    name: "method3153"
+    owner: "LoadingBarAwt"
+    name: "clear"
     arguments: {}
     locals: {}
   client!ro.a (III)I:
@@ -40293,9 +40293,9 @@ methods:
     arguments:
       0: "arg0"
       1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
+      2: "width"
+      3: "height"
+      4: "format"
       5: "arg5"
       6: "arg6"
     locals:
@@ -40324,9 +40324,9 @@ methods:
     arguments:
       0: "arg0"
       1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
+      2: "width"
+      3: "height"
+      4: "format"
       5: "arg5"
       6: "arg6"
     locals:
@@ -41909,7 +41909,7 @@ methods:
       16: "i"
       20: "encodedUsername"
   client!tl.a (Lclient!qc;Z)V:
-    owner: "Static34"
+    owner: "PathingEntity"
     name: "method4234"
     arguments:
       0: "arg0"
@@ -41950,7 +41950,7 @@ methods:
       246: "scenery"
       280: "groundDecor"
   client!tm.a (ILclient!qc;)V:
-    owner: "Static34"
+    owner: "PathingEntity"
     name: "method4247"
     arguments:
       1: "entity"
@@ -42609,7 +42609,7 @@ methods:
     locals:
       41: "sprite"
   client!ud.a (Z)V:
-    owner: "Static35"
+    owner: "WorldMap"
     name: "method4306"
     arguments: {}
     locals: {}
@@ -43101,7 +43101,7 @@ methods:
       66: "i1"
       73: "i2"
   client!ui.a (ILclient!fg;Lclient!ho;)V:
-    owner: "Static35"
+    owner: "WorldMap"
     name: "method4329"
     arguments:
       1: "element"
@@ -43111,7 +43111,7 @@ methods:
       16: "size"
       27: "local27"
       30: "local30"
-      32: "textLines"
+      32: "lineCount"
       34: "textWidth"
       36: "textHeight"
       49: "i"
@@ -43128,7 +43128,7 @@ methods:
       353: "i"
       364: "line"
   client!ui.a (Z)Ljava/lang/String;:
-    owner: "Static35"
+    owner: "MiniMenu"
     name: "method4328"
     arguments: {}
     locals:
@@ -43373,7 +43373,7 @@ methods:
     locals: {}
   client!um.a (ZII)I:
     owner: "ColorUtils"
-    name: "multiplyLightness"
+    name: "multiplyLightnessSafe"
     arguments:
       1: "hsl"
       2: "factor"
@@ -43435,7 +43435,7 @@ methods:
     locals:
       10: "change"
   client!va.a (ZI)V:
-    owner: "Static36"
+    owner: "WorldMap"
     name: "method4404"
     arguments:
       1: "arg0"
@@ -43572,7 +43572,7 @@ methods:
       1: "parentHeight"
     locals: {}
   client!vc.a (IZLclient!fg;ILclient!ho;)V:
-    owner: "Static36"
+    owner: "WorldMap"
     name: "method3811"
     arguments:
       0: "x"
@@ -43614,7 +43614,7 @@ methods:
     locals: {}
   client!vd.a (B)Ljava/lang/String;:
     owner: "Static36"
-    name: "method4436"
+    name: "getWebsiteUrl"
     arguments: {}
     locals:
       5: "hostname"
@@ -44411,7 +44411,7 @@ methods:
       28: "id"
       87: "i"
   client!vl.a (IIIII)V:
-    owner: "Static36"
+    owner: "WorldMap"
     name: "method4524"
     arguments:
       0: "arg0"
@@ -45137,7 +45137,7 @@ methods:
       0: "key"
     locals: {}
   client!wa.c (IB)V:
-    owner: "Static37"
+    owner: "WorldMap"
     name: "method4641"
     arguments:
       0: "arg0"
