@@ -2083,13 +2083,13 @@ fields:
     name: "anInt1248"
   client!eh.g I:
     owner: "Class47"
-    name: "anInt1249"
+    name: "textureId"
   client!eh.h [Lclient!kg;:
     owner: "Class47"
     name: "aClass105Array2"
   client!eh.i I:
     owner: "Class47"
-    name: "anInt1250"
+    name: "textureSize"
   client!eh.j I:
     owner: "Class47"
     name: "anInt1251"
@@ -3778,7 +3778,7 @@ fields:
     name: "anInt2355"
   client!ih.I I:
     owner: "Class4_Sub12"
-    name: "anInt2356"
+    name: "texture"
   client!ih.J [I:
     owner: "Class4_Sub12"
     name: "anIntArray205"
@@ -4081,7 +4081,7 @@ fields:
     name: "anIntArray215"
   client!ik.j I:
     owner: "ParticleEmitterType"
-    name: "anInt2403"
+    name: "texture"
   client!ik.jb I:
     owner: "ParticleEmitterType"
     name: "anInt2441"
@@ -4861,7 +4861,7 @@ fields:
     name: "aByteBuffer10"
   client!kg.i I:
     owner: "Class105"
-    name: "anInt2858"
+    name: "textureId"
   client!kg.j I:
     owner: "Class105"
     name: "anInt2859"
@@ -4870,7 +4870,7 @@ fields:
     name: "anInt2860"
   client!kg.l I:
     owner: "Class105"
-    name: "anInt2861"
+    name: "textureSize"
   client!kg.m I:
     owner: "Class105"
     name: "anInt2862"
@@ -5214,7 +5214,7 @@ fields:
     owner: "TextureOp14"
     name: "anInt3124"
   client!lg.a I:
-    owner: "Static4"
+    owner: "Rasteriser"
     name: "anInt3125"
   client!lg.b F:
     owner: "ColorUtils"
@@ -5223,46 +5223,46 @@ fields:
     owner: "ColorUtils"
     name: "HSL_TO_RGB"
   client!lg.d I:
-    owner: "Static4"
+    owner: "Rasteriser"
     name: "anInt3126"
   client!lg.e Z:
-    owner: "Static4"
+    owner: "Rasteriser"
     name: "aBoolean216"
   client!lg.f Z:
-    owner: "Static4"
+    owner: "Rasteriser"
     name: "aBoolean217"
   client!lg.g Lclient!nk;:
-    owner: "Static4"
+    owner: "Rasteriser"
     name: "textureProvider"
   client!lg.h Z:
-    owner: "Static4"
+    owner: "Rasteriser"
     name: "aBoolean218"
   client!lg.i I:
-    owner: "Static4"
-    name: "anInt3127"
+    owner: "Rasteriser"
+    name: "alpha"
   client!lg.j Z:
-    owner: "Static4"
+    owner: "Rasteriser"
     name: "aBoolean219"
   client!lg.k [I:
     owner: "MathUtils"
     name: "anIntArray296"
   client!lg.l I:
-    owner: "Static4"
+    owner: "Rasteriser"
     name: "anInt3128"
   client!lg.m [I:
-    owner: "Static4"
+    owner: "Rasteriser"
     name: "anIntArray297"
   client!lg.n [I:
     owner: "MathUtils"
     name: "COSINE"
   client!lg.o Z:
-    owner: "Static4"
-    name: "aBoolean220"
+    owner: "Rasteriser"
+    name: "lowDetail"
   client!lg.p [I:
     owner: "MathUtils"
     name: "SINE"
   client!lg.q I:
-    owner: "Static4"
+    owner: "Rasteriser"
     name: "anInt3129"
   client!lg.r [I:
     owner: "MathUtils"
@@ -8047,7 +8047,7 @@ fields:
     name: "anInt4296"
   client!qf.d I:
     owner: "PlainTile"
-    name: "anInt4297"
+    name: "texture"
   client!qf.e I:
     owner: "PlainTile"
     name: "anInt4298"
@@ -9961,7 +9961,7 @@ fields:
     name: "aBoolean123"
   client!to.a [I:
     owner: "ShapedTile"
-    name: "anIntArray572"
+    name: "textures"
   client!to.b I:
     owner: "ShapedTile"
     name: "anInt5224"
@@ -19466,7 +19466,7 @@ methods:
     name: "method1474"
     arguments:
       0: "arg0"
-      1: "arg1"
+      1: "texture"
       3: "arg2"
     locals:
       16: "local16"
@@ -27522,7 +27522,7 @@ methods:
       357: "local357"
       414: "local414"
   client!lg.a ()I:
-    owner: "Static23"
+    owner: "Rasteriser"
     name: "method2546"
     arguments: {}
     locals: {}
@@ -27541,7 +27541,7 @@ methods:
     locals:
       7: "l"
   client!lg.a (III)V:
-    owner: "Static23"
+    owner: "Rasteriser"
     name: "method2542"
     arguments:
       0: "arg0"
@@ -27549,7 +27549,7 @@ methods:
       2: "arg2"
     locals: {}
   client!lg.a (IIII)V:
-    owner: "Static23"
+    owner: "Rasteriser"
     name: "method2547"
     arguments:
       0: "arg0"
@@ -27560,7 +27560,7 @@ methods:
       23: "local23"
       25: "local25"
   client!lg.a (IIIIIII)V:
-    owner: "Static23"
+    owner: "Rasteriser"
     name: "method2550"
     arguments:
       0: "arg0"
@@ -27629,7 +27629,7 @@ methods:
       1110: "local1110"
       1114: "local1114"
   client!lg.a (IIIIIIIII)V:
-    owner: "Static23"
+    owner: "Rasteriser"
     name: "method2543"
     arguments:
       0: "arg0"
@@ -27712,7 +27712,7 @@ methods:
       1362: "local1362"
       1366: "local1366"
   client!lg.a (IIIIIIIIIIIIIIIIIII)V:
-    owner: "Static23"
+    owner: "Rasteriser"
     name: "method2549"
     arguments:
       0: "arg0"
@@ -27733,10 +27733,10 @@ methods:
       15: "arg15"
       16: "arg16"
       17: "arg17"
-      18: "arg18"
+      18: "texture"
     locals:
       5: "local5"
-      15: "local15"
+      15: "averageColor"
       48: "local48"
       52: "local52"
       56: "local56"
@@ -27840,13 +27840,13 @@ methods:
       2076: "local2076"
       2080: "local2080"
   client!lg.a (Lclient!nk;)V:
-    owner: "Static23"
+    owner: "Rasteriser"
     name: "setTextureProvider"
     arguments:
       0: "textureProvider"
     locals: {}
   client!lg.a ([BIIII)V:
-    owner: "Static23"
+    owner: "Rasteriser"
     name: "method2553"
     arguments:
       0: "arg0"
@@ -27858,7 +27858,7 @@ methods:
       13: "local13"
       43: "local43"
   client!lg.a ([BIIIIIII)V:
-    owner: "Static23"
+    owner: "Rasteriser"
     name: "method2552"
     arguments:
       0: "arg0"
@@ -27928,7 +27928,7 @@ methods:
       1046: "local1046"
       1050: "local1050"
   client!lg.a ([IIIIII)V:
-    owner: "Static23"
+    owner: "Rasteriser"
     name: "method2544"
     arguments:
       0: "arg0"
@@ -27947,7 +27947,7 @@ methods:
       269: "local269"
       276: "local276"
   client!lg.a ([IIIIIIII)V:
-    owner: "Static23"
+    owner: "Rasteriser"
     name: "method2554"
     arguments:
       0: "arg0"
@@ -27976,7 +27976,7 @@ methods:
       355: "local355"
       383: "local383"
   client!lg.a ([I[IIIIIIIIIIIIII)V:
-    owner: "Static23"
+    owner: "Rasteriser"
     name: "method2557"
     arguments:
       0: "arg0"
@@ -28061,7 +28061,7 @@ methods:
       1775: "local1775"
       1827: "local1827"
   client!lg.b ()I:
-    owner: "Static23"
+    owner: "Rasteriser"
     name: "method2548"
     arguments: {}
     locals: {}
@@ -28097,7 +28097,7 @@ methods:
       268: "ib"
       278: "rgb"
   client!lg.b (IIIIIIIIIIIIIIIIIII)V:
-    owner: "Static23"
+    owner: "Rasteriser"
     name: "method2558"
     arguments:
       0: "arg0"
@@ -28118,10 +28118,10 @@ methods:
       15: "arg15"
       16: "arg16"
       17: "arg17"
-      18: "arg18"
+      18: "texture"
     locals:
       5: "local5"
-      12: "local12"
+      12: "averageColor"
       43: "local43"
       47: "local47"
       51: "local51"
@@ -28225,7 +28225,7 @@ methods:
       2071: "local2071"
       2075: "local2075"
   client!lg.b ([I[IIIIIIIIIIIIII)V:
-    owner: "Static23"
+    owner: "Rasteriser"
     name: "method2560"
     arguments:
       0: "arg0"
@@ -28292,12 +28292,12 @@ methods:
       1553: "local1553"
       1607: "local1607"
   client!lg.c ()V:
-    owner: "Static23"
+    owner: "Rasteriser"
     name: "method2555"
     arguments: {}
     locals: {}
   client!lg.c (II)V:
-    owner: "Static23"
+    owner: "Rasteriser"
     name: "method2556"
     arguments:
       0: "arg0"
@@ -28307,7 +28307,7 @@ methods:
       7: "local7"
       13: "local13"
   client!lg.e ()V:
-    owner: "Static23"
+    owner: "Rasteriser"
     name: "method2561"
     arguments: {}
     locals: {}
@@ -30498,8 +30498,8 @@ methods:
     locals:
       117: "local117"
       123: "local123"
-      148: "local148"
-      157: "local157"
+      148: "i"
+      157: "texture"
       192: "local192"
       194: "local194"
       223: "local223"
@@ -30635,7 +30635,7 @@ methods:
       5: "arg5"
       6: "arg6"
       7: "arg7"
-      8: "arg8"
+      8: "key"
       9: "arg9"
       10: "arg10"
     locals:
@@ -30704,35 +30704,35 @@ methods:
     owner: "SoftwareModel"
     name: "method3822"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      3: "arg2"
-      4: "arg3"
-      5: "arg4"
-      6: "arg5"
-      7: "arg6"
+      1: "yAngle"
+      2: "zAngle"
+      3: "xAngle"
+      4: "xOffset"
+      5: "yOffset"
+      6: "zOffset"
+      7: "key"
     locals:
       6: "local6"
       8: "local8"
       12: "local12"
       16: "local16"
-      20: "local20"
-      24: "local24"
-      28: "local28"
-      32: "local32"
-      36: "local36"
-      40: "local40"
+      20: "sineY"
+      24: "cosineY"
+      28: "sineZ"
+      32: "cosineZ"
+      36: "sineX"
+      40: "cosineX"
       50: "local50"
-      52: "local52"
-      61: "local61"
-      66: "local66"
-      71: "local71"
-      83: "local83"
-      131: "local131"
-      147: "local147"
-      151: "local151"
-      155: "local155"
-      165: "local165"
+      52: "i"
+      61: "x"
+      66: "y"
+      71: "z"
+      83: "rotatedX"
+      131: "rotatedX"
+      147: "x2"
+      151: "y2"
+      155: "z2"
+      165: "rotatedY"
       240: "local240"
   client!na.a (II[[I[[IIIIZ)Lclient!na;:
     owner: "SoftwareModel"
@@ -31075,19 +31075,19 @@ methods:
     arguments:
       0: "arg0"
       1: "arg1"
-      2: "arg2"
+      2: "key"
       3: "arg3"
       4: "arg4"
-      5: "arg5"
+      5: "particleSystem"
     locals:
       5: "local5"
       7: "local7"
-      11: "local11"
-      22: "local22"
-      35: "local35"
-      51: "local51"
-      56: "local56"
-      61: "local61"
+      11: "i"
+      22: "i"
+      35: "i"
+      51: "a"
+      56: "b"
+      61: "c"
       65: "local65"
       69: "local69"
       73: "local73"
@@ -31109,42 +31109,42 @@ methods:
       406: "local406"
       429: "local429"
       449: "local449"
-      470: "local470"
+      470: "i"
       480: "local480"
       512: "local512"
       532: "local532"
-      566: "local566"
-      579: "local579"
-      594: "local594"
+      566: "i"
+      579: "i"
+      594: "i"
       601: "local601"
       605: "local605"
-      610: "local610"
+      610: "priority"
       619: "local619"
       629: "local629"
-      658: "local658"
+      658: "i"
       664: "local664"
       673: "local673"
       677: "local677"
       679: "local679"
       686: "local686"
       701: "local701"
-      706: "local706"
+      706: "particle"
       712: "local712"
       752: "local752"
       756: "local756"
       758: "local758"
       767: "local767"
       782: "local782"
-      787: "local787"
+      787: "particle"
       793: "local793"
-      827: "local827"
-      844: "local844"
+      827: "i"
+      844: "i"
       850: "local850"
       857: "local857"
       864: "local864"
       866: "local866"
       873: "local873"
-      881: "local881"
+      881: "priority"
       890: "local890"
       900: "local900"
       942: "local942"
@@ -31163,7 +31163,7 @@ methods:
       1107: "local1107"
       1109: "local1109"
       1131: "local1131"
-      1136: "local1136"
+      1136: "i"
       1271: "local1271"
       1275: "local1275"
       1279: "local1279"
@@ -31172,7 +31172,7 @@ methods:
       1309: "local1309"
       1347: "local1347"
       1405: "local1405"
-      1413: "local1413"
+      1413: "particle"
       1419: "local1419"
   client!na.a (ZZLclient!na;[B[S[I[I[I)Lclient!vg;:
     owner: "SoftwareModel"
@@ -31307,11 +31307,11 @@ methods:
     owner: "SoftwareModel"
     name: "method2904"
     arguments:
-      0: "arg0"
+      0: "triangle"
     locals:
-      12: "local12"
-      17: "local17"
-      22: "local22"
+      12: "a"
+      17: "b"
+      22: "c"
       136: "local136"
       141: "local141"
       146: "local146"
@@ -31327,14 +31327,14 @@ methods:
     owner: "SoftwareModel"
     name: "method2907"
     arguments:
-      0: "arg0"
+      0: "triangle"
     locals:
       1: "local1"
       3: "local3"
       5: "local5"
-      10: "local10"
-      15: "local15"
-      20: "local20"
+      10: "a"
+      15: "b"
+      20: "c"
       24: "local24"
       28: "local28"
       32: "local32"
@@ -37929,7 +37929,7 @@ methods:
       1529: "local1529"
       1580: "local1580"
       1590: "local1590"
-      1640: "local1640"
+      1640: "texture"
       1659: "local1659"
       1671: "local1671"
       1692: "local1692"
@@ -38259,13 +38259,13 @@ methods:
       26: "local26"
       35: "i"
       118: "local118"
-      120: "local120"
+      120: "i"
       128: "local128"
       130: "local130"
       132: "local132"
-      134: "local134"
-      136: "local136"
-      138: "local138"
+      134: "materialType"
+      136: "materialArg"
+      138: "texture"
       185: "local185"
       215: "local215"
       229: "local229"
@@ -38576,12 +38576,12 @@ methods:
     owner: "GlModel"
     name: "method3822"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      3: "arg2"
-      4: "arg3"
-      5: "arg4"
-      6: "arg5"
+      1: "yAngle"
+      2: "zAngle"
+      3: "xAngle"
+      4: "xOffset"
+      5: "yOffset"
+      6: "zOffset"
       7: "arg6"
     locals:
       5: "gl"
@@ -38727,7 +38727,7 @@ methods:
     name: "method3863"
     arguments:
       0: "arg0"
-      1: "arg1"
+      1: "texture"
       2: "arg2"
       3: "arg3"
     locals:
@@ -43718,12 +43718,12 @@ methods:
     owner: "Model"
     name: "method3822"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      3: "arg2"
-      4: "arg3"
-      5: "arg4"
-      6: "arg5"
+      1: "yAngle"
+      2: "zAngle"
+      3: "xAngle"
+      4: "xOffset"
+      5: "yOffset"
+      6: "zOffset"
       7: "arg6"
     locals: {}
   client!vg.a (I[IIIIZ)V:
