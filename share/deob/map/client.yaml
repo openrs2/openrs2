@@ -10840,7 +10840,7 @@ fields:
     name: "recolorSource"
   client!vh.g I:
     owner: "LocType"
-    name: "anInt5507"
+    name: "wallDecorOffsetScale"
   client!vh.h B:
     owner: "LocType"
     name: "aByte23"
@@ -10960,7 +10960,7 @@ fields:
     name: "zFine"
   client!vl.e I:
     owner: "WallDecor"
-    name: "anInt5625"
+    name: "zOffset"
   client!vl.f I:
     owner: "WallDecor"
     name: "xFine"
@@ -10999,7 +10999,7 @@ fields:
     name: "key"
   client!vl.t I:
     owner: "WallDecor"
-    name: "anInt5633"
+    name: "xOffset"
   client!vl.u I:
     owner: "MiniMenu"
     name: "size"
@@ -12813,8 +12813,8 @@ methods:
       5: "secondary"
       6: "arg6"
       7: "arg7"
-      8: "arg8"
-      9: "arg9"
+      8: "xOffset"
+      9: "zOffset"
       10: "key"
     locals:
       6: "wallDecor"
@@ -13687,12 +13687,12 @@ methods:
       55: "local55"
   client!bl.a (IIII)V:
     owner: "SceneGraph"
-    name: "method344"
+    name: "scaleWallDecorOffsets"
     arguments:
       0: "level"
       1: "x"
       2: "z"
-      3: "arg3"
+      3: "scale"
     locals:
       7: "tile"
       13: "wallDecor"
@@ -25672,19 +25672,19 @@ methods:
       1812: "local1812"
       1914: "local1914"
       1930: "local1930"
-      1967: "local1967"
-      1969: "local1969"
+      1967: "wallKey"
+      1969: "offsetScale"
       2013: "local2013"
       2040: "local2040"
-      2089: "local2089"
-      2091: "local2091"
+      2089: "wallKey"
+      2091: "offsetScale"
       2143: "local2143"
       2170: "local2170"
       2219: "local2219"
       2248: "local2248"
       2266: "local2266"
-      2300: "local2300"
-      2305: "local2305"
+      2300: "offsetScale"
+      2305: "wallKey"
       2328: "local2328"
       2350: "local2350"
       2356: "local2356"
