@@ -3,21 +3,21 @@ package org.openrs2.cache
 import com.google.common.jimfs.Configuration
 import com.google.common.jimfs.Jimfs
 import io.netty.buffer.Unpooled
+import org.apache.commons.compress.archivers.tar.TarArchiveOutputStream
 import org.openrs2.buffer.copiedBuffer
 import org.openrs2.buffer.use
 import org.openrs2.util.io.recursiveEquals
 import java.io.OutputStream
 import java.nio.file.Files
 import java.nio.file.Path
-import java.util.zip.ZipOutputStream
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
-public class FlatFileStoreZipWriterTest {
+public class FlatFileStoreTarWriterTest {
     @Test
     fun testBounds() {
-        FlatFileStoreZipWriter(ZipOutputStream(OutputStream.nullOutputStream())).use { store ->
+        FlatFileStoreTarWriter(TarArchiveOutputStream(OutputStream.nullOutputStream())).use { store ->
             // create
             assertFailsWith<IllegalArgumentException> {
                 store.create(-1)
@@ -58,7 +58,7 @@ public class FlatFileStoreZipWriterTest {
 
     @Test
     fun testUnsupported() {
-        FlatFileStoreZipWriter(ZipOutputStream(OutputStream.nullOutputStream())).use { store ->
+        FlatFileStoreTarWriter(TarArchiveOutputStream(OutputStream.nullOutputStream())).use { store ->
             assertFailsWith<UnsupportedOperationException> {
                 store.exists(0)
             }
@@ -92,11 +92,11 @@ public class FlatFileStoreZipWriterTest {
     @Test
     fun testWrite() {
         Jimfs.newFileSystem(Configuration.forCurrentPlatform()).use { fs ->
-            val actual = fs.rootDirectories.first().resolve("zip")
+            val actual = fs.rootDirectories.first().resolve("tar")
             Files.createDirectories(actual)
 
-            Files.newOutputStream(actual.resolve("cache.zip")).use { out ->
-                FlatFileStoreZipWriter(ZipOutputStream(out)).use { store ->
+            Files.newOutputStream(actual.resolve("cache.tar")).use { out ->
+                FlatFileStoreTarWriter(TarArchiveOutputStream(out)).use { store ->
                     store.create(0)
 
                     copiedBuffer("OpenRS2").use { buf ->
@@ -119,7 +119,7 @@ public class FlatFileStoreZipWriterTest {
 
     private companion object {
         private val ROOT = Path.of(
-            FlatFileStoreZipWriterTest::class.java.getResource("flat-file-store-zip").toURI()
+            FlatFileStoreTarWriterTest::class.java.getResource("flat-file-store-tar").toURI()
         )
     }
 }

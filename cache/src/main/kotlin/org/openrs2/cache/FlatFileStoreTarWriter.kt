@@ -1,15 +1,14 @@
 package org.openrs2.cache
 
 import io.netty.buffer.ByteBuf
-import java.nio.file.attribute.FileTime
+import org.apache.commons.compress.archivers.tar.TarArchiveEntry
+import org.apache.commons.compress.archivers.tar.TarArchiveOutputStream
 import java.time.Instant
-import java.util.zip.Deflater
-import java.util.zip.ZipEntry
-import java.util.zip.ZipOutputStream
+import java.util.Date
 
 /**
  * A specialised [Store] implementation that writes a cache in the
- * [FlatFileStore] format to a [ZipOutputStream].
+ * [FlatFileStore] format to a [TarArchiveOutputStream].
  *
  * The cache is not buffered to disk.
  *
@@ -18,23 +17,17 @@ import java.util.zip.ZipOutputStream
  *
  * It is only intended for use by the cache archiving service's web interface.
  */
-public class FlatFileStoreZipWriter(
-    private val out: ZipOutputStream,
+public class FlatFileStoreTarWriter(
+    private val out: TarArchiveOutputStream,
     private val prefix: String = "cache/",
-    level: Int = Deflater.BEST_COMPRESSION,
     timestamp: Instant = Instant.EPOCH
 ) : Store {
-    private val timestamp = FileTime.from(timestamp)
+    private val timestamp = Date.from(timestamp)
 
-    init {
-        out.setLevel(level)
-    }
-
-    private fun createZipEntry(name: String): ZipEntry {
-        val entry = ZipEntry(prefix + name)
-        entry.creationTime = timestamp
-        entry.lastAccessTime = timestamp
-        entry.lastModifiedTime = timestamp
+    private fun createTarEntry(name: String, size: Int): TarArchiveEntry {
+        val entry = TarArchiveEntry(prefix + name)
+        entry.modTime = timestamp
+        entry.size = size.toLong()
         return entry
     }
 
@@ -57,7 +50,8 @@ public class FlatFileStoreZipWriter(
     override fun create(archive: Int) {
         require(archive in 0..Store.MAX_ARCHIVE)
 
-        out.putNextEntry(createZipEntry("$archive/"))
+        out.putArchiveEntry(createTarEntry("$archive/", size = 0))
+        out.closeArchiveEntry()
     }
 
     override fun read(archive: Int, group: Int): ByteBuf {
@@ -69,8 +63,9 @@ public class FlatFileStoreZipWriter(
         require(group >= 0)
         require(buf.readableBytes() <= Store.MAX_GROUP_SIZE)
 
-        out.putNextEntry(createZipEntry("$archive/$group.dat"))
+        out.putArchiveEntry(createTarEntry("$archive/$group.dat", buf.readableBytes()))
         buf.readBytes(out, buf.readableBytes())
+        out.closeArchiveEntry()
     }
 
     override fun remove(archive: Int) {

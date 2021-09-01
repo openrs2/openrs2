@@ -78,7 +78,7 @@ public class WebServer @Inject constructor(
                     }
                 }
                 get("/caches/{id}/disk.zip") { cachesController.exportDisk(call) }
-                get("/caches/{id}/flat-file.zip") { cachesController.exportFlatFile(call) }
+                get("/caches/{id}/flat-file.tar.gz") { cachesController.exportFlatFile(call) }
                 get("/caches/{id}/keys.json") { cachesController.exportKeysJson(call) }
                 get("/caches/{id}/keys.zip") { cachesController.exportKeysZip(call) }
                 get("/caches/{id}/map.png") { cachesController.renderMap(call) }

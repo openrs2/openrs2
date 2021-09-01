@@ -14,6 +14,7 @@ dependencies {
     implementation(projects.buffer)
     implementation(projects.cache550)
     implementation(projects.cli)
+    implementation(projects.compress)
     implementation(projects.db)
     implementation(projects.http)
     implementation(projects.inject)

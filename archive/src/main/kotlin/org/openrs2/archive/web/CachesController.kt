@@ -12,10 +12,12 @@ import io.ktor.thymeleaf.ThymeleafContent
 import io.netty.buffer.ByteBufAllocator
 import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
+import org.apache.commons.compress.archivers.tar.TarArchiveOutputStream
 import org.openrs2.archive.cache.CacheExporter
 import org.openrs2.archive.map.MapRenderer
 import org.openrs2.cache.DiskStoreZipWriter
-import org.openrs2.cache.FlatFileStoreZipWriter
+import org.openrs2.cache.FlatFileStoreTarWriter
+import org.openrs2.compress.gzip.GzipLevelOutputStream
 import java.nio.file.attribute.FileTime
 import java.time.Instant
 import java.util.zip.Deflater
@@ -85,12 +87,13 @@ public class CachesController @Inject constructor(
         call.response.header(
             HttpHeaders.ContentDisposition,
             ContentDisposition.Attachment
-                .withParameter(ContentDisposition.Parameters.FileName, "cache.zip")
+                .withParameter(ContentDisposition.Parameters.FileName, "cache.tar.gz")
                 .toString()
         )
 
-        call.respondOutputStream(contentType = ContentType.Application.Zip) {
-            FlatFileStoreZipWriter(ZipOutputStream(this)).use { store ->
+        call.respondOutputStream(contentType = ContentType.Application.GZip) {
+            val output = TarArchiveOutputStream(GzipLevelOutputStream(this, Deflater.BEST_COMPRESSION))
+            FlatFileStoreTarWriter(output).use { store ->
                 exporter.export(id, store)
             }
         }
