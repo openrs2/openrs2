@@ -42,6 +42,9 @@ public class DiskStoreZipWriter(
 
     init {
         out.setLevel(level)
+
+        out.putNextEntry(createZipEntry(""))
+
         out.putNextEntry(createZipEntry("main_file_cache.dat2"))
         out.write(zeroBlock)
     }

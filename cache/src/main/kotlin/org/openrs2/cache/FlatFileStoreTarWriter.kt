@@ -24,6 +24,11 @@ public class FlatFileStoreTarWriter(
 ) : Store {
     private val timestamp = Date.from(timestamp)
 
+    init {
+        out.putArchiveEntry(createTarEntry("", size = 0))
+        out.closeArchiveEntry()
+    }
+
     private fun createTarEntry(name: String, size: Int): TarArchiveEntry {
         val entry = TarArchiveEntry(prefix + name)
         entry.modTime = timestamp
