@@ -333,6 +333,8 @@ public class CacheExporter @Inject constructor(
 
                 stmt.executeQuery().use { rows ->
                     alloc.buffer(2, 2).use { versionBuf ->
+                        store.create(Js5Archive.ARCHIVESET)
+
                         while (rows.next()) {
                             val archive = rows.getInt(1)
                             val group = rows.getInt(2)
