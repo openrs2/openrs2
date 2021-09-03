@@ -42,6 +42,7 @@ jquery = { module = "org.webjars:jquery", version = "3.6.0" }
 jsoup = { module = "org.jsoup:jsoup", version = "1.14.2" }
 junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version = { strictly = "5.7.2" } }
 junit-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
+junit-launcher = { module="org.junit.platform:junit-platform-launcher", version = "1.7.2" }
 kotlin-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinCoroutines" }
 kotlin-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinCoroutines" }
 kotlinPoet = { module = "com.squareup:kotlinpoet", version = "1.9.0" }

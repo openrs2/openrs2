@@ -134,6 +134,7 @@ configure(subprojects.filter { it.isFree }) {
 
             val testRuntimeOnly by configurations
             testRuntimeOnly(libs.junit.engine)
+            testRuntimeOnly(libs.junit.launcher)
         }
     }
 
