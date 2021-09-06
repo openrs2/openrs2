@@ -18,6 +18,7 @@ asm-core = { module = "org.ow2.asm:asm", version.ref = "asm" }
 asm-tree = { module = "org.ow2.asm:asm-tree", version.ref = "asm" }
 asm-util = { module = "org.ow2.asm:asm-util", version.ref = "asm" }
 bootstrap = { module = "org.webjars:bootstrap", version = "5.1.0" }
+bootstrapTable = { module="org.webjars.npm:bootstrap-table", version="1.18.3" }
 bouncyCastle-pkix = { module = "org.bouncycastle:bcpkix-jdk15on", version = "1.69" }
 bouncyCastle-provider = { module = "org.bouncycastle:bcprov-jdk15on", version = "1.69" }
 byteUnits = { module = "com.jakewharton.byteunits:byteunits", version = "0.9.1" }

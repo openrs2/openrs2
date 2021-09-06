@@ -12,13 +12,13 @@
 		<main class="container">
 			<h1>Caches</h1>
 			<div class="table-responsive">
-				<table class="table table-striped table-bordered table-hover">
+				<table class="table table-striped table-bordered table-hover" data-toggle="table" data-filter-control="true" data-sticky-header="true">
 					<thead class="table-dark">
 						<tr>
-							<th>Game</th>
-							<th>Build(s)</th>
-							<th>Timestamp</th>
-							<th>Source(s)</th>
+							<th data-field="game" data-filter-control="select">Game</th>
+							<th data-field="builds" data-filter-control="input" data-sortable="true">Build(s)</th>
+							<th data-field="timestamp" data-sortable="true">Timestamp</th>
+							<th data-field="sources" data-filter-control="input">Source(s)</th>
 							<th>Indexes</th>
 							<th>Groups</th>
 							<th>Keys<sup><a href="#empty-locs">1</a></sup></th>

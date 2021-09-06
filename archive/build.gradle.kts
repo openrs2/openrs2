@@ -25,6 +25,7 @@ dependencies {
     implementation(projects.util)
     implementation(projects.yaml)
     implementation(libs.bootstrap)
+    implementation(libs.bootstrapTable)
     implementation(libs.bundles.ktor)
     implementation(libs.bundles.thymeleaf)
     implementation(libs.byteUnits)

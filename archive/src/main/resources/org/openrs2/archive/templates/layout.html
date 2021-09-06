@@ -4,9 +4,15 @@
 		<!--/*@thymesVar id="title" type="java.lang.String"*/-->
 		<title th:text="${title}? ${title} + ' - OpenRS2 Archive' : 'OpenRS2 Archive'">OpenRS2 Archive</title>
 		<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/webjars/bootstrap-table/dist/bootstrap-table.min.css" />
+		<link rel="stylesheet" href="/webjars/bootstrap-table/dist/extensions/filter-control/bootstrap-table-filter-control.min.css" />
+		<link rel="stylesheet" href="/webjars/bootstrap-table/dist/extensions/sticky-header/bootstrap-table-sticky-header.min.css" />
 		<link rel="stylesheet" href="/static/css/openrs2.css" />
 		<script src="/webjars/jquery/jquery.min.js" defer></script>
 		<script src="/webjars/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+		<script src="/webjars/bootstrap-table/dist/bootstrap-table.min.js" defer></script>
+		<script src="/webjars/bootstrap-table/dist/extensions/filter-control/bootstrap-table-filter-control.min.js" defer></script>
+		<script src="/webjars/bootstrap-table/dist/extensions/sticky-header/bootstrap-table-sticky-header.min.js" defer></script>
 	</head>
 	<body>
 		<nav class="navbar navbar-dark navbar-expand bg-dark mb-4" th:fragment="nav">
