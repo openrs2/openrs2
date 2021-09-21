@@ -15,9 +15,9 @@ pluginManagement {
         id("com.github.ben-manes.versions") version "0.39.0"
         id("com.github.jk1.dependency-license-report") version "2.0"
         id("com.github.johnrengelman.shadow") version "7.0.0"
-        id("org.jetbrains.dokka") version "1.5.0"
-        id("org.jmailen.kotlinter") version "3.5.1"
-        kotlin("jvm") version "1.5.30"
+        id("org.jetbrains.dokka") version "1.5.30"
+        id("org.jmailen.kotlinter") version "3.6.0"
+        kotlin("jvm") version "1.5.31"
     }
 }
 
