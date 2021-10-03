@@ -1,14 +1,14 @@
 [versions]
 asm = "9.2"
 commons-compress = "1.21"
-guava = "30.1.1-jre"
+guava = "31.0.1-jre"
 guice = "5.0.1"
-jackson = "2.12.5"
+jackson = "2.13.0"
 jimfs = "1.2"
-junit = "5.8.0"
+junit = "5.8.1"
 kotlin = "1.5.30"
 kotlinCoroutines = "1.5.2"
-ktor = "1.6.3"
+ktor = "1.6.4"
 netty = "4.1.68.Final"
 nettyIoUring = "0.0.8.Final"
 
@@ -17,7 +17,7 @@ asm-commons = { module = "org.ow2.asm:asm-commons", version.ref = "asm" }
 asm-core = { module = "org.ow2.asm:asm", version.ref = "asm" }
 asm-tree = { module = "org.ow2.asm:asm-tree", version.ref = "asm" }
 asm-util = { module = "org.ow2.asm:asm-util", version.ref = "asm" }
-bootstrap = { module = "org.webjars:bootstrap", version = "5.1.0" }
+bootstrap = { module = "org.webjars:bootstrap", version = "5.1.1" }
 bootstrapTable = { module="org.webjars.npm:bootstrap-table", version="1.18.3" }
 bouncyCastle-pkix = { module = "org.bouncycastle:bcpkix-jdk15on", version = "1.69" }
 bouncyCastle-provider = { module = "org.bouncycastle:bcprov-jdk15on", version = "1.69" }
@@ -40,13 +40,13 @@ jdom = { module = "org.jdom:jdom2", version = "2.0.6" }
 jgrapht = { module = "org.jgrapht:jgrapht-core", version = "1.5.1" }
 jimfs = { module = "com.google.jimfs:jimfs", version.ref = "jimfs" }
 jquery = { module = "org.webjars:jquery", version = "3.6.0" }
-jsoup = { module = "org.jsoup:jsoup", version = "1.14.2" }
-junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version = { strictly = "5.8.0" } }
+jsoup = { module = "org.jsoup:jsoup", version = "1.14.3" }
+junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version = { strictly = "5.8.1" } }
 junit-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
-junit-launcher = { module="org.junit.platform:junit-platform-launcher", version = "1.8.0" }
+junit-launcher = { module="org.junit.platform:junit-platform-launcher", version = "1.8.1" }
 kotlin-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinCoroutines" }
 kotlin-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinCoroutines" }
-kotlinPoet = { module = "com.squareup:kotlinpoet", version = "1.10.0" }
+kotlinPoet = { module = "com.squareup:kotlinpoet", version = "1.10.1" }
 ktor-jackson = { module = "io.ktor:ktor-jackson", version.ref = "ktor" }
 ktor-server-cio = { module = "io.ktor:ktor-server-cio", version.ref = "ktor" }
 ktor-thymeleaf = { module = "io.ktor:ktor-thymeleaf", version.ref = "ktor" }
@@ -58,7 +58,7 @@ netty-codec-http = { module = "io.netty:netty-codec-http", version.ref = "netty"
 netty-handler = { module = "io.netty:netty-handler", version.ref = "netty" }
 netty-transport = { module = "io.netty:netty-transport", version.ref = "netty" }
 openrs2-natives = { module = "org.openrs2:openrs2-natives-all", version = "3.2.0" }
-postgres = { module = "org.postgresql:postgresql", version = "42.2.23" }
+postgres = { module = "org.postgresql:postgresql", version = "42.2.24" }
 thymeleaf-core = { module = "org.thymeleaf:thymeleaf", version = "3.0.12.RELEASE" }
 thymeleaf-java8time = { module = "org.thymeleaf.extras:thymeleaf-extras-java8time", version = "3.0.4.RELEASE" }
 xz = { module = "org.tukaani:xz", version = "1.9" }
