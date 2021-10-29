@@ -16,9 +16,17 @@ public class RuneStarNameDownloader @Inject constructor(
     private val client: HttpClient
 ) : NameDownloader {
     override suspend fun download(): Sequence<String> {
-        val names = readTsv(NAMES_ENDPOINT, 4)
-        val individualNames = readTsv(INDIVIDUAL_NAMES_ENDPOINT, 0)
-        return names + individualNames
+        val names = mutableSetOf<String>()
+
+        for (endpoint in NAMES_ENDPOINTS) {
+            names += readTsv(endpoint, 4)
+        }
+
+        for (endpoint in INDIVIDUAL_NAMES_ENDPOINTS) {
+            names += readTsv(endpoint, 0)
+        }
+
+        return names.asSequence()
     }
 
     private suspend fun readTsv(uri: URI, column: Int): Sequence<String> {
@@ -39,8 +47,13 @@ public class RuneStarNameDownloader @Inject constructor(
     }
 
     private companion object {
-        private val NAMES_ENDPOINT = URI("https://raw.githubusercontent.com/RuneStar/cache-names/master/names.tsv")
-        private val INDIVIDUAL_NAMES_ENDPOINT =
-            URI("https://raw.githubusercontent.com/RuneStar/cache-names/master/individual-names.tsv")
+        private val NAMES_ENDPOINTS = listOf(
+            URI("https://raw.githubusercontent.com/RuneStar/cache-names/master/names.tsv"),
+            URI("https://raw.githubusercontent.com/Joshua-F/cache-names/master/names.tsv"),
+        )
+        private val INDIVIDUAL_NAMES_ENDPOINTS = listOf(
+            URI("https://raw.githubusercontent.com/RuneStar/cache-names/master/individual-names.tsv"),
+            URI("https://raw.githubusercontent.com/Joshua-F/cache-names/master/individual-names.tsv"),
+        )
     }
 }
