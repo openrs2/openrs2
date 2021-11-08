@@ -165,9 +165,9 @@ public class CacheExporter @Inject constructor(
                     while (rows.next()) {
                         val id = rows.getInt(1)
                         val game = rows.getString(2)
-                        val builds = rows.getArray(3).array as Array<Any>
+                        val builds = rows.getArray(3).array as Array<*>
                         val timestamp = rows.getTimestamp(4)?.toInstant()
-                        val names = rows.getArray(5).array as Array<String>
+                        @Suppress("UNCHECKED_CAST") val names = rows.getArray(5).array as Array<String>
 
                         val validIndexes = rows.getLong(6)
                         val stats = if (!rows.wasNull()) {
