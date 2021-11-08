@@ -33,7 +33,8 @@ public abstract class Js5ChannelHandler(
     private val importer: CacheImporter,
     private val masterIndexFormat: MasterIndexFormat,
     private val maxInFlightRequests: Int,
-    private val maxBuildAttempts: Int = 10
+    private val maxBuildAttempts: Int = 10,
+    private val maxReconnectionAttempts: Int = 1
 ) : SimpleChannelInboundHandler<Any>(Object::class.java) {
     protected data class InFlightRequest(val prefetch: Boolean, val archive: Int, val group: Int)
     protected data class PendingRequest(
@@ -52,6 +53,7 @@ public abstract class Js5ChannelHandler(
 
     private var state = State.ACTIVE
     private var buildAttempts = 0
+    private var reconnectionAttempts = 0
     private val inFlightRequests = mutableSetOf<InFlightRequest>()
     private val pendingRequests = ArrayDeque<PendingRequest>()
     private var masterIndexId: Int = 0
@@ -98,7 +100,40 @@ public abstract class Js5ChannelHandler(
             state = State.ACTIVE
             bootstrap.connect(hostname, port)
         } else if (state != State.RESUMING_CONTINUATION) {
-            throw Exception("Connection closed unexpectedly")
+            if (isComplete()) {
+                throw Exception("Connection closed unexpectedly")
+            } else if (++reconnectionAttempts > maxReconnectionAttempts) {
+                throw Exception("Connection closed unexpectedly after maximum number of reconnection attempts")
+            }
+
+            // move in-flight requests back to the pending queue
+            for (request in inFlightRequests) {
+                val prefetch = request.prefetch
+                val archive = request.archive
+                val group = request.group
+
+                pendingRequests += if (archive == Js5Archive.ARCHIVESET && group == Js5Archive.ARCHIVESET) {
+                    PendingRequest(prefetch, archive, group, 0, 0)
+                } else if (archive == Js5Archive.ARCHIVESET) {
+                    val entry = masterIndex!!.entries[group]
+                    val version = entry.version
+                    val checksum = entry.checksum
+
+                    PendingRequest(prefetch, archive, group, version, checksum)
+                } else {
+                    val entry = indexes[archive]!![group]!!
+                    val version = entry.version
+                    val checksum = entry.checksum
+
+                    PendingRequest(prefetch, archive, group, version, checksum)
+                }
+            }
+
+            inFlightRequests.clear()
+
+            // re-connect
+            state = State.ACTIVE
+            bootstrap.connect(hostname, port)
         }
     }
 
@@ -118,7 +153,9 @@ public abstract class Js5ChannelHandler(
             ctx.write(msg, ctx.voidPromise())
         }
 
-        request(ctx, Js5Archive.ARCHIVESET, Js5Archive.ARCHIVESET, 0, 0)
+        if (masterIndex == null && pendingRequests.isEmpty()) {
+            request(ctx, Js5Archive.ARCHIVESET, Js5Archive.ARCHIVESET, 0, 0)
+        }
     }
 
     protected fun handleClientOutOfDate(ctx: ChannelHandlerContext) {
