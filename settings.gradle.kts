@@ -17,7 +17,7 @@ pluginManagement {
         id("com.github.johnrengelman.shadow") version "7.1.0"
         id("org.jetbrains.dokka") version "1.5.31"
         id("org.jmailen.kotlinter") version "3.7.0"
-        kotlin("jvm") version "1.5.31"
+        kotlin("jvm") version "1.6.0"
     }
 }
 
