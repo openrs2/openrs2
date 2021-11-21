@@ -210,6 +210,7 @@ public class ConstantArgTransformer @Inject constructor(private val profile: Pro
                     when (IntBranch.evaluateUnary(insn.opcode, value.set.values)) {
                         ALWAYS_TAKEN -> alwaysTakenBranches += insn
                         NEVER_TAKEN -> neverTakenBranches += insn
+                        else -> Unit
                     }
                 }
                 IF_ICMPEQ, IF_ICMPNE, IF_ICMPLT, IF_ICMPGE, IF_ICMPGT, IF_ICMPLE -> {
@@ -223,6 +224,7 @@ public class ConstantArgTransformer @Inject constructor(private val profile: Pro
                     when (IntBranch.evaluateBinary(insn.opcode, value1.set.values, value2.set.values)) {
                         ALWAYS_TAKEN -> alwaysTakenBranches += insn
                         NEVER_TAKEN -> neverTakenBranches += insn
+                        else -> Unit
                     }
                 }
             }

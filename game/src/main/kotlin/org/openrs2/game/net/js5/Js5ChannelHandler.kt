@@ -21,6 +21,7 @@ public class Js5ChannelHandler @Inject constructor(
             is Js5Request.Group -> service.push(client, msg)
             is Js5Request.Rekey -> handleRekey(ctx, msg)
             is Js5Request.Disconnect -> ctx.close()
+            else -> Unit
         }
     }
 

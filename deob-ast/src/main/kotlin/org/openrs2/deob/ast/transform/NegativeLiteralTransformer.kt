@@ -22,6 +22,7 @@ public class NegativeLiteralTransformer : Transformer() {
             when (expr.operator) {
                 UnaryExpr.Operator.PLUS -> expr.replace(operand)
                 UnaryExpr.Operator.MINUS -> expr.replace(operand.negate())
+                else -> Unit
             }
         }
     }

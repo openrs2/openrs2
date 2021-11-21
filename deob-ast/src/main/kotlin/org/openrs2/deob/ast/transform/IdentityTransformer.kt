@@ -52,6 +52,7 @@ public class IdentityTransformer : Transformer() {
                         expr.replace(expr.left)
                     }
                 }
+                else -> Unit
             }
         }
 

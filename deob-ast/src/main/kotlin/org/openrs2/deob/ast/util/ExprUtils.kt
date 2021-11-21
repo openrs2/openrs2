@@ -91,6 +91,7 @@ public fun Expression.not(): Expression {
                     return BinaryExpr(left.not(), right.not(), BinaryExpr.Operator.OR)
                 BinaryExpr.Operator.OR ->
                     return BinaryExpr(left.not(), right.not(), BinaryExpr.Operator.AND)
+                else -> Unit
             }
         }
         is BooleanLiteralExpr -> return BooleanLiteralExpr(!value)
