@@ -760,16 +760,36 @@ class DiskStoreTest {
         }
     }
 
+    @Test
+    fun testCreateLegacyDataFile() {
+        writeTest("single-block-legacy", legacyDataPath = true) { store ->
+            copiedBuffer("OpenRS2").use { buf ->
+                store.write(255, 1, buf)
+            }
+        }
+    }
+
+    @Test
+    fun testOpenLegacyDataFile() {
+        readTest("single-block-legacy") { store ->
+            copiedBuffer("OpenRS2").use { expected ->
+                store.read(255, 1).use { actual ->
+                    assertEquals(expected, actual)
+                }
+            }
+        }
+    }
+
     private fun readTest(name: String, f: (Store) -> Unit) {
         DiskStore.open(ROOT.resolve(name)).use { store ->
             f(store)
         }
     }
 
-    private fun writeTest(name: String, f: (Store) -> Unit) {
+    private fun writeTest(name: String, legacyDataPath: Boolean = false, f: (Store) -> Unit) {
         Jimfs.newFileSystem(Configuration.forCurrentPlatform()).use { fs ->
             val actual = fs.rootDirectories.first().resolve("cache")
-            DiskStore.create(actual).use { store ->
+            DiskStore.create(actual, legacyDataPath = legacyDataPath).use { store ->
                 f(store)
             }
 

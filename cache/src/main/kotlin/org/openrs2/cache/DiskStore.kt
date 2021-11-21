@@ -15,7 +15,8 @@ import kotlin.math.min
 
 /**
  * A [Store] implementation compatible with the native `main_file_cache.dat2`
- * and `main_file_cache.idx*` format used by the client.
+ * (or `main_file_cache.dat`) and `main_file_cache.idx*` format used by the
+ * client.
  *
  * It supports opening existing caches with a `main_file_cache.dat2m` file for
  * compatibility purposes. It does not support creating new caches with a
@@ -484,6 +485,10 @@ public class DiskStore private constructor(
             return root.resolve("main_file_cache.dat2")
         }
 
+        internal fun legacyDataPath(root: Path): Path {
+            return root.resolve("main_file_cache.dat")
+        }
+
         private fun musicDataPath(root: Path): Path {
             return root.resolve("main_file_cache.dat2m")
         }
@@ -493,15 +498,23 @@ public class DiskStore private constructor(
         }
 
         public fun open(root: Path, alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT): Store {
+            val js5DataPath = dataPath(root)
+            val legacyDataPath = legacyDataPath(root)
+
+            val dataPath = if (Files.exists(js5DataPath)) {
+                js5DataPath
+            } else {
+                legacyDataPath
+            }
             val data = BufferedFileChannel(
-                FileChannel.open(dataPath(root), READ, WRITE),
+                FileChannel.open(dataPath, READ, WRITE),
                 DATA_BUFFER_SIZE,
                 DATA_BUFFER_SIZE,
                 alloc
             )
 
-            val path = musicDataPath(root)
-            val musicData = if (Files.exists(path)) {
+            val musicDataPath = musicDataPath(root)
+            val musicData = if (Files.exists(musicDataPath)) {
                 BufferedFileChannel(
                     FileChannel.open(musicDataPath(root), READ, WRITE),
                     DATA_BUFFER_SIZE,
@@ -529,11 +542,20 @@ public class DiskStore private constructor(
             return DiskStore(root, data, musicData, archives, alloc)
         }
 
-        public fun create(root: Path, alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT): Store {
+        public fun create(
+            root: Path,
+            alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT,
+            legacyDataPath: Boolean = false
+        ): Store {
             Files.createDirectories(root)
 
+            val dataPath = if (legacyDataPath) {
+                legacyDataPath(root)
+            } else {
+                dataPath(root)
+            }
             val data = BufferedFileChannel(
-                FileChannel.open(dataPath(root), CREATE, READ, WRITE),
+                FileChannel.open(dataPath, CREATE, READ, WRITE),
                 DATA_BUFFER_SIZE,
                 DATA_BUFFER_SIZE,
                 alloc

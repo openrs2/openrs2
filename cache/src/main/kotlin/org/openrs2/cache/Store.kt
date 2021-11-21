@@ -136,7 +136,9 @@ public interface Store : Flushable, Closeable {
          * @throws IOException if an underlying I/O error occurs.
          */
         public fun open(root: Path, alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT): Store {
-            return if (Files.isRegularFile(DiskStore.dataPath(root))) {
+            val hasDataFile = Files.isRegularFile(DiskStore.dataPath(root))
+            val hasLegacyDataFile = Files.isRegularFile(DiskStore.legacyDataPath(root))
+            return if (hasDataFile || hasLegacyDataFile) {
                 DiskStore.open(root, alloc)
             } else {
                 FlatFileStore.open(root, alloc)
