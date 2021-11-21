@@ -19,6 +19,14 @@ public fun CharSequence.krHashCode(): Int {
     return hash
 }
 
+public fun CharSequence.jagHashCode(): Int {
+    var hash = 0
+    for (c in this) {
+        hash = (hash * 61) + (c.code - 32)
+    }
+    return hash
+}
+
 public fun String.capitalize(): String {
     return replaceFirstChar { it.titlecase() }
 }

@@ -22,6 +22,12 @@ class StringUtilsTest {
     }
 
     @Test
+    fun testJagHashCode() {
+        assertEquals(0, "".jagHashCode())
+        assertEquals(1012849752, "hello".jagHashCode())
+    }
+
+    @Test
     fun testCapitalize() {
         assertEquals("Hello", "hello".capitalize())
         assertEquals("Hello", "Hello".capitalize())
