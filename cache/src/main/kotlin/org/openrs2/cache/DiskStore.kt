@@ -30,9 +30,12 @@ public class DiskStore private constructor(
     private val data: BufferedFileChannel,
     private val musicData: BufferedFileChannel?,
     private val indexes: Array<BufferedFileChannel?>,
-    private val alloc: ByteBufAllocator
+    private val alloc: ByteBufAllocator,
+    legacyData: Boolean
 ) : Store {
     private data class IndexEntry(val size: Int, val block: Int)
+
+    private val archiveOffset = if (legacyData) 1 else 0
 
     init {
         require(indexes.size == Store.MAX_ARCHIVE + 1)
@@ -194,7 +197,7 @@ public class DiskStore private constructor(
                     }
                     val actualNum = tempBuf.readUnsignedShort()
                     val nextBlock = tempBuf.readUnsignedMedium()
-                    val actualArchive = tempBuf.readUnsignedByte().toInt()
+                    val actualArchive = (tempBuf.readUnsignedByte().toInt() - archiveOffset) and 0xFF
 
                     // verify header
                     when {
@@ -317,7 +320,7 @@ public class DiskStore private constructor(
                 }
                 val actualNum = tempBuf.readUnsignedShort()
                 nextBlock = tempBuf.readUnsignedMedium()
-                val actualArchive = tempBuf.readUnsignedByte().toInt()
+                val actualArchive = (tempBuf.readUnsignedByte().toInt() - archiveOffset) and 0xFF
 
                 if (actualGroup != group || actualNum != num || actualArchive != archive) {
                     block = 0
@@ -371,7 +374,7 @@ public class DiskStore private constructor(
                             }
                             val actualNum = tempBuf.readUnsignedShort()
                             nextNextBlock = tempBuf.readUnsignedMedium()
-                            val actualArchive = tempBuf.readUnsignedByte().toInt()
+                            val actualArchive = (tempBuf.readUnsignedByte().toInt() - archiveOffset) and 0xFF
 
                             if (actualGroup != group || actualNum != nextNum || actualArchive != archive) {
                                 nextBlock = 0
@@ -403,7 +406,7 @@ public class DiskStore private constructor(
                 }
                 tempBuf.writeShort(num)
                 tempBuf.writeMedium(nextBlock)
-                tempBuf.writeByte(archive)
+                tempBuf.writeByte(archive + archiveOffset)
 
                 data.write(blockPos, tempBuf, headerSize)
 
@@ -501,10 +504,13 @@ public class DiskStore private constructor(
             val js5DataPath = dataPath(root)
             val legacyDataPath = legacyDataPath(root)
 
-            val dataPath = if (Files.exists(js5DataPath)) {
-                js5DataPath
-            } else {
+            // We check for js5DataPath first as it takes precedence.
+            val legacyDataFile = !Files.exists(js5DataPath)
+
+            val dataPath = if (legacyDataFile) {
                 legacyDataPath
+            } else {
+                js5DataPath
             }
             val data = BufferedFileChannel(
                 FileChannel.open(dataPath, READ, WRITE),
@@ -539,17 +545,17 @@ public class DiskStore private constructor(
                 }
             }
 
-            return DiskStore(root, data, musicData, archives, alloc)
+            return DiskStore(root, data, musicData, archives, alloc, legacyDataFile)
         }
 
         public fun create(
             root: Path,
             alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT,
-            legacyDataPath: Boolean = false
+            legacyDataFile: Boolean = false
         ): Store {
             Files.createDirectories(root)
 
-            val dataPath = if (legacyDataPath) {
+            val dataPath = if (legacyDataFile) {
                 legacyDataPath(root)
             } else {
                 dataPath(root)
@@ -563,7 +569,7 @@ public class DiskStore private constructor(
 
             val archives = Array<BufferedFileChannel?>(Store.MAX_ARCHIVE + 1) { null }
 
-            return DiskStore(root, data, null, archives, alloc)
+            return DiskStore(root, data, null, archives, alloc, legacyDataFile)
         }
     }
 }

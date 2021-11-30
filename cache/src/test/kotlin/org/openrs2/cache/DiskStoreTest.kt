@@ -507,6 +507,12 @@ class DiskStoreTest {
             }
         }
 
+        readTest("corrupt-first-invalid-archive-legacy") { store ->
+            assertFailsWith<StoreCorruptException> {
+                store.read(0, 1).release()
+            }
+        }
+
         readTest("corrupt-first-invalid-block-number") { store ->
             assertFailsWith<StoreCorruptException> {
                 store.read(255, 1).release()
@@ -534,6 +540,12 @@ class DiskStoreTest {
         readTest("corrupt-second-invalid-archive") { store ->
             assertFailsWith<StoreCorruptException> {
                 store.read(255, 1).release()
+            }
+        }
+
+        readTest("corrupt-second-invalid-archive-legacy") { store ->
+            assertFailsWith<StoreCorruptException> {
+                store.read(0, 1).release()
             }
         }
 
@@ -587,6 +599,15 @@ class DiskStoreTest {
             }
         }
 
+        overwriteTest(
+            "corrupt-first-invalid-archive-legacy",
+            "corrupt-first-invalid-archive-overwritten-legacy"
+        ) { store ->
+            copiedBuffer("Hello".repeat(300)).use { buf ->
+                store.write(0, 1, buf)
+            }
+        }
+
         overwriteTest("corrupt-first-invalid-block-number", "corrupt-first-invalid-block-number-overwritten") { store ->
             copiedBuffer("Hello".repeat(300)).use { buf ->
                 store.write(255, 1, buf)
@@ -614,6 +635,15 @@ class DiskStoreTest {
         overwriteTest("corrupt-second-invalid-archive", "corrupt-second-invalid-archive-overwritten") { store ->
             copiedBuffer("Hello".repeat(300)).use { buf ->
                 store.write(255, 1, buf)
+            }
+        }
+
+        overwriteTest(
+            "corrupt-second-invalid-archive-legacy",
+            "corrupt-second-invalid-archive-overwritten-legacy"
+        ) { store ->
+            copiedBuffer("Hello".repeat(300)).use { buf ->
+                store.write(0, 1, buf)
             }
         }
 
@@ -665,6 +695,14 @@ class DiskStoreTest {
             }
         }
 
+        readTest("corrupt-first-invalid-archive-overwritten-legacy") { store ->
+            store.read(0, 1).use { actual ->
+                copiedBuffer("Hello".repeat(300)).use { expected ->
+                    assertEquals(expected, actual)
+                }
+            }
+        }
+
         readTest("corrupt-first-invalid-block-number-overwritten") { store ->
             store.read(255, 1).use { actual ->
                 copiedBuffer("Hello".repeat(300)).use { expected ->
@@ -699,6 +737,14 @@ class DiskStoreTest {
 
         readTest("corrupt-second-invalid-archive-overwritten") { store ->
             store.read(255, 1).use { actual ->
+                copiedBuffer("Hello".repeat(300)).use { expected ->
+                    assertEquals(expected, actual)
+                }
+            }
+        }
+
+        readTest("corrupt-second-invalid-archive-overwritten-legacy") { store ->
+            store.read(0, 1).use { actual ->
                 copiedBuffer("Hello".repeat(300)).use { expected ->
                     assertEquals(expected, actual)
                 }
@@ -762,9 +808,9 @@ class DiskStoreTest {
 
     @Test
     fun testCreateLegacyDataFile() {
-        writeTest("single-block-legacy", legacyDataPath = true) { store ->
+        writeTest("single-block-legacy", legacyDataFile = true) { store ->
             copiedBuffer("OpenRS2").use { buf ->
-                store.write(255, 1, buf)
+                store.write(0, 1, buf)
             }
         }
     }
@@ -773,7 +819,7 @@ class DiskStoreTest {
     fun testOpenLegacyDataFile() {
         readTest("single-block-legacy") { store ->
             copiedBuffer("OpenRS2").use { expected ->
-                store.read(255, 1).use { actual ->
+                store.read(0, 1).use { actual ->
                     assertEquals(expected, actual)
                 }
             }
@@ -786,10 +832,10 @@ class DiskStoreTest {
         }
     }
 
-    private fun writeTest(name: String, legacyDataPath: Boolean = false, f: (Store) -> Unit) {
+    private fun writeTest(name: String, legacyDataFile: Boolean = false, f: (Store) -> Unit) {
         Jimfs.newFileSystem(Configuration.forCurrentPlatform()).use { fs ->
             val actual = fs.rootDirectories.first().resolve("cache")
-            DiskStore.create(actual, legacyDataPath = legacyDataPath).use { store ->
+            DiskStore.create(actual, legacyDataFile = legacyDataFile).use { store ->
                 f(store)
             }
 
