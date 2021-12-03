@@ -862,6 +862,14 @@ public class CacheImporter @Inject constructor(
         database.execute { connection ->
             connection.prepareStatement(
                 """
+                REFRESH MATERIALIZED VIEW CONCURRENTLY index_stats
+            """.trimIndent()
+            ).use { stmt ->
+                stmt.execute()
+            }
+
+            connection.prepareStatement(
+                """
                 REFRESH MATERIALIZED VIEW CONCURRENTLY master_index_stats
             """.trimIndent()
             ).use { stmt ->
