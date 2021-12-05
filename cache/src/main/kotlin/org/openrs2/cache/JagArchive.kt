@@ -249,8 +249,10 @@ public class JagArchive : Closeable {
 
                     uncompress(entry, !compressedArchive, entryLen, uncompressedEntryLen).use { entryBuf ->
                         if (!archive.existsNamed(nameHash)) {
-                            // Store the first entry if there is a collision,
-                            // for compatibility with the client.
+                            /*
+                             * Store the first entry if there is a collision,
+                             * for compatibility with the client.
+                             */
                             archive.writeNamed(nameHash, entryBuf)
                         }
                     }
