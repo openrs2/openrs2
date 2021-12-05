@@ -808,7 +808,7 @@ class DiskStoreTest {
 
     @Test
     fun testCreateLegacyDataFile() {
-        writeTest("single-block-legacy", legacyDataFile = true) { store ->
+        writeTest("single-block-legacy", legacy = true) { store ->
             copiedBuffer("OpenRS2").use { buf ->
                 store.write(0, 1, buf)
             }
@@ -832,10 +832,10 @@ class DiskStoreTest {
         }
     }
 
-    private fun writeTest(name: String, legacyDataFile: Boolean = false, f: (Store) -> Unit) {
+    private fun writeTest(name: String, legacy: Boolean = false, f: (Store) -> Unit) {
         Jimfs.newFileSystem(Configuration.forCurrentPlatform()).use { fs ->
             val actual = fs.rootDirectories.first().resolve("cache")
-            DiskStore.create(actual, legacyDataFile = legacyDataFile).use { store ->
+            DiskStore.create(actual, legacy = legacy).use { store ->
                 f(store)
             }
 

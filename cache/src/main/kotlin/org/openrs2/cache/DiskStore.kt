@@ -31,11 +31,11 @@ public class DiskStore private constructor(
     private val musicData: BufferedFileChannel?,
     private val indexes: Array<BufferedFileChannel?>,
     private val alloc: ByteBufAllocator,
-    legacyData: Boolean
+    public val legacy: Boolean
 ) : Store {
     private data class IndexEntry(val size: Int, val block: Int)
 
-    private val archiveOffset = if (legacyData) 1 else 0
+    private val archiveOffset = if (legacy) 1 else 0
 
     init {
         require(indexes.size == Store.MAX_ARCHIVE + 1)
@@ -505,9 +505,9 @@ public class DiskStore private constructor(
             val legacyDataPath = legacyDataPath(root)
 
             // We check for js5DataPath first as it takes precedence.
-            val legacyDataFile = !Files.exists(js5DataPath)
+            val legacy = !Files.exists(js5DataPath)
 
-            val dataPath = if (legacyDataFile) {
+            val dataPath = if (legacy) {
                 legacyDataPath
             } else {
                 js5DataPath
@@ -545,17 +545,17 @@ public class DiskStore private constructor(
                 }
             }
 
-            return DiskStore(root, data, musicData, archives, alloc, legacyDataFile)
+            return DiskStore(root, data, musicData, archives, alloc, legacy)
         }
 
         public fun create(
             root: Path,
             alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT,
-            legacyDataFile: Boolean = false
+            legacy: Boolean = false
         ): Store {
             Files.createDirectories(root)
 
-            val dataPath = if (legacyDataFile) {
+            val dataPath = if (legacy) {
                 legacyDataPath(root)
             } else {
                 dataPath(root)
@@ -569,7 +569,7 @@ public class DiskStore private constructor(
 
             val archives = Array<BufferedFileChannel?>(Store.MAX_ARCHIVE + 1) { null }
 
-            return DiskStore(root, data, null, archives, alloc, legacyDataFile)
+            return DiskStore(root, data, null, archives, alloc, legacy)
         }
     }
 }
