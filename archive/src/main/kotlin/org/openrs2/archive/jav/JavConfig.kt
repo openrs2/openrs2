@@ -9,6 +9,7 @@ import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
+import java.time.Duration
 
 public data class JavConfig(
     public val config: Map<String, String>,
@@ -19,6 +20,7 @@ public data class JavConfig(
         public suspend fun download(client: HttpClient, url: String): JavConfig {
             val request = HttpRequest.newBuilder(URI(url))
                 .GET()
+                .timeout(Duration.ofSeconds(30))
                 .build()
 
             val response = client.sendAsync(request, HttpResponse.BodyHandlers.ofInputStream()).await()

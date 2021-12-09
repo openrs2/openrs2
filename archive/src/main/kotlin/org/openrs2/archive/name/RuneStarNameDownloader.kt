@@ -7,6 +7,7 @@ import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
+import java.time.Duration
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.streams.asSequence
@@ -32,6 +33,7 @@ public class RuneStarNameDownloader @Inject constructor(
     private suspend fun readTsv(uri: URI, column: Int): Sequence<String> {
         val request = HttpRequest.newBuilder(uri)
             .GET()
+            .timeout(Duration.ofSeconds(30))
             .build()
 
         val response = client.sendAsync(request, HttpResponse.BodyHandlers.ofLines()).await()

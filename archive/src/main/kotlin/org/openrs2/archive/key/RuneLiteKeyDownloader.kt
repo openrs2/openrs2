@@ -9,6 +9,7 @@ import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
+import java.time.Duration
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -25,6 +26,7 @@ public class RuneLiteKeyDownloader @Inject constructor(
     private suspend fun getVersion(): String {
         val request = HttpRequest.newBuilder(VERSION_ENDPOINT)
             .GET()
+            .timeout(Duration.ofSeconds(30))
             .build()
 
         val response = client.sendAsync(request, HttpResponse.BodyHandlers.ofInputStream()).await()

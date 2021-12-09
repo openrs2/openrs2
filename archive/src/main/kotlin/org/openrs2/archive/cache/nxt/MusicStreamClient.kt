@@ -8,6 +8,7 @@ import org.openrs2.http.checkStatusCode
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
+import java.time.Duration
 
 public class MusicStreamClient(
     private val client: HttpClient,
@@ -19,6 +20,7 @@ public class MusicStreamClient(
 
         val request = HttpRequest.newBuilder(uri)
             .GET()
+            .timeout(Duration.ofSeconds(30))
             .build()
 
         val response = client.sendAsync(request, byteBufBodyHandler).await()

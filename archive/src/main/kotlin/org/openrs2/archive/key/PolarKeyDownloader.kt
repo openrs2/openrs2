@@ -10,6 +10,7 @@ import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
+import java.time.Duration
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -21,6 +22,7 @@ public class PolarKeyDownloader @Inject constructor(
     override suspend fun getMissingUrls(seenUrls: Set<String>): Set<String> {
         val request = HttpRequest.newBuilder(ENDPOINT)
             .GET()
+            .timeout(Duration.ofSeconds(30))
             .build()
 
         val response = client.sendAsync(request, HttpResponse.BodyHandlers.ofInputStream()).await()

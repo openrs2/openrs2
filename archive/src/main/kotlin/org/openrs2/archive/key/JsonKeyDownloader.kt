@@ -9,6 +9,7 @@ import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
+import java.time.Duration
 
 public abstract class JsonKeyDownloader(
     private val client: HttpClient,
@@ -17,6 +18,7 @@ public abstract class JsonKeyDownloader(
     override suspend fun download(url: String): Sequence<XteaKey> {
         val request = HttpRequest.newBuilder(URI(url))
             .GET()
+            .timeout(Duration.ofSeconds(30))
             .build()
 
         val response = client.sendAsync(request, HttpResponse.BodyHandlers.ofInputStream()).await()
