@@ -8,8 +8,8 @@ jimfs = "1.2"
 junit = "5.8.2"
 kotlin = "1.6.0"
 kotlinCoroutines = "1.5.2"
-ktor = "1.6.6"
-netty = "4.1.70.Final"
+ktor = "1.6.7"
+netty = "4.1.71.Final"
 nettyIoUring = "0.0.10.Final"
 
 [libraries]
@@ -26,7 +26,7 @@ clikt = { module = "com.github.ajalt.clikt:clikt", version = "3.3.0" }
 commons-compress = { module = "org.apache.commons:commons-compress", version.ref = "commons-compress" }
 fastutil = { module = "it.unimi.dsi:fastutil", version = "8.5.6" }
 fernflower = { module = "org.openrs2:fernflower", version = "1.1.1" }
-flyway = { module = "org.flywaydb:flyway-core", version = "8.2.0" }
+flyway = { module = "org.flywaydb:flyway-core", version = "8.2.1" }
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
 guice = { module = "com.google.inject:guice", version.ref = "guice" }
 h2 = { module = "com.h2database:h2", version = "2.0.202" }
@@ -36,7 +36,7 @@ jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", ver
 jackson-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin", version.ref = "jackson" }
 jackson-yaml = { module = "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml", version.ref = "jackson" }
 javaParser = { module = "com.github.javaparser:javaparser-symbol-solver-core", version = "3.23.1" }
-jdom = { module = "org.jdom:jdom2", version = "2.0.6" }
+jdom = { module = "org.jdom:jdom2", version = "2.0.6.1" }
 jgrapht = { module = "org.jgrapht:jgrapht-core", version = "1.5.1" }
 jimfs = { module = "com.google.jimfs:jimfs", version.ref = "jimfs" }
 jquery = { module = "org.webjars:jquery", version = "3.6.0" }
@@ -59,7 +59,7 @@ netty-handler = { module = "io.netty:netty-handler", version.ref = "netty" }
 netty-transport = { module = "io.netty:netty-transport", version.ref = "netty" }
 openrs2-natives = { module = "org.openrs2:openrs2-natives-all", version = "3.2.0" }
 postgres = { module = "org.postgresql:postgresql", version = "42.3.1" }
-thymeleaf-core = { module = "org.thymeleaf:thymeleaf", version = "3.0.13.RELEASE" }
+thymeleaf-core = { module = "org.thymeleaf:thymeleaf", version = "3.0.14.RELEASE" }
 thymeleaf-java8time = { module = "org.thymeleaf.extras:thymeleaf-extras-java8time", version = "3.0.4.RELEASE" }
 xz = { module = "org.tukaani:xz", version = "1.9" }
 
