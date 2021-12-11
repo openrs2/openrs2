@@ -30,10 +30,12 @@ public class DiskStoreZipWriter(
     private val prefix: String = "cache/",
     level: Int = Deflater.BEST_COMPRESSION,
     timestamp: Instant = Instant.EPOCH,
-    private val alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT
+    private val alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT,
+    legacy: Boolean = false
 ) : Store {
     private data class IndexEntry(val len: Int, val block: Int)
 
+    private val archiveOffset = if (legacy) 1 else 0
     private val timestamp = FileTime.from(timestamp)
     private val indexes = arrayOfNulls<Int2ObjectSortedMap<IndexEntry>>(Store.MAX_ARCHIVE + 1)
     private val zeroBlock = ByteArray(DiskStore.BLOCK_SIZE)
@@ -45,7 +47,13 @@ public class DiskStoreZipWriter(
 
         out.putNextEntry(createZipEntry(""))
 
-        out.putNextEntry(createZipEntry("main_file_cache.dat2"))
+        val dataFile = if (legacy) {
+            "main_file_cache.dat"
+        } else {
+            "main_file_cache.dat2"
+        }
+
+        out.putNextEntry(createZipEntry(dataFile))
         out.write(zeroBlock)
     }
 
@@ -136,7 +144,7 @@ public class DiskStoreZipWriter(
                     tempBuf.writeMedium(0)
                 }
 
-                tempBuf.writeByte(archive)
+                tempBuf.writeByte(archive + archiveOffset)
                 tempBuf.readBytes(out, tempBuf.readableBytes())
 
                 // write data

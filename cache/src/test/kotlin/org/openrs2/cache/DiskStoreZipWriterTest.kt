@@ -89,14 +89,13 @@ class DiskStoreZipWriterTest {
         }
     }
 
-    @Test
-    fun testWrite() {
+    private fun testWrite(expected: String, legacy: Boolean) {
         Jimfs.newFileSystem(Configuration.forCurrentPlatform()).use { fs ->
             val actual = fs.rootDirectories.first().resolve("zip")
             Files.createDirectories(actual)
 
             Files.newOutputStream(actual.resolve("cache.zip")).use { out ->
-                DiskStoreZipWriter(ZipOutputStream(out)).use { store ->
+                DiskStoreZipWriter(ZipOutputStream(out), legacy = legacy).use { store ->
                     store.create(0)
 
                     copiedBuffer("OpenRS2").use { buf ->
@@ -113,8 +112,18 @@ class DiskStoreZipWriterTest {
                 }
             }
 
-            assertTrue(ROOT.recursiveEquals(actual))
+            assertTrue(ROOT.resolve(expected).recursiveEquals(actual))
         }
+    }
+
+    @Test
+    fun testWrite() {
+        testWrite("cache", legacy = false)
+    }
+
+    @Test
+    fun testWriteLegacy() {
+        testWrite("cache-legacy", legacy = true)
     }
 
     private companion object {
