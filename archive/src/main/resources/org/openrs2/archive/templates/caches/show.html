@@ -19,7 +19,7 @@
 					<td th:text="${cache.masterIndex}? ${cache.masterIndex.format} : 'LEGACY'">VERSIONED</td>
 				</tr>
 				<tr>
-					<th class="table-dark">Indexes</th>
+					<th class="table-dark">Archives</th>
 					<td th:class="${cache.stats}? (${cache.stats.allIndexesValid}? 'table-success' : 'table-danger')"
 					    th:text="${cache.stats}? ${cache.stats.validIndexes} + ' / ' + ${cache.stats.indexes} + ' (' + ${#numbers.formatPercent(cache.stats.validIndexesFraction, 1, 2)} + ')' : 'Calculating...'">
 						Calculating...
