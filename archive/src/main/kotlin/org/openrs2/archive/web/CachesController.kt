@@ -71,8 +71,8 @@ public class CachesController @Inject constructor(
         )
 
         call.respondOutputStream(contentType = ContentType.Application.Zip) {
-            DiskStoreZipWriter(ZipOutputStream(this), alloc = alloc).use { store ->
-                exporter.export(id, store)
+            exporter.export(id) { legacy ->
+                DiskStoreZipWriter(ZipOutputStream(this), alloc = alloc, legacy = legacy)
             }
         }
     }
@@ -92,9 +92,8 @@ public class CachesController @Inject constructor(
         )
 
         call.respondOutputStream(contentType = ContentType.Application.GZip) {
-            val output = TarArchiveOutputStream(GzipLevelOutputStream(this, Deflater.BEST_COMPRESSION))
-            FlatFileStoreTarWriter(output).use { store ->
-                exporter.export(id, store)
+            exporter.export(id) {
+                FlatFileStoreTarWriter(TarArchiveOutputStream(GzipLevelOutputStream(this, Deflater.BEST_COMPRESSION)))
             }
         }
     }

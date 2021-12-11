@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.Unpooled
 import org.openrs2.buffer.use
+import org.openrs2.cache.ChecksumTable
 import org.openrs2.cache.DiskStore
 import org.openrs2.cache.Js5Archive
 import org.openrs2.cache.Js5Compression
@@ -13,6 +14,7 @@ import org.openrs2.cache.Store
 import org.openrs2.crypto.XteaKey
 import org.openrs2.db.Database
 import org.postgresql.util.PGobject
+import java.sql.Connection
 import java.time.Instant
 import java.util.SortedSet
 import javax.inject.Inject
@@ -108,7 +110,8 @@ public class CacheExporter @Inject constructor(
         val sources: List<Source>,
         val updates: List<String>,
         val stats: Stats?,
-        val masterIndex: Js5MasterIndex
+        val masterIndex: Js5MasterIndex?,
+        val checksumTable: ChecksumTable?
     )
 
     public data class Source(
@@ -136,25 +139,25 @@ public class CacheExporter @Inject constructor(
                 SELECT *
                 FROM (
                     SELECT
-                        m.id,
+                        c.id,
                         g.name,
                         array_remove(array_agg(DISTINCT ROW(s.build_major, s.build_minor)::build ORDER BY ROW(s.build_major, s.build_minor)::build ASC), NULL) builds,
                         MIN(s.timestamp) AS timestamp,
                         array_remove(array_agg(DISTINCT s.name ORDER BY s.name ASC), NULL) sources,
-                        ms.valid_indexes,
-                        ms.indexes,
-                        ms.valid_groups,
-                        ms.groups,
-                        ms.valid_keys,
-                        ms.keys,
-                        ms.size,
-                        ms.blocks
-                    FROM master_indexes m
-                    JOIN sources s ON s.master_index_id = m.id
+                        cs.valid_indexes,
+                        cs.indexes,
+                        cs.valid_groups,
+                        cs.groups,
+                        cs.valid_keys,
+                        cs.keys,
+                        cs.size,
+                        cs.blocks
+                    FROM caches c
+                    JOIN sources s ON s.cache_id = c.id
                     JOIN games g ON g.id = s.game_id
-                    LEFT JOIN master_index_stats ms ON ms.master_index_id = m.id
-                    GROUP BY m.id, g.name, ms.valid_indexes, ms.indexes, ms.valid_groups, ms.groups, ms.valid_keys, ms.keys,
-                        ms.size, ms.blocks
+                    LEFT JOIN cache_stats cs ON cs.cache_id = c.id
+                    GROUP BY c.id, g.name, cs.valid_indexes, cs.indexes, cs.valid_groups, cs.groups, cs.valid_keys, cs.keys,
+                        cs.size, cs.blocks
                 ) t
                 ORDER BY t.name ASC, t.builds[1] ASC, t.timestamp ASC
             """.trimIndent()
@@ -201,26 +204,31 @@ public class CacheExporter @Inject constructor(
 
     public suspend fun get(id: Int): Cache? {
         return database.execute { connection ->
-            val masterIndex: Js5MasterIndex
+            val masterIndex: Js5MasterIndex?
+            val checksumTable: ChecksumTable?
             val stats: Stats?
 
             connection.prepareStatement(
                 """
                 SELECT
                     m.format,
-                    c.data,
-                    ms.valid_indexes,
-                    ms.indexes,
-                    ms.valid_groups,
-                    ms.groups,
-                    ms.valid_keys,
-                    ms.keys,
-                    ms.size,
-                    ms.blocks
-                FROM master_indexes m
-                JOIN containers c ON c.id = m.container_id
-                LEFT JOIN master_index_stats ms ON ms.master_index_id = m.id
-                WHERE m.id = ?
+                    mc.data,
+                    b.data,
+                    cs.valid_indexes,
+                    cs.indexes,
+                    cs.valid_groups,
+                    cs.groups,
+                    cs.valid_keys,
+                    cs.keys,
+                    cs.size,
+                    cs.blocks
+                FROM caches c
+                LEFT JOIN master_indexes m ON m.id = c.id
+                LEFT JOIN containers mc ON mc.id = m.container_id
+                LEFT JOIN crc_tables t ON t.id = c.id
+                LEFT JOIN blobs b ON b.id = t.blob_id
+                LEFT JOIN cache_stats cs ON cs.cache_id = c.id
+                WHERE c.id = ?
             """.trimIndent()
             ).use { stmt ->
                 stmt.setInt(1, id)
@@ -230,25 +238,38 @@ public class CacheExporter @Inject constructor(
                         return@execute null
                     }
 
-                    val format = MasterIndexFormat.valueOf(rows.getString(1).uppercase())
-
-                    masterIndex = Unpooled.wrappedBuffer(rows.getBytes(2)).use { compressed ->
-                        Js5Compression.uncompress(compressed).use { uncompressed ->
-                            Js5MasterIndex.readUnverified(uncompressed, format)
+                    val formatString = rows.getString(1)
+                    masterIndex = if (formatString != null) {
+                        Unpooled.wrappedBuffer(rows.getBytes(2)).use { compressed ->
+                            Js5Compression.uncompress(compressed).use { uncompressed ->
+                                val format = MasterIndexFormat.valueOf(formatString.uppercase())
+                                Js5MasterIndex.readUnverified(uncompressed, format)
+                            }
                         }
+                    } else {
+                        null
                     }
 
-                    val validIndexes = rows.getLong(3)
+                    val blob = rows.getBytes(3)
+                    checksumTable = if (blob != null) {
+                        Unpooled.wrappedBuffer(blob).use { buf ->
+                            ChecksumTable.read(buf)
+                        }
+                    } else {
+                        null
+                    }
+
+                    val validIndexes = rows.getLong(4)
                     stats = if (rows.wasNull()) {
                         null
                     } else {
-                        val indexes = rows.getLong(4)
-                        val validGroups = rows.getLong(5)
-                        val groups = rows.getLong(6)
-                        val validKeys = rows.getLong(7)
-                        val keys = rows.getLong(8)
-                        val size = rows.getLong(9)
-                        val blocks = rows.getLong(10)
+                        val indexes = rows.getLong(5)
+                        val validGroups = rows.getLong(6)
+                        val groups = rows.getLong(7)
+                        val validKeys = rows.getLong(8)
+                        val keys = rows.getLong(9)
+                        val size = rows.getLong(10)
+                        val blocks = rows.getLong(11)
                         Stats(validIndexes, indexes, validGroups, groups, validKeys, keys, size, blocks)
                     }
                 }
@@ -261,7 +282,7 @@ public class CacheExporter @Inject constructor(
                 SELECT g.name, s.build_major, s.build_minor, s.timestamp, s.name, s.description, s.url
                 FROM sources s
                 JOIN games g ON g.id = s.game_id
-                WHERE s.master_index_id = ?
+                WHERE s.cache_id = ?
                 ORDER BY s.name ASC
             """.trimIndent()
             ).use { stmt ->
@@ -303,7 +324,7 @@ public class CacheExporter @Inject constructor(
                 """
                 SELECT url
                 FROM updates
-                WHERE master_index_id = ?
+                WHERE cache_id = ?
             """.trimIndent()
             ).use { stmt ->
                 stmt.setInt(1, id)
@@ -315,46 +336,106 @@ public class CacheExporter @Inject constructor(
                 }
             }
 
-            Cache(id, sources, updates, stats, masterIndex)
+            Cache(id, sources, updates, stats, masterIndex, checksumTable)
         }
     }
 
-    public suspend fun export(id: Int, store: Store) {
-        database.execute { connection ->
-            connection.prepareStatement(
+    public fun export(id: Int, storeFactory: (Boolean) -> Store) {
+        database.executeOnce { connection ->
+            val legacy = connection.prepareStatement(
                 """
-                SELECT archive_id, group_id, data, version
-                FROM resolved_groups
-                WHERE master_index_id = ?
+                SELECT id
+                FROM crc_tables
+                WHERE id = ?
             """.trimIndent()
             ).use { stmt ->
-                stmt.fetchSize = BATCH_SIZE
                 stmt.setInt(1, id)
 
                 stmt.executeQuery().use { rows ->
-                    alloc.buffer(2, 2).use { versionBuf ->
-                        store.create(Js5Archive.ARCHIVESET)
+                    rows.next()
+                }
+            }
 
-                        while (rows.next()) {
-                            val archive = rows.getInt(1)
-                            val group = rows.getInt(2)
-                            val bytes = rows.getBytes(3)
-                            val version = rows.getInt(4)
-                            val versionNull = rows.wasNull()
+            storeFactory(legacy).use { store ->
+                if (legacy) {
+                    exportLegacy(connection, id, store)
+                } else {
+                    export(connection, id, store)
+                }
+            }
+        }
+    }
 
-                            versionBuf.clear()
-                            if (!versionNull) {
-                                versionBuf.writeShort(version)
+    private fun export(connection: Connection, id: Int, store: Store) {
+        connection.prepareStatement(
+            """
+            SELECT archive_id, group_id, data, version
+            FROM resolved_groups
+            WHERE master_index_id = ?
+        """.trimIndent()
+        ).use { stmt ->
+            stmt.fetchSize = BATCH_SIZE
+            stmt.setInt(1, id)
+
+            stmt.executeQuery().use { rows ->
+                alloc.buffer(2, 2).use { versionBuf ->
+                    store.create(Js5Archive.ARCHIVESET)
+
+                    while (rows.next()) {
+                        val archive = rows.getInt(1)
+                        val group = rows.getInt(2)
+                        val bytes = rows.getBytes(3)
+                        val version = rows.getInt(4)
+                        val versionNull = rows.wasNull()
+
+                        versionBuf.clear()
+                        if (!versionNull) {
+                            versionBuf.writeShort(version)
+                        }
+
+                        Unpooled.wrappedBuffer(Unpooled.wrappedBuffer(bytes), versionBuf.retain()).use { buf ->
+                            store.write(archive, group, buf)
+
+                            // ensure the .idx file exists even if it is empty
+                            if (archive == Js5Archive.ARCHIVESET) {
+                                store.create(group)
                             }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-                            Unpooled.wrappedBuffer(Unpooled.wrappedBuffer(bytes), versionBuf.retain()).use { buf ->
-                                store.write(archive, group, buf)
+    private fun exportLegacy(connection: Connection, id: Int, store: Store) {
+        connection.prepareStatement(
+            """
+            SELECT index_id, file_id, data, version
+            FROM resolved_files
+            WHERE crc_table_id = ?
+        """.trimIndent()
+        ).use { stmt ->
+            stmt.fetchSize = BATCH_SIZE
+            stmt.setInt(1, id)
 
-                                // ensure the .idx file exists even if it is empty
-                                if (archive == Js5Archive.ARCHIVESET) {
-                                    store.create(group)
-                                }
-                            }
+            stmt.executeQuery().use { rows ->
+                alloc.buffer(2, 2).use { versionBuf ->
+                    store.create(0)
+
+                    while (rows.next()) {
+                        val index = rows.getInt(1)
+                        val file = rows.getInt(2)
+                        val bytes = rows.getBytes(3)
+                        val version = rows.getInt(4)
+                        val versionNull = rows.wasNull()
+
+                        versionBuf.clear()
+                        if (!versionNull) {
+                            versionBuf.writeShort(version)
+                        }
+
+                        Unpooled.wrappedBuffer(Unpooled.wrappedBuffer(bytes), versionBuf.retain()).use { buf ->
+                            store.write(index, file, buf)
                         }
                     }
                 }

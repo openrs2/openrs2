@@ -16,7 +16,7 @@
 			<table class="table table-striped table-bordered table-hover">
 				<tr>
 					<th class="table-dark">Format</th>
-					<td th:text="${cache.masterIndex.format}">VERSIONED</td>
+					<td th:text="${cache.masterIndex}? ${cache.masterIndex.format} : 'LEGACY'">VERSIONED</td>
 				</tr>
 				<tr>
 					<th class="table-dark">Indexes</th>
@@ -110,49 +110,74 @@
 				</table>
 			</div>
 
-			<h2>Master index</h2>
+			<div th:if="${cache.masterIndex}" th:remove="tag">
+				<h2>Master index</h2>
 
-			<div class="table-responsive">
-				<table class="table table-striped table-bordered table-hover">
-					<thead class="table-dark">
-						<tr>
-							<th>Archive</th>
-							<th>Version</th>
-							<th>Checksum</th>
-							<th>Digest</th>
-							<th>Groups</th>
-							<th>Total uncompressed length</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="entry, it : ${cache.masterIndex.entries}">
-							<td th:text="${it.index}" class="text-right">0</td>
-							<td th:text="${#numbers.formatInteger(entry.version, 1, 'COMMA')}" class="text-right">0</td>
-							<td class="text-right">
-								<code th:text="${entry.checksum}">0</code>
-							</td>
-							<td>
-								<code
-									th:if="${cache.masterIndex.format >= @org.openrs2.cache.MasterIndexFormat@DIGESTS}"><span
-									th:remove="tag"
-									th:text="${@io.netty.buffer.ByteBufUtil@hexDump(entry.digest).substring(0, 64)}"></span>&ZeroWidthSpace;<span
-									th:remove="tag"
-									th:text="${@io.netty.buffer.ByteBufUtil@hexDump(entry.digest).substring(64)}"></span></code>
-							</td>
-							<td class="text-right">
-								<span
-									th:if="${cache.masterIndex.format >= @org.openrs2.cache.MasterIndexFormat@LENGTHS}"
-									th:text="${#numbers.formatInteger(entry.groups, 1, 'COMMA')}"></span>
-							</td>
-							<td class="text-right">
-								<!--/*@thymesVar id="#byteunits" type="org.openrs2.archive.web.ByteUnits"*/-->
-								<span
-									th:if="${cache.masterIndex.format >= @org.openrs2.cache.MasterIndexFormat@LENGTHS}"
-									th:text="${#byteunits.format(@java.lang.Integer@toUnsignedLong(entry.totalUncompressedLength))}"></span>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered table-hover">
+						<thead class="table-dark">
+							<tr>
+								<th>Archive</th>
+								<th>Version</th>
+								<th>Checksum</th>
+								<th>Digest</th>
+								<th>Groups</th>
+								<th>Total uncompressed length</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="entry, it : ${cache.masterIndex.entries}">
+								<td th:text="${it.index}" class="text-right">0</td>
+								<td th:text="${#numbers.formatInteger(entry.version, 1, 'COMMA')}" class="text-right">0</td>
+								<td class="text-right">
+									<code th:text="${entry.checksum}">0</code>
+								</td>
+								<td>
+									<code
+										th:if="${cache.masterIndex.format >= @org.openrs2.cache.MasterIndexFormat@DIGESTS}"><span
+										th:remove="tag"
+										th:text="${@io.netty.buffer.ByteBufUtil@hexDump(entry.digest).substring(0, 64)}"></span>&ZeroWidthSpace;<span
+										th:remove="tag"
+										th:text="${@io.netty.buffer.ByteBufUtil@hexDump(entry.digest).substring(64)}"></span></code>
+								</td>
+								<td class="text-right">
+									<span
+										th:if="${cache.masterIndex.format >= @org.openrs2.cache.MasterIndexFormat@LENGTHS}"
+										th:text="${#numbers.formatInteger(entry.groups, 1, 'COMMA')}"></span>
+								</td>
+								<td class="text-right">
+									<!--/*@thymesVar id="#byteunits" type="org.openrs2.archive.web.ByteUnits"*/-->
+									<span
+										th:if="${cache.masterIndex.format >= @org.openrs2.cache.MasterIndexFormat@LENGTHS}"
+										th:text="${#byteunits.format(@java.lang.Integer@toUnsignedLong(entry.totalUncompressedLength))}"></span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div th:if="${cache.checksumTable}" th:remove="tag">
+				<h2>Checksum table</h2>
+
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered table-hover">
+						<thead class="table-dark">
+							<tr>
+								<th>Archive</th>
+								<th>Checksum</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="entry, it : ${cache.checksumTable.entries}">
+								<td th:text="${it.index}" class="text-right">0</td>
+								<td class="text-right">
+									<code th:text="${entry}">0</code>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</main>
 	</body>

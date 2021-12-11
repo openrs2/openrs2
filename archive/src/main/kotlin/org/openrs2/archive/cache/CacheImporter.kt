@@ -4,9 +4,13 @@ import com.github.michaelbull.logging.InlineLogger
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.ByteBufUtil
+import io.netty.buffer.DefaultByteBufHolder
 import io.netty.buffer.Unpooled
 import org.openrs2.buffer.crc32
 import org.openrs2.buffer.use
+import org.openrs2.cache.ChecksumTable
+import org.openrs2.cache.DiskStore
+import org.openrs2.cache.JagArchive
 import org.openrs2.cache.Js5Archive
 import org.openrs2.cache.Js5Compression
 import org.openrs2.cache.Js5CompressionType
@@ -15,6 +19,7 @@ import org.openrs2.cache.Js5MasterIndex
 import org.openrs2.cache.MasterIndexFormat
 import org.openrs2.cache.Store
 import org.openrs2.cache.StoreCorruptException
+import org.openrs2.cache.VersionList
 import org.openrs2.cache.VersionTrailer
 import org.openrs2.crypto.Whirlpool
 import org.openrs2.db.Database
@@ -74,6 +79,32 @@ public class CacheImporter @Inject constructor(
         public val versionTruncated: Boolean
     ) : Container(compressed, uncompressed)
 
+    public abstract class Blob(
+        buf: ByteBuf
+    ) : DefaultByteBufHolder(buf) {
+        public val bytes: ByteArray = ByteBufUtil.getBytes(buf, buf.readerIndex(), buf.readableBytes(), false)
+        public val crc32: Int = buf.crc32()
+        public val whirlpool: ByteArray = Whirlpool.whirlpool(bytes)
+    }
+
+    public class ChecksumTableBlob(
+        buf: ByteBuf,
+        public val table: ChecksumTable
+    ) : Blob(buf)
+
+    public class Archive(
+        public val id: Int,
+        buf: ByteBuf,
+        public val versionList: VersionList?
+    ) : Blob(buf)
+
+    public class File(
+        public val index: Int,
+        public val file: Int,
+        buf: ByteBuf,
+        public val version: Int
+    ) : Blob(buf)
+
     private enum class SourceType {
         DISK,
         JS5REMOTE
@@ -100,83 +131,101 @@ public class CacheImporter @Inject constructor(
 
             val gameId = getGameId(connection, game)
 
-            // import master index
-            val masterIndex = createMasterIndex(store)
-            val masterIndexId = try {
-                if (masterIndex.index.entries.isEmpty()) {
-                    throw IOException("Master index empty, cache probably corrupt")
-                }
+            if (store is DiskStore && store.legacy) {
+                importLegacy(connection, store, gameId, buildMajor, buildMinor, timestamp, name, description, url)
+            } else {
+                importJs5(connection, store, gameId, buildMajor, buildMinor, timestamp, name, description, url)
+            }
+        }
+    }
 
-                addMasterIndex(connection, masterIndex)
-            } finally {
-                masterIndex.release()
+    private fun importJs5(
+        connection: Connection,
+        store: Store,
+        gameId: Int,
+        buildMajor: Int?,
+        buildMinor: Int?,
+        timestamp: Instant?,
+        name: String?,
+        description: String?,
+        url: String?
+    ) {
+        // import master index
+        val masterIndex = createMasterIndex(store)
+        val masterIndexId = try {
+            if (masterIndex.index.entries.isEmpty()) {
+                throw IOException("Master index empty, cache probably corrupt")
             }
 
-            // create source
-            val sourceId = addSource(
-                connection,
-                SourceType.DISK,
-                masterIndexId,
-                gameId,
-                buildMajor,
-                buildMinor,
-                timestamp,
-                name,
-                description,
-                url
-            )
+            addMasterIndex(connection, masterIndex)
+        } finally {
+            masterIndex.release()
+        }
 
-            // import indexes
-            val indexes = arrayOfNulls<Js5Index>(Js5Archive.ARCHIVESET)
-            val indexGroups = mutableListOf<Index>()
-            try {
-                for (archive in store.list(Js5Archive.ARCHIVESET)) {
-                    try {
-                        val indexGroup = readIndex(store, archive)
-                        indexes[archive] = indexGroup.index
-                        indexGroups += indexGroup
-                    } catch (ex: StoreCorruptException) {
-                        // see the comment in Js5MasterIndex::create
-                        logger.warn(ex) { "Skipping corrupt index (archive $archive)" }
-                    }
-                }
+        // create source
+        val sourceId = addSource(
+            connection,
+            SourceType.DISK,
+            masterIndexId,
+            gameId,
+            buildMajor,
+            buildMinor,
+            timestamp,
+            name,
+            description,
+            url
+        )
 
-                for (index in indexGroups) {
-                    addIndex(connection, sourceId, index)
+        // import indexes
+        val indexes = arrayOfNulls<Js5Index>(Js5Archive.ARCHIVESET)
+        val indexGroups = mutableListOf<Index>()
+        try {
+            for (archive in store.list(Js5Archive.ARCHIVESET)) {
+                try {
+                    val indexGroup = readIndex(store, archive)
+                    indexes[archive] = indexGroup.index
+                    indexGroups += indexGroup
+                } catch (ex: StoreCorruptException) {
+                    // see the comment in Js5MasterIndex::create
+                    logger.warn(ex) { "Skipping corrupt index (archive $archive)" }
                 }
-            } finally {
-                indexGroups.forEach(Index::release)
             }
 
-            // import groups
-            val groups = mutableListOf<Group>()
-            try {
-                for (archive in store.list()) {
-                    if (archive == Js5Archive.ARCHIVESET) {
-                        continue
-                    }
-
-                    val index = indexes[archive]
-
-                    for (id in store.list(archive)) {
-                        val group = readGroup(store, archive, index, id) ?: continue
-                        groups += group
-
-                        if (groups.size >= BATCH_SIZE) {
-                            addGroups(connection, sourceId, groups)
-
-                            groups.forEach(Group::release)
-                            groups.clear()
-                        }
-                    }
-                }
-
-                if (groups.isNotEmpty()) {
-                    addGroups(connection, sourceId, groups)
-                }
-            } finally {
-                groups.forEach(Group::release)
+            for (index in indexGroups) {
+                addIndex(connection, sourceId, index)
             }
+        } finally {
+            indexGroups.forEach(Index::release)
+        }
+
+        // import groups
+        val groups = mutableListOf<Group>()
+        try {
+            for (archive in store.list()) {
+                if (archive == Js5Archive.ARCHIVESET) {
+                    continue
+                }
+
+                val index = indexes[archive]
+
+                for (id in store.list(archive)) {
+                    val group = readGroup(store, archive, index, id) ?: continue
+                    groups += group
+
+                    if (groups.size >= BATCH_SIZE) {
+                        addGroups(connection, sourceId, groups)
+
+                        groups.forEach(Group::release)
+                        groups.clear()
+                    }
+                }
+            }
+
+            if (groups.isNotEmpty()) {
+                addGroups(connection, sourceId, groups)
+            }
+        } finally {
+            groups.forEach(Group::release)
         }
     }
 
@@ -229,7 +278,7 @@ public class CacheImporter @Inject constructor(
         buildMinor: Int?,
         lastId: Int?,
         timestamp: Instant
-    ): MasterIndexResult {
+    ): CacheImporter.MasterIndexResult {
         return database.execute { connection ->
             prepare(connection)
 
@@ -471,7 +520,7 @@ public class CacheImporter @Inject constructor(
     private fun addSource(
         connection: Connection,
         type: SourceType,
-        masterIndexId: Int,
+        cacheId: Int,
         gameId: Int,
         buildMajor: Int?,
         buildMinor: Int?,
@@ -485,10 +534,10 @@ public class CacheImporter @Inject constructor(
                 """
                 SELECT id
                 FROM sources
-                WHERE type = 'js5remote' AND master_index_id = ? AND game_id = ? AND build_major = ? AND build_minor IS NOT DISTINCT FROM ?
+                WHERE type = 'js5remote' AND cache_id = ? AND game_id = ? AND build_major = ? AND build_minor IS NOT DISTINCT FROM ?
             """.trimIndent()
             ).use { stmt ->
-                stmt.setInt(1, masterIndexId)
+                stmt.setInt(1, cacheId)
                 stmt.setInt(2, gameId)
                 stmt.setInt(3, buildMajor)
                 stmt.setObject(4, buildMinor, Types.INTEGER)
@@ -503,13 +552,13 @@ public class CacheImporter @Inject constructor(
 
         connection.prepareStatement(
             """
-            INSERT INTO sources (type, master_index_id, game_id, build_major, build_minor, timestamp, name, description, url)
+            INSERT INTO sources (type, cache_id, game_id, build_major, build_minor, timestamp, name, description, url)
             VALUES (?::source_type, ?, ?, ?, ?, ?, ?, ?, ?)
             RETURNING id
         """.trimIndent()
         ).use { stmt ->
             stmt.setString(1, type.toString().lowercase())
-            stmt.setInt(2, masterIndexId)
+            stmt.setInt(2, cacheId)
             stmt.setInt(3, gameId)
             stmt.setObject(4, buildMajor, Types.INTEGER)
             stmt.setObject(5, buildMinor, Types.INTEGER)
@@ -747,6 +796,19 @@ public class CacheImporter @Inject constructor(
         ).use { stmt ->
             stmt.execute()
         }
+
+        connection.prepareStatement(
+            """
+            CREATE TEMPORARY TABLE tmp_blobs (
+                index INTEGER NOT NULL,
+                crc32 INTEGER NOT NULL,
+                whirlpool BYTEA NOT NULL,
+                data BYTEA NOT NULL
+            ) ON COMMIT DROP
+        """.trimIndent()
+        ).use { stmt ->
+            stmt.execute()
+        }
     }
 
     private fun addContainer(connection: Connection, container: Container): Long {
@@ -823,6 +885,71 @@ public class CacheImporter @Inject constructor(
         return ids
     }
 
+    private fun addBlob(connection: Connection, blob: Blob): Long {
+        return addBlobs(connection, listOf(blob)).single()
+    }
+
+    private fun addBlobs(connection: Connection, blobs: List<Blob>): List<Long> {
+        connection.prepareStatement(
+            """
+            TRUNCATE TABLE tmp_blobs
+        """.trimIndent()
+        ).use { stmt ->
+            stmt.execute()
+        }
+
+        connection.prepareStatement(
+            """
+            INSERT INTO tmp_blobs (index, crc32, whirlpool, data)
+            VALUES (?, ?, ?, ?)
+        """.trimIndent()
+        ).use { stmt ->
+            for ((i, blob) in blobs.withIndex()) {
+                stmt.setInt(1, i)
+                stmt.setInt(2, blob.crc32)
+                stmt.setBytes(3, blob.whirlpool)
+                stmt.setBytes(4, blob.bytes)
+
+                stmt.addBatch()
+            }
+
+            stmt.executeBatch()
+        }
+
+        connection.prepareStatement(
+            """
+            INSERT INTO blobs (crc32, whirlpool, data)
+            SELECT t.crc32, t.whirlpool, t.data
+            FROM tmp_blobs t
+            LEFT JOIN blobs b ON b.whirlpool = t.whirlpool
+            WHERE b.whirlpool IS NULL
+            ON CONFLICT DO NOTHING
+        """.trimIndent()
+        ).use { stmt ->
+            stmt.execute()
+        }
+
+        val ids = mutableListOf<Long>()
+
+        connection.prepareStatement(
+            """
+            SELECT b.id
+            FROM tmp_blobs t
+            JOIN blobs b ON b.whirlpool = t.whirlpool
+            ORDER BY t.index ASC
+        """.trimIndent()
+        ).use { stmt ->
+            stmt.executeQuery().use { rows ->
+                while (rows.next()) {
+                    ids += rows.getLong(1)
+                }
+            }
+        }
+
+        check(ids.size == blobs.size)
+        return ids
+    }
+
     private fun getGameId(connection: Connection, name: String): Int {
         connection.prepareStatement(
             """
@@ -858,6 +985,313 @@ public class CacheImporter @Inject constructor(
         }
     }
 
+    private fun importLegacy(
+        connection: Connection,
+        store: Store,
+        gameId: Int,
+        buildMajor: Int?,
+        buildMinor: Int?,
+        timestamp: Instant?,
+        name: String?,
+        description: String?,
+        url: String?
+    ) {
+        // import checksum table
+        val checksumTable = createChecksumTable(store)
+        val checksumTableId = try {
+            if (checksumTable.table.entries.isEmpty()) {
+                throw IOException("Checksum table empty, cache probably corrupt")
+            }
+
+            addChecksumTable(connection, checksumTable)
+        } finally {
+            checksumTable.release()
+        }
+
+        // add source
+        val sourceId = addSource(
+            connection,
+            SourceType.DISK,
+            checksumTableId,
+            gameId,
+            buildMajor,
+            buildMinor,
+            timestamp,
+            name,
+            description,
+            url
+        )
+
+        // import archives and version list
+        for (id in store.list(0)) {
+            readArchive(store, id).use { archive ->
+                addArchive(connection, sourceId, archive)
+            }
+        }
+
+        // import files
+        val files = mutableListOf<File>()
+        try {
+            for (index in store.list()) {
+                if (index == 0) {
+                    continue
+                }
+
+                for (id in store.list(index)) {
+                    val file = readFile(store, index, id) ?: continue
+                    files += file
+
+                    if (files.size >= BATCH_SIZE) {
+                        addFiles(connection, sourceId, files)
+
+                        files.forEach(File::release)
+                        files.clear()
+                    }
+                }
+            }
+
+            if (files.isNotEmpty()) {
+                addFiles(connection, sourceId, files)
+            }
+        } finally {
+            files.forEach(File::release)
+        }
+    }
+
+    private fun createChecksumTable(store: Store): ChecksumTableBlob {
+        alloc.buffer().use { buf ->
+            val table = ChecksumTable.create(store)
+            table.write(buf)
+            return ChecksumTableBlob(buf.retain(), table)
+        }
+    }
+
+    private fun addChecksumTable(
+        connection: Connection,
+        checksumTable: ChecksumTableBlob
+    ): Int {
+        val blobId = addBlob(connection, checksumTable)
+
+        connection.prepareStatement(
+            """
+            SELECT id
+            FROM crc_tables
+            WHERE blob_id = ?
+        """.trimIndent()
+        ).use { stmt ->
+            stmt.setLong(1, blobId)
+
+            stmt.executeQuery().use { rows ->
+                if (rows.next()) {
+                    return rows.getInt(1)
+                }
+            }
+        }
+
+        val checksumTableId: Int
+
+        connection.prepareStatement(
+            """
+            INSERT INTO caches (id)
+            VALUES (DEFAULT)
+            RETURNING id
+        """.trimIndent()
+        ).use { stmt ->
+            stmt.executeQuery().use { rows ->
+                check(rows.next())
+                checksumTableId = rows.getInt(1)
+            }
+        }
+
+        connection.prepareStatement(
+            """
+            INSERT INTO crc_tables (id, blob_id)
+            VALUES (?, ?)
+        """.trimIndent()
+        ).use { stmt ->
+            stmt.setInt(1, checksumTableId)
+            stmt.setLong(2, blobId)
+
+            stmt.execute()
+        }
+
+        connection.prepareStatement(
+            """
+            INSERT INTO crc_table_archives (crc_table_id, archive_id, crc32)
+            VALUES (?, ?, ?)
+        """.trimIndent()
+        ).use { stmt ->
+            for ((i, entry) in checksumTable.table.entries.withIndex()) {
+                stmt.setInt(1, checksumTableId)
+                stmt.setInt(2, i)
+                stmt.setInt(3, entry)
+
+                stmt.addBatch()
+            }
+
+            stmt.executeBatch()
+        }
+
+        return checksumTableId
+    }
+
+    private fun readArchive(store: Store, id: Int): Archive {
+        store.read(0, id).use { buf ->
+            val versionList = if (id == 5) {
+                JagArchive.unpack(buf.slice()).use { archive ->
+                    VersionList.read(archive)
+                }
+            } else {
+                null
+            }
+
+            return Archive(id, buf.retain(), versionList)
+        }
+    }
+
+    private fun addArchive(connection: Connection, sourceId: Int, archive: Archive) {
+        val blobId = addBlob(connection, archive)
+
+        connection.prepareStatement(
+            """
+            INSERT INTO archives (archive_id, blob_id)
+            VALUES (?, ?)
+            ON CONFLICT DO NOTHING
+        """.trimIndent()
+        ).use { stmt ->
+            stmt.setInt(1, archive.id)
+            stmt.setLong(2, blobId)
+
+            stmt.execute()
+        }
+
+        connection.prepareStatement(
+            """
+            INSERT INTO source_archives (source_id, archive_id, blob_id)
+            VALUES (?, ?, ?)
+            ON CONFLICT DO NOTHING
+        """.trimIndent()
+        ).use { stmt ->
+            stmt.setInt(1, sourceId)
+            stmt.setInt(2, archive.id)
+            stmt.setLong(3, blobId)
+
+            stmt.execute()
+        }
+
+        val versionList = archive.versionList ?: return
+        val savepoint = connection.setSavepoint()
+
+        connection.prepareStatement(
+            """
+            INSERT INTO version_lists (blob_id)
+            VALUES (?)
+        """.trimIndent()
+        ).use { stmt ->
+            try {
+                stmt.setLong(1, blobId)
+
+                stmt.execute()
+            } catch (ex: SQLException) {
+                if (ex.sqlState == PSQLState.UNIQUE_VIOLATION.state) {
+                    connection.rollback(savepoint)
+                    return
+                }
+                throw ex
+            }
+        }
+
+        connection.prepareStatement(
+            """
+            INSERT INTO version_list_files (blob_id, index_id, file_id, version, crc32)
+            VALUES (?, ?, ?, ?, ?)
+        """.trimIndent()
+        ).use { stmt ->
+            for ((indexId, files) in versionList.files.withIndex()) {
+                for ((fileId, file) in files.withIndex()) {
+                    stmt.setLong(1, blobId)
+                    stmt.setInt(2, indexId + 1)
+                    stmt.setInt(3, fileId)
+                    stmt.setInt(4, file.version)
+                    stmt.setInt(5, file.checksum)
+
+                    stmt.addBatch()
+                }
+            }
+
+            stmt.executeBatch()
+        }
+
+        connection.prepareStatement(
+            """
+            INSERT INTO version_list_maps (blob_id, map_square, map_file_id, loc_file_id, free_to_play)
+            VALUES (?, ?, ?, ?, ?)
+        """.trimIndent()
+        ).use { stmt ->
+            for ((mapSquare, map) in versionList.maps) {
+                stmt.setLong(1, blobId)
+                stmt.setInt(2, mapSquare)
+                stmt.setInt(3, map.mapFile)
+                stmt.setInt(4, map.locFile)
+                stmt.setBoolean(5, map.freeToPlay)
+
+                stmt.addBatch()
+            }
+
+            stmt.executeBatch()
+        }
+    }
+
+    private fun readFile(store: Store, index: Int, file: Int): File? {
+        store.read(index, file).use { buf ->
+            val version = VersionTrailer.strip(buf) ?: return null
+            return File(index, file, buf.retain(), version)
+        }
+    }
+
+    private fun addFiles(connection: Connection, sourceId: Int, files: List<File>) {
+        val blobIds = addBlobs(connection, files)
+
+        connection.prepareStatement(
+            """
+            INSERT INTO files (index_id, file_id, version, blob_id)
+            VALUES (?, ?, ?, ?)
+            ON CONFLICT DO NOTHING
+        """.trimIndent()
+        ).use { stmt ->
+            for ((i, file) in files.withIndex()) {
+                stmt.setInt(1, file.index)
+                stmt.setInt(2, file.file)
+                stmt.setInt(3, file.version)
+                stmt.setLong(4, blobIds[i])
+
+                stmt.addBatch()
+            }
+
+            stmt.executeBatch()
+        }
+
+        connection.prepareStatement(
+            """
+            INSERT INTO source_files (source_id, index_id, file_id, version, blob_id)
+            VALUES (?, ?, ?, ?, ?)
+            ON CONFLICT DO NOTHING
+        """.trimIndent()
+        ).use { stmt ->
+            for ((i, file) in files.withIndex()) {
+                stmt.setInt(1, sourceId)
+                stmt.setInt(2, file.index)
+                stmt.setInt(3, file.file)
+                stmt.setInt(4, file.version)
+                stmt.setLong(5, blobIds[i])
+
+                stmt.addBatch()
+            }
+
+            stmt.executeBatch()
+        }
+    }
+
     public suspend fun refreshViews() {
         database.execute { connection ->
             connection.prepareStatement(
@@ -871,6 +1305,22 @@ public class CacheImporter @Inject constructor(
             connection.prepareStatement(
                 """
                 REFRESH MATERIALIZED VIEW CONCURRENTLY master_index_stats
+            """.trimIndent()
+            ).use { stmt ->
+                stmt.execute()
+            }
+
+            connection.prepareStatement(
+                """
+                REFRESH MATERIALIZED VIEW CONCURRENTLY version_list_stats
+            """.trimIndent()
+            ).use { stmt ->
+                stmt.execute()
+            }
+
+            connection.prepareStatement(
+                """
+                REFRESH MATERIALIZED VIEW CONCURRENTLY crc_table_stats
             """.trimIndent()
             ).use { stmt ->
                 stmt.execute()

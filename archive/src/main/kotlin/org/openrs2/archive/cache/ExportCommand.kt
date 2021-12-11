@@ -23,8 +23,8 @@ public class ExportCommand : CliktCommand(name = "export") {
         CloseableInjector(Guice.createInjector(ArchiveModule)).use { injector ->
             val exporter = injector.getInstance(CacheExporter::class.java)
 
-            DiskStore.create(output).use { store ->
-                exporter.export(id, store)
+            exporter.export(id) { legacy ->
+                DiskStore.create(output, legacy = legacy)
             }
         }
     }
