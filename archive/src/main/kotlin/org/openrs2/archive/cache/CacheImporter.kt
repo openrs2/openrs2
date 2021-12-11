@@ -1243,9 +1243,14 @@ public class CacheImporter @Inject constructor(
     }
 
     private fun readFile(store: Store, index: Int, file: Int): File? {
-        store.read(index, file).use { buf ->
-            val version = VersionTrailer.strip(buf) ?: return null
-            return File(index, file, buf.retain(), version)
+        try {
+            store.read(index, file).use { buf ->
+                val version = VersionTrailer.strip(buf) ?: return null
+                return File(index, file, buf.retain(), version)
+            }
+        } catch (ex: IOException) {
+            logger.warn(ex) { "Skipping corrupt file (index $index, group $file)" }
+            return null
         }
     }
 
