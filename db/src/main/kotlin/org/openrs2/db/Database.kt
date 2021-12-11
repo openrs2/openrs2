@@ -79,7 +79,14 @@ public class Database(
         throw AssertionError()
     }
 
-    private fun <T> executeOnce(transaction: Transaction<T>): T {
+    /**
+     * Executes a [Transaction]. If the transaction fails due to deadlock, it
+     * is not retried. This method should therefore only be used if the
+     * [Transaction.execute] method has side effects.
+     * @param transaction the transaction.
+     * @return the result returned by [Transaction.execute].
+     */
+    public fun <T> executeOnce(transaction: Transaction<T>): T {
         dataSource.connection.use { connection ->
             val oldAutoCommit = connection.autoCommit
             connection.autoCommit = false

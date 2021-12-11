@@ -45,6 +45,19 @@ class DatabaseTest {
     }
 
     @Test
+    fun testSuccessfulOnce() {
+        val result = database.executeOnce { connection ->
+            connection.prepareStatement("VALUES 12345").use { stmt ->
+                val rows = stmt.executeQuery()
+                assertTrue(rows.next())
+                return@executeOnce rows.getInt(1)
+            }
+        }
+
+        assertEquals(12345, result)
+    }
+
+    @Test
     fun testDeadlockRetry() = runBlockingTest {
         var attempts = 0
         val start = currentTime
@@ -66,6 +79,20 @@ class DatabaseTest {
 
         val elapsed = currentTime - start
         assertEquals(10, elapsed)
+    }
+
+    @Test
+    fun testDeadlockOnce() {
+        var attempts = 0
+
+        assertFailsWith<DeadlockException> {
+            database.executeOnce<Unit> {
+                attempts++
+                throw DeadlockException()
+            }
+        }
+
+        assertEquals(1, attempts)
     }
 
     @Test
@@ -94,6 +121,20 @@ class DatabaseTest {
                     attempts++
                     throw TestException()
                 }
+            }
+        }
+
+        assertEquals(1, attempts)
+    }
+
+    @Test
+    fun testNonDeadlockFailureOnce() {
+        var attempts = 0
+
+        assertFailsWith<TestException> {
+            database.executeOnce<Unit> {
+                attempts++
+                throw TestException()
             }
         }
 
