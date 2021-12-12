@@ -1209,6 +1209,10 @@ public class CacheImporter @Inject constructor(
         ).use { stmt ->
             for ((indexId, files) in versionList.files.withIndex()) {
                 for ((fileId, file) in files.withIndex()) {
+                    if (file.version == 0) {
+                        continue
+                    }
+
                     stmt.setLong(1, blobId)
                     stmt.setInt(2, indexId + 1)
                     stmt.setInt(3, fileId)
