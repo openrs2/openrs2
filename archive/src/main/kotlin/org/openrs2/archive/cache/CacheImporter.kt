@@ -461,18 +461,28 @@ public class CacheImporter @Inject constructor(
 
         connection.prepareStatement(
             """
-            INSERT INTO master_indexes (container_id, format)
-            VALUES (?, ?::master_index_format)
+            INSERT INTO caches (id)
+            VALUES (DEFAULT)
             RETURNING id
         """.trimIndent()
         ).use { stmt ->
-            stmt.setLong(1, containerId)
-            stmt.setString(2, masterIndex.index.format.name.lowercase())
-
             stmt.executeQuery().use { rows ->
                 check(rows.next())
                 masterIndexId = rows.getInt(1)
             }
+        }
+
+        connection.prepareStatement(
+            """
+            INSERT INTO master_indexes (id, container_id, format)
+            VALUES (?, ?, ?::master_index_format)
+        """.trimIndent()
+        ).use { stmt ->
+            stmt.setInt(1, masterIndexId)
+            stmt.setLong(2, containerId)
+            stmt.setString(3, masterIndex.index.format.name.lowercase())
+
+            stmt.execute()
         }
 
         connection.prepareStatement(
@@ -1250,6 +1260,9 @@ public class CacheImporter @Inject constructor(
         try {
             store.read(index, file).use { buf ->
                 val version = VersionTrailer.strip(buf) ?: return null
+
+                // TODO(gpe): try ungzipping here?
+
                 return File(index, file, buf.retain(), version)
             }
         } catch (ex: IOException) {
