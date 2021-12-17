@@ -376,7 +376,7 @@ public object PackClass {
 
         // read method metadata
         val exceptionCounts = readExceptionCounts(buf, methodAttributes)
-        val tryCatchCounts = readMaxs(buf, methodAttributes)
+        val tryCatchCounts = readTryCatchCounts(buf, methodAttributes)
         val maxStacks = readMaxs(buf, methodAttributes)
         val maxLocals = readMaxs(buf, methodAttributes)
         val lineStartPcs = readLinePcs(buf, methodAttributes)
@@ -809,6 +809,21 @@ public object PackClass {
         return IntArray(attributes.size) { i ->
             if (attributes[i].contains(ConstantPool.EXCEPTIONS)) {
                 buf.readUnsignedByte().toInt()
+            } else {
+                0
+            }
+        }
+    }
+
+    private fun readTryCatchCounts(buf: ByteBuf, attributes: Array<Array<String>>): IntArray {
+        return IntArray(attributes.size) { i ->
+            if (attributes[i].contains(ConstantPool.CODE)) {
+                /*
+                 * XXX(gpe): in older versions of packclass this is an unsigned
+                 * byte. Are there any class files using the older format with
+                 * 128 or more try/catch blocks per method?
+                 */
+                buf.readUnsignedShortSmart()
             } else {
                 0
             }
@@ -1399,7 +1414,7 @@ public object PackClass {
     private fun writeTryCatchCounts(buf: ByteBuf, clazz: ClassNode) {
         for (method in clazz.methods) {
             if (method.instructions.size() != 0) {
-                buf.writeByte(method.tryCatchBlocks.size)
+                buf.writeUnsignedShortSmart(method.tryCatchBlocks.size)
             }
         }
     }
