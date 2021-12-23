@@ -3,14 +3,14 @@ asm = "9.2"
 commons-compress = "1.21"
 guava = "31.0.1-jre"
 guice = "5.0.1"
-jackson = "2.13.0"
+jackson = "2.13.1"
 jimfs = "1.2"
 junit = "5.8.2"
-kotlin = "1.6.0"
-kotlinCoroutines = "1.5.2"
+kotlin = "1.6.10"
+kotlinCoroutines = "1.6.0"
 ktor = "1.6.7"
-netty = "4.1.71.Final"
-nettyIoUring = "0.0.10.Final"
+netty = "4.1.72.Final"
+nettyIoUring = "0.0.11.Final"
 
 [libraries]
 asm-commons = { module = "org.ow2.asm:asm-commons", version.ref = "asm" }
@@ -26,10 +26,10 @@ clikt = { module = "com.github.ajalt.clikt:clikt", version = "3.3.0" }
 commons-compress = { module = "org.apache.commons:commons-compress", version.ref = "commons-compress" }
 fastutil = { module = "it.unimi.dsi:fastutil", version = "8.5.6" }
 fernflower = { module = "org.openrs2:fernflower", version = "1.1.1" }
-flyway = { module = "org.flywaydb:flyway-core", version = "8.2.1" }
+flyway = { module = "org.flywaydb:flyway-core", version = "8.3.0" }
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
 guice = { module = "com.google.inject:guice", version.ref = "guice" }
-h2 = { module = "com.h2database:h2", version = "2.0.202" }
+h2 = { module = "com.h2database:h2", version = "2.0.204" }
 hikaricp = { module = "com.zaxxer:HikariCP", version = "5.0.0" }
 inlineLogger = { module = "com.michael-bull.kotlin-inline-logger:kotlin-inline-logger", version = "1.0.4" }
 jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jackson" }
@@ -51,7 +51,7 @@ ktor-jackson = { module = "io.ktor:ktor-jackson", version.ref = "ktor" }
 ktor-server-cio = { module = "io.ktor:ktor-server-cio", version.ref = "ktor" }
 ktor-thymeleaf = { module = "io.ktor:ktor-thymeleaf", version.ref = "ktor" }
 ktor-webjars = { module = "io.ktor:ktor-webjars", version.ref = "ktor" }
-logback = { module = "ch.qos.logback:logback-classic", version = "1.2.7" }
+logback = { module = "ch.qos.logback:logback-classic", version = "1.2.10" }
 netty-buffer = { module = "io.netty:netty-buffer", version.ref = "netty" }
 netty-codec-core = { module = "io.netty:netty-codec", version.ref = "netty" }
 netty-codec-http = { module = "io.netty:netty-codec-http", version.ref = "netty" }

@@ -14,10 +14,10 @@ pluginManagement {
     plugins {
         id("com.github.ben-manes.versions") version "0.39.0"
         id("com.github.jk1.dependency-license-report") version "2.0"
-        id("com.github.johnrengelman.shadow") version "7.1.0"
+        id("com.github.johnrengelman.shadow") version "7.1.1"
         id("org.jetbrains.dokka") version "1.6.0"
-        id("org.jmailen.kotlinter") version "3.7.0"
-        kotlin("jvm") version "1.6.0"
+        id("org.jmailen.kotlinter") version "3.8.0"
+        kotlin("jvm") version "1.6.10"
     }
 }
 

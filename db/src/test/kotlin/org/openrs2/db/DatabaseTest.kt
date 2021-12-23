@@ -1,7 +1,8 @@
 package org.openrs2.db
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.currentTime
+import kotlinx.coroutines.test.runTest
 import org.h2.jdbcx.JdbcDataSource
 import java.sql.SQLException
 import kotlin.test.Test
@@ -27,7 +28,7 @@ class DatabaseTest {
     }
 
     @Test
-    fun testSuccessful() = runBlockingTest {
+    fun testSuccessful() = runTest {
         val start = currentTime
 
         val result = database.execute { connection ->
@@ -58,7 +59,7 @@ class DatabaseTest {
     }
 
     @Test
-    fun testDeadlockRetry() = runBlockingTest {
+    fun testDeadlockRetry() = runTest {
         var attempts = 0
         val start = currentTime
 
@@ -100,7 +101,7 @@ class DatabaseTest {
         var attempts = 0
 
         assertFailsWith<DeadlockException> {
-            runBlockingTest {
+            runTest {
                 database.execute<Unit> {
                     attempts++
                     throw DeadlockException()
@@ -116,7 +117,7 @@ class DatabaseTest {
         var attempts = 0
 
         assertFailsWith<TestException> {
-            runBlockingTest {
+            runTest {
                 database.execute<Unit> {
                     attempts++
                     throw TestException()
@@ -142,7 +143,7 @@ class DatabaseTest {
     }
 
     @Test
-    fun testDeadlockCauseChain() = runBlockingTest {
+    fun testDeadlockCauseChain() = runTest {
         var attempts = 0
         val start = currentTime
 
@@ -166,7 +167,7 @@ class DatabaseTest {
     }
 
     @Test
-    fun testDeadlockNextChain() = runBlockingTest {
+    fun testDeadlockNextChain() = runTest {
         var attempts = 0
         val start = currentTime
 
@@ -196,7 +197,7 @@ class DatabaseTest {
         var attempts = 0
 
         assertFailsWith<NonDeadlockException> {
-            runBlockingTest {
+            runTest {
                 database.execute<Unit> {
                     attempts++
 
