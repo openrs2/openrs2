@@ -5,5 +5,6 @@ public data class Game(
     public val url: String?,
     public val buildMajor: Int?,
     public val buildMinor: Int?,
-    public val lastMasterIndexId: Int?
+    public val lastMasterIndexId: Int?,
+    public val languageId: Int
 )

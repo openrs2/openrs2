@@ -2,6 +2,7 @@ package org.openrs2.archive.cache
 
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.arguments.argument
+import com.github.ajalt.clikt.parameters.options.default
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.types.enum
 import com.github.ajalt.clikt.parameters.types.int
@@ -23,6 +24,8 @@ public class ImportMasterIndexCommand : CliktCommand(name = "import-master-index
     private val name by option()
     private val description by option()
     private val url by option()
+    private val environment by option().default("live")
+    private val language by option().default("en")
 
     private val game by argument()
     private val format by argument().enum<MasterIndexFormat>()
@@ -37,7 +40,19 @@ public class ImportMasterIndexCommand : CliktCommand(name = "import-master-index
             val importer = injector.getInstance(CacheImporter::class.java)
 
             Unpooled.wrappedBuffer(Files.readAllBytes(input)).use { buf ->
-                importer.importMasterIndex(buf, format, game, buildMajor, buildMinor, timestamp, name, description, url)
+                importer.importMasterIndex(
+                    buf,
+                    format,
+                    game,
+                    environment,
+                    language,
+                    buildMajor,
+                    buildMinor,
+                    timestamp,
+                    name,
+                    description,
+                    url
+                )
             }
         }
     }

@@ -119,6 +119,8 @@ public class CacheImporter @Inject constructor(
     public suspend fun import(
         store: Store,
         game: String,
+        environment: String,
+        language: String,
         buildMajor: Int?,
         buildMinor: Int?,
         timestamp: Instant?,
@@ -129,7 +131,7 @@ public class CacheImporter @Inject constructor(
         database.execute { connection ->
             prepare(connection)
 
-            val gameId = getGameId(connection, game)
+            val gameId = getGameId(connection, game, environment, language)
 
             if (store is DiskStore && store.legacy) {
                 importLegacy(connection, store, gameId, buildMajor, buildMinor, timestamp, name, description, url)
@@ -233,6 +235,8 @@ public class CacheImporter @Inject constructor(
         buf: ByteBuf,
         format: MasterIndexFormat,
         game: String,
+        environment: String,
+        language: String,
         buildMajor: Int?,
         buildMinor: Int?,
         timestamp: Instant?,
@@ -250,7 +254,7 @@ public class CacheImporter @Inject constructor(
             database.execute { connection ->
                 prepare(connection)
 
-                val gameId = getGameId(connection, game)
+                val gameId = getGameId(connection, game, environment, language)
                 val masterIndexId = addMasterIndex(connection, masterIndex)
 
                 addSource(
@@ -284,7 +288,7 @@ public class CacheImporter @Inject constructor(
 
             connection.prepareStatement(
                 """
-                UPDATE games
+                UPDATE game_variants
                 SET build_major = ?, build_minor = ?
                 WHERE id = ?
             """.trimIndent()
@@ -960,15 +964,20 @@ public class CacheImporter @Inject constructor(
         return ids
     }
 
-    private fun getGameId(connection: Connection, name: String): Int {
+    private fun getGameId(connection: Connection, name: String, environment: String, language: String): Int {
         connection.prepareStatement(
             """
-                SELECT id
-                FROM games
-                WHERE name = ?
+                SELECT v.id
+                FROM game_variants v
+                JOIN games g ON g.id = v.game_id
+                JOIN environments e ON e.id = v.environment_id
+                JOIN languages l ON l.id = v.language_id
+                WHERE g.name = ? AND e.name = ? AND l.iso_code = ?
             """.trimIndent()
         ).use { stmt ->
             stmt.setString(1, name)
+            stmt.setString(2, environment)
+            stmt.setString(3, language)
 
             stmt.executeQuery().use { rows ->
                 if (!rows.next()) {
@@ -984,7 +993,7 @@ public class CacheImporter @Inject constructor(
         database.execute { connection ->
             connection.prepareStatement(
                 """
-                UPDATE games SET last_master_index_id = ? WHERE id = ?
+                UPDATE game_variants SET last_master_index_id = ? WHERE id = ?
             """.trimIndent()
             ).use { stmt ->
                 stmt.setInt(1, masterIndexId)

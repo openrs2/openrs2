@@ -20,8 +20,8 @@ public class CacheDownloader @Inject constructor(
     private val gameDatabase: GameDatabase,
     private val importer: CacheImporter
 ) {
-    public suspend fun download(gameName: String) {
-        val game = gameDatabase.getGame(gameName) ?: throw Exception("Game not found")
+    public suspend fun download(gameName: String, environment: String, language: String) {
+        val game = gameDatabase.getGame(gameName, environment, language) ?: throw Exception("Game not found")
 
         val url = game.url ?: throw Exception("URL not set")
         val buildMajor = game.buildMajor ?: throw Exception("Current major build not set")
@@ -75,6 +75,7 @@ public class CacheDownloader @Inject constructor(
                                 continuation,
                                 importer,
                                 token,
+                                game.languageId,
                                 musicStreamClient
                             )
                         )

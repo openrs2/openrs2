@@ -33,6 +33,7 @@ public class NxtJs5ChannelHandler(
     continuation: Continuation<Unit>,
     importer: CacheImporter,
     private val token: String,
+    private val languageId: Int,
     private val musicStreamClient: MusicStreamClient,
     private val maxMinorBuildAttempts: Int = 5
 ) : Js5ChannelHandler(
@@ -56,7 +57,7 @@ public class NxtJs5ChannelHandler(
     private var minorBuildAttempts = 0
 
     override fun createInitMessage(): Any {
-        return InitJs5RemoteConnection(buildMajor, buildMinor!!, token, 0)
+        return InitJs5RemoteConnection(buildMajor, buildMinor!!, token, languageId)
     }
 
     override fun createRequestMessage(prefetch: Boolean, archive: Int, group: Int): Any {

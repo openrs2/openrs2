@@ -88,6 +88,8 @@
 					<thead class="table-dark">
 						<tr>
 							<th>Game</th>
+							<th>Environment</th>
+							<th>Language</th>
 							<th>Build</th>
 							<th>Timestamp</th>
 							<th>Name</th>
@@ -98,6 +100,8 @@
 					<tbody>
 						<tr th:each="source : ${cache.sources}">
 							<td th:text="${source.game}">runescape</td>
+							<td th:text="${source.environment}">live</td>
+							<td th:text="${source.language}">en</td>
 							<td th:text="${source.build}" class="text-right">550</td>
 							<td th:text="${#temporals.format(source.timestamp, 'yyyy-MM-dd HH:mm:ss')}"></td>
 							<td th:text="${source.name}"></td>

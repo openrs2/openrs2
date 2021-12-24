@@ -8,16 +8,21 @@ import javax.inject.Singleton
 public class GameDatabase @Inject constructor(
     private val database: Database
 ) {
-    public suspend fun getGame(name: String): Game? {
+    public suspend fun getGame(name: String, environment: String, language: String): Game? {
         return database.execute { connection ->
             connection.prepareStatement(
                 """
-                SELECT id, url, build_major, build_minor, last_master_index_id
-                FROM games
-                WHERE name = ?
+                SELECT v.id, v.url, v.build_major, v.build_minor, v.last_master_index_id, v.language_id
+                FROM game_variants v
+                JOIN games g ON g.id = v.game_id
+                JOIN environments e ON e.id = v.environment_id
+                JOIN languages l ON l.id = v.language_id
+                WHERE g.name = ? AND e.name = ? AND l.iso_code = ?
             """.trimIndent()
             ).use { stmt ->
                 stmt.setString(1, name)
+                stmt.setString(2, environment)
+                stmt.setString(3, language)
 
                 stmt.executeQuery().use { rows ->
                     if (!rows.next()) {
@@ -42,7 +47,9 @@ public class GameDatabase @Inject constructor(
                         lastMasterIndexId = null
                     }
 
-                    return@execute Game(id, url, buildMajor, buildMinor, lastMasterIndexId)
+                    val languageId = rows.getInt(6)
+
+                    return@execute Game(id, url, buildMajor, buildMinor, lastMasterIndexId, languageId)
                 }
             }
         }

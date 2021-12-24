@@ -99,6 +99,8 @@ public class CacheExporter @Inject constructor(
     public data class CacheSummary(
         val id: Int,
         val game: String,
+        val environment: String,
+        val language: String,
         val builds: SortedSet<Build>,
         val timestamp: Instant?,
         val names: SortedSet<String>,
@@ -116,6 +118,8 @@ public class CacheExporter @Inject constructor(
 
     public data class Source(
         val game: String,
+        val environment: String,
+        val language: String,
         val build: Build?,
         val timestamp: Instant?,
         val name: String?,
@@ -140,7 +144,9 @@ public class CacheExporter @Inject constructor(
                 FROM (
                     SELECT
                         c.id,
-                        g.name,
+                        g.name AS game,
+                        e.name AS environment,
+                        l.iso_code AS language,
                         array_remove(array_agg(DISTINCT ROW(s.build_major, s.build_minor)::build ORDER BY ROW(s.build_major, s.build_minor)::build ASC), NULL) builds,
                         MIN(s.timestamp) AS timestamp,
                         array_remove(array_agg(DISTINCT s.name ORDER BY s.name ASC), NULL) sources,
@@ -154,12 +160,15 @@ public class CacheExporter @Inject constructor(
                         cs.blocks
                     FROM caches c
                     JOIN sources s ON s.cache_id = c.id
-                    JOIN games g ON g.id = s.game_id
+                    JOIN game_variants v ON v.id = s.game_id
+                    JOIN games g ON g.id = v.game_id
+                    JOIN environments e ON e.id = v.environment_id
+                    JOIN languages l ON l.id = v.language_id
                     LEFT JOIN cache_stats cs ON cs.cache_id = c.id
-                    GROUP BY c.id, g.name, cs.valid_indexes, cs.indexes, cs.valid_groups, cs.groups, cs.valid_keys, cs.keys,
-                        cs.size, cs.blocks
+                    GROUP BY c.id, g.name, e.name, l.iso_code, cs.valid_indexes, cs.indexes, cs.valid_groups, cs.groups,
+                        cs.valid_keys, cs.keys, cs.size, cs.blocks
                 ) t
-                ORDER BY t.name ASC, t.builds[1] ASC, t.timestamp ASC
+                ORDER BY t.game ASC, t.environment ASC, t.language ASC, t.builds[1] ASC, t.timestamp ASC
             """.trimIndent()
             ).use { stmt ->
                 stmt.executeQuery().use { rows ->
@@ -168,19 +177,21 @@ public class CacheExporter @Inject constructor(
                     while (rows.next()) {
                         val id = rows.getInt(1)
                         val game = rows.getString(2)
-                        val builds = rows.getArray(3).array as Array<*>
-                        val timestamp = rows.getTimestamp(4)?.toInstant()
-                        @Suppress("UNCHECKED_CAST") val names = rows.getArray(5).array as Array<String>
+                        val environment = rows.getString(3)
+                        val language = rows.getString(4)
+                        val builds = rows.getArray(5).array as Array<*>
+                        val timestamp = rows.getTimestamp(6)?.toInstant()
+                        @Suppress("UNCHECKED_CAST") val names = rows.getArray(7).array as Array<String>
 
-                        val validIndexes = rows.getLong(6)
+                        val validIndexes = rows.getLong(8)
                         val stats = if (!rows.wasNull()) {
-                            val indexes = rows.getLong(7)
-                            val validGroups = rows.getLong(8)
-                            val groups = rows.getLong(9)
-                            val validKeys = rows.getLong(10)
-                            val keys = rows.getLong(11)
-                            val size = rows.getLong(12)
-                            val blocks = rows.getLong(13)
+                            val indexes = rows.getLong(9)
+                            val validGroups = rows.getLong(10)
+                            val groups = rows.getLong(11)
+                            val validKeys = rows.getLong(12)
+                            val keys = rows.getLong(13)
+                            val size = rows.getLong(14)
+                            val blocks = rows.getLong(15)
                             Stats(validIndexes, indexes, validGroups, groups, validKeys, keys, size, blocks)
                         } else {
                             null
@@ -189,6 +200,8 @@ public class CacheExporter @Inject constructor(
                         caches += CacheSummary(
                             id,
                             game,
+                            environment,
+                            language,
                             builds.mapNotNull { o -> Build.fromPgObject(o as PGobject) }.toSortedSet(),
                             timestamp,
                             names.toSortedSet(),
@@ -279,9 +292,12 @@ public class CacheExporter @Inject constructor(
 
             connection.prepareStatement(
                 """
-                SELECT g.name, s.build_major, s.build_minor, s.timestamp, s.name, s.description, s.url
+                SELECT g.name, e.name, l.iso_code, s.build_major, s.build_minor, s.timestamp, s.name, s.description, s.url
                 FROM sources s
-                JOIN games g ON g.id = s.game_id
+                JOIN game_variants v ON v.id = s.game_id
+                JOIN games g ON g.id = v.game_id
+                JOIN environments e ON e.id = v.environment_id
+                JOIN languages l ON l.id = v.language_id
                 WHERE s.cache_id = ?
                 ORDER BY s.name ASC
             """.trimIndent()
@@ -291,13 +307,15 @@ public class CacheExporter @Inject constructor(
                 stmt.executeQuery().use { rows ->
                     while (rows.next()) {
                         val game = rows.getString(1)
+                        val environment = rows.getString(2)
+                        val language = rows.getString(3)
 
-                        var buildMajor: Int? = rows.getInt(2)
+                        var buildMajor: Int? = rows.getInt(4)
                         if (rows.wasNull()) {
                             buildMajor = null
                         }
 
-                        var buildMinor: Int? = rows.getInt(3)
+                        var buildMinor: Int? = rows.getInt(5)
                         if (rows.wasNull()) {
                             buildMinor = null
                         }
@@ -308,12 +326,12 @@ public class CacheExporter @Inject constructor(
                             null
                         }
 
-                        val timestamp = rows.getTimestamp(4)?.toInstant()
-                        val name = rows.getString(5)
-                        val description = rows.getString(6)
-                        val url = rows.getString(7)
+                        val timestamp = rows.getTimestamp(6)?.toInstant()
+                        val name = rows.getString(7)
+                        val description = rows.getString(8)
+                        val url = rows.getString(9)
 
-                        sources += Source(game, build, timestamp, name, description, url)
+                        sources += Source(game, environment, language, build, timestamp, name, description, url)
                     }
                 }
             }
