@@ -1,6 +1,7 @@
 package org.openrs2.protocol.js5
 
 import io.netty.buffer.ByteBuf
+import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.Unpooled
 import io.netty.channel.embedded.EmbeddedChannel
 import io.netty.handler.codec.EncoderException
@@ -37,6 +38,24 @@ class Js5ResponseEncoderTest {
 
         assertFailsWith<EncoderException> {
             channel.writeOutbound(Js5Response(true, 2, 3, Unpooled.EMPTY_BUFFER))
+        }
+    }
+
+    @Test
+    fun testAllocateBuffer() {
+        val channel = EmbeddedChannel(Js5ResponseEncoder)
+
+        for (len in 1..1534) {
+            ByteBufAllocator.DEFAULT.buffer(len, len).use { data ->
+                data.writeZero(len)
+
+                channel.writeOutbound(Js5Response(true, 2, 3, data.retain()))
+            }
+
+            channel.readOutbound<ByteBuf>().use { actual ->
+                // check that allocateBuffer estimates the required capacity exactly
+                assertEquals(actual.writerIndex(), actual.capacity())
+            }
         }
     }
 
