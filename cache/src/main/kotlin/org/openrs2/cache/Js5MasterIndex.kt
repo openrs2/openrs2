@@ -256,7 +256,11 @@ public data class Js5MasterIndex(
                             "Invalid signature length"
                         }
 
-                        // the client doesn't verify what I presume is the RSA magic byte
+                        /*
+                         * This is the RSA magic byte. The client doesn't
+                         * verify this (so we also skip it for compatibility),
+                         * but the server does still set it to 10.
+                         */
                         plaintext.skipBytes(1)
 
                         val expected = ByteArray(Whirlpool.DIGESTBYTES)
