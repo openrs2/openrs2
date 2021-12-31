@@ -12,7 +12,7 @@ dependencyResolutionManagement {
 
 pluginManagement {
     plugins {
-        id("com.github.ben-manes.versions") version "0.39.0"
+        id("com.github.ben-manes.versions") version "0.40.0"
         id("com.github.jk1.dependency-license-report") version "2.0"
         id("com.github.johnrengelman.shadow") version "7.1.2"
         id("org.jetbrains.dokka") version "1.6.10"
