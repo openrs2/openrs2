@@ -26,10 +26,10 @@ clikt = { module = "com.github.ajalt.clikt:clikt", version = "3.3.0" }
 commons-compress = { module = "org.apache.commons:commons-compress", version.ref = "commons-compress" }
 fastutil = { module = "it.unimi.dsi:fastutil", version = "8.5.6" }
 fernflower = { module = "org.openrs2:fernflower", version = "1.1.1" }
-flyway = { module = "org.flywaydb:flyway-core", version = "8.3.0" }
+flyway = { module = "org.flywaydb:flyway-core", version = "8.4.0" }
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
 guice = { module = "com.google.inject:guice", version.ref = "guice" }
-h2 = { module = "com.h2database:h2", version = "2.0.204" }
+h2 = { module = "com.h2database:h2", version = "2.0.206" }
 hikaricp = { module = "com.zaxxer:HikariCP", version = "5.0.0" }
 inlineLogger = { module = "com.michael-bull.kotlin-inline-logger:kotlin-inline-logger", version = "1.0.4" }
 jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jackson" }
