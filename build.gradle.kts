@@ -110,6 +110,17 @@ configure(subprojects.filter { it.isFree }) {
         toolVersion = "0.8.7"
     }
 
+    plugins.withType<JavaPlugin> {
+        dependencies {
+            val testImplementation by configurations
+            testImplementation(libs.junit.api)
+
+            val testRuntimeOnly by configurations
+            testRuntimeOnly(libs.junit.engine)
+            testRuntimeOnly(libs.junit.launcher)
+        }
+    }
+
     plugins.withType<KotlinPluginWrapper> {
         apply(plugin = "org.jetbrains.dokka")
         apply(plugin = "org.jmailen.kotlinter")
