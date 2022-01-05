@@ -12,9 +12,10 @@ import java.net.http.HttpResponse
 import java.time.Duration
 
 public abstract class JsonKeyDownloader(
+    source: KeySource,
     private val client: HttpClient,
     private val jsonKeyReader: JsonKeyReader
-) : KeyDownloader {
+) : KeyDownloader(source) {
     override suspend fun download(url: String): Sequence<XteaKey> {
         val request = HttpRequest.newBuilder(URI(url))
             .GET()

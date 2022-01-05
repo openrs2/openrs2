@@ -13,6 +13,7 @@ import io.ktor.jackson.JacksonConverter
 import io.ktor.response.respond
 import io.ktor.response.respondRedirect
 import io.ktor.routing.get
+import io.ktor.routing.post
 import io.ktor.routing.routing
 import io.ktor.server.cio.CIO
 import io.ktor.server.engine.embeddedServer
@@ -83,6 +84,7 @@ public class WebServer @Inject constructor(
                 get("/caches/{id}/keys.zip") { cachesController.exportKeysZip(call) }
                 get("/caches/{id}/map.png") { cachesController.renderMap(call) }
                 get("/keys") { keysController.index(call) }
+                post("/keys") { keysController.import(call) }
                 get("/keys/all.json") { keysController.exportAll(call) }
                 get("/keys/valid.json") { keysController.exportValid(call) }
                 static("/static") { resources("/org/openrs2/archive/static") }

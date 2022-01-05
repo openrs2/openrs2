@@ -17,7 +17,7 @@ import javax.inject.Singleton
 public class RuneLiteKeyDownloader @Inject constructor(
     private val client: HttpClient,
     jsonKeyReader: JsonKeyReader
-) : JsonKeyDownloader(client, jsonKeyReader) {
+) : JsonKeyDownloader(KeySource.RUNELITE, client, jsonKeyReader) {
     override suspend fun getMissingUrls(seenUrls: Set<String>): Set<String> {
         val version = getVersion()
         return setOf(getXteaEndpoint(version))

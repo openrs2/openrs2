@@ -6,6 +6,9 @@ import org.openrs2.db.Database
 import java.nio.file.Files
 import java.nio.file.Path
 import java.sql.Connection
+import java.sql.Types
+import java.time.Instant
+import java.time.ZoneOffset
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -15,6 +18,8 @@ public class KeyImporter @Inject constructor(
     private val jsonKeyReader: JsonKeyReader,
     private val downloaders: Set<KeyDownloader>
 ) {
+    private data class Key(val key: XteaKey, val source: KeySource)
+
     public suspend fun import(path: Path) {
         val keys = mutableSetOf<XteaKey>()
 
@@ -43,10 +48,12 @@ public class KeyImporter @Inject constructor(
 
         logger.info { "Importing ${keys.size} keys" }
 
-        import(keys)
+        import(keys, KeySource.DISK)
     }
 
     public suspend fun download() {
+        val now = Instant.now()
+
         val seenUrls = database.execute { connection ->
             connection.prepareStatement(
                 """
@@ -63,12 +70,14 @@ public class KeyImporter @Inject constructor(
             }
         }
 
-        val keys = mutableSetOf<XteaKey>()
+        val keys = mutableSetOf<Key>()
         val urls = mutableSetOf<String>()
 
         for (downloader in downloaders) {
             for (url in downloader.getMissingUrls(seenUrls)) {
-                keys += downloader.download(url)
+                keys += downloader.download(url).map { key ->
+                    Key(key, downloader.source)
+                }
                 urls += url
             }
         }
@@ -89,67 +98,48 @@ public class KeyImporter @Inject constructor(
                 stmt.executeBatch()
             }
 
-            import(connection, keys)
+            import(connection, keys, now)
         }
     }
 
-    public suspend fun import(keys: Iterable<XteaKey>) {
+    public suspend fun import(keys: Iterable<XteaKey>, source: KeySource) {
+        val now = Instant.now()
+
         database.execute { connection ->
-            import(connection, keys)
+            import(connection, keys.map { key ->
+                Key(key, source)
+            }, now)
         }
     }
 
-    private fun import(connection: Connection, keys: Iterable<XteaKey>) {
-        connection.prepareStatement(
-            """
-            LOCK TABLE keys IN EXCLUSIVE MODE
-        """.trimIndent()
-        ).use { stmt ->
-            stmt.execute()
-        }
+    private fun import(connection: Connection, keys: Iterable<Key>, now: Instant) {
+        val timestamp = now.atOffset(ZoneOffset.UTC)
 
         connection.prepareStatement(
             """
-            CREATE TEMPORARY TABLE tmp_keys (
-                key xtea_key PRIMARY KEY NOT NULL
-            ) ON COMMIT DROP
-        """.trimIndent()
-        ).use { stmt ->
-            stmt.execute()
-        }
-
-        connection.prepareStatement(
-            """
-            INSERT INTO tmp_keys (key)
-            VALUES (ROW(?, ?, ?, ?))
+            INSERT INTO key_queue AS K (key, source, first_seen, last_seen)
+            VALUES (ROW(?, ?, ?, ?), ?::key_source, ?, ?)
+            ON CONFLICT (key, source) DO UPDATE SET
+                first_seen = LEAST(k.first_seen, EXCLUDED.first_seen),
+                last_seen = GREATEST(k.last_seen, EXCLUDED.last_seen)
         """.trimIndent()
         ).use { stmt ->
             for (key in keys) {
-                if (key.isZero) {
+                if (key.key.isZero) {
                     continue
                 }
 
-                stmt.setInt(1, key.k0)
-                stmt.setInt(2, key.k1)
-                stmt.setInt(3, key.k2)
-                stmt.setInt(4, key.k3)
+                stmt.setInt(1, key.key.k0)
+                stmt.setInt(2, key.key.k1)
+                stmt.setInt(3, key.key.k2)
+                stmt.setInt(4, key.key.k3)
+                stmt.setString(5, key.source.name.lowercase())
+                stmt.setObject(6, timestamp, Types.TIMESTAMP_WITH_TIMEZONE)
+                stmt.setObject(7, timestamp, Types.TIMESTAMP_WITH_TIMEZONE)
                 stmt.addBatch()
             }
 
             stmt.executeBatch()
-        }
-
-        connection.prepareStatement(
-            """
-            INSERT INTO keys (key)
-            SELECT t.key
-            FROM tmp_keys t
-            LEFT JOIN keys k ON k.key = t.key
-            WHERE k.key IS NULL
-            ON CONFLICT DO NOTHING
-        """.trimIndent()
-        ).use { stmt ->
-            stmt.execute()
         }
     }
 

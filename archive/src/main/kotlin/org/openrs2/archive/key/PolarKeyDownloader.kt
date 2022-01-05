@@ -18,7 +18,7 @@ import javax.inject.Singleton
 public class PolarKeyDownloader @Inject constructor(
     private val client: HttpClient,
     jsonKeyReader: JsonKeyReader
-) : JsonKeyDownloader(client, jsonKeyReader) {
+) : JsonKeyDownloader(KeySource.POLAR, client, jsonKeyReader) {
     override suspend fun getMissingUrls(seenUrls: Set<String>): Set<String> {
         val request = HttpRequest.newBuilder(ENDPOINT)
             .GET()

@@ -23,6 +23,88 @@ public class KeyBruteForcer @Inject constructor(
     )
 
     /*
+     * Copy XTEA keys from key_queue to keys. The queue exists so that we don't
+     * block the /keys API endpoint from working while the brute forcer is
+     * running.
+     *
+     * This has to be a different transaction as it needs to lock the keys
+     * table in EXCLUSIVE mode, but we want to downgrade that to SHARE mode as
+     * soon as possible. Locks can only be released on commit in Postgres.
+     */
+    private suspend fun assignKeyIds() {
+        database.execute { connection ->
+            connection.prepareStatement(
+                """
+                LOCK TABLE keys IN EXCLUSIVE MODE
+            """.trimIndent()
+            ).use { stmt ->
+                stmt.execute()
+            }
+
+            connection.prepareStatement(
+                """
+                CREATE TEMPORARY TABLE tmp_keys (
+                    key xtea_key NOT NULL,
+                    source key_source NOT NULL,
+                    first_seen TIMESTAMPTZ NOT NULL,
+                    last_seen TIMESTAMPTZ NOT NULL
+                ) ON COMMIT DROP
+            """.trimIndent()
+            ).use { stmt ->
+                stmt.execute()
+            }
+
+            connection.prepareStatement(
+                """
+                INSERT INTO tmp_keys (key, source, first_seen, last_seen)
+                SELECT key, source, first_seen, last_seen
+                FROM key_queue
+                FOR UPDATE SKIP LOCKED
+            """.trimIndent()
+            ).use { stmt ->
+                stmt.execute()
+            }
+
+            connection.prepareStatement(
+                """
+                INSERT INTO keys (key)
+                SELECT t.key
+                FROM tmp_keys t
+                LEFT JOIN keys k ON k.key = t.key
+                WHERE k.key IS NULL
+                ON CONFLICT DO NOTHING
+            """.trimIndent()
+            ).use { stmt ->
+                stmt.execute()
+            }
+
+            connection.prepareStatement(
+                """
+                INSERT INTO key_sources AS s (key_id, source, first_seen, last_seen)
+                SELECT k.id, t.source, t.first_seen, t.last_seen
+                FROM tmp_keys t
+                JOIN keys k ON k.key = t.key
+                ON CONFLICT (key_id, source) DO UPDATE SET
+                    first_seen = LEAST(s.first_seen, EXCLUDED.first_seen),
+                    last_seen = GREATEST(s.last_seen, EXCLUDED.last_seen)
+            """.trimIndent()
+            ).use { stmt ->
+                stmt.execute()
+            }
+
+            connection.prepareStatement(
+                """
+                DELETE FROM key_queue k
+                USING tmp_keys t
+                WHERE k.key = t.key AND k.source = t.source
+            """.trimIndent()
+            ).use { stmt ->
+                stmt.execute()
+            }
+        }
+    }
+
+    /*
      * The code for writing to the containers and keys tables ensures that the
      * row IDs are allocated monotonically (by forbidding any other
      * transactions from writing simultaneously with an EXCLUSIVE table lock).
@@ -64,6 +146,8 @@ public class KeyBruteForcer @Inject constructor(
      * from the tables.
      */
     public suspend fun bruteForce() {
+        assignKeyIds()
+
         database.execute { connection ->
             connection.prepareStatement(
                 """

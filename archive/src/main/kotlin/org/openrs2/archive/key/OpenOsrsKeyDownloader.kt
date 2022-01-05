@@ -8,7 +8,7 @@ import javax.inject.Singleton
 public class OpenOsrsKeyDownloader @Inject constructor(
     client: HttpClient,
     jsonKeyReader: JsonKeyReader
-) : JsonKeyDownloader(client, jsonKeyReader) {
+) : JsonKeyDownloader(KeySource.OPENOSRS, client, jsonKeyReader) {
     override suspend fun getMissingUrls(seenUrls: Set<String>): Set<String> {
         return setOf(ENDPOINT)
     }
