@@ -61,9 +61,11 @@ public class LoginChannelHandler @Inject constructor(
         )
         ctx.pipeline().remove(Rs2Decoder::class.java)
 
-        ctx.write(LoginResponse.Js5Ok).addListener {
-            ctx.pipeline().remove(Rs2Encoder::class.java)
-            ctx.pipeline().remove(this)
+        ctx.write(LoginResponse.Js5Ok).addListener { future ->
+            if (future.isSuccess) {
+                ctx.pipeline().remove(Rs2Encoder::class.java)
+                ctx.pipeline().remove(this)
+            }
         }
     }
 
