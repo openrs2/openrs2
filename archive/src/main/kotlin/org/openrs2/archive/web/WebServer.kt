@@ -55,6 +55,7 @@ public class WebServer @Inject constructor(
             routing {
                 get("/") { call.respond(ThymeleafContent("index.html", emptyMap())) }
                 get("/caches") { cachesController.index(call) }
+                get("/caches.json") { cachesController.indexJson(call) }
                 get("/caches/{id}") { cachesController.show(call) }
                 get("/caches/{id}.zip") {
                     val id = call.parameters["id"]

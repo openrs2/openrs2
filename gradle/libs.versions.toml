@@ -33,6 +33,7 @@ h2 = { module = "com.h2database:h2", version = "2.0.206" }
 hikaricp = { module = "com.zaxxer:HikariCP", version = "5.0.0" }
 inlineLogger = { module = "com.michael-bull.kotlin-inline-logger:kotlin-inline-logger", version = "1.0.4" }
 jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jackson" }
+jackson-jsr310 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310", version.ref = "jackson" }
 jackson-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin", version.ref = "jackson" }
 jackson-yaml = { module = "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml", version.ref = "jackson" }
 javaParser = { module = "com.github.javaparser:javaparser-symbol-solver-core", version = "3.23.1" }

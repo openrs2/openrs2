@@ -32,6 +32,7 @@ dependencies {
     implementation(libs.flyway)
     implementation(libs.guava)
     implementation(libs.hikaricp)
+    implementation(libs.jackson.jsr310)
     implementation(libs.jdom)
     implementation(libs.jquery)
     implementation(libs.jsoup)

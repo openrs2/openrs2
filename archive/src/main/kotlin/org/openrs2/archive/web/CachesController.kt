@@ -40,6 +40,11 @@ public class CachesController @Inject constructor(
         call.respond(ThymeleafContent("caches/index.html", mapOf("caches" to caches)))
     }
 
+    public suspend fun indexJson(call: ApplicationCall) {
+        val caches = exporter.list()
+        call.respond(caches)
+    }
+
     public suspend fun show(call: ApplicationCall) {
         val id = call.parameters["id"]?.toIntOrNull()
         if (id == null) {

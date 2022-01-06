@@ -1,5 +1,7 @@
 package org.openrs2.archive
 
+import com.fasterxml.jackson.databind.Module
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.google.inject.AbstractModule
 import com.google.inject.Scopes
 import com.google.inject.multibindings.Multibinder
@@ -43,6 +45,9 @@ public object ArchiveModule : AbstractModule() {
         keyBinder.addBinding().to(OpenOsrsKeyDownloader::class.java)
         keyBinder.addBinding().to(PolarKeyDownloader::class.java)
         keyBinder.addBinding().to(RuneLiteKeyDownloader::class.java)
+
+        val moduleBinder = Multibinder.newSetBinder(binder(), Module::class.java)
+        moduleBinder.addBinding().to(JavaTimeModule::class.java)
 
         val nameBinder = Multibinder.newSetBinder(binder(), NameDownloader::class.java)
         nameBinder.addBinding().to(RuneStarNameDownloader::class.java)

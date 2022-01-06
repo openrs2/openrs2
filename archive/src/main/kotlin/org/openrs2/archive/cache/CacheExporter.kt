@@ -1,6 +1,8 @@
 package org.openrs2.archive.cache
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.annotation.JsonUnwrapped
 import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.Unpooled
 import org.openrs2.buffer.use
@@ -35,21 +37,30 @@ public class CacheExporter @Inject constructor(
         val size: Long,
         val blocks: Long
     ) {
+        @JsonIgnore
         public val allIndexesValid: Boolean = indexes == validIndexes && indexes != 0L
+
+        @JsonIgnore
         public val validIndexesFraction: Double = if (indexes == 0L) {
             1.0
         } else {
             validIndexes.toDouble() / indexes
         }
 
+        @JsonIgnore
         public val allGroupsValid: Boolean = groups == validGroups
+
+        @JsonIgnore
         public val validGroupsFraction: Double = if (groups == 0L) {
             1.0
         } else {
             validGroups.toDouble() / groups
         }
 
+        @JsonIgnore
         public val allKeysValid: Boolean = keys == validKeys
+
+        @JsonIgnore
         public val validKeysFraction: Double = if (keys == 0L) {
             1.0
         } else {
@@ -103,7 +114,8 @@ public class CacheExporter @Inject constructor(
         val language: String,
         val builds: SortedSet<Build>,
         val timestamp: Instant?,
-        val names: SortedSet<String>,
+        val sources: SortedSet<String>,
+        @JsonUnwrapped
         val stats: Stats?
     )
 
@@ -181,7 +193,7 @@ public class CacheExporter @Inject constructor(
                         val language = rows.getString(4)
                         val builds = rows.getArray(5).array as Array<*>
                         val timestamp = rows.getTimestamp(6)?.toInstant()
-                        @Suppress("UNCHECKED_CAST") val names = rows.getArray(7).array as Array<String>
+                        @Suppress("UNCHECKED_CAST") val sources = rows.getArray(7).array as Array<String>
 
                         val validIndexes = rows.getLong(8)
                         val stats = if (!rows.wasNull()) {
@@ -204,7 +216,7 @@ public class CacheExporter @Inject constructor(
                             language,
                             builds.mapNotNull { o -> Build.fromPgObject(o as PGobject) }.toSortedSet(),
                             timestamp,
-                            names.toSortedSet(),
+                            sources.toSortedSet(),
                             stats
                         )
                     }

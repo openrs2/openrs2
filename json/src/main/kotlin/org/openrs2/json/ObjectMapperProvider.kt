@@ -16,6 +16,7 @@ public class ObjectMapperProvider @Inject constructor(
             .registerKotlinModule()
             .registerModules(modules)
             .enable(SerializationFeature.INDENT_OUTPUT)
+            .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
             .setDefaultPrettyPrinter(JsonPrettyPrinter())
             .setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE)
     }
