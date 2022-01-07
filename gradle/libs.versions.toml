@@ -61,7 +61,7 @@ netty-transport = { module = "io.netty:netty-transport", version.ref = "netty" }
 openrs2-natives = { module = "org.openrs2:openrs2-natives-all", version = "3.2.0" }
 pf4j = { module = "org.pf4j:pf4j", version = "3.6.0" }
 postgres = { module = "org.postgresql:postgresql", version = "42.3.1" }
-runelite-client = { module = "net.runelite:client", version = "1.8.8" }
+runelite-client = { module = "net.runelite:client", version = "1.8.9" }
 thymeleaf-core = { module = "org.thymeleaf:thymeleaf", version = "3.0.14.RELEASE" }
 thymeleaf-java8time = { module = "org.thymeleaf.extras:thymeleaf-extras-java8time", version = "3.0.4.RELEASE" }
 xz = { module = "org.tukaani:xz", version = "1.9" }
