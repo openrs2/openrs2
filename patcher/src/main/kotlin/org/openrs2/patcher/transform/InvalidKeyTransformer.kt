@@ -64,7 +64,7 @@ public class InvalidKeyTransformer : Transformer() {
             list.add(InsnNode(Opcodes.SWAP))
             list.add(MethodInsnNode(Opcodes.INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V"))
 
-            list.add(IntInsnNode(Opcodes.BIPUSH, 1))
+            list.add(InsnNode(Opcodes.ICONST_1))
             list.add(IntInsnNode(Opcodes.NEWARRAY, Opcodes.T_BYTE))
 
             list.add(InsnNode(Opcodes.DUP))
