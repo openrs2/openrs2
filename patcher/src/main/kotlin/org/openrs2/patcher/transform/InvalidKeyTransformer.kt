@@ -55,7 +55,7 @@ public class InvalidKeyTransformer : Transformer() {
              *
              *     } catch (RuntimeException ex) {
              *         System.out.println("T3 - " + ...);
-             *         uncompressed = new byte[] { 0, 0, 0, 0, 1, 1 };
+             *         uncompressed = new byte[] { 0 };
              *     }
              */
             val list = InsnList()
@@ -64,7 +64,7 @@ public class InvalidKeyTransformer : Transformer() {
             list.add(InsnNode(Opcodes.SWAP))
             list.add(MethodInsnNode(Opcodes.INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V"))
 
-            list.add(IntInsnNode(Opcodes.BIPUSH, 6))
+            list.add(IntInsnNode(Opcodes.BIPUSH, 1))
             list.add(IntInsnNode(Opcodes.NEWARRAY, Opcodes.T_BYTE))
 
             list.add(InsnNode(Opcodes.DUP))
