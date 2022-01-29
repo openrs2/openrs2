@@ -76,6 +76,12 @@ OpenRS2 is available under the terms of the [ISC license][isc], which is similar
 to the 2-clause BSD license. The full copyright notice and terms are available
 in the `LICENSE` file.
 
+The `compress-bzip2` module is derived from the reference [bzip2][bzip2]
+implementation. The reference implementation's license is available in
+`compress-bzip2/LICENSE`. Both this license and OpenRS2's license apply to the
+derived work.
+
+[bzip2]: https://sourceware.org/bzip2/
 [discord-badge]: https://img.shields.io/discord/684495254145335298
 [discord]: https://chat.openrs2.org/
 [drone-badge]: https://build.openrs2.org/api/badges/openrs2/openrs2/status.svg

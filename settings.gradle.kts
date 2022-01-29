@@ -30,6 +30,7 @@ include(
     "cache-550",
     "cli",
     "compress",
+    "compress-bzip2",
     "compress-cli",
     "conf",
     "crc32",
