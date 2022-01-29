@@ -6,14 +6,14 @@ import com.github.ajalt.clikt.parameters.types.defaultStdin
 import com.github.ajalt.clikt.parameters.types.defaultStdout
 import com.github.ajalt.clikt.parameters.types.inputStream
 import com.github.ajalt.clikt.parameters.types.outputStream
-import org.openrs2.compress.gzip.Gzip
+import org.openrs2.compress.gzip.GzipLaxInputStream
 
 public class GunzipLaxCommand : CliktCommand(name = "gunzip-lax") {
     private val input by option().inputStream().defaultStdin()
     private val output by option().outputStream(truncateExisting = true).defaultStdout()
 
     override fun run() {
-        Gzip.createLaxInputStream(input).use { input ->
+        GzipLaxInputStream(input).use { input ->
             output.use { output ->
                 input.copyTo(output)
             }

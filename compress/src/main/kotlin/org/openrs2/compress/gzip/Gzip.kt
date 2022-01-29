@@ -21,8 +21,4 @@ public object Gzip {
     ): OutputStream {
         return GzipLevelOutputStream(SkipOutputStream(output, HEADER.size.toLong()), level)
     }
-
-    public fun createLaxInputStream(input: InputStream): InputStream {
-        return GzipLaxInputStream(input)
-    }
 }
