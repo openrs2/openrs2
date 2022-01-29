@@ -11,11 +11,11 @@ defaultTasks("build")
 
 plugins {
     base
-    id("com.github.ben-manes.versions")
-    id("org.jetbrains.dokka")
+    alias(libs.plugins.dokka)
+    alias(libs.plugins.versions)
     kotlin("jvm")
 
-    id("org.jmailen.kotlinter") apply false
+    alias(libs.plugins.kotlinter) apply false
 }
 
 allprojects {

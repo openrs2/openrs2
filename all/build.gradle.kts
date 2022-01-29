@@ -4,8 +4,8 @@ import java.nio.file.Files
 plugins {
     `maven-publish`
     application
-    id("com.github.jk1.dependency-license-report")
-    id("com.github.johnrengelman.shadow")
+    alias(libs.plugins.dependencyLicenseReport)
+    alias(libs.plugins.shadow)
     kotlin("jvm")
 }
 
