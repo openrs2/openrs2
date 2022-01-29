@@ -12,7 +12,6 @@ public class JagexGzipOutputStream(
     private val deflater = Deflater(Deflater.DEFAULT_COMPRESSION, true)
     private val buffer = ByteArray(4096)
     private val checksum = CRC32()
-    private var size = 0
     private var closed = false
 
     init {
@@ -32,8 +31,6 @@ public class JagexGzipOutputStream(
 
     override fun write(b: ByteArray, off: Int, len: Int) {
         checksum.update(b, off, len)
-        size += len
-
         deflater.setInput(b, off, len)
 
         while (!deflater.needsInput()) {
@@ -58,7 +55,7 @@ public class JagexGzipOutputStream(
 
             val dataOutput = LittleEndianDataOutputStream(output)
             dataOutput.writeInt(checksum.value.toInt())
-            dataOutput.writeInt(size)
+            dataOutput.writeInt(deflater.totalIn)
 
             deflater.end()
             output.close()
