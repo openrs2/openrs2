@@ -2,7 +2,7 @@
 asm = "9.2"
 commons-compress = "1.21"
 guava = "31.0.1-jre"
-guice = "5.0.1"
+guice = "5.1.0"
 jackson = "2.13.1"
 jimfs = "1.2"
 junit = "5.8.2"
@@ -10,7 +10,7 @@ kotlin = "1.6.10"
 kotlinCoroutines = "1.6.0"
 ktor = "1.6.7"
 netty = "4.1.73.Final"
-nettyIoUring = "0.0.11.Final"
+nettyIoUring = "0.0.12.Final"
 
 [plugins]
 dependencyLicenseReport = { id = "com.github.jk1.dependency-license-report", version = "2.1" }
@@ -33,7 +33,7 @@ clikt = { module = "com.github.ajalt.clikt:clikt", version = "3.4.0" }
 commons-compress = { module = "org.apache.commons:commons-compress", version.ref = "commons-compress" }
 fastutil = { module = "it.unimi.dsi:fastutil", version = "8.5.6" }
 fernflower = { module = "org.openrs2:fernflower", version = "1.1.1" }
-flyway = { module = "org.flywaydb:flyway-core", version = "8.4.2" }
+flyway = { module = "org.flywaydb:flyway-core", version = "8.4.3" }
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
 guice = { module = "com.google.inject:guice", version.ref = "guice" }
 h2 = { module = "com.h2database:h2", version = "2.1.210" }
