@@ -68,10 +68,16 @@ public class CachesController @Inject constructor(
             return
         }
 
+        val name = exporter.getFileName(id)
+        if (name == null) {
+            call.respond(HttpStatusCode.NotFound)
+            return
+        }
+
         call.response.header(
             HttpHeaders.ContentDisposition,
             ContentDisposition.Attachment
-                .withParameter(ContentDisposition.Parameters.FileName, "cache.zip")
+                .withParameter(ContentDisposition.Parameters.FileName, "cache-$name.zip")
                 .toString()
         )
 
@@ -89,10 +95,16 @@ public class CachesController @Inject constructor(
             return
         }
 
+        val name = exporter.getFileName(id)
+        if (name == null) {
+            call.respond(HttpStatusCode.NotFound)
+            return
+        }
+
         call.response.header(
             HttpHeaders.ContentDisposition,
             ContentDisposition.Attachment
-                .withParameter(ContentDisposition.Parameters.FileName, "cache.tar.gz")
+                .withParameter(ContentDisposition.Parameters.FileName, "cache-$name.tar.gz")
                 .toString()
         )
 
@@ -110,6 +122,19 @@ public class CachesController @Inject constructor(
             return
         }
 
+        val name = exporter.getFileName(id)
+        if (name == null) {
+            call.respond(HttpStatusCode.NotFound)
+            return
+        }
+
+        call.response.header(
+            HttpHeaders.ContentDisposition,
+            ContentDisposition.Inline
+                .withParameter(ContentDisposition.Parameters.FileName, "keys-$name.json")
+                .toString()
+        )
+
         call.respond(exporter.exportKeys(id))
     }
 
@@ -120,10 +145,16 @@ public class CachesController @Inject constructor(
             return
         }
 
+        val name = exporter.getFileName(id)
+        if (name == null) {
+            call.respond(HttpStatusCode.NotFound)
+            return
+        }
+
         call.response.header(
             HttpHeaders.ContentDisposition,
             ContentDisposition.Attachment
-                .withParameter(ContentDisposition.Parameters.FileName, "keys.zip")
+                .withParameter(ContentDisposition.Parameters.FileName, "keys-$name.zip")
                 .toString()
         )
 
@@ -171,6 +202,19 @@ public class CachesController @Inject constructor(
             call.respond(HttpStatusCode.NotFound)
             return
         }
+
+        val name = exporter.getFileName(id)
+        if (name == null) {
+            call.respond(HttpStatusCode.NotFound)
+            return
+        }
+
+        call.response.header(
+            HttpHeaders.ContentDisposition,
+            ContentDisposition.Inline
+                .withParameter(ContentDisposition.Parameters.FileName, "map-$name.png")
+                .toString()
+        )
 
         /*
          * The temporary BufferedImages used by the MapRenderer use a large

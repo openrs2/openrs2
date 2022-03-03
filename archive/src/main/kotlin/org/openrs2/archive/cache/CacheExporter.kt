@@ -18,6 +18,8 @@ import org.openrs2.db.Database
 import org.postgresql.util.PGobject
 import java.sql.Connection
 import java.time.Instant
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
 import java.util.SortedSet
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -367,6 +369,61 @@ public class CacheExporter @Inject constructor(
             }
 
             Cache(id, sources, updates, stats, masterIndex, checksumTable)
+        }
+    }
+
+    public suspend fun getFileName(id: Int): String? {
+        return database.execute { connection ->
+            // TODO(gpe): what if a cache is from multiple games?
+            connection.prepareStatement("""
+                SELECT
+                    g.name AS game,
+                    e.name AS environment,
+                    l.iso_code AS language,
+                    array_remove(array_agg(DISTINCT ROW(s.build_major, s.build_minor)::build ORDER BY ROW(s.build_major, s.build_minor)::build ASC), NULL) builds,
+                    MIN(s.timestamp) AS timestamp
+                FROM sources s
+                JOIN game_variants v ON v.id = s.game_id
+                JOIN games g ON g.id = v.game_id
+                JOIN environments e ON e.id = v.environment_id
+                JOIN languages l ON l.id = v.language_id
+                WHERE s.cache_id = ?
+                GROUP BY g.name, e.name, l.iso_code
+                LIMIT 1
+            """.trimIndent()).use { stmt ->
+                stmt.setInt(1, id)
+
+                stmt.executeQuery().use { rows ->
+                    if (!rows.next()) {
+                        return@execute null
+                    }
+
+                    val game = rows.getString(1)
+                    val environment = rows.getString(2)
+                    val language = rows.getString(3)
+
+                    val name = StringBuilder("$game-$environment-$language")
+
+                    val builds = rows.getArray(4).array as Array<*>
+                    for (build in builds.mapNotNull { o -> Build.fromPgObject(o as PGobject) }.toSortedSet()) {
+                        name.append("-b")
+                        name.append(build)
+                    }
+
+                    val timestamp = rows.getTimestamp(5)
+                    if (!rows.wasNull()) {
+                        name.append('-')
+                        name.append(timestamp.toInstant()
+                            .atOffset(ZoneOffset.UTC)
+                            .format(DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss")))
+                    }
+
+                    name.append("-openrs2#")
+                    name.append(id)
+
+                    name.toString()
+                }
+            }
         }
     }
 
