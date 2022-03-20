@@ -3,14 +3,14 @@ asm = "9.2"
 commons-compress = "1.21"
 guava = "31.1-jre"
 guice = "5.1.0"
-jackson = "2.13.1"
+jackson = "2.13.2"
 jimfs = "1.2"
 junit = "5.8.2"
 kotlin = "1.6.10"
 kotlinCoroutines = "1.6.0"
-ktor = "1.6.7"
-netty = "4.1.74.Final"
-nettyIoUring = "0.0.12.Final"
+ktor = "1.6.8"
+netty = "4.1.75.Final"
+nettyIoUring = "0.0.13.Final"
 
 [plugins]
 dependencyLicenseReport = { id = "com.github.jk1.dependency-license-report", version = "2.1" }
@@ -33,7 +33,7 @@ clikt = { module = "com.github.ajalt.clikt:clikt", version = "3.4.0" }
 commons-compress = { module = "org.apache.commons:commons-compress", version.ref = "commons-compress" }
 fastutil = { module = "it.unimi.dsi:fastutil", version = "8.5.8" }
 fernflower = { module = "org.openrs2:fernflower", version = "1.1.1" }
-flyway = { module = "org.flywaydb:flyway-core", version = "8.5.1" }
+flyway = { module = "org.flywaydb:flyway-core", version = "8.5.4" }
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
 guice = { module = "com.google.inject:guice", version.ref = "guice" }
 h2 = { module = "com.h2database:h2", version = "2.1.210" }
@@ -59,7 +59,7 @@ ktor-jackson = { module = "io.ktor:ktor-jackson", version.ref = "ktor" }
 ktor-server-cio = { module = "io.ktor:ktor-server-cio", version.ref = "ktor" }
 ktor-thymeleaf = { module = "io.ktor:ktor-thymeleaf", version.ref = "ktor" }
 ktor-webjars = { module = "io.ktor:ktor-webjars", version.ref = "ktor" }
-logback = { module = "ch.qos.logback:logback-classic", version = "1.2.10" }
+logback = { module = "ch.qos.logback:logback-classic", version = "1.2.11" }
 netty-buffer = { module = "io.netty:netty-buffer", version.ref = "netty" }
 netty-codec-core = { module = "io.netty:netty-codec", version.ref = "netty" }
 netty-codec-http = { module = "io.netty:netty-codec-http", version.ref = "netty" }
@@ -68,7 +68,7 @@ netty-transport = { module = "io.netty:netty-transport", version.ref = "netty" }
 openrs2-natives = { module = "org.openrs2:openrs2-natives-all", version = "3.2.0" }
 pf4j = { module = "org.pf4j:pf4j", version = "3.6.0" }
 postgres = { module = "org.postgresql:postgresql", version = "42.3.3" }
-runelite-client = { module = "net.runelite:client", version = "1.8.12" }
+runelite-client = { module = "net.runelite:client", version = "1.8.14" }
 thymeleaf-core = { module = "org.thymeleaf:thymeleaf", version = "3.0.15.RELEASE" }
 thymeleaf-java8time = { module = "org.thymeleaf.extras:thymeleaf-extras-java8time", version = "3.0.4.RELEASE" }
 xz = { module = "org.tukaani:xz", version = "1.9" }
