@@ -703,6 +703,33 @@ class Js5CompressionTest {
         }
     }
 
+    @Test
+    fun testMissingHeader() {
+        read("missing-header.dat").use { compressed ->
+            assertFailsWith<IOException> {
+                Js5Compression.uncompress(compressed)
+            }
+        }
+
+        read("missing-header.dat").use { compressed ->
+            assertFailsWith<IOException> {
+                Js5Compression.uncompressUnlessEncrypted(compressed)
+            }
+        }
+
+        read("missing-header.dat").use { compressed ->
+            assertFailsWith<IOException> {
+                Js5Compression.uncompressIfKeyValid(compressed, XteaKey.ZERO)
+            }
+        }
+
+        read("missing-header.dat").use { compressed ->
+            assertFailsWith<IOException> {
+                Js5Compression.isEmptyLoc(compressed)
+            }
+        }
+    }
+
     private fun read(name: String): ByteBuf {
         Js5CompressionTest::class.java.getResourceAsStream("compression/$name").use { input ->
             return Unpooled.wrappedBuffer(input.readBytes())

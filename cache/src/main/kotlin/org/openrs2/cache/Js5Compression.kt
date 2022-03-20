@@ -108,6 +108,10 @@ public object Js5Compression {
     }
 
     public fun uncompress(input: ByteBuf, key: XteaKey = XteaKey.ZERO): ByteBuf {
+        if (input.readableBytes() < 5) {
+            throw IOException("Missing header")
+        }
+
         val typeId = input.readUnsignedByte().toInt()
         val type = Js5CompressionType.fromOrdinal(typeId)
             ?: throw IOException("Invalid compression type: $typeId")
@@ -167,6 +171,10 @@ public object Js5Compression {
     }
 
     public fun uncompressIfKeyValid(input: ByteBuf, key: XteaKey): ByteBuf? {
+        if (input.readableBytes() < 5) {
+            throw IOException("Missing header")
+        }
+
         val typeId = input.readUnsignedByte().toInt()
         val type = Js5CompressionType.fromOrdinal(typeId)
             ?: throw IOException("Invalid compression type: $typeId")
@@ -358,6 +366,10 @@ public object Js5Compression {
     }
 
     public fun isEmptyLoc(buf: ByteBuf): Boolean {
+        if (buf.readableBytes() < 5) {
+            throw IOException("Missing header")
+        }
+
         val typeId = buf.readUnsignedByte().toInt()
         val type = Js5CompressionType.fromOrdinal(typeId)
             ?: throw IOException("Invalid compression type: $typeId")
