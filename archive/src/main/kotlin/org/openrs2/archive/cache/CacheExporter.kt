@@ -375,7 +375,8 @@ public class CacheExporter @Inject constructor(
     public suspend fun getFileName(id: Int): String? {
         return database.execute { connection ->
             // TODO(gpe): what if a cache is from multiple games?
-            connection.prepareStatement("""
+            connection.prepareStatement(
+                """
                 SELECT
                     g.name AS game,
                     e.name AS environment,
@@ -390,7 +391,8 @@ public class CacheExporter @Inject constructor(
                 WHERE s.cache_id = ?
                 GROUP BY g.name, e.name, l.iso_code
                 LIMIT 1
-            """.trimIndent()).use { stmt ->
+            """.trimIndent()
+            ).use { stmt ->
                 stmt.setInt(1, id)
 
                 stmt.executeQuery().use { rows ->
@@ -413,9 +415,11 @@ public class CacheExporter @Inject constructor(
                     val timestamp = rows.getTimestamp(5)
                     if (!rows.wasNull()) {
                         name.append('-')
-                        name.append(timestamp.toInstant()
-                            .atOffset(ZoneOffset.UTC)
-                            .format(DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss")))
+                        name.append(
+                            timestamp.toInstant()
+                                .atOffset(ZoneOffset.UTC)
+                                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss"))
+                        )
                     }
 
                     name.append("-openrs2#")
