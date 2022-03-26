@@ -1043,8 +1043,13 @@ public class CacheImporter @Inject constructor(
 
         // import archives and version list
         for (id in store.list(0)) {
-            readArchive(store, id).use { archive ->
-                addArchive(connection, sourceId, archive)
+            try {
+                readArchive(store, id).use { archive ->
+                    addArchive(connection, sourceId, archive)
+                }
+            } catch (ex: StoreCorruptException) {
+                // see the comment in ChecksumTable::create
+                logger.warn(ex) { "Skipping corrupt archive ($id)" }
             }
         }
 

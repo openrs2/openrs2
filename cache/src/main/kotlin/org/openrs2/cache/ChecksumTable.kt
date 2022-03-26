@@ -26,8 +26,13 @@ public class ChecksumTable(
 
             var nextArchive = 0
             for (archive in store.list(0)) {
-                val entry = store.read(0, archive).use { buf ->
-                    buf.crc32()
+                val entry = try {
+                    store.read(0, archive).use { buf ->
+                        buf.crc32()
+                    }
+                } catch (ex: StoreCorruptException) {
+                    // see the equivalent comment in Js5MasterIndex::create
+                    continue
                 }
 
                 for (i in nextArchive until archive) {
