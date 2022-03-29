@@ -1330,6 +1330,21 @@ public class CacheImporter @Inject constructor(
 
     public suspend fun refreshViews() {
         database.execute { connection ->
+            connection.prepareStatement("""
+                SELECT pg_try_advisory_lock(0)
+            """.trimIndent()).use { stmt ->
+                stmt.executeQuery().use { rows ->
+                    if (!rows.next()) {
+                        throw IllegalStateException()
+                    }
+
+                    val locked = rows.getBoolean(1)
+                    if (!locked) {
+                        return@execute
+                    }
+                }
+            }
+
             connection.prepareStatement(
                 """
                 REFRESH MATERIALIZED VIEW CONCURRENTLY index_stats
