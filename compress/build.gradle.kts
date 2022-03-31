@@ -9,6 +9,7 @@ dependencies {
     api(libs.xz)
 
     implementation(projects.util)
+    implementation(libs.jnr)
 }
 
 publishing {
