@@ -4,11 +4,11 @@ plugins {
 }
 
 dependencies {
+    api(libs.commons.compress)
+    api(libs.guava)
     api(libs.xz)
 
     implementation(projects.util)
-    api(libs.commons.compress)
-    api(libs.guava)
 }
 
 publishing {
