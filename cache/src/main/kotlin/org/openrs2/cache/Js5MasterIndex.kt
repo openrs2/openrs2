@@ -66,6 +66,7 @@ public data class Js5MasterIndex(
         }
     }
 
+    @JvmOverloads
     public fun write(buf: ByteBuf, key: RSAKeyParameters? = null) {
         val start = buf.writerIndex()
 
@@ -179,6 +180,7 @@ public data class Js5MasterIndex(
             return masterIndex
         }
 
+        @JvmOverloads
         public fun read(buf: ByteBuf, format: MasterIndexFormat, key: RSAKeyParameters? = null): Js5MasterIndex {
             return read(buf, format, key, true)
         }

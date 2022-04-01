@@ -128,6 +128,7 @@ public class FlatFileStore private constructor(
         private val GROUP_NAME = Regex("[0-9]+[.]dat")
         private const val GROUP_EXTENSION = ".dat"
 
+        @JvmOverloads
         public fun open(root: Path, alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT): Store {
             if (!Files.isDirectory(root)) {
                 throw FileNotFoundException()
@@ -136,6 +137,7 @@ public class FlatFileStore private constructor(
             return FlatFileStore(root, alloc)
         }
 
+        @JvmOverloads
         public fun create(root: Path, alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT): Store {
             Files.createDirectories(root)
             return FlatFileStore(root, alloc)

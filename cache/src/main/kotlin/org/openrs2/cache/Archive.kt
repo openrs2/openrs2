@@ -181,6 +181,7 @@ public abstract class Archive internal constructor(
         return listNamed(group.krHashCode())
     }
 
+    @JvmOverloads
     public fun read(group: Int, file: Int, key: XteaKey = XteaKey.ZERO): ByteBuf {
         require(group >= 0 && file >= 0)
 
@@ -189,16 +190,19 @@ public abstract class Archive internal constructor(
         return unpacked.read(file)
     }
 
+    @JvmOverloads
     public fun readNamed(groupNameHash: Int, fileNameHash: Int, key: XteaKey = XteaKey.ZERO): ByteBuf {
         val entry = index.getNamed(groupNameHash) ?: throw FileNotFoundException()
         val unpacked = getUnpacked(entry, key)
         return unpacked.readNamed(fileNameHash)
     }
 
+    @JvmOverloads
     public fun read(group: String, file: String, key: XteaKey = XteaKey.ZERO): ByteBuf {
         return readNamed(group.krHashCode(), file.krHashCode(), key)
     }
 
+    @JvmOverloads
     public fun write(group: Int, file: Int, buf: ByteBuf, key: XteaKey = XteaKey.ZERO) {
         require(group >= 0 && file >= 0)
 
@@ -209,6 +213,7 @@ public abstract class Archive internal constructor(
         dirty = true
     }
 
+    @JvmOverloads
     public fun writeNamed(groupNameHash: Int, fileNameHash: Int, buf: ByteBuf, key: XteaKey = XteaKey.ZERO) {
         val entry = index.createOrGetNamed(groupNameHash)
         val unpacked = createOrGetUnpacked(entry, key, isOverwritingNamed(entry, fileNameHash))
@@ -218,6 +223,7 @@ public abstract class Archive internal constructor(
         index.hasNames = true
     }
 
+    @JvmOverloads
     public fun write(group: String, file: String, buf: ByteBuf, key: XteaKey = XteaKey.ZERO) {
         return writeNamed(group.krHashCode(), file.krHashCode(), buf, key)
     }
@@ -244,6 +250,7 @@ public abstract class Archive internal constructor(
         return removeNamed(group.krHashCode())
     }
 
+    @JvmOverloads
     public fun remove(group: Int, file: Int, key: XteaKey = XteaKey.ZERO) {
         require(group >= 0 && file >= 0)
 
@@ -260,6 +267,7 @@ public abstract class Archive internal constructor(
         dirty = true
     }
 
+    @JvmOverloads
     public fun removeNamed(groupNameHash: Int, fileNameHash: Int, key: XteaKey = XteaKey.ZERO) {
         val entry = index.getNamed(groupNameHash) ?: return
 
@@ -274,6 +282,7 @@ public abstract class Archive internal constructor(
         dirty = true
     }
 
+    @JvmOverloads
     public fun remove(group: String, file: String, key: XteaKey = XteaKey.ZERO) {
         return removeNamed(group.krHashCode(), file.krHashCode(), key)
     }

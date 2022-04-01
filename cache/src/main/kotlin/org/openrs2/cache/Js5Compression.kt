@@ -18,6 +18,7 @@ public object Js5Compression {
     private const val LZMA_PB_MAX = 4
     private const val LZMA_PRESET_DICT_SIZE_MAX = 1 shl 26
 
+    @JvmOverloads
     public fun compress(input: ByteBuf, type: Js5CompressionType, key: XteaKey = XteaKey.ZERO): ByteBuf {
         input.alloc().buffer().use { output ->
             output.writeByte(type.ordinal)
@@ -107,6 +108,7 @@ public object Js5Compression {
         }
     }
 
+    @JvmOverloads
     public fun uncompress(input: ByteBuf, key: XteaKey = XteaKey.ZERO): ByteBuf {
         if (input.readableBytes() < 5) {
             throw IOException("Missing header")

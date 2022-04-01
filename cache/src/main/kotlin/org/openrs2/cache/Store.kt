@@ -135,6 +135,7 @@ public interface Store : Flushable, Closeable {
          * groups read from the [Store] and for temporary internal use.
          * @throws IOException if an underlying I/O error occurs.
          */
+        @JvmOverloads
         public fun open(root: Path, alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT): Store {
             val hasDataFile = Files.isRegularFile(DiskStore.dataPath(root))
             val hasLegacyDataFile = Files.isRegularFile(DiskStore.legacyDataPath(root))

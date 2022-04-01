@@ -132,25 +132,30 @@ public class Cache private constructor(
         return listNamed(archive, group.krHashCode())
     }
 
+    @JvmOverloads
     public fun read(archive: Int, group: Int, file: Int, key: XteaKey = XteaKey.ZERO): ByteBuf {
         checkArchive(archive)
         return archives[archive]?.read(group, file, key) ?: throw FileNotFoundException()
     }
 
+    @JvmOverloads
     public fun readNamed(archive: Int, groupNameHash: Int, fileNameHash: Int, key: XteaKey = XteaKey.ZERO): ByteBuf {
         checkArchive(archive)
         return archives[archive]?.readNamed(groupNameHash, fileNameHash, key) ?: throw FileNotFoundException()
     }
 
+    @JvmOverloads
     public fun read(archive: Int, group: String, file: String, key: XteaKey = XteaKey.ZERO): ByteBuf {
         return readNamed(archive, group.krHashCode(), file.krHashCode(), key)
     }
 
+    @JvmOverloads
     public fun write(archive: Int, group: Int, file: Int, buf: ByteBuf, key: XteaKey = XteaKey.ZERO) {
         checkArchive(archive)
         createOrGetArchive(archive).write(group, file, buf, key)
     }
 
+    @JvmOverloads
     public fun writeNamed(
         archive: Int,
         groupNameHash: Int,
@@ -162,6 +167,7 @@ public class Cache private constructor(
         createOrGetArchive(archive).writeNamed(groupNameHash, fileNameHash, buf, key)
     }
 
+    @JvmOverloads
     public fun write(archive: Int, group: String, file: String, buf: ByteBuf, key: XteaKey = XteaKey.ZERO) {
         writeNamed(archive, group.krHashCode(), file.krHashCode(), buf, key)
     }
@@ -195,16 +201,19 @@ public class Cache private constructor(
         return removeNamed(archive, group.krHashCode())
     }
 
+    @JvmOverloads
     public fun remove(archive: Int, group: Int, file: Int, key: XteaKey = XteaKey.ZERO) {
         checkArchive(archive)
         archives[archive]?.remove(group, file, key)
     }
 
+    @JvmOverloads
     public fun removeNamed(archive: Int, groupNameHash: Int, fileNameHash: Int, key: XteaKey = XteaKey.ZERO) {
         checkArchive(archive)
         archives[archive]?.removeNamed(groupNameHash, fileNameHash, key)
     }
 
+    @JvmOverloads
     public fun remove(archive: Int, group: String, file: String, key: XteaKey = XteaKey.ZERO) {
         return removeNamed(archive, group.krHashCode(), file.krHashCode(), key)
     }
@@ -240,6 +249,7 @@ public class Cache private constructor(
     public companion object {
         public const val MAX_ARCHIVE: Int = 254
 
+        @JvmOverloads
         public fun open(
             root: Path,
             alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT,
@@ -248,6 +258,7 @@ public class Cache private constructor(
             return open(Store.open(root, alloc), alloc, unpackedCacheSize)
         }
 
+        @JvmOverloads
         public fun open(
             store: Store,
             alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT,

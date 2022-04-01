@@ -500,6 +500,7 @@ public class DiskStore private constructor(
             return root.resolve("main_file_cache.idx$archive")
         }
 
+        @JvmOverloads
         public fun open(root: Path, alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT): Store {
             val js5DataPath = dataPath(root)
             val legacyDataPath = legacyDataPath(root)

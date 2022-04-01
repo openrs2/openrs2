@@ -129,6 +129,7 @@ public class JagArchive : Closeable {
      * @param alloc the allocator.
      * @return the compressed archive.
      */
+    @JvmOverloads
     public fun pack(compressedArchive: Boolean, alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT): ByteBuf {
         alloc.buffer().use { output ->
             alloc.buffer().use { uncompressedArchiveBuf ->
@@ -189,6 +190,7 @@ public class JagArchive : Closeable {
      * @param alloc the allocator.
      * @return the compressed archive.
      */
+    @JvmOverloads
     public fun packBest(alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT): ByteBuf {
         pack(true, alloc).use { compressedArchive ->
             pack(false, alloc).use { compressedEntries ->
