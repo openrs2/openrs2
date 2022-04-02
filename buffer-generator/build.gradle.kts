@@ -5,7 +5,7 @@ plugins {
 }
 
 application {
-    mainClass.set("org.openrs2.buffer.generator.GenerateBufferCommand")
+    mainClass.set("org.openrs2.buffer.generator.GenerateBufferCommandKt")
 }
 
 dependencies {
