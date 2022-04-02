@@ -17,6 +17,7 @@ application {
 dependencies {
     implementation(projects.archive)
     implementation(projects.bufferGenerator)
+    implementation(projects.cacheCli)
     implementation(projects.compressCli)
     implementation(projects.crc32)
     implementation(projects.deob)

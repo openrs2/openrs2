@@ -28,6 +28,7 @@ include(
     "buffer-generator",
     "cache",
     "cache-550",
+    "cache-cli",
     "cli",
     "compress",
     "compress-cli",
