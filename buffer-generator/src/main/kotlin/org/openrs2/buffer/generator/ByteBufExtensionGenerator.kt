@@ -9,7 +9,7 @@ public class ByteBufExtensionGenerator {
     public fun generate(): String {
         val builder = FileSpec.builder("org.openrs2.buffer", "GeneratedByteBufExtensions")
         builder.indent("    ")
-        builder.addComment("This file is generated automatically. DO NOT EDIT.")
+        builder.addFileComment("This file is generated automatically. DO NOT EDIT.")
 
         for (type in IntType.values()) {
             for (order in ByteOrder.values()) {
