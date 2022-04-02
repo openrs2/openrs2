@@ -6,7 +6,7 @@ guice = "5.1.0"
 jackson = "2.13.2.2"
 jimfs = "1.2"
 junit = "5.8.2"
-kotlin = "1.6.10"
+kotlin = "1.6.20"
 kotlinCoroutines = "1.6.0"
 ktor = "1.6.8"
 netty = "4.1.75.Final"
@@ -14,7 +14,7 @@ nettyIoUring = "0.0.13.Final"
 
 [plugins]
 dependencyLicenseReport = { id = "com.github.jk1.dependency-license-report", version = "2.1" }
-dokka = { id = "org.jetbrains.dokka", version.ref = "kotlin" }
+dokka = { id = "org.jetbrains.dokka", version = "1.6.10" }
 kotlinter = { id = "org.jmailen.kotlinter", version = "3.9.0" }
 shadow = { id = "com.github.johnrengelman.shadow", version = "7.1.2" }
 versions = { id = "com.github.ben-manes.versions", version = "0.42.0" }
@@ -48,7 +48,7 @@ jdom = { module = "org.jdom:jdom2", version = "2.0.6.1" }
 jgrapht = { module = "org.jgrapht:jgrapht-core", version = "1.5.1" }
 jimfs = { module = "com.google.jimfs:jimfs", version.ref = "jimfs" }
 jquery = { module = "org.webjars:jquery", version = "3.6.0" }
-jnr = { module = "com.github.jnr:jnr-ffi", version = "2.2.11" }
+jnr = { module = "com.github.jnr:jnr-ffi", version = "2.2.12" }
 jsoup = { module = "org.jsoup:jsoup", version = "1.14.3" }
 junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version = { strictly = "5.8.2" } }
 junit-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
