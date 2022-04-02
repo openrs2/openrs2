@@ -3,7 +3,7 @@ asm = "9.2"
 commons-compress = "1.21"
 guava = "31.1-jre"
 guice = "5.1.0"
-jackson = "2.13.2.2"
+jackson = "2.13.2"
 jimfs = "1.2"
 junit = "5.8.2"
 kotlin = "1.6.20"
@@ -39,7 +39,7 @@ guice = { module = "com.google.inject:guice", version.ref = "guice" }
 h2 = { module = "com.h2database:h2", version = "2.1.210" }
 hikaricp = { module = "com.zaxxer:HikariCP", version = "5.0.1" }
 inlineLogger = { module = "com.michael-bull.kotlin-inline-logger:kotlin-inline-logger", version = "1.0.4" }
-jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jackson" }
+jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version = "2.13.2.2" }
 jackson-jsr310 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310", version.ref = "jackson" }
 jackson-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin", version.ref = "jackson" }
 jackson-yaml = { module = "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml", version.ref = "jackson" }
