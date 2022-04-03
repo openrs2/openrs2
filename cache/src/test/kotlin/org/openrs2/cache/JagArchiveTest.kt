@@ -18,12 +18,12 @@ class JagArchiveTest {
             assertEquals(0, archive.size)
             assertEquals(emptyList(), archive.list().asSequence().toList())
 
-            packTest("empty-compressed-archive.jag", archive, true)
-            packTest("empty-compressed-entries.jag", archive, false)
-            packBestTest("empty-compressed-entries.jag", archive)
+            packTest("empty-compressed-archive", archive, true)
+            packTest("empty-compressed-entries", archive, false)
+            packBestTest("empty-compressed-entries", archive)
 
-            unpackTest("empty-compressed-archive.jag", archive)
-            unpackTest("empty-compressed-entries.jag", archive)
+            unpackTest("empty-compressed-archive", archive)
+            unpackTest("empty-compressed-entries", archive)
         }
     }
 
@@ -54,12 +54,12 @@ class JagArchiveTest {
             assertFalse(archive.exists("HELLO.TXT"))
             assertFalse(archive.existsNamed("HELLO.TXT".jagHashCode()))
 
-            packTest("single-compressed-archive.jag", archive, true)
-            packTest("single-compressed-entries.jag", archive, false)
-            packBestTest("single-compressed-entries.jag", archive)
+            packTest("single-compressed-archive", archive, true)
+            packTest("single-compressed-entries", archive, false)
+            packBestTest("single-compressed-entries", archive)
 
-            unpackTest("single-compressed-archive.jag", archive)
-            unpackTest("single-compressed-entries.jag", archive)
+            unpackTest("single-compressed-archive", archive)
+            unpackTest("single-compressed-entries", archive)
         }
     }
 
@@ -111,12 +111,12 @@ class JagArchiveTest {
             assertFalse(archive.exists("OTHER.TXT"))
             assertFalse(archive.existsNamed("OTHER.TXT".jagHashCode()))
 
-            packTest("multiple-compressed-archive.jag", archive, true)
-            packTest("multiple-compressed-entries.jag", archive, false)
-            packBestTest("multiple-compressed-archive.jag", archive)
+            packTest("multiple-compressed-archive", archive, true)
+            packTest("multiple-compressed-entries", archive, false)
+            packBestTest("multiple-compressed-archive", archive)
 
-            unpackTest("multiple-compressed-archive.jag", archive)
-            unpackTest("multiple-compressed-entries.jag", archive)
+            unpackTest("multiple-compressed-archive", archive)
+            unpackTest("multiple-compressed-entries", archive)
 
             archive.remove("TEST.TXT")
 
@@ -164,28 +164,47 @@ class JagArchiveTest {
                 archive.write("TEST.TXT", buf)
             }
 
-            unpackTest("duplicate-entries.jag", archive)
+            unpackTest("duplicate-entries", archive)
         }
     }
 
     private fun packTest(name: String, archive: JagArchive, compressedArchive: Boolean) {
-        Unpooled.wrappedBuffer(Files.readAllBytes(ROOT.resolve(name))).use { expected ->
-            archive.pack(compressedArchive).use { actual ->
-                assertEquals(expected, actual)
+        val softwareName = "$name-commonscompress.jag"
+        val nativeName = "$name-libbzip2.jag"
+
+        Unpooled.wrappedBuffer(Files.readAllBytes(ROOT.resolve(softwareName))).use { expectedSoftware ->
+            Unpooled.wrappedBuffer(Files.readAllBytes(ROOT.resolve(nativeName))).use { expectedNative ->
+                archive.pack(compressedArchive).use { actual ->
+                    assertTrue(expectedSoftware == actual || expectedNative == actual)
+                }
             }
         }
     }
 
     private fun packBestTest(name: String, archive: JagArchive) {
-        Unpooled.wrappedBuffer(Files.readAllBytes(ROOT.resolve(name))).use { expected ->
-            archive.packBest().use { actual ->
-                assertEquals(expected, actual)
+        val softwareName = "$name-commonscompress.jag"
+        val nativeName = "$name-libbzip2.jag"
+
+        Unpooled.wrappedBuffer(Files.readAllBytes(ROOT.resolve(softwareName))).use { expectedSoftware ->
+            Unpooled.wrappedBuffer(Files.readAllBytes(ROOT.resolve(nativeName))).use { expectedNative ->
+                archive.packBest().use { actual ->
+                    assertTrue(expectedSoftware == actual || expectedNative == actual)
+                }
             }
         }
     }
 
     private fun unpackTest(name: String, expected: JagArchive) {
-        Unpooled.wrappedBuffer(Files.readAllBytes(ROOT.resolve(name))).use { buf ->
+        val softwareName = "$name-commonscompress.jag"
+        val nativeName = "$name-libbzip2.jag"
+
+        Unpooled.wrappedBuffer(Files.readAllBytes(ROOT.resolve(softwareName))).use { buf ->
+            JagArchive.unpack(buf).use { actual ->
+                assertEquals(expected, actual)
+            }
+        }
+
+        Unpooled.wrappedBuffer(Files.readAllBytes(ROOT.resolve(nativeName))).use { buf ->
             JagArchive.unpack(buf).use { actual ->
                 assertEquals(expected, actual)
             }
