@@ -1,13 +1,8 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="GenerateBuffer" type="JetRunConfigurationType">
-    <module name="openrs2.buffer-generator.main" />
-    <option name="VM_PARAMETERS" value="" />
-    <option name="PROGRAM_PARAMETERS" value="" />
-    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-    <option name="ALTERNATIVE_JRE_PATH" />
-    <option name="PASS_PARENT_ENVS" value="true" />
     <option name="MAIN_CLASS_NAME" value="org.openrs2.buffer.generator.GenerateBufferCommandKt" />
-    <option name="WORKING_DIRECTORY" value="" />
+    <module name="openrs2.buffer-generator.main" />
+    <shortenClasspath name="NONE" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

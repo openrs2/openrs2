@@ -1,13 +1,9 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Decompiler" type="JetRunConfigurationType">
-    <module name="openrs2.decompiler.main" />
-    <option name="VM_PARAMETERS" value="-Xmx3G" />
-    <option name="PROGRAM_PARAMETERS" value="" />
-    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-    <option name="ALTERNATIVE_JRE_PATH" />
-    <option name="PASS_PARENT_ENVS" value="true" />
     <option name="MAIN_CLASS_NAME" value="org.openrs2.decompiler.DecompileCommandKt" />
-    <option name="WORKING_DIRECTORY" value="" />
+    <module name="openrs2.decompiler.main" />
+    <shortenClasspath name="NONE" />
+    <option name="VM_PARAMETERS" value="-Xmx3G" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>
