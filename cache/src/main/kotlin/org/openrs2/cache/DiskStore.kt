@@ -450,7 +450,7 @@ public class DiskStore private constructor(
 
     override fun flush() {
         data.flush()
-        musicData?.close()
+        musicData?.flush()
 
         for (index in indexes) {
             index?.flush()
