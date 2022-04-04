@@ -227,6 +227,8 @@ public class Cache private constructor(
         for (archive in archives) {
             archive?.flush()
         }
+
+        store.flush()
     }
 
     /**
