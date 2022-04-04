@@ -230,6 +230,7 @@ public class JagArchive : Closeable {
          * @param buf the compressed archive.
          * @return the unpacked archive.
          */
+        @JvmStatic
         public fun unpack(buf: ByteBuf): JagArchive {
             val archive = JagArchive()
 

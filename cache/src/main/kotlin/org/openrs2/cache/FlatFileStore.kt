@@ -129,6 +129,7 @@ public class FlatFileStore private constructor(
         private const val GROUP_EXTENSION = ".dat"
 
         @JvmOverloads
+        @JvmStatic
         public fun open(root: Path, alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT): Store {
             if (!Files.isDirectory(root)) {
                 throw FileNotFoundException()
@@ -138,6 +139,7 @@ public class FlatFileStore private constructor(
         }
 
         @JvmOverloads
+        @JvmStatic
         public fun create(root: Path, alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT): Store {
             Files.createDirectories(root)
             return FlatFileStore(root, alloc)

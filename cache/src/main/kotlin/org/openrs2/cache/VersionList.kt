@@ -20,6 +20,7 @@ public class VersionList(
     public companion object {
         private val NAMES = listOf("model", "anim", "midi", "map")
 
+        @JvmStatic
         public fun read(archive: JagArchive): VersionList {
             val files = mutableListOf<List<File>>()
 

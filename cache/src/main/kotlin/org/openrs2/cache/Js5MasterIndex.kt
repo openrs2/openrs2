@@ -118,6 +118,7 @@ public data class Js5MasterIndex(
     public companion object {
         private const val SIGNATURE_LENGTH = Whirlpool.DIGESTBYTES + 1
 
+        @JvmStatic
         public fun create(store: Store): Js5MasterIndex {
             val masterIndex = Js5MasterIndex(MasterIndexFormat.ORIGINAL)
 
@@ -181,10 +182,12 @@ public data class Js5MasterIndex(
         }
 
         @JvmOverloads
+        @JvmStatic
         public fun read(buf: ByteBuf, format: MasterIndexFormat, key: RSAKeyParameters? = null): Js5MasterIndex {
             return read(buf, format, key, true)
         }
 
+        @JvmStatic
         public fun readUnverified(buf: ByteBuf, format: MasterIndexFormat): Js5MasterIndex {
             return read(buf, format, null, false)
         }

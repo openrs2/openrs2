@@ -280,6 +280,7 @@ public class Js5Index(
         private const val FLAG_LENGTHS = 0x04
         private const val FLAG_UNCOMPRESSED_CHECKSUMS = 0x08
 
+        @JvmStatic
         public fun read(buf: ByteBuf): Js5Index {
             val number = buf.readUnsignedByte().toInt()
             val protocol = Js5Protocol.fromId(number)

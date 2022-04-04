@@ -12,6 +12,7 @@ public enum class Js5Protocol {
         private const val OFFSET = 5
         private val values = values()
 
+        @JvmStatic
         public fun fromId(id: Int): Js5Protocol? {
             val ordinal = id - OFFSET
             return if (ordinal >= 0 && ordinal < values.size) {

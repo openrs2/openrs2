@@ -21,6 +21,7 @@ public class ChecksumTable(
     }
 
     public companion object {
+        @JvmStatic
         public fun create(store: Store): ChecksumTable {
             val table = ChecksumTable()
 
@@ -46,6 +47,7 @@ public class ChecksumTable(
             return table
         }
 
+        @JvmStatic
         public fun read(buf: ByteBuf): ChecksumTable {
             val table = ChecksumTable()
 

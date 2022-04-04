@@ -250,6 +250,7 @@ public class Cache private constructor(
         public const val MAX_ARCHIVE: Int = 254
 
         @JvmOverloads
+        @JvmStatic
         public fun open(
             root: Path,
             alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT,
@@ -259,6 +260,7 @@ public class Cache private constructor(
         }
 
         @JvmOverloads
+        @JvmStatic
         public fun open(
             store: Store,
             alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT,

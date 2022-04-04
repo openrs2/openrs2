@@ -91,6 +91,8 @@ public class Js5Pack private constructor(
     }
 
     public companion object {
+        @JvmOverloads
+        @JvmStatic
         public fun create(
             alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT,
             unpackedCacheSize: Int = UnpackedCache.DEFAULT_CAPACITY
@@ -107,6 +109,8 @@ public class Js5Pack private constructor(
             }
         }
 
+        @JvmOverloads
+        @JvmStatic
         public fun read(
             path: Path,
             alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT,
@@ -117,6 +121,8 @@ public class Js5Pack private constructor(
             }
         }
 
+        @JvmOverloads
+        @JvmStatic
         public fun read(
             input: InputStream,
             alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT,

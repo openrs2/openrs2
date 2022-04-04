@@ -501,6 +501,7 @@ public class DiskStore private constructor(
         }
 
         @JvmOverloads
+        @JvmStatic
         public fun open(root: Path, alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT): Store {
             val js5DataPath = dataPath(root)
             val legacyDataPath = legacyDataPath(root)
@@ -549,6 +550,8 @@ public class DiskStore private constructor(
             return DiskStore(root, data, musicData, archives, alloc, legacy)
         }
 
+        @JvmOverloads
+        @JvmStatic
         public fun create(
             root: Path,
             alloc: ByteBufAllocator = ByteBufAllocator.DEFAULT,

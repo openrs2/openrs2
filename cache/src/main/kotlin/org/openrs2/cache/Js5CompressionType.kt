@@ -41,6 +41,7 @@ public enum class Js5CompressionType {
     public companion object {
         private val values = values()
 
+        @JvmStatic
         public fun fromOrdinal(ordinal: Int): Js5CompressionType? {
             return if (ordinal >= 0 && ordinal < values.size) {
                 values[ordinal]
