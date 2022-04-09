@@ -147,8 +147,8 @@ public object Js5Compression {
                 throw IOException("Uncompressed length is negative: $uncompressedLen")
             }
 
-            plaintext.alloc().buffer(uncompressedLen, uncompressedLen).use { output ->
-                type.createInputStream(ByteBufInputStream(plaintext, len), uncompressedLen).use { inputStream ->
+            type.createInputStream(ByteBufInputStream(plaintext, len), uncompressedLen).use { inputStream ->
+                plaintext.alloc().buffer(uncompressedLen, uncompressedLen).use { output ->
                     var remaining = uncompressedLen
                     while (remaining > 0) {
                         val n = output.writeBytes(inputStream, remaining)
@@ -161,9 +161,9 @@ public object Js5Compression {
                     if (inputStream.read() != -1) {
                         throw IOException("Uncompressed data overflow")
                     }
-                }
 
-                return output.retain()
+                    return output.retain()
+                }
             }
         }
     }
@@ -317,21 +317,21 @@ public object Js5Compression {
             val uncompressedLen = plaintext.readInt()
             check(uncompressedLen >= 0)
 
-            /**
-             * We don't pass uncompressedLen to the buffer here: in some cases,
-             * an incorrect key can produce a valid header (particularly for
-             * LZMA, which has no magic number). If we're unlucky,
-             * uncompressedLen will be a huge number (e.g. 1 or 2 gigabytes),
-             * which might OOM some environments if allocated up front.
-             *
-             * However, if the key is incorrect it's likely that actually
-             * attempting to uncompress the data will quickly produce an error,
-             * long before we need to actually read 1 or 2 gigabytes of data.
-             * We therefore allow the buffer to grow dynamically.
-             */
-            plaintext.alloc().buffer().use { output ->
-                try {
-                    type.createInputStream(ByteBufInputStream(plaintext, len), uncompressedLen).use { inputStream ->
+            try {
+                type.createInputStream(ByteBufInputStream(plaintext, len), uncompressedLen).use { inputStream ->
+                    /**
+                     * We don't pass uncompressedLen to the buffer here: in some cases,
+                     * an incorrect key can produce a valid header (particularly for
+                     * LZMA, which has no magic number). If we're unlucky,
+                     * uncompressedLen will be a huge number (e.g. 1 or 2 gigabytes),
+                     * which might OOM some environments if allocated up front.
+                     *
+                     * However, if the key is incorrect it's likely that actually
+                     * attempting to uncompress the data will quickly produce an error,
+                     * long before we need to actually read 1 or 2 gigabytes of data.
+                     * We therefore allow the buffer to grow dynamically.
+                     */
+                    plaintext.alloc().buffer().use { output ->
                         var remaining = uncompressedLen
                         while (remaining > 0) {
                             val n = output.writeBytes(inputStream, remaining)
@@ -346,12 +346,12 @@ public object Js5Compression {
                             // uncompressed data overflow
                             return null
                         }
-                    }
-                } catch (ex: IOException) {
-                    return null
-                }
 
-                return output.retain()
+                        return output.retain()
+                    }
+                }
+            } catch (ex: IOException) {
+                return null
             }
         }
     }
