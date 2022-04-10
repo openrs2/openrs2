@@ -51,6 +51,7 @@ public class Pkcs12KeyStore private constructor(privateKeyEntry: KeyStore.Privat
         private val SHA256_WITH_RSA = AlgorithmIdentifier(PKCSObjectIdentifiers.sha256WithRSAEncryption)
         private val SHA256 = AlgorithmIdentifier(NISTObjectIdentifiers.id_sha256)
 
+        @JvmStatic
         public fun open(path: Path, signerName: String): Pkcs12KeyStore {
             val keyStore = KeyStore.getInstance("PKCS12")
             if (Files.exists(path)) {

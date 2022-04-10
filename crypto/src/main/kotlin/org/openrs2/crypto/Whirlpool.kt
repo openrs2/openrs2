@@ -266,6 +266,8 @@ public class Whirlpool {
             }
         }
 
+        @JvmOverloads
+        @JvmStatic
         public fun whirlpool(data: ByteArray, off: Int = 0, len: Int = data.size): ByteArray {
             val source: ByteArray
             if (off <= 0) {

@@ -32,18 +32,22 @@ public data class XteaKey(
     }
 
     public companion object {
+        @JvmStatic
         public val ZERO: XteaKey = XteaKey(0, 0, 0, 0)
 
+        @JvmStatic
         public fun fromIntArray(a: IntArray): XteaKey {
             require(a.size == 4)
 
             return XteaKey(a[0], a[1], a[2], a[3])
         }
 
+        @JvmStatic
         public fun fromHex(s: String): XteaKey {
             return fromHexOrNull(s) ?: throw IllegalArgumentException()
         }
 
+        @JvmStatic
         public fun fromHexOrNull(s: String): XteaKey? {
             if (s.length != 32) {
                 return null
