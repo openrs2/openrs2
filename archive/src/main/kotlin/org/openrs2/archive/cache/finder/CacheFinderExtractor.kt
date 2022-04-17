@@ -22,7 +22,7 @@ public class CacheFinderExtractor(
     private val input = LittleEndianDataInputStream(pushbackInput)
 
     private fun readTimestamp(): FileTime {
-        val lo = input.readInt().toLong()
+        val lo = input.readInt().toLong() and 0xFFFFFFFF
         val hi = input.readInt().toLong() and 0xFFFFFFFF
 
         val seconds = (((hi shl 32) or lo) / 10_000_000) - FILETIME_TO_UNIX_EPOCH
@@ -102,7 +102,7 @@ public class CacheFinderExtractor(
             val atime = readTimestamp()
             val mtime = readTimestamp()
 
-            val sizeHi = input.readInt().toLong()
+            val sizeHi = input.readInt().toLong() and 0xFFFFFFFF
             val sizeLo = input.readInt().toLong() and 0xFFFFFFFF
             val size = (sizeHi shl 32) or sizeLo
 
