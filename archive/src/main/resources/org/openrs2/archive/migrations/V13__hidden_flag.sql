@@ -1,0 +1,2 @@
+-- @formatter:off
+ALTER TABLE caches ADD COLUMN hidden BOOLEAN NOT NULL DEFAULT FALSE;
