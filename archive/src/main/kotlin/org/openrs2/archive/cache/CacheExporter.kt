@@ -181,7 +181,7 @@ public class CacheExporter @Inject constructor(
                     JOIN scopes sc ON sc.id = g.scope_id
                     JOIN environments e ON e.id = v.environment_id
                     JOIN languages l ON l.id = v.language_id
-                    LEFT JOIN cache_stats cs ON cs.cache_id = c.id
+                    LEFT JOIN cache_stats cs ON cs.scope_id = sc.id AND cs.cache_id = c.id
                     GROUP BY sc.name, c.id, g.name, e.name, l.iso_code, cs.valid_indexes, cs.indexes, cs.valid_groups,
                         cs.groups, cs.valid_keys, cs.keys, cs.size, cs.blocks
                 ) t
