@@ -24,6 +24,7 @@ import kotlin.coroutines.Continuation
 
 public class NxtJs5ChannelHandler(
     bootstrap: Bootstrap,
+    scopeId: Int,
     gameId: Int,
     hostname: String,
     port: Int,
@@ -38,6 +39,7 @@ public class NxtJs5ChannelHandler(
     private val maxMinorBuildAttempts: Int = 5
 ) : Js5ChannelHandler(
     bootstrap,
+    scopeId,
     gameId,
     hostname,
     port,

@@ -52,19 +52,19 @@
 						<div class="btn-toolbar">
 							<div class="btn-group me-2">
 								<a th:if="${cache.stats != null and cache.stats.diskStoreValid}"
-								   th:href="${'/caches/' + cache.id + '/disk.zip'}"
+								   th:href="${'/caches/' + scope + '/' + cache.id + '/disk.zip'}"
 								   class="btn btn-primary btn-sm">Cache (.dat2/.idx)</a>
-								<a th:href="${'/caches/' + cache.id + '/flat-file.tar.gz'}"
+								<a th:href="${'/caches/' + scope + '/' + cache.id + '/flat-file.tar.gz'}"
 								   class="btn btn-primary btn-sm">Cache (Flat file)</a>
 							</div>
 							<div class="btn-group me-2">
-								<a th:href="${'/caches/' + cache.id + '/keys.json'}"
+								<a th:href="${'/caches/' + scope + '/' + cache.id + '/keys.json'}"
 								   class="btn btn-primary btn-sm">Keys (JSON)</a>
-								<a th:href="${'/caches/' + cache.id + '/keys.zip'}"
+								<a th:href="${'/caches/' + scope + '/' + cache.id + '/keys.zip'}"
 								   class="btn btn-primary btn-sm">Keys (Text)</a>
 							</div>
 							<div class="btn-group">
-								<a th:href="${'/caches/' + cache.id + '/map.png'}"
+								<a th:href="${'/caches/' + scope + '/' + cache.id + '/map.png'}"
 								   class="btn btn-primary btn-sm">Map</a>
 							</div>
 						</div>

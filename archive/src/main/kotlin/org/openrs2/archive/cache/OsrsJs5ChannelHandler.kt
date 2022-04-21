@@ -17,6 +17,7 @@ import kotlin.coroutines.Continuation
 
 public class OsrsJs5ChannelHandler(
     bootstrap: Bootstrap,
+    scopeId: Int,
     gameId: Int,
     hostname: String,
     port: Int,
@@ -26,6 +27,7 @@ public class OsrsJs5ChannelHandler(
     importer: CacheImporter,
 ) : Js5ChannelHandler(
     bootstrap,
+    scopeId,
     gameId,
     hostname,
     port,

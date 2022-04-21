@@ -31,10 +31,28 @@ public class MapRenderer @Inject constructor(
         val fillColor = Color(outlineColor.red, outlineColor.green, outlineColor.blue, 128)
     }
 
-    public suspend fun render(masterIndexId: Int): BufferedImage {
+    public suspend fun render(scope: String, masterIndexId: Int): BufferedImage {
         return database.execute { connection ->
+            val scopeId = connection.prepareStatement(
+                """
+                SELECT id
+                FROM scopes
+                WHERE name = ?
+            """.trimIndent()
+            ).use { stmt ->
+                stmt.setString(1, scope)
+
+                stmt.executeQuery().use { rows ->
+                    if (!rows.next()) {
+                        throw IllegalArgumentException("Invalid scope")
+                    }
+
+                    rows.getInt(1)
+                }
+            }
+
             // read config index
-            val configIndex = readIndex(connection, masterIndexId, Js5Archive.CONFIG)
+            val configIndex = readIndex(connection, scopeId, masterIndexId, Js5Archive.CONFIG)
                 ?: throw IllegalArgumentException("Config index missing")
 
             // read FluType group
@@ -43,7 +61,7 @@ public class MapRenderer @Inject constructor(
             val underlayGroup = configIndex[Js5ConfigGroup.FLUTYPE]
                 ?: throw IllegalArgumentException("FluType group missing in index")
 
-            val underlayFiles = readGroup(connection, masterIndexId, Js5Archive.CONFIG, underlayGroup)
+            val underlayFiles = readGroup(connection, scopeId, masterIndexId, Js5Archive.CONFIG, underlayGroup)
                 ?: throw IllegalArgumentException("FluType group missing")
             try {
                 for ((id, file) in underlayFiles) {
@@ -59,7 +77,7 @@ public class MapRenderer @Inject constructor(
             val overlayGroup = configIndex[Js5ConfigGroup.FLOTYPE]
                 ?: throw IllegalArgumentException("FloType group missing in index")
 
-            val overlayFiles = readGroup(connection, masterIndexId, Js5Archive.CONFIG, overlayGroup)
+            val overlayFiles = readGroup(connection, scopeId, masterIndexId, Js5Archive.CONFIG, overlayGroup)
                 ?: throw IllegalArgumentException("FloType group missing")
             try {
                 for ((id, file) in overlayFiles) {
@@ -71,13 +89,13 @@ public class MapRenderer @Inject constructor(
 
             // read textures
             val textures = mutableMapOf<Int, Int>()
-            val materialsIndex = readIndex(connection, masterIndexId, Js5Archive.MATERIALS)
+            val materialsIndex = readIndex(connection, scopeId, masterIndexId, Js5Archive.MATERIALS)
 
             if (materialsIndex != null) {
                 val materialsGroup = materialsIndex[0]
                     ?: throw IllegalArgumentException("Materials group missing in index")
 
-                val materialsFiles = readGroup(connection, masterIndexId, Js5Archive.MATERIALS, materialsGroup)
+                val materialsFiles = readGroup(connection, scopeId, masterIndexId, Js5Archive.MATERIALS, materialsGroup)
                     ?: throw IllegalArgumentException("Materials group missing")
                 try {
                     val metadata = materialsFiles[0]
@@ -123,13 +141,13 @@ public class MapRenderer @Inject constructor(
                     materialsFiles.values.forEach(ByteBuf::release)
                 }
             } else {
-                val textureIndex = readIndex(connection, masterIndexId, Js5Archive.TEXTURES)
+                val textureIndex = readIndex(connection, scopeId, masterIndexId, Js5Archive.TEXTURES)
                     ?: throw IllegalArgumentException("Textures index missing")
 
                 val textureGroup = textureIndex[0]
                     ?: throw IllegalArgumentException("Textures group missing from index")
 
-                val textureFiles = readGroup(connection, masterIndexId, Js5Archive.TEXTURES, textureGroup)
+                val textureFiles = readGroup(connection, scopeId, masterIndexId, Js5Archive.TEXTURES, textureGroup)
                     ?: throw IllegalArgumentException("Textures group missing")
                 try {
                     for ((id, file) in textureFiles) {
@@ -155,11 +173,12 @@ public class MapRenderer @Inject constructor(
                 SELECT n.name, g.encrypted, g.empty_loc, g.key_id
                 FROM resolved_groups g
                 JOIN names n ON n.hash = g.name_hash
-                WHERE g.master_index_id = ? AND g.archive_id = ${Js5Archive.MAPS} AND
+                WHERE g.scope_id = ? AND g.master_index_id = ? AND g.archive_id = ${Js5Archive.MAPS} AND
                     n.name ~ '^[lm](?:[0-9]|[1-9][0-9])_(?:[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$'
             """.trimIndent()
             ).use { stmt ->
-                stmt.setInt(1, masterIndexId)
+                stmt.setInt(1, scopeId)
+                stmt.setInt(2, masterIndexId)
 
                 stmt.executeQuery().use { rows ->
                     while (rows.next()) {
@@ -207,11 +226,12 @@ public class MapRenderer @Inject constructor(
                 SELECT n.name, g.data
                 FROM resolved_groups g
                 JOIN names n ON n.hash = g.name_hash
-                WHERE g.master_index_id = ? AND g.archive_id = ${Js5Archive.MAPS} AND
+                WHERE g.scope_id = ? AND g.master_index_id = ? AND g.archive_id = ${Js5Archive.MAPS} AND
                     n.name ~ '^m(?:[0-9]|[1-9][0-9])_(?:[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$'
             """.trimIndent()
             ).use { stmt ->
-                stmt.setInt(1, masterIndexId)
+                stmt.setInt(1, scopeId)
+                stmt.setInt(2, masterIndexId)
 
                 stmt.executeQuery().use { rows ->
                     while (rows.next()) {
@@ -246,16 +266,17 @@ public class MapRenderer @Inject constructor(
         }
     }
 
-    private fun readIndex(connection: Connection, masterIndexId: Int, archiveId: Int): Js5Index? {
+    private fun readIndex(connection: Connection, scopeId: Int, masterIndexId: Int, archiveId: Int): Js5Index? {
         connection.prepareStatement(
             """
             SELECT data
             FROM resolved_indexes
-            WHERE master_index_id = ? AND archive_id = ?
+            WHERE scope_id = ? AND master_index_id = ? AND archive_id = ?
         """.trimIndent()
         ).use { stmt ->
-            stmt.setInt(1, masterIndexId)
-            stmt.setInt(2, archiveId)
+            stmt.setInt(1, scopeId)
+            stmt.setInt(2, masterIndexId)
+            stmt.setInt(3, archiveId)
 
             stmt.executeQuery().use { rows ->
                 if (!rows.next()) {
@@ -275,6 +296,7 @@ public class MapRenderer @Inject constructor(
 
     private fun readGroup(
         connection: Connection,
+        scopeId: Int,
         masterIndexId: Int,
         archiveId: Int,
         group: Js5Index.Group<*>
@@ -283,12 +305,13 @@ public class MapRenderer @Inject constructor(
             """
             SELECT data
             FROM resolved_groups
-            WHERE master_index_id = ? AND archive_id = ? AND group_id = ?
+            WHERE scope_id = ? AND master_index_id = ? AND archive_id = ? AND group_id = ?
         """.trimIndent()
         ).use { stmt ->
-            stmt.setInt(1, masterIndexId)
-            stmt.setInt(2, archiveId)
-            stmt.setInt(3, group.id)
+            stmt.setInt(1, scopeId)
+            stmt.setInt(2, masterIndexId)
+            stmt.setInt(3, archiveId)
+            stmt.setInt(4, group.id)
 
             stmt.executeQuery().use { rows ->
                 if (!rows.next()) {

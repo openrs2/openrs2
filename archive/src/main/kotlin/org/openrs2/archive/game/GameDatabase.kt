@@ -12,7 +12,7 @@ public class GameDatabase @Inject constructor(
         return database.execute { connection ->
             connection.prepareStatement(
                 """
-                SELECT v.id, v.url, v.build_major, v.build_minor, v.last_master_index_id, v.language_id
+                SELECT v.id, v.url, v.build_major, v.build_minor, v.last_master_index_id, v.language_id, g.scope_id
                 FROM game_variants v
                 JOIN games g ON g.id = v.game_id
                 JOIN environments e ON e.id = v.environment_id
@@ -48,8 +48,9 @@ public class GameDatabase @Inject constructor(
                     }
 
                     val languageId = rows.getInt(6)
+                    val scopeId = rows.getInt(7)
 
-                    return@execute Game(id, url, buildMajor, buildMinor, lastMasterIndexId, languageId)
+                    return@execute Game(id, url, buildMajor, buildMinor, lastMasterIndexId, languageId, scopeId)
                 }
             }
         }

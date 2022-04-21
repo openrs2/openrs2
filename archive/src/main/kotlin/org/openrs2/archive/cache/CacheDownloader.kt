@@ -43,6 +43,7 @@ public class CacheDownloader @Inject constructor(
                         OsrsJs5ChannelInitializer(
                             OsrsJs5ChannelHandler(
                                 bootstrap,
+                                game.scopeId,
                                 game.id,
                                 hostname,
                                 PORT,
@@ -66,6 +67,7 @@ public class CacheDownloader @Inject constructor(
                         NxtJs5ChannelInitializer(
                             NxtJs5ChannelHandler(
                                 bootstrap,
+                                game.scopeId,
                                 game.id,
                                 hostname,
                                 PORT,

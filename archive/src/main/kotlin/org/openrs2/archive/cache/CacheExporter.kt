@@ -111,6 +111,7 @@ public class CacheExporter @Inject constructor(
 
     public data class CacheSummary(
         val id: Int,
+        val scope: String,
         val game: String,
         val environment: String,
         val language: String,
@@ -159,6 +160,7 @@ public class CacheExporter @Inject constructor(
                     SELECT
                         c.id,
                         g.name AS game,
+                        sc.name AS scope,
                         e.name AS environment,
                         l.iso_code AS language,
                         array_remove(array_agg(DISTINCT ROW(s.build_major, s.build_minor)::build ORDER BY ROW(s.build_major, s.build_minor)::build ASC), NULL) builds,
@@ -176,11 +178,12 @@ public class CacheExporter @Inject constructor(
                     JOIN sources s ON s.cache_id = c.id
                     JOIN game_variants v ON v.id = s.game_id
                     JOIN games g ON g.id = v.game_id
+                    JOIN scopes sc ON sc.id = g.scope_id
                     JOIN environments e ON e.id = v.environment_id
                     JOIN languages l ON l.id = v.language_id
                     LEFT JOIN cache_stats cs ON cs.cache_id = c.id
-                    GROUP BY c.id, g.name, e.name, l.iso_code, cs.valid_indexes, cs.indexes, cs.valid_groups, cs.groups,
-                        cs.valid_keys, cs.keys, cs.size, cs.blocks
+                    GROUP BY sc.name, c.id, g.name, e.name, l.iso_code, cs.valid_indexes, cs.indexes, cs.valid_groups,
+                        cs.groups, cs.valid_keys, cs.keys, cs.size, cs.blocks
                 ) t
                 ORDER BY t.game ASC, t.environment ASC, t.language ASC, t.builds[1] ASC, t.timestamp ASC
             """.trimIndent()
@@ -191,21 +194,22 @@ public class CacheExporter @Inject constructor(
                     while (rows.next()) {
                         val id = rows.getInt(1)
                         val game = rows.getString(2)
-                        val environment = rows.getString(3)
-                        val language = rows.getString(4)
-                        val builds = rows.getArray(5).array as Array<*>
-                        val timestamp = rows.getTimestamp(6)?.toInstant()
-                        @Suppress("UNCHECKED_CAST") val sources = rows.getArray(7).array as Array<String>
+                        val scope = rows.getString(3)
+                        val environment = rows.getString(4)
+                        val language = rows.getString(5)
+                        val builds = rows.getArray(6).array as Array<*>
+                        val timestamp = rows.getTimestamp(7)?.toInstant()
+                        @Suppress("UNCHECKED_CAST") val sources = rows.getArray(8).array as Array<String>
 
-                        val validIndexes = rows.getLong(8)
+                        val validIndexes = rows.getLong(9)
                         val stats = if (!rows.wasNull()) {
-                            val indexes = rows.getLong(9)
-                            val validGroups = rows.getLong(10)
-                            val groups = rows.getLong(11)
-                            val validKeys = rows.getLong(12)
-                            val keys = rows.getLong(13)
-                            val size = rows.getLong(14)
-                            val blocks = rows.getLong(15)
+                            val indexes = rows.getLong(10)
+                            val validGroups = rows.getLong(11)
+                            val groups = rows.getLong(12)
+                            val validKeys = rows.getLong(13)
+                            val keys = rows.getLong(14)
+                            val size = rows.getLong(15)
+                            val blocks = rows.getLong(16)
                             Stats(validIndexes, indexes, validGroups, groups, validKeys, keys, size, blocks)
                         } else {
                             null
@@ -213,6 +217,7 @@ public class CacheExporter @Inject constructor(
 
                         caches += CacheSummary(
                             id,
+                            scope,
                             game,
                             environment,
                             language,
@@ -229,7 +234,7 @@ public class CacheExporter @Inject constructor(
         }
     }
 
-    public suspend fun get(id: Int): Cache? {
+    public suspend fun get(scope: String, id: Int): Cache? {
         return database.execute { connection ->
             val masterIndex: Js5MasterIndex?
             val checksumTable: ChecksumTable?
@@ -250,15 +255,17 @@ public class CacheExporter @Inject constructor(
                     cs.size,
                     cs.blocks
                 FROM caches c
+                CROSS JOIN scopes s
                 LEFT JOIN master_indexes m ON m.id = c.id
                 LEFT JOIN containers mc ON mc.id = m.container_id
                 LEFT JOIN crc_tables t ON t.id = c.id
                 LEFT JOIN blobs b ON b.id = t.blob_id
-                LEFT JOIN cache_stats cs ON cs.cache_id = c.id
-                WHERE c.id = ?
+                LEFT JOIN cache_stats cs ON cs.scope_id = s.id AND cs.cache_id = c.id
+                WHERE s.name = ? AND c.id = ?
             """.trimIndent()
             ).use { stmt ->
-                stmt.setInt(1, id)
+                stmt.setString(1, scope)
+                stmt.setInt(2, id)
 
                 stmt.executeQuery().use { rows ->
                     if (!rows.next()) {
@@ -310,13 +317,15 @@ public class CacheExporter @Inject constructor(
                 FROM sources s
                 JOIN game_variants v ON v.id = s.game_id
                 JOIN games g ON g.id = v.game_id
+                JOIN scopes sc ON sc.id = g.scope_id
                 JOIN environments e ON e.id = v.environment_id
                 JOIN languages l ON l.id = v.language_id
-                WHERE s.cache_id = ?
+                WHERE sc.name = ? AND s.cache_id = ?
                 ORDER BY s.name ASC
             """.trimIndent()
             ).use { stmt ->
-                stmt.setInt(1, id)
+                stmt.setString(1, scope)
+                stmt.setInt(2, id)
 
                 stmt.executeQuery().use { rows ->
                     while (rows.next()) {
@@ -372,7 +381,7 @@ public class CacheExporter @Inject constructor(
         }
     }
 
-    public suspend fun getFileName(id: Int): String? {
+    public suspend fun getFileName(scope: String, id: Int): String? {
         return database.execute { connection ->
             // TODO(gpe): what if a cache is from multiple games?
             connection.prepareStatement(
@@ -386,14 +395,16 @@ public class CacheExporter @Inject constructor(
                 FROM sources s
                 JOIN game_variants v ON v.id = s.game_id
                 JOIN games g ON g.id = v.game_id
+                JOIN scopes sc ON sc.id = g.scope_id
                 JOIN environments e ON e.id = v.environment_id
                 JOIN languages l ON l.id = v.language_id
-                WHERE s.cache_id = ?
+                WHERE sc.name = ? AND s.cache_id = ?
                 GROUP BY g.name, e.name, l.iso_code
                 LIMIT 1
             """.trimIndent()
             ).use { stmt ->
-                stmt.setInt(1, id)
+                stmt.setString(1, scope)
+                stmt.setInt(2, id)
 
                 stmt.executeQuery().use { rows ->
                     if (!rows.next()) {
@@ -431,7 +442,7 @@ public class CacheExporter @Inject constructor(
         }
     }
 
-    public fun export(id: Int, storeFactory: (Boolean) -> Store) {
+    public fun export(scope: String, id: Int, storeFactory: (Boolean) -> Store) {
         database.executeOnce { connection ->
             val legacy = connection.prepareStatement(
                 """
@@ -451,22 +462,24 @@ public class CacheExporter @Inject constructor(
                 if (legacy) {
                     exportLegacy(connection, id, store)
                 } else {
-                    export(connection, id, store)
+                    export(connection, scope, id, store)
                 }
             }
         }
     }
 
-    private fun export(connection: Connection, id: Int, store: Store) {
+    private fun export(connection: Connection, scope: String, id: Int, store: Store) {
         connection.prepareStatement(
             """
-            SELECT archive_id, group_id, data, version
-            FROM resolved_groups
-            WHERE master_index_id = ?
+            SELECT g.archive_id, g.group_id, g.data, g.version
+            FROM resolved_groups g
+            JOIN scopes s ON s.id = g.scope_id
+            WHERE s.name = ? AND g.master_index_id = ?
         """.trimIndent()
         ).use { stmt ->
             stmt.fetchSize = BATCH_SIZE
-            stmt.setInt(1, id)
+            stmt.setString(1, scope)
+            stmt.setInt(2, id)
 
             stmt.executeQuery().use { rows ->
                 alloc.buffer(2, 2).use { versionBuf ->
@@ -534,18 +547,20 @@ public class CacheExporter @Inject constructor(
         }
     }
 
-    public suspend fun exportKeys(id: Int): List<Key> {
+    public suspend fun exportKeys(scope: String, id: Int): List<Key> {
         return database.execute { connection ->
             connection.prepareStatement(
                 """
                 SELECT g.archive_id, g.group_id, g.name_hash, n.name, (k.key).k0, (k.key).k1, (k.key).k2, (k.key).k3
                 FROM resolved_groups g
+                JOIN scopes s ON s.id = g.scope_id
                 JOIN keys k ON k.id = g.key_id
                 LEFT JOIN names n ON n.hash = g.name_hash AND n.name ~ '^l(?:[0-9]|[1-9][0-9])_(?:[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$'
-                WHERE g.master_index_id = ?
+                WHERE s.name = ? AND g.master_index_id = ?
             """.trimIndent()
             ).use { stmt ->
-                stmt.setInt(1, id)
+                stmt.setString(1, scope)
+                stmt.setInt(2, id)
 
                 stmt.executeQuery().use { rows ->
                     val keys = mutableListOf<Key>()

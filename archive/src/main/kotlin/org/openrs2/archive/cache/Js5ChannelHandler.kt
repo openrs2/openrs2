@@ -25,6 +25,7 @@ import kotlin.coroutines.resumeWithException
 @ChannelHandler.Sharable
 public abstract class Js5ChannelHandler(
     private val bootstrap: Bootstrap,
+    private val scopeId: Int,
     private val gameId: Int,
     private val hostname: String,
     private val port: Int,
@@ -236,7 +237,7 @@ public abstract class Js5ChannelHandler(
 
         if (groups.size >= CacheImporter.BATCH_SIZE || complete) {
             runBlocking {
-                importer.importGroups(sourceId, groups)
+                importer.importGroups(sourceId, scopeId, groups)
             }
 
             releaseGroups()
@@ -315,7 +316,15 @@ public abstract class Js5ChannelHandler(
             }
 
             val groups = runBlocking {
-                importer.importIndexAndGetMissingGroups(sourceId, archive, index, buf, uncompressed, lastMasterIndexId)
+                importer.importIndexAndGetMissingGroups(
+                    scopeId,
+                    sourceId,
+                    archive,
+                    index,
+                    buf,
+                    uncompressed,
+                    lastMasterIndexId
+                )
             }
             for (group in groups) {
                 val groupEntry = index[group]!!

@@ -116,9 +116,14 @@ public class CacheImporter @Inject constructor(
         val indexes: List<ByteBuf?>
     )
 
+    private data class Game(
+        val id: Int,
+        val scopeId: Int
+    )
+
     public suspend fun import(
         store: Store,
-        game: String,
+        gameName: String,
         environment: String,
         language: String,
         buildMajor: Int?,
@@ -131,12 +136,12 @@ public class CacheImporter @Inject constructor(
         database.execute { connection ->
             prepare(connection)
 
-            val gameId = getGameId(connection, game, environment, language)
+            val game = getGame(connection, gameName, environment, language)
 
             if (store is DiskStore && store.legacy) {
-                importLegacy(connection, store, gameId, buildMajor, buildMinor, timestamp, name, description, url)
+                importLegacy(connection, store, game.id, buildMajor, buildMinor, timestamp, name, description, url)
             } else {
-                importJs5(connection, store, gameId, buildMajor, buildMinor, timestamp, name, description, url)
+                importJs5(connection, store, game, buildMajor, buildMinor, timestamp, name, description, url)
             }
         }
     }
@@ -144,7 +149,7 @@ public class CacheImporter @Inject constructor(
     private fun importJs5(
         connection: Connection,
         store: Store,
-        gameId: Int,
+        game: Game,
         buildMajor: Int?,
         buildMinor: Int?,
         timestamp: Instant?,
@@ -169,7 +174,7 @@ public class CacheImporter @Inject constructor(
             connection,
             SourceType.DISK,
             masterIndexId,
-            gameId,
+            game.id,
             buildMajor,
             buildMinor,
             timestamp,
@@ -194,7 +199,7 @@ public class CacheImporter @Inject constructor(
             }
 
             for (index in indexGroups) {
-                addIndex(connection, sourceId, index)
+                addIndex(connection, game.scopeId, sourceId, index)
             }
         } finally {
             indexGroups.forEach(Index::release)
@@ -215,7 +220,7 @@ public class CacheImporter @Inject constructor(
                     groups += group
 
                     if (groups.size >= BATCH_SIZE) {
-                        addGroups(connection, sourceId, groups)
+                        addGroups(connection, game.scopeId, sourceId, groups)
 
                         groups.forEach(Group::release)
                         groups.clear()
@@ -224,7 +229,7 @@ public class CacheImporter @Inject constructor(
             }
 
             if (groups.isNotEmpty()) {
-                addGroups(connection, sourceId, groups)
+                addGroups(connection, game.scopeId, sourceId, groups)
             }
         } finally {
             groups.forEach(Group::release)
@@ -234,7 +239,7 @@ public class CacheImporter @Inject constructor(
     public suspend fun importMasterIndex(
         buf: ByteBuf,
         format: MasterIndexFormat,
-        game: String,
+        gameName: String,
         environment: String,
         language: String,
         buildMajor: Int?,
@@ -254,14 +259,14 @@ public class CacheImporter @Inject constructor(
             database.execute { connection ->
                 prepare(connection)
 
-                val gameId = getGameId(connection, game, environment, language)
+                val game = getGame(connection, gameName, environment, language)
                 val masterIndexId = addMasterIndex(connection, masterIndex)
 
                 addSource(
                     connection,
                     SourceType.DISK,
                     masterIndexId,
-                    gameId,
+                    game.id,
                     buildMajor,
                     buildMinor,
                     timestamp,
@@ -363,6 +368,7 @@ public class CacheImporter @Inject constructor(
     }
 
     public suspend fun importIndexAndGetMissingGroups(
+        scopeId: Int,
         sourceId: Int,
         archive: Int,
         index: Js5Index,
@@ -372,7 +378,7 @@ public class CacheImporter @Inject constructor(
     ): List<Int> {
         return database.execute { connection ->
             prepare(connection)
-            val id = addIndex(connection, sourceId, Index(archive, index, buf, uncompressed))
+            val id = addIndex(connection, scopeId, sourceId, Index(archive, index, buf, uncompressed))
 
             /*
              * In order to defend against (crc32, version) collisions, we only
@@ -415,14 +421,14 @@ public class CacheImporter @Inject constructor(
         }
     }
 
-    public suspend fun importGroups(sourceId: Int, groups: List<Group>) {
+    public suspend fun importGroups(scopeId: Int, sourceId: Int, groups: List<Group>) {
         if (groups.isEmpty()) {
             return
         }
 
         database.execute { connection ->
             prepare(connection)
-            addGroups(connection, sourceId, groups)
+            addGroups(connection, scopeId, sourceId, groups)
         }
     }
 
@@ -627,22 +633,23 @@ public class CacheImporter @Inject constructor(
         }
     }
 
-    private fun addGroups(connection: Connection, sourceId: Int, groups: List<Group>): List<Long> {
+    private fun addGroups(connection: Connection, scopeId: Int, sourceId: Int, groups: List<Group>): List<Long> {
         val containerIds = addContainers(connection, groups)
 
         connection.prepareStatement(
             """
-            INSERT INTO groups (archive_id, group_id, version, version_truncated, container_id)
-            VALUES (?, ?, ?, ?, ?)
+            INSERT INTO groups (scope_id, archive_id, group_id, version, version_truncated, container_id)
+            VALUES (?, ?, ?, ?, ?, ?)
             ON CONFLICT DO NOTHING
         """.trimIndent()
         ).use { stmt ->
             for ((i, group) in groups.withIndex()) {
-                stmt.setInt(1, group.archive)
-                stmt.setInt(2, group.group)
-                stmt.setInt(3, group.version)
-                stmt.setBoolean(4, group.versionTruncated)
-                stmt.setLong(5, containerIds[i])
+                stmt.setInt(1, scopeId)
+                stmt.setInt(2, group.archive)
+                stmt.setInt(3, group.group)
+                stmt.setInt(4, group.version)
+                stmt.setBoolean(5, group.versionTruncated)
+                stmt.setLong(6, containerIds[i])
                 stmt.addBatch()
             }
 
@@ -672,8 +679,8 @@ public class CacheImporter @Inject constructor(
         return containerIds
     }
 
-    private fun addGroup(connection: Connection, sourceId: Int, group: Group): Long {
-        return addGroups(connection, sourceId, listOf(group)).single()
+    private fun addGroup(connection: Connection, scopeId: Int, sourceId: Int, group: Group): Long {
+        return addGroups(connection, scopeId, sourceId, listOf(group)).single()
     }
 
     private fun readIndex(store: Store, archive: Int): Index {
@@ -684,8 +691,8 @@ public class CacheImporter @Inject constructor(
         }
     }
 
-    private fun addIndex(connection: Connection, sourceId: Int, index: Index): Long {
-        val containerId = addGroup(connection, sourceId, index)
+    private fun addIndex(connection: Connection, scopeId: Int, sourceId: Int, index: Index): Long {
+        val containerId = addGroup(connection, scopeId, sourceId, index)
         val savepoint = connection.setSavepoint()
 
         connection.prepareStatement(
@@ -964,10 +971,10 @@ public class CacheImporter @Inject constructor(
         return ids
     }
 
-    private fun getGameId(connection: Connection, name: String, environment: String, language: String): Int {
+    private fun getGame(connection: Connection, name: String, environment: String, language: String): Game {
         connection.prepareStatement(
             """
-                SELECT v.id
+                SELECT v.id, g.scope_id
                 FROM game_variants v
                 JOIN games g ON g.id = v.game_id
                 JOIN environments e ON e.id = v.environment_id
@@ -984,7 +991,10 @@ public class CacheImporter @Inject constructor(
                     throw Exception("Game not found")
                 }
 
-                return rows.getInt(1)
+                val id = rows.getInt(1)
+                val scopeId = rows.getInt(2)
+
+                return Game(id, scopeId)
             }
         }
     }

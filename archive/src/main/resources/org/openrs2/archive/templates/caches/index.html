@@ -84,25 +84,25 @@
 										</button>
 										<ul class="dropdown-menu">
 											<li th:if="${cache.stats != null and cache.stats.diskStoreValid}"><a
-												th:href="${'/caches/' + cache.id + '/disk.zip'}"
+												th:href="${'/caches/' + cache.scope + '/' + cache.id + '/disk.zip'}"
 												class="dropdown-item">Cache (.dat2/.idx)</a></li>
-											<li><a th:href="${'/caches/' + cache.id + '/flat-file.tar.gz'}"
+											<li><a th:href="${'/caches/' + cache.scope + '/' + cache.id + '/flat-file.tar.gz'}"
 											       class="dropdown-item">Cache (Flat file)</a></li>
 											<li>
 												<hr class="dropdown-divider" />
 											</li>
-											<li><a th:href="${'/caches/' + cache.id + '/keys.json'}"
+											<li><a th:href="${'/caches/' + cache.scope + '/' + cache.id + '/keys.json'}"
 											       class="dropdown-item">Keys (JSON)</a></li>
-											<li><a th:href="${'/caches/' + cache.id + '/keys.zip'}"
+											<li><a th:href="${'/caches/' + cache.scope + '/' + cache.id + '/keys.zip'}"
 											       class="dropdown-item">Keys (Text)</a></li>
 											<li>
 												<hr class="dropdown-divider" />
 											</li>
-											<li><a th:href="${'/caches/' + cache.id + '/map.png'}"
+											<li><a th:href="${'/caches/' + cache.scope + '/' + cache.id + '/map.png'}"
 											       class="dropdown-item">Map</a></li>
 										</ul>
 									</div>
-									<a th:href="${'/caches/' + cache.id}"
+									<a th:href="${'/caches/' + cache.scope + '/' + cache.id}"
 									   class="btn btn-secondary btn-sm">More</a>
 								</div>
 							</td>

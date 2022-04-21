@@ -6,5 +6,6 @@ public data class Game(
     public val buildMajor: Int?,
     public val buildMinor: Int?,
     public val lastMasterIndexId: Int?,
-    public val languageId: Int
+    public val languageId: Int,
+    public val scopeId: Int
 )

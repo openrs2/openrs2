@@ -46,29 +46,38 @@ public class CachesController @Inject constructor(
     }
 
     public suspend fun show(call: ApplicationCall) {
+        val scope = call.parameters["scope"]!!
         val id = call.parameters["id"]?.toIntOrNull()
         if (id == null) {
             call.respond(HttpStatusCode.NotFound)
             return
         }
 
-        val cache = exporter.get(id)
+        val cache = exporter.get(scope, id)
         if (cache == null) {
             call.respond(HttpStatusCode.NotFound)
             return
         }
 
-        call.respond(ThymeleafContent("caches/show.html", mapOf("cache" to cache)))
+        call.respond(
+            ThymeleafContent(
+                "caches/show.html", mapOf(
+                    "cache" to cache,
+                    "scope" to scope,
+                )
+            )
+        )
     }
 
     public suspend fun exportDisk(call: ApplicationCall) {
+        val scope = call.parameters["scope"]!!
         val id = call.parameters["id"]?.toIntOrNull()
         if (id == null) {
             call.respond(HttpStatusCode.NotFound)
             return
         }
 
-        val name = exporter.getFileName(id)
+        val name = exporter.getFileName(scope, id)
         if (name == null) {
             call.respond(HttpStatusCode.NotFound)
             return
@@ -82,20 +91,21 @@ public class CachesController @Inject constructor(
         )
 
         call.respondOutputStream(contentType = ContentType.Application.Zip) {
-            exporter.export(id) { legacy ->
+            exporter.export(scope, id) { legacy ->
                 DiskStoreZipWriter(ZipOutputStream(this), alloc = alloc, legacy = legacy)
             }
         }
     }
 
     public suspend fun exportFlatFile(call: ApplicationCall) {
+        val scope = call.parameters["scope"]!!
         val id = call.parameters["id"]?.toIntOrNull()
         if (id == null) {
             call.respond(HttpStatusCode.NotFound)
             return
         }
 
-        val name = exporter.getFileName(id)
+        val name = exporter.getFileName(scope, id)
         if (name == null) {
             call.respond(HttpStatusCode.NotFound)
             return
@@ -109,20 +119,21 @@ public class CachesController @Inject constructor(
         )
 
         call.respondOutputStream(contentType = ContentType.Application.GZip) {
-            exporter.export(id) {
+            exporter.export(scope, id) {
                 FlatFileStoreTarWriter(TarArchiveOutputStream(GzipLevelOutputStream(this, Deflater.BEST_COMPRESSION)))
             }
         }
     }
 
     public suspend fun exportKeysJson(call: ApplicationCall) {
+        val scope = call.parameters["scope"]!!
         val id = call.parameters["id"]?.toIntOrNull()
         if (id == null) {
             call.respond(HttpStatusCode.NotFound)
             return
         }
 
-        val name = exporter.getFileName(id)
+        val name = exporter.getFileName(scope, id)
         if (name == null) {
             call.respond(HttpStatusCode.NotFound)
             return
@@ -135,17 +146,18 @@ public class CachesController @Inject constructor(
                 .toString()
         )
 
-        call.respond(exporter.exportKeys(id))
+        call.respond(exporter.exportKeys(scope, id))
     }
 
     public suspend fun exportKeysZip(call: ApplicationCall) {
+        val scope = call.parameters["scope"]!!
         val id = call.parameters["id"]?.toIntOrNull()
         if (id == null) {
             call.respond(HttpStatusCode.NotFound)
             return
         }
 
-        val name = exporter.getFileName(id)
+        val name = exporter.getFileName(scope, id)
         if (name == null) {
             call.respond(HttpStatusCode.NotFound)
             return
@@ -165,7 +177,7 @@ public class CachesController @Inject constructor(
 
                     val timestamp = FileTime.from(Instant.EPOCH)
 
-                    for (key in exporter.exportKeys(id)) {
+                    for (key in exporter.exportKeys(scope, id)) {
                         if (key.mapSquare == null) {
                             continue
                         }
@@ -197,13 +209,14 @@ public class CachesController @Inject constructor(
     }
 
     public suspend fun renderMap(call: ApplicationCall) {
+        val scope = call.parameters["scope"]!!
         val id = call.parameters["id"]?.toIntOrNull()
         if (id == null) {
             call.respond(HttpStatusCode.NotFound)
             return
         }
 
-        val name = exporter.getFileName(id)
+        val name = exporter.getFileName(scope, id)
         if (name == null) {
             call.respond(HttpStatusCode.NotFound)
             return
@@ -222,7 +235,7 @@ public class CachesController @Inject constructor(
          * performed in parallel to prevent OOMs.
          */
         renderSemaphore.withPermit {
-            val image = renderer.render(id)
+            val image = renderer.render(scope, id)
 
             call.respondOutputStream(contentType = ContentType.Image.PNG) {
                 ImageIO.write(image, "PNG", this)
