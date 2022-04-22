@@ -283,6 +283,7 @@ public class CacheImporter @Inject constructor(
         buf: ByteBuf,
         uncompressed: ByteBuf,
         gameId: Int,
+        scopeId: Int,
         buildMajor: Int,
         buildMinor: Int?,
         lastId: Int?,
@@ -337,13 +338,14 @@ public class CacheImporter @Inject constructor(
                 FROM master_index_archives a
                 LEFT JOIN master_index_archives a2 ON a2.master_index_id = ? AND a2.archive_id = a.archive_id AND
                     a2.crc32 = a.crc32 AND a2.version = a.version
-                LEFT JOIN resolve_index(a2.archive_id, a2.crc32, a2.version) c ON TRUE
+                LEFT JOIN resolve_index(?, a2.archive_id, a2.crc32, a2.version) c ON TRUE
                 WHERE a.master_index_id = ?
                 ORDER BY a.archive_id ASC
             """.trimIndent()
             ).use { stmt ->
                 stmt.setObject(1, lastId, Types.INTEGER)
-                stmt.setInt(2, masterIndexId)
+                stmt.setInt(2, scopeId)
+                stmt.setInt(3, masterIndexId)
 
                 stmt.executeQuery().use { rows ->
                     val indexes = mutableListOf<ByteBuf?>()
@@ -396,17 +398,18 @@ public class CacheImporter @Inject constructor(
                 SELECT ig.group_id
                 FROM index_groups ig
                 LEFT JOIN resolved_indexes i ON i.master_index_id = ? AND
-                    i.archive_id = ?
+                    i.archive_id = ? AND i.scope_id = ?
                 LEFT JOIN index_groups ig2 ON ig2.container_id = i.container_id AND ig2.group_id = ig.group_id AND
                     ig2.crc32 = ig.crc32 AND ig2.version = ig.version
-                LEFT JOIN resolve_group(i.archive_id, ig2.group_id, ig2.crc32, ig2.version) c ON TRUE
+                LEFT JOIN resolve_group(i.scope_id, i.archive_id, ig2.group_id, ig2.crc32, ig2.version) c ON TRUE
                 WHERE ig.container_id = ? AND c.id IS NULL
                 ORDER BY ig.group_id ASC
             """.trimIndent()
             ).use { stmt ->
                 stmt.setObject(1, lastMasterIndexId, Types.INTEGER)
                 stmt.setInt(2, archive)
-                stmt.setLong(3, id)
+                stmt.setInt(3, scopeId)
+                stmt.setLong(4, id)
 
                 stmt.executeQuery().use { rows ->
                     val groups = mutableListOf<Int>()

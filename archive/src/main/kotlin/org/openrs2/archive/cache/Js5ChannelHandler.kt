@@ -237,7 +237,7 @@ public abstract class Js5ChannelHandler(
 
         if (groups.size >= CacheImporter.BATCH_SIZE || complete) {
             runBlocking {
-                importer.importGroups(sourceId, scopeId, groups)
+                importer.importGroups(scopeId, sourceId, groups)
             }
 
             releaseGroups()
@@ -269,6 +269,7 @@ public abstract class Js5ChannelHandler(
                     buf,
                     uncompressed,
                     gameId,
+                    scopeId,
                     buildMajor,
                     buildMinor,
                     lastMasterIndexId,
