@@ -33,7 +33,7 @@ clikt = { module = "com.github.ajalt.clikt:clikt", version = "3.4.1" }
 commons-compress = { module = "org.apache.commons:commons-compress", version.ref = "commons-compress" }
 fastutil = { module = "it.unimi.dsi:fastutil", version = "8.5.8" }
 fernflower = { module = "org.openrs2:fernflower", version = "1.1.1" }
-flyway = { module = "org.flywaydb:flyway-core", version = "8.5.8" }
+flyway = { module = "org.flywaydb:flyway-core", version = "8.5.9" }
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
 guice = { module = "com.google.inject:guice", version.ref = "guice" }
 h2 = { module = "com.h2database:h2", version = "2.1.212" }
@@ -69,7 +69,7 @@ netty-transport = { module = "io.netty:netty-transport", version.ref = "netty" }
 openrs2-natives = { module = "org.openrs2:openrs2-natives-all", version = "3.2.0" }
 pf4j = { module = "org.pf4j:pf4j", version = "3.6.0" }
 postgres = { module = "org.postgresql:postgresql", version = "42.3.4" }
-runelite-client = { module = "net.runelite:client", version = "1.8.18.1" }
+runelite-client = { module = "net.runelite:client", version = "1.8.18.2" }
 thymeleaf-core = { module = "org.thymeleaf:thymeleaf", version = "3.0.15.RELEASE" }
 thymeleaf-java8time = { module = "org.thymeleaf.extras:thymeleaf-extras-java8time", version = "3.0.4.RELEASE" }
 xz = { module = "org.tukaani:xz", version = "1.9" }
