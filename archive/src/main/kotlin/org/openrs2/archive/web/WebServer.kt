@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import io.ktor.application.ApplicationCall
 import io.ktor.application.call
 import io.ktor.application.install
+import io.ktor.features.CORS
 import io.ktor.features.ContentNegotiation
 import io.ktor.features.XForwardedHeaderSupport
 import io.ktor.http.ContentType
@@ -35,6 +36,10 @@ public class WebServer @Inject constructor(
 ) {
     public fun start(address: String, port: Int) {
         embeddedServer(CIO, host = address, port = port) {
+            install(CORS) {
+                anyHost()
+            }
+
             install(ContentNegotiation) {
                 register(ContentType.Application.Json, JacksonConverter(mapper))
             }
