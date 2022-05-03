@@ -7,14 +7,18 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.response.header
 import io.ktor.response.respond
+import io.ktor.response.respondBytes
+import io.ktor.response.respondBytesWriter
 import io.ktor.response.respondOutputStream
 import io.ktor.thymeleaf.ThymeleafContent
 import io.netty.buffer.ByteBufAllocator
+import io.netty.buffer.ByteBufUtil
 import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
 import org.apache.commons.compress.archivers.tar.TarArchiveOutputStream
 import org.openrs2.archive.cache.CacheExporter
 import org.openrs2.archive.map.MapRenderer
+import org.openrs2.buffer.use
 import org.openrs2.cache.DiskStoreZipWriter
 import org.openrs2.cache.FlatFileStoreTarWriter
 import org.openrs2.compress.gzip.GzipLevelOutputStream
@@ -67,6 +71,28 @@ public class CachesController @Inject constructor(
                 )
             )
         )
+    }
+
+    public suspend fun exportGroup(call: ApplicationCall) {
+        val scope = call.parameters["scope"]!!
+        val id = call.parameters["id"]?.toIntOrNull()
+        val archiveId = call.parameters["archive"]?.toIntOrNull()
+        val groupId = call.parameters["group"]?.toIntOrNull()
+
+        if (id == null || archiveId == null || groupId == null) {
+            call.respond(HttpStatusCode.NotFound)
+            return
+        }
+
+        exporter.exportGroup(scope, id, archiveId, groupId).use { buf ->
+            if (buf == null) {
+                call.respond(HttpStatusCode.NotFound)
+                return
+            }
+
+            val bytes = ByteBufUtil.getBytes(buf, 0, buf.readableBytes(), false)
+            call.respondBytes(bytes, contentType = ContentType.Application.OctetStream)
+        }
     }
 
     public suspend fun exportDisk(call: ApplicationCall) {

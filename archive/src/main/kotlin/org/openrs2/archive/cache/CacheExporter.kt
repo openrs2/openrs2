@@ -3,6 +3,7 @@ package org.openrs2.archive.cache
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.annotation.JsonUnwrapped
+import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.Unpooled
 import org.openrs2.buffer.use
@@ -438,6 +439,39 @@ public class CacheExporter @Inject constructor(
                     name.append(id)
 
                     name.toString()
+                }
+            }
+        }
+    }
+
+    public suspend fun exportGroup(scope: String, id: Int, archive: Int, group: Int): ByteBuf? {
+        return database.execute { connection ->
+            connection.prepareStatement("""
+                SELECT g.data
+                FROM resolved_groups g
+                JOIN scopes s ON s.id = g.scope_id
+                WHERE s.name = ? AND g.master_index_id = ? AND g.archive_id = ? AND g.group_id = ?
+                UNION ALL
+                SELECT f.data
+                FROM resolved_files f
+                WHERE f.crc_table_id = ? AND f.index_id = ? AND f.file_id = ?
+            """.trimIndent()).use { stmt ->
+                stmt.setString(1, scope)
+                stmt.setInt(2, id)
+                stmt.setInt(3, archive)
+                stmt.setInt(4, group)
+                stmt.setInt(5, id)
+                stmt.setInt(6, archive)
+                stmt.setInt(7, group)
+
+                stmt.executeQuery().use { rows ->
+                    if (!rows.next()) {
+                        return@execute null
+                    }
+
+                    val data = rows.getBytes(1)
+
+                    return@execute Unpooled.wrappedBuffer(data)
                 }
             }
         }

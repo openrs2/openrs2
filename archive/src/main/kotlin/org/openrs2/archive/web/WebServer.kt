@@ -57,6 +57,7 @@ public class WebServer @Inject constructor(
                 get("/caches") { cachesController.index(call) }
                 get("/caches.json") { cachesController.indexJson(call) }
                 get("/caches/{scope}/{id}") { cachesController.show(call) }
+                get("/caches/{scope}/{id}/archives/{archive}/groups/{group}.dat") { cachesController.exportGroup(call) }
                 get("/caches/{scope}/{id}/disk.zip") { cachesController.exportDisk(call) }
                 get("/caches/{scope}/{id}/flat-file.tar.gz") { cachesController.exportFlatFile(call) }
                 get("/caches/{scope}/{id}/keys.json") { cachesController.exportKeysJson(call) }
