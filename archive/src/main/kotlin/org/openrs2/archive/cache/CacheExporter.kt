@@ -513,7 +513,8 @@ public class CacheExporter @Inject constructor(
 
     public suspend fun exportGroup(scope: String, id: Int, archive: Int, group: Int): ByteBuf? {
         return database.execute { connection ->
-            connection.prepareStatement("""
+            connection.prepareStatement(
+                """
                 SELECT g.data
                 FROM resolved_groups g
                 JOIN scopes s ON s.id = g.scope_id
@@ -522,7 +523,8 @@ public class CacheExporter @Inject constructor(
                 SELECT f.data
                 FROM resolved_files f
                 WHERE f.crc_table_id = ? AND f.index_id = ? AND f.file_id = ?
-            """.trimIndent()).use { stmt ->
+            """.trimIndent()
+            ).use { stmt ->
                 stmt.setString(1, scope)
                 stmt.setInt(2, id)
                 stmt.setInt(3, archive)
