@@ -8,7 +8,6 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.response.header
 import io.ktor.response.respond
 import io.ktor.response.respondBytes
-import io.ktor.response.respondBytesWriter
 import io.ktor.response.respondOutputStream
 import io.ktor.thymeleaf.ThymeleafContent
 import io.netty.buffer.ByteBufAllocator
