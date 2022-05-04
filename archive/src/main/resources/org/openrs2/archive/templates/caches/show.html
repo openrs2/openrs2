@@ -130,28 +130,28 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="entry, it : ${cache.masterIndex.entries}" th:with="index=${cache.indexes[it.index]}">
+							<tr th:each="entry, it : ${cache.masterIndex.entries}" th:with="archive=${cache.archives[it.index]}">
 								<td th:text="${it.index}" class="text-right">0</td>
 								<td th:text="${#numbers.formatInteger(entry.version, 1, 'COMMA')}" class="text-right">0</td>
 								<td class="text-right">
 									<code th:text="${entry.checksum}">0</code>
 								</td>
 								<div th:switch="true" th:remove="tag">
-									<div th:case="${index.stats != null}" th:remove="tag">
-										<td th:classappend="${index.stats.allGroupsValid}? 'table-success' : 'table-warning'" class="text-right">
-											<span th:text="${#numbers.formatInteger(index.stats.validGroups, 1, 'COMMA')} + '&nbsp;/&nbsp;' + ${#numbers.formatInteger(index.stats.groups, 1, 'COMMA')}"></span>
+									<div th:case="${archive.stats != null}" th:remove="tag">
+										<td th:classappend="${archive.stats.allGroupsValid}? 'table-success' : 'table-warning'" class="text-right">
+											<span th:text="${#numbers.formatInteger(archive.stats.validGroups, 1, 'COMMA')} + '&nbsp;/&nbsp;' + ${#numbers.formatInteger(archive.stats.groups, 1, 'COMMA')}"></span>
 											<br />
-											<span th:text="'(' + ${#numbers.formatPercent(index.stats.validGroupsFraction, 1, 2)} + ')'"></span>
+											<span th:text="'(' + ${#numbers.formatPercent(archive.stats.validGroupsFraction, 1, 2)} + ')'"></span>
 										</td>
-										<td th:classappend="${index.stats.allKeysValid}? 'table-success' : 'table-warning'" class="text-right">
-											<span th:text="${#numbers.formatInteger(index.stats.validKeys, 1, 'COMMA')} + '&nbsp;/&nbsp;' + ${#numbers.formatInteger(index.stats.keys, 1, 'COMMA')}"></span>
+										<td th:classappend="${archive.stats.allKeysValid}? 'table-success' : 'table-warning'" class="text-right">
+											<span th:text="${#numbers.formatInteger(archive.stats.validKeys, 1, 'COMMA')} + '&nbsp;/&nbsp;' + ${#numbers.formatInteger(archive.stats.keys, 1, 'COMMA')}"></span>
 											<br />
-											<span th:text="'(' + ${#numbers.formatPercent(index.stats.validKeysFraction, 1, 2)} + ')'"></span>
+											<span th:text="'(' + ${#numbers.formatPercent(archive.stats.validKeysFraction, 1, 2)} + ')'"></span>
 										</td>
 										<!--/*@thymesVar id="#byteunits" type="org.openrs2.archive.web.ByteUnits"*/-->
-										<td th:text="${#byteunits.format(index.stats.size)}" class="text-right">0 B</td>
+										<td th:text="${#byteunits.format(archive.stats.size)}" class="text-right">0 B</td>
 									</div>
-									<div th:case="${index.resolved}" th:remove="tag">
+									<div th:case="${archive.resolved}" th:remove="tag">
 										<td class="text-center" colspan="3">Calculating...</td>
 									</div>
 									<div th:case="${entry.checksum != 0 || entry.version != 0}" th:remove="tag">
@@ -176,17 +176,53 @@
 							<tr>
 								<th>Archive</th>
 								<th>Checksum</th>
+								<th>Size<sup><a href="/caches#size">2</a></sup></th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="entry, it : ${cache.checksumTable.entries}">
+							<tr th:each="entry, it : ${cache.checksumTable.entries}" th:with="archive=${cache.archives[it.index]}">
 								<td th:text="${it.index}" class="text-right">0</td>
 								<td class="text-right">
 									<code th:text="${entry}">0</code>
 								</td>
+								<div th:switch="true" th:remove="tag">
+									<!--/*@thymesVar id="#byteunits" type="org.openrs2.archive.web.ByteUnits"*/-->
+									<td th:case="${archive.stats != null}" th:text="${#byteunits.format(archive.stats.size)}" class="text-right">0 B</td>
+									<td th:case="${archive.resolved}" class="text-center">Calculating...</td>
+									<td th:case="${entry != 0}" class="text-center table-danger">Missing</td>
+									<td th:case="true" class="text-center text-muted">N/A</td>
+								</div>
 							</tr>
 						</tbody>
 					</table>
+				</div>
+
+				<div th:if="${cache.indexes}" th:remove="tag">
+					<h2>Version list</h2>
+
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered table-hover">
+							<thead class="table-dark">
+								<tr>
+									<th>Index</th>
+									<th>Files</th>
+									<th>Size<sup><a href="/caches#size">2</a></sup></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="index, it : ${cache.indexes}">
+									<td th:text="${it.index + 1}" class="text-right">0</td>
+									<td th:classappend="${index.allFilesValid}? 'table-success' : 'table-warning'" class="text-right">
+										<span th:text="${#numbers.formatInteger(index.validFiles, 1, 'COMMA')} + '&nbsp;/&nbsp;' + ${#numbers.formatInteger(index.files, 1, 'COMMA')}"></span>
+										<br />
+										<span th:text="'(' + ${#numbers.formatPercent(index.validFilesFraction, 1, 2)} + ')'"></span>
+									</td>
+									<!--/*@thymesVar id="#byteunits" type="org.openrs2.archive.web.ByteUnits"*/-->
+									<td th:text="${#byteunits.format(index.size)}" class="text-right">0 B</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</main>

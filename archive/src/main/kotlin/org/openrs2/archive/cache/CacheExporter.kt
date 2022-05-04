@@ -77,12 +77,12 @@ public class CacheExporter @Inject constructor(
         public val diskStoreValid: Boolean = blocks <= DiskStore.MAX_BLOCK
     }
 
-    public data class Index(
+    public data class Archive(
         val resolved: Boolean,
-        val stats: IndexStats?
+        val stats: ArchiveStats?
     )
 
-    public data class IndexStats(
+    public data class ArchiveStats(
         val validGroups: Long,
         val groups: Long,
         val validKeys: Long,
@@ -104,6 +104,21 @@ public class CacheExporter @Inject constructor(
             1.0
         } else {
             validKeys.toDouble() / keys
+        }
+    }
+
+    public data class IndexStats(
+        val validFiles: Long,
+        val files: Long,
+        val size: Long,
+        val blocks: Long
+    ) {
+        public val allFilesValid: Boolean = files == validFiles
+
+        public val validFilesFraction: Double = if (files == 0L) {
+            1.0
+        } else {
+            validFiles.toDouble() / files
         }
     }
 
@@ -158,7 +173,8 @@ public class CacheExporter @Inject constructor(
         val sources: List<Source>,
         val updates: List<String>,
         val stats: Stats?,
-        val indexes: List<Index>,
+        val archives: List<Archive>,
+        val indexes: List<IndexStats>?,
         val masterIndex: Js5MasterIndex?,
         val checksumTable: ChecksumTable?
     )
@@ -410,43 +426,81 @@ public class CacheExporter @Inject constructor(
                 }
             }
 
-            val indexes = mutableListOf<Index>()
+            val archives = mutableListOf<Archive>()
 
             connection.prepareStatement(
                 """
-                SELECT c.id IS NOT NULL, s.valid_groups, s.groups, s.valid_keys, s.keys, s.size, s.blocks
+                SELECT a.archive_id, c.id IS NOT NULL, s.valid_groups, s.groups, s.valid_keys, s.keys, s.size, s.blocks
                 FROM master_index_archives a
                 LEFT JOIN resolve_index((SELECT id FROM scopes WHERE name = ?), a.archive_id, a.crc32, a.version) c ON TRUE
                 LEFT JOIN index_stats s ON s.container_id = c.id
                 WHERE a.master_index_id = ?
-                ORDER BY a.archive_id ASC
+                UNION ALL
+                SELECT a.archive_id, b.id IS NOT NULL, NULL, NULL, NULL, NULL, length(b.data), group_blocks(a.archive_id, length(b.data))
+                FROM crc_table_archives a
+                LEFT JOIN resolve_archive(a.archive_id, a.crc32) b ON TRUE
+                WHERE a.crc_table_id = ?
+                ORDER BY archive_id ASC
             """.trimIndent()
             ).use { stmt ->
                 stmt.setString(1, scope)
                 stmt.setInt(2, id)
+                stmt.setInt(3, id)
 
                 stmt.executeQuery().use { rows ->
                     while (rows.next()) {
-                        val resolved = rows.getBoolean(1)
+                        val resolved = rows.getBoolean(2)
 
-                        val validGroups = rows.getLong(2)
-                        val indexStats = if (!rows.wasNull()) {
-                            val groups = rows.getLong(3)
-                            val validKeys = rows.getLong(4)
-                            val keys = rows.getLong(5)
-                            val size = rows.getLong(6)
-                            val blocks = rows.getLong(7)
-                            IndexStats(validGroups, groups, validKeys, keys, size, blocks)
+                        val size = rows.getLong(7)
+                        val archiveStats = if (!rows.wasNull()) {
+                            val validGroups = rows.getLong(3)
+                            val groups = rows.getLong(4)
+                            val validKeys = rows.getLong(5)
+                            val keys = rows.getLong(6)
+                            val blocks = rows.getLong(8)
+                            ArchiveStats(validGroups, groups, validKeys, keys, size, blocks)
                         } else {
                             null
                         }
 
-                        indexes += Index(resolved, indexStats)
+                        archives += Archive(resolved, archiveStats)
                     }
                 }
             }
 
-            Cache(id, sources, updates, stats, indexes, masterIndex, checksumTable)
+            val indexes = if (checksumTable != null && archives[5].resolved) {
+                connection.prepareStatement(
+                    """
+                    SELECT s.valid_files, s.files, s.size, s.blocks
+                    FROM crc_table_archives a
+                    JOIN resolve_archive(a.archive_id, a.crc32) b ON TRUE
+                    JOIN version_list_stats s ON s.blob_id = b.id
+                    WHERE a.crc_table_id = ? AND a.archive_id = 5
+                    ORDER BY s.index_id ASC
+                """.trimIndent()
+                ).use { stmt ->
+                    stmt.setInt(1, id)
+
+                    stmt.executeQuery().use { rows ->
+                        val indexes = mutableListOf<IndexStats>()
+
+                        while (rows.next()) {
+                            val validFiles = rows.getLong(1)
+                            val files = rows.getLong(2)
+                            val size = rows.getLong(3)
+                            val blocks = rows.getLong(4)
+
+                            indexes += IndexStats(validFiles, files, size, blocks)
+                        }
+
+                        indexes
+                    }
+                }
+            } else {
+                null
+            }
+
+            Cache(id, sources, updates, stats, archives, indexes, masterIndex, checksumTable)
         }
     }
 
@@ -487,7 +541,7 @@ public class CacheExporter @Inject constructor(
                     val name = StringBuilder("$game-$environment-$language")
 
                     val builds = rows.getArray(4).array as Array<*>
-                    for (build in builds.mapNotNull { o -> Build.fromPgObject(o as PGobject) }.toSortedSet()) {
+                    for (build in builds.mapNotNull { o -> CacheExporter.Build.fromPgObject(o as PGobject) }.toSortedSet()) {
                         name.append("-b")
                         name.append(build)
                     }
