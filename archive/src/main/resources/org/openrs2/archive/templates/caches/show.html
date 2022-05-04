@@ -137,12 +137,6 @@
 									<code th:text="${entry.checksum}">0</code>
 								</td>
 								<div th:switch="true" th:remove="tag">
-									<div th:case="${entry.checksum == 0 && entry.version == 0}" th:remove="tag">
-										<td class="text-center text-muted" colspan="3">N/A</td>
-									</div>
-									<div th:case="${!index.resolved}" th:remove="tag">
-										<td class="text-center table-danger" colspan="3">Index missing</td>
-									</div>
 									<div th:case="${index.stats != null}" th:remove="tag">
 										<td th:classappend="${index.stats.allGroupsValid}? 'table-success' : 'table-warning'" class="text-right">
 											<span th:text="${#numbers.formatInteger(index.stats.validGroups, 1, 'COMMA')} + '&nbsp;/&nbsp;' + ${#numbers.formatInteger(index.stats.groups, 1, 'COMMA')}"></span>
@@ -157,8 +151,14 @@
 										<!--/*@thymesVar id="#byteunits" type="org.openrs2.archive.web.ByteUnits"*/-->
 										<td th:text="${#byteunits.format(index.stats.size)}" class="text-right">0 B</td>
 									</div>
-									<div th:case="true" th:remove="tag">
+									<div th:case="${index.resolved}" th:remove="tag">
 										<td class="text-center" colspan="3">Calculating...</td>
+									</div>
+									<div th:case="${entry.checksum != 0 || entry.version != 0}" th:remove="tag">
+										<td class="text-center table-danger" colspan="3">Index missing</td>
+									</div>
+									<div th:case="true" th:remove="tag">
+										<td class="text-center text-muted" colspan="3">N/A</td>
 									</div>
 								</div>
 							</tr>
