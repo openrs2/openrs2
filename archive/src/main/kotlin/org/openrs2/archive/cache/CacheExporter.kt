@@ -77,6 +77,36 @@ public class CacheExporter @Inject constructor(
         public val diskStoreValid: Boolean = blocks <= DiskStore.MAX_BLOCK
     }
 
+    public data class Index(
+        val resolved: Boolean,
+        val stats: IndexStats?
+    )
+
+    public data class IndexStats(
+        val validGroups: Long,
+        val groups: Long,
+        val validKeys: Long,
+        val keys: Long,
+        val size: Long,
+        val blocks: Long
+    ) {
+        public val allGroupsValid: Boolean = groups == validGroups
+
+        public val validGroupsFraction: Double = if (groups == 0L) {
+            1.0
+        } else {
+            validGroups.toDouble() / groups
+        }
+
+        public val allKeysValid: Boolean = keys == validKeys
+
+        public val validKeysFraction: Double = if (keys == 0L) {
+            1.0
+        } else {
+            validKeys.toDouble() / keys
+        }
+    }
+
     public data class Build(val major: Int, val minor: Int?) : Comparable<Build> {
         override fun compareTo(other: Build): Int {
             return compareValuesBy(this, other, Build::major, Build::minor)
@@ -128,6 +158,7 @@ public class CacheExporter @Inject constructor(
         val sources: List<Source>,
         val updates: List<String>,
         val stats: Stats?,
+        val indexes: List<Index>,
         val masterIndex: Js5MasterIndex?,
         val checksumTable: ChecksumTable?
     )
@@ -379,7 +410,43 @@ public class CacheExporter @Inject constructor(
                 }
             }
 
-            Cache(id, sources, updates, stats, masterIndex, checksumTable)
+            val indexes = mutableListOf<Index>()
+
+            connection.prepareStatement(
+                """
+                SELECT c.id IS NOT NULL, s.valid_groups, s.groups, s.valid_keys, s.keys, s.size, s.blocks
+                FROM master_index_archives a
+                LEFT JOIN resolve_index((SELECT id FROM scopes WHERE name = ?), a.archive_id, a.crc32, a.version) c ON TRUE
+                LEFT JOIN index_stats s ON s.container_id = c.id
+                WHERE a.master_index_id = ?
+                ORDER BY a.archive_id ASC
+            """.trimIndent()
+            ).use { stmt ->
+                stmt.setString(1, scope)
+                stmt.setInt(2, id)
+
+                stmt.executeQuery().use { rows ->
+                    while (rows.next()) {
+                        val resolved = rows.getBoolean(1)
+
+                        val validGroups = rows.getLong(2)
+                        val indexStats = if (!rows.wasNull()) {
+                            val groups = rows.getLong(3)
+                            val validKeys = rows.getLong(4)
+                            val keys = rows.getLong(5)
+                            val size = rows.getLong(6)
+                            val blocks = rows.getLong(7)
+                            IndexStats(validGroups, groups, validKeys, keys, size, blocks)
+                        } else {
+                            null
+                        }
+
+                        indexes += Index(resolved, indexStats)
+                    }
+                }
+            }
+
+            Cache(id, sources, updates, stats, indexes, masterIndex, checksumTable)
         }
     }
 
