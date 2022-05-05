@@ -541,7 +541,7 @@ public class CacheExporter @Inject constructor(
                     val name = StringBuilder("$game-$environment-$language")
 
                     val builds = rows.getArray(4).array as Array<*>
-                    for (build in builds.mapNotNull { o -> CacheExporter.Build.fromPgObject(o as PGobject) }.toSortedSet()) {
+                    for (build in builds.mapNotNull { o -> Build.fromPgObject(o as PGobject) }.toSortedSet()) {
                         name.append("-b")
                         name.append(build)
                     }
