@@ -1,6 +1,7 @@
 package org.openrs2.util.io
 
 import java.io.BufferedWriter
+import java.io.IOException
 import java.io.OutputStream
 import java.nio.channels.FileChannel
 import java.nio.charset.Charset
@@ -110,8 +111,15 @@ public inline fun <T> Path.atomicWrite(f: (Path) -> T): T {
     parent.useTempFile(".$fileName", ".tmp") { tempFile ->
         val result = f(tempFile)
         tempFile.fsync()
+
         Files.move(tempFile, this, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING)
-        parent.fsync()
+
+        try {
+            parent.fsync()
+        } catch (ex: IOException) {
+            // can't fsync directories on (at least) Windows and jimfs
+        }
+
         return result
     }
 }
