@@ -42,8 +42,25 @@ public class OpaquePredicateTransformer : Transformer() {
 
     private fun findFlowObstructors(library: Library, method: MethodNode) {
         for (match in FLOW_OBSTRUCTOR_INITIALIZER_MATCHER.match(method)) {
-            // add flow obstructor to set
             val putstatic = match.last() as FieldInsnNode
+
+            /*
+             * if the initializer reads a local variable, check the local
+             * variable is populated with a static field
+             */
+            val first = match.first()
+            if (first is VarInsnNode) {
+                val storeFound = STORE_MATCHER.match(method).any {
+                    val istore = it[1] as VarInsnNode
+                    return@any first.`var` == istore.`var`
+                }
+
+                if (!storeFound) {
+                    continue
+                }
+            }
+
+            // add flow obstructor to set
             flowObstructors.add(MemberRef(putstatic))
 
             /*
