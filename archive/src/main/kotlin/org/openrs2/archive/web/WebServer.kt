@@ -59,6 +59,7 @@ public class WebServer @Inject constructor(
 
             routing {
                 get("/") { call.respond(ThymeleafContent("index.html", emptyMap())) }
+                get("/api") { call.respond(ThymeleafContent("api/index.html", mapOf("active" to "api"))) }
                 get("/caches") { cachesController.index(call) }
                 get("/caches.json") { cachesController.indexJson(call) }
                 get("/caches/{scope}/{id}") { cachesController.show(call) }

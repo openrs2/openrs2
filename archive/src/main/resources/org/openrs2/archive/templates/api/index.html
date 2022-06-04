@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+	<head th:replace="layout.html :: head">
+		<title>API - OpenRS2 Archive</title>
+		<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/static/css/openrs2.css" />
+		<script src="/webjars/jquery/jquery.min.js" defer></script>
+		<script src="/webjars/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+	</head>
+	<body>
+		<nav th:replace="layout.html :: nav"></nav>
+		<main class="container">
+			<h1>API</h1>
+
+			<p>All endpoints accept requests from any origin. Range requests are not supported by any endpoint.</p>
+
+			<h2><code>GET /caches.json</code></h2>
+
+			<p>
+				Returns a list of all caches, including all data available on the main <a href="/caches">caches</a>
+				page, in JSON format:
+			</p>
+
+			<pre><code>[
+    {
+        // The cache's internal ID.
+        "id": 1,
+
+        // A scope is a group of related games. Missing groups are only located
+        // from caches for games in the same scope.
+        //
+        // Currently the "runescape" scope is used for the "runescape" and
+        // "oldschool" games. Each FunOrb game has its own scope.
+        //
+        // Your code must be prepared for new scopes to be added in the future.
+        "scope": "runescape",
+
+        // The game's name. Your code must be prepared for new games to be
+        // added in the future.
+        "game": "runescape",
+
+        // Currently either "live" or "beta", but your code must be prepared
+        // for new environments to be added in the future.
+        "environment": "live",
+
+        // The language's ISO-639-1 code. Currently either "en", "de", "fr" or
+        // "pt", but your code must be prepared for new languages to be added
+        // in the future.
+        "language": "en",
+
+        // A list of build numbers the cache is associated with, which may be
+        // empty if the build number(s) are not known.
+        "builds": [
+            {
+                // The major number is always set.
+                "major": 549,
+
+                // The minor number may be null.
+                "minor": null
+            },
+            {
+                "major": 550,
+                "minor": null
+            }
+        ],
+
+        // The earliest timestamp the cache was available to users, in ISO 8601
+        // format. May be null if not known.
+        "timestamp": "2009-06-12T14:55:58Z",
+
+        // A list of users who provided a copy of this cache.
+        //
+        // May be empty if the users wished to remain anonymous.
+        //
+        // The value "Jagex" indicates the cache was directly downloaded from
+        // Jagex's servers by the OpenRS2 project, so we are completely certain
+        // it is genuine. This value will never be used for a cache obtained
+        // from a third party.
+        "sources": [
+            "Erand",
+            "Hlwys",
+            "Jagex",
+            "K4rn4ge",
+            "Nathan",
+            "Rune-Wars"
+        ],
+
+        // In old engine caches, the number of valid .jag archives that are not
+        // missing.
+        //
+        // In new engine caches, the number of valid JS5 indexes that are not
+        // missing.
+        //
+        // May be null if the cache is still being processed.
+        "valid_indexes": 29,
+
+        // In old engine caches, the total number of .jag archives that should
+        // exist, based on the cache's CRC table.
+        //
+        // In new engine caches, the total number of JS5 indexes that should
+        // exist, based on the JS5 master index.
+        //
+        // May be null if the cache is still being processed.
+        "indexes": 29,
+
+        // The number of valid files (old engine) or valid groups (new engine)
+        // that are not missing. May be null if the cache is still being processed.
+        "valid_groups": 71002,
+
+        // In old engine caches, the total number of files that should exist,
+        // based on the cache's versionlist.jag archive.
+        //
+        // In new engine caches, the total number of groups that should exist,
+        // based on the JS5 indexes that are available.
+        //
+        // May be null if the cache is still being processed.
+        "groups": 71146,
+
+        // The number of encrypted groups for which a valid key is available.
+        // May be null if the cache is still being processed.
+        "valid_keys": 1203,
+
+        // The total number of encrypted groups in the cache. May be null if
+        // the cache is still being processed.
+        "keys": 1240,
+
+        // The total size of all groups in the cache in bytes. May be null if
+        // the cache is still being processed.
+        "size": 74970573,
+
+        // The number of 520-byte blocks required to store the cache's data in
+        // a .dat2 file. May be null if the cache is still being processed.
+        "blocks": 185273,
+
+        // A boolean flag indicating if the cache is small enough to be
+        // downloaded in .dat2/.idx format. May be null if the cache is still
+        // being processed.
+        "disk_store_valid": true
+    },
+    ...
+]</code></pre>
+
+			<h2><code>GET /caches/&lt;scope&gt;/&lt;id&gt;/disk.zip</code></h2>
+
+			<p>
+				Returns a cache as a ZIP archive of <code>.dat/.idx</code>
+				(old engine) or <code>.dat2/.idx</code> (new engine) files. All
+				files are stored underneath a <code>cache</code> subdirectory
+				in the zip archive.
+			</p>
+
+			<h2><code>GET /caches/&lt;scope&gt;/&lt;id&gt;/flat-file.tar.gz</code></h2>
+
+			<p>
+				Returns a cache as a gzipped tarball of files, where each
+				file in the tarball holds a single file from the cache (old
+				engine) or single group (new engine).
+			</p>
+
+			<p>
+				The paths within the archive all have a format of
+				<code>cache/&lt;index&gt;/&lt;file&gt;.dat</code> (old engine)
+				or <code>cache/&lt;archive&gt;/&lt;group&gt;.dat</code> (new
+				engine).
+			</p>
+
+			<p>The two byte version trailers are included.</p>
+
+			<h2><code>GET /caches/&lt;scope&gt;/&lt;id&gt;/keys.json</code></h2>
+
+			<p>Returns a list of valid XTEA keys for the cache in JSON format:</p>
+
+			<pre><code>[
+    {
+        // The ID of the archive containing the group the key is used for.
+        // Typically this is 5 (maps), but do note that RuneScape 3 does
+        // support encrypting interfaces, though the functionality has not yet
+        // been used, and some FunOrb games also have encrypted groups.
+        "archive": 5,
+
+        // The ID of the group the key is used for.
+        "group": 1,
+
+        // The group's name hash, or null if the group has no name.
+        "name_hash": -1153472937,
+
+        // The name of the group, if available, or null if the group has no
+        // name or if the name is not known.
+        "name": "l40_55",
+
+        // The ID of the map square, if the group is an encrypted loc group
+        // (has a name of lX_Z). The map square ID is ((X &lt;&lt; 8) | Z).
+        // null if the group is not an encrypted loc group.
+        "mapsquare": 10295,
+
+        // The XTEA key, represented as four 32-bit integers.
+        "key": [
+            -1920480496,
+            -1423914110,
+            951774544,
+            -1419269290
+        ]
+    },
+    ...
+]</code></pre>
+
+			<h2><code>GET /caches/&lt;scope&gt;/&lt;id&gt;/keys.zip</code></h2>
+
+			<p>
+				Returns a zip archive file of valid XTEA keys for loc groups.
+				Each key is stored in a text file containing four lines, with
+				each line containing a 32-bit component of the key as a decimal
+				string. The paths within the archive all have a format of
+				<code>keys/&lt;mapsquare&gt;.txt</code>.
+			</p>
+
+			<h2><code>GET /caches/&lt;scope&gt;/&lt;id&gt;/map.png</code></h2>
+
+			<p>
+				Renders the map squares in the cache, with a coloured outline
+				representing whether we have a valid key for each map square or
+				not:
+			</p>
+
+			<ul>
+				<li><strong>Valid key:</strong> green outline.</li>
+				<li><strong>Loc group is not encrypted:</strong> green outline.</li>
+				<li><strong>Empty loc group:</strong> grey outline.</li>
+				<li><strong>Key unknown:</strong> red outline.</li>
+			</ul>
+
+			<p>
+				Empty loc groups may be replaced with an unencrypted equivalent
+				with a cache editor.
+			</p>
+
+			<h2><code>GET /caches/&lt;scope&gt;/&lt;id&gt;/archives/&lt;archive&gt;/groups/&lt;group&gt;.dat</code></h2>
+
+			<p>
+				Returns a single file (old engine) or group (new engine) in
+				binary format. The response contains a <code>.jag</code>
+				archive (index 0 of an old engine cache), a GZIP-compressed
+				file (the remaining indexes of an old engine cache) or
+				JS5-compressed data (new engine cache, also known as a
+				container). The two byte version trailer is not included.
+			</p>
+
+			<h2><code>GET /keys/all.json</code></h2>
+
+			<p>
+				Returns a list of all XTEA keys in the database, including
+				candidate keys that have not been validated against any cache.
+			</p>
+
+			<pre><code>[
+    // The XTEA key, represented as four 32-bit integers.
+    [
+        -2147135705,
+        1113423446,
+        1294100345,
+        946019601
+    ],
+    ...
+]</code></pre>
+
+			<h2><code>GET /keys/valid.json</code></h2>
+
+			<p>
+				Returns a list of XTEA keys in the database, only including
+				keys validated against at least one cache.
+			</p>
+
+			<pre><code>[
+    // The XTEA key, represented as four 32-bit integers.
+    [
+        -2147135705,
+        1113423446,
+        1294100345,
+        946019601
+    ],
+    ...
+]</code></pre>
+		</main>
+	</body>
+</html>
