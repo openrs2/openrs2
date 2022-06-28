@@ -1,10 +1,15 @@
 package org.openrs2.archive.web
 
 import io.ktor.application.ApplicationCall
+import io.ktor.http.CacheControl
 import io.ktor.http.ContentDisposition
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
+import io.ktor.http.content.CachingOptions
+import io.ktor.http.content.EntityTagVersion
+import io.ktor.http.content.caching
+import io.ktor.http.content.versions
 import io.ktor.response.header
 import io.ktor.response.respond
 import io.ktor.response.respondBytes
@@ -21,8 +26,10 @@ import org.openrs2.buffer.use
 import org.openrs2.cache.DiskStoreZipWriter
 import org.openrs2.cache.FlatFileStoreTarWriter
 import org.openrs2.compress.gzip.GzipLevelOutputStream
+import org.openrs2.crypto.whirlpool
 import java.nio.file.attribute.FileTime
 import java.time.Instant
+import java.util.Base64
 import java.util.zip.Deflater
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
@@ -89,8 +96,20 @@ public class CachesController @Inject constructor(
                 return
             }
 
+            val etag = Base64.getEncoder().encodeToString(buf.whirlpool().sliceArray(0 until 16))
+
             val bytes = ByteBufUtil.getBytes(buf, 0, buf.readableBytes(), false)
-            call.respondBytes(bytes, contentType = ContentType.Application.OctetStream)
+            call.respondBytes(bytes, contentType = ContentType.Application.OctetStream) {
+                caching = CachingOptions(
+                    cacheControl = CacheControl.MaxAge(
+                        maxAgeSeconds = 86400,
+                        visibility = CacheControl.Visibility.Public,
+                    ),
+                )
+                versions = listOf(
+                    EntityTagVersion(etag, weak = false),
+                )
+            }
         }
     }
 

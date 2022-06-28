@@ -5,6 +5,8 @@ import io.ktor.application.ApplicationCall
 import io.ktor.application.call
 import io.ktor.application.install
 import io.ktor.features.CORS
+import io.ktor.features.CachingHeaders
+import io.ktor.features.ConditionalHeaders
 import io.ktor.features.ContentNegotiation
 import io.ktor.features.XForwardedHeaderSupport
 import io.ktor.http.ContentType
@@ -36,6 +38,9 @@ public class WebServer @Inject constructor(
 ) {
     public fun start(address: String, port: Int) {
         embeddedServer(CIO, host = address, port = port) {
+            install(CachingHeaders)
+            install(ConditionalHeaders)
+
             install(CORS) {
                 anyHost()
             }
