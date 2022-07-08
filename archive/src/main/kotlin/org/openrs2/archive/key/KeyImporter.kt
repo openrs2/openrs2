@@ -3,6 +3,7 @@ package org.openrs2.archive.key
 import com.github.michaelbull.logging.InlineLogger
 import org.openrs2.crypto.XteaKey
 import org.openrs2.db.Database
+import java.io.IOException
 import java.nio.file.Files
 import java.nio.file.Path
 import java.sql.Connection
@@ -75,10 +76,15 @@ public class KeyImporter @Inject constructor(
 
         for (downloader in downloaders) {
             for (url in downloader.getMissingUrls(seenUrls)) {
-                keys += downloader.download(url).map { key ->
-                    Key(key, downloader.source)
+                try {
+                    keys += downloader.download(url).map { key ->
+                        Key(key, downloader.source)
+                    }
+                    urls += url
+                } catch (ex: IOException) {
+                    logger.warn(ex) { "Failed to download keys from ${downloader.source.name}" }
+                    continue
                 }
-                urls += url
             }
         }
 
