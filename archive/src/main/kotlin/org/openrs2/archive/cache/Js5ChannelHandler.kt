@@ -152,6 +152,7 @@ public abstract class Js5ChannelHandler(
         }
     }
 
+    @Suppress("OVERRIDE_DEPRECATION")
     override fun exceptionCaught(ctx: ChannelHandlerContext, cause: Throwable) {
         releaseGroups()
 

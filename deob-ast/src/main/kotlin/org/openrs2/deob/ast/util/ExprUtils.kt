@@ -73,7 +73,6 @@ public fun Expression.not(): Expression {
             }
         }
         is BinaryExpr -> {
-            @Suppress("NON_EXHAUSTIVE_WHEN")
             when (operator) {
                 BinaryExpr.Operator.EQUALS ->
                     return BinaryExpr(left.clone(), right.clone(), BinaryExpr.Operator.NOT_EQUALS)

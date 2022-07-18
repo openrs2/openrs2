@@ -18,7 +18,6 @@ public class NegativeLiteralTransformer : Transformer() {
                 return@walk
             }
 
-            @Suppress("NON_EXHAUSTIVE_WHEN")
             when (expr.operator) {
                 UnaryExpr.Operator.PLUS -> expr.replace(operand)
                 UnaryExpr.Operator.MINUS -> expr.replace(operand.negate())

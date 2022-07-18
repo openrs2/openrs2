@@ -6,15 +6,15 @@ guice = "5.1.0"
 jackson = "2.13.3"
 jimfs = "1.2"
 junit = "5.8.2"
-kotlin = "1.6.21"
-kotlinCoroutines = "1.6.2"
+kotlin = "1.7.10"
+kotlinCoroutines = "1.6.4"
 ktor = "1.6.8"
-netty = "4.1.77.Final"
+netty = "4.1.79.Final"
 nettyIoUring = "0.0.14.Final"
 
 [plugins]
 dependencyLicenseReport = { id = "com.github.jk1.dependency-license-report", version = "2.1" }
-dokka = { id = "org.jetbrains.dokka", version = "1.6.21" }
+dokka = { id = "org.jetbrains.dokka", version = "1.7.10" }
 kotlinter = { id = "org.jmailen.kotlinter", version = "3.9.0" }
 shadow = { id = "com.github.johnrengelman.shadow", version = "7.1.2" }
 versions = { id = "com.github.ben-manes.versions", version = "0.42.0" }
@@ -29,14 +29,14 @@ bootstrapTable = { module = "org.webjars.npm:bootstrap-table", version = "1.20.2
 bouncyCastle-pkix = { module = "org.bouncycastle:bcpkix-jdk15on", version = "1.70" }
 bouncyCastle-provider = { module = "org.bouncycastle:bcprov-jdk15on", version = "1.70" }
 byteUnits = { module = "com.jakewharton.byteunits:byteunits", version = "0.9.1" }
-clikt = { module = "com.github.ajalt.clikt:clikt", version = "3.4.2" }
+clikt = { module = "com.github.ajalt.clikt:clikt", version = "3.5.0" }
 commons-compress = { module = "org.apache.commons:commons-compress", version.ref = "commons-compress" }
 fastutil = { module = "it.unimi.dsi:fastutil", version = "8.5.8" }
 fernflower = { module = "org.openrs2:fernflower", version = "1.1.1" }
-flyway = { module = "org.flywaydb:flyway-core", version = "8.5.12" }
+flyway = { module = "org.flywaydb:flyway-core", version = "9.0.1" }
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
 guice = { module = "com.google.inject:guice", version.ref = "guice" }
-h2 = { module = "com.h2database:h2", version = "2.1.212" }
+h2 = { module = "com.h2database:h2", version = "2.1.214" }
 hikaricp = { module = "com.zaxxer:HikariCP", version = "5.0.1" }
 inlineLogger = { module = "com.michael-bull.kotlin-inline-logger:kotlin-inline-logger", version = "1.0.4" }
 jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version = "2.13.3" }
@@ -49,13 +49,13 @@ jgrapht = { module = "org.jgrapht:jgrapht-core", version = "1.5.1" }
 jimfs = { module = "com.google.jimfs:jimfs", version.ref = "jimfs" }
 jquery = { module = "org.webjars:jquery", version = "3.6.0" }
 jnr = { module = "com.github.jnr:jnr-ffi", version = "2.2.12" }
-jsoup = { module = "org.jsoup:jsoup", version = "1.15.1" }
+jsoup = { module = "org.jsoup:jsoup", version = "1.15.2" }
 junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version = { strictly = "5.8.2" } }
 junit-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
 junit-launcher = { module = "org.junit.platform:junit-platform-launcher", version = "1.8.2" }
 kotlin-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinCoroutines" }
 kotlin-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinCoroutines" }
-kotlinPoet = { module = "com.squareup:kotlinpoet", version = "1.11.0" }
+kotlinPoet = { module = "com.squareup:kotlinpoet", version = "1.12.0" }
 ktor-jackson = { module = "io.ktor:ktor-jackson", version.ref = "ktor" }
 ktor-server-cio = { module = "io.ktor:ktor-server-cio", version.ref = "ktor" }
 ktor-thymeleaf = { module = "io.ktor:ktor-thymeleaf", version.ref = "ktor" }
@@ -67,9 +67,9 @@ netty-codec-http = { module = "io.netty:netty-codec-http", version.ref = "netty"
 netty-handler = { module = "io.netty:netty-handler", version.ref = "netty" }
 netty-transport = { module = "io.netty:netty-transport", version.ref = "netty" }
 openrs2-natives = { module = "org.openrs2:openrs2-natives-all", version = "3.2.0" }
-pf4j = { module = "org.pf4j:pf4j", version = "3.6.0" }
-postgres = { module = "org.postgresql:postgresql", version = "42.3.6" }
-runelite-client = { module = "net.runelite:client", version = "1.8.21" }
+pf4j = { module = "org.pf4j:pf4j", version = "3.7.0" }
+postgres = { module = "org.postgresql:postgresql", version = "42.4.0" }
+runelite-client = { module = "net.runelite:client", version = "1.8.27.1" }
 thymeleaf-core = { module = "org.thymeleaf:thymeleaf", version = "3.0.15.RELEASE" }
 thymeleaf-java8time = { module = "org.thymeleaf.extras:thymeleaf-extras-java8time", version = "3.0.4.RELEASE" }
 xz = { module = "org.tukaani:xz", version = "1.9" }

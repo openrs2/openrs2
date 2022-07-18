@@ -17,7 +17,6 @@ import javax.inject.Singleton
 public class IdentityTransformer : Transformer() {
     override fun transformUnit(group: LibraryGroup, library: Library, unit: CompilationUnit) {
         unit.walk { expr: BinaryExpr ->
-            @Suppress("NON_EXHAUSTIVE_WHEN")
             when (expr.operator) {
                 BinaryExpr.Operator.PLUS -> {
                     if (expr.left.isZero()) {

@@ -206,7 +206,6 @@ public class ConstantArgTransformer @Inject constructor(private val profile: Pro
                         continue@frame
                     }
 
-                    @Suppress("NON_EXHAUSTIVE_WHEN")
                     when (IntBranch.evaluateUnary(insn.opcode, value.set.values)) {
                         ALWAYS_TAKEN -> alwaysTakenBranches += insn
                         NEVER_TAKEN -> neverTakenBranches += insn
@@ -220,7 +219,6 @@ public class ConstantArgTransformer @Inject constructor(private val profile: Pro
                         continue@frame
                     }
 
-                    @Suppress("NON_EXHAUSTIVE_WHEN")
                     when (IntBranch.evaluateBinary(insn.opcode, value1.set.values, value2.set.values)) {
                         ALWAYS_TAKEN -> alwaysTakenBranches += insn
                         NEVER_TAKEN -> neverTakenBranches += insn

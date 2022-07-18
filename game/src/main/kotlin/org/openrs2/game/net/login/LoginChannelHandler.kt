@@ -44,6 +44,7 @@ public class LoginChannelHandler @Inject constructor(
             is LoginRequest.InitJaggrabConnection -> handleInitJaggrabConnection(ctx)
             is LoginRequest.RequestWorldList -> handleRequestWorldList(ctx, msg)
             is LoginRequest.InitCrossDomainConnection -> handleInitCrossDomainConnection(ctx)
+            else -> Unit
         }
     }
 
