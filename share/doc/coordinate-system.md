@@ -54,7 +54,7 @@ calculating `(X << 8) | Z`.
 Each map square is split into zones, each of which contains 8x8 tiles across a
 single level. Zones are the granularity used for most packets that interact with
 the world - for example, spawning locs and obj stacks. An entire zone may be
-reset and populated with dynamic locs and obj stacks in one packet.
+reset and populated with dynamic locs and obj stacks in two packets.
 
 Zones are also the granularity used to build instances, such as player-owned
 houses.
