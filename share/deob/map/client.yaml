@@ -426,7 +426,7 @@ fields:
     owner: "Static1"
     name: "aBoolean8"
   client!af.A [I:
-    owner: "Static1"
+    owner: "Camera"
     name: "anIntArray13"
   client!af.B [[I:
     owner: "AnimBase"
@@ -435,7 +435,7 @@ fields:
     owner: "SceneGraph"
     name: "tiles"
   client!af.D [I:
-    owner: "Static1"
+    owner: "Camera"
     name: "anIntArray14"
   client!af.E Lclient!fh;:
     owner: "CursorTypeList"
@@ -2011,7 +2011,7 @@ fields:
     name: "sounds"
   client!eg.G I:
     owner: "SeqType"
-    name: "anInt1243"
+    name: "priority"
   client!eg.H I:
     owner: "MidiPlayer"
     name: "songFileId"
@@ -4485,8 +4485,8 @@ fields:
     owner: "TextureOp34"
     name: "anInt2621"
   client!jj.bb [Z:
-    owner: "Static3"
-    name: "aBooleanArray13"
+    owner: "Camera"
+    name: "shakeEnabled"
   client!jj.db [S:
     owner: "TextureOp34"
     name: "aShortArray38"
@@ -6958,7 +6958,7 @@ fields:
     name: "anInt3715"
   client!oc.D I:
     owner: "ProjAnim"
-    name: "anInt3717"
+    name: "level"
   client!oc.E D:
     owner: "ProjAnim"
     name: "aDouble4"
@@ -6973,13 +6973,13 @@ fields:
     name: "aBoolean268"
   client!oc.I I:
     owner: "ProjAnim"
-    name: "anInt3719"
+    name: "startLoop"
   client!oc.J I:
     owner: "ProjAnim"
     name: "spotAnimId"
   client!oc.L Lclient!eg;:
     owner: "ProjAnim"
-    name: "aClass46_2"
+    name: "seqType"
   client!oc.M D:
     owner: "ProjAnim"
     name: "aDouble6"
@@ -6997,7 +6997,7 @@ fields:
     name: "aDouble7"
   client!oc.S I:
     owner: "ProjAnim"
-    name: "anInt3726"
+    name: "y"
   client!oc.T I:
     owner: "ProjAnim"
     name: "anInt3727"
@@ -7009,7 +7009,7 @@ fields:
     name: "aDouble9"
   client!oc.W I:
     owner: "ProjAnim"
-    name: "anInt3728"
+    name: "zFine"
   client!oc.Y I:
     owner: "ProjAnim"
     name: "minY"
@@ -7024,7 +7024,7 @@ fields:
     name: "anInt3731"
   client!oc.o I:
     owner: "ProjAnim"
-    name: "anInt3707"
+    name: "endLoop"
   client!oc.p [I:
     owner: "SpriteLoader"
     name: "xOffsets"
@@ -7036,7 +7036,7 @@ fields:
     name: "anInt3708"
   client!oc.s I:
     owner: "ProjAnim"
-    name: "anInt3709"
+    name: "xFine"
   client!oc.u I:
     owner: "ProjAnim"
     name: "anInt3711"
@@ -7045,7 +7045,7 @@ fields:
     name: "aBoolean267"
   client!oc.x I:
     owner: "ProjAnim"
-    name: "anInt3713"
+    name: "targetEntity"
   client!oc.y D:
     owner: "ProjAnim"
     name: "aDouble3"
@@ -10590,7 +10590,7 @@ fields:
     owner: "Static7"
     name: "prevFocus"
   client!vb.S [I:
-    owner: "Static7"
+    owner: "Camera"
     name: "anIntArray625"
   client!vb.U I:
     owner: "TextureOp12"
@@ -10647,7 +10647,7 @@ fields:
     owner: "LightType"
     name: "anInt5484"
   client!vd.i [I:
-    owner: "Static7"
+    owner: "Camera"
     name: "anIntArray626"
   client!vd.k I:
     owner: "Static7"
@@ -10756,7 +10756,7 @@ fields:
     name: "translateX"
   client!vh.Fb Z:
     owner: "LocType"
-    name: "aBoolean385"
+    name: "breakRouteFinding"
   client!vh.G I:
     owner: "LocType"
     name: "soundVolume"
@@ -11263,7 +11263,7 @@ fields:
     name: "showObjCount"
   client!wf.Gc [Ljava/lang/String;:
     owner: "Component"
-    name: "aStringArray44"
+    name: "objOps"
   client!wf.H [I:
     owner: "Component"
     name: "anIntArray658"
@@ -12063,11 +12063,11 @@ methods:
       28: "redDelta"
       40: "greenDelta"
   client!ab.a (Z)V:
-    owner: "Static8"
-    name: "method11"
+    owner: "Camera"
+    name: "smoothReset"
     arguments: {}
     locals:
-      3: "local3"
+      3: "index"
   client!ac.<init> ()V:
     owner: "TextureOp28"
     name: "<init>"
@@ -19270,7 +19270,7 @@ methods:
       2: "arg1"
       3: "arg2"
     locals:
-      35: "local35"
+      35: "targetVerb"
       160: "local160"
       162: "local162"
       172: "local172"
@@ -19284,7 +19284,7 @@ methods:
       373: "action"
       444: "i"
       455: "action"
-      505: "local505"
+      505: "objOps"
       517: "i"
       533: "action"
       704: "i"
@@ -21653,8 +21653,8 @@ methods:
       10: "end2"
       16: "start2"
   client!gn.a (IBI)V:
-    owner: "Static17"
-    name: "method1654"
+    owner: "Camera"
+    name: "forceAngle"
     arguments:
       0: "arg0"
       2: "arg1"
@@ -23576,8 +23576,8 @@ methods:
     arguments: {}
     locals: {}
   client!il.b (B)V:
-    owner: "Static20"
-    name: "method1924"
+    owner: "Camera"
+    name: "incX"
     arguments: {}
     locals: {}
   client!il.b (I)V:
@@ -23935,7 +23935,7 @@ methods:
       16: "node"
       22: "projAnim"
       61: "npc"
-      113: "local113"
+      113: "id"
       118: "player"
   client!jb.a (I)V:
     owner: "Component"
@@ -24121,8 +24121,8 @@ methods:
       169: "local169"
       182: "local182"
   client!je.a (I)V:
-    owner: "Static21"
-    name: "method2007"
+    owner: "Camera"
+    name: "incY"
     arguments: {}
     locals: {}
   client!je.a (II)V:
@@ -24318,8 +24318,8 @@ methods:
       2109: "x"
       2116: "z"
       2157: "loc"
-      2208: "id"
-      2212: "value"
+      2208: "value"
+      2212: "id"
       2227: "groupId"
       2239: "volume"
       2256: "volume"
@@ -24374,8 +24374,8 @@ methods:
       3024: "verifyId"
       3028: "xAngle"
       3032: "id"
-      3053: "x"
-      3057: "z"
+      3053: "z"
+      3057: "x"
       3061: "levelAndClearMovementQueue"
       3091: "id"
       3095: "seqId"
@@ -24498,7 +24498,7 @@ methods:
       5167: "j"
       5214: "message"
       5282: "verifyId"
-      5286: "local5286"
+      5286: "index"
       5290: "local5290"
       5294: "local5294"
       5298: "local5298"
@@ -24779,8 +24779,8 @@ methods:
       33: "bytes"
       37: "newType"
   client!jk.a (I)V:
-    owner: "Static21"
-    name: "method2063"
+    owner: "InterfaceList"
+    name: "closeModal"
     arguments: {}
     locals:
       14: "subInterface"
@@ -27486,8 +27486,8 @@ methods:
       153: "local153"
       166: "local166"
   client!lf.c (IIIIII)V:
-    owner: "Static23"
-    name: "method2536"
+    owner: "Camera"
+    name: "lookAt"
     arguments:
       1: "arg0"
       2: "arg1"
@@ -28339,11 +28339,11 @@ methods:
     arguments: {}
     locals: {}
   client!li.a (B)V:
-    owner: "Static24"
-    name: "method2563"
+    owner: "Camera"
+    name: "reset"
     arguments: {}
     locals:
-      7: "local7"
+      7: "index"
   client!li.a (IIIB)Lclient!vg;:
     owner: "SpotAnimType"
     name: "method2569"
@@ -31864,8 +31864,8 @@ methods:
       28: "buffer"
       36: "pointSizeMax"
   client!nf.a (I)V:
-    owner: "Static26"
-    name: "method2973"
+    owner: "Camera"
+    name: "decY"
     arguments: {}
     locals: {}
   client!nf.a (IIIII)V:
@@ -32845,19 +32845,19 @@ methods:
     owner: "ProjAnim"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
-      5: "arg5"
-      6: "arg6"
+      0: "spotAnimId"
+      1: "level"
+      2: "xFine"
+      3: "zFine"
+      4: "y"
+      5: "startLoop"
+      6: "endLoop"
       7: "arg7"
       8: "arg8"
-      9: "arg9"
+      9: "targetEntity"
       10: "arg10"
     locals:
-      61: "local61"
+      61: "seqId"
   client!oc.a (BI)Z:
     owner: "Static27"
     name: "setBuildArea"
@@ -32881,7 +32881,7 @@ methods:
       3: "arg3"
       4: "arg4"
     locals:
-      11: "local11"
+      11: "model"
   client!oc.a (IIIIIIIIJILclient!ne;)V:
     owner: "ProjAnim"
     name: "method3805"
@@ -32898,15 +32898,15 @@ methods:
       9: "arg9"
       10: "arg10"
     locals:
-      7: "local7"
+      7: "model"
   client!oc.a (ILclient!vg;)V:
     owner: "ProjAnim"
     name: "method3106"
     arguments:
-      1: "arg0"
+      1: "model"
     locals:
-      4: "local4"
-      51: "local51"
+      4: "glModel"
+      51: "softwareModel"
   client!oc.a (Z)Lclient!vg;:
     owner: "ProjAnim"
     name: "getModel"
@@ -32921,17 +32921,17 @@ methods:
     locals: {}
   client!oc.b (IIIII)V:
     owner: "ProjAnim"
-    name: "method3105"
+    name: "setTarget"
     arguments:
-      1: "arg0"
-      2: "arg1"
-      3: "arg2"
-      4: "arg3"
+      1: "targetY"
+      2: "targetXFine"
+      3: "loop"
+      4: "targetZFine"
     locals:
-      14: "local14"
-      21: "local21"
-      30: "local30"
-      69: "local69"
+      14: "dx"
+      21: "dz"
+      30: "distance"
+      69: "remainingLoops"
   client!od.a ()V:
     owner: "LightingManager"
     name: "method3110"
@@ -35413,8 +35413,8 @@ methods:
       1650: "lowPrioritySource"
       1660: "lowPriorityComponent"
       1717: "level"
-      1797: "local1797"
-      1809: "local1809"
+      1797: "x"
+      1809: "z"
       2012: "local2012"
       2019: "local2019"
       2037: "local2037"
@@ -36496,9 +36496,9 @@ methods:
       343: "phrase"
       450: "spotAnimId"
       454: "yAndDelay"
-      456: "local456"
-      553: "local553"
-      562: "local562"
+      456: "play"
+      553: "seqId"
+      562: "seqType"
       670: "damage"
       674: "type"
   client!qh.a (Z)V:
@@ -37700,7 +37700,7 @@ methods:
       185: "local185"
       187: "local187"
       189: "local189"
-      191: "local191"
+      191: "index"
       237: "local237"
       328: "local328"
       363: "local363"
@@ -41417,8 +41417,8 @@ methods:
       17: "stop"
       19: "i"
   client!tj.e (I)V:
-    owner: "Static33"
-    name: "method3007"
+    owner: "Camera"
+    name: "decX"
     arguments: {}
     locals: {}
   client!tk.a (III)V:
@@ -42514,9 +42514,9 @@ methods:
       250: "delay"
       266: "spotAnimId"
       270: "yAndDelay"
-      272: "local272"
-      358: "local358"
-      365: "type"
+      272: "play"
+      358: "seqId"
+      365: "seqType"
   client!ud.<init> (II)V:
     owner: "Resampler"
     name: "<init>"
@@ -45223,9 +45223,9 @@ methods:
     owner: "Static37"
     name: "method4661"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      3: "arg2"
+      0: "x"
+      3: "z"
+      1: "miniMap"
     locals: {}
   client!wb.a (IIIJ)Z:
     owner: "SceneGraph"
@@ -45565,8 +45565,8 @@ methods:
     owner: "Static37"
     name: "method4736"
     arguments:
-      1: "arg0"
-      2: "arg1"
+      1: "createdComponentId"
+      2: "componentId"
     locals: {}
   client!wf.a (B[Lclient!ma;)Lclient!gl;:
     owner: "Component"
@@ -45649,18 +45649,18 @@ methods:
       162: "local162"
       173: "local173"
       181: "local181"
-      217: "local217"
+      217: "events"
       282: "local282"
       286: "local286"
       297: "local297"
       309: "local309"
       350: "local350"
       357: "local357"
-      399: "local399"
-      408: "local408"
+      399: "i"
+      408: "op"
       729: "local729"
-      743: "local743"
-      750: "local750"
+      743: "i"
+      750: "op"
       808: "local808"
   client!wf.a (Ljava/lang/String;II)V:
     owner: "Component"
@@ -45886,8 +45886,8 @@ methods:
       27: "bytes"
       31: "newType"
   client!wh.a (IIIIZII)V:
-    owner: "Static37"
-    name: "method4773"
+    owner: "Camera"
+    name: "moveTo"
     arguments:
       0: "arg0"
       1: "arg1"
@@ -46014,21 +46014,21 @@ methods:
       15: "position"
       26: "x"
       34: "z"
-      41: "local41"
-      47: "local47"
-      51: "local51"
-      55: "local55"
-      61: "local61"
-      67: "local67"
-      71: "local71"
-      75: "local75"
+      41: "targetX"
+      47: "targetZ"
+      51: "targetEntity"
+      55: "spotAnimId"
+      61: "y"
+      67: "targetY"
+      71: "startDelay"
+      75: "endDelay"
       79: "local79"
       89: "local89"
-      126: "local126"
-      130: "local130"
-      134: "local134"
+      126: "xFine"
+      130: "zFine"
+      134: "targetXFine"
       161: "projAnim"
-      165: "local165"
+      165: "targetZFine"
       198: "position"
       206: "x"
       212: "z"
@@ -46055,32 +46055,32 @@ methods:
       390: "position"
       400: "x"
       408: "z"
-      414: "local414"
-      421: "local421"
-      425: "local425"
-      429: "local429"
-      433: "local433"
-      437: "local437"
-      443: "local443"
-      447: "local447"
-      451: "local451"
+      414: "targetX"
+      421: "targetZ"
+      425: "sourceEntity"
+      429: "targetEntity"
+      433: "spotAnimId"
+      437: "y"
+      443: "targetY"
+      447: "startDelay"
+      451: "endDelay"
       455: "local455"
       465: "local465"
-      502: "local502"
-      506: "local506"
-      510: "local510"
-      514: "local514"
+      502: "targetZFine"
+      506: "targetXFine"
+      510: "xFine"
+      514: "zFine"
       528: "local528"
       534: "local534"
-      538: "local538"
-      542: "local542"
+      538: "id"
+      542: "entity"
       549: "local549"
-      559: "local559"
-      581: "local581"
+      559: "id"
+      581: "basType"
       607: "local607"
-      612: "local612"
+      612: "sine"
       619: "local619"
-      624: "local624"
+      624: "cosine"
       634: "local634"
       682: "projAnim"
       715: "position"
@@ -46092,7 +46092,7 @@ methods:
       765: "zFine"
       771: "xFine"
       789: "spotAnim"
-      804: "local804"
+      804: "seqId"
       814: "shapeAndAngle"
       818: "shape"
       822: "angle"
@@ -46120,20 +46120,20 @@ methods:
       1022: "position"
       1030: "x"
       1036: "z"
-      1042: "local1042"
-      1048: "local1048"
-      1052: "local1052"
-      1056: "local1056"
-      1062: "local1062"
-      1068: "local1068"
-      1072: "local1072"
-      1076: "local1076"
+      1042: "targetX"
+      1048: "targetZ"
+      1052: "targetEntity"
+      1056: "spotAnimId"
+      1062: "y"
+      1068: "targetY"
+      1072: "startDelay"
+      1076: "endDelay"
       1080: "local1080"
       1084: "local1084"
-      1128: "local1128"
-      1134: "local1134"
-      1140: "local1140"
-      1146: "local1146"
+      1128: "zFine"
+      1134: "targetXFine"
+      1140: "targetZFine"
+      1146: "xFine"
       1173: "projAnim"
       1203: "position"
       1212: "x"
