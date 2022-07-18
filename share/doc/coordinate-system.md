@@ -67,8 +67,8 @@ moving/rotating them.
 
 ## Dungeons
 
-Dungeons are typically, but not always, 6400 Z units above the equivalent
-ground-level areas. 6400 was likely chosen as this corresponds to 100 map
+Dungeons are typically, but not always, 6,400 Z units above the equivalent
+ground-level areas. 6,400 was likely chosen as this corresponds to 100 map
 squares, meaning a single "1" digit needs to be added to or removed from the
 map's file name to switch between ground level and the corresponding dungeon.
 
