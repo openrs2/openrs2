@@ -62,7 +62,7 @@ hash to load balance between login servers, but this has not been confirmed.
 | String        | Settings cookie                              |
 | Int           | Affiliate ID                                 |
 | Int           | Preferences                                  |
-| Short         | TODO                                         |
+| Short         | Verify ID                                    |
 | Int\[29\]     | JS5 archive checksums                        |
 | UnsignedByte  | RSA-encrypted payload length (n)             |
 | Byte\[n\]     | RSA-encrypted payload                        |
