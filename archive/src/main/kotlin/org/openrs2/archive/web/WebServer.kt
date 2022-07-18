@@ -1,28 +1,30 @@
 package org.openrs2.archive.web
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import io.ktor.application.ApplicationCall
-import io.ktor.application.call
-import io.ktor.application.install
-import io.ktor.features.CORS
-import io.ktor.features.CachingHeaders
-import io.ktor.features.ConditionalHeaders
-import io.ktor.features.ContentNegotiation
-import io.ktor.features.XForwardedHeaderSupport
 import io.ktor.http.ContentType
-import io.ktor.http.content.resources
-import io.ktor.http.content.static
-import io.ktor.jackson.JacksonConverter
-import io.ktor.response.respond
-import io.ktor.response.respondRedirect
-import io.ktor.routing.get
-import io.ktor.routing.post
-import io.ktor.routing.routing
+import io.ktor.serialization.jackson.JacksonConverter
+import io.ktor.server.application.ApplicationCall
+import io.ktor.server.application.call
+import io.ktor.server.application.install
 import io.ktor.server.cio.CIO
 import io.ktor.server.engine.embeddedServer
-import io.ktor.thymeleaf.Thymeleaf
-import io.ktor.thymeleaf.ThymeleafContent
-import io.ktor.webjars.Webjars
+import io.ktor.server.http.content.resources
+import io.ktor.server.http.content.static
+import io.ktor.server.plugins.autohead.AutoHeadResponse
+import io.ktor.server.plugins.cachingheaders.CachingHeaders
+import io.ktor.server.plugins.conditionalheaders.ConditionalHeaders
+import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.server.plugins.cors.routing.CORS
+import io.ktor.server.plugins.defaultheaders.DefaultHeaders
+import io.ktor.server.plugins.forwardedheaders.XForwardedHeaders
+import io.ktor.server.response.respond
+import io.ktor.server.response.respondRedirect
+import io.ktor.server.routing.get
+import io.ktor.server.routing.post
+import io.ktor.server.routing.routing
+import io.ktor.server.thymeleaf.Thymeleaf
+import io.ktor.server.thymeleaf.ThymeleafContent
+import io.ktor.server.webjars.Webjars
 import org.openrs2.json.Json
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect
 import org.thymeleaf.templatemode.TemplateMode
@@ -38,6 +40,7 @@ public class WebServer @Inject constructor(
 ) {
     public fun start(address: String, port: Int) {
         embeddedServer(CIO, host = address, port = port) {
+            install(AutoHeadResponse)
             install(CachingHeaders)
             install(ConditionalHeaders)
 
@@ -46,8 +49,12 @@ public class WebServer @Inject constructor(
             }
 
             install(ContentNegotiation) {
+                ignoreType<ThymeleafContent>()
+
                 register(ContentType.Application.Json, JacksonConverter(mapper))
             }
+
+            install(DefaultHeaders)
 
             install(Thymeleaf) {
                 addDialect(ByteUnitsDialect)
@@ -59,7 +66,7 @@ public class WebServer @Inject constructor(
                 })
             }
 
-            install(XForwardedHeaderSupport)
+            install(XForwardedHeaders)
             install(Webjars)
 
             routing {

@@ -1,10 +1,10 @@
 package org.openrs2.archive.web
 
-import io.ktor.application.ApplicationCall
 import io.ktor.http.HttpStatusCode
-import io.ktor.request.receive
-import io.ktor.response.respond
-import io.ktor.thymeleaf.ThymeleafContent
+import io.ktor.server.application.ApplicationCall
+import io.ktor.server.request.receive
+import io.ktor.server.response.respond
+import io.ktor.server.thymeleaf.ThymeleafContent
 import org.openrs2.archive.key.KeyExporter
 import org.openrs2.archive.key.KeyImporter
 import org.openrs2.archive.key.KeySource

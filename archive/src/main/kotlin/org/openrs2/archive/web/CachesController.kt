@@ -1,20 +1,20 @@
 package org.openrs2.archive.web
 
-import io.ktor.application.ApplicationCall
 import io.ktor.http.CacheControl
 import io.ktor.http.ContentDisposition
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
-import io.ktor.http.content.CachingOptions
 import io.ktor.http.content.EntityTagVersion
 import io.ktor.http.content.caching
 import io.ktor.http.content.versions
-import io.ktor.response.header
-import io.ktor.response.respond
-import io.ktor.response.respondBytes
-import io.ktor.response.respondOutputStream
-import io.ktor.thymeleaf.ThymeleafContent
+import io.ktor.server.application.ApplicationCall
+import io.ktor.server.http.content.CachingOptions
+import io.ktor.server.response.header
+import io.ktor.server.response.respond
+import io.ktor.server.response.respondBytes
+import io.ktor.server.response.respondOutputStream
+import io.ktor.server.thymeleaf.ThymeleafContent
 import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.ByteBufUtil
 import kotlinx.coroutines.sync.Semaphore
@@ -29,6 +29,8 @@ import org.openrs2.compress.gzip.GzipLevelOutputStream
 import org.openrs2.crypto.whirlpool
 import java.nio.file.attribute.FileTime
 import java.time.Instant
+import java.time.ZoneOffset
+import java.time.ZonedDateTime
 import java.util.Base64
 import java.util.zip.Deflater
 import java.util.zip.ZipEntry
@@ -105,6 +107,7 @@ public class CachesController @Inject constructor(
                         maxAgeSeconds = 86400,
                         visibility = CacheControl.Visibility.Public,
                     ),
+                    expires = ZonedDateTime.now(ZoneOffset.UTC).plusSeconds(86400),
                 )
                 versions = listOf(
                     EntityTagVersion(etag, weak = false),

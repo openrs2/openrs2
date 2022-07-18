@@ -8,7 +8,7 @@ jimfs = "1.2"
 junit = "5.8.2"
 kotlin = "1.7.10"
 kotlinCoroutines = "1.6.4"
-ktor = "1.6.8"
+ktor = "2.0.3"
 netty = "4.1.79.Final"
 nettyIoUring = "0.0.14.Final"
 
@@ -56,10 +56,17 @@ junit-launcher = { module = "org.junit.platform:junit-platform-launcher", versio
 kotlin-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinCoroutines" }
 kotlin-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinCoroutines" }
 kotlinPoet = { module = "com.squareup:kotlinpoet", version = "1.12.0" }
-ktor-jackson = { module = "io.ktor:ktor-jackson", version.ref = "ktor" }
+ktor-serialization-jackson = { module = "io.ktor:ktor-serialization-jackson", version.ref = "ktor" }
+ktor-server-auto-head-response = { module = "io.ktor:ktor-server-auto-head-response", version.ref = "ktor" }
+ktor-server-caching-headers = { module = "io.ktor:ktor-server-caching-headers", version.ref = "ktor" }
 ktor-server-cio = { module = "io.ktor:ktor-server-cio", version.ref = "ktor" }
-ktor-thymeleaf = { module = "io.ktor:ktor-thymeleaf", version.ref = "ktor" }
-ktor-webjars = { module = "io.ktor:ktor-webjars", version.ref = "ktor" }
+ktor-server-conditional-headers = { module = "io.ktor:ktor-server-conditional-headers", version.ref = "ktor" }
+ktor-server-content-negotiation = { module = "io.ktor:ktor-server-content-negotiation", version.ref = "ktor" }
+ktor-server-cors = { module = "io.ktor:ktor-server-cors", version.ref = "ktor" }
+ktor-server-default-headers = { module = "io.ktor:ktor-server-default-headers", version.ref = "ktor" }
+ktor-server-forwarded-header = { module = "io.ktor:ktor-server-forwarded-header", version.ref = "ktor" }
+ktor-server-thymeleaf = { module = "io.ktor:ktor-server-thymeleaf", version.ref = "ktor" }
+ktor-server-webjars = { module = "io.ktor:ktor-server-webjars", version.ref = "ktor" }
 logback = { module = "ch.qos.logback:logback-classic", version = "1.2.11" }
 netty-buffer = { module = "io.netty:netty-buffer", version.ref = "netty" }
 netty-codec-core = { module = "io.netty:netty-codec", version.ref = "netty" }
@@ -77,5 +84,17 @@ xz = { module = "org.tukaani:xz", version = "1.9" }
 [bundles]
 asm = ["asm-core", "asm-commons", "asm-tree", "asm-util"]
 bouncyCastle = ["bouncyCastle-pkix", "bouncyCastle-provider"]
-ktor = ["ktor-jackson", "ktor-server-cio", "ktor-thymeleaf", "ktor-webjars"]
+ktor = [
+	"ktor-serialization-jackson",
+	"ktor-server-auto-head-response",
+	"ktor-server-caching-headers",
+	"ktor-server-cio",
+	"ktor-server-conditional-headers",
+	"ktor-server-content-negotiation",
+	"ktor-server-cors",
+	"ktor-server-default-headers",
+	"ktor-server-forwarded-header",
+	"ktor-server-thymeleaf",
+	"ktor-server-webjars",
+]
 thymeleaf = ["thymeleaf-core", "thymeleaf-java8time"]
