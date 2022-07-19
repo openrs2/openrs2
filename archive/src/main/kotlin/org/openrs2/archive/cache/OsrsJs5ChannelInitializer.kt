@@ -12,7 +12,7 @@ public class OsrsJs5ChannelInitializer(private val handler: OsrsJs5ChannelHandle
         ch.pipeline().addLast(
             ReadTimeoutHandler(30),
             Rs2Encoder(Protocol.LOGIN_UPSTREAM),
-            Rs2Decoder(Protocol.LOGIN_DOWNSTREAM)
+            Rs2Decoder(Protocol.LOGIN_DOWNSTREAM_JS5REMOTE)
         )
         ch.pipeline().addLast("handler", handler)
     }

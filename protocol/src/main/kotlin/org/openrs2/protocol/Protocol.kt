@@ -39,12 +39,27 @@ public class Protocol(vararg codecs: PacketCodec<*>) {
             RequestWorldListCodec,
             InitCrossDomainConnectionCodec
         )
+
         public val LOGIN_DOWNSTREAM: Protocol = Protocol(
+            ClientOutOfDateCodec,
+            ServerFullCodec,
+            IpLimitCodec
+        )
+
+        /**
+         * Unfortunately the Js5Ok packet's opcode overlaps with the exchange
+         * session keys opcode - the only case where this happens. We therefore
+         * have two LOGIN_DOWNSTREAM protocols to avoid ambiguity: one for
+         * responses to the InitJs5RemoteConnection packet, and one for
+         * responses to all other login packets.
+         */
+        public val LOGIN_DOWNSTREAM_JS5REMOTE: Protocol = Protocol(
             Js5OkCodec,
             ClientOutOfDateCodec,
             ServerFullCodec,
             IpLimitCodec
         )
+
         public val WORLD_LIST_DOWNSTREAM: Protocol = Protocol(
             WorldListResponseCodec
         )
