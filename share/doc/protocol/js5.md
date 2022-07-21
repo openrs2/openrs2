@@ -34,7 +34,17 @@ is capable of handling up to 20 prefetch and 20 urgent in-flight requests.
 All upstream packets are exactly 4 bytes long, including the opcode. Unused
 payload bytes are set to zero.
 
-### Request group (prefetch/urgent)
+### 0 (Request group (prefetch))
+
+| Data type     | Description |
+|---------------|-------------|
+| UnsignedByte  | Archive ID  |
+| UnsignedShort | Group ID    |
+
+Requests a group. Prefetch requests are used to  prepopulate most of the cache
+in the background.
+
+### 1 (Request group (urgent))
 
 | Data type     | Description |
 |---------------|-------------|
@@ -42,10 +52,19 @@ payload bytes are set to zero.
 | UnsignedShort | Group ID    |
 
 Requests a group. Urgent requests have a higher priority than prefetch requests,
-as the client needs the group immediately. Prefetch requests are used to
-prepopulate most of the cache in the background.
+as the client needs the group immediately.
 
-### Rekey
+### 2 (Logged in)
+
+Sent whenever the player logs into the game. Consensus in the community is that
+the logged in/out state is probably used for prioritisation, much like the
+distinction between prefetch/urgent requests.
+
+### 3 (Logged out)
+
+Sent whenever the player logs out of the game.
+
+### 4 (Rekey)
 
 | Data type     | Description          |
 |---------------|----------------------|
@@ -54,13 +73,7 @@ prepopulate most of the cache in the background.
 
 Sent to set the encryption key.
 
-### Logged in/out
-
-Sent whenever the player logs in or out of the game. Consensus in the community
-is that the logged in/out state is probably used for prioritisation, much like
-the distinction between prefetch/urgent requests.
-
-### Connected
+### 6 (Connected)
 
 | Data type      | Description                 |
 |----------------|-----------------------------|
@@ -69,7 +82,7 @@ the distinction between prefetch/urgent requests.
 Sent immediately after the JS5 connection is established. Its purpose is not
 known.
 
-### Disconnect
+### 7 (Disconnect)
 
 Requests that the server closes the connection. Sent by the `::serverjs5drop`
 command.
