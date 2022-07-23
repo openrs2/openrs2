@@ -12,11 +12,11 @@ public class CloseableInjector(
                 continue
             }
 
-            val o = binding.provider.get()
-            if (o !is AutoCloseable) {
+            if (!AutoCloseable::class.java.isAssignableFrom(binding.key.typeLiteral.rawType)) {
                 continue
             }
 
+            val o = binding.provider.get() as AutoCloseable
             o.close()
         }
     }
