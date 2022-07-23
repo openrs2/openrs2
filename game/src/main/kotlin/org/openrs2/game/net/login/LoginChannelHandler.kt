@@ -50,7 +50,7 @@ public class LoginChannelHandler @Inject constructor(
 
     private fun handleInitJs5RemoteConnection(ctx: ChannelHandlerContext, msg: LoginRequest.InitJs5RemoteConnection) {
         val encoder = ctx.pipeline().get(Rs2Encoder::class.java)
-        encoder.protocol = Protocol.LOGIN_DOWNSTREAM_JS5REMOTE
+        encoder.protocol = Protocol.JS5REMOTE_DOWNSTREAM
 
         if (msg.build != BUILD) {
             ctx.write(LoginResponse.ClientOutOfDate).addListener(ChannelFutureListener.CLOSE)
