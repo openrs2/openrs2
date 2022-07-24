@@ -30,6 +30,14 @@ public object ProtocolModule : AbstractModule() {
         install(CryptoModule)
 
         bindProtocol(
+            Js5RemoteDownstream::class.java,
+            Js5OkCodec::class.java,
+            ClientOutOfDateCodec::class.java,
+            ServerFullCodec::class.java,
+            IpLimitCodec::class.java
+        )
+
+        bindProtocol(
             LoginUpstream::class.java,
             InitGameConnectionCodec::class.java,
             InitJs5RemoteConnectionCodec::class.java,
@@ -43,14 +51,6 @@ public object ProtocolModule : AbstractModule() {
 
         bindProtocol(
             LoginDownstream::class.java,
-            ClientOutOfDateCodec::class.java,
-            ServerFullCodec::class.java,
-            IpLimitCodec::class.java
-        )
-
-        bindProtocol(
-            Js5RemoteDownstream::class.java,
-            Js5OkCodec::class.java,
             ClientOutOfDateCodec::class.java,
             ServerFullCodec::class.java,
             IpLimitCodec::class.java
