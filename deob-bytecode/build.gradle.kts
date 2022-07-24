@@ -9,8 +9,8 @@ application {
 }
 
 dependencies {
+    api(libs.bundles.guice)
     api(libs.clikt)
-    api(libs.guice)
 
     implementation(projects.deobAnnotations)
     implementation(projects.deobUtil)

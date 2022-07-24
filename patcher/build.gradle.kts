@@ -10,8 +10,8 @@ application {
 
 dependencies {
     api(projects.asm)
+    api(libs.bundles.guice)
     api(libs.clikt)
-    api(libs.guice)
 
     implementation(projects.conf)
     implementation(projects.inject)

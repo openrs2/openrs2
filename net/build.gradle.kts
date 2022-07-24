@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-    api(libs.guice)
+    api(libs.bundles.guice)
     api(libs.kotlin.coroutines.core)
     api(libs.netty.transport)
 

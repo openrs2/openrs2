@@ -5,7 +5,7 @@ plugins {
 
 dependencies {
     api(projects.crypto)
-    api(libs.guice)
+    api(libs.bundles.guice)
 
     implementation(projects.yaml)
 }

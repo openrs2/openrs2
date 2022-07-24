@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-    api(libs.guice)
+    api(libs.bundles.guice)
     api(libs.netty.buffer)
 
     implementation(projects.util)

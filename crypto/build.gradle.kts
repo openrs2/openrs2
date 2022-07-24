@@ -5,7 +5,7 @@ plugins {
 
 dependencies {
     api(libs.bundles.bouncyCastle)
-    api(libs.guice)
+    api(libs.bundles.guice)
     api(libs.jackson.databind)
     api(libs.netty.buffer)
 

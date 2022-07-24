@@ -10,8 +10,8 @@ application {
 
 dependencies {
     api(projects.deobUtil)
+    api(libs.bundles.guice)
     api(libs.clikt)
-    api(libs.guice)
 
     implementation(projects.inject)
     implementation(projects.log)

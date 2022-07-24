@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-    api(libs.guice)
+    api(libs.bundles.guice)
 
     implementation(libs.guava)
     implementation(libs.kotlin.coroutines.core)

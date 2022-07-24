@@ -6,7 +6,7 @@ plugins {
 dependencies {
     api(projects.util)
     api(libs.bundles.asm)
-    api(libs.guice)
+    api(libs.bundles.guice)
     api(libs.jackson.databind)
     api(libs.netty.buffer)
 

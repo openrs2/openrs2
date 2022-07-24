@@ -5,9 +5,9 @@ plugins {
 
 dependencies {
     api(projects.crypto)
+    api(libs.bundles.guice)
     api(libs.commons.compress)
     api(libs.fastutil)
-    api(libs.guice)
     api(libs.netty.buffer)
 
     implementation(projects.buffer)

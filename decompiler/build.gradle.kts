@@ -11,8 +11,8 @@ application {
 
 dependencies {
     api(projects.deobUtil)
+    api(libs.bundles.guice)
     api(libs.clikt)
-    api(libs.guice)
 
     implementation(projects.log)
     implementation(projects.util)
