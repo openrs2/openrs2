@@ -7,8 +7,8 @@ import org.openrs2.game.net.login.LoginChannelHandler
 import org.openrs2.protocol.Protocol
 import org.openrs2.protocol.Rs2Decoder
 import org.openrs2.protocol.Rs2Encoder
-import org.openrs2.protocol.login.LoginDownstream
-import org.openrs2.protocol.login.LoginUpstream
+import org.openrs2.protocol.login.downstream.LoginDownstream
+import org.openrs2.protocol.login.upstream.LoginUpstream
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Provider

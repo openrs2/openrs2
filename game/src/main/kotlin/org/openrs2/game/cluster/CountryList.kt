@@ -2,7 +2,7 @@ package org.openrs2.game.cluster
 
 import org.openrs2.cache.config.enum.EnumTypeList
 import org.openrs2.conf.CountryCode
-import org.openrs2.protocol.world.WorldListResponse
+import org.openrs2.protocol.world.downstream.WorldListResponse
 import javax.inject.Inject
 import javax.inject.Singleton
 

@@ -19,7 +19,7 @@ import org.openrs2.buffer.use
 import org.openrs2.cache.MasterIndexFormat
 import org.openrs2.protocol.Rs2Decoder
 import org.openrs2.protocol.Rs2Encoder
-import org.openrs2.protocol.js5.XorDecoder
+import org.openrs2.protocol.js5.downstream.XorDecoder
 import kotlin.coroutines.Continuation
 
 public class NxtJs5ChannelHandler(

@@ -4,6 +4,8 @@ import io.netty.buffer.ByteBuf
 import io.netty.buffer.Unpooled
 import io.netty.channel.embedded.EmbeddedChannel
 import org.openrs2.buffer.use
+import org.openrs2.protocol.js5.upstream.Js5Request
+import org.openrs2.protocol.js5.upstream.Js5RequestEncoder
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

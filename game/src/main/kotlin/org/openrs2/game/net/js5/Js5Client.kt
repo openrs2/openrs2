@@ -1,7 +1,7 @@
 package org.openrs2.game.net.js5
 
 import io.netty.channel.ChannelHandlerContext
-import org.openrs2.protocol.js5.Js5Request
+import org.openrs2.protocol.js5.upstream.Js5Request
 
 public class Js5Client(
     public val ctx: ChannelHandlerContext

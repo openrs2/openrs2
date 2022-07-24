@@ -1,6 +1,8 @@
 package org.openrs2.protocol.jaggrab
 
 import io.netty.channel.embedded.EmbeddedChannel
+import org.openrs2.protocol.jaggrab.upstream.JaggrabRequest
+import org.openrs2.protocol.jaggrab.upstream.JaggrabRequestEncoder
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

@@ -6,20 +6,20 @@ import com.google.inject.TypeLiteral
 import com.google.inject.multibindings.Multibinder
 import org.openrs2.buffer.BufferModule
 import org.openrs2.crypto.CryptoModule
-import org.openrs2.protocol.js5.Js5RemoteDownstream
-import org.openrs2.protocol.login.ClientOutOfDateCodec
-import org.openrs2.protocol.login.InitCrossDomainConnectionCodec
-import org.openrs2.protocol.login.InitGameConnectionCodec
-import org.openrs2.protocol.login.InitJaggrabConnectionCodec
-import org.openrs2.protocol.login.InitJs5RemoteConnectionCodec
-import org.openrs2.protocol.login.IpLimitCodec
-import org.openrs2.protocol.login.Js5OkCodec
-import org.openrs2.protocol.login.LoginDownstream
-import org.openrs2.protocol.login.LoginUpstream
-import org.openrs2.protocol.login.RequestWorldListCodec
-import org.openrs2.protocol.login.ServerFullCodec
-import org.openrs2.protocol.world.WorldListDownstream
-import org.openrs2.protocol.world.WorldListResponseCodec
+import org.openrs2.protocol.js5.downstream.Js5RemoteDownstream
+import org.openrs2.protocol.login.downstream.ClientOutOfDateCodec
+import org.openrs2.protocol.login.downstream.IpLimitCodec
+import org.openrs2.protocol.login.downstream.Js5OkCodec
+import org.openrs2.protocol.login.downstream.LoginDownstream
+import org.openrs2.protocol.login.downstream.ServerFullCodec
+import org.openrs2.protocol.login.upstream.InitCrossDomainConnectionCodec
+import org.openrs2.protocol.login.upstream.InitGameConnectionCodec
+import org.openrs2.protocol.login.upstream.InitJaggrabConnectionCodec
+import org.openrs2.protocol.login.upstream.InitJs5RemoteConnectionCodec
+import org.openrs2.protocol.login.upstream.LoginUpstream
+import org.openrs2.protocol.login.upstream.RequestWorldListCodec
+import org.openrs2.protocol.world.downstream.WorldListDownstream
+import org.openrs2.protocol.world.downstream.WorldListResponseCodec
 
 public object ProtocolModule : AbstractModule() {
     public override fun configure() {

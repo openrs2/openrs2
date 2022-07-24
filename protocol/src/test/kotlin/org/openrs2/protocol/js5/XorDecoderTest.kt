@@ -5,6 +5,7 @@ import io.netty.buffer.PooledByteBufAllocator
 import io.netty.channel.embedded.EmbeddedChannel
 import org.openrs2.buffer.copiedBuffer
 import org.openrs2.buffer.use
+import org.openrs2.protocol.js5.downstream.XorDecoder
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

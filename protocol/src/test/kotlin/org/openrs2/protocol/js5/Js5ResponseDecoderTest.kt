@@ -7,6 +7,8 @@ import io.netty.channel.embedded.EmbeddedChannel
 import io.netty.handler.codec.DecoderException
 import org.openrs2.buffer.use
 import org.openrs2.buffer.wrappedBuffer
+import org.openrs2.protocol.js5.downstream.Js5Response
+import org.openrs2.protocol.js5.downstream.Js5ResponseDecoder
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith

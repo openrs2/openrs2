@@ -4,6 +4,8 @@ import io.netty.buffer.Unpooled
 import io.netty.channel.embedded.EmbeddedChannel
 import io.netty.handler.codec.DecoderException
 import org.openrs2.buffer.wrappedBuffer
+import org.openrs2.protocol.js5.upstream.Js5Request
+import org.openrs2.protocol.js5.upstream.Js5RequestDecoder
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith

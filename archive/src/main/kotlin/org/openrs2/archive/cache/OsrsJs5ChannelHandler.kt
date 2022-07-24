@@ -6,13 +6,13 @@ import io.netty.channel.ChannelPipeline
 import org.openrs2.cache.MasterIndexFormat
 import org.openrs2.protocol.Rs2Decoder
 import org.openrs2.protocol.Rs2Encoder
-import org.openrs2.protocol.js5.Js5Request
-import org.openrs2.protocol.js5.Js5RequestEncoder
-import org.openrs2.protocol.js5.Js5Response
-import org.openrs2.protocol.js5.Js5ResponseDecoder
-import org.openrs2.protocol.js5.XorDecoder
-import org.openrs2.protocol.login.LoginRequest
-import org.openrs2.protocol.login.LoginResponse
+import org.openrs2.protocol.js5.downstream.Js5Response
+import org.openrs2.protocol.js5.downstream.Js5ResponseDecoder
+import org.openrs2.protocol.js5.downstream.XorDecoder
+import org.openrs2.protocol.js5.upstream.Js5Request
+import org.openrs2.protocol.js5.upstream.Js5RequestEncoder
+import org.openrs2.protocol.login.downstream.LoginResponse
+import org.openrs2.protocol.login.upstream.LoginRequest
 import kotlin.coroutines.Continuation
 
 public class OsrsJs5ChannelHandler(

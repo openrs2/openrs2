@@ -7,7 +7,7 @@ import io.netty.channel.SimpleChannelInboundHandler
 import io.netty.handler.timeout.IdleStateEvent
 import org.openrs2.buffer.use
 import org.openrs2.game.net.FileProvider
-import org.openrs2.protocol.jaggrab.JaggrabRequest
+import org.openrs2.protocol.jaggrab.upstream.JaggrabRequest
 import javax.inject.Inject
 import javax.inject.Singleton
 

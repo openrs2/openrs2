@@ -2,6 +2,8 @@ package org.openrs2.protocol.jaggrab
 
 import io.netty.channel.embedded.EmbeddedChannel
 import io.netty.handler.codec.DecoderException
+import org.openrs2.protocol.jaggrab.upstream.JaggrabRequest
+import org.openrs2.protocol.jaggrab.upstream.JaggrabRequestDecoder
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith

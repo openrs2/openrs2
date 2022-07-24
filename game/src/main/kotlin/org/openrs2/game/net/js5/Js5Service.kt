@@ -9,8 +9,8 @@ import org.openrs2.cache.Js5CompressionType
 import org.openrs2.cache.Js5MasterIndex
 import org.openrs2.cache.Store
 import org.openrs2.cache.VersionTrailer
-import org.openrs2.protocol.js5.Js5Request
-import org.openrs2.protocol.js5.Js5Response
+import org.openrs2.protocol.js5.downstream.Js5Response
+import org.openrs2.protocol.js5.upstream.Js5Request
 import org.openrs2.util.collect.UniqueQueue
 import java.io.FileNotFoundException
 import javax.inject.Inject
