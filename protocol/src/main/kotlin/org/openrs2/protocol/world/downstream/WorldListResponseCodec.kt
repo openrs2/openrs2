@@ -6,15 +6,13 @@ import org.openrs2.buffer.readVersionedString
 import org.openrs2.buffer.writeUnsignedShortSmart
 import org.openrs2.buffer.writeVersionedString
 import org.openrs2.crypto.StreamCipher
-import org.openrs2.protocol.PacketCodec
-import org.openrs2.protocol.PacketLength
+import org.openrs2.protocol.VariableShortPacketCodec
 import javax.inject.Singleton
 
 @Singleton
-public class WorldListResponseCodec : PacketCodec<WorldListResponse>(
+public class WorldListResponseCodec : VariableShortPacketCodec<WorldListResponse>(
     type = WorldListResponse::class.java,
-    opcode = 0,
-    length = PacketLength.VARIABLE_SHORT
+    opcode = 0
 ) {
     override fun decode(input: ByteBuf, cipher: StreamCipher): WorldListResponse {
         val version = input.readUnsignedByte().toInt()

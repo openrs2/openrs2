@@ -3,10 +3,9 @@ package org.openrs2.protocol
 import io.netty.buffer.ByteBuf
 import org.openrs2.crypto.StreamCipher
 
-internal object VariableShortOptimisedPacketCodec : PacketCodec<VariableShortOptimisedPacket>(
+internal object VariableShortOptimisedPacketCodec : VariableShortPacketCodec<VariableShortOptimisedPacket>(
     type = VariableShortOptimisedPacket::class.java,
-    opcode = 4,
-    length = PacketLength.VARIABLE_SHORT
+    opcode = 4
 ) {
     override fun decode(input: ByteBuf, cipher: StreamCipher): VariableShortOptimisedPacket {
         val value = ByteArray(input.readableBytes())

@@ -4,13 +4,11 @@ import io.netty.buffer.ByteBuf
 import org.openrs2.buffer.readString
 import org.openrs2.buffer.writeString
 import org.openrs2.crypto.StreamCipher
-import org.openrs2.protocol.PacketCodec
-import org.openrs2.protocol.PacketLength
+import org.openrs2.protocol.VariableBytePacketCodec
 
-public object InitJs5RemoteConnectionCodec : PacketCodec<InitJs5RemoteConnection>(
-    length = PacketLength.VARIABLE_BYTE,
-    opcode = 15,
-    type = InitJs5RemoteConnection::class.java
+public object InitJs5RemoteConnectionCodec : VariableBytePacketCodec<InitJs5RemoteConnection>(
+    type = InitJs5RemoteConnection::class.java,
+    opcode = 15
 ) {
     override fun decode(input: ByteBuf, cipher: StreamCipher): InitJs5RemoteConnection {
         val buildMajor = input.readInt()

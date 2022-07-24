@@ -24,8 +24,8 @@ class Rs2EncoderTest {
         val channel = EmbeddedChannel(
             Rs2Encoder(
                 Protocol(
-                    VariableBytePacketCodec,
-                    VariableShortPacketCodec
+                    TestVariableBytePacketCodec,
+                    TestVariableShortPacketCodec
                 )
             )
         )
@@ -71,7 +71,7 @@ class Rs2EncoderTest {
 
     @Test
     fun testEncryptedOpcode() {
-        val encoder = Rs2Encoder(Protocol(FixedPacketCodec))
+        val encoder = Rs2Encoder(Protocol(TestFixedPacketCodec))
         encoder.cipher = TestStreamCipher
 
         val channel = EmbeddedChannel(encoder)
@@ -86,7 +86,7 @@ class Rs2EncoderTest {
 
     @Test
     fun testSwitchProtocol() {
-        val encoder = Rs2Encoder(Protocol(FixedPacketCodec))
+        val encoder = Rs2Encoder(Protocol(TestFixedPacketCodec))
         val channel = EmbeddedChannel(encoder)
 
         channel.writeOutbound(FixedPacket(0x11223344))
@@ -115,9 +115,9 @@ class Rs2EncoderTest {
         val channel = EmbeddedChannel(
             Rs2Encoder(
                 Protocol(
-                    FixedPacketCodec,
-                    VariableBytePacketCodec,
-                    VariableShortPacketCodec,
+                    TestFixedPacketCodec,
+                    TestVariableBytePacketCodec,
+                    TestVariableShortPacketCodec,
                     VariableByteOptimisedPacketCodec,
                     VariableShortOptimisedPacketCodec,
                     TestEmptyPacketCodec

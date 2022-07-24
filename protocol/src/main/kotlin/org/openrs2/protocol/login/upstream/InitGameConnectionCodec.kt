@@ -2,14 +2,14 @@ package org.openrs2.protocol.login.upstream
 
 import io.netty.buffer.ByteBuf
 import org.openrs2.crypto.StreamCipher
-import org.openrs2.protocol.PacketCodec
+import org.openrs2.protocol.FixedPacketCodec
 import javax.inject.Singleton
 
 @Singleton
-public class InitGameConnectionCodec : PacketCodec<LoginRequest.InitGameConnection>(
+public class InitGameConnectionCodec : FixedPacketCodec<LoginRequest.InitGameConnection>(
+    type = LoginRequest.InitGameConnection::class.java,
     opcode = 14,
-    length = 1,
-    type = LoginRequest.InitGameConnection::class.java
+    length = 1
 ) {
     override fun decode(input: ByteBuf, cipher: StreamCipher): LoginRequest.InitGameConnection {
         val usernameHash = input.readUnsignedByte().toInt()

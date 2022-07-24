@@ -16,39 +16,14 @@ public class Rs2Encoder(public var protocol: Protocol) : MessageToByteEncoder<Pa
 
         out.writeByte(encoder.opcode + cipher.nextInt())
 
-        val len = encoder.length
         val lenIndex = out.writerIndex()
-        when (len) {
-            PacketLength.VARIABLE_BYTE -> out.writeZero(1)
-            PacketLength.VARIABLE_SHORT -> out.writeZero(2)
-        }
+        encoder.writeLengthPlaceholder(out)
 
         val payloadIndex = out.writerIndex()
         encoder.encode(msg, out, cipher)
 
         val written = out.writerIndex() - payloadIndex
-
-        when (len) {
-            PacketLength.VARIABLE_BYTE -> {
-                if (written >= 256) {
-                    throw EncoderException("Variable byte payload too long: $written bytes")
-                }
-
-                out.setByte(lenIndex, written)
-            }
-            PacketLength.VARIABLE_SHORT -> {
-                if (written >= 65536) {
-                    throw EncoderException("Variable short payload too long: $written bytes")
-                }
-
-                out.setShort(lenIndex, written)
-            }
-            else -> {
-                if (written != len) {
-                    throw EncoderException("Fixed payload length mismatch (expected $len bytes, got $written bytes)")
-                }
-            }
-        }
+        encoder.setLength(out, lenIndex, written)
     }
 
     override fun allocateBuffer(ctx: ChannelHandlerContext, msg: Packet, preferDirect: Boolean): ByteBuf {

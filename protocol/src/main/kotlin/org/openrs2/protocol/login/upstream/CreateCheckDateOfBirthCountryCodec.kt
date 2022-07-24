@@ -2,12 +2,12 @@ package org.openrs2.protocol.login.upstream
 
 import io.netty.buffer.ByteBuf
 import org.openrs2.crypto.StreamCipher
-import org.openrs2.protocol.PacketCodec
+import org.openrs2.protocol.FixedPacketCodec
 import java.time.LocalDate
 import javax.inject.Singleton
 
 @Singleton
-public class CreateCheckDateOfBirthCountryCodec : PacketCodec<LoginRequest.CreateCheckDateOfBirthCountry>(
+public class CreateCheckDateOfBirthCountryCodec : FixedPacketCodec<LoginRequest.CreateCheckDateOfBirthCountry>(
     type = LoginRequest.CreateCheckDateOfBirthCountry::class.java,
     opcode = 20,
     length = 6

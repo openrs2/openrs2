@@ -9,8 +9,7 @@ import org.openrs2.crypto.Rsa
 import org.openrs2.crypto.StreamCipher
 import org.openrs2.crypto.rsa
 import org.openrs2.crypto.secureRandom
-import org.openrs2.protocol.PacketCodec
-import org.openrs2.protocol.PacketLength
+import org.openrs2.protocol.VariableBytePacketCodec
 import org.openrs2.util.Base37
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -18,10 +17,9 @@ import javax.inject.Singleton
 @Singleton
 public class CheckWorldSuitabilityCodec @Inject constructor(
     private val key: RSAPrivateCrtKeyParameters
-) : PacketCodec<LoginRequest.CheckWorldSuitability>(
+) : VariableBytePacketCodec<LoginRequest.CheckWorldSuitability>(
     type = LoginRequest.CheckWorldSuitability::class.java,
-    opcode = 24,
-    length = PacketLength.VARIABLE_BYTE
+    opcode = 24
 ) {
     override fun decode(input: ByteBuf, cipher: StreamCipher): LoginRequest.CheckWorldSuitability {
         val build = input.readShort().toInt()

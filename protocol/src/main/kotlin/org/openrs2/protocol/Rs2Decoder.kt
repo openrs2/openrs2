@@ -32,28 +32,16 @@ public class Rs2Decoder(public var protocol: Protocol) : ByteToMessageDecoder() 
 
             val opcode = (input.readUnsignedByte().toInt() - cipher.nextInt()) and 0xFF
             decoder = protocol.getDecoder(opcode) ?: throw DecoderException("Unsupported opcode: $opcode")
-            length = decoder.length
 
             state = State.READ_LENGTH
         }
 
         if (state == State.READ_LENGTH) {
-            when (length) {
-                PacketLength.VARIABLE_BYTE -> {
-                    if (!input.isReadable) {
-                        return
-                    }
-
-                    length = input.readUnsignedByte().toInt()
-                }
-                PacketLength.VARIABLE_SHORT -> {
-                    if (input.readableBytes() < 2) {
-                        return
-                    }
-
-                    length = input.readUnsignedShort()
-                }
+            if (!decoder.isLengthReadable(input)) {
+                return
             }
+
+            length = decoder.readLength(input)
 
             state = State.READ_PAYLOAD
         }

@@ -3,7 +3,7 @@ package org.openrs2.protocol
 import io.netty.buffer.ByteBuf
 import org.openrs2.crypto.StreamCipher
 
-internal object FixedPacketCodec : PacketCodec<FixedPacket>(
+internal object TestFixedPacketCodec : FixedPacketCodec<FixedPacket>(
     type = FixedPacket::class.java,
     opcode = 0,
     length = 4

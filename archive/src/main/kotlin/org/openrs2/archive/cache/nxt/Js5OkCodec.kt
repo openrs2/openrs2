@@ -2,12 +2,12 @@ package org.openrs2.archive.cache.nxt
 
 import io.netty.buffer.ByteBuf
 import org.openrs2.crypto.StreamCipher
-import org.openrs2.protocol.PacketCodec
+import org.openrs2.protocol.FixedPacketCodec
 
-public object Js5OkCodec : PacketCodec<LoginResponse.Js5Ok>(
+public object Js5OkCodec : FixedPacketCodec<LoginResponse.Js5Ok>(
+    type = LoginResponse.Js5Ok::class.java,
     opcode = 0,
-    length = LoginResponse.Js5Ok.LOADING_REQUIREMENTS * 4,
-    type = LoginResponse.Js5Ok::class.java
+    length = LoginResponse.Js5Ok.LOADING_REQUIREMENTS * 4
 ) {
     override fun decode(input: ByteBuf, cipher: StreamCipher): LoginResponse.Js5Ok {
         val loadingRequirements = mutableListOf<Int>()
