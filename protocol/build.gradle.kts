@@ -9,6 +9,7 @@ dependencies {
     api(libs.netty.codec.core)
 
     implementation(projects.buffer)
+    implementation(projects.util)
 }
 
 publishing {
