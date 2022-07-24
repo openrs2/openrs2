@@ -13,6 +13,7 @@ import org.openrs2.protocol.login.downstream.Js5OkCodec
 import org.openrs2.protocol.login.downstream.LoginDownstream
 import org.openrs2.protocol.login.downstream.ServerFullCodec
 import org.openrs2.protocol.login.upstream.CheckWorldSuitabilityCodec
+import org.openrs2.protocol.login.upstream.CreateAccountCodec
 import org.openrs2.protocol.login.upstream.CreateCheckDateOfBirthCountryCodec
 import org.openrs2.protocol.login.upstream.CreateCheckNameCodec
 import org.openrs2.protocol.login.upstream.InitCrossDomainConnectionCodec
@@ -44,6 +45,7 @@ public object ProtocolModule : AbstractModule() {
             InitJaggrabConnectionCodec::class.java,
             CreateCheckDateOfBirthCountryCodec::class.java,
             CreateCheckNameCodec::class.java,
+            CreateAccountCodec::class.java,
             RequestWorldListCodec::class.java,
             CheckWorldSuitabilityCodec::class.java,
             InitCrossDomainConnectionCodec::class.java

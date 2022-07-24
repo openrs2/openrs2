@@ -1,11 +1,12 @@
 package org.openrs2.crypto
 
 import io.netty.buffer.ByteBuf
+import java.security.SecureRandom
 
 private const val GOLDEN_RATIO = 0x9E3779B9.toInt()
 private const val ROUNDS = 32
-private const val BLOCK_SIZE = 8
-private const val BLOCK_SIZE_MASK = BLOCK_SIZE - 1
+public const val XTEA_BLOCK_SIZE: Int = 8
+private const val BLOCK_SIZE_MASK = XTEA_BLOCK_SIZE - 1
 
 public data class XteaKey(
     public val k0: Int,
@@ -34,6 +35,12 @@ public data class XteaKey(
     public companion object {
         @JvmStatic
         public val ZERO: XteaKey = XteaKey(0, 0, 0, 0)
+
+        @JvmStatic
+        @JvmOverloads
+        public fun generate(r: SecureRandom = secureRandom): XteaKey {
+            return XteaKey(r.nextInt(), r.nextInt(), r.nextInt(), r.nextInt())
+        }
 
         @JvmStatic
         public fun fromIntArray(a: IntArray): XteaKey {
@@ -71,7 +78,7 @@ public fun ByteBuf.xteaEncrypt(index: Int, length: Int, key: XteaKey) {
     val k = key.toIntArray()
 
     val end = index + (length and BLOCK_SIZE_MASK.inv())
-    for (i in index until end step BLOCK_SIZE) {
+    for (i in index until end step XTEA_BLOCK_SIZE) {
         var sum = 0
         var v0 = getInt(i)
         var v1 = getInt(i + 4)
@@ -91,7 +98,7 @@ public fun ByteBuf.xteaDecrypt(index: Int, length: Int, key: XteaKey) {
     val k = key.toIntArray()
 
     val end = index + (length and BLOCK_SIZE_MASK.inv())
-    for (i in index until end step BLOCK_SIZE) {
+    for (i in index until end step XTEA_BLOCK_SIZE) {
         @Suppress("INTEGER_OVERFLOW")
         var sum = GOLDEN_RATIO * ROUNDS
         var v0 = getInt(i)
