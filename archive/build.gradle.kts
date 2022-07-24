@@ -9,6 +9,7 @@ application {
 }
 
 dependencies {
+    api(libs.bundles.guice)
     api(libs.clikt)
 
     implementation(projects.buffer)
