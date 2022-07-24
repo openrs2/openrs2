@@ -59,9 +59,9 @@ hash to load balance between login servers, but this has not been confirmed.
 | UnsignedShort | Canvas height                                |
 | UnsignedByte  | Anti-aliasing mode                           |
 | Byte\[24\]    | UID                                          |
-| String        | Settings cookie                              |
+| String        | Site settings cookie                         |
 | Int           | Affiliate ID                                 |
-| Int           | Preferences                                  |
+| Int           | Detail options                               |
 | Short         | Verify ID                                    |
 | Int\[29\]     | JS5 archive checksums                        |
 | UnsignedByte  | RSA-encrypted payload length (n)             |
