@@ -41,13 +41,13 @@ public object ArchiveModule : AbstractModule() {
             .toProvider(DatabaseProvider::class.java)
             .`in`(Scopes.SINGLETON)
 
+        Multibinder.newSetBinder(binder(), Module::class.java)
+            .addBinding().to(JavaTimeModule::class.java)
+
         val keyBinder = Multibinder.newSetBinder(binder(), KeyDownloader::class.java)
         keyBinder.addBinding().to(OpenOsrsKeyDownloader::class.java)
         keyBinder.addBinding().to(PolarKeyDownloader::class.java)
         keyBinder.addBinding().to(RuneLiteKeyDownloader::class.java)
-
-        val moduleBinder = Multibinder.newSetBinder(binder(), Module::class.java)
-        moduleBinder.addBinding().to(JavaTimeModule::class.java)
 
         val nameBinder = Multibinder.newSetBinder(binder(), NameDownloader::class.java)
         nameBinder.addBinding().to(RuneStarNameDownloader::class.java)
