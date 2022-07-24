@@ -354,7 +354,7 @@ world.
 
 ### 26 (`IP_BLOCKED`)
 
-**Message:** This comptuer's address has been blocked as it was used to break
+**Message:** This computer's address has been blocked as it was used to break
 our rules.
 
 ### 27 (Service unavailable)
