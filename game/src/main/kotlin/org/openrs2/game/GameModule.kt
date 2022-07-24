@@ -18,6 +18,7 @@ import org.openrs2.game.cluster.SingleWorldCluster
 import org.openrs2.game.net.NetworkService
 import org.openrs2.game.net.js5.Js5Service
 import org.openrs2.net.NetworkModule
+import org.openrs2.protocol.ProtocolModule
 
 public object GameModule : AbstractModule() {
     override fun configure() {
@@ -25,6 +26,7 @@ public object GameModule : AbstractModule() {
         install(CacheModule)
         install(ConfigModule)
         install(NetworkModule)
+        install(ProtocolModule)
 
         val binder = Multibinder.newSetBinder(binder(), Service::class.java)
         binder.addBinding().to(GameService::class.java)

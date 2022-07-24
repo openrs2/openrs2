@@ -7,6 +7,8 @@ import org.openrs2.game.net.login.LoginChannelHandler
 import org.openrs2.protocol.Protocol
 import org.openrs2.protocol.Rs2Decoder
 import org.openrs2.protocol.Rs2Encoder
+import org.openrs2.protocol.login.LoginDownstream
+import org.openrs2.protocol.login.LoginUpstream
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Provider
@@ -14,13 +16,17 @@ import javax.inject.Singleton
 
 @Singleton
 public class Rs2ChannelInitializer @Inject constructor(
-    private val handlerProvider: Provider<LoginChannelHandler>
+    private val handlerProvider: Provider<LoginChannelHandler>,
+    @LoginUpstream
+    private val loginUpStreamProtocol: Protocol,
+    @LoginDownstream
+    private val loginDownStreamProtocol: Protocol
 ) : ChannelInitializer<Channel>() {
     override fun initChannel(ch: Channel) {
         ch.pipeline().addLast(
             IdleStateHandler(true, TIMEOUT_SECS, TIMEOUT_SECS, TIMEOUT_SECS, TimeUnit.SECONDS),
-            Rs2Decoder(Protocol.LOGIN_UPSTREAM),
-            Rs2Encoder(Protocol.LOGIN_DOWNSTREAM),
+            Rs2Decoder(loginUpStreamProtocol),
+            Rs2Encoder(loginDownStreamProtocol),
             handlerProvider.get()
         )
     }

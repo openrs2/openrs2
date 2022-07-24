@@ -1,17 +1,12 @@
 package org.openrs2.protocol
 
-import org.openrs2.protocol.login.ClientOutOfDateCodec
-import org.openrs2.protocol.login.InitCrossDomainConnectionCodec
-import org.openrs2.protocol.login.InitGameConnectionCodec
-import org.openrs2.protocol.login.InitJaggrabConnectionCodec
-import org.openrs2.protocol.login.InitJs5RemoteConnectionCodec
-import org.openrs2.protocol.login.IpLimitCodec
-import org.openrs2.protocol.login.Js5OkCodec
-import org.openrs2.protocol.login.RequestWorldListCodec
-import org.openrs2.protocol.login.ServerFullCodec
-import org.openrs2.protocol.world.WorldListResponseCodec
+import javax.inject.Inject
+import javax.inject.Singleton
 
-public class Protocol(vararg codecs: PacketCodec<*>) {
+@Singleton
+public class Protocol @Inject constructor(codecs: Set<PacketCodec<*>>) {
+    public constructor(vararg codecs: PacketCodec<*>) : this(codecs.toSet())
+
     private val decoders = arrayOfNulls<PacketCodec<*>>(256)
     private val encoders = codecs.associateBy(PacketCodec<*>::type)
 
@@ -29,32 +24,5 @@ public class Protocol(vararg codecs: PacketCodec<*>) {
     @Suppress("UNCHECKED_CAST")
     public fun <T : Packet> getEncoder(type: Class<T>): PacketCodec<T>? {
         return encoders[type] as PacketCodec<T>?
-    }
-
-    public companion object {
-        public val LOGIN_UPSTREAM: Protocol = Protocol(
-            InitGameConnectionCodec,
-            InitJs5RemoteConnectionCodec,
-            InitJaggrabConnectionCodec,
-            RequestWorldListCodec,
-            InitCrossDomainConnectionCodec
-        )
-
-        public val LOGIN_DOWNSTREAM: Protocol = Protocol(
-            ClientOutOfDateCodec,
-            ServerFullCodec,
-            IpLimitCodec
-        )
-
-        public val JS5REMOTE_DOWNSTREAM: Protocol = Protocol(
-            Js5OkCodec,
-            ClientOutOfDateCodec,
-            ServerFullCodec,
-            IpLimitCodec
-        )
-
-        public val WORLD_LIST_DOWNSTREAM: Protocol = Protocol(
-            WorldListResponseCodec
-        )
     }
 }

@@ -8,19 +8,14 @@ import org.openrs2.buffer.writeVersionedString
 import org.openrs2.crypto.StreamCipher
 import org.openrs2.protocol.PacketCodec
 import org.openrs2.protocol.PacketLength
+import javax.inject.Singleton
 
-public object WorldListResponseCodec : PacketCodec<WorldListResponse>(
+@Singleton
+public class WorldListResponseCodec : PacketCodec<WorldListResponse>(
     type = WorldListResponse::class.java,
     opcode = 0,
     length = PacketLength.VARIABLE_SHORT
 ) {
-    private const val VERSION = 1
-
-    private const val FLAG_MEMBERS_ONLY = 0x1
-    private const val FLAG_QUICK_CHAT = 0x2
-    private const val FLAG_PVP = 0x4
-    private const val FLAG_LOOT_SHARE = 0x8
-
     override fun decode(input: ByteBuf, cipher: StreamCipher): WorldListResponse {
         val version = input.readUnsignedByte().toInt()
         require(version == VERSION) {
@@ -133,5 +128,14 @@ public object WorldListResponseCodec : PacketCodec<WorldListResponse>(
             output.writeUnsignedShortSmart(offset)
             output.writeShort(count)
         }
+    }
+
+    private companion object {
+        private const val VERSION = 1
+
+        private const val FLAG_MEMBERS_ONLY = 0x1
+        private const val FLAG_QUICK_CHAT = 0x2
+        private const val FLAG_PVP = 0x4
+        private const val FLAG_LOOT_SHARE = 0x8
     }
 }

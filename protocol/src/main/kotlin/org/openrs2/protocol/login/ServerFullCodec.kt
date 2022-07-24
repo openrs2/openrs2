@@ -1,8 +1,10 @@
 package org.openrs2.protocol.login
 
 import org.openrs2.protocol.EmptyPacketCodec
+import javax.inject.Singleton
 
-public object ServerFullCodec : EmptyPacketCodec<LoginResponse.ServerFull>(
+@Singleton
+public class ServerFullCodec : EmptyPacketCodec<LoginResponse.ServerFull>(
     packet = LoginResponse.ServerFull,
     opcode = 7
 )

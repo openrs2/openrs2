@@ -6,13 +6,16 @@ import io.netty.handler.timeout.ReadTimeoutHandler
 import org.openrs2.protocol.Protocol
 import org.openrs2.protocol.Rs2Decoder
 import org.openrs2.protocol.Rs2Encoder
+import org.openrs2.protocol.login.ClientOutOfDateCodec
+import org.openrs2.protocol.login.InitJs5RemoteConnectionCodec
+import org.openrs2.protocol.login.Js5OkCodec
 
 public class OsrsJs5ChannelInitializer(private val handler: OsrsJs5ChannelHandler) : ChannelInitializer<Channel>() {
     override fun initChannel(ch: Channel) {
         ch.pipeline().addLast(
             ReadTimeoutHandler(30),
-            Rs2Encoder(Protocol.LOGIN_UPSTREAM),
-            Rs2Decoder(Protocol.JS5REMOTE_DOWNSTREAM)
+            Rs2Encoder(Protocol(InitJs5RemoteConnectionCodec())),
+            Rs2Decoder(Protocol(Js5OkCodec(), ClientOutOfDateCodec()))
         )
         ch.pipeline().addLast("handler", handler)
     }

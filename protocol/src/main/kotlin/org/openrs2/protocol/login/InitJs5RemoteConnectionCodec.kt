@@ -3,8 +3,10 @@ package org.openrs2.protocol.login
 import io.netty.buffer.ByteBuf
 import org.openrs2.crypto.StreamCipher
 import org.openrs2.protocol.PacketCodec
+import javax.inject.Singleton
 
-public object InitJs5RemoteConnectionCodec : PacketCodec<LoginRequest.InitJs5RemoteConnection>(
+@Singleton
+public class InitJs5RemoteConnectionCodec : PacketCodec<LoginRequest.InitJs5RemoteConnection>(
     type = LoginRequest.InitJs5RemoteConnection::class.java,
     opcode = 15,
     length = 4

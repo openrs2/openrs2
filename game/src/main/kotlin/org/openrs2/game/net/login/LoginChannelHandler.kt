@@ -20,11 +20,13 @@ import org.openrs2.protocol.Protocol
 import org.openrs2.protocol.Rs2Decoder
 import org.openrs2.protocol.Rs2Encoder
 import org.openrs2.protocol.jaggrab.JaggrabRequestDecoder
+import org.openrs2.protocol.js5.Js5RemoteDownstream
 import org.openrs2.protocol.js5.Js5RequestDecoder
 import org.openrs2.protocol.js5.Js5ResponseEncoder
 import org.openrs2.protocol.js5.XorDecoder
 import org.openrs2.protocol.login.LoginRequest
 import org.openrs2.protocol.login.LoginResponse
+import org.openrs2.protocol.world.WorldListDownstream
 import org.openrs2.protocol.world.WorldListResponse
 import javax.inject.Inject
 import javax.inject.Provider
@@ -32,7 +34,11 @@ import javax.inject.Provider
 public class LoginChannelHandler @Inject constructor(
     private val cluster: Cluster,
     private val js5HandlerProvider: Provider<Js5ChannelHandler>,
-    private val jaggrabHandler: JaggrabChannelHandler
+    private val jaggrabHandler: JaggrabChannelHandler,
+    @Js5RemoteDownstream
+    private val js5RemoteDownstreamProtocol: Protocol,
+    @WorldListDownstream
+    private val worldListDownstreamProtocol: Protocol
 ) : SimpleChannelInboundHandler<LoginRequest>(LoginRequest::class.java) {
     override fun channelActive(ctx: ChannelHandlerContext) {
         ctx.read()
@@ -50,7 +56,7 @@ public class LoginChannelHandler @Inject constructor(
 
     private fun handleInitJs5RemoteConnection(ctx: ChannelHandlerContext, msg: LoginRequest.InitJs5RemoteConnection) {
         val encoder = ctx.pipeline().get(Rs2Encoder::class.java)
-        encoder.protocol = Protocol.JS5REMOTE_DOWNSTREAM
+        encoder.protocol = js5RemoteDownstreamProtocol
 
         if (msg.build != BUILD) {
             ctx.write(LoginResponse.ClientOutOfDate).addListener(ChannelFutureListener.CLOSE)
@@ -105,7 +111,7 @@ public class LoginChannelHandler @Inject constructor(
         }
 
         val encoder = ctx.pipeline().get(Rs2Encoder::class.java)
-        encoder.protocol = Protocol.WORLD_LIST_DOWNSTREAM
+        encoder.protocol = worldListDownstreamProtocol
 
         ctx.write(WorldListResponse(worldList, players)).addListener(ChannelFutureListener.CLOSE)
     }

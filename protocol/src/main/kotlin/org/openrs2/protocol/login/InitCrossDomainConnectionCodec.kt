@@ -1,8 +1,10 @@
 package org.openrs2.protocol.login
 
 import org.openrs2.protocol.EmptyPacketCodec
+import javax.inject.Singleton
 
-public object InitCrossDomainConnectionCodec : EmptyPacketCodec<LoginRequest.InitCrossDomainConnection>(
+@Singleton
+public class InitCrossDomainConnectionCodec : EmptyPacketCodec<LoginRequest.InitCrossDomainConnection>(
     opcode = 'G'.code,
     packet = LoginRequest.InitCrossDomainConnection
 )

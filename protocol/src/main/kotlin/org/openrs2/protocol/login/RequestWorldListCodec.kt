@@ -3,8 +3,10 @@ package org.openrs2.protocol.login
 import io.netty.buffer.ByteBuf
 import org.openrs2.crypto.StreamCipher
 import org.openrs2.protocol.PacketCodec
+import javax.inject.Singleton
 
-public object RequestWorldListCodec : PacketCodec<LoginRequest.RequestWorldList>(
+@Singleton
+public class RequestWorldListCodec : PacketCodec<LoginRequest.RequestWorldList>(
     type = LoginRequest.RequestWorldList::class.java,
     opcode = 23,
     length = 4
