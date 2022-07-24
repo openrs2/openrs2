@@ -11,7 +11,7 @@
 |     18 | Variable short | Unknown                     | Reconnect (existing session)       |
 |     20 |              6 | Unknown                     | Check date of birth and country    |
 |     21 |              8 | `CREATE_CHECK_NAME`         | Check username availability        |
-|     22 |  Variable byte | `CREATE_ACCOUNT`            | Create account                     |
+|     22 | Variable short | `CREATE_ACCOUNT`            | Create account                     |
 |     23 |              4 | `REQUEST_WORLDLIST`         | Request world list                 |
 |     24 |  Variable byte | `CHECK_WORLD_SUITABILITY`   | Request most suitable world number |
 
