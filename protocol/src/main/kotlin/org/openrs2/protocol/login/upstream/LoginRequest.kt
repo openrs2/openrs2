@@ -11,6 +11,7 @@ public sealed class LoginRequest : Packet {
         public val dateOfBirth: LocalDate,
         public val country: Int
     ) : LoginRequest()
+    public data class CreateCheckName(public val username: String) : LoginRequest()
     public data class RequestWorldList(public val checksum: Int) : LoginRequest()
     public data class CheckWorldSuitability(
         public val build: Int,
