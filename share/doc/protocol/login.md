@@ -330,7 +330,7 @@ return to the main menu and exit fullscreen or use a members' account.
 | UnsignedByte | Hop time                |
 
 **Message:** You have only just left another world. Your profile will be
-transferred in <n> seconds.
+transferred in \<n\> seconds.
 
 The number of remaining seconds is calculated using the following formula:
 (hopTime * 60 + 180) / 50

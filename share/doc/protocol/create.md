@@ -76,7 +76,7 @@ try again.
 | Long\[n\]    | Base37-encoded suggested names                              |
 
 **Message (if n is non-zero):** That username is unavailable. Possible
-alternatives: <comma-separated list of suggested names>.
+alternatives: \<comma-separated list of suggested names\>.
 
 **Message (if n is zero):** That username is unavailable. We could not suggest a
 suitable alternative account name. Please choose again.
