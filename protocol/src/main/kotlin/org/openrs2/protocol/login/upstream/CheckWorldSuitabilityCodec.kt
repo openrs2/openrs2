@@ -7,6 +7,7 @@ import org.openrs2.buffer.use
 import org.openrs2.buffer.writeString
 import org.openrs2.crypto.Rsa
 import org.openrs2.crypto.StreamCipher
+import org.openrs2.crypto.publicKey
 import org.openrs2.crypto.rsa
 import org.openrs2.crypto.secureRandom
 import org.openrs2.protocol.VariableBytePacketCodec
@@ -56,7 +57,7 @@ public class CheckWorldSuitabilityCodec @Inject constructor(
             plaintext.writeString(input.password)
             plaintext.writeInt(secureRandom.nextInt())
 
-            plaintext.rsa(key).use { ciphertext ->
+            plaintext.rsa(key.publicKey).use { ciphertext ->
                 output.writeByte(ciphertext.readableBytes())
                 output.writeBytes(ciphertext)
             }
