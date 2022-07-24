@@ -2,7 +2,7 @@
 
 ## Downstream
 
-| Opcode | Length         | Jagex name | Description |
+| Opcode |         Length | Jagex name | Description |
 |-------:|---------------:|------------|-------------|
 |      0 | Variable short | Unknown    | World list  |
 

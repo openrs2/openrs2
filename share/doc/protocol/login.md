@@ -2,7 +2,7 @@
 
 ## Upstream
 
-| Opcode | Length         | Jagex name                  | Description                        |
+| Opcode |         Length | Jagex name                  | Description                        |
 |-------:|---------------:|-----------------------------|------------------------------------|
 |     14 |              1 | `INIT_GAME_CONNECTION`      | Set username hash                  |
 |     15 |              4 | `INIT_JS5REMOTE_CONNECTION` | Switch to JS5 mode                 |
@@ -134,7 +134,7 @@ The structure of the RSA-decrypted payload is described below:
 | UnsignedShort | Country ID                     |
 | Int           | XTEA key (bits 96-127)         |
 
-| Flag  | Description                          |
+|  Flag | Description                          |
 |------:|--------------------------------------|
 | `0x1` | Receive RuneScape newsletters        |
 | `0x2` | Receive Other newsletters            |
@@ -369,10 +369,10 @@ Service unavailable.
 
 | Reason | Message                                                                               |
 |-------:|---------------------------------------------------------------------------------------|
-| 0      | You must have a Combat Level of at least 20 (without Summoning) to enter a PvP world. |
-| 1      | You are currently carrying lent items and cannot enter a PvP world.                   |
-| 2      | You must be standing in the Wilderness or Edgeville to enter this Bounty world.       |
-| Other  | Unexpected server response. Please try using a different world.                       |
+|      0 | You must have a Combat Level of at least 20 (without Summoning) to enter a PvP world. |
+|      1 | You are currently carrying lent items and cannot enter a PvP world.                   |
+|      2 | You must be standing in the Wilderness or Edgeville to enter this Bounty world.       |
+|  Other | Unexpected server response. Please try using a different world.                       |
 
 ### 30 (Client is members-only)
 
