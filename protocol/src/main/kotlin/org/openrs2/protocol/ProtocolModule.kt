@@ -13,6 +13,7 @@ import org.openrs2.protocol.login.downstream.Js5OkCodec
 import org.openrs2.protocol.login.downstream.LoginDownstream
 import org.openrs2.protocol.login.downstream.ServerFullCodec
 import org.openrs2.protocol.login.upstream.CheckWorldSuitabilityCodec
+import org.openrs2.protocol.login.upstream.CreateCheckDateOfBirthCountryCodec
 import org.openrs2.protocol.login.upstream.InitCrossDomainConnectionCodec
 import org.openrs2.protocol.login.upstream.InitGameConnectionCodec
 import org.openrs2.protocol.login.upstream.InitJaggrabConnectionCodec
@@ -32,6 +33,7 @@ public object ProtocolModule : AbstractModule() {
             InitGameConnectionCodec::class.java,
             InitJs5RemoteConnectionCodec::class.java,
             InitJaggrabConnectionCodec::class.java,
+            CreateCheckDateOfBirthCountryCodec::class.java,
             RequestWorldListCodec::class.java,
             CheckWorldSuitabilityCodec::class.java,
             InitCrossDomainConnectionCodec::class.java
