@@ -20,11 +20,11 @@ import org.openrs2.protocol.Protocol
 import org.openrs2.protocol.Rs2Decoder
 import org.openrs2.protocol.Rs2Encoder
 import org.openrs2.protocol.jaggrab.upstream.JaggrabRequestDecoder
+import org.openrs2.protocol.js5.downstream.Js5LoginResponse
 import org.openrs2.protocol.js5.downstream.Js5RemoteDownstream
 import org.openrs2.protocol.js5.downstream.Js5ResponseEncoder
 import org.openrs2.protocol.js5.downstream.XorDecoder
 import org.openrs2.protocol.js5.upstream.Js5RequestDecoder
-import org.openrs2.protocol.login.downstream.LoginResponse
 import org.openrs2.protocol.login.upstream.LoginRequest
 import org.openrs2.protocol.world.downstream.WorldListDownstream
 import org.openrs2.protocol.world.downstream.WorldListResponse
@@ -59,7 +59,7 @@ public class LoginChannelHandler @Inject constructor(
         encoder.protocol = js5RemoteDownstreamProtocol
 
         if (msg.build != BUILD) {
-            ctx.write(LoginResponse.ClientOutOfDate).addListener(ChannelFutureListener.CLOSE)
+            ctx.write(Js5LoginResponse.ClientOutOfDate).addListener(ChannelFutureListener.CLOSE)
             return
         }
 
@@ -71,7 +71,7 @@ public class LoginChannelHandler @Inject constructor(
         )
         ctx.pipeline().remove(Rs2Decoder::class.java)
 
-        ctx.write(LoginResponse.Js5Ok).addListener { future ->
+        ctx.write(Js5LoginResponse.Ok).addListener { future ->
             if (future.isSuccess) {
                 ctx.pipeline().remove(encoder)
                 ctx.pipeline().remove(this)

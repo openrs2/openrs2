@@ -6,10 +6,13 @@ import com.google.inject.TypeLiteral
 import com.google.inject.multibindings.Multibinder
 import org.openrs2.buffer.BufferModule
 import org.openrs2.crypto.CryptoModule
+import org.openrs2.protocol.js5.downstream.Js5ClientOutOfDateCodec
+import org.openrs2.protocol.js5.downstream.Js5IpLimitCodec
+import org.openrs2.protocol.js5.downstream.Js5OkCodec
 import org.openrs2.protocol.js5.downstream.Js5RemoteDownstream
+import org.openrs2.protocol.js5.downstream.Js5ServerFullCodec
 import org.openrs2.protocol.login.downstream.ClientOutOfDateCodec
 import org.openrs2.protocol.login.downstream.IpLimitCodec
-import org.openrs2.protocol.login.downstream.Js5OkCodec
 import org.openrs2.protocol.login.downstream.LoginDownstream
 import org.openrs2.protocol.login.downstream.ServerFullCodec
 import org.openrs2.protocol.login.upstream.CheckWorldSuitabilityCodec
@@ -33,9 +36,9 @@ public object ProtocolModule : AbstractModule() {
         bindProtocol(
             Js5RemoteDownstream::class.java,
             Js5OkCodec::class.java,
-            ClientOutOfDateCodec::class.java,
-            ServerFullCodec::class.java,
-            IpLimitCodec::class.java
+            Js5ClientOutOfDateCodec::class.java,
+            Js5ServerFullCodec::class.java,
+            Js5IpLimitCodec::class.java
         )
 
         bindProtocol(

@@ -6,12 +6,12 @@ import io.netty.channel.ChannelPipeline
 import org.openrs2.cache.MasterIndexFormat
 import org.openrs2.protocol.Rs2Decoder
 import org.openrs2.protocol.Rs2Encoder
+import org.openrs2.protocol.js5.downstream.Js5LoginResponse
 import org.openrs2.protocol.js5.downstream.Js5Response
 import org.openrs2.protocol.js5.downstream.Js5ResponseDecoder
 import org.openrs2.protocol.js5.downstream.XorDecoder
 import org.openrs2.protocol.js5.upstream.Js5Request
 import org.openrs2.protocol.js5.upstream.Js5RequestEncoder
-import org.openrs2.protocol.login.downstream.LoginResponse
 import org.openrs2.protocol.login.upstream.LoginRequest
 import kotlin.coroutines.Continuation
 
@@ -66,9 +66,9 @@ public class OsrsJs5ChannelHandler(
 
     override fun channelRead0(ctx: ChannelHandlerContext, msg: Any) {
         when (msg) {
-            is LoginResponse.Js5Ok -> handleOk(ctx)
-            is LoginResponse.ClientOutOfDate -> handleClientOutOfDate(ctx)
-            is LoginResponse -> throw Exception("Invalid response: $msg")
+            is Js5LoginResponse.Ok -> handleOk(ctx)
+            is Js5LoginResponse.ClientOutOfDate -> handleClientOutOfDate(ctx)
+            is Js5LoginResponse -> throw Exception("Invalid response: $msg")
             is Js5Response -> handleResponse(ctx, msg.prefetch, msg.archive, msg.group, msg.data)
             else -> throw Exception("Unknown message type: ${msg.javaClass.name}")
         }
