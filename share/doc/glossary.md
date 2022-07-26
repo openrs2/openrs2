@@ -60,40 +60,40 @@
 
 ## Loc layers
 
-| ID | Jagex name  |
-|---:|-------------|
-|  0 | Wall        |
-|  1 | WallDecor   |
-|  2 | Scenery     |
-|  3 | GroundDecor |
+|  ID | Jagex name  |
+|----:|-------------|
+|   0 | Wall        |
+|   1 | WallDecor   |
+|   2 | Scenery     |
+|   3 | GroundDecor |
 
 ## Loc shapes
 
-| ID | Jagex name                    |
-|---:|-------------------------------|
-|  0 | `WALL_STRAIGHT`               |
-|  1 | `WALL_DIAGONALCORNER`         |
-|  2 | `WALL_L`                      |
-|  3 | `WALL_SQUARECORNER`           |
-|  4 | `WALLDECOR_STRAIGHT_NOOFFSET` |
-|  5 | `WALLDECOR_STRAIGHT_OFFSET`   |
-|  6 | `WALLDECOR_DIAGONAL_OFFSET`   |
-|  7 | `WALLDECOR_DIAGONAL_NOOFFSET` |
-|  8 | `WALLDECOR_DIAGONAL_BOTH`     |
-|  9 | `WALL_DIAGONAL`               |
-| 10 | `CENTREPIECE_STRAIGHT`        |
-| 11 | `CENTREPIECE_DIAGONAL`        |
-| 12 | `ROOF_STRAIGHT`               |
-| 13 | `ROOF_DIAGONAL_WITH_ROOFEDGE` |
-| 14 | `ROOF_DIAGONAL`               |
-| 15 | `ROOF_L_CONCAVE`              |
-| 16 | `ROOF_L_CONVEX`               |
-| 17 | `ROOF_FLAT`                   |
-| 18 | `ROOFEDGE_STRAIGHT`           |
-| 19 | `ROOFEDGE_DIAGONALCORNER`     |
-| 20 | `ROOFEDGE_L`                  |
-| 21 | `ROOFEDGE_SQUARECORNER`       |
-| 22 | `GROUNDDECOR`                 |
+|  ID | Jagex name                    |
+|----:|-------------------------------|
+|   0 | `WALL_STRAIGHT`               |
+|   1 | `WALL_DIAGONALCORNER`         |
+|   2 | `WALL_L`                      |
+|   3 | `WALL_SQUARECORNER`           |
+|   4 | `WALLDECOR_STRAIGHT_NOOFFSET` |
+|   5 | `WALLDECOR_STRAIGHT_OFFSET`   |
+|   6 | `WALLDECOR_DIAGONAL_OFFSET`   |
+|   7 | `WALLDECOR_DIAGONAL_NOOFFSET` |
+|   8 | `WALLDECOR_DIAGONAL_BOTH`     |
+|   9 | `WALL_DIAGONAL`               |
+|  10 | `CENTREPIECE_STRAIGHT`        |
+|  11 | `CENTREPIECE_DIAGONAL`        |
+|  12 | `ROOF_STRAIGHT`               |
+|  13 | `ROOF_DIAGONAL_WITH_ROOFEDGE` |
+|  14 | `ROOF_DIAGONAL`               |
+|  15 | `ROOF_L_CONCAVE`              |
+|  16 | `ROOF_L_CONVEX`               |
+|  17 | `ROOF_FLAT`                   |
+|  18 | `ROOFEDGE_STRAIGHT`           |
+|  19 | `ROOFEDGE_DIAGONALCORNER`     |
+|  20 | `ROOFEDGE_L`                  |
+|  21 | `ROOFEDGE_SQUARECORNER`       |
+|  22 | `GROUNDDECOR`                 |
 
 [hs16]: https://en.wikipedia.org/wiki/Endianness#Honeywell_Series_16
 [pdp11]: https://en.wikipedia.org/wiki/Endianness#PDP-endian
