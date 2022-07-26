@@ -59,6 +59,10 @@ public class Rs2Decoder(public var protocol: Protocol) : ByteToMessageDecoder() 
                 logger.warn { "Skipping unimplemented packet: ${decoder.javaClass}" }
             }
 
+            if (payload.isReadable) {
+                throw DecoderException("Decoder didn't read entire payload: ${decoder.javaClass}")
+            }
+
             state = State.READ_OPCODE
         }
     }

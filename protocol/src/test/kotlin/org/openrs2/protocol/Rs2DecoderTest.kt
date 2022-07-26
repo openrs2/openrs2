@@ -69,6 +69,16 @@ class Rs2DecoderTest {
         }
     }
 
+    @Test
+    fun testTrailingBytes() {
+        val decoder = Rs2Decoder(Protocol(LengthMismatchPacketCodec))
+        val channel = EmbeddedChannel(decoder)
+
+        assertFailsWith<DecoderException> {
+            channel.writeInbound(wrappedBuffer(0, 0x11, 0x22, 0x33, 0x44, 0x55))
+        }
+    }
+
     private fun testDecode(buf: ByteArray, expected: Packet) {
         val channel = EmbeddedChannel(
             Rs2Decoder(

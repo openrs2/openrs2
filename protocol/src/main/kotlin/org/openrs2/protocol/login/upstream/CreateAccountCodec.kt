@@ -59,6 +59,9 @@ public class CreateAccountCodec @Inject constructor(
 
             val email = input.readString()
 
+            // padding
+            input.skipBytes(minOf(input.readableBytes(), XTEA_BLOCK_SIZE - 1))
+
             return LoginRequest.CreateAccount(
                 build,
                 gameNewsletters,
