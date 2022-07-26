@@ -11,10 +11,37 @@ import org.openrs2.protocol.js5.downstream.Js5IpLimitCodec
 import org.openrs2.protocol.js5.downstream.Js5OkCodec
 import org.openrs2.protocol.js5.downstream.Js5RemoteDownstream
 import org.openrs2.protocol.js5.downstream.Js5ServerFullCodec
+import org.openrs2.protocol.login.downstream.BadSessionIdCodec
+import org.openrs2.protocol.login.downstream.BannedCodec
+import org.openrs2.protocol.login.downstream.ClientMembersOnlyCodec
 import org.openrs2.protocol.login.downstream.ClientOutOfDateCodec
+import org.openrs2.protocol.login.downstream.DisallowedByScriptCodec
+import org.openrs2.protocol.login.downstream.DuplicateCodec
+import org.openrs2.protocol.login.downstream.ExchangeSessionKeyCodec
+import org.openrs2.protocol.login.downstream.ForcePasswordChangeCodec
+import org.openrs2.protocol.login.downstream.FullscreenMembersOnlyCodec
+import org.openrs2.protocol.login.downstream.HopBlockedCodec
+import org.openrs2.protocol.login.downstream.InvalidLoginPacketCodec
+import org.openrs2.protocol.login.downstream.InvalidLoginServerCodec
+import org.openrs2.protocol.login.downstream.InvalidSaveCodec
+import org.openrs2.protocol.login.downstream.InvalidUsernameOrPasswordCodec
+import org.openrs2.protocol.login.downstream.IpBlockedCodec
 import org.openrs2.protocol.login.downstream.IpLimitCodec
+import org.openrs2.protocol.login.downstream.LockedCodec
 import org.openrs2.protocol.login.downstream.LoginDownstream
+import org.openrs2.protocol.login.downstream.LoginServerLoadErrorCodec
+import org.openrs2.protocol.login.downstream.LoginServerOfflineCodec
+import org.openrs2.protocol.login.downstream.MapMembersOnlyCodec
+import org.openrs2.protocol.login.downstream.NeedMembersAccountCodec
+import org.openrs2.protocol.login.downstream.NoReplyFromLoginServerCodec
+import org.openrs2.protocol.login.downstream.ReconnectOkCodec
 import org.openrs2.protocol.login.downstream.ServerFullCodec
+import org.openrs2.protocol.login.downstream.ServiceUnavailableCodec
+import org.openrs2.protocol.login.downstream.ShowVideoAdCodec
+import org.openrs2.protocol.login.downstream.SwitchWorldCodec
+import org.openrs2.protocol.login.downstream.TooManyAttemptsCodec
+import org.openrs2.protocol.login.downstream.UnknownReplyFromLoginServerCodec
+import org.openrs2.protocol.login.downstream.UpdateInProgressCodec
 import org.openrs2.protocol.login.upstream.CheckWorldSuitabilityCodec
 import org.openrs2.protocol.login.upstream.CreateAccountCodec
 import org.openrs2.protocol.login.upstream.CreateCheckDateOfBirthCountryCodec
@@ -56,9 +83,36 @@ public object ProtocolModule : AbstractModule() {
 
         bindProtocol(
             LoginDownstream::class.java,
+            ExchangeSessionKeyCodec::class.java,
+            ShowVideoAdCodec::class.java,
+            InvalidUsernameOrPasswordCodec::class.java,
+            BannedCodec::class.java,
+            DuplicateCodec::class.java,
             ClientOutOfDateCodec::class.java,
             ServerFullCodec::class.java,
-            IpLimitCodec::class.java
+            LoginServerOfflineCodec::class.java,
+            IpLimitCodec::class.java,
+            BadSessionIdCodec::class.java,
+            ForcePasswordChangeCodec::class.java,
+            NeedMembersAccountCodec::class.java,
+            InvalidSaveCodec::class.java,
+            UpdateInProgressCodec::class.java,
+            ReconnectOkCodec::class.java,
+            TooManyAttemptsCodec::class.java,
+            MapMembersOnlyCodec::class.java,
+            LockedCodec::class.java,
+            FullscreenMembersOnlyCodec::class.java,
+            InvalidLoginServerCodec::class.java,
+            HopBlockedCodec::class.java,
+            InvalidLoginPacketCodec::class.java,
+            NoReplyFromLoginServerCodec::class.java,
+            LoginServerLoadErrorCodec::class.java,
+            UnknownReplyFromLoginServerCodec::class.java,
+            IpBlockedCodec::class.java,
+            ServiceUnavailableCodec::class.java,
+            DisallowedByScriptCodec::class.java,
+            ClientMembersOnlyCodec::class.java,
+            SwitchWorldCodec::class.java
         )
 
         bindProtocol(
