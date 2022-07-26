@@ -1,14 +1,15 @@
 package org.openrs2.protocol.login.upstream
 
 import org.openrs2.protocol.Packet
-import java.time.LocalDate
 
 public sealed class LoginRequest : Packet {
     public data class InitGameConnection(public val usernameHash: Int) : LoginRequest()
     public data class InitJs5RemoteConnection(public val build: Int) : LoginRequest()
     public object InitJaggrabConnection : LoginRequest()
     public data class CreateCheckDateOfBirthCountry(
-        public val dateOfBirth: LocalDate,
+        public val year: Int,
+        public val month: Int,
+        public val day: Int,
         public val country: Int
     ) : LoginRequest()
     public data class CreateCheckName(public val username: String) : LoginRequest()
@@ -20,7 +21,9 @@ public sealed class LoginRequest : Packet {
         public val username: String,
         public val password: String,
         public val affiliate: Int,
-        public val dateOfBirth: LocalDate,
+        public val year: Int,
+        public val month: Int,
+        public val day: Int,
         public val country: Int,
         public val email: String
     ) : LoginRequest()

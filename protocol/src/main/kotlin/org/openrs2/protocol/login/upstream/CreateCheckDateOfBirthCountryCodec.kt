@@ -3,7 +3,6 @@ package org.openrs2.protocol.login.upstream
 import io.netty.buffer.ByteBuf
 import org.openrs2.crypto.StreamCipher
 import org.openrs2.protocol.FixedPacketCodec
-import java.time.LocalDate
 import javax.inject.Singleton
 
 @Singleton
@@ -14,17 +13,17 @@ public class CreateCheckDateOfBirthCountryCodec : FixedPacketCodec<LoginRequest.
 ) {
     override fun decode(input: ByteBuf, cipher: StreamCipher): LoginRequest.CreateCheckDateOfBirthCountry {
         val day = input.readUnsignedByte().toInt()
-        val month = input.readUnsignedByte().toInt() + 1
+        val month = input.readUnsignedByte().toInt()
         val year = input.readUnsignedShort()
         val country = input.readUnsignedShort()
 
-        return LoginRequest.CreateCheckDateOfBirthCountry(LocalDate.of(year, month, day), country)
+        return LoginRequest.CreateCheckDateOfBirthCountry(year, month, day, country)
     }
 
     override fun encode(input: LoginRequest.CreateCheckDateOfBirthCountry, output: ByteBuf, cipher: StreamCipher) {
-        output.writeByte(input.dateOfBirth.dayOfMonth)
-        output.writeByte(input.dateOfBirth.monthValue - 1)
-        output.writeShort(input.dateOfBirth.year)
+        output.writeByte(input.day)
+        output.writeByte(input.month)
+        output.writeShort(input.year)
         output.writeShort(input.country)
     }
 }

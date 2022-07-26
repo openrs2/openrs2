@@ -16,7 +16,6 @@ import org.openrs2.crypto.xteaDecrypt
 import org.openrs2.crypto.xteaEncrypt
 import org.openrs2.protocol.VariableShortPacketCodec
 import org.openrs2.util.Base37
-import java.time.LocalDate
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -68,7 +67,9 @@ public class CreateAccountCodec @Inject constructor(
                 username,
                 password,
                 affiliate,
-                dateOfBirth = LocalDate.of(year, month + 1, day),
+                year,
+                month,
+                day,
                 country,
                 email
             )
@@ -100,10 +101,10 @@ public class CreateAccountCodec @Inject constructor(
             plaintext.writeString(input.password)
             plaintext.writeInt(xteaKey.k1)
             plaintext.writeShort(input.affiliate)
-            plaintext.writeByte(input.dateOfBirth.dayOfMonth)
-            plaintext.writeByte(input.dateOfBirth.monthValue - 1)
+            plaintext.writeByte(input.day)
+            plaintext.writeByte(input.month)
             plaintext.writeInt(xteaKey.k2)
-            plaintext.writeShort(input.dateOfBirth.year)
+            plaintext.writeShort(input.year)
             plaintext.writeShort(input.country)
             plaintext.writeInt(xteaKey.k3)
 
