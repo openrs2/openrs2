@@ -186,7 +186,7 @@ The structure of the plaintext payload is described below:
 | Opcode | Length | Jagex name                       | Description                            |
 |-------:|-------:|----------------------------------|----------------------------------------|
 |      0 |      8 | Unknown                          | Exchange session key                   |
-|      1 |      0 | Unknown                          | Display video advertisement            |
+|      1 |      0 | Unknown                          | Show video advertisement               |
 |      2 |     14 | `OK`                             | Login successful                       |
 |      3 |      0 | `INVALID_USERNAME_OR_PASSWORD`   | Invalid username or password           |
 |      4 |      0 | `BANNED`                         | Account banned                         |
