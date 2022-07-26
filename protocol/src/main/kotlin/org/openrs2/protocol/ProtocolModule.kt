@@ -6,6 +6,31 @@ import com.google.inject.TypeLiteral
 import com.google.inject.multibindings.Multibinder
 import org.openrs2.buffer.BufferModule
 import org.openrs2.crypto.CryptoModule
+import org.openrs2.protocol.create.downstream.CannotCreateAtThisTimeCodec
+import org.openrs2.protocol.create.downstream.CountryInvalidCodec
+import org.openrs2.protocol.create.downstream.CreateClientOutOfDateCodec
+import org.openrs2.protocol.create.downstream.CreateDownstream
+import org.openrs2.protocol.create.downstream.CreateIpLimitCodec
+import org.openrs2.protocol.create.downstream.CreateOkCodec
+import org.openrs2.protocol.create.downstream.CreateServerFullCodec
+import org.openrs2.protocol.create.downstream.CreateServerOfflineCodec
+import org.openrs2.protocol.create.downstream.DateOfBirthFutureCodec
+import org.openrs2.protocol.create.downstream.DateOfBirthInvalidCodec
+import org.openrs2.protocol.create.downstream.DateOfBirthLastYearCodec
+import org.openrs2.protocol.create.downstream.DateOfBirthThisYearCodec
+import org.openrs2.protocol.create.downstream.EmailInvalid1Codec
+import org.openrs2.protocol.create.downstream.EmailInvalid2Codec
+import org.openrs2.protocol.create.downstream.EmailInvalidCodec
+import org.openrs2.protocol.create.downstream.NameInvalidCodec
+import org.openrs2.protocol.create.downstream.NameSuggestionsCodec
+import org.openrs2.protocol.create.downstream.NameUnavailableCodec
+import org.openrs2.protocol.create.downstream.PasswordGuessable1Codec
+import org.openrs2.protocol.create.downstream.PasswordGuessableCodec
+import org.openrs2.protocol.create.downstream.PasswordInvalidCharsCodec
+import org.openrs2.protocol.create.downstream.PasswordInvalidLengthCodec
+import org.openrs2.protocol.create.downstream.PasswordSimilarToName1Codec
+import org.openrs2.protocol.create.downstream.PasswordSimilarToName2Codec
+import org.openrs2.protocol.create.downstream.PasswordSimilarToNameCodec
 import org.openrs2.protocol.js5.downstream.Js5ClientOutOfDateCodec
 import org.openrs2.protocol.js5.downstream.Js5IpLimitCodec
 import org.openrs2.protocol.js5.downstream.Js5OkCodec
@@ -59,6 +84,34 @@ public object ProtocolModule : AbstractModule() {
     public override fun configure() {
         install(BufferModule)
         install(CryptoModule)
+
+        bindProtocol(
+            CreateDownstream::class.java,
+            CreateOkCodec::class.java,
+            CreateServerOfflineCodec::class.java,
+            CreateServerFullCodec::class.java,
+            CreateIpLimitCodec::class.java,
+            DateOfBirthInvalidCodec::class.java,
+            DateOfBirthFutureCodec::class.java,
+            DateOfBirthThisYearCodec::class.java,
+            DateOfBirthLastYearCodec::class.java,
+            CountryInvalidCodec::class.java,
+            NameUnavailableCodec::class.java,
+            NameSuggestionsCodec::class.java,
+            NameInvalidCodec::class.java,
+            PasswordInvalidLengthCodec::class.java,
+            PasswordInvalidCharsCodec::class.java,
+            PasswordGuessableCodec::class.java,
+            PasswordGuessable1Codec::class.java,
+            PasswordSimilarToNameCodec::class.java,
+            PasswordSimilarToName1Codec::class.java,
+            PasswordSimilarToName2Codec::class.java,
+            CreateClientOutOfDateCodec::class.java,
+            CannotCreateAtThisTimeCodec::class.java,
+            EmailInvalidCodec::class.java,
+            EmailInvalid1Codec::class.java,
+            EmailInvalid2Codec::class.java
+        )
 
         bindProtocol(
             Js5RemoteDownstream::class.java,

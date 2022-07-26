@@ -1,0 +1,10 @@
+package org.openrs2.protocol.create.downstream
+
+import org.openrs2.protocol.EmptyPacketCodec
+import javax.inject.Singleton
+
+@Singleton
+public class EmailInvalid2Codec : EmptyPacketCodec<CreateResponse.EmailInvalid2>(
+    packet = CreateResponse.EmailInvalid2,
+    opcode = 43
+)
