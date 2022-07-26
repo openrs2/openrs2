@@ -1,6 +1,7 @@
 package org.openrs2.protocol.create.downstream
 
 import io.netty.buffer.ByteBuf
+import io.netty.buffer.ByteBufAllocator
 import org.openrs2.crypto.StreamCipher
 import org.openrs2.protocol.PacketCodec
 import org.openrs2.util.Base37
@@ -41,5 +42,18 @@ public class NameSuggestionsCodec : PacketCodec<CreateResponse.NameSuggestions>(
         }
 
         output.setByte(index, written / 8)
+    }
+
+    override fun allocateBuffer(
+        alloc: ByteBufAllocator,
+        input: CreateResponse.NameSuggestions,
+        preferDirect: Boolean
+    ): ByteBuf {
+        val len = 2 + input.names.size * 8
+        return if (preferDirect) {
+            alloc.ioBuffer(len, len)
+        } else {
+            alloc.heapBuffer(len, len)
+        }
     }
 }
