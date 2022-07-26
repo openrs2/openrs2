@@ -16,8 +16,8 @@
 |     20 |      0 | Unknown              | Name unavailable                     |
 |     21 | Custom | Unknown              | Name suggestions                     |
 |     22 |      0 | Unknown              | Name invalid                         |
-|     30 |      0 | Unknown              | Password invalid                     |
-|     31 |      0 | Unknown              | Password invalid                     |
+|     30 |      0 | Unknown              | Password invalid length              |
+|     31 |      0 | Unknown              | Password invalid characters          |
 |     32 |      0 | Unknown              | Password guessable                   |
 |     33 |      0 | Unknown              | Password guessable                   |
 |     34 |      0 | Unknown              | Password too similar to username     |
@@ -85,11 +85,11 @@ suitable alternative account name. Please choose again.
 
 **Message:** Please supply a valid username.
 
-### 30 (Password invalid)
+### 30 (Password invalid length)
 
 **Message:** Please supply a valid password.
 
-### 31 (Password invalid)
+### 31 (Password invalid characters)
 
 **Message:** Please supply a valid password.
 
