@@ -59,8 +59,12 @@ public class CreateAccountCodec @Inject constructor(
 
             val email = input.readString()
 
-            // padding
-            input.skipBytes(minOf(input.readableBytes(), XTEA_BLOCK_SIZE - 1))
+            val padding = input.readableBytes()
+            require(padding in 1..XTEA_BLOCK_SIZE) {
+                "Padding ($padding bytes) must be between 1 and $XTEA_BLOCK_SIZE bytes"
+            }
+
+            input.skipBytes(padding)
 
             return LoginRequest.CreateAccount(
                 build,
@@ -121,7 +125,8 @@ public class CreateAccountCodec @Inject constructor(
 
         output.writeString(input.email)
 
-        while ((output.writerIndex() - xteaIndex) % XTEA_BLOCK_SIZE != 0) {
+        val padding = XTEA_BLOCK_SIZE - (output.writerIndex() - xteaIndex) % XTEA_BLOCK_SIZE
+        for (i in 0 until padding) {
             output.writeByte(secureRandom.nextInt())
         }
 
