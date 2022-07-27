@@ -18,15 +18,15 @@ import javax.inject.Singleton
 public class Rs2ChannelInitializer @Inject constructor(
     private val handlerProvider: Provider<LoginChannelHandler>,
     @LoginUpstream
-    private val loginUpStreamProtocol: Protocol,
+    private val loginUpstreamProtocol: Protocol,
     @LoginDownstream
-    private val loginDownStreamProtocol: Protocol
+    private val loginDownstreamProtocol: Protocol
 ) : ChannelInitializer<Channel>() {
     override fun initChannel(ch: Channel) {
         ch.pipeline().addLast(
             IdleStateHandler(true, TIMEOUT_SECS, TIMEOUT_SECS, TIMEOUT_SECS, TimeUnit.SECONDS),
-            Rs2Decoder(loginUpStreamProtocol),
-            Rs2Encoder(loginDownStreamProtocol),
+            Rs2Decoder(loginUpstreamProtocol),
+            Rs2Encoder(loginDownstreamProtocol),
             handlerProvider.get()
         )
     }
