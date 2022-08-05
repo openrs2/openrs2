@@ -13,7 +13,7 @@ classes:
   client!bb: "ProjAnimNode"
   client!bc: "PostProcessor"
   client!bd: "WaterMaterialRenderer"
-  client!be: "Class17"
+  client!be: "TextureMathUtils"
   client!bf: "VorbisFloor"
   client!bg: "LongNode"
   client!bh: "MouseWheel"
@@ -54,7 +54,7 @@ classes:
   client!ec: "GlShader"
   client!ed: "SpotAnimNode"
   client!eg: "SeqType"
-  client!eh: "Class47"
+  client!eh: "SkyBox"
   client!ei: "HardReferenceNode"
   client!ej: "MidiNote"
   client!em: "Light"
@@ -94,10 +94,10 @@ classes:
   client!hl: "SpecularMaterialRenderer"
   client!ho: "MelType"
   client!ia: "BrokenInputStream"
-  client!ib: "SkyBox"
+  client!ib: "SkyBoxCube"
   client!ic: "HashTable"
   client!ie: "BrowserControl"
-  client!ih: "Class4_Sub12"
+  client!ih: "GroundModel"
   client!ij: "QuickChatPhraseType"
   client!ik: "ParticleEmitterType"
   client!im: "AudioThread"
@@ -119,10 +119,10 @@ classes:
   client!jn: "SoftwareAlphaSprite"
   client!jo: "TextureOp"
   client!kb: "JavaAudioChannel"
-  client!kc: "Class103"
+  client!kc: "GroundShadowModel"
   client!ke: "SoftwareFont"
   client!kf: "Bzip2DState"
-  client!kg: "Class105"
+  client!kg: "SkyBoxSphere"
   client!kh: "SoftReferenceNode"
   client!ki: "DirectByteArray"
   client!kj: "TextureProvider"
@@ -191,7 +191,7 @@ classes:
   client!pf: "GlProgram"
   client!pg: "Class41"
   client!ph: "TextureOpPolarDistortion"
-  client!pi: "Class135"
+  client!pi: "GroundLightModel"
   client!pk: "TextureOpHorizontalGradient"
   client!pl: "EnumStringEntry"
   client!po: "MapElementList"
@@ -214,7 +214,7 @@ classes:
   client!r: "SecondaryParticleNode"
   client!ra: "ChangeLocRequest"
   client!rd: "VorbisMapping"
-  client!re: "Class150"
+  client!re: "Seq"
   client!rf: "Country"
   client!rg: "TextureOp37"
   client!rh: "TextureOpVoronoiNoise"
@@ -708,7 +708,7 @@ fields:
     owner: "ObjTypeList"
     name: "font"
   client!be.i [B:
-    owner: "Class17"
+    owner: "TextureMathUtils"
     name: "INVERSE_SQUARE_ROOT"
   client!be.j [I:
     owner: "PathingEntity"
@@ -882,7 +882,7 @@ fields:
     owner: "UnderwaterMaterialRenderer"
     name: "listId"
   client!bj.b Z:
-    owner: "Static1"
+    owner: "UnderwaterMaterialRenderer"
     name: "aBoolean21"
   client!bj.c I:
     owner: "UnderwaterMaterialRenderer"
@@ -2064,40 +2064,40 @@ fields:
     owner: "SeqType"
     name: "frames"
   client!eh.a I:
-    owner: "Class47"
+    owner: "SkyBox"
     name: "anInt1245"
   client!eh.b I:
-    owner: "Class47"
+    owner: "SkyBox"
     name: "anInt1246"
   client!eh.c Lclient!kg;:
-    owner: "Class47"
+    owner: "SkyBox"
     name: "aClass105_1"
   client!eh.d I:
-    owner: "Class47"
+    owner: "SkyBox"
     name: "anInt1247"
   client!eh.e [Lclient!kg;:
-    owner: "Class47"
+    owner: "SkyBox"
     name: "aClass105Array1"
   client!eh.f I:
-    owner: "Class47"
+    owner: "SkyBox"
     name: "anInt1248"
   client!eh.g I:
-    owner: "Class47"
+    owner: "SkyBox"
     name: "textureId"
   client!eh.h [Lclient!kg;:
-    owner: "Class47"
+    owner: "SkyBox"
     name: "aClass105Array2"
   client!eh.i I:
-    owner: "Class47"
+    owner: "SkyBox"
     name: "textureSize"
   client!eh.j I:
-    owner: "Class47"
+    owner: "SkyBox"
     name: "anInt1251"
   client!eh.k Lclient!fh;:
-    owner: "Static2"
-    name: "aClass58_37"
+    owner: "SkyBoxSphere"
+    name: "modelsArchive"
   client!eh.l Lclient!vn;:
-    owner: "Class47"
+    owner: "SkyBox"
     name: "aClass4_Sub3_Sub14_Sub1_1"
   client!ei.B I:
     owner: "BufferPool"
@@ -2167,7 +2167,7 @@ fields:
     name: "anInt1304"
   client!ej.p Lclient!cc;:
     owner: "SkyBoxTypeList"
-    name: "aClass26_11"
+    name: "skyBoxes"
   client!ej.r Ljava/lang/String;:
     owner: "LocalisedText"
     name: "MAINLOAD135B"
@@ -2260,7 +2260,7 @@ fields:
     name: "anInt1325"
   client!em.m Lclient!pi;:
     owner: "Light"
-    name: "aClass135_1"
+    name: "groundModel"
   client!em.n Lclient!eo;:
     owner: "Static2"
     name: "aClass52_1"
@@ -3663,37 +3663,37 @@ fields:
     owner: "Static3"
     name: "aClass185_5"
   client!ib.A [I:
-    owner: "SkyBox"
+    owner: "SkyBoxCube"
     name: "anIntArray194"
   client!ib.B I:
-    owner: "SkyBox"
+    owner: "SkyBoxCube"
     name: "id"
   client!ib.C I:
-    owner: "SkyBox"
+    owner: "SkyBoxCube"
     name: "bytes"
   client!ib.D [I:
-    owner: "SkyBox"
+    owner: "SkyBoxCube"
     name: "clip"
   client!ib.E I:
-    owner: "SkyBox"
-    name: "anInt2322"
+    owner: "SkyBoxCube"
+    name: "staticContextId"
   client!ib.F I:
-    owner: "SkyBox"
+    owner: "SkyBoxCube"
     name: "state"
   client!ib.G I:
-    owner: "SkyBox"
+    owner: "SkyBoxCube"
     name: "size"
   client!ib.H [F:
-    owner: "SkyBox"
+    owner: "SkyBoxCube"
     name: "aFloatArray23"
   client!ib.I I:
-    owner: "SkyBox"
+    owner: "SkyBoxCube"
     name: "contextId"
   client!ib.y Lclient!dj;:
-    owner: "SkyBox"
+    owner: "SkyBoxCube"
     name: "cache"
   client!ib.z [I:
-    owner: "SkyBox"
+    owner: "SkyBoxCube"
     name: "textures"
   client!ic.g Z:
     owner: "Preferences"
@@ -3753,101 +3753,101 @@ fields:
     owner: "Static3"
     name: "anIntArray199"
   client!ih.A Lclient!lk;:
-    owner: "Class4_Sub12"
-    name: "aClass111_2"
+    owner: "GroundModel"
+    name: "vertexVbo"
   client!ih.B Lclient!fd;:
-    owner: "Static3"
+    owner: "GroundModel"
     name: "aClass4_Sub10_5"
   client!ih.C [I:
-    owner: "Class4_Sub12"
-    name: "anIntArray204"
+    owner: "GroundModel"
+    name: "tileX"
   client!ih.D I:
-    owner: "Class4_Sub12"
+    owner: "GroundModel"
     name: "anInt2354"
   client!ih.E Z:
-    owner: "Class4_Sub12"
+    owner: "GroundModel"
     name: "aBoolean162"
   client!ih.F F:
-    owner: "Class4_Sub12"
+    owner: "GroundModel"
     name: "aFloat55"
   client!ih.G Ljava/nio/ByteBuffer;:
-    owner: "Static3"
+    owner: "GroundModel"
     name: "aByteBuffer5"
   client!ih.H I:
-    owner: "Class4_Sub12"
-    name: "anInt2355"
+    owner: "GroundModel"
+    name: "tileCapacity"
   client!ih.I I:
-    owner: "Class4_Sub12"
+    owner: "GroundModel"
     name: "texture"
   client!ih.J [I:
-    owner: "Class4_Sub12"
-    name: "anIntArray205"
+    owner: "GroundModel"
+    name: "vertexZ"
   client!ih.K [Z:
-    owner: "Class4_Sub12"
+    owner: "GroundModel"
     name: "aBooleanArray10"
   client!ih.L [[I:
-    owner: "Class4_Sub12"
+    owner: "GroundModel"
     name: "anIntArrayArray18"
   client!ih.M [I:
-    owner: "Class4_Sub12"
-    name: "anIntArray206"
+    owner: "GroundModel"
+    name: "tileZ"
   client!ih.N Lclient!ic;:
-    owner: "Class4_Sub12"
-    name: "aClass84_6"
+    owner: "GroundModel"
+    name: "vertexes"
   client!ih.O [[I:
-    owner: "Class4_Sub12"
+    owner: "GroundModel"
     name: "anIntArrayArray19"
   client!ih.P I:
-    owner: "Class4_Sub12"
-    name: "anInt2357"
+    owner: "GroundModel"
+    name: "vertexCount"
   client!ih.Q Ljava/nio/ByteBuffer;:
-    owner: "Class4_Sub12"
-    name: "aByteBuffer6"
+    owner: "GroundModel"
+    name: "vertexBuffer"
   client!ih.R [F:
-    owner: "Class4_Sub12"
-    name: "aFloatArray26"
+    owner: "GroundModel"
+    name: "vertexNormalY"
   client!ih.S [F:
-    owner: "Class4_Sub12"
+    owner: "GroundModel"
     name: "aFloatArray27"
   client!ih.T [I:
-    owner: "Class4_Sub12"
-    name: "anIntArray207"
+    owner: "GroundModel"
+    name: "vertexY"
   client!ih.o [I:
-    owner: "Class4_Sub12"
-    name: "anIntArray201"
+    owner: "GroundModel"
+    name: "vertexColor"
   client!ih.p [F:
-    owner: "Class4_Sub12"
-    name: "aFloatArray24"
+    owner: "GroundModel"
+    name: "vertexNormalX"
   client!ih.q I:
-    owner: "Class4_Sub12"
-    name: "anInt2350"
+    owner: "GroundModel"
+    name: "tileCount"
   client!ih.r [F:
-    owner: "Class4_Sub12"
-    name: "aFloatArray25"
+    owner: "GroundModel"
+    name: "vertexNormalZ"
   client!ih.s [I:
-    owner: "Class4_Sub12"
-    name: "anIntArray202"
+    owner: "GroundModel"
+    name: "tileLevel"
   client!ih.t I:
-    owner: "Class4_Sub12"
+    owner: "GroundModel"
     name: "anInt2351"
   client!ih.u [I:
-    owner: "Class4_Sub12"
-    name: "anIntArray203"
+    owner: "GroundModel"
+    name: "vertexX"
   client!ih.v I:
-    owner: "Class4_Sub12"
-    name: "anInt2352"
+    owner: "GroundModel"
+    name: "vertexCapacity"
   client!ih.w I:
-    owner: "Class4_Sub12"
+    owner: "GroundModel"
     name: "anInt2353"
   client!ih.x Lclient!fd;:
-    owner: "Static3"
+    owner: "GroundModel"
     name: "aClass4_Sub10_4"
   client!ih.y Ljava/nio/ByteBuffer;:
-    owner: "Static3"
+    owner: "GroundModel"
     name: "aByteBuffer4"
   client!ih.z Z:
-    owner: "Class4_Sub12"
-    name: "aBoolean161"
+    owner: "GroundModel"
+    name: "underwater"
   client!ii.A I:
     owner: "Static3"
     name: "anInt2972"
@@ -4429,7 +4429,7 @@ fields:
     name: "socket"
   client!jh.a Lclient!vc;:
     owner: "Class96"
-    name: "aClass53_3"
+    name: "entity"
   client!jh.b I:
     owner: "Static3"
     name: "anInt2583"
@@ -4441,7 +4441,7 @@ fields:
     name: "lowPriorityRequests"
   client!jh.g Lclient!fe;:
     owner: "Class96"
-    name: "aClass56_Sub1_3"
+    name: "sprite"
   client!jh.h Lclient!uk;:
     owner: "DelayedStateChange"
     name: "serverQueue"
@@ -4698,29 +4698,29 @@ fields:
     owner: "JavaAudioChannel"
     name: "binarySamples"
   client!kc.a I:
-    owner: "Class103"
+    owner: "GroundShadowModel"
     name: "textureId"
   client!kc.b I:
-    owner: "Class103"
+    owner: "GroundShadowModel"
     name: "anInt2807"
   client!kc.c [B:
-    owner: "Static4"
+    owner: "GroundShadowModel"
     name: "aByteArray21"
   client!kc.d Lclient!lk;:
-    owner: "Class103"
-    name: "aClass111_3"
+    owner: "GroundShadowModel"
+    name: "indexVbo"
   client!kc.e Z:
-    owner: "Class103"
+    owner: "GroundShadowModel"
     name: "aBoolean197"
   client!kc.f Ljava/nio/ByteBuffer;:
-    owner: "Class103"
-    name: "aByteBuffer7"
+    owner: "GroundShadowModel"
+    name: "vertexBuffer"
   client!kc.g Lclient!lk;:
-    owner: "Class103"
-    name: "aClass111_4"
+    owner: "GroundShadowModel"
+    name: "vertexVbo"
   client!kc.h Ljava/nio/ByteBuffer;:
-    owner: "Class103"
-    name: "aByteBuffer8"
+    owner: "GroundShadowModel"
+    name: "indexBuffer"
   client!ke.K [[B:
     owner: "SoftwareFont"
     name: "pixels"
@@ -4836,76 +4836,76 @@ fields:
     owner: "Bzip2DState"
     name: "strmTotalInLo32"
   client!kg.a Lclient!vn;:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "aClass4_Sub3_Sub14_Sub1_5"
   client!kg.b Ljava/nio/ByteBuffer;:
-    owner: "Static4"
-    name: "aByteBuffer9"
+    owner: "SkyBoxSphere"
+    name: "vertexBuffer"
   client!kg.c I:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "anInt2854"
   client!kg.d [I:
-    owner: "Static4"
-    name: "anIntArray256"
+    owner: "SkyBoxSphere"
+    name: "previousClip"
   client!kg.e I:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "anInt2855"
   client!kg.f I:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "anInt2856"
   client!kg.g I:
-    owner: "Static4"
-    name: "anInt2857"
+    owner: "SkyBoxSphere"
+    name: "staticContextId"
   client!kg.h Ljava/nio/ByteBuffer;:
-    owner: "Static4"
-    name: "aByteBuffer10"
+    owner: "SkyBoxSphere"
+    name: "indexBuffer"
   client!kg.i I:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "textureId"
   client!kg.j I:
-    owner: "Class105"
-    name: "anInt2859"
+    owner: "SkyBoxSphere"
+    name: "clearColor"
   client!kg.k I:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "anInt2860"
   client!kg.l I:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "textureSize"
   client!kg.m I:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "anInt2862"
   client!kg.n I:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "anInt2863"
   client!kg.o Lclient!ml;:
-    owner: "Static4"
-    name: "aClass53_Sub3_1"
+    owner: "SkyBoxSphere"
+    name: "model"
   client!kg.p I:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "anInt2864"
   client!kg.q Z:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "aBoolean198"
   client!kg.r I:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "anInt2865"
   client!kg.s I:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "contextId"
   client!kg.t I:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "anInt2867"
   client!kg.u Z:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "aBoolean199"
   client!kg.v [B:
-    owner: "Static4"
+    owner: "SkyBoxSphere"
     name: "aByteArray29"
   client!kg.w I:
-    owner: "Static4"
+    owner: "SkyBoxSphere"
     name: "anInt2868"
   client!kg.x I:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "anInt2869"
   client!kh.B Ljava/lang/ref/SoftReference;:
     owner: "SoftReferenceNode"
@@ -7486,7 +7486,7 @@ fields:
     name: "anInt3770"
   client!pg.j [S:
     owner: "Class41"
-    name: "aShortArray71"
+    name: "permutation"
   client!pg.k I:
     owner: "Class41"
     name: "seed"
@@ -7504,7 +7504,7 @@ fields:
     name: "anInt3775"
   client!pg.q [S:
     owner: "Class41"
-    name: "aShortArray72"
+    name: "powersOfTwo"
   client!ph.X Lclient!lo;:
     owner: "client"
     name: "soundStream"
@@ -7521,53 +7521,53 @@ fields:
     owner: "Fonts"
     name: "b12Full"
   client!pi.a I:
-    owner: "Class135"
-    name: "anInt4159"
+    owner: "GroundLightModel"
+    name: "vertexCapacity"
   client!pi.b Ljava/nio/ByteBuffer;:
-    owner: "Class135"
-    name: "aByteBuffer13"
+    owner: "GroundLightModel"
+    name: "vertexBuffer"
   client!pi.c I:
-    owner: "Class135"
-    name: "anInt4160"
+    owner: "GroundLightModel"
+    name: "indexCapacity"
   client!pi.d Ljava/nio/ByteBuffer;:
-    owner: "Class135"
-    name: "aByteBuffer14"
+    owner: "GroundLightModel"
+    name: "indexBuffer"
   client!pi.e [B:
-    owner: "Class135"
-    name: "aByteArray53"
+    owner: "GroundLightModel"
+    name: "vertexRed"
   client!pi.f [B:
-    owner: "Class135"
-    name: "aByteArray54"
+    owner: "GroundLightModel"
+    name: "vertexGreen"
   client!pi.g Lclient!lk;:
-    owner: "Class135"
-    name: "aClass111_5"
+    owner: "GroundLightModel"
+    name: "vertexVbo"
   client!pi.h I:
-    owner: "Class135"
-    name: "anInt4161"
+    owner: "GroundLightModel"
+    name: "vertexCount"
   client!pi.i [I:
-    owner: "Class135"
-    name: "anIntArray436"
+    owner: "GroundLightModel"
+    name: "vertexZ"
   client!pi.j [I:
-    owner: "Class135"
-    name: "anIntArray437"
+    owner: "GroundLightModel"
+    name: "indexes"
   client!pi.k Lclient!lk;:
-    owner: "Class135"
-    name: "aClass111_6"
+    owner: "GroundLightModel"
+    name: "indexVbo"
   client!pi.l I:
-    owner: "Class135"
-    name: "anInt4162"
+    owner: "GroundLightModel"
+    name: "indexCount"
   client!pi.m [I:
-    owner: "Class135"
-    name: "anIntArray438"
+    owner: "GroundLightModel"
+    name: "vertexY"
   client!pi.n Lclient!ic;:
-    owner: "Class135"
-    name: "aClass84_19"
+    owner: "GroundLightModel"
+    name: "vertexes"
   client!pi.o [B:
-    owner: "Class135"
-    name: "aByteArray55"
+    owner: "GroundLightModel"
+    name: "vertexBlue"
   client!pi.p [I:
-    owner: "Class135"
-    name: "anIntArray439"
+    owner: "GroundLightModel"
+    name: "vertexX"
   client!pj.a Lclient!uj;:
     owner: "MiniMap"
     name: "sprite"
@@ -8242,7 +8242,7 @@ fields:
     name: "anInt4398"
   client!qm.d I:
     owner: "SkyBoxType"
-    name: "anInt4399"
+    name: "defaultSphereIndex"
   client!qm.e I:
     owner: "Static6"
     name: "anInt4400"
@@ -8251,10 +8251,10 @@ fields:
     name: "anInt4403"
   client!qm.i [I:
     owner: "SkyBoxType"
-    name: "anIntArray466"
+    name: "spheres"
   client!qm.k I:
     owner: "SkyBoxType"
-    name: "anInt4405"
+    name: "textureId"
   client!qm.l [[B:
     owner: "SpriteLoader"
     name: "pixels"
@@ -8493,7 +8493,7 @@ fields:
     owner: "Texture"
     name: "normalisedY"
   client!re.b I:
-    owner: "Class150"
+    owner: "Seq"
     name: "seqId"
   client!re.c I:
     owner: "SoundPlayer"
@@ -8502,25 +8502,25 @@ fields:
     owner: "LoginManager"
     name: "loops"
   client!re.f I:
-    owner: "Class150"
+    owner: "Seq"
     name: "anInt4460"
   client!re.g I:
-    owner: "Class150"
+    owner: "Seq"
     name: "delay"
   client!re.h [I:
     owner: "PathFinder"
     name: "queueX"
   client!re.i I:
-    owner: "Class150"
+    owner: "Seq"
     name: "anInt4462"
   client!re.k I:
-    owner: "Class150"
+    owner: "Seq"
     name: "anInt4464"
   client!re.l Ljava/lang/String;:
     owner: "ClanChat"
     name: "owner"
   client!re.m I:
-    owner: "Class150"
+    owner: "Seq"
     name: "anInt4465"
   client!re.n I:
     owner: "Static6"
@@ -16481,7 +16481,7 @@ methods:
     owner: "Class41_Sub1"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "seed"
       1: "arg1"
       2: "arg2"
       3: "arg3"
@@ -16518,20 +16518,20 @@ methods:
     locals: {}
   client!ea.a (IBIII)Lclient!eh;:
     owner: "SkyBoxTypeList"
-    name: "method936"
+    name: "getSkyBox"
     arguments:
       3: "id"
       0: "arg0"
       2: "arg1"
       4: "arg3"
     locals:
-      39: "local39"
-      45: "local45"
-      52: "local52"
+      39: "key"
+      45: "skyBox"
+      52: "spheres"
       56: "type"
-      68: "local68"
-      83: "local83"
-      120: "local120"
+      68: "i"
+      83: "sphereType"
+      120: "newSkyBox"
   client!ea.a (IIB)V:
     owner: "Class41_Sub1"
     name: "method3146"
@@ -16796,28 +16796,28 @@ methods:
       35: "local35"
       124: "local124"
   client!eh.<init> (I[Lclient!kg;IIII)V:
-    owner: "Class47"
+    owner: "SkyBox"
     name: "<init>"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "textureId"
+      1: "spheres"
+      2: "defaultSphereIndex"
       3: "arg3"
       4: "arg4"
       5: "arg5"
     locals: {}
   client!eh.a (I)V:
-    owner: "Class47"
+    owner: "SkyBox"
     name: "method1029"
     arguments:
       0: "arg0"
     locals:
       10: "local10"
       36: "local36"
-      38: "local38"
-      48: "local48"
+      38: "i"
+      48: "sphere"
   client!eh.a (IIIIIIII)V:
-    owner: "Class47"
+    owner: "SkyBox"
     name: "method1024"
     arguments:
       0: "arg0"
@@ -16834,10 +16834,10 @@ methods:
       100: "local100"
       136: "local136"
   client!eh.a (Lclient!fh;)V:
-    owner: "Static13"
-    name: "method1028"
+    owner: "SkyBoxSphere"
+    name: "init"
     arguments:
-      0: "archive"
+      0: "modelsArchive"
     locals: {}
   client!eh.b ()V:
     owner: "Static13"
@@ -16845,7 +16845,7 @@ methods:
     arguments: {}
     locals: {}
   client!eh.b (IIIIIIII)V:
-    owner: "Class47"
+    owner: "SkyBox"
     name: "method1025"
     arguments:
       0: "arg0"
@@ -16855,7 +16855,7 @@ methods:
       4: "arg4"
       5: "arg5"
       6: "arg6"
-      7: "arg7"
+      7: "clearColor"
     locals:
       1: "gl"
       14: "local14"
@@ -22440,7 +22440,7 @@ methods:
     owner: "Static19"
     name: "method1778"
     arguments:
-      0: "arg0"
+      0: "light"
       1: "arg1"
       2: "arg2"
       3: "arg3"
@@ -22742,12 +22742,12 @@ methods:
     arguments: {}
     locals: {}
   client!ib.<init> ()V:
-    owner: "SkyBox"
+    owner: "SkyBoxCube"
     name: "<init>"
     arguments: {}
     locals: {}
   client!ib.<init> (IIIIII)V:
-    owner: "SkyBox"
+    owner: "SkyBoxCube"
     name: "<init>"
     arguments:
       0: "texture0"
@@ -22758,14 +22758,14 @@ methods:
       5: "texture5"
     locals: {}
   client!ib.a ()V:
-    owner: "SkyBox"
+    owner: "SkyBoxCube"
     name: "method1832"
     arguments: {}
     locals:
       8: "gl"
       11: "temp"
   client!ib.a (Lclient!ib;Lclient!ib;F)Lclient!ib;:
-    owner: "SkyBox"
+    owner: "SkyBoxCube"
     name: "method1835"
     arguments:
       0: "arg0"
@@ -22782,7 +22782,7 @@ methods:
       212: "textureTarget"
       255: "status"
   client!ib.a (Lgl!javax/media/opengl/GL;IIII)Z:
-    owner: "SkyBox"
+    owner: "SkyBoxCube"
     name: "method1837"
     arguments:
       0: "gl"
@@ -22793,7 +22793,7 @@ methods:
     locals:
       15: "status"
   client!ib.b (IIIIII)Lclient!ib;:
-    owner: "SkyBox"
+    owner: "SkyBoxCube"
     name: "create"
     arguments:
       0: "texture0"
@@ -22807,7 +22807,7 @@ methods:
       35: "skyBox"
       49: "newSkyBox"
   client!ib.c ()V:
-    owner: "SkyBox"
+    owner: "SkyBoxCube"
     name: "method1834"
     arguments: {}
     locals:
@@ -22820,13 +22820,13 @@ methods:
       113: "i"
       127: "buffer"
   client!ib.d ()Z:
-    owner: "SkyBox"
+    owner: "SkyBoxCube"
     name: "isReady"
     arguments: {}
     locals:
       1: "i"
   client!ib.finalize ()V:
-    owner: "SkyBox"
+    owner: "SkyBoxCube"
     name: "finalize"
     arguments: {}
     locals: {}
@@ -22981,81 +22981,81 @@ methods:
       32: "local32"
       38: "local38"
   client!ih.<init> (IFZZI)V:
-    owner: "Class4_Sub12"
+    owner: "GroundModel"
     name: "<init>"
     arguments:
       0: "arg0"
       1: "arg1"
       2: "arg2"
-      3: "arg3"
+      3: "underwater"
       4: "arg4"
     locals: {}
   client!ih.a ()V:
-    owner: "Class4_Sub12"
-    name: "method1866"
+    owner: "GroundModel"
+    name: "build"
     arguments: {}
     locals:
-      12: "local12"
-      14: "local14"
-      200: "local200"
+      12: "buffer"
+      14: "i"
+      200: "wrappedBuffer"
   client!ih.a (IIIFFFIF)I:
-    owner: "Class4_Sub12"
-    name: "method1871"
+    owner: "GroundModel"
+    name: "addVertex"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
-      4: "arg4"
-      5: "arg5"
-      6: "arg6"
+      0: "x"
+      1: "y"
+      2: "z"
+      3: "normalX"
+      4: "normalY"
+      5: "normalZ"
+      6: "color"
       7: "arg7"
     locals:
-      1: "local1"
-      28: "local28"
+      1: "key"
+      28: "node"
   client!ih.a (III[I[IZ)I:
-    owner: "Class4_Sub12"
-    name: "method1870"
+    owner: "GroundModel"
+    name: "addTile"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      0: "level"
+      1: "x"
+      2: "z"
       3: "arg3"
       4: "arg4"
       5: "arg5"
     locals: {}
   client!ih.a ([[[Lclient!nh;FZ)V:
-    owner: "Class4_Sub12"
-    name: "method1867"
+    owner: "GroundModel"
+    name: "render"
     arguments:
-      0: "arg0"
+      0: "tiles"
       1: "arg1"
       2: "arg2"
     locals:
-      47: "local47"
-      68: "local68"
+      47: "i"
+      68: "tile"
       78: "local78"
       86: "local86"
       90: "local90"
       111: "local111"
-      116: "local116"
-      149: "local149"
-      170: "local170"
+      116: "j"
+      149: "i"
+      170: "tile"
       180: "local180"
       188: "local188"
       192: "local192"
       213: "local213"
-      218: "local218"
+      218: "j"
       257: "gl"
-      282: "local282"
+      282: "stride"
   client!ih.b ()V:
-    owner: "Static19"
+    owner: "GroundModel"
     name: "method1868"
     arguments: {}
     locals: {}
   client!ih.d ()V:
-    owner: "Class4_Sub12"
-    name: "method1872"
+    owner: "GroundModel"
+    name: "clear"
     arguments: {}
     locals: {}
   client!ii.a ()Lclient!ll;:
@@ -25782,28 +25782,28 @@ methods:
     locals:
       34: "info"
   client!kc.<init> ()V:
-    owner: "Class103"
+    owner: "GroundShadowModel"
     name: "<init>"
     arguments: {}
     locals:
       9: "gl"
       12: "temp"
   client!kc.a ()V:
-    owner: "Class103"
-    name: "method2237"
+    owner: "GroundShadowModel"
+    name: "render"
     arguments: {}
     locals:
       1: "gl"
   client!kc.a (Lclient!fe;II)Z:
-    owner: "Class103"
+    owner: "GroundShadowModel"
     name: "method2236"
     arguments:
-      0: "arg0"
+      0: "sprite"
       1: "arg1"
       2: "arg2"
     locals:
-      2: "local2"
-      5: "local5"
+      2: "pixels"
+      5: "width"
       19: "local19"
       21: "local21"
       23: "local23"
@@ -25814,23 +25814,23 @@ methods:
       82: "local82"
       96: "local96"
       145: "gl"
-      148: "local148"
+      148: "buffer"
   client!kc.a ([[III)V:
-    owner: "Class103"
-    name: "method2238"
+    owner: "GroundShadowModel"
+    name: "buffer"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
+      1: "x"
+      2: "z"
+      0: "heights"
     locals:
-      4: "local4"
-      6: "local6"
-      11: "local11"
-      112: "local112"
-      147: "local147"
-      149: "local149"
-      154: "local154"
-      293: "local293"
+      4: "vertexBuffer"
+      6: "zOff"
+      11: "xOff"
+      112: "buffer"
+      147: "indexBuffer"
+      149: "zOff"
+      154: "xOff"
+      293: "buffer"
   client!ke.<init> ([B)V:
     owner: "SoftwareFont"
     name: "<init>"
@@ -26031,11 +26031,11 @@ methods:
       80: "local80"
       92: "local92"
   client!kg.<init> (IIIIIIIZ)V:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "<init>"
     arguments:
       0: "arg0"
-      1: "arg1"
+      1: "textureId"
       2: "arg2"
       3: "arg3"
       4: "arg4"
@@ -26044,7 +26044,7 @@ methods:
       7: "arg7"
     locals: {}
   client!kg.a ()V:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "method2291"
     arguments: {}
     locals:
@@ -26060,7 +26060,7 @@ methods:
       60: "local60"
       73: "local73"
   client!kg.a (IIII)Z:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "method2294"
     arguments:
       0: "arg0"
@@ -26077,7 +26077,7 @@ methods:
       90: "local90"
       145: "local145"
   client!kg.a (IIIIII)V:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "method2292"
     arguments:
       0: "arg0"
@@ -26097,7 +26097,7 @@ methods:
       105: "local105"
       107: "gl"
   client!kg.a (IIIIIILclient!kg;)V:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "method2299"
     arguments:
       0: "arg0"
@@ -26113,7 +26113,7 @@ methods:
       27: "local27"
       33: "local33"
   client!kg.a (Lclient!kg;)V:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "method2289"
     arguments:
       0: "arg0"
@@ -26130,15 +26130,15 @@ methods:
       145: "local145"
       157: "local157"
   client!kg.a ([IIIIIIIIIII)V:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "method2307"
     arguments:
-      0: "arg0"
+      0: "pixels"
       1: "arg1"
       2: "arg2"
       3: "arg3"
-      4: "arg4"
-      5: "arg5"
+      4: "i"
+      5: "stride"
       6: "arg6"
       7: "arg7"
       8: "arg8"
@@ -26149,7 +26149,7 @@ methods:
       12: "local12"
       15: "local15"
   client!kg.a ([IIIIIIIIIIII)V:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "method2288"
     arguments:
       0: "arg0"
@@ -26171,7 +26171,7 @@ methods:
       37: "local37"
       46: "local46"
   client!kg.b ()V:
-    owner: "Static22"
+    owner: "SkyBoxSphere"
     name: "method2295"
     arguments: {}
     locals:
@@ -26186,7 +26186,7 @@ methods:
       60: "local60"
       68: "local68"
   client!kg.b (Lclient!kg;)Z:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "method2290"
     arguments:
       0: "arg0"
@@ -26208,68 +26208,68 @@ methods:
       175: "local175"
       187: "local187"
   client!kg.c ()V:
-    owner: "Static22"
+    owner: "SkyBoxSphere"
     name: "method2296"
     arguments: {}
     locals:
-      10: "local10"
-      13: "local13"
-      16: "local16"
-      19: "local19"
-      22: "local22"
-      25: "local25"
-      28: "local28"
-      57: "local57"
+      10: "model"
+      13: "vertexX"
+      16: "vertexY"
+      19: "vertexZ"
+      22: "triangleVertexA"
+      25: "triangleVertexB"
+      28: "triangleVertexC"
+      57: "i"
       66: "local66"
       72: "local72"
       78: "local78"
-      80: "local80"
+      80: "j"
       89: "local89"
-      95: "local95"
-      105: "local105"
-      115: "local115"
+      95: "y"
+      105: "z"
+      115: "x"
       147: "local147"
       151: "local151"
-      174: "local174"
+      174: "j"
       181: "local181"
       185: "local185"
   client!kg.c (Lclient!kg;)V:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "method2293"
     arguments:
       0: "arg0"
     locals:
       14: "local14"
   client!kg.d ()V:
-    owner: "Static22"
-    name: "method2297"
+    owner: "SkyBoxSphere"
+    name: "buffer"
     arguments: {}
     locals:
-      6: "local6"
-      11: "local11"
-      96: "local96"
-      98: "local98"
-      100: "local100"
+      6: "indexBuffer"
+      11: "vertexBuffer"
+      96: "s"
+      98: "t"
+      100: "i"
       109: "local109"
       116: "local116"
       123: "local123"
-      125: "local125"
+      125: "j"
       134: "local134"
-      141: "local141"
-      150: "local150"
-      159: "local159"
+      141: "y"
+      150: "z"
+      159: "x"
       216: "local216"
       220: "local220"
-      232: "local232"
-      266: "local266"
+      232: "j"
+      266: "j"
   client!kg.d (Lclient!kg;)Z:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "method2298"
     arguments:
       0: "arg0"
     locals: {}
   client!kg.e ()V:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "method2301"
     arguments: {}
     locals:
@@ -26286,7 +26286,7 @@ methods:
       86: "local86"
       101: "local101"
   client!kg.e (Lclient!kg;)V:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "method2300"
     arguments:
       0: "arg0"
@@ -26306,10 +26306,10 @@ methods:
       184: "local184"
       208: "local208"
       240: "local240"
-      260: "local260"
-      269: "local269"
+      260: "i"
+      269: "pixels"
   client!kg.f (Lclient!kg;)V:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "method2304"
     arguments:
       0: "arg0"
@@ -26331,22 +26331,22 @@ methods:
       186: "local186"
       193: "local193"
   client!kg.finalize ()V:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "finalize"
     arguments: {}
     locals: {}
   client!kg.g ()V:
-    owner: "Static22"
-    name: "method2303"
+    owner: "SkyBoxSphere"
+    name: "clear"
     arguments: {}
     locals: {}
   client!kg.h ()V:
-    owner: "Static22"
+    owner: "SkyBoxSphere"
     name: "method2305"
     arguments: {}
     locals: {}
   client!kg.i ()V:
-    owner: "Class105"
+    owner: "SkyBoxSphere"
     name: "method2306"
     arguments: {}
     locals: {}
@@ -34806,7 +34806,7 @@ methods:
     owner: "Class41"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "seed"
       1: "arg1"
       2: "arg2"
       3: "arg3"
@@ -34896,15 +34896,15 @@ methods:
       17: "local17"
   client!pg.a (Z)V:
     owner: "Class41"
-    name: "method3143"
+    name: "createPermutation"
     arguments: {}
     locals:
       15: "random"
-      21: "local21"
-      35: "local35"
-      45: "local45"
-      50: "local50"
-      55: "local55"
+      21: "i"
+      35: "i"
+      45: "j"
+      50: "k"
+      55: "temp"
   client!pg.a ([[[BB[[B[[I[[FI[[B[[B[[I[[B[[F[[F)[Lclient!ih;:
     owner: "Static29"
     name: "method3149"
@@ -35080,10 +35080,10 @@ methods:
       2784: "local2784"
   client!pg.b (I)V:
     owner: "Class41"
-    name: "method3145"
+    name: "createPowersOfTwo"
     arguments: {}
     locals:
-      18: "local18"
+      18: "i"
   client!ph.<init> ()V:
     owner: "TextureOpPolarDistortion"
     name: "<init>"
@@ -35189,62 +35189,62 @@ methods:
       75: "graphics"
       127: "ex"
   client!pi.a ()V:
-    owner: "Class135"
-    name: "method3432"
+    owner: "GroundLightModel"
+    name: "clear"
     arguments: {}
     locals: {}
   client!pi.a (Lclient!em;IIIFFF)I:
-    owner: "Class135"
-    name: "method3435"
+    owner: "GroundLightModel"
+    name: "addVertex"
     arguments:
-      0: "arg0"
-      1: "arg1"
-      2: "arg2"
-      3: "arg3"
+      0: "light"
+      1: "x"
+      2: "y"
+      3: "z"
       4: "arg4"
       5: "arg5"
       6: "arg6"
     locals:
-      1: "local1"
-      23: "local23"
-      31: "local31"
-      37: "local37"
-      43: "local43"
-      49: "local49"
-      64: "local64"
-      68: "local68"
+      1: "key"
+      23: "node"
+      31: "color"
+      37: "dx"
+      43: "dy"
+      49: "dz"
+      64: "distance"
+      68: "inverseDistance"
       90: "local90"
       96: "local96"
       114: "local114"
-      126: "local126"
-      142: "local142"
-      157: "local157"
-      170: "local170"
+      126: "brightness"
+      142: "red"
+      157: "green"
+      170: "blue"
   client!pi.a ([I)V:
-    owner: "Class135"
-    name: "method3431"
+    owner: "GroundLightModel"
+    name: "addTriangleFan"
     arguments:
-      0: "arg0"
+      0: "vertices"
     locals:
-      1: "local1"
+      1: "i"
   client!pi.b ()V:
-    owner: "Class135"
-    name: "method3433"
+    owner: "GroundLightModel"
+    name: "render"
     arguments: {}
     locals:
       1: "gl"
   client!pi.c ()V:
-    owner: "Class135"
-    name: "method3434"
+    owner: "GroundLightModel"
+    name: "buffer"
     arguments: {}
     locals:
-      7: "local7"
-      15: "local15"
-      19: "local19"
-      76: "local76"
-      92: "local92"
-      149: "local149"
-      173: "local173"
+      7: "indexBuffer"
+      15: "vertexBuffer"
+      19: "i"
+      76: "i"
+      92: "i"
+      149: "i"
+      173: "buffer"
   client!pj.a (ZIZ)Ljava/lang/String;:
     owner: "IntUtils"
     name: "toString"
@@ -36984,7 +36984,7 @@ methods:
       2: "id"
       1: "code"
     locals:
-      26: "local26"
+      26: "i"
   client!qm.a (IILclient!fd;)V:
     owner: "SkyBoxType"
     name: "decode"
@@ -38018,7 +38018,7 @@ methods:
     owner: "Class41_Sub2"
     name: "<init>"
     arguments:
-      0: "arg0"
+      0: "seed"
       1: "arg1"
       2: "arg2"
       3: "arg3"
