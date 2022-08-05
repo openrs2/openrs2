@@ -9574,7 +9574,7 @@ fields:
     name: "recolorDestination"
   client!td.G I:
     owner: "ObjType"
-    name: "womanWear1"
+    name: "womanWear2"
   client!td.H I:
     owner: "ObjType"
     name: "manWear3"
@@ -9643,7 +9643,7 @@ fields:
     name: "certificateTemplate"
   client!td.eb I:
     owner: "ObjType"
-    name: "womanWear2"
+    name: "womanWear1"
   client!td.f I:
     owner: "ObjType"
     name: "contrast"
