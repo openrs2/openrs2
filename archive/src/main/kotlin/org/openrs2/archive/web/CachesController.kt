@@ -10,6 +10,7 @@ import io.ktor.http.content.caching
 import io.ktor.http.content.versions
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.http.content.CachingOptions
+import io.ktor.server.plugins.cachingheaders.caching
 import io.ktor.server.response.header
 import io.ktor.server.response.respond
 import io.ktor.server.response.respondBytes
@@ -54,6 +55,13 @@ public class CachesController @Inject constructor(
 
     public suspend fun indexJson(call: ApplicationCall) {
         val caches = exporter.list()
+        call.caching = CachingOptions(
+            cacheControl = CacheControl.MaxAge(
+                maxAgeSeconds = 900,
+                visibility = CacheControl.Visibility.Public,
+            ),
+            expires = ZonedDateTime.now(ZoneOffset.UTC).plusSeconds(900),
+        )
         call.respond(caches)
     }
 
