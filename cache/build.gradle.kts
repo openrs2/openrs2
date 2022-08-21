@@ -13,6 +13,7 @@ dependencies {
     implementation(projects.buffer)
     implementation(projects.compress)
     implementation(projects.util)
+    implementation(libs.sqlite)
 
     testImplementation(libs.jimfs)
 }
