@@ -9,6 +9,23 @@ import kotlin.test.assertNull
 
 class VersionTrailerTest {
     @Test
+    fun testPeek() {
+        assertNull(VersionTrailer.peek(Unpooled.EMPTY_BUFFER))
+
+        wrappedBuffer(0).use { buf ->
+            assertNull(VersionTrailer.peek(buf))
+        }
+
+        wrappedBuffer(0x12, 0x34).use { buf ->
+            assertEquals(0x1234, VersionTrailer.peek(buf))
+        }
+
+        wrappedBuffer(0x12, 0x34, 0x56).use { buf ->
+            assertEquals(0x3456, VersionTrailer.peek(buf))
+        }
+    }
+
+    @Test
     fun testStrip() {
         assertNull(VersionTrailer.strip(Unpooled.EMPTY_BUFFER))
 
