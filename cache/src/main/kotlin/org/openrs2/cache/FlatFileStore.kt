@@ -92,7 +92,7 @@ public class FlatFileStore private constructor(
         val path = groupPath(archive, group)
         Files.createDirectories(path.parent)
 
-        path.useAtomicOutputStream { output ->
+        path.useAtomicOutputStream(sync = false) { output ->
             buf.readBytes(output, buf.readableBytes())
         }
     }
