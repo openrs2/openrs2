@@ -107,25 +107,36 @@ public inline fun <T> Path.useTempFile(
     }
 }
 
-public inline fun <T> Path.atomicWrite(f: (Path) -> T): T {
+public inline fun <T> Path.atomicWrite(
+    sync: Boolean = true,
+    f: (Path) -> T,
+): T {
     parent.useTempFile(".$fileName", ".tmp") { tempFile ->
         val result = f(tempFile)
-        tempFile.fsync()
+        if (sync) {
+            tempFile.fsync()
+        }
 
         Files.move(tempFile, this, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING)
 
-        try {
-            parent.fsync()
-        } catch (ex: IOException) {
-            // can't fsync directories on (at least) Windows and jimfs
+        if (sync) {
+            try {
+                parent.fsync()
+            } catch (ex: IOException) {
+                // can't fsync directories on (at least) Windows and jimfs
+            }
         }
 
         return result
     }
 }
 
-public inline fun <T> Path.useAtomicBufferedWriter(vararg options: OpenOption, f: (BufferedWriter) -> T): T {
-    return atomicWrite { path ->
+public inline fun <T> Path.useAtomicBufferedWriter(
+    vararg options: OpenOption,
+    sync: Boolean = true,
+    f: (BufferedWriter) -> T,
+): T {
+    return atomicWrite(sync) { path ->
         Files.newBufferedWriter(path, *options).use { writer ->
             f(writer)
         }
@@ -135,17 +146,22 @@ public inline fun <T> Path.useAtomicBufferedWriter(vararg options: OpenOption, f
 public inline fun <T> Path.useAtomicBufferedWriter(
     cs: Charset,
     vararg options: OpenOption,
-    f: (BufferedWriter) -> T
+    sync: Boolean = true,
+    f: (BufferedWriter) -> T,
 ): T {
-    return atomicWrite { path ->
+    return atomicWrite(sync) { path ->
         Files.newBufferedWriter(path, cs, *options).use { writer ->
             f(writer)
         }
     }
 }
 
-public inline fun <T> Path.useAtomicOutputStream(vararg options: OpenOption, f: (OutputStream) -> T): T {
-    return atomicWrite { path ->
+public inline fun <T> Path.useAtomicOutputStream(
+    vararg options: OpenOption,
+    sync: Boolean = true,
+    f: (OutputStream) -> T,
+): T {
+    return atomicWrite(sync) { path ->
         Files.newOutputStream(path, *options).use { output ->
             f(output)
         }
