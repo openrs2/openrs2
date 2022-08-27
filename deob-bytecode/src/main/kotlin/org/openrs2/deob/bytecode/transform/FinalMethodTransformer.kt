@@ -22,7 +22,9 @@ public class FinalMethodTransformer : Transformer() {
     }
 
     private fun isMethodFinal(classPath: ClassPath, clazz: ClassNode, method: MethodNode): Boolean {
-        if (method.name == "<init>") {
+        if ((clazz.access and Opcodes.ACC_FINAL) != 0) {
+            return false
+        } else if (method.name == "<init>") {
             return false
         } else if ((method.access and (Opcodes.ACC_ABSTRACT or Opcodes.ACC_PRIVATE or Opcodes.ACC_STATIC)) != 0) {
             return false
