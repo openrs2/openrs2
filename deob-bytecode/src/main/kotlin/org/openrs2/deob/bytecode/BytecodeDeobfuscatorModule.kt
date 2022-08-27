@@ -15,8 +15,9 @@ import org.openrs2.deob.bytecode.transform.EmptyClassTransformer
 import org.openrs2.deob.bytecode.transform.ExceptionTracingTransformer
 import org.openrs2.deob.bytecode.transform.FernflowerExceptionTransformer
 import org.openrs2.deob.bytecode.transform.FieldOrderTransformer
+import org.openrs2.deob.bytecode.transform.FinalClassTransformer
 import org.openrs2.deob.bytecode.transform.FinalFieldTransformer
-import org.openrs2.deob.bytecode.transform.FinalTransformer
+import org.openrs2.deob.bytecode.transform.FinalMethodTransformer
 import org.openrs2.deob.bytecode.transform.InvokeSpecialTransformer
 import org.openrs2.deob.bytecode.transform.MethodOrderTransformer
 import org.openrs2.deob.bytecode.transform.MonitorTransformer
@@ -71,7 +72,8 @@ public object BytecodeDeobfuscatorModule : AbstractModule() {
         binder.addBinding().to(EmptyClassTransformer::class.java)
         binder.addBinding().to(MethodOrderTransformer::class.java)
         binder.addBinding().to(VisibilityTransformer::class.java)
-        binder.addBinding().to(FinalTransformer::class.java)
+        binder.addBinding().to(FinalClassTransformer::class.java)
+        binder.addBinding().to(FinalMethodTransformer::class.java)
         binder.addBinding().to(FinalFieldTransformer::class.java)
         binder.addBinding().to(OverrideTransformer::class.java)
         binder.addBinding().to(RedundantGotoTransformer::class.java)
