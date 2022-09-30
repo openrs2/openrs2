@@ -28,11 +28,13 @@ public object OpenNxtStore {
     }
 
     private fun unpackArchive(connection: Connection, archive: Int, output: Store) {
-        connection.prepareStatement("""
+        connection.prepareStatement(
+            """
             SELECT data, crc
             FROM cache_index
             WHERE key = 1
-        """.trimIndent()).use { stmt ->
+        """.trimIndent()
+        ).use { stmt ->
             stmt.executeQuery().use { rows ->
                 if (rows.next()) {
                     val checksum = rows.getInt(2)
@@ -51,10 +53,12 @@ public object OpenNxtStore {
             }
         }
 
-        connection.prepareStatement("""
+        connection.prepareStatement(
+            """
             SELECT key, data, crc, version
             FROM cache
-        """.trimIndent()).use { stmt ->
+        """.trimIndent()
+        ).use { stmt ->
             stmt.executeQuery().use { rows ->
                 while (rows.next()) {
                     val group = rows.getInt(1)
