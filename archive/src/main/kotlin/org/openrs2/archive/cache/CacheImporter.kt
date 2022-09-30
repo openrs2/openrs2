@@ -297,7 +297,7 @@ public class CacheImporter @Inject constructor(
                 UPDATE game_variants
                 SET build_major = ?, build_minor = ?
                 WHERE id = ?
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.setInt(1, buildMajor)
                 stmt.setObject(2, buildMinor, Types.INTEGER)
@@ -341,7 +341,7 @@ public class CacheImporter @Inject constructor(
                 LEFT JOIN resolve_index(?, a2.archive_id, a2.crc32, a2.version) c ON TRUE
                 WHERE a.master_index_id = ?
                 ORDER BY a.archive_id ASC
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.setObject(1, lastId, Types.INTEGER)
                 stmt.setInt(2, scopeId)
@@ -404,7 +404,7 @@ public class CacheImporter @Inject constructor(
                 LEFT JOIN resolve_group(i.scope_id, i.archive_id, ig2.group_id, ig2.crc32, ig2.version) c ON TRUE
                 WHERE ig.container_id = ? AND c.id IS NULL
                 ORDER BY ig.group_id ASC
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.setObject(1, lastMasterIndexId, Types.INTEGER)
                 stmt.setInt(2, archive)
@@ -458,7 +458,7 @@ public class CacheImporter @Inject constructor(
             SELECT id
             FROM master_indexes
             WHERE container_id = ? AND format = ?::master_index_format
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             stmt.setLong(1, containerId)
             stmt.setString(2, masterIndex.index.format.name.lowercase())
@@ -477,7 +477,7 @@ public class CacheImporter @Inject constructor(
             INSERT INTO caches (id)
             VALUES (DEFAULT)
             RETURNING id
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             stmt.executeQuery().use { rows ->
                 check(rows.next())
@@ -489,7 +489,7 @@ public class CacheImporter @Inject constructor(
             """
             INSERT INTO master_indexes (id, container_id, format)
             VALUES (?, ?, ?::master_index_format)
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             stmt.setInt(1, masterIndexId)
             stmt.setLong(2, containerId)
@@ -504,7 +504,7 @@ public class CacheImporter @Inject constructor(
                 master_index_id, archive_id, crc32, version, whirlpool, groups, total_uncompressed_length
             )
             VALUES (?, ?, ?, ?, ?, ?, ?)
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             for ((i, entry) in masterIndex.index.entries.withIndex()) {
                 stmt.setInt(1, masterIndexId)
@@ -558,7 +558,7 @@ public class CacheImporter @Inject constructor(
                 SELECT id
                 FROM sources
                 WHERE type = 'js5remote' AND cache_id = ? AND game_id = ? AND build_major = ? AND build_minor IS NOT DISTINCT FROM ?
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.setInt(1, cacheId)
                 stmt.setInt(2, gameId)
@@ -578,7 +578,7 @@ public class CacheImporter @Inject constructor(
             INSERT INTO sources (type, cache_id, game_id, build_major, build_minor, timestamp, name, description, url)
             VALUES (?::source_type, ?, ?, ?, ?, ?, ?, ?, ?)
             RETURNING id
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             stmt.setString(1, type.toString().lowercase())
             stmt.setInt(2, cacheId)
@@ -644,7 +644,7 @@ public class CacheImporter @Inject constructor(
             INSERT INTO groups (scope_id, archive_id, group_id, version, version_truncated, container_id)
             VALUES (?, ?, ?, ?, ?, ?)
             ON CONFLICT DO NOTHING
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             for ((i, group) in groups.withIndex()) {
                 stmt.setInt(1, scopeId)
@@ -664,7 +664,7 @@ public class CacheImporter @Inject constructor(
             INSERT INTO source_groups (source_id, archive_id, group_id, version, version_truncated, container_id)
             VALUES (?, ?, ?, ?, ?, ?)
             ON CONFLICT DO NOTHING
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             for ((i, group) in groups.withIndex()) {
                 stmt.setInt(1, sourceId)
@@ -704,7 +704,7 @@ public class CacheImporter @Inject constructor(
                 container_id, protocol, version, has_names, has_digests, has_lengths, has_uncompressed_checksums
             )
             VALUES (?, ?, ?, ?, ?, ?, ?)
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             stmt.setLong(1, containerId)
             stmt.setInt(2, index.index.protocol.id)
@@ -732,7 +732,7 @@ public class CacheImporter @Inject constructor(
                 uncompressed_crc32
             )
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             for (group in index.index) {
                 stmt.setLong(1, containerId)
@@ -771,7 +771,7 @@ public class CacheImporter @Inject constructor(
             """
             INSERT INTO index_files (container_id, group_id, file_id, name_hash)
             VALUES (?, ?, ?, ?)
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             for (group in index.index) {
                 for (file in group) {
@@ -799,7 +799,7 @@ public class CacheImporter @Inject constructor(
         connection.prepareStatement(
             """
             LOCK TABLE containers IN EXCLUSIVE MODE
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             stmt.execute()
         }
@@ -816,7 +816,7 @@ public class CacheImporter @Inject constructor(
                 encrypted BOOLEAN NOT NULL,
                 empty_loc BOOLEAN NULL
             ) ON COMMIT DROP
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             stmt.execute()
         }
@@ -829,7 +829,7 @@ public class CacheImporter @Inject constructor(
                 whirlpool BYTEA NOT NULL,
                 data BYTEA NOT NULL
             ) ON COMMIT DROP
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             stmt.execute()
         }
@@ -843,7 +843,7 @@ public class CacheImporter @Inject constructor(
         connection.prepareStatement(
             """
             TRUNCATE TABLE tmp_containers
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             stmt.execute()
         }
@@ -852,7 +852,7 @@ public class CacheImporter @Inject constructor(
             """
             INSERT INTO tmp_containers (index, crc32, whirlpool, data, uncompressed_length, uncompressed_crc32, encrypted, empty_loc)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             for ((i, container) in containers.withIndex()) {
                 stmt.setInt(1, i)
@@ -883,7 +883,7 @@ public class CacheImporter @Inject constructor(
             LEFT JOIN containers c ON c.whirlpool = t.whirlpool
             WHERE c.whirlpool IS NULL
             ON CONFLICT DO NOTHING
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             stmt.execute()
         }
@@ -896,7 +896,7 @@ public class CacheImporter @Inject constructor(
             FROM tmp_containers t
             JOIN containers c ON c.whirlpool = t.whirlpool
             ORDER BY t.index ASC
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             stmt.executeQuery().use { rows ->
                 while (rows.next()) {
@@ -917,7 +917,7 @@ public class CacheImporter @Inject constructor(
         connection.prepareStatement(
             """
             TRUNCATE TABLE tmp_blobs
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             stmt.execute()
         }
@@ -926,7 +926,7 @@ public class CacheImporter @Inject constructor(
             """
             INSERT INTO tmp_blobs (index, crc32, whirlpool, data)
             VALUES (?, ?, ?, ?)
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             for ((i, blob) in blobs.withIndex()) {
                 stmt.setInt(1, i)
@@ -948,7 +948,7 @@ public class CacheImporter @Inject constructor(
             LEFT JOIN blobs b ON b.whirlpool = t.whirlpool
             WHERE b.whirlpool IS NULL
             ON CONFLICT DO NOTHING
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             stmt.execute()
         }
@@ -961,7 +961,7 @@ public class CacheImporter @Inject constructor(
             FROM tmp_blobs t
             JOIN blobs b ON b.whirlpool = t.whirlpool
             ORDER BY t.index ASC
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             stmt.executeQuery().use { rows ->
                 while (rows.next()) {
@@ -1007,7 +1007,7 @@ public class CacheImporter @Inject constructor(
             connection.prepareStatement(
                 """
                 UPDATE game_variants SET last_master_index_id = ? WHERE id = ?
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.setInt(1, masterIndexId)
                 stmt.setInt(2, gameId)
@@ -1114,7 +1114,7 @@ public class CacheImporter @Inject constructor(
             SELECT id
             FROM crc_tables
             WHERE blob_id = ?
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             stmt.setLong(1, blobId)
 
@@ -1132,7 +1132,7 @@ public class CacheImporter @Inject constructor(
             INSERT INTO caches (id)
             VALUES (DEFAULT)
             RETURNING id
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             stmt.executeQuery().use { rows ->
                 check(rows.next())
@@ -1144,7 +1144,7 @@ public class CacheImporter @Inject constructor(
             """
             INSERT INTO crc_tables (id, blob_id)
             VALUES (?, ?)
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             stmt.setInt(1, checksumTableId)
             stmt.setLong(2, blobId)
@@ -1156,7 +1156,7 @@ public class CacheImporter @Inject constructor(
             """
             INSERT INTO crc_table_archives (crc_table_id, archive_id, crc32)
             VALUES (?, ?, ?)
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             for ((i, entry) in checksumTable.table.entries.withIndex()) {
                 stmt.setInt(1, checksumTableId)
@@ -1194,7 +1194,7 @@ public class CacheImporter @Inject constructor(
             INSERT INTO archives (archive_id, blob_id)
             VALUES (?, ?)
             ON CONFLICT DO NOTHING
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             stmt.setInt(1, archive.id)
             stmt.setLong(2, blobId)
@@ -1207,7 +1207,7 @@ public class CacheImporter @Inject constructor(
             INSERT INTO source_archives (source_id, archive_id, blob_id)
             VALUES (?, ?, ?)
             ON CONFLICT DO NOTHING
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             stmt.setInt(1, sourceId)
             stmt.setInt(2, archive.id)
@@ -1223,7 +1223,7 @@ public class CacheImporter @Inject constructor(
             """
             INSERT INTO version_lists (blob_id)
             VALUES (?)
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             try {
                 stmt.setLong(1, blobId)
@@ -1242,7 +1242,7 @@ public class CacheImporter @Inject constructor(
             """
             INSERT INTO version_list_files (blob_id, index_id, file_id, version, crc32)
             VALUES (?, ?, ?, ?, ?)
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             for ((indexId, files) in versionList.files.withIndex()) {
                 for ((fileId, file) in files.withIndex()) {
@@ -1267,7 +1267,7 @@ public class CacheImporter @Inject constructor(
             """
             INSERT INTO version_list_maps (blob_id, map_square, map_file_id, loc_file_id, free_to_play)
             VALUES (?, ?, ?, ?, ?)
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             for ((mapSquare, map) in versionList.maps) {
                 stmt.setLong(1, blobId)
@@ -1306,7 +1306,7 @@ public class CacheImporter @Inject constructor(
             INSERT INTO files (index_id, file_id, version, blob_id)
             VALUES (?, ?, ?, ?)
             ON CONFLICT DO NOTHING
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             for ((i, file) in files.withIndex()) {
                 stmt.setInt(1, file.index)
@@ -1325,7 +1325,7 @@ public class CacheImporter @Inject constructor(
             INSERT INTO source_files (source_id, index_id, file_id, version, blob_id)
             VALUES (?, ?, ?, ?, ?)
             ON CONFLICT DO NOTHING
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             for ((i, file) in files.withIndex()) {
                 stmt.setInt(1, sourceId)
@@ -1346,7 +1346,7 @@ public class CacheImporter @Inject constructor(
             connection.prepareStatement(
                 """
                 SELECT pg_try_advisory_lock(0)
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.executeQuery().use { rows ->
                     if (!rows.next()) {
@@ -1363,7 +1363,7 @@ public class CacheImporter @Inject constructor(
             connection.prepareStatement(
                 """
                 REFRESH MATERIALIZED VIEW CONCURRENTLY index_stats
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.execute()
             }
@@ -1371,7 +1371,7 @@ public class CacheImporter @Inject constructor(
             connection.prepareStatement(
                 """
                 REFRESH MATERIALIZED VIEW CONCURRENTLY master_index_stats
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.execute()
             }
@@ -1379,7 +1379,7 @@ public class CacheImporter @Inject constructor(
             connection.prepareStatement(
                 """
                 REFRESH MATERIALIZED VIEW CONCURRENTLY version_list_stats
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.execute()
             }
@@ -1387,7 +1387,7 @@ public class CacheImporter @Inject constructor(
             connection.prepareStatement(
                 """
                 REFRESH MATERIALIZED VIEW CONCURRENTLY crc_table_stats
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.execute()
             }

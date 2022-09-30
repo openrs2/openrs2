@@ -4,7 +4,7 @@ import org.openrs2.buffer.use
 
 public class VersionList(
     public val files: List<List<File>>,
-    public val maps: Map<Int, MapSquare>,
+    public val maps: Map<Int, MapSquare>
 ) {
     public data class File(
         val version: Int,

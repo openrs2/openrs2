@@ -51,11 +51,11 @@ public class RuneStarNameDownloader @Inject constructor(
     private companion object {
         private val NAMES_ENDPOINTS = listOf(
             URI("https://raw.githubusercontent.com/RuneStar/cache-names/master/names.tsv"),
-            URI("https://raw.githubusercontent.com/Joshua-F/cache-names/master/names.tsv"),
+            URI("https://raw.githubusercontent.com/Joshua-F/cache-names/master/names.tsv")
         )
         private val INDIVIDUAL_NAMES_ENDPOINTS = listOf(
             URI("https://raw.githubusercontent.com/RuneStar/cache-names/master/individual-names.tsv"),
-            URI("https://raw.githubusercontent.com/Joshua-F/cache-names/master/individual-names.tsv"),
+            URI("https://raw.githubusercontent.com/Joshua-F/cache-names/master/individual-names.tsv")
         )
     }
 }

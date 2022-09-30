@@ -358,7 +358,7 @@ public class HighDpiTransformer : Transformer() {
         private val DRAW_PIXELS_MATCHER = InsnMatcher.compile(
             """
             ALOAD ILOAD ILOAD LDC GETSTATIC IFEQ LDC GOTO SIPUSH ALOAD INVOKESTATIC INVOKEINTERFACE
-        """.trimIndent()
+            """.trimIndent()
         )
         private val GET_GL_MATCHER = InsnMatcher.compile("GETSTATIC INVOKEVIRTUAL PUTSTATIC")
         private val SET_CANVAS_VISIBLE_MATCHER = InsnMatcher.compile("GETSTATIC ICONST_1 INVOKEVIRTUAL")

@@ -14,7 +14,7 @@ public class Sprite private constructor(
         val xOffset: Int,
         val yOffset: Int,
         val innerWidth: Int,
-        val innerHeight: Int,
+        val innerHeight: Int
     ) {
         val pixels = ByteArray(innerWidth * innerHeight)
         var alpha: ByteArray? = null

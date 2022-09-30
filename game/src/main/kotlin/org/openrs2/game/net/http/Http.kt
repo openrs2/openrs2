@@ -109,7 +109,7 @@ public object Http {
                     <center>$BANNER</center>
                 </body>
             </html>
-        """.trimIndent().plus("\n"), Charsets.UTF_8
+            """.trimIndent().plus("\n"), Charsets.UTF_8
         ).use { buf ->
             writeResponse(ctx, request, status, buf, HttpHeaderValues.TEXT_HTML, buf.readableBytes().toLong())
         }

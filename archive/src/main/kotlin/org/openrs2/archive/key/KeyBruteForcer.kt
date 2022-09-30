@@ -36,7 +36,7 @@ public class KeyBruteForcer @Inject constructor(
             connection.prepareStatement(
                 """
                 LOCK TABLE keys IN EXCLUSIVE MODE
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.execute()
             }
@@ -49,7 +49,7 @@ public class KeyBruteForcer @Inject constructor(
                     first_seen TIMESTAMPTZ NOT NULL,
                     last_seen TIMESTAMPTZ NOT NULL
                 ) ON COMMIT DROP
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.execute()
             }
@@ -60,7 +60,7 @@ public class KeyBruteForcer @Inject constructor(
                 SELECT key, source, first_seen, last_seen
                 FROM key_queue
                 FOR UPDATE SKIP LOCKED
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.execute()
             }
@@ -73,7 +73,7 @@ public class KeyBruteForcer @Inject constructor(
                 LEFT JOIN keys k ON k.key = t.key
                 WHERE k.key IS NULL
                 ON CONFLICT DO NOTHING
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.execute()
             }
@@ -87,7 +87,7 @@ public class KeyBruteForcer @Inject constructor(
                 ON CONFLICT (key_id, source) DO UPDATE SET
                     first_seen = LEAST(s.first_seen, EXCLUDED.first_seen),
                     last_seen = GREATEST(s.last_seen, EXCLUDED.last_seen)
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.execute()
             }
@@ -97,7 +97,7 @@ public class KeyBruteForcer @Inject constructor(
                 DELETE FROM key_queue k
                 USING tmp_keys t
                 WHERE k.key = t.key AND k.source = t.source
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.execute()
             }
@@ -152,7 +152,7 @@ public class KeyBruteForcer @Inject constructor(
             connection.prepareStatement(
                 """
                 LOCK TABLE containers, keys IN SHARE MODE
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.execute()
             }
@@ -170,7 +170,7 @@ public class KeyBruteForcer @Inject constructor(
             SELECT last_container_id
             FROM brute_force_iterator
             FOR UPDATE
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             stmt.executeQuery().use { rows ->
                 check(rows.next())
@@ -191,7 +191,7 @@ public class KeyBruteForcer @Inject constructor(
                 """
                 SELECT id, (key).k0, (key).k1, (key).k2, (key).k3
                 FROM keys
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.fetchSize = BATCH_SIZE
 
@@ -224,7 +224,7 @@ public class KeyBruteForcer @Inject constructor(
             """
             UPDATE brute_force_iterator
             SET last_container_id = ?
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             stmt.setObject(1, lastContainerId, Types.BIGINT)
             stmt.execute()
@@ -239,7 +239,7 @@ public class KeyBruteForcer @Inject constructor(
             WHERE (? IS NULL OR id > ?) AND encrypted AND key_id IS NULL
             ORDER BY id ASC
             LIMIT 1
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             stmt.setObject(1, lastContainerId, Types.BIGINT)
             stmt.setObject(2, lastContainerId, Types.BIGINT)
@@ -265,7 +265,7 @@ public class KeyBruteForcer @Inject constructor(
             SELECT last_key_id, last_container_id
             FROM brute_force_iterator
             FOR UPDATE
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             stmt.executeQuery().use { rows ->
                 check(rows.next())
@@ -292,7 +292,7 @@ public class KeyBruteForcer @Inject constructor(
                 SELECT id, data
                 FROM containers
                 WHERE encrypted AND key_id IS NULL AND id <= ?
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.fetchSize = BATCH_SIZE
                 stmt.setLong(1, lastContainerId)
@@ -319,7 +319,7 @@ public class KeyBruteForcer @Inject constructor(
             """
             UPDATE brute_force_iterator
             SET last_key_id = ?
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             stmt.setObject(1, lastKeyId, Types.BIGINT)
             stmt.execute()
@@ -334,7 +334,7 @@ public class KeyBruteForcer @Inject constructor(
             WHERE ? IS NULL OR id > ?
             ORDER BY id ASC
             LIMIT 1
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             stmt.setObject(1, lastKeyId, Types.BIGINT)
             stmt.setObject(2, lastKeyId, Types.BIGINT)

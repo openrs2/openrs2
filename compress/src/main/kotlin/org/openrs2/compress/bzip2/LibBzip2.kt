@@ -56,7 +56,7 @@ public interface LibBzip2 {
         public fun load(): LibBzip2 {
             return LibraryLoader.loadLibrary(
                 LibBzip2::class.java, mapOf(
-                    LibraryOption.LoadNow to true,
+                    LibraryOption.LoadNow to true
                 ), "bz2"
             )
         }

@@ -25,7 +25,7 @@ public class NameImporter @Inject constructor(
                 INSERT INTO names (hash, name)
                 VALUES (?, ?)
                 ON CONFLICT DO NOTHING
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 for (name in names) {
                     stmt.setInt(1, name.krHashCode())

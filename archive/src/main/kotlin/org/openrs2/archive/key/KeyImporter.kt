@@ -59,7 +59,7 @@ public class KeyImporter @Inject constructor(
             connection.prepareStatement(
                 """
                 SELECT url FROM keysets
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.executeQuery().use { rows ->
                     val urls = mutableSetOf<String>()
@@ -94,7 +94,7 @@ public class KeyImporter @Inject constructor(
                 INSERT INTO keysets (url)
                 VALUES (?)
                 ON CONFLICT DO NOTHING
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 for (url in urls) {
                     stmt.setString(1, url)
@@ -128,7 +128,7 @@ public class KeyImporter @Inject constructor(
             ON CONFLICT (key, source) DO UPDATE SET
                 first_seen = LEAST(k.first_seen, EXCLUDED.first_seen),
                 last_seen = GREATEST(k.last_seen, EXCLUDED.last_seen)
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             for (key in keys) {
                 if (key.key.isZero) {

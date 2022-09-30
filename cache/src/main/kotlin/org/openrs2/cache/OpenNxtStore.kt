@@ -33,7 +33,7 @@ public object OpenNxtStore {
             SELECT data, crc
             FROM cache_index
             WHERE key = 1
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             stmt.executeQuery().use { rows ->
                 if (rows.next()) {
@@ -57,7 +57,7 @@ public object OpenNxtStore {
             """
             SELECT key, data, crc, version
             FROM cache
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             stmt.executeQuery().use { rows ->
                 while (rows.next()) {

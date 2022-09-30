@@ -109,7 +109,7 @@ public inline fun <T> Path.useTempFile(
 
 public inline fun <T> Path.atomicWrite(
     sync: Boolean = true,
-    f: (Path) -> T,
+    f: (Path) -> T
 ): T {
     parent.useTempFile(".$fileName", ".tmp") { tempFile ->
         val result = f(tempFile)
@@ -134,7 +134,7 @@ public inline fun <T> Path.atomicWrite(
 public inline fun <T> Path.useAtomicBufferedWriter(
     vararg options: OpenOption,
     sync: Boolean = true,
-    f: (BufferedWriter) -> T,
+    f: (BufferedWriter) -> T
 ): T {
     return atomicWrite(sync) { path ->
         Files.newBufferedWriter(path, *options).use { writer ->
@@ -147,7 +147,7 @@ public inline fun <T> Path.useAtomicBufferedWriter(
     cs: Charset,
     vararg options: OpenOption,
     sync: Boolean = true,
-    f: (BufferedWriter) -> T,
+    f: (BufferedWriter) -> T
 ): T {
     return atomicWrite(sync) { path ->
         Files.newBufferedWriter(path, cs, *options).use { writer ->
@@ -159,7 +159,7 @@ public inline fun <T> Path.useAtomicBufferedWriter(
 public inline fun <T> Path.useAtomicOutputStream(
     vararg options: OpenOption,
     sync: Boolean = true,
-    f: (OutputStream) -> T,
+    f: (OutputStream) -> T
 ): T {
     return atomicWrite(sync) { path ->
         Files.newOutputStream(path, *options).use { output ->

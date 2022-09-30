@@ -16,6 +16,6 @@ public interface PlayerStore {
         affiliate: Int,
         dateOfBirth: LocalDate,
         country: CountryCode,
-        email: String,
+        email: String
     ): Result<Unit, CreateResponse>
 }

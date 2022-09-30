@@ -50,7 +50,7 @@ public class CacheDownloader @Inject constructor(
                                 buildMajor,
                                 game.lastMasterIndexId,
                                 continuation,
-                                importer,
+                                importer
                             )
                         )
                     }

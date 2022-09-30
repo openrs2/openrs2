@@ -102,7 +102,7 @@ public class Js5Index(
 
     public class MutableFile internal constructor(
         parent: MutableNamedEntryCollection<MutableFile>,
-        override val id: Int,
+        override val id: Int
     ) : MutableNamedEntry, File {
         private var parent: MutableNamedEntryCollection<MutableFile>? = parent
 

@@ -58,9 +58,9 @@ public class CachesController @Inject constructor(
         call.caching = CachingOptions(
             cacheControl = CacheControl.MaxAge(
                 maxAgeSeconds = 900,
-                visibility = CacheControl.Visibility.Public,
+                visibility = CacheControl.Visibility.Public
             ),
-            expires = ZonedDateTime.now(ZoneOffset.UTC).plusSeconds(900),
+            expires = ZonedDateTime.now(ZoneOffset.UTC).plusSeconds(900)
         )
         call.respond(caches)
     }
@@ -83,7 +83,7 @@ public class CachesController @Inject constructor(
             ThymeleafContent(
                 "caches/show.html", mapOf(
                     "cache" to cache,
-                    "scope" to scope,
+                    "scope" to scope
                 )
             )
         )
@@ -113,12 +113,12 @@ public class CachesController @Inject constructor(
                 caching = CachingOptions(
                     cacheControl = CacheControl.MaxAge(
                         maxAgeSeconds = 86400,
-                        visibility = CacheControl.Visibility.Public,
+                        visibility = CacheControl.Visibility.Public
                     ),
-                    expires = ZonedDateTime.now(ZoneOffset.UTC).plusSeconds(86400),
+                    expires = ZonedDateTime.now(ZoneOffset.UTC).plusSeconds(86400)
                 )
                 versions = listOf(
-                    EntityTagVersion(etag, weak = false),
+                    EntityTagVersion(etag, weak = false)
                 )
             }
         }

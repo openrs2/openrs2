@@ -38,7 +38,7 @@ public class MapRenderer @Inject constructor(
                 SELECT id
                 FROM scopes
                 WHERE name = ?
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.setString(1, scope)
 
@@ -175,7 +175,7 @@ public class MapRenderer @Inject constructor(
                 JOIN names n ON n.hash = g.name_hash
                 WHERE g.scope_id = ? AND g.master_index_id = ? AND g.archive_id = ${Js5Archive.MAPS} AND
                     n.name ~ '^[lm](?:[0-9]|[1-9][0-9])_(?:[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$'
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.setInt(1, scopeId)
                 stmt.setInt(2, masterIndexId)
@@ -228,7 +228,7 @@ public class MapRenderer @Inject constructor(
                 JOIN names n ON n.hash = g.name_hash
                 WHERE g.scope_id = ? AND g.master_index_id = ? AND g.archive_id = ${Js5Archive.MAPS} AND
                     n.name ~ '^m(?:[0-9]|[1-9][0-9])_(?:[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$'
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.setInt(1, scopeId)
                 stmt.setInt(2, masterIndexId)
@@ -272,7 +272,7 @@ public class MapRenderer @Inject constructor(
             SELECT data
             FROM resolved_indexes
             WHERE scope_id = ? AND master_index_id = ? AND archive_id = ?
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             stmt.setInt(1, scopeId)
             stmt.setInt(2, masterIndexId)
@@ -306,7 +306,7 @@ public class MapRenderer @Inject constructor(
             SELECT data
             FROM resolved_groups
             WHERE scope_id = ? AND master_index_id = ? AND archive_id = ? AND group_id = ?
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             stmt.setInt(1, scopeId)
             stmt.setInt(2, masterIndexId)

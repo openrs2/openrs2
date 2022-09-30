@@ -18,7 +18,7 @@ public class GameDatabase @Inject constructor(
                 JOIN environments e ON e.id = v.environment_id
                 JOIN languages l ON l.id = v.language_id
                 WHERE g.name = ? AND e.name = ? AND l.iso_code = ?
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.setString(1, name)
                 stmt.setString(2, environment)

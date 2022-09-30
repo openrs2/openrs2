@@ -23,7 +23,7 @@ public class Js5Pack private constructor(
     index: Js5Index,
     unpackedCacheSize: Int,
     private var packedIndex: ByteBuf,
-    private val packed: Int2ObjectSortedMap<ByteBuf>,
+    private val packed: Int2ObjectSortedMap<ByteBuf>
 ) : Archive(alloc, index, 0, UnpackedCache(unpackedCacheSize)), Closeable {
     override fun packedExists(group: Int): Boolean {
         return packed.containsKey(group)

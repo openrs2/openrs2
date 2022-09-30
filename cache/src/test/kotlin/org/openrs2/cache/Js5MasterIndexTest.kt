@@ -28,7 +28,7 @@ class Js5MasterIndexTest {
                             "0e1a2b93c80a41c7ad2a985dff707a6a8ff82e229cbc468f04191198920955a1" +
                                 "4b3d7eab77a17faf99208dee5b44afb789962ad79f230b3b59106a0af892219c"
                         )
-                    ),
+                    )
                 )
             ), index
         )

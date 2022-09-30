@@ -24,7 +24,7 @@ public class OsrsJs5ChannelHandler(
     build: Int,
     lastMasterIndexId: Int?,
     continuation: Continuation<Unit>,
-    importer: CacheImporter,
+    importer: CacheImporter
 ) : Js5ChannelHandler(
     bootstrap,
     scopeId,

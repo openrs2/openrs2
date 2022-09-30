@@ -42,7 +42,7 @@ public object PackClass {
         Opcodes.V1_3,
         Opcodes.V1_4,
         Opcodes.V1_5,
-        Opcodes.V1_6,
+        Opcodes.V1_6
     )
 
     private const val INT_DESCRIPTOR = "I"

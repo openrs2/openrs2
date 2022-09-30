@@ -235,7 +235,7 @@ public class CacheExporter @Inject constructor(
                         cs.groups, cs.valid_keys, cs.keys, cs.size, cs.blocks
                 ) t
                 ORDER BY t.game ASC, t.environment ASC, t.language ASC, t.builds[1] ASC, t.timestamp ASC
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.executeQuery().use { rows ->
                     val caches = mutableListOf<CacheSummary>()
@@ -313,7 +313,7 @@ public class CacheExporter @Inject constructor(
                 LEFT JOIN blobs b ON b.id = t.blob_id
                 LEFT JOIN cache_stats cs ON cs.scope_id = s.id AND cs.cache_id = c.id
                 WHERE s.name = ? AND c.id = ?
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.setString(1, scope)
                 stmt.setInt(2, id)
@@ -373,7 +373,7 @@ public class CacheExporter @Inject constructor(
                 JOIN languages l ON l.id = v.language_id
                 WHERE sc.name = ? AND s.cache_id = ?
                 ORDER BY s.name ASC
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.setString(1, scope)
                 stmt.setInt(2, id)
@@ -417,7 +417,7 @@ public class CacheExporter @Inject constructor(
                 SELECT url
                 FROM updates
                 WHERE cache_id = ?
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.setInt(1, id)
 
@@ -443,7 +443,7 @@ public class CacheExporter @Inject constructor(
                 LEFT JOIN resolve_archive(a.archive_id, a.crc32) b ON TRUE
                 WHERE a.crc_table_id = ?
                 ORDER BY archive_id ASC
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.setString(1, scope)
                 stmt.setInt(2, id)
@@ -479,7 +479,7 @@ public class CacheExporter @Inject constructor(
                     JOIN version_list_stats s ON s.blob_id = b.id
                     WHERE a.crc_table_id = ? AND a.archive_id = 5
                     ORDER BY s.index_id ASC
-                """.trimIndent()
+                    """.trimIndent()
                 ).use { stmt ->
                     stmt.setInt(1, id)
 
@@ -526,7 +526,7 @@ public class CacheExporter @Inject constructor(
                 WHERE sc.name = ? AND s.cache_id = ?
                 GROUP BY g.name, e.name, l.iso_code
                 LIMIT 1
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.setString(1, scope)
                 stmt.setInt(2, id)
@@ -579,7 +579,7 @@ public class CacheExporter @Inject constructor(
                 SELECT f.data
                 FROM resolved_files f
                 WHERE f.crc_table_id = ? AND f.index_id = ? AND f.file_id = ?
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.setString(1, scope)
                 stmt.setInt(2, id)
@@ -609,7 +609,7 @@ public class CacheExporter @Inject constructor(
                 SELECT id
                 FROM crc_tables
                 WHERE id = ?
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.setInt(1, id)
 
@@ -635,7 +635,7 @@ public class CacheExporter @Inject constructor(
             FROM resolved_groups g
             JOIN scopes s ON s.id = g.scope_id
             WHERE s.name = ? AND g.master_index_id = ?
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             stmt.fetchSize = BATCH_SIZE
             stmt.setString(1, scope)
@@ -677,7 +677,7 @@ public class CacheExporter @Inject constructor(
             SELECT index_id, file_id, data, version
             FROM resolved_files
             WHERE crc_table_id = ?
-        """.trimIndent()
+            """.trimIndent()
         ).use { stmt ->
             stmt.fetchSize = BATCH_SIZE
             stmt.setInt(1, id)
@@ -717,7 +717,7 @@ public class CacheExporter @Inject constructor(
                 JOIN keys k ON k.id = g.key_id
                 LEFT JOIN names n ON n.hash = g.name_hash AND n.name ~ '^l(?:[0-9]|[1-9][0-9])_(?:[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$'
                 WHERE s.name = ? AND g.master_index_id = ?
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.setString(1, scope)
                 stmt.setInt(2, id)

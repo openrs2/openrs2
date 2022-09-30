@@ -51,7 +51,7 @@ public class KeyExporter @Inject constructor(
                     COUNT(*) FILTER (WHERE c.key_id IS NULL AND c.empty_loc)
                 FROM containers c
                 WHERE c.encrypted
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.executeQuery().use { rows ->
                     check(rows.next())
@@ -69,7 +69,7 @@ public class KeyExporter @Inject constructor(
                     COUNT(DISTINCT k.id) FILTER (WHERE c.key_id IS NOT NULL)
                 FROM keys k
                 LEFT JOIN containers c ON c.key_id = k.id
-            """.trimIndent()
+                """.trimIndent()
             ).use { stmt ->
                 stmt.executeQuery().use { rows ->
                     check(rows.next())

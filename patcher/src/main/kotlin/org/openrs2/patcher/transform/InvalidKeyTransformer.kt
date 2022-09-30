@@ -96,7 +96,7 @@ public class InvalidKeyTransformer : Transformer() {
         private val MATCHER = InsnMatcher.compile(
             """
             ALOAD INVOKESTATIC ASTORE GOTO ASTORE ALOAD NEW DUP INVOKESPECIAL? LDC .*? INVOKESTATIC ATHROW
-        """.trimIndent()
+            """.trimIndent()
         )
     }
 }

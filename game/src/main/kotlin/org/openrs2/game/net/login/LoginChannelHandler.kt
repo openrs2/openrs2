@@ -209,7 +209,7 @@ public class LoginChannelHandler @Inject constructor(
                     msg.affiliate,
                     dateOfBirth,
                     country,
-                    msg.email,
+                    msg.email
                 ).bind()
             }.getErrorOr(CreateResponse.Ok)
 
