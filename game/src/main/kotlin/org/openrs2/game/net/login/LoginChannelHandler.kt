@@ -96,6 +96,7 @@ public class LoginChannelHandler @Inject constructor(
         usernameHash = msg.usernameHash
         serverKey = secureRandom.nextLong()
         ctx.write(LoginResponse.ExchangeSessionKey(serverKey), ctx.voidPromise())
+        ctx.read()
     }
 
     private fun handleInitJs5RemoteConnection(ctx: ChannelHandlerContext, msg: LoginRequest.InitJs5RemoteConnection) {
