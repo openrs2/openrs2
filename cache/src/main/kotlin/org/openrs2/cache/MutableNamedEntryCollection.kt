@@ -251,6 +251,7 @@ public abstract class MutableNamedEntryCollection<T : MutableNamedEntry>(
                     newSet.add(id)
                     nameHashTable[newNameHash] = newSet
                 }
+
                 else -> set.add(id)
             }
 

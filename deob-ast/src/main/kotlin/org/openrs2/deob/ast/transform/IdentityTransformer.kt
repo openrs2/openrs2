@@ -27,6 +27,7 @@ public class IdentityTransformer : Transformer() {
                         expr.replace(expr.left)
                     }
                 }
+
                 BinaryExpr.Operator.MINUS -> {
                     if (expr.left.isZero()) {
                         // 0 - x => -x
@@ -36,6 +37,7 @@ public class IdentityTransformer : Transformer() {
                         expr.replace(expr.left)
                     }
                 }
+
                 BinaryExpr.Operator.MULTIPLY -> {
                     if (expr.left.isOne()) {
                         // 1 * x => x
@@ -45,12 +47,14 @@ public class IdentityTransformer : Transformer() {
                         expr.replace(expr.left)
                     }
                 }
+
                 BinaryExpr.Operator.DIVIDE -> {
                     if (expr.right.isOne()) {
                         // x / 1 => x
                         expr.replace(expr.left)
                     }
                 }
+
                 else -> Unit
             }
         }

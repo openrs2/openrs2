@@ -65,6 +65,7 @@ public class GzipLaxInputStream(
                     checkTrailer()
                     return -1
                 }
+
                 inflater.needsInput() -> fill()
                 inflater.needsDictionary() -> throw IOException("Dictionaries not supported")
             }

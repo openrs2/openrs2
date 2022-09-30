@@ -14,17 +14,20 @@ public object Js5RequestEncoder : MessageToByteEncoder<Js5Request>(Js5Request::c
                 out.writeByte(msg.archive)
                 out.writeShort(msg.group)
             }
+
             is Js5Request.Rekey -> {
                 out.writeByte(4)
                 out.writeByte(msg.key)
                 out.writeZero(2)
             }
+
             is Js5Request.LoggedIn -> encodeSimple(out, 2)
             is Js5Request.LoggedOut -> encodeSimple(out, 3)
             is Js5Request.Connected -> {
                 out.writeByte(6)
                 out.writeMedium(3)
             }
+
             is Js5Request.Disconnect -> encodeSimple(out, 7)
         }
     }

@@ -54,6 +54,7 @@ public class CacheDownloader @Inject constructor(
                             )
                         )
                     }
+
                     "runescape" -> {
                         val buildMinor = game.buildMinor ?: throw Exception("Current minor build not set")
 
@@ -82,6 +83,7 @@ public class CacheDownloader @Inject constructor(
                             )
                         )
                     }
+
                     else -> throw UnsupportedOperationException()
                 }
 

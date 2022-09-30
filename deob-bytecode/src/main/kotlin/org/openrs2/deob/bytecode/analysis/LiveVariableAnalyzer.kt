@@ -27,6 +27,7 @@ public class LiveVariableAnalyzer(owner: String, method: MethodNode) :
                 Opcodes.ISTORE, Opcodes.LSTORE, Opcodes.FSTORE, Opcodes.DSTORE, Opcodes.ASTORE -> set.minus(insn.`var`)
                 else -> set
             }
+
             is IincInsnNode -> set.plus(insn.`var`)
             else -> set
         }

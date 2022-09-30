@@ -24,11 +24,13 @@ public class JsonKeyReader @Inject constructor(
                     keys += mapper.treeToValue<XteaKey?>(key) ?: throw IOException("Key must be non-null")
                 }
             }
+
             root.isObject -> {
                 for (entry in root.fields()) {
                     keys += mapper.treeToValue<XteaKey?>(entry.value) ?: throw IOException("Key must be non-null")
                 }
             }
+
             else -> throw IOException("Root element must be an array or object")
         }
 

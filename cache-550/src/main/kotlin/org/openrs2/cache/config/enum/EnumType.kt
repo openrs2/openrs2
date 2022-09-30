@@ -37,6 +37,7 @@ public class EnumType(id: Int) : ConfigType(id) {
 
                 this.strings = strings
             }
+
             6 -> {
                 val size = buf.readUnsignedShort()
                 val ints = Int2IntOpenHashMap()
@@ -48,6 +49,7 @@ public class EnumType(id: Int) : ConfigType(id) {
 
                 this.ints = ints
             }
+
             else -> throw IllegalArgumentException("Unsupported config code: $code")
         }
     }

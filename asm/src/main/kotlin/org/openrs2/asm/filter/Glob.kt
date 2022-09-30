@@ -35,6 +35,7 @@ public object Glob {
                 } else {
                     regex.append(".*")
                 }
+
                 else -> regex.append(Regex.escape(ch.toString()))
             }
         }

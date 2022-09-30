@@ -26,6 +26,7 @@ public class StructType(id: Int) : ConfigType(id) {
                     }
                 }
             }
+
             else -> throw IllegalArgumentException("Unsupported config code: $code")
         }
     }
@@ -42,11 +43,13 @@ public class StructType(id: Int) : ConfigType(id) {
                         buf.writeMedium(id)
                         buf.writeString(value)
                     }
+
                     is Int -> {
                         buf.writeBoolean(false)
                         buf.writeMedium(id)
                         buf.writeInt(value)
                     }
+
                     else -> throw IllegalStateException()
                 }
             }

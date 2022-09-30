@@ -196,11 +196,13 @@ public object Song {
                         onVelocity = (onVelocity + onVelocityBuf.readUnsignedByte().toInt()) and 0x7F
                         ShortMessage(ShortMessage.NOTE_ON, channel, key, onVelocity)
                     }
+
                     NOTE_OFF -> {
                         key = (key + keyBuf.readUnsignedByte().toInt()) and 0x7F
                         offVelocity = (offVelocity + offVelocityBuf.readUnsignedByte().toInt()) and 0x7F
                         ShortMessage(ShortMessage.NOTE_OFF, channel, key, offVelocity)
                     }
+
                     CONTROL_CHANGE -> {
                         controller = (controller + controllerBuf.readUnsignedByte()) and 0x7F
 
@@ -218,6 +220,7 @@ public object Song {
                             REGISTERED_LSB -> registeredLsbBuf.readUnsignedByte().toInt()
                             DAMPER, PORTAMENTO, ALL_SOUND_OFF, RESET_CONTROLLERS, ALL_NOTES_OFF ->
                                 otherKnownControllerBuf.readUnsignedByte().toInt()
+
                             else -> unknownControllerBuf.readUnsignedByte().toInt()
                         }
 
@@ -225,25 +228,30 @@ public object Song {
                         values[controller] = value
                         ShortMessage(ShortMessage.CONTROL_CHANGE, channel, controller, value and 0x7F)
                     }
+
                     PITCH_WHEEL_CHANGE -> {
                         pitchWheel += pitchWheelLsbBuf.readUnsignedByte().toInt()
                         pitchWheel += (pitchWheelMsbBuf.readUnsignedByte().toInt() shl 7)
                         pitchWheel = pitchWheel and 0x3FFF
                         ShortMessage(ShortMessage.PITCH_BEND, channel, pitchWheel and 0x7F, pitchWheel shr 7)
                     }
+
                     CHANNEL_PRESSURE_CHANGE -> {
                         channelPressure = (channelPressure + channelPressureBuf.readUnsignedByte().toInt()) and 0x7F
                         ShortMessage(ShortMessage.CHANNEL_PRESSURE, channel, channelPressure, 0)
                     }
+
                     KEY_PRESSURE_CHANGE -> {
                         key = (key + keyBuf.readUnsignedByte().toInt()) and 0x7F
                         keyPressure = (keyPressure + keyPressureBuf.readUnsignedByte().toInt()) and 0x7F
                         ShortMessage(ShortMessage.POLY_PRESSURE, channel, key, keyPressure)
                     }
+
                     PROGRAM_CHANGE -> {
                         val bankSelect = bankSelectBuf.readUnsignedByte().toInt()
                         ShortMessage(ShortMessage.PROGRAM_CHANGE, channel, bankSelect, 0)
                     }
+
                     else -> throw IllegalStateException()
                 }
 
@@ -317,9 +325,11 @@ public object Song {
                                     require(message.data.size == 3)
                                     tempoBuf.writeBytes(message.data)
                                 }
+
                                 else -> throw IllegalArgumentException("Unsupported meta type: $type")
                             }
                         }
+
                         is ShortMessage -> {
                             val command = message.status and 0xF0
                             val channel = message.status and 0xF
@@ -354,11 +364,13 @@ public object Song {
                                     onVelocityBuf.writeByte((onVelocity - prevOnVelocity) and 0x7F)
                                     prevOnVelocity = onVelocity
                                 }
+
                                 ShortMessage.NOTE_OFF -> {
                                     val offVelocity = message.data2
                                     offVelocityBuf.writeByte((offVelocity - prevOffVelocity) and 0x7F)
                                     prevOffVelocity = offVelocity
                                 }
+
                                 ShortMessage.CONTROL_CHANGE -> {
                                     val controller = message.data1
                                     controllerBuf.writeByte((controller - prevController) and 0x7F)
@@ -381,11 +393,13 @@ public object Song {
                                         REGISTERED_LSB -> registeredLsbBuf.writeByte(valueDelta)
                                         DAMPER, PORTAMENTO, ALL_SOUND_OFF, RESET_CONTROLLERS, ALL_NOTES_OFF ->
                                             otherKnownControllerBuf.writeByte(valueDelta)
+
                                         else -> unknownControllerBuf.writeByte(valueDelta)
                                     }
 
                                     prevValues[controller] = value
                                 }
+
                                 ShortMessage.PITCH_BEND -> {
                                     val pitchWheel = message.data1 or (message.data2 shl 7)
                                     val pitchWheelDelta = (pitchWheel - prevPitchWheel) and 0x3FFF
@@ -393,22 +407,27 @@ public object Song {
                                     pitchWheelMsbBuf.writeByte(pitchWheelDelta shr 7)
                                     prevPitchWheel = pitchWheel
                                 }
+
                                 ShortMessage.CHANNEL_PRESSURE -> {
                                     val channelPressure = message.data1
                                     channelPressureBuf.writeByte((channelPressure - prevChannelPressure) and 0x7F)
                                     prevChannelPressure = channelPressure
                                 }
+
                                 ShortMessage.POLY_PRESSURE -> {
                                     val keyPressure = message.data2
                                     keyPressureBuf.writeByte((keyPressure - prevKeyPressure) and 0x7F)
                                     prevKeyPressure = keyPressure
                                 }
+
                                 ShortMessage.PROGRAM_CHANGE -> {
                                     bankSelectBuf.writeByte(message.data1)
                                 }
+
                                 else -> throw IllegalStateException()
                             }
                         }
+
                         else -> throw IllegalArgumentException("Unsupported message type: ${message.javaClass.name}")
                     }
                 }

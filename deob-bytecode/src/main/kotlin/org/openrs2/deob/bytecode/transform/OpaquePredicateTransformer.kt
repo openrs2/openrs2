@@ -111,10 +111,12 @@ public class OpaquePredicateTransformer : Transformer() {
                     method.instructions.remove(match[0])
                     branch.opcode = Opcodes.GOTO
                 }
+
                 Opcodes.IFNE -> {
                     // branch is never taken
                     match.forEach(method.instructions::remove)
                 }
+
                 else -> error("Invalid opcode")
             }
 

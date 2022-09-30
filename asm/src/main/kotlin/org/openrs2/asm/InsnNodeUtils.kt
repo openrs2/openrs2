@@ -245,6 +245,7 @@ public val AbstractInsnNode.intConstant: Int?
                 null
             }
         }
+
         is LdcInsnNode -> {
             val cst = cst
             if (cst is Int) {
@@ -253,6 +254,7 @@ public val AbstractInsnNode.intConstant: Int?
                 null
             }
         }
+
         else -> when (opcode) {
             Opcodes.ICONST_M1 -> -1
             Opcodes.ICONST_0 -> 0

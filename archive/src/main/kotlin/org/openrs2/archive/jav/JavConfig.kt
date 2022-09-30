@@ -47,12 +47,14 @@ public data class JavConfig(
                             messages[parts[0]] = parts[1]
                         }
                     }
+
                     line.startsWith("param=") -> {
                         val parts = line.substring("param=".length).split("=", limit = 2)
                         if (parts.size == 2) {
                             params[parts[0]] = parts[1]
                         }
                     }
+
                     else -> {
                         val parts = line.split("=", limit = 2)
                         if (parts.size == 2) {

@@ -105,9 +105,11 @@ public class ForestDisjointSet<T> : DisjointSet<T> {
             xRoot.rank < yRoot.rank -> {
                 xRoot.parent = yRoot
             }
+
             xRoot.rank > yRoot.rank -> {
                 yRoot.parent = xRoot
             }
+
             else -> {
                 yRoot.parent = xRoot
                 xRoot.rank++

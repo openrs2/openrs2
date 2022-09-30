@@ -60,10 +60,12 @@ public class FieldMappingGenerator(
             Type.BOOLEAN, Type.BYTE, Type.CHAR, Type.SHORT, Type.INT, Type.LONG, Type.FLOAT, Type.DOUBLE -> {
                 elementType.className + dimensions
             }
+
             Type.OBJECT -> {
                 val className = classMapping.getOrDefault(elementType.internalName, elementType.internalName)
                 className.getClassName() + dimensions
             }
+
             else -> throw IllegalArgumentException("Unknown field type $elementType")
         }
 

@@ -80,18 +80,22 @@ public class AddSubTransformer : Transformer() {
                 negate -> terms += expr.negate()
                 else -> terms += expr
             }
+
             expr is BinaryExpr -> when {
                 expr.operator == BinaryExpr.Operator.PLUS -> {
                     addTerms(terms, expr.left, negate)
                     addTerms(terms, expr.right, negate)
                 }
+
                 expr.operator == BinaryExpr.Operator.MINUS -> {
                     addTerms(terms, expr.left, negate)
                     addTerms(terms, expr.right, !negate)
                 }
+
                 negate -> terms += expr.negate()
                 else -> terms += expr
             }
+
             negate -> terms += expr.negate()
             else -> terms += expr
         }
@@ -105,11 +109,13 @@ public class AddSubTransformer : Transformer() {
                 is Int -> n < 0
                 else -> error("Invalid IntegerLiteralExpr type")
             }
+
             is LongLiteralExpr -> when (val n = asNumber()) {
                 LongLiteralExpr.MAX_63_BIT_UNSIGNED_VALUE_AS_BIG_INTEGER -> false
                 is Long -> n < 0
                 else -> error("Invalid LongLiteralExpr type")
             }
+
             else -> false
         }
     }

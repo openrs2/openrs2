@@ -109,12 +109,14 @@ public fun AbstractInsnNode.remap(remapper: ExtendedRemapper) {
             name = remapper.mapFieldName(originalOwner, name, desc)
             desc = remapper.mapDesc(desc)
         }
+
         is MethodInsnNode -> {
             val originalOwner = owner
             owner = remapper.mapMethodOwner(originalOwner, name, desc)
             name = remapper.mapMethodName(originalOwner, name, desc)
             desc = remapper.mapDesc(desc)
         }
+
         is InvokeDynamicInsnNode -> throw UnsupportedOperationException()
         is TypeInsnNode -> desc = remapper.mapType(desc)
         is LdcInsnNode -> cst = remapper.mapValue(cst)

@@ -15,6 +15,7 @@ public class VarbitType(id: Int) : ConfigType(id) {
                 startBit = buf.readUnsignedByte().toInt()
                 endBit = buf.readUnsignedByte().toInt()
             }
+
             else -> throw IllegalArgumentException("Unsupported config code: $code")
         }
     }

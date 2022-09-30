@@ -19,6 +19,7 @@ public enum class ByteOrder(public val suffix: String) {
                     else -> 8
                 }
             }
+
             ALT3_REVERSE -> {
                 require(width == 4)
                 when (i) {

@@ -210,12 +210,14 @@ public data class Js5MasterIndex(
                     }
                     len / 4
                 }
+
                 MasterIndexFormat.VERSIONED -> {
                     require(len % 8 == 0) {
                         "Length is not a multiple of 8 bytes"
                     }
                     len / 8
                 }
+
                 else -> {
                     buf.readUnsignedByte().toInt()
                 }

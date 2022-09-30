@@ -63,10 +63,12 @@ public class HighDpiTransformer : Transformer() {
                 addCanvasScaleField(clazz)
                 newMembers++
             }
+
             in GL_INTERFACES -> {
                 addPixelZoomMethod(clazz, Opcodes.ACC_ABSTRACT)
                 newMembers++
             }
+
             in GL_IMPLS -> {
                 addPixelZoomMethod(clazz, Opcodes.ACC_FINAL or Opcodes.ACC_NATIVE)
                 newMembers++

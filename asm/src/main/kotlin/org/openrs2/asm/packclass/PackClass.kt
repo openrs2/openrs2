@@ -503,11 +503,13 @@ public object PackClass {
                             branchLen += (cases + 2) * 4
                             sipushAndSwitchLen += 4
                         }
+
                         Opcodes.LOOKUPSWITCH -> {
                             val cases = buf.readVarInt()
                             branchLen += (cases + 1) * 4
                             sipushAndSwitchLen += cases * 4
                         }
+
                         Opcodes.INVOKEINTERFACE -> interfaceMethodRefLen += 2
                         Opcodes.NEWARRAY -> newArrayLen++
                         Opcodes.MULTIANEWARRAY -> multiNewArrayLen++
@@ -1155,10 +1157,12 @@ public object PackClass {
                                         )
                                     }
                                 }
+
                                 insn.`var` < 256 -> {
                                     buf.writeByte(insn.opcode)
                                     localVarBuf.writeByte(insn.`var`)
                                 }
+
                                 else -> {
                                     buf.writeByte(WIDE)
                                     buf.writeByte(insn.opcode)
@@ -1166,28 +1170,34 @@ public object PackClass {
                                 }
                             }
                         }
+
                         is LdcInsnNode -> {
                             when (val value = insn.cst) {
                                 is Int -> {
                                     buf.writeByte(LDC_INT)
                                     constantPool.writeInt(constantBuf, value)
                                 }
+
                                 is Long -> {
                                     buf.writeByte(LDC_LONG)
                                     constantPool.writeLong(wideConstantBuf, value)
                                 }
+
                                 is Float -> {
                                     buf.writeByte(LDC_FLOAT)
                                     constantPool.writeFloat(constantBuf, value)
                                 }
+
                                 is Double -> {
                                     buf.writeByte(LDC_DOUBLE)
                                     constantPool.writeDouble(wideConstantBuf, value)
                                 }
+
                                 is String -> {
                                     buf.writeByte(LDC_STRING)
                                     constantPool.writeString(constantBuf, value)
                                 }
+
                                 is Type -> {
                                     if (value.sort == Type.OBJECT) {
                                         buf.writeByte(LDC_CLASS)
@@ -1198,19 +1208,23 @@ public object PackClass {
                                         )
                                     }
                                 }
+
                                 else -> throw IllegalArgumentException(
                                     "Unsupported constant type: ${value.javaClass.name}"
                                 )
                             }
                         }
+
                         is TypeInsnNode -> {
                             buf.writeByte(insn.opcode)
                             constantPool.writeString(classBuf, insn.desc)
                         }
+
                         is FieldInsnNode -> {
                             buf.writeByte(insn.opcode)
                             constantPool.writeFieldRef(fieldRefBuf, MemberRef(insn.owner, insn.name, insn.desc))
                         }
+
                         is MethodInsnNode -> {
                             buf.writeByte(insn.opcode)
 
@@ -1221,6 +1235,7 @@ public object PackClass {
                                 constantPool.writeMethodRef(methodRefBuf, methodRef)
                             }
                         }
+
                         is JumpInsnNode -> {
                             val targetPc = insns[i].indexOf(insn.label.nextReal)
                             val delta = targetPc - pc
@@ -1239,6 +1254,7 @@ public object PackClass {
                                 branchBuf.writeInt(delta)
                             }
                         }
+
                         is IntInsnNode -> {
                             buf.writeByte(insn.opcode)
 
@@ -1249,6 +1265,7 @@ public object PackClass {
                                 else -> throw IllegalArgumentException("Unsupported IntInsnNode opcode: ${insn.opcode}")
                             }
                         }
+
                         is IincInsnNode -> {
                             if (insn.`var` < 256 && (insn.incr >= -128 && insn.incr <= 127)) {
                                 buf.writeByte(insn.opcode)
@@ -1261,6 +1278,7 @@ public object PackClass {
                                 wideIincBuf.writeShort(insn.incr)
                             }
                         }
+
                         is TableSwitchInsnNode -> {
                             buf.writeByte(insn.opcode)
 
@@ -1275,6 +1293,7 @@ public object PackClass {
                                 branchBuf.writeInt(targetPc - pc)
                             }
                         }
+
                         is LookupSwitchInsnNode -> {
                             buf.writeByte(insn.opcode)
 
@@ -1295,11 +1314,13 @@ public object PackClass {
                                 branchBuf.writeInt(targetPc - pc)
                             }
                         }
+
                         is MultiANewArrayInsnNode -> {
                             buf.writeByte(insn.opcode)
                             constantPool.writeString(classBuf, insn.desc)
                             multiNewArrayBuf.writeByte(insn.dims)
                         }
+
                         is InsnNode -> buf.writeByte(insn.opcode)
                         else -> throw IllegalArgumentException("Unsupported instruction type: ${insn.javaClass.name}")
                     }
@@ -1552,6 +1573,7 @@ public object PackClass {
                         throw IllegalArgumentException("Unsupported constant type: ${value.sort}")
                     }
                 }
+
                 else -> throw IllegalArgumentException("Unsupported constant type: ${value.javaClass.name}")
             }
         }

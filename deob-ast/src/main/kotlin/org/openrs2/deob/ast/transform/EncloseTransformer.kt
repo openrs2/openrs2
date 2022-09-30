@@ -76,6 +76,7 @@ public class EncloseTransformer : Transformer() {
                         BinaryExpr.Operator.OR -> LOGICAL_OR
                         else -> null
                     }
+
                     is InstanceOfExpr -> RELATIONAL
                     is ConditionalExpr -> TERNARY
                     is AssignExpr -> ASSIGNMENT
@@ -95,6 +96,7 @@ public class EncloseTransformer : Transformer() {
                         encloseLeft(expr, scope)
                     }
                 }
+
                 is UnaryExpr -> encloseRight(expr, expr.expression)
                 is CastExpr -> encloseRight(expr, expr.expression)
                 is ObjectCreationExpr -> {
@@ -102,16 +104,19 @@ public class EncloseTransformer : Transformer() {
                         encloseLeft(expr, scope)
                     }
                 }
+
                 is BinaryExpr -> {
                     encloseLeft(expr, expr.left)
                     encloseRight(expr, expr.right)
                 }
+
                 is InstanceOfExpr -> encloseLeft(expr, expr.expression)
                 is ConditionalExpr -> {
                     encloseLeft(expr, expr.condition)
                     encloseLeft(expr, expr.thenExpr)
                     encloseRight(expr, expr.elseExpr)
                 }
+
                 is AssignExpr -> {
                     encloseLeft(expr, expr.target)
                     encloseRight(expr, expr.value)
@@ -131,6 +136,7 @@ public class EncloseTransformer : Transformer() {
                         parent.replace(child, EnclosedExpr(child.clone()))
                     }
                 }
+
                 Associativity.NONE, Associativity.RIGHT -> {
                     if (childOp.isPrecedenceLessEqual(parentOp)) {
                         parent.replace(child, EnclosedExpr(child.clone()))
@@ -149,6 +155,7 @@ public class EncloseTransformer : Transformer() {
                         parent.replace(child, EnclosedExpr(child.clone()))
                     }
                 }
+
                 Associativity.RIGHT -> {
                     if (childOp.isPrecedenceLess(parentOp)) {
                         parent.replace(child, EnclosedExpr(child.clone()))

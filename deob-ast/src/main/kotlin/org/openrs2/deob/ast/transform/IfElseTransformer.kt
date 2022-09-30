@@ -458,6 +458,7 @@ public class IfElseTransformer : Transformer() {
                     null
                 }
             }
+
             else -> null
         }
     }
@@ -477,6 +478,7 @@ public class IfElseTransformer : Transformer() {
                 val tail = statements.lastOrNull()
                 tail is ThrowStmt || tail is ReturnStmt
             }
+
             else -> false
         }
     }

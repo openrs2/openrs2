@@ -12,6 +12,7 @@ public sealed class LoginRequest : Packet {
         public val day: Int,
         public val country: Int
     ) : LoginRequest()
+
     public data class CreateCheckName(public val username: String) : LoginRequest()
     public data class CreateAccount(
         public val build: Int,
@@ -27,11 +28,13 @@ public sealed class LoginRequest : Packet {
         public val country: Int,
         public val email: String
     ) : LoginRequest()
+
     public data class RequestWorldList(public val checksum: Int) : LoginRequest()
     public data class CheckWorldSuitability(
         public val build: Int,
         public val username: String,
         public val password: String
     ) : LoginRequest()
+
     public object InitCrossDomainConnection : LoginRequest()
 }

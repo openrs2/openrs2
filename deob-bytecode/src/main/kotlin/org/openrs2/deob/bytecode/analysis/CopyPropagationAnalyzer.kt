@@ -51,6 +51,7 @@ public class CopyPropagationAnalyzer(owner: String, method: MethodNode) :
                     newSet
                 }
             }
+
             insn is IincInsnNode -> set.minusKilledByAssignmentTo(insn.`var`)
             else -> set
         }

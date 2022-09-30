@@ -212,6 +212,7 @@ public class ConstantArgTransformer @Inject constructor(private val profile: Pro
                         else -> Unit
                     }
                 }
+
                 IF_ICMPEQ, IF_ICMPNE, IF_ICMPLT, IF_ICMPGE, IF_ICMPGT, IF_ICMPLE -> {
                     val value1 = frame.getStack(frame.stackSize - 2)
                     val value2 = frame.getStack(frame.stackSize - 1)

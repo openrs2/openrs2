@@ -79,6 +79,7 @@ public class EmptyClassTransformer : Transformer() {
                         addTypeReference(cst)
                     }
                 }
+
                 is TypeInsnNode -> referencedClasses.add(insn.desc)
             }
         }

@@ -255,6 +255,7 @@ public object Js5Compression {
                         return null
                     }
                 }
+
                 Js5CompressionType.GZIP -> {
                     val magic = plaintext.readUnsignedShort()
                     if (magic != GZIP_MAGIC) {
@@ -269,6 +270,7 @@ public object Js5Compression {
                         return null
                     }
                 }
+
                 Js5CompressionType.LZMA -> {
                     val properties = plaintext.readUnsignedByte()
 

@@ -32,6 +32,7 @@ public class PublicKeyTransformer @Inject constructor(private val key: RSAPrivat
                     insn.cst = key.publicExponent.toString()
                     exponents++
                 }
+
                 JAGEX_MODULUS -> {
                     insn.cst = key.modulus.toString()
                     moduli++

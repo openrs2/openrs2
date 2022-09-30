@@ -85,6 +85,7 @@ public class UnusedArgTransformer @Inject constructor(private val profile: Profi
                         retainArg(partition, localToArgMap, frame, insn.`var`)
                     }
                 }
+
                 is IincInsnNode -> retainArg(partition, localToArgMap, frame, insn.`var`)
                 is MethodInsnNode -> {
                     val invokePartition = inheritedMethodSets[MemberRef(insn)]

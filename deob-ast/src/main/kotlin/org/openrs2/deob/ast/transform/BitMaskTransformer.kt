@@ -62,6 +62,7 @@ public class BitMaskTransformer : Transformer() {
 
                     maskExpr = IntegerLiteralExpr(mask.toString())
                 }
+
                 is LongLiteralExpr -> {
                     var mask = maskExpr.checkedAsLong()
 
@@ -73,6 +74,7 @@ public class BitMaskTransformer : Transformer() {
 
                     maskExpr = mask.toLongLiteralExpr()
                 }
+
                 else -> return@walk
             }
 
@@ -124,6 +126,7 @@ public class BitMaskTransformer : Transformer() {
                     mask = mask ushr shamt
                     IntegerLiteralExpr(mask.toString())
                 }
+
                 is LongLiteralExpr -> {
                     var mask = maskExpr.checkedAsLong()
                     if (shamt > java.lang.Long.numberOfTrailingZeros(mask)) {
@@ -133,6 +136,7 @@ public class BitMaskTransformer : Transformer() {
                     mask = mask ushr shamt
                     mask.toLongLiteralExpr()
                 }
+
                 else -> return@walk
             }
 

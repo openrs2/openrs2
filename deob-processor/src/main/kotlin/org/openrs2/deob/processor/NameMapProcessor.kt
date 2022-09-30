@@ -101,6 +101,7 @@ public class NameMapProcessor : AbstractProcessor() {
 
                     map.methods[ref] = Method(owner, name, arguments, locals)
                 }
+
                 else -> error("Unexpected element type")
             }
         }

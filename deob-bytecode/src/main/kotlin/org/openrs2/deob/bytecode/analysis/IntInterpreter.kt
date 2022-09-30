@@ -84,12 +84,14 @@ public class IntInterpreter(private val args: Array<IntValueSet>) : Interpreter<
                         }
                         v1 / v2
                     }
+
                     Opcodes.IREM -> {
                         if (v2 == 0) {
                             return IntValue(basicValue)
                         }
                         v1 % v2
                     }
+
                     Opcodes.ISHL -> v1 shl v2
                     Opcodes.ISHR -> v1 shr v2
                     Opcodes.IUSHR -> v1 ushr v2

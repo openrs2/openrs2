@@ -45,6 +45,7 @@ public class ForLoopConditionTransformer : Transformer() {
                 PREFIX_INCREMENT, PREFIX_DECREMENT, POSTFIX_INCREMENT, POSTFIX_DECREMENT -> expression
                 else -> null
             }
+
             is AssignExpr -> target
             else -> null
         }

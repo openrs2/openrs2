@@ -99,6 +99,7 @@ public fun MethodNode.removeArgument(argIndex: Int) {
                     newLocalIndexUsed = true
                 }
             }
+
             is IincInsnNode -> {
                 insn.`var` = remap(insn.`var`, argType, localIndex, newLocalIndex)
 
@@ -106,6 +107,7 @@ public fun MethodNode.removeArgument(argIndex: Int) {
                     newLocalIndexUsed = true
                 }
             }
+
             is FrameNode -> throw UnsupportedOperationException("SKIP_FRAMES and COMPUTE_FRAMES must be used")
         }
     }

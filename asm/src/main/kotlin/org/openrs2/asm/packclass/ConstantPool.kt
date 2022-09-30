@@ -94,6 +94,7 @@ public class ConstantPool private constructor(
                                 addMethodRef(methodRef)
                             }
                         }
+
                         is FieldInsnNode -> addFieldRef(MemberRef(insn.owner, insn.name, insn.desc))
                         is TypeInsnNode -> strings += insn.desc
                     }
@@ -155,6 +156,7 @@ public class ConstantPool private constructor(
                         throw IllegalArgumentException("Unsupported constant type: ${value.sort}")
                     }
                 }
+
                 else -> throw IllegalArgumentException("Unsupported constant type: ${value.javaClass.name}")
             }
         }

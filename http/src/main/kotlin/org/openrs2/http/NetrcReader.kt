@@ -49,10 +49,12 @@ public class NetrcReader(private val scanner: Scanner) {
                     state = State.READ_MACHINE
                     host = scanner.next()
                 }
+
                 "default" -> {
                     state = State.READ_MACHINE
                     host = null
                 }
+
                 "login", "password", "account" -> {
                     if (state != State.READ_MACHINE) {
                         throw IOException("Unexpected token '$token'")
@@ -66,6 +68,7 @@ public class NetrcReader(private val scanner: Scanner) {
                         password = scanner.next()
                     }
                 }
+
                 "macdef" -> skipMacro()
             }
         }

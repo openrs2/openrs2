@@ -188,6 +188,7 @@ public val AbstractInsnNode.stackMetadata: StackMetadata
         } else {
             PUSH1
         }
+
         is FieldInsnNode -> {
             val fieldSize = Type.getType(desc).size
             var pushes = 0
@@ -202,6 +203,7 @@ public val AbstractInsnNode.stackMetadata: StackMetadata
             }
             StackMetadata(pops, pushes)
         }
+
         is MethodInsnNode -> {
             val argumentsAndReturnSizes = Type.getArgumentsAndReturnSizes(desc)
             val pushes = argumentsAndReturnSizes and 0x3
@@ -211,6 +213,7 @@ public val AbstractInsnNode.stackMetadata: StackMetadata
             }
             StackMetadata(pops, pushes)
         }
+
         is InvokeDynamicInsnNode -> throw UnsupportedOperationException()
         is MultiANewArrayInsnNode -> StackMetadata(dims, 1)
         else -> SIMPLE_OPCODES[opcode] ?: throw IllegalArgumentException()

@@ -51,16 +51,19 @@ public fun Expression.negate(): Expression {
             UnaryExpr.Operator.MINUS -> expression.clone()
             else -> UnaryExpr(clone(), UnaryExpr.Operator.MINUS)
         }
+
         is IntegerLiteralExpr -> when (val n = asNumber()) {
             IntegerLiteralExpr.MAX_31_BIT_UNSIGNED_VALUE_AS_LONG -> IntegerLiteralExpr(Integer.MIN_VALUE.toString())
             is Int -> IntegerLiteralExpr((-n.toInt()).toString())
             else -> error("Invalid IntegerLiteralExpr type")
         }
+
         is LongLiteralExpr -> when (val n = asNumber()) {
             LongLiteralExpr.MAX_63_BIT_UNSIGNED_VALUE_AS_BIG_INTEGER -> Long.MIN_VALUE.toLongLiteralExpr()
             is Long -> (-n).toLongLiteralExpr()
             else -> error("Invalid LongLiteralExpr type")
         }
+
         else -> UnaryExpr(clone(), UnaryExpr.Operator.MINUS)
     }
 }
@@ -72,27 +75,37 @@ public fun Expression.not(): Expression {
                 return expression.clone()
             }
         }
+
         is BinaryExpr -> {
             when (operator) {
                 BinaryExpr.Operator.EQUALS ->
                     return BinaryExpr(left.clone(), right.clone(), BinaryExpr.Operator.NOT_EQUALS)
+
                 BinaryExpr.Operator.NOT_EQUALS ->
                     return BinaryExpr(left.clone(), right.clone(), BinaryExpr.Operator.EQUALS)
+
                 BinaryExpr.Operator.GREATER ->
                     return BinaryExpr(left.clone(), right.clone(), BinaryExpr.Operator.LESS_EQUALS)
+
                 BinaryExpr.Operator.GREATER_EQUALS ->
                     return BinaryExpr(left.clone(), right.clone(), BinaryExpr.Operator.LESS)
+
                 BinaryExpr.Operator.LESS ->
                     return BinaryExpr(left.clone(), right.clone(), BinaryExpr.Operator.GREATER_EQUALS)
+
                 BinaryExpr.Operator.LESS_EQUALS ->
                     return BinaryExpr(left.clone(), right.clone(), BinaryExpr.Operator.GREATER)
+
                 BinaryExpr.Operator.AND ->
                     return BinaryExpr(left.not(), right.not(), BinaryExpr.Operator.OR)
+
                 BinaryExpr.Operator.OR ->
                     return BinaryExpr(left.not(), right.not(), BinaryExpr.Operator.AND)
+
                 else -> Unit
             }
         }
+
         is BooleanLiteralExpr -> return BooleanLiteralExpr(!value)
     }
 

@@ -244,10 +244,12 @@ public class GlTransformer @Inject constructor(private val registry: GlRegistry)
                 transformExpr(unit, command, parameter, expr.left)
                 transformExpr(unit, command, parameter, expr.right)
             }
+
             is ConditionalExpr -> {
                 transformExpr(unit, command, parameter, expr.thenExpr)
                 transformExpr(unit, command, parameter, expr.elseExpr)
             }
+
             is IntegerLiteralExpr -> {
                 transformIntegerLiteralExpr(unit, command, parameter, expr)
             }

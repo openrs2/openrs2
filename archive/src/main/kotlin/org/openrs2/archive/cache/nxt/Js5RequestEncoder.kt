@@ -16,6 +16,7 @@ public object Js5RequestEncoder : MessageToByteEncoder<Js5Request>(Js5Request::c
                 out.writeShort(msg.build)
                 out.writeShort(0)
             }
+
             is Js5Request.Connected -> {
                 out.writeByte(6)
                 out.writeMedium(5)
