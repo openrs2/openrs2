@@ -17,6 +17,8 @@ import org.openrs2.game.cluster.Cluster
 import org.openrs2.game.cluster.SingleWorldCluster
 import org.openrs2.game.net.NetworkService
 import org.openrs2.game.net.js5.Js5Service
+import org.openrs2.game.store.DummyPlayerStore
+import org.openrs2.game.store.PlayerStore
 import org.openrs2.net.NetworkModule
 import org.openrs2.protocol.ProtocolModule
 
@@ -47,5 +49,8 @@ public object GameModule : AbstractModule() {
 
         bind(Cluster::class.java)
             .to(SingleWorldCluster::class.java)
+
+        bind(PlayerStore::class.java)
+            .to(DummyPlayerStore::class.java)
     }
 }

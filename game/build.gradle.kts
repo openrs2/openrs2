@@ -20,7 +20,10 @@ dependencies {
     implementation(projects.protocol)
     implementation(projects.util)
     implementation(libs.guava)
+    implementation(libs.kotlin.coroutines.core)
     implementation(libs.netty.codec.http)
+    implementation(libs.result.core)
+    implementation(libs.result.coroutines)
 }
 
 publishing {
