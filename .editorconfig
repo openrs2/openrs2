@@ -20,6 +20,10 @@ disabled_rules = argument-list-wrapping, parameter-list-wrapping, wrapping
 [*.md]
 max_line_length = 80
 
+[*.sql]
+indent_style = space
+indent_size = 4
+
 # @formatter:off
 [*.{json,xml,yaml,yml}]
 # @formatter:on
