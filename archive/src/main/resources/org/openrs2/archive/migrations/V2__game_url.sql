@@ -1,3 +1,4 @@
+-- @formatter:off
 ALTER TABLE games
     DROP COLUMN hostname,
     DROP COLUMN port,
