@@ -248,7 +248,9 @@ public class CacheExporter @Inject constructor(
                         val language = rows.getString(5)
                         val builds = rows.getArray(6).array as Array<*>
                         val timestamp = rows.getTimestamp(7)?.toInstant()
-                        @Suppress("UNCHECKED_CAST") val sources = rows.getArray(8).array as Array<String>
+
+                        @Suppress("UNCHECKED_CAST")
+                        val sources = rows.getArray(8).array as Array<String>
 
                         val validIndexes = rows.getLong(9)
                         val stats = if (!rows.wasNull()) {
