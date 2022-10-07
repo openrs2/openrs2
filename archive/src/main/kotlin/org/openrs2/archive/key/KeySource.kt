@@ -5,5 +5,6 @@ public enum class KeySource {
     DISK,
     OPENOSRS,
     POLAR,
-    RUNELITE
+    RUNELITE,
+    HDOS
 }
