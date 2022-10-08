@@ -106,6 +106,15 @@ public class Cache private constructor(
         return existsNamed(archive, group.krHashCode(), file.krHashCode())
     }
 
+    public fun existsNamedGroup(archive: Int, groupNameHash: Int, file: Int): Boolean {
+        checkArchive(archive)
+        return archives[archive]?.existsNamedGroup(groupNameHash, file) ?: false
+    }
+
+    public fun exists(archive: Int, group: String, file: Int): Boolean {
+        return existsNamedGroup(archive, group.krHashCode(), file)
+    }
+
     public fun list(): Iterator<Int> {
         return archives.withIndex()
             .filter { it.value != null }
@@ -150,6 +159,17 @@ public class Cache private constructor(
     }
 
     @JvmOverloads
+    public fun readNamedGroup(archive: Int, groupNameHash: Int, file: Int, key: XteaKey = XteaKey.ZERO): ByteBuf {
+        checkArchive(archive)
+        return archives[archive]?.readNamedGroup(groupNameHash, file, key) ?: throw FileNotFoundException()
+    }
+
+    @JvmOverloads
+    public fun read(archive: Int, group: String, file: Int, key: XteaKey = XteaKey.ZERO): ByteBuf {
+        return readNamedGroup(archive, group.krHashCode(), file, key)
+    }
+
+    @JvmOverloads
     public fun write(archive: Int, group: Int, file: Int, buf: ByteBuf, key: XteaKey = XteaKey.ZERO) {
         checkArchive(archive)
         createOrGetArchive(archive).write(group, file, buf, key)
@@ -170,6 +190,17 @@ public class Cache private constructor(
     @JvmOverloads
     public fun write(archive: Int, group: String, file: String, buf: ByteBuf, key: XteaKey = XteaKey.ZERO) {
         writeNamed(archive, group.krHashCode(), file.krHashCode(), buf, key)
+    }
+
+    @JvmOverloads
+    public fun writeNamedGroup(archive: Int, groupNameHash: Int, file: Int, buf: ByteBuf, key: XteaKey = XteaKey.ZERO) {
+        checkArchive(archive)
+        createOrGetArchive(archive).writeNamedGroup(groupNameHash, file, buf, key)
+    }
+
+    @JvmOverloads
+    public fun write(archive: Int, group: String, file: Int, buf: ByteBuf, key: XteaKey = XteaKey.ZERO) {
+        writeNamedGroup(archive, group.krHashCode(), file, buf, key)
     }
 
     public fun remove(archive: Int) {
@@ -216,6 +247,17 @@ public class Cache private constructor(
     @JvmOverloads
     public fun remove(archive: Int, group: String, file: String, key: XteaKey = XteaKey.ZERO) {
         return removeNamed(archive, group.krHashCode(), file.krHashCode(), key)
+    }
+
+    @JvmOverloads
+    public fun removeNamedGroup(archive: Int, groupNameHash: Int, file: Int, key: XteaKey = XteaKey.ZERO) {
+        checkArchive(archive)
+        archives[archive]?.removeNamedGroup(groupNameHash, file, key)
+    }
+
+    @JvmOverloads
+    public fun remove(archive: Int, group: String, file: Int, key: XteaKey = XteaKey.ZERO) {
+        removeNamedGroup(archive, group.krHashCode(), file, key)
     }
 
     /**
