@@ -12,13 +12,13 @@
 		<main class="container">
 			<h1>Caches</h1>
 			<div class="table-responsive">
-				<table class="table table-striped table-bordered table-hover" data-toggle="table" data-filter-control="true" data-sticky-header="true">
+				<table class="table table-striped table-bordered table-hover" data-toggle="table" data-filter-control="true" data-sticky-header="true" data-custom-sort="customSort">
 					<thead class="table-dark">
 						<tr>
 							<th data-field="game" data-filter-control="select">Game</th>
 							<th data-field="environment" data-filter-control="select">Env</th>
 							<th data-field="language" data-filter-control="select">Lang</th>
-							<th data-field="builds" data-filter-control="input" data-sortable="true" data-sorter="buildSort">Build(s)</th>
+							<th data-field="builds" data-filter-control="input" data-sortable="true">Build(s)</th>
 							<th data-field="timestamp" data-sortable="true">Timestamp</th>
 							<th data-field="sources" data-filter-control="input">Source(s)</th>
 							<th>Archives</th>
@@ -41,9 +41,11 @@
 								</span>
 							</td>
 							<td>
-								<span th:text="${#temporals.format(cache.timestamp, 'yyyy-MM-dd')}"></span>
-								<br />
-								<span th:text="${#temporals.format(cache.timestamp, 'HH:mm:ss')}"></span>
+								<span th:if="${cache.timestamp}" th:remove="tag">
+									<span th:text="${#temporals.format(cache.timestamp, 'yyyy-MM-dd')}"></span>
+									<br />
+									<span th:text="${#temporals.format(cache.timestamp, 'HH:mm:ss')}"></span>
+								</span>
 							</td>
 							<td th:text="${#strings.setJoin(cache.sources, ', ')}"></td>
 							<td th:classappend="${cache.stats}? (${cache.stats.allIndexesValid}? 'table-success' : 'table-danger')"

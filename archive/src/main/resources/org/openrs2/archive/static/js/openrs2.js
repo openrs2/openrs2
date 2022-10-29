@@ -1,13 +1,35 @@
 var buildRegex = new RegExp('>([0-9]+)(?:[.]([0-9]+))?<');
 
+function customSort(name, order, data) {
+	order = order === 'asc' ? 1 : -1;
+
+	data.sort(function (a, b) {
+		a = a[name];
+		b = b[name];
+
+		if (!a) {
+			return 1;
+		} else if (!b) {
+			return -1;
+		}
+
+		if (name === 'builds') {
+			return buildSort(a, b) * order;
+		} else {
+			if (a < b) {
+				return -order;
+			} else if (a === b) {
+				return 0;
+			} else {
+				return order;
+			}
+		}
+	});
+}
+
 function buildSort(a, b) {
 	a = buildRegex.exec(a);
 	b = buildRegex.exec(b);
-	if (!a) {
-		return -1;
-	} else if (!b) {
-		return 1;
-	}
 
 	var aMajor = parseInt(a[1]);
 	var bMajor = parseInt(b[1]);
