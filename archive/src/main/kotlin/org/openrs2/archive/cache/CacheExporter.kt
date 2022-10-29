@@ -199,6 +199,25 @@ public class CacheExporter @Inject constructor(
         val key: XteaKey
     )
 
+    public suspend fun totalSize(): Long {
+        return database.execute { connection ->
+            connection.prepareStatement(
+                """
+                SELECT SUM(size)
+                FROM cache_stats
+                """.trimIndent()
+            ).use { stmt ->
+                stmt.executeQuery().use { rows ->
+                    if (rows.next()) {
+                        rows.getLong(1)
+                    } else {
+                        0
+                    }
+                }
+            }
+        }
+    }
+
     public suspend fun list(): List<CacheSummary> {
         return database.execute { connection ->
             connection.prepareStatement(

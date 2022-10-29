@@ -50,7 +50,15 @@ public class CachesController @Inject constructor(
 
     public suspend fun index(call: ApplicationCall) {
         val caches = exporter.list()
-        call.respond(ThymeleafContent("caches/index.html", mapOf("caches" to caches)))
+        val totalSize = exporter.totalSize()
+        call.respond(
+            ThymeleafContent(
+                "caches/index.html", mapOf(
+                    "caches" to caches,
+                    "totalSize" to totalSize
+                )
+            )
+        )
     }
 
     public suspend fun indexJson(call: ApplicationCall) {

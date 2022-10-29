@@ -111,6 +111,10 @@
 				</table>
 			</div>
 			<p>
+				The total size of all caches in the archive is
+				<strong th:text="${#byteunits.format(totalSize)}">0 B</strong>.
+			</p>
+			<p>
 				<sup id="empty-locs">1</sup> Map squares in the middle of the
 				sea are unreachable by normal players, making it impossible to
 				obtain the keys for their loc groups. However, the loc groups
