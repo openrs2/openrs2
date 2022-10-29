@@ -16,6 +16,7 @@ import io.netty.handler.codec.http.HttpRequestDecoder
 import io.netty.handler.codec.http.HttpResponseEncoder
 import io.netty.handler.codec.string.StringDecoder
 import io.netty.handler.timeout.IdleStateEvent
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.cancel
@@ -66,7 +67,11 @@ public class LoginChannelHandler @Inject constructor(
     private var serverKey = 0L
 
     override fun handlerAdded(ctx: ChannelHandlerContext) {
-        scope = CoroutineScope(ctx.executor().asCoroutineDispatcher())
+        val exceptionHandler = CoroutineExceptionHandler { _, ex ->
+            ctx.fireExceptionCaught(ex)
+        }
+
+        scope = CoroutineScope(ctx.executor().asCoroutineDispatcher() + exceptionHandler)
     }
 
     override fun handlerRemoved(ctx: ChannelHandlerContext) {
