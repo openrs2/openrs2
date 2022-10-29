@@ -344,6 +344,40 @@ public class MapRenderer @Inject constructor(
         }
     }
 
+    private fun isShortCode(buf: ByteBuf): Boolean {
+        for (plane in 0 until LEVELS) {
+            for (dx in 0 until MAP_SIZE) {
+                for (dz in 0 until MAP_SIZE) {
+                    while (true) {
+                        if (buf.readableBytes() < 2) {
+                            return false
+                        }
+
+                        val code = buf.readUnsignedShort()
+                        if (code == 0) {
+                            break
+                        } else if (code == 1) {
+                            if (!buf.isReadable) {
+                                return false
+                            }
+
+                            buf.skipBytes(1)
+                            break
+                        } else if (code <= 49) {
+                            if (buf.readableBytes() < 2) {
+                                return false
+                            }
+
+                            buf.skipBytes(2)
+                        }
+                    }
+                }
+            }
+        }
+
+        return !buf.isReadable
+    }
+
     private fun renderMap(
         image: BufferedImage,
         x: Int,
@@ -352,6 +386,12 @@ public class MapRenderer @Inject constructor(
         underlayColors: Map<Int, Int>,
         overlayColors: Map<Int, Int>
     ) {
+        val readCode = if (isShortCode(buf.slice())) {
+            buf::readUnsignedShort
+        } else {
+            { buf.readUnsignedByte().toInt() }
+        }
+
         for (plane in 0 until LEVELS) {
             for (dx in 0 until MAP_SIZE) {
                 for (dz in 0 until MAP_SIZE) {
@@ -360,14 +400,14 @@ public class MapRenderer @Inject constructor(
                     var underlay = 0
 
                     while (true) {
-                        val code = buf.readUnsignedByte().toInt()
+                        val code = readCode()
                         if (code == 0) {
                             break
                         } else if (code == 1) {
                             buf.skipBytes(1)
                             break
                         } else if (code <= 49) {
-                            overlay = buf.readUnsignedByte().toInt()
+                            overlay = readCode()
                             shape = (code - 2) shr 2
                         } else if (code <= 81) {
                             // empty
