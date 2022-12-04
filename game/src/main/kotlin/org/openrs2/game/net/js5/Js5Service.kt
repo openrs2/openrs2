@@ -62,9 +62,7 @@ public class Js5Service @Inject constructor(
             alloc.buffer().use { uncompressed ->
                 masterIndex.write(uncompressed)
 
-                Js5Compression.compress(uncompressed, Js5CompressionType.UNCOMPRESSED).use { compressed ->
-                    compressed.retain()
-                }
+                Js5Compression.compress(uncompressed, Js5CompressionType.UNCOMPRESSED)
             }
         } else {
             try {
