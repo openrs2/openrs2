@@ -588,6 +588,26 @@ public class CacheExporter @Inject constructor(
 
     public suspend fun exportGroup(scope: String, id: Int, archive: Int, group: Int): ByteBuf? {
         return database.execute { connection ->
+            if (archive == Store.ARCHIVESET && group == Store.ARCHIVESET) {
+                connection.prepareStatement(
+                    """
+                    SELECT c.data
+                    FROM master_indexes m
+                    JOIN containers c ON c.id = m.container_id
+                    WHERE m.id = ?
+                """.trimIndent()
+                ).use { stmt ->
+                    stmt.setInt(1, id)
+
+                    stmt.executeQuery().use { rows ->
+                        if (rows.next()) {
+                            val data = rows.getBytes(1)
+                            return@execute Unpooled.wrappedBuffer(data)
+                        }
+                    }
+                }
+            }
+
             connection.prepareStatement(
                 """
                 SELECT g.data
