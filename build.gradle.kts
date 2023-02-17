@@ -1,6 +1,5 @@
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
-import org.jetbrains.kotlin.gradle.plugin.getKotlinPluginVersion
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jmailen.gradle.kotlinter.KotlinterExtension
 import org.jmailen.gradle.kotlinter.KotlinterPlugin
@@ -126,15 +125,6 @@ configure(subprojects.filter { it.isFree }) {
         apply(plugin = "org.jmailen.kotlinter")
 
         dependencies {
-            val api by configurations
-            for (module in listOf("stdlib", "stdlib-common", "stdlib-jdk7", "stdlib-jdk8")) {
-                api("org.jetbrains.kotlin:kotlin-$module") {
-                    version {
-                        strictly(project.getKotlinPluginVersion())
-                    }
-                }
-            }
-
             val implementation by configurations
             implementation(kotlin("reflect"))
             implementation(libs.inlineLogger)
