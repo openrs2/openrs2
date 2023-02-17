@@ -595,7 +595,7 @@ public class CacheExporter @Inject constructor(
                     FROM master_indexes m
                     JOIN containers c ON c.id = m.container_id
                     WHERE m.id = ?
-                """.trimIndent()
+                    """.trimIndent()
                 ).use { stmt ->
                     stmt.setInt(1, id)
 
