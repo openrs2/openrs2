@@ -38,10 +38,10 @@ public class Js5ResponseDecoder : ByteToMessageDecoder() {
 
             request = Request(prefetch, archive, group)
 
-            if (buffers.containsKey(request)) {
-                state = State.READ_DATA
+            state = if (buffers.containsKey(request)) {
+                State.READ_DATA
             } else {
-                state = State.READ_LEN
+                State.READ_LEN
             }
         }
 
