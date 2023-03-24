@@ -6,10 +6,10 @@ import io.ktor.serialization.jackson.JacksonConverter
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.application.call
 import io.ktor.server.application.install
-import io.ktor.server.cio.CIO
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.http.content.resources
 import io.ktor.server.http.content.static
+import io.ktor.server.jetty.Jetty
 import io.ktor.server.plugins.autohead.AutoHeadResponse
 import io.ktor.server.plugins.cachingheaders.CachingHeaders
 import io.ktor.server.plugins.conditionalheaders.ConditionalHeaders
@@ -39,7 +39,7 @@ public class WebServer @Inject constructor(
     @Json private val mapper: ObjectMapper
 ) {
     public fun start(address: String, port: Int) {
-        embeddedServer(CIO, host = address, port = port) {
+        embeddedServer(Jetty, host = address, port = port) {
             install(AutoHeadResponse)
             install(CachingHeaders)
             install(ConditionalHeaders)

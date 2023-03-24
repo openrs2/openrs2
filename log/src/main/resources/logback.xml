@@ -19,6 +19,10 @@
     <appender-ref ref="STDERR" />
   </logger>
 
+  <logger name="org.eclipse.jetty" level="INFO">
+    <appender-ref ref="STDERR" />
+  </logger>
+
   <logger name="org.flywaydb" level="WARN">
     <appender-ref ref="STDERR" />
   </logger>
