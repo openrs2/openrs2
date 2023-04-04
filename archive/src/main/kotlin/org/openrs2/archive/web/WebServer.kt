@@ -2,7 +2,9 @@ package org.openrs2.archive.web
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.ktor.http.ContentType
+import io.ktor.http.HttpHeaders
 import io.ktor.serialization.jackson.JacksonConverter
+import io.ktor.server.application.*
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.application.call
 import io.ktor.server.application.install
@@ -14,9 +16,9 @@ import io.ktor.server.plugins.autohead.AutoHeadResponse
 import io.ktor.server.plugins.cachingheaders.CachingHeaders
 import io.ktor.server.plugins.conditionalheaders.ConditionalHeaders
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.server.plugins.cors.routing.CORS
 import io.ktor.server.plugins.defaultheaders.DefaultHeaders
 import io.ktor.server.plugins.forwardedheaders.XForwardedHeaders
+import io.ktor.server.response.header
 import io.ktor.server.response.respond
 import io.ktor.server.response.respondRedirect
 import io.ktor.server.routing.get
@@ -44,9 +46,11 @@ public class WebServer @Inject constructor(
             install(CachingHeaders)
             install(ConditionalHeaders)
 
-            install(CORS) {
-                anyHost()
-            }
+            install(createApplicationPlugin(name = "CORS") {
+                onCall { call ->
+                    call.response.header(HttpHeaders.AccessControlAllowOrigin, "*")
+                }
+            })
 
             install(ContentNegotiation) {
                 ignoreType<ThymeleafContent>()

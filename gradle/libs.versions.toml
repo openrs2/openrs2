@@ -62,7 +62,6 @@ ktor-server-autoHeadResponse = { module = "io.ktor:ktor-server-auto-head-respons
 ktor-server-cachingHeaders = { module = "io.ktor:ktor-server-caching-headers", version.ref = "ktor" }
 ktor-server-conditionalHeaders = { module = "io.ktor:ktor-server-conditional-headers", version.ref = "ktor" }
 ktor-server-contentNegotiation = { module = "io.ktor:ktor-server-content-negotiation", version.ref = "ktor" }
-ktor-server-cors = { module = "io.ktor:ktor-server-cors", version.ref = "ktor" }
 ktor-server-defaultHeaders = { module = "io.ktor:ktor-server-default-headers", version.ref = "ktor" }
 ktor-server-forwardedHeader = { module = "io.ktor:ktor-server-forwarded-header", version.ref = "ktor" }
 ktor-server-jetty = { module = "io.ktor:ktor-server-jetty", version.ref = "ktor" }
@@ -95,7 +94,6 @@ ktor = [
 	"ktor-server-cachingHeaders",
 	"ktor-server-conditionalHeaders",
 	"ktor-server-contentNegotiation",
-	"ktor-server-cors",
 	"ktor-server-defaultHeaders",
 	"ktor-server-forwardedHeader",
 	"ktor-server-jetty",
