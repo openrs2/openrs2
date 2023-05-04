@@ -75,16 +75,16 @@ public class KeyImporter @Inject constructor(
         val urls = mutableSetOf<String>()
 
         for (downloader in downloaders) {
-            for (url in downloader.getMissingUrls(seenUrls)) {
-                try {
+            try {
+                for (url in downloader.getMissingUrls(seenUrls)) {
                     keys += downloader.download(url).map { key ->
                         Key(key, downloader.source)
                     }
                     urls += url
-                } catch (ex: IOException) {
-                    logger.warn(ex) { "Failed to download keys from ${downloader.source.name}" }
-                    continue
                 }
+            } catch (ex: IOException) {
+                logger.warn(ex) { "Failed to download keys from ${downloader.source.name}" }
+                continue
             }
         }
 
