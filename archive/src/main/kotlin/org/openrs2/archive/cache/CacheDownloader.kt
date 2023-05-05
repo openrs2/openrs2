@@ -61,7 +61,11 @@ public class CacheDownloader @Inject constructor(
                         val tokens = config.params.values.filter { TOKEN_REGEX.matches(it) }
                         val token = tokens.singleOrNull() ?: throw Exception("Multiple candidate tokens: $tokens")
 
-                        hostname = NXT_HOSTNAME
+                        hostname = if (environment == "beta") {
+                            NXT_BETA_HOSTNAME
+                        } else {
+                            NXT_LIVE_HOSTNAME
+                        }
 
                         val musicStreamClient = MusicStreamClient(client, byteBufBodyHandler, "http://$hostname")
 
@@ -97,7 +101,8 @@ public class CacheDownloader @Inject constructor(
 
     private companion object {
         private const val CODEBASE = "codebase"
-        private const val NXT_HOSTNAME = "content.runescape.com"
+        private const val NXT_LIVE_HOSTNAME = "content.runescape.com"
+        private const val NXT_BETA_HOSTNAME = "content.beta.runescape.com"
         private const val PORT = 443
         private val TOKEN_REGEX = Regex("[A-Za-z0-9*-]{32}")
     }
