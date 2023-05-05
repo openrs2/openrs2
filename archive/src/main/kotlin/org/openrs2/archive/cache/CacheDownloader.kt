@@ -30,7 +30,7 @@ public class CacheDownloader @Inject constructor(
 
         val group = bootstrapFactory.createEventLoopGroup()
         try {
-            suspendCoroutine<Unit> { continuation ->
+            suspendCoroutine { continuation ->
                 val bootstrap = bootstrapFactory.createBootstrap(group)
 
                 val hostname: String
