@@ -27,6 +27,8 @@ public class RuneStarNameDownloader @Inject constructor(
             names += readTsv(endpoint, 0)
         }
 
+        names += readTsv(LEANBOW_NAMES_ENDPOINT, 1)
+
         return names.asSequence()
     }
 
@@ -50,12 +52,18 @@ public class RuneStarNameDownloader @Inject constructor(
 
     private companion object {
         private val NAMES_ENDPOINTS = listOf(
+            URI("https://raw.githubusercontent.com/Joshua-F/cache-names/master/names.tsv"),
+            URI("https://raw.githubusercontent.com/Pazaz/RT4-Data/main/names.tsv"),
+            URI("https://raw.githubusercontent.com/Pazaz/RT4-Data/main/osrs.tsv"),
+            URI("https://raw.githubusercontent.com/Pazaz/RT4-Data/main/walied.tsv"),
             URI("https://raw.githubusercontent.com/RuneStar/cache-names/master/names.tsv"),
-            URI("https://raw.githubusercontent.com/Joshua-F/cache-names/master/names.tsv")
         )
         private val INDIVIDUAL_NAMES_ENDPOINTS = listOf(
+            URI("https://raw.githubusercontent.com/Joshua-F/cache-names/master/individual-names.tsv"),
+            URI("https://raw.githubusercontent.com/Pazaz/RT4-Data/main/walied.individual.components.tsv"),
+            URI("https://raw.githubusercontent.com/Pazaz/RT4-Data/main/walied.individual.tsv"),
             URI("https://raw.githubusercontent.com/RuneStar/cache-names/master/individual-names.tsv"),
-            URI("https://raw.githubusercontent.com/Joshua-F/cache-names/master/individual-names.tsv")
         )
+        private val LEANBOW_NAMES_ENDPOINT = URI("https://raw.githubusercontent.com/Pazaz/RT4-Data/main/leanbow.tsv")
     }
 }
