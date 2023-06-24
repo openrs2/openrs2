@@ -105,9 +105,10 @@ public class CacheImporter @Inject constructor(
         public val version: Int
     ) : Blob(buf)
 
-    private enum class SourceType {
+    internal enum class SourceType {
         DISK,
-        JS5REMOTE
+        JS5REMOTE,
+        CROSS_POLLINATION
     }
 
     public data class MasterIndexResult(
@@ -540,11 +541,11 @@ public class CacheImporter @Inject constructor(
         return masterIndexId
     }
 
-    private fun addSource(
+    internal fun addSource(
         connection: Connection,
         type: SourceType,
-        cacheId: Int,
-        gameId: Int,
+        cacheId: Int?,
+        gameId: Int?,
         buildMajor: Int?,
         buildMinor: Int?,
         timestamp: Instant?,
@@ -552,7 +553,23 @@ public class CacheImporter @Inject constructor(
         description: String?,
         url: String?
     ): Int {
-        if (type == SourceType.JS5REMOTE && buildMajor != null) {
+        if (type == SourceType.CROSS_POLLINATION) {
+            connection.prepareStatement(
+                """
+                SELECT id
+                FROM sources
+                WHERE type = 'cross_pollination'
+            """.trimIndent()
+            ).use { stmt ->
+                stmt.executeQuery().use { rows ->
+                    if (rows.next()) {
+                        return rows.getInt(1)
+                    }
+                }
+            }
+        }
+
+        if (type == SourceType.JS5REMOTE && cacheId != null && gameId != null && buildMajor != null) {
             connection.prepareStatement(
                 """
                 SELECT id
@@ -581,8 +598,8 @@ public class CacheImporter @Inject constructor(
             """.trimIndent()
         ).use { stmt ->
             stmt.setString(1, type.toString().lowercase())
-            stmt.setInt(2, cacheId)
-            stmt.setInt(3, gameId)
+            stmt.setObject(2, cacheId, Types.INTEGER)
+            stmt.setObject(3, gameId, Types.INTEGER)
             stmt.setObject(4, buildMajor, Types.INTEGER)
             stmt.setObject(5, buildMinor, Types.INTEGER)
 
@@ -636,7 +653,7 @@ public class CacheImporter @Inject constructor(
         }
     }
 
-    private fun addGroups(connection: Connection, scopeId: Int, sourceId: Int, groups: List<Group>): List<Long> {
+    internal fun addGroups(connection: Connection, scopeId: Int, sourceId: Int, groups: List<Group>): List<Long> {
         val containerIds = addContainers(connection, groups)
 
         connection.prepareStatement(
@@ -795,7 +812,7 @@ public class CacheImporter @Inject constructor(
         return containerId
     }
 
-    private fun prepare(connection: Connection) {
+    internal fun prepare(connection: Connection) {
         connection.prepareStatement(
             """
             LOCK TABLE containers IN EXCLUSIVE MODE
@@ -1298,7 +1315,7 @@ public class CacheImporter @Inject constructor(
         }
     }
 
-    private fun addFiles(connection: Connection, sourceId: Int, files: List<File>) {
+    internal fun addFiles(connection: Connection, sourceId: Int, files: List<File>) {
         val blobIds = addBlobs(connection, files)
 
         connection.prepareStatement(

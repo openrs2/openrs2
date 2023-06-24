@@ -7,6 +7,7 @@ import org.openrs2.archive.cache.finder.ExtractCommand
 public class CacheCommand : NoOpCliktCommand(name = "cache") {
     init {
         subcommands(
+            CrossPollinateCommand(),
             DownloadCommand(),
             ExtractCommand(),
             ImportCommand(),
