@@ -823,6 +823,17 @@ public class CacheImporter @Inject constructor(
 
         connection.prepareStatement(
             """
+            CREATE TEMPORARY TABLE tmp_container_hashes (
+                index INTEGER NOT NULL,
+                whirlpool BYTEA NOT NULL
+            ) ON COMMIT DROP
+        """.trimIndent()
+        ).use { stmt ->
+            stmt.execute()
+        }
+
+        connection.prepareStatement(
+            """
             CREATE TEMPORARY TABLE tmp_containers (
                 index INTEGER NOT NULL,
                 crc32 INTEGER NOT NULL,
@@ -859,10 +870,57 @@ public class CacheImporter @Inject constructor(
     private fun addContainers(connection: Connection, containers: List<Container>): List<Long> {
         connection.prepareStatement(
             """
-            TRUNCATE TABLE tmp_containers
+            TRUNCATE TABLE tmp_containers, tmp_container_hashes
             """.trimIndent()
         ).use { stmt ->
             stmt.execute()
+        }
+
+        connection.prepareStatement(
+            """
+            INSERT INTO tmp_container_hashes (index, whirlpool)
+            VALUES (?, ?)
+        """.trimIndent()
+        ).use { stmt ->
+            for ((i, container) in containers.withIndex()) {
+                stmt.setInt(1, i)
+                stmt.setBytes(2, container.whirlpool)
+
+                stmt.addBatch()
+            }
+
+            stmt.executeBatch()
+        }
+
+        val ids = mutableListOf<Long?>()
+        var count = 0
+
+        connection.prepareStatement(
+            """
+            SELECT c.id
+            FROM tmp_container_hashes t
+            LEFT JOIN containers c ON c.whirlpool = t.whirlpool
+            ORDER BY t.index ASC
+        """.trimIndent()
+        ).use { stmt ->
+            stmt.executeQuery().use { rows ->
+                while (rows.next()) {
+                    val id = rows.getLong(1)
+                    if (rows.wasNull()) {
+                        ids += null
+                    } else {
+                        ids += id
+                        count++
+                    }
+                }
+            }
+        }
+
+        check(ids.size == containers.size)
+
+        if (count == containers.size) {
+            @Suppress("UNCHECKED_CAST")
+            return ids as List<Long>
         }
 
         connection.prepareStatement(
@@ -872,6 +930,10 @@ public class CacheImporter @Inject constructor(
             """.trimIndent()
         ).use { stmt ->
             for ((i, container) in containers.withIndex()) {
+                if (ids[i] != null) {
+                    continue
+                }
+
                 stmt.setInt(1, i)
                 stmt.setInt(2, container.crc32)
                 stmt.setBytes(3, container.whirlpool)
@@ -905,11 +967,9 @@ public class CacheImporter @Inject constructor(
             stmt.execute()
         }
 
-        val ids = mutableListOf<Long>()
-
         connection.prepareStatement(
             """
-            SELECT c.id
+            SELECT t.index, c.id
             FROM tmp_containers t
             JOIN containers c ON c.whirlpool = t.whirlpool
             ORDER BY t.index ASC
@@ -917,13 +977,19 @@ public class CacheImporter @Inject constructor(
         ).use { stmt ->
             stmt.executeQuery().use { rows ->
                 while (rows.next()) {
-                    ids += rows.getLong(1)
+                    val index = rows.getInt(1)
+                    val id = rows.getLong(2)
+
+                    ids[index] = id
+                    count++
                 }
             }
         }
 
-        check(ids.size == containers.size)
-        return ids
+        check(count == containers.size)
+
+        @Suppress("UNCHECKED_CAST")
+        return ids as List<Long>
     }
 
     private fun addBlob(connection: Connection, blob: Blob): Long {
