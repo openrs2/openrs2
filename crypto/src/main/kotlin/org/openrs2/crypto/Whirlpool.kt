@@ -281,7 +281,7 @@ public class Whirlpool {
 
             val whirlpool = Whirlpool()
             whirlpool.NESSIEinit()
-            whirlpool.NESSIEadd(source, (len * 8).toLong())
+            whirlpool.NESSIEadd(source, len.toLong() * 8)
 
             val digest = ByteArray(DIGESTBYTES)
             whirlpool.NESSIEfinalize(digest)
