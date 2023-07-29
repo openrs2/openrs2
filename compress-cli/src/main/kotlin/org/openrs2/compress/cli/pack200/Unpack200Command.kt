@@ -7,7 +7,7 @@ import com.github.ajalt.clikt.parameters.types.defaultStdout
 import com.github.ajalt.clikt.parameters.types.inputStream
 import com.github.ajalt.clikt.parameters.types.outputStream
 import org.openrs2.compress.gzip.Gzip
-import org.openrs2.util.io.DeterministicJarOutputStream
+import java.util.jar.JarOutputStream
 import java.util.jar.Pack200
 
 public class Unpack200Command : CliktCommand(name = "unpack200") {
@@ -16,7 +16,7 @@ public class Unpack200Command : CliktCommand(name = "unpack200") {
 
     override fun run() {
         Gzip.createHeaderlessInputStream(input).use { gzipInput ->
-            DeterministicJarOutputStream(output).use { jarOutput ->
+            JarOutputStream(output).use { jarOutput ->
                 Pack200.newUnpacker().unpack(gzipInput, jarOutput)
             }
         }
