@@ -187,8 +187,9 @@ public object Js5Compression {
         }
 
         if (type == Js5CompressionType.UNCOMPRESSED) {
-            if (input.readableBytes() < len) {
-                throw IOException("Data truncated")
+            val n = input.readableBytes()
+            if (n < len) {
+                throw IOException("Data truncated ($n bytes, expecting $len)")
             }
 
             /*
@@ -213,8 +214,9 @@ public object Js5Compression {
         }
 
         val lenWithUncompressedLen = len + 4
-        if (input.readableBytes() < lenWithUncompressedLen) {
-            throw IOException("Compressed data truncated")
+        val n = input.readableBytes()
+        if (n < lenWithUncompressedLen) {
+            throw IOException("Compressed data truncated ($n bytes, expecting $lenWithUncompressedLen)")
         }
 
         /*
