@@ -6,7 +6,7 @@ import jakarta.inject.Singleton
 @Singleton
 public class CryptoJacksonModule : SimpleModule() {
     init {
-        addDeserializer(XteaKey::class.java, XteaKeyDeserializer)
-        addSerializer(XteaKey::class.java, XteaKeySerializer)
+        addDeserializer(SymmetricKey::class.java, SymmetricKeyDeserializer)
+        addSerializer(SymmetricKey::class.java, SymmetricKeySerializer)
     }
 }

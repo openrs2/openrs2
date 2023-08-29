@@ -4,7 +4,7 @@ import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufInputStream
 import io.netty.buffer.ByteBufOutputStream
 import org.openrs2.buffer.use
-import org.openrs2.crypto.XteaKey
+import org.openrs2.crypto.SymmetricKey
 import org.openrs2.crypto.xteaDecrypt
 import org.openrs2.crypto.xteaEncrypt
 import java.io.IOException
@@ -19,7 +19,7 @@ public object Js5Compression {
     private const val LZMA_PRESET_DICT_SIZE_MAX = 1 shl 26
 
     @JvmOverloads
-    public fun compress(input: ByteBuf, type: Js5CompressionType, key: XteaKey = XteaKey.ZERO): ByteBuf {
+    public fun compress(input: ByteBuf, type: Js5CompressionType, key: SymmetricKey = SymmetricKey.ZERO): ByteBuf {
         input.alloc().buffer().use { output ->
             output.writeByte(type.ordinal)
 
@@ -62,7 +62,7 @@ public object Js5Compression {
         input: ByteBuf,
         enableLzma: Boolean = false,
         enableUncompressedEncryption: Boolean = false,
-        key: XteaKey = XteaKey.ZERO
+        key: SymmetricKey = SymmetricKey.ZERO
     ): ByteBuf {
         val types = mutableListOf(Js5CompressionType.BZIP2, Js5CompressionType.GZIP)
         if (enableLzma) {
@@ -109,7 +109,7 @@ public object Js5Compression {
     }
 
     @JvmOverloads
-    public fun uncompress(input: ByteBuf, key: XteaKey = XteaKey.ZERO): ByteBuf {
+    public fun uncompress(input: ByteBuf, key: SymmetricKey = SymmetricKey.ZERO): ByteBuf {
         if (input.readableBytes() < 5) {
             throw IOException("Missing header")
         }
@@ -169,10 +169,10 @@ public object Js5Compression {
     }
 
     public fun uncompressUnlessEncrypted(input: ByteBuf): ByteBuf? {
-        return uncompressIfKeyValid(input, XteaKey.ZERO)
+        return uncompressIfKeyValid(input, SymmetricKey.ZERO)
     }
 
-    public fun uncompressIfKeyValid(input: ByteBuf, key: XteaKey): ByteBuf? {
+    public fun uncompressIfKeyValid(input: ByteBuf, key: SymmetricKey): ByteBuf? {
         if (input.readableBytes() < 5) {
             throw IOException("Missing header")
         }
@@ -360,7 +360,7 @@ public object Js5Compression {
         }
     }
 
-    private fun decrypt(buf: ByteBuf, len: Int, key: XteaKey): ByteBuf {
+    private fun decrypt(buf: ByteBuf, len: Int, key: SymmetricKey): ByteBuf {
         if (key.isZero) {
             return buf.readRetainedSlice(len)
         }

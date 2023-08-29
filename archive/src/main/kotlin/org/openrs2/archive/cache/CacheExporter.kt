@@ -16,7 +16,7 @@ import org.openrs2.cache.Js5Compression
 import org.openrs2.cache.Js5MasterIndex
 import org.openrs2.cache.MasterIndexFormat
 import org.openrs2.cache.Store
-import org.openrs2.crypto.XteaKey
+import org.openrs2.crypto.SymmetricKey
 import org.openrs2.db.Database
 import org.postgresql.util.PGobject
 import java.sql.Connection
@@ -196,7 +196,7 @@ public class CacheExporter @Inject constructor(
         val nameHash: Int?,
         val name: String?,
         @JsonProperty("mapsquare") val mapSquare: Int?,
-        val key: XteaKey
+        val key: SymmetricKey
     )
 
     public suspend fun totalSize(): Long {
@@ -779,7 +779,7 @@ public class CacheExporter @Inject constructor(
                         val k3 = rows.getInt(8)
 
                         val mapSquare = getMapSquare(name)
-                        keys += Key(archive, group, nameHash, name, mapSquare, XteaKey(k0, k1, k2, k3))
+                        keys += Key(archive, group, nameHash, name, mapSquare, SymmetricKey(k0, k1, k2, k3))
                     }
 
                     keys

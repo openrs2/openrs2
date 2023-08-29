@@ -3,17 +3,17 @@ package org.openrs2.archive.key
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.Unpooled
 import org.openrs2.buffer.use
-import org.openrs2.crypto.XteaKey
+import org.openrs2.crypto.SymmetricKey
 import java.io.InputStream
 
 public object BinaryKeyReader : KeyReader {
-    override fun read(input: InputStream): Sequence<XteaKey> {
+    override fun read(input: InputStream): Sequence<SymmetricKey> {
         Unpooled.wrappedBuffer(input.readBytes()).use { buf ->
             val len = buf.readableBytes()
 
             if (len == (128 * 128 * 16)) {
                 val keys = read(buf, 0)
-                require(XteaKey.ZERO in keys)
+                require(SymmetricKey.ZERO in keys)
                 return keys.asSequence()
             }
 
@@ -22,19 +22,19 @@ public object BinaryKeyReader : KeyReader {
 
             if (maybeShort && !maybeInt) {
                 val keys = read(buf, 2)
-                require(XteaKey.ZERO in keys)
+                require(SymmetricKey.ZERO in keys)
                 return keys.asSequence()
             } else if (!maybeShort && maybeInt) {
                 val keys = read(buf, 4).asSequence()
-                require(XteaKey.ZERO in keys)
+                require(SymmetricKey.ZERO in keys)
                 return keys.asSequence()
             } else if (maybeShort && maybeInt) {
                 val shortKeys = read(buf, 2)
                 val intKeys = read(buf, 4)
 
-                return if (XteaKey.ZERO in shortKeys && XteaKey.ZERO !in intKeys) {
+                return if (SymmetricKey.ZERO in shortKeys && SymmetricKey.ZERO !in intKeys) {
                     shortKeys.asSequence()
-                } else if (XteaKey.ZERO !in shortKeys && XteaKey.ZERO in intKeys) {
+                } else if (SymmetricKey.ZERO !in shortKeys && SymmetricKey.ZERO in intKeys) {
                     intKeys.asSequence()
                 } else {
                     throw IllegalArgumentException("Failed to determine if map square IDs are 2 or 4 bytes")
@@ -47,8 +47,8 @@ public object BinaryKeyReader : KeyReader {
         }
     }
 
-    private fun read(buf: ByteBuf, mapSquareLen: Int): Set<XteaKey> {
-        val keys = mutableSetOf<XteaKey>()
+    private fun read(buf: ByteBuf, mapSquareLen: Int): Set<SymmetricKey> {
+        val keys = mutableSetOf<SymmetricKey>()
 
         while (buf.isReadable) {
             buf.skipBytes(mapSquareLen)
@@ -57,7 +57,7 @@ public object BinaryKeyReader : KeyReader {
             val k1 = buf.readInt()
             val k2 = buf.readInt()
             val k3 = buf.readInt()
-            keys += XteaKey(k0, k1, k2, k3)
+            keys += SymmetricKey(k0, k1, k2, k3)
         }
 
         return keys

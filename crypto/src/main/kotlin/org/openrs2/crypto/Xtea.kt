@@ -7,7 +7,7 @@ private const val ROUNDS = 32
 public const val XTEA_BLOCK_SIZE: Int = 8
 private const val BLOCK_SIZE_MASK = XTEA_BLOCK_SIZE - 1
 
-public fun ByteBuf.xteaEncrypt(index: Int, length: Int, key: XteaKey) {
+public fun ByteBuf.xteaEncrypt(index: Int, length: Int, key: SymmetricKey) {
     val k = key.toIntArray()
 
     val end = index + (length and BLOCK_SIZE_MASK.inv())
@@ -27,7 +27,7 @@ public fun ByteBuf.xteaEncrypt(index: Int, length: Int, key: XteaKey) {
     }
 }
 
-public fun ByteBuf.xteaDecrypt(index: Int, length: Int, key: XteaKey) {
+public fun ByteBuf.xteaDecrypt(index: Int, length: Int, key: SymmetricKey) {
     val k = key.toIntArray()
 
     val end = index + (length and BLOCK_SIZE_MASK.inv())

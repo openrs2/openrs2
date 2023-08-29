@@ -6,7 +6,7 @@ import org.openrs2.buffer.readString
 import org.openrs2.buffer.use
 import org.openrs2.buffer.writeString
 import org.openrs2.crypto.Rsa
-import org.openrs2.crypto.XteaKey
+import org.openrs2.crypto.SymmetricKey
 import org.openrs2.crypto.rsa
 import org.openrs2.protocol.common.AntiAliasingMode
 import org.openrs2.protocol.common.DisplayMode
@@ -28,7 +28,7 @@ public data class GameLoginPayload(
     val verifyId: Int,
     val js5ArchiveChecksums: List<Int>,
     // TODO(gpe): XteaKey needs a better name, as it represents an ISAAC key here
-    val key: XteaKey,
+    val key: SymmetricKey,
     val username: String,
     val password: String,
 ) {
@@ -133,7 +133,7 @@ public data class GameLoginPayload(
                     detailOptions,
                     verifyId,
                     js5ArchiveChecksums,
-                    XteaKey(k0, k1, k2, k3),
+                    SymmetricKey(k0, k1, k2, k3),
                     Base37.decodeLowerCase(username),
                     password,
                 )

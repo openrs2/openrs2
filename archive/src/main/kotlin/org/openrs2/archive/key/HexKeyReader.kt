@@ -1,13 +1,13 @@
 package org.openrs2.archive.key
 
-import org.openrs2.crypto.XteaKey
+import org.openrs2.crypto.SymmetricKey
 import java.io.InputStream
 
 public object HexKeyReader : KeyReader {
-    override fun read(input: InputStream): Sequence<XteaKey> {
+    override fun read(input: InputStream): Sequence<SymmetricKey> {
         return input.bufferedReader()
             .lineSequence()
-            .map(XteaKey::fromHexOrNull)
+            .map(SymmetricKey::fromHexOrNull)
             .filterNotNull()
     }
 }

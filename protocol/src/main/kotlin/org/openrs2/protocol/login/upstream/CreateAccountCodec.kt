@@ -9,8 +9,8 @@ import org.openrs2.buffer.use
 import org.openrs2.buffer.writeString
 import org.openrs2.crypto.Rsa
 import org.openrs2.crypto.StreamCipher
+import org.openrs2.crypto.SymmetricKey
 import org.openrs2.crypto.XTEA_BLOCK_SIZE
-import org.openrs2.crypto.XteaKey
 import org.openrs2.crypto.publicKey
 import org.openrs2.crypto.rsa
 import org.openrs2.crypto.secureRandom
@@ -54,7 +54,7 @@ public class CreateAccountCodec @Inject constructor(
             val country = plaintext.readUnsignedShort()
             val k3 = plaintext.readInt()
 
-            val xteaKey = XteaKey(k0, k1, k2, k3)
+            val xteaKey = SymmetricKey(k0, k1, k2, k3)
             input.xteaDecrypt(input.readerIndex(), input.readableBytes(), xteaKey)
 
             val email = input.readString()
@@ -84,7 +84,7 @@ public class CreateAccountCodec @Inject constructor(
     }
 
     override fun encode(input: LoginRequest.CreateAccount, output: ByteBuf, cipher: StreamCipher) {
-        val xteaKey = XteaKey.generate()
+        val xteaKey = SymmetricKey.generate()
 
         output.writeShort(input.build)
 

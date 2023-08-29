@@ -2,7 +2,7 @@ package org.openrs2.archive.key
 
 import jakarta.inject.Inject
 import jakarta.inject.Singleton
-import org.openrs2.crypto.XteaKey
+import org.openrs2.crypto.SymmetricKey
 import org.openrs2.db.Database
 import java.io.BufferedOutputStream
 import java.io.DataOutputStream
@@ -82,11 +82,11 @@ public class KeyExporter @Inject constructor(
         }
     }
 
-    public suspend fun exportAll(): List<XteaKey> {
+    public suspend fun exportAll(): List<SymmetricKey> {
         return export(validOnly = false)
     }
 
-    public suspend fun exportValid(): List<XteaKey> {
+    public suspend fun exportValid(): List<SymmetricKey> {
         return export(validOnly = true)
     }
 
@@ -116,7 +116,7 @@ public class KeyExporter @Inject constructor(
         return analysis
     }
 
-    private suspend fun export(validOnly: Boolean): List<XteaKey> {
+    private suspend fun export(validOnly: Boolean): List<SymmetricKey> {
         return database.execute { connection ->
             val query = if (validOnly) {
                 EXPORT_VALID_QUERY
@@ -126,14 +126,14 @@ public class KeyExporter @Inject constructor(
 
             connection.prepareStatement(query).use { stmt ->
                 stmt.executeQuery().use { rows ->
-                    val keys = mutableListOf<XteaKey>()
+                    val keys = mutableListOf<SymmetricKey>()
 
                     while (rows.next()) {
                         val k0 = rows.getInt(1)
                         val k1 = rows.getInt(2)
                         val k2 = rows.getInt(3)
                         val k3 = rows.getInt(4)
-                        keys += XteaKey(k0, k1, k2, k3)
+                        keys += SymmetricKey(k0, k1, k2, k3)
                     }
 
                     keys

@@ -2,7 +2,7 @@ package org.openrs2.crypto
 
 import java.security.SecureRandom
 
-public data class XteaKey(
+public data class SymmetricKey(
     public val k0: Int,
     public val k1: Int,
     public val k2: Int,
@@ -28,28 +28,28 @@ public data class XteaKey(
 
     public companion object {
         @JvmStatic
-        public val ZERO: XteaKey = XteaKey(0, 0, 0, 0)
+        public val ZERO: SymmetricKey = SymmetricKey(0, 0, 0, 0)
 
         @JvmStatic
         @JvmOverloads
-        public fun generate(r: SecureRandom = secureRandom): XteaKey {
-            return XteaKey(r.nextInt(), r.nextInt(), r.nextInt(), r.nextInt())
+        public fun generate(r: SecureRandom = secureRandom): SymmetricKey {
+            return SymmetricKey(r.nextInt(), r.nextInt(), r.nextInt(), r.nextInt())
         }
 
         @JvmStatic
-        public fun fromIntArray(a: IntArray): XteaKey {
+        public fun fromIntArray(a: IntArray): SymmetricKey {
             require(a.size == 4)
 
-            return XteaKey(a[0], a[1], a[2], a[3])
+            return SymmetricKey(a[0], a[1], a[2], a[3])
         }
 
         @JvmStatic
-        public fun fromHex(s: String): XteaKey {
+        public fun fromHex(s: String): SymmetricKey {
             return fromHexOrNull(s) ?: throw IllegalArgumentException()
         }
 
         @JvmStatic
-        public fun fromHexOrNull(s: String): XteaKey? {
+        public fun fromHexOrNull(s: String): SymmetricKey? {
             if (s.length != 32) {
                 return null
             }
@@ -60,7 +60,7 @@ public data class XteaKey(
                 val k2 = Integer.parseUnsignedInt(s, 16, 24, 16)
                 val k3 = Integer.parseUnsignedInt(s, 24, 32, 16)
 
-                XteaKey(k0, k1, k2, k3)
+                SymmetricKey(k0, k1, k2, k3)
             } catch (ex: NumberFormatException) {
                 null
             }

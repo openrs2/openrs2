@@ -6,7 +6,7 @@ import jakarta.inject.Singleton
 import org.openrs2.buffer.crc32
 import org.openrs2.buffer.use
 import org.openrs2.cache.Js5Compression
-import org.openrs2.crypto.XteaKey
+import org.openrs2.crypto.SymmetricKey
 import org.openrs2.db.Database
 import java.sql.Connection
 import java.sql.Types
@@ -203,7 +203,7 @@ public class KeyBruteForcer @Inject constructor(
                         val k1 = rows.getInt(3)
                         val k2 = rows.getInt(4)
                         val k3 = rows.getInt(5)
-                        val key = XteaKey(k0, k1, k2, k3)
+                        val key = SymmetricKey(k0, k1, k2, k3)
 
                         validatedKey = validateKey(data, key, keyId, containerId)
                         if (validatedKey != null) {
@@ -326,7 +326,7 @@ public class KeyBruteForcer @Inject constructor(
         }
     }
 
-    private fun nextKey(connection: Connection, lastKeyId: Long?): Pair<Long, XteaKey>? {
+    private fun nextKey(connection: Connection, lastKeyId: Long?): Pair<Long, SymmetricKey>? {
         connection.prepareStatement(
             """
             SELECT id, (key).k0, (key).k1, (key).k2, (key).k3
@@ -350,7 +350,7 @@ public class KeyBruteForcer @Inject constructor(
                 val k1 = rows.getInt(3)
                 val k2 = rows.getInt(4)
                 val k3 = rows.getInt(5)
-                val key = XteaKey(k0, k1, k2, k3)
+                val key = SymmetricKey(k0, k1, k2, k3)
 
                 return Pair(keyId, key)
             }
@@ -359,7 +359,7 @@ public class KeyBruteForcer @Inject constructor(
 
     private fun validateKey(
         data: ByteArray,
-        key: XteaKey,
+        key: SymmetricKey,
         keyId: Long,
         containerId: Long
     ): ValidatedKey? {

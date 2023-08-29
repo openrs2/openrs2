@@ -3,7 +3,7 @@ package org.openrs2.cache
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufAllocator
 import org.openrs2.buffer.use
-import org.openrs2.crypto.XteaKey
+import org.openrs2.crypto.SymmetricKey
 import org.openrs2.util.krHashCode
 import java.io.Closeable
 import java.io.FileNotFoundException
@@ -142,35 +142,45 @@ public class Cache private constructor(
     }
 
     @JvmOverloads
-    public fun read(archive: Int, group: Int, file: Int, key: XteaKey = XteaKey.ZERO): ByteBuf {
+    public fun read(archive: Int, group: Int, file: Int, key: SymmetricKey = SymmetricKey.ZERO): ByteBuf {
         checkArchive(archive)
         return archives[archive]?.read(group, file, key) ?: throw FileNotFoundException()
     }
 
     @JvmOverloads
-    public fun readNamed(archive: Int, groupNameHash: Int, fileNameHash: Int, key: XteaKey = XteaKey.ZERO): ByteBuf {
+    public fun readNamed(
+        archive: Int,
+        groupNameHash: Int,
+        fileNameHash: Int,
+        key: SymmetricKey = SymmetricKey.ZERO
+    ): ByteBuf {
         checkArchive(archive)
         return archives[archive]?.readNamed(groupNameHash, fileNameHash, key) ?: throw FileNotFoundException()
     }
 
     @JvmOverloads
-    public fun read(archive: Int, group: String, file: String, key: XteaKey = XteaKey.ZERO): ByteBuf {
+    public fun read(archive: Int, group: String, file: String, key: SymmetricKey = SymmetricKey.ZERO): ByteBuf {
         return readNamed(archive, group.krHashCode(), file.krHashCode(), key)
     }
 
     @JvmOverloads
-    public fun readNamedGroup(archive: Int, groupNameHash: Int, file: Int, key: XteaKey = XteaKey.ZERO): ByteBuf {
+    public fun readNamedGroup(
+        archive: Int,
+        groupNameHash: Int,
+        file: Int,
+        key: SymmetricKey = SymmetricKey.ZERO
+    ): ByteBuf {
         checkArchive(archive)
         return archives[archive]?.readNamedGroup(groupNameHash, file, key) ?: throw FileNotFoundException()
     }
 
     @JvmOverloads
-    public fun read(archive: Int, group: String, file: Int, key: XteaKey = XteaKey.ZERO): ByteBuf {
+    public fun read(archive: Int, group: String, file: Int, key: SymmetricKey = SymmetricKey.ZERO): ByteBuf {
         return readNamedGroup(archive, group.krHashCode(), file, key)
     }
 
     @JvmOverloads
-    public fun write(archive: Int, group: Int, file: Int, buf: ByteBuf, key: XteaKey = XteaKey.ZERO) {
+    public fun write(archive: Int, group: Int, file: Int, buf: ByteBuf, key: SymmetricKey = SymmetricKey.ZERO) {
         checkArchive(archive)
         createOrGetArchive(archive).write(group, file, buf, key)
     }
@@ -181,25 +191,31 @@ public class Cache private constructor(
         groupNameHash: Int,
         fileNameHash: Int,
         buf: ByteBuf,
-        key: XteaKey = XteaKey.ZERO
+        key: SymmetricKey = SymmetricKey.ZERO
     ) {
         checkArchive(archive)
         createOrGetArchive(archive).writeNamed(groupNameHash, fileNameHash, buf, key)
     }
 
     @JvmOverloads
-    public fun write(archive: Int, group: String, file: String, buf: ByteBuf, key: XteaKey = XteaKey.ZERO) {
+    public fun write(archive: Int, group: String, file: String, buf: ByteBuf, key: SymmetricKey = SymmetricKey.ZERO) {
         writeNamed(archive, group.krHashCode(), file.krHashCode(), buf, key)
     }
 
     @JvmOverloads
-    public fun writeNamedGroup(archive: Int, groupNameHash: Int, file: Int, buf: ByteBuf, key: XteaKey = XteaKey.ZERO) {
+    public fun writeNamedGroup(
+        archive: Int,
+        groupNameHash: Int,
+        file: Int,
+        buf: ByteBuf,
+        key: SymmetricKey = SymmetricKey.ZERO
+    ) {
         checkArchive(archive)
         createOrGetArchive(archive).writeNamedGroup(groupNameHash, file, buf, key)
     }
 
     @JvmOverloads
-    public fun write(archive: Int, group: String, file: Int, buf: ByteBuf, key: XteaKey = XteaKey.ZERO) {
+    public fun write(archive: Int, group: String, file: Int, buf: ByteBuf, key: SymmetricKey = SymmetricKey.ZERO) {
         writeNamedGroup(archive, group.krHashCode(), file, buf, key)
     }
 
@@ -233,30 +249,30 @@ public class Cache private constructor(
     }
 
     @JvmOverloads
-    public fun remove(archive: Int, group: Int, file: Int, key: XteaKey = XteaKey.ZERO) {
+    public fun remove(archive: Int, group: Int, file: Int, key: SymmetricKey = SymmetricKey.ZERO) {
         checkArchive(archive)
         archives[archive]?.remove(group, file, key)
     }
 
     @JvmOverloads
-    public fun removeNamed(archive: Int, groupNameHash: Int, fileNameHash: Int, key: XteaKey = XteaKey.ZERO) {
+    public fun removeNamed(archive: Int, groupNameHash: Int, fileNameHash: Int, key: SymmetricKey = SymmetricKey.ZERO) {
         checkArchive(archive)
         archives[archive]?.removeNamed(groupNameHash, fileNameHash, key)
     }
 
     @JvmOverloads
-    public fun remove(archive: Int, group: String, file: String, key: XteaKey = XteaKey.ZERO) {
+    public fun remove(archive: Int, group: String, file: String, key: SymmetricKey = SymmetricKey.ZERO) {
         return removeNamed(archive, group.krHashCode(), file.krHashCode(), key)
     }
 
     @JvmOverloads
-    public fun removeNamedGroup(archive: Int, groupNameHash: Int, file: Int, key: XteaKey = XteaKey.ZERO) {
+    public fun removeNamedGroup(archive: Int, groupNameHash: Int, file: Int, key: SymmetricKey = SymmetricKey.ZERO) {
         checkArchive(archive)
         archives[archive]?.removeNamedGroup(groupNameHash, file, key)
     }
 
     @JvmOverloads
-    public fun remove(archive: Int, group: String, file: Int, key: XteaKey = XteaKey.ZERO) {
+    public fun remove(archive: Int, group: String, file: Int, key: SymmetricKey = SymmetricKey.ZERO) {
         removeNamedGroup(archive, group.krHashCode(), file, key)
     }
 

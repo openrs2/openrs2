@@ -5,7 +5,7 @@ import jakarta.inject.Singleton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.future.await
 import kotlinx.coroutines.withContext
-import org.openrs2.crypto.XteaKey
+import org.openrs2.crypto.SymmetricKey
 import org.openrs2.http.checkStatusCode
 import java.net.URI
 import java.net.http.HttpClient
@@ -21,7 +21,7 @@ public class HdosKeyDownloader @Inject constructor(
         return setOf(ENDPOINT)
     }
 
-    override suspend fun download(url: String): Sequence<XteaKey> {
+    override suspend fun download(url: String): Sequence<SymmetricKey> {
         val request = HttpRequest.newBuilder(URI(url))
             .GET()
             .timeout(Duration.ofSeconds(30))
@@ -33,7 +33,7 @@ public class HdosKeyDownloader @Inject constructor(
         return withContext(Dispatchers.IO) {
             response.body().use { input ->
                 input.bufferedReader().use { reader ->
-                    val keys = mutableSetOf<XteaKey>()
+                    val keys = mutableSetOf<SymmetricKey>()
 
                     for (line in reader.lineSequence()) {
                         val parts = line.split(',')
@@ -41,7 +41,7 @@ public class HdosKeyDownloader @Inject constructor(
                             continue
                         }
 
-                        val key = XteaKey.fromHexOrNull(parts[2]) ?: continue
+                        val key = SymmetricKey.fromHexOrNull(parts[2]) ?: continue
                         keys += key
                     }
 

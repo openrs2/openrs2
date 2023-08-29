@@ -3,7 +3,7 @@ package org.openrs2.archive.key
 import com.github.michaelbull.logging.InlineLogger
 import jakarta.inject.Inject
 import jakarta.inject.Singleton
-import org.openrs2.crypto.XteaKey
+import org.openrs2.crypto.SymmetricKey
 import org.openrs2.db.Database
 import java.io.IOException
 import java.nio.file.Files
@@ -19,10 +19,10 @@ public class KeyImporter @Inject constructor(
     private val jsonKeyReader: JsonKeyReader,
     private val downloaders: Set<KeyDownloader>
 ) {
-    private data class Key(val key: XteaKey, val source: KeySource)
+    private data class Key(val key: SymmetricKey, val source: KeySource)
 
     public suspend fun import(path: Path) {
-        val keys = mutableSetOf<XteaKey>()
+        val keys = mutableSetOf<SymmetricKey>()
 
         for (file in Files.walk(path)) {
             if (!Files.isRegularFile(file)) {
@@ -45,7 +45,7 @@ public class KeyImporter @Inject constructor(
             }
         }
 
-        keys -= XteaKey.ZERO
+        keys -= SymmetricKey.ZERO
 
         logger.info { "Importing ${keys.size} keys" }
 
@@ -108,7 +108,7 @@ public class KeyImporter @Inject constructor(
         }
     }
 
-    public suspend fun import(keys: Iterable<XteaKey>, source: KeySource) {
+    public suspend fun import(keys: Iterable<SymmetricKey>, source: KeySource) {
         val now = Instant.now()
 
         database.execute { connection ->

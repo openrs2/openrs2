@@ -7,7 +7,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectSortedMap
 import it.unimi.dsi.fastutil.ints.Int2ObjectSortedMaps
 import org.openrs2.buffer.crc32
 import org.openrs2.buffer.use
-import org.openrs2.crypto.XteaKey
+import org.openrs2.crypto.SymmetricKey
 import org.openrs2.crypto.whirlpool
 import org.openrs2.util.krHashCode
 import java.io.FileNotFoundException
@@ -23,7 +23,7 @@ public abstract class Archive internal constructor(
 
     internal inner class Unpacked(
         private val entry: Js5Index.MutableGroup,
-        val key: XteaKey,
+        val key: SymmetricKey,
         private var files: Int2ObjectSortedMap<ByteBuf>
     ) {
         private var dirty = false
@@ -193,7 +193,7 @@ public abstract class Archive internal constructor(
     }
 
     @JvmOverloads
-    public fun read(group: Int, file: Int, key: XteaKey = XteaKey.ZERO): ByteBuf {
+    public fun read(group: Int, file: Int, key: SymmetricKey = SymmetricKey.ZERO): ByteBuf {
         require(group >= 0 && file >= 0)
 
         val entry = index[group] ?: throw FileNotFoundException()
@@ -202,19 +202,19 @@ public abstract class Archive internal constructor(
     }
 
     @JvmOverloads
-    public fun readNamed(groupNameHash: Int, fileNameHash: Int, key: XteaKey = XteaKey.ZERO): ByteBuf {
+    public fun readNamed(groupNameHash: Int, fileNameHash: Int, key: SymmetricKey = SymmetricKey.ZERO): ByteBuf {
         val entry = index.getNamed(groupNameHash) ?: throw FileNotFoundException()
         val unpacked = getUnpacked(entry, key)
         return unpacked.readNamed(fileNameHash)
     }
 
     @JvmOverloads
-    public fun read(group: String, file: String, key: XteaKey = XteaKey.ZERO): ByteBuf {
+    public fun read(group: String, file: String, key: SymmetricKey = SymmetricKey.ZERO): ByteBuf {
         return readNamed(group.krHashCode(), file.krHashCode(), key)
     }
 
     @JvmOverloads
-    public fun readNamedGroup(groupNameHash: Int, file: Int, key: XteaKey = XteaKey.ZERO): ByteBuf {
+    public fun readNamedGroup(groupNameHash: Int, file: Int, key: SymmetricKey = SymmetricKey.ZERO): ByteBuf {
         require(file >= 0)
 
         val entry = index.getNamed(groupNameHash) ?: throw FileNotFoundException()
@@ -223,12 +223,12 @@ public abstract class Archive internal constructor(
     }
 
     @JvmOverloads
-    public fun read(group: String, file: Int, key: XteaKey = XteaKey.ZERO): ByteBuf {
+    public fun read(group: String, file: Int, key: SymmetricKey = SymmetricKey.ZERO): ByteBuf {
         return readNamedGroup(group.krHashCode(), file, key)
     }
 
     @JvmOverloads
-    public fun write(group: Int, file: Int, buf: ByteBuf, key: XteaKey = XteaKey.ZERO) {
+    public fun write(group: Int, file: Int, buf: ByteBuf, key: SymmetricKey = SymmetricKey.ZERO) {
         require(group >= 0 && file >= 0)
 
         val entry = index.createOrGet(group)
@@ -239,7 +239,7 @@ public abstract class Archive internal constructor(
     }
 
     @JvmOverloads
-    public fun writeNamed(groupNameHash: Int, fileNameHash: Int, buf: ByteBuf, key: XteaKey = XteaKey.ZERO) {
+    public fun writeNamed(groupNameHash: Int, fileNameHash: Int, buf: ByteBuf, key: SymmetricKey = SymmetricKey.ZERO) {
         val entry = index.createOrGetNamed(groupNameHash)
         val unpacked = createOrGetUnpacked(entry, key, isOverwritingNamed(entry, fileNameHash))
         unpacked.writeNamed(fileNameHash, buf)
@@ -249,12 +249,12 @@ public abstract class Archive internal constructor(
     }
 
     @JvmOverloads
-    public fun write(group: String, file: String, buf: ByteBuf, key: XteaKey = XteaKey.ZERO) {
+    public fun write(group: String, file: String, buf: ByteBuf, key: SymmetricKey = SymmetricKey.ZERO) {
         return writeNamed(group.krHashCode(), file.krHashCode(), buf, key)
     }
 
     @JvmOverloads
-    public fun writeNamedGroup(groupNameHash: Int, file: Int, buf: ByteBuf, key: XteaKey = XteaKey.ZERO) {
+    public fun writeNamedGroup(groupNameHash: Int, file: Int, buf: ByteBuf, key: SymmetricKey = SymmetricKey.ZERO) {
         require(file >= 0)
 
         val entry = index.createOrGetNamed(groupNameHash)
@@ -266,7 +266,7 @@ public abstract class Archive internal constructor(
     }
 
     @JvmOverloads
-    public fun write(group: String, file: Int, buf: ByteBuf, key: XteaKey = XteaKey.ZERO) {
+    public fun write(group: String, file: Int, buf: ByteBuf, key: SymmetricKey = SymmetricKey.ZERO) {
         return writeNamedGroup(group.krHashCode(), file, buf, key)
     }
 
@@ -293,7 +293,7 @@ public abstract class Archive internal constructor(
     }
 
     @JvmOverloads
-    public fun remove(group: Int, file: Int, key: XteaKey = XteaKey.ZERO) {
+    public fun remove(group: Int, file: Int, key: SymmetricKey = SymmetricKey.ZERO) {
         require(group >= 0 && file >= 0)
 
         val entry = index[group] ?: return
@@ -310,7 +310,7 @@ public abstract class Archive internal constructor(
     }
 
     @JvmOverloads
-    public fun removeNamed(groupNameHash: Int, fileNameHash: Int, key: XteaKey = XteaKey.ZERO) {
+    public fun removeNamed(groupNameHash: Int, fileNameHash: Int, key: SymmetricKey = SymmetricKey.ZERO) {
         val entry = index.getNamed(groupNameHash) ?: return
 
         if (isOverwritingNamed(entry, fileNameHash)) {
@@ -325,12 +325,12 @@ public abstract class Archive internal constructor(
     }
 
     @JvmOverloads
-    public fun remove(group: String, file: String, key: XteaKey = XteaKey.ZERO) {
+    public fun remove(group: String, file: String, key: SymmetricKey = SymmetricKey.ZERO) {
         return removeNamed(group.krHashCode(), file.krHashCode(), key)
     }
 
     @JvmOverloads
-    public fun removeNamedGroup(groupNameHash: Int, file: Int, key: XteaKey = XteaKey.ZERO) {
+    public fun removeNamedGroup(groupNameHash: Int, file: Int, key: SymmetricKey = SymmetricKey.ZERO) {
         require(file >= 0)
 
         val entry = index.getNamed(groupNameHash) ?: return
@@ -347,7 +347,7 @@ public abstract class Archive internal constructor(
     }
 
     @JvmOverloads
-    public fun remove(group: String, file: Int, key: XteaKey = XteaKey.ZERO) {
+    public fun remove(group: String, file: Int, key: SymmetricKey = SymmetricKey.ZERO) {
         removeNamedGroup(group.krHashCode(), file, key)
     }
 
@@ -388,7 +388,7 @@ public abstract class Archive internal constructor(
         return fileEntry.nameHash == fileNameHash
     }
 
-    private fun createOrGetUnpacked(entry: Js5Index.MutableGroup, key: XteaKey, overwrite: Boolean): Unpacked {
+    private fun createOrGetUnpacked(entry: Js5Index.MutableGroup, key: SymmetricKey, overwrite: Boolean): Unpacked {
         return if (entry.size == 0 || overwrite) {
             val unpacked = Unpacked(entry, key, Int2ObjectAVLTreeMap())
             unpackedCache.put(archive, entry.id, unpacked)
@@ -398,7 +398,7 @@ public abstract class Archive internal constructor(
         }
     }
 
-    private fun getUnpacked(entry: Js5Index.MutableGroup, key: XteaKey): Unpacked {
+    private fun getUnpacked(entry: Js5Index.MutableGroup, key: SymmetricKey): Unpacked {
         var unpacked = unpackedCache.get(archive, entry.id)
         if (unpacked != null) {
             /*

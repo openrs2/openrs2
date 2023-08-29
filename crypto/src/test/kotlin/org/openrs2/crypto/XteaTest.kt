@@ -8,7 +8,7 @@ import kotlin.test.assertEquals
 
 class XteaTest {
     private class TestVector(key: String, plaintext: String, ciphertext: String) {
-        val key = XteaKey.fromHex(key)
+        val key = SymmetricKey.fromHex(key)
         val plaintext: ByteArray = ByteBufUtil.decodeHexDump(plaintext)
         val ciphertext: ByteArray = ByteBufUtil.decodeHexDump(ciphertext)
     }

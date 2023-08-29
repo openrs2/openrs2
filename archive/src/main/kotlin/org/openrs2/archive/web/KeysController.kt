@@ -10,7 +10,7 @@ import jakarta.inject.Singleton
 import org.openrs2.archive.key.KeyExporter
 import org.openrs2.archive.key.KeyImporter
 import org.openrs2.archive.key.KeySource
-import org.openrs2.crypto.XteaKey
+import org.openrs2.crypto.SymmetricKey
 
 @Singleton
 public class KeysController @Inject constructor(
@@ -24,7 +24,7 @@ public class KeysController @Inject constructor(
     }
 
     public suspend fun import(call: ApplicationCall) {
-        val keys = call.receive<Array<IntArray>>().mapTo(mutableSetOf(), XteaKey::fromIntArray)
+        val keys = call.receive<Array<IntArray>>().mapTo(mutableSetOf(), SymmetricKey::fromIntArray)
 
         if (keys.isNotEmpty()) {
             importer.import(keys, KeySource.API)

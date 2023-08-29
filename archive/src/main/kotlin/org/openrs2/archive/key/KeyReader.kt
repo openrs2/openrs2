@@ -1,8 +1,8 @@
 package org.openrs2.archive.key
 
-import org.openrs2.crypto.XteaKey
+import org.openrs2.crypto.SymmetricKey
 import java.io.InputStream
 
 public interface KeyReader {
-    public fun read(input: InputStream): Sequence<XteaKey>
+    public fun read(input: InputStream): Sequence<SymmetricKey>
 }

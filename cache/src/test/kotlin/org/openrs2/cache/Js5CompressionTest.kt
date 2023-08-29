@@ -4,7 +4,7 @@ import io.netty.buffer.ByteBuf
 import io.netty.buffer.Unpooled
 import org.openrs2.buffer.copiedBuffer
 import org.openrs2.buffer.use
-import org.openrs2.crypto.XteaKey
+import org.openrs2.crypto.SymmetricKey
 import java.io.IOException
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -276,7 +276,7 @@ class Js5CompressionTest {
             }
 
             assertFailsWith<IOException> {
-                Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO)?.release()
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), SymmetricKey.ZERO)?.release()
             }
         }
     }
@@ -289,7 +289,7 @@ class Js5CompressionTest {
             }
 
             assertFailsWith<IOException> {
-                Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO)?.release()
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), SymmetricKey.ZERO)?.release()
             }
         }
     }
@@ -301,7 +301,7 @@ class Js5CompressionTest {
                 Js5Compression.uncompress(compressed.slice()).release()
             }
 
-            Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { uncompressed ->
+            Js5Compression.uncompressIfKeyValid(compressed.slice(), SymmetricKey.ZERO).use { uncompressed ->
                 assertNull(uncompressed)
             }
         }
@@ -315,7 +315,7 @@ class Js5CompressionTest {
             }
 
             assertFailsWith<IOException> {
-                Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO)?.release()
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), SymmetricKey.ZERO)?.release()
             }
         }
     }
@@ -327,7 +327,7 @@ class Js5CompressionTest {
                 Js5Compression.uncompress(compressed.slice()).release()
             }
 
-            Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { uncompressed ->
+            Js5Compression.uncompressIfKeyValid(compressed.slice(), SymmetricKey.ZERO).use { uncompressed ->
                 assertNull(uncompressed)
             }
         }
@@ -340,7 +340,7 @@ class Js5CompressionTest {
                 Js5Compression.uncompress(compressed.slice()).release()
             }
 
-            Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { uncompressed ->
+            Js5Compression.uncompressIfKeyValid(compressed.slice(), SymmetricKey.ZERO).use { uncompressed ->
                 assertNull(uncompressed)
             }
         }
@@ -353,7 +353,7 @@ class Js5CompressionTest {
                 Js5Compression.uncompress(compressed.slice()).release()
             }
 
-            Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { uncompressed ->
+            Js5Compression.uncompressIfKeyValid(compressed.slice(), SymmetricKey.ZERO).use { uncompressed ->
                 assertNull(uncompressed)
             }
         }
@@ -366,7 +366,7 @@ class Js5CompressionTest {
                 Js5Compression.uncompress(compressed.slice()).release()
             }
 
-            Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { uncompressed ->
+            Js5Compression.uncompressIfKeyValid(compressed.slice(), SymmetricKey.ZERO).use { uncompressed ->
                 assertNull(uncompressed)
             }
         }
@@ -379,7 +379,7 @@ class Js5CompressionTest {
                 Js5Compression.uncompress(compressed.slice()).release()
             }
 
-            Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { uncompressed ->
+            Js5Compression.uncompressIfKeyValid(compressed.slice(), SymmetricKey.ZERO).use { uncompressed ->
                 assertNull(uncompressed)
             }
         }
@@ -392,7 +392,7 @@ class Js5CompressionTest {
                 Js5Compression.uncompress(compressed.slice()).release()
             }
 
-            Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { uncompressed ->
+            Js5Compression.uncompressIfKeyValid(compressed.slice(), SymmetricKey.ZERO).use { uncompressed ->
                 assertNull(uncompressed)
             }
         }
@@ -406,7 +406,7 @@ class Js5CompressionTest {
                     assertEquals(expected, actual)
                 }
 
-                Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { actual ->
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), SymmetricKey.ZERO).use { actual ->
                     assertEquals(expected, actual)
                 }
 
@@ -429,7 +429,7 @@ class Js5CompressionTest {
                     assertEquals(expected, actual)
                 }
 
-                Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { actual ->
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), SymmetricKey.ZERO).use { actual ->
                     assertEquals(expected, actual)
                 }
 
@@ -447,7 +447,7 @@ class Js5CompressionTest {
                     assertNull(actual)
                 }
 
-                Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { actual ->
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), SymmetricKey.ZERO).use { actual ->
                     assertNull(actual)
                 }
 
@@ -462,7 +462,7 @@ class Js5CompressionTest {
         }
 
         read("bzip2-invalid-magic.dat").use { compressed ->
-            Js5Compression.uncompressIfKeyValid(compressed, XteaKey.ZERO).use { actual ->
+            Js5Compression.uncompressIfKeyValid(compressed, SymmetricKey.ZERO).use { actual ->
                 assertNull(actual)
             }
         }
@@ -476,7 +476,7 @@ class Js5CompressionTest {
                     assertEquals(expected, actual)
                 }
 
-                Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { actual ->
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), SymmetricKey.ZERO).use { actual ->
                     assertEquals(expected, actual)
                 }
 
@@ -494,7 +494,7 @@ class Js5CompressionTest {
                     assertNull(actual)
                 }
 
-                Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { actual ->
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), SymmetricKey.ZERO).use { actual ->
                     assertNull(actual)
                 }
 
@@ -509,13 +509,13 @@ class Js5CompressionTest {
         }
 
         read("gzip-invalid-magic.dat").use { compressed ->
-            Js5Compression.uncompressIfKeyValid(compressed, XteaKey.ZERO).use { actual ->
+            Js5Compression.uncompressIfKeyValid(compressed, SymmetricKey.ZERO).use { actual ->
                 assertNull(actual)
             }
         }
 
         read("gzip-invalid-method.dat").use { compressed ->
-            Js5Compression.uncompressIfKeyValid(compressed, XteaKey.ZERO).use { actual ->
+            Js5Compression.uncompressIfKeyValid(compressed, SymmetricKey.ZERO).use { actual ->
                 assertNull(actual)
             }
         }
@@ -529,7 +529,7 @@ class Js5CompressionTest {
                     assertEquals(expected, actual)
                 }
 
-                Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { actual ->
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), SymmetricKey.ZERO).use { actual ->
                     assertEquals(expected, actual)
                 }
 
@@ -547,7 +547,7 @@ class Js5CompressionTest {
                     assertNull(actual)
                 }
 
-                Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { actual ->
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), SymmetricKey.ZERO).use { actual ->
                     assertNull(actual)
                 }
 
@@ -562,19 +562,19 @@ class Js5CompressionTest {
         }
 
         read("lzma-dict-size-negative.dat").use { compressed ->
-            Js5Compression.uncompressIfKeyValid(compressed, XteaKey.ZERO).use { actual ->
+            Js5Compression.uncompressIfKeyValid(compressed, SymmetricKey.ZERO).use { actual ->
                 assertNull(actual)
             }
         }
 
         read("lzma-dict-size-larger-than-preset.dat").use { compressed ->
-            Js5Compression.uncompressIfKeyValid(compressed, XteaKey.ZERO).use { actual ->
+            Js5Compression.uncompressIfKeyValid(compressed, SymmetricKey.ZERO).use { actual ->
                 assertNull(actual)
             }
         }
 
         read("lzma-invalid-pb.dat").use { compressed ->
-            Js5Compression.uncompressIfKeyValid(compressed, XteaKey.ZERO).use { actual ->
+            Js5Compression.uncompressIfKeyValid(compressed, SymmetricKey.ZERO).use { actual ->
                 assertNull(actual)
             }
         }
@@ -584,7 +584,7 @@ class Js5CompressionTest {
     fun testKeyValidShorterThanTwoBlocks() {
         read("shorter-than-two-blocks.dat").use { compressed ->
             assertFailsWith<IOException> {
-                Js5Compression.uncompressIfKeyValid(compressed, XteaKey.ZERO)?.release()
+                Js5Compression.uncompressIfKeyValid(compressed, SymmetricKey.ZERO)?.release()
             }
         }
     }
@@ -597,7 +597,7 @@ class Js5CompressionTest {
             }
 
             assertFailsWith<IOException> {
-                Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO)?.release()
+                Js5Compression.uncompressIfKeyValid(compressed.slice(), SymmetricKey.ZERO)?.release()
             }
         }
     }
@@ -609,7 +609,7 @@ class Js5CompressionTest {
                 Js5Compression.uncompress(compressed.slice()).release()
             }
 
-            Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { actual ->
+            Js5Compression.uncompressIfKeyValid(compressed.slice(), SymmetricKey.ZERO).use { actual ->
                 assertNull(actual)
             }
         }
@@ -622,7 +622,7 @@ class Js5CompressionTest {
                 Js5Compression.uncompress(compressed.slice()).release()
             }
 
-            Js5Compression.uncompressIfKeyValid(compressed.slice(), XteaKey.ZERO).use { actual ->
+            Js5Compression.uncompressIfKeyValid(compressed.slice(), SymmetricKey.ZERO).use { actual ->
                 assertNull(actual)
             }
         }
@@ -719,7 +719,7 @@ class Js5CompressionTest {
 
         read("missing-header.dat").use { compressed ->
             assertFailsWith<IOException> {
-                Js5Compression.uncompressIfKeyValid(compressed, XteaKey.ZERO)
+                Js5Compression.uncompressIfKeyValid(compressed, SymmetricKey.ZERO)
             }
         }
 
@@ -737,7 +737,7 @@ class Js5CompressionTest {
     }
 
     private companion object {
-        private val KEY = XteaKey.fromHex("00112233445566778899AABBCCDDEEFF")
-        private val INVALID_KEY = XteaKey.fromHex("0123456789ABCDEF0123456789ABCDEF")
+        private val KEY = SymmetricKey.fromHex("00112233445566778899AABBCCDDEEFF")
+        private val INVALID_KEY = SymmetricKey.fromHex("0123456789ABCDEF0123456789ABCDEF")
     }
 }
