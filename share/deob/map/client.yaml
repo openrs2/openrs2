@@ -4594,7 +4594,7 @@ fields:
     name: "THOUSAND"
   client!jm.g Z:
     owner: "Static4"
-    name: "aBoolean184"
+    name: "resizable"
   client!jm.i F:
     owner: "Static4"
     name: "aFloat62"
