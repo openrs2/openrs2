@@ -23,7 +23,7 @@ public class CrossPollinator @Inject constructor(
     public suspend fun crossPollinate() {
         database.execute { connection ->
             for ((index, archive) in OLD_TO_NEW_ENGINE) {
-                crossPollinate(connection, index, archive);
+                crossPollinate(connection, index, archive)
             }
         }
     }
