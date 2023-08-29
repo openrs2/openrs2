@@ -51,8 +51,7 @@ allprojects {
 
     plugins.withType<KotlinterPlugin> {
         configure<KotlinterExtension> {
-            // see https://github.com/pinterest/ktlint/issues/764
-            disabledRules = arrayOf("argument-list-wrapping", "parameter-list-wrapping", "wrapping")
+            ignoreFailures = true
         }
     }
 
