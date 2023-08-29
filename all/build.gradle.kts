@@ -39,10 +39,10 @@ tasks.shadowJar {
 
 tasks.register("generateAuthors") {
     inputs.dir("$rootDir/.git")
-    outputs.file("$buildDir/AUTHORS")
+    outputs.file(layout.buildDirectory.file("AUTHORS"))
 
     doLast {
-        Files.newOutputStream(buildDir.toPath().resolve("AUTHORS")).use { out ->
+        Files.newOutputStream(layout.buildDirectory.file("AUTHORS").get().asFile.toPath()).use { out ->
             exec {
                 commandLine("git", "shortlog", "-esn", "HEAD")
                 standardOutput = out
@@ -80,7 +80,7 @@ distributions {
         distributionBaseName.set("openrs2")
 
         contents {
-            from("$buildDir/AUTHORS")
+            from(layout.buildDirectory.file("AUTHORS"))
             from("$rootDir/CONTRIBUTING.md")
             from("$rootDir/DCO")
             from("$rootDir/LICENSE")
@@ -97,7 +97,7 @@ distributions {
                 exclude(".*", "*~")
                 into("share")
             }
-            from("$buildDir/reports/dependency-license/THIRD-PARTY-NOTICES.txt") {
+            from(layout.buildDirectory.file("reports/dependency-license/THIRD-PARTY-NOTICES.txt")) {
                 rename { "third-party-licenses.txt" }
                 into("share/doc")
             }

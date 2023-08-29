@@ -319,7 +319,7 @@ tasks.register<Exec>("publishDokka") {
         "ssh -oStrictHostKeyChecking=accept-new",
         "--delete",
         "-rtz",
-        "$buildDir/dokka/htmlCollector/",
+        "${layout.buildDirectory}/dokka/htmlCollector/",
         "build@docs.openrs2.org:/srv/www/docs"
     )
 }
