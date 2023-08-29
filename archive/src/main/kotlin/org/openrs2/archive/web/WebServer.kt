@@ -9,8 +9,7 @@ import io.ktor.server.application.call
 import io.ktor.server.application.createApplicationPlugin
 import io.ktor.server.application.install
 import io.ktor.server.engine.embeddedServer
-import io.ktor.server.http.content.resources
-import io.ktor.server.http.content.static
+import io.ktor.server.http.content.staticResources
 import io.ktor.server.jetty.Jetty
 import io.ktor.server.plugins.autohead.AutoHeadResponse
 import io.ktor.server.plugins.cachingheaders.CachingHeaders
@@ -89,7 +88,7 @@ public class WebServer @Inject constructor(
                 post("/keys") { keysController.import(call) }
                 get("/keys/all.json") { keysController.exportAll(call) }
                 get("/keys/valid.json") { keysController.exportValid(call) }
-                static("/static") { resources("/org/openrs2/archive/static") }
+                staticResources("/static", "/org/openrs2/archive/static")
 
                 // compatibility redirects
                 get("/caches/{id}") { redirect(call, permanent = true, "/caches/runescape/{id}") }
