@@ -79,7 +79,7 @@ postgres = { module = "org.postgresql:postgresql", version = "42.6.0" }
 result-core = { module = "com.michael-bull.kotlin-result:kotlin-result", version = "1.1.18" }
 result-coroutines = { module = "com.michael-bull.kotlin-result:kotlin-result-coroutines", version = "1.1.18" }
 runelite-client = { module = "net.runelite:client", version = "1.10.10.3" }
-sqlite = { module = "org.xerial:sqlite-jdbc", version = "3.42.0.1" }
+sqlite = { module = "org.xerial:sqlite-jdbc", version = "3.43.0.0" }
 thymeleaf-core = { module = "org.thymeleaf:thymeleaf", version = "3.1.2.RELEASE" }
 thymeleaf-java8time = { module = "org.thymeleaf.extras:thymeleaf-extras-java8time", version = "3.0.4.RELEASE" }
 xz = { module = "org.tukaani:xz", version = "1.9" }
