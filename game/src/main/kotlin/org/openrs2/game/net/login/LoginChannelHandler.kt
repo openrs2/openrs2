@@ -49,6 +49,7 @@ import org.openrs2.protocol.login.upstream.GameLoginPayload
 import org.openrs2.protocol.login.upstream.LoginRequest
 import org.openrs2.protocol.world.downstream.WorldListDownstream
 import org.openrs2.protocol.world.downstream.WorldListResponse
+import org.openrs2.util.Base37
 import java.time.DateTimeException
 import java.time.LocalDate
 
@@ -138,6 +139,18 @@ public class LoginChannelHandler @Inject constructor(
     private fun handleGameLogin(ctx: ChannelHandlerContext, msg: GameLoginPayload, reconnect: Boolean) {
         if (msg.build != BUILD || msg.js5ArchiveChecksums != js5ArchiveChecksums) {
             ctx.write(LoginResponse.ClientOutOfDate).addListener(ChannelFutureListener.CLOSE)
+            return
+        }
+
+        val usernameHash = ((Base37.encode(msg.username) shr 16) and 0x1F).toInt()
+        if (this.usernameHash != usernameHash) {
+            ctx.write(LoginResponse.InvalidLoginPacket).addListener(ChannelFutureListener.CLOSE)
+            return
+        }
+
+        val serverKey = (msg.key.k2.toLong() shl 32) or (msg.key.k3.toLong() and 0xFFFFFFFF)
+        if (this.serverKey != serverKey) {
+            ctx.write(LoginResponse.InvalidLoginPacket).addListener(ChannelFutureListener.CLOSE)
             return
         }
 
