@@ -359,7 +359,7 @@ our rules.
 
 ### 27 (Service unavailable)
 
-Service unavailable.
+**Message:** Service unavailable.
 
 ### 29 (`DISALLOWED_BY_SCRIPT`)
 
@@ -376,8 +376,8 @@ Service unavailable.
 
 ### 30 (Client is members-only)
 
-This is not a member's account; please choose the 'Free Users' option from the
-website to play on this account.
+**Message:** This is not a member's account; please choose the 'Free Users'
+option from the website to play on this account.
 
 ### 101 (Switch world)
 
