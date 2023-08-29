@@ -5,7 +5,9 @@ import org.openrs2.protocol.Packet
 public sealed class LoginRequest : Packet {
     public data class InitGameConnection(public val usernameHash: Int) : LoginRequest()
     public data class InitJs5RemoteConnection(public val build: Int) : LoginRequest()
+    public data class GameLogin(public val payload: GameLoginPayload) : LoginRequest()
     public object InitJaggrabConnection : LoginRequest()
+    public data class GameReconnect(public val payload: GameLoginPayload) : LoginRequest()
     public data class CreateCheckDateOfBirthCountry(
         public val year: Int,
         public val month: Int,

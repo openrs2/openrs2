@@ -71,6 +71,8 @@ import org.openrs2.protocol.login.upstream.CheckWorldSuitabilityCodec
 import org.openrs2.protocol.login.upstream.CreateAccountCodec
 import org.openrs2.protocol.login.upstream.CreateCheckDateOfBirthCountryCodec
 import org.openrs2.protocol.login.upstream.CreateCheckNameCodec
+import org.openrs2.protocol.login.upstream.GameLoginCodec
+import org.openrs2.protocol.login.upstream.GameReconnectCodec
 import org.openrs2.protocol.login.upstream.InitCrossDomainConnectionCodec
 import org.openrs2.protocol.login.upstream.InitGameConnectionCodec
 import org.openrs2.protocol.login.upstream.InitJaggrabConnectionCodec
@@ -125,7 +127,9 @@ public object ProtocolModule : AbstractModule() {
             LoginUpstream::class.java,
             InitGameConnectionCodec::class.java,
             InitJs5RemoteConnectionCodec::class.java,
+            GameLoginCodec::class.java,
             InitJaggrabConnectionCodec::class.java,
+            GameReconnectCodec::class.java,
             CreateCheckDateOfBirthCountryCodec::class.java,
             CreateCheckNameCodec::class.java,
             CreateAccountCodec::class.java,

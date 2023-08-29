@@ -24,6 +24,7 @@ import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import org.openrs2.buffer.copiedBuffer
+import org.openrs2.cache.Js5MasterIndex
 import org.openrs2.conf.CountryCode
 import org.openrs2.crypto.secureRandom
 import org.openrs2.game.cluster.Cluster
@@ -44,6 +45,7 @@ import org.openrs2.protocol.js5.downstream.Js5ResponseEncoder
 import org.openrs2.protocol.js5.downstream.XorDecoder
 import org.openrs2.protocol.js5.upstream.Js5RequestDecoder
 import org.openrs2.protocol.login.downstream.LoginResponse
+import org.openrs2.protocol.login.upstream.GameLoginPayload
 import org.openrs2.protocol.login.upstream.LoginRequest
 import org.openrs2.protocol.world.downstream.WorldListDownstream
 import org.openrs2.protocol.world.downstream.WorldListResponse
@@ -53,6 +55,7 @@ import java.time.LocalDate
 public class LoginChannelHandler @Inject constructor(
     private val cluster: Cluster,
     private val store: PlayerStore,
+    js5MasterIndex: Js5MasterIndex,
     private val js5HandlerProvider: Provider<Js5ChannelHandler>,
     private val jaggrabHandler: JaggrabChannelHandler,
     @CreateDownstream
@@ -63,6 +66,7 @@ public class LoginChannelHandler @Inject constructor(
     private val worldListDownstreamProtocol: Protocol
 ) : SimpleChannelInboundHandler<LoginRequest>(LoginRequest::class.java) {
     private lateinit var scope: CoroutineScope
+    private val js5ArchiveChecksums = js5MasterIndex.entries.map(Js5MasterIndex.Entry::checksum)
     private var usernameHash = 0
     private var serverKey = 0L
 
@@ -86,7 +90,9 @@ public class LoginChannelHandler @Inject constructor(
         when (msg) {
             is LoginRequest.InitGameConnection -> handleInitGameConnection(ctx, msg)
             is LoginRequest.InitJs5RemoteConnection -> handleInitJs5RemoteConnection(ctx, msg)
+            is LoginRequest.GameLogin -> handleGameLogin(ctx, msg.payload, reconnect = false)
             is LoginRequest.InitJaggrabConnection -> handleInitJaggrabConnection(ctx)
+            is LoginRequest.GameReconnect -> handleGameLogin(ctx, msg.payload, reconnect = true)
             is LoginRequest.CreateCheckDateOfBirthCountry -> handleCreateCheckDateOfBirthCountry(ctx, msg)
             is LoginRequest.CreateCheckName -> handleCreateCheckName(ctx, msg)
             is LoginRequest.CreateAccount -> handleCreateAccount(ctx, msg)
@@ -127,6 +133,15 @@ public class LoginChannelHandler @Inject constructor(
                 ctx.pipeline().remove(this)
             }
         }
+    }
+
+    private fun handleGameLogin(ctx: ChannelHandlerContext, msg: GameLoginPayload, reconnect: Boolean) {
+        if (msg.build != BUILD || msg.js5ArchiveChecksums != js5ArchiveChecksums) {
+            ctx.write(LoginResponse.ClientOutOfDate).addListener(ChannelFutureListener.CLOSE)
+            return
+        }
+
+        // TODO
     }
 
     private fun handleInitJaggrabConnection(ctx: ChannelHandlerContext) {
