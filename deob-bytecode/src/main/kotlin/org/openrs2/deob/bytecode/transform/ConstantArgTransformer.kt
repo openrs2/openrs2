@@ -1,6 +1,8 @@
 package org.openrs2.deob.bytecode.transform
 
 import com.github.michaelbull.logging.InlineLogger
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import org.objectweb.asm.Opcodes.GOTO
 import org.objectweb.asm.Opcodes.IFEQ
 import org.objectweb.asm.Opcodes.IFGE
@@ -47,8 +49,6 @@ import org.openrs2.deob.bytecode.filter.ReflectedConstructorFilter
 import org.openrs2.deob.bytecode.remap.MethodMappingGenerator
 import org.openrs2.util.collect.DisjointSet
 import org.openrs2.util.collect.UniqueQueue
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 public class ConstantArgTransformer @Inject constructor(private val profile: Profile) : Transformer() {

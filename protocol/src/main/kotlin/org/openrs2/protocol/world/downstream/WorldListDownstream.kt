@@ -1,6 +1,6 @@
 package org.openrs2.protocol.world.downstream
 
-import javax.inject.Qualifier
+import jakarta.inject.Qualifier
 
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)

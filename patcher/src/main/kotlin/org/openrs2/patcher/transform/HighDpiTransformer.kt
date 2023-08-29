@@ -1,6 +1,7 @@
 package org.openrs2.patcher.transform
 
 import com.github.michaelbull.logging.InlineLogger
+import jakarta.inject.Singleton
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.ClassNode
@@ -23,7 +24,6 @@ import org.openrs2.asm.getExpression
 import org.openrs2.asm.previousReal
 import org.openrs2.asm.stackMetadata
 import org.openrs2.asm.transform.Transformer
-import javax.inject.Singleton
 import kotlin.math.max
 
 @Singleton

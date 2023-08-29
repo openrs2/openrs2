@@ -22,6 +22,8 @@ import com.github.javaparser.resolution.types.ResolvedPrimitiveType
 import com.github.javaparser.resolution.types.ResolvedReferenceType
 import com.github.javaparser.resolution.types.ResolvedType
 import com.github.michaelbull.logging.InlineLogger
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import org.openrs2.deob.ast.Library
 import org.openrs2.deob.ast.LibraryGroup
 import org.openrs2.deob.ast.gl.GlCommand
@@ -31,8 +33,6 @@ import org.openrs2.deob.ast.gl.GlRegistry
 import org.openrs2.deob.ast.util.checkedAsInt
 import org.openrs2.deob.ast.util.toHexLiteralExpr
 import org.openrs2.deob.ast.util.walk
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 public class GlTransformer @Inject constructor(private val registry: GlRegistry) : Transformer() {

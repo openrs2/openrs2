@@ -2,12 +2,12 @@ package org.openrs2.archive.key
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.treeToValue
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import org.openrs2.crypto.XteaKey
 import org.openrs2.json.Json
 import java.io.IOException
 import java.io.InputStream
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 public class JsonKeyReader @Inject constructor(

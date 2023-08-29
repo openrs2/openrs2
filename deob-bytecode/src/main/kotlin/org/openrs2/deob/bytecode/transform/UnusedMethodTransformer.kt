@@ -1,6 +1,8 @@
 package org.openrs2.deob.bytecode.transform
 
 import com.github.michaelbull.logging.InlineLogger
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.MethodInsnNode
 import org.openrs2.asm.MemberRef
@@ -14,8 +16,6 @@ import org.openrs2.deob.bytecode.Profile
 import org.openrs2.deob.bytecode.filter.ReflectedConstructorFilter
 import org.openrs2.util.collect.DisjointSet
 import org.openrs2.util.collect.UniqueQueue
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 public class UnusedMethodTransformer @Inject constructor(private val profile: Profile) : Transformer() {

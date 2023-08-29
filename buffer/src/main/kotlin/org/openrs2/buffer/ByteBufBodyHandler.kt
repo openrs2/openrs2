@@ -3,13 +3,13 @@ package org.openrs2.buffer
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.Unpooled
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import java.net.http.HttpResponse
 import java.nio.ByteBuffer
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.CompletionStage
 import java.util.concurrent.Flow
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 public class ByteBufBodyHandler @Inject constructor(

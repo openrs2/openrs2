@@ -1,11 +1,11 @@
 package org.openrs2.deob.bytecode.transform
 
 import com.github.michaelbull.logging.InlineLogger
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import org.openrs2.asm.classpath.ClassPath
 import org.openrs2.asm.transform.Transformer
 import org.openrs2.patcher.PatcherQualifier
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 public class PatcherTransformer @Inject constructor(

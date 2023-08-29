@@ -1,6 +1,8 @@
 package org.openrs2.deob.bytecode.transform
 
 import com.github.michaelbull.logging.InlineLogger
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.LabelNode
@@ -13,8 +15,6 @@ import org.openrs2.asm.transform.Transformer
 import org.openrs2.deob.annotation.OriginalMember
 import org.openrs2.deob.bytecode.OriginalPcTable
 import org.openrs2.deob.util.map.NameMap
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 public class OriginalPcRestoreTransformer @Inject constructor(private val nameMap: NameMap) : Transformer() {

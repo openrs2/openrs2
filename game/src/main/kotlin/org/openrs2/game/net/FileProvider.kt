@@ -2,10 +2,10 @@ package org.openrs2.game.net
 
 import io.netty.channel.DefaultFileRegion
 import io.netty.channel.FileRegion
+import jakarta.inject.Singleton
 import java.nio.channels.FileChannel
 import java.nio.file.Files
 import java.nio.file.Path
-import javax.inject.Singleton
 
 @Singleton
 public class FileProvider {

@@ -1,5 +1,7 @@
 package org.openrs2.archive.name
 
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import kotlinx.coroutines.future.await
 import org.openrs2.http.checkStatusCode
 import java.io.IOException
@@ -8,8 +10,6 @@ import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 import java.time.Duration
-import javax.inject.Inject
-import javax.inject.Singleton
 import kotlin.streams.asSequence
 
 @Singleton

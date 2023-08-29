@@ -4,6 +4,8 @@ import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.ByteBufInputStream
 import io.netty.buffer.Unpooled
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import org.openrs2.buffer.crc32
 import org.openrs2.buffer.use
 import org.openrs2.cache.Js5Compression
@@ -11,8 +13,6 @@ import org.openrs2.cache.Js5CompressionType
 import org.openrs2.db.Database
 import java.sql.Connection
 import java.util.zip.GZIPInputStream
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 public class CrossPollinator @Inject constructor(

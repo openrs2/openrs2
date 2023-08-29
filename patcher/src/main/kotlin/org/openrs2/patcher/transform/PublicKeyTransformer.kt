@@ -1,6 +1,8 @@
 package org.openrs2.patcher.transform
 
 import com.github.michaelbull.logging.InlineLogger
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import org.bouncycastle.crypto.params.RSAPrivateCrtKeyParameters
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.LdcInsnNode
@@ -8,8 +10,6 @@ import org.objectweb.asm.tree.MethodNode
 import org.openrs2.asm.classpath.ClassPath
 import org.openrs2.asm.classpath.Library
 import org.openrs2.asm.transform.Transformer
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 public class PublicKeyTransformer @Inject constructor(private val key: RSAPrivateCrtKeyParameters) : Transformer() {

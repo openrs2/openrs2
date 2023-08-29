@@ -1,10 +1,10 @@
 package org.openrs2.game.cluster
 
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import org.openrs2.conf.Config
 import org.openrs2.protocol.world.downstream.WorldListResponse
 import java.util.SortedMap
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 public class SingleWorldCluster @Inject constructor(

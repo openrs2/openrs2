@@ -1,9 +1,9 @@
 package org.openrs2.protocol.login.downstream
 
 import io.netty.buffer.ByteBuf
+import jakarta.inject.Singleton
 import org.openrs2.crypto.StreamCipher
 import org.openrs2.protocol.FixedPacketCodec
-import javax.inject.Singleton
 
 @Singleton
 public class DisallowedByScriptCodec : FixedPacketCodec<LoginResponse.DisallowedByScript>(

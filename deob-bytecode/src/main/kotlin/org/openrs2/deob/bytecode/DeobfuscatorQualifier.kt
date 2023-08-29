@@ -1,6 +1,6 @@
 package org.openrs2.deob.bytecode
 
-import javax.inject.Qualifier
+import jakarta.inject.Qualifier
 
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)

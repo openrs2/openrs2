@@ -1,6 +1,7 @@
 package org.openrs2.patcher.transform
 
 import com.github.michaelbull.logging.InlineLogger
+import jakarta.inject.Singleton
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.FieldInsnNode
@@ -11,7 +12,6 @@ import org.objectweb.asm.tree.MethodNode
 import org.openrs2.asm.classpath.ClassPath
 import org.openrs2.asm.classpath.Library
 import org.openrs2.asm.transform.Transformer
-import javax.inject.Singleton
 
 @Singleton
 public class RightClickTransformer : Transformer() {

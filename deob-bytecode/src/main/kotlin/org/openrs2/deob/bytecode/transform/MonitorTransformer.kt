@@ -1,6 +1,7 @@
 package org.openrs2.deob.bytecode.transform
 
 import com.github.michaelbull.logging.InlineLogger
+import jakarta.inject.Singleton
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.commons.JSRInlinerAdapter
 import org.objectweb.asm.tree.AbstractInsnNode
@@ -15,7 +16,6 @@ import org.openrs2.asm.classpath.Library
 import org.openrs2.asm.nextReal
 import org.openrs2.asm.previousReal
 import org.openrs2.asm.transform.Transformer
-import javax.inject.Singleton
 
 /**
  * A [Transformer] that rewrites `synchronized` blocks produced by older

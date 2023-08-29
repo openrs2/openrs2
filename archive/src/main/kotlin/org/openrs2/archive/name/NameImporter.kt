@@ -1,9 +1,9 @@
 package org.openrs2.archive.name
 
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import org.openrs2.db.Database
 import org.openrs2.util.krHashCode
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 public class NameImporter @Inject constructor(

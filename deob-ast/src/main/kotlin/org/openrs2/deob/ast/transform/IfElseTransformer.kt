@@ -11,12 +11,12 @@ import com.github.javaparser.ast.stmt.ReturnStmt
 import com.github.javaparser.ast.stmt.Statement
 import com.github.javaparser.ast.stmt.ThrowStmt
 import com.github.javaparser.ast.type.VoidType
+import jakarta.inject.Singleton
 import org.openrs2.deob.ast.Library
 import org.openrs2.deob.ast.LibraryGroup
 import org.openrs2.deob.ast.util.countNots
 import org.openrs2.deob.ast.util.not
 import org.openrs2.deob.ast.util.walk
-import javax.inject.Singleton
 
 @Singleton
 public class IfElseTransformer : Transformer() {

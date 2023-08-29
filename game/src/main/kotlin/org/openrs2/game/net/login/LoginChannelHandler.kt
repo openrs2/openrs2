@@ -16,6 +16,8 @@ import io.netty.handler.codec.http.HttpRequestDecoder
 import io.netty.handler.codec.http.HttpResponseEncoder
 import io.netty.handler.codec.string.StringDecoder
 import io.netty.handler.timeout.IdleStateEvent
+import jakarta.inject.Inject
+import jakarta.inject.Provider
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.asCoroutineDispatcher
@@ -47,8 +49,6 @@ import org.openrs2.protocol.world.downstream.WorldListDownstream
 import org.openrs2.protocol.world.downstream.WorldListResponse
 import java.time.DateTimeException
 import java.time.LocalDate
-import javax.inject.Inject
-import javax.inject.Provider
 
 public class LoginChannelHandler @Inject constructor(
     private val cluster: Cluster,

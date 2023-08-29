@@ -14,10 +14,10 @@ import com.github.javaparser.ast.expr.InstanceOfExpr
 import com.github.javaparser.ast.expr.MethodCallExpr
 import com.github.javaparser.ast.expr.ObjectCreationExpr
 import com.github.javaparser.ast.expr.UnaryExpr
+import jakarta.inject.Singleton
 import org.openrs2.deob.ast.Library
 import org.openrs2.deob.ast.LibraryGroup
 import org.openrs2.deob.ast.util.walk
-import javax.inject.Singleton
 
 @Singleton
 public class EncloseTransformer : Transformer() {

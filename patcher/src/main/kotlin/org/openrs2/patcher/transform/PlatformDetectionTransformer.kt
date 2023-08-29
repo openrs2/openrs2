@@ -1,6 +1,7 @@
 package org.openrs2.patcher.transform
 
 import com.github.michaelbull.logging.InlineLogger
+import jakarta.inject.Singleton
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.ClassNode
@@ -18,7 +19,6 @@ import org.openrs2.asm.classpath.Library
 import org.openrs2.asm.toAbstractInsnNode
 import org.openrs2.asm.transform.Transformer
 import org.openrs2.patcher.OperatingSystem
-import javax.inject.Singleton
 
 @Singleton
 public class PlatformDetectionTransformer : Transformer() {

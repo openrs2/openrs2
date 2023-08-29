@@ -1,5 +1,7 @@
 package org.openrs2.archive.key
 
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.future.await
 import kotlinx.coroutines.withContext
@@ -10,8 +12,6 @@ import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 import java.time.Duration
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 public class RuneLiteKeyDownloader @Inject constructor(

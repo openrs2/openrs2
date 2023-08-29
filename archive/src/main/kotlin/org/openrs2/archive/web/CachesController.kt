@@ -18,6 +18,8 @@ import io.ktor.server.response.respondOutputStream
 import io.ktor.server.thymeleaf.ThymeleafContent
 import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.ByteBufUtil
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
 import org.apache.commons.compress.archivers.tar.TarArchiveOutputStream
@@ -37,8 +39,6 @@ import java.util.zip.Deflater
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 import javax.imageio.ImageIO
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 public class CachesController @Inject constructor(

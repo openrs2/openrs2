@@ -1,5 +1,7 @@
 package org.openrs2.archive.cache
 
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import org.openrs2.archive.cache.nxt.MusicStreamClient
 import org.openrs2.archive.game.GameDatabase
 import org.openrs2.archive.jav.JavConfig
@@ -8,8 +10,6 @@ import org.openrs2.net.BootstrapFactory
 import org.openrs2.net.awaitSuspend
 import java.net.URI
 import java.net.http.HttpClient
-import javax.inject.Inject
-import javax.inject.Singleton
 import kotlin.coroutines.suspendCoroutine
 
 @Singleton

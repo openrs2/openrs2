@@ -27,12 +27,12 @@ import io.ktor.server.routing.routing
 import io.ktor.server.thymeleaf.Thymeleaf
 import io.ktor.server.thymeleaf.ThymeleafContent
 import io.ktor.server.webjars.Webjars
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import org.openrs2.json.Json
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect
 import org.thymeleaf.templatemode.TemplateMode
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 public class WebServer @Inject constructor(

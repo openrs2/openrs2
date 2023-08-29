@@ -1,8 +1,8 @@
 package org.openrs2.game
 
 import com.google.common.util.concurrent.AbstractScheduledService
+import jakarta.inject.Singleton
 import java.util.concurrent.TimeUnit
-import javax.inject.Singleton
 
 @Singleton
 public class GameService : AbstractScheduledService() {

@@ -1,10 +1,10 @@
 package org.openrs2.http
 
+import jakarta.inject.Provider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
 import java.net.http.HttpClient
 import java.time.Duration
-import javax.inject.Provider
 
 public class HttpClientProvider : Provider<HttpClient> {
     override fun get(): HttpClient {

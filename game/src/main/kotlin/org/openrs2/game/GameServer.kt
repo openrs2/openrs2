@@ -3,8 +3,8 @@ package org.openrs2.game
 import com.github.michaelbull.logging.InlineLogger
 import com.google.common.util.concurrent.Service
 import com.google.common.util.concurrent.ServiceManager
-import javax.inject.Inject
-import javax.inject.Singleton
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 
 @Singleton
 public class GameServer @Inject constructor(

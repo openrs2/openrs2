@@ -14,6 +14,7 @@ import com.github.javaparser.ast.expr.Expression
 import com.github.javaparser.ast.expr.IntegerLiteralExpr
 import com.github.javaparser.ast.expr.UnaryExpr
 import com.github.javaparser.resolution.types.ResolvedPrimitiveType
+import jakarta.inject.Singleton
 import org.openrs2.deob.ast.Library
 import org.openrs2.deob.ast.LibraryGroup
 import org.openrs2.deob.ast.util.checkedAsInt
@@ -25,7 +26,6 @@ import java.lang.Character.PARAGRAPH_SEPARATOR
 import java.lang.Character.PRIVATE_USE
 import java.lang.Character.SURROGATE
 import java.lang.Character.UNASSIGNED
-import javax.inject.Singleton
 
 @Singleton
 public class CharLiteralTransformer : Transformer() {

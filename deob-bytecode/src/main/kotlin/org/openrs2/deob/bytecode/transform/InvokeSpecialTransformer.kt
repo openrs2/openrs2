@@ -1,6 +1,7 @@
 package org.openrs2.deob.bytecode.transform
 
 import com.github.michaelbull.logging.InlineLogger
+import jakarta.inject.Singleton
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.MethodInsnNode
@@ -8,7 +9,6 @@ import org.objectweb.asm.tree.MethodNode
 import org.openrs2.asm.classpath.ClassPath
 import org.openrs2.asm.classpath.Library
 import org.openrs2.asm.transform.Transformer
-import javax.inject.Singleton
 
 /**
  * A [Transformer] that replaces `INVOKESPECIAL` instructions in static methods

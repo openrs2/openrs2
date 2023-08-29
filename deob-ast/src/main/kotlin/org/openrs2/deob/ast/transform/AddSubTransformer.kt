@@ -7,13 +7,13 @@ import com.github.javaparser.ast.expr.IntegerLiteralExpr
 import com.github.javaparser.ast.expr.LiteralExpr
 import com.github.javaparser.ast.expr.LongLiteralExpr
 import com.github.javaparser.ast.expr.UnaryExpr
+import jakarta.inject.Singleton
 import org.openrs2.deob.ast.Library
 import org.openrs2.deob.ast.LibraryGroup
 import org.openrs2.deob.ast.util.hasSideEffects
 import org.openrs2.deob.ast.util.isString
 import org.openrs2.deob.ast.util.negate
 import org.openrs2.deob.ast.util.walk
-import javax.inject.Singleton
 
 @Singleton
 public class AddSubTransformer : Transformer() {

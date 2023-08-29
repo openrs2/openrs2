@@ -6,13 +6,13 @@ import com.github.javaparser.ast.expr.BinaryExpr
 import com.github.javaparser.ast.expr.Expression
 import com.github.javaparser.ast.expr.IntegerLiteralExpr
 import com.github.javaparser.ast.expr.LongLiteralExpr
+import jakarta.inject.Singleton
 import org.openrs2.deob.ast.Library
 import org.openrs2.deob.ast.LibraryGroup
 import org.openrs2.deob.ast.util.checkedAsInt
 import org.openrs2.deob.ast.util.checkedAsLong
 import org.openrs2.deob.ast.util.toHexLiteralExpr
 import org.openrs2.deob.ast.util.walk
-import javax.inject.Singleton
 
 @Singleton
 public class HexLiteralTransformer : Transformer() {

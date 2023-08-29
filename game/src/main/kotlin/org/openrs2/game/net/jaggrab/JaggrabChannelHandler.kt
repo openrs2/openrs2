@@ -5,11 +5,11 @@ import io.netty.channel.ChannelHandler
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.SimpleChannelInboundHandler
 import io.netty.handler.timeout.IdleStateEvent
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import org.openrs2.buffer.use
 import org.openrs2.game.net.FileProvider
 import org.openrs2.protocol.jaggrab.upstream.JaggrabRequest
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 @ChannelHandler.Sharable

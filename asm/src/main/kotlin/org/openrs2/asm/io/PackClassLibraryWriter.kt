@@ -1,6 +1,8 @@
 package org.openrs2.asm.io
 
 import io.netty.buffer.ByteBufAllocator
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import org.objectweb.asm.tree.ClassNode
 import org.openrs2.asm.classpath.ClassPath
 import org.openrs2.asm.packclass.ConstantPool
@@ -8,8 +10,6 @@ import org.openrs2.asm.packclass.PackClass
 import org.openrs2.buffer.use
 import org.openrs2.cache.Js5Pack
 import java.io.OutputStream
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 public class PackClassLibraryWriter @Inject constructor(

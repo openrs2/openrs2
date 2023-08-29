@@ -8,11 +8,11 @@ import com.github.javaparser.ast.expr.BooleanLiteralExpr
 import com.github.javaparser.ast.expr.Expression
 import com.github.javaparser.ast.expr.UnaryExpr
 import com.github.javaparser.ast.expr.UnaryExpr.Operator.LOGICAL_COMPLEMENT
+import jakarta.inject.Singleton
 import org.openrs2.deob.ast.Library
 import org.openrs2.deob.ast.LibraryGroup
 import org.openrs2.deob.ast.util.not
 import org.openrs2.deob.ast.util.walk
-import javax.inject.Singleton
 
 @Singleton
 public class NotTransformer : Transformer() {

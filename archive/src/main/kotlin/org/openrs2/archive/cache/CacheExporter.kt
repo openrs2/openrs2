@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonUnwrapped
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.Unpooled
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import org.openrs2.buffer.use
 import org.openrs2.cache.ChecksumTable
 import org.openrs2.cache.DiskStore
@@ -22,8 +24,6 @@ import java.time.Instant
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.util.SortedSet
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 public class CacheExporter @Inject constructor(

@@ -1,6 +1,6 @@
 package org.openrs2.yaml
 
-import javax.inject.Qualifier
+import jakarta.inject.Qualifier
 
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)

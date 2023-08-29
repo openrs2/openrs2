@@ -1,11 +1,11 @@
 package org.openrs2.conf
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import jakarta.inject.Inject
+import jakarta.inject.Provider
 import org.openrs2.yaml.Yaml
 import java.nio.file.Files
 import java.nio.file.Path
-import javax.inject.Inject
-import javax.inject.Provider
 
 public class ConfigProvider @Inject constructor(@Yaml private val mapper: ObjectMapper) : Provider<Config> {
     override fun get(): Config {

@@ -1,8 +1,8 @@
 package org.openrs2.deob.ast.gl
 
+import jakarta.inject.Provider
 import java.nio.file.Files
 import java.nio.file.Path
-import javax.inject.Provider
 
 public class GlRegistryProvider : Provider<GlRegistry> {
     override fun get(): GlRegistry {

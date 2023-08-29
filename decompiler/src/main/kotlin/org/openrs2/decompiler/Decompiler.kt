@@ -1,9 +1,9 @@
 package org.openrs2.decompiler
 
+import jakarta.inject.Singleton
 import org.jetbrains.java.decompiler.main.Fernflower
 import org.jetbrains.java.decompiler.main.extern.IFernflowerPreferences
 import org.openrs2.deob.util.Module
-import javax.inject.Singleton
 
 @Singleton
 public class Decompiler {

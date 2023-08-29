@@ -1,13 +1,13 @@
 package org.openrs2.deob
 
 import com.github.michaelbull.logging.InlineLogger
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import org.openrs2.decompiler.Decompiler
 import org.openrs2.deob.ast.AstDeobfuscator
 import org.openrs2.deob.bytecode.BytecodeDeobfuscator
 import org.openrs2.deob.util.Module
 import java.nio.file.Path
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 public class Deobfuscator @Inject constructor(

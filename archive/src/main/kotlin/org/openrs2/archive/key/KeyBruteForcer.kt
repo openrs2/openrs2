@@ -1,6 +1,8 @@
 package org.openrs2.archive.key
 
 import io.netty.buffer.Unpooled
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import org.openrs2.buffer.crc32
 import org.openrs2.buffer.use
 import org.openrs2.cache.Js5Compression
@@ -8,8 +10,6 @@ import org.openrs2.crypto.XteaKey
 import org.openrs2.db.Database
 import java.sql.Connection
 import java.sql.Types
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 public class KeyBruteForcer @Inject constructor(

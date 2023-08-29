@@ -1,6 +1,7 @@
 package org.openrs2.deob.bytecode.transform
 
 import com.github.michaelbull.logging.InlineLogger
+import jakarta.inject.Singleton
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.ClassNode
@@ -12,7 +13,6 @@ import org.openrs2.asm.deleteExpression
 import org.openrs2.asm.isPure
 import org.openrs2.asm.transform.Transformer
 import org.openrs2.deob.bytecode.analysis.LiveVariableAnalyzer
-import javax.inject.Singleton
 
 @Singleton
 public class UnusedLocalTransformer : Transformer() {

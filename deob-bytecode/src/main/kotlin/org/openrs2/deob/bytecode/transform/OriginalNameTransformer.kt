@@ -1,5 +1,6 @@
 package org.openrs2.deob.bytecode.transform
 
+import jakarta.inject.Singleton
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree.AnnotationNode
 import org.objectweb.asm.tree.ClassNode
@@ -11,7 +12,6 @@ import org.openrs2.asm.transform.Transformer
 import org.openrs2.deob.annotation.OriginalArg
 import org.openrs2.deob.annotation.OriginalClass
 import org.openrs2.deob.annotation.OriginalMember
-import javax.inject.Singleton
 
 @Singleton
 public class OriginalNameTransformer : Transformer() {

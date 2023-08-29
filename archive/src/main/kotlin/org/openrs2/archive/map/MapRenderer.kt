@@ -3,6 +3,7 @@ package org.openrs2.archive.map
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.Unpooled
 import it.unimi.dsi.fastutil.ints.Int2ObjectSortedMap
+import jakarta.inject.Inject
 import org.openrs2.buffer.use
 import org.openrs2.cache.Group
 import org.openrs2.cache.Js5Archive
@@ -14,7 +15,6 @@ import java.awt.Color
 import java.awt.Graphics2D
 import java.awt.image.BufferedImage
 import java.sql.Connection
-import javax.inject.Inject
 import kotlin.math.max
 import kotlin.math.min
 

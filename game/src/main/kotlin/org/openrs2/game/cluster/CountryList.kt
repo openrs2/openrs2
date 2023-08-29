@@ -1,10 +1,10 @@
 package org.openrs2.game.cluster
 
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import org.openrs2.cache.config.enum.EnumTypeList
 import org.openrs2.conf.CountryCode
 import org.openrs2.protocol.world.downstream.WorldListResponse
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 public class CountryList @Inject constructor(

@@ -5,12 +5,12 @@ import io.ktor.server.application.ApplicationCall
 import io.ktor.server.request.receive
 import io.ktor.server.response.respond
 import io.ktor.server.thymeleaf.ThymeleafContent
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import org.openrs2.archive.key.KeyExporter
 import org.openrs2.archive.key.KeyImporter
 import org.openrs2.archive.key.KeySource
 import org.openrs2.crypto.XteaKey
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 public class KeysController @Inject constructor(

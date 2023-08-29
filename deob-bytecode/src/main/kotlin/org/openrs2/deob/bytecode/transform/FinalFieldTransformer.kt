@@ -1,6 +1,7 @@
 package org.openrs2.deob.bytecode.transform
 
 import com.github.michaelbull.logging.InlineLogger
+import jakarta.inject.Singleton
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.FieldInsnNode
@@ -17,7 +18,6 @@ import org.openrs2.deob.bytecode.analysis.FieldWriteAnalyzer
 import org.openrs2.deob.bytecode.analysis.FieldWriteCount
 import org.openrs2.deob.bytecode.analysis.ThisInterpreter
 import org.openrs2.util.collect.DisjointSet
-import javax.inject.Singleton
 
 @Singleton
 public class FinalFieldTransformer : Transformer() {

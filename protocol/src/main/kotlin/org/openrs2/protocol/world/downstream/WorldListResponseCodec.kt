@@ -1,13 +1,13 @@
 package org.openrs2.protocol.world.downstream
 
 import io.netty.buffer.ByteBuf
+import jakarta.inject.Singleton
 import org.openrs2.buffer.readUnsignedShortSmart
 import org.openrs2.buffer.readVersionedString
 import org.openrs2.buffer.writeUnsignedShortSmart
 import org.openrs2.buffer.writeVersionedString
 import org.openrs2.crypto.StreamCipher
 import org.openrs2.protocol.VariableShortPacketCodec
-import javax.inject.Singleton
 
 @Singleton
 public class WorldListResponseCodec : VariableShortPacketCodec<WorldListResponse>(

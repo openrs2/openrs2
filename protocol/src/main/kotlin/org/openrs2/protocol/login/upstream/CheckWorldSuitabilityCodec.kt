@@ -1,6 +1,8 @@
 package org.openrs2.protocol.login.upstream
 
 import io.netty.buffer.ByteBuf
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import org.bouncycastle.crypto.params.RSAPrivateCrtKeyParameters
 import org.openrs2.buffer.readString
 import org.openrs2.buffer.use
@@ -12,8 +14,6 @@ import org.openrs2.crypto.rsa
 import org.openrs2.crypto.secureRandom
 import org.openrs2.protocol.VariableBytePacketCodec
 import org.openrs2.util.Base37
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 public class CheckWorldSuitabilityCodec @Inject constructor(

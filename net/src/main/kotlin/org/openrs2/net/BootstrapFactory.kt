@@ -19,8 +19,8 @@ import io.netty.channel.socket.nio.NioSocketChannel
 import io.netty.incubator.channel.uring.IOUringEventLoopGroup
 import io.netty.incubator.channel.uring.IOUringServerSocketChannel
 import io.netty.incubator.channel.uring.IOUringSocketChannel
-import javax.inject.Inject
-import javax.inject.Singleton
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 
 @Singleton
 public class BootstrapFactory @Inject constructor(

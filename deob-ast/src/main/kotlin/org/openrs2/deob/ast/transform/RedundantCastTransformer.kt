@@ -19,10 +19,10 @@ import com.github.javaparser.resolution.types.ResolvedPrimitiveType.INT
 import com.github.javaparser.resolution.types.ResolvedPrimitiveType.LONG
 import com.github.javaparser.resolution.types.ResolvedPrimitiveType.SHORT
 import com.google.common.collect.ImmutableSetMultimap
+import jakarta.inject.Singleton
 import org.openrs2.deob.ast.Library
 import org.openrs2.deob.ast.LibraryGroup
 import org.openrs2.deob.ast.util.walk
-import javax.inject.Singleton
 
 @Singleton
 public class RedundantCastTransformer : Transformer() {

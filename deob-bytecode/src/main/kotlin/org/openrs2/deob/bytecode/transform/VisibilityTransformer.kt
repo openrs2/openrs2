@@ -3,6 +3,8 @@ package org.openrs2.deob.bytecode.transform
 import com.github.michaelbull.logging.InlineLogger
 import com.google.common.collect.HashMultimap
 import com.google.common.collect.Multimap
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree.ClassNode
@@ -19,8 +21,6 @@ import org.openrs2.asm.transform.Transformer
 import org.openrs2.deob.bytecode.Profile
 import org.openrs2.deob.bytecode.filter.ReflectedConstructorFilter
 import org.openrs2.util.collect.DisjointSet
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 public class VisibilityTransformer @Inject constructor(private val profile: Profile) : Transformer() {

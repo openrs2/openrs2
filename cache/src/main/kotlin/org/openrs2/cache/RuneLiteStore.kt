@@ -2,13 +2,13 @@ package org.openrs2.cache
 
 import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.Unpooled
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import org.openrs2.buffer.crc32
 import org.openrs2.buffer.use
 import java.nio.file.Files
 import java.nio.file.Path
 import java.util.Base64
-import javax.inject.Inject
-import javax.inject.Singleton
 import kotlin.io.path.name
 
 @Singleton

@@ -2,12 +2,12 @@ package org.openrs2.game.net
 
 import com.google.common.util.concurrent.AbstractService
 import io.netty.channel.EventLoopGroup
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import org.openrs2.game.net.http.HttpChannelInitializer
 import org.openrs2.net.BootstrapFactory
 import org.openrs2.net.asCompletableFuture
 import java.util.concurrent.CompletableFuture
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 public class NetworkService @Inject constructor(

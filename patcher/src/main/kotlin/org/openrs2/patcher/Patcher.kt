@@ -1,6 +1,8 @@
 package org.openrs2.patcher
 
 import com.github.michaelbull.logging.InlineLogger
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import org.openrs2.asm.classpath.ClassPath
 import org.openrs2.asm.classpath.Library
 import org.openrs2.asm.io.JarLibraryReader
@@ -19,8 +21,6 @@ import java.nio.file.Path
 import java.util.jar.Attributes
 import java.util.jar.Attributes.Name.MANIFEST_VERSION
 import java.util.jar.Manifest
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 public class Patcher @Inject constructor(

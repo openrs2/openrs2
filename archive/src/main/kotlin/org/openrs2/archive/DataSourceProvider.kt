@@ -2,10 +2,10 @@ package org.openrs2.archive
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
+import jakarta.inject.Inject
+import jakarta.inject.Provider
 import org.flywaydb.core.Flyway
 import org.postgresql.ds.PGSimpleDataSource
-import javax.inject.Inject
-import javax.inject.Provider
 import javax.sql.DataSource
 
 public class DataSourceProvider @Inject constructor(

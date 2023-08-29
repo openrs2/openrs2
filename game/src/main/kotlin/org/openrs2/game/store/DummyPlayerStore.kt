@@ -2,10 +2,10 @@ package org.openrs2.game.store
 
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
+import jakarta.inject.Singleton
 import org.openrs2.conf.CountryCode
 import org.openrs2.protocol.create.downstream.CreateResponse
 import java.time.LocalDate
-import javax.inject.Singleton
 
 @Singleton
 public class DummyPlayerStore : PlayerStore {

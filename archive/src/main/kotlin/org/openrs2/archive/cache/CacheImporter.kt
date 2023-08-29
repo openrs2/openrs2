@@ -6,6 +6,8 @@ import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.ByteBufUtil
 import io.netty.buffer.DefaultByteBufHolder
 import io.netty.buffer.Unpooled
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import org.openrs2.buffer.crc32
 import org.openrs2.buffer.use
 import org.openrs2.cache.ChecksumTable
@@ -30,8 +32,6 @@ import java.sql.SQLException
 import java.sql.Types
 import java.time.Instant
 import java.time.ZoneOffset
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 public class CacheImporter @Inject constructor(

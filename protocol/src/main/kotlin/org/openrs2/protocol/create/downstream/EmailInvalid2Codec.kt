@@ -1,7 +1,7 @@
 package org.openrs2.protocol.create.downstream
 
+import jakarta.inject.Singleton
 import org.openrs2.protocol.EmptyPacketCodec
-import javax.inject.Singleton
 
 @Singleton
 public class EmailInvalid2Codec : EmptyPacketCodec<CreateResponse.EmailInvalid2>(

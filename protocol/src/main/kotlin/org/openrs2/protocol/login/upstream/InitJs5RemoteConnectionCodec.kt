@@ -1,9 +1,9 @@
 package org.openrs2.protocol.login.upstream
 
 import io.netty.buffer.ByteBuf
+import jakarta.inject.Singleton
 import org.openrs2.crypto.StreamCipher
 import org.openrs2.protocol.FixedPacketCodec
-import javax.inject.Singleton
 
 @Singleton
 public class InitJs5RemoteConnectionCodec : FixedPacketCodec<LoginRequest.InitJs5RemoteConnection>(

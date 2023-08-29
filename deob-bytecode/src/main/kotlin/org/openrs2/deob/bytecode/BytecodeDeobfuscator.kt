@@ -1,6 +1,8 @@
 package org.openrs2.deob.bytecode
 
 import com.github.michaelbull.logging.InlineLogger
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import org.openrs2.asm.classpath.ClassPath
 import org.openrs2.asm.classpath.Library
 import org.openrs2.asm.io.JarLibraryReader
@@ -11,8 +13,6 @@ import org.openrs2.deob.bytecode.remap.ClassNamePrefixRemapper
 import org.openrs2.deob.bytecode.remap.StripClassNamePrefixRemapper
 import java.nio.file.Files
 import java.nio.file.Path
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 public class BytecodeDeobfuscator @Inject constructor(

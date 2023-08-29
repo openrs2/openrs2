@@ -1,11 +1,11 @@
 package org.openrs2.archive.key
 
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import org.openrs2.crypto.XteaKey
 import org.openrs2.db.Database
 import java.io.BufferedOutputStream
 import java.io.DataOutputStream
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 public class KeyExporter @Inject constructor(

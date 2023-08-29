@@ -1,9 +1,9 @@
 package org.openrs2.archive
 
+import jakarta.inject.Inject
+import jakarta.inject.Provider
 import org.openrs2.db.Database
 import org.openrs2.db.PostgresDeadlockDetector
-import javax.inject.Inject
-import javax.inject.Provider
 import javax.sql.DataSource
 
 public class DatabaseProvider @Inject constructor(

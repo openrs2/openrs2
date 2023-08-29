@@ -1,6 +1,8 @@
 package org.openrs2.archive.key
 
 import com.github.michaelbull.logging.InlineLogger
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import org.openrs2.crypto.XteaKey
 import org.openrs2.db.Database
 import java.io.IOException
@@ -10,8 +12,6 @@ import java.sql.Connection
 import java.sql.Types
 import java.time.Instant
 import java.time.ZoneOffset
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 public class KeyImporter @Inject constructor(

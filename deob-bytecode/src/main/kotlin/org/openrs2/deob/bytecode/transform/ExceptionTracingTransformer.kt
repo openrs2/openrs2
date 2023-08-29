@@ -1,6 +1,7 @@
 package org.openrs2.deob.bytecode.transform
 
 import com.github.michaelbull.logging.InlineLogger
+import jakarta.inject.Singleton
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.MethodNode
 import org.openrs2.asm.InsnMatcher
@@ -8,7 +9,6 @@ import org.openrs2.asm.classpath.ClassPath
 import org.openrs2.asm.classpath.Library
 import org.openrs2.asm.nextReal
 import org.openrs2.asm.transform.Transformer
-import javax.inject.Singleton
 
 /**
  * A [Transformer] responsible for removing two kinds of redundant exception

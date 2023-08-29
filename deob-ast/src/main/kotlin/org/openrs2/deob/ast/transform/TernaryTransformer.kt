@@ -2,12 +2,12 @@ package org.openrs2.deob.ast.transform
 
 import com.github.javaparser.ast.CompilationUnit
 import com.github.javaparser.ast.expr.ConditionalExpr
+import jakarta.inject.Singleton
 import org.openrs2.deob.ast.Library
 import org.openrs2.deob.ast.LibraryGroup
 import org.openrs2.deob.ast.util.countNots
 import org.openrs2.deob.ast.util.not
 import org.openrs2.deob.ast.util.walk
-import javax.inject.Singleton
 
 @Singleton
 public class TernaryTransformer : Transformer() {

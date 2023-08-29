@@ -1,8 +1,8 @@
 package org.openrs2.archive.game
 
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import org.openrs2.db.Database
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 public class GameDatabase @Inject constructor(

@@ -1,7 +1,7 @@
 package org.openrs2.asm
 
 import com.fasterxml.jackson.databind.module.SimpleModule
-import javax.inject.Singleton
+import jakarta.inject.Singleton
 
 @Singleton
 public class AsmJacksonModule : SimpleModule() {

@@ -3,6 +3,9 @@ package org.openrs2.game.net
 import io.netty.channel.Channel
 import io.netty.channel.ChannelInitializer
 import io.netty.handler.timeout.IdleStateHandler
+import jakarta.inject.Inject
+import jakarta.inject.Provider
+import jakarta.inject.Singleton
 import org.openrs2.game.net.login.LoginChannelHandler
 import org.openrs2.protocol.Protocol
 import org.openrs2.protocol.Rs2Decoder
@@ -10,9 +13,6 @@ import org.openrs2.protocol.Rs2Encoder
 import org.openrs2.protocol.login.downstream.LoginDownstream
 import org.openrs2.protocol.login.upstream.LoginUpstream
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
-import javax.inject.Provider
-import javax.inject.Singleton
 
 @Singleton
 public class Rs2ChannelInitializer @Inject constructor(

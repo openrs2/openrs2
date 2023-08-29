@@ -1,10 +1,10 @@
 package org.openrs2.conf
 
+import jakarta.inject.Provider
 import org.bouncycastle.crypto.params.RSAPrivateCrtKeyParameters
 import org.openrs2.crypto.Rsa
 import java.nio.file.Files
 import java.nio.file.Path
-import javax.inject.Provider
 
 public class RsaKeyProvider : Provider<RSAPrivateCrtKeyParameters> {
     override fun get(): RSAPrivateCrtKeyParameters {

@@ -10,12 +10,12 @@ import com.github.javaparser.ast.expr.UnaryExpr.Operator.POSTFIX_INCREMENT
 import com.github.javaparser.ast.expr.UnaryExpr.Operator.PREFIX_DECREMENT
 import com.github.javaparser.ast.expr.UnaryExpr.Operator.PREFIX_INCREMENT
 import com.github.javaparser.ast.stmt.ForStmt
+import jakarta.inject.Singleton
 import org.openrs2.deob.ast.Library
 import org.openrs2.deob.ast.LibraryGroup
 import org.openrs2.deob.ast.util.flip
 import org.openrs2.deob.ast.util.hasSideEffects
 import org.openrs2.deob.ast.util.walk
-import javax.inject.Singleton
 
 @Singleton
 public class ForLoopConditionTransformer : Transformer() {

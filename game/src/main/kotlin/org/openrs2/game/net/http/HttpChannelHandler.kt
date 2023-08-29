@@ -8,10 +8,10 @@ import io.netty.handler.codec.http.HttpMethod
 import io.netty.handler.codec.http.HttpRequest
 import io.netty.handler.codec.http.HttpResponseStatus
 import io.netty.handler.timeout.IdleStateEvent
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import org.openrs2.buffer.use
 import org.openrs2.game.net.FileProvider
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 @ChannelHandler.Sharable

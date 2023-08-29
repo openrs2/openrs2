@@ -1,7 +1,7 @@
 package org.openrs2.protocol.js5.downstream
 
+import jakarta.inject.Singleton
 import org.openrs2.protocol.EmptyPacketCodec
-import javax.inject.Singleton
 
 @Singleton
 public class Js5OkCodec : EmptyPacketCodec<Js5LoginResponse.Ok>(

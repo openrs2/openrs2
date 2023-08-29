@@ -2,6 +2,8 @@ package org.openrs2.game.net.js5
 
 import com.google.common.util.concurrent.AbstractExecutionThreadService
 import io.netty.buffer.ByteBufAllocator
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import org.openrs2.buffer.use
 import org.openrs2.cache.Js5Archive
 import org.openrs2.cache.Js5Compression
@@ -13,8 +15,6 @@ import org.openrs2.protocol.js5.downstream.Js5Response
 import org.openrs2.protocol.js5.upstream.Js5Request
 import org.openrs2.util.collect.UniqueQueue
 import java.io.FileNotFoundException
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 public class Js5Service @Inject constructor(

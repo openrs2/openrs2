@@ -6,9 +6,9 @@ import io.netty.handler.codec.http.HttpObjectAggregator
 import io.netty.handler.codec.http.HttpRequestDecoder
 import io.netty.handler.codec.http.HttpResponseEncoder
 import io.netty.handler.timeout.IdleStateHandler
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 public class HttpChannelInitializer @Inject constructor(
