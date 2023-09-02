@@ -1,5 +1,4 @@
 .*
-!.drone.yml
 !.editorconfig
 !.git*
 !.idea
