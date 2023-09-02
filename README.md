@@ -1,6 +1,6 @@
 # OpenRS2
 
-[![Drone][drone-badge]][drone] [![Discord][discord-badge]][discord] [![ISC license][isc-badge]][isc]
+[![GitHub Actions][actions-badge]][actions] [![Discord][discord-badge]][discord] [![ISC license][isc-badge]][isc]
 
 ## Introduction
 
@@ -76,10 +76,10 @@ OpenRS2 is available under the terms of the [ISC license][isc], which is similar
 to the 2-clause BSD license. The full copyright notice and terms are available
 in the `LICENSE` file.
 
+[actions-badge]: https://github.com/openrs2/openrs2/actions/workflows/build.yaml/badge.svg?branch=master
+[actions]: https://github.com/openrs2/openrs2/actions
 [discord-badge]: https://img.shields.io/discord/684495254145335298
 [discord]: https://chat.openrs2.org/
-[drone-badge]: https://build.openrs2.org/api/badges/openrs2/openrs2/status.svg
-[drone]: https://build.openrs2.org/openrs2/openrs2/
 [isc-badge]: https://img.shields.io/badge/license-ISC-informational
 [isc]: https://opensource.org/licenses/ISC
 [issue-tracker]: https://git.openrs2.org/openrs2/openrs2/issues
