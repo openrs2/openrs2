@@ -4,9 +4,6 @@ plugins {
 }
 
 dependencies {
-    annotationProcessor(libs.pf4j)
-
-    compileOnly(libs.pf4j)
     compileOnly(libs.runelite.client)
 
     testImplementation(libs.runelite.client)

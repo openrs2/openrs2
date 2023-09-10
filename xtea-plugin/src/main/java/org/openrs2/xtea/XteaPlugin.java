@@ -19,17 +19,14 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.internal.annotations.EverythingIsNonNull;
-import org.pf4j.Extension;
-import org.pf4j.ExtensionPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Extension
 @PluginDescriptor(
 	name = "OpenRS2 XTEA",
 	description = "Collects XTEA keys and submits them to the OpenRS2 Archive"
 )
-public final class XteaPlugin extends Plugin implements ExtensionPoint {
+public final class XteaPlugin extends Plugin {
 	private static final Logger log = LoggerFactory.getLogger(XteaPlugin.class);
 
 	@Inject

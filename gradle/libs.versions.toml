@@ -74,7 +74,6 @@ netty-codec-http = { module = "io.netty:netty-codec-http", version.ref = "netty"
 netty-handler = { module = "io.netty:netty-handler", version.ref = "netty" }
 netty-transport = { module = "io.netty:netty-transport", version.ref = "netty" }
 openrs2-natives = { module = "org.openrs2:openrs2-natives-all", version = "3.2.0" }
-pf4j = { module = "org.pf4j:pf4j", version = "3.9.0" }
 postgres = { module = "org.postgresql:postgresql", version = "42.6.0" }
 result-core = { module = "com.michael-bull.kotlin-result:kotlin-result", version = "1.1.18" }
 result-coroutines = { module = "com.michael-bull.kotlin-result:kotlin-result-coroutines", version = "1.1.18" }
