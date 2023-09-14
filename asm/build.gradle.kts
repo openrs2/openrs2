@@ -14,6 +14,7 @@ dependencies {
     implementation(projects.cache)
     implementation(projects.compress)
     implementation(projects.crypto)
+    implementation(libs.cabParser)
 }
 
 publishing {
