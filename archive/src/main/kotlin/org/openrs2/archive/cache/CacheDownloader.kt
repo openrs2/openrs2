@@ -24,7 +24,7 @@ public class CacheDownloader @Inject constructor(
         val game = gameDatabase.getGame(gameName, environment, language) ?: throw Exception("Game not found")
 
         val url = game.url ?: throw Exception("URL not set")
-        val buildMajor = game.buildMajor ?: throw Exception("Current major build not set")
+        var buildMajor = game.buildMajor ?: throw Exception("Current major build not set")
 
         val config = JavConfig.download(client, url)
 
@@ -56,7 +56,13 @@ public class CacheDownloader @Inject constructor(
                     }
 
                     "runescape" -> {
-                        val buildMinor = game.buildMinor ?: throw Exception("Current minor build not set")
+                        var buildMinor = game.buildMinor ?: throw Exception("Current minor build not set")
+
+                        val serverVersion = config.config[SERVER_VERSION]
+                        if (serverVersion != null) {
+                            buildMajor = serverVersion.toInt()
+                            buildMinor = 1
+                        }
 
                         val tokens = config.params.values.filter { TOKEN_REGEX.matches(it) }
                         val token = tokens.singleOrNull() ?: throw Exception("Multiple candidate tokens: $tokens")
@@ -101,6 +107,7 @@ public class CacheDownloader @Inject constructor(
 
     private companion object {
         private const val CODEBASE = "codebase"
+        private const val SERVER_VERSION = "server_version"
         private const val NXT_LIVE_HOSTNAME = "content.runescape.com"
         private const val NXT_BETA_HOSTNAME = "content.beta.runescape.com"
         private const val PORT = 443
