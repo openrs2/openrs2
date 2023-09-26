@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+	<head th:replace="layout.html :: head(title='Clients')">
+		<title>Clients - OpenRS2 Archive</title>
+		<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/static/css/openrs2.css" />
+		<script src="/webjars/jquery/jquery.min.js" defer></script>
+		<script src="/webjars/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+	</head>
+	<body>
+		<nav th:replace="layout.html :: nav(active='clients')"></nav>
+		<main class="container">
+			<h1>Clients</h1>
+			<div class="table-responsive">
+				<table class="table table-striped table-bordered table-hover" data-toggle="table" data-filter-control="true" data-sticky-header="true" data-custom-sort="customSort">
+					<thead class="table-dark">
+						<tr>
+							<th data-field="game" data-filter-control="select">Game</th>
+							<th data-field="environment" data-filter-control="select">Env</th>
+							<th data-field="build" data-filter-control="input" data-sortable="true">Build</th>
+							<th data-field="timestamp" data-sortable="true">Timestamp</th>
+							<th data-field="type" data-filter-control="select">Type</th>
+							<th data-field="format" data-filter-control="select">Format</th>
+							<th data-field="os" data-filter-control="select">OS</th>
+							<th data-field="arch" data-filter-control="select">Arch</th>
+							<th data-field="jvm" data-filter-control="select">JVM</th>
+							<th>Size</th>
+							<th>Links</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!--/*@thymesVar id="artifacts" type="java.util.List<org.openrs2.archive.client.ClientExporter.ArtifactSummary>"*/-->
+						<tr th:each="artifact : ${artifacts}">
+							<td th:text="${artifact.game}">runescape</td>
+							<td th:text="${artifact.environment}">live</td>
+							<td th:text="${artifact.build}" class="text-end">550</td>
+							<td>
+								<span th:if="${artifact.timestamp}" th:remove="tag">
+									<span th:text="${#temporals.format(artifact.timestamp, 'yyyy-MM-dd')}"></span>
+									<br />
+									<span th:text="${#temporals.format(artifact.timestamp, 'HH:mm:ss')}"></span>
+								</span>
+							</td>
+							<td th:text="${artifact.type.toString().toLowerCase()}">client_gl</td>
+							<td th:text="${artifact.format.toString().toLowerCase()}">pack200</td>
+							<td th:text="${artifact.os.toString().toLowerCase()}">independent</td>
+							<td th:text="${artifact.arch.toString().toLowerCase()}">independent</td>
+							<td th:text="${artifact.jvm.toString().toLowerCase()}">independent</td>
+							<!--/*@thymesVar id="#byteunits" type="org.openrs2.archive.web.ByteUnits"*/-->
+							<td th:text="${#byteunits.format(artifact.size)}" class="text-end">494 KiB</td>
+							<td>
+								<div class="btn-group">
+									<a th:href="${'/clients/' + artifact.id + '.dat'}" class="btn btn-primary btn-sm">Download</a>
+									<a th:href="${'/clients/' + artifact.id}" class="btn btn-secondary btn-sm">More</a>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</main>
+	</body>
+</html>

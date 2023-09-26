@@ -10,6 +10,7 @@ import org.openrs2.archive.key.KeyDownloader
 import org.openrs2.archive.key.RuneLiteKeyDownloader
 import org.openrs2.archive.name.NameDownloader
 import org.openrs2.archive.name.RuneStarNameDownloader
+import org.openrs2.asm.AsmModule
 import org.openrs2.buffer.BufferModule
 import org.openrs2.cache.CacheModule
 import org.openrs2.db.Database
@@ -21,6 +22,7 @@ import javax.sql.DataSource
 
 public object ArchiveModule : AbstractModule() {
     override fun configure() {
+        install(AsmModule)
         install(BufferModule)
         install(CacheModule)
         install(HttpModule)

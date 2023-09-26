@@ -12,6 +12,7 @@ dependencies {
     api(libs.bundles.guice)
     api(libs.clikt)
 
+    implementation(projects.asm)
     implementation(projects.buffer)
     implementation(projects.cache550)
     implementation(projects.cli)
@@ -30,15 +31,18 @@ dependencies {
     implementation(libs.bundles.ktor)
     implementation(libs.bundles.thymeleaf)
     implementation(libs.byteUnits)
+    implementation(libs.cabParser)
     implementation(libs.flyway)
     implementation(libs.guava)
     implementation(libs.hikaricp)
     implementation(libs.jackson.jsr310)
     implementation(libs.jdom)
+    implementation(libs.jelf)
     implementation(libs.jquery)
     implementation(libs.jsoup)
     implementation(libs.kotlin.coroutines.core)
     implementation(libs.netty.handler)
+    implementation(libs.pecoff4j)
     implementation(libs.postgres)
 }
 

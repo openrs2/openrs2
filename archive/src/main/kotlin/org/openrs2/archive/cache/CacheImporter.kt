@@ -24,6 +24,8 @@ import org.openrs2.cache.StoreCorruptException
 import org.openrs2.cache.VersionList
 import org.openrs2.cache.VersionTrailer
 import org.openrs2.crypto.Whirlpool
+import org.openrs2.crypto.sha1
+import org.openrs2.crypto.whirlpool
 import org.openrs2.db.Database
 import org.postgresql.util.PSQLState
 import java.io.IOException
@@ -84,7 +86,8 @@ public class CacheImporter @Inject constructor(
     ) : DefaultByteBufHolder(buf) {
         public val bytes: ByteArray = ByteBufUtil.getBytes(buf, buf.readerIndex(), buf.readableBytes(), false)
         public val crc32: Int = buf.crc32()
-        public val whirlpool: ByteArray = Whirlpool.whirlpool(bytes)
+        public val sha1: ByteArray = buf.sha1()
+        public val whirlpool: ByteArray = buf.whirlpool()
     }
 
     public class ChecksumTableBlob(
@@ -854,6 +857,7 @@ public class CacheImporter @Inject constructor(
             CREATE TEMPORARY TABLE tmp_blobs (
                 index INTEGER NOT NULL,
                 crc32 INTEGER NOT NULL,
+                sha1 BYTEA NOT NULL,
                 whirlpool BYTEA NOT NULL,
                 data BYTEA NOT NULL
             ) ON COMMIT DROP
@@ -992,11 +996,11 @@ public class CacheImporter @Inject constructor(
         return ids as List<Long>
     }
 
-    private fun addBlob(connection: Connection, blob: Blob): Long {
+    public fun addBlob(connection: Connection, blob: Blob): Long {
         return addBlobs(connection, listOf(blob)).single()
     }
 
-    private fun addBlobs(connection: Connection, blobs: List<Blob>): List<Long> {
+    public fun addBlobs(connection: Connection, blobs: List<Blob>): List<Long> {
         connection.prepareStatement(
             """
             TRUNCATE TABLE tmp_blobs
@@ -1007,15 +1011,16 @@ public class CacheImporter @Inject constructor(
 
         connection.prepareStatement(
             """
-            INSERT INTO tmp_blobs (index, crc32, whirlpool, data)
-            VALUES (?, ?, ?, ?)
+            INSERT INTO tmp_blobs (index, crc32, sha1, whirlpool, data)
+            VALUES (?, ?, ?, ?, ?)
             """.trimIndent()
         ).use { stmt ->
             for ((i, blob) in blobs.withIndex()) {
                 stmt.setInt(1, i)
                 stmt.setInt(2, blob.crc32)
-                stmt.setBytes(3, blob.whirlpool)
-                stmt.setBytes(4, blob.bytes)
+                stmt.setBytes(3, blob.sha1)
+                stmt.setBytes(4, blob.whirlpool)
+                stmt.setBytes(5, blob.bytes)
 
                 stmt.addBatch()
             }
@@ -1025,8 +1030,8 @@ public class CacheImporter @Inject constructor(
 
         connection.prepareStatement(
             """
-            INSERT INTO blobs (crc32, whirlpool, data)
-            SELECT t.crc32, t.whirlpool, t.data
+            INSERT INTO blobs (crc32, sha1, whirlpool, data)
+            SELECT t.crc32, t.sha1, t.whirlpool, t.data
             FROM tmp_blobs t
             LEFT JOIN blobs b ON b.whirlpool = t.whirlpool
             WHERE b.whirlpool IS NULL

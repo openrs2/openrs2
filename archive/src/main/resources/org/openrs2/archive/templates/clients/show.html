@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+	<head th:replace="layout.html :: head(title='Cache')">
+		<title>Client - OpenRS2 Archive</title>
+		<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/static/css/openrs2.css" />
+		<script src="/webjars/jquery/jquery.min.js" defer></script>
+		<script src="/webjars/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+	</head>
+	<body>
+		<nav th:replace="layout.html :: nav"></nav>
+		<main class="container">
+			<h1>Client</h1>
+
+			<!--/*@thymesVar id="artifact" type="org.openrs2.archive.client.ClientExporter.Artifact"*/-->
+			<table class="table table-striped table-bordered table-hover">
+				<tr>
+					<th class="table-dark">Game</th>
+					<td th:text="${artifact.summary.game}">runescape</td>
+				</tr>
+				<tr>
+					<th class="table-dark">Environment</th>
+					<td th:text="${artifact.summary.environment}">live</td>
+				</tr>
+				<tr>
+					<th class="table-dark">Build</th>
+					<td th:text="${artifact.summary.build}">550</td>
+				</tr>
+				<tr>
+					<th class="table-dark">Timestamp</th>
+					<td th:text="${#temporals.format(artifact.summary.timestamp, 'yyyy-MM-dd HH:mm:ss')}"></td>
+				</tr>
+				<tr>
+					<th class="table-dark">Type</th>
+					<td th:text="${artifact.summary.type.toString().toLowerCase()}">client_gl</td>
+				</tr>
+				<tr>
+					<th class="table-dark">Format</th>
+					<td th:text="${artifact.summary.format.toString().toLowerCase()}">pack200</td>
+				</tr>
+				<tr>
+					<th class="table-dark">OS</th>
+					<td th:text="${artifact.summary.os.toString().toLowerCase()}">independent</td>
+				</tr>
+				<tr>
+					<th class="table-dark">Architecture</th>
+					<td th:text="${artifact.summary.arch.toString().toLowerCase()}">independent</td>
+				</tr>
+				<tr>
+					<th class="table-dark">JVM</th>
+					<td th:text="${artifact.summary.jvm.toString().toLowerCase()}">independent</td>
+				</tr>
+				<tr>
+					<th class="table-dark">Size</th>
+					<!--/*@thymesVar id="#byteunits" type="org.openrs2.archive.web.ByteUnits"*/-->
+					<td th:text="${#byteunits.format(artifact.summary.size)}">494 KiB</td>
+				</tr>
+				<tr>
+					<th class="table-dark">Checksum</th>
+					<td th:text="${artifact.crc32}"></td>
+				</tr>
+				<tr>
+					<th class="table-dark">SHA-1</th>
+					<td>
+						<code th:text="${artifact.sha1Hex}"></code>
+					</td>
+				</tr>
+				<tr>
+					<th class="table-dark">Download</th>
+					<td>
+						<a th:href="${'/clients/' + artifact.summary.id + '.dat'}" class="btn btn-primary btn-sm">Download</a>
+					</td>
+				</tr>
+			</table>
+
+			<div th:if="${artifact.links}" th:tag="remove">
+				<h2>Links</h2>
+
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered table-hover">
+						<thead class="table-dark">
+							<tr>
+								<th>Build</th>
+								<th>Timestamp</th>
+								<th>Type</th>
+								<th>Format</th>
+								<th>OS</th>
+								<th>Arch</th>
+								<th>JVM</th>
+								<th>Checksum</th>
+								<th>SHA-1</th>
+								<th>Size</th>
+								<th>Links</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="entry : ${artifact.links}" th:classappend="${entry.id}? 'table-success' : 'table-danger'">
+								<td th:text="${entry.build}" class="text-end">550</td>
+								<td>
+									<span th:if="${entry.timestamp}" th:remove="tag">
+										<span th:text="${#temporals.format(entry.timestamp, 'yyyy-MM-dd')}"></span>
+										<br />
+										<span th:text="${#temporals.format(entry.timestamp, 'HH:mm:ss')}"></span>
+									</span>
+								</td>
+								<td th:text="${entry.link.type.toString().toLowerCase()}">client_gl</td>
+								<td th:text="${entry.link.format.toString().toLowerCase()}">pack200</td>
+								<td th:text="${entry.link.os.toString().toLowerCase()}">independent</td>
+								<td th:text="${entry.link.arch.toString().toLowerCase()}">independent</td>
+								<td th:text="${entry.link.jvm.toString().toLowerCase()}">independent</td>
+								<td th:text="${entry.link.crc32}"></td>
+								<td><code th:text="${entry.link.sha1Hex}"></code></td>
+								<!--/*@thymesVar id="#byteunits" type="org.openrs2.archive.web.ByteUnits"*/-->
+								<td th:text="${#byteunits.format(entry.link.size)}">494 KiB</td>
+								<td th:if="${entry.id}">
+									<div class="btn-group">
+										<a th:href="${'/clients/' + entry.id + '.dat'}" class="btn btn-primary btn-sm">Download</a>
+										<a th:href="${'/clients/' + entry.id}" class="btn btn-secondary btn-sm">More</a>
+									</div>
+								</td>
+								<td th:unless="${entry.id}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>

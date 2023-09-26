@@ -36,6 +36,7 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver
 @Singleton
 public class WebServer @Inject constructor(
     private val cachesController: CachesController,
+    private val clientsController: ClientsController,
     private val keysController: KeysController,
     @Json private val mapper: ObjectMapper
 ) {
@@ -84,6 +85,9 @@ public class WebServer @Inject constructor(
                 get("/caches/{scope}/{id}/keys.json") { cachesController.exportKeysJson(call) }
                 get("/caches/{scope}/{id}/keys.zip") { cachesController.exportKeysZip(call) }
                 get("/caches/{scope}/{id}/map.png") { cachesController.renderMap(call) }
+                get("/clients") { clientsController.index(call) }
+                get("/clients/{id}.dat") { clientsController.export(call) }
+                get("/clients/{id}") { clientsController.show(call) }
                 get("/keys") { keysController.index(call) }
                 post("/keys") { keysController.import(call) }
                 get("/keys/all.json") { keysController.exportAll(call) }

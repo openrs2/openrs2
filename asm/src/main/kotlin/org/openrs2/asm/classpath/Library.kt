@@ -5,6 +5,7 @@ import org.objectweb.asm.tree.ClassNode
 import org.openrs2.asm.io.LibraryReader
 import org.openrs2.asm.io.LibraryWriter
 import org.openrs2.util.io.useAtomicOutputStream
+import java.io.InputStream
 import java.nio.file.Files
 import java.nio.file.Path
 import java.util.SortedMap
@@ -59,9 +60,13 @@ public class Library(public val name: String) : Iterable<ClassNode> {
         public fun read(name: String, path: Path, reader: LibraryReader): Library {
             logger.info { "Reading library $path" }
 
-            val classes = Files.newInputStream(path).use { input ->
-                reader.read(input)
+            Files.newInputStream(path).use { input ->
+                return read(name, input, reader)
             }
+        }
+
+        public fun read(name: String, input: InputStream, reader: LibraryReader): Library {
+            val classes = reader.read(input)
 
             val library = Library(name)
             for (clazz in classes) {
