@@ -38,7 +38,7 @@ INSERT INTO games (id, name)
 SELECT id, name
 FROM game_variants;
 
-SELECT setval('game_variants_id_seq', MAX(id)) FROM game_variants;
+SELECT setval('games_id_seq', MAX(id)) FROM game_variants;
 
 ALTER TABLE game_variants
     ADD COLUMN game_id INT NULL REFERENCES games (id),
