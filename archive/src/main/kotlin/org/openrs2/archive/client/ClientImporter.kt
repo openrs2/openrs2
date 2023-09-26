@@ -614,7 +614,9 @@ public class ClientImporter @Inject constructor(
                 }
             }
 
-            candidates -= NEW_ENGINE_RESOLUTIONS
+            for (build in NEW_ENGINE_RESOLUTIONS) {
+                candidates -= build
+            }
 
             val version = candidates.singleOrNull()
             if (version != null) {
