@@ -9,7 +9,7 @@ junit = "5.10.0"
 kotlin = "1.9.10"
 kotlinCoroutines = "1.7.3"
 ktor = "2.3.4"
-netty = "4.1.97.Final"
+netty = "4.1.98.Final"
 nettyIoUring = "0.0.22.Final"
 
 [plugins]
@@ -34,11 +34,11 @@ clikt = { module = "com.github.ajalt.clikt:clikt", version = "4.2.0" }
 commons-compress = { module = "org.apache.commons:commons-compress", version.ref = "commons-compress" }
 fastutil = { module = "it.unimi.dsi:fastutil", version = "8.5.12" }
 fernflower = { module = "org.openrs2:fernflower", version = "1.1.1" }
-flyway = { module = "org.flywaydb:flyway-core", version = "9.22.1" }
+flyway = { module = "org.flywaydb:flyway-core", version = "9.22.2" }
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
 guice-core = { module = "com.google.inject:guice", version.ref = "guice" }
 guice-assistedInject = { module = "com.google.inject.extensions:guice-assistedinject", version.ref = "guice" }
-h2 = { module = "com.h2database:h2", version = "2.2.222" }
+h2 = { module = "com.h2database:h2", version = "2.2.224" }
 hikaricp = { module = "com.zaxxer:HikariCP", version = "5.0.1" }
 inlineLogger = { module = "com.michael-bull.kotlin-inline-logger:kotlin-inline-logger", version = "1.0.5" }
 jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jackson" }
@@ -80,7 +80,7 @@ pecoff4j = { module = "com.kichik.pecoff4j:pecoff4j", version = "0.4.0" }
 postgres = { module = "org.postgresql:postgresql", version = "42.6.0" }
 result-core = { module = "com.michael-bull.kotlin-result:kotlin-result", version = "1.1.18" }
 result-coroutines = { module = "com.michael-bull.kotlin-result:kotlin-result-coroutines", version = "1.1.18" }
-runelite-client = { module = "net.runelite:client", version = "1.10.12.1" }
+runelite-client = { module = "net.runelite:client", version = "1.10.13.1" }
 sqlite = { module = "org.xerial:sqlite-jdbc", version = "3.43.0.0" }
 thymeleaf-core = { module = "org.thymeleaf:thymeleaf", version = "3.1.2.RELEASE" }
 thymeleaf-java8time = { module = "org.thymeleaf.extras:thymeleaf-extras-java8time", version = "3.0.4.RELEASE" }
