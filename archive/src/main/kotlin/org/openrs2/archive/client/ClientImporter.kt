@@ -360,7 +360,8 @@ public class ClientImporter @Inject constructor(
                 pe.sectionTable.rvaConverter.convertVirtualAddressToRawDataPointer(exportTable.namePointerRVA.toInt())
 
             for (i in 0 until exportTable.numberOfNamePointers.toInt()) {
-                val namePointer = buf.readerIndex() + buf.getIntLE(buf.readerIndex() + namePointerTable + 4 * i)
+                val namePointerRva = buf.readerIndex() + buf.getIntLE(buf.readerIndex() + namePointerTable + 4 * i)
+                val namePointer = pe.sectionTable.rvaConverter.convertVirtualAddressToRawDataPointer(namePointerRva)
 
                 val end = buf.forEachByte(namePointer, buf.writerIndex() - namePointer, ByteProcessor.FIND_NUL)
                 require(end != -1) {
