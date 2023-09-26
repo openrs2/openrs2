@@ -17,6 +17,7 @@ import jakarta.inject.Inject
 import jakarta.inject.Singleton
 import net.fornwall.jelf.ElfFile
 import net.fornwall.jelf.ElfSymbol
+import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.LdcInsnNode
 import org.objectweb.asm.tree.MethodInsnNode
@@ -597,27 +598,27 @@ public class ClientImporter @Inject constructor(
                 }
             }
 
-            for (match in NEW_ENGINE_VERSION_MATCHER.match(method)) {
-                val new = match[0] as TypeInsnNode
-                if (new.desc != "client") {
-                    continue
-                }
+            var betweenNewAndReturn = false
+            val candidates = mutableListOf<Int>()
 
-                val candidates = mutableListOf<Int>()
-
-                for (insn in match) {
+            for (insn in method.instructions) {
+                if (insn is TypeInsnNode && insn.desc == "client") {
+                    betweenNewAndReturn = true
+                } else if (insn.opcode == Opcodes.RETURN) {
+                    break
+                } else if (betweenNewAndReturn) {
                     val candidate = insn.intConstant
                     if (candidate != null && candidate in NEW_ENGINE_BUILDS) {
                         candidates += candidate
                     }
                 }
+            }
 
-                candidates -= NEW_ENGINE_RESOLUTIONS
+            candidates -= NEW_ENGINE_RESOLUTIONS
 
-                val version = candidates.singleOrNull()
-                if (version != null) {
-                    return CacheExporter.Build(version, null)
-                }
+            val version = candidates.singleOrNull()
+            if (version != null) {
+                return CacheExporter.Build(version, null)
             }
         }
 
@@ -722,7 +723,6 @@ public class ClientImporter @Inject constructor(
         private val OLD_ENGINE_VERSION_MATCHER =
             InsnMatcher.compile("LDC INVOKESPECIAL (ICONST | BIPUSH | SIPUSH | LDC)")
 
-        private val NEW_ENGINE_VERSION_MATCHER = InsnMatcher.compile("NEW .*? RETURN")
         private val NEW_ENGINE_RESOLUTIONS = listOf(765, 503, 1024, 768)
         private val NEW_ENGINE_BUILDS = 402..916
 
