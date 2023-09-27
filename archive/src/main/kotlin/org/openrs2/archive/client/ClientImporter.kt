@@ -250,6 +250,14 @@ public class ClientImporter @Inject constructor(
             parseElf(buf)
         } else if (buf.hasPrefix(PE)) {
             parsePe(buf)
+        } else if (
+            buf.hasPrefix(MACHO32BE) ||
+            buf.hasPrefix(MACHO32LE) ||
+            buf.hasPrefix(MACHO64BE) ||
+            buf.hasPrefix(MACHO64LE) ||
+            buf.hasPrefix(MACHO_UNIVERSAL)
+        ) {
+            parseMachO(buf)
         } else {
             throw IllegalArgumentException()
         }
@@ -372,6 +380,25 @@ public class ClientImporter @Inject constructor(
                 yield(buf.toString(namePointer, end - namePointer, Charsets.US_ASCII))
             }
         }
+    }
+
+    private fun parseMachO(buf: ByteBuf): Artifact {
+        val (arch, symbols) = MachO.parse(buf.slice())
+        val type = getArtifactType(symbols.asSequence())
+
+        return Artifact(
+            buf.retain(),
+            "shared",
+            "live",
+            null,
+            null,
+            type,
+            ArtifactFormat.NATIVE,
+            OperatingSystem.MACOS,
+            arch,
+            Jvm.SUN,
+            emptyList()
+        )
     }
 
     private fun parseJar(buf: ByteBuf): Artifact {
