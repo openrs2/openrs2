@@ -40,6 +40,11 @@ public class CacheDownloader @Inject constructor(
                         val codebase = config.config[CODEBASE] ?: throw Exception("Codebase missing")
                         hostname = URI(codebase).host ?: throw Exception("Hostname missing")
 
+                        val serverVersion = config.params[OSRS_SERVER_VERSION]
+                        if (serverVersion != null) {
+                            buildMajor = serverVersion.toInt()
+                        }
+
                         OsrsJs5ChannelInitializer(
                             OsrsJs5ChannelHandler(
                                 bootstrap,
@@ -58,10 +63,18 @@ public class CacheDownloader @Inject constructor(
                     "runescape" -> {
                         var buildMinor = game.buildMinor ?: throw Exception("Current minor build not set")
 
-                        val serverVersion = config.config[SERVER_VERSION]
+                        val serverVersion = config.config[NXT_SERVER_VERSION]
                         if (serverVersion != null) {
-                            buildMajor = serverVersion.toInt()
-                            buildMinor = 1
+                            val n = serverVersion.toInt()
+
+                            /*
+                             * Only reset buildMinor if buildMajor changes, so
+                             * we don't have to keep retrying minor versions.
+                             */
+                            if (buildMajor != n) {
+                                buildMajor = n
+                                buildMinor = 1
+                            }
                         }
 
                         val tokens = config.params.values.filter { TOKEN_REGEX.matches(it) }
@@ -107,7 +120,8 @@ public class CacheDownloader @Inject constructor(
 
     private companion object {
         private const val CODEBASE = "codebase"
-        private const val SERVER_VERSION = "server_version"
+        private const val OSRS_SERVER_VERSION = "25"
+        private const val NXT_SERVER_VERSION = "server_version"
         private const val NXT_LIVE_HOSTNAME = "content.runescape.com"
         private const val NXT_BETA_HOSTNAME = "content.beta.runescape.com"
         private const val PORT = 443
