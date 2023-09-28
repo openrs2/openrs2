@@ -50,12 +50,13 @@ The following fields are always present:
 
 ##### Flags
 
-| Flag | Description  |
-|-----:|--------------|
-|  0x1 | Members only |
-|  0x2 | Quick chat   |
-|  0x4 | PvP          |
-|  0x8 | Loot share   |
+| Flag | Jagex name          | Description        |
+|-----:|---------------------|--------------------|
+|  0x1 | `MEMBERS`           | Members only       |
+|  0x2 | `QUICKCHAT`         | Quick chat         |
+|  0x4 | `PVPWORLD`          | PvP                |
+|  0x8 | `LOOTSHARE`         | Loot share         |
+| 0x10 | `DEDICATEDACTIVITY` | Dedicated activity |
 
 ### Player count
 

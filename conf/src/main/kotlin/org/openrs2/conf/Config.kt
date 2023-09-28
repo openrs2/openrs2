@@ -11,7 +11,8 @@ public data class Config(
     val members: Boolean,
     val quickChat: Boolean,
     val pvp: Boolean,
-    val lootShare: Boolean
+    val lootShare: Boolean,
+    val dedicatedActivity: Boolean
 ) {
     val internalGame: String = game.toInternalName()
     val internalOperator: String = operator.toInternalName()

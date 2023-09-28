@@ -49,11 +49,12 @@ public class WorldListResponseCodec : VariableShortPacketCodec<WorldListResponse
                 val quickChat = (flags and FLAG_QUICK_CHAT) != 0
                 val pvp = (flags and FLAG_PVP) != 0
                 val lootShare = (flags and FLAG_LOOT_SHARE) != 0
+                val dedicatedActivity = (flags and FLAG_DEDICATED_ACTIVITY) != 0
 
                 val activity = input.readVersionedString()
                 val hostname = input.readVersionedString()
 
-                worlds[id] = WorldListResponse.World(country, members, quickChat, pvp, lootShare, activity, hostname)
+                worlds[id] = WorldListResponse.World(country, members, quickChat, pvp, lootShare, dedicatedActivity, activity, hostname)
             }
 
             val checksum = input.readInt()
@@ -111,6 +112,9 @@ public class WorldListResponseCodec : VariableShortPacketCodec<WorldListResponse
                 if (world.lootShare) {
                     flags = flags or FLAG_LOOT_SHARE
                 }
+                if (world.dedicatedActivity) {
+                    flags = flags or FLAG_DEDICATED_ACTIVITY
+                }
                 output.writeInt(flags)
 
                 output.writeVersionedString(world.activity)
@@ -135,5 +139,6 @@ public class WorldListResponseCodec : VariableShortPacketCodec<WorldListResponse
         private const val FLAG_QUICK_CHAT = 0x2
         private const val FLAG_PVP = 0x4
         private const val FLAG_LOOT_SHARE = 0x8
+        private const val FLAG_DEDICATED_ACTIVITY = 0x10
     }
 }

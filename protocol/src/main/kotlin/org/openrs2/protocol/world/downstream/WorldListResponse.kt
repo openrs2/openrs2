@@ -22,6 +22,7 @@ public data class WorldListResponse(
         public val quickChat: Boolean,
         public val pvp: Boolean,
         public val lootShare: Boolean,
+        public val dedicatedActivity: Boolean,
         public val activity: String,
         public val hostname: String
     )

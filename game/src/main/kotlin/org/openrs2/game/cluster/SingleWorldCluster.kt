@@ -18,6 +18,7 @@ public class SingleWorldCluster @Inject constructor(
             config.quickChat,
             config.pvp,
             config.lootShare,
+            config.dedicatedActivity,
             config.activity,
             config.hostname
         )
