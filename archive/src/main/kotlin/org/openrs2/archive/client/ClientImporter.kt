@@ -60,7 +60,7 @@ public class ClientImporter @Inject constructor(
     private val packClassLibraryReader: PackClassLibraryReader,
     private val importer: CacheImporter
 ) {
-    public suspend fun import(paths: Iterable<Path>) {
+    public suspend fun import(paths: Iterable<Path>, name: String?, description: String?, url: String?) {
         alloc.buffer().use { buf ->
             for (path in paths) {
                 buf.clear()
@@ -72,19 +72,34 @@ public class ClientImporter @Inject constructor(
                 }
 
                 logger.info { "Importing $path" }
-                import(parse(buf))
+                import(parse(buf), name, description, url)
             }
         }
     }
 
-    public suspend fun import(artifact: Artifact) {
+    public suspend fun import(artifact: Artifact, name: String?, description: String?, url: String?) {
         database.execute { connection ->
             importer.prepare(connection)
-            import(connection, artifact)
+
+            val id = import(connection, artifact)
+
+            connection.prepareStatement(
+                """
+                INSERT INTO artifact_sources (blob_id, name, description, url)
+                VALUES (?, ?, ?, ?)
+            """.trimIndent()
+            ).use { stmt ->
+                stmt.setLong(1, id)
+                stmt.setString(2, name)
+                stmt.setString(3, description)
+                stmt.setString(4, url)
+
+                stmt.execute()
+            }
         }
     }
 
-    private fun import(connection: Connection, artifact: Artifact) {
+    private fun import(connection: Connection, artifact: Artifact): Long {
         val id = importer.addBlob(connection, artifact)
 
         val gameId = connection.prepareStatement(
@@ -187,6 +202,8 @@ public class ClientImporter @Inject constructor(
 
             stmt.executeBatch()
         }
+
+        return id
     }
 
     public suspend fun refresh() {
