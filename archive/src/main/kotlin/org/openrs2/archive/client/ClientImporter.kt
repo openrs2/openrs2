@@ -506,7 +506,7 @@ public class ClientImporter @Inject constructor(
             links = emptyList()
         } else if (client != null) {
             game = "runescape"
-            build = parseClientBuild(client)
+            build = parseClientBuild(library, client)
             type = if (build != null && build.major < COMBINED_BUILD && isClientGl(library)) {
                 ArtifactType.CLIENT_GL
             } else {
@@ -521,7 +521,7 @@ public class ClientImporter @Inject constructor(
                 links = emptyList() // TODO(gpe): classic support
             } else {
                 game = "runescape"
-                build = parseLoaderBuild(library)
+                build = parseSignLinkBuild(library)
                 type = if (timestamp != null && timestamp < COMBINED_TIMESTAMP && isLoaderGl(library)) {
                     ArtifactType.LOADER_GL
                 } else {
@@ -624,7 +624,7 @@ public class ClientImporter @Inject constructor(
         return false
     }
 
-    private fun parseClientBuild(clazz: ClassNode): CacheExporter.Build? {
+    private fun parseClientBuild(library: Library, clazz: ClassNode): CacheExporter.Build? {
         for (method in clazz.methods) {
             if (!method.hasCode || method.name != "main") {
                 continue
@@ -668,10 +668,10 @@ public class ClientImporter @Inject constructor(
             }
         }
 
-        return null
+        return parseSignLinkBuild(library)
     }
 
-    private fun parseLoaderBuild(library: Library): CacheExporter.Build? {
+    private fun parseSignLinkBuild(library: Library): CacheExporter.Build? {
         val clazz = library["sign/signlink"] ?: return null
 
         for (field in clazz.fields) {
