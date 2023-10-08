@@ -79,6 +79,12 @@ public class ClientExporter @Inject constructor(
             }
     }
 
+    public data class ArtifactSource(
+        public val name: String?,
+        public val description: String?,
+        public val url: String?
+    )
+
     public data class ArtifactLinkExport(
         public val id: Long?,
         public val build: CacheExporter.Build?,
@@ -90,6 +96,7 @@ public class ClientExporter @Inject constructor(
         public val summary: ArtifactSummary,
         public val crc32: Int,
         public val sha1: ByteArray,
+        public val sources: List<ArtifactSource>,
         public val links: List<ArtifactLinkExport>
     ) {
         public val sha1Hex: String
@@ -180,7 +187,28 @@ public class ClientExporter @Inject constructor(
 
     public suspend fun get(id: Long): Artifact? {
         return database.execute { connection ->
+            val sources = mutableListOf<ArtifactSource>()
             val links = mutableListOf<ArtifactLinkExport>()
+
+            connection.prepareStatement(
+                """
+                SELECT name, description, url
+                FROM artifact_sources
+                WHERE blob_id = ?
+            """.trimIndent()
+            ).use { stmt ->
+                stmt.setLong(1, id)
+
+                stmt.executeQuery().use { rows ->
+                    while (rows.next()) {
+                        val name = rows.getString(1)
+                        val description = rows.getString(2)
+                        val url = rows.getString(3)
+
+                        sources += ArtifactSource(name, description, url)
+                    }
+                }
+            }
 
             connection.prepareStatement(
                 """
@@ -339,7 +367,7 @@ public class ClientExporter @Inject constructor(
                             arch,
                             jvm,
                             size
-                        ), crc32, sha1, links
+                        ), crc32, sha1, sources, links
                     )
                 }
             }
