@@ -254,6 +254,12 @@ public abstract class Js5ChannelHandler(
             continuation.resume(Unit)
 
             ctx.close()
+        } else {
+            /*
+             * Reset the number of reconnection attempts as we are making
+             * progress.
+             */
+            reconnectionAttempts = 0
         }
     }
 
