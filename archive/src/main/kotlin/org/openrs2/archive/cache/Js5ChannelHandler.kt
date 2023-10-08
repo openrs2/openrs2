@@ -3,11 +3,11 @@ package org.openrs2.archive.cache
 import com.github.michaelbull.logging.InlineLogger
 import io.netty.bootstrap.Bootstrap
 import io.netty.buffer.ByteBuf
+import io.netty.channel.ChannelException
 import io.netty.channel.ChannelHandler
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelPipeline
 import io.netty.channel.SimpleChannelInboundHandler
-import io.netty.handler.timeout.ReadTimeoutException
 import kotlinx.coroutines.runBlocking
 import org.openrs2.buffer.crc32
 import org.openrs2.buffer.use
@@ -16,6 +16,7 @@ import org.openrs2.cache.Js5Compression
 import org.openrs2.cache.Js5Index
 import org.openrs2.cache.Js5MasterIndex
 import org.openrs2.cache.MasterIndexFormat
+import java.io.IOException
 import java.nio.channels.ClosedChannelException
 import java.time.Instant
 import kotlin.coroutines.Continuation
@@ -158,11 +159,11 @@ public abstract class Js5ChannelHandler(
 
         if (state == State.RESUMING_CONTINUATION) {
             logger.warn(cause) { "Swallowing exception as continuation has already resumed" }
-        } else if (cause != ReadTimeoutException.INSTANCE) {
+        } else if (cause !is ChannelException && cause !is IOException) {
             /*
-             * We skip continuation resumption if there's a read timeout - this
-             * allows channelInactive() to attempt to reconnect if we haven't
-             * used too many reconnection attempts.
+             * We skip continuation resumption if there's an I/O error or
+             * timeout - this allows channelInactive() to attempt to reconnect
+             * if we haven't used too many reconnection attempts.
              */
             state = State.RESUMING_CONTINUATION
             continuation.resumeWithException(cause)
