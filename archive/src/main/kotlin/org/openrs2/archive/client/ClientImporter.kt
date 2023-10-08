@@ -534,6 +534,16 @@ public class ClientImporter @Inject constructor(
             build = null
             type = ArtifactType.CLIENT
             links = emptyList()
+        } else if (library.contains("loginapplet")) {
+            game = "loginapplet"
+            build = null
+            type = ArtifactType.CLIENT
+            links = emptyList()
+        } else if (library.contains("passwordapp")) {
+            game = "passapplet"
+            build = null
+            type = ArtifactType.CLIENT
+            links = emptyList()
         } else if (library.contains("jaggl/opengl")) {
             game = "shared"
             type = ArtifactType.JAGGL
