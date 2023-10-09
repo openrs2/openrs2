@@ -52,6 +52,7 @@ import java.time.ZoneOffset
 import java.util.jar.JarInputStream
 import java.util.jar.JarOutputStream
 import java.util.jar.Pack200
+import kotlin.io.path.getLastModifiedTime
 
 @Singleton
 public class ClientImporter @Inject constructor(
@@ -72,12 +73,26 @@ public class ClientImporter @Inject constructor(
                 }
 
                 logger.info { "Importing $path" }
-                import(parse(buf), name, description, url)
+                import(
+                    parse(buf),
+                    name,
+                    description,
+                    url,
+                    path.fileName.toString(),
+                    path.getLastModifiedTime().toInstant()
+                )
             }
         }
     }
 
-    public suspend fun import(artifact: Artifact, name: String?, description: String?, url: String?) {
+    public suspend fun import(
+        artifact: Artifact,
+        name: String?,
+        description: String?,
+        url: String?,
+        fileName: String,
+        timestamp: Instant
+    ) {
         database.execute { connection ->
             importer.prepare(connection)
 
@@ -85,14 +100,16 @@ public class ClientImporter @Inject constructor(
 
             connection.prepareStatement(
                 """
-                INSERT INTO artifact_sources (blob_id, name, description, url)
-                VALUES (?, ?, ?, ?)
+                INSERT INTO artifact_sources (blob_id, name, description, url, file_name, timestamp)
+                VALUES (?, ?, ?, ?, ?, ?)
             """.trimIndent()
             ).use { stmt ->
                 stmt.setLong(1, id)
                 stmt.setString(2, name)
                 stmt.setString(3, description)
                 stmt.setString(4, url)
+                stmt.setString(5, fileName)
+                stmt.setObject(6, timestamp.atOffset(ZoneOffset.UTC), Types.TIMESTAMP_WITH_TIMEZONE)
 
                 stmt.execute()
             }
