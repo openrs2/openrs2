@@ -61,7 +61,13 @@ public class ClientImporter @Inject constructor(
     private val packClassLibraryReader: PackClassLibraryReader,
     private val importer: CacheImporter
 ) {
-    public suspend fun import(paths: Iterable<Path>, name: String?, description: String?, url: String?) {
+    public suspend fun import(
+        paths: Iterable<Path>,
+        name: String?,
+        description: String?,
+        url: String?,
+        skipErrors: Boolean
+    ) {
         alloc.buffer().use { buf ->
             for (path in paths) {
                 buf.clear()
@@ -73,14 +79,23 @@ public class ClientImporter @Inject constructor(
                 }
 
                 logger.info { "Importing $path" }
-                import(
-                    parse(buf),
-                    name,
-                    description,
-                    url,
-                    path.fileName.toString(),
-                    path.getLastModifiedTime().toInstant()
-                )
+                try {
+                    import(
+                        parse(buf),
+                        name,
+                        description,
+                        url,
+                        path.fileName.toString(),
+                        path.getLastModifiedTime().toInstant()
+                    )
+                } catch (t: Throwable) {
+                    if (skipErrors) {
+                        logger.warn(t) { "Failed to import $path" }
+                        continue
+                    }
+
+                    throw t
+                }
             }
         }
     }
