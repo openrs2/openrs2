@@ -192,7 +192,7 @@ public class ClientExporter @Inject constructor(
 
             connection.prepareStatement(
                 """
-                SELECT name, description, url
+                SELECT DISTINCT name, description, url
                 FROM artifact_sources
                 WHERE blob_id = ?
             """.trimIndent()
