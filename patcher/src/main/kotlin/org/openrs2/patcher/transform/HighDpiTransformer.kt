@@ -3,7 +3,6 @@ package org.openrs2.patcher.transform
 import com.github.michaelbull.logging.InlineLogger
 import jakarta.inject.Singleton
 import org.objectweb.asm.Opcodes
-import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.FieldInsnNode
 import org.objectweb.asm.tree.FieldNode
@@ -20,7 +19,7 @@ import org.objectweb.asm.tree.VarInsnNode
 import org.openrs2.asm.InsnMatcher
 import org.openrs2.asm.classpath.ClassPath
 import org.openrs2.asm.classpath.Library
-import org.openrs2.asm.getExpression
+import org.openrs2.asm.getArgumentExpressions
 import org.openrs2.asm.previousReal
 import org.openrs2.asm.transform.Transformer
 import kotlin.math.max
@@ -267,26 +266,16 @@ public class HighDpiTransformer : Transformer() {
     }
 
     private fun transformBounds(method: MethodNode, invoke: MethodInsnNode): Boolean {
-        val exprs = mutableListOf<List<AbstractInsnNode>>()
-        var head = invoke.previousReal ?: return false
+        val exprs = getArgumentExpressions(invoke) ?: return false
 
-        while (exprs.size < 4) {
-            val expr = getExpression(head) ?: return false
-
-            if (invoke.name == "glViewport" && expr.any { it.opcode == Opcodes.IALOAD }) {
-                /*
-                 * The glViewport() call that uses IALOAD restores viewport
-                 * bounds previously saved with glGetIntegerv(), so there's no
-                 * need for us to scale it again.
-                 */
-                return false
-            }
-
-            exprs += expr
-            head = expr.first().previousReal ?: return false
+        if (invoke.name == "glViewport" && exprs.flatten().any { it.opcode == Opcodes.IALOAD }) {
+            /*
+             * The glViewport() call that uses IALOAD restores viewport
+             * bounds previously saved with glGetIntegerv(), so there's no
+             * need for us to scale it again.
+             */
+            return false
         }
-
-        exprs.reverse()
 
         for (expr in exprs) {
             val single = expr.singleOrNull()
