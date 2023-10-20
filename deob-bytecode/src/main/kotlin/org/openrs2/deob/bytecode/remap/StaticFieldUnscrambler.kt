@@ -105,8 +105,7 @@ public class StaticFieldUnscrambler(
             }
 
             // TODO(gpe): use a filter here (pure with no *LOADs?)
-            val expr = getExpression(putstatic) ?: continue
-            simpleInitializers[desc] = expr.plus(putstatic)
+            simpleInitializers[desc] = getExpression(putstatic) ?: continue
         }
 
         return Pair(simpleInitializers, complexInitializers)

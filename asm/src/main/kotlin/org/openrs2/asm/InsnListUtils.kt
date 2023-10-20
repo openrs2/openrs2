@@ -16,8 +16,8 @@ public fun getExpression(
     var insn: AbstractInsnNode? = last
     do {
         val (pops, pushes) = insn!!.stackMetadata
+        expr.add(insn)
         if (insn !== last) {
-            expr.add(insn)
             height -= pushes
         }
         height += pops
@@ -38,7 +38,7 @@ public fun InsnList.replaceExpression(
     filter: (AbstractInsnNode) -> Boolean = ANY_INSN
 ): Boolean {
     val expr = getExpression(last, filter) ?: return false
-    expr.forEach(this::remove)
+    expr.filter { it !== last }.forEach(this::remove)
     this[last] = replacement
     return true
 }
@@ -49,7 +49,6 @@ public fun InsnList.deleteExpression(
 ): Boolean {
     val expr = getExpression(last, filter) ?: return false
     expr.forEach(this::remove)
-    remove(last)
     return true
 }
 

@@ -22,7 +22,6 @@ import org.openrs2.asm.classpath.ClassPath
 import org.openrs2.asm.classpath.Library
 import org.openrs2.asm.getExpression
 import org.openrs2.asm.previousReal
-import org.openrs2.asm.stackMetadata
 import org.openrs2.asm.transform.Transformer
 import kotlin.math.max
 
@@ -272,11 +271,7 @@ public class HighDpiTransformer : Transformer() {
         var head = invoke.previousReal ?: return false
 
         while (exprs.size < 4) {
-            val expr = if (head.stackMetadata.pops == 0) {
-                listOf(head)
-            } else {
-                getExpression(head)?.plus(head) ?: return false
-            }
+            val expr = getExpression(head) ?: return false
 
             if (invoke.name == "glViewport" && expr.any { it.opcode == Opcodes.IALOAD }) {
                 /*
