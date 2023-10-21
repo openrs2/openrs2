@@ -239,11 +239,13 @@ public class ClientImporter @Inject constructor(
     }
 
     public suspend fun refresh() {
+        data class Blob(val id: Long, val bytes: ByteArray)
+
         database.execute { connection ->
             importer.prepare(connection)
 
             var lastId: Long? = null
-            val blobs = mutableListOf<ByteArray>()
+            val blobs = mutableListOf<Blob>()
 
             while (true) {
                 blobs.clear()
@@ -263,8 +265,9 @@ public class ClientImporter @Inject constructor(
 
                     stmt.executeQuery().use { rows ->
                         while (rows.next()) {
-                            lastId = rows.getLong(1)
-                            blobs += rows.getBytes(2)
+                            val id = rows.getLong(1)
+                            lastId = id
+                            blobs += Blob(id, rows.getBytes(2))
                         }
                     }
                 }
@@ -274,7 +277,9 @@ public class ClientImporter @Inject constructor(
                 }
 
                 for (blob in blobs) {
-                    Unpooled.wrappedBuffer(blob).use { buf ->
+                    logger.info { "Refreshing artifact ${blob.id}" }
+
+                    Unpooled.wrappedBuffer(blob.bytes).use { buf ->
                         import(connection, parse(buf))
                     }
                 }
