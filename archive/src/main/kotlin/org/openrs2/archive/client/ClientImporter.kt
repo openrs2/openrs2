@@ -18,7 +18,9 @@ import jakarta.inject.Singleton
 import net.fornwall.jelf.ElfFile
 import net.fornwall.jelf.ElfSymbol
 import org.objectweb.asm.Opcodes
+import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.ClassNode
+import org.objectweb.asm.tree.JumpInsnNode
 import org.objectweb.asm.tree.LdcInsnNode
 import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.TypeInsnNode
@@ -26,6 +28,7 @@ import org.openrs2.archive.cache.CacheExporter
 import org.openrs2.archive.cache.CacheImporter
 import org.openrs2.asm.InsnMatcher
 import org.openrs2.asm.classpath.Library
+import org.openrs2.asm.getArgumentExpressions
 import org.openrs2.asm.hasCode
 import org.openrs2.asm.intConstant
 import org.openrs2.asm.io.CabLibraryReader
@@ -33,6 +36,7 @@ import org.openrs2.asm.io.JarLibraryReader
 import org.openrs2.asm.io.LibraryReader
 import org.openrs2.asm.io.Pack200LibraryReader
 import org.openrs2.asm.io.PackClassLibraryReader
+import org.openrs2.asm.nextReal
 import org.openrs2.buffer.use
 import org.openrs2.compress.gzip.Gzip
 import org.openrs2.db.Database
@@ -780,8 +784,155 @@ public class ClientImporter @Inject constructor(
             )
         }
 
-        // TODO(gpe): new engine support
+        val loader = library["loader"]
+        if (loader != null) {
+            val links = mutableListOf<ArtifactLink>()
+            val paths = mutableSetOf<String>()
+
+            for (method in loader.methods) {
+                if (method.name != "run" || method.desc != "()V") {
+                    continue
+                }
+
+                for (insn in method.instructions) {
+                    if (insn !is MethodInsnNode || insn.owner != loader.name || !insn.desc.endsWith(")[B")) {
+                        continue
+                    }
+
+                    // TODO(gpe): extract file size too (tricky due to dummy arguments)
+
+                    val exprs = getArgumentExpressions(insn) ?: continue
+                    for (expr in exprs) {
+                        val single = expr.singleOrNull() ?: continue
+                        if (single !is LdcInsnNode) {
+                            continue
+                        }
+
+                        val cst = single.cst
+                        if (cst is String && FILE_NAME_REGEX.matches(cst)) {
+                            paths += cst
+                        }
+                    }
+                }
+            }
+
+            val hashes = mutableMapOf<AbstractInsnNode, ByteArray>()
+
+            for (method in loader.methods) {
+                for (match in SHA1_CMP_MATCHER.match(method)) {
+                    val sha1 = ByteArray(SHA1_BYTES)
+                    var i = 0
+
+                    while (i < match.size) {
+                        var n = match[i++].intConstant
+                        if (n != null) {
+                            i++ // ALOAD
+                        }
+
+                        val index = match[i++].intConstant!!
+                        i++ // BALOAD
+
+                        var xor = false
+                        if (i + 1 < match.size && match[i + 1].opcode == Opcodes.IXOR) {
+                            i += 2 // ICONST_M1, IXOR
+                            xor = true
+                        }
+
+                        if (match[i].opcode == Opcodes.IFNE) {
+                            n = 0
+                            i++
+                        } else {
+                            if (n == null) {
+                                n = match[i++].intConstant!!
+                            }
+
+                            i++ // ICMP_IFNE
+                        }
+
+                        if (xor) {
+                            n = n.inv()
+                        }
+
+                        sha1[index] = n.toByte()
+                    }
+
+                    hashes[match[0]] = sha1
+                }
+            }
+
+            for (method in loader.methods) {
+                for (match in PATH_CMP_MATCHER.match(method)) {
+                    val first = match[0]
+                    val ldc = if (first is LdcInsnNode) {
+                        first
+                    } else {
+                        match[1] as LdcInsnNode
+                    }
+
+                    val path = ldc.cst
+                    if (path !is String) {
+                        continue
+                    }
+
+                    val acmp = match[2] as JumpInsnNode
+                    val target = if (acmp.opcode == Opcodes.IF_ACMPNE) {
+                        acmp.nextReal
+                    } else {
+                        acmp.label.nextReal
+                    }
+
+                    val hash = hashes.remove(target) ?: continue
+                    if (!paths.remove(path)) {
+                        continue
+                    }
+
+                    links += parseLink(path, hash)
+                }
+            }
+
+            if (paths.size != hashes.size || paths.size > 1) {
+                throw IllegalArgumentException()
+            } else if (paths.size == 1) {
+                links += parseLink(paths.single(), hashes.values.single())
+            }
+
+            return links
+        }
+
+        // TODO(gpe)
         return emptyList()
+    }
+
+    private fun parseLink(path: String, sha1: ByteArray): ArtifactLink {
+        val m = FILE_NAME_REGEX.matchEntire(path) ?: throw IllegalArgumentException()
+        val (name, crc1, ext, crc2) = m.destructured
+
+        val type = when (name) {
+            // TODO(gpe): funorb loaders
+            "runescape", "client" -> ArtifactType.CLIENT
+            "unpackclass" -> ArtifactType.UNPACKCLASS
+            else -> throw IllegalArgumentException()
+        }
+
+        val format = when (ext) {
+            "pack200" -> ArtifactFormat.PACK200
+            "js5" -> ArtifactFormat.PACKCLASS
+            "jar", "pack" -> ArtifactFormat.JAR
+            else -> throw IllegalArgumentException()
+        }
+
+        val crc = crc1.toIntOrNull() ?: crc2.toIntOrNull() ?: throw IllegalArgumentException()
+
+        return ArtifactLink(
+            type,
+            format,
+            OperatingSystem.INDEPENDENT,
+            Architecture.INDEPENDENT,
+            Jvm.INDEPENDENT,
+            crc,
+            sha1,
+            null
+        )
     }
 
     private fun ByteBuf.hasPrefix(bytes: ByteArray): Boolean {
@@ -830,5 +981,10 @@ public class ClientImporter @Inject constructor(
         private const val SHA1_BYTES = 20
         private val SHA1_MATCHER =
             InsnMatcher.compile("BIPUSH NEWARRAY (DUP (ICONST | BIPUSH) (ICONST | BIPUSH | SIPUSH) IASTORE)+")
+
+        private val FILE_NAME_REGEX = Regex("([a-z]+)(?:_(-?[0-9]+))?[.]([a-z0-9]+)(?:\\?crc=(-?[0-9]+))?")
+        private val SHA1_CMP_MATCHER =
+            InsnMatcher.compile("((ICONST | BIPUSH)? ALOAD (ICONST | BIPUSH) BALOAD (ICONST IXOR)? (ICONST | BIPUSH)? (IF_ICMPEQ | IF_ICMPNE | IFEQ | IFNE))+")
+        private val PATH_CMP_MATCHER = InsnMatcher.compile("(LDC ALOAD | ALOAD LDC) (IF_ACMPEQ | IF_ACMPNE)")
     }
 }
