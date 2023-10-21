@@ -54,7 +54,16 @@ public class WorldListResponseCodec : VariableShortPacketCodec<WorldListResponse
                 val activity = input.readVersionedString()
                 val hostname = input.readVersionedString()
 
-                worlds[id] = WorldListResponse.World(country, members, quickChat, pvp, lootShare, dedicatedActivity, activity, hostname)
+                worlds[id] = WorldListResponse.World(
+                    country,
+                    members,
+                    quickChat,
+                    pvp,
+                    lootShare,
+                    dedicatedActivity,
+                    activity,
+                    hostname
+                )
             }
 
             val checksum = input.readInt()
