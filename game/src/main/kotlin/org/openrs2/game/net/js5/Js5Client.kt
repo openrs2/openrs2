@@ -13,6 +13,7 @@ public class Js5Client(
         if (request.prefetch) {
             prefetch += request
         } else {
+            prefetch -= request
             urgent += request
         }
     }
