@@ -883,7 +883,7 @@ public class ClientImporter @Inject constructor(
 
                     val hash = hashes.remove(target) ?: continue
                     if (!paths.remove(path)) {
-                        continue
+                        logger.warn { "Adding link for unused file $path" }
                     }
 
                     links += parseLink(path, hash)
@@ -911,6 +911,8 @@ public class ClientImporter @Inject constructor(
             // TODO(gpe): funorb loaders
             "runescape", "client" -> ArtifactType.CLIENT
             "unpackclass" -> ArtifactType.UNPACKCLASS
+            "jogl", "jogltrimmed" -> ArtifactType.JOGL
+            "jogl_awt" -> ArtifactType.JOGL_AWT
             else -> throw IllegalArgumentException()
         }
 
@@ -918,17 +920,22 @@ public class ClientImporter @Inject constructor(
             "pack200" -> ArtifactFormat.PACK200
             "js5" -> ArtifactFormat.PACKCLASS
             "jar", "pack" -> ArtifactFormat.JAR
+            "dll" -> ArtifactFormat.NATIVE
             else -> throw IllegalArgumentException()
         }
+
+        val os = if (format == ArtifactFormat.NATIVE) OperatingSystem.WINDOWS else OperatingSystem.INDEPENDENT
+        val arch = if (format == ArtifactFormat.NATIVE) Architecture.X86 else Architecture.INDEPENDENT
+        val jvm = if (format == ArtifactFormat.NATIVE) Jvm.SUN else Jvm.INDEPENDENT
 
         val crc = crc1.toIntOrNull() ?: crc2.toIntOrNull() ?: throw IllegalArgumentException()
 
         return ArtifactLink(
             type,
             format,
-            OperatingSystem.INDEPENDENT,
-            Architecture.INDEPENDENT,
-            Jvm.INDEPENDENT,
+            os,
+            arch,
+            jvm,
             crc,
             sha1,
             null
@@ -982,7 +989,7 @@ public class ClientImporter @Inject constructor(
         private val SHA1_MATCHER =
             InsnMatcher.compile("BIPUSH NEWARRAY (DUP (ICONST | BIPUSH) (ICONST | BIPUSH | SIPUSH) IASTORE)+")
 
-        private val FILE_NAME_REGEX = Regex("([a-z]+)(?:_(-?[0-9]+))?[.]([a-z0-9]+)(?:\\?crc=(-?[0-9]+))?")
+        private val FILE_NAME_REGEX = Regex("([a-z_]+)(?:_(-?[0-9]+))?[.]([a-z0-9]+)(?:\\?crc=(-?[0-9]+))?")
         private val SHA1_CMP_MATCHER =
             InsnMatcher.compile("((ICONST | BIPUSH)? ALOAD (ICONST | BIPUSH) BALOAD (ICONST IXOR)? (ICONST | BIPUSH)? (IF_ICMPEQ | IF_ICMPNE | IFEQ | IFNE))+")
         private val PATH_CMP_MATCHER = InsnMatcher.compile("(LDC ALOAD | ALOAD LDC) (IF_ACMPEQ | IF_ACMPNE)")
