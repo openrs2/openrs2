@@ -12,6 +12,7 @@ import org.openrs2.deob.bytecode.transform.ConstantArgTransformer
 import org.openrs2.deob.bytecode.transform.CopyPropagationTransformer
 import org.openrs2.deob.bytecode.transform.CounterTransformer
 import org.openrs2.deob.bytecode.transform.EmptyClassTransformer
+import org.openrs2.deob.bytecode.transform.ExceptionObfuscationTransformer
 import org.openrs2.deob.bytecode.transform.ExceptionTracingTransformer
 import org.openrs2.deob.bytecode.transform.FernflowerExceptionTransformer
 import org.openrs2.deob.bytecode.transform.FieldOrderTransformer
@@ -56,6 +57,7 @@ public object BytecodeDeobfuscatorModule : AbstractModule() {
         binder.addBinding().to(PatcherTransformer::class.java)
         binder.addBinding().to(ResourceTransformer::class.java)
         binder.addBinding().to(OpaquePredicateTransformer::class.java)
+        binder.addBinding().to(ExceptionObfuscationTransformer::class.java)
         binder.addBinding().to(ExceptionTracingTransformer::class.java)
         binder.addBinding().to(MonitorTransformer::class.java)
         binder.addBinding().to(BitShiftTransformer::class.java)
