@@ -42,6 +42,8 @@ public class ExceptionTracingTransformer : Transformer() {
         clazz: ClassNode,
         method: MethodNode
     ): Boolean {
+        var changed = false
+
         for (match in CATCH_MATCHER.match(method)) {
             val foundTryCatch = method.tryCatchBlocks.removeIf { tryCatch ->
                 tryCatch.type == "java/lang/RuntimeException" && tryCatch.handler.nextReal === match[0]
@@ -50,9 +52,11 @@ public class ExceptionTracingTransformer : Transformer() {
             if (foundTryCatch) {
                 match.forEach(method.instructions::remove)
                 tracingTryCatches++
+                changed = true
             }
         }
-        return false
+
+        return changed
     }
 
     override fun postTransform(classPath: ClassPath) {
