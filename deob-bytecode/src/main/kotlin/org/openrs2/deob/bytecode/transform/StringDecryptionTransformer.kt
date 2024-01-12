@@ -95,8 +95,6 @@ public class StringDecryptionTransformer : Transformer() {
                 // step 4: inline all string references to the static String[] field (specifically static!)
                 if (field != null) {
                     for (method in clazz.methods) {
-                        if (method.name == "<clinit>") continue
-
                         if (field.desc == "[Ljava/lang/String;") {
                             // multiple encrypted strings in the class so an array is produced
                             for (insn in method.instructions) {
