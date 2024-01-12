@@ -61,7 +61,7 @@ public class StaticFieldUnscrambler(
         return fields
     }
 
-    private fun MethodNode.extractEntryExitBlocks(): List<AbstractInsnNode> {
+    private fun MethodNode.extractEntryExitBlocks(): Set<AbstractInsnNode> {
         /*
          * Most (or all?) of the <clinit> methods have "simple" initializers
          * that we're capable of moving in the first and last basic blocks of
@@ -73,14 +73,14 @@ public class StaticFieldUnscrambler(
 
         val last = instructions.lastOrNull()
         if (last == null || last.opcode != Opcodes.RETURN) {
-            return entry
+            return entry.toSet()
         }
 
         val exit = instructions.toList()
             .dropLast(1)
             .takeLastWhile { it.isSequential }
 
-        return entry.plus(exit)
+        return (entry + exit).toSet()
     }
 
     private fun MethodNode.extractInitializers(
@@ -90,32 +90,50 @@ public class StaticFieldUnscrambler(
 
         val simpleInitializers = mutableMapOf<MemberDesc, List<AbstractInsnNode>>()
         val complexInitializers = instructions.asSequence()
-            .filter { !entryExitBlocks.contains(it) }
+            .filter { it !in entryExitBlocks }
             .filterIsInstance<FieldInsnNode>()
-            .filter { it.opcode == Opcodes.GETSTATIC && it.owner == owner }
-            .filter { !excludedFields.matches(it.owner, it.name, it.desc) }
+            .filter { it.owner == owner }
             .map(::MemberDesc)
-            .toSet()
+            .toMutableSet()
 
         val putstatics = entryExitBlocks
             .filterIsInstance<FieldInsnNode>()
             .filter { it.opcode == Opcodes.PUTSTATIC && it.owner == owner }
-            .filter { !excludedFields.matches(it.owner, it.name, it.desc) }
 
         for (putstatic in putstatics) {
             val desc = MemberDesc(putstatic)
-            if (simpleInitializers.containsKey(desc) || complexInitializers.contains(desc)) {
+            if (desc in complexInitializers) {
+                continue
+            }
+
+            if (desc in simpleInitializers) {
+                simpleInitializers -= desc
+                complexInitializers += desc
                 continue
             }
 
             // TODO(gpe): use a filter here (pure with no *LOADs?)
-            simpleInitializers[desc] = getExpression(putstatic) ?: continue
+            val initializer = getExpression(putstatic)
+            if (initializer != null) {
+                simpleInitializers[desc] = initializer
+            } else {
+                complexInitializers += desc
+            }
         }
 
-        return Pair(simpleInitializers, complexInitializers)
-    }
+        val overlappingInitializers = mutableSetOf<MemberDesc>()
 
-    private companion object {
-        private const val MAX_FIELDS_PER_CLASS = 500
+        for ((field1, initializer1) in simpleInitializers) {
+            for ((field2, initializer2) in simpleInitializers) {
+                if (field1 != field2 && initializer1.any { it in initializer2 }) {
+                    overlappingInitializers += field1
+                }
+            }
+        }
+
+        simpleInitializers -= overlappingInitializers
+        complexInitializers += overlappingInitializers
+
+        return Pair(simpleInitializers, complexInitializers)
     }
 }

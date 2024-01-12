@@ -47,8 +47,4 @@ public class StaticMethodUnscrambler(
 
         return owners
     }
-
-    private companion object {
-        private const val MAX_METHODS_PER_CLASS = 50
-    }
 }
