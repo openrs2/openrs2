@@ -24,7 +24,9 @@ public class StaticMethodUnscrambler(
             }
 
             for (clazz in library) {
-                if (clazz.name.contains('/')) continue
+                if (clazz.name.contains('/')) {
+                    continue
+                }
 
                 for (method in clazz.methods) {
                     if (method.access and Opcodes.ACC_STATIC == 0) {
