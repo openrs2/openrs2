@@ -22,6 +22,7 @@ import org.openrs2.deob.bytecode.transform.FinalMethodTransformer
 import org.openrs2.deob.bytecode.transform.InvokeSpecialTransformer
 import org.openrs2.deob.bytecode.transform.MethodOrderTransformer
 import org.openrs2.deob.bytecode.transform.MonitorTransformer
+import org.openrs2.deob.bytecode.transform.MultipleAssignmentTransformer
 import org.openrs2.deob.bytecode.transform.OpaquePredicateTransformer
 import org.openrs2.deob.bytecode.transform.OriginalNameTransformer
 import org.openrs2.deob.bytecode.transform.OriginalPcRestoreTransformer
@@ -53,6 +54,7 @@ public object BytecodeDeobfuscatorModule : AbstractModule() {
         binder.addBinding().to(OriginalNameTransformer::class.java)
         binder.addBinding().to(ClassLiteralTransformer::class.java)
         binder.addBinding().to(InvokeSpecialTransformer::class.java)
+        binder.addBinding().to(MultipleAssignmentTransformer::class.java)
         binder.addBinding().to(RemapTransformer::class.java)
         binder.addBinding().to(PatcherTransformer::class.java)
         binder.addBinding().to(ResourceTransformer::class.java)
