@@ -117,6 +117,19 @@ public class StaticFieldUnscrambler(
             }
         }
 
+        val overlappingInitializers = mutableSetOf<MemberDesc>()
+
+        for ((field1, initializer1) in simpleInitializers) {
+            for ((field2, initializer2) in simpleInitializers) {
+                if (field1 != field2 && initializer1.any { it in initializer2 }) {
+                    overlappingInitializers += field1
+                }
+            }
+        }
+
+        simpleInitializers -= overlappingInitializers
+        complexInitializers += overlappingInitializers
+
         return Pair(simpleInitializers, complexInitializers)
     }
 }
