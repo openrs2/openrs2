@@ -110,8 +110,4 @@ public class StaticFieldUnscrambler(
 
         return Pair(simpleInitializers, complexInitializers)
     }
-
-    private companion object {
-        private const val MAX_FIELDS_PER_CLASS = 500
-    }
 }
