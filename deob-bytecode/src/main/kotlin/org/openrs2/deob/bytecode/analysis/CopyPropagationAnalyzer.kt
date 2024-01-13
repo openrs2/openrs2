@@ -5,7 +5,6 @@ import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.IincInsnNode
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.VarInsnNode
-import java.util.Collections
 
 public class CopyPropagationAnalyzer(owner: String, method: MethodNode) :
     DataFlowAnalyzer<Set<CopyAssignment>>(owner, method) {
@@ -28,7 +27,7 @@ public class CopyPropagationAnalyzer(owner: String, method: MethodNode) :
     }
 
     override fun createEntrySet(): Set<CopyAssignment> {
-        return Collections.emptySet()
+        return emptySet()
     }
 
     override fun createInitialSet(): Set<CopyAssignment> {
