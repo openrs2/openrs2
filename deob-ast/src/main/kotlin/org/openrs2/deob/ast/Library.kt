@@ -10,13 +10,17 @@ import com.github.javaparser.printer.configuration.DefaultPrinterConfiguration.C
 import com.github.javaparser.printer.configuration.DefaultPrinterConfiguration.ConfigOption.ORDER_IMPORTS
 import com.github.javaparser.printer.configuration.Indentation
 import com.github.javaparser.printer.configuration.Indentation.IndentType.TABS_WITH_SPACE_ALIGN
+import com.github.javaparser.resolution.TypeSolver
 import com.github.javaparser.symbolsolver.JavaSymbolSolver
 import com.github.javaparser.symbolsolver.resolution.typesolvers.ClassLoaderTypeSolver
 import com.github.javaparser.symbolsolver.resolution.typesolvers.CombinedTypeSolver
+import com.github.javaparser.symbolsolver.resolution.typesolvers.JarTypeSolver
 import com.github.javaparser.symbolsolver.resolution.typesolvers.JavaParserTypeSolver
 import com.github.javaparser.utils.SourceRoot
 import com.github.michaelbull.logging.InlineLogger
 import org.openrs2.deob.util.Module
+import java.nio.file.Files
+import java.nio.file.Paths
 import java.util.function.Function
 
 public class Library(
@@ -62,8 +66,23 @@ public class Library(
         public fun parse(module: Module): Library {
             logger.info { "Parsing root ${module.sources}" }
 
+            val extraSolvers: MutableList<TypeSolver> = mutableListOf()
+            if (Files.exists(Paths.get("share", "deob", "jars.dependencies.list"))) {
+                // would be nice to read this from yaml, unfortunately profile.yaml is not available here
+                val files = Files.readAllLines(Paths.get("share", "deob", "jars.dependencies.list"))
+
+                for (file in files) {
+                    if (file.isEmpty()) {
+                        continue
+                    }
+
+                    extraSolvers += JarTypeSolver(file)
+                }
+            }
+
             val solver = CombinedTypeSolver(
                 ClassLoaderTypeSolver(ClassLoader.getPlatformClassLoader()),
+                *extraSolvers.toTypedArray(),
                 JavaParserTypeSolver(module.sources)
             )
             for (dependency in module.transitiveDependencies) {
