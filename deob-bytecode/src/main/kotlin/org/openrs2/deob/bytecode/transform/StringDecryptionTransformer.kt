@@ -27,6 +27,7 @@ public class StringDecryptionTransformer : Transformer() {
 
     private val DECRYPTION_CALL_MATCHER = InsnMatcher.compile("LDC INVOKESTATIC INVOKESTATIC")
     private val DECRYPTION_METHOD_MATCHER = InsnMatcher.compile("(ICONST | BIPUSH) IXOR I2C CASTORE")
+    private val INLINE_STRING_MATCHER = InsnMatcher.compile("GETSTATIC (ICONST | BIPUSH | SIPUSH)? AALOAD?")
 
     private data class DecryptionContext(
         val clinit: MethodNode,
@@ -95,14 +96,14 @@ public class StringDecryptionTransformer : Transformer() {
                     // this one is the static String[] field
                     val put = outerCall.next.next as FieldInsnNode
                     if (put.owner == clazz.name && put.desc == "[Ljava/lang/String;") {
-                        field = clazz.fields.find { it.name == put.name }
+                        field = clazz.fields.find { it.name == put.name && it.desc == put.desc }
                         fieldInit = put
                     }
                 } else if (outerCall.next?.opcode == Opcodes.PUTSTATIC) {
                     // this one is the static String field
                     val put = outerCall.next as FieldInsnNode
                     if (put.owner == clazz.name && put.desc == "Ljava/lang/String;") {
-                        field = clazz.fields.find { it.name == put.name }
+                        field = clazz.fields.find { it.name == put.name && it.desc == put.desc }
                         fieldInit = put
                     }
                 }
@@ -124,62 +125,32 @@ public class StringDecryptionTransformer : Transformer() {
         val ctx = context[clazz.name] ?: return false
 
         // step 4: inline string references
-        if (ctx.field.desc == "[Ljava/lang/String;") {
-            // multiple encrypted strings in the class so an array is produced
-            for (insn in method.instructions) {
-                // we're looking for getstatic -> constant -> aaload
-                // we start backwards (aaload) and check the previous 2 instructions
-                if (insn.opcode != Opcodes.AALOAD) {
-                    continue
-                }
+        for (match in INLINE_STRING_MATCHER.match(method.instructions)) {
+            val getstatic = match[0] as FieldInsnNode
+            if (
+                getstatic.owner != clazz.name ||
+                getstatic.name != ctx.field.name ||
+                getstatic.desc != ctx.field.desc
+            ) {
+                continue
+            }
 
-                val push = insn.previous
-                if (push.previous.opcode != Opcodes.GETSTATIC) {
-                    continue
-                }
-
-                val getstatic = push.previous as FieldInsnNode
-                if (
-                    getstatic.owner != clazz.name ||
-                    getstatic.name != ctx.field.name ||
-                    getstatic.desc != ctx.field.desc
-                ) {
-                    continue
-                }
-
-                val index = push.intConstant ?: continue
+            if (ctx.field.desc == "[Ljava/lang/String;") {
+                val index = match[1].intConstant ?: continue
                 val str = ctx.strings[index]
                 val ldc = LdcInsnNode(str)
 
-                method.instructions.remove(push)
-                method.instructions.remove(insn)
+                method.instructions.remove(match[2])
+                method.instructions.remove(match[1])
                 method.instructions.set(getstatic, ldc)
-
-                stringsInlined++
-            }
-        } else if (ctx.field.desc == "Ljava/lang/String;") {
-            // one encrypted string in the class so no array is produced
-            for (insn in method.instructions) {
-                if (insn.opcode != Opcodes.GETSTATIC) {
-                    continue
-                }
-
-                val getstatic = insn as FieldInsnNode
-                if (
-                    getstatic.owner != clazz.name ||
-                    getstatic.name != ctx.field.name ||
-                    getstatic.desc != ctx.field.desc
-                ) {
-                    continue
-                }
-
+            } else if (ctx.field.desc == "Ljava/lang/String;") {
                 val str = ctx.strings[0]
                 val ldc = LdcInsnNode(str)
 
                 method.instructions.set(getstatic, ldc)
-
-                stringsInlined++
             }
+
+            stringsInlined++
         }
 
         return false
