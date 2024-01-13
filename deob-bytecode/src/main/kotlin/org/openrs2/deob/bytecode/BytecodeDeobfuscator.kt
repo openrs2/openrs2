@@ -16,25 +16,59 @@ import java.nio.file.Path
 
 @Singleton
 public class BytecodeDeobfuscator @Inject constructor(
+    private val profile: Profile,
     @DeobfuscatorQualifier private val transformers: Set<Transformer>
 ) {
     public fun run(input: Path, output: Path) {
         // read input jars/packs
         logger.info { "Reading input jars" }
-        val client = Library.read("client", input.resolve("runescape_gl.pack200"), Pack200LibraryReader)
-        val gl = Library.read("gl", input.resolve("jaggl.pack200"), Pack200LibraryReader)
-        val loader = Library.read("loader", input.resolve("loader_gl.jar"), JarLibraryReader)
-        val unpackClass = Library.read("unpackclass", input.resolve("unpackclass.pack"), JarLibraryReader)
 
-        // overwrite client's classes with signed classes from the loader
-        logger.info { "Moving signed classes from loader to signlink" }
-        val signLink = Library("signlink")
-        SignedClassUtils.move(loader, client, signLink)
+        val libraries = mutableListOf<Library>()
 
-        // move unpack class out of the loader (so the unpacker and loader can both depend on it)
-        logger.info { "Moving unpack from loader to unpack" }
-        val unpack = Library("unpack")
-        unpack.add(loader.remove("unpack")!!)
+        profile.libraries.forEach {
+            val name = it.key
+            val lib = it.value
+
+            if (lib.format != null && lib.file != null) {
+                // real library
+                val reader = when (lib.format) {
+                    "jar" -> JarLibraryReader
+                    "pack200" -> Pack200LibraryReader
+                    else -> throw IllegalArgumentException("Unsupported format: ${lib.format}")
+                }
+
+                libraries += Library.read(name, input.resolve(lib.file), reader)
+            } else {
+                // virtual library
+                libraries += Library(name)
+            }
+        }
+
+        for (library in libraries) {
+            val conf = profile.libraries[library.name]!!
+            if (conf.signedMove.isNullOrEmpty() || conf.signedMove.size != 2) {
+                continue
+            }
+
+            val loaderLib = libraries.find { it.name == conf.signedMove.first() }!!
+            val clientLib = libraries.find { it.name == conf.signedMove.last() }!!
+
+            SignedClassUtils.move(loaderLib, clientLib, library)
+        }
+
+        for (library in libraries) {
+            val conf = profile.libraries[library.name]!!
+            if (conf.move.isNullOrEmpty()) {
+                continue
+            }
+
+            for (move in conf.move) {
+                val other = libraries.find { it.name == move.substringBefore('!') }!!
+                val clazz = move.substringAfter('!')
+
+                library.add(other.remove(clazz)!!)
+            }
+        }
 
         /*
          * Prefix class names with the name of the library the class
@@ -64,26 +98,26 @@ public class BytecodeDeobfuscator @Inject constructor(
          * different sets of fields/methods, presumably as a result of the
          * obfuscator removing unused code.)
          */
-        val clientRemapper = ClassNamePrefixRemapper(client, gl, signLink)
-        val glRemapper = ClassNamePrefixRemapper(gl)
-        val loaderRemapper = ClassNamePrefixRemapper(loader, signLink, unpack)
-        val signLinkRemapper = ClassNamePrefixRemapper(signLink)
-        val unpackClassRemapper = ClassNamePrefixRemapper(unpackClass, unpack)
-        val unpackRemapper = ClassNamePrefixRemapper(unpack)
+        for (library in libraries) {
+            val conf = profile.libraries[library.name]!!
 
-        client.remap(clientRemapper)
-        gl.remap(glRemapper)
-        loader.remap(loaderRemapper)
-        signLink.remap(signLinkRemapper)
-        unpack.remap(unpackRemapper)
-        unpackClass.remap(unpackClassRemapper)
+            if (!conf.requires.isNullOrEmpty()) {
+                val requires = conf.requires.map { libraries.find { library -> library.name == it }!! }
+
+                val remapper = ClassNamePrefixRemapper(library, *requires.toTypedArray())
+                library.remap(remapper)
+            } else {
+                val remapper = ClassNamePrefixRemapper(library)
+                library.remap(remapper)
+            }
+        }
 
         // bundle libraries together into a common classpath
         val runtime = ClassLoader.getPlatformClassLoader()
         val classPath = ClassPath(
             runtime,
             dependencies = emptyList(),
-            libraries = listOf(client, gl, loader, signLink, unpack, unpackClass)
+            libraries
         )
 
         // deobfuscate
@@ -94,24 +128,18 @@ public class BytecodeDeobfuscator @Inject constructor(
         }
 
         // strip class name prefixes
-        client.remap(StripClassNamePrefixRemapper)
-        gl.remap(StripClassNamePrefixRemapper)
-        loader.remap(StripClassNamePrefixRemapper)
-        signLink.remap(StripClassNamePrefixRemapper)
-        unpack.remap(StripClassNamePrefixRemapper)
-        unpackClass.remap(StripClassNamePrefixRemapper)
+        for (library in libraries) {
+            library.remap(StripClassNamePrefixRemapper)
+        }
 
         // write output jars
         logger.info { "Writing output jars" }
 
         Files.createDirectories(output)
 
-        client.write(output.resolve("client.jar"), JarLibraryWriter, classPath)
-        gl.write(output.resolve("gl.jar"), JarLibraryWriter, classPath)
-        loader.write(output.resolve("loader.jar"), JarLibraryWriter, classPath)
-        signLink.write(output.resolve("signlink.jar"), JarLibraryWriter, classPath)
-        unpack.write(output.resolve("unpack.jar"), JarLibraryWriter, classPath)
-        unpackClass.write(output.resolve("unpackclass.jar"), JarLibraryWriter, classPath)
+        for (library in libraries) {
+            library.write(output.resolve("${library.name}.jar"), JarLibraryWriter, classPath)
+        }
     }
 
     private companion object {
