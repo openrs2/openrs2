@@ -9,6 +9,7 @@ import org.objectweb.asm.tree.FieldInsnNode
 import org.objectweb.asm.tree.FieldNode
 import org.objectweb.asm.tree.LdcInsnNode
 import org.objectweb.asm.tree.MethodInsnNode
+import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.TableSwitchInsnNode
 import org.openrs2.asm.InsnMatcher
 import org.openrs2.asm.classpath.ClassPath
@@ -24,32 +25,40 @@ public class StringDecryptionTransformer : Transformer() {
     private var classesDecrypted = 0
     private var stringsInlined = 0
 
+    private val DECRYPTION_CALL_MATCHER = InsnMatcher.compile("LDC INVOKESTATIC INVOKESTATIC")
+    private val DECRYPTION_METHOD_MATCHER = InsnMatcher.compile("(ICONST | BIPUSH) IXOR I2C CASTORE")
+
+    private data class DecryptionContext(
+        val clinit: MethodNode,
+        val inner: MethodNode,
+        val outer: MethodNode,
+        val strings: MutableList<String>,
+        val field: FieldNode,
+        val fieldInit: AbstractInsnNode
+    )
+    private var context: Map<String, DecryptionContext> = mutableMapOf()
+
     override fun transformClass(classPath: ClassPath, library: Library, clazz: ClassNode): Boolean {
         val clinit = clazz.methods.find { it.name == "<clinit>" } ?: return false
 
         // step 1: identify the decryption methods
-        val inner = clinit.instructions.iterator().asSequence().filterIsInstance<MethodInsnNode>()
-            .filter {
-                it.owner == clazz.name && it.desc == "(Ljava/lang/String;)[C" &&
-                    it.next?.opcode == Opcodes.INVOKESTATIC
-            }.firstOrNull()?.let {
-                clazz.methods.find { method -> method.name == it.name && method.desc == it.desc }
-            }
-        val outer = clinit.instructions.iterator().asSequence().filterIsInstance<MethodInsnNode>()
-            .filter {
-                it.owner == clazz.name && it.desc == "([C)Ljava/lang/String;" &&
-                    it.previous?.opcode == Opcodes.INVOKESTATIC
-            }.firstOrNull()?.let {
-                clazz.methods.find { method -> method.name == it.name && method.desc == it.desc }
-            }
+        // these methods *always* have the same signature, determined after comparing 651-668
+        // we still want to check the instructions to be sure this is a no-op in other revisions
+        val inner = clazz.methods.firstOrNull {
+            it.name == "z" && it.desc == "(Ljava/lang/String;)[C" &&
+            DECRYPTION_METHOD_MATCHER.match(it.instructions).count() > 0
+        }
+        val outer = clazz.methods.firstOrNull {
+            it.name == "z" && it.desc == "([C)Ljava/lang/String;" &&
+            DECRYPTION_METHOD_MATCHER.match(it.instructions).count() > 0
+        }
 
         if (inner == null || outer == null) return false
 
         // step 2: get the xor table from the outer method
+        val key = mutableListOf<Int>()
         val switch = outer.instructions.iterator().asSequence()
             .filterIsInstance<TableSwitchInsnNode>().firstOrNull() ?: return false
-
-        val key = mutableListOf<Int>()
         for (label in switch.labels) {
             key += label.nextReal?.intConstant ?: continue
         }
@@ -59,16 +68,20 @@ public class StringDecryptionTransformer : Transformer() {
         val strings = mutableListOf<String>()
         var field: FieldNode? = null
         var fieldInit: AbstractInsnNode? = null
-        for (insn in clinit.instructions) {
-            if (insn !is MethodInsnNode || insn.opcode != Opcodes.INVOKESTATIC) {
+
+        for (match in DECRYPTION_CALL_MATCHER.match(clinit.instructions)) {
+            val ldc = match[0] as LdcInsnNode
+            val innerCall = match[1] as MethodInsnNode
+            val outerCall = match[2] as MethodInsnNode
+
+            if (innerCall.owner != clazz.name || innerCall.name != inner.name || innerCall.desc != inner.desc) {
                 continue
             }
 
-            if (insn.owner != clazz.name || insn.name != outer.name || insn.desc != outer.desc) {
+            if (outerCall.owner != clazz.name || outerCall.name != outer.name || outerCall.desc != outer.desc) {
                 continue
             }
 
-            val ldc = insn.previous.previous as LdcInsnNode
             val str = ldc.cst as String
             val decrypted = decryptString(str, key)
 
@@ -77,16 +90,17 @@ public class StringDecryptionTransformer : Transformer() {
             stringsDecrypted++
 
             if (field == null) {
-                if (insn.next?.opcode == Opcodes.AASTORE && insn.next?.next?.opcode == Opcodes.PUTSTATIC) {
+                // this will run at the end of the initializer since we're checking next
+                if (outerCall.next?.opcode == Opcodes.AASTORE && outerCall.next?.next?.opcode == Opcodes.PUTSTATIC) {
                     // this one is the static String[] field
-                    val put = insn.next.next as FieldInsnNode
+                    val put = outerCall.next.next as FieldInsnNode
                     if (put.owner == clazz.name && put.desc == "[Ljava/lang/String;") {
                         field = clazz.fields.find { it.name == put.name }
                         fieldInit = put
                     }
-                } else if (insn.next?.opcode == Opcodes.PUTSTATIC) {
+                } else if (outerCall.next?.opcode == Opcodes.PUTSTATIC) {
                     // this one is the static String field
-                    val put = insn.next as FieldInsnNode
+                    val put = outerCall.next as FieldInsnNode
                     if (put.owner == clazz.name && put.desc == "Ljava/lang/String;") {
                         field = clazz.fields.find { it.name == put.name }
                         fieldInit = put
@@ -94,86 +108,96 @@ public class StringDecryptionTransformer : Transformer() {
                 }
             }
 
-            clinit.instructions.remove(insn.previous)
-            clinit.instructions.remove(insn)
+            clinit.instructions.remove(innerCall)
+            clinit.instructions.remove(outerCall)
         }
 
-        // step 4: inline all string references to the static String[] field (specifically static!)
-        if (field != null) {
-            for (method in clazz.methods) {
-                if (field.desc == "[Ljava/lang/String;") {
-                    // multiple encrypted strings in the class so an array is produced
-                    for (insn in method.instructions) {
-                        // we're looking for getstatic -> constant -> aaload
-                        // we start backwards (aaload) and check the previous 2 instructions
-                        if (insn.opcode != Opcodes.AALOAD) {
-                            continue
-                        }
-
-                        val push = insn.previous
-                        if (push.previous.opcode != Opcodes.GETSTATIC) {
-                            continue
-                        }
-
-                        val getstatic = push.previous as FieldInsnNode
-                        if (
-                            getstatic.owner != clazz.name ||
-                            getstatic.name != field.name ||
-                            getstatic.desc != field.desc
-                        ) {
-                            continue
-                        }
-
-                        val index = push.intConstant ?: continue
-                        val str = strings[index]
-                        val ldc = LdcInsnNode(str)
-
-                        method.instructions.remove(push)
-                        method.instructions.remove(insn)
-                        method.instructions.set(getstatic, ldc)
-
-                        stringsInlined++
-                    }
-                } else if (field.desc == "Ljava/lang/String;") {
-                    // one encrypted string in the class so no array is produced
-                    for (insn in method.instructions) {
-                        if (insn.opcode != Opcodes.GETSTATIC) {
-                            continue
-                        }
-
-                        val getstatic = insn as FieldInsnNode
-                        if (
-                            getstatic.owner != clazz.name ||
-                            getstatic.name != field.name ||
-                            getstatic.desc != field.desc
-                        ) {
-                            continue
-                        }
-
-                        val str = strings[0]
-                        val ldc = LdcInsnNode(str)
-
-                        method.instructions.set(getstatic, ldc)
-
-                        stringsInlined++
-                    }
-                }
-            }
-
-            // step 5: cleanup
-            clazz.fields.remove(field)
-            clinit.instructions.deleteExpression(fieldInit!!)
+        if (field != null && fieldInit != null) {
+            context += clazz.name to DecryptionContext(clinit, inner, outer, strings, field, fieldInit)
         }
-
-        // step 5: cleanup
-        clazz.methods.remove(inner)
-        clazz.methods.remove(outer)
 
         classesDecrypted++
         return false
     }
 
+    override fun transformCode(classPath: ClassPath, library: Library, clazz: ClassNode, method: MethodNode): Boolean {
+        val ctx = context[clazz.name] ?: return false
+
+        // step 4: inline string references
+        if (ctx.field.desc == "[Ljava/lang/String;") {
+            // multiple encrypted strings in the class so an array is produced
+            for (insn in method.instructions) {
+                // we're looking for getstatic -> constant -> aaload
+                // we start backwards (aaload) and check the previous 2 instructions
+                if (insn.opcode != Opcodes.AALOAD) {
+                    continue
+                }
+
+                val push = insn.previous
+                if (push.previous.opcode != Opcodes.GETSTATIC) {
+                    continue
+                }
+
+                val getstatic = push.previous as FieldInsnNode
+                if (
+                    getstatic.owner != clazz.name ||
+                    getstatic.name != ctx.field.name ||
+                    getstatic.desc != ctx.field.desc
+                ) {
+                    continue
+                }
+
+                val index = push.intConstant ?: continue
+                val str = ctx.strings[index]
+                val ldc = LdcInsnNode(str)
+
+                method.instructions.remove(push)
+                method.instructions.remove(insn)
+                method.instructions.set(getstatic, ldc)
+
+                stringsInlined++
+            }
+        } else if (ctx.field.desc == "Ljava/lang/String;") {
+            // one encrypted string in the class so no array is produced
+            for (insn in method.instructions) {
+                if (insn.opcode != Opcodes.GETSTATIC) {
+                    continue
+                }
+
+                val getstatic = insn as FieldInsnNode
+                if (
+                    getstatic.owner != clazz.name ||
+                    getstatic.name != ctx.field.name ||
+                    getstatic.desc != ctx.field.desc
+                ) {
+                    continue
+                }
+
+                val str = ctx.strings[0]
+                val ldc = LdcInsnNode(str)
+
+                method.instructions.set(getstatic, ldc)
+
+                stringsInlined++
+            }
+        }
+
+        return false
+    }
+
     override fun postTransform(classPath: ClassPath) {
+        for (library in classPath.libraries) {
+            for (clazz in library) {
+                val ctx = context[clazz.name] ?: continue
+
+                // step 5: cleanup
+                ctx.clinit.instructions.deleteExpression(ctx.fieldInit)
+                clazz.fields.remove(ctx.field)
+                clazz.methods.remove(ctx.inner)
+                clazz.methods.remove(ctx.outer)
+            }
+        }
+
         logger.info { "Decrypted $stringsDecrypted strings across $classesDecrypted classes" }
         logger.info { "Inlined $stringsInlined string references" }
     }
