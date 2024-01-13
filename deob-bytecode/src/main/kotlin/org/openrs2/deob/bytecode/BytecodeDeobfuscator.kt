@@ -24,24 +24,38 @@ public class BytecodeDeobfuscator @Inject constructor(
         logger.info { "Reading input jars" }
 
         val libraries = mutableListOf<Library>()
+        val dependencies = mutableListOf<Library>()
 
         profile.libraries.forEach {
             val name = it.key
-            val lib = it.value
+            val conf = it.value
 
-            if (lib.format != null && lib.file != null) {
+            if (conf.format != null && conf.file != null) {
                 // real library
-                val reader = when (lib.format) {
+                val reader = when (conf.format) {
                     "jar" -> JarLibraryReader
                     "pack200" -> Pack200LibraryReader
-                    else -> throw IllegalArgumentException("Unsupported format: ${lib.format}")
+                    else -> throw IllegalArgumentException("Unsupported format: ${conf.format}")
                 }
 
-                libraries += Library.read(name, input.resolve(lib.file), reader)
+                libraries += Library.read(name, input.resolve(conf.file), reader)
             } else {
                 // virtual library
                 libraries += Library(name)
             }
+        }
+
+        profile.dependencies?.forEach {
+            val name = it.key
+            val conf = it.value
+
+            val reader = when (conf.format) {
+                "jar" -> JarLibraryReader
+                "pack200" -> Pack200LibraryReader
+                else -> throw IllegalArgumentException("Unsupported format: ${conf.format}")
+            }
+
+            dependencies += Library.read(name, input.resolve(conf.file), reader)
         }
 
         for (library in libraries) {
@@ -116,7 +130,7 @@ public class BytecodeDeobfuscator @Inject constructor(
         val runtime = ClassLoader.getPlatformClassLoader()
         val classPath = ClassPath(
             runtime,
-            dependencies = emptyList(),
+            dependencies,
             libraries
         )
 
