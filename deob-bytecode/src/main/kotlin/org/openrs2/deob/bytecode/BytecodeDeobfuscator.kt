@@ -16,9 +16,17 @@ import java.nio.file.Path
 
 @Singleton
 public class BytecodeDeobfuscator @Inject constructor(
-    @DeobfuscatorQualifier private val transformers: Set<Transformer>
+    @DeobfuscatorQualifier private val allTransformers: Set<Transformer>,
+    private val profile: Profile,
 ) {
+    private val allTransformersByName = allTransformers.associateBy(Transformer::name)
+
     public fun run(input: Path, output: Path) {
+        // read list of enabled transformers and their order from the profile
+        val transformers = profile.transformers.map { name ->
+            allTransformersByName[name] ?: throw IllegalArgumentException("Unknown transformer $name")
+        }
+
         // read input jars/packs
         logger.info { "Reading input jars" }
         val client = Library.read("client", input.resolve("runescape_gl.pack200"), Pack200LibraryReader)

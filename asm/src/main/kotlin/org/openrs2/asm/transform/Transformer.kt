@@ -8,6 +8,8 @@ import org.openrs2.asm.classpath.Library
 import org.openrs2.asm.hasCode
 
 public abstract class Transformer {
+    public val name: String = javaClass.simpleName.removeSuffix("Transformer")
+
     public open fun transform(classPath: ClassPath) {
         preTransform(classPath)
 
