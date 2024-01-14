@@ -95,7 +95,7 @@ public class BytecodeDeobfuscator @Inject constructor(
         )
 
         // deobfuscate
-        logger.info { "Transforming client" }
+        logger.info { "Transforming" }
         for (transformer in transformers) {
             logger.info { "Running transformer ${transformer.javaClass.simpleName}" }
             transformer.transform(classPath)
