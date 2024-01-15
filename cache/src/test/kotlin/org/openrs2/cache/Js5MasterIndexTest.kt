@@ -114,9 +114,9 @@ class Js5MasterIndexTest {
                 MasterIndexFormat.LENGTHS,
                 mutableListOf(
                     Js5MasterIndex.Entry(
-                        0x12345678, -1080883457, 3, 123, ByteBufUtil.decodeHexDump(
-                            "0bf30b80b7213154ada5c3797be15a8fbb6a96a80432e2093e10617bcb4e67de" +
-                                "9a858211cabe844c6fa3a1fbfe3164a3e4e1918983c69597dff3fc3c53096884"
+                        0x12345678, -817299640, 13, 123, ByteBufUtil.decodeHexDump(
+                            "7c2eb43256e9350b637d0ca819813fa3397bc6035a72c6c7e41b714b74301c7e" +
+                                "bba0e6b5408cb2514656181b75f2040397e4eb6944456ce60ca337a32a1c4f05"
                         )
                     )
                 )
