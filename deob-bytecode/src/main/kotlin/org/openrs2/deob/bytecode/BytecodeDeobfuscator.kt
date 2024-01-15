@@ -16,10 +16,17 @@ import java.nio.file.Path
 
 @Singleton
 public class BytecodeDeobfuscator @Inject constructor(
+    @DeobfuscatorQualifier private val allTransformers: Set<Transformer>,
     private val profile: Profile,
-    @DeobfuscatorQualifier private val transformers: Set<Transformer>
 ) {
+    private val allTransformersByName = allTransformers.associateBy(Transformer::name)
+
     public fun run(input: Path, output: Path) {
+        // read list of enabled transformers and their order from the profile
+        val transformers = profile.transformers.map { name ->
+            allTransformersByName[name] ?: throw IllegalArgumentException("Unknown transformer $name")
+        }
+
         // read input jars/packs
         logger.info { "Reading input jars" }
 
@@ -135,7 +142,7 @@ public class BytecodeDeobfuscator @Inject constructor(
         )
 
         // deobfuscate
-        logger.info { "Transforming client" }
+        logger.info { "Transforming" }
         for (transformer in transformers) {
             logger.info { "Running transformer ${transformer.javaClass.simpleName}" }
             transformer.transform(classPath)

@@ -11,7 +11,8 @@ public class Profile(
     public val excludedFields: GlobMemberFilter,
     public val entryPoints: GlobMemberFilter,
     public val scrambledLibraries: Set<String>,
-    public val maxObfuscatedNameLen: Int
+    public val maxObfuscatedNameLen: Int,
+    public val transformers: List<String>
 ) {
     public class LibraryProfile(
         public val format: String?,

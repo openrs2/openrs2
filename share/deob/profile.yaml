@@ -63,3 +63,37 @@ entry_points:
 scrambled_libraries:
   - client
 max_obfuscated_name_len: 2
+transformers:
+  - OriginalPcSave
+  - OriginalName
+  - ClassLiteral
+  - InvokeSpecial
+  - MultipleAssignment
+  - Remap
+  - Patcher
+  - Resource
+  - OpaquePredicate
+  - ExceptionObfuscation
+  - ExceptionTracing
+  - Monitor
+  - BitShift
+  - Canvas
+  - FieldOrder
+  - BitwiseOp
+  - ConstantArg
+  - CopyPropagation
+  - UnusedLocal
+  - UnusedMethod
+  - UnusedArg
+  - Counter
+  - Reset
+  - EmptyClass
+  - MethodOrder
+  - Visibility
+  - FinalClass
+  - FinalMethod
+  - FinalField
+  - Override
+  - RedundantGoto
+  - OriginalPcRestore
+  - FernflowerException

@@ -22,7 +22,7 @@ public sealed class IntValueSet {
         }
     }
 
-    public object Unknown : IntValueSet() {
+    public data object Unknown : IntValueSet() {
         override val singleton: Int?
             get() = null
 

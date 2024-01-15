@@ -52,55 +52,38 @@ public object BytecodeDeobfuscatorModule : AbstractModule() {
             .`in`(Scopes.SINGLETON)
 
         val binder = Multibinder.newSetBinder(binder(), Transformer::class.java, DeobfuscatorQualifier::class.java)
-
-        if (Files.notExists(Paths.get("share", "deob", "bytecode.transformers.list"))) {
-            println("No bytecode transformers")
-            return
-        }
-
-        // would be nice to read this from yaml, unfortunately profile.yaml is not available until the module runs
-        val transformers = Files.readAllLines(Paths.get("share/deob/bytecode.transformers.list"))
-        for (transformer in transformers) {
-            if (transformer.isEmpty()) {
-                continue
-            }
-
-            binder.addBinding().to(when (transformer) {
-                "OriginalPcSave" -> OriginalPcSaveTransformer::class.java
-                "OriginalName" -> OriginalNameTransformer::class.java
-                "StringDecryption" -> StringDecryptionTransformer::class.java
-                "ClassLiteral" -> ClassLiteralTransformer::class.java
-                "InvokeSpecial" -> InvokeSpecialTransformer::class.java
-                "MultipleAssignment" -> MultipleAssignmentTransformer::class.java
-                "Remap" -> RemapTransformer::class.java
-                "Patcher" -> PatcherTransformer::class.java
-                "OpaquePredicate" -> OpaquePredicateTransformer::class.java
-                "ExceptionObfuscation" -> ExceptionObfuscationTransformer::class.java
-                "ExceptionTracing" -> ExceptionTracingTransformer::class.java
-                "Monitor" -> MonitorTransformer::class.java
-                "BitShift" -> BitShiftTransformer::class.java
-                "Canvas" -> CanvasTransformer::class.java
-                "FieldOrder" -> FieldOrderTransformer::class.java
-                "BitwiseOp" -> BitwiseOpTransformer::class.java
-                "ConstantArg" -> ConstantArgTransformer::class.java
-                "CopyPropagation" -> CopyPropagationTransformer::class.java
-                "UnusedLocal" -> UnusedLocalTransformer::class.java
-                "UnusedMethod" -> UnusedMethodTransformer::class.java
-                "UnusedArg" -> UnusedArgTransformer::class.java
-                "Counter" -> CounterTransformer::class.java
-                "Reset" -> ResetTransformer::class.java
-                "EmptyClass" -> EmptyClassTransformer::class.java
-                "MethodOrder" -> MethodOrderTransformer::class.java
-                "Visibility" -> VisibilityTransformer::class.java
-                "FinalClass" -> FinalClassTransformer::class.java
-                "FinalMethod" -> FinalMethodTransformer::class.java
-                "FinalField" -> FinalFieldTransformer::class.java
-                "Override" -> OverrideTransformer::class.java
-                "RedundantGoto" -> RedundantGotoTransformer::class.java
-                "OriginalPcRestore" -> OriginalPcRestoreTransformer::class.java
-                "FernflowerException" -> FernflowerExceptionTransformer::class.java
-                else -> throw IllegalArgumentException("Unknown bytecode transformer: $transformer")
-            })
-        }
+        binder.addBinding().to(BitShiftTransformer::class.java)
+        binder.addBinding().to(BitwiseOpTransformer::class.java)
+        binder.addBinding().to(CanvasTransformer::class.java)
+        binder.addBinding().to(ClassLiteralTransformer::class.java)
+        binder.addBinding().to(ConstantArgTransformer::class.java)
+        binder.addBinding().to(CopyPropagationTransformer::class.java)
+        binder.addBinding().to(CounterTransformer::class.java)
+        binder.addBinding().to(EmptyClassTransformer::class.java)
+        binder.addBinding().to(ExceptionObfuscationTransformer::class.java)
+        binder.addBinding().to(ExceptionTracingTransformer::class.java)
+        binder.addBinding().to(FernflowerExceptionTransformer::class.java)
+        binder.addBinding().to(FieldOrderTransformer::class.java)
+        binder.addBinding().to(FinalClassTransformer::class.java)
+        binder.addBinding().to(FinalFieldTransformer::class.java)
+        binder.addBinding().to(FinalMethodTransformer::class.java)
+        binder.addBinding().to(InvokeSpecialTransformer::class.java)
+        binder.addBinding().to(MethodOrderTransformer::class.java)
+        binder.addBinding().to(MonitorTransformer::class.java)
+        binder.addBinding().to(MultipleAssignmentTransformer::class.java)
+        binder.addBinding().to(OpaquePredicateTransformer::class.java)
+        binder.addBinding().to(OriginalNameTransformer::class.java)
+        binder.addBinding().to(OriginalPcRestoreTransformer::class.java)
+        binder.addBinding().to(OriginalPcSaveTransformer::class.java)
+        binder.addBinding().to(OverrideTransformer::class.java)
+        binder.addBinding().to(PatcherTransformer::class.java)
+        binder.addBinding().to(RedundantGotoTransformer::class.java)
+        binder.addBinding().to(RemapTransformer::class.java)
+        binder.addBinding().to(ResetTransformer::class.java)
+        binder.addBinding().to(ResourceTransformer::class.java)
+        binder.addBinding().to(UnusedArgTransformer::class.java)
+        binder.addBinding().to(UnusedLocalTransformer::class.java)
+        binder.addBinding().to(UnusedMethodTransformer::class.java)
+        binder.addBinding().to(VisibilityTransformer::class.java)
     }
 }
