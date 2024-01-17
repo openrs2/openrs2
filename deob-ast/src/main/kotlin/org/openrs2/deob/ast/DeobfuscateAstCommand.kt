@@ -10,8 +10,8 @@ public fun main(args: Array<String>): Unit = DeobfuscateAstCommand().main(args)
 public class DeobfuscateAstCommand : CliktCommand(name = "ast") {
     override fun run() {
         CloseableInjector(Guice.createInjector(AstDeobfuscatorModule)).use { injector ->
-            val deobfuscator = injector.getInstance(AstDeobfuscator::class.java)
-            deobfuscator.run(Module.ALL)
+            // val deobfuscator = injector.getInstance(AstDeobfuscator::class.java)
+            // deobfuscator.run(Module.ALL)
         }
     }
 }
