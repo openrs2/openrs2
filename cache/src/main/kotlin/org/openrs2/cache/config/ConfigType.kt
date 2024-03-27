@@ -6,6 +6,7 @@ public abstract class ConfigType(
     public val id: Int
 ) {
     public abstract fun read(buf: ByteBuf, code: Int)
+    public open fun postRead() {}
     public abstract fun write(buf: ByteBuf)
 
     public fun read(buf: ByteBuf) {

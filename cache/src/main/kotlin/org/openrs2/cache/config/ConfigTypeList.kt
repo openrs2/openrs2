@@ -30,6 +30,7 @@ public abstract class ConfigTypeList<T : ConfigType>(
         cache.read(archive, group, file).use { buf ->
             type = allocate(id)
             type.read(buf)
+            type.postRead()
             types[id] = type
             return type
         }
