@@ -8,7 +8,7 @@ public class Profile(
     public val excludedMethods: GlobMemberFilter,
     public val excludedFields: GlobMemberFilter,
     public val entryPoints: GlobMemberFilter,
-    public val scrambledLibraries: Set<String>,
     public val maxObfuscatedNameLen: Int,
-    public val transformers: List<String>
+    public val transformers: List<String>,
+    public val scrambledLibraries: Set<String> = emptySet()
 )
