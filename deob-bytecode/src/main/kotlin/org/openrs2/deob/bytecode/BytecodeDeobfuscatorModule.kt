@@ -1,7 +1,6 @@
 package org.openrs2.deob.bytecode
 
 import com.google.inject.AbstractModule
-import com.google.inject.Scopes
 import com.google.inject.multibindings.Multibinder
 import org.openrs2.asm.transform.Transformer
 import org.openrs2.deob.bytecode.transform.BitShiftTransformer
@@ -44,10 +43,6 @@ public object BytecodeDeobfuscatorModule : AbstractModule() {
     override fun configure() {
         install(PatcherModule)
         install(DeobfuscatorUtilModule)
-
-        bind(Profile::class.java)
-            .toProvider(ProfileProvider::class.java)
-            .`in`(Scopes.SINGLETON)
 
         val binder = Multibinder.newSetBinder(binder(), Transformer::class.java, DeobfuscatorQualifier::class.java)
         binder.addBinding().to(BitShiftTransformer::class.java)
