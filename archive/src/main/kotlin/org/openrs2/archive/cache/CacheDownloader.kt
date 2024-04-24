@@ -14,6 +14,7 @@ import org.openrs2.net.awaitSuspend
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
+import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 @Singleton
@@ -119,6 +120,11 @@ public class CacheDownloader @Inject constructor(
 
                 bootstrap.handler(initializer)
                     .connect(hostname, PORT)
+                    .addListener { future ->
+                        if (!future.isSuccess) {
+                            continuation.resumeWithException(future.cause())
+                        }
+                    }
             }
         } finally {
             group.shutdownGracefully().awaitSuspend()
