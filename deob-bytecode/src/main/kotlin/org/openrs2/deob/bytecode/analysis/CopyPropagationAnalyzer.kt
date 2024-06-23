@@ -63,7 +63,7 @@ public class CopyPropagationAnalyzer(owner: String, method: MethodNode) :
     private companion object {
         private val LOAD_OPCODES = setOf(
             Opcodes.ILOAD,
-            Opcodes.LSTORE,
+            Opcodes.LLOAD,
             Opcodes.FLOAD,
             Opcodes.DLOAD,
             Opcodes.ALOAD
