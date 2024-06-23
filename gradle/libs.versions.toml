@@ -78,8 +78,8 @@ netty-transport = { module = "io.netty:netty-transport", version.ref = "netty" }
 openrs2-natives = { module = "org.openrs2:openrs2-natives-all", version = "3.2.0" }
 pecoff4j = { module = "com.kichik.pecoff4j:pecoff4j", version = "0.4.1" }
 postgres = { module = "org.postgresql:postgresql", version = "42.7.3" }
-result-core = { module = "com.michael-bull.kotlin-result:kotlin-result", version = "1.1.18" }
-result-coroutines = { module = "com.michael-bull.kotlin-result:kotlin-result-coroutines", version = "1.1.18" }
+result-core = { module = "com.michael-bull.kotlin-result:kotlin-result", version = "2.0.0" }
+result-coroutines = { module = "com.michael-bull.kotlin-result:kotlin-result-coroutines", version = "2.0.0" }
 runelite-client = { module = "net.runelite:client", version = "1.10.32.1" }
 sqlite = { module = "org.xerial:sqlite-jdbc", version = "3.46.0.0" }
 thymeleaf-core = { module = "org.thymeleaf:thymeleaf", version = "3.1.2.RELEASE" }

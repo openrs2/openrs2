@@ -4,7 +4,7 @@ import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
 import com.github.michaelbull.result.and
-import com.github.michaelbull.result.coroutines.binding.binding
+import com.github.michaelbull.result.coroutines.coroutineBinding
 import com.github.michaelbull.result.getErrorOr
 import io.netty.buffer.Unpooled
 import io.netty.channel.ChannelFutureListener
@@ -230,7 +230,7 @@ public class LoginChannelHandler @Inject constructor(
         }
 
         scope.launch {
-            val response = binding {
+            val response = coroutineBinding {
                 val dateOfBirth = validateDateOfBirth(msg.year, msg.month, msg.day).bind()
                 val country = validateCountry(msg.country).bind()
 
