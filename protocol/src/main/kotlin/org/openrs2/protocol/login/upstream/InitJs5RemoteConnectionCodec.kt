@@ -9,7 +9,7 @@ import org.openrs2.protocol.FixedPacketCodec
 public class InitJs5RemoteConnectionCodec : FixedPacketCodec<LoginRequest.InitJs5RemoteConnection>(
     type = LoginRequest.InitJs5RemoteConnection::class.java,
     opcode = 15,
-    length = 4
+    length = 20
 ) {
     override fun decode(input: ByteBuf, cipher: StreamCipher): LoginRequest.InitJs5RemoteConnection {
         val build = input.readInt()
@@ -18,5 +18,9 @@ public class InitJs5RemoteConnectionCodec : FixedPacketCodec<LoginRequest.InitJs
 
     override fun encode(input: LoginRequest.InitJs5RemoteConnection, output: ByteBuf, cipher: StreamCipher) {
         output.writeInt(input.build)
+        output.writeInt(0)
+        output.writeInt(0)
+        output.writeInt(0)
+        output.writeInt(0)
     }
 }
