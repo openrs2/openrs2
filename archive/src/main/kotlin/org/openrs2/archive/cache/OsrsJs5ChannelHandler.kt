@@ -3,7 +3,9 @@ package org.openrs2.archive.cache
 import io.netty.bootstrap.Bootstrap
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelPipeline
+import org.openrs2.archive.cache.osrs.InitJs5RemoteConnection
 import org.openrs2.cache.MasterIndexFormat
+import org.openrs2.crypto.SymmetricKey
 import org.openrs2.protocol.Rs2Decoder
 import org.openrs2.protocol.Rs2Encoder
 import org.openrs2.protocol.js5.downstream.Js5LoginResponse
@@ -12,7 +14,6 @@ import org.openrs2.protocol.js5.downstream.Js5ResponseDecoder
 import org.openrs2.protocol.js5.downstream.XorDecoder
 import org.openrs2.protocol.js5.upstream.Js5Request
 import org.openrs2.protocol.js5.upstream.Js5RequestEncoder
-import org.openrs2.protocol.login.upstream.LoginRequest
 import kotlin.coroutines.Continuation
 
 public class OsrsJs5ChannelHandler(
@@ -40,7 +41,7 @@ public class OsrsJs5ChannelHandler(
     maxInFlightRequests = 200
 ) {
     override fun createInitMessage(): Any {
-        return LoginRequest.InitJs5RemoteConnection(buildMajor)
+        return InitJs5RemoteConnection(buildMajor, SymmetricKey.ZERO)
     }
 
     override fun createRequestMessage(prefetch: Boolean, archive: Int, group: Int): Any {
