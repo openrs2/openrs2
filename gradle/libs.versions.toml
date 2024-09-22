@@ -30,7 +30,7 @@ bouncyCastle-pkix = { module = "org.bouncycastle:bcpkix-jdk15on", version = "1.7
 bouncyCastle-provider = { module = "org.bouncycastle:bcprov-jdk15on", version = "1.70" }
 byteUnits = { module = "com.jakewharton.byteunits:byteunits", version = "0.9.1" }
 cabParser = { module = "com.dorkbox:CabParser", version = "3.4" }
-clikt = { module = "com.github.ajalt.clikt:clikt", version = "4.4.0" }
+clikt = { module = "com.github.ajalt.clikt:clikt", version = "5.0.0" }
 commons-compress = { module = "org.apache.commons:commons-compress", version.ref = "commons-compress" }
 fastutil = { module = "it.unimi.dsi:fastutil", version = "8.5.14" }
 fernflower = { module = "org.openrs2:fernflower", version = "1.1.1" }

@@ -1,6 +1,7 @@
 package org.openrs2.buffer.generator
 
 import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.core.main
 import java.nio.file.Files
 import java.nio.file.Path
 

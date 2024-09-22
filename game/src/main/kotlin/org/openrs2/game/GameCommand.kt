@@ -1,6 +1,7 @@
 package org.openrs2.game
 
 import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.core.main
 import com.github.michaelbull.logging.InlineLogger
 import com.google.inject.Guice
 import org.openrs2.inject.CloseableInjector

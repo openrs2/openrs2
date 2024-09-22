@@ -1,6 +1,7 @@
 package org.openrs2.decompiler
 
 import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.core.main
 import org.openrs2.deob.util.Module
 
 public fun main(args: Array<String>): Unit = DecompileCommand().main(args)

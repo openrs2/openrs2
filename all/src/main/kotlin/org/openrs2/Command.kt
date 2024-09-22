@@ -1,6 +1,7 @@
 package org.openrs2
 
 import com.github.ajalt.clikt.core.NoOpCliktCommand
+import com.github.ajalt.clikt.core.main
 import com.github.ajalt.clikt.core.subcommands
 import org.openrs2.archive.ArchiveCommand
 import org.openrs2.buffer.generator.GenerateBufferCommand

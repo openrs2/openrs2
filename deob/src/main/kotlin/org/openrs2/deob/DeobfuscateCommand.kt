@@ -1,6 +1,7 @@
 package org.openrs2.deob
 
 import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.core.main
 import com.google.inject.Guice
 import org.openrs2.inject.CloseableInjector
 

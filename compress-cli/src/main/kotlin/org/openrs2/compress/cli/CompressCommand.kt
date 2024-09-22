@@ -1,6 +1,7 @@
 package org.openrs2.compress.cli
 
 import com.github.ajalt.clikt.core.NoOpCliktCommand
+import com.github.ajalt.clikt.core.main
 import com.github.ajalt.clikt.core.subcommands
 import org.openrs2.compress.cli.bzip2.Bunzip2Command
 import org.openrs2.compress.cli.bzip2.Bzip2Command
