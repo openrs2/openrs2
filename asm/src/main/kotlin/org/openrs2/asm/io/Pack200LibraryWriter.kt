@@ -1,5 +1,6 @@
 package org.openrs2.asm.io
 
+import org.glavo.pack200.Pack200
 import org.objectweb.asm.tree.ClassNode
 import org.openrs2.asm.classpath.ClassPath
 import org.openrs2.compress.gzip.Gzip
@@ -7,7 +8,6 @@ import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.OutputStream
 import java.util.jar.JarInputStream
-import java.util.jar.Pack200
 
 public object Pack200LibraryWriter : LibraryWriter {
     override fun write(output: OutputStream, classPath: ClassPath, classes: Iterable<ClassNode>) {

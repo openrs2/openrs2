@@ -15,6 +15,7 @@ dependencies {
     implementation(projects.compress)
     implementation(projects.crypto)
     implementation(libs.cabParser)
+    implementation(libs.pack200)
 }
 
 publishing {

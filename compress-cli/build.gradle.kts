@@ -15,6 +15,7 @@ dependencies {
     implementation(projects.compress)
     implementation(projects.log)
     implementation(projects.util)
+    implementation(libs.pack200)
 }
 
 publishing {

@@ -1,12 +1,12 @@
 package org.openrs2.asm.io
 
+import org.glavo.pack200.Pack200
 import org.objectweb.asm.tree.ClassNode
 import org.openrs2.compress.gzip.Gzip
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
 import java.util.jar.JarOutputStream
-import java.util.jar.Pack200
 
 public object Pack200LibraryReader : LibraryReader {
     override fun read(input: InputStream): Iterable<ClassNode> {

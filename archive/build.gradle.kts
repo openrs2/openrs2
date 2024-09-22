@@ -42,6 +42,7 @@ dependencies {
     implementation(libs.jsoup)
     implementation(libs.kotlin.coroutines.core)
     implementation(libs.netty.handler)
+    implementation(libs.pack200)
     implementation(libs.pecoff4j)
     implementation(libs.postgres)
 }

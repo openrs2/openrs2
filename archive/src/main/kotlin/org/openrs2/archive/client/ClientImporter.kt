@@ -17,6 +17,7 @@ import jakarta.inject.Inject
 import jakarta.inject.Singleton
 import net.fornwall.jelf.ElfFile
 import net.fornwall.jelf.ElfSymbol
+import org.glavo.pack200.Pack200
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.ClassNode
@@ -55,7 +56,6 @@ import java.time.Month
 import java.time.ZoneOffset
 import java.util.jar.JarInputStream
 import java.util.jar.JarOutputStream
-import java.util.jar.Pack200
 import kotlin.io.path.getLastModifiedTime
 
 @Singleton
