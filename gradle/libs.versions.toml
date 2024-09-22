@@ -1,19 +1,19 @@
 [versions]
 asm = "9.7"
-commons-compress = "1.26.2"
-guava = "33.2.1-jre"
+commons-compress = "1.27.1"
+guava = "33.3.0-jre"
 guice = "7.0.0"
-jackson = "2.17.1"
+jackson = "2.17.2"
 jimfs = "1.3.0"
-junit = "5.10.2"
-kotlin = "2.0.0"
-kotlinCoroutines = "1.8.1"
+junit = "5.11.0"
+kotlin = "2.0.20"
+kotlinCoroutines = "1.9.0"
 ktor = "2.3.12"
-netty = "4.1.111.Final"
+netty = "4.1.113.Final"
 nettyIoUring = "0.0.25.Final"
 
 [plugins]
-dependencyLicenseReport = { id = "com.github.jk1.dependency-license-report", version = "2.8" }
+dependencyLicenseReport = { id = "com.github.jk1.dependency-license-report", version = "2.9" }
 dokka = { id = "org.jetbrains.dokka", version = "1.9.20" }
 kotlinter = { id = "org.jmailen.kotlinter", version = "3.16.0" }
 shadow = { id = "com.github.johnrengelman.shadow", version = "8.1.1" }
@@ -25,40 +25,40 @@ asm-core = { module = "org.ow2.asm:asm", version.ref = "asm" }
 asm-tree = { module = "org.ow2.asm:asm-tree", version.ref = "asm" }
 asm-util = { module = "org.ow2.asm:asm-util", version.ref = "asm" }
 bootstrap = { module = "org.webjars:bootstrap", version = "5.3.3" }
-bootstrapTable = { module = "org.webjars.npm:bootstrap-table", version = "1.22.6" }
+bootstrapTable = { module = "org.webjars.npm:bootstrap-table", version = "1.23.4" }
 bouncyCastle-pkix = { module = "org.bouncycastle:bcpkix-jdk15on", version = "1.70" }
 bouncyCastle-provider = { module = "org.bouncycastle:bcprov-jdk15on", version = "1.70" }
 byteUnits = { module = "com.jakewharton.byteunits:byteunits", version = "0.9.1" }
 cabParser = { module = "com.dorkbox:CabParser", version = "3.4" }
 clikt = { module = "com.github.ajalt.clikt:clikt", version = "4.4.0" }
 commons-compress = { module = "org.apache.commons:commons-compress", version.ref = "commons-compress" }
-fastutil = { module = "it.unimi.dsi:fastutil", version = "8.5.13" }
+fastutil = { module = "it.unimi.dsi:fastutil", version = "8.5.14" }
 fernflower = { module = "org.openrs2:fernflower", version = "1.1.1" }
 flyway = { module = "org.flywaydb:flyway-core", version = "9.22.3" }
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
 guice-core = { module = "com.google.inject:guice", version.ref = "guice" }
 guice-assistedInject = { module = "com.google.inject.extensions:guice-assistedinject", version.ref = "guice" }
-h2 = { module = "com.h2database:h2", version = "2.2.224" }
+h2 = { module = "com.h2database:h2", version = "2.3.232" }
 hikaricp = { module = "com.zaxxer:HikariCP", version = "5.1.0" }
 inlineLogger = { module = "com.michael-bull.kotlin-inline-logger:kotlin-inline-logger", version = "1.0.6" }
 jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jackson" }
 jackson-jsr310 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310", version.ref = "jackson" }
 jackson-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin", version.ref = "jackson" }
 jackson-yaml = { module = "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml", version.ref = "jackson" }
-javaParser = { module = "com.github.javaparser:javaparser-symbol-solver-core", version = "3.26.0" }
+javaParser = { module = "com.github.javaparser:javaparser-symbol-solver-core", version = "3.26.2" }
 jdom = { module = "org.jdom:jdom2", version = "2.0.6.1" }
 jelf = { module = "net.fornwall:jelf", version = "0.9.0" }
 jgrapht = { module = "org.jgrapht:jgrapht-core", version = "1.5.2" }
 jimfs = { module = "com.google.jimfs:jimfs", version.ref = "jimfs" }
 jquery = { module = "org.webjars:jquery", version = "3.7.1" }
 jnr = { module = "com.github.jnr:jnr-ffi", version = "2.2.16" }
-jsoup = { module = "org.jsoup:jsoup", version = "1.17.2" }
-junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version = { strictly = "5.10.2" } }
+jsoup = { module = "org.jsoup:jsoup", version = "1.18.1" }
+junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version = { strictly = "5.11.0" } }
 junit-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
-junit-launcher = { module = "org.junit.platform:junit-platform-launcher", version = "1.10.2" }
+junit-launcher = { module = "org.junit.platform:junit-platform-launcher", version = "1.11.0" }
 kotlin-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinCoroutines" }
 kotlin-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinCoroutines" }
-kotlinPoet = { module = "com.squareup:kotlinpoet", version = "1.17.0" }
+kotlinPoet = { module = "com.squareup:kotlinpoet", version = "1.18.1" }
 ktor-serialization-jackson = { module = "io.ktor:ktor-serialization-jackson", version.ref = "ktor" }
 ktor-server-autoHeadResponse = { module = "io.ktor:ktor-server-auto-head-response", version.ref = "ktor" }
 ktor-server-cachingHeaders = { module = "io.ktor:ktor-server-caching-headers", version.ref = "ktor" }
@@ -69,7 +69,7 @@ ktor-server-forwardedHeader = { module = "io.ktor:ktor-server-forwarded-header",
 ktor-server-jetty = { module = "io.ktor:ktor-server-jetty", version.ref = "ktor" }
 ktor-server-thymeleaf = { module = "io.ktor:ktor-server-thymeleaf", version.ref = "ktor" }
 ktor-server-webjars = { module = "io.ktor:ktor-server-webjars", version.ref = "ktor" }
-logback = { module = "ch.qos.logback:logback-classic", version = "1.5.6" }
+logback = { module = "ch.qos.logback:logback-classic", version = "1.5.8" }
 netty-buffer = { module = "io.netty:netty-buffer", version.ref = "netty" }
 netty-codec-core = { module = "io.netty:netty-codec", version.ref = "netty" }
 netty-codec-http = { module = "io.netty:netty-codec-http", version.ref = "netty" }
@@ -77,14 +77,14 @@ netty-handler = { module = "io.netty:netty-handler", version.ref = "netty" }
 netty-transport = { module = "io.netty:netty-transport", version.ref = "netty" }
 openrs2-natives = { module = "org.openrs2:openrs2-natives-all", version = "3.2.0" }
 pecoff4j = { module = "com.kichik.pecoff4j:pecoff4j", version = "0.4.1" }
-postgres = { module = "org.postgresql:postgresql", version = "42.7.3" }
+postgres = { module = "org.postgresql:postgresql", version = "42.7.4" }
 result-core = { module = "com.michael-bull.kotlin-result:kotlin-result", version = "2.0.0" }
 result-coroutines = { module = "com.michael-bull.kotlin-result:kotlin-result-coroutines", version = "2.0.0" }
-runelite-client = { module = "net.runelite:client", version = "1.10.32.1" }
-sqlite = { module = "org.xerial:sqlite-jdbc", version = "3.46.0.0" }
+runelite-client = { module = "net.runelite:client", version = "1.10.37.1" }
+sqlite = { module = "org.xerial:sqlite-jdbc", version = "3.46.1.0" }
 thymeleaf-core = { module = "org.thymeleaf:thymeleaf", version = "3.1.2.RELEASE" }
 thymeleaf-java8time = { module = "org.thymeleaf.extras:thymeleaf-extras-java8time", version = "3.0.4.RELEASE" }
-xz = { module = "org.tukaani:xz", version = "1.9" }
+xz = { module = "org.tukaani:xz", version = "1.10" }
 
 [bundles]
 asm = ["asm-core", "asm-commons", "asm-tree", "asm-util"]
