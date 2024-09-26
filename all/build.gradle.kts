@@ -31,6 +31,8 @@ tasks.shadowJar {
 
     minimize {
         exclude(dependency("ch.qos.logback:logback-classic"))
+        exclude(dependency("com.github.ajalt.mordant:mordant-jvm-ffm-jvm"))
+        exclude(dependency("com.github.ajalt.mordant:mordant-jvm-jna-jvm"))
         exclude(dependency("com.github.jnr:jnr-ffi"))
         exclude(dependency("org.flywaydb:flyway-core"))
         exclude(dependency("org.jetbrains.kotlin:kotlin-reflect"))
