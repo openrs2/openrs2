@@ -1,7 +1,6 @@
 package org.openrs2.asm.packclass
 
 import io.netty.buffer.ByteBuf
-import io.netty.buffer.ByteBufAllocator
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree.AbstractInsnNode
@@ -24,6 +23,7 @@ import org.objectweb.asm.tree.TryCatchBlockNode
 import org.objectweb.asm.tree.TypeInsnNode
 import org.objectweb.asm.tree.VarInsnNode
 import org.openrs2.asm.nextReal
+import org.openrs2.buffer.Arena
 import org.openrs2.buffer.readUnsignedShortSmart
 import org.openrs2.buffer.readVarInt
 import org.openrs2.buffer.writeUnsignedShortSmart
@@ -1113,23 +1113,22 @@ public object PackClass {
         writeTryCatchReverseHandlerPcs(buf, clazz, insns)
 
         // write operand buffers
-        val operandBuffers = OperandBuffers.alloc(buf.alloc())
-        try {
-            val newArrayBuf = operandBuffers.newArrayBuf
-            val localVarBuf = operandBuffers.localVarBuf
-            val wideLocalVarBuf = operandBuffers.wideLocalVarBuf
-            val sipushAndSwitchBuf = operandBuffers.sipushAndSwitchBuf
-            val constantBuf = operandBuffers.constantBuf
-            val wideConstantBuf = operandBuffers.wideConstantBuf
-            val classBuf = operandBuffers.classBuf
-            val fieldRefBuf = operandBuffers.fieldRefBuf
-            val methodRefBuf = operandBuffers.methodRefBuf
-            val interfaceMethodRefBuf = operandBuffers.interfaceMethodRefBuf
-            val branchBuf = operandBuffers.branchBuf
-            val bipushBuf = operandBuffers.bipushBuf
-            val wideIincBuf = operandBuffers.wideIincBuf
-            val iincBuf = operandBuffers.iincBuf
-            val multiNewArrayBuf = operandBuffers.multiNewArrayBuf
+        Arena(buf.alloc()).use { alloc ->
+            val newArrayBuf = alloc.buffer()
+            val localVarBuf = alloc.buffer()
+            val wideLocalVarBuf = alloc.buffer()
+            val sipushAndSwitchBuf = alloc.buffer()
+            val constantBuf = alloc.buffer()
+            val wideConstantBuf = alloc.buffer()
+            val classBuf = alloc.buffer()
+            val fieldRefBuf = alloc.buffer()
+            val methodRefBuf = alloc.buffer()
+            val interfaceMethodRefBuf = alloc.buffer()
+            val branchBuf = alloc.buffer()
+            val bipushBuf = alloc.buffer()
+            val wideIincBuf = alloc.buffer()
+            val iincBuf = alloc.buffer()
+            val multiNewArrayBuf = alloc.buffer()
 
             for ((i, list) in insns.withIndex()) {
                 if (list.isEmpty()) {
@@ -1344,8 +1343,6 @@ public object PackClass {
             buf.writeBytes(wideIincBuf)
             buf.writeBytes(iincBuf)
             buf.writeBytes(multiNewArrayBuf)
-        } finally {
-            operandBuffers.release()
         }
 
         // write trailer
@@ -1618,73 +1615,6 @@ public object PackClass {
                 val list = insns[i]
                 val handlerPc = list.indexOf(tryCatch.handler.nextReal)
                 buf.writeShort(list.size - handlerPc)
-            }
-        }
-    }
-
-    private class OperandBuffers private constructor(
-        val newArrayBuf: ByteBuf,
-        val localVarBuf: ByteBuf,
-        val wideLocalVarBuf: ByteBuf,
-        val sipushAndSwitchBuf: ByteBuf,
-        val constantBuf: ByteBuf,
-        val wideConstantBuf: ByteBuf,
-        val classBuf: ByteBuf,
-        val fieldRefBuf: ByteBuf,
-        val methodRefBuf: ByteBuf,
-        val interfaceMethodRefBuf: ByteBuf,
-        val branchBuf: ByteBuf,
-        val bipushBuf: ByteBuf,
-        val wideIincBuf: ByteBuf,
-        val iincBuf: ByteBuf,
-        val multiNewArrayBuf: ByteBuf
-    ) {
-        fun release() {
-            newArrayBuf.release()
-            localVarBuf.release()
-            wideLocalVarBuf.release()
-            sipushAndSwitchBuf.release()
-            constantBuf.release()
-            wideConstantBuf.release()
-            classBuf.release()
-            fieldRefBuf.release()
-            methodRefBuf.release()
-            interfaceMethodRefBuf.release()
-            branchBuf.release()
-            bipushBuf.release()
-            wideIincBuf.release()
-            iincBuf.release()
-            multiNewArrayBuf.release()
-        }
-
-        companion object {
-            fun alloc(alloc: ByteBufAllocator): OperandBuffers {
-                val bufs = mutableListOf<ByteBuf>()
-                try {
-                    for (i in 0..14) {
-                        bufs += alloc.buffer()
-                    }
-
-                    return OperandBuffers(
-                        bufs[0].retain(),
-                        bufs[1].retain(),
-                        bufs[2].retain(),
-                        bufs[3].retain(),
-                        bufs[4].retain(),
-                        bufs[5].retain(),
-                        bufs[6].retain(),
-                        bufs[7].retain(),
-                        bufs[8].retain(),
-                        bufs[9].retain(),
-                        bufs[10].retain(),
-                        bufs[11].retain(),
-                        bufs[12].retain(),
-                        bufs[13].retain(),
-                        bufs[14].retain()
-                    )
-                } finally {
-                    bufs.forEach(ByteBuf::release)
-                }
             }
         }
     }

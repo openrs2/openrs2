@@ -1,7 +1,7 @@
 package org.openrs2.cache.midi
 
 import io.netty.buffer.ByteBuf
-import io.netty.buffer.ByteBufAllocator
+import org.openrs2.buffer.Arena
 import org.openrs2.buffer.readVarInt
 import org.openrs2.buffer.writeVarInt
 import javax.sound.midi.MetaMessage
@@ -270,31 +270,30 @@ public object Song {
             throw IllegalArgumentException("SMPTE unsupported")
         }
 
-        val buffers = Buffers.alloc(buf.alloc())
-        try {
-            val deltaTimeBuf = buffers.deltaTimeBuf
-            val controllerBuf = buffers.controllerBuf
-            val otherKnownControllerBuf = buffers.otherKnownControllerBuf
-            val keyPressureBuf = buffers.keyPressureBuf
-            val channelPressureBuf = buffers.channelPressureBuf
-            val pitchWheelMsbBuf = buffers.pitchWheelMsbBuf
-            val modulationWheelMsbBuf = buffers.modulationWheelMsbBuf
-            val channelVolumeMsbBuf = buffers.channelVolumeMsbBuf
-            val panMsbBuf = buffers.panMsbBuf
-            val keyBuf = buffers.keyBuf
-            val onVelocityBuf = buffers.onVelocityBuf
-            val unknownControllerBuf = buffers.unknownControllerBuf
-            val offVelocityBuf = buffers.offVelocityBuf
-            val modulationWheelLsbBuf = buffers.modulationWheelLsbBuf
-            val channelVolumeLsbBuf = buffers.channelVolumeLsbBuf
-            val panLsbBuf = buffers.panLsbBuf
-            val bankSelectBuf = buffers.bankSelectBuf
-            val pitchWheelLsbBuf = buffers.pitchWheelLsbBuf
-            val nonRegisteredMsbBuf = buffers.nonRegisteredMsbBuf
-            val nonRegisteredLsbBuf = buffers.nonRegisteredLsbBuf
-            val registeredMsbBuf = buffers.nonRegisteredMsbBuf
-            val registeredLsbBuf = buffers.nonRegisteredLsbBuf
-            val tempoBuf = buffers.tempoBuf
+        Arena(buf.alloc()).use { alloc ->
+            val deltaTimeBuf = alloc.buffer()
+            val controllerBuf = alloc.buffer()
+            val otherKnownControllerBuf = alloc.buffer()
+            val keyPressureBuf = alloc.buffer()
+            val channelPressureBuf = alloc.buffer()
+            val pitchWheelMsbBuf = alloc.buffer()
+            val modulationWheelMsbBuf = alloc.buffer()
+            val channelVolumeMsbBuf = alloc.buffer()
+            val panMsbBuf = alloc.buffer()
+            val keyBuf = alloc.buffer()
+            val onVelocityBuf = alloc.buffer()
+            val unknownControllerBuf = alloc.buffer()
+            val offVelocityBuf = alloc.buffer()
+            val modulationWheelLsbBuf = alloc.buffer()
+            val channelVolumeLsbBuf = alloc.buffer()
+            val panLsbBuf = alloc.buffer()
+            val bankSelectBuf = alloc.buffer()
+            val pitchWheelLsbBuf = alloc.buffer()
+            val nonRegisteredMsbBuf = alloc.buffer()
+            val nonRegisteredLsbBuf = alloc.buffer()
+            val registeredMsbBuf = alloc.buffer()
+            val registeredLsbBuf = alloc.buffer()
+            val tempoBuf = alloc.buffer()
 
             var prevChannel = 0
             var prevKey = 0
@@ -456,102 +455,9 @@ public object Song {
             buf.writeBytes(registeredMsbBuf)
             buf.writeBytes(registeredLsbBuf)
             buf.writeBytes(tempoBuf)
-        } finally {
-            buffers.release()
         }
 
         buf.writeByte(sequence.tracks.size)
         buf.writeShort(sequence.resolution and 0x7FFF)
-    }
-
-    private class Buffers private constructor(
-        val deltaTimeBuf: ByteBuf,
-        val controllerBuf: ByteBuf,
-        val otherKnownControllerBuf: ByteBuf,
-        val keyPressureBuf: ByteBuf,
-        val channelPressureBuf: ByteBuf,
-        val pitchWheelMsbBuf: ByteBuf,
-        val modulationWheelMsbBuf: ByteBuf,
-        val channelVolumeMsbBuf: ByteBuf,
-        val panMsbBuf: ByteBuf,
-        val keyBuf: ByteBuf,
-        val onVelocityBuf: ByteBuf,
-        val unknownControllerBuf: ByteBuf,
-        val offVelocityBuf: ByteBuf,
-        val modulationWheelLsbBuf: ByteBuf,
-        val channelVolumeLsbBuf: ByteBuf,
-        val panLsbBuf: ByteBuf,
-        val bankSelectBuf: ByteBuf,
-        val pitchWheelLsbBuf: ByteBuf,
-        val nonRegisteredMsbBuf: ByteBuf,
-        val nonRegisteredLsbBuf: ByteBuf,
-        val registeredMsbBuf: ByteBuf,
-        val registeredLsbBuf: ByteBuf,
-        val tempoBuf: ByteBuf
-    ) {
-        fun release() {
-            deltaTimeBuf.release()
-            controllerBuf.release()
-            otherKnownControllerBuf.release()
-            keyPressureBuf.release()
-            channelPressureBuf.release()
-            pitchWheelMsbBuf.release()
-            modulationWheelMsbBuf.release()
-            channelVolumeMsbBuf.release()
-            panMsbBuf.release()
-            keyBuf.release()
-            onVelocityBuf.release()
-            unknownControllerBuf.release()
-            offVelocityBuf.release()
-            modulationWheelLsbBuf.release()
-            channelVolumeLsbBuf.release()
-            panLsbBuf.release()
-            bankSelectBuf.release()
-            pitchWheelLsbBuf.release()
-            nonRegisteredMsbBuf.release()
-            nonRegisteredLsbBuf.release()
-            registeredMsbBuf.release()
-            registeredLsbBuf.release()
-            tempoBuf.release()
-        }
-
-        companion object {
-            fun alloc(alloc: ByteBufAllocator): Buffers {
-                val bufs = mutableListOf<ByteBuf>()
-                try {
-                    for (i in 0..22) {
-                        bufs += alloc.buffer()
-                    }
-
-                    return Buffers(
-                        bufs[0].retain(),
-                        bufs[1].retain(),
-                        bufs[2].retain(),
-                        bufs[3].retain(),
-                        bufs[4].retain(),
-                        bufs[5].retain(),
-                        bufs[6].retain(),
-                        bufs[7].retain(),
-                        bufs[8].retain(),
-                        bufs[9].retain(),
-                        bufs[10].retain(),
-                        bufs[11].retain(),
-                        bufs[12].retain(),
-                        bufs[13].retain(),
-                        bufs[14].retain(),
-                        bufs[15].retain(),
-                        bufs[16].retain(),
-                        bufs[17].retain(),
-                        bufs[18].retain(),
-                        bufs[19].retain(),
-                        bufs[20].retain(),
-                        bufs[21].retain(),
-                        bufs[22].retain()
-                    )
-                } finally {
-                    bufs.forEach(ByteBuf::release)
-                }
-            }
-        }
     }
 }
