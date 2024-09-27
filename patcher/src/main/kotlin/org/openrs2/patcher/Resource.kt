@@ -89,7 +89,7 @@ public class Resource(
             val platforms = mutableListOf<List<Resource>>()
             var i = 0
 
-            for (os in OperatingSystem.values()) {
+            for (os in OperatingSystem.entries) {
                 for (arch in os.architectures) {
                     val resources = mutableListOf<Resource>()
 

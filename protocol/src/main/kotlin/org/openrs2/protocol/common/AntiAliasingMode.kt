@@ -6,11 +6,9 @@ public enum class AntiAliasingMode {
     X4;
 
     public companion object {
-        private val values = values()
-
         public fun fromOrdinal(ordinal: Int): AntiAliasingMode? {
-            return if (ordinal >= 0 && ordinal < values.size) {
-                values[ordinal]
+            return if (ordinal >= 0 && ordinal < entries.size) {
+                entries[ordinal]
             } else {
                 null
             }

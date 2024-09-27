@@ -51,7 +51,7 @@ public class PlatformDetectionTransformer : Transformer() {
             val end = LabelNode()
             var platform = 0
 
-            for (os in OperatingSystem.values()) {
+            for (os in OperatingSystem.entries) {
                 val nextOs = LabelNode()
 
                 list.add(VarInsnNode(Opcodes.ALOAD, nameVar))

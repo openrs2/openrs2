@@ -158,7 +158,7 @@ public class RuneLiteStore @Inject constructor(
         alloc.buffer().use { uncompressed ->
             index.write(uncompressed)
 
-            val matching = Js5CompressionType.values().count { type ->
+            val matching = Js5CompressionType.entries.count { type ->
                 Js5Compression.compress(uncompressed.slice(), type).use { compressed ->
                     val checksum = compressed.crc32()
 

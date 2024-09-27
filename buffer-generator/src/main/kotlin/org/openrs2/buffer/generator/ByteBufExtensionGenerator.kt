@@ -11,9 +11,9 @@ public class ByteBufExtensionGenerator {
         builder.indent("    ")
         builder.addFileComment("This file is generated automatically. DO NOT EDIT.")
 
-        for (type in IntType.values()) {
-            for (order in ByteOrder.values()) {
-                for (transformation in Transformation.values()) {
+        for (type in IntType.entries) {
+            for (order in ByteOrder.entries) {
+                for (transformation in Transformation.entries) {
                     // only integers can be middle-endian
                     if (type != IntType.INT && (order == ByteOrder.ALT3 || order == ByteOrder.ALT3_REVERSE)) {
                         continue
@@ -37,7 +37,7 @@ public class ByteBufExtensionGenerator {
                         continue
                     }
 
-                    for (signedness in Signedness.values()) {
+                    for (signedness in Signedness.entries) {
                         // unsigned integers not supported
                         if (type == IntType.INT && signedness == Signedness.UNSIGNED) {
                             continue
@@ -53,8 +53,8 @@ public class ByteBufExtensionGenerator {
             }
         }
 
-        for (order in ArrayOrder.values()) {
-            for (transformation in Transformation.values()) {
+        for (order in ArrayOrder.entries) {
+            for (transformation in Transformation.entries) {
                 // supplied by Netty
                 if (order == ArrayOrder.FORWARD && transformation == Transformation.IDENTITY) {
                     continue
@@ -87,7 +87,7 @@ public class ByteBufExtensionGenerator {
             }
         }
 
-        for (transformation in Transformation.values()) {
+        for (transformation in Transformation.entries) {
             // supplied by Netty
             if (transformation == Transformation.IDENTITY) {
                 continue

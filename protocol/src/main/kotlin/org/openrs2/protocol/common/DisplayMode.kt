@@ -7,11 +7,9 @@ public enum class DisplayMode {
     HD_FULLSCREEN;
 
     public companion object {
-        private val values = values()
-
         public fun fromOrdinal(ordinal: Int): DisplayMode? {
-            return if (ordinal >= 0 && ordinal < values.size) {
-                values[ordinal]
+            return if (ordinal >= 0 && ordinal < entries.size) {
+                entries[ordinal]
             } else {
                 null
             }
