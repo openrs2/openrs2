@@ -197,7 +197,7 @@ public class CrossPollinator @Inject constructor(
     }
 
     private fun groupToFile(input: ByteBuf, expectedChecksum: Int): ByteBuf? {
-        val type = Js5CompressionType.fromOrdinal(input.readUnsignedByte().toInt())
+        val type = Js5CompressionType.entries.getOrNull(input.readUnsignedByte().toInt())
         if (type != Js5CompressionType.GZIP) {
             return null
         }

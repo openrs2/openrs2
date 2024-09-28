@@ -84,13 +84,13 @@ public data class GameLoginPayload(
             val advertSuppressed = buf.readBoolean()
             val clientSigned = buf.readBoolean()
 
-            val displayMode = DisplayMode.fromOrdinal(buf.readUnsignedByte().toInt())
+            val displayMode = DisplayMode.entries.getOrNull(buf.readUnsignedByte().toInt())
                 ?: throw IllegalArgumentException("Invalid DisplayMode")
 
             val canvasWidth = buf.readUnsignedShort()
             val canvasHeight = buf.readUnsignedShort()
 
-            val antiAliasingMode = AntiAliasingMode.fromOrdinal(buf.readUnsignedByte().toInt())
+            val antiAliasingMode = AntiAliasingMode.entries.getOrNull(buf.readUnsignedByte().toInt())
                 ?: throw IllegalArgumentException("Invalid AntiAliasingMode")
 
             val uid = Uid.read(buf)

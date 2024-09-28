@@ -151,7 +151,7 @@ public class Js5Pack private constructor(
 
         private fun readCompressed(input: DataInputStream, alloc: ByteBufAllocator): ByteBuf {
             val typeId = input.readUnsignedByte()
-            val type = Js5CompressionType.fromOrdinal(typeId)
+            val type = Js5CompressionType.entries.getOrNull(typeId)
                 ?: throw IOException("Invalid compression type: $typeId")
 
             val len = input.readInt()

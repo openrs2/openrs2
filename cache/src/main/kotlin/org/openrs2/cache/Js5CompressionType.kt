@@ -37,15 +37,4 @@ public enum class Js5CompressionType {
             LZMA -> Lzma.createHeaderlessOutputStream(output, Lzma.DEFAULT_COMPRESSION)
         }
     }
-
-    public companion object {
-        @JvmStatic
-        public fun fromOrdinal(ordinal: Int): Js5CompressionType? {
-            return if (ordinal >= 0 && ordinal < entries.size) {
-                entries[ordinal]
-            } else {
-                null
-            }
-        }
-    }
 }

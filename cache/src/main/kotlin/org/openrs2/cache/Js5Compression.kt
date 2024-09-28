@@ -115,7 +115,7 @@ public object Js5Compression {
         }
 
         val typeId = input.readUnsignedByte().toInt()
-        val type = Js5CompressionType.fromOrdinal(typeId)
+        val type = Js5CompressionType.entries.getOrNull(typeId)
             ?: throw IOException("Invalid compression type: $typeId")
 
         val len = input.readInt()
@@ -178,7 +178,7 @@ public object Js5Compression {
         }
 
         val typeId = input.readUnsignedByte().toInt()
-        val type = Js5CompressionType.fromOrdinal(typeId)
+        val type = Js5CompressionType.entries.getOrNull(typeId)
             ?: throw IOException("Invalid compression type: $typeId")
 
         val len = input.readInt()
@@ -377,7 +377,7 @@ public object Js5Compression {
         }
 
         val typeId = buf.readUnsignedByte().toInt()
-        val type = Js5CompressionType.fromOrdinal(typeId)
+        val type = Js5CompressionType.entries.getOrNull(typeId)
             ?: throw IOException("Invalid compression type: $typeId")
 
         val len = buf.readInt()
