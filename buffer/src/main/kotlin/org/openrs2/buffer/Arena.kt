@@ -8,7 +8,7 @@ import io.netty.util.ReferenceCounted
 public class Arena(
     private val alloc: ByteBufAllocator,
 ) : ByteBufAllocator, AutoCloseable {
-    private val buffers = mutableListOf<ReferenceCounted>()
+    private val buffers = mutableListOf<ByteBuf>()
 
     override fun buffer(): ByteBuf {
         val buf = alloc.buffer()
