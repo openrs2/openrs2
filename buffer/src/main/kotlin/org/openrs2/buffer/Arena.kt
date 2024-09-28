@@ -128,5 +128,6 @@ public class Arena(
 
     public override fun close() {
         buffers.forEach(ReferenceCounted::release)
+        buffers.clear()
     }
 }
