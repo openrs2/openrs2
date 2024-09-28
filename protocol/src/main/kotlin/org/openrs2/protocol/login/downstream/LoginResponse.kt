@@ -23,7 +23,7 @@ public sealed class LoginResponse : Packet {
     public object Locked : LoginResponse()
     public object FullscreenMembersOnly : LoginResponse()
     public object InvalidLoginServer : LoginResponse()
-    public data class HopBlocked(public val time: Int) : LoginResponse()
+    public data class HopBlocked(val time: Int) : LoginResponse()
     public object InvalidLoginPacket : LoginResponse()
     public object NoReplyFromLoginServer : LoginResponse()
     public object LoginServerLoadError : LoginResponse()
