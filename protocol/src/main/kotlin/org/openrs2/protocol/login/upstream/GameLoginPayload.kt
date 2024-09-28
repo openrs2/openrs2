@@ -27,7 +27,6 @@ public data class GameLoginPayload(
     val detailOptions: Int,
     val verifyId: Int,
     val js5ArchiveChecksums: List<Int>,
-    // TODO(gpe): XteaKey needs a better name, as it represents an ISAAC key here
     val key: SymmetricKey,
     val username: String,
     val password: String,
