@@ -59,6 +59,7 @@ import org.openrs2.protocol.login.downstream.LoginServerOfflineCodec
 import org.openrs2.protocol.login.downstream.MapMembersOnlyCodec
 import org.openrs2.protocol.login.downstream.NeedMembersAccountCodec
 import org.openrs2.protocol.login.downstream.NoReplyFromLoginServerCodec
+import org.openrs2.protocol.login.downstream.OkCodec
 import org.openrs2.protocol.login.downstream.ReconnectOkCodec
 import org.openrs2.protocol.login.downstream.ServerFullCodec
 import org.openrs2.protocol.login.downstream.ServiceUnavailableCodec
@@ -141,6 +142,7 @@ public object ProtocolModule : AbstractModule() {
         bindProtocol(
             LoginDownstream::class.java,
             ExchangeSessionKeyCodec::class.java,
+            OkCodec::class.java,
             ShowVideoAdCodec::class.java,
             InvalidUsernameOrPasswordCodec::class.java,
             BannedCodec::class.java,

@@ -5,6 +5,18 @@ import org.openrs2.protocol.Packet
 public sealed class LoginResponse : Packet {
     public data class ExchangeSessionKey(val key: Long) : LoginResponse()
     public object ShowVideoAd : LoginResponse()
+    public data class Ok(
+        val staffModelLevel: Int,
+        val playerModLevel: Int,
+        val playerUnderage: Boolean,
+        val parentalChatConsent: Boolean,
+        val parentalAdvertConsent: Boolean,
+        val mapQuickChat: Boolean,
+        val recordMouseMovement: Boolean,
+        val playerId: Int,
+        val playerMember: Boolean,
+        val mapMembers: Boolean
+    ) : LoginResponse()
     public object InvalidUsernameOrPassword : LoginResponse()
     public object Banned : LoginResponse()
     public object Duplicate : LoginResponse()
