@@ -25,7 +25,6 @@ public fun InputStream.contentEquals(other: InputStream): Boolean {
             remaining -= n2
         }
 
-        @Suppress("ReplaceJavaStaticMethodWithKotlinAnalog")
         if (!Arrays.equals(buf1, 0, n1, buf2, 0, n1)) {
             return false
         }
