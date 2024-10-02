@@ -12,5 +12,6 @@ public enum class ArtifactType {
     JOGL_AWT,
     LOADER,
     LOADER_GL,
+    SW3D,
     UNPACKCLASS
 }

@@ -396,9 +396,18 @@ public class ClientImporter @Inject constructor(
             else -> throw IllegalArgumentException()
         }
 
+        val dllName = getDllName(buf, pe)
         val symbols = parsePeExportNames(buf, pe).toSet()
 
-        val type = getArtifactType(symbols.asSequence())
+        /*
+         * There are no non-obfuscated symbols exported by sw3d, so we can only
+         * identify it by the DLL name.
+         */
+        val type = if (dllName == "sw3d.dll" && symbols.any { symbol -> symbol.startsWith("_Java_") }) {
+            ArtifactType.SW3D
+        } else {
+            getArtifactType(symbols.asSequence())
+        }
         val jvm = if (symbols.contains("RNIGetCompatibleVersion")) {
             Jvm.MICROSOFT
         } else {
@@ -418,6 +427,17 @@ public class ClientImporter @Inject constructor(
             jvm,
             emptyList()
         )
+    }
+
+    private fun getDllName(buf: ByteBuf, pe: PE): String {
+        val namePointer = pe.sectionTable.rvaConverter.convertVirtualAddressToRawDataPointer(pe.imageData.exportTable.nameRVA.toInt())
+
+        val end = buf.forEachByte(namePointer, buf.writerIndex() - namePointer, ByteProcessor.FIND_NUL)
+        require(end != -1) {
+            "Unterminated string"
+        }
+
+        return buf.toString(namePointer, end - namePointer, Charsets.US_ASCII)
     }
 
     private fun parsePeExportNames(buf: ByteBuf, pe: PE): Sequence<String> {
