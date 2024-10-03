@@ -6,7 +6,7 @@ public sealed class LoginResponse : Packet {
     public data class ExchangeSessionKey(val key: Long) : LoginResponse()
     public object ShowVideoAd : LoginResponse()
     public data class Ok(
-        val staffModelLevel: Int,
+        val staffModLevel: Int,
         val playerModLevel: Int,
         val playerUnderage: Boolean,
         val parentalChatConsent: Boolean,

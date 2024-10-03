@@ -36484,7 +36484,7 @@ methods:
       128: "i"
       135: "seqId"
       232: "chatFlags"
-      236: "staffModelLevel"
+      236: "staffModLevel"
       244: "quickChat"
       248: "len"
       251: "off"

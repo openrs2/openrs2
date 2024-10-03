@@ -45,7 +45,7 @@ public class OkCodec : FixedPacketCodec<LoginResponse.Ok>(
         output: ByteBuf,
         cipher: StreamCipher
     ) {
-        output.writeByte(input.staffModelLevel)
+        output.writeByte(input.staffModLevel)
         output.writeByte(input.playerModLevel)
         output.writeBoolean(input.playerUnderage)
         output.writeBoolean(input.parentalChatConsent)
