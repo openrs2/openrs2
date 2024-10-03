@@ -38,6 +38,7 @@ import org.openrs2.asm.io.LibraryReader
 import org.openrs2.asm.io.Pack200LibraryReader
 import org.openrs2.asm.io.PackClassLibraryReader
 import org.openrs2.asm.nextReal
+import org.openrs2.asm.previousReal
 import org.openrs2.buffer.use
 import org.openrs2.compress.gzip.Gzip
 import org.openrs2.db.Database
@@ -806,147 +807,259 @@ public class ClientImporter @Inject constructor(
 
         val loader = library["loader"]
         if (loader != null) {
-            val links = mutableListOf<ArtifactLink>()
-            val paths = mutableSetOf<String>()
-
-            for (method in loader.methods) {
-                if (method.name != "run" || method.desc != "()V") {
-                    continue
-                }
-
-                for (insn in method.instructions) {
-                    if (insn !is MethodInsnNode || insn.owner != loader.name || !insn.desc.endsWith(")[B")) {
-                        continue
-                    }
-
-                    // TODO(gpe): extract file size too (tricky due to dummy arguments)
-
-                    val exprs = getArgumentExpressions(insn) ?: continue
-                    for (expr in exprs) {
-                        val single = expr.singleOrNull() ?: continue
-                        if (single !is LdcInsnNode) {
-                            continue
-                        }
-
-                        val cst = single.cst
-                        if (cst is String && FILE_NAME_REGEX.matches(cst)) {
-                            paths += cst
-                        }
-                    }
-                }
+            val links = parseLoaderLinks(loader)
+            if (links.isNotEmpty()) {
+                return links
             }
 
-            val hashes = mutableMapOf<AbstractInsnNode, ByteArray>()
-
-            for (method in loader.methods) {
-                for (match in SHA1_CMP_MATCHER.match(method)) {
-                    val sha1 = ByteArray(SHA1_BYTES)
-                    var i = 0
-
-                    while (i < match.size) {
-                        var n = match[i++].intConstant
-                        if (n != null) {
-                            i++ // ALOAD
-                        }
-
-                        val index = match[i++].intConstant!!
-                        i++ // BALOAD
-
-                        var xor = false
-                        if (i + 1 < match.size && match[i + 1].opcode == Opcodes.IXOR) {
-                            i += 2 // ICONST_M1, IXOR
-                            xor = true
-                        }
-
-                        if (match[i].opcode == Opcodes.IFNE) {
-                            n = 0
-                            i++
-                        } else {
-                            if (n == null) {
-                                n = match[i++].intConstant!!
-                            }
-
-                            i++ // ICMP_IFNE
-                        }
-
-                        if (xor) {
-                            n = n.inv()
-                        }
-
-                        sha1[index] = n.toByte()
-                    }
-
-                    hashes[match[0]] = sha1
-                }
-            }
-
-            for (method in loader.methods) {
-                for (match in PATH_CMP_MATCHER.match(method)) {
-                    val first = match[0]
-                    val ldc = if (first is LdcInsnNode) {
-                        first
-                    } else {
-                        match[1] as LdcInsnNode
-                    }
-
-                    val path = ldc.cst
-                    if (path !is String) {
-                        continue
-                    }
-
-                    val acmp = match[2] as JumpInsnNode
-                    val target = if (acmp.opcode == Opcodes.IF_ACMPNE) {
-                        acmp.nextReal
-                    } else {
-                        acmp.label.nextReal
-                    }
-
-                    val hash = hashes.remove(target) ?: continue
-                    if (!paths.remove(path)) {
-                        logger.warn { "Adding link for unused file $path" }
-                    }
-
-                    links += parseLink(path, hash)
-                }
-            }
-
-            if (paths.size != hashes.size || paths.size > 1) {
-                throw IllegalArgumentException()
-            } else if (paths.size == 1) {
-                links += parseLink(paths.single(), hashes.values.single())
-            }
-
-            return links
+            return parseResourceLinks(library)
         }
 
         // TODO(gpe)
         return emptyList()
     }
 
-    private fun parseLink(path: String, sha1: ByteArray): ArtifactLink {
-        val m = FILE_NAME_REGEX.matchEntire(path) ?: throw IllegalArgumentException()
-        val (name, crc1, ext, crc2) = m.destructured
+    private fun parseLoaderLinks(loader: ClassNode): List<ArtifactLink> {
+        val links = mutableListOf<ArtifactLink>()
+        val paths = mutableSetOf<String>()
 
-        val type = when (name) {
-            // TODO(gpe): funorb loaders
-            "runescape", "client" -> ArtifactType.CLIENT
-            "unpackclass" -> ArtifactType.UNPACKCLASS
-            "jogl", "jogltrimmed" -> ArtifactType.JOGL
-            "jogl_awt" -> ArtifactType.JOGL_AWT
-            else -> throw IllegalArgumentException()
+        for (method in loader.methods) {
+            if (method.name != "run" || method.desc != "()V") {
+                continue
+            }
+
+            for (insn in method.instructions) {
+                if (insn !is MethodInsnNode || insn.owner != loader.name || !insn.desc.endsWith(")[B")) {
+                    continue
+                }
+
+                // TODO(gpe): extract file size too (tricky due to dummy arguments)
+
+                val exprs = getArgumentExpressions(insn) ?: continue
+                for (expr in exprs) {
+                    val single = expr.singleOrNull() ?: continue
+                    if (single !is LdcInsnNode) {
+                        continue
+                    }
+
+                    val cst = single.cst
+                    if (cst is String && FILE_NAME_REGEX.matches(cst)) {
+                        paths += cst
+                    }
+                }
+            }
         }
+
+        val hashes = mutableMapOf<AbstractInsnNode, ByteArray>()
+
+        for (method in loader.methods) {
+            for (match in SHA1_CMP_MATCHER.match(method)) {
+                val sha1 = ByteArray(SHA1_BYTES)
+                var i = 0
+
+                while (i < match.size) {
+                    var n = match[i++].intConstant
+                    if (n != null) {
+                        i++ // ALOAD
+                    }
+
+                    val index = match[i++].intConstant!!
+                    i++ // BALOAD
+
+                    var xor = false
+                    if (i + 1 < match.size && match[i + 1].opcode == Opcodes.IXOR) {
+                        i += 2 // ICONST_M1, IXOR
+                        xor = true
+                    }
+
+                    if (match[i].opcode == Opcodes.IFNE) {
+                        n = 0
+                        i++
+                    } else {
+                        if (n == null) {
+                            n = match[i++].intConstant!!
+                        }
+
+                        i++ // ICMP_IFNE
+                    }
+
+                    if (xor) {
+                        n = n.inv()
+                    }
+
+                    sha1[index] = n.toByte()
+                }
+
+                hashes[match[0]] = sha1
+            }
+        }
+
+        for (method in loader.methods) {
+            for (match in PATH_CMP_MATCHER.match(method)) {
+                val first = match[0]
+                val ldc = if (first is LdcInsnNode) {
+                    first
+                } else {
+                    match[1] as LdcInsnNode
+                }
+
+                val path = ldc.cst
+                if (path !is String) {
+                    continue
+                }
+
+                val acmp = match[2] as JumpInsnNode
+                val target = if (acmp.opcode == Opcodes.IF_ACMPNE) {
+                    acmp.nextReal
+                } else {
+                    acmp.label.nextReal
+                }
+
+                val hash = hashes.remove(target) ?: continue
+                if (!paths.remove(path)) {
+                    logger.warn { "Adding link for unused file $path" }
+                }
+
+                links += parseLink(path, hash, null)
+            }
+        }
+
+        if (paths.size != hashes.size || paths.size > 1) {
+            throw IllegalArgumentException()
+        } else if (paths.size == 1) {
+            links += parseLink(paths.single(), hashes.values.single(), null)
+        }
+
+        return links
+    }
+
+    private fun parseResourceLinks(library: Library): List<ArtifactLink> {
+        val links = mutableListOf<ArtifactLink>()
+
+        for (clazz in library) {
+            val clinit = clazz.methods.firstOrNull { it.name == "<clinit>" && it.desc == "()V" }
+            if (clinit != null) {
+                for (match in RESOURCE_CTOR_MATCHER.match(clinit)) {
+                    val srcLdc = match[1] as LdcInsnNode
+                    val src = srcLdc.cst
+                    if (src !is String) {
+                        continue
+                    }
+
+                    val newArray = match.single { it.opcode == Opcodes.NEWARRAY }
+
+                    val off = match.indexOf(newArray) + 3
+                    val sha1 = ByteArray(SHA1_BYTES) { i ->
+                        val insn = match[off + i * 4]
+                        insn.intConstant!!.toByte()
+                    }
+
+                    val size = newArray.previousReal!!.previousReal!!.previousReal!!.intConstant!!
+
+                    links += parseLink(src, sha1, size)
+                }
+            }
+        }
+
+        return links
+    }
+
+    private fun parseLink(path: String, sha1: ByteArray, size: Int?): ArtifactLink {
+        val m = FILE_NAME_REGEX.matchEntire(path) ?: throw IllegalArgumentException(path)
+        val (name, namePrefix, crc1, ext, crc2) = m.destructured
 
         val format = when (ext) {
             "pack200" -> ArtifactFormat.PACK200
             "js5" -> ArtifactFormat.PACKCLASS
             "jar", "pack" -> ArtifactFormat.JAR
-            "dll" -> ArtifactFormat.NATIVE
-            else -> throw IllegalArgumentException()
+            "dll", "lib" -> ArtifactFormat.NATIVE
+            else -> throw IllegalArgumentException(ext)
         }
 
-        val os = if (format == ArtifactFormat.NATIVE) OperatingSystem.WINDOWS else OperatingSystem.INDEPENDENT
-        val arch = if (format == ArtifactFormat.NATIVE) Architecture.X86 else Architecture.INDEPENDENT
-        val jvm = if (format == ArtifactFormat.NATIVE) Jvm.SUN else Jvm.INDEPENDENT
+        val type: ArtifactType
+        val os: OperatingSystem
+        val arch: Architecture
+        val jvm: Jvm
+
+        if (format == ArtifactFormat.NATIVE) {
+            data class Tuple(
+                val type: ArtifactType,
+                val os: OperatingSystem,
+                val arch: Architecture,
+                val jvm: Jvm
+            )
+
+            val tuple = when (name) {
+                "browsercontrol" -> Tuple(ArtifactType.BROWSERCONTROL, OperatingSystem.WINDOWS, Architecture.X86, Jvm.SUN)
+                "jaggl_0" -> Tuple(ArtifactType.JAGGL, OperatingSystem.WINDOWS, Architecture.X86, Jvm.SUN)
+                "jaggl_1" -> Tuple(ArtifactType.JAGGL, OperatingSystem.WINDOWS, Architecture.AMD64, Jvm.SUN)
+                "jaggl_2" -> Tuple(ArtifactType.JAGGL, OperatingSystem.LINUX, Architecture.X86, Jvm.SUN)
+                "jaggl_3" -> Tuple(ArtifactType.JAGGL, OperatingSystem.LINUX, Architecture.AMD64, Jvm.SUN)
+                "jaggl_4" -> Tuple(ArtifactType.JAGGL, OperatingSystem.MACOS, Architecture.POWERPC, Jvm.SUN)
+                // TODO: is jaggl_5 correct? the loader doesn't use it
+                "jaggl_5" -> Tuple(ArtifactType.JAGGL, OperatingSystem.MACOS, Architecture.X86, Jvm.SUN)
+                "jaggl_6" -> Tuple(ArtifactType.JAGGL, OperatingSystem.MACOS, Architecture.AMD64, Jvm.SUN)
+                "jaggl_7" -> Tuple(ArtifactType.JAGGL, OperatingSystem.MACOS, Architecture.UNIVERSAL, Jvm.SUN)
+                "jaggl_0_0" -> Tuple(ArtifactType.JAGGL, OperatingSystem.WINDOWS, Architecture.X86, Jvm.SUN)
+                "jaggl_1_0" -> Tuple(ArtifactType.JAGGL, OperatingSystem.LINUX, Architecture.X86, Jvm.SUN)
+                "jaggl_1_1" -> Tuple(ArtifactType.JAGGL_DRI, OperatingSystem.LINUX, Architecture.X86, Jvm.SUN)
+                "jaggl_2_0" -> Tuple(ArtifactType.JAGGL, OperatingSystem.MACOS, Architecture.POWERPC, Jvm.SUN)
+                "jaggl_3_0" -> Tuple(ArtifactType.JAGGL, OperatingSystem.MACOS, Architecture.X86, Jvm.SUN)
+                "jaggl_4_0" -> Tuple(ArtifactType.JAGGL, OperatingSystem.WINDOWS, Architecture.AMD64, Jvm.SUN)
+                "jaggl_5_0" -> Tuple(ArtifactType.JAGGL, OperatingSystem.MACOS, Architecture.AMD64, Jvm.SUN)
+                "jagmisc_0" -> Tuple(ArtifactType.JAGMISC, OperatingSystem.WINDOWS, Architecture.X86, Jvm.SUN)
+                "jagmisc_1" -> Tuple(ArtifactType.JAGMISC, OperatingSystem.WINDOWS, Architecture.X86, Jvm.MICROSOFT)
+                "jagmisc_2" -> Tuple(ArtifactType.JAGMISC, OperatingSystem.WINDOWS, Architecture.AMD64, Jvm.SUN)
+                "jogl" -> Tuple(ArtifactType.JOGL, OperatingSystem.WINDOWS, Architecture.X86, Jvm.SUN)
+                "jogl_awt" -> Tuple(ArtifactType.JOGL_AWT, OperatingSystem.WINDOWS, Architecture.X86, Jvm.SUN)
+                "jogl_0_0" -> Tuple(ArtifactType.JOGL, OperatingSystem.WINDOWS, Architecture.X86, Jvm.SUN)
+                "jogl_0_1" -> Tuple(ArtifactType.JOGL_AWT, OperatingSystem.WINDOWS, Architecture.X86, Jvm.SUN)
+                "jogl_1_0" -> Tuple(ArtifactType.JOGL, OperatingSystem.WINDOWS, Architecture.AMD64, Jvm.SUN)
+                "jogl_1_1" -> Tuple(ArtifactType.JOGL_AWT, OperatingSystem.WINDOWS, Architecture.AMD64, Jvm.SUN)
+                "jogl_2_0" -> Tuple(ArtifactType.JOGL, OperatingSystem.LINUX, Architecture.X86, Jvm.SUN)
+                "jogl_2_1" -> Tuple(ArtifactType.JOGL_AWT, OperatingSystem.LINUX, Architecture.X86, Jvm.SUN)
+                "jogl_2_2" -> Tuple(ArtifactType.GLUEGEN_RT, OperatingSystem.LINUX, Architecture.X86, Jvm.SUN)
+                "jogl_3_0" -> Tuple(ArtifactType.JOGL, OperatingSystem.LINUX, Architecture.AMD64, Jvm.SUN)
+                "jogl_3_1" -> Tuple(ArtifactType.JOGL_AWT, OperatingSystem.LINUX, Architecture.AMD64, Jvm.SUN)
+                "jogl_3_2" -> Tuple(ArtifactType.GLUEGEN_RT, OperatingSystem.LINUX, Architecture.AMD64, Jvm.SUN)
+                "jogl_4_0" -> Tuple(ArtifactType.JOGL, OperatingSystem.MACOS, Architecture.POWERPC, Jvm.SUN)
+                "jogl_4_1" -> Tuple(ArtifactType.JOGL_AWT, OperatingSystem.MACOS, Architecture.POWERPC, Jvm.SUN)
+                "jogl_5_0" -> Tuple(ArtifactType.JOGL, OperatingSystem.MACOS, Architecture.UNIVERSAL, Jvm.SUN)
+                "jogl_5_1" -> Tuple(ArtifactType.JOGL_AWT, OperatingSystem.MACOS, Architecture.UNIVERSAL, Jvm.SUN)
+                "jogl_6_0" -> Tuple(ArtifactType.JOGL, OperatingSystem.SOLARIS, Architecture.AMD64, Jvm.SUN)
+                "jogl_6_1" -> Tuple(ArtifactType.JOGL_AWT, OperatingSystem.SOLARIS, Architecture.AMD64, Jvm.SUN)
+                "jogl_6_2" -> Tuple(ArtifactType.GLUEGEN_RT, OperatingSystem.SOLARIS, Architecture.AMD64, Jvm.SUN)
+                "jogl_7_0" -> Tuple(ArtifactType.JOGL, OperatingSystem.SOLARIS, Architecture.X86, Jvm.SUN)
+                "jogl_7_1" -> Tuple(ArtifactType.JOGL_AWT, OperatingSystem.SOLARIS, Architecture.X86, Jvm.SUN)
+                "jogl_7_2" -> Tuple(ArtifactType.GLUEGEN_RT, OperatingSystem.SOLARIS, Architecture.X86, Jvm.SUN)
+                "jogl_8_0" -> Tuple(ArtifactType.JOGL, OperatingSystem.SOLARIS, Architecture.SPARC, Jvm.SUN)
+                "jogl_8_1" -> Tuple(ArtifactType.JOGL_AWT, OperatingSystem.SOLARIS, Architecture.SPARC, Jvm.SUN)
+                "jogl_8_2" -> Tuple(ArtifactType.GLUEGEN_RT, OperatingSystem.SOLARIS, Architecture.SPARC, Jvm.SUN)
+                "jogl_9_0" -> Tuple(ArtifactType.JOGL, OperatingSystem.SOLARIS, Architecture.SPARCV9, Jvm.SUN)
+                "jogl_9_1" -> Tuple(ArtifactType.JOGL_AWT, OperatingSystem.SOLARIS, Architecture.SPARCV9, Jvm.SUN)
+                "jogl_9_2" -> Tuple(ArtifactType.GLUEGEN_RT, OperatingSystem.SOLARIS, Architecture.SPARCV9, Jvm.SUN)
+                "sw3d_0" -> Tuple(ArtifactType.SW3D, OperatingSystem.WINDOWS, Architecture.X86, Jvm.SUN)
+                else -> throw IllegalArgumentException(name)
+            }
+
+            type = tuple.type
+            os = tuple.os
+            arch = tuple.arch
+            jvm = tuple.jvm
+        } else {
+            // TODO(gpe): funorb loaders
+            type = when (namePrefix) {
+                "runescape", "client" -> ArtifactType.CLIENT
+                "runescape_gl" -> ArtifactType.CLIENT_GL
+                "unpackclass" -> ArtifactType.UNPACKCLASS
+                "jogl", "jogltrimmed" -> ArtifactType.JOGL
+                "jaggl" -> ArtifactType.JAGGL
+                else -> throw IllegalArgumentException(namePrefix)
+            }
+            os = OperatingSystem.INDEPENDENT
+            arch = Architecture.INDEPENDENT
+            jvm = Jvm.INDEPENDENT
+        }
 
         val crc = crc1.toIntOrNull() ?: crc2.toIntOrNull() ?: throw IllegalArgumentException()
 
@@ -958,7 +1071,7 @@ public class ClientImporter @Inject constructor(
             jvm,
             crc,
             sha1,
-            null
+            size
         )
     }
 
@@ -1009,9 +1122,11 @@ public class ClientImporter @Inject constructor(
         private val SHA1_MATCHER =
             InsnMatcher.compile("BIPUSH NEWARRAY (DUP (ICONST | BIPUSH) (ICONST | BIPUSH | SIPUSH) IASTORE)+")
 
-        private val FILE_NAME_REGEX = Regex("([a-z_]+)(?:_(-?[0-9]+))?[.]([a-z0-9]+)(?:\\?crc=(-?[0-9]+))?")
+        private val FILE_NAME_REGEX = Regex("(([a-z0-9_]+?)(?:_[0-9]){0,2})(?:_(-?[0-9]+))?[.]([a-z0-9]+)(?:\\?crc=(-?[0-9]+))?")
         private val SHA1_CMP_MATCHER =
             InsnMatcher.compile("((ICONST | BIPUSH)? ALOAD (ICONST | BIPUSH) BALOAD (ICONST IXOR)? (ICONST | BIPUSH)? (IF_ICMPEQ | IF_ICMPNE | IFEQ | IFNE))+")
         private val PATH_CMP_MATCHER = InsnMatcher.compile("(LDC ALOAD | ALOAD LDC) (IF_ACMPEQ | IF_ACMPNE)")
+
+        private val RESOURCE_CTOR_MATCHER = InsnMatcher.compile("LDC LDC (LDC+ | ICONST ANEWARRAY (DUP ICONST LDC AASTORE)+) (ICONST | BIPUSH | SIPUSH | LDC) (ICONST | BIPUSH | SIPUSH | LDC) BIPUSH NEWARRAY (DUP (ICONST | BIPUSH) (ICONST | BIPUSH) IASTORE)+ INVOKESPECIAL")
     }
 }
