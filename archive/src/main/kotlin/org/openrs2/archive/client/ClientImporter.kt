@@ -372,6 +372,8 @@ public class ClientImporter @Inject constructor(
                 return ArtifactType.JAGGL_DRI
             } else if (name.startsWith("jaggl_opengl_")) {
                 return ArtifactType.JAGGL
+            } else if (name.startsWith("jaggl_OpenGL_")) {
+                return ArtifactType.JAGGL
             } else if (name.startsWith("com_sun_opengl_impl_GLImpl_")) {
                 return ArtifactType.JOGL
             } else if (name.startsWith("com_sun_opengl_impl_JAWT_")) {
