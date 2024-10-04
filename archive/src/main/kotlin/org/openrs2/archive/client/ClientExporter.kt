@@ -339,7 +339,7 @@ public class ClientExporter @Inject constructor(
                     }
 
                     val build = if (buildMajor != null) {
-                        CacheExporter.Build(buildMajor!!, buildMinor)
+                        CacheExporter.Build(buildMajor, buildMinor)
                     } else {
                         null
                     }
