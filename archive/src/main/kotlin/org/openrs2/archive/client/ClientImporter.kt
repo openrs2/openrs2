@@ -297,21 +297,30 @@ public class ClientImporter @Inject constructor(
     }
 
     private fun resolveBuilds(connection: Connection) {
+        connection.prepareStatement("""
+            UPDATE artifacts
+            SET
+                resolved_build_major = build_major,
+                resolved_build_minor = build_minor
+        """.trimIndent()).use { stmt ->
+            stmt.execute()
+        }
+
         connection.prepareStatement(
             """
             UPDATE artifacts a
             SET
-                resolved_build_major = t.build_major,
-                resolved_build_minor = t.build_minor
+                resolved_build_major = coalesce(a.build_major, t.build_major),
+                resolved_build_minor = coalesce(a.build_minor, t.build_minor)
             FROM (
                 SELECT DISTINCT ON (a1.blob_id)
                     a1.blob_id,
-                    coalesce(a1.build_major, a2.build_major) build_major,
-                    coalesce(a1.build_minor, a2.build_minor) build_minor
+                    a2.build_major,
+                    a2.build_minor
                 FROM artifacts a1
-                LEFT JOIN artifact_links al ON al.blob_id = a1.blob_id
-                LEFT JOIN blobs b2 ON b2.sha1 = al.sha1
-                LEFT JOIN artifacts a2 ON a2.blob_id = b2.id
+                JOIN artifact_links al ON al.blob_id = a1.blob_id
+                JOIN blobs b2 ON b2.sha1 = al.sha1
+                JOIN artifacts a2 ON a2.blob_id = b2.id AND a2.build_major IS NOT NULL
                 ORDER BY a1.blob_id ASC, b2.id ASC
             ) t
             WHERE a.blob_id = t.blob_id
