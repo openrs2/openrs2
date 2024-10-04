@@ -116,8 +116,8 @@ public class ClientExporter @Inject constructor(
                     a.blob_id,
                     g.name,
                     e.name,
-                    a.build_major,
-                    a.build_minor,
+                    a.resolved_build_major,
+                    a.resolved_build_minor,
                     a.timestamp,
                     a.type,
                     a.format,
@@ -129,7 +129,7 @@ public class ClientExporter @Inject constructor(
                 JOIN blobs b ON b.id = a.blob_id
                 JOIN games g ON g.id = a.game_id
                 JOIN environments e ON e.id = a.environment_id
-                ORDER BY a.build_major ASC, a.timestamp ASC, a.type ASC, a.format ASC, a.os ASC, a.arch ASC, a.jvm ASC
+                ORDER BY a.resolved_build_major ASC, a.resolved_build_minor ASC, a.timestamp ASC, a.type ASC, a.format ASC, a.os ASC, a.arch ASC, a.jvm ASC
             """.trimIndent()
             ).use { stmt ->
                 stmt.executeQuery().use { rows ->
@@ -214,8 +214,8 @@ public class ClientExporter @Inject constructor(
                 """
                 SELECT
                     a.blob_id,
-                    a.build_major,
-                    a.build_minor,
+                    a.resolved_build_major,
+                    a.resolved_build_minor,
                     a.timestamp,
                     l.type,
                     l.format,
@@ -300,8 +300,8 @@ public class ClientExporter @Inject constructor(
                 SELECT
                     g.name,
                     e.name,
-                    a.build_major,
-                    a.build_minor,
+                    a.resolved_build_major,
+                    a.resolved_build_minor,
                     a.timestamp,
                     a.type,
                     a.format,
@@ -381,8 +381,8 @@ public class ClientExporter @Inject constructor(
                 SELECT
                     g.name,
                     e.name,
-                    a.build_major,
-                    a.build_minor,
+                    a.resolved_build_major,
+                    a.resolved_build_minor,
                     a.timestamp,
                     a.type,
                     a.format,
