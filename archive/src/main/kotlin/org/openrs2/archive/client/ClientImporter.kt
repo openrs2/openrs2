@@ -297,12 +297,14 @@ public class ClientImporter @Inject constructor(
     }
 
     private fun resolveBuilds(connection: Connection) {
-        connection.prepareStatement("""
+        connection.prepareStatement(
+            """
             UPDATE artifacts
             SET
                 resolved_build_major = build_major,
                 resolved_build_minor = build_minor
-        """.trimIndent()).use { stmt ->
+        """.trimIndent()
+        ).use { stmt ->
             stmt.execute()
         }
 
@@ -324,7 +326,8 @@ public class ClientImporter @Inject constructor(
                 ORDER BY a1.blob_id ASC, b2.id ASC
             ) t
             WHERE a.blob_id = t.blob_id
-        """.trimIndent()).use { stmt ->
+        """.trimIndent()
+        ).use { stmt ->
             stmt.execute()
         }
     }
@@ -470,7 +473,8 @@ public class ClientImporter @Inject constructor(
     }
 
     private fun getDllName(buf: ByteBuf, pe: PE): String {
-        val namePointer = pe.sectionTable.rvaConverter.convertVirtualAddressToRawDataPointer(pe.imageData.exportTable.nameRVA.toInt())
+        val namePointer =
+            pe.sectionTable.rvaConverter.convertVirtualAddressToRawDataPointer(pe.imageData.exportTable.nameRVA.toInt())
 
         val end = buf.forEachByte(namePointer, buf.writerIndex() - namePointer, ByteProcessor.FIND_NUL)
         require(end != -1) {
@@ -1029,7 +1033,13 @@ public class ClientImporter @Inject constructor(
             )
 
             val tuple = when (name) {
-                "browsercontrol" -> Tuple(ArtifactType.BROWSERCONTROL, OperatingSystem.WINDOWS, Architecture.X86, Jvm.SUN)
+                "browsercontrol" -> Tuple(
+                    ArtifactType.BROWSERCONTROL,
+                    OperatingSystem.WINDOWS,
+                    Architecture.X86,
+                    Jvm.SUN
+                )
+
                 "jaggl_0" -> Tuple(ArtifactType.JAGGL, OperatingSystem.WINDOWS, Architecture.X86, Jvm.SUN)
                 "jaggl_1" -> Tuple(ArtifactType.JAGGL, OperatingSystem.WINDOWS, Architecture.AMD64, Jvm.SUN)
                 "jaggl_2" -> Tuple(ArtifactType.JAGGL, OperatingSystem.LINUX, Architecture.X86, Jvm.SUN)
@@ -1161,11 +1171,13 @@ public class ClientImporter @Inject constructor(
         private val SHA1_MATCHER =
             InsnMatcher.compile("BIPUSH NEWARRAY (DUP (ICONST | BIPUSH) (ICONST | BIPUSH | SIPUSH) IASTORE)+")
 
-        private val FILE_NAME_REGEX = Regex("(([a-z0-9_]+?)(?:_[0-9]){0,2})(?:_(-?[0-9]+))?[.]([a-z0-9]+)(?:\\?crc=(-?[0-9]+))?")
+        private val FILE_NAME_REGEX =
+            Regex("(([a-z0-9_]+?)(?:_[0-9]){0,2})(?:_(-?[0-9]+))?[.]([a-z0-9]+)(?:\\?crc=(-?[0-9]+))?")
         private val SHA1_CMP_MATCHER =
             InsnMatcher.compile("((ICONST | BIPUSH)? ALOAD (ICONST | BIPUSH) BALOAD (ICONST IXOR)? (ICONST | BIPUSH)? (IF_ICMPEQ | IF_ICMPNE | IFEQ | IFNE))+")
         private val PATH_CMP_MATCHER = InsnMatcher.compile("(LDC ALOAD | ALOAD LDC) (IF_ACMPEQ | IF_ACMPNE)")
 
-        private val RESOURCE_CTOR_MATCHER = InsnMatcher.compile("LDC LDC (LDC+ | ICONST ANEWARRAY (DUP ICONST LDC AASTORE)+) (ICONST | BIPUSH | SIPUSH | LDC) (ICONST | BIPUSH | SIPUSH | LDC) BIPUSH NEWARRAY (DUP (ICONST | BIPUSH) (ICONST | BIPUSH) IASTORE)+ INVOKESPECIAL")
+        private val RESOURCE_CTOR_MATCHER =
+            InsnMatcher.compile("LDC LDC (LDC+ | ICONST ANEWARRAY (DUP ICONST LDC AASTORE)+) (ICONST | BIPUSH | SIPUSH | LDC) (ICONST | BIPUSH | SIPUSH | LDC) BIPUSH NEWARRAY (DUP (ICONST | BIPUSH) (ICONST | BIPUSH) IASTORE)+ INVOKESPECIAL")
     }
 }
