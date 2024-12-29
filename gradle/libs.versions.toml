@@ -58,7 +58,7 @@ junit-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref 
 junit-launcher = { module = "org.junit.platform:junit-platform-launcher", version = "1.11.4" }
 kotlin-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinCoroutines" }
 kotlin-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinCoroutines" }
-kotlinPoet = { module = "com.squareup:kotlinpoet", version = "1.18.1" }
+kotlinPoet = { module = "com.squareup:kotlinpoet", version = "2.0.0" }
 ktor-serialization-jackson = { module = "io.ktor:ktor-serialization-jackson", version.ref = "ktor" }
 ktor-server-autoHeadResponse = { module = "io.ktor:ktor-server-auto-head-response", version.ref = "ktor" }
 ktor-server-cachingHeaders = { module = "io.ktor:ktor-server-caching-headers", version.ref = "ktor" }
