@@ -118,7 +118,7 @@ public class ClientExporter @Inject constructor(
                     e.name,
                     a.resolved_build_major,
                     a.resolved_build_minor,
-                    a.timestamp,
+                    a.resolved_timestamp,
                     a.type,
                     a.format,
                     a.os,
@@ -129,7 +129,7 @@ public class ClientExporter @Inject constructor(
                 JOIN blobs b ON b.id = a.blob_id
                 JOIN games g ON g.id = a.game_id
                 JOIN environments e ON e.id = a.environment_id
-                ORDER BY a.resolved_build_major ASC, a.resolved_build_minor ASC, a.timestamp ASC, a.type ASC, a.format ASC, a.os ASC, a.arch ASC, a.jvm ASC
+                ORDER BY a.resolved_build_major ASC, a.resolved_build_minor ASC, a.resolved_timestamp ASC, a.type ASC, a.format ASC, a.os ASC, a.arch ASC, a.jvm ASC
             """.trimIndent()
             ).use { stmt ->
                 stmt.executeQuery().use { rows ->
@@ -216,7 +216,7 @@ public class ClientExporter @Inject constructor(
                     a.blob_id,
                     a.resolved_build_major,
                     a.resolved_build_minor,
-                    a.timestamp,
+                    a.resolved_timestamp,
                     l.type,
                     l.format,
                     l.os,
@@ -302,7 +302,7 @@ public class ClientExporter @Inject constructor(
                     e.name,
                     a.resolved_build_major,
                     a.resolved_build_minor,
-                    a.timestamp,
+                    a.resolved_timestamp,
                     a.type,
                     a.format,
                     a.os,
@@ -383,7 +383,7 @@ public class ClientExporter @Inject constructor(
                     e.name,
                     a.resolved_build_major,
                     a.resolved_build_minor,
-                    a.timestamp,
+                    a.resolved_timestamp,
                     a.type,
                     a.format,
                     a.os,

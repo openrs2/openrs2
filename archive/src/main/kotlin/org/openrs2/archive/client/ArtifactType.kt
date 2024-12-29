@@ -13,5 +13,6 @@ public enum class ArtifactType {
     LOADER,
     LOADER_GL,
     SW3D,
-    UNPACKCLASS
+    UNPACKCLASS,
+    WORLDMAP
 }

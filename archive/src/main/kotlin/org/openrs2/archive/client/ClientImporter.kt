@@ -40,6 +40,7 @@ import org.openrs2.asm.io.PackClassLibraryReader
 import org.openrs2.asm.nextReal
 import org.openrs2.asm.previousReal
 import org.openrs2.buffer.use
+import org.openrs2.cache.JagArchive
 import org.openrs2.compress.gzip.Gzip
 import org.openrs2.db.Database
 import org.openrs2.util.io.entries
@@ -302,7 +303,8 @@ public class ClientImporter @Inject constructor(
             UPDATE artifacts
             SET
                 resolved_build_major = build_major,
-                resolved_build_minor = build_minor
+                resolved_build_minor = build_minor,
+                resolved_timestamp = timestamp
         """.trimIndent()
         ).use { stmt ->
             stmt.execute()
@@ -324,6 +326,28 @@ public class ClientImporter @Inject constructor(
                 JOIN blobs b2 ON b2.sha1 = al.sha1
                 JOIN artifacts a2 ON a2.blob_id = b2.id AND a2.build_major IS NOT NULL
                 ORDER BY a1.blob_id ASC, b2.id ASC
+            ) t
+            WHERE a.blob_id = t.blob_id
+        """.trimIndent()
+        ).use { stmt ->
+            stmt.execute()
+        }
+
+        connection.prepareStatement(
+            """
+            UPDATE artifacts a
+            SET
+                resolved_timestamp = coalesce(a.timestamp, t.timestamp)
+            FROM (
+                SELECT DISTINCT ON (a2.blob_id)
+                    a2.blob_id,
+                    a1.timestamp
+                FROM artifacts a1
+                JOIN artifact_links al ON al.blob_id = a1.blob_id
+                JOIN blobs b2 ON b2.sha1 = al.sha1
+                JOIN artifacts a2 ON a2.blob_id = b2.id
+                WHERE a1.timestamp IS NOT NULL
+                ORDER BY a2.blob_id ASC, a1.blob_id ASC
             ) t
             WHERE a.blob_id = t.blob_id
         """.trimIndent()
@@ -358,8 +382,34 @@ public class ClientImporter @Inject constructor(
         ) {
             parseMachO(buf)
         } else {
+            val archive = try {
+                JagArchive.unpack(buf.slice())
+            } catch (_: Exception) {
+                throw IllegalArgumentException()
+            }
+
+            parseJagArchive(buf, archive)
+        }
+    }
+
+    private fun parseJagArchive(buf: ByteBuf, archive: JagArchive): Artifact {
+        if (!archive.exists("SIZE.DAT")) {
             throw IllegalArgumentException()
         }
+
+        return Artifact(
+            buf.retain(),
+            "mapview",
+            "live",
+            null,
+            null,
+            ArtifactType.WORLDMAP,
+            ArtifactFormat.JAG,
+            OperatingSystem.INDEPENDENT,
+            Architecture.INDEPENDENT,
+            Jvm.INDEPENDENT,
+            emptyList()
+        )
     }
 
     private fun parseElf(buf: ByteBuf): Artifact {
@@ -632,13 +682,13 @@ public class ClientImporter @Inject constructor(
                 } else {
                     ArtifactType.LOADER
                 }
-                links = parseLinks(library)
+                links = parseLoaderLinks(library)
             }
         } else if (library.contains("mapview")) {
             game = "mapview"
             build = null
             type = ArtifactType.CLIENT
-            links = emptyList()
+            links = parseWorldMapLinks(library)
         } else if (library.contains("loginapplet")) {
             game = "loginapplet"
             build = null
@@ -799,7 +849,48 @@ public class ClientImporter @Inject constructor(
         return null
     }
 
-    private fun parseLinks(library: Library): List<ArtifactLink> {
+    private fun parseWorldMapLinks(library: Library): List<ArtifactLink> {
+        val links = mutableListOf<ArtifactLink>()
+
+        for (clazz in library) {
+            for (method in clazz.methods) {
+                if (!method.hasCode || method.name != "<clinit>") {
+                    continue
+                }
+
+                for (match in SHA1_MATCHER.match(method)) {
+                    val len = match[0].intConstant
+                    if (len != SHA1_BYTES) {
+                        continue
+                    }
+
+                    val sha1 = ByteArray(SHA1_BYTES)
+                    for (i in 2 until match.size step 4) {
+                        val k = match[i + 1].intConstant!!
+                        val v = match[i + 2].intConstant!!
+                        sha1[k] = v.toByte()
+                    }
+
+                    links += ArtifactLink(
+                        ArtifactType.WORLDMAP,
+                        ArtifactFormat.JAG,
+                        OperatingSystem.INDEPENDENT,
+                        Architecture.INDEPENDENT,
+                        Jvm.INDEPENDENT,
+                        crc32 = null,
+                        sha1,
+                        size = null,
+                    )
+                }
+            }
+        }
+
+        require(links.size <= 1)
+
+        return links
+    }
+
+    private fun parseLoaderLinks(library: Library): List<ArtifactLink> {
         val sig = library["sig"]
         if (sig != null) {
             var size: Int? = null
