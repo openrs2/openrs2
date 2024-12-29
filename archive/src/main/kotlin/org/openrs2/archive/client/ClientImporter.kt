@@ -393,7 +393,7 @@ public class ClientImporter @Inject constructor(
     }
 
     private fun parseJagArchive(buf: ByteBuf, archive: JagArchive): Artifact {
-        if (!archive.exists("SIZE.DAT")) {
+        if (!archive.exists("LABELS.DAT")) {
             throw IllegalArgumentException()
         }
 
