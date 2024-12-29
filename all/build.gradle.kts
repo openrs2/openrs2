@@ -44,12 +44,11 @@ tasks.register("generateAuthors") {
     outputs.file(layout.buildDirectory.file("AUTHORS"))
 
     doLast {
-        Files.newOutputStream(layout.buildDirectory.file("AUTHORS").get().asFile.toPath()).use { out ->
-            exec {
-                commandLine("git", "shortlog", "-esn", "HEAD")
-                standardOutput = out
-            }.assertNormalExitValue()
-        }
+        val bytes = providers.exec {
+            commandLine("git", "shortlog", "-esn", "HEAD")
+        }.standardOutput.asBytes.get()
+
+        Files.write(layout.buildDirectory.file("AUTHORS").get().asFile.toPath(), bytes)
     }
 }
 

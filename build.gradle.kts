@@ -4,7 +4,6 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jmailen.gradle.kotlinter.KotlinterExtension
 import org.jmailen.gradle.kotlinter.KotlinterPlugin
-import java.io.ByteArrayOutputStream
 import java.net.URL
 
 defaultTasks("build")
@@ -404,10 +403,7 @@ project(":nonfree:unpackclass") {
 }
 
 fun commitHash(): String {
-    val out = ByteArrayOutputStream()
-    exec {
+    return providers.exec {
         commandLine("git", "rev-parse", "HEAD")
-        standardOutput = out
-    }.assertNormalExitValue()
-    return String(out.toByteArray(), Charsets.UTF_8).trim()
+    }.standardOutput.asText.get().trim()
 }
