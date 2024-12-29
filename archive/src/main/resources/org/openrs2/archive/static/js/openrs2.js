@@ -41,3 +41,9 @@ function buildSort(a, b) {
 	var bMinor = b[2] ? parseInt(b[2]) : 0;
 	return aMinor - bMinor;
 }
+
+$(function () {
+	$('#paginated-table').on('post-body.bs.table', function () {
+		$(this).fadeIn();
+	});
+})
