@@ -96,7 +96,7 @@
 				</table>
 			</div>
 
-			<div th:if="${artifact.links}" th:tag="remove">
+			<div th:unless="${artifact.links.isEmpty()}" th:tag="remove">
 				<h2>Links</h2>
 
 				<div class="table-responsive">
