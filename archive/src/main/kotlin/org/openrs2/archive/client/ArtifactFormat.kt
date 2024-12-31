@@ -37,10 +37,6 @@ public enum class ArtifactFormat {
         }
     }
 
-    public fun isJar(): Boolean {
-        return this != NATIVE && this != JAG
-    }
-
     private companion object {
         private val CAB_MIME_TYPE = ContentType("application", "vnd.ms-cab-compressed")
         private val JAR_MIME_TYPE = ContentType("application", "java-archive")
