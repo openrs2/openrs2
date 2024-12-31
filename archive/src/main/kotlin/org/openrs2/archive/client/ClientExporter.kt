@@ -97,7 +97,8 @@ public class ClientExporter @Inject constructor(
         public val crc32: Int,
         public val sha1: ByteArray,
         public val sources: List<ArtifactSource>,
-        public val links: List<ArtifactLinkExport>
+        public val links: List<ArtifactLinkExport>,
+        public val reverseLinks: List<ArtifactLinkExport>
     ) {
         public val sha1Hex: String
             get() = ByteBufUtil.hexDump(sha1)
@@ -189,6 +190,7 @@ public class ClientExporter @Inject constructor(
         return database.execute { connection ->
             val sources = mutableListOf<ArtifactSource>()
             val links = mutableListOf<ArtifactLinkExport>()
+            val reverseLinks = mutableListOf<ArtifactLinkExport>()
 
             connection.prepareStatement(
                 """
@@ -298,6 +300,81 @@ public class ClientExporter @Inject constructor(
             connection.prepareStatement(
                 """
                 SELECT
+                    a.blob_id,
+                    a.resolved_build_major,
+                    a.resolved_build_minor,
+                    a.resolved_timestamp,
+                    a.type,
+                    a.format,
+                    a.os,
+                    a.arch,
+                    a.jvm,
+                    ab.crc32,
+                    ab.sha1,
+                    length(ab.data)
+                FROM artifacts a
+                JOIN blobs ab ON ab.id = a.blob_id
+                JOIN artifact_links l ON l.blob_id = a.blob_id
+                JOIN blobs lb ON lb.sha1 = l.sha1
+                WHERE lb.id = ?
+                ORDER BY a.resolved_build_major, a.resolved_build_minor, a.resolved_timestamp, a.type, a.format, a.os, a.arch, a.jvm
+            """.trimIndent()
+            ).use { stmt ->
+                stmt.setLong(1, id)
+
+                stmt.executeQuery().use { rows ->
+                    while (rows.next()) {
+                        val linkId: Long = rows.getLong(1)
+
+                        var buildMajor: Int? = rows.getInt(2)
+                        if (rows.wasNull()) {
+                            buildMajor = null
+                        }
+
+                        var buildMinor: Int? = rows.getInt(3)
+                        if (rows.wasNull()) {
+                            buildMinor = null
+                        }
+
+                        val build = if (buildMajor != null) {
+                            CacheExporter.Build(buildMajor, buildMinor)
+                        } else {
+                            null
+                        }
+
+                        val timestamp = rows.getTimestamp(4)?.toInstant()
+                        val type = ArtifactType.valueOf(rows.getString(5).uppercase())
+                        val format = ArtifactFormat.valueOf(rows.getString(6).uppercase())
+                        val os = OperatingSystem.valueOf(rows.getString(7).uppercase())
+                        val arch = Architecture.valueOf(rows.getString(8).uppercase())
+                        val jvm = Jvm.valueOf(rows.getString(9).uppercase())
+
+                        val crc32: Int = rows.getInt(10)
+                        val sha1 = rows.getBytes(11)
+                        val size: Int = rows.getInt(12)
+
+                        reverseLinks += ArtifactLinkExport(
+                            linkId,
+                            build,
+                            timestamp,
+                            ArtifactLink(
+                                type,
+                                format,
+                                os,
+                                arch,
+                                jvm,
+                                crc32,
+                                sha1,
+                                size
+                            )
+                        )
+                    }
+                }
+            }
+
+            connection.prepareStatement(
+                """
+                SELECT
                     g.name,
                     e.name,
                     a.resolved_build_major,
@@ -367,7 +444,7 @@ public class ClientExporter @Inject constructor(
                             arch,
                             jvm,
                             size
-                        ), crc32, sha1, sources, links
+                        ), crc32, sha1, sources, links, reverseLinks
                     )
                 }
             }
