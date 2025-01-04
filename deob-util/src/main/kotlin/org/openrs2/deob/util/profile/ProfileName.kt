@@ -1,4 +1,4 @@
-package org.openrs2.deob.bytecode
+package org.openrs2.deob.util.profile
 
 import jakarta.inject.Qualifier
 

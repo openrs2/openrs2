@@ -1,4 +1,4 @@
-package org.openrs2.deob.bytecode
+package org.openrs2.deob.util.profile
 
 import org.openrs2.asm.filter.GlobClassFilter
 import org.openrs2.asm.filter.GlobMemberFilter

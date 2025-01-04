@@ -1,4 +1,4 @@
-package org.openrs2.deob.bytecode
+package org.openrs2.deob.util.profile
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.michaelbull.logging.InlineLogger

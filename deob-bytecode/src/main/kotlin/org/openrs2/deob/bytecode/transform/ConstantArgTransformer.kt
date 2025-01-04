@@ -39,7 +39,7 @@ import org.openrs2.asm.stackMetadata
 import org.openrs2.asm.toAbstractInsnNode
 import org.openrs2.asm.transform.Transformer
 import org.openrs2.deob.bytecode.ArgPartition
-import org.openrs2.deob.bytecode.Profile
+import org.openrs2.deob.util.profile.Profile
 import org.openrs2.deob.bytecode.analysis.IntBranch
 import org.openrs2.deob.bytecode.analysis.IntBranchResult.ALWAYS_TAKEN
 import org.openrs2.deob.bytecode.analysis.IntBranchResult.NEVER_TAKEN
