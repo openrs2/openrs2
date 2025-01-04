@@ -4,9 +4,9 @@ import jakarta.inject.Inject
 import jakarta.inject.Singleton
 import org.openrs2.asm.classpath.ClassPath
 import org.openrs2.asm.transform.Transformer
-import org.openrs2.deob.bytecode.Profile
 import org.openrs2.deob.bytecode.remap.TypedRemapper
 import org.openrs2.deob.util.map.NameMap
+import org.openrs2.deob.util.profile.Profile
 
 @Singleton
 public class RemapTransformer @Inject constructor(

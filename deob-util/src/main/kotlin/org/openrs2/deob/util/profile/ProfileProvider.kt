@@ -1,4 +1,4 @@
-package org.openrs2.deob.bytecode
+package org.openrs2.deob.util.profile
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.michaelbull.logging.InlineLogger
@@ -13,7 +13,7 @@ import kotlin.io.path.exists
 
 public class ProfileProvider @Inject constructor(
     @param:Yaml private val mapper: ObjectMapper,
-    @ProfileName private val profile: String,
+    @param:ProfileName private val profile: String,
 ) : Provider<Profile> {
     override fun get(): Profile {
         val path = resolveProfile()
