@@ -11,6 +11,7 @@ import org.openrs2.asm.io.Pack200LibraryReader
 import org.openrs2.asm.transform.Transformer
 import org.openrs2.deob.bytecode.remap.ClassNamePrefixRemapper
 import org.openrs2.deob.bytecode.remap.StripClassNamePrefixRemapper
+import org.openrs2.deob.util.profile.Profile
 import java.nio.file.Files
 import java.nio.file.Path
 

@@ -5,7 +5,7 @@ import com.github.ajalt.clikt.core.main
 import com.github.ajalt.clikt.parameters.options.default
 import com.github.ajalt.clikt.parameters.options.option
 import com.google.inject.Guice
-import org.openrs2.deob.bytecode.ProfileModule
+import org.openrs2.deob.util.profile.ProfileModule
 import org.openrs2.inject.CloseableInjector
 
 public fun main(args: Array<String>): Unit = DeobfuscateCommand().main(args)
