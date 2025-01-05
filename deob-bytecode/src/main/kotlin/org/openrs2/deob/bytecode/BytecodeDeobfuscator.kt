@@ -13,7 +13,6 @@ import org.openrs2.deob.bytecode.remap.ClassNamePrefixRemapper
 import org.openrs2.deob.bytecode.remap.StripClassNamePrefixRemapper
 import org.openrs2.deob.util.profile.Profile
 import java.nio.file.Files
-import java.nio.file.Path
 
 @Singleton
 public class BytecodeDeobfuscator @Inject constructor(
@@ -22,7 +21,10 @@ public class BytecodeDeobfuscator @Inject constructor(
 ) {
     private val allTransformersByName = allTransformers.associateBy(Transformer::name)
 
-    public fun run(input: Path, output: Path) {
+    public fun run() {
+        val input = profile.directory.resolve("lib")
+        val output = profile.directory.resolve("var/cache/deob")
+
         // read list of enabled transformers and their order from the profile
         val transformers = profile.transformers.map { name ->
             allTransformersByName[name] ?: throw IllegalArgumentException("Unknown transformer $name")

@@ -1,4 +1,6 @@
 ---
+directory: nonfree
+mapping: "share/deob/map/"
 excluded_classes:
   - "*!client"
   - "*!com/sun/opengl/impl/x11/**"
