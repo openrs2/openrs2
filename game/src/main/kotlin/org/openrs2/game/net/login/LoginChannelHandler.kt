@@ -42,7 +42,7 @@ import org.openrs2.protocol.jaggrab.upstream.JaggrabRequestDecoder
 import org.openrs2.protocol.js5.downstream.Js5LoginResponse
 import org.openrs2.protocol.js5.downstream.Js5RemoteDownstream
 import org.openrs2.protocol.js5.downstream.Js5ResponseEncoder
-import org.openrs2.protocol.js5.downstream.XorDecoder
+import org.openrs2.protocol.js5.downstream.XorEncoder
 import org.openrs2.protocol.js5.upstream.Js5RequestDecoder
 import org.openrs2.protocol.login.downstream.LoginResponse
 import org.openrs2.protocol.login.upstream.GameLoginPayload
@@ -121,7 +121,7 @@ public class LoginChannelHandler @Inject constructor(
         }
 
         ctx.pipeline().addLast(
-            XorDecoder(),
+            XorEncoder(),
             Js5RequestDecoder(),
             Js5ResponseEncoder,
             js5HandlerProvider.get()
