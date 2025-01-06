@@ -4,7 +4,7 @@ import jakarta.inject.Inject
 import jakarta.inject.Singleton
 import org.jetbrains.java.decompiler.main.Fernflower
 import org.jetbrains.java.decompiler.main.extern.IFernflowerPreferences
-import org.openrs2.deob.util.Module
+import org.openrs2.deob.util.module.Module
 
 @Singleton
 public class Decompiler @Inject constructor(private val modules: Set<Module>) {
