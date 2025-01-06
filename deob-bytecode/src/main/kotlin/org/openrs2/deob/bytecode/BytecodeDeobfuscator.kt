@@ -5,47 +5,46 @@ import jakarta.inject.Inject
 import jakarta.inject.Singleton
 import org.openrs2.asm.classpath.ClassPath
 import org.openrs2.asm.classpath.Library
-import org.openrs2.asm.io.JarLibraryReader
 import org.openrs2.asm.io.JarLibraryWriter
-import org.openrs2.asm.io.Pack200LibraryReader
 import org.openrs2.asm.transform.Transformer
 import org.openrs2.deob.bytecode.remap.ClassNamePrefixRemapper
 import org.openrs2.deob.bytecode.remap.StripClassNamePrefixRemapper
+import org.openrs2.deob.util.module.Module
+import org.openrs2.deob.util.module.ModuleType
 import org.openrs2.deob.util.profile.Profile
 import java.nio.file.Files
+import java.nio.file.Path
+import java.util.EnumMap
 
 @Singleton
 public class BytecodeDeobfuscator @Inject constructor(
     @param:DeobfuscatorQualifier private val allTransformers: Set<Transformer>,
     private val profile: Profile,
+    modules: Set<Module>,
 ) {
     private val allTransformersByName = allTransformers.associateBy(Transformer::name)
+    private val modules = modules.associateByTo(EnumMap(ModuleType::class.java), Module::type)
 
     public fun run() {
         val input = profile.directory.resolve("lib")
-        val output = profile.directory.resolve("var/cache/deob")
+        logger.info { "Reading input jars from $input" }
+        val libraries = modules.mapValuesTo(EnumMap(ModuleType::class.java)) { (_, module) -> module.toLibrary(input) }
 
-        // read list of enabled transformers and their order from the profile
-        val transformers = profile.transformers.map { name ->
-            allTransformersByName[name] ?: throw IllegalArgumentException("Unknown transformer $name")
+        if (ModuleType.LOADER in modules) {
+            val loader = libraries[ModuleType.LOADER]!!
+
+            // overwrite client's classes with signed classes from the loader
+            if (ModuleType.CLIENT in modules && ModuleType.SIGNLINK in modules) {
+                logger.info { "Moving signed classes from loader to signlink" }
+                SignedClassUtils.move(loader, libraries[ModuleType.CLIENT]!!, libraries[ModuleType.SIGNLINK]!!)
+            }
+
+            // move unpack class out of the loader (so the unpacker and loader can both depend on it)
+            if (ModuleType.UNPACK in modules) {
+                logger.info { "Moving unpack from loader to unpack" }
+                libraries[ModuleType.UNPACK]!!.add(loader.remove("unpack")!!)
+            }
         }
-
-        // read input jars/packs
-        logger.info { "Reading input jars" }
-        val client = Library.read("client", input.resolve("runescape_gl.pack200"), Pack200LibraryReader)
-        val gl = Library.read("gl", input.resolve("jaggl.pack200"), Pack200LibraryReader)
-        val loader = Library.read("loader", input.resolve("loader_gl.jar"), JarLibraryReader)
-        val unpackClass = Library.read("unpackclass", input.resolve("unpackclass.pack"), JarLibraryReader)
-
-        // overwrite client's classes with signed classes from the loader
-        logger.info { "Moving signed classes from loader to signlink" }
-        val signLink = Library("signlink")
-        SignedClassUtils.move(loader, client, signLink)
-
-        // move unpack class out of the loader (so the unpacker and loader can both depend on it)
-        logger.info { "Moving unpack from loader to unpack" }
-        val unpack = Library("unpack")
-        unpack.add(loader.remove("unpack")!!)
 
         /*
          * Prefix class names with the name of the library the class
@@ -75,54 +74,49 @@ public class BytecodeDeobfuscator @Inject constructor(
          * different sets of fields/methods, presumably as a result of the
          * obfuscator removing unused code.)
          */
-        val clientRemapper = ClassNamePrefixRemapper(client, gl, signLink)
-        val glRemapper = ClassNamePrefixRemapper(gl)
-        val loaderRemapper = ClassNamePrefixRemapper(loader, signLink, unpack)
-        val signLinkRemapper = ClassNamePrefixRemapper(signLink)
-        val unpackClassRemapper = ClassNamePrefixRemapper(unpackClass, unpack)
-        val unpackRemapper = ClassNamePrefixRemapper(unpack)
 
-        client.remap(clientRemapper)
-        gl.remap(glRemapper)
-        loader.remap(loaderRemapper)
-        signLink.remap(signLinkRemapper)
-        unpack.remap(unpackRemapper)
-        unpackClass.remap(unpackClassRemapper)
+        // create all remappers prior to remapping, otherwise the later ones will build the wrong mapping table
+        libraries.map { (type, library) ->
+            val libs = modules[type]!!.transitiveDependencies.mapTo(mutableListOf(library)) { libraries[it.type]!! }
+            library to ClassNamePrefixRemapper(libs)
+        }
+            .forEach { (library, remapper) -> library.remap(remapper) }
 
         // bundle libraries together into a common classpath
         val runtime = ClassLoader.getPlatformClassLoader()
         val classPath = ClassPath(
             runtime,
             dependencies = emptyList(),
-            libraries = listOf(client, gl, loader, signLink, unpack, unpackClass)
+            libraries = libraries.values.toList()
         )
 
-        // deobfuscate
-        logger.info { "Transforming" }
+        // read list of enabled transformers and their order from the profile
+        val transformers = profile.transformers.map { name ->
+            requireNotNull(allTransformersByName[name]) { "Unknown transformer $name" }
+        }
+
         for (transformer in transformers) {
             logger.info { "Running transformer ${transformer.javaClass.simpleName}" }
             transformer.transform(classPath)
         }
 
-        // strip class name prefixes
-        client.remap(StripClassNamePrefixRemapper)
-        gl.remap(StripClassNamePrefixRemapper)
-        loader.remap(StripClassNamePrefixRemapper)
-        signLink.remap(StripClassNamePrefixRemapper)
-        unpack.remap(StripClassNamePrefixRemapper)
-        unpackClass.remap(StripClassNamePrefixRemapper)
+        libraries.values.forEach { it.remap(StripClassNamePrefixRemapper) }
 
-        // write output jars
         logger.info { "Writing output jars" }
+        for ((type, library) in libraries) {
+            val path = modules[type]!!.jar
+            Files.createDirectories(path.parent)
 
-        Files.createDirectories(output)
+            library.write(path, JarLibraryWriter, classPath)
+        }
+    }
 
-        client.write(output.resolve("client.jar"), JarLibraryWriter, classPath)
-        gl.write(output.resolve("gl.jar"), JarLibraryWriter, classPath)
-        loader.write(output.resolve("loader.jar"), JarLibraryWriter, classPath)
-        signLink.write(output.resolve("signlink.jar"), JarLibraryWriter, classPath)
-        unpack.write(output.resolve("unpack.jar"), JarLibraryWriter, classPath)
-        unpackClass.write(output.resolve("unpackclass.jar"), JarLibraryWriter, classPath)
+    private fun Module.toLibrary(directory: Path): Library {
+        return if (type.synthetic) {
+            Library(name)
+        } else {
+            Library.read(name, directory.resolve(source), format.reader)
+        }
     }
 
     private companion object {

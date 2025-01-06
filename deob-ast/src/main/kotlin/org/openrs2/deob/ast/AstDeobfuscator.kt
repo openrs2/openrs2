@@ -4,7 +4,7 @@ import com.github.michaelbull.logging.InlineLogger
 import jakarta.inject.Inject
 import jakarta.inject.Singleton
 import org.openrs2.deob.ast.transform.Transformer
-import org.openrs2.deob.util.Module
+import org.openrs2.deob.util.module.Module
 
 @Singleton
 public class AstDeobfuscator @Inject constructor(

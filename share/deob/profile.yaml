@@ -1,6 +1,19 @@
 ---
 directory: nonfree
 mapping: "share/deob/map/"
+modules:
+  - type: gl
+    source: jaggl.pack200
+  - type: client
+    source: runescape_gl.pack200
+    dependencies: [gl, signlink]
+  - type: loader
+    source: loader_gl.jar
+    dependencies: [signlink, unpack]
+  - type: unpackclass
+    source: unpackclass.pack
+    format: jar
+    dependencies: [unpack]
 excluded_classes:
   - "*!client"
   - "*!com/sun/opengl/impl/x11/**"
