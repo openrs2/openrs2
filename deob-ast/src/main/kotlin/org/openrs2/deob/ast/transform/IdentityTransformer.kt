@@ -3,6 +3,7 @@ package org.openrs2.deob.ast.transform
 import com.github.javaparser.ast.CompilationUnit
 import com.github.javaparser.ast.expr.AssignExpr
 import com.github.javaparser.ast.expr.BinaryExpr
+import com.github.javaparser.ast.expr.BooleanLiteralExpr
 import com.github.javaparser.ast.expr.Expression
 import com.github.javaparser.ast.expr.IntegerLiteralExpr
 import com.github.javaparser.ast.expr.LongLiteralExpr
@@ -56,6 +57,26 @@ public class IdentityTransformer : Transformer() {
                     }
                 }
 
+                BinaryExpr.Operator.BINARY_AND -> {
+                    if (expr.right.isTrue()) {
+                        // x & true
+                        expr.replace(expr.left)
+                    } else if (expr.left.isTrue()) {
+                        // true & x
+                        expr.replace(expr.right)
+                    }
+                }
+
+                BinaryExpr.Operator.BINARY_OR -> {
+                    if (expr.right.isFalse()) {
+                        // x | false
+                        expr.replace(expr.left)
+                    } else if (expr.left.isFalse()) {
+                        // false | x
+                        expr.replace(expr.right)
+                    }
+                }
+
                 else -> Unit
             }
         }
@@ -66,6 +87,10 @@ public class IdentityTransformer : Transformer() {
                 AssignExpr.Operator.PLUS, AssignExpr.Operator.MINUS -> expr.value.isZero()
                 // x *= 1, x /= 1
                 AssignExpr.Operator.MULTIPLY, AssignExpr.Operator.DIVIDE -> expr.value.isOne()
+                // x &= true
+                AssignExpr.Operator.BINARY_AND -> expr.value.isTrue()
+                // x |= false
+                AssignExpr.Operator.BINARY_OR -> expr.value.isFalse()
                 else -> false
             }
         }.forEach { expr ->
@@ -93,5 +118,13 @@ public class IdentityTransformer : Transformer() {
             is LongLiteralExpr -> asNumber() == 1L
             else -> false
         }
+    }
+
+    private fun Expression.isTrue(): Boolean {
+        return this is BooleanLiteralExpr && value
+    }
+
+    private fun Expression.isFalse(): Boolean {
+        return this is BooleanLiteralExpr && !value
     }
 }
