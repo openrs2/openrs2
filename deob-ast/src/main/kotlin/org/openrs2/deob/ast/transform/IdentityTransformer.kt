@@ -11,6 +11,7 @@ import com.github.javaparser.ast.stmt.ExpressionStmt
 import jakarta.inject.Singleton
 import org.openrs2.deob.ast.Library
 import org.openrs2.deob.ast.LibraryGroup
+import org.openrs2.deob.ast.util.findAll
 import org.openrs2.deob.ast.util.walk
 
 @Singleton
@@ -59,19 +60,15 @@ public class IdentityTransformer : Transformer() {
             }
         }
 
-        unit.walk { expr: AssignExpr ->
-            val identity = when (expr.operator) {
+        unit.findAll { expr: AssignExpr ->
+            when (expr.operator) {
                 // x += 0, x -= 0
                 AssignExpr.Operator.PLUS, AssignExpr.Operator.MINUS -> expr.value.isZero()
                 // x *= 1, x /= 1
                 AssignExpr.Operator.MULTIPLY, AssignExpr.Operator.DIVIDE -> expr.value.isOne()
                 else -> false
             }
-
-            if (!identity) {
-                return@walk
-            }
-
+        }.forEach { expr ->
             expr.parentNode.ifPresent { parent ->
                 if (parent is ExpressionStmt) {
                     parent.remove()
