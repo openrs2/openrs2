@@ -19,13 +19,13 @@ import org.openrs2.asm.transform.Transformer
 @Singleton
 public class OpaquePredicateTransformer : Transformer() {
     private val flowObstructors = mutableSetOf<MemberRef>()
+    private var assignments = 0
     private var opaquePredicates = 0
-    private var stores = 0
 
     override fun preTransform(classPath: ClassPath) {
         flowObstructors.clear()
+        assignments = 0
         opaquePredicates = 0
-        stores = 0
 
         for (library in classPath.libraries) {
             for (clazz in library) {
@@ -96,6 +96,11 @@ public class OpaquePredicateTransformer : Transformer() {
         }
     }
 
+    private fun isRedundantPut(match: List<AbstractInsnNode>): Boolean {
+        val putstatic = match[1] as FieldInsnNode
+        return isFlowObstructor(putstatic)
+    }
+
     private fun isRedundantStore(match: List<AbstractInsnNode>): Boolean {
         val getstatic = match[0] as FieldInsnNode
         return isFlowObstructor(getstatic)
@@ -124,16 +129,22 @@ public class OpaquePredicateTransformer : Transformer() {
         }
 
         // remove redundant stores
-        for (match in STORE_MATCHER.match(method).filter(this::isRedundantStore)) {
+        for (match in STORE_MATCHER.match(method).filter(::isRedundantStore)) {
             match.forEach(method.instructions::remove)
-            stores++
+            assignments++
+        }
+
+        // remove redundant field assignments
+        for (match in PUT_MATCHER.match(method).filter(::isRedundantPut)) {
+            match.forEach(method.instructions::remove)
+            assignments++
         }
 
         return false
     }
 
     override fun postTransform(classPath: ClassPath) {
-        logger.info { "Removed $opaquePredicates opaque predicates and $stores redundant stores" }
+        logger.info { "Removed $opaquePredicates opaque predicates and $assignments redundant assignments" }
     }
 
     private companion object {
@@ -147,6 +158,7 @@ public class OpaquePredicateTransformer : Transformer() {
         """
         )
         private val OPAQUE_PREDICATE_MATCHER = InsnMatcher.compile("(GETSTATIC | ILOAD) (IFEQ | IFNE)")
+        private val PUT_MATCHER = InsnMatcher.compile("ICONST PUTSTATIC")
         private val STORE_MATCHER = InsnMatcher.compile("GETSTATIC ISTORE")
     }
 }
