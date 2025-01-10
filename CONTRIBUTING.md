@@ -65,15 +65,15 @@ contributions.
 
 OpenRS2 uses [Semantic Versioning][semver].
 
-## Gitea
+## GitHub
 
-OpenRS2 only uses GitHub as a mirror. Issues and pull requests should be
-submitted to [OpenRS2's self-hosted Gitea instance][gitea].
+Issues and pull requests should be submitted to
+[OpenRS2's GitHub organisation][github].
 
 [commitmsg]: https://chris.beams.io/posts/git-commit/#seven-rules
 [dco]: https://developercertificate.org/
 [discord]: https://chat.openrs2.org/
-[gitea]: https://git.openrs2.org/openrs2/openrs2
+[github]: https://github.com/openrs2
 [idea]: https://www.jetbrains.com/idea/
 [ktlint]: https://github.com/pinterest/ktlint#readme
 [rewriting-history]: https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History
