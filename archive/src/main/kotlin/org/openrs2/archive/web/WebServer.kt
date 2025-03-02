@@ -7,6 +7,7 @@ import io.ktor.serialization.jackson.JacksonConverter
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.application.createApplicationPlugin
 import io.ktor.server.application.install
+import io.ktor.server.engine.connector
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.http.content.staticResources
 import io.ktor.server.jetty.jakarta.Jetty
@@ -31,6 +32,7 @@ import org.openrs2.json.Json
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect
 import org.thymeleaf.templatemode.TemplateMode
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver
+import kotlin.time.Duration.Companion.minutes
 
 @Singleton
 public class WebServer @Inject constructor(
@@ -40,7 +42,14 @@ public class WebServer @Inject constructor(
     @Json private val mapper: ObjectMapper
 ) {
     public fun start(address: String, port: Int) {
-        embeddedServer(Jetty, host = address, port = port) {
+        embeddedServer(Jetty, configure = {
+            connector {
+                host = address
+                this.port = port
+            }
+
+            idleTimeout = 5.minutes
+        }) {
             install(AutoHeadResponse)
             install(CachingHeaders)
             install(ConditionalHeaders)
