@@ -612,8 +612,7 @@ public class CacheExporter @Inject constructor(
                 """
                 SELECT g.data
                 FROM resolved_groups g
-                JOIN scopes s ON s.id = g.scope_id
-                WHERE s.name = ? AND g.master_index_id = ? AND g.archive_id = ? AND g.group_id = ?
+                WHERE g.scope_id = (SELECT id FROM scopes WHERE name = ?) AND g.master_index_id = ? AND g.archive_id = ? AND g.group_id = ?
                 UNION ALL
                 SELECT f.data
                 FROM resolved_files f
