@@ -1,9 +1,10 @@
 package org.openrs2.asm.filter
 
+import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonIgnore
 import org.openrs2.asm.MemberRef
 
-public class GlobMemberFilter(@Suppress("CanBeParameter") private val patterns: List<MemberRef>) : MemberFilter {
+public class GlobMemberFilter @JsonCreator constructor(@Suppress("CanBeParameter") private val patterns: List<MemberRef>) : MemberFilter {
     private data class CompiledPattern(val owner: Regex, val name: Regex, val desc: Regex)
 
     @JsonIgnore
