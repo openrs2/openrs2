@@ -325,13 +325,12 @@ public class CacheExporter @Inject constructor(
                     cs.size,
                     cs.blocks
                 FROM caches c
-                CROSS JOIN scopes s
                 LEFT JOIN master_indexes m ON m.id = c.id
                 LEFT JOIN containers mc ON mc.id = m.container_id
                 LEFT JOIN crc_tables t ON t.id = c.id
                 LEFT JOIN blobs b ON b.id = t.blob_id
-                LEFT JOIN cache_stats cs ON cs.scope_id = s.id AND cs.cache_id = c.id
-                WHERE s.name = ? AND c.id = ?
+                LEFT JOIN cache_stats cs ON cs.scope_id = (SELECT id FROM scopes WHERE name = ?) AND cs.cache_id = c.id
+                WHERE c.id = ?
                 """.trimIndent()
             ).use { stmt ->
                 stmt.setString(1, scope)
@@ -712,8 +711,7 @@ public class CacheExporter @Inject constructor(
             """
             SELECT g.archive_id, g.group_id, g.data, g.version
             FROM resolved_groups g
-            JOIN scopes s ON s.id = g.scope_id
-            WHERE s.name = ? AND g.master_index_id = ?
+            WHERE g.scope_id = (SELECT id FROM scopes WHERE name = ?) AND g.master_index_id = ?
             """.trimIndent()
         ).use { stmt ->
             stmt.fetchSize = BATCH_SIZE
@@ -792,10 +790,9 @@ public class CacheExporter @Inject constructor(
                 """
                 SELECT g.archive_id, g.group_id, g.name_hash, n.name, (k.key).k0, (k.key).k1, (k.key).k2, (k.key).k3
                 FROM resolved_groups g
-                JOIN scopes s ON s.id = g.scope_id
                 JOIN keys k ON k.id = g.key_id
                 LEFT JOIN names n ON n.hash = g.name_hash AND n.name ~ '^l(?:[0-9]|[1-9][0-9])_(?:[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$'
-                WHERE s.name = ? AND g.master_index_id = ?
+                WHERE g.scope_id = (SELECT id FROM scopes WHERE name = ?) AND g.master_index_id = ?
                 """.trimIndent()
             ).use { stmt ->
                 stmt.setString(1, scope)
