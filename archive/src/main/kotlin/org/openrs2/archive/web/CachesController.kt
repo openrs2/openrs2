@@ -132,6 +132,42 @@ public class CachesController @Inject constructor(
         }
     }
 
+    public suspend fun exportGroupByContentAddress(call: ApplicationCall) {
+        val scope = call.parameters["scope"]!!
+        val archiveId = call.parameters["archive"]?.toIntOrNull()
+        val groupId = call.parameters["group"]?.toIntOrNull()
+        val version = call.parameters["version"]?.toIntOrNull()
+        val checksum = call.parameters["checksum"]?.toIntOrNull()
+
+        if (archiveId == null || groupId == null || version == null || checksum == null) {
+            call.respond(HttpStatusCode.NotFound)
+            return
+        }
+
+        exporter.exportGroupByContentAddress(scope, archiveId, groupId, version, checksum).use { buf ->
+            if (buf == null) {
+                call.respond(HttpStatusCode.NotFound)
+                return
+            }
+
+            val etag = Base64.getEncoder().encodeToString(buf.whirlpool().sliceArray(0 until 16))
+
+            val bytes = ByteBufUtil.getBytes(buf, 0, buf.readableBytes(), false)
+            call.respondBytes(bytes, contentType = ContentType.Application.OctetStream) {
+                caching = CachingOptions(
+                    cacheControl = CacheControl.MaxAge(
+                        maxAgeSeconds = 86400,
+                        visibility = CacheControl.Visibility.Public
+                    ),
+                    expires = ZonedDateTime.now(ZoneOffset.UTC).plusSeconds(86400)
+                )
+                versions = listOf(
+                    EntityTagVersion(etag, weak = false)
+                )
+            }
+        }
+    }
+
     public suspend fun exportDisk(call: ApplicationCall) {
         val scope = call.parameters["scope"]!!
         val id = call.parameters["id"]?.toIntOrNull()

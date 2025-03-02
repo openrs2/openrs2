@@ -245,6 +245,24 @@
 				container). The two byte version trailer is not included.
 			</p>
 
+			<h2><code>GET /caches/&lt;scope&gt;/archives/&lt;archive&gt;/groups/&lt;group&gt;/versions/&lt;version&gt;/checksums/&lt;checksum&gt;.dat</code></h2>
+
+			<p>
+				Returns a single file (old engine) or group (new engine) in
+				binary format. The response contains a <code>.jag</code>
+				archive (index 0 of an old engine cache), a GZIP-compressed
+				file (the remaining indexes of an old engine cache) or
+				JS5-compressed data (new engine cache, also known as a
+				container). The two byte version trailer is not included.
+			</p>
+
+			<p>
+				This is faster than the previous endpoint as it doesn't need to
+				look the group's version and checksum up in the JS5 index. If
+				you need to download more than a handful of groups, you should
+				use this endpoint.
+			</p>
+
 			<h2><code>GET /keys/all.json</code></h2>
 
 			<p>

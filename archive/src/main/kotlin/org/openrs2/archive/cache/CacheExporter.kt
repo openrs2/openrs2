@@ -640,6 +640,47 @@ public class CacheExporter @Inject constructor(
         }
     }
 
+    public suspend fun exportGroupByContentAddress(scope: String, archiveId: Int, groupId: Int, version: Int, checksum: Int): ByteBuf? {
+        return database.execute { connection ->
+            connection.prepareStatement("""
+                SELECT data FROM resolve_group((SELECT id FROM scopes WHERE name = ?), ?::uint1, ?, ?, ?)
+            """.trimIndent()).use { stmt ->
+                stmt.setString(1, scope)
+                stmt.setInt(2, archiveId)
+                stmt.setInt(3, groupId)
+                stmt.setInt(4, checksum)
+                stmt.setInt(5, version)
+
+                stmt.executeQuery().use { rows ->
+                    if (rows.next()) {
+                        val data = rows.getBytes(1)
+                        return@execute Unpooled.wrappedBuffer(data)
+                    }
+
+                    if (scope == "runescape" && groupId in 0..0xFFFF && version in 0..0xFFFF) {
+                        connection.prepareStatement("""
+                            SELECT data FROM resolve_file(?::uint1, ?::uint2, ?::uint2, ?)
+                        """.trimIndent()).use { stmt ->
+                            stmt.setInt(1, archiveId)
+                            stmt.setInt(2, groupId)
+                            stmt.setInt(3, version)
+                            stmt.setInt(4, checksum)
+
+                            stmt.executeQuery().use { rows ->
+                                if (rows.next()) {
+                                    val data = rows.getBytes(1)
+                                    return@execute Unpooled.wrappedBuffer(data)
+                                }
+                            }
+                        }
+                    }
+
+                    return@execute null
+                }
+            }
+        }
+    }
+
     public fun export(scope: String, id: Int, storeFactory: (Boolean) -> Store) {
         database.executeOnce { connection ->
             val legacy = connection.prepareStatement(
