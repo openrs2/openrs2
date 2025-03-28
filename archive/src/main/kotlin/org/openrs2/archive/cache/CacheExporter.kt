@@ -453,7 +453,7 @@ public class CacheExporter @Inject constructor(
                 SELECT a.archive_id, c.id IS NOT NULL, s.valid_groups, s.groups, s.valid_keys, s.keys, s.size, s.blocks
                 FROM master_index_archives a
                 LEFT JOIN resolve_index((SELECT id FROM scopes WHERE name = ?), a.archive_id, a.crc32, a.version) c ON TRUE
-                LEFT JOIN index_stats s ON s.container_id = c.id
+                LEFT JOIN index_stats s ON s.scope_id = (SELECT id FROM scopes WHERE name = ?) AND s.archive_id = a.archive_id AND s.container_id = c.id
                 WHERE a.master_index_id = ?
                 UNION ALL
                 SELECT a.archive_id, b.id IS NOT NULL, NULL, NULL, NULL, NULL, length(b.data), group_blocks(a.archive_id, length(b.data))
@@ -464,8 +464,9 @@ public class CacheExporter @Inject constructor(
                 """.trimIndent()
             ).use { stmt ->
                 stmt.setString(1, scope)
-                stmt.setInt(2, id)
+                stmt.setString(2, scope)
                 stmt.setInt(3, id)
+                stmt.setInt(4, id)
 
                 stmt.executeQuery().use { rows ->
                     while (rows.next()) {
