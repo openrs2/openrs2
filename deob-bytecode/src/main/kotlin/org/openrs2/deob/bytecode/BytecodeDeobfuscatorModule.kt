@@ -32,13 +32,15 @@ import org.openrs2.deob.bytecode.transform.PatcherTransformer
 import org.openrs2.deob.bytecode.transform.RedundantGotoTransformer
 import org.openrs2.deob.bytecode.transform.RemapTransformer
 import org.openrs2.deob.bytecode.transform.ResetTransformer
+import org.openrs2.deob.bytecode.transform.StringDecryptionTransformer
 import org.openrs2.deob.bytecode.transform.UnusedArgTransformer
 import org.openrs2.deob.bytecode.transform.UnusedLocalTransformer
 import org.openrs2.deob.bytecode.transform.UnusedMethodTransformer
 import org.openrs2.deob.bytecode.transform.VisibilityTransformer
 import org.openrs2.deob.util.DeobfuscatorUtilModule
 import org.openrs2.patcher.PatcherModule
-import org.openrs2.patcher.transform.ResourceTransformer
+import java.nio.file.Files
+import java.nio.file.Paths
 
 public object BytecodeDeobfuscatorModule : AbstractModule() {
     override fun configure() {
