@@ -382,7 +382,7 @@ public class CacheExporter @Inject constructor(
 
             connection.prepareStatement(
                 """
-                SELECT g.name, e.name, l.iso_code, s.build_major, s.build_minor, s.timestamp, s.name, s.description, s.url
+                SELECT DISTINCT g.name, e.name, l.iso_code, s.build_major, s.build_minor, s.timestamp, s.name, s.description, s.url
                 FROM sources s
                 JOIN game_variants v ON v.id = s.game_id
                 JOIN games g ON g.id = v.game_id
