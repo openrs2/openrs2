@@ -240,6 +240,37 @@ public class CacheImporter @Inject constructor(
         }
     }
 
+    public suspend fun importChecksumTable(
+        buf: ByteBuf,
+        buildMajor: Int?,
+        timestamp: Instant?,
+        name: String?,
+        description: String?,
+        url: String?
+    ) {
+        val checksumTable = ChecksumTable.read(buf.slice())
+
+        database.execute { connection ->
+            prepare(connection)
+
+            val game = getGame(connection, "runescape", "live", "en")
+            val checksumTableId = addChecksumTable(connection, ChecksumTableBlob(buf, checksumTable))
+
+            addSource(
+                connection,
+                SourceType.DISK,
+                checksumTableId,
+                game.id,
+                buildMajor,
+                buildMinor = null,
+                timestamp,
+                name,
+                description,
+                url,
+            )
+        }
+    }
+
     public suspend fun importMasterIndex(
         buf: ByteBuf,
         format: MasterIndexFormat,
