@@ -43,11 +43,22 @@ public abstract class DataFlowAnalyzer<T>(owner: String, private val method: Met
     }
 
     public fun analyze() {
+        val vertices = graph.vertexSet()
+        if (vertices.isEmpty()) {
+            return
+        }
+
         val entrySet = createEntrySet()
         val initialSet = createInitialSet()
 
         val workList = UniqueQueue<Int>()
-        workList += graph.vertexSet().filter { vertex -> graph.inDegreeOf(vertex) == 0 }
+        val entryNodes = vertices.filter { vertex -> graph.inDegreeOf(vertex) == 0 }
+        if (entryNodes.isEmpty()) {
+            // The CFG is strongly connected (i.e. the entire method body is a loop), so start from the first insn
+            workList += 0
+        } else {
+            workList += entryNodes
+        }
 
         while (true) {
             val node = workList.removeFirstOrNull() ?: break
