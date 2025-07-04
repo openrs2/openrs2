@@ -116,7 +116,7 @@ public abstract class Archive internal constructor(
 
     // TODO(gpe): rename/move, reindex, rekey, method to go from name->id
 
-    public val capacity: Int = index.capacity
+    public val capacity: Int get() = index.capacity
 
     public fun capacity(group: Int): Int {
         val entry = index[group] ?: throw FileNotFoundException()
