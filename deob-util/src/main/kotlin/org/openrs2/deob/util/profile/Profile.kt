@@ -9,6 +9,7 @@ public class Profile(
     public val directory: Path,
     public val mapping: Path,
     public val modules: List<ModuleSpec>,
+    public val preprocessors: List<String> = emptyList(),
     public val excludedClasses: GlobClassFilter,
     public val excludedMethods: GlobMemberFilter,
     public val excludedFields: GlobMemberFilter,
