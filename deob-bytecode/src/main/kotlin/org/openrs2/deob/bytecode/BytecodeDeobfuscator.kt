@@ -7,6 +7,8 @@ import org.openrs2.asm.classpath.ClassPath
 import org.openrs2.asm.classpath.Library
 import org.openrs2.asm.io.JarLibraryWriter
 import org.openrs2.asm.transform.Transformer
+import org.openrs2.deob.bytecode.library.LibraryPreprocessor
+import org.openrs2.deob.bytecode.library.LibraryPreprocessorQualifier
 import org.openrs2.deob.bytecode.remap.ClassNamePrefixRemapper
 import org.openrs2.deob.bytecode.remap.StripClassNamePrefixRemapper
 import org.openrs2.deob.util.module.Module
@@ -19,30 +21,34 @@ import java.util.EnumMap
 @Singleton
 public class BytecodeDeobfuscator @Inject constructor(
     @param:DeobfuscatorQualifier private val allTransformers: Set<Transformer>,
+    @param:LibraryPreprocessorQualifier private val allPreprocessors: Set<LibraryPreprocessor>,
     private val profile: Profile,
     modules: Set<Module>,
 ) {
     private val allTransformersByName = allTransformers.associateBy(Transformer::name)
     private val modules = modules.associateByTo(EnumMap(ModuleType::class.java), Module::type)
+    private val allPreprocessorsByName = allPreprocessors.associateBy(LibraryPreprocessor::name)
 
     public fun run() {
         val input = profile.directory.resolve("lib")
         logger.info { "Reading input jars from $input" }
         val libraries = modules.mapValuesTo(EnumMap(ModuleType::class.java)) { (_, module) -> module.toLibrary(input) }
 
-        if (ModuleType.LOADER in modules) {
-            val loader = libraries[ModuleType.LOADER]!!
+        // read list of enabled preprocessors and their order from the profile
+        val preprocessors = profile.preprocessors.map { name ->
+            requireNotNull(allPreprocessorsByName[name]) { "Unknown preprocessor $name" }
+        }
 
-            // overwrite client's classes with signed classes from the loader
-            if (ModuleType.CLIENT in modules && ModuleType.SIGNLINK in modules) {
-                logger.info { "Moving signed classes from loader to signlink" }
-                SignedClassUtils.move(loader, libraries[ModuleType.CLIENT]!!, libraries[ModuleType.SIGNLINK]!!)
-            }
+        for (preprocessor in preprocessors) {
+            val missing = preprocessor.requiredModules.filter { it !in modules }
 
-            // move unpack class out of the loader (so the unpacker and loader can both depend on it)
-            if (ModuleType.UNPACK in modules) {
-                logger.info { "Moving unpack from loader to unpack" }
-                libraries[ModuleType.UNPACK]!!.add(loader.remove("unpack")!!)
+            if (missing.isEmpty()) {
+                logger.info { "Running preprocessor ${preprocessor.name}" }
+                preprocessor.preprocess(modules, libraries)
+            } else {
+                logger.warn {
+                    "Preprocessor ${preprocessor.name} requested, but required modules were missing: $missing."
+                }
             }
         }
 
