@@ -1265,7 +1265,7 @@ public class ClientImporter @Inject constructor(
         private val FILE_NAME_REGEX =
             Regex("(([a-z0-9_]+?)(?:_[0-9]){0,2})(?:_(-?[0-9]+))?[.]([a-z0-9]+)(?:\\?crc=(-?[0-9]+))?")
         private val SHA1_CMP_MATCHER =
-            InsnMatcher.compile("((ICONST | BIPUSH)? ALOAD (ICONST | BIPUSH) BALOAD (ICONST IXOR)? (ICONST | BIPUSH)? (IF_ICMPEQ | IF_ICMPNE | IFEQ | IFNE))+")
+            InsnMatcher.compile("((ICONST | BIPUSH)? ALOAD (ICONST | BIPUSH) BALOAD (ICONST IXOR)? (ICONST | BIPUSH | SIPUSH)? (IF_ICMPEQ | IF_ICMPNE | IFEQ | IFNE))+")
         private val PATH_CMP_MATCHER = InsnMatcher.compile("(LDC ALOAD | ALOAD LDC) (IF_ACMPEQ | IF_ACMPNE)")
 
         private val RESOURCE_CTOR_MATCHER =
