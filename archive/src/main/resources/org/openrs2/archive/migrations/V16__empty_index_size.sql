@@ -26,7 +26,8 @@ JOIN groups g ON g.scope_id = s.id AND g.container_id = i.container_id AND g.arc
     NOT g.version_truncated AND g.version = i.version
 LEFT JOIN index_groups ig ON ig.container_id = i.container_id
 LEFT JOIN resolve_group(s.id, g.group_id::uint1, ig.group_id, ig.crc32, ig.version) c ON TRUE
-GROUP BY s.id, g.group_id, i.container_id;
+GROUP BY s.id, g.group_id, i.container_id
+WITH NO DATA;
 
 CREATE UNIQUE INDEX ON index_stats_new (scope_id, archive_id, container_id);
 
@@ -64,7 +65,8 @@ CROSS JOIN master_indexes m
 LEFT JOIN master_index_archives a ON a.master_index_id = m.id
 LEFT JOIN resolve_index(sc.id, a.archive_id, a.crc32, a.version) c ON TRUE
 LEFT JOIN index_stats s ON s.scope_id = sc.id AND s.archive_id = a.archive_id AND s.container_id = c.id
-GROUP BY sc.id, m.id;
+GROUP BY sc.id, m.id
+WITH NO DATA;
 
 CREATE UNIQUE INDEX ON master_index_stats_new (scope_id, master_index_id);
 

@@ -14,7 +14,8 @@ SELECT
 FROM version_lists v
 JOIN version_list_files vf ON vf.blob_id = v.blob_id
 LEFT JOIN resolve_file(vf.index_id, vf.file_id, vf.version, vf.crc32) b ON TRUE
-GROUP BY v.blob_id, vf.index_id;
+GROUP BY v.blob_id, vf.index_id
+WITH NO DATA;
 
 CREATE UNIQUE INDEX ON version_list_stats (blob_id, index_id);
 
@@ -31,7 +32,8 @@ FROM crc_tables c
 LEFT JOIN crc_table_archives a ON a.crc_table_id = c.id
 LEFT JOIN resolve_archive(a.archive_id, a.crc32) b ON TRUE
 LEFT JOIN version_list_stats s ON s.blob_id = b.id
-GROUP BY c.id;
+GROUP BY c.id
+WITH NO DATA;
 
 CREATE UNIQUE INDEX ON crc_table_stats (crc_table_id);
 

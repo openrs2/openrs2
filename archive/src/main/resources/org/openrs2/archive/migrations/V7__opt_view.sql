@@ -23,7 +23,8 @@ JOIN groups g ON g.container_id = i.container_id AND g.archive_id = 255 AND NOT 
     g.version = i.version
 JOIN index_groups ig ON ig.container_id = i.container_id
 LEFT JOIN resolve_group(g.group_id::uint1, ig.group_id, ig.crc32, ig.version) c ON TRUE
-GROUP BY g.group_id, i.container_id;
+GROUP BY g.group_id, i.container_id
+WITH NO DATA;
 
 CREATE UNIQUE INDEX ON index_stats (container_id);
 
@@ -52,7 +53,8 @@ FROM master_indexes m
 LEFT JOIN master_index_archives a ON a.master_index_id = m.id
 LEFT JOIN resolve_index(a.archive_id, a.crc32, a.version) c ON TRUE
 LEFT JOIN index_stats s ON s.archive_id = a.archive_id AND s.container_id = c.id
-GROUP BY m.id;
+GROUP BY m.id
+WITH NO DATA;
 
 CREATE UNIQUE INDEX ON master_index_stats_new (master_index_id);
 

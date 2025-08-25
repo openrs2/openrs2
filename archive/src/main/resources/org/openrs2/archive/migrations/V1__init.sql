@@ -249,7 +249,8 @@ LEFT JOIN (
     LEFT JOIN resolve_group(i.archive_id, ig.group_id, ig.crc32, ig.version) c ON TRUE
     LEFT JOIN keys k ON k.id = c.key_id
     GROUP BY i.master_index_id
-) g ON g.master_index_id = m.id;
+) g ON g.master_index_id = m.id
+WITH NO DATA;
 
 CREATE UNIQUE INDEX ON master_index_stats (master_index_id);
 
