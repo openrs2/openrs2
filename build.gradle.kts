@@ -149,7 +149,7 @@ configure(subprojects.filter { it.isFree }) {
 
                 sourceLink {
                     localDirectory.set(rootDir)
-                    remoteUrl.set(URL("https://git.openrs2.org/openrs2/openrs2/src/commit/${commitHash()}"))
+                    remoteUrl.set(URL("https://github.com/openrs2/openrs2/tree/${commitHash()}"))
                     remoteLineSuffix.set("#L")
                 }
 
@@ -274,19 +274,19 @@ configure(subprojects.filter { it.isFree }) {
                     }
 
                     scm {
-                        connection.set("scm:git:https://git.openrs2.org/openrs2/openrs2.git")
-                        developerConnection.set("scm:git:git@git.openrs2.org:openrs2/openrs2.git")
-                        url.set("https://git.openrs2.org/openrs2/openrs2")
+                        connection.set("scm:git:https://github.com/openrs2/openrs2.git")
+                        developerConnection.set("scm:git:git@github.com:openrs2/openrs2.git")
+                        url.set("https://github.com/openrs2/openrs2")
                     }
 
                     issueManagement {
-                        system.set("Gitea")
-                        url.set("https://git.openrs2.org/openrs2/openrs2")
+                        system.set("GitHub")
+                        url.set("https://github.com/openrs2/openrs2/issues")
                     }
 
                     ciManagement {
-                        system.set("Drone")
-                        url.set("https://build.openrs2.org/openrs2/openrs2/")
+                        system.set("GitHub")
+                        url.set("https://github.com/openrs2/openrs2/actions")
                     }
                 }
             }

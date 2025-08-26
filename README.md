@@ -82,7 +82,7 @@ in the `LICENSE` file.
 [discord]: https://chat.openrs2.org/
 [isc-badge]: https://img.shields.io/badge/license-ISC-informational
 [isc]: https://opensource.org/licenses/ISC
-[issue-tracker]: https://git.openrs2.org/openrs2/openrs2/issues
+[issue-tracker]: https://github.com/openrs2/openrs2/issues
 [jdk]: https://jdk.java.net/
 [kdoc]: https://docs.openrs2.org/
 [www]: https://www.openrs2.org/
