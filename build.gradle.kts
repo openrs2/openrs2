@@ -355,6 +355,12 @@ project(":nonfree:client") {
     }
 
     tasks.named<JavaExec>("run") {
+        /*
+         * Required for SignLink to invoke load0 and loadLibrary0 in newer
+         * versions of Java.
+         */
+        jvmArgs("--add-opens=java.base/java.lang=ALL-UNNAMED")
+
         args("1", "live", "en", "game0")
     }
 
