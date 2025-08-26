@@ -1,21 +1,18 @@
 package org.openrs2.deob.bytecode.analysis
 
-import org.jgrapht.Graph
-import org.jgrapht.graph.DefaultEdge
-import org.jgrapht.graph.EdgeReversedGraph
 import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.MethodNode
 import org.openrs2.util.collect.UniqueQueue
 
 public abstract class DataFlowAnalyzer<T>(owner: String, private val method: MethodNode, backwards: Boolean = false) {
-    private val graph: Graph<Int, DefaultEdge>
+    private val graph: ControlFlowGraph
     private val inSets = mutableMapOf<Int, T>()
     private val outSets = mutableMapOf<Int, T>()
 
     init {
         val forwardsGraph = ControlFlowAnalyzer().createGraph(owner, method)
         graph = if (backwards) {
-            EdgeReversedGraph(forwardsGraph)
+            forwardsGraph.reverse()
         } else {
             forwardsGraph
         }
@@ -47,7 +44,7 @@ public abstract class DataFlowAnalyzer<T>(owner: String, private val method: Met
         val initialSet = createInitialSet()
 
         val workList = UniqueQueue<Int>()
-        workList += graph.vertexSet().filter { vertex -> graph.inDegreeOf(vertex) == 0 }
+        workList += graph.entryNodes
 
         while (true) {
             val node = workList.removeFirstOrNull() ?: break
