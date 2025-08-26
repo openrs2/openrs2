@@ -25,8 +25,8 @@ asm-tree = { module = "org.ow2.asm:asm-tree", version.ref = "asm" }
 asm-util = { module = "org.ow2.asm:asm-util", version.ref = "asm" }
 bootstrap = { module = "org.webjars:bootstrap", version = "5.3.7" }
 bootstrapTable = { module = "org.webjars.npm:bootstrap-table", version = "1.24.2" }
-bouncyCastle-pkix = { module = "org.bouncycastle:bcpkix-jdk15on", version = "1.70" }
-bouncyCastle-provider = { module = "org.bouncycastle:bcprov-jdk15on", version = "1.70" }
+bouncyCastle-pkix = { module = "org.bouncycastle:bcpkix-jdk18on", version = "1.81" }
+bouncyCastle-provider = { module = "org.bouncycastle:bcprov-jdk18on", version = "1.81" }
 byteUnits = { module = "com.jakewharton.byteunits:byteunits", version = "0.9.1" }
 cabParser = { module = "com.dorkbox:CabParser", version = "3.4" }
 clikt = { module = "com.github.ajalt.clikt:clikt", version = "5.0.3" }

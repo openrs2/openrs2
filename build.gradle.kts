@@ -159,11 +159,11 @@ configure(subprojects.filter { it.isFree }) {
                     }
 
                     externalDocumentationLink {
-                        url.set(URI("https://www.bouncycastle.org/docs/docs1.5on/").toURL())
+                        url.set(URI("https://downloads.bouncycastle.org/java/docs/bcprov-jdk18on-javadoc/").toURL())
                     }
 
                     externalDocumentationLink {
-                        url.set(URI("https://www.bouncycastle.org/docs/pkixdocs1.5on/").toURL())
+                        url.set(URI("https://downloads.bouncycastle.org/java/docs/bcpkix-jdk18on-javadoc/").toURL())
                     }
 
                     externalDocumentationLink {
