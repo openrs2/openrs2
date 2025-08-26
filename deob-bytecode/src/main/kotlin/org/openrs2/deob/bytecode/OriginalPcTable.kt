@@ -18,6 +18,7 @@ public class OriginalPcTable(
         return false
     }
 
+    @Deprecated("Deprecated in Java")
     override fun getLabels(): Array<Label> {
         return pcs.keys.map(LabelNode::getLabel).toTypedArray()
     }
