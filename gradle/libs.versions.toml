@@ -70,7 +70,7 @@ ktor-server-thymeleaf = { module = "io.ktor:ktor-server-thymeleaf", version.ref 
 ktor-server-webjars = { module = "io.ktor:ktor-server-webjars", version.ref = "ktor" }
 logback = { module = "ch.qos.logback:logback-classic", version = "1.5.8" }
 netty-buffer = { module = "io.netty:netty-buffer", version.ref = "netty" }
-netty-codec-core = { module = "io.netty:netty-codec", version.ref = "netty" }
+netty-codec-base = { module = "io.netty:netty-codec-base", version.ref = "netty" }
 netty-codec-http = { module = "io.netty:netty-codec-http", version.ref = "netty" }
 netty-handler = { module = "io.netty:netty-handler", version.ref = "netty" }
 netty-transport = { module = "io.netty:netty-transport", version.ref = "netty" }

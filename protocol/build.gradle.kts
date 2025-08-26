@@ -6,7 +6,7 @@ plugins {
 dependencies {
     api(projects.crypto)
     api(libs.bundles.guice)
-    api(libs.netty.codec.core)
+    api(libs.netty.codec.base)
 
     implementation(projects.buffer)
     implementation(projects.util)
