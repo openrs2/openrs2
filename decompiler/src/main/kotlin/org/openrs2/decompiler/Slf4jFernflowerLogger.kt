@@ -16,7 +16,6 @@ public object Slf4jFernflowerLogger : IFernflowerLogger() {
             Severity.INFO -> logger.info { message }
             Severity.WARN -> logger.warn { message }
             Severity.ERROR -> logger.error { message }
-            else -> throw IllegalArgumentException()
         }
     }
 
@@ -26,7 +25,6 @@ public object Slf4jFernflowerLogger : IFernflowerLogger() {
             Severity.INFO -> logger.info(t) { message }
             Severity.WARN -> logger.warn(t) { message }
             Severity.ERROR -> logger.error(t) { message }
-            else -> throw IllegalArgumentException()
         }
     }
 }

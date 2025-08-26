@@ -100,7 +100,6 @@ public class LoginChannelHandler @Inject constructor(
             is LoginRequest.RequestWorldList -> handleRequestWorldList(ctx, msg)
             is LoginRequest.CheckWorldSuitability -> handleCheckWorldSuitability(ctx, msg)
             is LoginRequest.InitCrossDomainConnection -> handleInitCrossDomainConnection(ctx)
-            else -> Unit
         }
     }
 
