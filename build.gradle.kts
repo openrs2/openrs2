@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jmailen.gradle.kotlinter.KotlinterExtension
 import org.jmailen.gradle.kotlinter.KotlinterPlugin
-import java.net.URL
+import java.net.URI
 
 defaultTasks("build")
 
@@ -149,37 +149,37 @@ configure(subprojects.filter { it.isFree }) {
 
                 sourceLink {
                     localDirectory.set(rootDir)
-                    remoteUrl.set(URL("https://github.com/openrs2/openrs2/tree/${commitHash()}"))
+                    remoteUrl.set(URI("https://github.com/openrs2/openrs2/tree/${commitHash()}").toURL())
                     remoteLineSuffix.set("#L")
                 }
 
                 if (project.hasProperty("externalDocumentationLinks")) {
                     externalDocumentationLink {
-                        url.set(URL("https://asm.ow2.io/javadoc/"))
+                        url.set(URI("https://asm.ow2.io/javadoc/").toURL())
                     }
 
                     externalDocumentationLink {
-                        url.set(URL("https://www.bouncycastle.org/docs/docs1.5on/"))
+                        url.set(URI("https://www.bouncycastle.org/docs/docs1.5on/").toURL())
                     }
 
                     externalDocumentationLink {
-                        url.set(URL("https://www.bouncycastle.org/docs/pkixdocs1.5on/"))
+                        url.set(URI("https://www.bouncycastle.org/docs/pkixdocs1.5on/").toURL())
                     }
 
                     externalDocumentationLink {
-                        url.set(URL("https://ajalt.github.io/clikt/api/clikt/"))
+                        url.set(URI("https://ajalt.github.io/clikt/api/clikt/").toURL())
                     }
 
                     externalDocumentationLink {
-                        url.set(URL("https://commons.apache.org/proper/commons-compress/javadocs/api-${libs.versions.commons.compress.get()}/"))
+                        url.set(URI("https://commons.apache.org/proper/commons-compress/javadocs/api-${libs.versions.commons.compress.get()}/").toURL())
                     }
 
                     externalDocumentationLink {
-                        url.set(URL("https://guava.dev/releases/${libs.versions.guava.get()}/api/docs/"))
+                        url.set(URI("https://guava.dev/releases/${libs.versions.guava.get()}/api/docs/").toURL())
                     }
 
                     externalDocumentationLink {
-                        url.set(URL("https://google.github.io/guice/api-docs/${libs.versions.guice.get()}/javadoc/"))
+                        url.set(URI("https://google.github.io/guice/api-docs/${libs.versions.guice.get()}/javadoc/").toURL())
                     }
 
                     val jacksonVersion = libs.versions.jackson.get().split(".")
@@ -187,31 +187,31 @@ configure(subprojects.filter { it.isFree }) {
                         .joinToString(".")
 
                     externalDocumentationLink {
-                        url.set(URL("https://fasterxml.github.io/jackson-annotations/javadoc/$jacksonVersion/"))
+                        url.set(URI("https://fasterxml.github.io/jackson-annotations/javadoc/$jacksonVersion/").toURL())
                     }
 
                     externalDocumentationLink {
-                        url.set(URL("https://fasterxml.github.io/jackson-core/javadoc/$jacksonVersion/"))
+                        url.set(URI("https://fasterxml.github.io/jackson-core/javadoc/$jacksonVersion/").toURL())
                     }
 
                     externalDocumentationLink {
-                        url.set(URL("https://fasterxml.github.io/jackson-databind/javadoc/$jacksonVersion/"))
+                        url.set(URI("https://fasterxml.github.io/jackson-databind/javadoc/$jacksonVersion/").toURL())
                     }
 
                     externalDocumentationLink {
-                        url.set(URL("https://fasterxml.github.io/jackson-dataformats-text/javadoc/yaml/$jacksonVersion/"))
+                        url.set(URI("https://fasterxml.github.io/jackson-dataformats-text/javadoc/yaml/$jacksonVersion/").toURL())
                     }
 
                     externalDocumentationLink {
-                        url.set(URL("http://www.jdom.org/docs/apidocs/"))
+                        url.set(URI("http://www.jdom.org/docs/apidocs/").toURL())
                     }
 
                     externalDocumentationLink {
-                        url.set(URL("https://google.github.io/jimfs/releases/${libs.versions.jimfs.get()}/api/docs/"))
+                        url.set(URI("https://google.github.io/jimfs/releases/${libs.versions.jimfs.get()}/api/docs/").toURL())
                     }
 
                     externalDocumentationLink {
-                        url.set(URL("https://junit.org/junit5/docs/${libs.versions.junit.get()}/api/"))
+                        url.set(URI("https://junit.org/junit5/docs/${libs.versions.junit.get()}/api/").toURL())
                     }
 
                     externalDocumentationLink {
@@ -219,7 +219,7 @@ configure(subprojects.filter { it.isFree }) {
                             .take(2)
                             .joinToString(".")
 
-                        url.set(URL("https://netty.io/$version/api/"))
+                        url.set(URI("https://netty.io/$version/api/").toURL())
                     }
                 }
             }
