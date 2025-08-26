@@ -51,7 +51,7 @@ allprojects {
 
     plugins.withType<KotlinterPlugin> {
         configure<KotlinterExtension> {
-            ignoreFailures = true
+            ignoreLintFailures = true
         }
     }
 
