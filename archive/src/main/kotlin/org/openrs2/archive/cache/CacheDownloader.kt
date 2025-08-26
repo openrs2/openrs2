@@ -1,5 +1,6 @@
 package org.openrs2.archive.cache
 
+import io.netty.channel.MultiThreadIoEventLoopGroup
 import jakarta.inject.Inject
 import jakarta.inject.Singleton
 import org.openrs2.archive.cache.nxt.MusicStreamClient
@@ -10,6 +11,7 @@ import org.openrs2.archive.world.WorldList
 import org.openrs2.buffer.ByteBufBodyHandler
 import org.openrs2.buffer.use
 import org.openrs2.net.BootstrapFactory
+import org.openrs2.net.Transport
 import org.openrs2.net.awaitSuspend
 import java.net.URI
 import java.net.http.HttpClient
@@ -19,6 +21,7 @@ import kotlin.coroutines.suspendCoroutine
 
 @Singleton
 public class CacheDownloader @Inject constructor(
+    private val transport: Transport,
     private val client: HttpClient,
     private val byteBufBodyHandler: ByteBufBodyHandler,
     private val bootstrapFactory: BootstrapFactory,
@@ -30,10 +33,10 @@ public class CacheDownloader @Inject constructor(
         val url = game.url ?: throw Exception("URL not set")
         val config = JavConfig.download(client, url)
 
-        val group = bootstrapFactory.createEventLoopGroup()
+        val group = MultiThreadIoEventLoopGroup(transport.ioHandlerFactory)
         try {
             suspendCoroutine { continuation ->
-                val bootstrap = bootstrapFactory.createBootstrap(group)
+                val bootstrap = bootstrapFactory.createBootstrap(group, transport.socketChannel)
                 val hostname: String
 
                 val initializer = when (gameName) {

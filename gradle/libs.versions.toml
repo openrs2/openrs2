@@ -9,8 +9,7 @@ junit = "5.13.4"
 kotlin = "2.0.21"
 kotlinCoroutines = "1.10.2"
 ktor = "3.2.3"
-netty = "4.1.124.Final"
-nettyIoUring = "0.0.26.Final"
+netty = "4.2.4.Final"
 
 [plugins]
 dependencyLicenseReport = { id = "com.github.jk1.dependency-license-report", version = "2.9" }

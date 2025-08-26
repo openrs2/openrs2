@@ -2,15 +2,18 @@ package org.openrs2.game.net
 
 import com.google.common.util.concurrent.AbstractService
 import io.netty.channel.EventLoopGroup
+import io.netty.channel.MultiThreadIoEventLoopGroup
 import jakarta.inject.Inject
 import jakarta.inject.Singleton
 import org.openrs2.game.net.http.HttpChannelInitializer
 import org.openrs2.net.BootstrapFactory
+import org.openrs2.net.Transport
 import org.openrs2.net.asCompletableFuture
 import java.util.concurrent.CompletableFuture
 
 @Singleton
 public class NetworkService @Inject constructor(
+    private val transport: Transport,
     private val bootstrapFactory: BootstrapFactory,
     private val httpInitializer: HttpChannelInitializer,
     private val rs2Initializer: Rs2ChannelInitializer
@@ -18,14 +21,14 @@ public class NetworkService @Inject constructor(
     private lateinit var group: EventLoopGroup
 
     override fun doStart() {
-        group = bootstrapFactory.createEventLoopGroup()
+        group = MultiThreadIoEventLoopGroup(transport.ioHandlerFactory)
 
-        val httpFuture = bootstrapFactory.createServerBootstrap(group)
+        val httpFuture = bootstrapFactory.createServerBootstrap(group, transport.serverSocketChannel)
             .childHandler(httpInitializer)
             .bind(HTTP_PORT)
             .asCompletableFuture()
 
-        val rs2Initializer = bootstrapFactory.createServerBootstrap(group)
+        val rs2Initializer = bootstrapFactory.createServerBootstrap(group, transport.serverSocketChannel)
             .childHandler(rs2Initializer)
 
         val rs2PrimaryFuture = rs2Initializer.bind(RS2_PRIMARY_PORT)
