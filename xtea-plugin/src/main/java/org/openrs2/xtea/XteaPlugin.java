@@ -49,6 +49,7 @@ public final class XteaPlugin extends Plugin {
 			return;
 		}
 
+		@SuppressWarnings("deprecation")
 		int[][] keys = client.getXteaKeys();
 		String url = config.endpoint();
 
