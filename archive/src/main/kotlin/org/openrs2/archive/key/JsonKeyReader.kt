@@ -26,7 +26,7 @@ public class JsonKeyReader @Inject constructor(
             }
 
             root.isObject -> {
-                for (entry in root.fields()) {
+                for (entry in root.properties()) {
                     keys += mapper.treeToValue<SymmetricKey?>(entry.value) ?: throw IOException("Key must be non-null")
                 }
             }
