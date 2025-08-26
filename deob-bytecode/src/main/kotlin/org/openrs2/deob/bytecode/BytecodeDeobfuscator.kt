@@ -16,7 +16,7 @@ import java.nio.file.Path
 
 @Singleton
 public class BytecodeDeobfuscator @Inject constructor(
-    @DeobfuscatorQualifier private val allTransformers: Set<Transformer>,
+    @param:DeobfuscatorQualifier private val allTransformers: Set<Transformer>,
     private val profile: Profile,
 ) {
     private val allTransformersByName = allTransformers.associateBy(Transformer::name)

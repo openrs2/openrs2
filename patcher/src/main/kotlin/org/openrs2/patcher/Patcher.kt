@@ -24,7 +24,7 @@ import java.util.jar.Manifest
 
 @Singleton
 public class Patcher @Inject constructor(
-    @PatcherQualifier private val transformers: Set<Transformer>,
+    @param:PatcherQualifier private val transformers: Set<Transformer>,
     private val config: Config,
     private val packClassLibraryWriter: PackClassLibraryWriter
 ) {

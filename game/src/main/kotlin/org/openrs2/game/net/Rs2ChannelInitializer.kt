@@ -17,9 +17,9 @@ import java.util.concurrent.TimeUnit
 @Singleton
 public class Rs2ChannelInitializer @Inject constructor(
     private val handlerProvider: Provider<LoginChannelHandler>,
-    @LoginUpstream
+    @param:LoginUpstream
     private val loginUpstreamProtocol: Protocol,
-    @LoginDownstream
+    @param:LoginDownstream
     private val loginDownstreamProtocol: Protocol
 ) : ChannelInitializer<Channel>() {
     override fun initChannel(ch: Channel) {

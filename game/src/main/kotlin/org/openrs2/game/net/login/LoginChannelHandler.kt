@@ -59,11 +59,11 @@ public class LoginChannelHandler @Inject constructor(
     js5MasterIndex: Js5MasterIndex,
     private val js5HandlerProvider: Provider<Js5ChannelHandler>,
     private val jaggrabHandler: JaggrabChannelHandler,
-    @CreateDownstream
+    @param:CreateDownstream
     private val createDownstreamProtocol: Protocol,
-    @Js5RemoteDownstream
+    @param:Js5RemoteDownstream
     private val js5RemoteDownstreamProtocol: Protocol,
-    @WorldListDownstream
+    @param:WorldListDownstream
     private val worldListDownstreamProtocol: Protocol
 ) : SimpleChannelInboundHandler<LoginRequest>(LoginRequest::class.java) {
     private lateinit var scope: CoroutineScope

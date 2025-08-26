@@ -39,7 +39,7 @@ public class WebServer @Inject constructor(
     private val cachesController: CachesController,
     private val clientsController: ClientsController,
     private val keysController: KeysController,
-    @Json private val mapper: ObjectMapper
+    @param:Json private val mapper: ObjectMapper
 ) {
     public fun start(address: String, port: Int) {
         embeddedServer(Jetty, configure = {

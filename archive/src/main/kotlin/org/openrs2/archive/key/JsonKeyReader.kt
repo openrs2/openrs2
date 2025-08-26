@@ -11,7 +11,7 @@ import java.io.InputStream
 
 @Singleton
 public class JsonKeyReader @Inject constructor(
-    @Json private val mapper: ObjectMapper
+    @param:Json private val mapper: ObjectMapper
 ) : KeyReader {
     override fun read(input: InputStream): Sequence<SymmetricKey> {
         val keys = mutableSetOf<SymmetricKey>()

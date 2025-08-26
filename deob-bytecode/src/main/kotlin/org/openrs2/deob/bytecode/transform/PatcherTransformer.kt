@@ -9,7 +9,7 @@ import org.openrs2.patcher.PatcherQualifier
 
 @Singleton
 public class PatcherTransformer @Inject constructor(
-    @PatcherQualifier private val transformers: Set<Transformer>
+    @param:PatcherQualifier private val transformers: Set<Transformer>
 ) : Transformer() {
     override fun transform(classPath: ClassPath) {
         for (transformer in transformers) {

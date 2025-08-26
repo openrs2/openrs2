@@ -8,7 +8,7 @@ import java.nio.file.Files
 import java.nio.file.Path
 
 public class ArchiveConfigProvider @Inject constructor(
-    @Yaml private val mapper: ObjectMapper
+    @param:Yaml private val mapper: ObjectMapper
 ) : Provider<ArchiveConfig> {
     override fun get(): ArchiveConfig {
         if (Files.notExists(CONFIG_PATH)) {

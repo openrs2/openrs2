@@ -7,7 +7,7 @@ import org.openrs2.yaml.Yaml
 import java.nio.file.Files
 import java.nio.file.Path
 
-public class ProfileProvider @Inject constructor(@Yaml private val mapper: ObjectMapper) : Provider<Profile> {
+public class ProfileProvider @Inject constructor(@param:Yaml private val mapper: ObjectMapper) : Provider<Profile> {
     override fun get(): Profile {
         return Files.newBufferedReader(PATH).use { reader ->
             mapper.readValue(reader, Profile::class.java)

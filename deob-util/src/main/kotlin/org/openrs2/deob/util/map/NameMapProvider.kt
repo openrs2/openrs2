@@ -7,7 +7,7 @@ import org.openrs2.yaml.Yaml
 import java.nio.file.Files
 import java.nio.file.Path
 
-public class NameMapProvider @Inject constructor(@Yaml private val mapper: ObjectMapper) : Provider<NameMap> {
+public class NameMapProvider @Inject constructor(@param:Yaml private val mapper: ObjectMapper) : Provider<NameMap> {
     override fun get(): NameMap {
         val combinedMap = NameMap()
 

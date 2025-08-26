@@ -7,7 +7,7 @@ import org.openrs2.yaml.Yaml
 import java.nio.file.Files
 import java.nio.file.Path
 
-public class ConfigProvider @Inject constructor(@Yaml private val mapper: ObjectMapper) : Provider<Config> {
+public class ConfigProvider @Inject constructor(@param:Yaml private val mapper: ObjectMapper) : Provider<Config> {
     override fun get(): Config {
         if (Files.notExists(CONFIG_PATH)) {
             Files.copy(EXAMPLE_CONFIG_PATH, CONFIG_PATH)
