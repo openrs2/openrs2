@@ -39,7 +39,6 @@ import org.openrs2.asm.stackMetadata
 import org.openrs2.asm.toAbstractInsnNode
 import org.openrs2.asm.transform.Transformer
 import org.openrs2.deob.bytecode.ArgPartition
-import org.openrs2.deob.bytecode.Profile
 import org.openrs2.deob.bytecode.analysis.IntBranch
 import org.openrs2.deob.bytecode.analysis.IntBranchResult.ALWAYS_TAKEN
 import org.openrs2.deob.bytecode.analysis.IntBranchResult.NEVER_TAKEN
@@ -47,6 +46,7 @@ import org.openrs2.deob.bytecode.analysis.IntInterpreter
 import org.openrs2.deob.bytecode.analysis.IntValueSet
 import org.openrs2.deob.bytecode.filter.ReflectedConstructorFilter
 import org.openrs2.deob.bytecode.remap.MethodMappingGenerator
+import org.openrs2.deob.util.profile.Profile
 import org.openrs2.util.collect.DisjointSet
 import org.openrs2.util.collect.UniqueQueue
 
