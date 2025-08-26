@@ -55,7 +55,7 @@ public class JagexGzipOutputStream(
 
             val dataOutput = LittleEndianDataOutputStream(output)
             dataOutput.writeInt(checksum.value.toInt())
-            dataOutput.writeInt(deflater.totalIn)
+            dataOutput.writeInt(deflater.bytesRead.toInt())
 
             deflater.end()
             output.close()
