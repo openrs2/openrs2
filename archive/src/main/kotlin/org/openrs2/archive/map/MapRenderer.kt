@@ -345,7 +345,7 @@ public class MapRenderer @Inject constructor(
     }
 
     private fun isShortCode(buf: ByteBuf): Boolean {
-        for (plane in 0 until LEVELS) {
+        for (plane in 0 until LEVELS + 1) {
             for (dx in 0 until MAP_SIZE) {
                 for (dz in 0 until MAP_SIZE) {
                     while (true) {
@@ -371,6 +371,18 @@ public class MapRenderer @Inject constructor(
                             buf.skipBytes(2)
                         }
                     }
+                }
+            }
+
+            // check if there's an extra -1 level
+            if (plane == LEVELS - 1) {
+                if (!buf.isReadable) {
+                    return true
+                }
+
+                val underground = buf.readBoolean()
+                if (!underground) {
+                    return !buf.isReadable
                 }
             }
         }
