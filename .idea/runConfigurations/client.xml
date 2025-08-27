@@ -3,6 +3,7 @@
     <option name="MAIN_CLASS_NAME" value="client" />
     <module name="openrs2.nonfree.client.main" />
     <option name="PROGRAM_PARAMETERS" value="1 live en game0" />
+    <option name="VM_PARAMETERS" value="--add-opens=java.base/java.lang=ALL-UNNAMED" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>
