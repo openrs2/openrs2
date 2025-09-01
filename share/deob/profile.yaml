@@ -1,4 +1,32 @@
 ---
+libraries:
+  client:
+    format: pack200
+    file: runescape_gl.pack200
+    requires:
+      - gl
+      - signlink
+  gl:
+    format: pack200
+    file: jaggl.pack200
+  loader:
+    format: jar
+    file: loader_gl.jar
+    requires:
+      - signlink
+      - unpack
+  unpackclass:
+    format: jar
+    file: unpackclass.pack
+    requires:
+      - unpack
+  signlink:
+    signed_move:
+      - loader
+      - client
+  unpack:
+    move:
+      - "loader!unpack"
 excluded_classes:
   - "*!client"
   - "*!com/sun/opengl/impl/x11/**"
