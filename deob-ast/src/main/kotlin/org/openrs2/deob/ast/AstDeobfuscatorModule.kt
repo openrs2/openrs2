@@ -25,6 +25,8 @@ import org.openrs2.deob.ast.transform.TernaryTransformer
 import org.openrs2.deob.ast.transform.Transformer
 import org.openrs2.deob.ast.transform.UnencloseTransformer
 import org.openrs2.deob.ast.transform.ValueOfTransformer
+import java.nio.file.Files
+import java.nio.file.Paths
 
 public object AstDeobfuscatorModule : AbstractModule() {
     override fun configure() {
@@ -33,24 +35,41 @@ public object AstDeobfuscatorModule : AbstractModule() {
             .`in`(Scopes.SINGLETON)
 
         val binder = Multibinder.newSetBinder(binder(), Transformer::class.java)
-        binder.addBinding().to(UnencloseTransformer::class.java)
-        binder.addBinding().to(NegativeLiteralTransformer::class.java)
-        binder.addBinding().to(ComplementTransformer::class.java)
-        binder.addBinding().to(NotTransformer::class.java)
-        binder.addBinding().to(CharLiteralTransformer::class.java)
-        binder.addBinding().to(IfElseTransformer::class.java)
-        binder.addBinding().to(TernaryTransformer::class.java)
-        binder.addBinding().to(BinaryExprOrderTransformer::class.java)
-        binder.addBinding().to(AddSubTransformer::class.java)
-        binder.addBinding().to(IdentityTransformer::class.java)
-        binder.addBinding().to(BitMaskTransformer::class.java)
-        binder.addBinding().to(HexLiteralTransformer::class.java)
-        binder.addBinding().to(ValueOfTransformer::class.java)
-        binder.addBinding().to(NewInstanceTransformer::class.java)
-        binder.addBinding().to(IncrementTransformer::class.java)
-        binder.addBinding().to(ForLoopConditionTransformer::class.java)
-        binder.addBinding().to(RedundantCastTransformer::class.java)
-        binder.addBinding().to(GlTransformer::class.java)
-        binder.addBinding().to(EncloseTransformer::class.java)
+
+        if (Files.notExists(Paths.get("share", "deob", "ast.transformers.list"))) {
+            println("No AST transformers")
+            return
+        }
+
+        // would be nice to read this from yaml, unfortunately profile.yaml is not available until the module runs
+        val transformers = Files.readAllLines(Paths.get("share", "deob", "ast.transformers.list"))
+        for (transformer in transformers) {
+            if (transformer.isEmpty()) {
+                continue
+            }
+
+            binder.addBinding().to(when (transformer) {
+                "Unenclose" -> UnencloseTransformer::class.java
+                "NegativeLiteral" -> NegativeLiteralTransformer::class.java
+                "Complement" -> ComplementTransformer::class.java
+                "Not" -> NotTransformer::class.java
+                "CharLiteral" -> CharLiteralTransformer::class.java
+                "IfElse" -> IfElseTransformer::class.java
+                "Ternary" -> TernaryTransformer::class.java
+                "BinaryExprOrder" -> BinaryExprOrderTransformer::class.java
+                "AddSub" -> AddSubTransformer::class.java
+                "Identity" -> IdentityTransformer::class.java
+                "BitMask" -> BitMaskTransformer::class.java
+                "HexLiteral" -> HexLiteralTransformer::class.java
+                "ValueOf" -> ValueOfTransformer::class.java
+                "NewInstance" -> NewInstanceTransformer::class.java
+                "Increment" -> IncrementTransformer::class.java
+                "ForLoopCondition" -> ForLoopConditionTransformer::class.java
+                "RedundantCast" -> RedundantCastTransformer::class.java
+                "Gl" -> GlTransformer::class.java
+                "Enclose" -> EncloseTransformer::class.java
+                else -> throw IllegalArgumentException("Unknown AST transformer: $transformer")
+            })
+        }
     }
 }
