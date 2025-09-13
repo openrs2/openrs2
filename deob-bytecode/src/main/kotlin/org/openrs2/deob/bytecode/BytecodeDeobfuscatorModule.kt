@@ -1,9 +1,12 @@
 package org.openrs2.deob.bytecode
 
 import com.google.inject.AbstractModule
-import com.google.inject.Scopes
 import com.google.inject.multibindings.Multibinder
 import org.openrs2.asm.transform.Transformer
+import org.openrs2.deob.bytecode.library.LibraryPreprocessor
+import org.openrs2.deob.bytecode.library.LibraryPreprocessorQualifier
+import org.openrs2.deob.bytecode.library.SignedClassPreprocessor
+import org.openrs2.deob.bytecode.library.UnpackLibraryPreprocessor
 import org.openrs2.deob.bytecode.transform.BitShiftTransformer
 import org.openrs2.deob.bytecode.transform.BitwiseOpTransformer
 import org.openrs2.deob.bytecode.transform.CanvasTransformer
@@ -45,10 +48,6 @@ public object BytecodeDeobfuscatorModule : AbstractModule() {
         install(PatcherModule)
         install(DeobfuscatorUtilModule)
 
-        bind(Profile::class.java)
-            .toProvider(ProfileProvider::class.java)
-            .`in`(Scopes.SINGLETON)
-
         val binder = Multibinder.newSetBinder(binder(), Transformer::class.java, DeobfuscatorQualifier::class.java)
         binder.addBinding().to(BitShiftTransformer::class.java)
         binder.addBinding().to(BitwiseOpTransformer::class.java)
@@ -83,5 +82,13 @@ public object BytecodeDeobfuscatorModule : AbstractModule() {
         binder.addBinding().to(UnusedLocalTransformer::class.java)
         binder.addBinding().to(UnusedMethodTransformer::class.java)
         binder.addBinding().to(VisibilityTransformer::class.java)
+
+        val preprocessors = Multibinder.newSetBinder(
+            binder(),
+            LibraryPreprocessor::class.java,
+            LibraryPreprocessorQualifier::class.java
+        )
+        preprocessors.addBinding().to(SignedClassPreprocessor::class.java)
+        preprocessors.addBinding().to(UnpackLibraryPreprocessor::class.java)
     }
 }
