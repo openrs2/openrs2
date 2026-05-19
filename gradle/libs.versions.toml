@@ -79,7 +79,6 @@ pecoff4j = { module = "com.kichik.pecoff4j:pecoff4j", version = "0.4.1" }
 postgres = { module = "org.postgresql:postgresql", version = "42.7.11" }
 result-core = { module = "com.michael-bull.kotlin-result:kotlin-result", version = "2.3.1" }
 result-coroutines = { module = "com.michael-bull.kotlin-result:kotlin-result-coroutines", version = "2.3.1" }
-runelite-client = { module = "net.runelite:client", version = "1.11.14" }
 sqlite = { module = "org.xerial:sqlite-jdbc", version = "3.53.1.0" }
 thymeleaf-core = { module = "org.thymeleaf:thymeleaf", version = "3.1.5.RELEASE" }
 thymeleaf-java8time = { module = "org.thymeleaf.extras:thymeleaf-extras-java8time", version = "3.0.4.RELEASE" }

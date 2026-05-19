@@ -5,7 +5,6 @@ dependencyResolutionManagement {
         mavenCentral()
         gradlePluginPortal()
         maven(url = "https://repo.openrs2.org/repository/openrs2")
-        maven(url = "https://repo.runelite.net")
         mavenLocal()
         maven(url = "https://repo.openrs2.org/repository/openrs2-snapshots")
     }
@@ -58,6 +57,5 @@ include(
     "patcher",
     "protocol",
     "util",
-    "xtea-plugin",
     "yaml"
 )
