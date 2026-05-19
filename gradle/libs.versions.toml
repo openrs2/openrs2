@@ -11,7 +11,7 @@ ktor = "3.5.0"
 netty = "4.2.13.Final"
 
 [plugins]
-dependencyLicenseReport = { id = "com.github.jk1.dependency-license-report", version = "2.9" }
+dependencyLicenseReport = { id = "com.github.jk1.dependency-license-report", version = "3.1.2" }
 dokka = { id = "org.jetbrains.dokka", version = "1.9.20" }
 kotlinter = { id = "org.jmailen.kotlinter", version = "5.2.0" }
 shadow = { id = "com.github.johnrengelman.shadow", version = "8.1.1" }
