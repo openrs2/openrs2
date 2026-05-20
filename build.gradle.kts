@@ -38,8 +38,8 @@ allprojects {
         configure<JavaPluginExtension> {
             withSourcesJar()
 
-            sourceCompatibility = JavaVersion.VERSION_11
-            targetCompatibility = JavaVersion.VERSION_11
+            sourceCompatibility = JavaVersion.VERSION_17
+            targetCompatibility = JavaVersion.VERSION_17
         }
     }
 
@@ -57,12 +57,12 @@ allprojects {
 
     tasks.withType<JavaCompile> {
         options.encoding = "UTF-8"
-        options.release.set(11)
+        options.release.set(17)
     }
 
     tasks.withType<KotlinCompile> {
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
+            jvmTarget.set(JvmTarget.JVM_17)
             freeCompilerArgs.set(listOf("-Xinline-classes", "-Xjsr305=strict"))
         }
     }
@@ -100,14 +100,6 @@ val Project.isFree: Boolean
 configure(subprojects.filter { it.isFree }) {
     apply(plugin = "jacoco")
 
-    configure<JacocoPluginExtension> {
-        /*
-         * Temporarily override bundled Jacoco for compatibility with Kotlin
-         * 1.5.
-         */
-        toolVersion = "0.8.7"
-    }
-
     plugins.withType<JavaPlugin> {
         dependencies {
             val testImplementation by configurations
@@ -144,7 +136,7 @@ configure(subprojects.filter { it.isFree }) {
         dokkaSourceSets {
             configureEach {
                 includeNonPublic.set(true)
-                jdkVersion.set(11)
+                jdkVersion.set(17)
                 moduleName.set("openrs2")
 
                 sourceLink {

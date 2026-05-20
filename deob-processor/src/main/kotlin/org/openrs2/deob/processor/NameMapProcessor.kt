@@ -36,7 +36,7 @@ import javax.lang.model.element.VariableElement
     "org.openrs2.deob.annotation.OriginalMember",
     "org.openrs2.deob.annotation.Pc"
 )
-@SupportedSourceVersion(SourceVersion.RELEASE_11)
+@SupportedSourceVersion(SourceVersion.RELEASE_17)
 @SupportedOptions(
     "map"
 )
