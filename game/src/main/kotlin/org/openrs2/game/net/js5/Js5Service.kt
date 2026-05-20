@@ -22,6 +22,7 @@ public class Js5Service @Inject constructor(
     private val masterIndex: Js5MasterIndex,
     private val alloc: ByteBufAllocator
 ) : AbstractExecutionThreadService() {
+    @Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN")
     private val lock = Object()
     private val clients = UniqueQueue<Js5Client>()
 
