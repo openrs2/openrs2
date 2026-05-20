@@ -147,7 +147,11 @@ public class ByteBufExtensionGenerator {
             )
         }
 
-        builder.addStatement("return value.%N()", "to${readType.simpleName}")
+        if (readType != Int::class) {
+            builder.addStatement("return value.%N()", "to${readType.simpleName}")
+        } else {
+            builder.addStatement("return value")
+        }
 
         return builder.build()
     }

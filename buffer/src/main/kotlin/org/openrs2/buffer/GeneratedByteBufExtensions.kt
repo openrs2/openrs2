@@ -139,7 +139,7 @@ public fun ByteBuf.getUnsignedShortA(index: Int): Int {
     var value = 0
     value = value or (((getByte(index + 0).toInt()) and 0xFF) shl 8)
     value = value or (((getByte(index + 1).toInt() - 128) and 0xFF) shl 0)
-    return value.toInt()
+    return value
 }
 
 public fun ByteBuf.readUnsignedShortA(): Int {
@@ -181,7 +181,7 @@ public fun ByteBuf.getUnsignedShortC(index: Int): Int {
     var value = 0
     value = value or (((getByte(index + 0).toInt()) and 0xFF) shl 8)
     value = value or (((-getByte(index + 1).toInt()) and 0xFF) shl 0)
-    return value.toInt()
+    return value
 }
 
 public fun ByteBuf.readUnsignedShortC(): Int {
@@ -223,7 +223,7 @@ public fun ByteBuf.getUnsignedShortS(index: Int): Int {
     var value = 0
     value = value or (((getByte(index + 0).toInt()) and 0xFF) shl 8)
     value = value or (((128 - getByte(index + 1).toInt()) and 0xFF) shl 0)
-    return value.toInt()
+    return value
 }
 
 public fun ByteBuf.readUnsignedShortS(): Int {
@@ -265,7 +265,7 @@ public fun ByteBuf.getUnsignedShortLEA(index: Int): Int {
     var value = 0
     value = value or (((getByte(index + 0).toInt() - 128) and 0xFF) shl 0)
     value = value or (((getByte(index + 1).toInt()) and 0xFF) shl 8)
-    return value.toInt()
+    return value
 }
 
 public fun ByteBuf.readUnsignedShortLEA(): Int {
@@ -307,7 +307,7 @@ public fun ByteBuf.getUnsignedShortLEC(index: Int): Int {
     var value = 0
     value = value or (((-getByte(index + 0).toInt()) and 0xFF) shl 0)
     value = value or (((getByte(index + 1).toInt()) and 0xFF) shl 8)
-    return value.toInt()
+    return value
 }
 
 public fun ByteBuf.readUnsignedShortLEC(): Int {
@@ -349,7 +349,7 @@ public fun ByteBuf.getUnsignedShortLES(index: Int): Int {
     var value = 0
     value = value or (((128 - getByte(index + 0).toInt()) and 0xFF) shl 0)
     value = value or (((getByte(index + 1).toInt()) and 0xFF) shl 8)
-    return value.toInt()
+    return value
 }
 
 public fun ByteBuf.readUnsignedShortLES(): Int {
@@ -379,7 +379,7 @@ public fun ByteBuf.getIntAlt3(index: Int): Int {
     value = value or (((getByte(index + 1).toInt()) and 0xFF) shl 24)
     value = value or (((getByte(index + 2).toInt()) and 0xFF) shl 0)
     value = value or (((getByte(index + 3).toInt()) and 0xFF) shl 8)
-    return value.toInt()
+    return value
 }
 
 public fun ByteBuf.readIntAlt3(): Int {
@@ -411,7 +411,7 @@ public fun ByteBuf.getIntAlt3Reverse(index: Int): Int {
     value = value or (((getByte(index + 1).toInt()) and 0xFF) shl 0)
     value = value or (((getByte(index + 2).toInt()) and 0xFF) shl 24)
     value = value or (((getByte(index + 3).toInt()) and 0xFF) shl 16)
-    return value.toInt()
+    return value
 }
 
 public fun ByteBuf.readIntAlt3Reverse(): Int {
