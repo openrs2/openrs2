@@ -54,7 +54,7 @@ public fun Expression.negate(): Expression {
 
         is IntegerLiteralExpr -> when (val n = asNumber()) {
             IntegerLiteralExpr.MAX_31_BIT_UNSIGNED_VALUE_AS_LONG -> IntegerLiteralExpr(Integer.MIN_VALUE.toString())
-            is Int -> IntegerLiteralExpr((-n.toInt()).toString())
+            is Int -> IntegerLiteralExpr((-n).toString())
             else -> error("Invalid IntegerLiteralExpr type")
         }
 

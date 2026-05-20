@@ -22,7 +22,7 @@ public class OkCodec : FixedPacketCodec<LoginResponse.Ok>(
         val parentalAdvertConsent = input.readBoolean()
         val mapQuickChat = input.readBoolean()
         val recordMouseMovement = input.readBoolean()
-        val playerId = input.readUnsignedShort().toInt()
+        val playerId = input.readUnsignedShort()
         val playerMember = input.readBoolean()
         val mapMembers = input.readBoolean()
 
