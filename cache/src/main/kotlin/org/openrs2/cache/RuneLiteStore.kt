@@ -101,21 +101,21 @@ public class RuneLiteStore @Inject constructor(
                         "contents" -> {
                             Unpooled.wrappedBuffer(Base64.getDecoder().decode(value)).use { buf ->
                                 // Some groups have version trailers and some don't. Fix that up here.
-                                if (group!!.checksum != buf.crc32()) {
-                                    if (group!!.version != VersionTrailer.strip(buf)) {
+                                if (group.checksum != buf.crc32()) {
+                                    if (group.version != VersionTrailer.strip(buf)) {
                                         throw StoreCorruptException("Group version does not match contents")
                                     }
 
-                                    if (group!!.checksum != buf.crc32()) {
+                                    if (group.checksum != buf.crc32()) {
                                         throw StoreCorruptException("Group CRC does not match contents")
                                     }
                                 }
 
                                 alloc.buffer(2, 2).use { versionBuf ->
-                                    versionBuf.writeShort(group!!.version)
+                                    versionBuf.writeShort(group.version)
 
                                     Unpooled.wrappedBuffer(buf.retain(), versionBuf.retain()).use { combinedBuf ->
-                                        output.write(archive, group!!.id, combinedBuf)
+                                        output.write(archive, group.id, combinedBuf)
                                     }
                                 }
                             }

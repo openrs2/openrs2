@@ -407,7 +407,7 @@ public abstract class Archive internal constructor(
              * regardless of group cache size/invalidation behaviour.
              */
             require(unpacked.key == key) {
-                "Invalid key for archive $archive group ${entry.id} (expected ${unpacked!!.key}, actual $key)"
+                "Invalid key for archive $archive group ${entry.id} (expected ${unpacked.key}, actual $key)"
             }
             return unpacked
         }
