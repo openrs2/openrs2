@@ -1,9 +1,10 @@
 package org.openrs2.asm.classpath
 
+import org.objectweb.asm.Opcodes
 import org.objectweb.asm.commons.Remapper
 import org.objectweb.asm.tree.AbstractInsnNode
 
-public abstract class ExtendedRemapper : Remapper() {
+public abstract class ExtendedRemapper : Remapper(Opcodes.ASM9) {
     public open fun getFieldInitializer(owner: String, name: String, descriptor: String): List<AbstractInsnNode>? {
         return null
     }
