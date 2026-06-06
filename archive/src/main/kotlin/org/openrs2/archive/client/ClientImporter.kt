@@ -840,7 +840,7 @@ public class ClientImporter @Inject constructor(
         val clazz = library["loader"] ?: return null
 
         for (method in clazz.methods) {
-            if (!method.hasCode || method.name != "<clinit>") {
+            if (!method.hasCode || (method.name != "<init>" && method.name != "<clinit>")) {
                 continue
             }
 
