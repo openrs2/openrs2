@@ -21,6 +21,7 @@ import org.glavo.pack200.Pack200
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.ClassNode
+import org.objectweb.asm.tree.FieldInsnNode
 import org.objectweb.asm.tree.JumpInsnNode
 import org.objectweb.asm.tree.LdcInsnNode
 import org.objectweb.asm.tree.MethodInsnNode
@@ -656,7 +657,7 @@ public class ClientImporter @Inject constructor(
 
         if (mudclient != null) {
             game = "classic"
-            build = null // TODO(gpe): classic support
+            build = parseClassicClientBuild(library)
             type = ArtifactType.CLIENT
             links = emptyList()
         } else if (client != null) {
@@ -787,6 +788,72 @@ public class ClientImporter @Inject constructor(
         }
 
         return false
+    }
+
+    private fun parseClassicClientBuild(library: Library): CacheExporter.Build? {
+        val versions = library.singleOrNull { clazz ->
+            val noMethods = clazz.methods.none { method ->
+                method.name != "<init>" && method.name != "<clinit>"
+            }
+
+            val onlyStaticIntegers = clazz.fields.none { field ->
+                field.desc != "I" || ((field.access and Opcodes.ACC_STATIC) == 0)
+            }
+
+            noMethods && onlyStaticIntegers
+        } ?: return null
+
+        val candidates = mutableListOf<String>()
+
+        for (clazz in library) {
+            for (method in clazz.methods) {
+                if (!method.hasCode) {
+                    continue
+                }
+
+                for (match in STATIC_COPY_MATCHER.match(method)) {
+                    val src = match[0] as FieldInsnNode
+                    if (src.owner == versions.name && versions.fields.any { it.name == src.name && it.desc == "I" } && src.desc == "I") {
+                        candidates += src.name
+                    }
+                }
+            }
+        }
+
+        val name = candidates.singleOrNull() ?: return null
+
+        for (field in versions.fields) {
+            if (field.name != name || field.desc != "I") {
+                continue
+            }
+
+            val value = field.value
+            if (value !is Int) {
+                continue
+            }
+
+            return CacheExporter.Build(value, null)
+        }
+
+        for (method in versions.methods) {
+            if (method.name != "<clinit>") {
+                continue
+            }
+
+            for (match in SET_STATIC_INT_MATCHER.match(method)) {
+                val field = match[1] as FieldInsnNode
+                if (field.owner != versions.name || field.name != name || field.desc != "I") {
+                    continue
+                }
+
+                val value = match[0].intConstant
+                if (value != null) {
+                    return CacheExporter.Build(value, null)
+                }
+            }
+        }
+
+        return null
     }
 
     private fun parseClientBuild(library: Library, clazz: ClassNode): CacheExporter.Build? {
@@ -1297,5 +1364,7 @@ public class ClientImporter @Inject constructor(
             InsnMatcher.compile("LDC LDC (LDC+ | ICONST ANEWARRAY (DUP ICONST LDC AASTORE)+) (ICONST | BIPUSH | SIPUSH | LDC) (ICONST | BIPUSH | SIPUSH | LDC) BIPUSH NEWARRAY (DUP (ICONST | BIPUSH) (ICONST | BIPUSH) IASTORE)+ INVOKESPECIAL")
 
         private val MUDCLIENT_REGEX = Regex("mudclient(\\d+)[.]jar")
+        private val STATIC_COPY_MATCHER = InsnMatcher.compile("GETSTATIC PUTSTATIC")
+        private val SET_STATIC_INT_MATCHER = InsnMatcher.compile("(ICONST | BIPUSH | SIPUSH | LDC) PUTSTATIC")
     }
 }
