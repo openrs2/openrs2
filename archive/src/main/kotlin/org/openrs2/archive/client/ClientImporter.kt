@@ -873,7 +873,14 @@ public class ClientImporter @Inject constructor(
             }
         }
 
-        val name = candidates.singleOrNull() ?: return null
+        val name = if (candidates.isEmpty()) {
+            val first = versions.fields.firstOrNull() ?: return null
+            first.name
+        } else if (candidates.size == 1) {
+            candidates.single()
+        } else {
+            return null
+        }
 
         for (field in versions.fields) {
             if (field.name != name || field.desc != "I") {
