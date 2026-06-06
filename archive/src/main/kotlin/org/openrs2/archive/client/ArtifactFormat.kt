@@ -8,7 +8,8 @@ public enum class ArtifactFormat {
     NATIVE,
     PACK200,
     PACKCLASS,
-    JAG;
+    JAG,
+    MEM;
 
     public fun getPrefix(os: OperatingSystem): String {
         return when (this) {
@@ -25,6 +26,7 @@ public enum class ArtifactFormat {
             PACK200 -> "pack200"
             PACKCLASS -> "js5"
             JAG -> "jag"
+            MEM -> "mem"
         }
     }
 
@@ -33,7 +35,7 @@ public enum class ArtifactFormat {
             CAB -> CAB_MIME_TYPE
             JAR -> JAR_MIME_TYPE
             NATIVE -> os.getContentType()
-            PACK200, PACKCLASS, JAG -> ContentType.Application.OctetStream
+            PACK200, PACKCLASS, JAG, MEM -> ContentType.Application.OctetStream
         }
     }
 

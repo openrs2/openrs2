@@ -398,18 +398,67 @@ public class ClientImporter @Inject constructor(
     }
 
     private fun parseJagArchive(buf: ByteBuf, archive: JagArchive): Artifact {
-        if (!archive.exists("LABELS.DAT")) {
+        if (archive.exists("LABELS.DAT")) {
+            return Artifact(
+                buf.retain(),
+                "mapview",
+                "live",
+                null,
+                null,
+                ArtifactType.WORLDMAP,
+                ArtifactFormat.JAG,
+                OperatingSystem.INDEPENDENT,
+                Architecture.INDEPENDENT,
+                Jvm.INDEPENDENT,
+                emptyList()
+            )
+        }
+
+        val type: ArtifactType
+        var format = ArtifactFormat.JAG
+
+        if (archive.exists("LOGO.TGA")) {
+            type = ArtifactType.JAGEX
+        } else if (archive.exists("BOUNDARY.TXT") || archive.exists("INTEGER.DAT")) {
+            type = ArtifactType.CONFIG
+        } else if (archive.exists("APRON.TGA") || archive.exists("APRON.DAT")) {
+            type = ArtifactType.ENTITY
+        } else if (archive.exists("BAT.DAT")) {
+            type = ArtifactType.ENTITY
+            format = ArtifactFormat.MEM
+        } else if (archive.exists("BADENC.TXT")) {
+            type = ArtifactType.FILTER
+        } else if (archive.exists("M05050.HEI")) {
+            type = ArtifactType.LAND
+        } else if (archive.exists("M05646.HEI")) {
+            type = ArtifactType.LAND
+            format = ArtifactFormat.MEM
+        } else if (archive.exists("M05050.JM") || archive.exists("M05050.DAT")) {
+            type = ArtifactType.MAPS
+        } else if (archive.exists("M05646.JM") || archive.exists("M05646.DAT")) {
+            type = ArtifactType.MAPS
+            format = ArtifactFormat.MEM
+        } else if (archive.exists("ARROWS.TGA") || archive.exists("ARROWS.DAT")) {
+            type = ArtifactType.MEDIA
+        } else if (archive.exists("ALTAR.OB2") || archive.exists("ALTAR.OB3")) {
+            type = ArtifactType.MODELS
+        } else if (archive.exists("ADVANCE.PCM")) {
+            type = ArtifactType.SOUNDS
+            format = ArtifactFormat.MEM
+        } else if (archive.exists("ARROWSLIT.TGA") || archive.exists("ARROWSLIT.DAT")) {
+            type = ArtifactType.TEXTURES
+        } else {
             throw IllegalArgumentException()
         }
 
         return Artifact(
             buf.retain(),
-            "mapview",
+            "classic",
             "live",
             null,
             null,
-            ArtifactType.WORLDMAP,
-            ArtifactFormat.JAG,
+            type,
+            format,
             OperatingSystem.INDEPENDENT,
             Architecture.INDEPENDENT,
             Jvm.INDEPENDENT,
@@ -678,7 +727,7 @@ public class ClientImporter @Inject constructor(
                 game = "classic"
                 build = parseClassicLoaderBuild(loader)
                 type = ArtifactType.LOADER
-                links = emptyList() // TODO(gpe): classic support
+                links = parseClassicLoaderLinks(loader)
             } else {
                 game = "runescape"
                 build = parseSignLinkBuild(library)
@@ -984,6 +1033,106 @@ public class ClientImporter @Inject constructor(
         require(links.size <= 1)
 
         return links
+    }
+
+    private fun parseClassicLoaderLinks(loader: ClassNode): List<ArtifactLink> {
+        val names = mutableListOf<String>()
+        val sizes = mutableListOf<Int>()
+        val hashes = mutableListOf<ByteArray>()
+
+        for (method in loader.methods) {
+            if (!method.hasCode || (method.name != "<init>" && method.name != "<clinit>")) {
+                continue
+            }
+
+            for (m in FILE_NAME_ARRAY_MATCHER.match(method)) {
+                val put = m.last() as FieldInsnNode
+                if (put.name != "internetname") {
+                    continue
+                }
+
+                for (i in 4 until m.size step 4) {
+                    val ldc = m[i] as LdcInsnNode
+
+                    val cst = ldc.cst
+                    if (cst !is String) {
+                        break
+                    }
+
+                    names += cst
+                }
+            }
+
+            for (m in SIZE_ARRAY_MATCHER.match(method)) {
+                val put = m.last() as FieldInsnNode
+                if (put.name != "size") {
+                    continue
+                }
+
+                for (i in 4 until m.size step 4) {
+                    sizes += m[i].intConstant!!
+                }
+            }
+
+            for (match in SHA1_MATCHER.match(method)) {
+                val len = match[0].intConstant
+                if (len != SHA1_BYTES) {
+                    continue
+                }
+
+                val sha1 = ByteArray(SHA1_BYTES)
+                for (i in 2 until match.size step 4) {
+                    val k = match[i + 1].intConstant!!
+                    val v = match[i + 2].intConstant!!
+                    sha1[k] = v.toByte()
+                }
+
+                hashes += sha1
+            }
+        }
+
+        if (names.size != sizes.size || sizes.size != hashes.size) {
+            return emptyList()
+        }
+
+        return List(names.size) { i ->
+            val name = names[i]
+            val size = sizes[i]
+            val sha1 = hashes[i]
+
+            val type = when {
+                name.startsWith("mudclient") -> ArtifactType.CLIENT
+                name.startsWith("jagex") -> ArtifactType.JAGEX
+                name.startsWith("config") -> ArtifactType.CONFIG
+                name.startsWith("entity") -> ArtifactType.ENTITY
+                name.startsWith("land") -> ArtifactType.LAND
+                name.startsWith("maps") -> ArtifactType.MAPS
+                name.startsWith("media") -> ArtifactType.MEDIA
+                name.startsWith("models") -> ArtifactType.MODELS
+                name.startsWith("textures") -> ArtifactType.TEXTURES
+                name.startsWith("filter") -> ArtifactType.FILTER
+                name.startsWith("sounds") -> ArtifactType.SOUNDS
+                else -> throw IllegalArgumentException()
+            }
+
+            val format = when {
+                name.endsWith(".jag") -> ArtifactFormat.JAG
+                name.endsWith(".jar") -> ArtifactFormat.JAR
+                name.endsWith(".mem") -> ArtifactFormat.MEM
+                else -> throw IllegalArgumentException()
+            }
+
+            ArtifactLink(
+                type,
+                format,
+                OperatingSystem.INDEPENDENT,
+                Architecture.INDEPENDENT,
+                Jvm.INDEPENDENT,
+                crc32 = null,
+                sha1,
+                size,
+            )
+        }
     }
 
     private fun parseLoaderLinks(library: Library): List<ArtifactLink> {
@@ -1356,7 +1505,7 @@ public class ClientImporter @Inject constructor(
 
         private const val SHA1_BYTES = 20
         private val SHA1_MATCHER =
-            InsnMatcher.compile("BIPUSH NEWARRAY (DUP (ICONST | BIPUSH) (ICONST | BIPUSH | SIPUSH) IASTORE)+")
+            InsnMatcher.compile("BIPUSH NEWARRAY (DUP (ICONST | BIPUSH) (ICONST | BIPUSH | SIPUSH) (BASTORE | IASTORE))+")
 
         private val FILE_NAME_REGEX =
             Regex("(([a-z0-9_]+?)(?:_[0-9]){0,2})(?:_(-?[0-9]+))?[.]([a-z0-9]+)(?:\\?crc=(-?[0-9]+))?")
@@ -1366,6 +1515,9 @@ public class ClientImporter @Inject constructor(
 
         private val RESOURCE_CTOR_MATCHER =
             InsnMatcher.compile("LDC LDC (LDC+ | ICONST ANEWARRAY (DUP ICONST LDC AASTORE)+) (ICONST | BIPUSH | SIPUSH | LDC) (ICONST | BIPUSH | SIPUSH | LDC) BIPUSH NEWARRAY (DUP (ICONST | BIPUSH) (ICONST | BIPUSH) IASTORE)+ INVOKESPECIAL")
+
+        private val FILE_NAME_ARRAY_MATCHER = InsnMatcher.compile("(ICONST | BIPUSH) ANEWARRAY (DUP (ICONST | BIPUSH) LDC AASTORE)+ (PUTSTATIC | PUTFIELD)")
+        private val SIZE_ARRAY_MATCHER = InsnMatcher.compile("(ICONST | BIPUSH) NEWARRAY (DUP (ICONST | BIPUSH) (ICONST | BIPUSH | SIPUSH | LDC) IASTORE)+ (PUTSTATIC | PUTFIELD)")
 
         private val MUDCLIENT_REGEX = Regex("mudclient(\\d+)[.]jar")
         private val STATIC_COPY_MATCHER = InsnMatcher.compile("GETSTATIC PUTSTATIC")

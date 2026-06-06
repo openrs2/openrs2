@@ -14,5 +14,17 @@ public enum class ArtifactType {
     LOADER_GL,
     SW3D,
     UNPACKCLASS,
-    WORLDMAP
+    WORLDMAP,
+
+    // classic
+    JAGEX,
+    CONFIG,
+    ENTITY,
+    LAND,
+    MAPS,
+    MEDIA,
+    MODELS,
+    TEXTURES,
+    FILTER,
+    SOUNDS
 }
