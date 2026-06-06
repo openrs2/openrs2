@@ -358,22 +358,16 @@ public class ClientImporter @Inject constructor(
     }
 
     private fun parse(buf: ByteBuf): Artifact {
-        return if (buf.hasPrefix(JAR)) {
-            parseJar(buf)
+        if (buf.hasPrefix(JAR)) {
+            return parseJar(buf)
         } else if (buf.hasPrefix(PACK200)) {
-            parsePack200(buf)
+            return parsePack200(buf)
         } else if (buf.hasPrefix(CAB)) {
-            parseCab(buf)
-        } else if (
-            buf.hasPrefix(PACKCLASS_UNCOMPRESSED) ||
-            buf.hasPrefix(PACKCLASS_BZIP2) ||
-            buf.hasPrefix(PACKCLASS_GZIP)
-        ) {
-            parseLibrary(buf, packClassLibraryReader, ArtifactFormat.PACKCLASS)
+            return parseCab(buf)
         } else if (buf.hasPrefix(ELF)) {
-            parseElf(buf)
+            return parseElf(buf)
         } else if (buf.hasPrefix(PE)) {
-            parsePe(buf)
+            return parsePe(buf)
         } else if (
             buf.hasPrefix(MACHO32BE) ||
             buf.hasPrefix(MACHO32LE) ||
@@ -381,15 +375,25 @@ public class ClientImporter @Inject constructor(
             buf.hasPrefix(MACHO64LE) ||
             buf.hasPrefix(MACHO_UNIVERSAL)
         ) {
-            parseMachO(buf)
-        } else {
-            val archive = try {
-                JagArchive.unpack(buf.slice())
-            } catch (_: Exception) {
+            return parseMachO(buf)
+        }
+
+        return try {
+            JagArchive.unpack(buf.slice())
+        } catch (_: Exception) {
+            null
+        }.use { archive ->
+            if (archive != null) {
+                parseJagArchive(buf, archive)
+            } else if (
+                buf.hasPrefix(PACKCLASS_UNCOMPRESSED) ||
+                buf.hasPrefix(PACKCLASS_BZIP2) ||
+                buf.hasPrefix(PACKCLASS_GZIP)
+            ) {
+                parseLibrary(buf, packClassLibraryReader, ArtifactFormat.PACKCLASS)
+            } else {
                 throw IllegalArgumentException()
             }
-
-            parseJagArchive(buf, archive)
         }
     }
 
