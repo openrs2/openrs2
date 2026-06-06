@@ -426,7 +426,7 @@ public class ClientImporter @Inject constructor(
         } else if (archive.exists("BAT.DAT")) {
             type = ArtifactType.ENTITY
             format = ArtifactFormat.MEM
-        } else if (archive.exists("BADENC.TXT")) {
+        } else if (archive.exists("BADWORDSENCODED.TXT") || archive.exists("BADENC.TXT")) {
             type = ArtifactType.FILTER
         } else if (archive.exists("M05050.HEI")) {
             type = ArtifactType.LAND
