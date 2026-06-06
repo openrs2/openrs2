@@ -20,10 +20,10 @@ import org.openrs2.asm.hasCode
 import org.openrs2.asm.removeArgument
 import org.openrs2.asm.transform.Transformer
 import org.openrs2.deob.bytecode.ArgPartition
-import org.openrs2.deob.bytecode.Profile
 import org.openrs2.deob.bytecode.analysis.ConstSourceInterpreter
 import org.openrs2.deob.bytecode.analysis.ConstSourceValue
 import org.openrs2.deob.bytecode.remap.MethodMappingGenerator
+import org.openrs2.deob.util.profile.Profile
 import org.openrs2.util.collect.DisjointSet
 
 @Singleton

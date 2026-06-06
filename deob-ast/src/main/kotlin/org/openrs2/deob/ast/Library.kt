@@ -16,7 +16,7 @@ import com.github.javaparser.symbolsolver.resolution.typesolvers.CombinedTypeSol
 import com.github.javaparser.symbolsolver.resolution.typesolvers.JavaParserTypeSolver
 import com.github.javaparser.utils.SourceRoot
 import com.github.michaelbull.logging.InlineLogger
-import org.openrs2.deob.util.Module
+import org.openrs2.deob.util.module.Module
 import java.util.function.Function
 
 public class Library(
