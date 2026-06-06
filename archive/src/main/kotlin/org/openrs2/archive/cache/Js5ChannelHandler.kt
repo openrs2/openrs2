@@ -39,7 +39,7 @@ public abstract class Js5ChannelHandler(
     private val maxInFlightRequests: Int,
     private val maxBuildAttempts: Int = 10,
     private val maxReconnectionAttempts: Int = 1
-) : SimpleChannelInboundHandler<Any>(Object::class.java) {
+) : SimpleChannelInboundHandler<Any>(Any::class.java) {
     protected data class InFlightRequest(val prefetch: Boolean, val archive: Int, val group: Int)
     protected data class PendingRequest(
         val prefetch: Boolean,
