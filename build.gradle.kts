@@ -359,6 +359,7 @@ project(":nonfree:client") {
     plugins.withType<JavaPlugin> {
         dependencies {
             val implementation by configurations
+            implementation(project(":jsobject"))
             implementation(project(":nonfree:gl"))
             implementation(project(":nonfree:signlink"))
         }
@@ -375,6 +376,7 @@ project(":nonfree:loader") {
     plugins.withType<JavaPlugin> {
         dependencies {
             val implementation by configurations
+            implementation(project(":pack200"))
             implementation(project(":nonfree:signlink"))
             implementation(project(":nonfree:unpack"))
         }
