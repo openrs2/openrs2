@@ -213,7 +213,7 @@ public class KeyBruteForcer @Inject constructor(
                 }
 
                 if (validatedKey != null) {
-                    updateContainers(connection, listOf(validatedKey!!))
+                    updateContainers(connection, listOf(validatedKey))
                 }
 
                 lastContainerId = containerId
