@@ -32,6 +32,7 @@ import org.openrs2.deob.bytecode.transform.PatcherTransformer
 import org.openrs2.deob.bytecode.transform.RedundantGotoTransformer
 import org.openrs2.deob.bytecode.transform.RemapTransformer
 import org.openrs2.deob.bytecode.transform.ResetTransformer
+import org.openrs2.deob.bytecode.transform.StubTransformer
 import org.openrs2.deob.bytecode.transform.UnusedArgTransformer
 import org.openrs2.deob.bytecode.transform.UnusedLocalTransformer
 import org.openrs2.deob.bytecode.transform.UnusedMethodTransformer
@@ -79,6 +80,7 @@ public object BytecodeDeobfuscatorModule : AbstractModule() {
         binder.addBinding().to(RemapTransformer::class.java)
         binder.addBinding().to(ResetTransformer::class.java)
         binder.addBinding().to(ResourceTransformer::class.java)
+        binder.addBinding().to(StubTransformer::class.java)
         binder.addBinding().to(UnusedArgTransformer::class.java)
         binder.addBinding().to(UnusedLocalTransformer::class.java)
         binder.addBinding().to(UnusedMethodTransformer::class.java)

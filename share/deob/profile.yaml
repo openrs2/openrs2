@@ -69,3 +69,4 @@ transformers:
   - RedundantGoto
   - OriginalPcRestore
   - FernflowerException
+  - Stub
