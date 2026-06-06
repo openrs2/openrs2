@@ -348,7 +348,7 @@ public class ClientImporter @Inject constructor(
                 JOIN blobs b2 ON b2.sha1 = al.sha1
                 JOIN artifacts a2 ON a2.blob_id = b2.id
                 WHERE a1.timestamp IS NOT NULL
-                ORDER BY a2.blob_id ASC, a1.blob_id ASC
+                ORDER BY a2.blob_id ASC, a1.timestamp ASC
             ) t
             WHERE a.blob_id = t.blob_id
         """.trimIndent()
