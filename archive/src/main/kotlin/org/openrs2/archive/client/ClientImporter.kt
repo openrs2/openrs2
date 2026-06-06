@@ -671,7 +671,7 @@ public class ClientImporter @Inject constructor(
         } else if (loader != null) {
             if (isLoaderClassic(loader)) {
                 game = "classic"
-                build = null // TODO(gpe): classic support
+                build = parseClassicLoaderBuild(library)
                 type = ArtifactType.LOADER
                 links = emptyList() // TODO(gpe): classic support
             } else {
@@ -834,6 +834,33 @@ public class ClientImporter @Inject constructor(
         }
 
         return parseSignLinkBuild(library)
+    }
+
+    private fun parseClassicLoaderBuild(library: Library): CacheExporter.Build? {
+        val clazz = library["loader"] ?: return null
+
+        for (method in clazz.methods) {
+            if (!method.hasCode || method.name != "<clinit>") {
+                continue
+            }
+
+            for (insn in method.instructions) {
+                if (insn !is LdcInsnNode) {
+                    continue
+                }
+
+                val cst = insn.cst
+                if (cst !is String) {
+                    continue
+                }
+
+                val m = MUDCLIENT_REGEX.matchEntire(cst) ?: continue
+                val (build) = m.destructured
+                return CacheExporter.Build(build.toInt(), null)
+            }
+        }
+
+        return null
     }
 
     private fun parseSignLinkBuild(library: Library): CacheExporter.Build? {
@@ -1270,5 +1297,7 @@ public class ClientImporter @Inject constructor(
 
         private val RESOURCE_CTOR_MATCHER =
             InsnMatcher.compile("LDC LDC (LDC+ | ICONST ANEWARRAY (DUP ICONST LDC AASTORE)+) (ICONST | BIPUSH | SIPUSH | LDC) (ICONST | BIPUSH | SIPUSH | LDC) BIPUSH NEWARRAY (DUP (ICONST | BIPUSH) (ICONST | BIPUSH) IASTORE)+ INVOKESPECIAL")
+
+        private val MUDCLIENT_REGEX = Regex("mudclient(\\d+)[.]jar")
     }
 }
