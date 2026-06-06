@@ -857,6 +857,7 @@ public class ClientImporter @Inject constructor(
         } ?: return null
 
         val candidates = mutableListOf<String>()
+        var firstField: String? = null
 
         for (clazz in library) {
             for (method in clazz.methods) {
@@ -866,14 +867,20 @@ public class ClientImporter @Inject constructor(
 
                 for (match in STATIC_COPY_MATCHER.match(method)) {
                     val src = match[0] as FieldInsnNode
-                    if (src.owner == versions.name && versions.fields.any { it.name == src.name && it.desc == "I" } && src.desc == "I") {
-                        candidates += src.name
+                    if (src.owner == versions.name && src.desc == "I") {
+                        if (firstField == null) {
+                            firstField = src.name
+                        }
+
+                        if (versions.fields.any { it.name == src.name && it.desc == "I" }) {
+                            candidates += src.name
+                        }
                     }
                 }
             }
         }
 
-        val name = candidates.singleOrNull() ?: return null
+        val name = candidates.singleOrNull() ?: firstField ?: return null
 
         for (field in versions.fields) {
             if (field.name != name || field.desc != "I") {
