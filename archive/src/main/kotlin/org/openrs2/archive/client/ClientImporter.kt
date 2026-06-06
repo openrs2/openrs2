@@ -671,7 +671,7 @@ public class ClientImporter @Inject constructor(
         } else if (loader != null) {
             if (isLoaderClassic(loader)) {
                 game = "classic"
-                build = parseClassicLoaderBuild(library)
+                build = parseClassicLoaderBuild(loader)
                 type = ArtifactType.LOADER
                 links = emptyList() // TODO(gpe): classic support
             } else {
@@ -836,10 +836,8 @@ public class ClientImporter @Inject constructor(
         return parseSignLinkBuild(library)
     }
 
-    private fun parseClassicLoaderBuild(library: Library): CacheExporter.Build? {
-        val clazz = library["loader"] ?: return null
-
-        for (method in clazz.methods) {
+    private fun parseClassicLoaderBuild(loader: ClassNode): CacheExporter.Build? {
+        for (method in loader.methods) {
             if (!method.hasCode || (method.name != "<init>" && method.name != "<clinit>")) {
                 continue
             }
