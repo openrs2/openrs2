@@ -1107,25 +1107,28 @@ public class ClientImporter @Inject constructor(
             val size = sizes[i]
             val sha1 = hashes[i]
 
-            val type = when {
-                name.startsWith("mudclient") -> ArtifactType.CLIENT
-                name.startsWith("jagex") -> ArtifactType.JAGEX
-                name.startsWith("config") -> ArtifactType.CONFIG
-                name.startsWith("entity") -> ArtifactType.ENTITY
-                name.startsWith("land") -> ArtifactType.LAND
-                name.startsWith("maps") -> ArtifactType.MAPS
-                name.startsWith("media") -> ArtifactType.MEDIA
-                name.startsWith("models") -> ArtifactType.MODELS
-                name.startsWith("textures") -> ArtifactType.TEXTURES
-                name.startsWith("filter") -> ArtifactType.FILTER
-                name.startsWith("sounds") -> ArtifactType.SOUNDS
+            val match = CLASSIC_FILE_NAME_REGEX.matchEntire(name) ?: throw IllegalArgumentException()
+            val (prefix, version, extension) = match.destructured
+
+            val type = when (prefix) {
+                "mudclient" -> ArtifactType.CLIENT
+                "jagex" -> ArtifactType.JAGEX
+                "config" -> ArtifactType.CONFIG
+                "entity" -> ArtifactType.ENTITY
+                "land" -> ArtifactType.LAND
+                "maps" -> ArtifactType.MAPS
+                "media" -> ArtifactType.MEDIA
+                "models" -> ArtifactType.MODELS
+                "textures" -> ArtifactType.TEXTURES
+                "filter" -> ArtifactType.FILTER
+                "sounds" -> ArtifactType.SOUNDS
                 else -> throw IllegalArgumentException()
             }
 
-            val format = when {
-                name.endsWith(".jag") -> ArtifactFormat.JAG
-                name.endsWith(".jar") -> ArtifactFormat.JAR
-                name.endsWith(".mem") -> ArtifactFormat.MEM
+            val format = when (extension) {
+                "jag" -> ArtifactFormat.JAG
+                "jar" -> ArtifactFormat.JAR
+                "mem" -> ArtifactFormat.MEM
                 else -> throw IllegalArgumentException()
             }
 
@@ -1516,6 +1519,7 @@ public class ClientImporter @Inject constructor(
 
         private val FILE_NAME_REGEX =
             Regex("(([a-z0-9_]+?)(?:_[0-9]){0,2})(?:_(-?[0-9]+))?[.]([a-z0-9]+)(?:\\?crc=(-?[0-9]+))?")
+        private val CLASSIC_FILE_NAME_REGEX = Regex("([a-z]+)([0-9]*)[.]([a-z]+)")
         private val SHA1_CMP_MATCHER =
             InsnMatcher.compile("((ICONST | BIPUSH)? ALOAD (ICONST | BIPUSH) BALOAD (ICONST IXOR)? (ICONST | BIPUSH | SIPUSH)? (IF_ICMPEQ | IF_ICMPNE | IFEQ | IFNE))+")
         private val PATH_CMP_MATCHER = InsnMatcher.compile("(LDC ALOAD | ALOAD LDC) (IF_ACMPEQ | IF_ACMPNE)")
