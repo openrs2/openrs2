@@ -94,45 +94,45 @@ logging in from the login screen.
 
 ### 20 (Check date of birth and country)
 
-| Data type     | Description                  |
-|---------------|------------------------------|
-| UnsignedByte  | Day                          |
-| UnsignedByte  | Month                        |
-| UnsignedShort | Year                         |
-| UnsignedShort | Country ID                   |
+| Data type     | Description |
+|---------------|-------------|
+| UnsignedByte  | Day         |
+| UnsignedByte  | Month       |
+| UnsignedShort | Year        |
+| UnsignedShort | Country ID  |
 
 ### 21 (`CREATE_CHECK_NAME`)
 
-| Data type | Description                  |
-|-----------|------------------------------|
-| Long      | Base37-encoded username      |
+| Data type | Description             |
+|-----------|-------------------------|
+| Long      | Base37-encoded username |
 
 ### 22 (`CREATE_ACCOUNT`)
 
-| Data type       | Description                                           |
-|-----------------|-------------------------------------------------------|
-| UnsignedShort   | Client build number                                   |
-| UnsignedByte    | RSA-encrypted payload length (n)                      |
-| Byte\[n\]       | RSA-encrypted payload                                 |
-| Byte\[len-n-3\] | XTEA-encrypted payload                                |
+| Data type       | Description                      |
+|-----------------|----------------------------------|
+| UnsignedShort   | Client build number              |
+| UnsignedByte    | RSA-encrypted payload length (n) |
+| Byte\[n\]       | RSA-encrypted payload            |
+| Byte\[len-n-3\] | XTEA-encrypted payload           |
 
 The structure of the RSA-decrypted payload is described below:
 
-| Data type     | Description                    |
-|---------------|--------------------------------|
-| UnsignedByte  | Must be `10`                   |
-| UnsignedShort | Flags (see below)              |
-| Long          | Base37-encoded username        |
-| Int           | XTEA key (bits 0-31)           |
-| String        | Password                       |
-| Int           | XTEA key (bits 32-63)          |
-| UnsignedShort | Affiliate ID                   |
-| UnsignedByte  | Day                            |
-| UnsignedByte  | Month                          |
-| Int           | XTEA key (bits 64-95)          |
-| UnsignedShort | Year                           |
-| UnsignedShort | Country ID                     |
-| Int           | XTEA key (bits 96-127)         |
+| Data type     | Description             |
+|---------------|-------------------------|
+| UnsignedByte  | Must be `10`            |
+| UnsignedShort | Flags (see below)       |
+| Long          | Base37-encoded username |
+| Int           | XTEA key (bits 0-31)    |
+| String        | Password                |
+| Int           | XTEA key (bits 32-63)   |
+| UnsignedShort | Affiliate ID            |
+| UnsignedByte  | Day                     |
+| UnsignedByte  | Month                   |
+| Int           | XTEA key (bits 64-95)   |
+| UnsignedShort | Year                    |
+| UnsignedShort | Country ID              |
+| Int           | XTEA key (bits 96-127)  |
 
 |  Flag | Description                          |
 |------:|--------------------------------------|
@@ -164,11 +164,11 @@ been confirmed.
 
 ### 24 (`CHECK_WORLD_SUITABILITY`)
 
-| Data type     | Description                               |
-|---------------|-------------------------------------------|
-| UnsignedShort | Client build number                       |
-| UnsignedByte  | RSA-encrypted payload length (n)          |
-| Byte\[n\]     | RSA-encrypted payload                     |
+| Data type     | Description                      |
+|---------------|----------------------------------|
+| UnsignedShort | Client build number              |
+| UnsignedByte  | RSA-encrypted payload length (n) |
+| Byte\[n\]     | RSA-encrypted payload            |
 
 The structure of the plaintext payload is described below:
 
@@ -325,9 +325,9 @@ return to the main menu and exit fullscreen or use a members' account.
 
 ### 21 (`HOP_BLOCKED`)
 
-| Data type    | Description             |
-|--------------|-------------------------|
-| UnsignedByte | Hop time                |
+| Data type    | Description |
+|--------------|-------------|
+| UnsignedByte | Hop time    |
 
 **Message:** You have only just left another world. Your profile will be
 transferred in \<n\> seconds.
@@ -363,9 +363,9 @@ our rules.
 
 ### 29 (`DISALLOWED_BY_SCRIPT`)
 
-| Data type    | Description             |
-|--------------|-------------------------|
-| UnsignedByte | Reason                  |
+| Data type    | Description |
+|--------------|-------------|
+| UnsignedByte | Reason      |
 
 | Reason | Message                                                                               |
 |-------:|---------------------------------------------------------------------------------------|
@@ -381,6 +381,6 @@ option from the website to play on this account.
 
 ### 101 (Switch world)
 
-| Data type     | Description             |
-|---------------|-------------------------|
-| UnsignedShort | World number            |
+| Data type     | Description  |
+|---------------|--------------|
+| UnsignedShort | World number |

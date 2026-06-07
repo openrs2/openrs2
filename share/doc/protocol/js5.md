@@ -41,7 +41,7 @@ payload bytes are set to zero.
 | UnsignedByte  | Archive ID  |
 | UnsignedShort | Group ID    |
 
-Requests a group. Prefetch requests are used to  prepopulate most of the cache
+Requests a group. Prefetch requests are used to prepopulate most of the cache
 in the background.
 
 ### 1 (Request group (urgent))

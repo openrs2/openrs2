@@ -27,9 +27,9 @@ The following fields are only present if the worlds updated flag is set:
 
 The following fields are always present:
 
-| Data type          | Description               |
-|--------------------|---------------------------|
-| PlayerCount\[o\]   | Player counts (see below) |
+| Data type        | Description               |
+|------------------|---------------------------|
+| PlayerCount\[o\] | Player counts (see below) |
 
 #### Country
 

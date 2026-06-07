@@ -96,8 +96,8 @@ only see other players and NPCs on the same level as them.
 When used in a script, the coordinates of a tile are packed into a 32-bit
 integer as follows:
 
-| **Field** | (unused) | Level | X  | Z  |
-|-----------|----------|------:|---:|---:|
+| **Field** | (unused) | Level |  X |  Z |
+|-----------|---------:|------:|---:|---:|
 | **Bits**  |        2 |     2 | 14 | 14 |
 
 The two unused bits are set to zero.
