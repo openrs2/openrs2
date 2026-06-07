@@ -1527,8 +1527,10 @@ public class ClientImporter @Inject constructor(
         private val RESOURCE_CTOR_MATCHER =
             InsnMatcher.compile("LDC LDC (LDC+ | ICONST ANEWARRAY (DUP ICONST LDC AASTORE)+) (ICONST | BIPUSH | SIPUSH | LDC) (ICONST | BIPUSH | SIPUSH | LDC) BIPUSH NEWARRAY (DUP (ICONST | BIPUSH) (ICONST | BIPUSH) IASTORE)+ INVOKESPECIAL")
 
-        private val FILE_NAME_ARRAY_MATCHER = InsnMatcher.compile("(ICONST | BIPUSH) ANEWARRAY (DUP (ICONST | BIPUSH) LDC AASTORE)+ (PUTSTATIC | PUTFIELD)")
-        private val SIZE_ARRAY_MATCHER = InsnMatcher.compile("(ICONST | BIPUSH) NEWARRAY (DUP (ICONST | BIPUSH) (ICONST | BIPUSH | SIPUSH | LDC) IASTORE)+ (PUTSTATIC | PUTFIELD)")
+        private val FILE_NAME_ARRAY_MATCHER =
+            InsnMatcher.compile("(ICONST | BIPUSH) ANEWARRAY (DUP (ICONST | BIPUSH) LDC AASTORE)+ (PUTSTATIC | PUTFIELD)")
+        private val SIZE_ARRAY_MATCHER =
+            InsnMatcher.compile("(ICONST | BIPUSH) NEWARRAY (DUP (ICONST | BIPUSH) (ICONST | BIPUSH | SIPUSH | LDC) IASTORE)+ (PUTSTATIC | PUTFIELD)")
 
         private val MUDCLIENT_REGEX = Regex("mudclient(\\d+)[.]jar")
         private val STATIC_COPY_MATCHER = InsnMatcher.compile("GETSTATIC PUTSTATIC")

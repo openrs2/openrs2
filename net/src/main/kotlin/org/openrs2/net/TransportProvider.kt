@@ -25,16 +25,19 @@ public class TransportProvider : Provider<Transport> {
                 IoUringSocketChannel::class,
                 IoUringServerSocketChannel::class,
             )
+
             Epoll.isAvailable() -> Transport(
                 EpollIoHandler.newFactory(),
                 EpollSocketChannel::class,
                 EpollServerSocketChannel::class,
             )
+
             KQueue.isAvailable() -> Transport(
                 KQueueIoHandler.newFactory(),
                 KQueueSocketChannel::class,
                 KQueueServerSocketChannel::class,
             )
+
             else -> Transport(
                 NioIoHandler.newFactory(),
                 NioSocketChannel::class,

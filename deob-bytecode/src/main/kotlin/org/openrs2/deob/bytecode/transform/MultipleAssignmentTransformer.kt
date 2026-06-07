@@ -37,7 +37,10 @@ public class MultipleAssignmentTransformer : Transformer() {
                 val putstatic = match[i + 1] as FieldInsnNode
 
                 method.instructions.remove(dup)
-                method.instructions.insert(putstatic, FieldInsnNode(Opcodes.GETSTATIC, putstatic.owner, putstatic.name, putstatic.desc))
+                method.instructions.insert(
+                    putstatic,
+                    FieldInsnNode(Opcodes.GETSTATIC, putstatic.owner, putstatic.name, putstatic.desc)
+                )
 
                 assignments++
             }

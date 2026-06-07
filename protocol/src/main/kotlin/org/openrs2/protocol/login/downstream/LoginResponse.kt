@@ -17,6 +17,7 @@ public sealed class LoginResponse : Packet {
         val playerMember: Boolean,
         val mapMembers: Boolean
     ) : LoginResponse()
+
     public object InvalidUsernameOrPassword : LoginResponse()
     public object Banned : LoginResponse()
     public object Duplicate : LoginResponse()

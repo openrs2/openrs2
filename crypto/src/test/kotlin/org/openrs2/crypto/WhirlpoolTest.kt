@@ -6,7 +6,6 @@ import io.netty.buffer.Unpooled
 import org.junit.jupiter.api.Assertions.assertArrayEquals
 import org.openrs2.buffer.copiedBuffer
 import org.openrs2.buffer.use
-import kotlin.streams.toList
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
 

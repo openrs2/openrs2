@@ -640,11 +640,19 @@ public class CacheExporter @Inject constructor(
         }
     }
 
-    public suspend fun exportGroupByContentAddress(scope: String, archiveId: Int, groupId: Int, version: Int, checksum: Int): ByteBuf? {
+    public suspend fun exportGroupByContentAddress(
+        scope: String,
+        archiveId: Int,
+        groupId: Int,
+        version: Int,
+        checksum: Int
+    ): ByteBuf? {
         return database.execute { connection ->
-            connection.prepareStatement("""
+            connection.prepareStatement(
+                """
                 SELECT data FROM resolve_group((SELECT id FROM scopes WHERE name = ?), ?::uint1, ?, ?, ?)
-            """.trimIndent()).use { stmt ->
+            """.trimIndent()
+            ).use { stmt ->
                 stmt.setString(1, scope)
                 stmt.setInt(2, archiveId)
                 stmt.setInt(3, groupId)
@@ -658,9 +666,11 @@ public class CacheExporter @Inject constructor(
                     }
 
                     if (scope == "runescape" && groupId in 0..0xFFFF && version in 0..0xFFFF) {
-                        connection.prepareStatement("""
+                        connection.prepareStatement(
+                            """
                             SELECT data FROM resolve_file(?::uint1, ?::uint2, ?::uint2, ?)
-                        """.trimIndent()).use { stmt ->
+                        """.trimIndent()
+                        ).use { stmt ->
                             stmt.setInt(1, archiveId)
                             stmt.setInt(2, groupId)
                             stmt.setInt(3, version)

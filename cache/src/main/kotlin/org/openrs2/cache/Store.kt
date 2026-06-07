@@ -2,6 +2,7 @@ package org.openrs2.cache
 
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufAllocator
+import org.openrs2.cache.Store.Companion.MAX_GROUP_SIZE
 import java.io.Closeable
 import java.io.FileNotFoundException
 import java.io.Flushable
