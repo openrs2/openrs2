@@ -143,7 +143,8 @@ public class TypedRemapper private constructor(
 
         private fun verifyMapping(name: String, mappedName: String, maxObfuscatedNameLen: Int) {
             val originalName = StripClassNamePrefixRemapper.map(name)
-            if (originalName.length > maxObfuscatedNameLen && originalName != mappedName) {
+            val justThis = originalName.substringAfterLast('/')
+            if (justThis.length > maxObfuscatedNameLen && originalName != mappedName) {
                 logger.warn { "Remapping probably unobfuscated name $originalName to $mappedName" }
             }
         }

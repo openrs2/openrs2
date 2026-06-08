@@ -30,6 +30,10 @@ public class StaticFieldUnscrambler(
             }
 
             for (clazz in library) {
+                if (clazz.name.contains('/')) {
+                    continue
+                }
+
                 val clinit = clazz.methods.find { it.name == "<clinit>" }
                 val (simpleInitializers, complexInitializers) = clinit?.extractInitializers(clazz.name)
                     ?: Pair(emptyMap(), emptySet())
