@@ -1,10 +1,14 @@
----
 on: push
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        java-version: [17, 21] #, 25
     steps:
-      - uses: actions/cache@v5
+      - uses: actions/cache@v6
         with:
           path: ~/.ssh/known_hosts
           key: ssh-known-hosts
@@ -12,18 +16,21 @@ jobs:
       - uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: 17
+          java-version: ${{ matrix.java-version }}
       - uses: gradle/actions/setup-gradle@v6
       - run: ./gradlew build
-      - if: github.ref == 'refs/heads/master'
-        run: |
+      - if: |-
+          github.ref == 'refs/heads/master' &&
+          matrix.java-version == '17'
+        id: ssh
+        run: |-
           install -dm0700 ~/.ssh
           touch ~/.ssh/id_ed25519
           chmod 0600 ~/.ssh/id_ed25519
-          echo "${SSH_KEY}" > ~/.ssh/id_ed25519
+          echo "$SSH_KEY" > ~/.ssh/id_ed25519
         env:
           SSH_KEY: ${{ secrets.SSH_KEY }}
-      - if: github.ref == 'refs/heads/master'
+      - if: ${{ steps.ssh.outcome == 'success' }}
         run: ./gradlew publish
         env:
           ORG_GRADLE_PROJECT_openrs2Username: ${{ secrets.REPO_USERNAME }}
