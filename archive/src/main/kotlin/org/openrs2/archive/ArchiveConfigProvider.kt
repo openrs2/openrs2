@@ -8,6 +8,7 @@ import java.nio.file.FileSystemNotFoundException
 import java.nio.file.Path
 import kotlin.io.path.bufferedReader
 import kotlin.io.path.copyTo
+import kotlin.io.path.exists
 import kotlin.io.path.notExists
 import kotlin.io.path.toPath
 
@@ -32,7 +33,7 @@ public class ArchiveConfigProvider @Inject constructor(
 
             // go from <root>/lib/openrs2.jar to <root>
             val root = path?.parent?.parent
-            if (root != null) {
+            if (root != null && (root.resolve(CONFIG_PATH).exists() || root.resolve(EXAMPLE_CONFIG_PATH).exists())) {
                 return root
             }
         }
