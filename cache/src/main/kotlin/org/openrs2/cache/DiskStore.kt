@@ -26,7 +26,7 @@ import kotlin.math.min
  * This class is not thread safe.
  */
 public class DiskStore private constructor(
-    private val root: Path,
+    public val root: Path,
     private val data: BufferedFileChannel,
     private val musicData: BufferedFileChannel?,
     private val indexes: Array<BufferedFileChannel?>,
