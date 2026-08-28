@@ -25,11 +25,17 @@ public class ChecksumTable(
 
     public companion object {
         @JvmStatic
-        public fun create(store: Store, format: ChecksumTableFormat): ChecksumTable {
+        public fun create(store: Store, format: ChecksumTableFormat, clientChecksum: Int): ChecksumTable {
             val table = ChecksumTable(format)
 
-            var nextArchive = 0
+            var nextArchive = 1
+            table.entries += clientChecksum
+
             for (archive in store.list(0)) {
+                if (archive == 0) {
+                    continue
+                }
+
                 val entry = try {
                     store.read(0, archive).use { buf ->
                         buf.crc32()

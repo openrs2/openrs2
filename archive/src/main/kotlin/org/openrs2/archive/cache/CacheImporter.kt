@@ -35,6 +35,8 @@ import java.sql.SQLException
 import java.sql.Types
 import java.time.Instant
 import java.time.ZoneOffset
+import kotlin.io.path.exists
+import kotlin.io.path.readBytes
 
 @Singleton
 public class CacheImporter @Inject constructor(
@@ -1185,76 +1187,99 @@ public class CacheImporter @Inject constructor(
         description: String?,
         url: String?
     ) {
-        // import checksum table
-        val checksumTable = createChecksumTable(store)
-        val checksumTableId = try {
-            if (checksumTable.table.entries.isEmpty()) {
-                throw IOException("Checksum table empty, cache probably corrupt")
+        // read client in code.dat, if it exists
+        createClientArchive(store).use { clientArchive ->
+            val clientChecksum = clientArchive?.crc32 ?: 0
+
+            // import checksum table
+            val checksumTable = createChecksumTable(store, clientChecksum)
+            val checksumTableId = try {
+                if (checksumTable.table.entries.isEmpty()) {
+                    throw IOException("Checksum table empty, cache probably corrupt")
+                }
+
+                addChecksumTable(connection, checksumTable)
+            } finally {
+                checksumTable.release()
             }
 
-            addChecksumTable(connection, checksumTable)
-        } finally {
-            checksumTable.release()
-        }
+            // add source
+            val sourceId = addSource(
+                connection,
+                SourceType.DISK,
+                checksumTableId,
+                gameId,
+                buildMajor,
+                buildMinor,
+                timestamp,
+                name,
+                description,
+                url
+            )
 
-        // add source
-        val sourceId = addSource(
-            connection,
-            SourceType.DISK,
-            checksumTableId,
-            gameId,
-            buildMajor,
-            buildMinor,
-            timestamp,
-            name,
-            description,
-            url
-        )
+            // import client archive
+            if (clientArchive != null) {
+                addArchive(connection, sourceId, clientArchive)
+            }
 
-        // import archives and version list
-        for (id in store.list(0)) {
+            // import archives and version list
+            for (id in store.list(0)) {
+                try {
+                    readArchive(store, id).use { archive ->
+                        addArchive(connection, sourceId, archive)
+                    }
+                } catch (ex: StoreCorruptException) {
+                    // see the comment in ChecksumTable::create
+                    logger.warn(ex) { "Skipping corrupt archive ($id)" }
+                }
+            }
+
+            // import files
+            val files = mutableListOf<File>()
             try {
-                readArchive(store, id).use { archive ->
-                    addArchive(connection, sourceId, archive)
-                }
-            } catch (ex: StoreCorruptException) {
-                // see the comment in ChecksumTable::create
-                logger.warn(ex) { "Skipping corrupt archive ($id)" }
-            }
-        }
+                for (index in store.list()) {
+                    if (index == 0) {
+                        continue
+                    }
 
-        // import files
-        val files = mutableListOf<File>()
-        try {
-            for (index in store.list()) {
-                if (index == 0) {
-                    continue
-                }
+                    for (id in store.list(index)) {
+                        val file = readFile(store, index, id) ?: continue
+                        files += file
 
-                for (id in store.list(index)) {
-                    val file = readFile(store, index, id) ?: continue
-                    files += file
+                        if (files.size >= BATCH_SIZE) {
+                            addFiles(connection, sourceId, files)
 
-                    if (files.size >= BATCH_SIZE) {
-                        addFiles(connection, sourceId, files)
-
-                        files.forEach(File::release)
-                        files.clear()
+                            files.forEach(File::release)
+                            files.clear()
+                        }
                     }
                 }
-            }
 
-            if (files.isNotEmpty()) {
-                addFiles(connection, sourceId, files)
+                if (files.isNotEmpty()) {
+                    addFiles(connection, sourceId, files)
+                }
+            } finally {
+                files.forEach(File::release)
             }
-        } finally {
-            files.forEach(File::release)
         }
     }
 
-    private fun createChecksumTable(store: Store): ChecksumTableBlob {
+    private fun createClientArchive(store: Store): Archive? {
+        if (store !is DiskStore) {
+            return null
+        }
+
+        val path = store.root.resolve("code.dat")
+        if (!path.exists()) {
+            return null
+        }
+
+        return Archive(CLIENT_ARCHIVE, Unpooled.wrappedBuffer(path.readBytes()), null)
+    }
+
+    private fun createChecksumTable(store: Store, clientChecksum: Int): ChecksumTableBlob {
         alloc.buffer().use { buf ->
-            val table = ChecksumTable.create(store, ChecksumTableFormat.CHECKSUM)
+            val table = ChecksumTable.create(store, ChecksumTableFormat.CHECKSUM, clientChecksum)
             table.write(buf)
             return ChecksumTableBlob(buf.retain(), table)
         }
@@ -1557,6 +1582,8 @@ public class CacheImporter @Inject constructor(
         private val logger = InlineLogger()
 
         public const val BATCH_SIZE: Int = 1024
+
+        private const val CLIENT_ARCHIVE = 0
         private const val VERSION_LIST_ARCHIVE = 5
     }
 }
