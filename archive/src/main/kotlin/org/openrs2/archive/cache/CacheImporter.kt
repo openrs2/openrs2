@@ -11,6 +11,7 @@ import jakarta.inject.Singleton
 import org.openrs2.buffer.crc32
 import org.openrs2.buffer.use
 import org.openrs2.cache.ChecksumTable
+import org.openrs2.cache.ChecksumTableFormat
 import org.openrs2.cache.DiskStore
 import org.openrs2.cache.JagArchive
 import org.openrs2.cache.Js5Archive
@@ -1253,7 +1254,7 @@ public class CacheImporter @Inject constructor(
 
     private fun createChecksumTable(store: Store): ChecksumTableBlob {
         alloc.buffer().use { buf ->
-            val table = ChecksumTable.create(store)
+            val table = ChecksumTable.create(store, ChecksumTableFormat.CHECKSUM)
             table.write(buf)
             return ChecksumTableBlob(buf.retain(), table)
         }

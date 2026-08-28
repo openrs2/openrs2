@@ -5,6 +5,7 @@ import org.openrs2.buffer.crc32
 import org.openrs2.buffer.use
 
 public class ChecksumTable(
+    public var format: ChecksumTableFormat,
     public val entries: MutableList<Int> = mutableListOf()
 ) {
     public fun write(buf: ByteBuf) {
@@ -12,18 +13,20 @@ public class ChecksumTable(
             buf.writeInt(entry)
         }
 
-        var checksum = 1234
-        for (entry in entries) {
-            checksum = (checksum shl 1) + entry
-        }
+        if (format >= ChecksumTableFormat.CHECKSUM) {
+            var checksum = 1234
+            for (entry in entries) {
+                checksum = (checksum shl 1) + entry
+            }
 
-        buf.writeInt(checksum)
+            buf.writeInt(checksum)
+        }
     }
 
     public companion object {
         @JvmStatic
-        public fun create(store: Store): ChecksumTable {
-            val table = ChecksumTable()
+        public fun create(store: Store, format: ChecksumTableFormat): ChecksumTable {
+            val table = ChecksumTable(format)
 
             var nextArchive = 0
             for (archive in store.list(0)) {
@@ -49,19 +52,28 @@ public class ChecksumTable(
 
         @JvmStatic
         public fun read(buf: ByteBuf): ChecksumTable {
-            val table = ChecksumTable()
+            require(buf.readableBytes() % 4 == 0)
 
-            var expectedChecksum = 1234
+            val format = if (buf.readableBytes() >= 40) ChecksumTableFormat.CHECKSUM else ChecksumTableFormat.ORIGINAL
+            val table = ChecksumTable(format)
 
-            while (buf.readableBytes() >= 8) {
-                val entry = buf.readInt()
-                table.entries += entry
+            if (format >= ChecksumTableFormat.CHECKSUM) {
+                var expectedChecksum = 1234
 
-                expectedChecksum = (expectedChecksum shl 1) + entry
+                while (buf.readableBytes() >= 8) {
+                    val entry = buf.readInt()
+                    table.entries += entry
+
+                    expectedChecksum = (expectedChecksum shl 1) + entry
+                }
+
+                val actualChecksum = buf.readInt()
+                require(expectedChecksum == actualChecksum)
+            } else {
+                while (buf.readableBytes() >= 4) {
+                    table.entries += buf.readInt()
+                }
             }
-
-            val actualChecksum = buf.readInt()
-            require(expectedChecksum == actualChecksum)
 
             return table
         }
