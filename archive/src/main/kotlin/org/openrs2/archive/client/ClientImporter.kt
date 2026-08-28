@@ -26,8 +26,8 @@ import org.objectweb.asm.tree.JumpInsnNode
 import org.objectweb.asm.tree.LdcInsnNode
 import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.TypeInsnNode
+import org.openrs2.archive.cache.BlobImporter
 import org.openrs2.archive.cache.CacheExporter
-import org.openrs2.archive.cache.CacheImporter
 import org.openrs2.asm.InsnMatcher
 import org.openrs2.asm.classpath.Library
 import org.openrs2.asm.getArgumentExpressions
@@ -66,7 +66,7 @@ public class ClientImporter @Inject constructor(
     private val database: Database,
     private val alloc: ByteBufAllocator,
     private val packClassLibraryReader: PackClassLibraryReader,
-    private val importer: CacheImporter
+    private val importer: BlobImporter
 ) {
     public suspend fun import(
         paths: Iterable<Path>,
@@ -118,26 +118,38 @@ public class ClientImporter @Inject constructor(
         database.execute { connection ->
             importer.prepare(connection)
 
-            val id = import(connection, artifact)
-
-            connection.prepareStatement(
-                """
-                INSERT INTO artifact_sources (blob_id, name, description, url, file_name, timestamp)
-                VALUES (?, ?, ?, ?, ?, ?)
-            """.trimIndent()
-            ).use { stmt ->
-                stmt.setLong(1, id)
-                stmt.setString(2, name)
-                stmt.setString(3, description)
-                stmt.setString(4, url)
-                stmt.setString(5, fileName)
-                stmt.setObject(6, timestamp.atOffset(ZoneOffset.UTC), Types.TIMESTAMP_WITH_TIMEZONE)
-
-                stmt.execute()
-            }
-
-            resolveBuilds(connection)
+            import(connection, artifact, name, description, url, fileName, timestamp)
         }
+    }
+
+    public fun import(
+        connection: Connection,
+        artifact: Artifact,
+        name: String?,
+        description: String?,
+        url: String?,
+        fileName: String,
+        timestamp: Instant
+    ) {
+        val id = import(connection, artifact)
+
+        connection.prepareStatement(
+            """
+            INSERT INTO artifact_sources (blob_id, name, description, url, file_name, timestamp)
+            VALUES (?, ?, ?, ?, ?, ?)
+        """.trimIndent()
+        ).use { stmt ->
+            stmt.setLong(1, id)
+            stmt.setString(2, name)
+            stmt.setString(3, description)
+            stmt.setString(4, url)
+            stmt.setString(5, fileName)
+            stmt.setObject(6, timestamp.atOffset(ZoneOffset.UTC), Types.TIMESTAMP_WITH_TIMEZONE)
+
+            stmt.execute()
+        }
+
+        resolveBuilds(connection)
     }
 
     private fun import(connection: Connection, artifact: Artifact): Long {
@@ -357,7 +369,7 @@ public class ClientImporter @Inject constructor(
         }
     }
 
-    private fun parse(buf: ByteBuf): Artifact {
+    public fun parse(buf: ByteBuf): Artifact {
         if (buf.hasPrefix(JAR)) {
             return parseJar(buf)
         } else if (buf.hasPrefix(PACK200)) {

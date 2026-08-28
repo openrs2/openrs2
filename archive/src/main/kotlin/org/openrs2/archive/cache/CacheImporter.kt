@@ -4,10 +4,10 @@ import com.github.michaelbull.logging.InlineLogger
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.ByteBufUtil
-import io.netty.buffer.DefaultByteBufHolder
 import io.netty.buffer.Unpooled
 import jakarta.inject.Inject
 import jakarta.inject.Singleton
+import org.openrs2.archive.client.ClientImporter
 import org.openrs2.buffer.crc32
 import org.openrs2.buffer.use
 import org.openrs2.cache.ChecksumTable
@@ -25,8 +25,6 @@ import org.openrs2.cache.StoreCorruptException
 import org.openrs2.cache.VersionList
 import org.openrs2.cache.VersionTrailer
 import org.openrs2.crypto.Whirlpool
-import org.openrs2.crypto.sha1
-import org.openrs2.crypto.whirlpool
 import org.openrs2.db.Database
 import org.postgresql.util.PSQLState
 import java.io.IOException
@@ -36,12 +34,15 @@ import java.sql.Types
 import java.time.Instant
 import java.time.ZoneOffset
 import kotlin.io.path.exists
+import kotlin.io.path.getLastModifiedTime
 import kotlin.io.path.readBytes
 
 @Singleton
 public class CacheImporter @Inject constructor(
     private val database: Database,
-    private val alloc: ByteBufAllocator
+    private val alloc: ByteBufAllocator,
+    private val blobImporter: BlobImporter,
+    private val clientImporter: ClientImporter
 ) {
     public abstract class Container(
         private val compressed: ByteBuf,
@@ -84,32 +85,24 @@ public class CacheImporter @Inject constructor(
         public val versionTruncated: Boolean
     ) : Container(compressed, uncompressed)
 
-    public abstract class Blob(
-        buf: ByteBuf
-    ) : DefaultByteBufHolder(buf) {
-        public val bytes: ByteArray = ByteBufUtil.getBytes(buf, buf.readerIndex(), buf.readableBytes(), false)
-        public val crc32: Int = buf.crc32()
-        public val sha1: ByteArray = buf.sha1()
-        public val whirlpool: ByteArray = buf.whirlpool()
-    }
-
     public class ChecksumTableBlob(
         buf: ByteBuf,
         public val table: ChecksumTable
-    ) : Blob(buf)
+    ) : BlobImporter.Blob(buf)
 
     public class Archive(
         public val id: Int,
         buf: ByteBuf,
-        public val versionList: VersionList?
-    ) : Blob(buf)
+        public val versionList: VersionList?,
+        public val timestamp: Instant?
+    ) : BlobImporter.Blob(buf)
 
     public class File(
         public val index: Int,
         public val file: Int,
         buf: ByteBuf,
         public val version: Int
-    ) : Blob(buf)
+    ) : BlobImporter.Blob(buf)
 
     internal enum class SourceType {
         DISK,
@@ -141,7 +134,7 @@ public class CacheImporter @Inject constructor(
         url: String?
     ) {
         database.execute { connection ->
-            prepare(connection)
+            blobImporter.prepare(connection)
 
             val game = getGame(connection, gameName, environment, language)
 
@@ -254,7 +247,7 @@ public class CacheImporter @Inject constructor(
         val checksumTable = ChecksumTable.read(buf.slice())
 
         database.execute { connection ->
-            prepare(connection)
+            blobImporter.prepare(connection)
 
             val game = getGame(connection, "runescape", "live", "en")
             val checksumTableId = addChecksumTable(connection, ChecksumTableBlob(buf, checksumTable))
@@ -282,7 +275,7 @@ public class CacheImporter @Inject constructor(
         url: String?,
     ) {
         database.execute { connection ->
-            prepare(connection)
+            blobImporter.prepare(connection)
 
             val game = getGame(connection, "runescape", "live", "en")
 
@@ -307,7 +300,7 @@ public class CacheImporter @Inject constructor(
                 null
             }
 
-            addArchive(connection, sourceId, Archive(id, buf, versionList))
+            addArchive(connection, sourceId, Archive(id, buf, versionList, null))
         }
     }
 
@@ -332,7 +325,7 @@ public class CacheImporter @Inject constructor(
             )
 
             database.execute { connection ->
-                prepare(connection)
+                blobImporter.prepare(connection)
 
                 val game = getGame(connection, gameName, environment, language)
                 val masterIndexId = addMasterIndex(connection, masterIndex)
@@ -365,7 +358,7 @@ public class CacheImporter @Inject constructor(
         timestamp: Instant
     ): CacheImporter.MasterIndexResult {
         return database.execute { connection ->
-            prepare(connection)
+            blobImporter.prepare(connection)
 
             connection.prepareStatement(
                 """
@@ -454,7 +447,7 @@ public class CacheImporter @Inject constructor(
         lastMasterIndexId: Int?
     ): List<Int> {
         return database.execute { connection ->
-            prepare(connection)
+            blobImporter.prepare(connection)
             val id = addIndex(connection, scopeId, sourceId, Index(archive, index, buf, uncompressed))
 
             /*
@@ -505,7 +498,7 @@ public class CacheImporter @Inject constructor(
         }
 
         database.execute { connection ->
-            prepare(connection)
+            blobImporter.prepare(connection)
             addGroups(connection, scopeId, sourceId, groups)
         }
     }
@@ -886,58 +879,6 @@ public class CacheImporter @Inject constructor(
         return containerId
     }
 
-    internal fun prepare(connection: Connection) {
-        connection.prepareStatement(
-            """
-            LOCK TABLE containers IN EXCLUSIVE MODE
-            """.trimIndent()
-        ).use { stmt ->
-            stmt.execute()
-        }
-
-        connection.prepareStatement(
-            """
-            CREATE TEMPORARY TABLE tmp_container_hashes (
-                index INTEGER NOT NULL,
-                whirlpool BYTEA NOT NULL
-            ) ON COMMIT DROP
-        """.trimIndent()
-        ).use { stmt ->
-            stmt.execute()
-        }
-
-        connection.prepareStatement(
-            """
-            CREATE TEMPORARY TABLE tmp_containers (
-                index INTEGER NOT NULL,
-                crc32 INTEGER NOT NULL,
-                whirlpool BYTEA NOT NULL,
-                uncompressed_length INTEGER NULL,
-                uncompressed_crc32 INTEGER NULL,
-                data BYTEA NOT NULL,
-                encrypted BOOLEAN NOT NULL,
-                empty_loc BOOLEAN NULL
-            ) ON COMMIT DROP
-            """.trimIndent()
-        ).use { stmt ->
-            stmt.execute()
-        }
-
-        connection.prepareStatement(
-            """
-            CREATE TEMPORARY TABLE tmp_blobs (
-                index INTEGER NOT NULL,
-                crc32 INTEGER NOT NULL,
-                sha1 BYTEA NOT NULL,
-                whirlpool BYTEA NOT NULL,
-                data BYTEA NOT NULL
-            ) ON COMMIT DROP
-            """.trimIndent()
-        ).use { stmt ->
-            stmt.execute()
-        }
-    }
-
     private fun addContainer(connection: Connection, container: Container): Long {
         return addContainers(connection, listOf(container)).single()
     }
@@ -1067,72 +1008,6 @@ public class CacheImporter @Inject constructor(
         return ids as List<Long>
     }
 
-    public fun addBlob(connection: Connection, blob: Blob): Long {
-        return addBlobs(connection, listOf(blob)).single()
-    }
-
-    public fun addBlobs(connection: Connection, blobs: List<Blob>): List<Long> {
-        connection.prepareStatement(
-            """
-            TRUNCATE TABLE tmp_blobs
-            """.trimIndent()
-        ).use { stmt ->
-            stmt.execute()
-        }
-
-        connection.prepareStatement(
-            """
-            INSERT INTO tmp_blobs (index, crc32, sha1, whirlpool, data)
-            VALUES (?, ?, ?, ?, ?)
-            """.trimIndent()
-        ).use { stmt ->
-            for ((i, blob) in blobs.withIndex()) {
-                stmt.setInt(1, i)
-                stmt.setInt(2, blob.crc32)
-                stmt.setBytes(3, blob.sha1)
-                stmt.setBytes(4, blob.whirlpool)
-                stmt.setBytes(5, blob.bytes)
-
-                stmt.addBatch()
-            }
-
-            stmt.executeBatch()
-        }
-
-        connection.prepareStatement(
-            """
-            INSERT INTO blobs (crc32, sha1, whirlpool, data)
-            SELECT t.crc32, t.sha1, t.whirlpool, t.data
-            FROM tmp_blobs t
-            LEFT JOIN blobs b ON b.whirlpool = t.whirlpool
-            WHERE b.whirlpool IS NULL
-            ON CONFLICT DO NOTHING
-            """.trimIndent()
-        ).use { stmt ->
-            stmt.execute()
-        }
-
-        val ids = mutableListOf<Long>()
-
-        connection.prepareStatement(
-            """
-            SELECT b.id
-            FROM tmp_blobs t
-            JOIN blobs b ON b.whirlpool = t.whirlpool
-            ORDER BY t.index ASC
-            """.trimIndent()
-        ).use { stmt ->
-            stmt.executeQuery().use { rows ->
-                while (rows.next()) {
-                    ids += rows.getLong(1)
-                }
-            }
-        }
-
-        check(ids.size == blobs.size)
-        return ids
-    }
-
     private fun getGame(connection: Connection, name: String, environment: String, language: String): Game {
         connection.prepareStatement(
             """
@@ -1220,6 +1095,10 @@ public class CacheImporter @Inject constructor(
             // import client archive
             if (clientArchive != null) {
                 addArchive(connection, sourceId, clientArchive)
+
+                // and import it as an artifact
+                val artifact = clientImporter.parse(clientArchive.content())
+                clientImporter.import(connection, artifact, name, description, url, "code.dat", artifact.timestamp!!)
             }
 
             // import archives and version list
@@ -1274,7 +1153,8 @@ public class CacheImporter @Inject constructor(
             return null
         }
 
-        return Archive(CLIENT_ARCHIVE, Unpooled.wrappedBuffer(path.readBytes()), null)
+        val timestamp = path.getLastModifiedTime().toInstant()
+        return Archive(CLIENT_ARCHIVE, Unpooled.wrappedBuffer(path.readBytes()), null, timestamp)
     }
 
     private fun createChecksumTable(store: Store, clientChecksum: Int): ChecksumTableBlob {
@@ -1289,7 +1169,7 @@ public class CacheImporter @Inject constructor(
         connection: Connection,
         checksumTable: ChecksumTableBlob
     ): Int {
-        val blobId = addBlob(connection, checksumTable)
+        val blobId = blobImporter.addBlob(connection, checksumTable)
 
         connection.prepareStatement(
             """
@@ -1366,12 +1246,12 @@ public class CacheImporter @Inject constructor(
                 null
             }
 
-            return Archive(id, buf.retain(), versionList)
+            return Archive(id, buf.retain(), versionList, null)
         }
     }
 
     private fun addArchive(connection: Connection, sourceId: Int, archive: Archive) {
-        val blobId = addBlob(connection, archive)
+        val blobId = blobImporter.addBlob(connection, archive)
 
         connection.prepareStatement(
             """
@@ -1483,7 +1363,7 @@ public class CacheImporter @Inject constructor(
     }
 
     internal fun addFiles(connection: Connection, sourceId: Int, files: List<File>) {
-        val blobIds = addBlobs(connection, files)
+        val blobIds = blobImporter.addBlobs(connection, files)
 
         connection.prepareStatement(
             """

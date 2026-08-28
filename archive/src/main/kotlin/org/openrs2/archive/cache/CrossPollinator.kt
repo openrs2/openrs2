@@ -18,7 +18,8 @@ import java.util.zip.GZIPInputStream
 public class CrossPollinator @Inject constructor(
     private val database: Database,
     private val alloc: ByteBufAllocator,
-    private val importer: CacheImporter
+    private val blobImporter: BlobImporter,
+    private val cacheImporter: CacheImporter
 ) {
     public suspend fun crossPollinate() {
         database.execute { connection ->
@@ -132,9 +133,9 @@ public class CrossPollinator @Inject constructor(
                 return
             }
 
-            importer.prepare(connection)
+            blobImporter.prepare(connection)
 
-            val sourceId = importer.addSource(
+            val sourceId = cacheImporter.addSource(
                 connection,
                 type = CacheImporter.SourceType.CROSS_POLLINATION,
                 cacheId = null,
@@ -148,11 +149,11 @@ public class CrossPollinator @Inject constructor(
             )
 
             if (groups.isNotEmpty()) {
-                importer.addGroups(connection, scopeId, sourceId, groups)
+                cacheImporter.addGroups(connection, scopeId, sourceId, groups)
             }
 
             if (files.isNotEmpty()) {
-                importer.addFiles(connection, sourceId, files)
+                cacheImporter.addFiles(connection, sourceId, files)
             }
         } finally {
             groups.forEach(CacheImporter.Group::release)

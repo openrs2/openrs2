@@ -2,8 +2,8 @@ package org.openrs2.archive.client
 
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufUtil
+import org.openrs2.archive.cache.BlobImporter
 import org.openrs2.archive.cache.CacheExporter
-import org.openrs2.archive.cache.CacheImporter
 import java.time.Instant
 
 public class Artifact(
@@ -18,7 +18,7 @@ public class Artifact(
     public val arch: Architecture,
     public val jvm: Jvm,
     public val links: List<ArtifactLink>
-) : CacheImporter.Blob(data)
+) : BlobImporter.Blob(data)
 
 public data class ArtifactLink(
     val type: ArtifactType,
