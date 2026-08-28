@@ -1270,10 +1270,11 @@ public class CacheImporter @Inject constructor(
             """
             SELECT id
             FROM crc_tables
-            WHERE blob_id = ?
+            WHERE blob_id = ? AND format = ?::crc_table_format
             """.trimIndent()
         ).use { stmt ->
             stmt.setLong(1, blobId)
+            stmt.setString(2, checksumTable.table.format.name.lowercase())
 
             stmt.executeQuery().use { rows ->
                 if (rows.next()) {
@@ -1299,12 +1300,13 @@ public class CacheImporter @Inject constructor(
 
         connection.prepareStatement(
             """
-            INSERT INTO crc_tables (id, blob_id)
-            VALUES (?, ?)
+            INSERT INTO crc_tables (id, blob_id, format)
+            VALUES (?, ?, ?::crc_table_format)
             """.trimIndent()
         ).use { stmt ->
             stmt.setInt(1, checksumTableId)
             stmt.setLong(2, blobId)
+            stmt.setString(3, checksumTable.table.format.name.lowercase())
 
             stmt.execute()
         }
