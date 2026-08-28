@@ -23,13 +23,30 @@ public class CrossPollinator @Inject constructor(
 ) {
     public suspend fun crossPollinate() {
         database.execute { connection ->
+            blobImporter.prepare(connection)
+
+            val sourceId = cacheImporter.addSource(
+                connection,
+                type = CacheImporter.SourceType.CROSS_POLLINATION,
+                cacheId = null,
+                gameId = null,
+                buildMajor = null,
+                buildMinor = null,
+                timestamp = null,
+                name = null,
+                description = null,
+                url = null,
+            )
+
             for ((index, archive) in OLD_TO_NEW_ENGINE) {
-                crossPollinate(connection, index, archive)
+                crossPollinate(connection, sourceId, index, archive)
             }
+
+            crossPollinateLegacyClients(connection, sourceId)
         }
     }
 
-    private fun crossPollinate(connection: Connection, index: Int, archive: Int) {
+    private fun crossPollinate(connection: Connection, sourceId: Int, index: Int, archive: Int) {
         val scopeId: Int
 
         connection.prepareStatement(
@@ -133,21 +150,6 @@ public class CrossPollinator @Inject constructor(
                 return
             }
 
-            blobImporter.prepare(connection)
-
-            val sourceId = cacheImporter.addSource(
-                connection,
-                type = CacheImporter.SourceType.CROSS_POLLINATION,
-                cacheId = null,
-                gameId = null,
-                buildMajor = null,
-                buildMinor = null,
-                timestamp = null,
-                name = null,
-                description = null,
-                url = null,
-            )
-
             if (groups.isNotEmpty()) {
                 cacheImporter.addGroups(connection, scopeId, sourceId, groups)
             }
@@ -209,6 +211,47 @@ public class CrossPollinator @Inject constructor(
             input.retainedSlice()
         } else {
             null
+        }
+    }
+
+    private fun crossPollinateLegacyClients(connection: Connection, sourceId: Int) {
+        connection.prepareStatement("""
+            CREATE TEMPORARY TABLE tmp_legacy_clients ON COMMIT DROP AS
+            SELECT a.blob_id
+            FROM artifacts a
+            JOIN games g ON g.id = a.game_id
+            JOIN environments e ON e.id = a.environment_id
+            WHERE
+                a.build_major <= 377 AND
+                a.build_minor IS NULL AND
+                a.type = 'client' AND
+                a.format = 'jar' AND
+                a.os = 'independent' AND
+                a.arch = 'independent' AND
+                a.jvm = 'independent' AND
+                g.name = 'runescape' AND
+                e.name = 'live'
+        """.trimIndent()).use { stmt ->
+            stmt.execute()
+        }
+
+        connection.prepareStatement("""
+            INSERT INTO archives (archive_id, blob_id)
+            SELECT 0, blob_id
+            FROM tmp_legacy_clients
+            ON CONFLICT DO NOTHING
+        """.trimIndent()).use { stmt ->
+            stmt.execute()
+        }
+
+        connection.prepareStatement("""
+            INSERT INTO source_archives (source_id, archive_id, blob_id)
+            SELECT ?, 0, blob_id
+            FROM tmp_legacy_clients
+            ON CONFLICT DO NOTHING
+        """.trimIndent()).use { stmt ->
+            stmt.setInt(1, sourceId)
+            stmt.execute()
         }
     }
 
