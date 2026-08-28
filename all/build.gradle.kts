@@ -87,11 +87,9 @@ distributions {
             from("$rootDir/LICENSE")
             from("$rootDir/README.md")
             from("$rootDir/etc/archive.example.yaml") {
-                rename { "archive.yaml" }
                 into("etc")
             }
             from("$rootDir/etc/config.example.yaml") {
-                rename { "config.yaml" }
                 into("etc")
             }
             from("$rootDir/share") {
