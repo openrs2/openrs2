@@ -11,6 +11,7 @@ public class CacheCommand : NoOpCliktCommand(name = "cache") {
             DownloadCommand(),
             ExtractCommand(),
             ImportCommand(),
+            ImportArchiveCommand(),
             ImportChecksumTableCommand(),
             ImportMasterIndexCommand(),
             ExportCommand(),

@@ -271,6 +271,43 @@ public class CacheImporter @Inject constructor(
         }
     }
 
+    public suspend fun importArchive(
+        buf: ByteBuf,
+        id: Int,
+        name: String?,
+        description: String?,
+        url: String?,
+    ) {
+        database.execute { connection ->
+            prepare(connection)
+
+            val game = getGame(connection, "runescape", "live", "en")
+
+            val sourceId = addSource(
+                connection,
+                SourceType.DISK,
+                null,
+                game.id,
+                null,
+                null,
+                null,
+                name,
+                description,
+                url,
+            )
+
+            val versionList = if (id == VERSION_LIST_ARCHIVE) {
+                JagArchive.unpack(buf.slice()).use { archive ->
+                    VersionList.read(archive)
+                }
+            } else {
+                null
+            }
+
+            addArchive(connection, sourceId, Archive(id, buf, versionList))
+        }
+    }
+
     public suspend fun importMasterIndex(
         buf: ByteBuf,
         format: MasterIndexFormat,
@@ -1293,7 +1330,7 @@ public class CacheImporter @Inject constructor(
 
     private fun readArchive(store: Store, id: Int): Archive {
         store.read(0, id).use { buf ->
-            val versionList = if (id == 5) {
+            val versionList = if (id == VERSION_LIST_ARCHIVE) {
                 JagArchive.unpack(buf.slice()).use { archive ->
                     VersionList.read(archive)
                 }
@@ -1517,5 +1554,6 @@ public class CacheImporter @Inject constructor(
         private val logger = InlineLogger()
 
         public const val BATCH_SIZE: Int = 1024
+        private const val VERSION_LIST_ARCHIVE = 5
     }
 }
