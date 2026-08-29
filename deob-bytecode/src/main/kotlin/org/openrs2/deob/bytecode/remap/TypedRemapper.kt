@@ -6,8 +6,8 @@ import org.openrs2.asm.MemberRef
 import org.openrs2.asm.classpath.ClassPath
 import org.openrs2.asm.classpath.ExtendedRemapper
 import org.openrs2.deob.bytecode.ArgRef
-import org.openrs2.deob.bytecode.Profile
 import org.openrs2.deob.util.map.NameMap
+import org.openrs2.deob.util.profile.Profile
 import org.openrs2.util.collect.DisjointSet
 
 public class TypedRemapper private constructor(

@@ -12,8 +12,8 @@ import org.openrs2.asm.filter.UnionMemberFilter
 import org.openrs2.asm.hasCode
 import org.openrs2.asm.removeDeadCode
 import org.openrs2.asm.transform.Transformer
-import org.openrs2.deob.bytecode.Profile
 import org.openrs2.deob.bytecode.filter.ReflectedConstructorFilter
+import org.openrs2.deob.util.profile.Profile
 import org.openrs2.util.collect.DisjointSet
 import org.openrs2.util.collect.UniqueQueue
 

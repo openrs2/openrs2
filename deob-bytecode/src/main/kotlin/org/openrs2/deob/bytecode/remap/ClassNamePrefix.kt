@@ -18,8 +18,10 @@ public fun String.getClassName(): String {
     return substring(lastIndexOfAny(BOUNDARY_CHARS) + 1)
 }
 
-public class ClassNamePrefixRemapper(vararg libraries: Library) : ExtendedRemapper() {
+public class ClassNamePrefixRemapper(libraries: List<Library>) : ExtendedRemapper() {
     private val mapping = mutableMapOf<String, String>()
+
+    public constructor(vararg libraries: Library) : this(libraries.toList())
 
     init {
         for (library in libraries) {

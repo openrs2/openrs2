@@ -6,8 +6,6 @@ import jakarta.inject.Singleton
 import org.openrs2.decompiler.Decompiler
 import org.openrs2.deob.ast.AstDeobfuscator
 import org.openrs2.deob.bytecode.BytecodeDeobfuscator
-import org.openrs2.deob.util.Module
-import java.nio.file.Path
 
 @Singleton
 public class Deobfuscator @Inject constructor(
@@ -17,16 +15,13 @@ public class Deobfuscator @Inject constructor(
 ) {
     public fun run() {
         logger.info { "Deobfuscating bytecode" }
-        bytecodeDeobfuscator.run(
-            input = Path.of("nonfree/lib"),
-            output = Path.of("nonfree/var/cache/deob")
-        )
+        bytecodeDeobfuscator.run()
 
         logger.info { "Decompiling" }
-        decompiler.run(Module.ALL)
+        decompiler.run()
 
         logger.info { "Deobfuscating AST" }
-        astDeobfuscator.run(Module.ALL)
+        astDeobfuscator.run()
     }
 
     private companion object {
