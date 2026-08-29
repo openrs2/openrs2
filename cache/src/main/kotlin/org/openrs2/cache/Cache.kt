@@ -34,14 +34,21 @@ public class Cache private constructor(
         }
     }
 
-    private fun createOrGetArchive(id: Int): Archive {
+    private fun createOrGetArchive(id: Int, init: Js5IndexConfig.() -> Unit = {}): Archive {
         var archive = archives[id]
         if (archive != null) {
             return archive
         }
 
-        // TODO(gpe): protocol/flags should be configurable somehow
-        val index = Js5Index(Js5Protocol.VERSIONED)
+        val config = Js5IndexConfig().apply(init)
+        val index = Js5Index(
+            config.protocol,
+            config.version,
+            config.hasNames,
+            config.hasDigests,
+            config.hasLengths,
+            config.hasUncompressedChecksums
+        )
         archive = CacheArchive(alloc, index, id, unpackedCache, store)
         archives[id] = archive
         return archive
@@ -49,9 +56,9 @@ public class Cache private constructor(
 
     // TODO(gpe): rename/move, reindex, rekey, method to go from name->id
 
-    public fun create(archive: Int) {
+    public fun create(archive: Int, init: Js5IndexConfig.() -> Unit = {}) {
         checkArchive(archive)
-        createOrGetArchive(archive)
+        createOrGetArchive(archive, init)
     }
 
     public fun capacity(archive: Int): Int {

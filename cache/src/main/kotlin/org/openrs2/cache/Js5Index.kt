@@ -7,13 +7,25 @@ import org.openrs2.buffer.writeUnsignedIntSmart
 import org.openrs2.crypto.Whirlpool
 
 public class Js5Index(
-    public var protocol: Js5Protocol,
-    public var version: Int = 0,
-    public var hasNames: Boolean = false,
-    public var hasDigests: Boolean = false,
-    public var hasLengths: Boolean = false,
-    public var hasUncompressedChecksums: Boolean = false
+    public var protocol: Js5Protocol = Js5IndexConfig.PROTOCOL,
+    public var version: Int = Js5IndexConfig.VERSION,
+    public var hasNames: Boolean = Js5IndexConfig.HAS_NAMES,
+    public var hasDigests: Boolean = Js5IndexConfig.HAS_DIGESTS,
+    public var hasLengths: Boolean = Js5IndexConfig.HAS_LENGTHS,
+    public var hasUncompressedChecksums: Boolean = Js5IndexConfig.HAS_UNCOMPRESSED_CHECKSUMS
 ) : MutableNamedEntryCollection<Js5Index.MutableGroup>(::MutableGroup) {
+
+    public constructor(config: Js5IndexConfig.() -> Unit = {}) : this(Js5IndexConfig().apply(config))
+
+    public constructor(config: Js5IndexConfig) : this(
+        protocol = config.protocol,
+        version = config.version,
+        hasNames = config.hasNames,
+        hasDigests = config.hasDigests,
+        hasLengths = config.hasLengths,
+        hasUncompressedChecksums = config.hasUncompressedChecksums
+    )
+
     public interface Group<out T : File> : NamedEntryCollection<T>, NamedEntry {
         public val version: Int
         public val checksum: Int
