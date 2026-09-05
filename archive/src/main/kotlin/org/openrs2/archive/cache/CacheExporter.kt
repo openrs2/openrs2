@@ -165,7 +165,8 @@ public class CacheExporter @Inject constructor(
         val timestamp: Instant?,
         val sources: SortedSet<String>,
         @JsonUnwrapped
-        val stats: Stats?
+        val stats: Stats?,
+        val hidden: Boolean
     )
 
     public data class Cache(
@@ -218,7 +219,7 @@ public class CacheExporter @Inject constructor(
         }
     }
 
-    public suspend fun list(): List<CacheSummary> {
+    public suspend fun list(includeHidden: Boolean): List<CacheSummary> {
         return database.execute { connection ->
             connection.prepareStatement(
                 """
@@ -240,7 +241,8 @@ public class CacheExporter @Inject constructor(
                         cs.valid_keys,
                         cs.keys,
                         cs.size,
-                        cs.blocks
+                        cs.blocks,
+                        c.hidden
                     FROM caches c
                     JOIN sources s ON s.cache_id = c.id
                     JOIN game_variants v ON v.id = s.game_id
@@ -249,13 +251,15 @@ public class CacheExporter @Inject constructor(
                     JOIN environments e ON e.id = v.environment_id
                     JOIN languages l ON l.id = v.language_id
                     LEFT JOIN cache_stats cs ON cs.scope_id = sc.id AND cs.cache_id = c.id
-                    WHERE NOT c.hidden
+                    WHERE NOT c.hidden OR ?
                     GROUP BY sc.name, c.id, g.name, e.name, l.iso_code, cs.valid_indexes, cs.indexes, cs.valid_groups,
                         cs.groups, cs.valid_keys, cs.keys, cs.size, cs.blocks
                 ) t
                 ORDER BY t.game ASC, t.environment ASC, t.language ASC, t.builds[1] ASC, t.timestamp ASC
                 """.trimIndent()
             ).use { stmt ->
+                stmt.setBoolean(1, includeHidden)
+
                 stmt.executeQuery().use { rows ->
                     val caches = mutableListOf<CacheSummary>()
 
@@ -285,6 +289,8 @@ public class CacheExporter @Inject constructor(
                             null
                         }
 
+                        val hidden = rows.getBoolean(17)
+
                         caches += CacheSummary(
                             id,
                             scope,
@@ -294,7 +300,8 @@ public class CacheExporter @Inject constructor(
                             builds.mapNotNull { o -> Build.fromPgObject(o as PGobject) }.toSortedSet(),
                             timestamp,
                             sources.toSortedSet(),
-                            stats
+                            stats,
+                            hidden
                         )
                     }
 

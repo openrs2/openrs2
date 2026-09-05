@@ -49,7 +49,7 @@ public class CachesController @Inject constructor(
     private val renderSemaphore = Semaphore(1)
 
     public suspend fun index(call: ApplicationCall) {
-        val caches = exporter.list()
+        val caches = exporter.list(call.parameters.contains("hidden"))
         val totalSize = exporter.totalSize()
         call.respond(
             ThymeleafContent(
@@ -62,7 +62,7 @@ public class CachesController @Inject constructor(
     }
 
     public suspend fun indexJson(call: ApplicationCall) {
-        val caches = exporter.list()
+        val caches = exporter.list(call.parameters.contains("hidden"))
         call.caching = CachingOptions(
             cacheControl = CacheControl.MaxAge(
                 maxAgeSeconds = 900,
