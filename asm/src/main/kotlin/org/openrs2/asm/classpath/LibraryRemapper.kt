@@ -58,6 +58,10 @@ public class LibraryRemapper(
 
     private fun extractFields() {
         for (clazz in classes.values) {
+            if (clazz.name.contains('/')) {
+                continue
+            }
+
             clazz.fields.removeIf { field ->
                 // do nothing if the field is not moved between classes
                 val oldOwner = remapper.mapType(clazz.name)
@@ -118,6 +122,10 @@ public class LibraryRemapper(
 
     private fun extractMethods() {
         for (clazz in classes.values) {
+            if (clazz.name.contains('/')) {
+                continue
+            }
+
             clazz.methods.removeIf { method ->
                 // do nothing if the method is not moved between classes
                 val oldOwner = remapper.mapType(clazz.name)
