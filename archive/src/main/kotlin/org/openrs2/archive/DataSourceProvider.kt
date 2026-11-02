@@ -23,6 +23,7 @@ public class DataSourceProvider @Inject constructor(
 
         val config = HikariConfig()
         config.dataSource = dataSource
+        config.maximumPoolSize = 20
         return HikariDataSource(config)
     }
 }
